@@ -2,11 +2,19 @@
  "id": "ny-personal-injury",
  "state": "NY",
  "practice": "personal-injury",
- "label": "New York \u00d7 Personal Injury",
- "measured_at": "2026-09-07",
- "source": "ahrefs batch-analysis (mode=subdomains, country=us)",
+ "label": "New York × Personal Injury",
+ "measured_at": "2026-09-08",
+ "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us); 23 rows measured 2026-09-07, 16 rows added 2026-09-08",
  "full_size_estimate": 148,
  "firms": [
+  {
+   "domain": "yourlawyer.com",
+   "name": "Parker Waichman LLP",
+   "dr": 57,
+   "refdomains": 3007,
+   "org_keywords": 1351,
+   "org_traffic": 10641
+  },
   {
    "domain": "ask4sam.net",
    "name": "Silberstein, Awad & Miklos",
@@ -24,6 +32,22 @@
    "org_traffic": 4547
   },
   {
+   "domain": "injurylawyer.com",
+   "name": "The Rothenberg Law Firm",
+   "dr": 52,
+   "refdomains": 1758,
+   "org_keywords": 1060,
+   "org_traffic": 9543
+  },
+  {
+   "domain": "1800nynylaw.com",
+   "name": "Stephen Bilkis & Associates",
+   "dr": 50,
+   "refdomains": 1721,
+   "org_keywords": 10330,
+   "org_traffic": 47206
+  },
+  {
    "domain": "jacobyandmeyers.com",
    "name": "Jacoby & Meyers",
    "dr": 50,
@@ -32,12 +56,12 @@
    "org_traffic": 45171
   },
   {
-   "domain": "fuchsberg.com",
-   "name": "The Jacob D. Fuchsberg Law Firm",
-   "dr": 47,
-   "refdomains": 1401,
-   "org_keywords": 1186,
-   "org_traffic": 9424
+   "domain": "rosenbaumnylaw.com",
+   "name": "Rosenbaum Meier Personal Injury Lawyers",
+   "dr": 50,
+   "refdomains": 1162,
+   "org_keywords": 1460,
+   "org_traffic": 23899
   },
   {
    "domain": "cellinolaw.com",
@@ -46,6 +70,14 @@
    "refdomains": 1354,
    "org_keywords": 611,
    "org_traffic": 4142
+  },
+  {
+   "domain": "fuchsberg.com",
+   "name": "The Jacob D. Fuchsberg Law Firm",
+   "dr": 47,
+   "refdomains": 1401,
+   "org_keywords": 1186,
+   "org_traffic": 9424
   },
   {
    "domain": "perecman.com",
@@ -62,6 +94,22 @@
    "refdomains": 1577,
    "org_keywords": 1856,
    "org_traffic": 15220
+  },
+  {
+   "domain": "shulman-hill.com",
+   "name": "Shulman & Hill Injury Lawyers",
+   "dr": 41,
+   "refdomains": 1628,
+   "org_keywords": 913,
+   "org_traffic": 7610
+  },
+  {
+   "domain": "workerslaw.com",
+   "name": "Pasternack Tilker Ziegler Walsh Stanton & Romano LLP",
+   "dr": 41,
+   "refdomains": 983,
+   "org_keywords": 1834,
+   "org_traffic": 12449
   },
   {
    "domain": "gairgair.com",
@@ -96,6 +144,22 @@
    "org_traffic": 12192
   },
   {
+   "domain": "msllegal.com",
+   "name": "The Law Offices of Michael S. Lamonsoff, PLLC",
+   "dr": 36,
+   "refdomains": 931,
+   "org_keywords": 631,
+   "org_traffic": 3135
+  },
+  {
+   "domain": "cohenjaffe.com",
+   "name": "Law Office of Cohen & Jaffe",
+   "dr": 35,
+   "refdomains": 1127,
+   "org_keywords": 1751,
+   "org_traffic": 7441
+  },
+  {
    "domain": "rmfwlaw.com",
    "name": "Rosenberg, Minc, Falkoff & Wolff",
    "dr": 34,
@@ -104,12 +168,20 @@
    "org_traffic": 976
   },
   {
-   "domain": "sakkascahn.com",
-   "name": "Sakkas, Cahn & Weiss",
+   "domain": "lawfirmdavidoff.com",
+   "name": "Davidoff Law Personal Injury Lawyers",
    "dr": 33,
-   "refdomains": 837,
-   "org_keywords": 854,
-   "org_traffic": 4676
+   "refdomains": 1858,
+   "org_keywords": 1131,
+   "org_traffic": 6715
+  },
+  {
+   "domain": "mirmanlawyers.com",
+   "name": "Mirman, Markovits & Landau, P.C.",
+   "dr": 33,
+   "refdomains": 732,
+   "org_keywords": 783,
+   "org_traffic": 5144
   },
   {
    "domain": "oreskylaw.com",
@@ -120,12 +192,36 @@
    "org_traffic": 10389
   },
   {
+   "domain": "sakkascahn.com",
+   "name": "Sakkas, Cahn & Weiss",
+   "dr": 33,
+   "refdomains": 837,
+   "org_keywords": 854,
+   "org_traffic": 4676
+  },
+  {
+   "domain": "plattalaw.com",
+   "name": "The Platta Law Firm",
+   "dr": 32,
+   "refdomains": 673,
+   "org_keywords": 549,
+   "org_traffic": 3781
+  },
+  {
    "domain": "lawyertime.com",
    "name": "Gersowitz Libo & Korek",
    "dr": 31,
    "refdomains": 1164,
    "org_keywords": 282,
    "org_traffic": 1176
+  },
+  {
+   "domain": "raphaelsonlaw.com",
+   "name": "Raphaelson & Levine Law Firm",
+   "dr": 31,
+   "refdomains": 1124,
+   "org_keywords": 1538,
+   "org_traffic": 10825
   },
   {
    "domain": "866attylaw.com",
@@ -144,6 +240,14 @@
    "org_traffic": 164
   },
   {
+   "domain": "hillmoin.com",
+   "name": "Hill & Moin LLP",
+   "dr": 28,
+   "refdomains": 841,
+   "org_keywords": 326,
+   "org_traffic": 2695
+  },
+  {
    "domain": "kdlm.com",
    "name": "Kramer Dillof Livingston & Moore",
    "dr": 28,
@@ -152,12 +256,12 @@
    "org_traffic": 831
   },
   {
-   "domain": "wrshlaw.com",
-   "name": "Wingate, Russotti, Shapiro, Moses & Halperin",
-   "dr": 27,
-   "refdomains": 836,
-   "org_keywords": 671,
-   "org_traffic": 7808
+   "domain": "nyclawfirm.com",
+   "name": "Greenstein & Pittari, LLP",
+   "dr": 28,
+   "refdomains": 906,
+   "org_keywords": 469,
+   "org_traffic": 2736
   },
   {
    "domain": "godoskygentile.com",
@@ -168,6 +272,22 @@
    "org_traffic": 266
   },
   {
+   "domain": "wrshlaw.com",
+   "name": "Wingate, Russotti, Shapiro, Moses & Halperin",
+   "dr": 27,
+   "refdomains": 836,
+   "org_keywords": 671,
+   "org_traffic": 7808
+  },
+  {
+   "domain": "cohanlegal.com",
+   "name": "Cohan Law Firm",
+   "dr": 23,
+   "refdomains": 694,
+   "org_keywords": 270,
+   "org_traffic": 1992
+  },
+  {
    "domain": "ginarte.com",
    "name": "Ginarte Gonzalez Winograd",
    "dr": 21,
@@ -176,29 +296,34 @@
    "org_traffic": 1109
   },
   {
+   "domain": "lawyer1.com",
+   "name": "Hecht, Kleeger & Damashek, P.C.",
+   "dr": 21,
+   "refdomains": 772,
+   "org_keywords": 879,
+   "org_traffic": 4736
+  },
+  {
+   "domain": "shaevitzandshaevitz.com",
+   "name": "Shaevitz & Shaevitz Law Offices",
+   "dr": 21,
+   "refdomains": 485,
+   "org_keywords": 138,
+   "org_traffic": 1172
+  },
+  {
    "domain": "greenbergandstein.com",
    "name": "Greenberg & Stein",
    "dr": 20,
    "refdomains": 673,
    "org_keywords": 54,
    "org_traffic": 78
-  },
-  {
-   "domain": "nyclawfirm.com",
-   "name": "Greenstein & Pittari, LLP",
-   "dr": 28,
-   "refdomains": 906,
-   "org_keywords": 469,
-   "org_traffic": 2736
   }
  ],
  "unresolved": [
   "tgcllaw.com",
-  "raphaelsonlevine.com",
   "hachroselaw.com",
-  "shulmanhill.com",
   "pazerepstein.com",
-  "leavandsteinberg.com",
-  "hillandmoin.com"
+  "leavandsteinberg.com"
  ]
 }
