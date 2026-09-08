@@ -62,6 +62,23 @@ CANDIDATE_PATHS = [
 SPANISH_SIGNALS = re.compile(
     r"se habla espa|hablamos espa|español|abogado|/es/|lang=[\"']es", re.I)
 
+# How a link's path is recognised. Reading the site's own nav beats guessing paths: firms that
+# use /our-attorneys/ or /verdicts/ were invisible when only the fixed list above was tried.
+LINK_KINDS = [
+    ("about", r"about|our-firm|who-we-are|firm-overview|the-firm"),
+    ("attorneys", r"attorney|lawyer|our-team|/team|staff|profiles"),
+    ("contact", r"contact|locations|/offices"),
+    ("results", r"result|verdict|settlement|recoveries|case-stud"),
+    ("privacy", r"privacy"),
+    ("disclaimer", r"disclaimer|legal-notice|terms-of"),
+    ("fees", r"/fees|contingency|no-fee|pricing"),
+    ("blog", r"/blog|/news|/articles|/insights"),
+]
+TRUST_PAGE_KEYS = {
+    "privacy": "privacy_policy", "disclaimer": "disclaimer", "fees": "fee_statement",
+    "blog": "blog", "attorneys": "attorney_bios",
+}
+
 
 def fetch(url):
     """GET a URL. Returns (status, text, final_url) with text='' when the body is not HTML."""
@@ -141,6 +158,23 @@ def unescape(s):
     return s.strip()
 
 
+def discover_links(html, origin):
+    """Internal links on a page, one URL per kind, taken from the site's own navigation."""
+    found = {}
+    for m in re.finditer(r'href=["\']([^"\'#\s]+)["\']', html, re.I):
+        url = urllib.parse.urljoin(origin + "/", m.group(1).strip())
+        if not url.startswith(origin):
+            continue
+        path = urllib.parse.urlparse(url).path.lower()
+        if path in ("", "/"):
+            continue
+        for kind, pattern in LINK_KINDS:
+            if kind not in found and re.search(pattern, path):
+                found[kind] = url
+                break
+    return found
+
+
 def crawl(domain, fetched_at):
     origin = "https://" + domain
     record = {
@@ -159,37 +193,13 @@ def crawl(domain, fetched_at):
         "notes": [],
     }
 
-    rp = robots_for(origin)
-    seen_kinds = set()
-
-    for path, kind in CANDIDATE_PATHS:
-        # One URL per kind is enough; the list is ordered by how common each variant is.
-        if kind in seen_kinds:
-            continue
-        url = origin + path
-        if not rp.can_fetch(UA, url):
-            record["robots_disallowed"].append(url)
-            continue
-
-        status, html, final = fetch(url)
-        time.sleep(DELAY)
-        if status != 200 or not html:
-            continue
-
-        seen_kinds.add(kind)
+    def harvest(kind, html, final):
+        """Pull every signal we take from one page. Same treatment for home and inner pages."""
         record["pages_found"][kind] = final
-        if kind == "home":
-            record["https_ok"] = True
-
-        if kind in ("privacy", "disclaimer", "fees", "blog", "attorneys"):
-            record["trust_pages"][{
-                "privacy": "privacy_policy", "disclaimer": "disclaimer", "fees": "fee_statement",
-                "blog": "blog", "attorneys": "attorney_bios",
-            }[kind]] = True
-        if kind == "attorneys":
+        if kind in TRUST_PAGE_KEYS:
+            record["trust_pages"][TRUST_PAGE_KEYS[kind]] = True
+        if kind == "attorneys" and final not in record["attorney_page_urls"]:
             record["attorney_page_urls"].append(final)
-
-        text = strip_tags(html)
 
         title = re.search(r"<title[^>]*>([^<]*)</title>", html, re.I)
         for value, where in [(title.group(1) if title else None, "<title>"),
@@ -211,8 +221,47 @@ def crawl(domain, fetched_at):
             if e and e not in [x["value"] for x in record["emails"]]:
                 record["emails"].append({"value": e, "source_url": final})
 
-        if SPANISH_SIGNALS.search(html) or SPANISH_SIGNALS.search(text):
+        if SPANISH_SIGNALS.search(html) or SPANISH_SIGNALS.search(strip_tags(html)):
             record["spanish_signals"] = True
+
+    # The home page comes first: it settles the canonical origin (many firms redirect the bare
+    # domain to www) and supplies the navigation we read the rest of the site from.
+    status, home_html, final_home = fetch(origin + "/")
+    time.sleep(DELAY)
+    if status != 200 or not home_html:
+        record["notes"].append(
+            "Home page returned %s over HTTPS, so nothing else was collected. A 403 here is bot "
+            "protection; this firm needs manual entry rather than evasion." % status)
+        record["schema_detected"] = False
+        record["g5_evidence"] = {"https_reachable": False, "contact_method": False,
+                                 "attorney_names_published": "not checked"}
+        return record
+
+    record["https_ok"] = True
+    parsed = urllib.parse.urlparse(final_home)
+    canonical = parsed.scheme + "://" + parsed.netloc
+    if canonical != origin:
+        record["canonical_origin"] = canonical
+        origin = canonical
+
+    rp = robots_for(origin)
+    harvest("home", home_html, final_home)
+
+    # Discovered links win; the fixed list only fills kinds the navigation did not reveal.
+    plan = discover_links(home_html, origin)
+    for path, kind in CANDIDATE_PATHS:
+        if kind != "home" and kind not in plan:
+            plan[kind] = origin + path
+
+    for kind, url in plan.items():
+        if not rp.can_fetch(UA, url):
+            record["robots_disallowed"].append(url)
+            continue
+        status, html, final = fetch(url)
+        time.sleep(DELAY)
+        if status != 200 or not html:
+            continue
+        harvest(kind, html, final)
 
     record["schema_detected"] = len(record["json_ld"]) > 0
 
@@ -223,8 +272,6 @@ def crawl(domain, fetched_at):
         "contact_method": bool(record["phones"] or record["emails"] or record["pages_found"].get("contact")),
         "attorney_names_published": "pending — bio pages recorded, names not auto-extracted",
     }
-    if not record["https_ok"]:
-        record["notes"].append("Home page did not return 200 over HTTPS; everything else is unreliable.")
     if record["robots_disallowed"]:
         record["notes"].append("robots.txt disallowed %d path(s); they were not fetched."
                                % len(record["robots_disallowed"]))
