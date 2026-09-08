@@ -1,0 +1,182 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Scorecard from '../../components/Scorecard.astro';
+
+export async function getStaticPaths() {
+  const firms = await getCollection('firms', f => f.data.status !== 'sample' || import.meta.env.LFL_ENV !== 'production');
+  return firms.map(f => ({ params: { slug: f.data.slug }, props: { firm: f } }));
+}
+const { firm } = Astro.props;
+const d = firm.data; const s = d.score;
+const cohort = await getEntry('cohorts', d.cohort_id);
+const primary = d.practices.filter(p => p.primary);
+const hq = d.offices.find(o => o.is_hq) ?? d.offices[0];
+const ah = d.digital.ahrefs;
+const peers = cohort ? cohort.data.firms.filter(f => f.domain !== d.domain) : [];
+const pct = (v: number, arr: number[]) => arr.length ? Math.round(100 * (arr.filter(x => x < v).length + 0.5 * arr.filter(x => x === v).length) / arr.length) : null;
+const drPct = ah ? pct(ah.dr, peers.map(f => f.dr)) : null;
+const median = (arr: number[]) => { const a = [...arr].sort((x, y) => x - y); const m = Math.floor(a.length / 2); return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
+const drMedian = cohort ? median(cohort.data.firms.map(f => f.dr)) : null;
+const kwMedian = cohort ? median(cohort.data.firms.map(f => f.org_keywords)) : null;
+const ai = ah?.ai_citations;
+const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
+const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
+const title = `${d.name} — ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
+const description = `Profile of ${d.name}: practice areas, attorneys, ${d.offices.length} office${d.offices.length>1?'s':''} in ${d.market.city}, client reviews, fees${isCertified ? ` and LFL Certification Score ${s!.total}` : ''}.`;
+const schema = {
+  '@context': 'https://schema.org', '@type': 'LegalService', name: d.name, url: d.website, telephone: d.phone,
+  address: { '@type': 'PostalAddress', streetAddress: hq.address },
+  areaServed: `${d.market.city}, ${d.market.state}`, knowsLanguage: d.languages,
+  employee: d.attorneys.map(a => ({ '@type': 'Person', name: a.name, jobTitle: a.role })),
+};
+---
+<Base title={title} description={description} nav="cities" schema={schema}>
+<section class="page-hero profile-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href={`/cities/${d.market.city_slug}/`}>{d.market.city}, {d.market.state}</a></li><li><a href={`/practice-areas/${primary[0]?.slug ?? d.practices[0].slug}/`}>{primary[0]?.name ?? d.practices[0].name}</a></li><li aria-current="page">{d.name}</li></ol>
+      <div class="profile-id">
+        <div class="profile-logo">{d.initials}</div>
+        <div>
+          <h1>{d.name}</h1>
+          {d.tagline && <p class="tagline">“{d.tagline}”</p>}
+          <div class="profile-badges">
+            {isCertified && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s!.computed_at).getFullYear()} · Score {s!.total}</span>}
+            {!isCertified && <span class="badge badge--tier">Listed · not yet certified</span>}
+            <span class="badge badge--tier">{primary[0]?.name ?? d.practices[0].name}</span>
+            <span class="badge badge--tier">{d.market.city}, {d.market.state}</span>
+            <span class="badge badge--live">● Accepting new clients</span>
+          </div>
+          <div class="profile-meta">
+            {d.reviews.google && <span><span class="stars">★★★★★</span> <b>{d.reviews.google.rating.toFixed(1)}</b> · {d.reviews.google.count_label} Google reviews</span>}
+            <span><b>{d.offices.length}</b> office{d.offices.length > 1 ? 's' : ''}</span>
+            <span><b>{d.attorneys.length}</b> attorneys</span>
+            <span>{d.languages.join(' · ')}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-facts profile-facts">
+      <div class="fact"><b>{d.fee_model}</b><span>{d.fee_statement ?? 'Fee model'}</span></div>
+      <div class="fact"><b>{d.free_consultation ? 'Free' : 'Paid'}</b><span>Initial consultation</span></div>
+      {d.availability.slice(0, 3).map(a => { const [h, ...r] = a.split(' '); return <div class="fact"><b>{h}</b><span>{r.join(' ')}</span></div>; })}
+      <div class="fact"><b class="num">{d.practices.length}</b><span>Practice areas</span></div>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="Profile sections">
+  <div class="container">
+    <a href="#overview" class="is-active">Overview</a>{s && <a href="#certification">Score</a>}<a href="#practice">Practice areas</a><a href="#results">Results</a><a href="#attorneys">Attorneys</a><a href="#reviews">Reviews</a><a href="#offices">Offices</a><a href="#faq">FAQ</a>
+    <a class="btn btn--primary btn--sm cta" href="#contact">Request free consultation</a>
+  </div>
+</nav>
+
+<section class="section--tight">
+  <div class="container layout">
+    <div class="profile-main">
+
+      <div class="block" id="overview">
+        <h2>About {d.name.replace(/,? (LLP|LLC|P\.C\.|PC|PLLC)$/, '')}</h2>
+        <div class="prose">
+          <p>{d.about[0]}</p>
+          {d.quote && <blockquote>“{d.quote.text}”<br /><small class="muted" style="font-weight:400;font-size:.9rem">— {d.quote.attribution}</small></blockquote>}
+          {d.about.slice(1).map(p => <p>{p}</p>)}
+        </div>
+        {d.highlights.length > 0 && <div class="highlights">{d.highlights.map(h => <div class="hl"><Icon name={h.icon} /><div><b>{h.title}</b>{h.text}</div></div>)}</div>}
+      </div>
+
+      {s && (
+      <div class="block" id="certification">
+        <h2>LFL Certification Score <small>Scored under <a href="/methodology/">Methodology {s.methodology}</a> · rows tagged <b>Registry</b>, <b>Observed</b> or <b>Ahrefs</b> are measured; rows tagged <b>Illustrative</b> are sample values pending full verification</small></h2>
+        <Scorecard firm={firm} cohortSize={cohort?.data.firms.length} cohortLabel={cohort?.data.label} />
+        {ah && (
+        <>
+        <h3 style="margin:28px 0 4px;font-size:1.15rem">Digital presence snapshot</h3>
+        <p class="muted" style="font-size:.9rem">Pillar D signals, re-measured monthly. Paid advertising is not scored.</p>
+        <div class="digital-grid">
+          <div class="dg"><span class="k">Domain Rating</span><div class="v">{ah.dr}<small>· {drPct}th percentile</small></div><div class="s">{ah.refdomains.toLocaleString()} ref. domains · cohort median DR {drMedian} · Ahrefs rank {(ah.ahrefs_rank/1e6).toFixed(1)}M</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
+          <div class="dg"><span class="k">Organic visibility</span><div class="v">{ah.org_keywords.toLocaleString()}<small>keywords</small></div><div class="s">≈{ah.org_traffic.toLocaleString()} organic visits/mo (US) · cohort median {kwMedian} kw · {ah.paid_keywords ? `${ah.paid_keywords} paid keywords` : 'no paid search'}</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
+          {ai && <div class="dg"><span class="k">AI-search citations</span><div class="v">{ai.total}<small>· {ai.pages} pages</small></div><div class="s">{Object.entries(ai.by_platform).map(([k,v]) => `${platformNames[k] ?? k} ${v}`).join(' · ')}</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>}
+          {d.digital.trust_pages && <div class="dg"><span class="k">Trust pages</span><div class="v">{Object.values(d.digital.trust_pages).filter(Boolean).length} / {Object.keys(d.digital.trust_pages).length}</div><div class="s">{Object.entries(d.digital.trust_pages).map(([k,v]) => v ? k.replace(/_/g,' ') : `✕ ${k.replace(/_/g,' ')}`).join(' · ')}</div><span class="pill good">Observed</span></div>}
+          <div class="dg"><span class="k">Structured data</span><div class="v">{d.digital.schema_detected ? 'Present' : 'None'}<small>{d.digital.schema_detected ? '' : 'detected'}</small></div><div class="s">{d.digital.schema_detected ? 'JSON-LD found on site' : 'Add LegalService, Attorney, FAQPage, Review'}</div><span class={`pill ${d.digital.schema_detected ? 'good' : 'warn'}`}>{d.digital.schema_detected ? 'Observed' : 'Observed · +1 pt available'}</span></div>
+          <div class="dg"><span class="k">Core Web Vitals</span><div class="v">{d.digital.psi ? (d.digital.psi.value.cwv_pass ? 'Pass' : 'Fail') : '—'}<small>mobile</small></div><div class="s">{d.digital.psi ? `Performance ${d.digital.psi.value.performance}` : 'PageSpeed Insights measurement pending'}</div><span class={`pill ${d.digital.psi ? 'good' : ''}`}>{d.digital.psi ? `Observed · PSI, ${d.digital.psi.measured_at}` : 'Pending'}</span></div>
+        </div>
+        </>
+        )}
+      </div>
+      )}
+
+      <div class="block" id="practice">
+        <h2>Practice areas <small>{d.practices.length} areas · primary focus highlighted</small></h2>
+        <div class="pa-grid">{d.practices.map(p => <a class={`pa ${p.primary ? 'is-primary' : ''}`} href={p.slug === 'personal-injury' ? '/practice-areas/personal-injury/' : '#'}><Icon name="check" />{p.name}</a>)}</div>
+      </div>
+
+      <div class="block" id="results">
+        <h2>Case results <small>Only results verified against court records or documentation show amounts</small></h2>
+        <div class="results">
+          {d.results.map(r => <div class="result"><div class="amt">{r.verified && r.amount ? r.amount : '$—'}<small>{r.type}</small></div><div><b>{r.title}</b><p>{r.description}</p></div><span class={`badge ${r.verified ? 'badge--certified' : 'badge--tier'}`}>{r.verified ? 'Verified' : 'Pending verification'}</span></div>)}
+        </div>
+        <p class="muted" style="font-size:.86rem;margin-top:12px">Results are specific to their facts and do not guarantee similar outcomes. Firms submit results through their claimed profile; only results we can substantiate are published with amounts.</p>
+      </div>
+
+      <div class="block" id="attorneys">
+        <h2>Attorneys <small>{d.attorneys.length} attorneys · licensure checked against the {d.market.state_name} attorney registry</small></h2>
+        <div class="team">{d.attorneys.map(a => <div class="member"><div class="av">{a.name.split(' ').filter(w => /^[A-Z]/.test(w)).map(w => w[0]).filter((_, i, arr) => i === 0 || i === arr.length - 1).join('')}</div><div><b>{a.name}</b><span>{a.role}</span></div></div>)}</div>
+      </div>
+
+      <div class="block" id="reviews">
+        <h2>Client reviews</h2>
+        {d.reviews.google && <div class="reviews-head"><div class="big">{d.reviews.google.rating.toFixed(1)}</div><div><div class="stars">★★★★★</div><div class="src">Based on {d.reviews.google.count_label} Google reviews · {d.reviews.google.source} · Quotes below are testimonials published by the firm</div></div></div>}
+        <div class="rev-grid">{d.reviews.quotes.map(q => <div class="review"><div class="stars">★★★★★</div><q>{q.text}</q><div class="who">{q.author}</div></div>)}</div>
+      </div>
+
+      <div class="block" id="offices">
+        <h2>Offices <small>{d.offices.length} location{d.offices.length > 1 ? 's' : ''} · main office: {hq.label}</small></h2>
+        <div class="map" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i></div><Icon name="skyline" /><span class="hv-placeholder">Map embed slot</span></div>
+        <div class="offices">{d.offices.map(o => <div class={`office ${o.is_hq ? 'is-hq' : ''}`}><Icon name="pin" /><div><b>{o.label}</b><span>{o.address}</span>{o.by_appointment && <div class="note">By appointment</div>}</div></div>)}</div>
+      </div>
+
+      <div class="block" id="faq">
+        <h2>Frequently asked questions</h2>
+        <div class="faq">{d.faq.map((f, i) => <details open={i === 0}><summary>{f.q}</summary><div>{f.a}</div></details>)}</div>
+      </div>
+    </div>
+
+    <aside class="sidebar" id="contact">
+      <div class="contact-card">
+        <div class="phone">{d.phone_vanity ?? d.phone}<small>{d.phone_vanity ? `${d.phone} · ` : ''}{d.availability[0] ?? ''}</small></div>
+        <a class="btn btn--primary" href="#">Request free consultation</a>
+        <a class="btn btn--ghost" href={d.website} rel="nofollow noopener" target="_blank">Visit website ↗</a>
+        <dl>
+          <dt>Fee</dt><dd>{d.fee_model}</dd>
+          <dt>Consultation</dt><dd>{d.free_consultation ? 'Free' : 'Paid'}</dd>
+          <dt>Languages</dt><dd>{d.languages.join(', ')}</dd>
+          <dt>Main office</dt><dd>{hq.address.split(',')[0]}, {hq.address.split(',').slice(-1)[0].trim()}</dd>
+          <dt>Profile</dt><dd>Unclaimed</dd>
+        </dl>
+        {s && <div class="verified-line"><Icon name="check" /> LFL Score {s.total} · {s.tier} · re-verified {s.computed_at}</div>}
+      </div>
+      <div class="panel panel--ink">
+        <h4>Compare with similar firms</h4>
+        <p>See how {d.name} stacks up against other {primary[0]?.name.toLowerCase() ?? ''} firms in {d.market.city}.</p>
+        <a class="btn btn--white" href="/guides/best-personal-injury-law-firms-nyc/">View {d.market.city} ranking</a>
+      </div>
+      {cohort && (
+      <div class="panel">
+        <h4>Same cohort · by Domain Rating</h4>
+        <ul>{[...cohort.data.firms].sort((a, b) => b.dr - a.dr).slice(0, 5).map(f => <li><span style={f.domain === d.domain ? 'color:var(--ink);font-weight:600' : ''}>{f.name ?? f.domain}</span><span class="num">DR {f.dr}</span></li>)}</ul>
+      </div>
+      )}
+      <div class="panel">
+        <h4>Is this your firm?</h4>
+        <p class="muted" style="font-size:.92rem">Claim the profile to submit verified results, respond to reviews and update office details.</p>
+        <a class="link" href="#" style="margin-top:12px">Claim this profile</a>
+      </div>
+    </aside>
+  </div>
+</section>
+</Base>

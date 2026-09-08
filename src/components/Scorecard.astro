@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props { firm: CollectionEntry<'firms'>; cohortSize?: number; cohortLabel?: string }
+const { firm, cohortSize, cohortLabel } = Astro.props;
+const d = firm.data; const s = d.score;
+if (!s) throw new Error(`No score for ${d.slug} — run scripts/score.py`);
+const pillarNames: Record<string,string> = { A: 'Professional Standing', B: 'Verified Outcomes', C: 'Client Experience', D: 'Digital Presence & Authority', E: 'Access & Responsiveness' };
+const gateNames: Record<string,string> = { G1: 'Licensure', G2: 'Discipline', G3: 'Entity & office', G4: 'Consumer actions', G5: 'Website', G6: 'Footprint' };
+const tagLabel = (src: string) => ({ registry: 'Registry', observed: 'Observed', ahrefs: `Ahrefs · ${d.digital.ahrefs?.measured_at ?? ''}`, places: 'Google', psi: 'PageSpeed', court: 'Court records', firm: 'Firm-submitted', illustrative: 'Illustrative', pending: 'Pending' }[src] ?? src);
+const isMeasured = (src: string) => ['registry','observed','ahrefs','places','psi','court'].includes(src);
+const nextMonth = new Date(); nextMonth.setMonth(nextMonth.getMonth() + 1, 1);
+const nextCheck = nextMonth.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const verified = new Date(s.computed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : s.tier.startsWith('Dist') || s.tier === 'Elite' ? `LFL Certified · ${s.tier}` : s.tier;
+---
+<div class="scorecard">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b3"></i></div>
+  <div class="sc-top">
+    <div class="score-ring" style={`--pct:${s.total}%`}><b>{s.total}<small>/ 100</small></b></div>
+    <div>
+      <span class="tier-name">LFL Certification Score · Methodology {s.methodology}</span>
+      <h3>{tierLabel}</h3>
+      <p>{s.verdict}</p>
+      {s.tier !== 'Listed' && s.tier !== 'Not eligible' && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s.computed_at).getFullYear()} · re-verified {verified}</span>}
+    </div>
+    {s.next_tier && (
+      <div class="sc-next">
+        <b>{s.next_tier.gap} points to {s.next_tier.name}</b>
+        <div class="track"><i style={`width:${s.total}%`}></i></div>
+        <span>{s.next_tier.needed} needed · A+B+C floor {s.next_tier.floor_met ? 'met' : 'not yet met'} ({s.floor_abc})</span>
+        <div style="margin-top:10px;color:#fff">Most headroom: {s.next_tier.path.join(' · ')}</div>
+      </div>
+    )}
+  </div>
+  <div class="sc-gates">
+    {Object.entries(d.gates).map(([code, g]) => (
+      <div class="sc-gate"><Icon name="check" /><div>{code} {gateNames[code]}<small>{g.evidence}</small></div></div>
+    ))}
+  </div>
+  <div class="sc-pillars">
+    {(['A','B','C','D','E'] as const).map((p, i) => { const pl = s.pillars[p]; return (
+      <details class="sc-pillar" open={p === 'A' || p === 'D'}>
+        <summary><span class={`l w${p}`}>{p}</span><b>{pillarNames[p]}</b><div class="bar"><i style={`width:${Math.round(pl.score / pl.max * 100)}%`}></i></div><span class="v">{pl.score}<small>/{pl.max}</small></span></summary>
+        <div class="sc-sub">
+          {pl.subs.map(sub => (
+            <div class="sc-row"><span>{sub.code} {sub.label}<span class={`src-tag ${isMeasured(sub.source) ? 'ok' : ''}`}>{tagLabel(sub.source)}</span></span><span class="ev">{sub.evidence}</span><span class="pt">{sub.pts} / {sub.max}</span></div>
+          ))}
+        </div>
+      </details>
+    ); })}
+  </div>
+  <div class="sc-foot"><span>Next automated re-check: {nextCheck} · Cohort: {cohortLabel ?? d.cohort_id}{cohortSize ? ` (${cohortSize} firms measured)` : ''}</span><span><a href="/methodology/">How the score works →</a></span></div>
+</div>

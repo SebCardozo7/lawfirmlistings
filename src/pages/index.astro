@@ -1,0 +1,243 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Law Firm Listings — Find Vetted Law Firms Across the United States" description="Independent rankings and verified reviews of top-rated law firms in 100 U.S. cities and every practice area." nav="home">
+<!-- HERO -->
+<section class="hero">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><span class="glow"></span><span class="noise"></span></div>
+  <div class="container">
+    <div class="trust-pill"><span class="avs"><i></i><i></i><i></i><i></i></span><span class="stars">★★★★★</span><span><b>4.9</b> · 12,400+ verified client reviews</span></div>
+    <h1>The law firm directory built on <span class="grad-text">verification</span>, not advertising.</h1>
+    <p class="lede">Search 4,800+ certified firms across 100 U.S. cities. Every listing is checked for active licensure, clean disciplinary records and verified client outcomes — and no firm can pay to rank.</p>
+    <form class="search-panel" action="#" onsubmit="return false">
+      <div class="search-field">
+        <Icon name="search" />
+        <div style="flex:1"><label for="q">Legal matter</label><input id="q" type="text" placeholder="Car accident, divorce, DUI…"></div>
+      </div>
+      <div class="search-field">
+        <Icon name="pin" />
+        <div style="flex:1"><label for="loc">City or state</label><input id="loc" type="text" placeholder="New York, NY"></div>
+      </div>
+      <button class="btn btn--primary" type="submit">Search firms</button>
+    </form>
+    <div class="hero-popular"><span>Popular:</span><a href="/practice-areas/personal-injury/">Personal injury</a><a href="#">Divorce</a><a href="#">Criminal defense</a><a href="#">Immigration</a><a href="#">Estate planning</a></div>
+
+    <div class="hero-preview" aria-hidden="true">
+      <div class="glass">
+        <div class="firm"><div class="avatar">HM</div><div><b>Harlan &amp; Mercer LLP</b><span>Personal Injury · Manhattan, NY</span></div></div>
+        <div class="stars">★★★★★ <small>4.9 · 312 verified reviews</small></div>
+        <span class="badge badge--certified"><Icon name="shield" /> LFL Certified 2026</span>
+        <div class="img"><Icon name="skyline" /><span class="hv-placeholder">Custom image slot</span></div>
+        <div class="row"><span>Recovered <b>$2.1B+</b></span><span>Free consult <b>Yes</b></span><span>Fee <b>Contingency</b></span></div>
+      </div>
+      <div class="glass">
+        <div class="k">Certification score</div><div class="v num">96<span style="font-size:1rem;color:var(--on-night-soft)">/100</span></div>
+        <div class="sub">Licensure · Discipline · Results · Reviews</div>
+        <div class="bar"><i style="width:96%"></i></div>
+        <div class="row"><span>Bar status <b>Active</b></span><span>Discipline <b>None</b></span></div>
+        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Verified results <b>14</b></span><span>Peer score <b>9.1</b></span></div>
+      </div>
+      <div class="glass">
+        <div class="k">Certified firms</div><div class="v num">4,812</div>
+        <div class="sub">across 100 U.S. cities · 30 practice areas</div>
+        <div class="row"><span>New York <b class="num">612</b></span><span>Los Angeles <b class="num">488</b></span></div>
+        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Chicago <b class="num">341</b></span><span>Houston <b class="num">296</b></span></div>
+        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Updated <b>Sept 2026</b></span><span class="badge badge--live">● Live</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SITUATIONS -->
+<section class="section" style="border-top:0;padding-top:72px">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Start with your situation</span><h2 style="margin-top:12px">Tell us what happened. We'll show you who's certified to handle it.</h2><p>Most people don't know which kind of lawyer they need — they know what's going on in their life. Start there.</p></div>
+      <a class="link" href="#">All 30 practice areas</a>
+    </div>
+    <div class="sit-grid">
+      <a class="sit" href="/practice-areas/personal-injury/"><span class="ico"><Icon name="car" /></span><div><b>I was hurt in an accident</b><span>Car, truck, work or construction injuries, slip &amp; fall, medical mistakes</span></div><em>Personal Injury · <span class="num">1,240</span> firms</em></a>
+      <a class="sit" href="#"><span class="ico"><Icon name="heart" /></span><div><b>I'm getting divorced or need custody help</b><span>Divorce, child custody and support, prenups, domestic violence orders</span></div><em>Family Law · <span class="num">816</span> firms</em></a>
+      <a class="sit" href="#"><span class="ico"><Icon name="gavel" /></span><div><b>I've been arrested or charged</b><span>DUI, drug and assault charges, white-collar and federal investigations</span></div><em>Criminal Defense · <span class="num">702</span> firms</em></a>
+      <a class="sit" href="#"><span class="ico"><Icon name="globe" /></span><div><b>I need a visa, green card or citizenship</b><span>Family and work visas, asylum, naturalization, removal defense</span></div><em>Immigration · <span class="num">588</span> firms</em></a>
+      <a class="sit" href="#"><span class="ico"><Icon name="users" /></span><div><b>I was fired, harassed or underpaid</b><span>Wrongful termination, discrimination, unpaid wages, severance review</span></div><em>Employment · <span class="num">431</span> firms</em></a>
+      <a class="sit" href="#"><span class="ico"><Icon name="pen" /></span><div><b>I want to protect my family's future</b><span>Wills, trusts, probate, powers of attorney, elder care planning</span></div><em>Estate Planning · <span class="num">396</span> firms</em></a>
+      <a class="sit" href="#"><span class="ico"><Icon name="briefcase" /></span><div><b>I'm starting or running a business</b><span>Formation, contracts, partnerships, disputes, mergers</span></div><em>Business Law · <span class="num">354</span> firms</em></a>
+      <a class="sit" href="#"><span class="ico"><Icon name="home" /></span><div><b>I'm buying, selling or renting property</b><span>Closings, landlord–tenant disputes, evictions, zoning, title issues</span></div><em>Real Estate · <span class="num">277</span> firms</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- CITIES & STATES -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Certified firms near you</span><h2 style="margin-top:12px">Every state. The 100 largest legal markets. Verified locally.</h2><p>Licensure is checked against each state's bar, and rankings are built city by city — a top firm in Houston is ranked against Houston, not Boston.</p></div>
+      <a class="link" href="#">See all 100 cities</a>
+    </div>
+    <div class="city-grid">
+      <a class="city c1" href="/cities/new-york-ny/"><Icon name="sky_sm" /><div class="t"><b>New York, NY</b><span class="num">612 certified firms</span></div></a>
+      <a class="city c2" href="#"><Icon name="sky_sm" /><div class="t"><b>Los Angeles, CA</b><span class="num">488 certified firms</span></div></a>
+      <a class="city c3" href="#"><Icon name="sky_sm" /><div class="t"><b>Chicago, IL</b><span class="num">341 certified firms</span></div></a>
+      <a class="city c4" href="#"><Icon name="sky_sm" /><div class="t"><b>Houston, TX</b><span class="num">296 certified firms</span></div></a>
+      <a class="city c5" href="#"><Icon name="sky_sm" /><div class="t"><b>Miami, FL</b><span class="num">254 certified firms</span></div></a>
+      <a class="city c6" href="#"><Icon name="sky_sm" /><div class="t"><b>Washington, DC</b><span class="num">233 certified firms</span></div></a>
+      <a class="city c7" href="#"><Icon name="sky_sm" /><div class="t"><b>San Francisco, CA</b><span class="num">201 certified firms</span></div></a>
+      <a class="city c8" href="#"><Icon name="sky_sm" /><div class="t"><b>Boston, MA</b><span class="num">187 certified firms</span></div></a>
+    </div>
+    <div class="states">
+      <span class="lbl">Browse by state</span>
+      <div class="chips">
+        <a class="chip" href="#">California</a><a class="chip" href="#">Texas</a><a class="chip" href="#">Florida</a><a class="chip" href="#">New York</a><a class="chip" href="#">Illinois</a><a class="chip" href="#">Pennsylvania</a><a class="chip" href="#">Georgia</a><a class="chip" href="#">Arizona</a><a class="chip" href="#">New Jersey</a><a class="chip" href="#">Washington</a><a class="chip" href="#">Massachusetts</a><a class="chip" href="#">Colorado</a><a class="chip" href="#">All 50 states →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>100 U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
+    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>100 U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
+  </div>
+</div>
+
+<!-- WHAT CERTIFIED MEANS -->
+<section class="section section--night cert-section">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i></div>
+  <div class="container" style="position:relative">
+    <div class="cert-grid">
+      <div>
+        <span class="eyebrow">What "certified" means</span>
+        <h2 style="margin-top:14px">Most directories sell placement. We verify firms — and publish exactly how.</h2>
+        <p class="lede" style="color:var(--on-night-soft);margin-top:18px">A firm earns the <b style="color:#fff">LFL Certified</b> badge only after four checks pass. It can't be bought, it's re-checked every month, and it's revoked the moment a public disciplinary action appears.</p>
+        <div class="criteria" style="margin-top:28px">
+          <div class="criterion"><Icon name="shield" /><div><b>1 · Licensure &amp; discipline</b><span>Every named attorney active with the state bar and free of public discipline for 10 years.</span></div></div>
+          <div class="criterion"><Icon name="scale" /><div><b>2 · Verified outcomes</b><span>At least three case results confirmed against court records or documentation.</span></div></div>
+          <div class="criterion"><Icon name="star" /><div><b>3 · Client experience</b><span>25+ verified client reviews with a 4.5 average, weighted for recency and detail.</span></div></div>
+          <div class="criterion"><Icon name="users" /><div><b>4 · Peer recognition</b><span>Confidential evaluations from attorneys in the same market and practice area.</span></div></div>
+        </div>
+        <a class="btn btn--white" href="#" style="margin-top:28px">Read the full methodology</a>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead><tr><th>What you get</th><th class="us">Law Firm Listings</th><th>Paid directories</th><th>Search &amp; reviews</th></tr></thead>
+          <tbody>
+            <tr><td>Bar licensure checked for every attorney</td><td class="us"><Icon name="check" /></td><td>—</td><td>—</td></tr>
+            <tr><td>Disciplinary history screened</td><td class="us"><Icon name="check" /></td><td>—</td><td>—</td></tr>
+            <tr><td>Case results verified against records</td><td class="us"><Icon name="check" /></td><td>Self-reported</td><td>—</td></tr>
+            <tr><td>Firms can pay to rank higher</td><td class="us">Never</td><td>Yes</td><td>Ads</td></tr>
+            <tr><td>Ranked against local competitors</td><td class="us"><Icon name="check" /></td><td>Partial</td><td>—</td></tr>
+            <tr><td>Fee model &amp; free-consult shown up front</td><td class="us"><Icon name="check" /></td><td>Sometimes</td><td>—</td></tr>
+            <tr><td>Re-verified</td><td class="us">Monthly</td><td>Annually</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED FIRMS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Certified this month</span><h2 style="margin-top:12px">Firms that just earned the 2026 certification</h2><p>New certifications are published on the first business day of each month, after licensure, discipline and results checks are complete.</p></div>
+      <a class="link" href="#">View all rankings</a>
+    </div>
+    <div class="feat-grid">
+      <article class="feat">
+        <div class="top"><div class="firm-logo">HM</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
+        <div><h3><a href="/firms/greenstein-pittari-llp/">Harlan &amp; Mercer LLP</a></h3><span class="where">Personal Injury · New York, NY</span></div>
+        <p>Trial-first plaintiffs' firm with 40+ years of seven- and eight-figure verdicts in construction and medical malpractice cases.</p>
+        <div class="foot"><span class="stars">★★★★★ <b>4.9</b></span><span class="muted num">312 reviews</span></div>
+      </article>
+      <article class="feat">
+        <div class="top"><div class="firm-logo l2">AV</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
+        <div><h3><a href="#">Alvarez Vance Family Law</a></h3><span class="where">Family &amp; Divorce · Los Angeles, CA</span></div>
+        <p>Boutique divorce and custody practice known for high-net-worth settlements and collaborative divorce.</p>
+        <div class="foot"><span class="stars">★★★★★ <b>4.8</b></span><span class="muted num">204 reviews</span></div>
+      </article>
+      <article class="feat">
+        <div class="top"><div class="firm-logo l3">OK</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
+        <div><h3><a href="#">Okafor &amp; Reyes Defense</a></h3><span class="where">Criminal Defense · Chicago, IL</span></div>
+        <p>Former federal prosecutors defending DUI, drug and white-collar charges in Cook County and the Northern District.</p>
+        <div class="foot"><span class="stars">★★★★★ <b>4.9</b></span><span class="muted num">178 reviews</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">How it works</span><h2 style="margin-top:12px">From "what do I do now?" to a booked consultation</h2><p>No account, no forms sold to lead brokers. You choose who to contact, and the firm hears from you directly.</p></div>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Describe your situation</h3><p>Pick what's happening and your city. Or just search — "rear-ended on the BQE" works as well as "car accident lawyer".</p></div>
+      <div class="step"><h3>Compare certified firms</h3><p>Ratings, fee model, verified results, languages and consultation availability, side by side and in plain English.</p></div>
+      <div class="step"><h3>Talk to the firm — free</h3><p>Request a consultation directly. 92% of certified firms offer the first call free; none pay us referral fees.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Before you call</span><h2 style="margin-top:12px">Plain-English guides for the situation you're in</h2><p>What a case is worth, what a lawyer costs, what to bring to the first meeting — written and reviewed by licensed attorneys.</p></div>
+      <a class="link" href="#">All guides</a>
+    </div>
+    <div class="guide-grid">
+      <a class="guide guide--lead" href="/guides/best-personal-injury-law-firms-nyc/">
+        <div class="thumb"><Icon name="skyline" /></div>
+        <div class="body"><span class="kicker">Ranking · Personal Injury</span><h3>Best Personal Injury Law Firms in NYC, Ranked for 2026</h3><p>Our editors evaluated 84 Manhattan, Brooklyn and Queens firms on trial record, verified results and client reviews.</p><span class="meta">Updated Sept 2026 · 14 min read</span></div>
+      </a>
+      <a class="guide" href="#">
+        <div class="thumb t2"><Icon name="columns" /></div>
+        <div class="body"><span class="kicker">Costs</span><h3>How much does a lawyer cost in 2026?</h3><span class="meta">Hourly, flat and contingency fees explained</span></div>
+      </a>
+      <a class="guide" href="#">
+        <div class="thumb t3"><Icon name="sky_sm" /></div>
+        <div class="body"><span class="kicker">Preparation</span><h3>What to bring to your first consultation</h3><span class="meta">A 10-item checklist from working attorneys</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--paper">
+  <div class="container faq-split">
+    <div><span class="eyebrow">Questions people ask first</span><h2 style="margin-top:14px">Before you hire anyone</h2><p style="margin-top:14px;max-width:38ch">Short answers to the questions we hear most. Every guide is reviewed by a licensed attorney in the relevant state.</p><a class="link" href="#" style="margin-top:20px">Browse all guides</a></div>
+    <div class="faq">
+      <details open><summary>How much does a lawyer cost?</summary><div>It depends on the matter. Personal injury firms almost always work on contingency (typically 33⅓%, nothing up front). Divorce, criminal defense and business work are usually hourly ($250–$1,200) or flat-fee. Every profile shows the fee model before you call.</div></details>
+      <details><summary>Is a "certified" firm better than a highly rated one?</summary><div>Ratings tell you how clients felt. Certification tells you the attorneys are licensed, undisciplined and have results we could verify. The best firms have both — and our rankings weight them together.</div></details>
+      <details><summary>Do law firms pay to be listed here?</summary><div>Certification and the basic profile are free and cannot be purchased. Firms may buy clearly labeled sponsored placements in some sections; those never affect rankings or certification.</div></details>
+      <details><summary>What happens when I request a consultation?</summary><div>Your message goes straight to the firm — we don't sell it to other lawyers. Most certified firms respond within one business day, and 92% offer the first consultation free.</div></details>
+      <details><summary>What if a firm loses its certification?</summary><div>If a public disciplinary action appears or verified reviews fall below our threshold, the badge is removed within 30 days and the firm drops out of ranked lists until it re-qualifies.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FOR FIRMS -->
+<section class="section">
+  <div class="container">
+    <div class="cta-firm">
+      <div>
+        <span class="eyebrow">For law firms</span>
+        <h2 style="margin-top:14px">Is your firm eligible for certification?</h2>
+        <p class="lede" style="margin-top:14px">Certification is free and earned, never purchased. Claim your profile to submit verified results, respond to reviews and appear in city and practice-area rankings.</p>
+        <div class="actions"><a class="btn btn--ink" href="#">Claim your firm profile</a><a class="btn btn--ghost" href="/methodology/">See certification criteria</a></div>
+      </div>
+      <ul>
+        <li><Icon name="check" /><span>Free, permanent profile with verified badge</span></li>
+        <li><Icon name="check" /><span>Featured in monthly "Recently certified" rankings</span></li>
+        <li><Icon name="check" /><span>Structured data for Google &amp; AI search visibility</span></li>
+        <li><Icon name="check" /><span>Direct consultation requests — no referral fees</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</Base>
