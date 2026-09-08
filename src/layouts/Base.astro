@@ -10,7 +10,9 @@ interface Props {
   schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
 }
-const { title, description, nav = 'home', schema, noindex = false } = Astro.props;
+const { title, description, nav = 'home', schema, noindex: pageNoindex = false } = Astro.props;
+// Build-time switch (Cloudflare → Settings → Build → Variables): LFL_NOINDEX=true keeps the whole site out of search engines until launch.
+const noindex = pageNoindex || import.meta.env.LFL_NOINDEX === 'true';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const siteName = 'Law Firm Listings';
 const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
