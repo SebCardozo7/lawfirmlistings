@@ -1,0 +1,21 @@
+{
+  "name": "lawfirmlistings",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "python3 scripts/score.py && astro build",
+    "preview": "astro preview",
+    "score": "python3 scripts/score.py",
+    "check": "astro check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.1"
+  },
+  "type": "module",
+  "private": true
+}
