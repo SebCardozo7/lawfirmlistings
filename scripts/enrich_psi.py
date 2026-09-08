@@ -53,6 +53,23 @@ def api_key():
     return os.environ.get("GOOGLE_API_KEY")
 
 
+def write_key(path, key, value):
+    """Re-read, set one key, write back.
+
+    The enrichers each own one key in the staging record but share the file. Holding a copy
+    from the start of a long run and writing it back at the end silently discards whatever
+    another enricher wrote in between — which is how napolilaw.com lost its `places` block when
+    this script and enrich_places.py were run concurrently. Re-reading immediately before the
+    write keeps them safe to run in parallel.
+    """
+    with io.open(path, encoding="utf-8") as fh:
+        fresh = json.load(fh)
+    fresh[key] = value
+    with io.open(path, "w", encoding="utf-8") as fh:
+        json.dump(fresh, fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
+
+
 def measure(url, key, strategy="mobile"):
     qs = urllib.parse.urlencode({
         "url": url, "key": key, "strategy": strategy,
@@ -152,10 +169,7 @@ def main():
             failed += 1
             continue
 
-        rec["psi"] = psi
-        with io.open(path, "w", encoding="utf-8") as fh:
-            json.dump(rec, fh, indent=2, ensure_ascii=False)
-            fh.write("\n")
+        write_key(path, "psi", psi)
         print("%-24s perf %3d/100  cwv_pass %-5s  %s"
               % (rec["domain"], psi["value"]["performance"], psi["value"]["cwv_pass"], psi["note"]))
         measured += 1

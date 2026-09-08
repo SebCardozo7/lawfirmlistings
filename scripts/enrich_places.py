@@ -18,6 +18,15 @@ How reviews are aggregated (Sebastián's call, 2026-09-08)
     firm for how it splits its profiles. Every listing is stored individually so the aggregate
     can be recomputed or audited.
 
+    Totals are national, not restricted to the cohort's state — also Sebastián's call, chosen
+    for simplicity over a second rule to maintain and explain on every profile. The trade-off,
+    recorded here so it is not rediscovered later: pillar C is scored as a percentile inside a
+    state x practice cohort, so a firm with out-of-state offices carries review volume from
+    markets its cohort peers do not compete in. Measured effect on this batch is small (Parker
+    Waichman 1,870 vs 1,758 New York only; Cellino 1,740 vs 1,689) except for the Rothenberg
+    Law Firm, whose New York share is 276 of 577. If C1 percentiles ever look inflated for
+    multi-state firms, this is the reason and `listings[].address` is where to filter.
+
 Gate G6 needs >= 10 public reviews and >= 1 year in operation. Only the review half is decidable
 here, so G6 is reported as `reviews_ok` rather than a pass: the operating-age half needs a
 Secretary of State filing date, which is gate G3's source.
@@ -216,9 +225,13 @@ def main():
             print("%-24s FAILED  %s" % (rec["domain"], str(e)[:150]))
             continue
 
-        rec["places"] = block
+        # Re-read before writing: see write_key in enrich_psi.py. Holding a copy across a long
+        # run and writing it back discards whatever another enricher wrote in the meantime.
+        with io.open(path, encoding="utf-8") as fh:
+            fresh = json.load(fh)
+        fresh["places"] = block
         with io.open(path, "w", encoding="utf-8") as fh:
-            json.dump(rec, fh, indent=2, ensure_ascii=False)
+            json.dump(fresh, fh, indent=2, ensure_ascii=False)
             fh.write("\n")
 
         agg = block["aggregate"]
