@@ -4,7 +4,7 @@
  "practice": "personal-injury",
  "label": "New York × Personal Injury",
  "measured_at": "2026-09-08",
- "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us); 23 rows measured 2026-09-07, 16 rows added 2026-09-08",
+ "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us); 23 rows measured 2026-09-07, 16 rows added 2026-09-08; jacobyandmeyers.com excluded 2026-09-08: its own JSON-LD describes a California practice at 2000 Ave of the Stars, Los Angeles CA",
  "full_size_estimate": 148,
  "firms": [
   {
@@ -46,14 +46,6 @@
    "refdomains": 1721,
    "org_keywords": 10330,
    "org_traffic": 47206
-  },
-  {
-   "domain": "jacobyandmeyers.com",
-   "name": "Jacoby & Meyers",
-   "dr": 50,
-   "refdomains": 1759,
-   "org_keywords": 1787,
-   "org_traffic": 45171
   },
   {
    "domain": "rosenbaumnylaw.com",
