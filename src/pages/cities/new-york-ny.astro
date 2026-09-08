@@ -1,6 +1,55 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import FirmCard from '../../components/FirmCard.astro';
+
+const CITY_SLUG = 'new-york-ny';
+
+// Firms, counts and borough tiles all derive from the collection. Sample firms are excluded
+// outright: this is a public ranked list, and fictional firms must never appear in one.
+const inCity = await getCollection('firms', f =>
+  f.data.status !== 'sample' &&
+  f.data.status !== 'not_eligible' &&
+  f.data.market.city_slug === CITY_SLUG);
+
+const weight = (f: typeof inCity[number]) =>
+  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+const firms = inCity.sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
+
+const certified = firms.filter(f => f.data.status === 'certified');
+const freeConsult = firms.filter(f => f.data.free_consultation).length;
+const multilingual = firms.filter(f => f.data.languages.some(l => l !== 'English')).length;
+const share = (n: number) => (firms.length ? Math.round((100 * n) / firms.length) + '%' : '\u2014');
+const logoVariants = ['', 'l2', 'l3'];
+
+const computedDates = firms.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+const lastUpdated = computedDates.length
+  ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// Only practice areas that have a firm here AND a page to link to. Anything else would 404.
+const PRACTICE_ICONS: Record<string, string> = { 'personal-injury': 'car' };
+const practiceTiles = Object.keys(PRACTICE_ICONS).map(slug => {
+  const matching = firms.filter(f => f.data.practices.some(pr => pr.slug === slug));
+  const name = matching[0]?.data.practices.find(pr => pr.slug === slug)?.name ?? slug;
+  return {
+    slug, name, icon: PRACTICE_ICONS[slug], listed: matching.length,
+    count: matching.filter(f => f.data.status === 'certified').length,
+  };
+}).filter(t => t.listed > 0);
+
+// Borough presence comes from the offices each firm publishes, not from a guess.
+const BOROUGHS = [
+  { name: 'Manhattan', needle: 'Manhattan', cls: 'c1' },
+  { name: 'Brooklyn', needle: 'Brooklyn', cls: 'c3' },
+  { name: 'Queens', needle: 'Queens', cls: 'c4' },
+  { name: 'The Bronx', needle: 'Bronx', cls: 'c7' },
+  { name: 'Staten Island', needle: 'Staten Island', cls: 'c1' },
+];
+const boroughTiles = BOROUGHS
+  .map(b => ({ ...b, count: firms.filter(f => f.data.offices.some(o => o.label.includes(b.needle))).length }))
+  .filter(b => b.count > 0);
 ---
 <Base title="Top Law Firms in New York, NY (2026)" description="Browse certified law firms in New York City by practice area — personal injury, family law, criminal defense, immigration and more." nav="cities">
 <section class="page-hero on-night">
@@ -10,18 +59,17 @@ import Icon from '../../components/Icon.astro';
       <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="#">Cities</a></li><li><a href="#">New York</a></li><li aria-current="page">New York City</li></ol>
       <span class="eyebrow">City guide</span>
       <h1>Top Law Firms in New York, NY</h1>
-      <p class="lede">New York City is home to more than 80,000 practicing attorneys — and to some of the most complex courts in the country. We've certified 612 firms across the five boroughs, from white-shoe Midtown practices to neighborhood immigration offices in Jackson Heights. Browse by what you need, compare verified results and book a free consultation.</p>
+      <p class="lede">New York City is home to more than 80,000 practicing attorneys — and to some of the most complex courts in the country. {certified.length > 0 ? <>We have certified {certified.length} {certified.length === 1 ? 'firm' : 'firms'} here so far, starting with the personal injury cohort.</> : <>Our first New York cohort is still in verification.</>} Browse by what you need and compare what each firm publishes.</p>
       <div class="chips" style="margin-top:24px">
         <a class="chip" href="#">Manhattan</a><a class="chip" href="#">Brooklyn</a><a class="chip" href="#">Queens</a><a class="chip" href="#">The Bronx</a><a class="chip" href="#">Staten Island</a><a class="chip" href="#">Long Island</a><a class="chip" href="#">Westchester</a>
       </div>
     </div>
     <div class="hero-facts">
-      <div class="fact"><b class="num">612</b><span>Certified firms in NYC</span></div>
-      <div class="fact"><b class="num">28</b><span>Practice areas covered</span></div>
-      <div class="fact"><b class="num">4.7</b><span>Avg. verified rating</span></div>
-      <div class="fact"><b class="num">$450–$1,200</b><span>Typical hourly rate</span></div>
-      <div class="fact"><b class="num">89%</b><span>Offer free consultation</span></div>
-      <div class="fact"><b class="num">41%</b><span>Multilingual staff</span></div>
+      <div class="fact"><b class="num">{certified.length}</b><span>Certified firms in NYC</span></div>
+      <div class="fact"><b class="num">{firms.length}</b><span>Firms listed</span></div>
+      <div class="fact"><b class="num">{practiceTiles.length}</b><span>{practiceTiles.length === 1 ? 'Practice area covered' : 'Practice areas covered'}</span></div>
+      <div class="fact"><b class="num">{share(freeConsult)}</b><span>Offer free consultation</span></div>
+      <div class="fact"><b class="num">{share(multilingual)}</b><span>Multilingual staff</span></div>
     </div>
   </div>
 </section>
@@ -31,17 +79,12 @@ import Icon from '../../components/Icon.astro';
   <div class="container">
     <div class="section-head">
       <div><span class="eyebrow">Browse by legal need</span><h2 style="margin-top:12px">Law firms in New York by practice area</h2></div>
-      <a class="link" href="#">All 28 practice areas in NYC</a>
+      
     </div>
     <div class="cat-grid">
-      <a class="cat" href="/practice-areas/personal-injury/"><span class="ico"><Icon name="car" /></span><b>Personal Injury</b><span class="num">148 certified firms · Avg 4.8</span></a>
-      <a class="cat" href="#"><span class="ico"><Icon name="heart" /></span><b>Family &amp; Divorce</b><span class="num">86 certified firms · Avg 4.7</span></a>
-      <a class="cat" href="#"><span class="ico"><Icon name="gavel" /></span><b>Criminal Defense</b><span class="num">72 certified firms · Avg 4.8</span></a>
-      <a class="cat" href="#"><span class="ico"><Icon name="globe" /></span><b>Immigration</b><span class="num">94 certified firms · Avg 4.7</span></a>
-      <a class="cat" href="#"><span class="ico"><Icon name="home" /></span><b>Real Estate</b><span class="num">58 certified firms · Avg 4.6</span></a>
-      <a class="cat" href="#"><span class="ico"><Icon name="users" /></span><b>Employment</b><span class="num">47 certified firms · Avg 4.7</span></a>
-      <a class="cat" href="#"><span class="ico"><Icon name="briefcase" /></span><b>Business &amp; Corporate</b><span class="num">63 certified firms · Avg 4.6</span></a>
-      <a class="cat" href="#"><span class="ico"><Icon name="pen" /></span><b>Estate Planning</b><span class="num">44 certified firms · Avg 4.8</span></a>
+      {practiceTiles.map(t => (
+        <a class="cat" href={`/practice-areas/${t.slug}/`}><span class="ico"><Icon name={t.icon} /></span><b>{t.name}</b><span class="num">{t.count} certified {t.count === 1 ? 'firm' : 'firms'} · {t.listed} listed</span></a>
+      ))}
     </div>
   </div>
 </section>
@@ -50,50 +93,16 @@ import Icon from '../../components/Icon.astro';
 <section class="section section--tint">
   <div class="container layout">
     <div>
-      <div class="results-head"><h2>Highest-ranked law firms in New York City</h2><span>Across all practice areas · Sept 2026</span></div>
+      <div class="results-head"><h2>Highest-ranked law firms in New York City</h2><span>Across all practice areas{lastUpdated ? ` · ${lastUpdated}` : ''}</span></div>
       <div class="firm-list">
-        <article class="firm-card">
-          <span class="rank">#1 in NYC</span>
-          <div class="firm-logo">HM</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="/firms/greenstein-pittari-llp/">Harlan &amp; Mercer LLP</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.9</b> <span class="muted num">(312)</span></span><span>Personal Injury</span><span>Financial District · 3 offices</span></div>
-            <p class="firm-desc">Trial-first plaintiffs' firm with $2.1B+ recovered, including a $110M construction-fall verdict in Kings County in 2024.</p>
-          </div>
-          <div class="firm-side"><a class="btn btn--primary btn--sm" href="#">Free consultation</a><a class="btn btn--ghost btn--sm" href="#">View profile</a></div>
-        </article>
-        <article class="firm-card">
-          <span class="rank">#2 in NYC</span>
-          <div class="firm-logo l2">GB</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Goldstein Bhatt Family Law</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.9</b> <span class="muted num">(241)</span></span><span>Family &amp; Divorce</span><span>Midtown East</span></div>
-            <p class="firm-desc">High-net-worth divorce and custody boutique; fellows of the American Academy of Matrimonial Lawyers, with a dedicated forensic accounting team.</p>
-          </div>
-          <div class="firm-side"><a class="btn btn--primary btn--sm" href="#">Free consultation</a><a class="btn btn--ghost btn--sm" href="#">View profile</a></div>
-        </article>
-        <article class="firm-card">
-          <span class="rank">#3 in NYC</span>
-          <div class="firm-logo l3">RO</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Reyes Okonkwo Defense Group</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.8</b> <span class="muted num">(189)</span></span><span>Criminal Defense</span><span>Downtown Brooklyn</span></div>
-            <p class="firm-desc">Former Manhattan ADAs and a federal defender handling state felonies, SDNY/EDNY federal cases and white-collar investigations. Available 24/7 for arraignments.</p>
-          </div>
-          <div class="firm-side"><a class="btn btn--primary btn--sm" href="#">Free consultation</a><a class="btn btn--ghost btn--sm" href="#">View profile</a></div>
-        </article>
-        <article class="firm-card">
-          <span class="rank">#4 in NYC</span>
-          <div class="firm-logo l5">PA</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Park &amp; Adeyemi Immigration</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.8</b> <span class="muted num">(426)</span></span><span>Immigration</span><span>Jackson Heights · Flushing</span></div>
-            <p class="firm-desc">Employment-based visas, family petitions and removal defense in seven languages. Among the highest asylum approval rates in the New York immigration court.</p>
-          </div>
-          <div class="firm-side"><a class="btn btn--primary btn--sm" href="#">Free consultation</a><a class="btn btn--ghost btn--sm" href="#">View profile</a></div>
-        </article>
+        {firms.map((firm, i) => (
+          <FirmCard firm={firm} rank={i + 1} rankLabel={i === 0 ? '#1 in NYC' : `#${i + 1}`} logoVariant={logoVariants[i % logoVariants.length]} />
+        ))}
       </div>
-      <div style="margin-top:24px;text-align:center"><a class="btn btn--ghost" href="#">See all 612 certified firms in New York</a></div>
+      {firms.length === 0 && (
+        <div class="callout"><b>Nothing published here yet.</b> The New York cohort is still in verification. Firms appear once their eligibility gates are checked.</div>
+      )}
+      
     </div>
     <aside class="sidebar">
       <div class="panel panel--ink">
@@ -109,15 +118,6 @@ import Icon from '../../components/Icon.astro';
           <li><a href="#">Best criminal defense firms in Brooklyn</a></li>
           <li><a href="#">Best immigration lawyers in Queens</a></li>
           <li><a href="#">Best real estate attorneys in NYC</a></li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h4>Nearby cities</h4>
-        <ul>
-          <li><a href="#">Newark, NJ</a><span class="num">64 firms</span></li>
-          <li><a href="#">Jersey City, NJ</a><span class="num">38 firms</span></li>
-          <li><a href="#">White Plains, NY</a><span class="num">29 firms</span></li>
-          <li><a href="#">Stamford, CT</a><span class="num">22 firms</span></li>
         </ul>
       </div>
     </aside>
@@ -149,10 +149,9 @@ import Icon from '../../components/Icon.astro';
       <div><span class="eyebrow">By borough &amp; neighborhood</span><h2 style="margin-top:12px">Certified firms near you</h2></div>
     </div>
     <div class="city-grid">
-      <a class="city c1" href="#"><Icon name="sky_sm" /><div class="t"><b>Manhattan</b><span class="num">338 certified firms</span></div></a>
-      <a class="city c3" href="#"><Icon name="sky_sm" /><div class="t"><b>Brooklyn</b><span class="num">124 certified firms</span></div></a>
-      <a class="city c4" href="#"><Icon name="sky_sm" /><div class="t"><b>Queens</b><span class="num">86 certified firms</span></div></a>
-      <a class="city c7" href="#"><Icon name="sky_sm" /><div class="t"><b>The Bronx &amp; Staten Island</b><span class="num">64 certified firms</span></div></a>
+      {boroughTiles.map(b => (
+        <div class={`city ${b.cls}`}><Icon name="sky_sm" /><div class="t"><b>{b.name}</b><span class="num">{b.count} {b.count === 1 ? 'firm with an office here' : 'firms with an office here'}</span></div></div>
+      ))}
     </div>
   </div>
 </section>

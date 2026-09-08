@@ -1,0 +1,81 @@
+---
+// Ranked .firm-card, rendered from a `firms` collection entry.
+// Markup and class names are the frozen "Aurora + Paper" ones — only the data source changed.
+//
+// Honesty rules this component enforces, so no caller can break them:
+// - No monetary figure is ever printed. Case results carry amount: null until a docket or
+//   document backs them, so the side panel shows the certification score instead of "recovered".
+// - Ratings render only when the firm has a reviews.google block, and always carry their source,
+//   because today's counts are self-reported ("as reported by the firm").
+// - The certified badge appears only for status: certified; a listed firm gets a neutral card.
+// - Both buttons resolve to real URLs (no href="#").
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+  firm: CollectionEntry<'firms'>;
+  rank?: number;
+  rankLabel?: string;
+  logoVariant?: string;
+}
+const { firm, rank, rankLabel, logoVariant } = Astro.props;
+const d = firm.data;
+const s = d.score;
+
+const isCertified = d.status === 'certified' && !!s;
+const primary = d.practices.filter(p => p.primary);
+const otherLanguages = d.languages.filter(l => l !== 'English');
+const blurb = d.about[0] ?? d.tagline;
+
+const g = d.reviews.google;
+const stars = g ? '★'.repeat(Math.round(g.rating)) + '☆'.repeat(5 - Math.round(g.rating)) : null;
+// count_label is a label, not a number ("400+"), and its provenance ships with it.
+const selfReported = g ? /as reported by the firm/i.test(g.source) : false;
+
+const officeLabel = `${d.offices.length} office${d.offices.length === 1 ? '' : 's'}`;
+const attorneyLabel = `${d.attorneys.length} attorney${d.attorneys.length === 1 ? '' : 's'}`;
+const seniority = d.founded_year ? `Est. ${d.founded_year} · ${attorneyLabel}` : attorneyLabel;
+---
+
+<article class="firm-card">
+  {rank && <span class="rank">{rankLabel ?? `#${rank}`}</span>}
+  <div class={logoVariant ? `firm-logo ${logoVariant}` : 'firm-logo'}>{d.initials}</div>
+
+  <div class="firm-body">
+    <div class="firm-title">
+      <h3><a href={`/firms/${d.slug}/`}>{d.name}</a></h3>
+      {isCertified && (
+        <span class="badge badge--certified"><Icon name="shield" /> LFL Certified 2026</span>
+      )}
+      {isCertified && s!.tier !== 'Certified' && (
+        <span class="badge badge--tier">{s!.tier}</span>
+      )}
+    </div>
+
+    <div class="firm-meta">
+      {g && stars && (
+        <span class="stars">{stars}<b>{g.rating.toFixed(1)}</b>{' '}
+          <span class="muted num">({g.count_label}{selfReported ? ', as reported by the firm' : ''})</span>
+        </span>
+      )}
+      <span>{d.market.city}, {d.market.state} · {officeLabel}</span>
+      <span>{seniority}</span>
+    </div>
+
+    {blurb && <p class="firm-desc">{blurb}</p>}
+
+    <div class="firm-tags">
+      {primary.map(p => <span class="tag">{p.name}</span>)}
+      {otherLanguages.length > 0 && <span class="tag">Se habla español</span>}
+    </div>
+  </div>
+
+  <div class="firm-side">
+    {isCertified
+      ? <div class="stat"><b class="num">{s!.total}/100</b>LFL Certification Score</div>
+      : <div class="stat"><b>Listed</b>score pending verification</div>}
+    <div class="stat"><b>{d.fee_model}</b>{d.free_consultation ? 'free consultation' : 'fee model'}</div>
+    <a class="btn btn--primary btn--sm" href={`/firms/${d.slug}/`}>View profile</a>
+    <a class="btn btn--ghost btn--sm" href={d.website} rel="nofollow noopener" target="_blank">Visit website</a>
+  </div>
+</article>
