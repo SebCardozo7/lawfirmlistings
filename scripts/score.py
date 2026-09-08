@@ -12,9 +12,19 @@ Guard: LFL_ENV=production fails the build if a firm has status "sample", or a *c
 """
 import json, os, sys, glob, statistics, datetime, pathlib
 
+# The data files and this script's own output carry non-ASCII (× in cohort labels, → in tier paths).
+# Windows would otherwise default to cp1252 and crash on them, so pin UTF-8 everywhere.
+def read_json(path):
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8")
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 FIRMS = sorted(glob.glob(str(ROOT / "src/data/firms/**/*.json"), recursive=True))
-COHORTS = {json.load(open(p))["id"]: json.load(open(p)) for p in glob.glob(str(ROOT / "src/data/cohorts/*.json"))}
+COHORTS = {c["id"]: c for c in (read_json(p) for p in glob.glob(str(ROOT / "src/data/cohorts/*.json")))}
 PROD = os.environ.get("LFL_ENV") == "production"
 TODAY = datetime.date.today().isoformat()
 METHOD = "v1.0"
@@ -146,7 +156,7 @@ def compute(firm):
 def main():
     errors = []
     for path in FIRMS:
-        firm = json.load(open(path))
+        firm = read_json(path)
         if firm.get("status") == "sample":
             if PROD: errors.append(f"{path}: status=sample is not allowed in production")
             continue
@@ -155,7 +165,8 @@ def main():
         ill = [s["code"] for p in score["pillars"].values() for s in p["subs"] if s["source"] == "illustrative"]
         if PROD and firm.get("status") == "certified" and ill:
             errors.append(f"{path}: certified firm still has illustrative sub-factors {ill}")
-        json.dump(firm, open(path, "w"), indent=2, ensure_ascii=False)
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(firm, fh, indent=2, ensure_ascii=False)
         print(f"{firm['name']}: {score['total']} → {score['tier']} (A+B+C={score['floor_abc']}) illustrative={ill}")
     if errors:
         print("\n".join(errors), file=sys.stderr); sys.exit(1)
