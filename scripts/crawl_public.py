@@ -29,6 +29,7 @@ Usage:
 import argparse
 import datetime
 import gzip
+import html as html_entities
 import io
 import json
 import pathlib
@@ -79,6 +80,17 @@ TRUST_PAGE_KEYS = {
     "blog": "blog", "attorneys": "attorney_bios",
 }
 
+# Claims that feed required schema fields (fee_model, free_consultation, availability) and
+# pillar E. Each hit is stored with the sentence it came from and the page URL, so a reviewer
+# can see the firm's own wording rather than a bare boolean somebody has to trust.
+PHRASE_SIGNALS = [
+    ("contingency", r"contingen\w+|no fee unless|no recovery[, ]+no fee|pay nothing unless"),
+    ("free_consultation", r"free consultation|free case (?:review|evaluation)|free legal consultation"),
+    ("available_24_7", r"24/7|24 hours a day|around the clock|available anytime"),
+    ("hospital_visits", r"hospital visit|home visit|we(?:'ll| will)? come to you"),
+    ("se_habla_espanol", r"se habla espa\w+|hablamos espa\w+"),
+]
+
 
 def fetch(url):
     """GET a URL. Returns (status, text, final_url) with text='' when the body is not HTML."""
@@ -121,7 +133,9 @@ def robots_for(origin):
 
 def strip_tags(html):
     html = re.sub(r"<(script|style|noscript)[^>]*>.*?</\1>", " ", html, flags=re.S | re.I)
-    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html)).strip()
+    text = html_entities.unescape(re.sub(r"<[^>]+>", " ", html))
+    # &nbsp; unescapes to U+00A0, which is not matched by \s in older behaviour; normalise it.
+    return re.sub(r"[\s ]+", " ", text).strip()
 
 
 def json_ld_blocks(html):
@@ -189,6 +203,7 @@ def crawl(domain, fetched_at):
         "trust_pages": {},
         "attorney_page_urls": [],
         "spanish_signals": False,
+        "claims": {},
         "robots_disallowed": [],
         "notes": [],
     }
@@ -221,8 +236,22 @@ def crawl(domain, fetched_at):
             if e and e not in [x["value"] for x in record["emails"]]:
                 record["emails"].append({"value": e, "source_url": final})
 
-        if SPANISH_SIGNALS.search(html) or SPANISH_SIGNALS.search(strip_tags(html)):
+        text = strip_tags(html)
+        if SPANISH_SIGNALS.search(html) or SPANISH_SIGNALS.search(text):
             record["spanish_signals"] = True
+
+        for label, pattern in PHRASE_SIGNALS:
+            if label in record["claims"]:
+                continue
+            m = re.search(pattern, text, re.I)
+            if not m:
+                continue
+            # Keep the surrounding sentence, trimmed, as the evidence for this claim.
+            start, end = max(0, m.start() - 90), min(len(text), m.end() + 90)
+            record["claims"][label] = {
+                "quote": text[start:end].strip(),
+                "source_url": final,
+            }
 
     # The home page comes first: it settles the canonical origin (many firms redirect the bare
     # domain to www) and supplies the navigation we read the rest of the site from.
