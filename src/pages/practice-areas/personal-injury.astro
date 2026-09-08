@@ -1,6 +1,42 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import FirmCard from '../../components/FirmCard.astro';
+
+const PRACTICE = 'personal-injury';
+
+// Every firm and every count on this page comes from the collection, so a data correction
+// propagates here. Sample firms are excluded outright rather than gated on LFL_ENV: this is a
+// public ranked list, and fictional firms must never appear in one.
+const matching = await getCollection('firms', f =>
+  f.data.status !== 'sample' &&
+  f.data.status !== 'not_eligible' &&
+  f.data.practices.some(p => p.slug === PRACTICE));
+
+// Certified firms rank by score; listed firms have no score yet and follow, alphabetically.
+const weight = (f: typeof matching[number]) =>
+  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+const firms = matching.sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
+
+const certified = firms.filter(f => f.data.status === 'certified');
+const cities = [...new Set(firms.map(f => `${f.data.market.city}, ${f.data.market.state}`))];
+const contingency = firms.filter(f => /contingency/i.test(f.data.fee_model)).length;
+const freeConsult = firms.filter(f => f.data.free_consultation).length;
+const share = (n: number) => (firms.length ? `${Math.round((100 * n) / firms.length)}%` : '—');
+const logoVariants = ['', 'l2', 'l3'];
+
+// "Updated" reflects the newest score the engine actually wrote, not a hand-typed month.
+const computedDates = firms.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+const lastUpdated = computedDates.length
+  ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// Cities that actually have a firm in this practice, with their real counts.
+const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slug => {
+  const inCity = firms.filter(f => f.data.market.city_slug === slug);
+  return { slug, label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`, count: inCity.length };
+}).sort((a, b) => b.count - a.count);
 ---
 <Base title="Best Personal Injury Law Firms in the U.S. (2026)" description="Compare vetted personal injury law firms by city, verdicts and client outcomes. Free consultations, contingency fees, verified licensure." nav="practice">
 <section class="page-hero on-night">
@@ -10,18 +46,17 @@ import Icon from '../../components/Icon.astro';
       <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="#">Practice Areas</a></li><li aria-current="page">Personal Injury</li></ol>
       <span class="eyebrow">Practice area</span>
       <h1>Best Personal Injury Law Firms in the United States</h1>
-      <p class="lede">Compare 1,240 certified personal injury firms handling car accidents, slip and fall, medical malpractice, construction injuries and wrongful death. Every firm is checked for active licensure, clean disciplinary history and verified case results — and 96% work on contingency, so you pay nothing unless you win.</p>
+      <p class="lede">Personal injury firms handling car accidents, slip and fall, medical malpractice, construction injuries and wrongful death. Every firm is checked for active licensure, clean disciplinary history and verified case results. {certified.length > 0 && <>{certified.length} of the {firms.length} listed {firms.length === 1 ? 'firm has' : 'firms have'} earned certification so far.</>}</p>
       <div class="chips" style="margin-top:24px">
         <a class="chip" href="#">Car accidents</a><a class="chip" href="#">Truck accidents</a><a class="chip" href="#">Slip &amp; fall</a><a class="chip" href="#">Medical malpractice</a><a class="chip" href="#">Construction injuries</a><a class="chip" href="#">Wrongful death</a><a class="chip" href="#">Product liability</a>
       </div>
     </div>
     <div class="hero-facts">
-      <div class="fact"><b class="num">1,240</b><span>Certified PI firms</span></div>
-      <div class="fact"><b class="num">96%</b><span>Work on contingency</span></div>
-      <div class="fact"><b class="num">33%</b><span>Typical fee (pre-suit)</span></div>
-      <div class="fact"><b class="num">100</b><span>Cities covered</span></div>
-      <div class="fact"><b class="num">4.7</b><span>Avg. verified rating</span></div>
-      <div class="fact"><b>Free</b><span>Initial consultation</span></div>
+      <div class="fact"><b class="num">{certified.length}</b><span>Certified PI firms</span></div>
+      <div class="fact"><b class="num">{firms.length}</b><span>Firms listed</span></div>
+      <div class="fact"><b class="num">{share(contingency)}</b><span>Work on contingency</span></div>
+      <div class="fact"><b class="num">{share(freeConsult)}</b><span>Free consultation</span></div>
+      <div class="fact"><b class="num">{cities.length}</b><span>{cities.length === 1 ? 'City covered' : 'Cities covered'}</span></div>
     </div>
   </div>
 </section>
@@ -38,112 +73,20 @@ import Icon from '../../components/Icon.astro';
 <section class="section--tight">
   <div class="container layout">
     <div>
-      <div class="results-head"><h2>Top-ranked personal injury firms</h2><span class="num">Showing 1–6 of 1,240 · Ranked by our methodology, updated Sept 2026</span></div>
-      <div class="firm-list">
-
-        <article class="firm-card">
-          <span class="rank">#1 Nationally</span>
-          <div class="firm-logo">HM</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="/firms/greenstein-pittari-llp/">Harlan &amp; Mercer LLP</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span><span class="badge badge--tier">Tier 1</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.9</b> <span class="muted num">(312)</span></span><span>New York, NY · 3 offices</span><span>Est. 1981 · 42 attorneys</span></div>
-            <p class="firm-desc">A trial-first plaintiffs' firm that insurers know will take a case to verdict. More than $2.1 billion recovered, including a $110M construction-fall verdict in 2024 and multiple eight-figure medical malpractice settlements.</p>
-            <div class="firm-tags"><span class="tag">Construction accidents</span><span class="tag">Medical malpractice</span><span class="tag">Wrongful death</span><span class="tag">Se habla español</span></div>
-          </div>
-          <div class="firm-side">
-            <div class="stat"><b>$2.1B+</b>verified recoveries</div>
-            <div class="stat"><b>Contingency</b>no fee unless you win</div>
-            <a class="btn btn--primary btn--sm" href="#">Request free consultation</a>
-            <a class="btn btn--ghost btn--sm" href="#">View profile</a>
-          </div>
-        </article>
-
-        <article class="firm-card">
-          <span class="rank">#2</span>
-          <div class="firm-logo l2">DK</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Delgado Kim Trial Lawyers</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span><span class="badge badge--tier">Tier 1</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.9</b> <span class="muted num">(487)</span></span><span>Los Angeles, CA · 5 offices</span><span>Est. 1994 · 68 attorneys</span></div>
-            <p class="firm-desc">California's most-awarded catastrophic injury firm, with a dedicated trucking-accident unit and in-house accident reconstruction team. Known for rejecting lowball offers and preparing every case for trial from day one.</p>
-            <div class="firm-tags"><span class="tag">Truck accidents</span><span class="tag">Catastrophic injury</span><span class="tag">Rideshare accidents</span></div>
-          </div>
-          <div class="firm-side">
-            <div class="stat"><b>$1.6B+</b>verified recoveries</div>
-            <div class="stat"><b>Contingency</b>no fee unless you win</div>
-            <a class="btn btn--primary btn--sm" href="#">Request free consultation</a>
-            <a class="btn btn--ghost btn--sm" href="#">View profile</a>
-          </div>
-        </article>
-
-        <article class="firm-card">
-          <span class="rank">#3</span>
-          <div class="firm-logo l3">WB</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Whitfield Brannon P.C.</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span><span class="badge badge--tier">Tier 1</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.8</b> <span class="muted num">(263)</span></span><span>Chicago, IL · 2 offices</span><span>Est. 1978 · 31 attorneys</span></div>
-            <p class="firm-desc">Medical malpractice specialists with physicians on staff. Secured the largest birth-injury verdict in Illinois history and a string of eight-figure surgical-error settlements against Chicago hospital systems.</p>
-            <div class="firm-tags"><span class="tag">Medical malpractice</span><span class="tag">Birth injury</span><span class="tag">Nursing home abuse</span></div>
-          </div>
-          <div class="firm-side">
-            <div class="stat"><b>$940M+</b>verified recoveries</div>
-            <div class="stat"><b>Contingency</b>no fee unless you win</div>
-            <a class="btn btn--primary btn--sm" href="#">Request free consultation</a>
-            <a class="btn btn--ghost btn--sm" href="#">View profile</a>
-          </div>
-        </article>
-
-        <article class="firm-card">
-          <span class="rank">#4</span>
-          <div class="firm-logo l4">SR</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Santos &amp; Rourke Injury Law</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span><span class="badge badge--tier">Tier 1</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.8</b> <span class="muted num">(541)</span></span><span>Houston, TX · 4 offices</span><span>Est. 2002 · 55 attorneys</span></div>
-            <p class="firm-desc">Texas's leading 18-wheeler and oilfield injury firm. Bilingual intake team, 24/7 case evaluation and a reputation for record-setting verdicts in Harris and Fort Bend counties.</p>
-            <div class="firm-tags"><span class="tag">18-wheeler accidents</span><span class="tag">Oilfield injuries</span><span class="tag">Se habla español</span></div>
-          </div>
-          <div class="firm-side">
-            <div class="stat"><b>$780M+</b>verified recoveries</div>
-            <div class="stat"><b>Contingency</b>no fee unless you win</div>
-            <a class="btn btn--primary btn--sm" href="#">Request free consultation</a>
-            <a class="btn btn--ghost btn--sm" href="#">View profile</a>
-          </div>
-        </article>
-
-        <article class="firm-card">
-          <span class="rank">#5</span>
-          <div class="firm-logo l5">CP</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Castellano Pryor LLP</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span><span class="badge badge--tier">Tier 2</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.7</b> <span class="muted num">(198)</span></span><span>Miami, FL · 2 offices</span><span>Est. 1999 · 24 attorneys</span></div>
-            <p class="firm-desc">Premises liability and cruise-ship injury specialists with deep experience in Florida's comparative-negligence rules and maritime law. Consistently ranked among South Florida's top plaintiffs' firms.</p>
-            <div class="firm-tags"><span class="tag">Slip &amp; fall</span><span class="tag">Cruise ship injuries</span><span class="tag">Premises liability</span></div>
-          </div>
-          <div class="firm-side">
-            <div class="stat"><b>$410M+</b>verified recoveries</div>
-            <div class="stat"><b>Contingency</b>no fee unless you win</div>
-            <a class="btn btn--primary btn--sm" href="#">Request free consultation</a>
-            <a class="btn btn--ghost btn--sm" href="#">View profile</a>
-          </div>
-        </article>
-
-        <article class="firm-card">
-          <span class="rank">#6</span>
-          <div class="firm-logo l6">NL</div>
-          <div class="firm-body">
-            <div class="firm-title"><h3><a href="#">Nakamura Lindqvist Injury Group</a></h3><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span><span class="badge badge--tier">Tier 2</span></div>
-            <div class="firm-meta"><span class="stars">★★★★★<b>4.7</b> <span class="muted num">(176)</span></span><span>Phoenix, AZ · 3 offices</span><span>Est. 2008 · 19 attorneys</span></div>
-            <p class="firm-desc">Fast-growing Southwest firm focused on motorcycle and pedestrian accidents, with a client-communication guarantee: a named attorney returns every call within one business day.</p>
-            <div class="firm-tags"><span class="tag">Motorcycle accidents</span><span class="tag">Pedestrian accidents</span><span class="tag">Dog bites</span></div>
-          </div>
-          <div class="firm-side">
-            <div class="stat"><b>$265M+</b>verified recoveries</div>
-            <div class="stat"><b>Contingency</b>no fee unless you win</div>
-            <a class="btn btn--primary btn--sm" href="#">Request free consultation</a>
-            <a class="btn btn--ghost btn--sm" href="#">View profile</a>
-          </div>
-        </article>
+      <div class="results-head">
+        <h2>Top-ranked personal injury firms</h2>
+        <span class="num">{firms.length === 0
+          ? 'No firms published yet'
+          : `Showing ${firms.length} of ${firms.length} · Ranked by our methodology${lastUpdated ? `, updated ${lastUpdated}` : ''}`}</span>
       </div>
-      <nav class="pager" aria-label="Pagination"><a class="is-active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">…</a><a href="#">207</a><a href="#">›</a></nav>
+      <div class="firm-list">
+        {firms.map((firm, i) => (
+          <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
+        ))}
+      </div>
+      {firms.length === 0 && (
+        <div class="callout"><b>Nothing published here yet.</b> The New York personal injury cohort is still in verification. Firms appear once their eligibility gates are checked.</div>
+      )}
     </div>
 
     <aside class="sidebar">
@@ -155,13 +98,9 @@ import Icon from '../../components/Icon.astro';
       <div class="panel">
         <h4>Personal injury by city</h4>
         <ul>
-          <li><a href="/cities/new-york-ny/">New York, NY</a><span class="num">148 firms</span></li>
-          <li><a href="#">Los Angeles, CA</a><span class="num">131 firms</span></li>
-          <li><a href="#">Chicago, IL</a><span class="num">96 firms</span></li>
-          <li><a href="#">Houston, TX</a><span class="num">88 firms</span></li>
-          <li><a href="#">Miami, FL</a><span class="num">74 firms</span></li>
-          <li><a href="#">Philadelphia, PA</a><span class="num">61 firms</span></li>
-          <li><a href="#">All 100 cities</a><span>→</span></li>
+          {cityCounts.map(c => (
+            <li><a href={`/cities/${c.slug}/`}>{c.label}</a><span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}</span></li>
+          ))}
         </ul>
       </div>
       <div class="panel">

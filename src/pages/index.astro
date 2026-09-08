@@ -1,6 +1,37 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+
+// The hero preview and the "certified this month" grid both render real firms.
+// They used to be hand-written mock-ups naming firms that do not exist.
+const published = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const certified = published
+  .filter(f => f.data.status === 'certified' && f.data.score)
+  .sort((a, b) => (b.data.score!.total) - (a.data.score!.total));
+
+const lead = certified[0] ?? published[0] ?? null;
+const leadPrimary = lead?.data.practices.find(pr => pr.primary) ?? lead?.data.practices[0];
+const leadHq = lead?.data.offices.find(o => o.is_hq) ?? lead?.data.offices[0];
+const leadGoogle = lead?.data.reviews.google;
+const leadSelfReported = leadGoogle ? /as reported by the firm/i.test(leadGoogle.source) : false;
+// Only results backed by a docket or document count; nothing else may imply an outcome.
+const leadVerifiedResults = lead ? lead.data.results.filter(r => r.verified).length : 0;
+
+const cityCounts = [...new Set(published.map(f => f.data.market.city_slug))].map(slug => {
+  const inCity = published.filter(f => f.data.market.city_slug === slug);
+  return { label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`, count: inCity.length };
+}).sort((a, b) => b.count - a.count);
+
+const practiceCount = new Set(published.flatMap(f => f.data.practices.map(pr => pr.slug))).size;
+
+const computedDates = published.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+const lastUpdated = computedDates.length
+  ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
+  : null;
+const logoVariants = ['', 'l2', 'l3'];
 ---
 <Base title="Law Firm Listings — Find Vetted Law Firms Across the United States" description="Independent rankings and verified reviews of top-rated law firms in 100 U.S. cities and every practice area." nav="home">
 <!-- HERO -->
@@ -24,26 +55,35 @@ import Icon from '../components/Icon.astro';
     <div class="hero-popular"><span>Popular:</span><a href="/practice-areas/personal-injury/">Personal injury</a><a href="#">Divorce</a><a href="#">Criminal defense</a><a href="#">Immigration</a><a href="#">Estate planning</a></div>
 
     <div class="hero-preview" aria-hidden="true">
+      {lead && (
+        <div class="glass">
+          <div class="firm"><div class="avatar">{lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {leadHq?.label.split('—')[0].trim()}, {lead.data.market.state}</span></div></div>
+          {leadGoogle && (
+            <div class="stars">{'★'.repeat(Math.round(leadGoogle.rating))} <small>{leadGoogle.rating.toFixed(1)} · {leadGoogle.count_label} reviews{leadSelfReported ? ', as reported by the firm' : ''}</small></div>
+          )}
+          {lead.data.status === 'certified' && (
+            <span class="badge badge--certified"><Icon name="shield" /> LFL Certified 2026</span>
+          )}
+          <div class="img"><Icon name="skyline" /><span class="hv-placeholder">Custom image slot</span></div>
+          <div class="row"><span>Offices <b>{lead.data.offices.length}</b></span><span>Free consult <b>{lead.data.free_consultation ? 'Yes' : 'No'}</b></span><span>Fee <b>{lead.data.fee_model}</b></span></div>
+        </div>
+      )}
+      {lead?.data.score && (
+        <div class="glass">
+          <div class="k">Certification score</div><div class="v num">{lead.data.score.total}<span style="font-size:1rem;color:var(--on-night-soft)">/100</span></div>
+          <div class="sub">Licensure · Discipline · Results · Reviews</div>
+          <div class="bar"><i style={`width:${lead.data.score.total}%`}></i></div>
+          <div class="row"><span>Bar status <b>{lead.data.gates.G1?.pass ? 'Active' : 'Pending'}</b></span><span>Discipline <b>{lead.data.gates.G2?.pass ? 'None' : 'Pending'}</b></span></div>
+          <div class="row" style="border:0;padding:0;margin-top:8px"><span>Verified results <b>{leadVerifiedResults > 0 ? leadVerifiedResults : 'Pending'}</b></span><span>A+B+C <b>{lead.data.score.floor_abc}/65</b></span></div>
+        </div>
+      )}
       <div class="glass">
-        <div class="firm"><div class="avatar">HM</div><div><b>Harlan &amp; Mercer LLP</b><span>Personal Injury · Manhattan, NY</span></div></div>
-        <div class="stars">★★★★★ <small>4.9 · 312 verified reviews</small></div>
-        <span class="badge badge--certified"><Icon name="shield" /> LFL Certified 2026</span>
-        <div class="img"><Icon name="skyline" /><span class="hv-placeholder">Custom image slot</span></div>
-        <div class="row"><span>Recovered <b>$2.1B+</b></span><span>Free consult <b>Yes</b></span><span>Fee <b>Contingency</b></span></div>
-      </div>
-      <div class="glass">
-        <div class="k">Certification score</div><div class="v num">96<span style="font-size:1rem;color:var(--on-night-soft)">/100</span></div>
-        <div class="sub">Licensure · Discipline · Results · Reviews</div>
-        <div class="bar"><i style="width:96%"></i></div>
-        <div class="row"><span>Bar status <b>Active</b></span><span>Discipline <b>None</b></span></div>
-        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Verified results <b>14</b></span><span>Peer score <b>9.1</b></span></div>
-      </div>
-      <div class="glass">
-        <div class="k">Certified firms</div><div class="v num">4,812</div>
-        <div class="sub">across 100 U.S. cities · 30 practice areas</div>
-        <div class="row"><span>New York <b class="num">612</b></span><span>Los Angeles <b class="num">488</b></span></div>
-        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Chicago <b class="num">341</b></span><span>Houston <b class="num">296</b></span></div>
-        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Updated <b>Sept 2026</b></span><span class="badge badge--live">● Live</span></div>
+        <div class="k">Certified firms</div><div class="v num">{certified.length}</div>
+        <div class="sub">across {cityCounts.length} {cityCounts.length === 1 ? 'city' : 'U.S. cities'} · {practiceCount} practice areas</div>
+        {cityCounts.slice(0, 2).map(c => (
+          <div class="row"><span>{c.label} <b class="num">{c.count}</b></span></div>
+        ))}
+        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Updated <b>{lastUpdated ?? '—'}</b></span><span class="badge badge--live">● Live</span></div>
       </div>
     </div>
   </div>
@@ -143,28 +183,30 @@ import Icon from '../components/Icon.astro';
   <div class="container">
     <div class="section-head">
       <div><span class="eyebrow">Certified this month</span><h2 style="margin-top:12px">Firms that just earned the 2026 certification</h2><p>New certifications are published on the first business day of each month, after licensure, discipline and results checks are complete.</p></div>
-      <a class="link" href="#">View all rankings</a>
+      <a class="link" href="/practice-areas/personal-injury/">View all rankings</a>
     </div>
     <div class="feat-grid">
-      <article class="feat">
-        <div class="top"><div class="firm-logo">HM</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-        <div><h3><a href="/firms/greenstein-pittari-llp/">Harlan &amp; Mercer LLP</a></h3><span class="where">Personal Injury · New York, NY</span></div>
-        <p>Trial-first plaintiffs' firm with 40+ years of seven- and eight-figure verdicts in construction and medical malpractice cases.</p>
-        <div class="foot"><span class="stars">★★★★★ <b>4.9</b></span><span class="muted num">312 reviews</span></div>
-      </article>
-      <article class="feat">
-        <div class="top"><div class="firm-logo l2">AV</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-        <div><h3><a href="#">Alvarez Vance Family Law</a></h3><span class="where">Family &amp; Divorce · Los Angeles, CA</span></div>
-        <p>Boutique divorce and custody practice known for high-net-worth settlements and collaborative divorce.</p>
-        <div class="foot"><span class="stars">★★★★★ <b>4.8</b></span><span class="muted num">204 reviews</span></div>
-      </article>
-      <article class="feat">
-        <div class="top"><div class="firm-logo l3">OK</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-        <div><h3><a href="#">Okafor &amp; Reyes Defense</a></h3><span class="where">Criminal Defense · Chicago, IL</span></div>
-        <p>Former federal prosecutors defending DUI, drug and white-collar charges in Cook County and the Northern District.</p>
-        <div class="foot"><span class="stars">★★★★★ <b>4.9</b></span><span class="muted num">178 reviews</span></div>
-      </article>
+      {certified.map((f, i) => {
+        const pr = f.data.practices.find(x => x.primary) ?? f.data.practices[0];
+        const g = f.data.reviews.google;
+        const self = g ? /as reported by the firm/i.test(g.source) : false;
+        return (
+          <article class="feat">
+            <div class="top"><div class={logoVariants[i % logoVariants.length] ? `firm-logo ${logoVariants[i % logoVariants.length]}` : 'firm-logo'}>{f.data.initials}</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
+            <div><h3><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></h3><span class="where">{pr?.name} · {f.data.market.city}, {f.data.market.state}</span></div>
+            <p>{f.data.about[0] ?? f.data.tagline}</p>
+            <div class="foot">
+              {g
+                ? <><span class="stars">{'★'.repeat(Math.round(g.rating))} <b>{g.rating.toFixed(1)}</b></span><span class="muted num">{g.count_label} reviews{self ? ', as reported by the firm' : ''}</span></>
+                : <span class="muted num">Reviews pending verification</span>}
+            </div>
+          </article>
+        );
+      })}
     </div>
+    {certified.length === 0 && (
+      <div class="callout"><b>No certifications published yet.</b> The first cohort is in verification; certified firms appear here on the first business day of the month.</div>
+    )}
   </div>
 </section>
 
