@@ -32,6 +32,14 @@ const stars = g ? '★'.repeat(Math.round(g.rating)) + '☆'.repeat(5 - Math.rou
 // count_label is a label, not a number ("400+"), and its provenance ships with it.
 const selfReported = g ? /as reported by the firm/i.test(g.source) : false;
 
+// The link attribute is editorial, not commercial: a firm that clears every eligibility gate
+// earns a followed link. Claiming a profile does not change it and neither does paying for
+// anything — selling followed links is a link scheme, and the penalty would land on this site
+// rather than on the firm.
+const gateList = Object.values(d.gates ?? {});
+const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
+const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
+
 const officeLabel = `${d.offices.length} office${d.offices.length === 1 ? '' : 's'}`;
 // An empty attorneys array means we have not verified any names yet, not that the firm has no
 // attorneys. Printing "0 attorneys" states something false about a real firm, so the line is
@@ -55,6 +63,9 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
       )}
       {isCertified && s!.tier !== 'Certified' && (
         <span class="badge badge--tier">{s!.tier}</span>
+      )}
+      {d.claimed && (
+        <span class="badge badge--claimed" title="The firm confirmed it owns this page and maintains its own information. This says nothing about the firm's certification."><Icon name="check" /> Firm-managed</span>
       )}
     </div>
 
@@ -82,6 +93,6 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
       : <div class="stat"><b>Listed</b>score pending verification</div>}
     <div class="stat"><b>{d.fee_model}</b>{d.free_consultation ? 'free consultation' : 'fee model'}</div>
     <a class="btn btn--primary btn--sm" href={`/firms/${d.slug}/`}>View profile</a>
-    <a class="btn btn--ghost btn--sm" href={d.website} rel="nofollow noopener" target="_blank">Visit website</a>
+    <a class="btn btn--ghost btn--sm" href={d.website} rel={linkRel} target="_blank">Visit website</a>
   </div>
 </article>

@@ -22,6 +22,12 @@ const drMedian = cohort ? median(cohort.data.firms.map(f => f.dr)) : null;
 const ai = ah?.ai_citations;
 const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
+// The link attribute is editorial, not commercial: clearing every eligibility gate earns a
+// followed link. Claiming the profile does not change it, and neither does paying for anything —
+// selling followed links is a link scheme and the penalty would land on this site.
+const gateList = Object.values(d.gates ?? {});
+const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
+const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
 const title = `${d.name} — ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
 const description = `Profile of ${d.name}: practice areas, attorneys, ${d.offices.length} office${d.offices.length>1?'s':''} in ${d.market.city}, client reviews, fees${isCertified ? ` and LFL Certification Score ${s!.total}` : ''}.`;
 const schema = {
@@ -45,6 +51,7 @@ const schema = {
           <div class="profile-badges">
             {isCertified && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s!.computed_at).getFullYear()} · Score {s!.total}</span>}
             {!isCertified && <span class="badge badge--tier">Listed · not yet certified</span>}
+            {d.claimed && <span class="badge badge--claimed"><Icon name="check" /> Firm-managed</span>}
             <span class="badge badge--tier">{primary[0]?.name ?? d.practices[0].name}</span>
             <span class="badge badge--tier">{d.market.city}, {d.market.state}</span>
             <span class="badge badge--live">● Accepting new clients</span>
@@ -147,13 +154,13 @@ const schema = {
       <div class="contact-card">
         <div class="phone">{d.phone_vanity ?? d.phone}<small>{d.phone_vanity ? `${d.phone} · ` : ''}{d.availability[0] ?? ''}</small></div>
         <a class="btn btn--primary" href="#">Request free consultation</a>
-        <a class="btn btn--ghost" href={d.website} rel="nofollow noopener" target="_blank">Visit website ↗</a>
+        <a class="btn btn--ghost" href={d.website} rel={linkRel} target="_blank">Visit website ↗</a>
         <dl>
           <dt>Fee</dt><dd>{d.fee_model}</dd>
           <dt>Consultation</dt><dd>{d.free_consultation ? 'Free' : 'Paid'}</dd>
           <dt>Languages</dt><dd>{d.languages.join(', ')}</dd>
           <dt>Main office</dt><dd>{hq.address.split(',')[0]}, {hq.address.split(',').slice(-1)[0].trim()}</dd>
-          <dt>Profile</dt><dd>Unclaimed</dd>
+          <dt>Profile</dt><dd>{d.claimed ? `Managed by the firm since ${d.claimed.claimed_at}` : 'Unclaimed'}</dd>
         </dl>
         {s && <div class="verified-line"><Icon name="check" /> LFL Score {s.total} · {s.tier} · re-verified {s.computed_at}</div>}
       </div>
@@ -169,9 +176,18 @@ const schema = {
       </div>
       )}
       <div class="panel">
-        <h4>Is this your firm?</h4>
-        <p class="muted" style="font-size:.92rem">Claim the profile to submit verified results, respond to reviews and update office details.</p>
-        <a class="link" href="#" style="margin-top:12px">Claim this profile</a>
+        {d.claimed ? (
+          <>
+            <h4>Managed by the firm</h4>
+            <p class="muted" style="font-size:.92rem">{d.name} confirmed it owns this page on {d.claimed.claimed_at} and keeps its own details up to date. Claiming is free and does not affect the Certification Score, the eligibility gates or the tier — those stay ours to measure.</p>
+          </>
+        ) : (
+          <>
+            <h4>Is this your firm?</h4>
+            <p class="muted" style="font-size:.92rem">Claiming is free. Keep your offices, fees and practice areas current, and submit case results with a docket for verification. It does not affect your Certification Score, gates or tier.</p>
+            <a class="link" href="#" style="margin-top:12px">Claim this profile</a>
+          </>
+        )}
       </div>
     </aside>
   </div>

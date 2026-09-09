@@ -17,6 +17,15 @@ const pool = await getCollection('firms', f =>
 
 const ranked = pool.sort((a, b) => (b.data.score?.total ?? 0) - (a.data.score?.total ?? 0));
 const gateMet = ranked.length >= MIN_CERTIFIED;
+
+// Counts for the related-guide cards, which used to read "1,240 firms · 100 cities" and
+// "612 certified firms". Both were invented.
+const listed = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const practiceFirms = listed.filter(f => f.data.practices.some(pr => pr.slug === PRACTICE));
+const inPractice = practiceFirms.length;
+const practiceCities = new Set(practiceFirms.map(f => f.data.market.city_slug)).size;
+const inCity = listed.filter(f => f.data.market.city_slug === CITY_SLUG).length;
 ---
 <Base title="Best Personal Injury Law Firms in NYC, Ranked for 2026" description="Our editors ranked New York City's top personal injury firms by trial record, verified results and client reviews." nav="guides">
 <article>
@@ -201,9 +210,8 @@ const gateMet = ranked.length >= MIN_CERTIFIED;
   <div class="container">
     <div class="section-head"><div><span class="eyebrow">Keep reading</span><h2 style="margin-top:12px">Related guides and rankings</h2></div></div>
     <div class="rel-grid">
-      <a class="guide" href="/practice-areas/personal-injury/"><div class="thumb"><Icon name="sky_sm" /></div><div class="body"><span class="kicker">Directory</span><h3>All certified personal injury firms in the U.S.</h3><span class="meta">1,240 firms · 100 cities</span></div></a>
-      <a class="guide" href="#"><div class="thumb t2"><Icon name="columns" /></div><div class="body"><span class="kicker">Guide</span><h3>What is my New York injury case worth?</h3><span class="meta">Updated Aug 2026 · 9 min read</span></div></a>
-      <a class="guide" href="/cities/new-york-ny/"><div class="thumb t3"><Icon name="skyline" /></div><div class="body"><span class="kicker">City guide</span><h3>Top law firms in New York, NY — every practice area</h3><span class="meta">612 certified firms</span></div></a>
+      <a class="guide" href="/practice-areas/personal-injury/"><div class="thumb"><Icon name="sky_sm" /></div><div class="body"><span class="kicker">Directory</span><h3>Personal injury firms in the directory</h3><span class="meta">{inPractice} {inPractice === 1 ? 'firm' : 'firms'} · {practiceCities} {practiceCities === 1 ? 'city' : 'cities'}</span></div></a>
+      <a class="guide" href="/cities/new-york-ny/"><div class="thumb t3"><Icon name="skyline" /></div><div class="body"><span class="kicker">City guide</span><h3>Law firms in New York, NY — every practice area</h3><span class="meta">{inCity} {inCity === 1 ? 'firm' : 'firms'}</span></div></a>
     </div>
   </div>
 </section>

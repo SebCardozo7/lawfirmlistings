@@ -92,6 +92,12 @@ button,input,select{font:inherit;color:inherit}
 .badge--certified::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--aurora);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 .badge--certified svg{width:13px;height:13px;color:var(--a2)}
 .badge--tier{background:var(--tint);color:var(--ink)}
+/* A claimed profile is an administrative fact, not an award: hairline outline, muted text, no
+   aurora ring. It must never be mistakable for .badge--certified at a glance. */
+.badge--claimed{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:500}
+.badge--claimed svg{width:12px;height:12px;color:var(--muted)}
+.on-night .badge--claimed{color:var(--on-night-soft);border-color:rgba(255,255,255,.18)}
+.on-night .badge--claimed svg{color:var(--on-night-soft)}
 .badge--live{background:#E7F7EF;color:var(--success)}
 .chip{display:inline-flex;align-items:center;padding:9px 16px;border-radius:var(--pill);border:1px solid var(--line-2);background:var(--paper);color:var(--ink);font-size:.92rem;font-weight:500;transition:border-color .15s,background .15s;text-decoration:none!important}
 .chip:hover{border-color:var(--ink)}
@@ -581,6 +587,10 @@ button,input,select{font:inherit;color:inherit}
 .sit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .sit{display:grid;grid-template-columns:auto 1fr;gap:16px 18px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;text-decoration:none!important;color:inherit;transition:border-color .18s,box-shadow .18s,transform .18s;position:relative}
 .sit:hover{border-color:var(--ink);box-shadow:var(--shadow);transform:translateY(-2px)}
+/* A practice area we have not started yet: same tile, no link, no hover lift. It stays on the
+   page as navigation for what the directory covers, without pretending a page exists. */
+.sit.is-soon{opacity:.55;cursor:default}
+.sit.is-soon:hover{border-color:var(--line);box-shadow:none;transform:none}
 .sit .ico{width:46px;height:46px;border-radius:14px;background:var(--ink);display:grid;place-items:center;color:#fff;grid-row:span 2}
 .sit .ico svg{width:22px;height:22px}
 .sit b{display:block;color:var(--ink);font-size:1.15rem;letter-spacing:-.02em;font-weight:600}
