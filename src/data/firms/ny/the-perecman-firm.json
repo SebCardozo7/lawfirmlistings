@@ -119,7 +119,7 @@
   "faq": [],
   "fee_statement": "maximum compensation. How much does it cost to hire The Perecman Firm, PLLC? We work on a contingency fee basis, so you pay nothing upfront. We only get paid if we win your case, typically ta",
   "score": {
-    "total": 12,
+    "total": 14,
     "tier": "Under review",
     "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-09",
@@ -133,7 +133,7 @@
             "code": "A1",
             "label": "Clean-record depth",
             "pts": 0,
-            "max": 6,
+            "max": 10,
             "source": "pending",
             "evidence": "Not yet assessed"
           },
@@ -141,23 +141,7 @@
             "code": "A2",
             "label": "Experience",
             "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "A3",
-            "label": "Board certification",
-            "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "A4",
-            "label": "Peer recognition",
-            "pts": 0,
-            "max": 5,
+            "max": 9,
             "source": "pending",
             "evidence": "Not yet assessed"
           },
@@ -165,7 +149,7 @@
             "code": "A5",
             "label": "Accountability",
             "pts": 0,
-            "max": 4,
+            "max": 6,
             "source": "pending",
             "evidence": "Not yet assessed"
           }
@@ -294,38 +278,30 @@
         ]
       },
       "E": {
-        "score": 4,
+        "score": 6,
         "max": 10,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 3,
-            "max": 3,
+            "pts": 4,
+            "max": 4,
             "source": "observed",
             "evidence": "Free consultation · maximum compensation. How much does it cost to hire The Perecman Firm, PLLC? We work on a contingency fee basis, so you pay nothing upfront. We only get paid if we win your case, typically ta"
           },
           {
-            "code": "E2",
-            "label": "Intake responsiveness",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Mystery shop pending"
-          },
-          {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 0.5,
-            "max": 2,
+            "pts": 1.0,
+            "max": 3,
             "source": "observed",
             "evidence": "English, Español"
           },
           {
             "code": "E4",
             "label": "Availability",
-            "pts": 1,
-            "max": 2,
+            "pts": 1.5,
+            "max": 3,
             "source": "observed",
             "evidence": "24/7 intake line"
           }
@@ -336,12 +312,12 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 58,
+      "gap": 56,
       "floor_met": false,
       "path": [
-        "D2 Search authority: +8 available",
-        "A1 Clean-record depth: +6 available",
-        "B1 Volume of verified results: +6 available"
+        "A1 Clean-record depth: +10 available",
+        "A2 Experience: +9 available",
+        "D2 Search authority: +8 available"
       ]
     }
   }

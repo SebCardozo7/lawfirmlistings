@@ -67,11 +67,9 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
           <table>
             <thead><tr><th>Sub-factor</th><th>Pts</th><th>How it's scored</th></tr></thead>
             <tbody>
-              <tr><td>A1 Clean-record depth</td><td class="p">6</td><td>10+ years clean for all attorneys = 6 · 5–10 years = 4 · private admonition on file = 2</td></tr>
-              <tr><td>A2 Experience</td><td class="p">5</td><td>Weighted average years since admission: 15+ = 5 · 10–15 = 4 · 5–10 = 3 · under 5 = 1</td></tr>
-              <tr><td>A3 Board certification</td><td class="p">5</td><td>State-board or NBTA certification in the primary practice area (e.g., Texas Board of Legal Specialization, Florida Bar Board Certified); partial = 2–3</td></tr>
-              <tr><td>A4 Peer recognition</td><td class="p">5</td><td>Independent, non-paid peer ratings only — Martindale-Hubbell AV, Best Lawyers, Super Lawyers, Chambers. Pay-for-badge "awards" excluded.</td></tr>
-              <tr><td>A5 Accountability</td><td class="p">4</td><td>Malpractice insurance disclosed (2) · membership in substantive bar associations — AAJ, state trial lawyers, NACDL, AILA (2)</td></tr>
+              <tr><td>A1 Clean-record depth</td><td class="p">10</td><td>10+ years clean for all attorneys = 10 · 5–10 years = 6 · private admonition on file = 3</td></tr>
+              <tr><td>A2 Experience</td><td class="p">9</td><td>Weighted average years since admission: 15+ = 9 · 10–15 = 7 · 5–10 = 5 · under 5 = 2</td></tr>
+              <tr><td>A5 Accountability</td><td class="p">6</td><td>Malpractice insurance disclosed (3) · membership in substantive bar associations — AAJ, state trial lawyers, NACDL, AILA (3)</td></tr>
             </tbody>
           </table>
         </div>
@@ -133,10 +131,9 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
           <table>
             <thead><tr><th>Sub-factor</th><th>Pts</th><th>How it's scored</th></tr></thead>
             <tbody>
-              <tr><td>E1 Free consultation &amp; fee transparency</td><td class="p">3</td><td>Free consultation 1 · fee model stated publicly — contingency %, hourly range or flat fee 2</td></tr>
-              <tr><td>E2 Intake responsiveness</td><td class="p">3</td><td>Two anonymous mystery-shop contacts per quarter (web form + phone): under 1 business hour = 3 · under 1 day = 2 · under 3 days = 1 · none = 0</td></tr>
-              <tr><td>E3 Languages &amp; accessibility</td><td class="p">2</td><td>Each language beyond English 0.5 (max 1.5) · ADA-accessible offices or virtual consultations 0.5</td></tr>
-              <tr><td>E4 Availability</td><td class="p">2</td><td>24/7 intake line 1 · evening/weekend, hospital or home visits 1</td></tr>
+              <tr><td>E1 Free consultation &amp; fee transparency</td><td class="p">4</td><td>Free consultation 1 · fee model stated publicly — contingency %, hourly range or flat fee 2 · the actual fee terms published, not just the model 1</td></tr>
+              <tr><td>E3 Languages &amp; accessibility</td><td class="p">3</td><td>Each language beyond English 1 (max 2) · ADA-accessible offices or virtual consultations 1</td></tr>
+              <tr><td>E4 Availability</td><td class="p">3</td><td>24/7 intake line 1.5 · evening/weekend, hospital or home visits 1.5</td></tr>
             </tbody>
           </table>
         </div>
@@ -190,7 +187,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
     <div class="section-head"><div><span class="eyebrow">Re-verification</span><h2 style="margin-top:12px">Certification is a monthly event, not a plaque</h2></div></div>
     <div class="timeline">
       <div class="tl"><span class="k">Monthly · automated</span><h3>Re-checked and republished</h3><ul><li>Licensure and disciplinary feeds</li><li>Review aggregation and authenticity</li><li>Website crawl and Core Web Vitals</li><li>GBP, local rankings, authority metrics</li><li>Scores republish on the 1st business day</li></ul></div>
-      <div class="tl"><span class="k">Quarterly · human</span><h3>Tested from the outside</h3><ul><li>Mystery-shop intake calls and forms</li><li>AI-search visibility sampling</li><li>Citation and NAP audit</li></ul></div>
+      <div class="tl"><span class="k">Quarterly · human</span><h3>Tested from the outside</h3><ul><li>AI-search visibility sampling</li><li>Citation and NAP audit</li></ul></div>
       <div class="tl"><span class="k">Annually · audited</span><h3>Documentation reviewed</h3><ul><li>Outcomes evidence re-examined</li><li>Peer-recognition inputs refreshed</li><li>Firm re-attests results and insurance</li></ul></div>
       <div class="tl"><span class="k">Immediately · revoked</span><h3>Badge removed within 30 days</h3><ul><li>Any public discipline or suspension</li><li>AG or FTC action</li><li>Verified fake reviews (12-month cooling period)</li><li>Deceptive website claims · loss of office</li><li>Revocations logged publicly on the profile</li></ul></div>
     </div>

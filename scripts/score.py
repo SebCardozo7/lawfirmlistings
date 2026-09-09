@@ -10,7 +10,7 @@ Manual/assessed sub-factors: read from firm["assessments"][code] = {pts, source,
 Guard: LFL_ENV=production fails the build if a firm has status "sample", or a *certified* firm still has
 "illustrative" sub-factors.
 """
-import json, os, sys, glob, statistics, datetime, pathlib
+import json, os, re, sys, glob, statistics, datetime, pathlib
 
 # The data files and this script's own output carry non-ASCII (× in cohort labels, → in tier paths).
 # Windows would otherwise default to cp1252 and crash on them, so pin UTF-8 everywhere.
@@ -30,11 +30,14 @@ TODAY = datetime.date.today().isoformat()
 METHOD = "v1.0"
 
 SUBS = {  # code: (pillar, label, max)
- "A1": ("A", "Clean-record depth", 6), "A2": ("A", "Experience", 5), "A3": ("A", "Board certification", 5), "A4": ("A", "Peer recognition", 5), "A5": ("A", "Accountability", 4),
+ # v1.1 dropped A3, A4 and E2. Pillar weights are unchanged (A 25, B 20, C 20, D 25, E 10) so
+ # the tier thresholds and the A+B+C floor keep meaning what they meant; the freed points were
+ # redistributed inside their own pillar. See the header for why each one went.
+ "A1": ("A", "Clean-record depth", 10), "A2": ("A", "Experience", 9), "A5": ("A", "Accountability", 6),
  "B1": ("B", "Volume of verified results", 6), "B2": ("B", "Magnitude", 6), "B3": ("B", "Trial & appellate", 5), "B4": ("B", "Recency", 3),
  "C1": ("C", "Authentic volume", 5), "C2": ("C", "Rating quality", 6), "C3": ("C", "Recency & consistency", 3), "C4": ("C", "Firm responsiveness", 3), "C5": ("C", "Complaints", 3),
  "D1": ("D", "Website trust & experience", 7), "D2": ("D", "Search authority", 8), "D3": ("D", "Local presence", 5), "D4": ("D", "Content, E-E-A-T & schema", 5),
- "E1": ("E", "Free consult & fee transparency", 3), "E2": ("E", "Intake responsiveness", 3), "E3": ("E", "Languages & accessibility", 2), "E4": ("E", "Availability", 2),
+ "E1": ("E", "Free consult & fee transparency", 4), "E3": ("E", "Languages & accessibility", 3), "E4": ("E", "Availability", 3),
 }
 PILLAR_MAX = {"A": 25, "B": 20, "C": 20, "D": 25, "E": 10}
 TIERS = [("Elite", 93, 55), ("Distinguished", 85, 50), ("Certified", 70, 40)]
@@ -63,7 +66,7 @@ def compute(firm):
         return sub(code, 0, "pending", default_ev)
 
     # ---- A, B: assessed (registry/court work) ----
-    for c in ["A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4"]: out.append(assessed(c))
+    for c in ["A1", "A2", "A5", "B1", "B2", "B3", "B4"]: out.append(assessed(c))
 
     # ---- C ----
     g = firm.get("reviews", {}).get("google")
@@ -119,15 +122,21 @@ def compute(firm):
     out.append(sub("D4", d4, "ahrefs" if ah else "observed", " · ".join(ev)))
 
     # ---- E ----
-    e1 = (1 if firm.get("free_consultation") else 0) + (2 if firm.get("fee_statement") or firm.get("fee_model") else 0)
-    out.append(sub("E1", e1, "observed", ("Free consultation · " if firm.get("free_consultation") else "") + (firm.get("fee_statement") or firm.get("fee_model", ""))))
-    out.append(assessed("E2", "Mystery shop pending"))
+    # "Not stated" is a non-empty string, so the old truthiness test handed two transparency
+    # points to firms that publish no fee model at all. A model only counts when it says something.
+    model = (firm.get("fee_model") or "").strip()
+    stated = bool(model) and not re.match(r"^(not stated|unknown|n/?a|pending)$", model, re.I)
+    e1 = (1 if firm.get("free_consultation") else 0) + (2 if stated else 0) \
+        + (1 if firm.get("fee_statement") else 0)
+    e1_ev = ("Free consultation · " if firm.get("free_consultation") else "") + \
+        (firm.get("fee_statement") or (model if stated else "fee model not published"))
+    out.append(sub("E1", e1, "observed", e1_ev))
     langs = [l for l in firm.get("languages", []) if l.lower() != "english"]
     av = " ".join(firm.get("availability", [])).lower()
-    e3 = min(1.5, 0.5 * len(langs)) + (0.5 if "video" in av or "ada" in av else 0)
+    e3 = min(2, 1.0 * len(langs)) + (1 if "video" in av or "ada" in av else 0)
     out.append(sub("E3", e3, "observed", ", ".join(firm.get("languages", [])) + (" · video consults" if "video" in av else "")))
-    e4 = (1 if "24/7" in av else 0) + (1 if "hospital" in av or "evening" in av or "weekend" in av else 0)
-    out.append(sub("E4", e4, "observed", " · ".join(firm.get("availability", []))))
+    e4 = (1.5 if "24/7" in av else 0) + (1.5 if any(w in av for w in ("hospital", "home", "evening", "weekend")) else 0)
+    out.append(sub("E4", e4, "observed", " · ".join(firm.get("availability", [])) or "no availability published"))
 
     # ---- aggregate ----
     pillars = {p: {"score": 0, "max": PILLAR_MAX[p], "subs": []} for p in PILLAR_MAX}
