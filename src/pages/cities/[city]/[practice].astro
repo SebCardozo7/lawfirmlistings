@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import Icon from '../../../components/Icon.astro';
 import FirmCard from '../../../components/FirmCard.astro';
+import { fitDescription } from '../../../lib/seo';
 
 /**
  * City × practice: the ranked list, and the page someone searching "personal injury lawyer
@@ -63,7 +64,10 @@ const lastUpdated = computedDates.length
 
 const place = `${market.city}, ${market.state}`;
 const title = `${practiceName} Law Firms in ${place}`;
-const description = `${ranked.length} ${practiceName.toLowerCase()} ${ranked.length === 1 ? 'firm' : 'firms'} in ${place}, compared on verified offices, client reviews, fee terms and site performance. Ranked against each other, not against other cities. No firm can pay to rank.`;
+const description = fitDescription(
+  `${practiceName} law firms in ${place}, ranked on verified offices, attorneys, client reviews and fee terms.`,
+  'Compared locally, not nationally.',
+  'No firm can pay to rank.');
 ---
 <Base title={title} description={description} nav="cities">
 <section class="page-hero on-night">

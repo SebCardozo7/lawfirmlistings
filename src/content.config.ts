@@ -31,7 +31,7 @@ const firms = defineCollection({
     practices: z.array(z.object({ slug: z.string(), name: z.string(), primary: z.boolean().default(false) })),
     market: z.object({ city_slug: z.string(), city: z.string(), state: z.string(), state_name: z.string() }),
     offices: z.array(z.object({ label: z.string(), address: z.string(), by_appointment: z.boolean().default(false), is_hq: z.boolean().default(false), source_url: z.string().optional() })),
-    attorneys: z.array(z.object({ name: z.string(), role: z.string(), bar_state: z.string().optional(), bar_number: z.string().optional(), admitted_year: z.number().optional(), registry_status: z.string().optional(), checked_at: z.string().optional() })),
+    attorneys: z.array(z.object({ name: z.string(), role: z.string(), bar_state: z.string().optional(), bar_number: z.string().optional(), admitted_year: z.number().optional(), registry_status: z.string().optional(), registry_basis: z.string().optional(), checked_at: z.string().optional() })),
     languages: z.array(z.string()),
     fee_model: z.string(), fee_statement: z.string().optional(), free_consultation: z.boolean(),
     availability: z.array(z.string()).default([]),
@@ -55,7 +55,12 @@ const firms = defineCollection({
         rating_weighted: z.number().nullable(), source: z.string(), measured_at: z.string(),
       }).optional(),
     }),
-    gates: z.record(z.object({ pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string() })),
+    gates: z.record(z.object({
+      pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string(),
+      // Satisfied by the firm's written attestation rather than by our own measurement. Shown
+      // as such on the profile: a reader is entitled to know which is which.
+      attested: z.boolean().optional(), attested_by: z.string().optional(),
+    })),
     cohort_id: z.string(),
     assessments: z.record(z.object({ pts: z.number(), source: z.string().optional(), evidence: z.string() })).optional(),
     // written by scripts/score.py — do not edit by hand

@@ -12,7 +12,14 @@ const isMeasured = (src: string) => ['registry','observed','ahrefs','places','ps
 const nextMonth = new Date(); nextMonth.setMonth(nextMonth.getMonth() + 1, 1);
 const nextCheck = nextMonth.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 const verified = new Date(s.computed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : s.tier.startsWith('Dist') || s.tier === 'Elite' ? `LFL Certified · ${s.tier}` : s.tier;
+// An allowlist, not a denylist. This was `tier !== 'Listed' && tier !== 'Not eligible'`, so
+// when the engine gained a third non-certified state the badge kept rendering: a firm whose own
+// scorecard said "Under review · 2 eligibility gates still to be checked" was crowned "LFL
+// Certified 2026" directly above it. Any tier this file has not been taught about is not
+// certified.
+const CERTIFIED_TIERS = ['Certified', 'Distinguished', 'Elite'];
+const isCertified = CERTIFIED_TIERS.includes(s.tier);
+const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL Certified · ${s.tier}` : s.tier;
 ---
 <div class="scorecard">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b3"></i></div>
@@ -22,7 +29,7 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : s.tier.startsWith('
       <span class="tier-name">LFL Certification Score · Methodology {s.methodology}</span>
       <h3>{tierLabel}</h3>
       <p>{s.verdict}</p>
-      {s.tier !== 'Listed' && s.tier !== 'Not eligible' && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s.computed_at).getFullYear()} · re-verified {verified}</span>}
+      {isCertified && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s.computed_at).getFullYear()} · re-verified {verified}</span>}
     </div>
     {s.next_tier && (
       <div class="sc-next">
@@ -34,8 +41,19 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : s.tier.startsWith('
     )}
   </div>
   <div class="sc-gates">
+    {/* Every gate used to render a check, including the ones that had not passed: a reader saw a
+        tick beside "Licensure" on a firm whose licensure gate was open. The icon now follows the
+        state, and an attested gate says so, because a gate the firm asserted and a gate we
+        measured are not the same evidence and should not look identical. */}
     {Object.entries(d.gates).map(([code, g]) => (
-      <div class="sc-gate"><Icon name="check" /><div>{code} {gateNames[code]}<small>{g.evidence}</small></div></div>
+      <div class={`sc-gate ${g.pass ? (g.attested ? 'is-attested' : 'is-pass') : /pending|partial/i.test(g.source) ? 'is-pending' : 'is-fail'}`}>
+        <Icon name={g.pass ? 'check' : 'clock'} />
+        <div>{code} {gateNames[code]}
+          {g.attested && <span class="sc-tag">Firm-attested</span>}
+          {!g.pass && <span class="sc-tag">{/pending|partial/i.test(g.source) ? 'Not yet checked' : 'Not passed'}</span>}
+          <small>{g.evidence}</small>
+        </div>
+      </div>
     ))}
   </div>
   <div class="sc-pillars">

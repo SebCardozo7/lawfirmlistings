@@ -4,3 +4,7 @@ dist/
 .env
 .DS_Store
 .crawl/
+
+# Python bytecode from the scripts/ tooling
+__pycache__/
+*.pyc

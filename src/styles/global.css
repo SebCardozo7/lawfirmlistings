@@ -731,6 +731,15 @@ button,input,select{font:inherit;color:inherit}
 .sc-gate:first-child{border-left:0}
 .sc-gate svg{width:14px;height:14px;color:var(--a3);flex:none}
 .sc-gate small{display:block;color:var(--on-night-soft);font-size:.7rem}
+/* Gate state. The tick used to be unconditional, so a gate that had not passed looked
+   identical to one that had. Colour carries the state and the tag carries the words, because
+   colour alone is not an accessible signal. */
+.sc-gate.is-pass svg{color:var(--a3)}
+.sc-gate.is-attested svg{color:#8b5cf6}
+.sc-gate.is-pending svg,.sc-gate.is-fail svg{color:var(--on-night-soft)}
+.sc-gate.is-pending,.sc-gate.is-fail{opacity:.72}
+.sc-tag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:var(--pill);font-size:.62rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,.14);color:var(--on-night)}
+.sc-gate.is-attested .sc-tag{background:rgba(139,92,246,.28)}
 .sc-pillars{display:grid;gap:0}
 .sc-pillar{border-bottom:1px solid var(--night-line)}
 .sc-pillar summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:36px 1fr 220px 80px;gap:18px;align-items:center;padding:18px 32px}

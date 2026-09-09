@@ -29,7 +29,7 @@ const cities = [...new Map(firms.map(f => [f.data.market.city_slug, f.data.marke
 const states = [...new Set(cities.map(c => c.market.state_name))];
 
 const title = 'Law Firms by City';
-const description = `Every city the directory covers, with how many firms are published in each. ${cities.length === 1 ? 'One city so far' : `${cities.length} cities`}, ranked locally rather than nationally.`;
+const description = 'Browse law firms by US city. Every ranking is built within a city and practice area, so firms are compared against the ones you could hire instead.';
 ---
 <Base title={title} description={description} nav="cities">
 <section class="page-hero on-night">
