@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../data/site';
+import { SITE, mailto } from '../data/site';
 
 const title = 'Privacy policy';
 const description = 'What this site collects, which is almost nothing, and the one third party that receives your IP address.';
@@ -16,7 +16,7 @@ const updated = new Date(SITE.policiesUpdated).toLocaleDateString('en-US',
       <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Privacy</li></ol>
       <span class="eyebrow">Legal · Updated {updated}</span>
       <h1>Privacy policy</h1>
-      <p class="lede">This site runs no analytics, sets no cookies and has no working forms, so there is very little to describe. What follows is what actually happens when you load a page, not a template.</p>
+      <p class="lede">This site runs no analytics, sets no cookies, has no accounts and sends us nothing you type, so there is very little to describe. What follows is what actually happens when you load a page, not a template.</p>
     </div>
   </div>
 </section>
@@ -51,7 +51,7 @@ const updated = new Date(SITE.policiesUpdated).toLocaleDateString('en-US',
     <p>If you are an attorney and believe something published about you is inaccurate, write to us and we will check it against the source and correct it if it is wrong. <a href="/contact/">Contact</a>.</p>
 
     <h2>Your requests</h2>
-    <p>You can ask what personal information we hold about you, ask us to correct it, or ask us to delete it. Because we run no analytics and no accounts, in most cases the answer is that we hold nothing beyond what is described above. {SITE.emailPrivacy ? <>Write to <a href={`mailto:${SITE.emailPrivacy}`}>{SITE.emailPrivacy}</a>.</> : <>Our privacy contact channel is being set up; see <a href="/contact/">contact</a>.</>}</p>
+    <p>You can ask what personal information we hold about you, ask us to correct it, or ask us to delete it. Because we run no analytics and no accounts, in most cases the answer is that we hold nothing beyond what is described above. {SITE.email ? <>Write to <a href={mailto('Privacy request')}>{SITE.email}</a> with "Privacy request" as the subject.</> : <>Our contact channel is being set up; see <a href="/contact/">contact</a>.</>}</p>
 
     <h2>Children</h2>
     <p>This site is not directed at children and we do not knowingly collect information from anyone under 13.</p>
