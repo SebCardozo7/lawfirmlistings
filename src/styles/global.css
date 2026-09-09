@@ -599,6 +599,11 @@ button,input,select{font:inherit;color:inherit}
 .pending-guides b{font-weight:600}
 .pending-guides span{color:var(--muted);font-size:.9rem}
 
+/* The hero search's answer when it has no page to send the visitor to. Spans the panel so it
+   sits under both fields rather than squeezing between them. */
+.search-note{grid-column:1/-1;margin:0;padding:0 4px;font-size:.9rem;color:var(--muted);text-align:left}
+.on-night .search-note,.hero .search-note{color:var(--on-night-soft)}
+
 .soon{opacity:.5;cursor:default}
 .site-footer .soon{color:var(--on-night-soft)}
 .sit.is-soon{opacity:.55;cursor:default}

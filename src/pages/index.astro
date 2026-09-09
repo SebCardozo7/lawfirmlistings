@@ -62,6 +62,20 @@ const lastUpdated = computedDates.length
   ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
   : null;
 const logoVariants = ['', 'l2', 'l3'];
+// The hero search routes in the browser against the pages that exist. Built from the
+// collection, so a new city or practice area is searchable as soon as it has a page.
+const PRACTICE_PAGES = new Set(['personal-injury']);
+const searchIndex = {
+  practices: [...new Map(published.flatMap(f => f.data.practices)
+    .filter(pr => PRACTICE_PAGES.has(pr.slug))
+    .map(pr => [pr.slug, pr.name])).entries()]
+    .map(([slug, name]) => ({ slug, name, href: `/practice-areas/${slug}/` })),
+  cities: [...new Map(published.map(f =>
+    [f.data.market.city_slug, { city: f.data.market.city, state: f.data.market.state }])).entries()]
+    .map(([slug, m]) => ({ slug, name: `${m.city}, ${m.state}`, city: m.city, state: m.state,
+                           href: `/cities/${slug}/` })),
+};
+
 ---
 {/* The description is the snippet Google shows, so it says what the directory holds today.
     It read "top-rated law firms in 100 U.S. cities and every practice area" — one city, one
@@ -74,7 +88,7 @@ const logoVariants = ['', 'l2', 'l3'];
     {ratingAvg && <div class="trust-pill"><span class="avs"><i></i><i></i><i></i><i></i></span><span class="stars">{'★'.repeat(Math.round(ratingAvg))}</span><span><b>{ratingAvg.toFixed(2)}</b> · {reviewTotal.toLocaleString()} client reviews from Google Business Profiles</span></div>}
     <h1>The law firm directory built on <span class="grad-text">verification</span>, not advertising.</h1>
     <p class="lede">Every firm here is checked for active licensure, clean disciplinary records and verified client outcomes — and no firm can pay to rank. {published.length} {published.length === 1 ? 'firm' : 'firms'} published so far, starting with personal injury in New York.</p>
-    <form class="search-panel" action="#" onsubmit="return false">
+    <form class="search-panel" id="firm-search" action="/practice-areas/personal-injury/" method="get">
       <div class="search-field">
         <Icon name="search" />
         <div style="flex:1"><label for="q">Legal matter</label><input id="q" type="text" placeholder="Car accident, divorce, DUI…"></div>
@@ -84,7 +98,59 @@ const logoVariants = ['', 'l2', 'l3'];
         <div style="flex:1"><label for="loc">City or state</label><input id="loc" type="text" placeholder="New York, NY"></div>
       </div>
       <button class="btn btn--primary" type="submit">Search firms</button>
+      <p class="search-note" hidden id="search-note"></p>
     </form>
+    <script is:inline define:vars={{ searchIndex }}>
+  // Client-side only: no request leaves the browser until the visitor is sent to a page that
+  // already exists. A matter or city we do not cover yet says so instead of pretending.
+  (function () {
+    var form = document.getElementById('firm-search');
+    if (!form) return;
+    var note = document.getElementById('search-note');
+    var norm = function (s) { return (s || '').toLowerCase().replace(/[^a-z\s]/g, ' ').trim(); };
+
+    // Everyday words for a matter, mapped to the practice slug they belong to. Only slugs that
+    // have a page are in searchIndex, so an unmatched term is genuinely uncovered.
+    var MATTER_HINTS = {
+      'personal-injury': ['injury', 'injured', 'hurt', 'accident', 'crash', 'car', 'truck',
+        'motorcycle', 'pedestrian', 'slip', 'fall', 'construction', 'malpractice', 'negligence',
+        'wrongful death', 'work', 'workers', 'compensation', 'premises', 'dog bite']
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var matter = norm(document.getElementById('q').value);
+      var where = norm(document.getElementById('loc').value);
+
+      var city = searchIndex.cities.find(function (c) {
+        var n = norm(c.name), just = norm(c.city);
+        return where && (n.indexOf(where) > -1 || where.indexOf(just) > -1 ||
+                         just.indexOf(where) > -1 || norm(c.state) === where);
+      });
+
+      var practice = searchIndex.practices.find(function (p) {
+        if (matter && norm(p.name).indexOf(matter) > -1) return true;
+        var hints = MATTER_HINTS[p.slug] || [];
+        return matter && hints.some(function (h) { return matter.indexOf(h) > -1; });
+      });
+
+      if (practice) { window.location.href = practice.href; return; }
+      // A matter was typed and matched nothing: say so rather than routing to the city anyway.
+      // Sending someone looking for a divorce lawyer to a personal-injury page, silently, is
+      // the kind of helpfulness that misleads.
+      if (city && !matter) { window.location.href = city.href; return; }
+
+      if (note) {
+        var have = searchIndex.practices.map(function (p) { return p.name; }).join(', ');
+        var places = searchIndex.cities.map(function (c) { return c.name; }).join(', ');
+        note.textContent = (matter || where)
+          ? 'We do not cover that yet. So far the directory holds ' + have + ' in ' + places + '.'
+          : 'Tell us what happened, or pick one of the popular searches below.';
+        note.hidden = false;
+      }
+    });
+  })();
+</script>
     <div class="hero-popular"><span>Popular:</span><a href="/practice-areas/personal-injury/">Personal injury</a><a href="#">Divorce</a><a href="#">Criminal defense</a><a href="#">Immigration</a><a href="#">Estate planning</a></div>
 
     <div class="hero-preview" aria-hidden="true">
