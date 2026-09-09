@@ -82,6 +82,35 @@
       "source": "PageSpeed Insights API (mobile, field + lab)",
       "measured_at": "2026-09-08",
       "note": "LCP 2.8 s / CLS 0.050 / TBT 289 ms"
+    },
+    "ahrefs": {
+      "dr": 50,
+      "ahrefs_rank": 718987,
+      "refdomains": 1162,
+      "refdomains_dofollow": 644,
+      "backlinks": 34519,
+      "org_keywords": 1460,
+      "org_traffic": 23899,
+      "paid_keywords": 5,
+      "ai_citations": {
+        "total": 346,
+        "pages": 128,
+        "by_platform": {
+          "chatgpt": 20,
+          "perplexity": 28,
+          "gemini": 12,
+          "google_ai_overviews": 14,
+          "copilot": 21
+        }
+      },
+      "measured_at": "2026-09-09"
+    },
+    "places": {
+      "listing_count": 3,
+      "review_count_total": 259,
+      "rating_weighted": 4.81,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-08"
     }
   },
   "gates": {
@@ -126,7 +155,7 @@
   "faq": [],
   "fee_statement": "ction Accidents Get a free Consultation We offer free initial consultations and work on a contingency fee basis. You will owe no attorney’s fees unless and until we succeed in recovering comp",
   "score": {
-    "total": 13,
+    "total": 26,
     "tier": "Under review",
     "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-09",
@@ -201,7 +230,7 @@
         ]
       },
       "C": {
-        "score": 4,
+        "score": 9,
         "max": 20,
         "subs": [
           {
@@ -215,10 +244,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 0,
+            "pts": 5,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "Google rating 4.81 over 259 reviews → Bayesian 4.81 (prior 4.80 weighted as 100 reviews, from 13 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -247,7 +276,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 11,
         "max": 25,
         "subs": [
           {
@@ -261,26 +290,26 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "source": "ahrefs",
+            "evidence": "DR 50 → 88th pct of 37-firm cohort (median 33.5) 3/3 · 1,162 referring domains, 65th pct 1/2 · 1,460 organic keywords / 23,899 visits·mo, 88th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0,
+            "pts": 1,
             "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "places",
+            "evidence": "3 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
-            "pts": 1,
+            "pts": 2,
             "max": 5,
-            "source": "observed",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "source": "ahrefs",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1 · cited in AI answers: 346 citations / 128 pages 1/1"
           }
         ]
       },
@@ -315,16 +344,16 @@
         ]
       }
     },
-    "floor_abc": 4,
+    "floor_abc": 9,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 57,
+      "gap": 44,
       "floor_met": false,
       "path": [
         "A1 Clean-record depth: +10 available",
         "A2 Experience: +9 available",
-        "D2 Search authority: +8 available"
+        "A5 Accountability: +6 available"
       ]
     }
   }

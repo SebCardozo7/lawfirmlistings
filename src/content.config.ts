@@ -47,6 +47,13 @@ const firms = defineCollection({
       trust_pages: z.record(z.boolean()).optional(),
       schema_detected: z.boolean().optional(),
       psi: measured(z.object({ performance: z.number(), cwv_pass: z.boolean() })).optional(),
+      // Google Business Profile aggregate behind pillar C and the measurable half of D3.
+      // Counts are summed across the firm's verified listings and the rating is weighted by
+      // count, so a multi-office firm is neither rewarded nor penalised for how it splits them.
+      places: z.object({
+        listing_count: z.number(), review_count_total: z.number(),
+        rating_weighted: z.number().nullable(), source: z.string(), measured_at: z.string(),
+      }).optional(),
     }),
     gates: z.record(z.object({ pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string() })),
     cohort_id: z.string(),

@@ -66,6 +66,35 @@
       "source": "PageSpeed Insights API (mobile, field + lab)",
       "measured_at": "2026-09-08",
       "note": "LCP 6.7 s / CLS 0.030 / TBT 1324 ms"
+    },
+    "ahrefs": {
+      "dr": 41,
+      "ahrefs_rank": 1449875,
+      "refdomains": 1046,
+      "refdomains_dofollow": 353,
+      "backlinks": 185045,
+      "org_keywords": 3008,
+      "org_traffic": 64932,
+      "paid_keywords": 0,
+      "ai_citations": {
+        "total": 473,
+        "pages": 83,
+        "by_platform": {
+          "chatgpt": 3,
+          "perplexity": 8,
+          "gemini": 6,
+          "google_ai_overviews": 12,
+          "copilot": 4
+        }
+      },
+      "measured_at": "2026-09-09"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 110,
+      "rating_weighted": 4.6,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-08"
     }
   },
   "gates": {
@@ -110,7 +139,7 @@
   "faq": [],
   "fee_statement": "scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but",
   "score": {
-    "total": 11,
+    "total": 22,
     "tier": "Under review",
     "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-09",
@@ -185,7 +214,7 @@
         ]
       },
       "C": {
-        "score": 3,
+        "score": 7,
         "max": 20,
         "subs": [
           {
@@ -199,10 +228,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 0,
+            "pts": 4,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "Google rating 4.6 over 110 reviews → Bayesian 4.70 (prior 4.80 weighted as 100 reviews, from 13 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -231,7 +260,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -245,26 +274,26 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "source": "ahrefs",
+            "evidence": "DR 41 → 70th pct of 37-firm cohort (median 33.5) 2/3 · 1,046 referring domains, 54th pct 1/2 · 3,008 organic keywords / 64,932 visits·mo, 98th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0,
+            "pts": 1,
             "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
-            "pts": 1,
+            "pts": 2,
             "max": 5,
-            "source": "observed",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "source": "ahrefs",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1 · cited in AI answers: 473 citations / 83 pages 1/1"
           }
         ]
       },
@@ -299,16 +328,16 @@
         ]
       }
     },
-    "floor_abc": 3,
+    "floor_abc": 7,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 59,
+      "gap": 48,
       "floor_met": false,
       "path": [
         "A1 Clean-record depth: +10 available",
         "A2 Experience: +9 available",
-        "D2 Search authority: +8 available"
+        "A5 Accountability: +6 available"
       ]
     }
   }
