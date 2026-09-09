@@ -49,6 +49,57 @@ def by_domain(domain: str) -> Path | None:
     return None
 
 
+def promote_attorneys(rec: dict, firm: dict) -> list[str]:
+    """Merge the crawled roster into the profile.
+
+    Merged by name rather than replaced, because check_ny_registry.py writes a registration
+    number, an admission year and a licence status against each name, and a straight overwrite
+    would throw all of that away and quietly restate every profile as unverified. A name the firm
+    has stopped publishing is dropped, since the firm's own site is the authority on who works
+    there, but the drop is reported rather than silent.
+    """
+    found = ((rec.get("attorneys_found") or {}).get("attorneys")) or []
+    if not found:
+        return []
+    # Matched on a normalised name, because the same person is spelled two ways: the bio heading
+    # reads "Robert J Greenstein" and the profile, which carries his verified registration
+    # number, reads "Robert J. Greenstein". Matching the raw strings treated one man as a
+    # departure and an arrival, and discarded the licence check in between.
+    def key(name):
+        return " ".join(name.replace(".", " ").split()).casefold()
+
+    existing = {key(a["name"]): a for a in (firm.get("attorneys") or [])}
+    merged, added = [], []
+    for person in found:
+        prior = existing.get(key(person["name"]))
+        keep = dict(prior or {})
+        was_known = bool(keep)
+        # The existing spelling wins when both name the same person: it is the one the registry
+        # matched against, and a middle initial with its full stop is the more careful form.
+        keep["name"] = keep.get("name") or person["name"]
+        keep["role"] = person.get("role") or keep.get("role") or "Attorney"
+        keep.setdefault("bar_state", "NY")
+        if person.get("source_url"):
+            keep["source_url"] = person["source_url"]
+        merged.append(keep)
+        if not was_known:
+            added.append(person["name"])
+    still_published = {key(p["name"]) for p in found}
+    dropped = [a["name"] for k, a in existing.items() if k not in still_published]
+
+    changed = []
+    if added:
+        changed.append("attorneys      +%d: %s%s"
+                       % (len(added), ", ".join(added[:6]), " ..." if len(added) > 6 else ""))
+    if dropped:
+        changed.append("attorneys      -%d no longer published: %s%s"
+                       % (len(dropped), ", ".join(dropped[:6]), " ..." if len(dropped) > 6 else ""))
+    if not added and not dropped:
+        changed.append("attorneys      %d unchanged" % len(merged))
+    firm["attorneys"] = merged
+    return changed
+
+
 def promote(rec: dict, firm: dict) -> list[str]:
     """Mutate `firm` in place; return a line per field changed."""
     changed: list[str] = []

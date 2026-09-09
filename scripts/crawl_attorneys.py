@@ -84,6 +84,11 @@ ROLE_WORDS = {
     "operating", "operational", "financial", "administrative", "marketing", "technology",
     "information", "revenue", "strategy", "strategic", "business", "development", "relations",
     "services", "support", "compliance", "risk", "human", "resources", "client", "clients",
+    # Spanish, on the Spanish-language versions of these same sites.
+    "abogado", "abogada", "abogados", "abogadas", "asociado", "asociada", "socio", "socia",
+    "fundador", "fundadora", "gerente", "director", "directora", "principal", "consejero",
+    # Korean and Chinese for "attorney", which appear as a suffix on a bio heading.
+    "\ubcc0\ud638\uc0ac", "\u5f8b\u5e2b", "\u5f8b\u5e08",
 }
 
 # The peel is vocabulary-based, so a title word we do not know leaves everything to its left
@@ -107,6 +112,15 @@ def looks_like_a_person(name):
     if NOT_A_PERSON.search(name):
         return False
     words = [w for w in re.split(r"\s+", name) if w]
+    # A name written in a script without cases or spaces between given and family name is
+    # still a name. Two to five Latin words is the right test for Latin script and the wrong
+    # one for Korean, Chinese or Japanese, where a full name is one short block.
+    # Hangul syllables sit at U+AC00-D7AF, above the CJK block, so a single range stopping at
+    # U+9FFF matched nothing Korean at all. Three blocks: the Japanese syllabaries, CJK, and
+    # Hangul.
+    if any("\u3040" <= ch <= "\u30ff" or "\u4e00" <= ch <= "\u9fff"
+           or "\uac00" <= ch <= "\ud7af" for ch in name):
+        return 2 <= len(name.replace(" ", "")) <= 12
     if not 2 <= len(words) <= 5:
         return False
     # A title word past the given name and surname means the peel stopped early.
@@ -133,10 +147,17 @@ def split_name_and_role(raw):
 
     words = [w for w in re.split(r"[\s,|]+", text) if w]
     role = []
-    # Peel from the right while the word reads as part of a title, never below two words so a
-    # short name cannot be eaten. A word counts as title if it is a known role word, or is
+    # Peel from the right while the word reads as part of a title, never below the floor so
+    # a short name cannot be eaten. A word counts as title if it is a known role word, or is
     # all-caps while the name beside it is not.
-    while len(words) - len(role) > 2:
+    #
+    # The floor is two words for Latin script and one for Korean, Chinese or Japanese, where
+    # a full name is a single block: "오재현 변호사" is a name followed by the word for attorney,
+    # and a floor of two left the title inside the name.
+    cjk = any("\u3040" <= ch <= "\u30ff" or "\u4e00" <= ch <= "\u9fff"
+              or "\uac00" <= ch <= "\ud7af" for ch in text)
+    floor = 1 if cjk else 2
+    while len(words) - len(role) > floor:
         w = words[len(words) - len(role) - 1]
         letters = re.sub(r"[^A-Za-z]", "", w)
         is_caps = len(letters) >= 2 and letters.isupper()
@@ -225,6 +246,10 @@ def collect(domain, verbose=False, record=None):
 
     result = {"index_url": index_final, "attorneys": [], "rejected": [],
               "checked_at": datetime.date.today().isoformat()}
+    # Firms publish one bio per language, so the same person arrives twice once the Spanish role
+    # words peel correctly. The first reading wins: it comes from the default locale, which is
+    # where the rest of the profile came from.
+    seen_names: set[str] = set()
 
     bios = seeded_bios or (bio_candidates(index_html, origin, index_final)
                            if index_html else [])
@@ -255,12 +280,15 @@ def collect(domain, verbose=False, record=None):
             continue
         heading = h1_of(html) or meta(html, "og:title")
         name, role = split_name_and_role(heading)
+        if name and name.casefold() in seen_names:
+            continue
         if not looks_like_a_person(name):
             result["rejected"].append({"heading": heading, "url": final})
             continue
         bar = BAR_NUMBER.search(strip_tags(html))
         # The role is whatever the firm printed next to the name, not our inference. Where it
         # printed none, "Attorney" stands — the handoff's rule that seniority is not assumed.
+        seen_names.add(name.casefold())
         result["attorneys"].append({
             "name": name, "source_url": final,
             "bar_number": bar.group(1) if bar else None,
