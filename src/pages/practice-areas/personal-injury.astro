@@ -38,15 +38,15 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
   return { slug, label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`, count: inCity.length };
 }).sort((a, b) => b.count - a.count);
 ---
-<Base title={cities.length === 1 ? `Personal Injury Law Firms in ${cities[0]} (2026)` : `Personal Injury Law Firms in ${cities.length} U.S. Cities (2026)`} description={`Compare personal injury law firms on verified evidence: offices, client reviews, fee terms and site performance. ${firms.length} ${firms.length === 1 ? 'firm' : 'firms'} listed in ${cities.length === 1 ? cities[0] : `${cities.length} cities`}. No firm can pay to rank.`} nav="practice">
+<Base title="Personal Injury Law Firms — Rankings & Hiring Guide" description={`How to choose a personal injury firm, and where our rankings are published. ${firms.length} ${firms.length === 1 ? 'firm' : 'firms'} measured on verified offices, client reviews, fee terms and site performance across ${cities.length === 1 ? cities[0] : `${cities.length} cities`}. No firm can pay to rank.`} nav="practice">
 <section class="page-hero on-night">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">
     <div>
-      <ol class="crumbs"><li><a href="/">Home</a></li><li>Practice Areas</li><li aria-current="page">Personal Injury</li></ol>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/practice-areas/">Practice Areas</a></li><li aria-current="page">Personal Injury</li></ol>
       <span class="eyebrow">Practice area</span>
-      <h1>{cities.length === 1 ? `Personal Injury Law Firms in ${cities[0]}` : "Personal Injury Law Firms"}</h1>
-      <p class="lede">Personal injury firms handling car accidents, slip and fall, medical malpractice, construction injuries and wrongful death. Every firm is checked for active licensure, clean disciplinary history and verified case results. {certified.length > 0 && <>{certified.length} of the {firms.length} listed {firms.length === 1 ? 'firm has' : 'firms have'} earned certification so far.</>}</p>
+      <h1>Personal Injury Law Firms</h1>
+      <p class="lede">Personal injury firms handling car accidents, slip and fall, medical malpractice, construction injuries and wrongful death. Every firm is checked for active licensure, clean disciplinary history and verified case results. Rankings are published per city, because a firm is worth comparing against the firms someone could actually hire instead of it — {cities.length === 1 ? <>so far that means {cities[0]}</> : <>so far that means {cities.length} cities</>}.</p>
       <div class="chips" style="margin-top:24px">
         {/* Sub-topics of this practice area. None has a page yet, so they describe the scope
             without pretending to be navigation. */}
@@ -71,25 +71,39 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
     <span class="lbl">City</span>
     {/* Eight cities were listed here and seven had no page. The filter now offers the cities
         that hold firms, and the sort control is left out until it does something. */}
-    <span class="chip is-active">All cities</span>
-    {cityCounts.map(c => <a class="chip" href={`/cities/${c.slug}/`}>{c.label.split(',')[0]}</a>)}
+    {cityCounts.map(c => <a class="chip" href={`/cities/${c.slug}/${PRACTICE}/`}>{c.label.split(',')[0]}</a>)}
   </div>
 </div>
 
 <section class="section--tight">
   <div class="container layout">
     <div>
+      {/* This page is the national view of the practice. The ranked list lives at
+          /cities/<city>/<practice>/, because ranking is scoped to a city in the methodology
+          and this URL claims the country. Showing the same thirteen firms here and there was
+          two pages of near-identical content, and neither answered "personal injury lawyer
+          NYC". A short teaser stays so the page is not an index of indexes. */}
       <div class="results-head">
-        <h2>Top-ranked personal injury firms</h2>
+        <h2>Highest-scoring firms in the practice</h2>
         <span class="num">{firms.length === 0
           ? 'No firms published yet'
-          : `Showing ${firms.length} of ${firms.length} · Ranked by our methodology${lastUpdated ? `, updated ${lastUpdated}` : ''}`}</span>
+          : `Top ${Math.min(3, firms.length)} of ${firms.length}${lastUpdated ? ` · updated ${lastUpdated}` : ''}`}</span>
       </div>
       <div class="firm-list">
-        {firms.map((firm, i) => (
+        {firms.slice(0, 3).map((firm, i) => (
           <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
         ))}
       </div>
+      {cityCounts.length > 0 && (
+        <div class="ranked-links">
+          <h3>Ranked lists by city</h3>
+          <ul>
+            {cityCounts.map(c => (
+              <li><a href={`/cities/${c.slug}/${PRACTICE}/`}>Personal injury firms in {c.label}</a><span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
       {firms.length === 0 && (
         <div class="callout"><b>Nothing published here yet.</b> The New York personal injury cohort is still in verification. Firms appear once their eligibility gates are checked.</div>
       )}
@@ -101,14 +115,6 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
         <p>Tell us what happened and we'll match you with up to three certified firms in your city — free, and without sharing your details until you say so.</p>
         {/* No matching service exists yet, so the panel describes it without a dead button. */}
         <span class="btn btn--white soon">Get matched in 2 minutes</span>
-      </div>
-      <div class="panel">
-        <h4>Personal injury by city</h4>
-        <ul>
-          {cityCounts.map(c => (
-            <li><a href={`/cities/${c.slug}/`}>{c.label}</a><span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}</span></li>
-          ))}
-        </ul>
       </div>
       <div class="panel">
         <h4>Related guides</h4>

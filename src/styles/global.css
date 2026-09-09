@@ -388,6 +388,15 @@ button,input,select{font:inherit;color:inherit}
 .results-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:28px;flex-wrap:wrap}
 .results-head h2{font-size:1.6rem}
 .results-head span{font-size:.9rem;color:var(--muted)}
+
+/* Ranked-list links: the hub pages show a three-firm teaser and then send people to the
+   city x practice list, which is where the full ranking lives. */
+.ranked-links{margin-top:32px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.ranked-links h3{font-size:1.05rem;margin-bottom:14px}
+.ranked-links ul{list-style:none;display:grid;gap:10px;font-size:.95rem}
+.ranked-links li{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.ranked-links li a{color:var(--ink);font-weight:500}
+.ranked-links li span{color:var(--muted);font-size:.86rem;white-space:nowrap}
 .pager{display:flex;gap:8px;justify-content:center;margin-top:32px}
 .pager a{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line-2);border-radius:50%;color:var(--ink);font-weight:500;background:var(--paper)}
 .pager a.is-active{background:var(--ink);color:#fff;border-color:var(--ink)}

@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import FirmCard from '../../../components/FirmCard.astro';
+
+/**
+ * City × practice: the ranked list, and the page someone searching "personal injury lawyer
+ * NYC" is actually looking for.
+ *
+ * It exists because the two hubs above it were doing this job badly. /practice-areas/
+ * personal-injury/ listed thirteen New York firms behind a URL that claimed the country, and
+ * /cities/new-york-ny/ listed the same thirteen — two pages of near-identical content and
+ * neither addressed the search that matters. Ranking is scoped to city × practice in the
+ * methodology, so the URL now matches the unit of comparison.
+ *
+ * Routes are generated from the collection: a combination appears as soon as a firm published
+ * in that city lists that practice.
+ */
+export async function getStaticPaths() {
+  const firms = await getCollection('firms', f =>
+    f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+  const combos = new Map<string, { city: string; practice: string }>();
+  for (const f of firms) {
+    for (const pr of f.data.practices) {
+      // Only practices with a hub page of their own, so breadcrumbs never climb into nothing.
+      if (pr.slug !== 'personal-injury') continue;
+      combos.set(`${f.data.market.city_slug}/${pr.slug}`,
+        { city: f.data.market.city_slug, practice: pr.slug });
+    }
+  }
+
+  return [...combos.values()].map(({ city, practice }) => {
+    const inScope = firms.filter(f =>
+      f.data.market.city_slug === city && f.data.practices.some(pr => pr.slug === practice));
+    return { params: { city, practice }, props: { firms: inScope } };
+  });
+}
+
+const { city, practice } = Astro.params;
+const { firms } = Astro.props;
+
+const market = firms[0].data.market;
+const practiceName = firms[0].data.practices.find(pr => pr.slug === practice)!.name;
+
+// Certified firms rank by score; listed firms have no score yet and follow alphabetically.
+const weight = (f: typeof firms[number]) =>
+  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+const ranked = [...firms].sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
+
+const certified = ranked.filter(f => f.data.status === 'certified');
+const contingency = ranked.filter(f => /contingency/i.test(f.data.fee_model)).length;
+const freeConsult = ranked.filter(f => f.data.free_consultation).length;
+const offices = ranked.reduce((n, f) => n + f.data.offices.length, 0);
+const share = (n: number) => (ranked.length ? `${Math.round((100 * n) / ranked.length)}%` : '—');
+const logoVariants = ['', 'l2', 'l3'];
+
+const computedDates = ranked.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+const lastUpdated = computedDates.length
+  ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+const place = `${market.city}, ${market.state}`;
+const title = `${practiceName} Law Firms in ${place}`;
+const description = `${ranked.length} ${practiceName.toLowerCase()} ${ranked.length === 1 ? 'firm' : 'firms'} in ${place}, compared on verified offices, client reviews, fee terms and site performance. Ranked against each other, not against other cities. No firm can pay to rank.`;
+---
+<Base title={title} description={description} nav="cities">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs">
+        <li><a href="/">Home</a></li>
+        <li><a href="/cities/">Cities</a></li>
+        <li><a href={`/cities/${city}/`}>{place}</a></li>
+        <li aria-current="page">{practiceName}</li>
+      </ol>
+      <span class="eyebrow">{practiceName} · {place}</span>
+      <h1>{practiceName} Law Firms in {market.city}</h1>
+      <p class="lede">Every firm here is checked for active licensure, clean disciplinary history and verified case results, and compared against the other {practiceName.toLowerCase()} firms in {market.city} — not against a national average. {certified.length > 0 && <>{certified.length} of the {ranked.length} {ranked.length === 1 ? 'has' : 'have'} completed certification so far.</>}</p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{ranked.length}</b><span>Firms listed</span></div>
+      <div class="fact"><b class="num">{certified.length}</b><span>Certified</span></div>
+      <div class="fact"><b class="num">{offices}</b><span>Verified offices</span></div>
+      <div class="fact"><b class="num">{share(contingency)}</b><span>Work on contingency</span></div>
+      <div class="fact"><b class="num">{share(freeConsult)}</b><span>Free consultation</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="container layout">
+    <div>
+      <div class="results-head">
+        <h2>Ranked {practiceName.toLowerCase()} firms in {market.city}</h2>
+        <span class="num">{`Showing all ${ranked.length} · Ranked by the Certification Score${lastUpdated ? `, updated ${lastUpdated}` : ''}`}</span>
+      </div>
+      <div class="firm-list">
+        {ranked.map((firm, i) => (
+          <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
+        ))}
+      </div>
+      <p class="muted" style="font-size:.86rem;margin-top:18px">Firms marked <b>under review</b> have had some pillars measured and are waiting on checks the others need — licensure against the {market.state_name} attorney registry and outcomes against court records. A profile says which is which on every row.</p>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <h4>How the order is decided</h4>
+        <p class="muted" style="font-size:.92rem">Position comes from the Certification Score, computed from evidence we can check. Neither the score, the eligibility gates nor the tier can be bought or edited — including by a firm that manages its own profile.</p>
+        <a class="link" href="/methodology/" style="margin-top:12px">Read the methodology</a>
+      </div>
+      <div class="panel">
+        <h4>Elsewhere in the directory</h4>
+        <ul>
+          <li><a href={`/cities/${city}/`}>All law firms in {place}</a></li>
+          <li><a href={`/practice-areas/${practice}/`}>{practiceName} across every city</a></li>
+          <li><a href="/guides/">Guides &amp; rankings</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+</Base>

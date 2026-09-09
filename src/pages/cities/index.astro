@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+
+// The Cities link in the nav went straight to New York, so there was no way to see what the
+// directory covers or to reach a second city once one exists. This is that page, and it is
+// built from the collection, so a city appears the moment a firm in it is published.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const PRACTICE_PAGES = new Set(['personal-injury']);
+
+const cities = [...new Map(firms.map(f => [f.data.market.city_slug, f.data.market])).entries()]
+  .map(([slug, market]) => {
+    const inCity = firms.filter(f => f.data.market.city_slug === slug);
+    const practices = [...new Map(inCity.flatMap(f => f.data.practices)
+      .filter(pr => PRACTICE_PAGES.has(pr.slug))
+      .map(pr => [pr.slug, pr.name])).entries()];
+    return {
+      slug, market, practices,
+      count: inCity.length,
+      certified: inCity.filter(f => f.data.status === 'certified').length,
+      offices: inCity.reduce((n, f) => n + f.data.offices.length, 0),
+    };
+  })
+  .sort((a, b) => b.count - a.count);
+
+const states = [...new Set(cities.map(c => c.market.state_name))];
+
+const title = 'Law Firms by City';
+const description = `Every city the directory covers, with how many firms are published in each. ${cities.length === 1 ? 'One city so far' : `${cities.length} cities`}, ranked locally rather than nationally.`;
+---
+<Base title={title} description={description} nav="cities">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Cities</li></ol>
+      <span class="eyebrow">Cities</span>
+      <h1>Ranked against the city, not the country.</h1>
+      <p class="lede">A firm's search authority, review volume and verified outcomes are compared against firms in the same city and practice area. A strong firm in a smaller market is measured against that market — which is why the directory grows one city at a time rather than claiming the whole country at once.</p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{cities.length}</b><span>{cities.length === 1 ? 'City covered' : 'Cities covered'}</span></div>
+      <div class="fact"><b class="num">{states.length}</b><span>{states.length === 1 ? 'State' : 'States'}</span></div>
+      <div class="fact"><b class="num">{firms.length}</b><span>Firms published</span></div>
+      <div class="fact"><b class="num">{cities.reduce((n, c) => n + c.offices, 0)}</b><span>Verified offices</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {cities.length > 0 ? (
+      <div class="city-grid">
+        {cities.map((c, i) => (
+          <a class={`city c${(i % 8) + 1}`} href={`/cities/${c.slug}/`}>
+            <Icon name="sky_sm" />
+            <div class="t">
+              <b>{c.market.city}, {c.market.state}</b>
+              <span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}{c.certified > 0 && ` · ${c.certified} certified`}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="callout"><b>No cities published yet.</b> A city appears here once a firm in it has been verified.</div>
+    )}
+
+    {cities.some(c => c.practices.length > 0) && (
+      <>
+        <div class="section-head" style="margin-top:56px">
+          <div>
+            <span class="eyebrow">By city and practice</span>
+            <h2 style="margin-top:12px">Go straight to a ranked list</h2>
+            <p>Rankings are built per city and practice area, because that is the comparison that means something to someone hiring a lawyer.</p>
+          </div>
+        </div>
+        <div class="chips">
+          {cities.flatMap(c => c.practices.map(([slug, name]) => (
+            <a class="chip" href={`/cities/${c.slug}/${slug}/`}>{name} in {c.market.city}</a>
+          )))}
+        </div>
+      </>
+    )}
+  </div>
+</section>
+</Base>
