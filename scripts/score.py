@@ -42,6 +42,49 @@ SUBS = {  # code: (pillar, label, max)
 PILLAR_MAX = {"A": 25, "B": 20, "C": 20, "D": 25, "E": 10}
 TIERS = [("Elite", 93, 55), ("Distinguished", 85, 50), ("Certified", 70, 40)]
 
+def review_count(google):
+    """count_label is a label, not a number: "1,776" and "400+" both have to parse."""
+    return int("".join(ch for ch in str(google.get("count_label", "")) if ch.isdigit()) or 0)
+
+
+# How many reviews before a firm's own average is trusted on its own terms. The methodology
+# specifies a Bayesian average with the cohort mean as prior but not the weight, so this is an
+# implementation choice and worth stating: 100 reviews. It is fixed rather than derived from the
+# cohort's median for two reasons. A derived weight drifts as peers are added, moving a firm's
+# score for reasons that have nothing to do with the firm. And this cohort's median is 577, a
+# weight so heavy it compressed the whole range — a firm rated 4.35 landed one point below one
+# rated 4.91, which defeats the point of scoring rating quality.
+C2_PRIOR_WEIGHT = 100
+
+
+def rating_prior():
+    """Count-weighted mean rating across every firm with a rating: the prior for C2.
+
+    Computed once over the whole set rather than per firm, so a firm cannot move its own prior,
+    and count-weighted on purpose: a plain mean of ratings would let a firm with nine reviews
+    pull the prior as hard as one with five thousand.
+    """
+    pairs = []
+    for path in FIRMS:
+        try:
+            firm = read_json(path)
+        except Exception:
+            continue
+        if firm.get("status") == "sample":
+            continue
+        g = (firm.get("reviews") or {}).get("google")
+        if g and g.get("rating") and review_count(g):
+            pairs.append((g["rating"], review_count(g)))
+    if not pairs:
+        return None, 0
+    total = sum(n for _, n in pairs)
+    mean = sum(r * n for r, n in pairs) / total
+    return (round(mean, 3), C2_PRIOR_WEIGHT), len(pairs)
+
+
+RATING_PRIOR, RATING_N = rating_prior()
+
+
 def pct(value, values):
     others = [v for v in values]
     if not others: return 50
@@ -75,7 +118,28 @@ def compute(firm):
         pts = 5 if n >= 300 else 4 if n >= 150 else 3 if n >= 75 else 2 if n >= 25 else 1 if n >= 10 else 0
         out.append(sub("C1", pts, "observed", f"{g['count_label']} Google reviews · {g['source']}"))
     else: out.append(assessed("C1"))
-    for c in ["C2", "C3", "C4", "C5"]: out.append(assessed(c))
+
+    # C2 rating quality, as the methodology defines it: a Bayesian average with the cohort mean
+    # as the prior, so three reviews at 5.0 cannot beat four hundred at 4.8. The shrinkage is
+    # the IMDb form — (v·R + m·C) / (v + m) — with C the count-weighted mean across scored firms
+    # and m the median review count, so a firm with fewer reviews than its peers is pulled
+    # toward the middle rather than rewarded for a thin sample.
+    #
+    # One platform, not several: Google Business Profile is the only source collected so far.
+    # The evidence string says so, because a single-platform average is weaker than the
+    # cross-platform one §3 describes and a reader should not have to guess which they are seeing.
+    if g and "C2" not in A and RATING_PRIOR and g.get("rating"):
+        n = review_count(g)
+        prior_mean, prior_weight = RATING_PRIOR
+        bayes = (n * g["rating"] + prior_weight * prior_mean) / (n + prior_weight)
+        pts = (6 if bayes >= 4.9 else 5 if bayes >= 4.8 else 4 if bayes >= 4.6
+               else 3 if bayes >= 4.4 else 2 if bayes >= 4.0 else 1 if bayes >= 3.5 else 0)
+        out.append(sub("C2", pts, "observed",
+                       f"Google rating {g['rating']} over {n:,} reviews → Bayesian {bayes:.2f} "
+                       f"(prior {prior_mean:.2f} weighted as {prior_weight:,} reviews, from "
+                       f"{RATING_N} scored firms) · single platform, Google only"))
+    else: out.append(assessed("C2"))
+    for c in ["C3", "C4", "C5"]: out.append(assessed(c))
 
     # ---- D1: trust pages (+ psi) ----
     tp = firm.get("digital", {}).get("trust_pages")
@@ -109,7 +173,20 @@ def compute(firm):
         out.append(sub("D2", pts, "ahrefs", ev))
     else: out.append(assessed("D2", "Ahrefs data not yet collected"))
 
-    out.append(assessed("D3"))
+    # D3 local presence, partially. The methodology asks for a verified *and complete* Google
+    # Business Profile (categories, hours, services, 20+ photos, Q&A, recent posts) for 2 points,
+    # NAP consistency across 30 citations for 1, and local-pack rank for 2. Only the first half
+    # of the first item is collected: that listings exist, are operational and carry reviews.
+    # That earns 1 point, not 2 — completeness is not something we have looked at, and the
+    # evidence says which half is missing so the row is not mistaken for a full measurement.
+    places = firm.get("digital", {}).get("places")
+    if places and places.get("listing_count") and "D3" not in A:
+        n = places["listing_count"]
+        out.append(sub("D3", 1, "places",
+                       f"{n} operational Google Business Profile listing{'' if n == 1 else 's'} "
+                       f"with reviews · profile completeness, NAP consistency across citations "
+                       f"and local-pack rank not yet measured (4 of 5 pts still available)"))
+    else: out.append(assessed("D3"))
 
     # ---- D4: content(2) assessed, schema(1) observed, media(1) assessed, AI(1) ahrefs ----
     d4 = 0; ev = []

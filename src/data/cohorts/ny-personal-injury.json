@@ -3,8 +3,8 @@
  "state": "NY",
  "practice": "personal-injury",
  "label": "New York × Personal Injury",
- "measured_at": "2026-09-08",
- "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us); 23 rows measured 2026-09-07, 16 rows added 2026-09-08",
+ "measured_at": "2026-09-09",
+ "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us). The 12 published New York firms were re-measured 2026-09-09; the remaining peer rows date from 2026-09-07 and 2026-09-08. jacobyandmeyers.com excluded 2026-09-08: its own JSON-LD and all ten of its Google listings place it in Los Angeles, California.",
  "full_size_estimate": 148,
  "firms": [
   {
@@ -19,17 +19,17 @@
    "domain": "ask4sam.net",
    "name": "Silberstein, Awad & Miklos",
    "dr": 55,
-   "refdomains": 1772,
-   "org_keywords": 512,
-   "org_traffic": 2264
+   "refdomains": 1776,
+   "org_keywords": 510,
+   "org_traffic": 2233
   },
   {
    "domain": "napolilaw.com",
    "name": "Napoli Shkolnik",
    "dr": 53,
-   "refdomains": 1546,
-   "org_keywords": 703,
-   "org_traffic": 4547
+   "refdomains": 1596,
+   "org_keywords": 702,
+   "org_traffic": 4576
   },
   {
    "domain": "injurylawyer.com",
@@ -48,14 +48,6 @@
    "org_traffic": 47206
   },
   {
-   "domain": "jacobyandmeyers.com",
-   "name": "Jacoby & Meyers",
-   "dr": 50,
-   "refdomains": 1759,
-   "org_keywords": 1787,
-   "org_traffic": 45171
-  },
-  {
    "domain": "rosenbaumnylaw.com",
    "name": "Rosenbaum Meier Personal Injury Lawyers",
    "dr": 50,
@@ -67,25 +59,25 @@
    "domain": "cellinolaw.com",
    "name": "Cellino Law",
    "dr": 47,
-   "refdomains": 1354,
-   "org_keywords": 611,
-   "org_traffic": 4142
+   "refdomains": 1365,
+   "org_keywords": 616,
+   "org_traffic": 4350
   },
   {
    "domain": "fuchsberg.com",
    "name": "The Jacob D. Fuchsberg Law Firm",
    "dr": 47,
-   "refdomains": 1401,
-   "org_keywords": 1186,
-   "org_traffic": 9424
+   "refdomains": 1417,
+   "org_keywords": 1183,
+   "org_traffic": 9427
   },
   {
    "domain": "perecman.com",
    "name": "The Perecman Firm",
    "dr": 47,
-   "refdomains": 1272,
-   "org_keywords": 792,
-   "org_traffic": 7844
+   "refdomains": 1277,
+   "org_keywords": 786,
+   "org_traffic": 9816
   },
   {
    "domain": "thebarnesfirm.com",
@@ -94,6 +86,14 @@
    "refdomains": 1577,
    "org_keywords": 1856,
    "org_traffic": 15220
+  },
+  {
+   "domain": "gairgair.com",
+   "name": "Gair, Gair, Conason, Rubinowitz, Bloom, Hershenhorn, Steigman & Mackauf",
+   "dr": 41,
+   "refdomains": 1046,
+   "org_keywords": 3008,
+   "org_traffic": 64932
   },
   {
    "domain": "shulman-hill.com",
@@ -110,14 +110,6 @@
    "refdomains": 983,
    "org_keywords": 1834,
    "org_traffic": 12449
-  },
-  {
-   "domain": "gairgair.com",
-   "name": "Gair, Gair, Conason, Rubinowitz, Bloom, Hershenhorn, Steigman & Mackauf",
-   "dr": 40,
-   "refdomains": 1039,
-   "org_keywords": 3040,
-   "org_traffic": 66688
   },
   {
    "domain": "blockotoole.com",

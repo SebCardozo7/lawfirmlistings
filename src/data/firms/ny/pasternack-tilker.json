@@ -149,6 +149,34 @@
       "source": "PageSpeed Insights API (mobile, field + lab)",
       "measured_at": "2026-09-08",
       "note": "LCP 3.1 s / CLS 0.082 / TBT 679 ms"
+    },
+    "ahrefs": {
+      "dr": 41,
+      "ahrefs_rank": 1402863,
+      "refdomains": 983,
+      "refdomains_dofollow": 323,
+      "backlinks": 85751,
+      "org_keywords": 1834,
+      "org_traffic": 12449,
+      "paid_keywords": 6,
+      "ai_citations": {
+        "total": 554,
+        "pages": 146,
+        "by_platform": {
+          "perplexity": 15,
+          "gemini": 32,
+          "google_ai_overviews": 30,
+          "copilot": 1
+        }
+      },
+      "measured_at": "2026-09-09"
+    },
+    "places": {
+      "listing_count": 11,
+      "review_count_total": 4894,
+      "rating_weighted": 4.78,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-08"
     }
   },
   "gates": {
@@ -193,7 +221,7 @@
   "faq": [],
   "fee_statement": "Home Our Attorneys About Our Firm Areas We Serve Contact Us Articles Client Testimonials Contingency Fee Site Map Practice Areas Workers' Compensation Social Security Disability Construction",
   "score": {
-    "total": 14,
+    "total": 25,
     "tier": "Under review",
     "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-09",
@@ -268,7 +296,7 @@
         ]
       },
       "C": {
-        "score": 5,
+        "score": 9,
         "max": 20,
         "subs": [
           {
@@ -282,10 +310,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 0,
+            "pts": 4,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "Google rating 4.78 over 4,894 reviews → Bayesian 4.78 (prior 4.80 weighted as 100 reviews, from 13 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -314,7 +342,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -328,26 +356,26 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "source": "ahrefs",
+            "evidence": "DR 41 → 70th pct of 37-firm cohort (median 33.5) 2/3 · 983 referring domains, 49th pct 1/2 · 1,834 organic keywords / 12,449 visits·mo, 89th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0,
+            "pts": 1,
             "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "places",
+            "evidence": "11 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
-            "pts": 0,
+            "pts": 1,
             "max": 5,
-            "source": "observed",
-            "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
+            "source": "ahrefs",
+            "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1 · cited in AI answers: 554 citations / 146 pages 1/1"
           }
         ]
       },
@@ -382,16 +410,16 @@
         ]
       }
     },
-    "floor_abc": 5,
+    "floor_abc": 9,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 56,
+      "gap": 45,
       "floor_met": false,
       "path": [
         "A1 Clean-record depth: +10 available",
         "A2 Experience: +9 available",
-        "D2 Search authority: +8 available"
+        "A5 Accountability: +6 available"
       ]
     }
   }
