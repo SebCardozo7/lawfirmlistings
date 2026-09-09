@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+
+// Computed from the collection at build time. The tests below run against the fee language each
+// firm publishes on its own site — the same strings that feed sub-factor E1 — so if a firm adds
+// a real fee page, this article stops saying nobody has one.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const freeConsult = firms.filter(f => f.data.free_consultation);
+
+// A stated fee model, using the same test the scoring engine uses: "Not stated" is a value, not
+// a statement, and treating it as one was a bug worth not repeating here.
+const NOT_STATED = /^(not stated|unknown|n\/?a|pending)$/i;
+const statesModel = firms.filter(f => f.data.fee_model && !NOT_STATED.test(f.data.fee_model.trim()));
+const contingency = firms.filter(f => /contingency/i.test(f.data.fee_model));
+const noModel = firms.filter(f => !f.data.fee_model || NOT_STATED.test(f.data.fee_model.trim()));
+
+// The two questions that decide what a client actually receives, tested against the published
+// language rather than assumed.
+const PCT = /(\d{2}(?:[.,]\d+)?\s*(?:%|percent)|33\s*1\/3|one[-\s]third)/i;
+const EXPENSES = /(expense|disbursement|court cost|case cost|out[-\s]of[-\s]pocket|costs? are (?:deducted|advanced))/i;
+const withStatement = firms.filter(f => f.data.fee_statement);
+const publishPct = withStatement.filter(f => PCT.test(f.data.fee_statement!));
+const publishExpenses = withStatement.filter(f => EXPENSES.test(f.data.fee_statement!));
+
+const spanish = firms.filter(f => f.data.languages.some(l => /espa|spanish/i.test(l)));
+
+// E1 is the fee-transparency sub-factor. Quoting the real distribution beats describing it.
+const e1 = firms.map(f => f.data.score?.pillars.E.subs.find(s => s.code === 'E1')?.pts)
+  .filter((p): p is number => typeof p === 'number');
+const e1Max = 4;
+const e1Full = e1.filter(p => p === e1Max).length;
+
+const all = (xs: unknown[]) => xs.length === firms.length;
+const title = publishPct.length === 0
+  ? 'Every New York injury firm promises “no fee unless we win”. None publishes the fee.'
+  : 'What New York injury firms publish about fees';
+const description = `We read the fee language on every New York personal injury firm in the directory. ${freeConsult.length} of ${firms.length} offer a free consultation, ${contingency.length} say they work on contingency, and ${publishPct.length === 0 ? 'none' : publishPct.length} publishes the percentage. What to ask instead.`;
+---
+<Base title={title} description={description} nav="guides">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">What firms publish about fees</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Costs · Personal injury</span>
+    <h1>{title}</h1>
+    <p class="lede">We read the fee language published by every New York personal injury firm in this directory. {all(freeConsult) ? <>All {firms.length}</> : <>{freeConsult.length} of {firms.length}</>} offer a free consultation. {contingency.length} say they work on contingency. {publishPct.length === 0 ? <><b>None</b> states what the percentage is</> : <>{publishPct.length} state what the percentage is</>}, and {publishExpenses.length === 0 ? <><b>none</b> explains how case expenses are handled</> : <>{publishExpenses.length} explain how case expenses are handled</>} — which is the part that changes what you take home.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>4 min read</span>
+    </div>
+  </div>
+</header>
+
+<div class="article-cover">
+  <div class="container">
+    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="doc" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
+  </div>
+</div>
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#free" class="is-active">"Free consultation" is not a feature</a></li>
+      <li><a href="#gap">What nobody publishes</a></li>
+      <li><a href="#expenses">Why expenses are the real number</a></li>
+      <li><a href="#ask">Four questions to ask</a></li>
+      <li><a href="#score">How the score treats this</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from the fee language each firm publishes on its own website. This is not legal advice, and it is not a statement about what any firm charges — only about what it says publicly.</div>
+
+    <h2 id="free">"Free consultation" is not a feature</h2>
+    <p>{all(freeConsult) ? <>Every single firm in this set offers one.</> : <>{freeConsult.length} of the {firms.length} firms offer one.</>} It appears in hero headlines, in sticky banners, in the phone number's alt text. It is presented as a reason to choose one firm over another, and it cannot be, because it is what everybody does. In a contingency practice the first call is a sales conversation — the firm is deciding whether to take your case at least as much as you are deciding whether to hire it. Charging for that would be strange.</p>
+    <p>{all(freeConsult) ? <>So the field is unanimous, and a directory that let you filter on it would return every firm.</> : <>So the field is nearly unanimous.</>} The same is true of the {contingency.length} firms saying they work on contingency: in New York personal injury, contingency is the model, not a differentiator. {spanish.length > 0 && <>({spanish.length} of the {firms.length} also serve clients in Spanish, which <i>is</i> a real difference if you need it.)</>}</p>
+
+    <h2 id="gap">What nobody publishes</h2>
+    <p>Here is what we found when we looked past the banner. Of the {firms.length} firms:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>What the firm publishes</th><th>Firms</th></tr></thead>
+        <tbody>
+          <tr><td>A free initial consultation</td><td class="num">{freeConsult.length} of {firms.length}</td></tr>
+          <tr><td>A stated fee model at all</td><td class="num">{statesModel.length} of {firms.length}</td></tr>
+          <tr><td>Some written statement about fees</td><td class="num">{withStatement.length} of {firms.length}</td></tr>
+          <tr><td>The actual contingency percentage</td><td class="num">{publishPct.length} of {firms.length}</td></tr>
+          <tr><td>How case expenses are handled</td><td class="num">{publishExpenses.length} of {firms.length}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The written statements exist, and most of them say a version of the same sentence: you pay nothing unless we win. That sentence is true and it is worth saying. It is also not a fee disclosure. It tells you the <i>structure</i> of the arrangement and nothing about the <i>size</i> of it.</p>
+    {noModel.length > 0 && (
+      <p>{noModel.length === 1 ? 'One firm publishes' : `${noModel.length} firms publish`} no fee terms at all on the pages we crawled — not even the contingency sentence. That is recorded as <i>not stated</i> rather than as an assumption, and it costs points in the score. We crawl a firm's own public pages and honour its robots.txt, so it is always possible a disclosure lives somewhere we did not reach; if it does, {noModel.length === 1 ? 'the firm can' : 'those firms can'} <a href="/contact/">tell us where</a> and we will read it.</p>
+    )}
+
+    <h2 id="expenses">Why expenses are the real number</h2>
+    <p>New York regulates contingency fees in personal injury matters, and the standard arrangement most firms use is one third of the recovery, with a sliding scale required in medical malpractice cases. So the percentage is fairly predictable even when nobody prints it. What is not predictable, and what no firm in this set puts in writing, is the order of operations on expenses.</p>
+    <p>A personal injury case costs money to run: filing fees, deposition transcripts, medical records, and expert witnesses, who are the expensive part. The firm advances that money. The question is whether the fee is calculated before or after those costs come out of the settlement.</p>
+    <p>Take a $300,000 settlement with $30,000 in case expenses and a one-third fee. Deduct the expenses first and the fee is charged on $270,000: the firm takes $90,000 and you receive $180,000. Charge the fee on the gross instead, then subtract expenses, and the firm takes $100,000 and you receive $170,000. Same settlement, same percentage, same firm — a $10,000 difference in what reaches you, decided by one line in a retainer nobody advertises.</p>
+    <div class="callout"><b>This is a question, not an accusation.</b> Both orderings are lawful and both appear in ordinary retainers. The problem is that you cannot compare two firms on it before you are sitting in one of their offices, because none of them publishes the answer.</div>
+
+    <h2 id="ask">Four questions to ask on the free call</h2>
+    <p>Since the consultation is free everywhere, the useful thing is to arrive with questions the website did not answer. These four are the ones that move money.</p>
+    <ul>
+      <li><b>Is the fee calculated before or after case expenses come out?</b> Ask for the number on a hypothetical settlement, as above. A firm that handles this comfortably is a firm that has answered it many times.</li>
+      <li><b>Does the percentage change if the case goes to trial?</b> Many retainers step up when a suit is filed or when trial begins. Ask what the steps are and what triggers them.</li>
+      <li><b>What happens if we lose?</b> "No fee" usually means no <i>fee</i>. Whether you owe the advanced expenses is a separate clause. Ask to see it.</li>
+      <li><b>Who is actually handling this, and will they return my call?</b> Not a fee question on its face, but in a high-volume practice the person you meet may not be the person you speak to again. Ask for a name.</li>
+    </ul>
+    <p>Get the answers in writing before you sign. A retainer is a contract, you are entitled to read it slowly, and a firm that would rather you did not is telling you something.</p>
+
+    <h2 id="score">How the score treats this</h2>
+    <p>Fee transparency is sub-factor E1 of the <a href="/methodology/">LFL Certification Score</a>, inside pillar E — accessibility and client care — and it is worth {e1Max} points. A firm earns one for offering a free consultation, two for stating its fee model plainly, and one for publishing a fee statement a reader can actually quote.</p>
+    {e1.length > 0 && (
+      <p>{e1Full === 0
+        ? <>None of the {e1.length} firms scored so far has the full {e1Max}.</>
+        : <>And {e1Full} of the {e1.length} firms scored so far {e1Full === 1 ? 'has' : 'have'} the full {e1Max} — which, set against the table above, is the more interesting result. Our own sub-factor is satisfied by a free consultation, the word "contingency" and a sentence promising no fee unless we win. Every one of those is the banner. None of them is the disclosure a client needs, and a test that most firms pass while none publishes a percentage is a test measuring the wrong thing.</>}</p>
+    )}
+    <p>We are saying that about our own methodology because the alternative is to quietly keep awarding the points. E1 is a candidate for a revision that separates <i>mentioning</i> fees from <i>disclosing</i> them — likely a point for the percentage and a point for the treatment of expenses, which nothing in this cohort would currently earn. Any change to a sub-factor is published with the methodology version and rescores every firm at once, which is why it is a note here rather than a silent edit.</p>
+    <p>Four points out of a hundred is a small weight either way, and deliberately so: a firm that writes a clear fee page is not thereby a better lawyer. But it is the cheapest four points on the board, it takes an afternoon, and unlike almost everything else the score measures, it directly improves the thing a client came to find out.</p>
+    <p class="muted" style="font-size:.86rem">Fee language is collected by crawling each firm's own public pages, honouring robots.txt, and is stored with the source URL and the date it was read. Every profile shows the statement we found and where it came from. Nothing on this page is a quote of a retainer agreement, none of which is public.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>Compare what each firm publishes</h4>
+      <p>Every profile shows the fee model, the fee statement we found, and whether the consultation is free — each with its source.</p>
+      <a class="btn btn--white" href="/cities/new-york-ny/personal-injury/">New York injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology v1.1</a></li>
+        <li><a href="/guides/google-reviews-new-york-injury-firms/">What the Google reviews tell you</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
