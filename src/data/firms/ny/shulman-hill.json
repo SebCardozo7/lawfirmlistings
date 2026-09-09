@@ -43,7 +43,7 @@
       "name": "JJ Hill",
       "role": "Founding Partner",
       "bar_state": "NY",
-      "registry_status": "Not verified — not found",
+      "registry_status": "Not verified. Not found",
       "checked_at": "2026-09-09"
     },
     {
@@ -260,7 +260,7 @@
       "name": "Yeiner Atehortua",
       "role": "Associate Attorney",
       "bar_state": "NY",
-      "registry_status": "Not verified — not found",
+      "registry_status": "Not verified. Not found",
       "checked_at": "2026-09-09"
     }
   ],
@@ -282,7 +282,7 @@
     "google": {
       "rating": 4.9,
       "count_label": "523",
-      "source": "Google Business Profile via Places API — 1 listing, counts summed and rating weighted by count",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
       "fetched_at": "2026-09-08"
     }
   },
@@ -337,14 +337,14 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "22 of 24 attorneys currently registered. 1 not currently registered — Joel Mays: Delinquent. Held for review: either record may be out of date.",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — pending review of a registration lapse",
+      "evidence": "22 of 24 attorneys currently registered. 1 not currently registered (Joel Mays: Delinquent). Held for review: either record may be out of date.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, pending review of a registration lapse",
       "checked_at": "2026-09-09"
     },
     "G2": {
       "pass": false,
-      "evidence": "2 of 24 attorneys unmatched — pending",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "evidence": "2 of 24 attorneys unmatched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
       "checked_at": "2026-09-09"
     },
     "G3": {
@@ -459,7 +459,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "523 Google reviews · Google Business Profile via Places API — 1 listing, counts summed and rating weighted by count"
+            "evidence": "523 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",

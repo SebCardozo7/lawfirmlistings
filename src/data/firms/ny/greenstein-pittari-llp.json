@@ -83,7 +83,7 @@
   },
   "offices": [
     {
-      "label": "Manhattan — Main office",
+      "label": "Manhattan (main office)",
       "address": "1825 Park Avenue, 9th Floor, New York, NY 10035",
       "is_hq": true,
       "source_url": "https://www.nyclawfirm.com/"
@@ -147,7 +147,7 @@
     {
       "name": "Michael A. Barnett",
       "role": "Attorney",
-      "registry_status": "Not verified — ambiguous (3 attorneys share this name)",
+      "registry_status": "Not verified. Ambiguous (3 attorneys share this name)",
       "checked_at": "2026-09-09"
     },
     {
@@ -225,7 +225,7 @@
     "Claim-tracking mobile app"
   ],
   "about": [
-    "Greenstein & Pittari, LLP is a New York personal injury firm with seven offices across Manhattan, the Bronx, Brooklyn, Queens, Staten Island, Yonkers and Long Island. The firm represents people injured in car, truck and motorcycle accidents, construction and workplace accidents, slip-and-falls, and cases of medical malpractice, nursing home abuse and police misconduct — always on a contingency basis, with no fees unless the case is won.",
+    "Greenstein & Pittari, LLP is a New York personal injury firm with seven offices across Manhattan, the Bronx, Brooklyn, Queens, Staten Island, Yonkers and Long Island. The firm represents people injured in car, truck and motorcycle accidents, construction and workplace accidents, slip-and-falls, and cases of medical malpractice, nursing home abuse and police misconduct, always on a contingency basis, with no fees unless the case is won.",
     "The firm places unusual emphasis on client access: attorneys visit clients in the hospital or at home, offer video consultations, commit to returning calls promptly, and provide a mobile app for tracking the status of an injury claim. Intake and representation are available in English and Spanish."
   ],
   "quote": {
@@ -258,7 +258,7 @@
     "google": {
       "rating": 4.9,
       "count_label": "1,013",
-      "source": "Google Business Profile via Places API — 7 listings, counts summed and rating weighted by count",
+      "source": "Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count",
       "fetched_at": "2026-09-09"
     },
     "quotes": [
@@ -357,14 +357,14 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "8 of 9 matched; 1 could not be matched — pending",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "evidence": "8 of 9 matched. 1 could not be matched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
       "checked_at": "2026-09-09"
     },
     "G2": {
       "pass": false,
-      "evidence": "1 of 9 attorneys unmatched — pending",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "evidence": "1 of 9 attorneys unmatched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
       "checked_at": "2026-09-09"
     },
     "G3": {
@@ -396,7 +396,7 @@
   "faq": [
     {
       "q": "How much does Greenstein & Pittari charge?",
-      "a": "The firm works on a contingency fee — \"no fees until we win your injury case.\" In New York that is typically 33⅓% of the recovery for most personal injury matters; medical malpractice fees follow the statutory sliding scale. Confirm the fee agreement and how case expenses are handled at your free consultation."
+      "a": "The firm works on a contingency fee: \"no fees until we win your injury case.\" In New York that is typically 33⅓% of the recovery for most personal injury matters; medical malpractice fees follow the statutory sliding scale. Confirm the fee agreement and how case expenses are handled at your free consultation."
     },
     {
       "q": "Do they offer a free consultation?",
@@ -525,7 +525,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "1,013 Google reviews · Google Business Profile via Places API — 7 listings, counts summed and rating weighted by count"
+            "evidence": "1,013 Google reviews · Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",

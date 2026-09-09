@@ -51,7 +51,7 @@ export const GUIDES: Guide[] = [
     kicker: 'Costs',
     title: 'Every New York injury firm promises “no fee unless we win”. None publishes the fee.',
     summary:
-      'Every firm in the directory offers a free consultation, so it differentiates nothing. What none of them publishes is the percentage, or how case expenses are handled — which is where a five-figure difference hides.',
+      'Every firm in the directory offers a free consultation, so it differentiates nothing. What none of them publishes is the percentage, or how case expenses are handled, which is where a five-figure difference hides.',
     thumb: 't2',
     icon: 'doc',
     meta: 'The four questions to ask on the free call',

@@ -23,7 +23,7 @@ const certified = firms.filter(f => f.data.status === 'certified');
 const cities = [...new Set(firms.map(f => `${f.data.market.city}, ${f.data.market.state}`))];
 const contingency = firms.filter(f => /contingency/i.test(f.data.fee_model)).length;
 const freeConsult = firms.filter(f => f.data.free_consultation).length;
-const share = (n: number) => (firms.length ? `${Math.round((100 * n) / firms.length)}%` : '—');
+const share = (n: number) => (firms.length ? `${Math.round((100 * n) / firms.length)}%` : 'n/a');
 const logoVariants = ['', 'l2', 'l3'];
 
 // "Updated" reflects the newest score the engine actually wrote, not a hand-typed month.
@@ -38,7 +38,7 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
   return { slug, label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`, count: inCity.length };
 }).sort((a, b) => b.count - a.count);
 ---
-<Base title="Personal Injury Law Firms — Rankings & Hiring Guide" description="How to choose a personal injury law firm: trial record, case focus, contingency fees and what to ask on the free consultation. Plus our city rankings." nav="practice">
+<Base title="Personal Injury Law Firms: Rankings and Hiring Guide" description="How to choose a personal injury law firm: trial record, case focus, contingency fees and what to ask on the free consultation. Plus our city rankings." nav="practice">
 <section class="page-hero on-night">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">
@@ -46,7 +46,7 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
       <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/practice-areas/">Practice Areas</a></li><li aria-current="page">Personal Injury</li></ol>
       <span class="eyebrow">Practice area</span>
       <h1>Personal Injury Law Firms</h1>
-      <p class="lede">Personal injury firms handling car accidents, slip and fall, medical malpractice, construction injuries and wrongful death. Every firm is checked for active licensure, clean disciplinary history and verified case results. Rankings are published per city, because a firm is worth comparing against the firms someone could actually hire instead of it — {cities.length === 1 ? <>so far that means {cities[0]}</> : <>so far that means {cities.length} cities</>}.</p>
+      <p class="lede">Personal injury firms handling car accidents, slip and fall, medical malpractice, construction injuries and wrongful death. Every firm is checked for active licensure, clean disciplinary history and verified case results. Rankings are published per city, because a firm is worth comparing against the firms someone could actually hire instead of it. {cities.length === 1 ? <>so far that means {cities[0]}</> : <>so far that means {cities.length} cities</>}.</p>
       <div class="chips" style="margin-top:24px">
         {/* Sub-topics of this practice area. None has a page yet, so they describe the scope
             without pretending to be navigation. */}
@@ -112,7 +112,7 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
     <aside class="sidebar">
       <div class="panel panel--ink">
         <h4>Not sure which firm fits?</h4>
-        <p>A short intake that puts your case in front of the firms whose published evidence fits it. Not built yet — for now, the ranked list and the profiles are the whole product, and nobody pays us to appear in either.</p>
+        <p>A short intake that puts your case in front of the firms whose published evidence fits it. It is not built yet. For now the ranked list and the profiles are the whole product, and nobody pays us to appear in either.</p>
         {/* No matching service exists yet, so the panel describes it without a dead button. */}
         <span class="btn btn--white soon">Get matched in 2 minutes</span>
       </div>
@@ -134,15 +134,15 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
   <div class="narrow prose">
     <span class="eyebrow">Hiring guide</span>
     <h2 style="margin-top:14px">How to choose a personal injury law firm</h2>
-    <p>Personal injury is one of the few areas of law where the firm you choose can change the outcome by hundreds of thousands of dollars. Insurance carriers track which firms actually try cases — and they make higher offers to the ones that do. When comparing firms on this page, weigh the following.</p>
+    <p>Personal injury is one of the few areas of law where the firm you choose can change the outcome by hundreds of thousands of dollars. Insurance carriers track which firms actually try cases, and they make higher offers to the ones that do. When comparing firms on this page, weigh the following.</p>
     <h3>A trial record, not just a settlement history</h3>
     <p>Most injury cases settle, but the firms that settle for the most are the ones prepared to go to verdict. Look for recent jury verdicts in your county, not just cumulative "recovered" totals.</p>
     <h3>Focus on your type of injury</h3>
     <p>A firm that handles hundreds of rear-end collisions may not be the right choice for a birth-injury or trucking case, which require specialized experts and much larger case budgets. Our tags show each firm's verified focus areas.</p>
     <h3>Direct access to a senior attorney</h3>
     <p>Ask who will actually handle your case. In high-volume firms, it may be a case manager. The firms ranked highest here commit to a named attorney returning calls within one business day.</p>
-    <h3>Contingency fees — and what's not included</h3>
-    <p>New York regulates contingency fees in injury matters, and one third of the recovery is the ordinary arrangement, with a statutory sliding scale in medical malpractice. We can tell you that much from the rules — not from the firms, because <a href="/guides/what-new-york-injury-firms-publish-about-fees/">none of the firms in this directory publishes its percentage</a>. Nor does any of them say whether case expenses come out before or after the fee is calculated, which is worth five figures on a mid-size settlement. Ask both questions on the free call.</p>
+    <h3>Contingency fees, and what they leave out</h3>
+    <p>New York regulates contingency fees in injury matters, and one third of the recovery is the ordinary arrangement, with a statutory sliding scale in medical malpractice. We can tell you that much from the rules, though not from the firms, because <a href="/guides/what-new-york-injury-firms-publish-about-fees/">none of the firms in this directory publishes its percentage</a>. Nor does any of them say whether case expenses come out before or after the fee is calculated, which is worth five figures on a mid-size settlement. Ask both questions on the free call.</p>
     <div class="callout"><b>Deadline warning.</b> Statutes of limitations for injury claims range from one year (Tennessee, Louisiana) to six (Maine). Claims against government entities often require a notice within 90 days. Consult a firm as early as possible.</div>
   </div>
 </section>
@@ -152,11 +152,11 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
     <span class="eyebrow">Frequently asked</span>
     <h2 style="margin:14px 0 28px">Personal injury law firm FAQ</h2>
     <div class="faq">
-      <details open><summary>How much does a personal injury lawyer cost?</summary><div>Personal injury work is done on contingency: you pay nothing up front, and the fee is a share of the recovery. In New York one third is the ordinary share, and medical malpractice follows a statutory sliding scale. We report what firms publish rather than what they charge, and no firm here publishes its percentage — so ask, and ask whether case expenses are deducted before or after the fee.</div></details>
-      <details><summary>How do I know if a firm is "certified"?</summary><div>Certification requires clearing six eligibility gates — active licensure, clean public discipline, a verified entity and physical office, no consumer-protection actions, an honest website baseline and a minimum public footprint — and then scoring 70 or above out of 100 across five pillars, with a floor on the three that cover professional standing, verified results and client experience. <a href="/methodology/">The methodology</a> gives every gate and sub-factor. A firm that has not cleared all six is shown as <b>under review</b>, not as failed.</div></details>
-      <details><summary>Can law firms pay to rank higher on this page?</summary><div>No. The order comes from the Certification Score, and the score, the eligibility gates and the tier cannot be bought or edited — not even by a firm that manages its own profile. Claiming a profile is free and lets a firm keep its offices, fees and practice areas current. Sponsored placements are always labeled and never appear inside this list.</div></details>
+      <details open><summary>How much does a personal injury lawyer cost?</summary><div>Personal injury work is done on contingency: you pay nothing up front, and the fee is a share of the recovery. In New York one third is the ordinary share, and medical malpractice follows a statutory sliding scale. We report what firms publish rather than what they charge, and no firm here publishes its percentage. So ask, and ask whether case expenses come out before or after the fee is worked out.</div></details>
+      <details><summary>How do I know if a firm is "certified"?</summary><div>Certification requires clearing six eligibility gates: active licensure, clean public discipline, a verified entity and physical office, no consumer-protection actions, an honest website baseline and a minimum public footprint. Then scoring 70 or above out of 100 across five pillars, with a floor on the three that cover professional standing, verified results and client experience. <a href="/methodology/">The methodology</a> gives every gate and sub-factor. A firm that has not cleared all six is shown as <b>under review</b>, not as failed.</div></details>
+      <details><summary>Can law firms pay to rank higher on this page?</summary><div>No. The order comes from the Certification Score, and the score, the eligibility gates and the tier cannot be bought or edited, not even by a firm that manages its own profile. Claiming a profile is free and lets a firm keep its offices, fees and practice areas current. Sponsored placements are always labeled and never appear inside this list.</div></details>
       <details><summary>What is my personal injury case worth?</summary><div>It depends on medical costs, lost income, the severity and permanence of your injuries, and the insurance coverage available. Most firms listed here offer a free case evaluation that will give you a realistic range within a few days.</div></details>
-      <details><summary>How long do I have to file a personal injury claim?</summary><div>Statutes of limitations range from one to six years depending on the state and the type of claim. Claims against a city, state or federal agency often have much shorter notice requirements — sometimes 90 days.</div></details>
+      <details><summary>How long do I have to file a personal injury claim?</summary><div>Statutes of limitations range from one to six years depending on the state and the type of claim. Claims against a city, state or federal agency often have much shorter notice requirements, sometimes as little as 90 days.</div></details>
     </div>
   </div>
 </section>

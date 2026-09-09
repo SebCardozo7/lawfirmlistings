@@ -307,7 +307,7 @@ def crawl(domain, fetched_at):
     record["g5_evidence"] = {
         "https_reachable": record["https_ok"],
         "contact_method": bool(record["phones"] or record["emails"] or record["pages_found"].get("contact")),
-        "attorney_names_published": "pending — bio pages recorded, names not auto-extracted",
+        "attorney_names_published": "pending. Bio pages recorded, names not auto-extracted",
     }
     if record["robots_disallowed"]:
         record["notes"].append("robots.txt disallowed %d path(s); they were not fetched."

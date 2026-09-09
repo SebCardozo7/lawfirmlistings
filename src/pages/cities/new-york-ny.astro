@@ -61,7 +61,7 @@ const boroughTiles = BOROUGHS
       <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/cities/">Cities</a></li><li aria-current="page">New York City</li></ol>
       <span class="eyebrow">City guide</span>
       <h1>Top Law Firms in New York, NY</h1>
-      <p class="lede">New York City is home to more than 80,000 practicing attorneys — and to some of the most complex courts in the country. {certified.length > 0 ? <>We have certified {certified.length} {certified.length === 1 ? 'firm' : 'firms'} here so far, starting with the personal injury cohort.</> : <>Our first New York cohort is still in verification.</>} Browse by what you need and compare what each firm publishes.</p>
+      <p class="lede">New York City is home to more than 80,000 practising attorneys, and to some of the most complex courts in the country. {certified.length > 0 ? <>We have certified {certified.length} {certified.length === 1 ? 'firm' : 'firms'} here so far, starting with the personal injury cohort.</> : <>Our first New York cohort is still in verification.</>} Browse by what you need and compare what each firm publishes.</p>
       <div class="chips" style="margin-top:24px">
         {/* Borough pages do not exist yet. The chips name the coverage without pretending
             to be navigation — same treatment as the unopened practice areas. */}
@@ -124,7 +124,7 @@ const boroughTiles = BOROUGHS
     <aside class="sidebar">
       <div class="panel panel--ink">
         <h4>Get matched with a NYC firm</h4>
-        <p>A short intake that puts your case in front of the firms whose published evidence fits it. Not built yet — for now, the ranked list and the profiles are the whole product, and nobody pays us to appear in either.</p>
+        <p>A short intake that puts your case in front of the firms whose published evidence fits it. It is not built yet. For now the ranked list and the profiles are the whole product, and nobody pays us to appear in either.</p>
         {/* No matching service exists yet, so the panel describes it without a dead button. */}
         <span class="btn btn--white soon">Start matching</span>
       </div>
@@ -147,12 +147,12 @@ const boroughTiles = BOROUGHS
   <div class="narrow prose">
     <span class="eyebrow">Know before you hire</span>
     <h2 style="margin-top:14px">Hiring a lawyer in New York City: what's different</h2>
-    <p>New York's court system is unusually layered. Most civil cases over $50,000 are heard in the Supreme Court of the county (Manhattan is New York County; Brooklyn is Kings), while criminal matters move through Criminal Court before indictment and Supreme Court after. Federal cases fall in the Southern District (Manhattan, the Bronx, Westchester) or Eastern District (Brooklyn, Queens, Staten Island, Long Island). Firms that practice regularly in your specific courthouse know the judges, the clerks and the calendars — and that matters.</p>
+    <p>New York's court system is unusually layered. Most civil cases over $50,000 are heard in the Supreme Court of the county (Manhattan is New York County; Brooklyn is Kings), while criminal matters move through Criminal Court before indictment and Supreme Court after. Federal cases fall in the Southern District (Manhattan, the Bronx, Westchester) or Eastern District (Brooklyn, Queens, Staten Island, Long Island). Firms that practice regularly in your specific courthouse know the judges, the clerks and the calendars, and that matters.</p>
     <h3>What lawyers cost in NYC</h3>
     <p>Hourly rates for experienced attorneys in Manhattan run from roughly $450 for a solo practitioner to $1,200 or more at large firms. Personal injury firms work on contingency (typically 33⅓%). Uncontested divorces are often flat-fee ($3,500–$7,500), and immigration matters are almost always flat-fee by petition type.</p>
     <h3>Deadlines that catch New Yorkers out</h3>
     <ul>
-      <li><b>Personal injury:</b> 3 years from the accident — but only <b>90 days</b> to file a Notice of Claim against the City, MTA or NYCHA.</li>
+      <li><b>Personal injury:</b> 3 years from the accident, but only <b>90 days</b> to file a Notice of Claim against the City, MTA or NYCHA.</li>
       <li><b>Medical malpractice:</b> 2 years and 6 months from the malpractice (with a discovery rule for foreign objects and missed cancer diagnoses).</li>
       <li><b>Wrongful termination / discrimination:</b> 3 years under the NYC Human Rights Law; 300 days to file with the EEOC.</li>
     </ul>
@@ -177,11 +177,11 @@ const boroughTiles = BOROUGHS
 <section class="section section--paper">
   <div class="narrow">
     <span class="eyebrow">Frequently asked</span>
-    <h2 style="margin:14px 0 28px">Hiring a law firm in New York — FAQ</h2>
+    <h2 style="margin:14px 0 28px">Hiring a law firm in New York: FAQ</h2>
     <div class="faq">
-      <details open><summary>How do I check if a New York lawyer is licensed?</summary><div>Search the New York State Unified Court System attorney registration database at iapps.courts.state.ny.us. It is free, and it shows registration status, the year admitted and any public discipline. Our own licensure gate is not yet running, so for now this is a check you should do yourself rather than rely on us for — the attorney list on each profile tells you whether we have verified it.</div></details>
-      <details><summary>Do New York law firms offer free consultations?</summary><div>{share(freeConsult)} of the firms published here do — every one of them, so far, which means it is not a way to tell them apart. Personal injury firms almost always offer a free initial call, because the call is also how the firm decides whether to take your case. What none of them publishes is the fee itself; <a href="/guides/what-new-york-injury-firms-publish-about-fees/">we read all of their fee pages</a>.</div></details>
-      <details><summary>Should I hire a firm in my borough?</summary><div>Not necessarily — many Manhattan firms appear regularly in Brooklyn and Queens courts. What matters more is regular practice in the specific courthouse handling your case. Firm profiles list the counties where each firm most often appears.</div></details>
+      <details open><summary>How do I check if a New York lawyer is licensed?</summary><div>Search the New York State Unified Court System attorney registration database at iapps.courts.state.ny.us. It is free, and it shows registration status, the year admitted and any public discipline. Our own licensure gate is not yet running, so for now this is a check you should do yourself rather than rely on us for. The attorney list on each profile tells you whether we have verified it.</div></details>
+      <details><summary>Do New York law firms offer free consultations?</summary><div>{share(freeConsult)} of the firms published here do, which is every one of them so far, so it is not a way to tell them apart. Personal injury firms almost always offer a free initial call, because the call is also how the firm decides whether to take your case. What none of them publishes is the fee itself; <a href="/guides/what-new-york-injury-firms-publish-about-fees/">we read all of their fee pages</a>.</div></details>
+      <details><summary>Should I hire a firm in my borough?</summary><div>Not necessarily. Many Manhattan firms appear regularly in Brooklyn and Queens courts. What matters more is regular practice in the specific courthouse handling your case. Firm profiles list the counties where each firm most often appears.</div></details>
       <details><summary>Can I get legal help in a language other than English?</summary><div>{spanish} of the {firms.length} firms published here list Spanish-speaking staff. Every profile shows the languages a firm states it works in, taken from the firm's own site. We do not yet have data on other languages, so we do not claim any.</div></details>
     </div>
   </div>

@@ -47,7 +47,7 @@ const description = 'Every New York injury firm offers a free consultation, so i
     <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">What firms publish about fees</li></ol>
     <span class="eyebrow" style="margin-top:18px">Costs · Personal injury</span>
     <h1>{title}</h1>
-    <p class="lede">We read the fee language published by every New York personal injury firm in this directory. {all(freeConsult) ? <>All {firms.length}</> : <>{freeConsult.length} of {firms.length}</>} offer a free consultation. {contingency.length} say they work on contingency. {publishPct.length === 0 ? <><b>None</b> states what the percentage is</> : <>{publishPct.length} state what the percentage is</>}, and {publishExpenses.length === 0 ? <><b>none</b> explains how case expenses are handled</> : <>{publishExpenses.length} explain how case expenses are handled</>} — which is the part that changes what you take home.</p>
+    <p class="lede">We read the fee language published by every New York personal injury firm in this directory. {all(freeConsult) ? <>All {firms.length}</> : <>{freeConsult.length} of {firms.length}</>} offer a free consultation. {contingency.length} say they work on contingency. {publishPct.length === 0 ? <><b>None</b> states what the percentage is</> : <>{publishPct.length} state what the percentage is</>}, and {publishExpenses.length === 0 ? <><b>none</b> explains how case expenses are handled</> : <>{publishExpenses.length} explain how case expenses are handled</>}, and that is the part that changes what you take home.</p>
     <div class="byline">
       <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
       <span class="sep" aria-hidden="true"></span>
@@ -75,10 +75,10 @@ const description = 'Every New York injury firm offers a free consultation, so i
   </nav>
 
   <div class="prose">
-    <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from the fee language each firm publishes on its own website. This is not legal advice, and it is not a statement about what any firm charges — only about what it says publicly.</div>
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from the fee language each firm publishes on its own website. This is not legal advice, and it is not a statement about what any firm charges, only about what it says publicly.</div>
 
     <h2 id="free">"Free consultation" is not a feature</h2>
-    <p>{all(freeConsult) ? <>Every single firm in this set offers one.</> : <>{freeConsult.length} of the {firms.length} firms offer one.</>} It appears in hero headlines, in sticky banners, in the phone number's alt text. It is presented as a reason to choose one firm over another, and it cannot be, because it is what everybody does. In a contingency practice the first call is a sales conversation — the firm is deciding whether to take your case at least as much as you are deciding whether to hire it. Charging for that would be strange.</p>
+    <p>{all(freeConsult) ? <>Every single firm in this set offers one.</> : <>{freeConsult.length} of the {firms.length} firms offer one.</>} It appears in hero headlines, in sticky banners, in the phone number's alt text. It is presented as a reason to choose one firm over another, and it cannot be, because it is what everybody does. In a contingency practice the first call is a sales conversation. The firm is deciding whether to take your case at least as much as you are deciding whether to hire it. Charging for that would be strange.</p>
     <p>{all(freeConsult) ? <>So the field is unanimous, and a directory that let you filter on it would return every firm.</> : <>So the field is nearly unanimous.</>} The same is true of the {contingency.length} firms saying they work on contingency: in New York personal injury, contingency is the model, not a differentiator. {spanish.length > 0 && <>({spanish.length} of the {firms.length} also serve clients in Spanish, which <i>is</i> a real difference if you need it.)</>}</p>
 
     <h2 id="gap">What nobody publishes</h2>
@@ -97,13 +97,13 @@ const description = 'Every New York injury firm offers a free consultation, so i
     </div>
     <p>The written statements exist, and most of them say a version of the same sentence: you pay nothing unless we win. That sentence is true and it is worth saying. It is also not a fee disclosure. It tells you the <i>structure</i> of the arrangement and nothing about the <i>size</i> of it.</p>
     {noModel.length > 0 && (
-      <p>{noModel.length === 1 ? 'One firm publishes' : `${noModel.length} firms publish`} no fee terms at all on the pages we crawled — not even the contingency sentence. That is recorded as <i>not stated</i> rather than as an assumption, and it costs points in the score. We crawl a firm's own public pages and honour its robots.txt, so it is always possible a disclosure lives somewhere we did not reach; if it does, {noModel.length === 1 ? 'the firm can' : 'those firms can'} <a href="/contact/">tell us where</a> and we will read it.</p>
+      <p>{noModel.length === 1 ? 'One firm publishes' : `${noModel.length} firms publish`} no fee terms at all on the pages we crawled, not even the contingency sentence. That is recorded as <i>not stated</i> rather than as an assumption, and it costs points in the score. We crawl a firm's own public pages and honour its robots.txt, so it is always possible a disclosure lives somewhere we did not reach; if it does, {noModel.length === 1 ? 'the firm can' : 'those firms can'} <a href="/contact/">tell us where</a> and we will read it.</p>
     )}
 
     <h2 id="expenses">Why expenses are the real number</h2>
     <p>New York regulates contingency fees in personal injury matters, and the standard arrangement most firms use is one third of the recovery, with a sliding scale required in medical malpractice cases. So the percentage is fairly predictable even when nobody prints it. What is not predictable, and what no firm in this set puts in writing, is the order of operations on expenses.</p>
     <p>A personal injury case costs money to run: filing fees, deposition transcripts, medical records, and expert witnesses, who are the expensive part. The firm advances that money. The question is whether the fee is calculated before or after those costs come out of the settlement.</p>
-    <p>Take a $300,000 settlement with $30,000 in case expenses and a one-third fee. Deduct the expenses first and the fee is charged on $270,000: the firm takes $90,000 and you receive $180,000. Charge the fee on the gross instead, then subtract expenses, and the firm takes $100,000 and you receive $170,000. Same settlement, same percentage, same firm — a $10,000 difference in what reaches you, decided by one line in a retainer nobody advertises.</p>
+    <p>Take a $300,000 settlement with $30,000 in case expenses and a one-third fee. Deduct the expenses first and the fee is charged on $270,000: the firm takes $90,000 and you receive $180,000. Charge the fee on the gross instead, then subtract expenses, and the firm takes $100,000 and you receive $170,000. Same settlement, same percentage, same firm, and a $10,000 difference in what reaches you, decided by one line in a retainer nobody advertises.</p>
     <div class="callout"><b>This is a question, not an accusation.</b> Both orderings are lawful and both appear in ordinary retainers. The problem is that you cannot compare two firms on it before you are sitting in one of their offices, because none of them publishes the answer.</div>
 
     <h2 id="ask">Four questions to ask on the free call</h2>
@@ -117,13 +117,13 @@ const description = 'Every New York injury firm offers a free consultation, so i
     <p>Get the answers in writing before you sign. A retainer is a contract, you are entitled to read it slowly, and a firm that would rather you did not is telling you something.</p>
 
     <h2 id="score">How the score treats this</h2>
-    <p>Fee transparency is sub-factor E1 of the <a href="/methodology/">LFL Certification Score</a>, inside pillar E — accessibility and client care — and it is worth {e1Max} points. A firm earns one for offering a free consultation, two for stating its fee model plainly, and one for publishing a fee statement a reader can actually quote.</p>
+    <p>Fee transparency is sub-factor E1 of the <a href="/methodology/">LFL Certification Score</a>, inside pillar E, which covers accessibility and client care, and it is worth {e1Max} points. A firm earns one for offering a free consultation, two for stating its fee model plainly, and one for publishing a fee statement a reader can actually quote.</p>
     {e1.length > 0 && (
       <p>{e1Full === 0
         ? <>None of the {e1.length} firms scored so far has the full {e1Max}.</>
-        : <>And {e1Full} of the {e1.length} firms scored so far {e1Full === 1 ? 'has' : 'have'} the full {e1Max} — which, set against the table above, is the more interesting result. Our own sub-factor is satisfied by a free consultation, the word "contingency" and a sentence promising no fee unless we win. Every one of those is the banner. None of them is the disclosure a client needs, and a test that most firms pass while none publishes a percentage is a test measuring the wrong thing.</>}</p>
+        : <>And {e1Full} of the {e1.length} firms scored so far {e1Full === 1 ? 'has' : 'have'} the full {e1Max}, which, set against the table above, is the more interesting result. Our own sub-factor is satisfied by a free consultation, the word "contingency" and a sentence promising no fee unless we win. Every one of those is the banner. None of them is the disclosure a client needs, and a test that most firms pass while none publishes a percentage is a test measuring the wrong thing.</>}</p>
     )}
-    <p>We are saying that about our own methodology because the alternative is to quietly keep awarding the points. E1 is a candidate for a revision that separates <i>mentioning</i> fees from <i>disclosing</i> them — likely a point for the percentage and a point for the treatment of expenses, which nothing in this cohort would currently earn. Any change to a sub-factor is published with the methodology version and rescores every firm at once, which is why it is a note here rather than a silent edit.</p>
+    <p>We are saying that about our own methodology because the alternative is to quietly keep awarding the points. E1 is a candidate for a revision that separates <i>mentioning</i> fees from <i>disclosing</i> them: likely a point for the percentage and a point for the treatment of expenses, which nothing in this cohort would currently earn. Any change to a sub-factor is published with the methodology version and rescores every firm at once, which is why it is a note here rather than a silent edit.</p>
     <p>Four points out of a hundred is a small weight either way, and deliberately so: a firm that writes a clear fee page is not thereby a better lawyer. But it is the cheapest four points on the board, it takes an afternoon, and unlike almost everything else the score measures, it directly improves the thing a client came to find out.</p>
     <p class="muted" style="font-size:.86rem">Fee language is collected by crawling each firm's own public pages, honouring robots.txt, and is stored with the source URL and the date it was read. Every profile shows the statement we found and where it came from. Nothing on this page is a quote of a retainer agreement, none of which is public.</p>
   </div>
@@ -131,7 +131,7 @@ const description = 'Every New York injury firm offers a free consultation, so i
   <aside class="article-aside">
     <div class="panel panel--ink">
       <h4>Compare what each firm publishes</h4>
-      <p>Every profile shows the fee model, the fee statement we found, and whether the consultation is free — each with its source.</p>
+      <p>Every profile shows the fee model, the fee statement we found, and whether the consultation is free, each with its source.</p>
       <a class="btn btn--white" href="/cities/new-york-ny/personal-injury/">New York injury firms</a>
     </div>
     <div class="panel">

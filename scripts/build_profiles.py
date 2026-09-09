@@ -199,7 +199,7 @@ def build(rec, cohort_lookup):
         reviews["google"] = {
             "rating": agg["rating_weighted"],
             "count_label": "{:,}".format(agg["review_count_total"]),
-            "source": "Google Business Profile via Places API — %d listing%s, counts summed and "
+            "source": "Google Business Profile via Places API. %d listing%s, counts summed and "
                       "rating weighted by count" % (agg["listing_count"],
                                                     "" if agg["listing_count"] == 1 else "s"),
             "fetched_at": places.get("measured_at"),
@@ -278,8 +278,8 @@ def build(rec, cohort_lookup):
             },
             "attorney_page_urls": rec.get("attorney_page_urls", []),
             "blocking": [
-                "about[] is empty — must be written from the material above before publishing",
-                "attorneys[] is empty — names must be read from the bio pages, not guessed",
+                "about[] is empty. It must be written from the material above before publishing",
+                "attorneys[] is empty. Names must be read from the bio pages, not guessed",
                 "fee_statement omitted" if fee_model == "Not stated" else None,
             ],
         },

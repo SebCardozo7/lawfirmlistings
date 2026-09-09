@@ -108,7 +108,7 @@ def main() -> int:
         gates[args.gate] = {
             "pass": False,
             "evidence": "Attestation withdrawn; awaiting our own check",
-            "source": f"Attestation withdrawn {today} — pending",
+            "source": f"Attestation withdrawn {today}, pending our own check",
             "checked_at": today,
         }
         print(f"revoked: {args.firm} {args.gate}")

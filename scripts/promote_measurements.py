@@ -62,7 +62,7 @@ def promote(rec: dict, firm: dict) -> list[str]:
         firm.setdefault("reviews", {"quotes": []})["google"] = {
             "rating": agg["rating_weighted"],
             "count_label": f"{n:,}",
-            "source": ("Google Business Profile via Places API — %d listing%s, counts summed and "
+            "source": ("Google Business Profile via Places API. %d listing%s, counts summed and "
                        "rating weighted by count" % (listings, "" if listings == 1 else "s")),
             "fetched_at": places.get("measured_at"),
         }

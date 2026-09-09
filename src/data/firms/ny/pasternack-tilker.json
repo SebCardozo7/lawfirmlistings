@@ -133,7 +133,7 @@
       "name": "Kevin P. Walsh",
       "role": "Senior Partner",
       "bar_state": "NY",
-      "registry_status": "Not verified — ambiguous (4 attorneys share this name)",
+      "registry_status": "Not verified. Ambiguous (4 attorneys share this name)",
       "checked_at": "2026-09-09"
     },
     {
@@ -290,7 +290,7 @@
       "name": "Shannon L. Dechent-Montenegro",
       "role": "Associate",
       "bar_state": "NY",
-      "registry_status": "Not verified — not found",
+      "registry_status": "Not verified. Not found",
       "checked_at": "2026-09-09"
     },
     {
@@ -307,7 +307,7 @@
       "name": "Tara L. Johnsson",
       "role": "Associate",
       "bar_state": "NY",
-      "registry_status": "Not verified — not found",
+      "registry_status": "Not verified. Not found",
       "checked_at": "2026-09-09"
     },
     {
@@ -399,7 +399,7 @@
     "google": {
       "rating": 4.78,
       "count_label": "4,894",
-      "source": "Google Business Profile via Places API — 11 listings, counts summed and rating weighted by count",
+      "source": "Google Business Profile via Places API. 11 listings, counts summed and rating weighted by count",
       "fetched_at": "2026-09-08"
     }
   },
@@ -454,14 +454,14 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "25 of 28 matched; 3 could not be matched — pending",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "evidence": "25 of 28 matched. 3 could not be matched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
       "checked_at": "2026-09-09"
     },
     "G2": {
       "pass": false,
-      "evidence": "3 of 28 attorneys unmatched — pending",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "evidence": "3 of 28 attorneys unmatched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
       "checked_at": "2026-09-09"
     },
     "G3": {
@@ -577,7 +577,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "4,894 Google reviews · Google Business Profile via Places API — 11 listings, counts summed and rating weighted by count"
+            "evidence": "4,894 Google reviews · Google Business Profile via Places API. 11 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
