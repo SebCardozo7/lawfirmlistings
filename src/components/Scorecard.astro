@@ -24,18 +24,31 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL 
 <div class="scorecard">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b3"></i></div>
   <div class="sc-top">
-    <div class="score-ring" style={`--pct:${s.total}%`}><b>{s.total}<small>/ 100</small></b></div>
+    {/* The ring reads as a percentage now, because that is what the number is: a share of the
+        sub-factors we have assessed, not a tally out of a hundred points most of which nobody
+        has looked at. The coverage sits directly under it so the two are never separated. */}
+    <div class="score-ring" style={`--pct:${s.total}%`}><b>{s.total}<small>out of 100</small></b></div>
     <div>
       <span class="tier-name">LFL Certification Score · Methodology {s.methodology}</span>
+      {s.assessed !== undefined && (
+        <span class="sc-coverage">Scored across {s.assessed} of the 100 available points. The
+          remaining {100 - s.assessed} cover evidence we have not collected for this firm yet, and
+          count neither for nor against it.</span>
+      )}
       <h3>{tierLabel}</h3>
       <p>{s.verdict}</p>
+      {!isCertified && s.tier === 'Verified' && <span class="badge badge--verified"><Icon name="check" /> LFL Verified {new Date(s.computed_at).getFullYear()}</span>}
       {isCertified && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s.computed_at).getFullYear()} · re-verified {verified}</span>}
     </div>
     {s.next_tier && (
       <div class="sc-next">
-        <b>{s.next_tier.gap} points to {s.next_tier.name}</b>
+        {/* A gap in points is only the real distance when the coverage requirement is already
+            met. Where it is not, the points cannot lift the firm and saying so is the point. */}
+        <b>{s.next_tier.coverage_met === false
+          ? `${s.next_tier.name} needs more measured`
+          : `${s.next_tier.gap} points to ${s.next_tier.name}`}</b>
         <div class="track"><i style={`width:${s.total}%`}></i></div>
-        <span>{s.next_tier.needed} needed · A+B+C floor {s.next_tier.floor_met ? 'met' : 'not yet met'} ({s.floor_abc})</span>
+        <span>{s.next_tier.needed} needed · A+B+C floor {s.next_tier.floor_met ? 'met' : 'not yet met'}{s.floor_abc_pct !== undefined && ` (${Math.round(s.floor_abc_pct * 100)}% of the A, B and C points assessed)`}</span>
         <div style="margin-top:10px;color:#fff">Most headroom: {s.next_tier.path.join(' · ')}</div>
       </div>
     )}

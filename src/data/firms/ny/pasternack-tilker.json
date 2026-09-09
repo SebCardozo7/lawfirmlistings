@@ -465,10 +465,10 @@
       "checked_at": "2026-09-09"
     },
     "G3": {
-      "pass": false,
-      "evidence": "11 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "pass": true,
+      "evidence": "PASTERNACK TILKER ZIEGLER WALSH STANTON & ROMANO LLP is an active domestic registered limited liability partnership registered since 2010-06-10, with 11 Google-verified locations",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-09"
     },
     "G4": {
       "pass": false,
@@ -477,25 +477,25 @@
       "checked_at": "2026-09-08"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-08"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 28 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-09"
     },
     "G6": {
-      "pass": false,
-      "evidence": "4,894 public reviews across 11 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "pass": true,
+      "evidence": "4,894 public client reviews and 16 years since the entity was formed in 2010",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-09"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "fee_statement": "Home Our Attorneys About Our Firm Areas We Serve Contact Us Articles Client Testimonials Contingency Fee Site Map Practice Areas Workers' Compensation Social Security Disability Construction",
   "score": {
-    "total": 34,
+    "total": 63,
     "tier": "Under review",
-    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar B (0/20).",
+    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
@@ -686,13 +686,26 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 36,
-      "floor_met": false,
+      "gap": 7,
+      "floor_met": true,
+      "coverage_met": false,
       "path": [
-        "A1 Clean-record depth: +10 available",
-        "A5 Accountability: +6 available",
-        "B1 Volume of verified results: +6 available"
+        "A1 Clean-record depth: not yet measured (10 pts)",
+        "A5 Accountability: not yet measured (6 pts)",
+        "B1 Volume of verified results: not yet measured (6 pts)"
       ]
-    }
+    },
+    "raw": 34.5,
+    "assessed": 55,
+    "coverage": 0.55,
+    "floor_abc_pct": 0.9
+  },
+  "entity": {
+    "legal_name": "PASTERNACK TILKER ZIEGLER WALSH STANTON & ROMANO LLP",
+    "entity_type": "DOMESTIC REGISTERED LIMITED LIABILITY PARTNERSHIP",
+    "dos_id": "3960187",
+    "formed": "2010-06-10",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-09-09"
   }
 }

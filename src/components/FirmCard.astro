@@ -23,6 +23,9 @@ const d = firm.data;
 const s = d.score;
 
 const isCertified = d.status === 'certified' && !!s;
+// Verified is its own claim: the gates were checked and held. It is deliberately a
+// different badge from Certified, because it is a different and weaker statement.
+const isVerified = d.status === 'verified' && !!s;
 const primary = d.practices.filter(p => p.primary);
 const otherLanguages = d.languages.filter(l => l !== 'English');
 const blurb = d.about[0] ?? d.tagline;
@@ -63,6 +66,9 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
       )}
       {isCertified && s!.tier !== 'Certified' && (
         <span class="badge badge--tier">{s!.tier}</span>
+      )}
+      {isVerified && (
+        <span class="badge badge--verified" title="Every eligibility gate has been checked and passed. This is not certification, which additionally requires a score."><Icon name="check" /> LFL Verified</span>
       )}
       {d.claimed && (
         <span class="badge badge--claimed" title="The firm confirmed it owns this page and maintains its own information. This says nothing about the firm's certification."><Icon name="check" /> Firm-managed</span>

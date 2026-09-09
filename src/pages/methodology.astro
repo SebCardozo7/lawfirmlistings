@@ -47,8 +47,8 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
     <div class="section-head"><div><span class="eyebrow">Layer 0</span><h2 style="margin-top:12px">Six eligibility gates every firm must pass</h2><p>Fail one and the firm is listed with a neutral profile but cannot be certified, regardless of reviews, results or website.</p></div></div>
     <div class="gates">
       <div class="gate"><span class="k">G1</span><b>Active licensure</b><span>Every attorney named on the firm's site holds an active license in each state of practice.</span><span class="src">State bar &amp; court attorney registries (50 states + DC)</span></div>
-      <div class="gate"><span class="k">G2</span><b>Clean public discipline</b><span>No disbarment, suspension or public censure of any current attorney in the last 10 years. Older discipline is disclosed on the profile.</span><span class="src">State disciplinary databases · ABA National Lawyer Regulatory Data Bank</span></div>
-      <div class="gate"><span class="k">G3</span><b>Verified entity &amp; office</b><span>Registered legal entity and at least one confirmed physical office. No virtual-office-only listings.</span><span class="src">Secretary of State · GBP verification · postcard/phone check</span></div>
+      <div class="gate"><span class="k">G2</span><b>Clean public discipline</b><span>No current attorney carries a disciplinary status on the public register: disbarred, suspended, or resigned for disciplinary reasons. Those statuses persist, so the check reaches back years, but it will not show a censure or a suspension since lifted. We say which firms this has been run for.</span><span class="src">NYS Attorney Registration database (Department of State open data), per attorney</span></div>
+      <div class="gate"><span class="k">G3</span><b>Verified entity &amp; office</b><span>Registered legal entity and at least one confirmed physical office. No virtual-office-only listings.</span><span class="src">NY Department of State active corporations register · Google Business Profile verification</span></div>
       <div class="gate"><span class="k">G4</span><b>No consumer-protection actions</b><span>No active state Attorney General, FTC or court sanction for client-related misconduct.</span><span class="src">AG releases · PACER / CourtListener · news monitoring</span></div>
       <div class="gate"><span class="k">G5</span><b>Honest website baseline</b><span>Live HTTPS site with working contact and named attorneys; no "guaranteed results", fake badges or misleading claims.</span><span class="src">Automated crawl + editorial review</span></div>
       <div class="gate"><span class="k">G6</span><b>Minimum footprint</b><span>At least 10 public client reviews across verified platforms and one year in operation.</span><span class="src">Google · Avvo · Yelp · BBB · SoS filing date</span></div>
@@ -121,7 +121,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
               <tr><td>D4 Content, E-E-A-T &amp; structured data</td><td class="p">5</td><td>Original legal content with attorney bylines and credentials 2 · schema.org markup (LegalService/Attorney, FAQPage, Review, BreadcrumbList) 1 · earned media and citations in news, court reporters, CLE speaking or publications 1 · AI-search visibility: firm cited in ChatGPT, Gemini, Perplexity and AI Overviews answers for its core queries, sampled quarterly 1</td></tr>
             </tbody>
           </table>
-          <div class="note"><b>Cap rule:</b> Digital Presence can lift a firm's tier but cannot create one. Reaching Certified requires A + B + C ≥ 40 of 65; Distinguished requires 50; Elite requires 55. A brilliant website with thin verified results plateaus at Certified, and the firm sees exactly which D sub-factors would move it up.</div>
+          <div class="note"><b>Cap rule:</b> Digital Presence can lift a firm's tier but cannot create one. Reaching Certified requires Gates all pass · A+B+C ≥ 40 of 65 assessed · at least 60 of 100 points assessed; Distinguished requires 50; Elite requires 55. A brilliant website with thin verified results plateaus at Certified, and the firm sees exactly which D sub-factors would move it up.</div>
         </div>
       </details>
 
@@ -146,10 +146,11 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
   <div class="container">
     <div class="section-head"><div><span class="eyebrow">Tiers</span><h2 style="margin-top:12px">What the badge says, and what it takes</h2></div></div>
     <div class="tiers">
-      <div class="tier"><span class="eyebrow" style="color:var(--muted)">Listed</span><div class="range">&lt; 70</div><p>All gates pass. Neutral profile, no badge, not eligible for ranked lists.</p><div class="req">Shows the firm its sub-scores and the path to 70</div></div>
-      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> LFL Certified</span><div class="range">70–84</div><p>Trustworthy on every dimension we can verify.</p><div class="req">A + B + C ≥ 40 of 65</div></div>
-      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> Certified · Distinguished</span><div class="range">85–92</div><p>Strong verified outcomes and client record, plus a mature digital presence.</p><div class="req">A + B + C ≥ 50 of 65</div></div>
-      <div class="tier tier--night"><span class="badge badge--certified"><Icon name="shield" /> Certified · Elite</span><div class="range">93–100<small>top 5%</small></div><p>The top 5% of the firm's state × practice cohort.</p><div class="req">A + B + C ≥ 55 of 65 · cohort top 5%</div></div>
+      <div class="tier"><span class="eyebrow" style="color:var(--muted)">Listed</span><div class="range">Gates open</div><p>One or more gates still to be checked, or a gate not passed. A neutral profile with no badge, and the sub-scores we do have.</p><div class="req">Shows the firm which gates are open</div></div>
+      <div class="tier"><span class="badge badge--verified"><Icon name="check" /> LFL Verified</span><div class="range">Gates clear</div><p>All six eligibility gates checked and passed: licensure, discipline, entity and office, consumer-protection actions, website baseline and public footprint. This says the firm is what it says it is. It says nothing about the score.</p><div class="req">Six gates pass · no score threshold</div></div>
+      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> LFL Certified</span><div class="range">70–84</div><p>Every gate passed, and a score of 70 or better across the sub-factors we have assessed.</p><div class="req">Gates all pass · A+B+C ≥ 40 of 65 assessed · at least 60 of 100 points assessed</div></div>
+      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> Certified · Distinguished</span><div class="range">85–92</div><p>Strong verified outcomes and client record, plus a mature digital presence.</p><div class="req">Gates all pass · A+B+C ≥ 50 of 65 assessed</div></div>
+      <div class="tier tier--night"><span class="badge badge--certified"><Icon name="shield" /> Certified · Elite</span><div class="range">93–100<small>top 5%</small></div><p>The top 5% of the firm's state × practice cohort.</p><div class="req">Gates all pass · A+B+C ≥ 55 of 65 assessed · cohort top 5%</div></div>
     </div>
   </div>
 </section>
@@ -198,13 +199,13 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
   <div class="container">
     <div class="section-head"><div><span class="eyebrow">Data sources</span><h2 style="margin-top:12px">Where every point comes from</h2></div></div>
     <div class="sources">
-      <div class="src-card"><b>Licensure &amp; discipline</b><span>State bar and court registries for 50 states + DC · ABA National Lawyer Regulatory Data Bank</span></div>
-      <div class="src-card"><b>Entity &amp; office</b><span>Secretary of State business search · USPS validation · Google Business Profile verification</span></div>
-      <div class="src-card"><b>Court outcomes</b><span>PACER via CourtListener/RECAP · state e-filing portals · jury-verdict reporters</span></div>
-      <div class="src-card"><b>Reviews</b><span>Google Places, Yelp Fusion, Avvo, BBB, Facebook, de-duplicated, NLP-scored and authenticity-filtered</span></div>
-      <div class="src-card"><b>Web performance &amp; accessibility</b><span>PageSpeed Insights API · Lighthouse · axe-core</span></div>
-      <div class="src-card"><b>Search authority</b><span>Ahrefs, Semrush, Moz and DataForSEO APIs, cohort percentiles, monthly</span></div>
-      <div class="src-card"><b>Local presence</b><span>Local-pack tracking (5 core queries per firm per market) · citation audits</span></div>
+      <div class="src-card"><b>Licensure &amp; discipline</b><span>NYS Attorney Registration database, published as open data by the Unified Court System. Other states as we open them.</span></div>
+      <div class="src-card"><b>Entity &amp; office</b><span>NY Department of State active corporations register · Google Business Profile verification</span></div>
+      <div class="src-card"><b>Court outcomes</b><span>Not yet running. Case results stay unverified, and pillar B unscored, until this is built.</span></div>
+      <div class="src-card"><b>Reviews</b><span>Google Places API, summed across every business listing a firm operates and weighted by count. One platform so far, which we label on every profile.</span></div>
+      <div class="src-card"><b>Web performance &amp; accessibility</b><span>PageSpeed Insights API, on mobile. Accessibility auditing is not yet running.</span></div>
+      <div class="src-card"><b>Search authority</b><span>Ahrefs, cohort percentiles. A single provider, so the sub-factor says so.</span></div>
+      <div class="src-card"><b>Local presence</b><span>Google Business Profile completeness. Local-pack rank tracking is not yet running.</span></div>
       <div class="src-card"><b>Content &amp; structured data</b><span>Custom crawler: JSON-LD parsing, byline and credential detection, freshness</span></div>
       <div class="src-card"><b>AI-search visibility</b><span>Sampled prompts across ChatGPT, Gemini, Perplexity and Google AI Overviews, quarterly</span></div>
     </div>

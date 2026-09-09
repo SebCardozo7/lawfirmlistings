@@ -129,10 +129,10 @@
       "checked_at": "2026-09-08"
     },
     "G3": {
-      "pass": false,
-      "evidence": "4 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "pass": true,
+      "evidence": "THE ROTHENBERG LAW FIRM LLP is an active new york registered foreign limited liability partnership registered since 2022-07-27, with 4 Google-verified locations",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-09"
     },
     "G4": {
       "pass": false,
@@ -142,24 +142,24 @@
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-09"
     },
     "G6": {
-      "pass": false,
-      "evidence": "577 public reviews across 4 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "pass": true,
+      "evidence": "577 public client reviews and 4 years since the entity was formed in 2022",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-09"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "fee_statement": "no upfront fees in working with an injury lawyer. Our personal injury attorneys work on a contingency fee basis, which means that you do not pay anything unless we win your case. This allows",
   "score": {
-    "total": 25,
+    "total": 54,
     "tier": "Under review",
-    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "4 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
@@ -350,13 +350,26 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 45,
-      "floor_met": false,
+      "gap": 16,
+      "floor_met": true,
+      "coverage_met": false,
       "path": [
-        "A1 Clean-record depth: +10 available",
-        "A2 Experience: +9 available",
-        "A5 Accountability: +6 available"
+        "A1 Clean-record depth: not yet measured (10 pts)",
+        "A2 Experience: not yet measured (9 pts)",
+        "A5 Accountability: not yet measured (6 pts)"
       ]
-    }
+    },
+    "raw": 25.0,
+    "assessed": 46,
+    "coverage": 0.46,
+    "floor_abc_pct": 0.909
+  },
+  "entity": {
+    "legal_name": "THE ROTHENBERG LAW FIRM LLP",
+    "entity_type": "NEW YORK REGISTERED FOREIGN LIMITED LIABILITY PARTNERSHIP",
+    "dos_id": "6546896",
+    "formed": "2022-07-27",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-09-09"
   }
 }

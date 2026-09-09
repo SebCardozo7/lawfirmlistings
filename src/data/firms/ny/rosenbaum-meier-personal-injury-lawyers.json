@@ -128,9 +128,9 @@
     },
     "G3": {
       "pass": false,
-      "evidence": "3 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "checked_at": "2026-09-09"
     },
     "G4": {
       "pass": false,
@@ -140,24 +140,24 @@
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-09"
     },
     "G6": {
       "pass": false,
-      "evidence": "259 public reviews across 3 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "Time in operation not established",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "checked_at": "2026-09-09"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "fee_statement": "ction Accidents Get a free Consultation We offer free initial consultations and work on a contingency fee basis. You will owe no attorney’s fees unless and until we succeed in recovering comp",
   "score": {
-    "total": 26,
+    "total": 58,
     "tier": "Under review",
-    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "verdict": "6 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
@@ -348,13 +348,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 44,
-      "floor_met": false,
+      "gap": 12,
+      "floor_met": true,
+      "coverage_met": false,
       "path": [
-        "A1 Clean-record depth: +10 available",
-        "A2 Experience: +9 available",
-        "A5 Accountability: +6 available"
+        "A1 Clean-record depth: not yet measured (10 pts)",
+        "A2 Experience: not yet measured (9 pts)",
+        "A5 Accountability: not yet measured (6 pts)"
       ]
-    }
+    },
+    "raw": 26.5,
+    "assessed": 46,
+    "coverage": 0.46,
+    "floor_abc_pct": 0.818
   }
 }

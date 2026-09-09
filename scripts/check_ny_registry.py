@@ -259,6 +259,10 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
 
     if not attorneys:
         result["note"] = "no attorney names collected"
+        if write and write_gates:
+            apply_g5(firm, date.today().isoformat())
+            path.write_text(json.dumps(firm, indent=2, ensure_ascii=False) + "\n",
+                            encoding="utf-8")
         return result
 
     # One request per distinct surname, reused across attorneys who share one.
@@ -344,9 +348,35 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
 
     if write and write_gates:
         apply_gates(firm, result, today)
+        apply_g5(firm, today)
     if write:
         path.write_text(json.dumps(firm, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return result
+
+
+def apply_g5(firm: dict, today: str) -> None:
+    """Honest website baseline, recomputed from the profile rather than frozen at crawl time."""
+    gates = firm.setdefault("gates", {})
+    if (gates.get("G5") or {}).get("attested"):
+        return
+    https = (firm.get("website") or "").lower().startswith("https://")
+    phone = bool((firm.get("phone") or "").strip())
+    named = len(firm.get("attorneys") or [])
+    ok = https and phone and named > 0
+    parts = [
+        "served over HTTPS" if https else "no HTTPS on the published address",
+        "a working phone number published" if phone else "no contact number published",
+        (f"{named} named attorney{'' if named == 1 else 's'} published"
+         if named else "no attorney is named on the site we could read"),
+    ]
+    gates["G5"] = {
+        "pass": ok,
+        "evidence": ("Site has " + ", ".join(parts) + "."
+                     + ("" if ok else " The gate also asks for no misleading claims, which is"
+                        " an editorial read we have not recorded.")),
+        "source": "Public crawl of the firm's own site" if ok else "Public crawl, partial",
+        "checked_at": today,
+    }
 
 
 def apply_gates(firm: dict, result: dict, today: str) -> None:
