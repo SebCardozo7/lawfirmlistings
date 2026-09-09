@@ -21,8 +21,7 @@ const practices = [...new Map(published.flatMap(f => f.data.practices)
 // unlinked until the page exists, rather than as an href="#" a reader can click into nothing.
 const PLANNED_PRACTICES = ['Family & Divorce', 'Criminal Defense', 'Immigration',
                            'Estate Planning', 'Business & Corporate'];
-const PLANNED_RESOURCES = ['Best-of rankings', 'Legal guides', 'Cost of a lawyer',
-                           'How to hire a law firm'];
+const PLANNED_RESOURCES = ['Cost of a lawyer', 'How to hire a law firm'];
 // Privacy policy and Terms of use belong here for now, and are the two this site cannot
 // launch without.
 const PLANNED_COMPANY = ['About us', 'For law firms', 'Editorial standards', 'Contact',
@@ -58,6 +57,7 @@ const PLANNED_COMPANY = ['About us', 'For law firms', 'Editorial standards', 'Co
       <div>
         <h4>Resources</h4>
         <ul>
+          <li><a href="/guides/">Guides &amp; rankings</a></li>
           <li><a href="/methodology/">Our methodology</a></li>
           {PLANNED_RESOURCES.map(name => <li><span class="soon">{name}</span></li>)}
         </ul>
