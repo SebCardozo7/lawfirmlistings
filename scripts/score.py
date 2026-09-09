@@ -136,8 +136,20 @@ def compute(firm):
     for p in pillars: pillars[p]["score"] = round(pillars[p]["score"])
     total = sum(pillars[p]["score"] for p in pillars)
     abc = pillars["A"]["score"] + pillars["B"]["score"] + pillars["C"]["score"]
-    gates_ok = all(g["pass"] for g in firm.get("gates", {}).values()) and len(firm.get("gates", {})) == 6
-    tier = "Not eligible" if not gates_ok else "Listed"
+    # A gate has three real states, not two. "Not eligible" is a finding — the firm failed a
+    # documented check — while a gate we have not run yet says nothing about the firm. Calling
+    # the second one "Not eligible" publishes a false statement about a real business, so an
+    # unchecked gate (source contains "pending" or "partial", the same convention the
+    # sub-factors use) puts the firm under review instead.
+    gates = firm.get("gates", {})
+    def unchecked(g):
+        return not g["pass"] and any(w in g.get("source", "").lower() for w in ("pending", "partial"))
+    pending_gates = [k for k, g in gates.items() if unchecked(g)]
+    failed_gates = [k for k, g in gates.items() if not g["pass"] and not unchecked(g)]
+    gates_ok = len(gates) == 6 and not pending_gates and not failed_gates
+    tier = ("Not eligible" if failed_gates
+            else "Under review" if pending_gates or len(gates) != 6
+            else "Listed")
     for name, need, floor in TIERS:
         if gates_ok and total >= need and abc >= floor: tier = name; break
     nxt = None
@@ -148,7 +160,10 @@ def compute(firm):
             for s in weakest: path.append(f"{s['code']} {s['label']}: +{round(s['max']-s['pts'],1)} available")
             nxt = {"name": name, "needed": need, "gap": max(0, need - total), "floor_met": abc >= floor, "path": path}; break
     lowest = min(pillars, key=lambda p: pillars[p]["score"] / pillars[p]["max"])
-    verdict = (f"All six eligibility gates passed. " if gates_ok else "Eligibility gates not fully passed. ") + \
+    verdict = ("All six eligibility gates passed. " if gates_ok
+               else f"Eligibility gates not passed: {', '.join(sorted(failed_gates))}. " if failed_gates
+               else f"{len(pending_gates) or 6 - len(gates)} eligibility gate(s) still to be checked; "
+                    "this firm has not been scored yet. ") + \
               f"Strongest pillar: {max(pillars, key=lambda p: pillars[p]['score']/pillars[p]['max'])}; most headroom in pillar {lowest} ({pillars[lowest]['score']}/{pillars[lowest]['max']})."
     return {"total": total, "tier": tier, "verdict": verdict, "computed_at": TODAY, "methodology": METHOD,
             "pillars": pillars, "floor_abc": abc, "next_tier": nxt}
