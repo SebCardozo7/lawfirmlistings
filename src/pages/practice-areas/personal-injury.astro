@@ -38,7 +38,7 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
   return { slug, label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`, count: inCity.length };
 }).sort((a, b) => b.count - a.count);
 ---
-<Base title="Personal Injury Law Firms — Rankings & Hiring Guide" description={`How to choose a personal injury firm, and where our rankings are published. ${firms.length} ${firms.length === 1 ? 'firm' : 'firms'} measured on verified offices, client reviews, fee terms and site performance across ${cities.length === 1 ? cities[0] : `${cities.length} cities`}. No firm can pay to rank.`} nav="practice">
+<Base title="Personal Injury Law Firms — Rankings & Hiring Guide" description="How to choose a personal injury law firm: trial record, case focus, contingency fees and what to ask on the free consultation. Plus our city rankings." nav="practice">
 <section class="page-hero on-night">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">

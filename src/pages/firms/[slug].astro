@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { fitDescription } from '../../lib/seo';
 import Icon from '../../components/Icon.astro';
 import Scorecard from '../../components/Scorecard.astro';
 
@@ -29,7 +30,15 @@ const gateList = Object.values(d.gates ?? {});
 const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
 const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
 const title = `${d.name} — ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
-const description = `Profile of ${d.name}: practice areas, attorneys, ${d.offices.length} office${d.offices.length>1?'s':''} in ${d.market.city}, client reviews, fees${isCertified ? ` and LFL Certification Score ${s!.total}` : ''}.`;
+// Built with fitDescription because the length is not knowable here: firm names in this cohort
+// run from 14 to 71 characters, and the longest already sat one character under the limit. The
+// clauses are ordered so a long name loses the tail rather than the subject.
+// No counts here either: offices, attorneys and the score all change. The stable keywords are
+// the firm, its practice and its city, which is also what someone searching for it types.
+const description = fitDescription(
+  `${d.name} — ${(primary[0]?.name ?? d.practices[0]?.name ?? 'law').toLowerCase()} firm in ${d.market.city}, ${d.market.state}.`,
+  'Offices, attorneys, reviews and fee terms.',
+  'Each value shows its source and date.');
 const schema = {
   '@context': 'https://schema.org', '@type': 'LegalService', name: d.name, url: d.website, telephone: d.phone,
   address: { '@type': 'PostalAddress', streetAddress: hq.address },

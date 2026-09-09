@@ -30,7 +30,7 @@ const alsoPractised = [...new Map(firms.flatMap(f => f.data.practices)
   .map(pr => [pr.slug, pr.name])).entries()].map(([, name]) => name).sort();
 
 const title = 'Law firms by practice area';
-const description = `Practice areas the directory covers, with how many firms are published in each. Rankings are built per city and practice, never nationally.`;
+const description = 'Browse law firms by practice area. Rankings are built per city and practice area on verified evidence, never nationally and never for sale.';
 ---
 <Base title={title} description={description} nav="practice">
 <section class="page-hero on-night">

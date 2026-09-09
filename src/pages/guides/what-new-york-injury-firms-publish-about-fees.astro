@@ -38,7 +38,7 @@ const all = (xs: unknown[]) => xs.length === firms.length;
 const title = publishPct.length === 0
   ? 'Every New York injury firm promises “no fee unless we win”. None publishes the fee.'
   : 'What New York injury firms publish about fees';
-const description = `We read the fee language on every New York personal injury firm in the directory. ${freeConsult.length} of ${firms.length} offer a free consultation, ${contingency.length} say they work on contingency, and ${publishPct.length === 0 ? 'none' : publishPct.length} publishes the percentage. What to ask instead.`;
+const description = 'Every New York injury firm offers a free consultation, so it tells you nothing. What none publishes is the contingency fee, or who pays case expenses.';
 ---
 <Base title={title} description={description} nav="guides">
 <article>
