@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+
+// Same gap the Cities link had: Practice Areas in the nav went straight to personal injury,
+// with no page showing what the directory covers. Built from the collection.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// Only areas with a page. An area a firm lists but we have not built has nowhere to link.
+const PRACTICE_PAGES: Record<string, string> = { 'personal-injury': 'car' };
+
+const practices = Object.keys(PRACTICE_PAGES).map(slug => {
+  const inPractice = firms.filter(f => f.data.practices.some(pr => pr.slug === slug));
+  const name = inPractice[0]?.data.practices.find(pr => pr.slug === slug)?.name ?? slug;
+  const cities = [...new Map(inPractice.map(f => [f.data.market.city_slug, f.data.market])).entries()];
+  return {
+    slug, name, icon: PRACTICE_PAGES[slug], cities,
+    count: inPractice.length,
+    certified: inPractice.filter(f => f.data.status === 'certified').length,
+  };
+}).filter(p => p.count > 0);
+
+// What firms actually practise, beyond the areas we have built pages for. Naming them is how
+// the page says what is coming without pretending those pages exist.
+const covered = new Set(Object.keys(PRACTICE_PAGES));
+const alsoPractised = [...new Map(firms.flatMap(f => f.data.practices)
+  .filter(pr => !covered.has(pr.slug))
+  .map(pr => [pr.slug, pr.name])).entries()].map(([, name]) => name).sort();
+
+const title = 'Law firms by practice area';
+const description = `Practice areas the directory covers, with how many firms are published in each. Rankings are built per city and practice, never nationally.`;
+---
+<Base title={title} description={description} nav="practice">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Practice Areas</li></ol>
+      <span class="eyebrow">Practice areas</span>
+      <h1>One area at a time, finished properly.</h1>
+      <p class="lede">A practice area is only worth publishing once its firms have been measured against each other in the same market. We would rather cover one area completely than list every area thinly, so the directory opens areas as the evidence behind them is collected.</p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{practices.length}</b><span>{practices.length === 1 ? 'Area covered' : 'Areas covered'}</span></div>
+      <div class="fact"><b class="num">{firms.length}</b><span>Firms published</span></div>
+      <div class="fact"><b class="num">{practices.reduce((n, p) => n + p.certified, 0)}</b><span>Certified</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {practices.length > 0 ? (
+      <div class="cat-grid">
+        {practices.map(p => (
+          <a class="cat" href={`/practice-areas/${p.slug}/`}>
+            <span class="ico"><Icon name={p.icon} /></span>
+            <b>{p.name}</b>
+            <span class="num">{p.count} {p.count === 1 ? 'firm' : 'firms'} · {p.cities.length === 1 ? p.cities[0][1].city : `${p.cities.length} cities`}</span>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="callout"><b>No practice areas published yet.</b></div>
+    )}
+
+    {practices.some(p => p.cities.length > 0) && (
+      <>
+        <div class="section-head" style="margin-top:56px">
+          <div>
+            <span class="eyebrow">By practice and city</span>
+            <h2 style="margin-top:12px">Go straight to a ranked list</h2>
+            <p>Every ranking is scoped to a city, because that is the comparison that means something to someone hiring a lawyer.</p>
+          </div>
+        </div>
+        <div class="chips">
+          {practices.flatMap(p => p.cities.map(([slug, market]) => (
+            <a class="chip" href={`/cities/${slug}/${p.slug}/`}>{p.name} in {market.city}</a>
+          )))}
+        </div>
+      </>
+    )}
+
+    {alsoPractised.length > 0 && (
+      <>
+        <div class="section-head" style="margin-top:56px">
+          <div>
+            <span class="eyebrow">Not yet open</span>
+            <h2 style="margin-top:12px">Areas these firms also practise</h2>
+            <p>Firms in the directory list these too. They do not have pages yet, because a page without firms measured against each other is not worth having.</p>
+          </div>
+        </div>
+        <div class="chips">
+          {alsoPractised.map(name => <span class="chip soon">{name}</span>)}
+        </div>
+      </>
+    )}
+  </div>
+</section>
+</Base>

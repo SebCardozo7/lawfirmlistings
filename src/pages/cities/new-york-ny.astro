@@ -22,6 +22,7 @@ const freeConsult = firms.filter(f => f.data.free_consultation).length;
 const multilingual = firms.filter(f => f.data.languages.some(l => l !== 'English')).length;
 const share = (n: number) => (firms.length ? Math.round((100 * n) / firms.length) + '%' : '\u2014');
 const logoVariants = ['', 'l2', 'l3'];
+const cityName = firms[0]?.data.market.city ?? 'New York City';
 
 const computedDates = firms.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
 const lastUpdated = computedDates.length
@@ -56,12 +57,15 @@ const boroughTiles = BOROUGHS
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">
     <div>
-      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="#">Cities</a></li><li><a href="#">New York</a></li><li aria-current="page">New York City</li></ol>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/cities/">Cities</a></li><li aria-current="page">New York City</li></ol>
       <span class="eyebrow">City guide</span>
       <h1>Top Law Firms in New York, NY</h1>
       <p class="lede">New York City is home to more than 80,000 practicing attorneys — and to some of the most complex courts in the country. {certified.length > 0 ? <>We have certified {certified.length} {certified.length === 1 ? 'firm' : 'firms'} here so far, starting with the personal injury cohort.</> : <>Our first New York cohort is still in verification.</>} Browse by what you need and compare what each firm publishes.</p>
       <div class="chips" style="margin-top:24px">
-        <a class="chip" href="#">Manhattan</a><a class="chip" href="#">Brooklyn</a><a class="chip" href="#">Queens</a><a class="chip" href="#">The Bronx</a><a class="chip" href="#">Staten Island</a><a class="chip" href="#">Long Island</a><a class="chip" href="#">Westchester</a>
+        {/* Borough pages do not exist yet. The chips name the coverage without pretending
+            to be navigation — same treatment as the unopened practice areas. */}
+        {['Manhattan', 'Brooklyn', 'Queens', 'The Bronx', 'Staten Island', 'Long Island',
+          'Westchester'].map(b => <span class="chip soon">{b}</span>)}
       </div>
     </div>
     <div class="hero-facts">
@@ -83,7 +87,7 @@ const boroughTiles = BOROUGHS
     </div>
     <div class="cat-grid">
       {practiceTiles.map(t => (
-        <a class="cat" href={`/practice-areas/${t.slug}/`}><span class="ico"><Icon name={t.icon} /></span><b>{t.name}</b><span class="num">{t.count} certified {t.count === 1 ? 'firm' : 'firms'} · {t.listed} listed</span></a>
+        <a class="cat" href={`/cities/${CITY_SLUG}/${t.slug}/`}><span class="ico"><Icon name={t.icon} /></span><b>{t.name}</b><span class="num">{t.count} certified {t.count === 1 ? 'firm' : 'firms'} · {t.listed} listed</span></a>
       ))}
     </div>
   </div>
@@ -93,12 +97,24 @@ const boroughTiles = BOROUGHS
 <section class="section section--tint">
   <div class="container layout">
     <div>
-      <div class="results-head"><h2>Highest-ranked law firms in New York City</h2><span>Across all practice areas{lastUpdated ? ` · ${lastUpdated}` : ''}</span></div>
+      <div class="results-head"><h2>Highest-ranked law firms in New York City</h2><span>Top {Math.min(3, firms.length)} of {firms.length} across all practice areas{lastUpdated ? ` · ${lastUpdated}` : ''}</span></div>
+      {/* The full ranked list lives at /cities/<city>/<practice>/. This page's job is the
+          city: which practice areas are covered here and what hiring a lawyer in it involves. */}
       <div class="firm-list">
-        {firms.map((firm, i) => (
+        {firms.slice(0, 3).map((firm, i) => (
           <FirmCard firm={firm} rank={i + 1} rankLabel={i === 0 ? '#1 in NYC' : `#${i + 1}`} logoVariant={logoVariants[i % logoVariants.length]} />
         ))}
       </div>
+      {practiceTiles.length > 0 && (
+        <div class="ranked-links">
+          <h3>Ranked lists in {cityName}</h3>
+          <ul>
+            {practiceTiles.map(t => (
+              <li><a href={`/cities/${CITY_SLUG}/${t.slug}/`}>{t.name} firms in {cityName}</a><span class="num">{t.listed} {t.listed === 1 ? 'firm' : 'firms'}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
       {firms.length === 0 && (
         <div class="callout"><b>Nothing published here yet.</b> The New York cohort is still in verification. Firms appear once their eligibility gates are checked.</div>
       )}
@@ -108,16 +124,17 @@ const boroughTiles = BOROUGHS
       <div class="panel panel--ink">
         <h4>Get matched with a NYC firm</h4>
         <p>Answer four questions and we'll connect you with up to three certified firms in your borough. Free and confidential.</p>
-        <a class="btn btn--white" href="#">Start matching</a>
+        {/* No matching service exists yet, so the panel describes it without a dead button. */}
+        <span class="btn btn--white soon">Start matching</span>
       </div>
       <div class="panel">
         <h4>New York rankings</h4>
         <ul>
           <li><a href="/guides/best-personal-injury-law-firms-nyc/">Best personal injury firms in NYC</a></li>
-          <li><a href="#">Best divorce lawyers in Manhattan</a></li>
-          <li><a href="#">Best criminal defense firms in Brooklyn</a></li>
-          <li><a href="#">Best immigration lawyers in Queens</a></li>
-          <li><a href="#">Best real estate attorneys in NYC</a></li>
+          {['Best divorce lawyers in Manhattan', 'Best criminal defense firms in Brooklyn',
+            'Best immigration lawyers in Queens', 'Best real estate attorneys in NYC'].map(t => (
+            <li><span class="soon">{t}</span></li>
+          ))}
         </ul>
       </div>
     </aside>

@@ -49,6 +49,7 @@ const PLANNED_COMPANY = ['For law firms', 'Editorial standards'];
             <li><a href={`/practice-areas/${slug}/`}>{name}</a></li>
           ))}
           {PLANNED_PRACTICES.map(name => <li><span class="soon">{name}</span></li>)}
+          <li><a href="/practice-areas/">All practice areas</a></li>
         </ul>
       </div>
       <div>
@@ -57,6 +58,7 @@ const PLANNED_COMPANY = ['For law firms', 'Editorial standards'];
           {cities.map(([slug, label]) => (
             <li><a href={`/cities/${slug}/`}>{label}</a></li>
           ))}
+          <li><a href="/cities/">All cities</a></li>
         </ul>
       </div>
       <div>

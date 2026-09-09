@@ -67,12 +67,6 @@ const reasons = [
     <p>We are not a law firm. We do not give legal advice, review your case, or refer you to a lawyer. If you need advice about a legal matter, contact a licensed attorney directly — the firms in this directory publish their own phone numbers on their profiles, and most state bar associations run a referral service.</p>
     <p>We also cannot take a firm’s payment to change a score, a gate or a tier. That is not a policy we bend for anyone; it is the reason the score is worth anything. See <a href="/about/">how we make money</a>.</p>
 
-    {(SITE.legalEntity || SITE.postalAddress) && (
-      <>
-        <h2>Publisher</h2>
-        <p>{SITE.legalEntity}{SITE.legalEntity && SITE.postalAddress && <br />}{SITE.postalAddress}</p>
-      </>
-    )}
   </div>
 </section>
 </Base>

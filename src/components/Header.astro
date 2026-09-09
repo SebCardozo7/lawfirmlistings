@@ -11,8 +11,8 @@ const { nav = 'home' } = Astro.props;
         <span>Law Firm Listings<small>Ranked · Verified · Independent</small></span>
       </a>
       <ul class="nav-links">
-        <li><a href="/practice-areas/personal-injury/" aria-current={nav==='practice'?'page':undefined}><Icon name="scale" /><span>Practice Areas</span></a></li>
-        <li><a href="/cities/new-york-ny/" aria-current={nav==='cities'?'page':undefined}><Icon name="pin" /><span>Cities</span></a></li>
+        <li><a href="/practice-areas/" aria-current={nav==='practice'?'page':undefined}><Icon name="scale" /><span>Practice Areas</span></a></li>
+        <li><a href="/cities/" aria-current={nav==='cities'?'page':undefined}><Icon name="pin" /><span>Cities</span></a></li>
         <li><a href="/methodology/" aria-current={nav==='method'?'page':undefined}><Icon name="shield" /><span>Methodology</span></a></li>
         <li><a href="/guides/" aria-current={nav==='guides'?'page':undefined}><Icon name="doc" /><span>Guides</span></a></li>
       </ul>
@@ -20,7 +20,7 @@ const { nav = 'home' } = Astro.props;
         {/* "Find a firm" has a real destination — the directory. "List your firm" does not
             exist yet, so it renders as a button-shaped span rather than a link into nothing. */}
         <span class="btn btn--ghost btn--sm soon">List your firm</span>
-        <a class="btn btn--primary btn--sm" href="/practice-areas/personal-injury/">Find a firm</a>
+        <a class="btn btn--primary btn--sm" href="/cities/new-york-ny/personal-injury/">Find a firm</a>
         <button class="nav-toggle" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
       </div>
     </nav>
