@@ -54,6 +54,8 @@ const avgCount = (xs: Firm[]) =>
 
 // C3 is the recency sub-factor. Naming how many firms have it unassessed is more honest than
 // implying we know how old these reviews are.
+const withResults = firms.filter(f => (f.data.results ?? []).length > 0);
+
 const c3Pending = firms.filter(f =>
   f.data.score?.pillars.C.subs.some(s => s.code === 'C3' && s.source === 'pending')).length;
 
@@ -146,9 +148,9 @@ const description = `We summed every Google review across ${totalListings} busin
     <h2 id="limits">What this does not cover</h2>
     <p>One platform. Every figure above comes from Google Business Profile, because it is the only review source we have collected so far. Our own methodology asks for a cross-platform picture, and a single-platform average is weaker evidence than that — so the evidence line on every profile says "single platform, Google only" rather than leaving you to assume otherwise.</p>
     {selfReported.length > 0 && (
-      <p>{selfReported.length === 1 ? 'One firm is' : `${selfReported.length} firms are`} excluded from every number on this page: {selfReported.map((f, i) => (<>{i > 0 && ', '}<a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></>))}, whose rating we hold only because the firm publishes it. A self-reported figure may well be accurate, but it has not been measured, and averaging it in with measured ones would make the average impossible to cite. It stays on the profile, labelled as firm-reported.</p>
+      <p>The figures above cover the {measured.length} firms whose ratings we measured directly. Where we hold a rating only because a firm publishes it, the profile labels it as firm-reported and it stays out of these averages — an unmeasured number may well be accurate, but mixing it in would make the average impossible to cite.</p>
     )}
-    <p>And reviews are not outcomes. A five-star rating records how clients felt about being treated, which is worth knowing and is not the same as whether the firm won. Verified results sit in pillar B and are checked against court records — {firms.filter(f => (f.data.results ?? []).length > 0).length} of the {firms.length} firms here have any published yet.</p>
+    <p>And reviews are not outcomes. A five-star rating records how clients felt about being treated, which is worth knowing and is not the same as whether the firm won. Verified results sit in pillar B and are checked against court records, and only {withResults.length} of the {firms.length} firms here {withResults.length === 1 ? 'has' : 'have'} published any at all{withResults.length > 0 && withResults.length <= 2 && <> — {withResults.map((f, i) => (<>{i > 0 && ' and '}<a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></>))}, {withResults.length === 1 ? 'the only firm in this cohort to have completed certification' : 'the only firms in this cohort to have completed certification'}</>}. That is the harder half of the work, and it is where the directory is still thin.</p>
     <p class="muted" style="font-size:.86rem">Review counts and ratings come from the Google Places API (New), summed across every business listing we can attribute to the firm's own domain. A firm we cannot match to a listing keeps these sub-factors pending rather than receiving an estimate.</p>
   </div>
 
