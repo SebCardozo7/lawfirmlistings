@@ -22,10 +22,15 @@ const practices = [...new Map(published.flatMap(f => f.data.practices)
 const PLANNED_PRACTICES = ['Family & Divorce', 'Criminal Defense', 'Immigration',
                            'Estate Planning', 'Business & Corporate'];
 const PLANNED_RESOURCES = ['Cost of a lawyer', 'How to hire a law firm'];
-// Privacy policy and Terms of use belong here for now, and are the two this site cannot
-// launch without.
-const PLANNED_COMPANY = ['About us', 'For law firms', 'Editorial standards', 'Contact',
-                         'Privacy policy', 'Terms of use'];
+// About, Contact, Privacy and Terms now exist. What is left planned is the two that need
+// content rather than a page: a For-firms explainer and a published editorial standards note.
+const COMPANY_LINKS: [string, string][] = [
+  ['/about/', 'About us'],
+  ['/contact/', 'Contact'],
+  ['/privacy/', 'Privacy policy'],
+  ['/terms/', 'Terms of use'],
+];
+const PLANNED_COMPANY = ['For law firms', 'Editorial standards'];
 ---
 <footer class="site-footer">
   <div class="container">
@@ -65,6 +70,7 @@ const PLANNED_COMPANY = ['About us', 'For law firms', 'Editorial standards', 'Co
       <div>
         <h4>Company</h4>
         <ul>
+          {COMPANY_LINKS.map(([href, name]) => <li><a href={href}>{name}</a></li>)}
           {PLANNED_COMPANY.map(name => <li><span class="soon">{name}</span></li>)}
         </ul>
       </div>

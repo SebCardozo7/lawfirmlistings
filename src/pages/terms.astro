@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+
+const title = 'Terms of use';
+const description = 'Rankings are editorial opinion, not legal advice. What you may rely on, what you may reuse, and the limits of both.';
+
+const updated = new Date(SITE.policiesUpdated).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+<Base title={title} description={description} nav="terms">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Terms</li></ol>
+      <span class="eyebrow">Legal · Updated {updated}</span>
+      <h1>Terms of use</h1>
+      <p class="lede">The short version: this is a directory, not a law firm. Scores are our editorial opinion, formed by applying a published method to evidence we can check. Nothing here is legal advice, and nothing here creates a lawyer–client relationship.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="narrow prose">
+    <div class="callout"><b>A draft pending legal review.</b> Operating a directory that rates attorneys touches state bar advertising rules, and this has not been reviewed by a lawyer. It should be before this site is promoted.</div>
+
+    <h2>Not legal advice, and not a referral</h2>
+    <p>Law Firm Listings publishes information about law firms. It does not practise law, does not give legal advice, and is not a lawyer referral service. Reading this site creates no lawyer–client relationship with us or with any firm listed on it. If you need advice about a legal matter, speak to a licensed attorney.</p>
+    <p>A listing is not a recommendation that a particular firm is right for your matter. Only you and a lawyer who knows your facts can judge that.</p>
+
+    <h2>Rankings are opinion</h2>
+    <p>A Certification Score is an editorial opinion. It is formed by applying <a href="/methodology/">a published methodology</a> to evidence available to us at the time, and it is only as good as that evidence. A score is not a statement of fact about a firm's competence, honesty or likely performance in your case. <b>Past results do not guarantee similar outcomes.</b></p>
+    <p>Where a value on a profile is measured, the profile names the source and the date. Where it is not measured, the profile says so. We would rather show a gap than fill it with an estimate.</p>
+
+    <h2>Accuracy, and what to do when we are wrong</h2>
+    <p>We compile profiles from sources firms and public bodies have published, and those sources are sometimes out of date or wrong. We do not warrant that everything here is accurate or current.</p>
+    <p>If something is wrong, tell us. A firm may submit a correction or new documentation and appeal a score; the methodology commits us to reviewing an appeal within 30 days, and a correction that holds up is applied to the profile and to anything built from it. <a href="/contact/">Contact us</a>.</p>
+
+    <h2>No pay-to-rank</h2>
+    <p>Neither the Certification Score, the eligibility gates nor the tier can be bought, and no advertiser or firm managing its own profile can edit them. Claiming a profile is free and changes nothing that is scored. Optional tools and sponsored placements are the paid products; sponsored placements are always labeled and never appear inside a ranked list. Outbound links to a firm's website follow whether the firm has cleared its eligibility gates, not whether it has paid us anything.</p>
+
+    <h2>Firms managing a profile</h2>
+    <p>A firm that claims its profile may keep its own factual details current — offices, phone, practice areas, languages, fee terms — and may submit case results with a docket for verification. In doing so the firm confirms it is authorised to act for the firm and that what it submits is accurate. We may verify, decline or remove submitted material, and we publish a case result with an amount only where a docket or document supports it.</p>
+
+    <h2>Using this content</h2>
+    <p>The text, scores, methodology and design of this site belong to its publisher. You may read it, link to it, and quote a short passage with attribution and a link. You may not copy the directory or its scores wholesale, scrape it systematically, or republish it as your own — including to train a model on it as a substitute for the site.</p>
+    <p>Firm names, logos and trademarks belong to those firms and appear here for identification.</p>
+
+    <h2>Links to other sites</h2>
+    <p>Profiles link to firms' own websites and to public records. We do not control those sites and are not responsible for their content, accuracy or privacy practices.</p>
+
+    <h2>Availability and liability</h2>
+    <p>The site is provided as it is, without warranty of any kind. We do not promise it will be available, complete or error-free. To the fullest extent the law allows, we are not liable for any loss arising from your use of this site or from a decision you make on the basis of anything published here — including the choice of a law firm. Nothing in these terms limits liability that cannot lawfully be limited.</p>
+
+    <h2>Changes</h2>
+    <p>We may revise these terms; the date at the top of this page changes when we do. Continuing to use the site after a change means you accept the revised terms. This version is dated {updated}.</p>
+
+    {SITE.governingLaw && (
+      <>
+        <h2>Governing law</h2>
+        <p>These terms are governed by the laws of {SITE.governingLaw}.</p>
+      </>
+    )}
+    {SITE.legalEntity && (
+      <>
+        <h2>Publisher</h2>
+        <p>{SITE.legalEntity}{SITE.postalAddress && <><br />{SITE.postalAddress}</>}</p>
+      </>
+    )}
+  </div>
+</section>
+</Base>

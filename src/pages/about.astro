@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const certified = firms.filter(f => f.data.status === 'certified');
+const cities = new Set(firms.map(f => f.data.market.city_slug));
+const practices = new Set(firms.flatMap(f => f.data.practices.map(p => p.slug)));
+
+const title = 'About Law Firm Listings';
+const description = 'Who publishes this directory, how firms are scored, how we make money, and what we do not do.';
+---
+<Base title={title} description={description} nav="about">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">About</li></ol>
+      <span class="eyebrow">About</span>
+      <h1>A directory that shows its work.</h1>
+      <p class="lede">Most legal directories rank firms by what those firms pay. This one ranks them on evidence anyone can check, publishes the method in full, and shows the source behind every measured value on every profile.</p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{firms.length}</b><span>{firms.length === 1 ? 'Firm published' : 'Firms published'}</span></div>
+      <div class="fact"><b class="num">{certified.length}</b><span>Certified so far</span></div>
+      <div class="fact"><b class="num">{cities.size}</b><span>{cities.size === 1 ? 'City' : 'Cities'}</span></div>
+      <div class="fact"><b class="num">{practices.size}</b><span>{practices.size === 1 ? 'Practice area' : 'Practice areas'}</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="narrow prose">
+    <h2>What this is</h2>
+    <p>Law Firm Listings publishes profiles of United States law firms and scores them from 0 to 100 under a published methodology. A score is built from things that can be verified from outside the firm: attorney licensure and disciplinary records, outcomes confirmed against court dockets, authenticated client reviews, the firm's own published fee and access terms, and the quality of its digital presence.</p>
+    <p>We are early. The directory covers {firms.length} {firms.length === 1 ? 'firm' : 'firms'} in {cities.size === 1 ? 'one city' : `${cities.size} cities`}, and most of them are still marked <b>under review</b> — meaning we have measured some pillars and not yet run the checks the others need. A profile says which is which, on every row.</p>
+
+    <h2>How scoring works, in one paragraph</h2>
+    <p>A firm passes six eligibility gates or it is not scored at all: active licensure for every attorney it names, no public discipline in ten years, a verified entity and physical office, no consumer-protection actions, an honest website, and a minimum public footprint. Past the gates, five pillars carry 100 points between them — professional standing 25, verified outcomes 20, client experience 20, digital presence 25, access and responsiveness 10. Certification starts at 70, and additionally requires standing, outcomes and client experience to reach 40 of their combined 65, so a firm with a polished website and thin verified results cannot certify on the website alone. <a href="/methodology/">The methodology</a> sets out every sub-factor and its evidence.</p>
+
+    <h2>How we make money, and what it cannot buy</h2>
+    <p>Being listed is free. Claiming a profile to keep its information current is free. Revenue comes from optional tools a firm can buy and from sponsored placements, which are always labeled and never appear inside a ranked list.</p>
+    <p>What money cannot do is move a score. Neither the score, the eligibility gates nor the tier can be bought or edited — not by a firm that manages its own profile, and not by an advertiser. A firm can change its score only by changing the things the score measures. Outbound links to a firm's own website follow editorial merit, not payment: a firm that clears all six gates gets a followed link and one that has not does not, which is why we do not sell links.</p>
+
+    <h2>What we do not do</h2>
+    <ul>
+      <li><b>We do not give legal advice</b> and we are not a lawyer referral service. Nothing here is a recommendation to hire a particular firm for a particular matter.</li>
+      <li><b>We do not publish figures we cannot substantiate.</b> A case result without a docket or document shows no amount. A self-reported "recovered" total scores nothing.</li>
+      <li><b>We do not invent content.</b> Where a value is not measured, the profile says so rather than estimating it.</li>
+      <li><b>We do not accept payment for coverage</b> or for a rating, in any form.</li>
+    </ul>
+
+    <h2>Corrections and appeals</h2>
+    <p>Every firm can see its own sub-scores and the evidence behind each one on its profile. If a measurement is wrong we want to know: a firm may submit a correction or new documentation and appeal a score, and the methodology commits us to reviewing an appeal within 30 days. <a href="/contact/">Contact us</a> to raise one.</p>
+    <p>Rankings on this site are editorial opinions formed by applying a published methodology to available evidence. They are not statements of fact about a firm's competence, and past results do not guarantee future outcomes. See the <a href="/terms/">terms of use</a>.</p>
+
+    {(SITE.legalEntity || SITE.editorialLead || SITE.reviewingAttorney) && (
+      <>
+        <h2>Who publishes this</h2>
+        {SITE.legalEntity && <p>Law Firm Listings is published by {SITE.legalEntity}{SITE.postalAddress && <>, {SITE.postalAddress}</>}.</p>}
+        {SITE.editorialLead && <p>Editorial responsibility rests with {SITE.editorialLead}.</p>}
+        {SITE.reviewingAttorney && <p>Score appeals are reviewed by {SITE.reviewingAttorney}, a licensed attorney.</p>}
+      </>
+    )}
+  </div>
+</section>
+</Base>
