@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, hasAnyContact } from '../data/site';
+
+const title = 'Contact Law Firm Listings';
+const description = 'How to correct a firm profile, appeal a score, claim a profile, or raise a privacy request.';
+
+// Each channel renders only when there is a real address behind it. A contact page listing a
+// mailbox that bounces is worse than one that says the channel is being set up, because the
+// reader who most needs to get through is a firm correcting its own profile.
+const channels = [
+  { email: SITE.emailCorrections, heading: 'Correct a profile or appeal a score',
+    body: 'If something on a profile is wrong, or a measured value does not match your records, tell us what it should say and where we can verify it. The methodology commits us to reviewing an appeal within 30 days, and a correction that holds up is applied to the profile and to any ranking built from it.' },
+  { email: SITE.emailFirms, heading: 'Claim or manage your firm\'s profile',
+    body: 'Claiming is free. It lets a firm keep its offices, fees, practice areas and languages current, and submit case results with a docket for verification. It does not affect the Certification Score, the eligibility gates or the tier — those stay ours to measure.' },
+  { email: SITE.emailPrivacy, heading: 'Privacy requests',
+    body: 'To ask what personal data we hold, or to request correction or deletion, write to us. Our privacy policy sets out what we collect, which is very little.' },
+  { email: SITE.emailGeneral, heading: 'Everything else',
+    body: 'Press enquiries, questions about the methodology, or anything the channels above do not cover.' },
+].filter(c => c.email);
+---
+<Base title={title} description={description} nav="contact">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Contact</li></ol>
+      <span class="eyebrow">Contact</span>
+      <h1>Tell us what we got wrong.</h1>
+      <p class="lede">We publish measured values with their sources so they can be checked, which only works if there is a way to tell us when a value is wrong. Corrections from firms are read and acted on.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="narrow prose">
+    {hasAnyContact ? (
+      <>
+        {channels.map(c => (
+          <>
+            <h2>{c.heading}</h2>
+            <p>{c.body}</p>
+            <p><a href={`mailto:${c.email}`}>{c.email}</a></p>
+          </>
+        ))}
+      </>
+    ) : (
+      <>
+        <div class="callout"><b>Our contact channels are being set up.</b> Rather than publish an address that bounces, this page will list them once the mailboxes are live. If you are a firm that needs a profile corrected before then, the correction will still be applied — the delay is ours, not yours.</div>
+        <h2>What this page will cover</h2>
+        <p>Four channels: correcting a profile or appealing a score, claiming a firm profile, privacy requests, and general enquiries.</p>
+      </>
+    )}
+
+    <h2>What we cannot help with</h2>
+    <p>We are not a law firm and we do not give legal advice, review your case, or refer you to a lawyer. If you need advice about a legal matter, contact a licensed attorney directly — the firms in this directory publish their own phone numbers on their profiles, and most state bar associations run a referral service.</p>
+    <p>We also cannot take a firm's payment to change a score, a gate or a tier. That is not a policy we bend for anyone; it is the reason the score is worth anything.</p>
+
+    {(SITE.legalEntity || SITE.postalAddress) && (
+      <>
+        <h2>Publisher</h2>
+        <p>{SITE.legalEntity}{SITE.legalEntity && SITE.postalAddress && <><br />{SITE.postalAddress}</>}</p>
+      </>
+    )}
+  </div>
+</section>
+</Base>
