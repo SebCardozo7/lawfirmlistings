@@ -350,7 +350,17 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
 
 
 def apply_gates(firm: dict, result: dict, today: str) -> None:
-    """G1 from the registry outright; G2 only as far as current status can carry it."""
+    """G1 from the registry outright; G2 only as far as current status can carry it.
+
+    A gate the firm has attested is left exactly as it is. Otherwise this script, which runs
+    whenever the roster changes, would silently undo a deliberate editorial decision - and the
+    firm would lose a tier without anyone touching it. Withdrawing an attestation is a decision
+    too, so it is made with scripts/attest.py --revoke, not as a side effect of a re-check.
+    """
+    existing = firm.get("gates") or {}
+    keep = {code for code, g in existing.items() if g.get("attested")}
+    if keep:
+        print(f"    (leaving attested {', '.join(sorted(keep))} untouched)")
     total = len(firm.get("attorneys") or [])
     gates = firm.setdefault("gates", {})
     matched = result["matched"]
@@ -358,12 +368,17 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
     disciplined = result["disciplined"]
     lapsed = [(n, st) for n, st in result["inactive"] if st.strip().lower() in LAPSED]
 
+    # An attestation cannot survive a finding of actual discipline: if the registry says an
+    # attorney is disbarred or suspended, that outranks anything the firm has told us.
     if disciplined:
+        keep -= {"G1", "G2"}
+
+    if disciplined and "G1" not in keep:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
         gates["G1"] = {"pass": False,
                        "evidence": f"{len(disciplined)} of {total} under a disciplinary status — {detail}",
                        "source": DATASET, "checked_at": today}
-    elif lapsed:
+    elif lapsed and "G1" not in keep:
         detail = "; ".join(f"{n}: {st}" for n, st in lapsed[:3])
         gates["G1"] = {"pass": False,
                        "evidence": (f"{matched} of {total} attorneys currently registered. "
@@ -371,16 +386,18 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
                                     "Held for review: either record may be out of date."),
                        "source": f"{DATASET} — pending review of a registration lapse",
                        "checked_at": today}
-    elif matched and not unchecked:
+    elif matched and not unchecked and "G1" not in keep:
         gates["G1"] = {"pass": True,
                        "evidence": f"All {matched} named attorneys currently registered",
                        "source": DATASET, "checked_at": today}
-    else:
+    elif "G1" not in keep:
         gates["G1"] = {"pass": False,
                        "evidence": f"{matched} of {total} matched; {unchecked} could not be matched — pending",
                        "source": f"{DATASET} — partial, pending", "checked_at": today}
 
-    if disciplined:
+    if "G2" in keep:
+        pass
+    elif disciplined:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
         gates["G2"] = {"pass": False, "evidence": f"Current disciplinary status on record — {detail}",
                        "source": DATASET, "checked_at": today}

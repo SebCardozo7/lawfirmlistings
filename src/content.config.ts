@@ -55,7 +55,12 @@ const firms = defineCollection({
         rating_weighted: z.number().nullable(), source: z.string(), measured_at: z.string(),
       }).optional(),
     }),
-    gates: z.record(z.object({ pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string() })),
+    gates: z.record(z.object({
+      pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string(),
+      // Satisfied by the firm's written attestation rather than by our own measurement. Shown
+      // as such on the profile: a reader is entitled to know which is which.
+      attested: z.boolean().optional(), attested_by: z.string().optional(),
+    })),
     cohort_id: z.string(),
     assessments: z.record(z.object({ pts: z.number(), source: z.string().optional(), evidence: z.string() })).optional(),
     // written by scripts/score.py — do not edit by hand

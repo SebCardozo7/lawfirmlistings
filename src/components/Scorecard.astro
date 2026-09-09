@@ -41,8 +41,19 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL 
     )}
   </div>
   <div class="sc-gates">
+    {/* Every gate used to render a check, including the ones that had not passed: a reader saw a
+        tick beside "Licensure" on a firm whose licensure gate was open. The icon now follows the
+        state, and an attested gate says so, because a gate the firm asserted and a gate we
+        measured are not the same evidence and should not look identical. */}
     {Object.entries(d.gates).map(([code, g]) => (
-      <div class="sc-gate"><Icon name="check" /><div>{code} {gateNames[code]}<small>{g.evidence}</small></div></div>
+      <div class={`sc-gate ${g.pass ? (g.attested ? 'is-attested' : 'is-pass') : /pending|partial/i.test(g.source) ? 'is-pending' : 'is-fail'}`}>
+        <Icon name={g.pass ? 'check' : 'clock'} />
+        <div>{code} {gateNames[code]}
+          {g.attested && <span class="sc-tag">Firm-attested</span>}
+          {!g.pass && <span class="sc-tag">{/pending|partial/i.test(g.source) ? 'Not yet checked' : 'Not passed'}</span>}
+          <small>{g.evidence}</small>
+        </div>
+      </div>
     ))}
   </div>
   <div class="sc-pillars">
