@@ -377,29 +377,19 @@
   ],
   "assessments": {
     "A1": {
-      "pts": 6,
+      "pts": 10,
       "source": "registry",
-      "evidence": "All attorneys, no public discipline 10+ yrs"
+      "evidence": "All attorneys, no public discipline 10+ yrs (assessed 6/6 under methodology v1.0; rescaled to the v1.1 weighting)"
     },
     "A2": {
-      "pts": 5,
+      "pts": 9,
       "source": "registry",
-      "evidence": "Weighted avg admission 15+ yrs"
-    },
-    "A3": {
-      "pts": 3,
-      "source": "illustrative",
-      "evidence": "NBTA civil trial cert., partial"
-    },
-    "A4": {
-      "pts": 4,
-      "source": "illustrative",
-      "evidence": "Independent peer ratings on file"
+      "evidence": "Weighted avg admission 15+ yrs (assessed 5/5 under methodology v1.0; rescaled to the v1.1 weighting)"
     },
     "A5": {
-      "pts": 3,
+      "pts": 4.5,
       "source": "illustrative",
-      "evidence": "Bar memberships; malpractice insurance not disclosed"
+      "evidence": "Bar memberships; malpractice insurance not disclosed (assessed 3/4 under methodology v1.0; rescaled to the v1.1 weighting)"
     },
     "B1": {
       "pts": 4,
@@ -470,47 +460,42 @@
       "pts": 1,
       "source": "illustrative",
       "evidence": "earned media"
-    },
-    "E2": {
-      "pts": 2,
-      "source": "illustrative",
-      "evidence": "Mystery shop: phone < 1 hr, web form next day"
     }
   },
   "score": {
-    "total": 72,
+    "total": 82,
     "tier": "Certified",
-    "verdict": "All six eligibility gates passed. Strongest pillar: E; most headroom in pillar A (14/25).",
+    "verdict": "All six eligibility gates passed. Strongest pillar: A; most headroom in pillar D (17/25).",
     "computed_at": "2026-09-09",
     "methodology": "v1.0",
     "pillars": {
       "A": {
-        "score": 14,
+        "score": 24,
         "max": 25,
         "subs": [
           {
             "code": "A1",
             "label": "Clean-record depth",
-            "pts": 6,
+            "pts": 10,
             "max": 10,
             "source": "registry",
-            "evidence": "All attorneys, no public discipline 10+ yrs"
+            "evidence": "All attorneys, no public discipline 10+ yrs (assessed 6/6 under methodology v1.0; rescaled to the v1.1 weighting)"
           },
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 5,
+            "pts": 9,
             "max": 9,
             "source": "registry",
-            "evidence": "Weighted avg admission 15+ yrs"
+            "evidence": "Weighted avg admission 15+ yrs (assessed 5/5 under methodology v1.0; rescaled to the v1.1 weighting)"
           },
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 3,
+            "pts": 4.5,
             "max": 6,
             "source": "illustrative",
-            "evidence": "Bar memberships; malpractice insurance not disclosed"
+            "evidence": "Bar memberships; malpractice insurance not disclosed (assessed 3/4 under methodology v1.0; rescaled to the v1.1 weighting)"
           }
         ]
       },
@@ -667,16 +652,16 @@
         ]
       }
     },
-    "floor_abc": 46,
+    "floor_abc": 56,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 13,
-      "floor_met": false,
+      "gap": 3,
+      "floor_met": true,
       "path": [
-        "A1 Clean-record depth: +4 available",
-        "A2 Experience: +4 available",
-        "D2 Search authority: +4 available"
+        "D2 Search authority: +4 available",
+        "B1 Volume of verified results: +2 available",
+        "D1 Website trust & experience: +2.0 available"
       ]
     }
   }
