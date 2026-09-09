@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { GUIDES } from '../../data/guides';
+
+// Every guide we publish is listed here, and the header's Guides link points at this page
+// rather than at one particular article. Before this existed the nav pointed straight at the
+// gated ranking, so "Guides" led to a page saying the ranking was not published yet.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// A gated guide is evaluated against the collection, not against a stored flag, so a ranking
+// joins this list on its own the moment its cohort qualifies.
+const published = GUIDES.filter(g => {
+  if (!g.gate) return true;
+  const certified = firms.filter(f =>
+    f.data.status === 'certified' &&
+    f.data.market.city_slug === g.gate!.citySlug &&
+    f.data.practices.some(pr => pr.slug === g.gate!.practice));
+  return certified.length >= g.gate.minCertified;
+});
+
+const pending = GUIDES.filter(g => !published.includes(g));
+
+// The market's name comes from the firms themselves rather than from prettifying the slug,
+// which produced "New York, Ny".
+const marketLabel = (citySlug: string) => {
+  const f = firms.find(x => x.data.market.city_slug === citySlug);
+  return f ? `${f.data.market.city}, ${f.data.market.state}` : citySlug;
+};
+
+const title = 'Guides and rankings';
+const description = `Research and analysis behind the LFL Certification Score. ${published.length} ${published.length === 1 ? 'guide' : 'guides'} published.`;
+---
+<Base title={title} description={description} nav="guides">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Guides</li></ol>
+      <span class="eyebrow">Guides &amp; rankings</span>
+      <h1>What we measured, and what it means.</h1>
+      <p class="lede">Rankings are built from the Certification Score, and the analysis behind it is published here. Every figure in these pieces is computed from the same data the profiles use, so a correction propagates everywhere at once.</p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{published.length}</b><span>{published.length === 1 ? 'Guide published' : 'Guides published'}</span></div>
+      <div class="fact"><b class="num">{firms.length}</b><span>Firms in the data</span></div>
+      <div class="fact"><b>Free</b><span>No paywall, no sponsorship</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {published.length > 0 ? (
+      <div class="guide-grid">
+        {published.map(g => (
+          <a class="guide" href={`/guides/${g.slug}/`}>
+            <div class={g.thumb ? `thumb ${g.thumb}` : 'thumb'}><Icon name={g.icon ?? 'skyline'} /></div>
+            <div class="body">
+              <span class="kicker">{g.kicker}</span>
+              <h3>{g.title}</h3>
+              <p>{g.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="callout"><b>Nothing published yet.</b> Guides appear here as they are written.</div>
+    )}
+
+    {pending.length > 0 && (
+      <>
+        <div class="section-head" style="margin-top:56px">
+          <div>
+            <span class="eyebrow">In preparation</span>
+            <h2 style="margin-top:12px">Waiting on evidence</h2>
+            <p>A ranked post publishes only once its cohort holds enough certified firms, so the order reflects verified evidence rather than whichever firms we measured first.</p>
+          </div>
+        </div>
+        <ul class="pending-guides">
+          {pending.map(g => (
+            <li>
+              <b>{g.title}</b>
+              <span>{g.gate && `Publishes at ${g.gate.minCertified} certified firms in ${marketLabel(g.gate.citySlug)}`}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </div>
+</section>
+</Base>
