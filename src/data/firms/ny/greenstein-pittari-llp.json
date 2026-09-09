@@ -256,10 +256,10 @@
   ],
   "reviews": {
     "google": {
-      "rating": 5.0,
-      "count_label": "400+",
-      "source": "As reported by the firm (nyclawfirm.com)",
-      "fetched_at": "2026-09-07"
+      "rating": 4.9,
+      "count_label": "1,013",
+      "source": "Google Business Profile via Places API — 7 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-09"
     },
     "quotes": [
       {
@@ -341,15 +341,18 @@
       "measured_at": "2026-09-07"
     },
     "trust_pages": {
-      "https": true,
       "privacy_policy": true,
       "disclaimer": true,
-      "fee_statement": true,
-      "spanish": true,
-      "blog": true,
-      "bar_numbers_on_bios": false
+      "blog": true
     },
-    "schema_detected": false
+    "schema_detected": false,
+    "places": {
+      "listing_count": 7,
+      "review_count_total": 1013,
+      "rating_weighted": 4.9,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-09"
+    }
   },
   "gates": {
     "G1": {
@@ -426,118 +429,43 @@
     }
   ],
   "assessments": {
-    "A1": {
-      "pts": 10,
-      "source": "registry",
-      "evidence": "All attorneys, no public discipline 10+ yrs (assessed 6/6 under methodology v1.0; rescaled to the v1.1 weighting)"
-    },
-    "A2": {
-      "pts": 9,
-      "source": "registry",
-      "evidence": "Weighted avg admission 15+ yrs (assessed 5/5 under methodology v1.0; rescaled to the v1.1 weighting)"
-    },
     "A5": {
       "pts": 4.5,
       "source": "illustrative",
       "evidence": "Bar memberships; malpractice insurance not disclosed (assessed 3/4 under methodology v1.0; rescaled to the v1.1 weighting)"
     },
-    "B1": {
-      "pts": 4,
-      "source": "illustrative",
-      "evidence": "12 verified results · 70th percentile, NY × PI"
-    },
-    "B2": {
-      "pts": 5,
-      "source": "illustrative",
-      "evidence": "Median above cohort median"
-    },
-    "B3": {
-      "pts": 4,
-      "source": "illustrative",
-      "evidence": "Verdicts on record; no published appellate decisions"
-    },
-    "B4": {
-      "pts": 2,
-      "source": "illustrative",
-      "evidence": "Only 40% of results within 24 months"
-    },
-    "C2": {
-      "pts": 5,
-      "source": "illustrative",
-      "evidence": "Bayesian avg 4.8 across platforms"
-    },
-    "C3": {
-      "pts": 3,
-      "source": "illustrative",
-      "evidence": "Steady monthly flow; minor platform variance"
-    },
-    "C4": {
-      "pts": 2,
-      "source": "illustrative",
-      "evidence": "Responds to most ≤3★ reviews"
-    },
-    "C5": {
-      "pts": 2,
-      "source": "illustrative",
-      "evidence": "One BBB complaint, resolved"
-    },
-    "D1_cwv": {
-      "pts": 2,
-      "source": "illustrative",
-      "evidence": "pass (illustrative)"
-    },
-    "D1_a11y": {
-      "pts": 0,
-      "source": "illustrative",
-      "evidence": "a11y not measured"
-    },
-    "D2_brand": {
-      "pts": 1,
-      "source": "illustrative",
-      "evidence": "brand demand"
-    },
-    "D3": {
-      "pts": 4,
-      "source": "illustrative",
-      "evidence": "GBP complete · NAP consistent · top-3 local pack for 3 of 5 terms"
-    },
     "D4_content": {
       "pts": 2,
       "source": "observed",
       "evidence": "Blog + press releases"
-    },
-    "D4_media": {
-      "pts": 1,
-      "source": "illustrative",
-      "evidence": "earned media"
     }
   },
   "score": {
-    "total": 82,
+    "total": 38,
     "tier": "Under review",
-    "verdict": "2 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: A; most headroom in pillar D (17/25).",
+    "verdict": "2 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar B (0/20).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
       "A": {
-        "score": 24,
+        "score": 10,
         "max": 25,
         "subs": [
           {
-            "code": "A1",
-            "label": "Clean-record depth",
-            "pts": 10,
-            "max": 10,
-            "source": "registry",
-            "evidence": "All attorneys, no public discipline 10+ yrs (assessed 6/6 under methodology v1.0; rescaled to the v1.1 weighting)"
-          },
-          {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 5,
             "max": 9,
             "source": "registry",
-            "evidence": "Weighted avg admission 15+ yrs (assessed 5/5 under methodology v1.0; rescaled to the v1.1 weighting)"
+            "evidence": "Mean 8.6 years since admission across 8 of 9 named attorneys (longest 32, shortest 0) · NYS Attorney Registration database"
+          },
+          {
+            "code": "A1",
+            "label": "Clean-record depth",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "A5",
@@ -550,45 +478,45 @@
         ]
       },
       "B": {
-        "score": 15,
+        "score": 0,
         "max": 20,
         "subs": [
           {
             "code": "B1",
             "label": "Volume of verified results",
-            "pts": 4,
+            "pts": 0,
             "max": 6,
-            "source": "illustrative",
-            "evidence": "12 verified results · 70th percentile, NY × PI"
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "B2",
             "label": "Magnitude",
-            "pts": 5,
+            "pts": 0,
             "max": 6,
-            "source": "illustrative",
-            "evidence": "Median above cohort median"
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "B3",
             "label": "Trial & appellate",
-            "pts": 4,
+            "pts": 0,
             "max": 5,
-            "source": "illustrative",
-            "evidence": "Verdicts on record; no published appellate decisions"
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "B4",
             "label": "Recency",
-            "pts": 2,
+            "pts": 0,
             "max": 3,
-            "source": "illustrative",
-            "evidence": "Only 40% of results within 24 months"
+            "source": "pending",
+            "evidence": "Not yet assessed"
           }
         ]
       },
       "C": {
-        "score": 17,
+        "score": 10,
         "max": 20,
         "subs": [
           {
@@ -597,77 +525,77 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "400+ Google reviews · As reported by the firm (nyclawfirm.com)"
+            "evidence": "1,013 Google reviews · Google Business Profile via Places API — 7 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
             "pts": 5,
             "max": 6,
-            "source": "illustrative",
-            "evidence": "Bayesian avg 4.8 across platforms"
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 1,013 reviews → Bayesian 4.89 (prior 4.80 weighted as 100 reviews, from 13 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Recency & consistency",
-            "pts": 3,
+            "pts": 0,
             "max": 3,
-            "source": "illustrative",
-            "evidence": "Steady monthly flow; minor platform variance"
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "C4",
             "label": "Firm responsiveness",
-            "pts": 2,
+            "pts": 0,
             "max": 3,
-            "source": "illustrative",
-            "evidence": "Responds to most ≤3★ reviews"
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "C5",
             "label": "Complaints",
-            "pts": 2,
+            "pts": 0,
             "max": 3,
-            "source": "illustrative",
-            "evidence": "One BBB complaint, resolved"
+            "source": "pending",
+            "evidence": "Not yet assessed"
           }
         ]
       },
       "D": {
-        "score": 17,
+        "score": 9,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 5.0,
+            "pts": 2.0,
             "max": 7,
-            "source": "illustrative",
-            "evidence": "CWV pass (illustrative) · no bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content"
+            "source": "observed",
+            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 4,
+            "pts": 3,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 28 → 22th pct of 37-firm cohort (median 33.5) 1/3 · 906 referring domains, 41th pct 1/2 · 469 organic keywords / 2,736 visits·mo, 31th pct 1/2 · brand demand 1/1 (illustrative)"
+            "evidence": "DR 28 → 22th pct of 37-firm cohort (median 33.5) 1/3 · 906 referring domains, 41th pct 1/2 · 469 organic keywords / 2,736 visits·mo, 31th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 4,
+            "pts": 1,
             "max": 5,
-            "source": "illustrative",
-            "evidence": "GBP complete · NAP consistent · top-3 local pack for 3 of 5 terms"
+            "source": "places",
+            "evidence": "7 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
-            "pts": 4,
+            "pts": 3,
             "max": 5,
             "source": "ahrefs",
-            "evidence": "content 2/2 · no JSON-LD detected 0/1 · earned media 1/1 (illustrative) · cited in AI answers: 155 citations / 75 pages 1/1"
+            "evidence": "content 2/2 · no JSON-LD detected 0/1 · earned media 0/1 · cited in AI answers: 155 citations / 75 pages 1/1"
           }
         ]
       },
@@ -702,16 +630,16 @@
         ]
       }
     },
-    "floor_abc": 56,
+    "floor_abc": 20,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 3,
-      "floor_met": true,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 32,
+      "floor_met": false,
       "path": [
-        "D2 Search authority: +4 available",
-        "B1 Volume of verified results: +2 available",
-        "D1 Website trust & experience: +2.0 available"
+        "A1 Clean-record depth: +10 available",
+        "B1 Volume of verified results: +6 available",
+        "B2 Magnitude: +6 available"
       ]
     }
   }

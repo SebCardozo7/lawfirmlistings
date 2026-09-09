@@ -101,6 +101,8 @@ def sub(code, pts, source, evidence):
     pil, label, mx = SUBS[code]
     return {"code": code, "label": label, "pts": round(min(pts, mx), 1), "max": mx, "source": source, "evidence": evidence}
 
+TODAY_YEAR = int(TODAY[:4])
+
 def compute(firm):
     A = firm.get("assessments", {})
     cohort = COHORTS.get(firm["cohort_id"])
@@ -111,8 +113,31 @@ def compute(firm):
         if a: return sub(code, a["pts"], a.get("source", "illustrative"), a["evidence"])
         return sub(code, 0, "pending", default_ev)
 
-    # ---- A, B: assessed (registry/court work) ----
-    for c in ["A1", "A2", "A5", "B1", "B2", "B3", "B4"]: out.append(assessed(c))
+    # ---- A2 experience: computed from the registry, no longer asserted ----
+    # This was hand-entered, and for the one firm that had a value it claimed a "weighted average
+    # admission 15+ yrs" that the registry contradicts outright: the real mean across its
+    # attorneys is 8.6 years, which is two bands lower. Now that scripts/check_ny_registry.py
+    # writes a real admitted_year, the sub-factor is arithmetic.
+    #
+    # The mean, not a "weighted" mean: the methodology said weighted without ever defining the
+    # weights, so the word described nothing. Coverage is stated in the evidence rather than
+    # gated on a threshold, because the mean over eight of nine attorneys is a sound estimate of
+    # the mean over nine and hiding the denominator would be the dishonest part.
+    attys = firm.get("attorneys") or []
+    years = [TODAY_YEAR - a["admitted_year"] for a in attys
+             if a.get("admitted_year") and a["admitted_year"] <= TODAY_YEAR]
+    if years and "A2" not in A:
+        avg = sum(years) / len(years)
+        pts = 9 if avg >= 15 else 7 if avg >= 10 else 5 if avg >= 5 else 2
+        out.append(sub("A2", pts, "registry",
+                       f"Mean {avg:.1f} years since admission across {len(years)} of {len(attys)} "
+                       f"named attorneys (longest {max(years)}, shortest {min(years)}) · "
+                       f"NYS Attorney Registration database"))
+    else:
+        out.append(assessed("A2"))
+
+    # ---- A1, A5, B: still assessed (court records and disclosures we do not yet collect) ----
+    for c in ["A1", "A5", "B1", "B2", "B3", "B4"]: out.append(assessed(c))
 
     # ---- C ----
     g = firm.get("reviews", {}).get("google")

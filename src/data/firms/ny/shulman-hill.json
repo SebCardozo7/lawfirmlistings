@@ -375,29 +375,29 @@
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 26,
+    "total": 33,
     "tier": "Under review",
-    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: C; most headroom in pillar B (0/20).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 7,
         "max": 25,
         "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 7,
+            "max": 9,
+            "source": "registry",
+            "evidence": "Mean 10.2 years since admission across 22 of 24 named attorneys (longest 21, shortest 0) · NYS Attorney Registration database"
+          },
           {
             "code": "A1",
             "label": "Clean-record depth",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "A2",
-            "label": "Experience",
-            "pts": 0,
-            "max": 9,
             "source": "pending",
             "evidence": "Not yet assessed"
           },
@@ -564,16 +564,16 @@
         ]
       }
     },
-    "floor_abc": 10,
+    "floor_abc": 17,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 44,
+      "gap": 37,
       "floor_met": false,
       "path": [
         "A1 Clean-record depth: +10 available",
-        "A2 Experience: +9 available",
-        "A5 Accountability: +6 available"
+        "A5 Accountability: +6 available",
+        "B1 Volume of verified results: +6 available"
       ]
     }
   }
