@@ -33,8 +33,14 @@ const stars = g ? '★'.repeat(Math.round(g.rating)) + '☆'.repeat(5 - Math.rou
 const selfReported = g ? /as reported by the firm/i.test(g.source) : false;
 
 const officeLabel = `${d.offices.length} office${d.offices.length === 1 ? '' : 's'}`;
-const attorneyLabel = `${d.attorneys.length} attorney${d.attorneys.length === 1 ? '' : 's'}`;
-const seniority = d.founded_year ? `Est. ${d.founded_year} · ${attorneyLabel}` : attorneyLabel;
+// An empty attorneys array means we have not verified any names yet, not that the firm has no
+// attorneys. Printing "0 attorneys" states something false about a real firm, so the line is
+// omitted until there is a name in it.
+const attorneyLabel = d.attorneys.length
+  ? `${d.attorneys.length} attorney${d.attorneys.length === 1 ? '' : 's'}`
+  : null;
+const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLabel]
+  .filter(Boolean).join(' · ') || null;
 ---
 
 <article class="firm-card">
@@ -59,7 +65,7 @@ const seniority = d.founded_year ? `Est. ${d.founded_year} · ${attorneyLabel}` 
         </span>
       )}
       <span>{d.market.city}, {d.market.state} · {officeLabel}</span>
-      <span>{seniority}</span>
+      {seniority && <span>{seniority}</span>}
     </div>
 
     {blurb && <p class="firm-desc">{blurb}</p>}

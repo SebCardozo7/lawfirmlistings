@@ -1,0 +1,341 @@
+{
+  "slug": "jacob-d-fuchsberg-law-firm",
+  "name": "Jacob D. Fuchsberg Law Firm",
+  "initials": "JD",
+  "website": "https://www.fuchsberg.com/",
+  "domain": "fuchsberg.com",
+  "phone": "(212) 869-3500",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true
+    }
+  ],
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "Jacob D. Fuchsberg Law Firm",
+      "address": "3 Park Ave 37th Floor, New York, NY 10016, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=5820875056792559091&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Español"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "The Jacob D. Fuchsberg Law Firm is a New York personal injury practice based in a single Manhattan office. The firm describes its work as representing victims of medical malpractice and of negligence in police custody.",
+    "It states that it works on a contingency basis, with no fees unless the case is won, and publishes a free consultation, a 24-hour intake line and material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.7,
+      "count_label": "109",
+      "source": "Google Business Profile via Places API — 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-08"
+    }
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 64,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-08",
+      "note": "LCP 6.7 s / CLS 0.000 / TBT 32 ms"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Bar registry not yet checked for this firm's attorneys",
+      "source": "pending",
+      "checked_at": "2026-09-08"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Disciplinary history not yet checked",
+      "source": "pending",
+      "checked_at": "2026-09-08"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-08"
+    },
+    "G4": {
+      "pass": false,
+      "evidence": "AG, FTC and court-sanction search not yet run",
+      "source": "pending",
+      "checked_at": "2026-09-08"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-08"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "109 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-08"
+    }
+  },
+  "cohort_id": "ny-personal-injury",
+  "faq": [],
+  "fee_statement": "eath lawyers will guide you through the legal process and fight for justice. We work on a contingency basis, so no fees unless we win. Schedule a Free Consultation #cta_end Common Causes of D",
+  "score": {
+    "total": 10,
+    "tier": "Under review",
+    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-09",
+    "methodology": "v1.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A1",
+            "label": "Clean-record depth",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A3",
+            "label": "Board certification",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A4",
+            "label": "Peer recognition",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 20,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Volume of verified results",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "B2",
+            "label": "Magnitude",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "B3",
+            "label": "Trial & appellate",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "B4",
+            "label": "Recency",
+            "pts": 0,
+            "max": 3,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          }
+        ]
+      },
+      "C": {
+        "score": 3,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "109 Google reviews · Google Business Profile via Places API — 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "C3",
+            "label": "Recency & consistency",
+            "pts": 0,
+            "max": 3,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "C4",
+            "label": "Firm responsiveness",
+            "pts": 0,
+            "max": 3,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "C5",
+            "label": "Complaints",
+            "pts": 0,
+            "max": 3,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 10,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "Free consultation · eath lawyers will guide you through the legal process and fight for justice. We work on a contingency basis, so no fees unless we win. Schedule a Free Consultation #cta_end Common Causes of D"
+          },
+          {
+            "code": "E2",
+            "label": "Intake responsiveness",
+            "pts": 0,
+            "max": 3,
+            "source": "pending",
+            "evidence": "Mystery shop pending"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.5,
+            "max": 2,
+            "source": "observed",
+            "evidence": "English, Español"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 1,
+            "max": 2,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 3,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 60,
+      "floor_met": false,
+      "path": [
+        "D2 Search authority: +8 available",
+        "A1 Clean-record depth: +6 available",
+        "B1 Volume of verified results: +6 available"
+      ]
+    }
+  }
+}
