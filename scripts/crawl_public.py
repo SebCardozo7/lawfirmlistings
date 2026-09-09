@@ -39,6 +39,8 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+
+import lib_discover
 import urllib.robotparser
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -127,6 +129,15 @@ def fetch(url):
         return None, "", str(e)
 
 
+def robots_body(origin):
+    """The raw robots.txt, kept because it carries the Sitemap directives."""
+    try:
+        status, body, _ = fetch(origin + "/robots.txt")
+        return body if status == 200 else ""
+    except Exception:
+        return ""
+
+
 def robots_for(origin):
     rp = urllib.robotparser.RobotFileParser()
     rp.set_url(origin + "/robots.txt")
@@ -181,6 +192,7 @@ def unescape(s):
 
 
 def discover_links(html, origin):
+    # Kept as the fallback for a site with no usable sitemap.
     """Internal links on a page, one URL per kind, taken from the site's own navigation."""
     found = {}
     for m in re.finditer(r'href=["\']([^"\'#\s]+)["\']', html, re.I):
@@ -190,7 +202,12 @@ def discover_links(html, origin):
         path = urllib.parse.urlparse(url).path.lower()
         if path in ("", "/"):
             continue
+        if "attorneys" not in found and lib_discover.is_attorney_path(path):
+            found["attorneys"] = url
+            continue
         for kind, pattern in LINK_KINDS:
+            if kind == "attorneys":
+                continue
             if kind not in found and re.search(pattern, path):
                 found[kind] = url
                 break
@@ -284,11 +301,31 @@ def crawl(domain, fetched_at):
     rp = robots_for(origin)
     harvest("home", home_html, final_home)
 
-    # Discovered links win; the fixed list only fills kinds the navigation did not reveal.
-    plan = discover_links(home_html, origin)
+    # Three sources, most authoritative first. The sitemap is the list the site itself
+    # publishes for crawlers; the home page navigation is what a visitor sees; the fixed
+    # paths are guesses and only fill what neither revealed. Before the sitemap was read,
+    # a firm whose /meet-our-attorneys/ page sits in its sitemap but is not linked from the
+    # home page in a recognised form was recorded as publishing no attorney bios at all.
+    sitemap_pages, roster_pages = lib_discover.crawl_sitemap(
+        origin, fetch, lambda u: rp.can_fetch(UA, u), robots_body(origin))
+    plan = lib_discover.pick_by_kind(sitemap_pages, LINK_KINDS)
+    if sitemap_pages:
+        record["notes"].append(
+            "sitemap listed %d page(s); %d kind(s) resolved from it%s"
+            % (len(sitemap_pages), len(plan),
+               ("; %d bio page(s) from a roster sitemap" % len(roster_pages))
+               if roster_pages else ""))
+    for kind, url in discover_links(home_html, origin).items():
+        plan.setdefault(kind, url)
     for path, kind in CANDIDATE_PATHS:
         if kind != "home" and kind not in plan:
             plan[kind] = origin + path
+
+    # Individual bio pages, for crawl_attorneys.py. Several of these firms render their team
+    # grid in JavaScript, so the server-side HTML of the index lists nobody and the only
+    # place the people are enumerated is the sitemap.
+    record["attorney_bio_urls"] = lib_discover.attorney_bio_urls(
+        sitemap_pages, plan.get("attorneys"), roster_pages)
 
     for kind, url in plan.items():
         if not rp.can_fetch(UA, url):

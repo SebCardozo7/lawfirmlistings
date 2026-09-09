@@ -98,6 +98,8 @@ def main() -> int:
     ap.add_argument("--domains", required=True, help="comma-separated staging domains")
     ap.add_argument("--staging", default=".crawl")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--attorneys", action="store_true",
+                    help="also merge the crawled roster into the profile")
     args = ap.parse_args()
 
     rc = 0
@@ -115,7 +117,10 @@ def main() -> int:
             continue
 
         firm = json.loads(path.read_text(encoding="utf-8"))
-        changed = promote(json.loads(staging.read_text(encoding="utf-8")), firm)
+        rec = json.loads(staging.read_text(encoding="utf-8"))
+        changed = promote(rec, firm)
+        if args.attorneys:
+            changed += promote_attorneys(rec, firm)
         print(f"\n{firm['name']}  ({path.name})")
         if not changed:
             print("  nothing measured to promote")

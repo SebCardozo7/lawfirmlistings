@@ -43,7 +43,10 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 DELAY = 1.5
 # Four firms hit a cap of 25 with names still on the page, so this is the number of bios a
 # large firm plausibly publishes rather than a number that quietly truncates the result.
-MAX_BIOS = 60
+# Raised from 60 once the sitemap started finding real rosters: one firm publishes 64 bios,
+# and a cap below the roster size truncates silently, which is how this went wrong at 25.
+# Hitting the cap is now reported rather than absorbed.
+MAX_BIOS = 200
 
 ATTORNEY_PATTERN = next(p for k, p in LINK_KINDS if k == "attorneys")
 
@@ -67,9 +70,28 @@ SUFFIXES = re.compile(r"\s*[,|–—-]\s*(esq\.?|esquire|jd|j\.d\.|llp|llc|p\.?c
 # The title is worth keeping: it is the firm's own published statement of the role.
 ROLE_WORDS = {
     "founding", "managing", "senior", "seniour", "equity", "name", "supervising", "appellate",
-    "general", "and", "of", "associate", "partner", "counsel", "attorney", "attorneys",
+    "general", "and", "of", "the", "associate", "partner", "counsel", "attorney", "attorneys",
     "paralegal", "founder", "co-founder", "shareholder", "trial", "litigation", "esq",
+    # Titles that are not "partner" or "associate". A firm published "Steven Dorfman Managing
+    # Legal Officer" as its bio heading, and because "officer" was missing the peel stopped on
+    # the first word and the whole title stayed in the name.
+    "officer", "legal", "chief", "executive", "director", "president", "vice", "chair",
+    "chairman", "chairwoman", "principal", "member", "head", "lead", "practice", "department",
+    "operations", "intake", "emeritus", "advocate", "clerk",
+    # Adjectives that only ever sit inside a job title. None is a plausible surname, which is the
+    # test for adding one here: the peel walks right to left and stops at the first word it does
+    # not know, so a missing adjective leaves everything to its left stuck in the name.
+    "operating", "operational", "financial", "administrative", "marketing", "technology",
+    "information", "revenue", "strategy", "strategic", "business", "development", "relations",
+    "services", "support", "compliance", "risk", "human", "resources", "client", "clients",
 }
+
+# The peel is vocabulary-based, so a title word we do not know leaves everything to its left
+# stuck in the name. Five words was already the ceiling for a person, but a four-word "name" that
+# is really two names plus two title words looked fine. A residual title word after the second
+# word is the tell, and it sends the heading to `rejected` for a human rather than publishing a
+# job description as somebody's name.
+TITLE_RESIDUE = re.compile(r"\b(" + "|".join(sorted(ROLE_WORDS)) + r")\b", re.I)
 
 # New York registration numbers are seven digits; the label varies by firm.
 BAR_NUMBER = re.compile(
@@ -86,6 +108,9 @@ def looks_like_a_person(name):
         return False
     words = [w for w in re.split(r"\s+", name) if w]
     if not 2 <= len(words) <= 5:
+        return False
+    # A title word past the given name and surname means the peel stopped early.
+    if len(words) > 2 and TITLE_RESIDUE.search(" ".join(words[2:])):
         return False
 
     def cased_like_a_name(w):
@@ -154,7 +179,7 @@ def bio_candidates(html, origin, index_url):
     return out
 
 
-def collect(domain, verbose=False):
+def collect(domain, verbose=False, record=None):
     origin = "https://" + domain
     status, home, final_home = fetch(origin + "/")
     time.sleep(DELAY)
@@ -164,8 +189,14 @@ def collect(domain, verbose=False):
     origin = parsed.scheme + "://" + parsed.netloc
     rp = robots_for(origin)
 
-    # Find the attorney index from the home page's own navigation.
-    index_url = None
+    # The sitemap first: it is the list the site publishes for crawlers, and it reaches pages
+    # the home page does not link in a form we recognise. Falling back to the navigation.
+    index_url = (record or {}).get("pages_found", {}).get("attorneys")
+    seeded_bios = [u for u in ((record or {}).get("attorney_bio_urls") or [])]
+    if index_url or seeded_bios:
+        if verbose:
+            print("      from sitemap: index %s, %d bio url(s)"
+                  % (index_url or "none", len(seeded_bios)))
     for m in re.finditer(r'href=["\']([^"\'#\s]+)["\']', home, re.I):
         url = urllib.parse.urljoin(origin + "/", m.group(1).strip())
         if not url.startswith(origin):
@@ -176,24 +207,34 @@ def collect(domain, verbose=False):
             # Prefer the shallowest match: the index, not one of its bios.
             if index_url is None or len(segs) < len([s for s in urllib.parse.urlparse(index_url).path.split("/") if s]):
                 index_url = url.split("?")[0]
-    if not index_url:
-        return {"error": "no attorney index found in the site's navigation"}
+    if not index_url and not seeded_bios:
+        return {"error": "no attorney index found in the sitemap or the navigation"}
 
-    if not rp.can_fetch(UA, index_url):
-        return {"error": "robots.txt disallows %s" % index_url}
-    status, index_html, index_final = fetch(index_url)
-    time.sleep(DELAY)
-    if status != 200 or not index_html:
-        return {"error": "attorney index returned %s" % status, "index_url": index_url}
+    index_html, index_final = "", index_url or ""
+    if index_url:
+        if not rp.can_fetch(UA, index_url):
+            if not seeded_bios:
+                return {"error": "robots.txt disallows %s" % index_url}
+        else:
+            status, index_html, index_final = fetch(index_url)
+            time.sleep(DELAY)
+            if (status != 200 or not index_html) and not seeded_bios:
+                return {"error": "attorney index returned %s" % status,
+                        "index_url": index_url}
+            index_final = index_final or index_url
 
     result = {"index_url": index_final, "attorneys": [], "rejected": [],
               "checked_at": datetime.date.today().isoformat()}
 
-    bios = bio_candidates(index_html, origin, index_final)
+    bios = seeded_bios or (bio_candidates(index_html, origin, index_final)
+                           if index_html else [])
     if verbose:
-        print("      index %s -> %d bio link(s)" % (index_final, len(bios)))
+        print("      %d bio page(s) to read (%s)"
+              % (len(bios), "from sitemap" if seeded_bios else "from index links"))
 
     # A single bio page reached directly (no index of its own) still counts.
+    if not bios and not index_html:
+        return {"error": "no bio pages found", "index_url": index_final}
     if not bios:
         name, role = split_name_and_role(h1_of(index_html))
         if looks_like_a_person(name):
@@ -203,6 +244,8 @@ def collect(domain, verbose=False):
             result["rejected"].append({"heading": h1_of(index_html), "url": index_final})
         return result
 
+    if len(bios) > MAX_BIOS:
+        result["truncated"] = {"found": len(bios), "read": MAX_BIOS}
     for url in bios[:MAX_BIOS]:
         if not rp.can_fetch(UA, url):
             continue
@@ -252,7 +295,7 @@ def main():
         if not rec.get("https_ok"):
             continue
 
-        found = collect(rec["domain"], args.verbose)
+        found = collect(rec["domain"], args.verbose, rec)
         # Re-read before writing: another enricher may have written in the meantime.
         fresh = json.loads(io.open(path, encoding="utf-8").read())
         fresh["attorneys_found"] = found
