@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
-import { GUIDES } from '../../data/guides';
+import { GUIDES, publishedGuides } from '../../data/guides';
 
 // Every guide we publish is listed here, and the header's Guides link points at this page
 // rather than at one particular article. Before this existed the nav pointed straight at the
@@ -11,15 +11,9 @@ const firms = await getCollection('firms', f =>
   f.data.status !== 'sample' && f.data.status !== 'not_eligible');
 
 // A gated guide is evaluated against the collection, not against a stored flag, so a ranking
-// joins this list on its own the moment its cohort qualifies.
-const published = GUIDES.filter(g => {
-  if (!g.gate) return true;
-  const certified = firms.filter(f =>
-    f.data.status === 'certified' &&
-    f.data.market.city_slug === g.gate!.citySlug &&
-    f.data.practices.some(pr => pr.slug === g.gate!.practice));
-  return certified.length >= g.gate.minCertified;
-});
+// joins this list on its own the moment its cohort qualifies. The home page asks the same
+// question, so the rule lives in the manifest.
+const published = publishedGuides(firms);
 
 const pending = GUIDES.filter(g => !published.includes(g));
 

@@ -1,0 +1,171 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+
+// Every figure here is computed from the firms collection at build time, so the article cannot
+// drift away from the data it describes. Firms whose rating we hold only because the firm
+// reports it are excluded from the statistics and named separately: mixing a self-reported
+// number into an average of measured ones would make the average unciteable.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+type Firm = typeof firms[number];
+const count = (f: Firm) =>
+  Number((f.data.reviews.google?.count_label ?? '0').replace(/[^0-9]/g, '')) || 0;
+
+// digital.places is written by the Places API run; its presence is what separates a measured
+// rating from one a firm publishes about itself.
+const measured = firms.filter(f => f.data.digital.places && f.data.reviews.google?.rating);
+const selfReported = firms.filter(f => !f.data.digital.places && f.data.reviews.google?.rating);
+
+const byCount = [...measured].sort((a, b) => count(b) - count(a));
+const byRating = [...measured].sort((a, b) =>
+  (b.data.reviews.google!.rating ?? 0) - (a.data.reviews.google!.rating ?? 0));
+
+const totalReviews = measured.reduce((n, f) => n + count(f), 0);
+const totalListings = measured.reduce((n, f) => n + f.data.digital.places!.listing_count, 0);
+const ratings = measured.map(f => f.data.reviews.google!.rating!);
+const hiRating = Math.max(...ratings);
+const loRating = Math.min(...ratings);
+const ratingSpread = +(hiRating - loRating).toFixed(2);
+const hiCount = count(byCount[0]);
+const loCount = count(byCount[byCount.length - 1]);
+const countRatio = Math.round(hiCount / loCount);
+
+// The count-weighted mean is the prior the score's C2 shrinks toward, so the article quotes the
+// same number the engine uses rather than an unweighted average of the ratings.
+const weightedMean = totalReviews
+  ? +(measured.reduce((s, f) => s + f.data.reviews.google!.rating! * count(f), 0) / totalReviews).toFixed(2)
+  : null;
+const plainMean = +(ratings.reduce((s, r) => s + r, 0) / ratings.length).toFixed(2);
+
+// How many firms share the most common rating once rounded to one decimal: the "they all look
+// the same" claim, counted rather than asserted.
+const rounded = ratings.map(r => Math.round(r * 10) / 10);
+const modeSize = Math.max(...rounded.map(r => rounded.filter(x => x === r).length));
+const clustered = rounded.filter(r => r >= 4.8).length;
+
+// Single-office firms versus firms with several: the point of the piece.
+const single = measured.filter(f => f.data.digital.places!.listing_count === 1);
+const multi = measured.filter(f => f.data.digital.places!.listing_count > 1);
+const avgCount = (xs: Firm[]) =>
+  xs.length ? Math.round(xs.reduce((n, f) => n + count(f), 0) / xs.length) : 0;
+
+// C3 is the recency sub-factor. Naming how many firms have it unassessed is more honest than
+// implying we know how old these reviews are.
+const c3Pending = firms.filter(f =>
+  f.data.score?.pillars.C.subs.some(s => s.code === 'C3' && s.source === 'pending')).length;
+
+const measuredOn = measured[0]?.data.digital.places!.measured_at ?? null;
+const updated = measuredOn
+  ? new Date(measuredOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+const fmt = (n: number) => n.toLocaleString('en-US');
+
+const title = 'Google reviews, and why the ratings barely differ';
+const description = `We summed every Google review across ${totalListings} business listings for ${measured.length} New York personal injury firms. The ratings differ by ${ratingSpread} points; the review counts differ by ${countRatio}×. Why a star rating ranks almost nothing, and what to read instead.`;
+---
+<Base title={title} description={description} nav="guides">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Google reviews</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Data · Client reviews</span>
+    <h1>{title}</h1>
+    <p class="lede">We pulled every Google Business Profile belonging to a New York personal injury firm in this directory — {fmt(totalListings)} listings across {measured.length} firms — and summed the reviews. There are {fmt(totalReviews)} of them. The highest-rated firm sits at {hiRating} and the lowest at {loRating}. That gap, {ratingSpread} of a star, is the entire range you are choosing within when you sort by rating.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>4 min read</span>
+    </div>
+  </div>
+</header>
+
+<div class="article-cover">
+  <div class="container">
+    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="star" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
+  </div>
+</div>
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#spread" class="is-active">The ratings barely differ</a></li>
+      <li><a href="#offices">The counts differ enormously</a></li>
+      <li><a href="#bayes">What the score does about it</a></li>
+      <li><a href="#read">What to read instead</a></li>
+      <li><a href="#limits">What this does not cover</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="spread">The ratings barely differ</h2>
+    <p>Sorted by star rating, the {measured.length} firms we measured run from {hiRating} down to {loRating}. {clustered} of the {measured.length} sit at 4.8 or above, and {modeSize} share the same rating once rounded to a single decimal. A rating is a real signal — a firm sitting at 3.2 would tell you something loudly — but within a competitive practice in a large city, almost every firm that stays in business clusters at the top of the scale, and the ordering inside that cluster is mostly noise.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Firm</th><th>Rating</th><th>Reviews</th><th>Listings</th></tr></thead>
+        <tbody>
+          {byRating.map(f => (
+            <tr>
+              <td><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></td>
+              <td class="num">{f.data.reviews.google!.rating}</td>
+              <td class="num">{fmt(count(f))}</td>
+              <td class="num">{f.data.digital.places!.listing_count}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p>The unweighted average of those ratings is {plainMean}. Weighted by how many reviews each rating rests on, it is {weightedMean} — slightly higher, because the firms with the most reviews are also rated slightly above the middle. Both numbers are so close to the top of the scale that the useful question is not <i>which firm is rated highest</i> but <i>which rating is standing on enough reviews to mean anything</i>.</p>
+
+    <h2 id="offices">The counts differ enormously</h2>
+    <p>That is where the spread actually is. {byCount[0].data.name} has {fmt(hiCount)} reviews. {byCount[byCount.length - 1].data.name} has {fmt(loCount)}. One is {countRatio} times the other, and both firms take the same kind of case in the same city.</p>
+    <p>Most of that gap is offices, not popularity. A Google review attaches to a business listing, not to a firm, so a practice with {byCount[0].data.digital.places!.listing_count} listings accumulates reviews at {byCount[0].data.digital.places!.listing_count} addresses at once.{multi.length > 0 && single.length > 0 && <> Across this set, the {multi.length} firms with more than one listing average {fmt(avgCount(multi))} reviews; the {single.length} with a single listing average {fmt(avgCount(single))}.</>} A firm that has never opened a satellite office is not worse than one that has — it is counted differently, and any directory that ranks on raw review volume is quietly ranking on office count.</p>
+    <p>This is also why our per-firm totals are sums. We add every listing a firm operates and weight the rating by each listing's count, so a firm is described by all of its reviews rather than by whichever office Google decides to show you. The source line on each profile says how many listings went into the number.</p>
+
+    <h2 id="bayes">What the score does about it</h2>
+    <p>Client experience is pillar C of the <a href="/methodology/">LFL Certification Score</a>, worth 20 of 100, and reviews feed the first two sub-factors. They are deliberately built to resist both problems above.</p>
+    <p><b>C1, authentic volume,</b> is banded rather than linear. Past a few hundred reviews the sub-factor is maxed out, so the firm with {fmt(hiCount)} and the firm with a tenth of that score the same. Volume past the point of statistical confidence buys nothing.</p>
+    <p><b>C2, rating quality,</b> is a Bayesian average rather than the raw star rating. Each firm's rating is pulled toward the count-weighted mean of the cohort — {weightedMean} — with the prior weighted as 100 reviews. A firm with thousands of reviews barely moves. A firm with forty moves a lot. The arithmetic is the familiar shrinkage form, <code>(v·R + m·C) / (v + m)</code>, and it means three reviews at a perfect 5.0 cannot outrank four hundred at 4.8. Every profile prints the result of that calculation next to the inputs, so you can check it.</p>
+
+    <h2 id="read">What to read instead</h2>
+    <p>If the ratings are all the same and the counts measure offices, the text is what is left, and it is more informative than the number sitting above it.</p>
+    <ul>
+      <li><b>Read the one- and two-star reviews first.</b> Not to count them — every firm with hundreds of clients has some — but because they are where the recurring complaint shows up. A pattern of "nobody returned my calls for three months" across several years is a finding. One furious review about an outcome nobody could have won is not.</li>
+      <li><b>Check whether the firm replies.</b> A firm that answers criticism publicly is a firm that reads its own reviews. That is our C4 sub-factor, and it is not yet assessed for any firm here — but you can see it yourself in ten seconds.</li>
+      <li><b>Look at the dates.</b> Two hundred reviews spread over eight years describes a stable practice. Two hundred inside one quarter describes a campaign. That is C3, recency and consistency, unassessed for {c3Pending} of the {firms.length} firms in the directory, which is exactly why we say so on the profile rather than scoring it anyway.</li>
+      <li><b>Read what the case was.</b> A firm rated highly for handling straightforward rear-end collisions has told you nothing about how it handles a birth injury or a trucking case, which need different experts and much larger case budgets.</li>
+    </ul>
+
+    <h2 id="limits">What this does not cover</h2>
+    <p>One platform. Every figure above comes from Google Business Profile, because it is the only review source we have collected so far. Our own methodology asks for a cross-platform picture, and a single-platform average is weaker evidence than that — so the evidence line on every profile says "single platform, Google only" rather than leaving you to assume otherwise.</p>
+    {selfReported.length > 0 && (
+      <p>{selfReported.length === 1 ? 'One firm is' : `${selfReported.length} firms are`} excluded from every number on this page: {selfReported.map((f, i) => (<>{i > 0 && ', '}<a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></>))}, whose rating we hold only because the firm publishes it. A self-reported figure may well be accurate, but it has not been measured, and averaging it in with measured ones would make the average impossible to cite. It stays on the profile, labelled as firm-reported.</p>
+    )}
+    <p>And reviews are not outcomes. A five-star rating records how clients felt about being treated, which is worth knowing and is not the same as whether the firm won. Verified results sit in pillar B and are checked against court records — {firms.filter(f => (f.data.results ?? []).length > 0).length} of the {firms.length} firms here have any published yet.</p>
+    <p class="muted" style="font-size:.86rem">Review counts and ratings come from the Google Places API (New), summed across every business listing we can attribute to the firm's own domain. A firm we cannot match to a listing keeps these sub-factors pending rather than receiving an estimate.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the data per firm</h4>
+      <p>Every firm above has a profile showing its rating, review count, listing count and the source line behind each one.</p>
+      <a class="btn btn--white" href="/cities/new-york-ny/personal-injury/">New York injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>How scoring works</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology v1.1</a></li>
+        <li><a href="/guides/core-web-vitals-new-york-injury-firms/">Core Web Vitals, measured</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
