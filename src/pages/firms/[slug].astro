@@ -76,7 +76,9 @@ const schema = {
 
 <nav class="subnav" aria-label="Profile sections">
   <div class="container">
-    <a href="#overview" class="is-active">Overview</a>{s && <a href="#certification">Score</a>}<a href="#practice">Practice areas</a><a href="#results">Results</a><a href="#attorneys">Attorneys</a><a href="#reviews">Reviews</a><a href="#offices">Offices</a><a href="#faq">FAQ</a>
+    {/* Only link the sections this profile actually renders; an anchor to a hidden block
+        scrolls nowhere. */}
+    <a href="#overview" class="is-active">Overview</a>{s && <a href="#certification">Score</a>}<a href="#practice">Practice areas</a>{d.results.length > 0 && <a href="#results">Results</a>}{d.attorneys.length > 0 && <a href="#attorneys">Attorneys</a>}<a href="#reviews">Reviews</a><a href="#offices">Offices</a>{d.faq.length > 0 && <a href="#faq">FAQ</a>}
     <a class="btn btn--primary btn--sm cta" href="#contact">Request free consultation</a>
   </div>
 </nav>
@@ -127,10 +129,22 @@ const schema = {
         <p class="muted" style="font-size:.86rem;margin-top:12px">Results are specific to their facts and do not guarantee similar outcomes. Firms submit results through their claimed profile; only results we can substantiate are published with amounts.</p>
       </div>
 
+      {/* Hidden entirely when no attorney has been collected. An empty section said
+          "0 attorneys · licensure checked against the New York attorney registry", because
+          [].every() is vacuously true — the strongest claim on the page, made about nobody. */}
+      {d.attorneys.length > 0 && (
       <div class="block" id="attorneys">
-        <h2>Attorneys <small>{d.attorneys.length} attorneys · licensure checked against the {d.market.state_name} attorney registry</small></h2>
+        {/* The heading used to claim licensure had been checked against the state registry. It
+            has not been, for any firm: the names are read from each firm's own bio pages and the
+            registry check does not exist yet. It now says which of the two it is. */}
+        <h2>Attorneys <small>{d.attorneys.length} {d.attorneys.length === 1 ? 'attorney' : 'attorneys'}{
+          d.attorneys.every(a => a.registry_status && !/pending/i.test(a.registry_status))
+            ? ` · licensure checked against the ${d.market.state_name} attorney registry`
+            : ` · listed by the firm · licensure not yet checked against the ${d.market.state_name} attorney registry`
+        }</small></h2>
         <div class="team">{d.attorneys.map(a => <div class="member"><div class="av">{a.name.split(' ').filter(w => /^[A-Z]/.test(w)).map(w => w[0]).filter((_, i, arr) => i === 0 || i === arr.length - 1).join('')}</div><div><b>{a.name}</b><span>{a.role}</span></div></div>)}</div>
       </div>
+      )}
 
       <div class="block" id="reviews">
         <h2>Client reviews</h2>

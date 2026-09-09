@@ -65,15 +65,23 @@ SPANISH_SIGNALS = re.compile(
 
 # How a link's path is recognised. Reading the site's own nav beats guessing paths: firms that
 # use /our-attorneys/ or /verdicts/ were invisible when only the fixed list above was tried.
+#
+# These match a whole path segment, not a substring. Matching "lawyer" loosely sent four firms'
+# attorney pages to a practice area instead: ask4sam.net offered
+# /home/new-york-city-car-accident-lawyer/ and yourlawyer.com
+# /complex-litigation/whistleblower-lawyers/. A slug that ends in "-lawyer" is a practice page;
+# an attorney index is the segment itself.
 LINK_KINDS = [
-    ("about", r"about|our-firm|who-we-are|firm-overview|the-firm"),
-    ("attorneys", r"attorney|lawyer|our-team|/team|staff|profiles"),
-    ("contact", r"contact|locations|/offices"),
-    ("results", r"result|verdict|settlement|recoveries|case-stud"),
-    ("privacy", r"privacy"),
-    ("disclaimer", r"disclaimer|legal-notice|terms-of"),
-    ("fees", r"/fees|contingency|no-fee|pricing"),
-    ("blog", r"/blog|/news|/articles|/insights"),
+    ("about", r"/(about|about-us|our-firm|who-we-are|firm-overview|the-firm)(/|\.html?|$)"),
+    ("attorneys", r"/(attorney|attorneys|our-attorneys|lawyer|lawyers|our-lawyers|team|our-team|"
+                  r"meet-the-team|staff|people|profiles)(/|\.html?|$)"),
+    ("contact", r"/(contact|contact-us|locations|offices)(/|\.html?|$)"),
+    ("results", r"/(results|case-results|verdicts|settlements|verdicts-settlements|recoveries|"
+                r"case-studies)(/|\.html?|$)"),
+    ("privacy", r"/(privacy|privacy-policy)(/|\.html?|$)"),
+    ("disclaimer", r"/(disclaimer|legal-disclaimer|legal-notice|terms|terms-of-use)(/|\.html?|$)"),
+    ("fees", r"/(fees|our-fees|contingency-fees|contingency-fee|no-fee|pricing)(/|\.html?|$)"),
+    ("blog", r"/(blog|news|articles|insights)(/|\.html?|$)"),
 ]
 TRUST_PAGE_KEYS = {
     "privacy": "privacy_policy", "disclaimer": "disclaimer", "fees": "fee_statement",
