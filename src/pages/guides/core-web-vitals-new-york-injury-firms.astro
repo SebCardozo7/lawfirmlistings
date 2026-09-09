@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+
+// A short technical piece, written so the article template is in production and so pillar D has
+// something public explaining it. Every figure below is computed from the firms collection at
+// build time rather than typed in, so the article cannot drift away from the data it describes.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const withPsi = firms.filter(f => f.data.digital.psi);
+const passing = withPsi.filter(f => f.data.digital.psi!.value.cwv_pass);
+const worst = [...withPsi].sort((a, b) =>
+  a.data.digital.psi!.value.performance - b.data.digital.psi!.value.performance);
+const best = [...worst].reverse();
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const medianPerf = withPsi.length ? median(withPsi.map(f => f.data.digital.psi!.value.performance)) : null;
+
+const noSchema = firms.filter(f => f.data.digital.schema_detected === false);
+const attorneyTotal = firms.reduce((n, f) => n + f.data.attorneys.length, 0);
+const withBarNumber = firms.reduce(
+  (n, f) => n + f.data.attorneys.filter(a => a.bar_number).length, 0);
+
+const measuredOn = withPsi[0]?.data.digital.psi!.measured_at ?? null;
+const updated = measuredOn
+  ? new Date(measuredOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+const title = 'Almost every New York injury firm fails Core Web Vitals';
+const description = `We measured Core Web Vitals for ${withPsi.length} New York personal injury firms. ${passing.length} passed. What that means for pillar D of the LFL Certification Score, and what a firm can do about it.`;
+---
+<Base title={title} description={description} nav="guides">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/practice-areas/personal-injury/">Personal Injury</a></li><li aria-current="page">Core Web Vitals</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Technical · Digital presence</span>
+    <h1>{title}</h1>
+    <p class="lede">We ran Google's PageSpeed Insights against every New York personal injury firm in the directory. Of the {withPsi.length} we could measure, <b>{passing.length}</b> passed Core Web Vitals. This is what we measured, why the score counts it, and why it is the cheapest thing on a firm's list to fix.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>3 min read</span>
+    </div>
+  </div>
+</header>
+
+<div class="article-cover">
+  <div class="container">
+    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="skyline" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
+  </div>
+</div>
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#results">The results</a></li>
+      <li><a href="#why" >Why the score counts it</a></li>
+      <li><a href="#fix">What a firm can do</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Core Web Vitals are Google's three field metrics for how a page actually behaves for a visitor: how long the largest piece of content takes to appear (LCP), how much the layout jumps while loading (CLS), and how long the page ignores input while it works (INP, approximated in lab data by total blocking time). Google's own thresholds are LCP at or under 2.5 seconds, CLS at or under 0.1, and blocking time at or under 200 milliseconds. A page passes only if all three clear.</p>
+    <p>We measured each firm's home page through the PageSpeed Insights API on mobile. Where a site has enough real-user traffic the result includes field data; otherwise it is lab only, which is weaker evidence, and we record which one a measurement came from.</p>
+
+    <h2 id="results">The results</h2>
+    <p>{withPsi.length} of the {firms.length} firms in the directory could be measured. {passing.length === 1 ? 'One passed.' : `${passing.length} passed.`} The median performance score was {medianPerf}.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Firm</th><th>Performance</th><th>Core Web Vitals</th></tr></thead>
+        <tbody>
+          {best.slice(0, 3).map(f => (
+            <tr>
+              <td><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></td>
+              <td class="num">{f.data.digital.psi!.value.performance}</td>
+              <td>{f.data.digital.psi!.value.cwv_pass ? 'Pass' : 'Fail'}</td>
+            </tr>
+          ))}
+          {worst.slice(0, 3).reverse().map(f => (
+            <tr>
+              <td><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></td>
+              <td class="num">{f.data.digital.psi!.value.performance}</td>
+              <td>{f.data.digital.psi!.value.cwv_pass ? 'Pass' : 'Fail'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p>The spread is wide. {best[0] && <><a href={`/firms/${best[0].data.slug}/`}>{best[0].data.name}</a> scores {best[0].data.digital.psi!.value.performance}</>}{worst[0] && <>, while <a href={`/firms/${worst[0].data.slug}/`}>{worst[0].data.name}</a> scores {worst[0].data.digital.psi!.value.performance}</>}. These are firms competing for the same clients on the same search terms.</p>
+    <p>Two other things turned up while we were looking. {noSchema.length > 0 && <>{noSchema.length === 1 ? 'One firm publishes' : `${noSchema.length} firms publish`} no structured data at all — no JSON-LD of any kind — which costs a point and makes the site harder for search engines and AI assistants to read.</>} And of the {attorneyTotal} attorney bios we have collected from firm websites, {withBarNumber === 0 ? 'not one' : withBarNumber} publishes a bar registration number, which is the single easiest way for a firm to make its own attorney roster verifiable.</p>
+
+    <h2 id="why">Why the score counts it</h2>
+    <p>Website performance sits in pillar D of the LFL Certification Score, worth 25 of 100, and Core Web Vitals is the first thing in it. The reasoning is not that a fast site makes a better lawyer. It is that a firm which maintains its own site is a firm that is reachable, current and accountable — the same reason the pillar rewards published fee terms, attorney credentials and a working contact method.</p>
+    <p>Pillar D is deliberately capped. It can lift a firm's tier but it cannot create one: certification also requires professional standing, verified outcomes and client experience to reach 40 of their combined 65. A firm with an excellent website and thin verified results plateaus, by design. <a href="/methodology/">The full methodology</a> sets out every sub-factor and the evidence behind it.</p>
+
+    <h2 id="fix">What a firm can do</h2>
+    <p>Of everything the score measures, this is the part a firm controls outright and can change in weeks rather than years. Compressing hero images, deferring third-party scripts — chat widgets and tag managers are the usual culprits behind long blocking times — and serving fonts locally will move all three metrics. Publishing bar admission numbers on attorney bios is a text change.</p>
+    <p>Every firm can see its own sub-scores and the evidence behind each one on its profile. If a measurement looks wrong, the profile links to the source we used.</p>
+    <p class="muted" style="font-size:.86rem">Measurements come from the Google PageSpeed Insights API. A site we cannot measure keeps that sub-factor pending rather than receiving an estimated score.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm above has a profile showing its offices, fees, client reviews and measured digital presence.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>How scoring works</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology v1.1</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

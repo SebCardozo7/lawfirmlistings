@@ -589,6 +589,11 @@ button,input,select{font:inherit;color:inherit}
 .sit:hover{border-color:var(--ink);box-shadow:var(--shadow);transform:translateY(-2px)}
 /* A practice area we have not started yet: same tile, no link, no hover lift. It stays on the
    page as navigation for what the directory covers, without pretending a page exists. */
+/* A destination the directory intends to cover but has not built. It stays visible as a
+   roadmap and is deliberately not a link: an href="#" is worse than plain text, because a
+   reader clicks it and a crawler follows it. */
+.soon{opacity:.5;cursor:default}
+.site-footer .soon{color:var(--on-night-soft)}
 .sit.is-soon{opacity:.55;cursor:default}
 .sit.is-soon:hover{border-color:var(--line);box-shadow:none;transform:none}
 .sit .ico{width:46px;height:46px;border-radius:14px;background:var(--ink);display:grid;place-items:center;color:#fff;grid-row:span 2}

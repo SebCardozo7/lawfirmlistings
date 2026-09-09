@@ -9,6 +9,24 @@ const published = await getCollection('firms', f =>
 const cities = [...new Map(published.map(f =>
   [f.data.market.city_slug, `${f.data.market.city}, ${f.data.market.state}`])).entries()]
   .sort((a, b) => a[1].localeCompare(b[1]));
+
+// Only practice areas that have both a page and a firm behind them. The footer used to list
+// five more that went to href="#", on every page of the site.
+const PRACTICE_PAGES = new Set(['personal-injury']);
+const practices = [...new Map(published.flatMap(f => f.data.practices)
+  .filter(pr => PRACTICE_PAGES.has(pr.slug))
+  .map(pr => [pr.slug, pr.name])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+
+// Destinations the directory intends to cover. They stay visible as a roadmap and render
+// unlinked until the page exists, rather than as an href="#" a reader can click into nothing.
+const PLANNED_PRACTICES = ['Family & Divorce', 'Criminal Defense', 'Immigration',
+                           'Estate Planning', 'Business & Corporate'];
+const PLANNED_RESOURCES = ['Best-of rankings', 'Legal guides', 'Cost of a lawyer',
+                           'How to hire a law firm'];
+// Privacy policy and Terms of use belong here for now, and are the two this site cannot
+// launch without.
+const PLANNED_COMPANY = ['About us', 'For law firms', 'Editorial standards', 'Contact',
+                         'Privacy policy', 'Terms of use'];
 ---
 <footer class="site-footer">
   <div class="container">
@@ -23,13 +41,10 @@ const cities = [...new Map(published.map(f =>
       <div>
         <h4>Practice areas</h4>
         <ul>
-          <li><a href="/practice-areas/personal-injury/">Personal Injury</a></li>
-          <li><a href="#">Family &amp; Divorce</a></li>
-          <li><a href="#">Criminal Defense</a></li>
-          <li><a href="#">Immigration</a></li>
-          <li><a href="#">Estate Planning</a></li>
-          <li><a href="#">Business &amp; Corporate</a></li>
-          <li><a href="#">All practice areas</a></li>
+          {practices.map(([slug, name]) => (
+            <li><a href={`/practice-areas/${slug}/`}>{name}</a></li>
+          ))}
+          {PLANNED_PRACTICES.map(name => <li><span class="soon">{name}</span></li>)}
         </ul>
       </div>
       <div>
@@ -43,22 +58,14 @@ const cities = [...new Map(published.map(f =>
       <div>
         <h4>Resources</h4>
         <ul>
-          <li><a href="/guides/best-personal-injury-law-firms-nyc/">Best-of rankings</a></li>
-          <li><a href="#">Legal guides</a></li>
-          <li><a href="#">Cost of a lawyer</a></li>
-          <li><a href="#">How to hire a law firm</a></li>
           <li><a href="/methodology/">Our methodology</a></li>
+          {PLANNED_RESOURCES.map(name => <li><span class="soon">{name}</span></li>)}
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">For law firms</a></li>
-          <li><a href="#">Editorial standards</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy policy</a></li>
-          <li><a href="#">Terms of use</a></li>
+          {PLANNED_COMPANY.map(name => <li><span class="soon">{name}</span></li>)}
         </ul>
       </div>
     </div>
