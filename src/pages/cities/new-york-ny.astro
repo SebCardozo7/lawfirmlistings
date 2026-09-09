@@ -23,6 +23,7 @@ const multilingual = firms.filter(f => f.data.languages.some(l => l !== 'English
 const share = (n: number) => (firms.length ? Math.round((100 * n) / firms.length) + '%' : '\u2014');
 const logoVariants = ['', 'l2', 'l3'];
 const cityName = firms[0]?.data.market.city ?? 'New York City';
+const spanish = firms.filter(f => f.data.languages.some(l => /espa|spanish/i.test(l))).length;
 
 const computedDates = firms.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
 const lastUpdated = computedDates.length
@@ -123,7 +124,7 @@ const boroughTiles = BOROUGHS
     <aside class="sidebar">
       <div class="panel panel--ink">
         <h4>Get matched with a NYC firm</h4>
-        <p>Answer four questions and we'll connect you with up to three certified firms in your borough. Free and confidential.</p>
+        <p>A short intake that puts your case in front of the firms whose published evidence fits it. Not built yet — for now, the ranked list and the profiles are the whole product, and nobody pays us to appear in either.</p>
         {/* No matching service exists yet, so the panel describes it without a dead button. */}
         <span class="btn btn--white soon">Start matching</span>
       </div>
@@ -155,7 +156,7 @@ const boroughTiles = BOROUGHS
       <li><b>Medical malpractice:</b> 2 years and 6 months from the malpractice (with a discovery rule for foreign objects and missed cancer diagnoses).</li>
       <li><b>Wrongful termination / discrimination:</b> 3 years under the NYC Human Rights Law; 300 days to file with the EEOC.</li>
     </ul>
-    <div class="callout"><b>Verify before you hire.</b> Every attorney at a certified firm has been checked against the New York State Unified Court System's attorney registration database. You can run the same check yourself at iapps.courts.state.ny.us.</div>
+    <div class="callout"><b>Verify before you hire, and do not take our word for it.</b> The attorney names on our profiles are read from each firm's own website. Checking them against the New York State Unified Court System's attorney registration database is a gate we have not yet run for any firm, and every profile says so next to the attorney list. The database is public and free: search it at iapps.courts.state.ny.us before you sign anything.</div>
   </div>
 </section>
 
@@ -178,10 +179,10 @@ const boroughTiles = BOROUGHS
     <span class="eyebrow">Frequently asked</span>
     <h2 style="margin:14px 0 28px">Hiring a law firm in New York — FAQ</h2>
     <div class="faq">
-      <details open><summary>How do I check if a New York lawyer is licensed?</summary><div>Search the New York State Unified Court System attorney registration database. It shows registration status, year admitted and any public discipline. Every attorney at a LFL Certified firm has already passed this check.</div></details>
-      <details><summary>Do New York law firms offer free consultations?</summary><div>89% of certified firms in NYC do. Personal injury, criminal defense and immigration firms almost always offer a free initial call; some family-law and business firms charge a reduced flat fee for a first strategy session.</div></details>
+      <details open><summary>How do I check if a New York lawyer is licensed?</summary><div>Search the New York State Unified Court System attorney registration database at iapps.courts.state.ny.us. It is free, and it shows registration status, the year admitted and any public discipline. Our own licensure gate is not yet running, so for now this is a check you should do yourself rather than rely on us for — the attorney list on each profile tells you whether we have verified it.</div></details>
+      <details><summary>Do New York law firms offer free consultations?</summary><div>{share(freeConsult)} of the firms published here do — every one of them, so far, which means it is not a way to tell them apart. Personal injury firms almost always offer a free initial call, because the call is also how the firm decides whether to take your case. What none of them publishes is the fee itself; <a href="/guides/what-new-york-injury-firms-publish-about-fees/">we read all of their fee pages</a>.</div></details>
       <details><summary>Should I hire a firm in my borough?</summary><div>Not necessarily — many Manhattan firms appear regularly in Brooklyn and Queens courts. What matters more is regular practice in the specific courthouse handling your case. Firm profiles list the counties where each firm most often appears.</div></details>
-      <details><summary>Can I get legal help in a language other than English?</summary><div>41% of certified NYC firms have multilingual staff. Filter any list by language — Spanish, Mandarin, Cantonese, Russian, Bengali, Haitian Creole and Korean are the most common.</div></details>
+      <details><summary>Can I get legal help in a language other than English?</summary><div>{spanish} of the {firms.length} firms published here list Spanish-speaking staff. Every profile shows the languages a firm states it works in, taken from the firm's own site. We do not yet have data on other languages, so we do not claim any.</div></details>
     </div>
   </div>
 </section>
