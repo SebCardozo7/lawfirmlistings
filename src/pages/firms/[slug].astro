@@ -19,7 +19,6 @@ const pct = (v: number, arr: number[]) => arr.length ? Math.round(100 * (arr.fil
 const drPct = ah ? pct(ah.dr, peers.map(f => f.dr)) : null;
 const median = (arr: number[]) => { const a = [...arr].sort((x, y) => x - y); const m = Math.floor(a.length / 2); return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
 const drMedian = cohort ? median(cohort.data.firms.map(f => f.dr)) : null;
-const kwMedian = cohort ? median(cohort.data.firms.map(f => f.org_keywords)) : null;
 const ai = ah?.ai_citations;
 const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
@@ -98,11 +97,9 @@ const schema = {
         <h3 style="margin:28px 0 4px;font-size:1.15rem">Digital presence snapshot</h3>
         <p class="muted" style="font-size:.9rem">Pillar D signals, re-measured monthly. Paid advertising is not scored.</p>
         <div class="digital-grid">
-          <div class="dg"><span class="k">Domain Rating</span><div class="v">{ah.dr}<small>· {drPct}th percentile</small></div><div class="s">{ah.refdomains.toLocaleString()} ref. domains · cohort median DR {drMedian} · Ahrefs rank {(ah.ahrefs_rank/1e6).toFixed(1)}M</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
-          <div class="dg"><span class="k">Organic visibility</span><div class="v">{ah.org_keywords.toLocaleString()}<small>keywords</small></div><div class="s">≈{ah.org_traffic.toLocaleString()} organic visits/mo (US) · cohort median {kwMedian} kw · {ah.paid_keywords ? `${ah.paid_keywords} paid keywords` : 'no paid search'}</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
+          <div class="dg"><span class="k">Domain authority</span><div class="v">{ah.dr}<small>· {drPct}th percentile</small></div><div class="s">{ah.refdomains.toLocaleString()} ref. domains · cohort median {drMedian} · Ahrefs rank {(ah.ahrefs_rank/1e6).toFixed(1)}M</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
           {ai && <div class="dg"><span class="k">AI-search citations</span><div class="v">{ai.total}<small>· {ai.pages} pages</small></div><div class="s">{Object.entries(ai.by_platform).map(([k,v]) => `${platformNames[k] ?? k} ${v}`).join(' · ')}</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>}
           {d.digital.trust_pages && <div class="dg"><span class="k">Trust pages</span><div class="v">{Object.values(d.digital.trust_pages).filter(Boolean).length} / {Object.keys(d.digital.trust_pages).length}</div><div class="s">{Object.entries(d.digital.trust_pages).map(([k,v]) => v ? k.replace(/_/g,' ') : `✕ ${k.replace(/_/g,' ')}`).join(' · ')}</div><span class="pill good">Observed</span></div>}
-          <div class="dg"><span class="k">Structured data</span><div class="v">{d.digital.schema_detected ? 'Present' : 'None'}<small>{d.digital.schema_detected ? '' : 'detected'}</small></div><div class="s">{d.digital.schema_detected ? 'JSON-LD found on site' : 'Add LegalService, Attorney, FAQPage, Review'}</div><span class={`pill ${d.digital.schema_detected ? 'good' : 'warn'}`}>{d.digital.schema_detected ? 'Observed' : 'Observed · +1 pt available'}</span></div>
           <div class="dg"><span class="k">Core Web Vitals</span><div class="v">{d.digital.psi ? (d.digital.psi.value.cwv_pass ? 'Pass' : 'Fail') : '—'}<small>mobile</small></div><div class="s">{d.digital.psi ? `Performance ${d.digital.psi.value.performance}` : 'PageSpeed Insights measurement pending'}</div><span class={`pill ${d.digital.psi ? 'good' : ''}`}>{d.digital.psi ? `Observed · PSI, ${d.digital.psi.measured_at}` : 'Pending'}</span></div>
         </div>
         </>
@@ -167,7 +164,7 @@ const schema = {
       </div>
       {cohort && (
       <div class="panel">
-        <h4>Same cohort · by Domain Rating</h4>
+        <h4>Same cohort · by domain authority</h4>
         <ul>{[...cohort.data.firms].sort((a, b) => b.dr - a.dr).slice(0, 5).map(f => <li><span style={f.domain === d.domain ? 'color:var(--ink);font-weight:600' : ''}>{f.name ?? f.domain}</span><span class="num">DR {f.dr}</span></li>)}</ul>
       </div>
       )}
