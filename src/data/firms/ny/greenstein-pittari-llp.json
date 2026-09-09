@@ -8,7 +8,7 @@
   "domain": "nyclawfirm.com",
   "phone": "1-800-842-8462",
   "phone_vanity": "1-800-VICTIM2",
-  "status": "certified",
+  "status": "listed",
   "tagline": "Don't Be a Victim Twice!",
   "practices": [
     {
@@ -126,39 +126,89 @@
   "attorneys": [
     {
       "name": "Robert J. Greenstein",
-      "role": "Founding Partner"
+      "role": "Founding Partner",
+      "bar_state": "NY",
+      "bar_number": "2591121",
+      "admitted_year": 1994,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Bartolomeo Andrew Pittari",
-      "role": "Founding Partner"
+      "role": "Founding Partner",
+      "bar_state": "NY",
+      "bar_number": "5107164",
+      "admitted_year": 2013,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Michael A. Barnett",
-      "role": "Attorney"
+      "role": "Attorney",
+      "registry_status": "Not verified — ambiguous (3 attorneys share this name)",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Jake I. Berkowitz",
-      "role": "Attorney"
+      "role": "Attorney",
+      "bar_state": "NY",
+      "bar_number": "5937222",
+      "admitted_year": 2022,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Valerie Hernandez",
-      "role": "Attorney"
+      "role": "Attorney",
+      "bar_state": "NY",
+      "bar_number": "5765789",
+      "admitted_year": 2020,
+      "registry_status": "Due to reregister within 30 days of birthday",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Emily Driscoll",
-      "role": "Attorney"
+      "role": "Attorney",
+      "bar_state": "NY",
+      "bar_number": "6234330",
+      "admitted_year": 2025,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Michael A. Simon",
-      "role": "Attorney"
+      "role": "Attorney",
+      "bar_state": "NY",
+      "bar_number": "5406582",
+      "admitted_year": 2016,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Sabastina Wiafe",
-      "role": "Attorney"
+      "role": "Attorney",
+      "bar_state": "NY",
+      "bar_number": "6065585",
+      "admitted_year": 2023,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
     },
     {
       "name": "Michael J. Martorelli",
-      "role": "Attorney"
+      "role": "Attorney",
+      "bar_state": "NY",
+      "bar_number": "6285241",
+      "admitted_year": 2026,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09"
     }
   ],
   "languages": [
@@ -303,16 +353,16 @@
   },
   "gates": {
     "G1": {
-      "pass": true,
-      "evidence": "9 of 9 named attorneys active",
-      "source": "NYS Unified Court System registry",
-      "checked_at": "2026-09-07"
+      "pass": false,
+      "evidence": "8 of 9 matched; 1 could not be matched — pending",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "checked_at": "2026-09-09"
     },
     "G2": {
-      "pass": true,
-      "evidence": "No public discipline, 10 yrs",
-      "source": "NYS disciplinary records",
-      "checked_at": "2026-09-07"
+      "pass": false,
+      "evidence": "1 of 9 attorneys unmatched — pending",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "checked_at": "2026-09-09"
     },
     "G3": {
       "pass": true,
@@ -354,8 +404,8 @@
       "a": "All five boroughs plus Westchester (Yonkers) and Long Island (Uniondale). The Brooklyn, Queens, Long Island and Staten Island offices are by appointment."
     },
     {
-      "q": "What does \"LFL Certified\" mean for this firm?",
-      "a": "Every named attorney has been checked for active licensure and public discipline, the firm has submitted results for verification, and it meets our minimum for verified client reviews. Certification is free and cannot be purchased."
+      "q": "What has Law Firm Listings actually verified about this firm?",
+      "a": "The score and tier shown above are computed from evidence, and the scorecard names the source and date behind every sub-factor. Attorney names come from the firm’s own site and are checked against the NYS Attorney Registration database; the attorney list says how many have been confirmed. Certification additionally requires all six eligibility gates to pass, and the scorecard states which are outstanding. Certification is free, earned and cannot be purchased."
     }
   ],
   "similar": [
@@ -464,8 +514,8 @@
   },
   "score": {
     "total": 82,
-    "tier": "Certified",
-    "verdict": "All six eligibility gates passed. Strongest pillar: A; most headroom in pillar D (17/25).",
+    "tier": "Under review",
+    "verdict": "2 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: A; most headroom in pillar D (17/25).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {

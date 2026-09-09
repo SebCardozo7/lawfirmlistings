@@ -266,8 +266,21 @@ def main():
             continue
         score = compute(firm)
         firm["score"] = score
+
+        # status follows the computed tier. It used to be hand-set, and the two drifted apart the
+        # moment a real gate check replaced an asserted one: a firm's JSON still said "certified"
+        # while its own scorecard said the gates had not been checked, so the page showed the
+        # badge and the contradiction side by side. The tier is the only thing entitled to decide
+        # this, and nothing outside the engine writes it.
+        was = firm.get("status")
+        firm["status"] = ("certified" if score["tier"] in ("Certified", "Distinguished", "Elite")
+                          else "not_eligible" if score["tier"] == "Not eligible"
+                          else "listed")
+        if was != firm["status"]:
+            print(f"  status: {was} -> {firm['status']}  ({score['tier']})")
+
         ill = [s["code"] for p in score["pillars"].values() for s in p["subs"] if s["source"] == "illustrative"]
-        if PROD and firm.get("status") == "certified" and ill:
+        if PROD and firm["status"] == "certified" and ill:
             errors.append(f"{path}: certified firm still has illustrative sub-factors {ill}")
         with open(path, "w", encoding="utf-8") as fh:
             json.dump(firm, fh, indent=2, ensure_ascii=False)

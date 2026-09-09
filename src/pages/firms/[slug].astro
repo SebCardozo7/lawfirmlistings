@@ -23,6 +23,7 @@ const drMedian = cohort ? median(cohort.data.firms.map(f => f.dr)) : null;
 const ai = ah?.ai_citations;
 const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
+const verifiedLicences = d.attorneys.filter(a => a.bar_number).length;
 // The link attribute is editorial, not commercial: clearing every eligibility gate earns a
 // followed link. Claiming the profile does not change it, and neither does paying for anything —
 // selling followed links is a link scheme and the penalty would land on this site.
@@ -146,10 +147,19 @@ const schema = {
         {/* The heading used to claim licensure had been checked against the state registry. It
             has not been, for any firm: the names are read from each firm's own bio pages and the
             registry check does not exist yet. It now says which of the two it is. */}
+        {/* Evidence of a match, not the wording of a status. Testing the status string for
+            "pending" broke as soon as the registry checker started writing "Not verified —
+            ambiguous (3 attorneys share this name)": no "pending" in it, so every() went true and
+            the page claimed all nine licences were checked when one was not. A registration
+            number is only ever written on a confident match, so that is the test — and the count
+            is stated, because "not yet checked" under-claims eight verified licences as badly as
+            the old wording over-claimed the ninth. */}
         <h2>Attorneys <small>{d.attorneys.length} {d.attorneys.length === 1 ? 'attorney' : 'attorneys'}{
-          d.attorneys.every(a => a.registry_status && !/pending/i.test(a.registry_status))
-            ? ` · licensure checked against the ${d.market.state_name} attorney registry`
-            : ` · listed by the firm · licensure not yet checked against the ${d.market.state_name} attorney registry`
+          verifiedLicences === 0
+            ? ` · listed by the firm · licensure not yet checked against the ${d.market.state_name} attorney registry`
+            : verifiedLicences === d.attorneys.length
+              ? ` · every licence checked against the ${d.market.state_name} attorney registry`
+              : ` · ${verifiedLicences} of ${d.attorneys.length} licences checked against the ${d.market.state_name} attorney registry`
         }</small></h2>
         <div class="team">{d.attorneys.map(a => <div class="member"><div class="av">{a.name.split(' ').filter(w => /^[A-Z]/.test(w)).map(w => w[0]).filter((_, i, arr) => i === 0 || i === arr.length - 1).join('')}</div><div><b>{a.name}</b><span>{a.role}</span></div></div>)}</div>
       </div>

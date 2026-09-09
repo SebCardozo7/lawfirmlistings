@@ -31,7 +31,7 @@ const firms = defineCollection({
     practices: z.array(z.object({ slug: z.string(), name: z.string(), primary: z.boolean().default(false) })),
     market: z.object({ city_slug: z.string(), city: z.string(), state: z.string(), state_name: z.string() }),
     offices: z.array(z.object({ label: z.string(), address: z.string(), by_appointment: z.boolean().default(false), is_hq: z.boolean().default(false), source_url: z.string().optional() })),
-    attorneys: z.array(z.object({ name: z.string(), role: z.string(), bar_state: z.string().optional(), bar_number: z.string().optional(), admitted_year: z.number().optional(), registry_status: z.string().optional(), checked_at: z.string().optional() })),
+    attorneys: z.array(z.object({ name: z.string(), role: z.string(), bar_state: z.string().optional(), bar_number: z.string().optional(), admitted_year: z.number().optional(), registry_status: z.string().optional(), registry_basis: z.string().optional(), checked_at: z.string().optional() })),
     languages: z.array(z.string()),
     fee_model: z.string(), fee_statement: z.string().optional(), free_consultation: z.boolean(),
     availability: z.array(z.string()).default([]),
