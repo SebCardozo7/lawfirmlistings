@@ -118,9 +118,9 @@
     },
     "G4": {
       "pass": false,
-      "evidence": "AG, FTC and court-sanction search not yet run",
-      "source": "pending",
-      "checked_at": "2026-09-08"
+      "evidence": "A docket search found 9 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
+      "checked_at": "2026-09-09"
     },
     "G5": {
       "pass": false,

@@ -374,10 +374,10 @@
       "checked_at": "2026-09-09"
     },
     "G4": {
-      "pass": true,
-      "evidence": "None found",
-      "source": "AG / CourtListener / news",
-      "checked_at": "2026-09-07"
+      "pass": false,
+      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
+      "checked_at": "2026-09-09"
     },
     "G5": {
       "pass": true,
@@ -443,7 +443,7 @@
   "score": {
     "total": 68,
     "tier": "Under review",
-    "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
+    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
