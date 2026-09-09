@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LFL Certification Score — Methodology v1.0
+LFL Certification Score — Methodology v1.1
 Reads src/data/firms/**/*.json + src/data/cohorts/*.json, computes the score and writes it
 back into each firm file under "score". Deterministic; run before `astro build`.
 
@@ -27,7 +27,10 @@ FIRMS = sorted(glob.glob(str(ROOT / "src/data/firms/**/*.json"), recursive=True)
 COHORTS = {c["id"]: c for c in (read_json(p) for p in glob.glob(str(ROOT / "src/data/cohorts/*.json")))}
 PROD = os.environ.get("LFL_ENV") == "production"
 TODAY = datetime.date.today().isoformat()
-METHOD = "v1.0"
+# Bumped with the v1.1 change that dropped A3, A4 and E2 and redistributed their points.
+# Every firm's score records the version it was computed under, so this must move whenever
+# the sub-factors or weights do — otherwise a score claims a methodology it did not use.
+METHOD = "v1.1"
 
 SUBS = {  # code: (pillar, label, max)
  # v1.1 dropped A3, A4 and E2. Pillar weights are unchanged (A 25, B 20, C 20, D 25, E 10) so

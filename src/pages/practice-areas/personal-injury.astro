@@ -38,17 +38,22 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
   return { slug, label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`, count: inCity.length };
 }).sort((a, b) => b.count - a.count);
 ---
-<Base title="Best Personal Injury Law Firms in the U.S. (2026)" description="Compare vetted personal injury law firms by city, verdicts and client outcomes. Free consultations, contingency fees, verified licensure." nav="practice">
+<Base title={cities.length === 1 ? `Personal Injury Law Firms in ${cities[0]} (2026)` : `Personal Injury Law Firms in ${cities.length} U.S. Cities (2026)`} description={`Compare personal injury law firms on verified evidence: offices, client reviews, fee terms and site performance. ${firms.length} ${firms.length === 1 ? 'firm' : 'firms'} listed in ${cities.length === 1 ? cities[0] : `${cities.length} cities`}. No firm can pay to rank.`} nav="practice">
 <section class="page-hero on-night">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">
     <div>
-      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="#">Practice Areas</a></li><li aria-current="page">Personal Injury</li></ol>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li>Practice Areas</li><li aria-current="page">Personal Injury</li></ol>
       <span class="eyebrow">Practice area</span>
-      <h1>Best Personal Injury Law Firms in the United States</h1>
+      <h1>{cities.length === 1 ? `Personal Injury Law Firms in ${cities[0]}` : "Personal Injury Law Firms"}</h1>
       <p class="lede">Personal injury firms handling car accidents, slip and fall, medical malpractice, construction injuries and wrongful death. Every firm is checked for active licensure, clean disciplinary history and verified case results. {certified.length > 0 && <>{certified.length} of the {firms.length} listed {firms.length === 1 ? 'firm has' : 'firms have'} earned certification so far.</>}</p>
       <div class="chips" style="margin-top:24px">
-        <a class="chip" href="#">Car accidents</a><a class="chip" href="#">Truck accidents</a><a class="chip" href="#">Slip &amp; fall</a><a class="chip" href="#">Medical malpractice</a><a class="chip" href="#">Construction injuries</a><a class="chip" href="#">Wrongful death</a><a class="chip" href="#">Product liability</a>
+        {/* Sub-topics of this practice area. None has a page yet, so they describe the scope
+            without pretending to be navigation. */}
+        {['Car accidents', 'Truck accidents', 'Slip & fall', 'Medical malpractice',
+          'Construction injuries', 'Wrongful death', 'Product liability'].map(t => (
+          <span class="chip soon">{t}</span>
+        ))}
       </div>
     </div>
     <div class="hero-facts">
@@ -64,9 +69,10 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
 <div class="filterbar">
   <div class="container">
     <span class="lbl">City</span>
-    <a class="chip is-active" href="#">All cities</a>
-    <a class="chip" href="/cities/new-york-ny/">New York</a><a class="chip" href="#">Los Angeles</a><a class="chip" href="#">Chicago</a><a class="chip" href="#">Houston</a><a class="chip" href="#">Miami</a><a class="chip" href="#">Phoenix</a><a class="chip" href="#">Philadelphia</a><a class="chip" href="#">Atlanta</a>
-    <div class="sort"><label for="sort">Sort by</label><select id="sort"><option>LFL ranking</option><option>Highest rated</option><option>Most reviews</option><option>Largest verified results</option></select></div>
+    {/* Eight cities were listed here and seven had no page. The filter now offers the cities
+        that hold firms, and the sort control is left out until it does something. */}
+    <span class="chip is-active">All cities</span>
+    {cityCounts.map(c => <a class="chip" href={`/cities/${c.slug}/`}>{c.label.split(',')[0]}</a>)}
   </div>
 </div>
 
@@ -93,7 +99,8 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
       <div class="panel panel--ink">
         <h4>Not sure which firm fits?</h4>
         <p>Tell us what happened and we'll match you with up to three certified firms in your city — free, and without sharing your details until you say so.</p>
-        <a class="btn btn--white" href="#">Get matched in 2 minutes</a>
+        {/* No matching service exists yet, so the panel describes it without a dead button. */}
+        <span class="btn btn--white soon">Get matched in 2 minutes</span>
       </div>
       <div class="panel">
         <h4>Personal injury by city</h4>
@@ -106,10 +113,11 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
       <div class="panel">
         <h4>Related guides</h4>
         <ul>
-          <li><a href="/guides/best-personal-injury-law-firms-nyc/">Best personal injury firms in NYC (2026)</a></li>
-          <li><a href="#">How contingency fees work</a></li>
-          <li><a href="#">What is my injury case worth?</a></li>
-          <li><a href="#">Statute of limitations by state</a></li>
+          <li><a href="/guides/core-web-vitals-new-york-injury-firms/">Almost every New York injury firm fails Core Web Vitals</a></li>
+          {['Best personal injury firms in NYC', 'How contingency fees work',
+            'What is my injury case worth?', 'Statute of limitations by state'].map(t => (
+            <li><span class="soon">{t}</span></li>
+          ))}
         </ul>
       </div>
     </aside>

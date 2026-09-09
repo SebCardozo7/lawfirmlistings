@@ -5,15 +5,15 @@ import Scorecard from '../components/Scorecard.astro';
 import { getCollection } from 'astro:content';
 const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-pittari-llp')!;
 ---
-<Base title="LFL Certified™ Methodology — How the Certification Score Works" description="The 0–100 LFL Certification Score explained: eligibility gates, five pillars, tiers and re-verification." nav="method">
+<Base title="LFL Certified™ Methodology — How the Certification Score Works" description="The 0–100 LFL Certification Score explained: six eligibility gates, five weighted pillars, tiers and monthly re-verification. No firm can pay for a point." nav="method">
 <section class="page-hero method-hero on-night">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">
     <div>
       <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Methodology</li></ol>
-      <span class="eyebrow">Our Methodology · LFL Certified™ v1.0</span>
+      <span class="eyebrow">Our Methodology · LFL Certified™ v1.1</span>
       <h1>The score behind the badge.</h1>
-      <p class="lede">Every certified firm earns a 0–100 Certification Score from verifiable evidence: licensure and discipline records, court-confirmed outcomes, authenticated client reviews, peer standing — and the quality and authority of its digital presence. No firm can pay for a point. Here is exactly how it works.</p>
+      <p class="lede">Every certified firm earns a 0–100 Certification Score from verifiable evidence: licensure and discipline records, court-confirmed outcomes, authenticated client reviews, published fee and access terms — and the quality and authority of its digital presence. No firm can pay for a point. Here is exactly how it works.</p>
       <div class="chips on-night" style="margin-top:24px"><a class="chip" href="#gates">Eligibility gates</a><a class="chip" href="#pillars">Five pillars</a><a class="chip" href="#digital">Digital presence</a><a class="chip" href="#tiers">Tiers</a><a class="chip" href="#cadence">Re-verification</a><a class="chip" href="#independence">Independence</a></div>
     </div>
     <div class="glass" style="padding:28px">
@@ -231,7 +231,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
         <span class="eyebrow">For law firms</span>
         <h2 style="margin-top:14px">See your score before anyone else does</h2>
         <p class="lede" style="margin-top:14px">Claim your profile to view your full breakdown, submit results for verification and get a concrete list of what would move you to the next tier.</p>
-        <div class="actions"><a class="btn btn--ink" href="#">Claim your firm profile</a><a class="btn btn--ghost" href="#">Download the methodology (PDF)</a></div>
+        <div class="actions"><span class="btn btn--ink soon">Claim your firm profile</span><span class="btn btn--ghost soon">Download the methodology (PDF)</span></div>
       </div>
       <ul>
         <li><Icon name="check" /><span>Free — certification cannot be purchased</span></li>

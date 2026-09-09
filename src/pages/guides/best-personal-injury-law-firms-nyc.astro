@@ -26,21 +26,31 @@ const practiceFirms = listed.filter(f => f.data.practices.some(pr => pr.slug ===
 const inPractice = practiceFirms.length;
 const practiceCities = new Set(practiceFirms.map(f => f.data.market.city_slug)).size;
 const inCity = listed.filter(f => f.data.market.city_slug === CITY_SLUG).length;
+
+const computedDates = listed.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+const lastUpdated = computedDates.length
+  ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
 ---
-<Base title="Best Personal Injury Law Firms in NYC, Ranked for 2026" description="Our editors ranked New York City's top personal injury firms by trial record, verified results and client reviews." nav="guides">
+{/* noindex while the ranking is gated. The page explains itself to a visitor who lands on
+    it, but a title promising a ranking that is not published should not be in search results.
+    Drop the noindex — and the sitemap filter in astro.config.mjs — when the gate opens. */}
+<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City — ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology v1.1, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" noindex={!gateMet}>
 <article>
 <header class="article-head">
   <div class="narrow">
     <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="#">Guides</a></li><li><a href="/practice-areas/personal-injury/">Personal Injury</a></li><li aria-current="page">New York City</li></ol>
     <span class="eyebrow" style="margin-top:18px">Ranking · Personal Injury · New York</span>
-    <h1>Best Personal Injury Law Firms in NYC, Ranked for 2026</h1>
-    <p class="lede">If you were hurt in a crash on the BQE, fell on an icy Brooklyn sidewalk, or were injured on a Manhattan construction site, the firm you hire will shape everything that follows — the medical care you can afford, how insurers negotiate, and what you ultimately recover. We evaluated 84 New York City firms on trial record, verified results and client experience. These eight came out on top.</p>
+    <h1>{gateMet ? 'Best Personal Injury Law Firms in NYC, Ranked for 2026' : 'Personal injury firms in New York City'}</h1>
+    <p class="lede">If you were hurt in a crash on the BQE, fell on an icy Brooklyn sidewalk, or were injured on a Manhattan construction site, the firm you hire will shape everything that follows — the medical care you can afford, how insurers negotiate, and what you ultimately recover. {gateMet ? <>These {ranked.length} came out on top under our methodology.</> : <>We are working through the New York cohort now; this page will carry the ranking once {MIN_CERTIFIED} firms have completed certification.</>}</p>
     <div class="byline">
-      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Reviewed by a licensed New York attorney</div></div>
+      {/* The byline claimed review by a licensed New York attorney. Nobody has reviewed this
+          page. On a page about choosing a lawyer that is the most consequential thing on it to
+          get wrong, so it states who wrote it and nothing more. The attorney review the
+          content plan calls for is still to happen. */}
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Pending review by a licensed New York attorney</div></div>
       <span class="sep" aria-hidden="true"></span>
-      <span>Updated September 3, 2026</span>
-      <span class="sep" aria-hidden="true"></span>
-      <span>14 min read</span>
+      <span>Updated {lastUpdated ?? 'September 2026'}</span>
     </div>
   </div>
 </header>
@@ -66,17 +76,21 @@ const inCity = listed.filter(f => f.data.market.city_slug === CITY_SLUG).length;
   </nav>
 
   <div class="prose">
-    <div class="callout"><b>Editorial independence.</b> Firms cannot pay to appear in or influence this ranking. Our methodology is public, and we disclose sponsored placements wherever they appear on the site. Sample data shown for design review.</div>
+    <div class="callout"><b>Editorial independence.</b> Firms cannot pay to appear in or influence this ranking. Neither the score, the eligibility gates nor the tier can be bought or edited, including by a firm that manages its own profile. Sponsored placements are always labeled and never appear inside a ranked list.</div>
 
     <h2 id="how-we-ranked">How we ranked these firms</h2>
-    <p>Personal injury is the most heavily advertised area of law in New York. Subway cars, taxi tops and daytime television are full of firms promising maximum compensation. That noise makes it hard to tell a genuine trial firm from a high-volume settlement mill. So we ignored advertising entirely and scored each of the 84 firms we reviewed on four weighted factors.</p>
+    <p>Personal injury is the most heavily advertised area of law in New York. Subway cars, taxi tops and daytime television are full of firms promising maximum compensation. That noise makes it hard to tell a genuine trial firm from a high-volume settlement mill. So advertising counts for nothing here. Each firm is scored out of 100 across five pillars, and paid search spend is excluded by design.</p>
+    {/* These are the real pillar weights from Methodology v1.1. The list here previously read
+        35/25/25/15 across four factors that do not exist, one of which — peer recognition —
+        was removed from the methodology entirely. */}
     <ul>
-      <li><b>Trial record (35%).</b> Jury verdicts in New York state and federal courts over the past five years, confirmed against court records — not self-reported "recovered" totals.</li>
-      <li><b>Verified results (25%).</b> Settlements and verdicts we could substantiate through public filings, published decisions or documentation provided under our verification protocol.</li>
-      <li><b>Client experience (25%).</b> Independent reviews weighted for recency, specificity and verified engagement.</li>
-      <li><b>Peer recognition (15%).</b> Confidential evaluations from New York plaintiff and defense attorneys, and appellate work that shaped New York injury law.</li>
+      <li><b>Professional standing (25).</b> Who the attorneys are: clean-record depth and years since admission, checked against the state bar registry, plus disclosed malpractice insurance and bar association membership.</li>
+      <li><b>Verified outcomes (20).</b> Results confirmed against court dockets, published decisions or verdict reporters. A self-reported "$1B recovered" total scores nothing.</li>
+      <li><b>Client experience (20).</b> Authentic review volume and a Bayesian rating average, so a handful of five-star reviews cannot outrank hundreds at 4.8.</li>
+      <li><b>Digital presence and authority (25).</b> Site performance, search authority against local peers, local presence and structured data. Paid advertising is excluded. Capped so it can lift a firm's tier but never create one.</li>
+      <li><b>Access and responsiveness (10).</b> Fee transparency, free consultations, languages and availability.</li>
     </ul>
-    <p>Every firm below has active licensure for all named attorneys and no public discipline in the past decade. Read the <a href="#">full methodology</a>.</p>
+    <p>A firm is scored only once all six eligibility gates pass, and certification additionally requires professional standing, outcomes and client experience to reach 40 of their combined 65 — which is what stops a firm with a strong website and thin results from certifying. Read the <a href="/methodology/">full methodology</a>.</p>
 
     <h2 id="the-list">The best personal injury law firms in New York City</h2>
 

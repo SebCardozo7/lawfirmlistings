@@ -51,7 +51,7 @@ const boroughTiles = BOROUGHS
   .map(b => ({ ...b, count: firms.filter(f => f.data.offices.some(o => o.label.includes(b.needle))).length }))
   .filter(b => b.count > 0);
 ---
-<Base title="Top Law Firms in New York, NY (2026)" description="Browse certified law firms in New York City by practice area — personal injury, family law, criminal defense, immigration and more." nav="cities">
+<Base title="Top Law Firms in New York, NY (2026)" description={`Law firms in New York City with verified offices, client reviews and fee terms. ${firms.length} ${firms.length === 1 ? 'firm' : 'firms'} listed across ${practiceTiles.length} ${practiceTiles.length === 1 ? 'practice area' : 'practice areas'}, ranked city by city rather than nationally.`} nav="cities">
 <section class="page-hero on-night">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">

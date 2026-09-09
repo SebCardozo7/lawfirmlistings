@@ -167,7 +167,7 @@ const schema = {
     <aside class="sidebar" id="contact">
       <div class="contact-card">
         <div class="phone">{d.phone_vanity ?? d.phone}<small>{d.phone_vanity ? `${d.phone} · ` : ''}{d.availability[0] ?? ''}</small></div>
-        <a class="btn btn--primary" href="#">Request free consultation</a>
+        <a class="btn btn--primary" href={`tel:${d.phone.replace(/[^\d+]/g, '')}`}>Call {d.phone}</a>
         <a class="btn btn--ghost" href={d.website} rel={linkRel} target="_blank">Visit website ↗</a>
         <dl>
           <dt>Fee</dt><dd>{d.fee_model}</dd>
@@ -199,7 +199,7 @@ const schema = {
           <>
             <h4>Is this your firm?</h4>
             <p class="muted" style="font-size:.92rem">Claiming is free. Keep your offices, fees and practice areas current, and submit case results with a docket for verification. It does not affect your Certification Score, gates or tier.</p>
-            <a class="link" href="#" style="margin-top:12px">Claim this profile</a>
+            <span class="link soon" style="margin-top:12px">Claim this profile</span>
           </>
         )}
       </div>
