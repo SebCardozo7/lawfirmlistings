@@ -19,6 +19,14 @@ const firms = defineCollection({
     initials: z.string(), website: z.string().url(), domain: z.string(), phone: z.string(), phone_vanity: z.string().optional(),
     founded_year: z.number().optional(),
     status: z.enum(['listed', 'certified', 'not_eligible', 'sample']),
+    // The firm proved it owns this page and maintains its own information. It says nothing
+    // about quality — that is what `status` and `score` are for — so it never touches either,
+    // and a claimed profile is deliberately styled apart from the certification badge.
+    claimed: z.object({
+      claimed_at: z.string(),
+      verified_via: z.string(),
+      contact_role: z.string().optional(),
+    }).optional(),
     tagline: z.string().optional(),
     practices: z.array(z.object({ slug: z.string(), name: z.string(), primary: z.boolean().default(false) })),
     market: z.object({ city_slug: z.string(), city: z.string(), state: z.string(), state_name: z.string() }),

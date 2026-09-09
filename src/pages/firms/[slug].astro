@@ -19,10 +19,15 @@ const pct = (v: number, arr: number[]) => arr.length ? Math.round(100 * (arr.fil
 const drPct = ah ? pct(ah.dr, peers.map(f => f.dr)) : null;
 const median = (arr: number[]) => { const a = [...arr].sort((x, y) => x - y); const m = Math.floor(a.length / 2); return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
 const drMedian = cohort ? median(cohort.data.firms.map(f => f.dr)) : null;
-const kwMedian = cohort ? median(cohort.data.firms.map(f => f.org_keywords)) : null;
 const ai = ah?.ai_citations;
 const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
+// The link attribute is editorial, not commercial: clearing every eligibility gate earns a
+// followed link. Claiming the profile does not change it, and neither does paying for anything —
+// selling followed links is a link scheme and the penalty would land on this site.
+const gateList = Object.values(d.gates ?? {});
+const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
+const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
 const title = `${d.name} — ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
 const description = `Profile of ${d.name}: practice areas, attorneys, ${d.offices.length} office${d.offices.length>1?'s':''} in ${d.market.city}, client reviews, fees${isCertified ? ` and LFL Certification Score ${s!.total}` : ''}.`;
 const schema = {
@@ -46,6 +51,7 @@ const schema = {
           <div class="profile-badges">
             {isCertified && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s!.computed_at).getFullYear()} · Score {s!.total}</span>}
             {!isCertified && <span class="badge badge--tier">Listed · not yet certified</span>}
+            {d.claimed && <span class="badge badge--claimed"><Icon name="check" /> Firm-managed</span>}
             <span class="badge badge--tier">{primary[0]?.name ?? d.practices[0].name}</span>
             <span class="badge badge--tier">{d.market.city}, {d.market.state}</span>
             <span class="badge badge--live">● Accepting new clients</span>
@@ -98,11 +104,9 @@ const schema = {
         <h3 style="margin:28px 0 4px;font-size:1.15rem">Digital presence snapshot</h3>
         <p class="muted" style="font-size:.9rem">Pillar D signals, re-measured monthly. Paid advertising is not scored.</p>
         <div class="digital-grid">
-          <div class="dg"><span class="k">Domain Rating</span><div class="v">{ah.dr}<small>· {drPct}th percentile</small></div><div class="s">{ah.refdomains.toLocaleString()} ref. domains · cohort median DR {drMedian} · Ahrefs rank {(ah.ahrefs_rank/1e6).toFixed(1)}M</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
-          <div class="dg"><span class="k">Organic visibility</span><div class="v">{ah.org_keywords.toLocaleString()}<small>keywords</small></div><div class="s">≈{ah.org_traffic.toLocaleString()} organic visits/mo (US) · cohort median {kwMedian} kw · {ah.paid_keywords ? `${ah.paid_keywords} paid keywords` : 'no paid search'}</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
+          <div class="dg"><span class="k">Domain authority</span><div class="v">{ah.dr}<small>· {drPct}th percentile</small></div><div class="s">{ah.refdomains.toLocaleString()} ref. domains · cohort median {drMedian} · Ahrefs rank {(ah.ahrefs_rank/1e6).toFixed(1)}M</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
           {ai && <div class="dg"><span class="k">AI-search citations</span><div class="v">{ai.total}<small>· {ai.pages} pages</small></div><div class="s">{Object.entries(ai.by_platform).map(([k,v]) => `${platformNames[k] ?? k} ${v}`).join(' · ')}</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>}
           {d.digital.trust_pages && <div class="dg"><span class="k">Trust pages</span><div class="v">{Object.values(d.digital.trust_pages).filter(Boolean).length} / {Object.keys(d.digital.trust_pages).length}</div><div class="s">{Object.entries(d.digital.trust_pages).map(([k,v]) => v ? k.replace(/_/g,' ') : `✕ ${k.replace(/_/g,' ')}`).join(' · ')}</div><span class="pill good">Observed</span></div>}
-          <div class="dg"><span class="k">Structured data</span><div class="v">{d.digital.schema_detected ? 'Present' : 'None'}<small>{d.digital.schema_detected ? '' : 'detected'}</small></div><div class="s">{d.digital.schema_detected ? 'JSON-LD found on site' : 'Add LegalService, Attorney, FAQPage, Review'}</div><span class={`pill ${d.digital.schema_detected ? 'good' : 'warn'}`}>{d.digital.schema_detected ? 'Observed' : 'Observed · +1 pt available'}</span></div>
           <div class="dg"><span class="k">Core Web Vitals</span><div class="v">{d.digital.psi ? (d.digital.psi.value.cwv_pass ? 'Pass' : 'Fail') : '—'}<small>mobile</small></div><div class="s">{d.digital.psi ? `Performance ${d.digital.psi.value.performance}` : 'PageSpeed Insights measurement pending'}</div><span class={`pill ${d.digital.psi ? 'good' : ''}`}>{d.digital.psi ? `Observed · PSI, ${d.digital.psi.measured_at}` : 'Pending'}</span></div>
         </div>
         </>
@@ -150,13 +154,13 @@ const schema = {
       <div class="contact-card">
         <div class="phone">{d.phone_vanity ?? d.phone}<small>{d.phone_vanity ? `${d.phone} · ` : ''}{d.availability[0] ?? ''}</small></div>
         <a class="btn btn--primary" href="#">Request free consultation</a>
-        <a class="btn btn--ghost" href={d.website} rel="nofollow noopener" target="_blank">Visit website ↗</a>
+        <a class="btn btn--ghost" href={d.website} rel={linkRel} target="_blank">Visit website ↗</a>
         <dl>
           <dt>Fee</dt><dd>{d.fee_model}</dd>
           <dt>Consultation</dt><dd>{d.free_consultation ? 'Free' : 'Paid'}</dd>
           <dt>Languages</dt><dd>{d.languages.join(', ')}</dd>
           <dt>Main office</dt><dd>{hq.address.split(',')[0]}, {hq.address.split(',').slice(-1)[0].trim()}</dd>
-          <dt>Profile</dt><dd>Unclaimed</dd>
+          <dt>Profile</dt><dd>{d.claimed ? `Managed by the firm since ${d.claimed.claimed_at}` : 'Unclaimed'}</dd>
         </dl>
         {s && <div class="verified-line"><Icon name="check" /> LFL Score {s.total} · {s.tier} · re-verified {s.computed_at}</div>}
       </div>
@@ -167,14 +171,23 @@ const schema = {
       </div>
       {cohort && (
       <div class="panel">
-        <h4>Same cohort · by Domain Rating</h4>
+        <h4>Same cohort · by domain authority</h4>
         <ul>{[...cohort.data.firms].sort((a, b) => b.dr - a.dr).slice(0, 5).map(f => <li><span style={f.domain === d.domain ? 'color:var(--ink);font-weight:600' : ''}>{f.name ?? f.domain}</span><span class="num">DR {f.dr}</span></li>)}</ul>
       </div>
       )}
       <div class="panel">
-        <h4>Is this your firm?</h4>
-        <p class="muted" style="font-size:.92rem">Claim the profile to submit verified results, respond to reviews and update office details.</p>
-        <a class="link" href="#" style="margin-top:12px">Claim this profile</a>
+        {d.claimed ? (
+          <>
+            <h4>Managed by the firm</h4>
+            <p class="muted" style="font-size:.92rem">{d.name} confirmed it owns this page on {d.claimed.claimed_at} and keeps its own details up to date. Claiming is free and does not affect the Certification Score, the eligibility gates or the tier — those stay ours to measure.</p>
+          </>
+        ) : (
+          <>
+            <h4>Is this your firm?</h4>
+            <p class="muted" style="font-size:.92rem">Claiming is free. Keep your offices, fees and practice areas current, and submit case results with a docket for verification. It does not affect your Certification Score, gates or tier.</p>
+            <a class="link" href="#" style="margin-top:12px">Claim this profile</a>
+          </>
+        )}
       </div>
     </aside>
   </div>

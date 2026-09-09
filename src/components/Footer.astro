@@ -1,5 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import Icon from './Icon.astro';
+
+// The footer listed six cities and "All 100 cities" on every page of the site; five of the six
+// had no page and the hundred do not exist. It now lists the cities that actually have firms.
+const published = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const cities = [...new Map(published.map(f =>
+  [f.data.market.city_slug, `${f.data.market.city}, ${f.data.market.state}`])).entries()]
+  .sort((a, b) => a[1].localeCompare(b[1]));
 ---
 <footer class="site-footer">
   <div class="container">
@@ -24,15 +33,11 @@ import Icon from './Icon.astro';
         </ul>
       </div>
       <div>
-        <h4>Top cities</h4>
+        <h4>{cities.length === 1 ? 'City' : 'Cities'}</h4>
         <ul>
-          <li><a href="/cities/new-york-ny/">New York, NY</a></li>
-          <li><a href="#">Los Angeles, CA</a></li>
-          <li><a href="#">Chicago, IL</a></li>
-          <li><a href="#">Houston, TX</a></li>
-          <li><a href="#">Miami, FL</a></li>
-          <li><a href="#">Washington, DC</a></li>
-          <li><a href="#">All 100 cities</a></li>
+          {cities.map(([slug, label]) => (
+            <li><a href={`/cities/${slug}/`}>{label}</a></li>
+          ))}
         </ul>
       </div>
       <div>
