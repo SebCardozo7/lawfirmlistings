@@ -57,6 +57,10 @@ SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
 FIELDS = ",".join("places." + f for f in [
     "displayName", "websiteUri", "rating", "userRatingCount", "formattedAddress",
     "nationalPhoneNumber", "businessStatus", "googleMapsUri", "primaryTypeDisplayName",
+    # Five reviews per listing, with dates and ratings. A sample, not a census, which is
+    # what the evidence on the profile says: eleven listings give fifty-five dated reviews,
+    # one listing gives five.
+    "reviews",
 ])
 G6_MIN_REVIEWS = 10
 DELAY = 0.6
@@ -150,6 +154,15 @@ def collect(rec, key, verbose=False):
                 "status": p.get("businessStatus"),
                 "maps_uri": p.get("googleMapsUri"),
                 "type": p.get("primaryTypeDisplayName", {}).get("text"),
+                # Only what the two sub-factors read: when it was left and how it rated. The
+                # text is not kept, because nothing on the site quotes it and holding
+                # strangers' words about a named business with no use for them is not worth
+                # doing.
+                "reviews": [
+                    {"published_at": rv.get("publishTime"), "rating": rv.get("rating")}
+                    for rv in (p.get("reviews") or [])
+                    if rv.get("publishTime") or rv.get("rating")
+                ],
             }
             if same_site(row["website"], domain):
                 accepted.append(row)
@@ -157,6 +170,9 @@ def collect(rec, key, verbose=False):
                 rejected.append({k: row[k] for k in ("name", "website", "review_count")})
 
     rated = [a for a in accepted if a["rating"] and a["review_count"]]
+    # One flat sample across the firm's listings. A firm with eleven offices contributes
+    # eleven times as many sampled reviews, which is right: it has eleven times the surface.
+    sample = [rv for a in accepted for rv in (a.get("reviews") or [])]
     total = sum(a["review_count"] for a in rated)
     weighted = (round(sum(a["rating"] * a["review_count"] for a in rated) / total, 2)
                 if total else None)
@@ -164,10 +180,12 @@ def collect(rec, key, verbose=False):
     block = {
         "listings": accepted,
         "rejected": rejected[:12],
+        "review_sample": sample,
         "aggregate": {
             "listing_count": len(accepted),
             "review_count_total": total,
             "rating_weighted": weighted,
+            "sampled_reviews": len(sample),
             "method": "counts summed across the firm's verified listings; rating averaged "
                       "weighted by review count",
         },

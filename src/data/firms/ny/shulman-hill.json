@@ -307,8 +307,30 @@
       "rating": 4.9,
       "count_label": "523",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-08"
-    }
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-02-11T20:53:13.038195912Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-02T14:31:37.690069667Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-03T14:51:13.473221907Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-19T20:45:00.389669013Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-24T09:09:54.033778880Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -355,7 +377,7 @@
       "review_count_total": 523,
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-08"
+      "measured_at": "2026-09-10"
     }
   },
   "gates": {
@@ -377,12 +399,6 @@
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
       "checked_at": "2026-09-09"
     },
-    "G4": {
-      "pass": false,
-      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
-      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
-      "checked_at": "2026-09-09"
-    },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 24 named attorneys published.",
@@ -399,31 +415,31 @@
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 59,
+    "total": 65,
     "tier": "Under review",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar B (0/20).",
-    "computed_at": "2026-09-09",
-    "methodology": "v1.1",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (5/15).",
+    "computed_at": "2026-09-10",
+    "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 7,
+        "score": 14,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
             "pts": 7,
-            "max": 9,
+            "max": 10,
             "source": "registry",
             "evidence": "Mean 10.2 years since admission across 22 of 24 named attorneys (longest 21, shortest 0) · NYS Attorney Registration database"
           },
           {
-            "code": "A1",
-            "label": "Clean-record depth",
-            "pts": 0,
-            "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 7.5,
+            "max": 9,
+            "source": "registry",
+            "evidence": "22 of 24 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -431,50 +447,42 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "Nothing published about insurance or bar memberships"
           }
         ]
       },
       "B": {
-        "score": 0,
-        "max": 20,
+        "score": 11,
+        "max": 15,
         "subs": [
           {
             "code": "B1",
-            "label": "Volume of verified results",
-            "pts": 0,
+            "label": "Results published",
+            "pts": 6,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "firm",
+            "evidence": "26 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
-            "label": "Magnitude",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Specificity",
+            "pts": 5,
+            "max": 5,
+            "source": "firm",
+            "evidence": "8 case types named; 1 court or county reference"
           },
           {
             "code": "B3",
-            "label": "Trial & appellate",
+            "label": "Results disclosure",
             "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "B4",
-            "label": "Recency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
           }
         ]
       },
       "C": {
-        "score": 10,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -495,27 +503,19 @@
           },
           {
             "code": "C3",
-            "label": "Recency & consistency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "C4",
-            "label": "Firm responsiveness",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-02) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
-            "label": "Complaints",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -558,53 +558,53 @@
         ]
       },
       "E": {
-        "score": 4,
-        "max": 10,
+        "score": 5,
+        "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
             "pts": 1,
-            "max": 4,
+            "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · fee model not published"
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 1.0,
-            "max": 3,
+            "pts": 1.5,
+            "max": 4,
             "source": "observed",
             "evidence": "English, Español"
           },
           {
             "code": "E4",
             "label": "Availability",
-            "pts": 1.5,
-            "max": 3,
+            "pts": 2.5,
+            "max": 5,
             "source": "observed",
             "evidence": "24/7 intake line"
           }
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 44,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 5,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A1 Clean-record depth: not yet measured (10 pts)",
-        "A5 Accountability: not yet measured (6 pts)",
-        "B1 Volume of verified results: not yet measured (6 pts)"
+        "E1 Free consult & fee transparency: +5 available",
+        "B3 Results disclosure: +4 available",
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 32.5,
-    "assessed": 55,
-    "coverage": 0.55,
-    "floor_abc_pct": 0.85
+    "raw": 61.5,
+    "assessed": 94,
+    "coverage": 0.94,
+    "floor_abc_pct": 0.824
   },
   "entity": {
     "legal_name": "SHULMAN & HILL, PLLC",
@@ -613,5 +613,59 @@
     "formed": "2013-08-06",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
     "checked_at": "2026-09-09"
+  },
+  "results_published": {
+    "count": 26,
+    "counted_from": "stated amounts",
+    "amounts": [
+      6500000,
+      5100000,
+      4900000,
+      3500000,
+      3050000,
+      2500000,
+      2250000,
+      2100000,
+      2000000,
+      1750000,
+      1600000,
+      1500000,
+      1350000,
+      1250000,
+      1175000,
+      1100000,
+      1000000,
+      850000,
+      800000,
+      775000,
+      755000,
+      750000,
+      650000,
+      625000,
+      600000,
+      500000
+    ],
+    "largest": 6500000,
+    "aggregate_claims": [
+      1000000000
+    ],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [
+      "Westchester County"
+    ],
+    "text_length": 16014,
+    "readable": true,
+    "url": "https://shulman-hill.com/results/",
+    "checked_at": "2026-09-10"
   }
 }

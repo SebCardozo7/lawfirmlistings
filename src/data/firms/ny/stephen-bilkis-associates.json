@@ -5,7 +5,7 @@
   "website": "https://www.1800nynylaw.com/",
   "domain": "1800nynylaw.com",
   "phone": "(212) 254-6800",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -87,8 +87,106 @@
       "rating": 4.35,
       "count_label": "199",
       "source": "Google Business Profile via Places API. 5 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-08"
-    }
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-03T22:42:37.688828473Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-01-06T18:39:32.625404805Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-06T19:27:56.705919970Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-06T17:22:25.299353867Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-02-17T21:15:45.835289Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-10-31T14:42:47.365659Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2018-01-08T00:22:52.410Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2018-09-10T14:24:30.576909Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-06-04T19:38:16.015447Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2016-04-22T18:22:37.164Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-29T00:47:26.385974672Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-03-15T11:55:23.374928Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2018-02-01T16:54:10.395Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2022-07-28T20:48:10.955431Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2016-04-30T13:06:04.836Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-08-01T19:57:19.895920Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2018-01-31T03:15:56.112Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2018-03-12T19:51:06.605Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2020-02-12T19:57:50.505149Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-05-02T16:26:56.538891Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2025-04-02T15:47:50.200778Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2019-06-04T21:08:56.250657Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2025-08-19T19:47:19.389604168Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2016-04-30T13:18:58.906Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -134,7 +232,7 @@
       "review_count_total": 199,
       "rating_weighted": 4.35,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-08"
+      "measured_at": "2026-09-10"
     }
   },
   "gates": {
@@ -156,12 +254,6 @@
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
       "checked_at": "2026-09-09"
     },
-    "G4": {
-      "pass": false,
-      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
-      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
-      "checked_at": "2026-09-09"
-    },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
@@ -179,31 +271,31 @@
   "faq": [],
   "fee_statement": "s of dollars for clients. 8 Personal attention. 9 We fight diligently for our clients. 10 Contingency cases. The firm does take some cases with no upfront fee. Legal fees can be taken at the",
   "score": {
-    "total": 59,
-    "tier": "Under review",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
-    "computed_at": "2026-09-09",
-    "methodology": "v1.1",
+    "total": 62,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (11/25).",
+    "computed_at": "2026-09-10",
+    "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 9,
+        "score": 18,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
             "pts": 9,
-            "max": 9,
+            "max": 10,
             "source": "registry",
             "evidence": "Mean 29.0 years since admission across 1 of 1 named attorneys (longest 29, shortest 29) · NYS Attorney Registration database"
           },
           {
-            "code": "A1",
-            "label": "Clean-record depth",
-            "pts": 0,
-            "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 9,
+            "max": 9,
+            "source": "registry",
+            "evidence": "1 of 1 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -211,50 +303,42 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "Nothing published about insurance or bar memberships"
           }
         ]
       },
       "B": {
-        "score": 0,
-        "max": 20,
+        "score": 12,
+        "max": 15,
         "subs": [
           {
             "code": "B1",
-            "label": "Volume of verified results",
-            "pts": 0,
+            "label": "Results published",
+            "pts": 3,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "firm",
+            "evidence": "6 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
-            "label": "Magnitude",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Specificity",
+            "pts": 5,
+            "max": 5,
+            "source": "firm",
+            "evidence": "8 case types named; 4 court or county references"
           },
           {
             "code": "B3",
-            "label": "Trial & appellate",
-            "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "B4",
-            "label": "Recency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Results disclosure",
+            "pts": 4,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
           }
         ]
       },
       "C": {
-        "score": 7,
+        "score": 10,
         "max": 20,
         "subs": [
           {
@@ -275,27 +359,19 @@
           },
           {
             "code": "C3",
-            "label": "Recency & consistency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "C4",
-            "label": "Firm responsiveness",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Review recency",
+            "pts": 2.5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 24 sampled reviews are from the last 12 months (newest 2026-06-03) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
-            "label": "Complaints",
+            "label": "Complaint share",
             "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "max": 4,
+            "source": "places",
+            "evidence": "10 of 24 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -338,53 +414,53 @@
         ]
       },
       "E": {
-        "score": 6,
-        "max": 10,
+        "score": 8,
+        "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 4,
-            "max": 4,
+            "pts": 5,
+            "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · s of dollars for clients. 8 Personal attention. 9 We fight diligently for our clients. 10 Contingency cases. The firm does take some cases with no upfront fee. Legal fees can be taken at the"
+            "evidence": "Free consultation · s of dollars for clients. 8 Personal attention. 9 We fight diligently for our clients. 10 Contingency cases. The firm does take some cases with no upfront fee. Legal fees can be taken at the · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
             "pts": 0.0,
-            "max": 3,
+            "max": 4,
             "source": "observed",
             "evidence": "English"
           },
           {
             "code": "E4",
             "label": "Availability",
-            "pts": 1.5,
-            "max": 3,
+            "pts": 2.5,
+            "max": 5,
             "source": "observed",
             "evidence": "24/7 intake line"
           }
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 40,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 8,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A1 Clean-record depth: not yet measured (10 pts)",
-        "A5 Accountability: not yet measured (6 pts)",
-        "B1 Volume of verified results: not yet measured (6 pts)"
+        "D1 Website trust & experience: +6.0 available",
+        "C5 Complaint share: +4 available",
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 32.5,
-    "assessed": 55,
-    "coverage": 0.55,
-    "floor_abc_pct": 0.8
+    "raw": 58.0,
+    "assessed": 94,
+    "coverage": 0.94,
+    "floor_abc_pct": 0.731
   },
   "entity": {
     "legal_name": "STEPHEN BILKIS & ASSOCIATES, PLLC",
@@ -393,5 +469,42 @@
     "formed": "2013-08-22",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
     "checked_at": "2026-09-09"
+  },
+  "results_published": {
+    "count": 6,
+    "counted_from": "stated amounts",
+    "amounts": [
+      35000000,
+      29000000,
+      27000000,
+      23000000,
+      19500000,
+      12000000
+    ],
+    "largest": 35000000,
+    "aggregate_claims": [
+      40000000
+    ],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian",
+      "municipal"
+    ],
+    "disclaimer": true,
+    "venues": [
+      "Nassau County",
+      "New York County",
+      "Suffolk County",
+      "Westchester County"
+    ],
+    "text_length": 6486,
+    "readable": true,
+    "url": "https://www.1800nynylaw.com/results/",
+    "checked_at": "2026-09-10"
   }
 }

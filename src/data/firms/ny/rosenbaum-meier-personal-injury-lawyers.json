@@ -178,8 +178,70 @@
       "rating": 4.81,
       "count_label": "259",
       "source": "Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-08"
-    }
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-02T19:34:44.606683806Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-11T20:35:21.117166893Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-02T19:07:03.474469793Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-23T07:08:01.402238657Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-05-18T13:53:22.413183077Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-02-13T20:56:57.071415973Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-03T23:24:18.166932746Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-24T13:36:06.773403624Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-04-23T15:30:04.327124Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-07T00:39:06.603894160Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-22T22:38:07.764807005Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-19T20:09:36.490664828Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-16T14:58:47.774006999Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-22T19:08:21.317253456Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-03-21T21:51:03.519982Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -227,7 +289,7 @@
       "review_count_total": 259,
       "rating_weighted": 4.81,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-08"
+      "measured_at": "2026-09-10"
     }
   },
   "gates": {
@@ -249,12 +311,6 @@
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
       "checked_at": "2026-09-09"
     },
-    "G4": {
-      "pass": false,
-      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
-      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
-      "checked_at": "2026-09-09"
-    },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 11 named attorneys published.",
@@ -272,31 +328,31 @@
   "faq": [],
   "fee_statement": "ction Accidents Get a free Consultation We offer free initial consultations and work on a contingency fee basis. You will owe no attorney’s fees unless and until we succeed in recovering comp",
   "score": {
-    "total": 59,
+    "total": 66,
     "tier": "Under review",
-    "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
-    "computed_at": "2026-09-09",
-    "methodology": "v1.1",
+    "verdict": "4 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar A (12/25).",
+    "computed_at": "2026-09-10",
+    "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 5,
+        "score": 12,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
             "pts": 5,
-            "max": 9,
+            "max": 10,
             "source": "registry",
             "evidence": "Mean 8.4 years since admission across 9 of 11 named attorneys (longest 30, shortest 0) · NYS Attorney Registration database"
           },
           {
-            "code": "A1",
-            "label": "Clean-record depth",
-            "pts": 0,
-            "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 7.5,
+            "max": 9,
+            "source": "registry",
+            "evidence": "9 of 11 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -304,50 +360,42 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "Nothing published about insurance or bar memberships"
           }
         ]
       },
       "B": {
-        "score": 0,
-        "max": 20,
+        "score": 13,
+        "max": 15,
         "subs": [
           {
             "code": "B1",
-            "label": "Volume of verified results",
-            "pts": 0,
+            "label": "Results published",
+            "pts": 6,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "firm",
+            "evidence": "50 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
-            "label": "Magnitude",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "8 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
-            "label": "Trial & appellate",
-            "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "B4",
-            "label": "Recency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Results disclosure",
+            "pts": 4,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
           }
         ]
       },
       "C": {
-        "score": 9,
+        "score": 16,
         "max": 20,
         "subs": [
           {
@@ -368,27 +416,19 @@
           },
           {
             "code": "C3",
-            "label": "Recency & consistency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "C4",
-            "label": "Firm responsiveness",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "13 of 15 sampled reviews are from the last 12 months (newest 2026-06-22) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
-            "label": "Complaints",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Complaint share",
+            "pts": 2,
+            "max": 4,
+            "source": "places",
+            "evidence": "2 of 15 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -431,52 +471,132 @@
         ]
       },
       "E": {
-        "score": 6,
-        "max": 10,
+        "score": 9,
+        "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 4,
-            "max": 4,
+            "pts": 5,
+            "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · ction Accidents Get a free Consultation We offer free initial consultations and work on a contingency fee basis. You will owe no attorney’s fees unless and until we succeed in recovering comp"
+            "evidence": "Free consultation · ction Accidents Get a free Consultation We offer free initial consultations and work on a contingency fee basis. You will owe no attorney’s fees unless and until we succeed in recovering comp · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 1.0,
-            "max": 3,
+            "pts": 1.5,
+            "max": 4,
             "source": "observed",
             "evidence": "English, Español"
           },
           {
             "code": "E4",
             "label": "Availability",
-            "pts": 1.5,
-            "max": 3,
+            "pts": 2.5,
+            "max": 5,
             "source": "observed",
             "evidence": "24/7 intake line"
           }
         ]
       }
     },
-    "floor_abc": 14,
+    "floor_abc": 42,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 4,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A1 Clean-record depth: not yet measured (10 pts)",
-        "A5 Accountability: not yet measured (6 pts)",
-        "B1 Volume of verified results: not yet measured (6 pts)"
+        "A2 Experience: +5 available",
+        "D1 Website trust & experience: +4.0 available",
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 32.5,
-    "assessed": 55,
-    "coverage": 0.55,
-    "floor_abc_pct": 0.7
+    "raw": 62.5,
+    "assessed": 94,
+    "coverage": 0.94,
+    "floor_abc_pct": 0.769
+  },
+  "results_published": {
+    "count": 50,
+    "counted_from": "stated amounts",
+    "amounts": [
+      65000000,
+      14100000,
+      7000000,
+      5200000,
+      4000000,
+      3625000,
+      3060000,
+      2850000,
+      2750000,
+      2500000,
+      2400000,
+      2200000,
+      2000000,
+      1950000,
+      1900000,
+      1500000,
+      1350000,
+      1300000,
+      1275000,
+      1250000,
+      1200000,
+      1100000,
+      850000,
+      840000,
+      800000,
+      750000,
+      735000,
+      725000,
+      700000,
+      680000,
+      650000,
+      625000,
+      600000,
+      575000,
+      560000,
+      550000,
+      540000,
+      500000,
+      475000,
+      460000,
+      450000,
+      425000,
+      420000,
+      400000,
+      390000,
+      375000,
+      350000,
+      325000,
+      320000,
+      310000
+    ],
+    "largest": 65000000,
+    "aggregate_claims": [
+      22000000,
+      1000000,
+      900000,
+      340000,
+      300000
+    ],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "workplace",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": true,
+    "venues": [],
+    "text_length": 25134,
+    "readable": true,
+    "url": "https://www.rosenbaumnylaw.com/case-results/",
+    "checked_at": "2026-09-10"
   }
 }

@@ -30,19 +30,45 @@ TODAY = datetime.date.today().isoformat()
 # Bumped with the v1.1 change that dropped A3, A4 and E2 and redistributed their points.
 # Every firm's score records the version it was computed under, so this must move whenever
 # the sub-factors or weights do — otherwise a score claims a methodology it did not use.
-METHOD = "v1.1"
+METHOD = "v2.0"
 
 SUBS = {  # code: (pillar, label, max)
  # v1.1 dropped A3, A4 and E2. Pillar weights are unchanged (A 25, B 20, C 20, D 25, E 10) so
  # the tier thresholds and the A+B+C floor keep meaning what they meant; the freed points were
  # redistributed inside their own pillar. See the header for why each one went.
- "A1": ("A", "Clean-record depth", 10), "A2": ("A", "Experience", 9), "A5": ("A", "Accountability", 6),
- "B1": ("B", "Volume of verified results", 6), "B2": ("B", "Magnitude", 6), "B3": ("B", "Trial & appellate", 5), "B4": ("B", "Recency", 3),
- "C1": ("C", "Authentic volume", 5), "C2": ("C", "Rating quality", 6), "C3": ("C", "Recency & consistency", 3), "C4": ("C", "Firm responsiveness", 3), "C5": ("C", "Complaints", 3),
+ # v2.0. Every sub-factor here is computed from a public source with no outreach. That is
+ # the whole change: at v1.1, 54 of the 100 points needed somebody to phone a firm or read a
+ # docket, so most of the scale sat pending on every profile and the score was reporting our
+ # coverage rather than the firm. What could not be found online was removed, and the field
+ # that referred to it went with it.
+ #
+ # Gone from v1.1: A1 clean-record depth, which wanted ten years of disciplinary history that
+ # no public source carries; C4 firm responsiveness, because the Places API does not return
+ # owner replies; and gate G4, which is documented at length in scripts/check_g4.py.
+ "A2": ("A", "Experience", 10), "A5": ("A", "Accountability", 6),
+ "A6": ("A", "Roster verifiability", 9),
+ # B is Published Outcomes now, not Verified Outcomes, and it deliberately does not score
+ # magnitude: scripts/crawl_results.py shows how fragile the provenance of a headline figure
+ # is, since the largest number on a results page is usually a firm-wide total.
+ "B1": ("B", "Results published", 6), "B2": ("B", "Specificity", 5),
+ "B3": ("B", "Results disclosure", 4),
+ "C1": ("C", "Authentic volume", 5), "C2": ("C", "Rating quality", 6),
+ "C3": ("C", "Review recency", 5), "C5": ("C", "Complaint share", 4),
  "D1": ("D", "Website trust & experience", 7), "D2": ("D", "Search authority", 8), "D3": ("D", "Local presence", 5), "D4": ("D", "Content, E-E-A-T & schema", 5),
- "E1": ("E", "Free consult & fee transparency", 4), "E3": ("E", "Languages & accessibility", 3), "E4": ("E", "Availability", 3),
+ # E gains the five points B loses. Published results are weaker evidence than verified ones,
+ # and everything in E is measured from the firm's own site and is what a client actually
+ # uses: what it costs, whether they speak your language, whether anyone answers.
+ "E1": ("E", "Free consult & fee transparency", 6), "E3": ("E", "Languages & accessibility", 4),
+ "E4": ("E", "Availability", 5),
 }
-PILLAR_MAX = {"A": 25, "B": 20, "C": 20, "D": 25, "E": 10}
+PILLAR_MAX = {"A": 25, "B": 15, "C": 20, "D": 25, "E": 15}
+
+# The eligibility gates, all five checkable by machine from a public source. G4, "no
+# consumer-protection actions", was removed at v2.0: it asked for a negative across every
+# enforcement body in the country and no search can establish it. The reasoning, and the two
+# query shapes that failed, are recorded in scripts/check_g4.py. Naming the set here rather
+# than counting to six inline means removing or adding a gate is one edit.
+GATES = ("G1", "G2", "G3", "G5", "G6")
 # Thresholds are percentages now, of what we could actually assess. The absolute floors the
 # methodology set, 40, 50 and 55 out of the 65 points in pillars A, B and C, carry across as
 # the same proportions.
@@ -147,8 +173,63 @@ def compute(firm):
     else:
         out.append(assessed("A2"))
 
-    # ---- A1, A5, B: still assessed (court records and disclosures we do not yet collect) ----
-    for c in ["A1", "A5", "B1", "B2", "B3", "B4"]: out.append(assessed(c))
+    # ---- A6 roster verifiability: computed from the registry check ----
+    # What replaced A1. A firm whose whole published roster can be matched to the state
+    # register, and which prints bar numbers on its bios, is accountable in a way anybody can
+    # check in a minute. A firm that names one attorney and no numbers is not, and that is a
+    # real difference rather than a gap in our data.
+    named = len(attys)
+    verified = [a for a in attys if a.get("bar_number")]
+    with_number = [a for a in attys if a.get("bar_number") and a.get("registry_basis")]
+    if named:
+        share = len(verified) / named
+        pts = 6 if share >= 0.95 else 4.5 if share >= 0.8 else 3 if share >= 0.5 else 1
+        # Three more for publishing the numbers itself, which is a text change any firm can
+        # make and which is the single cheapest thing on this scale.
+        on_bios = sum(1 for a in attys if (a.get("bar_number") and
+                                           "firm" in (a.get("registry_basis") or "").lower()))
+        pts += 3 if on_bios else 0
+        out.append(sub("A6", pts, "registry",
+                       f"{len(verified)} of {named} named attorneys matched to the "
+                       f"{firm.get('market', {}).get('state_name', 'state')} register"
+                       + ("; bar numbers published on the bios" if on_bios else
+                          "; no bar number published on any bio")))
+    else:
+        out.append(sub("A6", 0, "pending", "No attorney is named on the site we could read"))
+
+    # ---- A5: only what the firm publishes about itself ----
+    out.append(assessed("A5", "Nothing published about insurance or bar memberships"))
+
+    # ---- B: Published Outcomes, from the firm's own results page ----
+    rp = firm.get("results_published")
+    if rp and rp.get("readable"):
+        n = rp.get("count") or 0
+        b1 = 6 if n >= 25 else 4.5 if n >= 10 else 3 if n >= 3 else 1 if n >= 1 else 0
+        out.append(sub("B1", b1, "firm",
+                       (f"{n} result{'' if n == 1 else 's'} published on the firm's own site, "
+                        f"counted from {rp.get('counted_from', 'the page')}")
+                       if n else "The firm publishes no case results we could read"))
+        # Specificity: a figure attached to a kind of case, and a court or county named, are
+        # what let a reader go and look. A page of bare numbers does not.
+        types, venues = len(rp.get("case_types") or []), len(rp.get("venues") or [])
+        b2 = min(3, types) + (2 if venues else 0)
+        out.append(sub("B2", b2, "firm",
+                       f"{types} case type{'' if types == 1 else 's'} named"
+                       + (f"; {venues} court or county reference{'' if venues == 1 else 's'}"
+                          if venues else "; no court or county named, so no result can be "
+                                         "looked up")))
+        # The disclaimer New York's advertising rules effectively require alongside results.
+        out.append(sub("B3", 4 if rp.get("disclaimer") else 0, "firm",
+                       "Prior-results disclaimer present, as the advertising rules require"
+                       if rp.get("disclaimer") else
+                       "No prior-results disclaimer on the results page, which the New York "
+                       "advertising rules effectively require"))
+    elif rp:
+        for c in ["B1", "B2", "B3"]:
+            out.append(sub(c, 0, "pending", rp.get("why") or "Results page could not be read"))
+    else:
+        for c in ["B1", "B2", "B3"]:
+            out.append(assessed(c, "The firm's results page has not been read yet"))
 
     # ---- C ----
     g = firm.get("reviews", {}).get("google")
@@ -178,7 +259,34 @@ def compute(firm):
                        f"(prior {prior_mean:.2f} weighted as {prior_weight:,} reviews, from "
                        f"{RATING_N} scored firms) · single platform, Google only"))
     else: out.append(assessed("C2"))
-    for c in ["C3", "C4", "C5"]: out.append(assessed(c))
+    # ---- C3 recency and C5 complaint share, from the review sample Places returns ----
+    # Places returns five reviews per business listing with a publish time, a rating and the
+    # text. Five per listing is a sample, not a census, and the evidence says so: with eleven
+    # listings a firm has fifty-five dated reviews behind these two numbers, and with one it
+    # has five.
+    sample = firm.get("reviews", {}).get("sample") or []
+    if sample:
+        dates = sorted(r["published_at"][:10] for r in sample if r.get("published_at"))
+        recent = [d for d in dates if d >= (datetime.date.today()
+                                            - datetime.timedelta(days=365)).isoformat()]
+        share_recent = len(recent) / len(dates) if dates else 0
+        c3 = (5 if share_recent >= 0.6 else 4 if share_recent >= 0.4
+              else 2.5 if share_recent >= 0.2 else 1 if dates else 0)
+        out.append(sub("C3", c3, "places",
+                       f"{len(recent)} of {len(dates)} sampled reviews are from the last 12 "
+                       f"months (newest {dates[-1] if dates else 'unknown'}) · a sample of "
+                       f"five per business listing, not every review"))
+        low = [r for r in sample if (r.get("rating") or 5) <= 2]
+        share_low = len(low) / len(sample)
+        c5 = (4 if share_low == 0 else 3 if share_low <= 0.1
+              else 2 if share_low <= 0.2 else 1 if share_low <= 0.35 else 0)
+        out.append(sub("C5", c5, "places",
+                       f"{len(low)} of {len(sample)} sampled reviews rate 1 or 2 stars · a "
+                       "sample, so this is the shape of the complaints rather than a count "
+                       "of them"))
+    else:
+        for c in ["C3", "C5"]:
+            out.append(assessed(c, "No review sample collected yet"))
 
     # ---- D1: trust pages (+ psi) ----
     tp = firm.get("digital", {}).get("trust_pages")
@@ -242,16 +350,24 @@ def compute(firm):
     # points to firms that publish no fee model at all. A model only counts when it says something.
     model = (firm.get("fee_model") or "").strip()
     stated = bool(model) and not re.match(r"^(not stated|unknown|n/?a|pending)$", model, re.I)
-    e1 = (1 if firm.get("free_consultation") else 0) + (2 if stated else 0) \
-        + (1 if firm.get("fee_statement") else 0)
+    # The fourth point is for publishing the actual percentage, which the fee guide found no
+    # firm in the directory does. It is a real differentiator precisely because it is empty:
+    # every firm here says "no fee unless we win" and none says what the fee is.
+    statement = firm.get("fee_statement") or ""
+    states_pct = bool(re.search(r"(\d{2}(?:[.,]\d+)?\s*(?:%|percent)|33\s*1/3|one[-\s]third)",
+                                statement, re.I))
+    e1 = ((1 if firm.get("free_consultation") else 0) + (2 if stated else 0)
+          + (2 if statement else 0) + (1 if states_pct else 0))
     e1_ev = ("Free consultation · " if firm.get("free_consultation") else "") + \
-        (firm.get("fee_statement") or (model if stated else "fee model not published"))
+        (statement or (model if stated else "fee model not published")) + \
+        ("" if states_pct else " · the fee percentage itself is not published")
     out.append(sub("E1", e1, "observed", e1_ev))
     langs = [l for l in firm.get("languages", []) if l.lower() != "english"]
     av = " ".join(firm.get("availability", [])).lower()
-    e3 = min(2, 1.0 * len(langs)) + (1 if "video" in av or "ada" in av else 0)
+    e3 = min(3, 1.5 * len(langs)) + (1 if "video" in av or "ada" in av else 0)
     out.append(sub("E3", e3, "observed", ", ".join(firm.get("languages", [])) + (" · video consults" if "video" in av else "")))
-    e4 = (1.5 if "24/7" in av else 0) + (1.5 if any(w in av for w in ("hospital", "home", "evening", "weekend")) else 0)
+    e4 = ((2.5 if "24/7" in av else 0)
+          + (2.5 if any(w in av for w in ("hospital", "home", "evening", "weekend")) else 0))
     out.append(sub("E4", e4, "observed", " · ".join(firm.get("availability", [])) or "no availability published"))
 
     # ---- aggregate ----
@@ -294,13 +410,13 @@ def compute(firm):
         return not g["pass"] and any(w in g.get("source", "").lower() for w in ("pending", "partial"))
     pending_gates = [k for k, g in gates.items() if unchecked(g)]
     failed_gates = [k for k, g in gates.items() if not g["pass"] and not unchecked(g)]
-    gates_ok = len(gates) == 6 and not pending_gates and not failed_gates
-    # Clearing all six gates is itself a finding worth publishing. It says licensure,
+    gates_ok = len(gates) == len(GATES) and not pending_gates and not failed_gates
+    # Clearing every gate is itself a finding worth publishing. It says licensure,
     # discipline, entity, offices, website and footprint were checked and held, which is the
     # part that protects a client, and it claims nothing about the score. Without a rung here
     # the ladder ran straight from "listed" to a tier no firm could reach.
     tier = ("Not eligible" if failed_gates
-            else "Under review" if pending_gates or len(gates) != 6
+            else "Under review" if pending_gates or len(gates) != len(GATES)
             else "Verified")
     if gates_ok and coverage_ok:
         for name, need, floor in TIERS:
@@ -332,9 +448,9 @@ def compute(firm):
         coverage_note = ("Certification needs more of the scale measured than we have managed "
                          "here" + (f", pillar{'s' if len(short) > 1 else ''} {listed} "
                                    f"in particular" if short else "") + ". ")
-    verdict = ("All six eligibility gates passed. " if gates_ok
+    verdict = (f"All {len(GATES)} eligibility gates passed. " if gates_ok
                else f"Eligibility gates not passed: {', '.join(sorted(failed_gates))}. " if failed_gates
-               else f"{len(pending_gates) or 6 - len(gates)} eligibility gate(s) still to be checked. ") + \
+               else f"{len(pending_gates) or len(GATES) - len(gates)} eligibility gate(s) still to be checked. ") + \
               coverage_note + \
               f"Strongest pillar: {max(pillars, key=lambda p: pillars[p]['score']/pillars[p]['max'])}; most headroom in pillar {lowest} ({pillars[lowest]['score']}/{pillars[lowest]['max']})."
     return {"total": total, "tier": tier, "verdict": verdict, "computed_at": TODAY, "methodology": METHOD,

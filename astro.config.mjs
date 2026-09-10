@@ -31,5 +31,9 @@ export default defineConfig({
   site: 'https://lawfirmlistings.com',
   trailingSlash: 'always',
   build: { format: 'directory' },
-  integrations: [sitemap({ filter: isIndexable })],
+  // xslURL adds the <?xml-stylesheet?> instruction to both the index and the urlset, so a
+  // browser renders public/sitemap.xsl instead of raw XML. A crawler ignores it entirely,
+  // which is the point: the file a crawler reads is unchanged, and the file a person opens
+  // before a launch is legible.
+  integrations: [sitemap({ filter: isIndexable, xslURL: '/sitemap.xsl' })],
 });
