@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { fitDescription } from '../../lib/seo';
+import { officeLabel } from '../../lib/labels';
 import Icon from '../../components/Icon.astro';
 import Scorecard from '../../components/Scorecard.astro';
 
@@ -32,6 +33,9 @@ const PRACTICE_PAGES = new Set(['personal-injury']);
 const gateList = Object.values(d.gates ?? {});
 const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
 const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
+// Only a results page we could actually read and count is worth a panel.
+const rp = d.results_published;
+const published = rp && rp.readable && rp.count ? rp : null;
 const title = `${d.name}: ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
 // Built with fitDescription because the length is not knowable here: firm names in this cohort
 // run from 14 to 71 characters, and the longest already sat one character under the limit. The
@@ -141,13 +145,49 @@ const schema = {
         ))}</div>
       </div>
 
+      {/* Two different things used to share this section. The results[] array holds
+          individual results we confirmed, and it is empty for every firm here.
+          results_published holds what the firm publishes on its own site, which is
+          what pillar B actually scores and was rendered nowhere, so the section was
+          an empty heading on thirty-six profiles. Both appear now, and the block is
+          hidden when there is neither.
+
+          No amounts from the published page. They are the firm's own figures, we
+          have confirmed none of them, and the parser read one results page as a nine
+          trillion dollar settlement. The count and the case types are solid; the
+          numbers are not ours to repeat. */}
+      {(d.results.length > 0 || published) && (
       <div class="block" id="results">
         <h2>Case results <small>Only results verified against court records or documentation show amounts</small></h2>
         <div class="results">
-          {d.results.map(r => <div class="result"><div class="amt">{r.verified && r.amount ? r.amount : 'Not verified'}<small>{r.type}</small></div><div><b>{r.title}</b><p>{r.description}</p></div><span class={`badge ${r.verified ? 'badge--certified' : 'badge--tier'}`}>{r.verified ? 'Verified' : 'Pending verification'}</span></div>)}
+          {/* A result we have not confirmed used to print "Not verified" where the
+              amount goes, with a "Pending verification" badge beside it. Three of those
+              in a row read as a verdict on the firm, when all it describes is what we
+              have and have not confirmed. The amount slot now carries the amount or the
+              case type alone, and only a confirmed result is badged: the heading above
+              already tells the reader that an amount means we checked it. */}
+          {d.results.map(r => <div class="result"><div class="amt">{r.verified && r.amount ? <>{r.amount}<small>{r.type}</small></> : <small>{r.type}</small>}</div><div><b>{r.title}</b><p>{r.description}</p></div>{r.verified && <span class="badge badge--certified">Verified</span>}</div>)}
         </div>
+        {published && (
+          <div class="panel" style="margin-top:18px">
+            <b>What the firm publishes itself</b>
+            <p class="muted" style="font-size:.92rem;margin-top:6px">
+              {d.name} lists {published.count} case result{published.count === 1 ? '' : 's'} on its own website{published.case_types.length > 0 ? ', across ' + published.case_types.length + ' case type' + (published.case_types.length === 1 ? '' : 's') : ''}. {published.disclaimer
+                ? 'The page carries its own disclaimer about past results.'
+                : 'The page carries no disclaimer about past results.'}
+              {' '}We have read the page and counted what is on it. We have not confirmed the amounts, so none are repeated here.
+            </p>
+            {published.case_types.length > 0 && (
+              <div class="chips" style="margin-top:12px">{published.case_types.map(ct => <span class="chip soon">{ct}</span>)}</div>
+            )}
+            {published.url && (
+              <a class="link" href={published.url} rel={linkRel} target="_blank" style="margin-top:12px">See the firm's own results page ↗</a>
+            )}
+          </div>
+        )}
         <p class="muted" style="font-size:.86rem;margin-top:12px">Results are specific to their facts and do not guarantee similar outcomes. Firms submit results through their claimed profile; only results we can substantiate are published with amounts.</p>
       </div>
+      )}
 
       {/* Hidden entirely when no attorney has been collected. An empty section said
           "0 attorneys · licensure checked against the New York attorney registry", because
@@ -182,15 +222,19 @@ const schema = {
       </div>
 
       <div class="block" id="offices">
-        <h2>Offices <small>{d.offices.length} location{d.offices.length > 1 ? 's' : ''} · main office: {hq.label}</small></h2>
+        <h2>Offices <small>{d.offices.length} location{d.offices.length > 1 ? 's' : ''} · main office: {officeLabel(hq.label, hq.address, d.name)}</small></h2>
         <div class="map" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i></div><Icon name="skyline" /><span class="hv-placeholder">Map embed slot</span></div>
-        <div class="offices">{d.offices.map(o => <div class={`office ${o.is_hq ? 'is-hq' : ''}`}><Icon name="pin" /><div><b>{o.label}</b><span>{o.address}</span>{o.by_appointment && <div class="note">By appointment</div>}</div></div>)}</div>
+        <div class="offices">{d.offices.map(o => <div class={`office ${o.is_hq ? 'is-hq' : ''}`}><Icon name="pin" /><div><b>{officeLabel(o.label, o.address, d.name)}</b><span>{o.address}</span>{o.by_appointment && <div class="note">By appointment</div>}</div></div>)}</div>
       </div>
 
+      {/* A firm with no FAQ written yet showed the heading over an empty box. The nav link
+          above was already conditional; the block was not. */}
+      {d.faq.length > 0 && (
       <div class="block" id="faq">
         <h2>Frequently asked questions</h2>
         <div class="faq">{d.faq.map((f, i) => <details open={i === 0}><summary>{f.q}</summary><div>{f.a}</div></details>)}</div>
       </div>
+      )}
     </div>
 
     <aside class="sidebar" id="contact">

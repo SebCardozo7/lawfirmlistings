@@ -293,7 +293,7 @@
   ],
   "languages": [
     "English",
-    "Español"
+    "Spanish"
   ],
   "fee_model": "Contingency",
   "free_consultation": true,
@@ -466,12 +466,12 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 71,
+        "performance": 73,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-08",
-      "note": "LCP 7.9 s / CLS 0.000 / TBT 7 ms"
+      "measured_at": "2026-09-10",
+      "note": "LCP 7.1 s / CLS 0.000 / TBT 0 ms"
     },
     "ahrefs": {
       "dr": 57,
@@ -520,7 +520,7 @@
       "pass": true,
       "evidence": "PARKER WAICHMAN LLP is an active domestic registered limited liability partnership registered since 2002-07-22, with 7 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": true,
@@ -530,9 +530,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "1,870 public client reviews and 24 years since the entity was formed in 2002",
+      "evidence": "1,871 public client reviews and 24 years since the entity was formed in 2002",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -623,7 +623,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.84 over 1,871 reviews → Bayesian 4.84 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.84 over 1,871 reviews → Bayesian 4.84 (prior 4.81 weighted as 100 reviews, from 37 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -699,7 +699,7 @@
             "pts": 1.5,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Español"
+            "evidence": "English, Spanish"
           },
           {
             "code": "E4",
@@ -736,7 +736,7 @@
     "dos_id": "2792082",
     "formed": "2002-07-22",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-09"
+    "checked_at": "2026-09-10"
   },
   "results_published": {
     "count": 10,

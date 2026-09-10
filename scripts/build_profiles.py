@@ -186,7 +186,9 @@ def build(rec, cohort_lookup, market, cohort_id):
 
     languages = ["English"]
     if "se_habla_espanol" in claims or rec.get("spanish_signals"):
-        languages.append("Español")
+        # The site is written in English, so the field names the language in English. A
+        # profile that read "English and Español" mixed the two in one sentence.
+        languages.append("Spanish")
 
     availability = []
     if "available_24_7" in claims:

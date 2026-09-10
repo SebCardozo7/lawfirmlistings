@@ -302,7 +302,7 @@
   ],
   "languages": [
     "English",
-    "Español"
+    "Spanish"
   ],
   "fee_model": "Contingency",
   "free_consultation": true,
@@ -355,12 +355,12 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 64,
+        "performance": 88,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-08",
-      "note": "LCP 6.7 s / CLS 0.000 / TBT 32 ms"
+      "measured_at": "2026-09-10",
+      "note": "LCP 3.5 s / CLS 0.000 / TBT 77 ms"
     },
     "ahrefs": {
       "dr": 47,
@@ -407,7 +407,7 @@
       "pass": true,
       "evidence": "THE JACOB D. FUCHSBERG LAW FIRM, LLP is an active domestic registered limited liability partnership registered since 1999-07-02, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": true,
@@ -419,7 +419,7 @@
       "pass": true,
       "evidence": "109 public client reviews and 27 years since the entity was formed in 1999",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -510,7 +510,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 109 reviews → Bayesian 4.75 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 109 reviews → Bayesian 4.75 (prior 4.81 weighted as 100 reviews, from 37 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -586,7 +586,7 @@
             "pts": 1.5,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Español"
+            "evidence": "English, Spanish"
           },
           {
             "code": "E4",
@@ -623,7 +623,7 @@
     "dos_id": "2394805",
     "formed": "1999-07-02",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-09"
+    "checked_at": "2026-09-10"
   },
   "results_published": {
     "readable": true,

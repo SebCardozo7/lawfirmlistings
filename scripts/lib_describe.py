@@ -67,10 +67,32 @@ def state_of(address: str) -> str | None:
     return None
 
 
+NUMBER_WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight",
+                9: "nine", 10: "ten", 11: "eleven", 12: "twelve"}
+
+
+def _count(n: int) -> str:
+    """Small counts read as words, the way the hand-written profiles wrote them."""
+    return NUMBER_WORDS.get(n, str(n))
+
+
+def _join(items: list[str]) -> str:
+    if len(items) == 1:
+        return items[0]
+    return ", ".join(items[:-1]) + " and " + items[-1]
+
+
 def _localities(offices: list[dict]) -> list[str]:
     out: list[str] = []
     for office in offices:
-        place = locality(office.get("address") or "")
+        address = office.get("address") or ""
+        place = locality(address)
+        # A Manhattan address is written "New York, NY", so the postal city repeats the state.
+        # That produced "offices in New York and Brooklyn", which reads as though Brooklyn were
+        # somewhere else entirely. Manhattan is what a New Yorker would say, and what the
+        # hand-written profiles said.
+        if place == "New York" and state_of(address) == "NY":
+            place = "Manhattan"
         if place and place not in out:
             out.append(place)
     return out
@@ -101,15 +123,13 @@ def _footprint(market: dict, offices: list[dict]) -> str:
         return f"with a single office in {places[0] if places else market['city']}"
 
     if len(states) > 1:
-        listed = ", ".join(states[:-1]) + f" and {states[-1]}"
-        return f"with {n} offices across {listed}"
-    if len(places) >= 2 and len(places) <= 3:
-        listed = ", ".join(places[:-1]) + f" and {places[-1]}"
-        return f"with offices in {listed}"
+        return f"with {_count(n)} offices across {_join(states)}"
+    if 2 <= len(places) <= 3:
+        return f"with offices in {_join(places)}"
     if len(places) > 3:
-        return (f"with {n} offices across {states[0] if states else market['city']}, "
-                f"among them {', '.join(places[:3])}")
-    return f"with {n} offices across {states[0] if states else market['city']}"
+        return (f"with {_count(n)} offices across "
+                f"{states[0] if states else market['city']}, including {_join(places[:3])}")
+    return f"with {_count(n)} offices across {states[0] if states else market['city']}"
 
 
 def describe(name: str, market: dict, offices: list[dict], practices: list[dict],
@@ -140,7 +160,7 @@ def describe(name: str, market: dict, offices: list[dict], practices: list[dict]
 
     tail: list[str] = []
     if [l for l in languages if l.lower() != "english"]:
-        tail.append("It publishes service in " + " and ".join(languages) + ".")
+        tail.append("It publishes material in " + _join(languages) + ".")
     if (fee_model or "").strip().lower() in NOT_STATED:
         tail.append("It does not state a fee model on its public pages, so none is recorded here.")
 

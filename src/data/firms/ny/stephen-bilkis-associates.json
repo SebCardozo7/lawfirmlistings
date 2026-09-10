@@ -198,12 +198,12 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 72,
+        "performance": 82,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-08",
-      "note": "LCP 4.6 s / CLS 0.061 / TBT 283 ms"
+      "measured_at": "2026-09-10",
+      "note": "LCP 3.8 s / CLS 0.058 / TBT 134 ms"
     },
     "ahrefs": {
       "dr": 50,
@@ -252,7 +252,7 @@
       "pass": true,
       "evidence": "STEPHEN BILKIS & ASSOCIATES, PLLC is an active domestic professional service limited liability company registered since 2013-08-22, with 5 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": true,
@@ -264,7 +264,7 @@
       "pass": true,
       "evidence": "199 public client reviews and 13 years since the entity was formed in 2013",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -355,7 +355,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.35 over 199 reviews → Bayesian 4.51 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.35 over 199 reviews → Bayesian 4.50 (prior 4.81 weighted as 100 reviews, from 37 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -468,7 +468,7 @@
     "dos_id": "4449766",
     "formed": "2013-08-22",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-09"
+    "checked_at": "2026-09-10"
   },
   "results_published": {
     "count": 6,

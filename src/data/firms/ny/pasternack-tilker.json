@@ -444,7 +444,7 @@
   ],
   "languages": [
     "English",
-    "Español"
+    "Spanish"
   ],
   "fee_model": "Contingency",
   "free_consultation": true,
@@ -698,12 +698,12 @@
     "schema_detected": false,
     "psi": {
       "value": {
-        "performance": 75,
+        "performance": 68,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-08",
-      "note": "LCP 3.1 s / CLS 0.082 / TBT 679 ms"
+      "measured_at": "2026-09-10",
+      "note": "LCP 2.6 s / CLS 0.038 / TBT 1645 ms"
     },
     "ahrefs": {
       "dr": 41,
@@ -751,7 +751,7 @@
       "pass": true,
       "evidence": "PASTERNACK TILKER ZIEGLER WALSH STANTON & ROMANO LLP is an active domestic registered limited liability partnership registered since 2010-06-10, with 11 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": true,
@@ -763,7 +763,7 @@
       "pass": true,
       "evidence": "4,894 public client reviews and 16 years since the entity was formed in 2010",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -854,7 +854,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.78 over 4,894 reviews → Bayesian 4.78 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.78 over 4,894 reviews → Bayesian 4.78 (prior 4.81 weighted as 100 reviews, from 37 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -930,7 +930,7 @@
             "pts": 1.5,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Español"
+            "evidence": "English, Spanish"
           },
           {
             "code": "E4",
@@ -967,7 +967,7 @@
     "dos_id": "3960187",
     "formed": "2010-06-10",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-09"
+    "checked_at": "2026-09-10"
   },
   "results_published": {
     "readable": true,

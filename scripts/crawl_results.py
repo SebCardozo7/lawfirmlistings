@@ -170,6 +170,13 @@ def money_values(text):
         # or a fragment of a phone number rather than a recovery.
         if value < 10_000:
             continue
+        # And one over ten billion is a parse, not a settlement. One results page read as
+        # a nine trillion dollar recovery, which is more than the annual output of most
+        # countries and would have sat in our data waiting for somebody to render it. The
+        # largest personal injury verdicts in the country are in the low billions, so this
+        # ceiling drops the artefacts without touching a real figure.
+        if value > 10_000_000_000:
+            continue
         before = text[max(0, match.start() - 90):match.start()]
         after = text[match.end():match.end() + 70]
         if AGGREGATE_BEFORE.search(before) or AGGREGATE_AFTER.search(after):

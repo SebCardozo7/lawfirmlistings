@@ -290,7 +290,7 @@
   ],
   "languages": [
     "English",
-    "Español"
+    "Spanish"
   ],
   "fee_model": "Not stated",
   "free_consultation": true,
@@ -343,12 +343,12 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 97,
-        "cwv_pass": true
+        "performance": 89,
+        "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-08",
-      "note": "LCP 2.1 s / CLS 0.027 / TBT 29 ms"
+      "measured_at": "2026-09-10",
+      "note": "LCP 3.3 s / CLS 0.027 / TBT 194 ms"
     },
     "ahrefs": {
       "dr": 41,
@@ -397,7 +397,7 @@
       "pass": true,
       "evidence": "SHULMAN & HILL, PLLC is an active domestic professional service limited liability company registered since 2013-08-06, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": true,
@@ -409,13 +409,13 @@
       "pass": true,
       "evidence": "523 public client reviews and 13 years since the entity was formed in 2013",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 65,
+    "total": 63,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (5/15).",
     "computed_at": "2026-09-10",
@@ -499,7 +499,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 523 reviews → Bayesian 4.89 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 523 reviews → Bayesian 4.89 (prior 4.81 weighted as 100 reviews, from 37 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -520,16 +520,16 @@
         ]
       },
       "D": {
-        "score": 12,
+        "score": 10,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 4.0,
+            "pts": 2.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pass · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -575,7 +575,7 @@
             "pts": 1.5,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Español"
+            "evidence": "English, Spanish"
           },
           {
             "code": "E4",
@@ -592,16 +592,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 5,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": true,
       "path": [
+        "D1 Website trust & experience: +5.0 available",
         "E1 Free consult & fee transparency: +5 available",
-        "B3 Results disclosure: +4 available",
-        "D3 Local presence: +4 available"
+        "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 61.5,
+    "raw": 59.5,
     "assessed": 94,
     "coverage": 0.94,
     "floor_abc_pct": 0.824
@@ -612,7 +612,7 @@
     "dos_id": "4441273",
     "formed": "2013-08-06",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-09"
+    "checked_at": "2026-09-10"
   },
   "results_published": {
     "count": 26,

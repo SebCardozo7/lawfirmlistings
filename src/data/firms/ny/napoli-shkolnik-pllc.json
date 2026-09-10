@@ -352,7 +352,7 @@
   ],
   "languages": [
     "English",
-    "Español"
+    "Spanish"
   ],
   "fee_model": "Not stated",
   "free_consultation": true,
@@ -445,12 +445,12 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 38,
+        "performance": 49,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-08",
-      "note": "LCP 11.2 s / CLS 0.025 / TBT 3217 ms"
+      "measured_at": "2026-09-10",
+      "note": "LCP 4.0 s / CLS 0.025 / TBT 1689 ms"
     },
     "ahrefs": {
       "dr": 53,
@@ -499,7 +499,7 @@
       "pass": true,
       "evidence": "NAPOLI SHKOLNIK PLLC is an active domestic professional service limited liability company registered since 2015-07-06, with 3 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": true,
@@ -509,9 +509,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "625 public client reviews and 11 years since the entity was formed in 2015",
+      "evidence": "628 public client reviews and 11 years since the entity was formed in 2015",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -601,7 +601,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.35 over 628 reviews → Bayesian 4.41 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.35 over 628 reviews → Bayesian 4.41 (prior 4.81 weighted as 100 reviews, from 37 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -677,7 +677,7 @@
             "pts": 1.5,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Español"
+            "evidence": "English, Spanish"
           },
           {
             "code": "E4",
@@ -714,7 +714,7 @@
     "dos_id": "4785108",
     "formed": "2015-07-06",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-09"
+    "checked_at": "2026-09-10"
   },
   "results_published": {
     "count": 4,
