@@ -222,8 +222,90 @@
       "rating": 4.81,
       "count_label": "577",
       "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-08"
-    }
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-12T15:27:57.868777100Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-19T23:06:17.828338312Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-02T22:17:08.431705177Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-02T19:59:15.646238148Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-25T02:59:57.171425149Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-07T17:58:58.376750919Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-16T17:59:49.110435007Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-29T20:09:36.502110301Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-19T13:08:58.771491965Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-06-06T16:16:14.811393Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-19T23:22:44.574165207Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-10T18:24:52.735422527Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-13T23:41:03.815956063Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-09T01:31:22.989541863Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-09T02:14:27.672471595Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-09T19:55:29.025314447Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-04-01T10:13:39.608637Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-04-01T10:14:45.420476Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-03-20T19:06:42.590453Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-03-17T13:48:51.187209Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -269,7 +351,7 @@
       "review_count_total": 577,
       "rating_weighted": 4.81,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-08"
+      "measured_at": "2026-09-10"
     }
   },
   "gates": {
@@ -291,12 +373,6 @@
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
       "checked_at": "2026-09-09"
     },
-    "G4": {
-      "pass": false,
-      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
-      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
-      "checked_at": "2026-09-09"
-    },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 16 named attorneys published.",
@@ -314,31 +390,31 @@
   "faq": [],
   "fee_statement": "no upfront fees in working with an injury lawyer. Our personal injury attorneys work on a contingency fee basis, which means that you do not pay anything unless we win your case. This allows",
   "score": {
-    "total": 62,
+    "total": 63,
     "tier": "Under review",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar B (0/20).",
-    "computed_at": "2026-09-09",
-    "methodology": "v1.1",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (5/15).",
+    "computed_at": "2026-09-10",
+    "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 9,
+        "score": 15,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
             "pts": 9,
-            "max": 9,
+            "max": 10,
             "source": "registry",
             "evidence": "Mean 29.8 years since admission across 9 of 16 named attorneys (longest 45, shortest 11) · NYS Attorney Registration database"
           },
           {
-            "code": "A1",
-            "label": "Clean-record depth",
-            "pts": 0,
-            "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 6,
+            "max": 9,
+            "source": "registry",
+            "evidence": "9 of 16 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -346,50 +422,42 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "Nothing published about insurance or bar memberships"
           }
         ]
       },
       "B": {
-        "score": 0,
-        "max": 20,
+        "score": 9,
+        "max": 15,
         "subs": [
           {
             "code": "B1",
-            "label": "Volume of verified results",
-            "pts": 0,
+            "label": "Results published",
+            "pts": 6,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "firm",
+            "evidence": "103 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
-            "label": "Magnitude",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "9 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
-            "label": "Trial & appellate",
+            "label": "Results disclosure",
             "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "B4",
-            "label": "Recency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
           }
         ]
       },
       "C": {
-        "score": 10,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -410,27 +478,19 @@
           },
           {
             "code": "C3",
-            "label": "Recency & consistency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "C4",
-            "label": "Firm responsiveness",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "14 of 20 sampled reviews are from the last 12 months (newest 2026-06-12) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
-            "label": "Complaints",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -473,22 +533,22 @@
         ]
       },
       "E": {
-        "score": 4,
-        "max": 10,
+        "score": 5,
+        "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 4,
-            "max": 4,
+            "pts": 5,
+            "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · no upfront fees in working with an injury lawyer. Our personal injury attorneys work on a contingency fee basis, which means that you do not pay anything unless we win your case. This allows"
+            "evidence": "Free consultation · no upfront fees in working with an injury lawyer. Our personal injury attorneys work on a contingency fee basis, which means that you do not pay anything unless we win your case. This allows · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
             "pts": 0.0,
-            "max": 3,
+            "max": 4,
             "source": "observed",
             "evidence": "English"
           },
@@ -496,30 +556,30 @@
             "code": "E4",
             "label": "Availability",
             "pts": 0,
-            "max": 3,
+            "max": 5,
             "source": "observed",
             "evidence": "no availability published"
           }
         ]
       }
     },
-    "floor_abc": 19,
+    "floor_abc": 43,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 8,
+      "gap": 7,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A1 Clean-record depth: not yet measured (10 pts)",
-        "A5 Accountability: not yet measured (6 pts)",
-        "B1 Volume of verified results: not yet measured (6 pts)"
+        "D1 Website trust & experience: +5.0 available",
+        "E4 Availability: +5 available",
+        "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 34.0,
-    "assessed": 55,
-    "coverage": 0.55,
-    "floor_abc_pct": 0.95
+    "raw": 59.0,
+    "assessed": 94,
+    "coverage": 0.94,
+    "floor_abc_pct": 0.796
   },
   "entity": {
     "legal_name": "THE ROTHENBERG LAW FIRM LLP",
@@ -528,5 +588,93 @@
     "formed": "2022-07-27",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
     "checked_at": "2026-09-09"
+  },
+  "results_published": {
+    "count": 103,
+    "counted_from": "stated amounts",
+    "amounts": [
+      55000000,
+      26300000,
+      25000000,
+      22100000,
+      19870000,
+      18700000,
+      18000000,
+      17500000,
+      15000000,
+      13750000,
+      13500000,
+      12200000,
+      11800000,
+      11500000,
+      10000000,
+      8600000,
+      7300000,
+      6900000,
+      6825000,
+      6800000,
+      6750000,
+      6500000,
+      6250000,
+      6000000,
+      5500000,
+      5150000,
+      5000000,
+      4200000,
+      4000000,
+      3800000,
+      3500000,
+      3250000,
+      3100000,
+      3000000,
+      2850000,
+      2800000,
+      2650000,
+      2600000,
+      2520000,
+      2500000,
+      2400000,
+      2375000,
+      2260000,
+      2250000,
+      2000000,
+      1900000,
+      1850000,
+      1780000,
+      1750000,
+      1730000,
+      1700000,
+      1650000,
+      1600000,
+      1550000,
+      1500000,
+      1400000,
+      1300000,
+      1250000,
+      1210000,
+      1200000
+    ],
+    "largest": 55000000,
+    "aggregate_claims": [
+      7500000,
+      725000
+    ],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "workplace",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 35006,
+    "readable": true,
+    "url": "https://injurylawyer.com/results/",
+    "checked_at": "2026-09-10"
   }
 }

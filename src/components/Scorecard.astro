@@ -5,7 +5,7 @@ interface Props { firm: CollectionEntry<'firms'>; cohortSize?: number; cohortLab
 const { firm, cohortSize, cohortLabel } = Astro.props;
 const d = firm.data; const s = d.score;
 if (!s) throw new Error(`No score for ${d.slug} — run scripts/score.py`);
-const pillarNames: Record<string,string> = { A: 'Professional Standing', B: 'Verified Outcomes', C: 'Client Experience', D: 'Digital Presence & Authority', E: 'Access & Responsiveness' };
+const pillarNames: Record<string,string> = { A: 'Professional Standing', B: 'Published Outcomes', C: 'Client Experience', D: 'Digital Presence & Authority', E: 'Access & Responsiveness' };
 const gateNames: Record<string,string> = { G1: 'Licensure', G2: 'Discipline', G3: 'Entity & office', G4: 'Consumer actions', G5: 'Website', G6: 'Footprint' };
 const tagLabel = (src: string) => ({ registry: 'Registry', observed: 'Observed', ahrefs: `Ahrefs · ${d.digital.ahrefs?.measured_at ?? ''}`, places: 'Google', psi: 'PageSpeed', court: 'Court records', firm: 'Firm-submitted', illustrative: 'Illustrative', pending: 'Pending' }[src] ?? src);
 const isMeasured = (src: string) => ['registry','observed','ahrefs','places','psi','court'].includes(src);

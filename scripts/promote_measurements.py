@@ -13,6 +13,8 @@ So this promotes only what a machine measured, and only the fields build_profile
 the same shape, so there is one convention and not two:
 
     reviews.google           from the Places aggregate, replacing a firm-reported figure
+    reviews.sample           dates and ratings for the reviews Places returned, for C3 and C5
+    results_published        what the firm publishes about its own results, for pillar B
     digital.places           listing count, summed reviews, count-weighted rating
     digital.psi              Core Web Vitals, when PageSpeed could complete
     digital.trust_pages      which trust pages the crawl actually found
@@ -126,6 +128,33 @@ def promote(rec: dict, firm: dict) -> list[str]:
         }
         was = f"{before.get('rating')} over {before.get('count_label')} ({before.get('source', '?')[:34]})"
         changed.append(f"reviews.google  {was}  ->  {agg['rating_weighted']} over {n:,} across {listings} listings")
+
+    # The review sample: dates and ratings only, which is what C3 and C5 read. Kept beside
+    # the aggregate it was drawn from so the sample size can never be quoted without the
+    # listing count that explains it.
+    sample = places.get("review_sample") or []
+    if sample:
+        before = len((firm.get("reviews") or {}).get("sample") or [])
+        firm.setdefault("reviews", {"quotes": []})["sample"] = sample
+        if before != len(sample):
+            changed.append(f"reviews.sample  {before} -> {len(sample)} dated reviews across "
+                           f"{agg.get('listing_count', 0)} listing(s)")
+
+    # What the firm publishes about its own results. Promoted whole, including the
+    # unreadable case, because pillar B has to tell "publishes nothing" from "we could not
+    # read it" and only the record knows which.
+    published = rec.get("results_published")
+    if published:
+        was = firm.get("results_published") or {}
+        firm["results_published"] = published
+        if was.get("count") != published.get("count") or was.get("readable") != published.get("readable"):
+            changed.append(
+                "results_published  %s result(s), disclaimer %s, %d case type(s)"
+                % (published.get("count", 0),
+                   "yes" if published.get("disclaimer") else "no",
+                   len(published.get("case_types") or []))
+                if published.get("readable") else
+                "results_published  not readable: %s" % published.get("why", "unknown"))
 
     if rec.get("psi"):
         digital["psi"] = rec["psi"]

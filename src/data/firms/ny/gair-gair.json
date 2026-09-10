@@ -46,15 +46,37 @@
       "rating": 4.6,
       "count_label": "110",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-08"
-    }
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-29T18:04:35.708235065Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-22T05:53:35.731577123Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-16T01:39:35.358559720Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-23T21:40:57.373221571Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-03T11:39:56.247618105Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
     "trust_pages": {
       "attorney_bios": true,
-      "disclaimer": true,
       "blog": true,
+      "disclaimer": true,
       "privacy_policy": true
     },
     "schema_detected": true,
@@ -94,7 +116,7 @@
       "review_count_total": 110,
       "rating_weighted": 4.6,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-08"
+      "measured_at": "2026-09-10"
     }
   },
   "gates": {
@@ -116,12 +138,6 @@
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
       "checked_at": "2026-09-09"
     },
-    "G4": {
-      "pass": false,
-      "evidence": "A docket search found 9 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
-      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
-      "checked_at": "2026-09-09"
-    },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
@@ -139,11 +155,11 @@
   "faq": [],
   "fee_statement": "scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but",
   "score": {
-    "total": 48,
+    "total": 43,
     "tier": "Under review",
-    "verdict": "6 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-09",
-    "methodology": "v1.1",
+    "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-10",
+    "methodology": "v2.0",
     "pillars": {
       "A": {
         "score": 0,
@@ -153,17 +169,17 @@
             "code": "A2",
             "label": "Experience",
             "pts": 0,
-            "max": 9,
+            "max": 10,
             "source": "pending",
             "evidence": "Not yet assessed"
           },
           {
-            "code": "A1",
-            "label": "Clean-record depth",
+            "code": "A6",
+            "label": "Roster verifiability",
             "pts": 0,
-            "max": 10,
+            "max": 9,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "No attorney is named on the site we could read"
           },
           {
             "code": "A5",
@@ -171,50 +187,42 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "Nothing published about insurance or bar memberships"
           }
         ]
       },
       "B": {
         "score": 0,
-        "max": 20,
+        "max": 15,
         "subs": [
           {
             "code": "B1",
-            "label": "Volume of verified results",
+            "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
-            "label": "Magnitude",
+            "label": "Specificity",
             "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
-            "label": "Trial & appellate",
+            "label": "Results disclosure",
             "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "B4",
-            "label": "Recency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
           }
         ]
       },
       "C": {
-        "score": 7,
+        "score": 16,
         "max": 20,
         "subs": [
           {
@@ -235,27 +243,19 @@
           },
           {
             "code": "C3",
-            "label": "Recency & consistency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "C4",
-            "label": "Firm responsiveness",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-29) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
-            "label": "Complaints",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -298,22 +298,22 @@
         ]
       },
       "E": {
-        "score": 5,
-        "max": 10,
+        "score": 6,
+        "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 4,
-            "max": 4,
+            "pts": 5,
+            "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but"
+            "evidence": "Free consultation · scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 1.0,
-            "max": 3,
+            "pts": 1.5,
+            "max": 4,
             "source": "observed",
             "evidence": "English, Español"
           },
@@ -321,29 +321,39 @@
             "code": "E4",
             "label": "Availability",
             "pts": 0,
-            "max": 3,
+            "max": 5,
             "source": "observed",
             "evidence": "no availability published"
           }
         ]
       }
     },
-    "floor_abc": 7,
+    "floor_abc": 16,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 22,
-      "floor_met": true,
+      "gap": 27,
+      "floor_met": false,
       "coverage_met": false,
       "path": [
-        "A1 Clean-record depth: not yet measured (10 pts)",
-        "A2 Experience: not yet measured (9 pts)",
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
         "A5 Accountability: not yet measured (6 pts)"
       ]
     },
-    "raw": 22.0,
-    "assessed": 46,
-    "coverage": 0.46,
-    "floor_abc_pct": 0.636
+    "raw": 32.5,
+    "assessed": 75,
+    "coverage": 0.75,
+    "floor_abc_pct": 0.457
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-10"
   }
 }

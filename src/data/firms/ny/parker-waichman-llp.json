@@ -308,10 +308,152 @@
     "quotes": [],
     "google": {
       "rating": 4.84,
-      "count_label": "1,870",
+      "count_label": "1,871",
       "source": "Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-08"
-    }
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-24T13:52:07.955524686Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-18T19:15:06.392736041Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-29T20:08:28.012651211Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-23T15:16:22.591772461Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-11T15:34:53.791633328Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-26T16:51:05.704523497Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-18T12:33:23.607683245Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-27T20:47:27.352642069Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-07T17:38:47.596210667Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-26T22:14:14.062025839Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-06-30T02:08:16.762095351Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-31T19:46:41.186741826Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-23T20:18:22.654595269Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-28T00:44:09.498895502Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-20T20:05:25.888476426Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-26T03:56:31.648940459Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-19T19:32:45.556614197Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-18T21:48:57.909739327Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-27T01:46:05.681382264Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-30T02:13:45.446120509Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-31T18:43:55.143234500Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-27T20:34:58.535617776Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-02T13:45:23.146995838Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-30T02:05:53.229805582Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-14T15:45:20.036171717Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-27T21:08:53.289081081Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-25T21:16:18.602073122Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-05T15:12:52.594217176Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-27T01:26:56.467911077Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-31T00:20:15.489919641Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-23T23:34:27.481359635Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-17T21:17:05.872133590Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-13T15:30:35.966810844Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-19T21:31:36.713556358Z",
+        "rating": 4
+      },
+      {
+        "published_at": "2025-10-27T17:37:53.827937943Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -355,10 +497,10 @@
     },
     "places": {
       "listing_count": 7,
-      "review_count_total": 1870,
+      "review_count_total": 1871,
       "rating_weighted": 4.84,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-08"
+      "measured_at": "2026-09-10"
     }
   },
   "gates": {
@@ -380,12 +522,6 @@
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
       "checked_at": "2026-09-09"
     },
-    "G4": {
-      "pass": false,
-      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
-      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
-      "checked_at": "2026-09-09"
-    },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 21 named attorneys published.",
@@ -403,31 +539,31 @@
   "faq": [],
   "fee_statement": "ir injuries. Do I Need to Pay Attorney’s Fees Up Front? Personal injury lawyers charge a “contingency fee” to take an injury case. A contingency fee means that the firm will not get paid any",
   "score": {
-    "total": 68,
+    "total": 69,
     "tier": "Under review",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
-    "computed_at": "2026-09-09",
-    "methodology": "v1.1",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (12/25).",
+    "computed_at": "2026-09-10",
+    "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 9,
+        "score": 16,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
             "pts": 9,
-            "max": 9,
+            "max": 10,
             "source": "registry",
             "evidence": "Mean 16.6 years since admission across 17 of 21 named attorneys (longest 42, shortest 2) · NYS Attorney Registration database"
           },
           {
-            "code": "A1",
-            "label": "Clean-record depth",
-            "pts": 0,
-            "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 7.5,
+            "max": 9,
+            "source": "registry",
+            "evidence": "17 of 21 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -435,50 +571,42 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "Nothing published about insurance or bar memberships"
           }
         ]
       },
       "B": {
-        "score": 0,
-        "max": 20,
+        "score": 10,
+        "max": 15,
         "subs": [
           {
             "code": "B1",
-            "label": "Volume of verified results",
-            "pts": 0,
+            "label": "Results published",
+            "pts": 4.5,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "firm",
+            "evidence": "10 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
-            "label": "Magnitude",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Specificity",
+            "pts": 5,
+            "max": 5,
+            "source": "firm",
+            "evidence": "8 case types named; 1 court or county reference"
           },
           {
             "code": "B3",
-            "label": "Trial & appellate",
+            "label": "Results disclosure",
             "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "B4",
-            "label": "Recency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
           }
         ]
       },
       "C": {
-        "score": 10,
+        "score": 18,
         "max": 20,
         "subs": [
           {
@@ -487,7 +615,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "1,870 Google reviews · Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count"
+            "evidence": "1,871 Google reviews · Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -495,31 +623,23 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.84 over 1,870 reviews → Bayesian 4.84 (prior 4.80 weighted as 100 reviews, from 13 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.84 over 1,871 reviews → Bayesian 4.84 (prior 4.80 weighted as 100 reviews, from 13 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
-            "label": "Recency & consistency",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
-          },
-          {
-            "code": "C4",
-            "label": "Firm responsiveness",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "31 of 35 sampled reviews are from the last 12 months (newest 2026-07-31) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
-            "label": "Complaints",
-            "pts": 0,
-            "max": 3,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "label": "Complaint share",
+            "pts": 3,
+            "max": 4,
+            "source": "places",
+            "evidence": "1 of 35 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -562,53 +682,53 @@
         ]
       },
       "E": {
-        "score": 6,
-        "max": 10,
+        "score": 9,
+        "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 4,
-            "max": 4,
+            "pts": 5,
+            "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · ir injuries. Do I Need to Pay Attorney’s Fees Up Front? Personal injury lawyers charge a “contingency fee” to take an injury case. A contingency fee means that the firm will not get paid any"
+            "evidence": "Free consultation · ir injuries. Do I Need to Pay Attorney’s Fees Up Front? Personal injury lawyers charge a “contingency fee” to take an injury case. A contingency fee means that the firm will not get paid any · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 1.0,
-            "max": 3,
+            "pts": 1.5,
+            "max": 4,
             "source": "observed",
             "evidence": "English, Español"
           },
           {
             "code": "E4",
             "label": "Availability",
-            "pts": 1.5,
-            "max": 3,
+            "pts": 2.5,
+            "max": 5,
             "source": "observed",
             "evidence": "24/7 intake line"
           }
         ]
       }
     },
-    "floor_abc": 19,
+    "floor_abc": 44,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 2,
+      "gap": 1,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A1 Clean-record depth: not yet measured (10 pts)",
-        "A5 Accountability: not yet measured (6 pts)",
-        "B1 Volume of verified results: not yet measured (6 pts)"
+        "D1 Website trust & experience: +5.0 available",
+        "B3 Results disclosure: +4 available",
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 37.5,
-    "assessed": 55,
-    "coverage": 0.55,
-    "floor_abc_pct": 0.95
+    "raw": 65.0,
+    "assessed": 94,
+    "coverage": 0.94,
+    "floor_abc_pct": 0.815
   },
   "entity": {
     "legal_name": "PARKER WAICHMAN LLP",
@@ -617,5 +737,41 @@
     "formed": "2002-07-22",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
     "checked_at": "2026-09-09"
+  },
+  "results_published": {
+    "count": 10,
+    "counted_from": "stated amounts",
+    "amounts": [
+      11000000,
+      10000000,
+      8000000,
+      5000000,
+      4350000,
+      4000000,
+      3600000,
+      2785330,
+      2545000,
+      2185531
+    ],
+    "largest": 11000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [
+      "Supreme Court"
+    ],
+    "text_length": 9860,
+    "readable": true,
+    "url": "https://www.yourlawyer.com/results/",
+    "checked_at": "2026-09-10"
   }
 }

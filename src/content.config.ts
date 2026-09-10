@@ -46,6 +46,9 @@ const firms = defineCollection({
     highlights: z.array(z.object({ icon: z.string(), title: z.string(), text: z.string() })).default([]),
     reviews: z.object({
       google: z.object({ rating: z.number(), count_label: z.string(), source: z.string(), fetched_at: z.string() }).optional(),
+      // Dates and ratings for the reviews Places returned, five per business listing. The text is
+      // deliberately not stored: nothing quotes it, so holding it would serve no purpose.
+      sample: z.array(z.object({ published_at: z.string().nullable().optional(), rating: z.number().nullable().optional() })).default([]),
       quotes: z.array(z.object({ text: z.string(), author: z.string(), source: z.string() })).default([]),
     }),
     results: z.array(z.object({ type: z.string(), title: z.string(), description: z.string(), amount: z.string().nullable(), verified: z.boolean(), docket: z.string().optional(), source_url: z.string().optional() })).default([]),
@@ -62,6 +65,17 @@ const firms = defineCollection({
         rating_weighted: z.number().nullable(), source: z.string(), measured_at: z.string(),
       }).optional(),
     }),
+    // What the firm publishes about its own results: the input for pillar B at v2.0. `readable`
+    // separates "publishes nothing", which is a finding, from "we could not read the page", which
+    // leaves the pillar pending rather than scoring the firm zero for our failure.
+    results_published: z.object({
+      readable: z.boolean(), count: z.number().optional(), amounts: z.array(z.number()).default([]),
+      largest: z.number().nullable().optional(), aggregate_claims: z.array(z.number()).default([]),
+      case_types: z.array(z.string()).default([]), disclaimer: z.boolean().optional(),
+      venues: z.array(z.string()).default([]), counted_from: z.string().optional(),
+      text_length: z.number().optional(), why: z.string().optional(),
+      url: z.string().optional(), checked_at: z.string(),
+    }).optional(),
     gates: z.record(z.object({
       pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string(),
       // Satisfied by the firm's written attestation rather than by our own measurement. Shown
