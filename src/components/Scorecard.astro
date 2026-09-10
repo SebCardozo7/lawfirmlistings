@@ -17,6 +17,15 @@ const verified = new Date(s.computed_at).toLocaleDateString('en-US', { month: 's
 // scorecard said "Under review · 2 eligibility gates still to be checked" was crowned "LFL
 // Certified 2026" directly above it. Any tier this file has not been taught about is not
 // certified.
+// The same vocabulary score.py uses in NOT_A_FINDING, and for the same reason: a gate that did
+// not pass is a failure only if we ran a check and it came back adverse. This card was labelling
+// "Maryland does not publish an attorney register we can query" as "Not passed", which reads as
+// a finding against a firm for something its state does not publish.
+const NOT_A_FINDING = ['pending', 'partial', 'no queryable source', 'unavailable',
+                       'screening only', 'incomplete', 'not yet'];
+const notAFinding = (source: string) =>
+  NOT_A_FINDING.some(w => (source ?? '').toLowerCase().includes(w));
+
 const CERTIFIED_TIERS = ['Certified', 'Distinguished', 'Elite'];
 const isCertified = CERTIFIED_TIERS.includes(s.tier);
 const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL Certified · ${s.tier}` : s.tier;
@@ -59,11 +68,11 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL 
         state, and an attested gate says so, because a gate the firm asserted and a gate we
         measured are not the same evidence and should not look identical. */}
     {Object.entries(d.gates).map(([code, g]) => (
-      <div class={`sc-gate ${g.pass ? (g.attested ? 'is-attested' : 'is-pass') : /pending|partial/i.test(g.source) ? 'is-pending' : 'is-fail'}`}>
+      <div class={`sc-gate ${g.pass ? (g.attested ? 'is-attested' : 'is-pass') : notAFinding(g.source) ? 'is-pending' : 'is-fail'}`}>
         <Icon name={g.pass ? 'check' : 'clock'} />
         <div>{code} {gateNames[code]}
           {g.attested && <span class="sc-tag">Firm-attested</span>}
-          {!g.pass && <span class="sc-tag">{/pending|partial/i.test(g.source) ? 'Not yet checked' : 'Not passed'}</span>}
+          {!g.pass && <span class="sc-tag">{notAFinding(g.source) ? 'Not checked' : 'Not passed'}</span>}
           <small>{g.evidence}</small>
         </div>
       </div>

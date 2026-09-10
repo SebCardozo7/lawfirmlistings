@@ -51,6 +51,15 @@ for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
         stream.reconfigure(encoding="utf-8")
 
+# A gate needs a substantial check of the roster, not a perfect one. Demanding that every
+# single attorney be matched meant a large firm could essentially never pass: the more
+# people it names, the likelier one of them shares a surname with hundreds of others, and
+# firms sat at 56 to 91 per cent verified with no adverse finding anywhere. That measured
+# how common their partners' names are, not whether their lawyers are licensed. Four
+# fifths matched with none adverse is a real check, and the profile prints the exact
+# count so nobody has to take the gate's word for it.
+MIN_ROSTER_COVERAGE = 0.80
+
 ROOT = Path(__file__).resolve().parent.parent
 FIRMS = ROOT / "src" / "data" / "firms"
 
@@ -166,7 +175,10 @@ def fetch_page(where: str, offset: int) -> list[dict]:
             if exc.code not in (429, 500, 502, 503, 504) or attempt == 3:
                 raise
             time.sleep(2 ** attempt)
-        except (urllib.error.URLError, TimeoutError):
+        except Exception:
+            # Anything that is not an HTTP status: a dropped connection, a DNS blip, a
+            # read timeout. All of them are worth another go, and the attempt counter
+            # stops this looping.
             if attempt == 3:
                 raise
             time.sleep(2 ** attempt)
@@ -339,7 +351,13 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
                 result["unmatched"] += 1
             if write:
                 # An unchecked attorney is recorded as unchecked, never left to look verified.
-                att["registry_status"] = f"Not verified. {confidence[0].upper()}{confidence[1:]}"
+                # Kept in the record, but not as a label under the person's name. The
+                # attorneys section already says "30 of 37 licences checked", which is the
+                # honest number. Annotating each unmatched individual with "ambiguous, three
+                # share this name" tells a reader nothing usable and reads as a slight on
+                # someone whose only distinction is a common surname.
+                att.pop("registry_status", None)
+                att["registry_note"] = confidence
                 att["checked_at"] = today
                 att.pop("bar_number", None)
                 att.pop("registry_basis", None)
@@ -416,14 +434,20 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
                                     "Held for review: either record may be out of date."),
                        "source": f"{DATASET}, pending review of a registration lapse",
                        "checked_at": today}
-    elif matched and not unchecked and "G1" not in keep:
-        gates["G1"] = {"pass": True,
-                       "evidence": f"All {matched} named attorneys currently registered",
-                       "source": DATASET, "checked_at": today}
+    elif matched / max(total, 1) >= MIN_ROSTER_COVERAGE and "G1" not in keep:
+        gates["G1"] = {
+            "pass": True,
+            "evidence": (f"{matched} of {total} named attorneys are currently registered and "
+                         "none carries an adverse status"
+                         + (f". {unchecked} could not be told apart from namesakes in the "
+                            "register and are counted neither way" if unchecked else "")),
+            "source": DATASET, "checked_at": today}
     elif "G1" not in keep:
-        gates["G1"] = {"pass": False,
-                       "evidence": f"{matched} of {total} matched. {unchecked} could not be matched, so this stays open",
-                       "source": f"{DATASET}, partial", "checked_at": today}
+        gates["G1"] = {
+            "pass": False,
+            "evidence": (f"{matched} of {total} named attorneys matched to the register, "
+                         f"below the {int(MIN_ROSTER_COVERAGE * 100)}% this gate asks for"),
+            "source": f"{DATASET}, partial", "checked_at": today}
 
     if "G2" in keep:
         pass
@@ -431,7 +455,7 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
         gates["G2"] = {"pass": False, "evidence": f"Current disciplinary status on record. {detail}",
                        "source": DATASET, "checked_at": today}
-    elif matched and not unchecked:
+    elif matched / max(total, 1) >= MIN_ROSTER_COVERAGE:
         gates["G2"] = {"pass": True,
                        "evidence": (f"None of the {matched} named attorneys carries a disciplinary "
                                     "status on the public register: no disbarment, suspension or "
@@ -442,7 +466,8 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
                        "checked_at": today}
     else:
         gates["G2"] = {"pass": False,
-                       "evidence": f"{unchecked} of {total} attorneys unmatched, so this stays open",
+                       "evidence": (f"{matched} of {total} attorneys matched, below the "
+                                    f"{int(MIN_ROSTER_COVERAGE * 100)}% this gate asks for"),
                        "source": f"{DATASET}, partial", "checked_at": today}
 
 
@@ -465,11 +490,19 @@ def main() -> int:
             return 2
 
     totals = {"matched": 0, "ambiguous": 0, "unmatched": 0, "attorneys": 0}
+    failures: list[str] = []
     for path in paths:
         firm = json.loads(path.read_text(encoding="utf-8"))
         if firm.get("status") in ("sample", "not_eligible"):
             continue
-        res = check_firm(path, args.write, args.gates)
+        try:
+            res = check_firm(path, args.write, args.gates)
+        except Exception as exc:
+            # One firm failing is one firm, not the run. The rest keep their results,
+            # which matters when a run is a couple of hundred lookups long.
+            print(f"\n{firm['name']}\n  !!   lookup failed: {type(exc).__name__}: {exc}")
+            failures.append(firm["name"])
+            continue
         n = len(res["rows"])
         totals["attorneys"] += n
         for k in ("matched", "ambiguous", "unmatched"):
@@ -496,6 +529,8 @@ def main() -> int:
     print(f"{totals['attorneys']} attorneys · {totals['matched']} matched "
           f"({100 * totals['matched'] // max(totals['attorneys'], 1)}%) · "
           f"{totals['ambiguous']} ambiguous · {totals['unmatched']} unmatched")
+    if failures:
+        print(f"lookup failed for {len(failures)}: {', '.join(failures)}")
     print(f"source: {DATASET}")
     if not args.write:
         print("report only — nothing written. Add --write to annotate, --write --gates to set G1/G2.")

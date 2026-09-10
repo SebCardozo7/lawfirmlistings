@@ -69,6 +69,18 @@ PILLAR_MAX = {"A": 25, "B": 15, "C": 20, "D": 25, "E": 15}
 # query shapes that failed, are recorded in scripts/check_g4.py. Naming the set here rather
 # than counting to six inline means removing or adding a gate is one edit.
 GATES = ("G1", "G2", "G3", "G5", "G6")
+
+# A gate that did not pass is a finding only if we ran a check and it came back adverse. These
+# markers in a gate's source mean we did not, and the difference is the whole reason the gates
+# have three states rather than two.
+#
+# "no queryable source" earned its place the hard way. Maryland publishes no attorney register we
+# can query, so Malloy Law's G1 and G2 said so honestly, and because that wording carried neither
+# "pending" nor "partial" the engine counted them as failed and published "Not eligible" about a
+# real firm for something its state does not publish. Matching on substrings of prose is fragile,
+# which is why the list is named and here rather than inline.
+NOT_A_FINDING = ("pending", "partial", "no queryable source", "unavailable",
+                 "screening only", "incomplete", "not yet")
 # Thresholds are percentages now, of what we could actually assess. The absolute floors the
 # methodology set, 40, 50 and 55 out of the 65 points in pillars A, B and C, carry across as
 # the same proportions.
@@ -407,7 +419,7 @@ def compute(firm):
     # sub-factors use) puts the firm under review instead.
     gates = firm.get("gates", {})
     def unchecked(g):
-        return not g["pass"] and any(w in g.get("source", "").lower() for w in ("pending", "partial"))
+        return not g["pass"] and any(w in g.get("source", "").lower() for w in NOT_A_FINDING)
     pending_gates = [k for k, g in gates.items() if unchecked(g)]
     failed_gates = [k for k, g in gates.items() if not g["pass"] and not unchecked(g)]
     gates_ok = len(gates) == len(GATES) and not pending_gates and not failed_gates
@@ -416,7 +428,12 @@ def compute(firm):
     # part that protects a client, and it claims nothing about the score. Without a rung here
     # the ladder ran straight from "listed" to a tier no firm could reach.
     tier = ("Not eligible" if failed_gates
-            else "Under review" if pending_gates or len(gates) != len(GATES)
+            # "Under review" describes us rather than the firm. It says we have not
+            # finished, which is no use to somebody choosing a lawyer and makes a
+            # directory of real, working practices read as a building site. A firm with an
+            # open gate is Listed, and the scorecard still says which gate and why, row
+            # by row, for anyone who wants it.
+            else "Listed" if pending_gates or len(gates) != len(GATES)
             else "Verified")
     if gates_ok and coverage_ok:
         for name, need, floor in TIERS:

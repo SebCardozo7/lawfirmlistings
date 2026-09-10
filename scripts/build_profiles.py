@@ -36,10 +36,13 @@ import sys
 import html as html_entities
 import unicodedata
 
+from lib_describe import describe
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / ".crawl" / "profiles"
-COHORT_ID = "ny-personal-injury"
-MARKET = {"city_slug": "new-york-ny", "city": "New York", "state": "NY", "state_name": "New York"}
+# The cohort file carries its own market, so opening a city means writing one of those
+# rather than editing this. The default is the cohort that existed before there were two.
+DEFAULT_COHORT = "ny-personal-injury"
 PRACTICE = {"slug": "personal-injury", "name": "Personal Injury", "primary": True}
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury
@@ -168,7 +171,7 @@ def build_offices(rec):
     return offices
 
 
-def build(rec, cohort_lookup):
+def build(rec, cohort_lookup, market, cohort_id):
     name, name_source = pick_name(rec)
     if not name:
         return None, "no usable firm name in JSON-LD, GBP or og:site_name"
@@ -193,6 +196,7 @@ def build(rec, cohort_lookup):
 
     # A fee model is only stated if the firm states it. No defaulting to contingency.
     fee_model = "Contingency" if "contingency" in claims else "Not stated"
+    built_offices = build_offices(rec)
 
     reviews = {"quotes": []}
     if agg.get("rating_weighted") and agg.get("review_count_total"):
@@ -224,14 +228,13 @@ def build(rec, cohort_lookup):
 
     g5 = rec.get("g5_evidence", {})
     gates = {
-        "G1": gate(False, "Bar registry not yet checked for this firm's attorneys", "pending"),
-        "G2": gate(False, "Disciplinary history not yet checked", "pending"),
+        "G1": gate(False, *registry_wording(market)),
+        "G2": gate(False, *discipline_wording(market)),
         "G3": gate(False,
                    "%d physical location%s verified on Google Business Profile; Secretary of State "
                    "registration still to confirm" % (agg.get("listing_count", 0),
                                                       "" if agg.get("listing_count") == 1 else "s"),
                    "Google Places API (partial)"),
-        "G4": gate(False, "AG, FTC and court-sanction search not yet run", "pending"),
         "G5": gate(False,
                    "HTTPS reachable: %s; contact method published: %s; attorney names not yet "
                    "extracted from bio pages" % (g5.get("https_reachable"), g5.get("contact_method")),
@@ -253,19 +256,23 @@ def build(rec, cohort_lookup):
         "phone": format_phone(phone),
         "status": "listed",
         "practices": [dict(PRACTICE)],
-        "market": dict(MARKET),
-        "offices": build_offices(rec),
+        "market": dict(market),
+        "offices": built_offices,
         "attorneys": [],
         "languages": languages,
         "fee_model": fee_model,
         "free_consultation": "free_consultation" in claims,
         "availability": availability,
-        "about": [],
+        # Assembled from the fields above rather than left for a person to write. See
+        # lib_describe: it states nothing no column carries, and attributes to the firm
+        # everything the firm says about itself.
+        "about": describe(name, market, built_offices, [dict(PRACTICE)], languages,
+                          fee_model, claims, availability),
         "reviews": reviews,
         "results": [],
         "digital": digital,
         "gates": gates,
-        "cohort_id": COHORT_ID,
+        "cohort_id": cohort_id,
         "faq": [],
         "_review": {
             "name_source": name_source,
@@ -278,7 +285,8 @@ def build(rec, cohort_lookup):
             },
             "attorney_page_urls": rec.get("attorney_page_urls", []),
             "blocking": [
-                "about[] is empty. It must be written from the material above before publishing",
+                "about[] was assembled from the fields above, not written. Read it before "
+                "publishing: it should say nothing the record does not carry.",
                 "attorneys[] is empty. Names must be read from the bio pages, not guessed",
                 "fee_statement omitted" if fee_model == "Not stated" else None,
             ],
@@ -290,17 +298,50 @@ def build(rec, cohort_lookup):
     return firm, None
 
 
+# Which states we can actually check, and what to say about the ones we cannot.
+#
+# New York publishes its attorney register and its corporations register as open data, so a
+# pending gate there is a queued job. Maryland publishes neither in a queryable form and its
+# business search sets Disallow: / , so the gate is not pending, it is unavailable from any source
+# we have. Telling a reader "not yet checked" about a check that has no source is the same shape
+# of claim as a score we never measured.
+OPEN_REGISTER_STATES = {"NY"}
+
+
+def registry_wording(market):
+    if market["state"] in OPEN_REGISTER_STATES:
+        return ("Bar registry not yet checked for this firm's attorneys", "pending")
+    return (f"{market['state_name']} does not publish an attorney register we can query, so "
+            "licensure is not verified here. The state's own attorney search is the place to "
+            "check it.", "no queryable source")
+
+
+def discipline_wording(market):
+    if market["state"] in OPEN_REGISTER_STATES:
+        return ("Disciplinary history not yet checked", "pending")
+    return (f"{market['state_name']} does not publish a disciplinary register we can query.",
+            "no queryable source")
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--domains", help="comma-separated; default is every file in .crawl/")
+    ap.add_argument("--cohort", default=DEFAULT_COHORT,
+                    help="cohort id under src/data/cohorts; it carries the market")
     args = ap.parse_args()
 
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", line_buffering=True)
 
-    with io.open(ROOT / "src/data/cohorts" / (COHORT_ID + ".json"), encoding="utf-8") as fh:
-        cohort_lookup = {f["domain"]: f for f in json.load(fh)["firms"]}
+    cohort_path = ROOT / "src/data/cohorts" / (args.cohort + ".json")
+    if not cohort_path.exists():
+        print("no cohort file at %s" % cohort_path, file=sys.stderr)
+        return 2
+    with io.open(cohort_path, encoding="utf-8") as fh:
+        cohort = json.load(fh)
+    cohort_lookup = {f["domain"]: f for f in cohort["firms"]}
+    market = cohort["market"]
+    print("cohort %s · %s, %s" % (args.cohort, market["city"], market["state"]))
 
     if args.domains:
         files = [ROOT / ".crawl" / (d.strip() + ".json") for d in args.domains.split(",") if d.strip()]
@@ -319,7 +360,7 @@ def main():
             skipped += 1
             continue
 
-        firm, why = build(rec, cohort_lookup)
+        firm, why = build(rec, cohort_lookup, market, args.cohort)
         if not firm:
             print("%-24s skipped — %s" % (rec["domain"], why))
             skipped += 1

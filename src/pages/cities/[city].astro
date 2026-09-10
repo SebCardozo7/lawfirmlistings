@@ -1,0 +1,192 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import FirmCard from '../../components/FirmCard.astro';
+import { CITY_NOTES } from '../../data/cities';
+
+/**
+ * A city hub, generated per city in the collection.
+ *
+ * This replaces a hand-written new-york-ny.astro. Opening Baltimore left two choices: write a
+ * second page by hand, or derive everything derivable and treat local knowledge as optional.
+ * Local knowledge is optional: src/data/cities.ts carries what cannot be generated, which court
+ * hears what and how long somebody has to file, and a city with no entry gets a page without
+ * those sections rather than a page with invented ones.
+ *
+ * The ranked list lives one level deeper, at /cities/<city>/<practice>/, because ranking is
+ * scoped to a city and a practice area in the methodology. This page's job is the city: which
+ * practices are covered, which firms lead, and what is worth knowing locally.
+ */
+export async function getStaticPaths() {
+  const firms = await getCollection('firms', f =>
+    f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+  const cities = [...new Map(firms.map(f => [f.data.market.city_slug, f.data.market])).entries()];
+  return cities.map(([slug, market]) => ({
+    params: { city: slug },
+    props: { market, firms: firms.filter(f => f.data.market.city_slug === slug) },
+  }));
+}
+
+const { city } = Astro.params;
+const { market, firms } = Astro.props;
+const notes = CITY_NOTES[city] ?? {};
+
+// Certified firms rank by score; the rest follow alphabetically.
+const weight = (f: typeof firms[number]) =>
+  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+const ranked = [...firms].sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
+
+const certified = ranked.filter(f => f.data.status === 'certified');
+const verified = ranked.filter(f => f.data.status === 'verified');
+const offices = ranked.reduce((n, f) => n + f.data.offices.length, 0);
+const freeConsult = ranked.filter(f => f.data.free_consultation).length;
+const multilingual = ranked.filter(f => f.data.languages.some(l => l !== 'English')).length;
+const share = (n: number) => (ranked.length ? `${Math.round((100 * n) / ranked.length)}%` : 'n/a');
+const logoVariants = ['', 'l2', 'l3'];
+
+// Only practices with a ranked page of their own, so nothing links into nothing.
+const PRACTICE_ICONS: Record<string, string> = { 'personal-injury': 'car' };
+const practices = Object.keys(PRACTICE_ICONS).map(slug => {
+  const matching = ranked.filter(f => f.data.practices.some(pr => pr.slug === slug));
+  return {
+    slug,
+    icon: PRACTICE_ICONS[slug],
+    name: matching[0]?.data.practices.find(pr => pr.slug === slug)?.name ?? slug,
+    listed: matching.length,
+    certified: matching.filter(f => f.data.status === 'certified').length,
+  };
+}).filter(p => p.listed > 0);
+
+const place = `${market.city}, ${market.state}`;
+const lede = notes.lede
+  ?? `Law firms in ${market.city} compared on what they publish and what we could verify: `
+     + `offices, attorneys, client reviews and fee terms. Ranked against each other rather than `
+     + `against a national average.`;
+---
+<Base title={`Law Firms in ${place}`}
+      description={`Law firms in ${market.city} by practice area, with verified offices, attorneys, client reviews and fee terms.`}
+      nav="cities">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs">
+        <li><a href="/">Home</a></li>
+        <li><a href="/cities/">Cities</a></li>
+        <li aria-current="page">{place}</li>
+      </ol>
+      <span class="eyebrow">City guide</span>
+      <h1>Law Firms in {place}</h1>
+      <p class="lede">{lede}</p>
+      {notes.areas && notes.areas.length > 0 && (
+        <div class="chips" style="margin-top:24px">
+          {/* Named, not linked: there are no neighbourhood pages yet, and a chip that goes
+              nowhere is worse than a chip that plainly does not. */}
+          {notes.areas.map(a => <span class="chip soon">{a}</span>)}
+        </div>
+      )}
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{ranked.length}</b><span>{ranked.length === 1 ? 'Firm published' : 'Firms published'}</span></div>
+      <div class="fact"><b class="num">{certified.length + verified.length}</b><span>Certified or verified</span></div>
+      <div class="fact"><b class="num">{offices}</b><span>Verified offices</span></div>
+      <div class="fact"><b class="num">{share(freeConsult)}</b><span>Free consultation</span></div>
+      <div class="fact"><b class="num">{share(multilingual)}</b><span>Multilingual staff</span></div>
+    </div>
+  </div>
+</section>
+
+{practices.length > 0 && (
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Browse by legal need</span><h2 style="margin-top:12px">Law firms in {market.city} by practice area</h2></div>
+    </div>
+    <div class="cat-grid">
+      {practices.map(p => (
+        <a class="cat" href={`/cities/${city}/${p.slug}/`}>
+          <span class="ico"><Icon name={p.icon} /></span>
+          <b>{p.name}</b>
+          <span class="num">{p.listed} {p.listed === 1 ? 'firm' : 'firms'}{p.certified > 0 && ` · ${p.certified} certified`}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+)}
+
+<section class="section section--tint">
+  <div class="container layout">
+    <div>
+      <div class="results-head">
+        <h2>Highest-ranked firms in {market.city}</h2>
+        <span>Top {Math.min(3, ranked.length)} of {ranked.length} across all practice areas</span>
+      </div>
+      <div class="firm-list">
+        {ranked.slice(0, 3).map((firm, i) => (
+          <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
+        ))}
+      </div>
+      {practices.length > 0 && (
+        <div class="ranked-links">
+          <h3>Ranked lists in {market.city}</h3>
+          <ul>
+            {practices.map(p => (
+              <li><a href={`/cities/${city}/${p.slug}/`}>{p.name} firms in {market.city}</a><span class="num">{p.listed} {p.listed === 1 ? 'firm' : 'firms'}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {ranked.length === 0 && (
+        <div class="callout"><b>Nothing published here yet.</b> A firm appears once its own pages have been read and its public record checked.</div>
+      )}
+    </div>
+    <aside class="sidebar">
+      <div class="panel">
+        <h4>How the order is decided</h4>
+        <p class="muted" style="font-size:.92rem">Position comes from the Certification Score, computed from evidence we can check. Neither the score, the eligibility gates nor the tier can be bought or edited, including by a firm that manages its own profile.</p>
+        <a class="link" href="/methodology/" style="margin-top:12px">Read the methodology</a>
+      </div>
+      <div class="panel">
+        <h4>Elsewhere in the directory</h4>
+        <ul>
+          <li><a href="/cities/">All cities</a></li>
+          <li><a href="/practice-areas/">All practice areas</a></li>
+          <li><a href="/guides/">Guides and rankings</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+{notes.sections && notes.sections.length > 0 && (
+<section class="section section--paper">
+  <div class="narrow prose">
+    <span class="eyebrow">Know before you hire</span>
+    {notes.sections.map((s, i) => (
+      <>
+        {i === 0 ? <h2 style="margin-top:14px">{s.heading}</h2> : <h3>{s.heading}</h3>}
+        {s.paragraphs.map(p => <p set:html={p} />)}
+        {s.list && <ul>{s.list.map(item => <li set:html={item} />)}</ul>}
+      </>
+    ))}
+  </div>
+</section>
+)}
+
+{notes.faq && notes.faq.length > 0 && (
+<section class="section">
+  <div class="narrow">
+    <span class="eyebrow">Frequently asked</span>
+    <h2 style="margin:14px 0 28px">Hiring a law firm in {market.city}: FAQ</h2>
+    <div class="faq">
+      {notes.faq.map((item, i) => (
+        <details open={i === 0}><summary>{item.q}</summary><div set:html={item.a} /></details>
+      ))}
+    </div>
+  </div>
+</section>
+)}
+</Base>

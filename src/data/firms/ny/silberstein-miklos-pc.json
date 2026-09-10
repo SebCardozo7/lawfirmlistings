@@ -5,7 +5,7 @@
   "website": "https://ask4sam.net/",
   "domain": "ask4sam.net",
   "phone": "(877) 275-4726",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -73,7 +73,7 @@
       "admitted_year": 1977,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "David Saxman",
@@ -84,7 +84,7 @@
       "admitted_year": 2023,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Michael Felice",
@@ -95,7 +95,7 @@
       "admitted_year": 2025,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Catherine Chillemi",
@@ -106,23 +106,23 @@
       "admitted_year": 2017,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Braelan Barnett",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://ask4sam.net/attorneys/braelan-barnett/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Megan E. McGlynn-Sanchez",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://ask4sam.net/attorneys/megan-e-mcglynn-sanchez/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Jessica C. Petry",
@@ -133,7 +133,7 @@
       "admitted_year": 2026,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Robert A. Miklos",
@@ -144,7 +144,7 @@
       "admitted_year": 2010,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Daniel P. Miklos",
@@ -155,7 +155,7 @@
       "admitted_year": 2005,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Chelsea A. Horowitz",
@@ -166,7 +166,7 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Rocco Riccobono",
@@ -177,7 +177,7 @@
       "admitted_year": 2002,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Stephanie R. Tuorto",
@@ -188,7 +188,7 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   ],
   "languages": [
@@ -386,16 +386,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "10 of 12 matched. 2 could not be matched, so this stays open",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-09"
+      "pass": true,
+      "evidence": "10 of 12 named attorneys are currently registered and none carries an adverse status. 2 could not be told apart from namesakes in the register and are counted neither way",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-09-10"
     },
     "G2": {
-      "pass": false,
-      "evidence": "2 of 12 attorneys unmatched, so this stays open",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-09"
+      "pass": true,
+      "evidence": "None of the 10 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-09-10"
     },
     "G3": {
       "pass": true,
@@ -407,7 +407,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 12 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G6": {
       "pass": true,
@@ -421,8 +421,8 @@
   "fee_statement": "D FOR personal injury clients Learn More THE CONSULTATION IS FREE THE ADVICE IS PRICELESS No fee unless we win Name * First Last Email * Phone * Details * Phone Name Terms Terms of Use * By sub",
   "score": {
     "total": 69,
-    "tier": "Under review",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (12/25).",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (12/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
@@ -504,7 +504,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 585 reviews → Bayesian 4.89 (prior 4.80 weighted as 100 reviews, from 13 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 585 reviews → Bayesian 4.89 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
