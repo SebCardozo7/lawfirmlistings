@@ -215,9 +215,24 @@ def collect(domain, results_url, verbose=False):
         return {"readable": False, "why": f"results page returned {status}",
                 "url": results_url, "checked_at": date.today().isoformat()}
     text = strip_tags(html)
-    if len(text) < 400:
-        return {"readable": False, "why": "results page has almost no text, most likely rendered "
-                                          "in the browser rather than served",
+    # A length test is the wrong test. Malloy Law's results page serves 220KB of HTML and 5,617
+    # characters of text, all of it the navigation menu: the results themselves are rendered in
+    # the browser. It cleared a 400-character floor comfortably and would have scored zero
+    # results, which is a judgement about their tech stack rather than their transparency, and
+    # exactly what the readable flag exists to prevent.
+    #
+    # So the test is for content: a results page we actually read shows a figure or the word for
+    # a result. Neither means we did not read the results, whatever the text length, and pillar B
+    # stays pending rather than scoring the firm nothing.
+    has_money = bool(MONEY.search(text))
+    has_words = bool(RESULT_WORD.search(text))
+    if len(text) < 400 or not (has_money or has_words):
+        return {"readable": False,
+                "why": ("results page has almost no text, most likely rendered in the browser"
+                        if len(text) < 400 else
+                        "the results page served no figures and no mention of a settlement, "
+                        "verdict or recovery, so its results are rendered in the browser rather "
+                        "than served to a reader or a crawler"),
                 "url": final, "checked_at": date.today().isoformat()}
     out = extract(text)
     out.update({"readable": True, "url": final, "checked_at": date.today().isoformat()})

@@ -52,6 +52,21 @@ def locality(address: str) -> str | None:
     return parts[1] if len(parts) > 2 else None
 
 
+STATE_NAMES = {
+    "NY": "New York", "MD": "Maryland", "DC": "Washington DC", "VA": "Virginia",
+    "NJ": "New Jersey", "PA": "Pennsylvania", "CT": "Connecticut", "DE": "Delaware",
+    "MA": "Massachusetts", "FL": "Florida", "CA": "California", "TX": "Texas",
+    "IL": "Illinois", "GA": "Georgia", "AZ": "Arizona", "WA": "Washington",
+}
+
+
+def state_of(address: str) -> str | None:
+    for part in [p.strip() for p in (address or "").split(",")]:
+        if STATE_ZIP.match(part):
+            return part.split()[0]
+    return None
+
+
 def _localities(offices: list[dict]) -> list[str]:
     out: list[str] = []
     for office in offices:
@@ -62,21 +77,39 @@ def _localities(offices: list[dict]) -> list[str]:
 
 
 def _footprint(market: dict, offices: list[dict]) -> str:
-    """Where the firm works from, and never repeating the market it is already described as."""
+    """Where the firm works from, without putting its offices in the wrong place.
+
+    A firm is listed in one market and may work well beyond it. Malloy Law is listed in
+    Baltimore, which is one of its eight offices, and the first draft of this described it as
+    having "8 offices across the Baltimore area, among them Bethesda, Baltimore, Washington".
+    Bethesda and Washington are not the Baltimore area. So where the offices span more than one
+    state the footprint is described by state, which is true at any scale, and only a firm whose
+    offices sit in one state is described by town.
+    """
     places = _localities(offices)
     n = len(offices)
+    states = []
+    for office in offices:
+        code = state_of(office.get("address") or "")
+        name = STATE_NAMES.get(code, code)
+        if name and name not in states:
+            states.append(name)
 
     if not n:
         return f"in {market['city']}"
     if n == 1:
         return f"with a single office in {places[0] if places else market['city']}"
-    if len(places) >= 2:
-        if len(places) <= 3:
-            listed = ", ".join(places[:-1]) + f" and {places[-1]}"
-            return f"with offices in {listed}"
-        listed = ", ".join(places[:3])
-        return (f"with {n} offices across the {market['city']} area, among them {listed}")
-    return f"with {n} offices across the {market['city']} area"
+
+    if len(states) > 1:
+        listed = ", ".join(states[:-1]) + f" and {states[-1]}"
+        return f"with {n} offices across {listed}"
+    if len(places) >= 2 and len(places) <= 3:
+        listed = ", ".join(places[:-1]) + f" and {places[-1]}"
+        return f"with offices in {listed}"
+    if len(places) > 3:
+        return (f"with {n} offices across {states[0] if states else market['city']}, "
+                f"among them {', '.join(places[:3])}")
+    return f"with {n} offices across {states[0] if states else market['city']}"
 
 
 def describe(name: str, market: dict, offices: list[dict], practices: list[dict],
