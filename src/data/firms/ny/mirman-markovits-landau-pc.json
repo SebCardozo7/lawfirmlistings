@@ -206,14 +206,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 61,
+    "total": 63,
     "tier": "Listed",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -235,10 +235,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -379,11 +379,11 @@
         ]
       }
     },
-    "floor_abc": 26,
+    "floor_abc": 28,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -392,9 +392,26 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 41.0,
-    "assessed": 67,
-    "coverage": 0.67,
-    "floor_abc_pct": 0.729
+    "raw": 44.0,
+    "assessed": 70,
+    "coverage": 0.7,
+    "floor_abc_pct": 0.75
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://mirmanlawyers.com/",
+        "quote": "by negligence learn more Michele S. Mirman Former President New York State Trial Lawyers Association New York City Personal Injury Lawyer contact us"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

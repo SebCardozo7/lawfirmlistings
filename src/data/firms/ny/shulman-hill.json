@@ -415,14 +415,14 @@
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 63,
+    "total": 64,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (5/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 14,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -444,10 +444,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Bar Association, Brooklyn Bar Association, American Association for Justice and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -588,11 +588,11 @@
         ]
       }
     },
-    "floor_abc": 44,
+    "floor_abc": 48,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 7,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -601,10 +601,10 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 59.5,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.824
+    "raw": 62.5,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.833
   },
   "entity": {
     "legal_name": "SHULMAN & HILL, PLLC",
@@ -666,6 +666,48 @@
     "text_length": 16014,
     "readable": true,
     "url": "https://shulman-hill.com/results/",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://shulman-hill.com/our-team/alex-shulman",
+        "quote": "Y Injured Workers’ Bar Association Brooklyn Bar Association New York State Bar Association Russian American Bar Association SuperLawyers 2023-2025 Sup"
+      },
+      {
+        "name": "Brooklyn Bar Association",
+        "source_url": "https://shulman-hill.com/our-team/alex-shulman",
+        "quote": "sian Other Affiliations NY Injured Workers’ Bar Association Brooklyn Bar Association New York State Bar Association Russian American Bar Associa"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://shulman-hill.com/our-team/michael-zogala",
+        "quote": "member of the New York State Trial Lawyers Association, the American Association for Justice, and the LGBT Bar Association of Greater New York. Phone: 8"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://shulman-hill.com/our-team/michael-zogala",
+        "quote": "eshold for continuing legal education seminars given by the New York State Trial Lawyers Institute. In 2019, Mr. Zogala was recognized as one of the"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://shulman-hill.com/our-team/matthew-nosenchuk",
+        "quote": "orkers’ Compensation Other Affiliations NYS Bar Association American Bar Association Free Case Review Free & Confidential No Win, No Fee We Figh"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://shulman-hill.com/our-team/valeriia-but",
+        "quote": "Law Bar Admissions New York New York State Bar Association New York City Bar Association Free Case Review Free & Confidential No Win, No Fee We Figh"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Bar Association, Brooklyn Bar Association, American Association for Justice and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 50,
+    "bios_published": 47,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

@@ -339,7 +339,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 66,
+    "total": 64,
     "tier": "Listed",
     "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: B; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-10",
@@ -369,9 +369,9 @@
             "code": "A5",
             "label": "Accountability",
             "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -516,7 +516,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 4,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -526,8 +526,19 @@
       ]
     },
     "raw": 44.5,
-    "assessed": 67,
-    "coverage": 0.67,
-    "floor_abc_pct": 0.814
+    "assessed": 70,
+    "coverage": 0.7,
+    "floor_abc_pct": 0.75
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

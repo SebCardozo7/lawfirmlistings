@@ -5,7 +5,7 @@
   "website": "https://ask4sam.net/",
   "domain": "ask4sam.net",
   "phone": "(877) 275-4726",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -420,14 +420,14 @@
   "faq": [],
   "fee_statement": "D FOR personal injury clients Learn More THE CONSULTATION IS FREE THE ADVICE IS PRICELESS No fee unless we win Name * First Last Email * Phone * Details * Phone Name Terms Terms of Use * By sub",
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (12/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 14,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -449,10 +449,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, American Bar Association and 7 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -593,11 +593,11 @@
         ]
       }
     },
-    "floor_abc": 42,
+    "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -606,10 +606,10 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 65.0,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.769
+    "raw": 68.0,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.781
   },
   "entity": {
     "legal_name": "SILBERSTEIN & MIKLOS, P.C.",
@@ -650,6 +650,68 @@
     "text_length": 18501,
     "readable": true,
     "url": "https://ask4sam.net/case-studies",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://ask4sam.net/about-us/",
+        "quote": "e New York State Trial Lawyers Association, Governor of the American Association for Justice, President of the Long Island Affiliate of the New York Sta"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://ask4sam.net/about-us/",
+        "quote": "partners have had the honor of serving as President of the New York State Trial Lawyers Association, Governor of the American Association for Justi"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://ask4sam.net/attorneys/joseph-miklos",
+        "quote": "ubbell Rating: AV Member Nassau County, New York County and American Bar Associations New York State Trial Lawyers Association (President Long I"
+      },
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://ask4sam.net/attorneys/jerome-d-silberstein",
+        "quote": "of American Bar Association New York State Bar Association Association of Trial Lawyers of America New York State Trial Lawyers The Association of the City Ba"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://ask4sam.net/attorneys/jerome-d-silberstein",
+        "quote": "The firm's partners and members of American Bar Association New York State Bar Association Association of Trial Lawyers of America New York State Tria"
+      },
+      {
+        "name": "Bronx County Bar Association",
+        "source_url": "https://ask4sam.net/attorneys/jerome-d-silberstein",
+        "quote": "of the City Bar of New York New York County Bar Association Bronx County Bar Association Queens County Bar Association Nassau County Bar Association"
+      },
+      {
+        "name": "Queens County Bar Association",
+        "source_url": "https://ask4sam.net/attorneys/jerome-d-silberstein",
+        "quote": "ew York County Bar Association Bronx County Bar Association Queens County Bar Association Nassau County Bar Association Suffolk County Bar Associatio"
+      },
+      {
+        "name": "Nassau County Bar Association",
+        "source_url": "https://ask4sam.net/attorneys/jerome-d-silberstein",
+        "quote": "Bronx County Bar Association Queens County Bar Association Nassau County Bar Association Suffolk County Bar Association Trial Lawyers for Public Jus"
+      },
+      {
+        "name": "Suffolk County Bar Association",
+        "source_url": "https://ask4sam.net/attorneys/jerome-d-silberstein",
+        "quote": "Queens County Bar Association Nassau County Bar Association Suffolk County Bar Association Trial Lawyers for Public Justice Roscoe Pound Foundation, a"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://ask4sam.net/attorneys/megan-e-mcglynn-sanchez",
+        "quote": "icts of New York. Megan currently serves as a member of the New York City Bar Association’s Tort and Product Liability Committee, where she contribut"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, American Bar Association and 7 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 16,
+    "bios_published": 13,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

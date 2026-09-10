@@ -304,14 +304,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 78,
+    "total": 79,
     "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 21,
         "max": 25,
         "subs": [
           {
@@ -333,10 +333,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of Association of Trial Lawyers of America, New York State Trial Lawyers Association, Nassau County Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -477,11 +477,11 @@
         ]
       }
     },
-    "floor_abc": 52,
+    "floor_abc": 55,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 7,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -490,9 +490,41 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 67.5,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.963
+    "raw": 70.5,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.965
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://www.cohenjaffe.com/about/",
+        "quote": "ociation, New York State Trial Lawyers Association, and the Association of Trial Lawyers of America. He is also fluent in Spanish, allowing him to serve a broa"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.cohenjaffe.com/about/",
+        "quote": "l organizations, such as the Nassau County Bar Association, New York State Trial Lawyers Association, and the Association of Trial Lawyers of Americ"
+      },
+      {
+        "name": "Nassau County Bar Association",
+        "source_url": "https://www.cohenjaffe.com/about/",
+        "quote": "a member of several professional organizations, such as the Nassau County Bar Association, New York State Trial Lawyers Association, and the Associat"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.cohenjaffe.com/about/attorneys/katherine-sawicki",
+        "quote": "Personal Injury Court Admissions New York State Memberships New York State Bar Association New York State Trial Lawyers Education St. John’s Universit"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Association of Trial Lawyers of America, New York State Trial Lawyers Association, Nassau County Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 8,
+    "bios_published": 5,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

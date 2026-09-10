@@ -315,14 +315,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 70,
+    "total": 71,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -344,10 +344,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, Bronx County Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -488,11 +488,11 @@
         ]
       }
     },
-    "floor_abc": 48,
+    "floor_abc": 50,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 15,
+      "gap": 14,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -501,9 +501,41 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 60.5,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.88
+    "raw": 63.5,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.886
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://oreskylaw.com/attorneys/joshua-e-goldblatt",
+        "quote": "Science) Associations New York State Bar Association (2006) New York State Trial Lawyers Association (2015) Bronx County Bar Association (2014) Bar"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://oreskylaw.com/attorneys/joshua-e-goldblatt",
+        "quote": "hlehem, Pennsylvania, 2006 (Political Science) Associations New York State Bar Association (2006) New York State Trial Lawyers Association (2015) Bron"
+      },
+      {
+        "name": "Bronx County Bar Association",
+        "source_url": "https://oreskylaw.com/attorneys/joshua-e-goldblatt",
+        "quote": "tion (2006) New York State Trial Lawyers Association (2015) Bronx County Bar Association (2014) Bar Admissions New York, 2006 United States District"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://oreskylaw.com/attorneys/raul-velez-iii",
+        "quote": "of Law (2023) CALI Excellence Award, Trial Practice (2018) American Association for Justice, Regional Champion (2017 and 2018) Professional Affiliation"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, Bronx County Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 16,
+    "bios_published": 14,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

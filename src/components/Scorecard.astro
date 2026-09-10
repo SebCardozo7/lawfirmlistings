@@ -7,7 +7,10 @@ const d = firm.data; const s = d.score;
 if (!s) throw new Error(`No score for ${d.slug} — run scripts/score.py`);
 const pillarNames: Record<string,string> = { A: 'Professional Standing', B: 'Published Outcomes', C: 'Client Experience', D: 'Digital Presence & Authority', E: 'Access & Responsiveness' };
 const gateNames: Record<string,string> = { G1: 'Licensure', G2: 'Discipline', G3: 'Entity & office', G5: 'Website', G6: 'Footprint' };
-const tagLabel = (src: string) => ({ registry: 'Registry', observed: 'Observed', ahrefs: `Ahrefs · ${d.digital.ahrefs?.measured_at ?? ''}`, places: 'Google', psi: 'PageSpeed', court: 'Court records', firm: 'Firm-submitted', illustrative: 'Illustrative', pending: 'Pending' }[src] ?? src);
+const tagLabel = (src: string) => ({ registry: 'Registry', observed: 'Observed', ahrefs: `Ahrefs · ${d.digital.ahrefs?.measured_at ?? ''}`, places: 'Google', psi: 'PageSpeed', court: 'Court records', firm: 'Firm-submitted', illustrative: 'Illustrative', partial: 'Not fully read', pending: 'Pending' }[src] ?? src);
+// 'partial' means the check ran and could not reach everything it needed, so the row is
+// not a finding about the firm and score.py keeps it out of the scale. It was rendering
+// as the bare word "partial" next to a zero, which reads like a verdict.
 const isMeasured = (src: string) => ['registry','observed','ahrefs','places','psi','court'].includes(src);
 const nextMonth = new Date(); nextMonth.setMonth(nextMonth.getMonth() + 1, 1);
 const nextCheck = nextMonth.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });

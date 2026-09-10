@@ -271,14 +271,14 @@
   "faq": [],
   "fee_statement": "s of dollars for clients. 8 Personal attention. 9 We fight diligently for our clients. 10 Contingency cases. The firm does take some cases with no upfront fee. Legal fees can be taken at the",
   "score": {
-    "total": 62,
+    "total": 63,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (11/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (11/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 21,
         "max": 25,
         "subs": [
           {
@@ -300,10 +300,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -444,11 +444,11 @@
         ]
       }
     },
-    "floor_abc": 40,
+    "floor_abc": 42,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 8,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -457,10 +457,10 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 58.0,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.731
+    "raw": 61.0,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.746
   },
   "entity": {
     "legal_name": "STEPHEN BILKIS & ASSOCIATES, PLLC",
@@ -505,6 +505,33 @@
     "text_length": 6486,
     "readable": true,
     "url": "https://www.1800nynylaw.com/results/",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.1800nynylaw.com/lawyers/stephen-bilkis",
+        "quote": "ociation, the New York State Trial Lawyers Association, the American Association for Justice, the American Prepaid Legal Institute, and the AARP Legal S"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.1800nynylaw.com/lawyers/stephen-bilkis",
+        "quote": "izations, including the New York State Bar Association, the New York State Trial Lawyers Association, the American Association for Justice, the Amer"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.1800nynylaw.com/lawyers/stephen-bilkis",
+        "quote": "ive membership in professional organizations, including the New York State Bar Association, the New York State Trial Lawyers Association, the American"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 4,
+    "bios_published": 1,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

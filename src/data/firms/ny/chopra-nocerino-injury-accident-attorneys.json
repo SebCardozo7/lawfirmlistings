@@ -310,14 +310,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 61,
+    "total": 62,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (2/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 15,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -339,10 +339,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -483,11 +483,11 @@
         ]
       }
     },
-    "floor_abc": 44,
+    "floor_abc": 47,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -496,9 +496,36 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 52.5,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.815
+    "raw": 55.5,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.825
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.chopranocerino.com/about-us/",
+        "quote": "potential changes in the law that could impact our clients. American Association for Justice The American Association for Justice is an attorney members"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.chopranocerino.com/about-us/",
+        "quote": "justice in various practice areas to network. Alex Nocerino New York State Trial Lawyers Association The New York State Trial Lawyers Association is"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.chopranocerino.com/attorneys/sameer-chopra",
+        "quote": "yers 2022 – 2026 Professional Associations and Membership • New York State Bar Association, Member Areas of Practice Wrongful Death Complex Traumatic"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 12,
+    "bios_published": 9,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

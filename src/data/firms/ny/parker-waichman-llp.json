@@ -5,7 +5,7 @@
   "website": "https://www.yourlawyer.com/",
   "domain": "yourlawyer.com",
   "phone": "(800) 968-7529",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -539,14 +539,14 @@
   "faq": [],
   "fee_statement": "ir injuries. Do I Need to Pay Attorney’s Fees Up Front? Personal injury lawyers charge a “contingency fee” to take an injury case. A contingency fee means that the firm will not get paid any",
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (12/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -568,10 +568,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Bar Association, New York State Trial Lawyers Association, Queens County Bar Association and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -712,11 +712,11 @@
         ]
       }
     },
-    "floor_abc": 44,
+    "floor_abc": 47,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -725,10 +725,10 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 65.0,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.815
+    "raw": 68.0,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.825
   },
   "entity": {
     "legal_name": "PARKER WAICHMAN LLP",
@@ -772,6 +772,53 @@
     "text_length": 9860,
     "readable": true,
     "url": "https://www.yourlawyer.com/results/",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.yourlawyer.com/staff-bios/",
+        "quote": "York City Technical College (CUNY), and is a member of the New York State Bar Association for Paralegals and NALA-The Paralegal Association. Julie Tr"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.yourlawyer.com/about/craig-h-snyder",
+        "quote": "itted to the New York Bar since 1996. He is a member of the New York State Trial Lawyers Association and the New York State Trial Lawyers Academy. O"
+      },
+      {
+        "name": "Queens County Bar Association",
+        "source_url": "https://www.yourlawyer.com/about/ankesh-sharma",
+        "quote": "sociation, South Asian Bar Association of New York, and the Queens County Bar Association Educational Background Albany Law School (J.D., 2013)‍ Bost"
+      },
+      {
+        "name": "Nassau County Bar Association",
+        "source_url": "https://www.yourlawyer.com/about/ankesh-sharma",
+        "quote": "e Academy of Trial Lawyers New Jersey State Bar Association Nassau County Bar Association Queens County Bar Association Courts Admitted All New York"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.yourlawyer.com/about/ankesh-sharma",
+        "quote": "e in New York and New Jersey and is an active member of the American Bar Association, New York State Bar Association, South Asian Bar Associatio"
+      },
+      {
+        "name": "New Jersey State Bar Association",
+        "source_url": "https://www.yourlawyer.com/about/ankesh-sharma",
+        "quote": "ate Bar Association New York State Academy of Trial Lawyers New Jersey State Bar Association Nassau County Bar Association Queens County Bar Association"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.yourlawyer.com/about/carrie-r-guest",
+        "quote": "led on behalf of clients nationwide. She is a member of the American Association for Justice, the North Carolina Advocates for Justice, the North Caroli"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Bar Association, New York State Trial Lawyers Association, Queens County Bar Association and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 24,
+    "bios_published": 21,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

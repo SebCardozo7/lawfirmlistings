@@ -537,14 +537,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 59,
+    "total": 61,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (2/15).",
+    "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: A; most headroom in pillar E (2/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 21,
         "max": 25,
         "subs": [
           {
@@ -566,10 +566,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -710,11 +710,11 @@
         ]
       }
     },
-    "floor_abc": 45,
+    "floor_abc": 48,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -723,9 +723,51 @@
         "E4 Availability: +5 available"
       ]
     },
-    "raw": 51.0,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.833
+    "raw": 54.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.842
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.wrshlaw.com/",
+        "quote": "research, peer nominations, and evaluations. Member of the American Association for Justice Philip Russotti is a sustaining member of the American Asso"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.wrshlaw.com/attorneys/philip-russotti.html",
+        "quote": "gent conduct. Phil served on the Executive Committee of the New York State Trial Lawyers Association. He also serves as a Dean of the N.Y. State Tri"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.wrshlaw.com/attorneys/philip-russotti.html",
+        "quote": "tute where he teaches trial practice. He is a member of the New York State Bar Association, and is a sustaining member of the American Association for"
+      },
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://www.wrshlaw.com/attorneys/william-wingate.html",
+        "quote": "e New York State Trial Lawyers Association; a member of the Association of Trial Lawyers of America and various Bar Associations. He had always been a leading"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.wrshlaw.com/attorneys/kenneth-halperin.html",
+        "quote": "he New York's civil justice system. Learn More About NYSTLA American Bar Association As a member of the American Bar Association, Kenneth Halper"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.wrshlaw.com/attorneys/erin-hurley.html",
+        "quote": "ember and secretary of the Tort Litigation Committee of the Association of the Bar of the City of New York and also served as a member of that association’s Sta"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 33,
+    "bios_published": 31,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

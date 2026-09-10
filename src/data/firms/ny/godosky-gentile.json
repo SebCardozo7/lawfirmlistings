@@ -155,14 +155,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 55,
+    "total": 57,
     "tier": "Listed",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -184,10 +184,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -328,11 +328,11 @@
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 19,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 15,
+      "gap": 13,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -341,9 +341,51 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 28.5,
-    "assessed": 52,
-    "coverage": 0.52,
-    "floor_abc_pct": 0.8
+    "raw": 31.5,
+    "assessed": 55,
+    "coverage": 0.55,
+    "floor_abc_pct": 0.826
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/david-m-godosky",
+        "quote": "awyers Guild, Member New York State Bar Association, Member New York State Trial Lawyers Association, Member International Academy of Trial Lawyers,"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/david-m-godosky",
+        "quote": "s Alliance (NYCTLA), President Jewish Lawyers Guild, Member New York State Bar Association, Member New York State Trial Lawyers Association, Member In"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/david-m-godosky",
+        "quote": "City of New York) Professional Associations and Memberships Association of the Bar of the City of New York, Member The New York City Trial Lawyers Alliance (NYC"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/jeffrey-r-brecker",
+        "quote": "the City of New York, Member, Medical Malpractice Committee American Association for Justice, Member Association of Trial Lawyers of the City of New Yor"
+      },
+      {
+        "name": "Brooklyn Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/jeffrey-r-brecker",
+        "quote": "ssociation of Trial Lawyers of the City of New York, Member Brooklyn Bar Association, Member Jewish Lawyer's Guild, Member New York State Bar As"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/jeffrey-r-brecker",
+        "quote": ",\" 1992 - Present Professional Associations and Memberships American Bar Association, Member Association of the Bar of the City of New York, Mem"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 8,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

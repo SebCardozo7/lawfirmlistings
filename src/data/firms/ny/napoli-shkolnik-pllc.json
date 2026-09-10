@@ -517,14 +517,14 @@
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 57,
+    "total": 59,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar E (5/15).",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: A; most headroom in pillar E (5/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 15,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -546,10 +546,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Bar Association, Suffolk County Bar Association, American Association for Justice and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -690,11 +690,11 @@
         ]
       }
     },
-    "floor_abc": 38,
+    "floor_abc": 41,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 13,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -703,10 +703,10 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 54.0,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.704
+    "raw": 57.0,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.719
   },
   "entity": {
     "legal_name": "NAPOLI SHKOLNIK PLLC",
@@ -740,6 +740,53 @@
     "text_length": 5694,
     "readable": true,
     "url": "https://www.napolilaw.com/our-difference/verdicts-settlements/",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.napolilaw.com/attorneys/stephen-j-maloney-jr",
+        "quote": "26 Professional affiliations Suffolk County Bar Association New York State Bar Association Nassau Suffolk Trial Lawyers Association Suffolk County Bre"
+      },
+      {
+        "name": "Suffolk County Bar Association",
+        "source_url": "https://www.napolilaw.com/attorneys/stephen-j-maloney-jr",
+        "quote": "awyers®, Rising Stars , 2020-2026 Professional affiliations Suffolk County Bar Association New York State Bar Association Nassau Suffolk Trial Lawyers"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.napolilaw.com/attorneys/shayna-sacks",
+        "quote": "s American Bar Association American Association of Justice (AAJ), The Toxic, Environmental, and Pharmaceutical Torts (STEPS"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.napolilaw.com/attorneys/shayna-sacks",
+        "quote": "Bar Association (BWBA) New York State Lawyers Association (NYSTLA) New York Women’s Bar Association (NYWBA), Mass Tort Commit"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.napolilaw.com/attorneys/shayna-sacks",
+        "quote": "rd, Governmental Affairs Category Professional affiliations American Bar Association American Association of Justice (AAJ), The Toxic, Environme"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.napolilaw.com/attorneys/patrick-j-lanciotti",
+        "quote": "Association of Justice (AAJ), PFC Water Contamination Group New York City Bar Association American Bar Association New York State Trial Lawyers Assoc"
+      },
+      {
+        "name": "Queens County Bar Association",
+        "source_url": "https://www.napolilaw.com/attorneys/stephen-holihan",
+        "quote": "College of Criminal Justice, B.S. Professional affiliations Queens County Bar Association Catholic Lawyer’s Guild New York State Trial Lawyer’s Assoc"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Bar Association, Suffolk County Bar Association, American Association for Justice and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 34,
+    "bios_published": 64,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

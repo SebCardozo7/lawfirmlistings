@@ -143,6 +143,16 @@ def promote(rec: dict, firm: dict) -> list[str]:
     # What the firm publishes about its own results. Promoted whole, including the
     # unreadable case, because pillar B has to tell "publishes nothing" from "we could not
     # read it" and only the record knows which.
+    # A5 accountability, measured by scripts/check_a5.py off the firm's own pages. It replaces
+    # the one hand-entered assessment left on the directory, so it belongs with the measurements
+    # rather than beside the prose.
+    acc = rec.get("accountability")
+    if acc:
+        was = firm.get("accountability") or {}
+        firm["accountability"] = acc
+        if was.get("pts") != acc.get("pts"):
+            changed.append("accountability  %s/6 · %s" % (acc.get("pts"), acc.get("evidence", "")[:88]))
+
     published = rec.get("results_published")
     if published:
         was = firm.get("results_published") or {}

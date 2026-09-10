@@ -587,14 +587,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 45,
+    "total": 47,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 21,
         "max": 25,
         "subs": [
           {
@@ -616,10 +616,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, Association of Trial Lawyers of America and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -760,11 +760,11 @@
         ]
       }
     },
-    "floor_abc": 30,
+    "floor_abc": 33,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 25,
+      "gap": 23,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -773,9 +773,56 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 39.0,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.556
+    "raw": 42.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.579
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.triallaw1.com/attorney/thomas-j-mcmanus",
+        "quote": "D 2005 Boston College • B.A. 2002 Professional Associations New York State Trial Lawyers Association New York City Trial Lawyers Association Brehon"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.triallaw1.com/attorney/nicholas-papain",
+        "quote": "ional Associations New York State Trial Lawyers Association New York State Bar Association The Hellenic Lawyers Association of New York Selected Publi"
+      },
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://www.triallaw1.com/attorney/john-m-tomsky",
+        "quote": "ion, Member New York County Lawyers Association, Member The Association of Trial Lawyers of America, Sustaining Member New York State Trial Lawyers Association"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.triallaw1.com/attorney/frank-v-floriani",
+        "quote": "te Trial Lawyers Association New York State Bar Association American Association for Justice Selected Publications Mr. Floriani has been called upon to"
+      },
+      {
+        "name": "Nassau County Bar Association",
+        "source_url": "https://www.triallaw1.com/attorney/robert-g-sullivan",
+        "quote": "onal Associations New York State Trial Lawyer’s Association Nassau County Bar Association Nassau-Suffolk Trial Lawyer’s Association Extracurricular W"
+      },
+      {
+        "name": "Queens County Bar Association",
+        "source_url": "https://www.triallaw1.com/attorney/ana-marija-turkovic",
+        "quote": "al Lawyers Alliance New York State Academy of Trial Lawyers Queens County Bar Association Languages English Croatian Practice Areas Plantiff's Person"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.triallaw1.com/attorney/ana-marija-turkovic",
+        "quote": "on Brooklyn Law School, JD • 2019 Professional Associations American Bar Association New York State Trial Lawyers Association Brooklyn Women’s B"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, Association of Trial Lawyers of America and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 37,
+    "bios_published": 34,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

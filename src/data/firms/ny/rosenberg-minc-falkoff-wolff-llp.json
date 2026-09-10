@@ -344,14 +344,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 52,
+    "total": 54,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 21,
         "max": 25,
         "subs": [
           {
@@ -373,10 +373,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -517,11 +517,11 @@
         ]
       }
     },
-    "floor_abc": 32,
+    "floor_abc": 34,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 16,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -530,9 +530,41 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 45.0,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.583
+    "raw": 48.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.605
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://rmfwlaw.com/attorneys/arthur-o-tisi",
+        "quote": "y. He is a member of the New York State Bar Association and New York State Trial Lawyers Association. Bar Admissions New Jersey, 1996 New York, 1996"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://rmfwlaw.com/attorneys/arthur-o-tisi",
+        "quote": "Court for the District of New Jersey. He is a member of the New York State Bar Association and New York State Trial Lawyers Association. Bar Admission"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://rmfwlaw.com/attorneys/jesse-m-minc",
+        "quote": ": Honors Graduate Professional Associations and Memberships New York City Bar Association New York State Bar Association New York State Trial Lawyers"
+      },
+      {
+        "name": "Bronx County Bar Association",
+        "source_url": "https://rmfwlaw.com/attorneys/joyce-randazzo",
+        "quote": "ions & Memberships New York State Trial Lawyers Association Bronx County Bar Association New York State Bar Association Columbian Lawyers Associatio"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 13,
+    "bios_published": 10,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

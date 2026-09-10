@@ -155,7 +155,7 @@
   "faq": [],
   "fee_statement": "scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but",
   "score": {
-    "total": 43,
+    "total": 42,
     "tier": "Listed",
     "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-10",
@@ -185,9 +185,9 @@
             "code": "A5",
             "label": "Accountability",
             "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -332,19 +332,19 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 27,
+      "gap": 28,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "A5 Accountability: not yet measured (6 pts)"
+        "B1 Results published: +6 available"
       ]
     },
     "raw": 32.5,
-    "assessed": 75,
-    "coverage": 0.75,
-    "floor_abc_pct": 0.457
+    "assessed": 78,
+    "coverage": 0.78,
+    "floor_abc_pct": 0.421
   },
   "results_published": {
     "readable": true,
@@ -354,6 +354,17 @@
     "disclaimer": false,
     "venues": [],
     "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

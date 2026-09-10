@@ -234,12 +234,17 @@ def collect(domain, results_url, verbose=False):
     has_money = bool(MONEY.search(text))
     has_words = bool(RESULT_WORD.search(text))
     if len(text) < 400 or not (has_money or has_words):
+        # State what we saw, not why we think we saw it. This used to conclude "rendered in the
+        # browser rather than served to a reader or a crawler", which sounds authoritative and
+        # was wrong at least once: one firm's results page turned out to carry no results at all,
+        # in a real browser with scripts running, just a breadcrumb saying Results. Pillar B is
+        # pending either way, so the guess bought nothing and could have been repeated back to a
+        # firm as a technical diagnosis of a page that simply had nothing on it.
         return {"readable": False,
-                "why": ("results page has almost no text, most likely rendered in the browser"
-                        if len(text) < 400 else
-                        "the results page served no figures and no mention of a settlement, "
-                        "verdict or recovery, so its results are rendered in the browser rather "
-                        "than served to a reader or a crawler"),
+                "why": ("the results page served %d characters of text and no figure or mention "
+                        "of a settlement, verdict or recovery, so there was nothing on it to "
+                        "count. Whether the results are held back from the served HTML or the "
+                        "page carries none is not something this check can tell." % len(text)),
                 "url": final, "checked_at": date.today().isoformat()}
     out = extract(text)
     out.update({"readable": True, "url": final, "checked_at": date.today().isoformat()})

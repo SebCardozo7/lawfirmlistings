@@ -146,8 +146,21 @@ def pct(value, values):
 def scale(p, maxpts):  # percentile → points, rounded half-up, min 0
     return max(0, min(maxpts, round(p / 100 * maxpts + 1e-9)))
 
-def sub(code, pts, source, evidence):
+def sub(code, pts, source, evidence, max_override=None):
+    """One sub-score.
+
+    max_override exists for a factor where part of the scale is not assessable for a firm rather
+    than unearned by it. A5 is the case: three of its six points are for disclosing professional
+    liability cover, and across thirty-eight firms in two states not one publishes it, not even
+    as a phrase on an about page. Plaintiff-side firms in this country do not advertise their own
+    cover, and scoring an absence that is universal charges every firm three points for a fact
+    about the market. It separates nobody, it moves no ranking, and it quietly makes the published
+    thresholds stricter than the page says they are, because 70 out of a scale where three points
+    cannot be reached is really 70 out of 97. So that half leaves the denominator until we see a
+    firm publish it, at which point the firm that does gets the credit.
+    """
     pil, label, mx = SUBS[code]
+    mx = mx if max_override is None else max_override
     return {"code": code, "label": label, "pts": round(min(pts, mx), 1), "max": mx, "source": source, "evidence": evidence}
 
 TODAY_YEAR = int(TODAY[:4])
@@ -210,7 +223,21 @@ def compute(firm):
         out.append(sub("A6", 0, "pending", "No attorney is named on the site we could read"))
 
     # ---- A5: only what the firm publishes about itself ----
-    out.append(assessed("A5", "Nothing published about insurance or bar memberships"))
+    # ---- A5 accountability: read off the firm's own pages, not entered by hand ----
+    # This was the last hand-entered sub-factor on the directory, and it was the shape the whole
+    # v2.0 rework set out to remove: six points that only a person could award, pending on every
+    # profile but one. scripts/check_a5.py looks for a disclosure of professional liability cover
+    # with the firm as the subject of the sentence, and for named bar or trial lawyers'
+    # associations. A firm that publishes neither scores nothing here rather than being asked.
+    acc = firm.get("accountability")
+    if acc and "A5" not in A:
+        # Three points for cover disclosed, three for a named association. Where no cover is
+        # published the scale is the association half alone; see sub() for why.
+        cover = acc.get("malpractice_insurance")
+        out.append(sub("A5", acc["pts"], acc.get("source", "observed"),
+                       acc["evidence"], max_override=None if cover else 3))
+    else:
+        out.append(assessed("A5", "Nothing published about insurance or bar memberships"))
 
     # ---- B: Published Outcomes, from the firm's own results page ----
     rp = firm.get("results_published")
@@ -395,11 +422,16 @@ def compute(firm):
     # pipeline. That measured our own coverage and published it as the firm's result, which
     # put the A+B+C floor of 40 out of 65 arithmetically out of reach for everyone and left a
     # certification nobody could earn.
+    # "pending" was the only source treated as unassessed, and NOT_A_FINDING exists precisely
+    # because there are several ways of not having looked. A5 brought the difference to a head: a
+    # firm whose bios we could not all read, and where we found no membership, reports "partial",
+    # and counting that as an assessed zero would charge the firm six points for the reach of our
+    # own crawl. The same vocabulary the gates use, for the same reason.
     def spread(codes):
         earned = assessable = 0.0
         for pk in codes:
             for x in pillars[pk]["subs"]:
-                if x["source"] != "pending":
+                if not any(w in (x["source"] or "").lower() for w in NOT_A_FINDING):
                     earned += x["pts"]; assessable += x["max"]
         return earned, assessable
 

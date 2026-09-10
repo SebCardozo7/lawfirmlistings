@@ -281,14 +281,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 67,
+    "total": 69,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -310,10 +310,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -454,11 +454,11 @@
         ]
       }
     },
-    "floor_abc": 45,
+    "floor_abc": 48,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 3,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -467,9 +467,41 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 58.0,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.833
+    "raw": 61.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.842
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://lawyer1.com/",
+        "quote": "s involvement in various legal organizations, including the New York State Trial Lawyers Association, further demonstrates his dedication. Read Judd"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://lawyer1.com/about/jordan-hecht",
+        "quote": "Litigation Committee New York City Bar Association, Member New York State Bar Association, Member Grieving Families/Wrongful Death Committee, Chair L"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://lawyer1.com/about/jordan-hecht",
+        "quote": "York County Lawyers Association, Tort Litigation Committee New York City Bar Association, Member New York State Bar Association, Member Grieving Fam"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://lawyer1.com/about/jonathan-damashek",
+        "quote": "is best qualified. Professional Associations & Memberships American Association for Justice , Member, 1997 – Present New York State Trial Lawyers Assoc"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 1 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 10,
+    "bios_published": 8,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

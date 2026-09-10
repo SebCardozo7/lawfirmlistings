@@ -770,14 +770,14 @@
   "faq": [],
   "fee_statement": "Home Our Attorneys About Our Firm Areas We Serve Contact Us Articles Client Testimonials Contingency Fee Site Map Practice Areas Workers' Compensation Social Security Disability Construction",
   "score": {
-    "total": 54,
+    "total": 55,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -799,10 +799,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association and 6 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -943,11 +943,11 @@
         ]
       }
     },
-    "floor_abc": 32,
+    "floor_abc": 34,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 16,
+      "gap": 15,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -956,10 +956,10 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 50.5,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.583
+    "raw": 53.5,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.605
   },
   "entity": {
     "legal_name": "PASTERNACK TILKER ZIEGLER WALSH STANTON & ROMANO LLP",
@@ -977,6 +977,63 @@
     "disclaimer": false,
     "venues": [],
     "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.workerslaw.com/nyc-lawyer/about/",
+        "quote": "acy Group Chair of the Workers' Compensation Section of the American Association for Justice Call the Law Offices of Pasternack Tilker Ziegler Walsh Sta"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.workerslaw.com/nyc-lawyer/about/",
+        "quote": "dical Monitoring Program at Mt Sinai Board of Director's of New York State Trial Lawyers' Association Chair of the Workers Compensation Committee, B"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.workerslaw.com/attorneys/",
+        "quote": "zo School of Law in 2011. Ms. Katz has been a member of the New York State Bar Association since 2011 and the New York State Trial Lawyers Association"
+      },
+      {
+        "name": "Brooklyn Bar Association",
+        "source_url": "https://www.workerslaw.com/attorneys/heather-myer",
+        "quote": "uro College in New York. Heather is an active member of The Brooklyn Bar Association, The Women's Brooklyn Bar Association, and The American Ass"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.workerslaw.com/attorneys/barbara-doblin-tilker",
+        "quote": "presently on the panel of the Legal Referral Service of the Association of the Bar of the City of New York in the practice area of Social Security Disability. S"
+      },
+      {
+        "name": "Suffolk County Bar Association",
+        "source_url": "https://www.workerslaw.com/attorneys/barbara-doblin-tilker",
+        "quote": "resentations to the New York State Trial Lawyers Institute, Suffolk County Bar Association Academy of Law, and St. Luke's Hospital Symposium. Barbara"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.workerslaw.com/attorneys/robert-stanton",
+        "quote": "June of 2015, where he graduated Cum Laude and received the ABA/BNA Award for Excellence in the Study of Intellectual Prope"
+      },
+      {
+        "name": "Queens County Bar Association",
+        "source_url": "https://www.workerslaw.com/attorneys/robert-saminsky",
+        "quote": "New York State Workers Compensation Bar Association and the Queens County Bar Association. He is listed in \"Who's Who in American Law,\" and \"Who's Wh"
+      },
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://www.workerslaw.com/attorneys/victor-pasternack",
+        "quote": "the New York State Captain for Workers Compensation for the Association of Trial Lawyers of America (now, the American Association for Justice). He is past pre"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association and 6 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 34,
+    "bios_published": 31,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

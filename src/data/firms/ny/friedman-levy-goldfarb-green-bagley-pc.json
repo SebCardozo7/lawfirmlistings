@@ -246,14 +246,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 67,
+    "total": 68,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -275,10 +275,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, American Bar Association, Association of Trial Lawyers of America and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -419,11 +419,11 @@
         ]
       }
     },
-    "floor_abc": 44,
+    "floor_abc": 48,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 3,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -432,9 +432,51 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 57.5,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.824
+    "raw": 60.5,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.833
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://friedmanlevy.com/attorneys/charles-e-green-new-york-personal-injury-lawyer",
+        "quote": "rn and Eastern Districts of New York. He is a member of the New York State Trial Lawyers Association and the American Bar Association. Contact Email"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://friedmanlevy.com/attorneys/charles-e-green-new-york-personal-injury-lawyer",
+        "quote": "ber of the New York State Trial Lawyers Association and the American Bar Association. Contact Email Contact Us Δ Company This field is for valid"
+      },
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://friedmanlevy.com/attorneys/robert-levy",
+        "quote": "tion; the New York State Trial Lawyers Association; and the Association of Trial Lawyers of America. Contact Email Contact Us Δ Facebook This field is for vali"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://friedmanlevy.com/attorneys/robert-levy",
+        "quote": "tary Appeals and the U. S. Tax Court. He is a member of the New York State Bar Association; the Bronx County Bar Association; the New York State Trial"
+      },
+      {
+        "name": "Bronx County Bar Association",
+        "source_url": "https://friedmanlevy.com/attorneys/robert-levy",
+        "quote": ". He is a member of the New York State Bar Association; the Bronx County Bar Association; the New York State Trial Lawyers Association; and the Asso"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://friedmanlevy.com/attorneys/nicolas-bagley",
+        "quote": "al Lawyers Association, New York State Bar Association, the Association of the Bar of the City of New York and the Bronx Bar Association where he a member of th"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, American Bar Association, Association of Trial Lawyers of America and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 10,
+    "bios_published": 7,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

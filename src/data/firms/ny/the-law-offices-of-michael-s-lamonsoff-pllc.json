@@ -409,14 +409,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 70,
+    "total": 71,
     "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 14,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -438,10 +438,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, New York State Bar Association, New York City Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -582,11 +582,11 @@
         ]
       }
     },
-    "floor_abc": 48,
+    "floor_abc": 50,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 15,
+      "gap": 14,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -595,9 +595,36 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 60.0,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.88
+    "raw": 63.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.886
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.msllegal.com/attorneys/michael-s-lamonsoff-esq",
+        "quote": "f: Board of Directors of NY State Trial Lawyers Association American Association for Justice NY County Lawyers Association Educated at: University of Ar"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.msllegal.com/attorneys/michael-s-lamonsoff-esq",
+        "quote": "tern districts of New York Mr. Lamonsoff is a member of the New York State Bar Association He is on the Board of Directors for the New York State Tria"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.msllegal.com/attorneys/liana-cotto",
+        "quote": "respected member of the legal community. As a member of the New York City Bar Association, Liana stays actively involved in professional development"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, New York State Bar Association, New York City Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 16,
+    "bios_published": 13,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

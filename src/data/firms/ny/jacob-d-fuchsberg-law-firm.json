@@ -426,14 +426,14 @@
   "faq": [],
   "fee_statement": "eath lawyers will guide you through the legal process and fight for justice. We work on a contingency basis, so no fees unless we win. Schedule a Free Consultation #cta_end Common Causes of D",
   "score": {
-    "total": 53,
+    "total": 55,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 15,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -455,10 +455,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York City Bar Association, American Bar Association, American Association for Justice and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -599,11 +599,11 @@
         ]
       }
     },
-    "floor_abc": 31,
+    "floor_abc": 34,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 17,
+      "gap": 15,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -612,10 +612,10 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 50.0,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.574
+    "raw": 53.0,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.596
   },
   "entity": {
     "legal_name": "THE JACOB D. FUCHSBERG LAW FIRM, LLP",
@@ -633,6 +633,53 @@
     "disclaimer": false,
     "venues": [],
     "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.fuchsberg.com/attorneys/alan-l-fuchsberg",
+        "quote": "an Jewish Congress Legal Services, Chairman, 1985 – Present Association of the Bar of the City of New York, Member American Bar Association, Member New York Uni"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.fuchsberg.com/attorneys/alan-l-fuchsberg",
+        "quote": "sent Association of the Bar of the City of New York, Member American Bar Association, Member New York University School of Law, Board of Trustee"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.fuchsberg.com/attorneys/bradley-s-zimmerman",
+        "quote": "Trial Lawyers Association, is a long-standing member of the American Association for Justice. Mr. Zimmerman has become a life-long Fellow of the America"
+      },
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://www.fuchsberg.com/attorneys/bradley-s-zimmerman",
+        "quote": "NYSTLI); Pretrial Issues in Laparoscopic Negligence Cases , ATLA Professional Negligence Section Newsletter and Legislative"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.fuchsberg.com/attorneys/bradley-s-zimmerman",
+        "quote": "an has served as the Chair of Birth Trauma Seminars for the New York State Trial Lawyers Institute teaching and instructing other lawyers how to lit"
+      },
+      {
+        "name": "Queens County Bar Association",
+        "source_url": "https://www.fuchsberg.com/attorneys/christopher-m-nyberg",
+        "quote": "rving his community of Queens, he serves as a member of the Queens County Bar Association, has and is been a member of the vestry and/or numerous com"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.fuchsberg.com/attorneys/kathleen-kettles",
+        "quote": "is also a longtime member of the AAJ, NYSTLA, NYATL and the NYSBA. Education Pace University, Lienhard School of Nursing (B.S"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York City Bar Association, American Bar Association, American Association for Justice and 4 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 30,
+    "bios_published": 27,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }

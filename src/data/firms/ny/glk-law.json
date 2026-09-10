@@ -262,14 +262,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 57,
+    "total": 58,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (2/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 14,
+        "score": 16,
         "max": 25,
         "subs": [
           {
@@ -291,10 +291,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, American Association for Justice, Association of Trial Lawyers of America and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -435,11 +435,11 @@
         ]
       }
     },
-    "floor_abc": 42,
+    "floor_abc": 46,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 13,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -448,9 +448,51 @@
         "E4 Availability: +5 available"
       ]
     },
-    "raw": 49.0,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.787
+    "raw": 52.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.798
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.lawyertime.com/attorneys/",
+        "quote": "selection and trial. He is on the board of directors of the NYSTLA. He is fluent in Hebrew. View More Anthony Makarov Associat"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.lawyertime.com/attorneys/andrew-l-libo",
+        "quote": "onx County Bar Association American Association of Justice (AAJ) (Formerly the Association of Trial Lawyers of America (ATL"
+      },
+      {
+        "name": "Association of Trial Lawyers of America",
+        "source_url": "https://www.lawyertime.com/attorneys/andrew-l-libo",
+        "quote": "ciation American Association of Justice (AAJ) (Formerly the Association of Trial Lawyers of America (ATLA) ) Gersowitz Libo & Korek, P.C. New York 212-385-4410"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.lawyertime.com/attorneys/andrew-l-libo",
+        "quote": "010 and 2011 editions Memberships: American Bar Association Association of the Bar of the City of New York (ABCNY) New York State Trial Lawyers Association (NYS"
+      },
+      {
+        "name": "Bronx County Bar Association",
+        "source_url": "https://www.lawyertime.com/attorneys/andrew-l-libo",
+        "quote": "k (ABCNY) New York State Trial Lawyers Association (NYSTLA) Bronx County Bar Association American Association of Justice (AAJ) (Formerly the Associa"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.lawyertime.com/attorneys/andrew-l-libo",
+        "quote": "rk Times magazine 2009, 2010 and 2011 editions Memberships: American Bar Association Association of the Bar of the City of New York (ABCNY) New"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, American Association for Justice, Association of Trial Lawyers of America and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 8,
+    "bios_published": 5,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

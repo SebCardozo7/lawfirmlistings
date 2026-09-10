@@ -407,14 +407,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 72,
+    "total": 73,
     "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -436,10 +436,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -580,11 +580,11 @@
         ]
       }
     },
-    "floor_abc": 49,
+    "floor_abc": 52,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 13,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -593,9 +593,26 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 62.0,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.907
+    "raw": 65.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.912
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.raphaelsonlaw.com/attorney/andrew-levine",
+        "quote": "lades , Andrew has served on the Board of Directors for the New York State Trial Lawyers since 2012. Several of Andrew’s notable recoveries have bee"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 17,
+    "bios_published": 15,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

@@ -247,14 +247,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 56,
+    "total": 58,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -276,10 +276,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -420,11 +420,11 @@
         ]
       }
     },
-    "floor_abc": 36,
+    "floor_abc": 38,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -433,9 +433,36 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 48.5,
-    "assessed": 86,
-    "coverage": 0.86,
-    "floor_abc_pct": 0.657
+    "raw": 51.5,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.675
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://plattalaw.com/our-attorneys/slawomir-platta",
+        "quote": "the New York State Trial Lawyers Association Member of the American Association for Justice Bar Admissions New York State Courts Court of Appeals for t"
+      },
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://plattalaw.com/our-attorneys/slawomir-platta",
+        "quote": "2018) Grand Marshal of the Pulaski Day Parade Member of the New York State Trial Lawyers Association Member of the American Association for Justice"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://plattalaw.com/our-attorneys/michael-taub",
+        "quote": "sociations Bar Admissions Education Awards and Associations New York State Bar Association New York State Trial Lawyers Association Westchester County"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, New York State Trial Lawyers Association, New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 11,
+    "bios_published": 8,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

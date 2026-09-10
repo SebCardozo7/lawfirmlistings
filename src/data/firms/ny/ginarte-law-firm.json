@@ -385,14 +385,14 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 33,
+    "total": 35,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 1,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -414,10 +414,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -558,22 +558,39 @@
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 19,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 37,
+      "gap": 35,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "D2 Search authority: not yet measured (8 pts)",
-        "A5 Accountability: not yet measured (6 pts)"
+        "A6 Roster verifiability: +8 available"
       ]
     },
-    "raw": 25.0,
-    "assessed": 76,
-    "coverage": 0.76,
-    "floor_abc_pct": 0.364
+    "raw": 28.0,
+    "assessed": 79,
+    "coverage": 0.79,
+    "floor_abc_pct": 0.404
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.ginarte.com/our-attorneys/timothy-bartzos-esq",
+        "quote": "n County Bar Association New Jersey Association for Justice American Bar Association Bergen County 200 Club Court Admissions: New Jersey Educati"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 4,
+    "bios_published": 1,
+    "source": "observed",
+    "checked_at": "2026-09-10"
   }
 }

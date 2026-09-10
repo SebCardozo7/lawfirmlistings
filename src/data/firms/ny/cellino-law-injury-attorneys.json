@@ -5,7 +5,7 @@
   "website": "https://www.cellinolaw.com/",
   "domain": "cellinolaw.com",
   "phone": "(718) 550-1692",
-  "status": "certified",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -748,8 +748,8 @@
   "faq": [],
   "fee_statement": "about your case. And you won’t pay any fees unless we win. Let’s Talk About Your Case Our Contingency Fees Explained Our personal injury lawyers operate entirely on a contingency fee basis. T",
   "score": {
-    "total": 71,
-    "tier": "Certified",
+    "total": 69,
+    "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (10/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
@@ -778,9 +778,9 @@
             "code": "A5",
             "label": "Accountability",
             "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -923,9 +923,9 @@
     },
     "floor_abc": 46,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 14,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -935,9 +935,9 @@
       ]
     },
     "raw": 66.5,
-    "assessed": 94,
-    "coverage": 0.94,
-    "floor_abc_pct": 0.861
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.816
   },
   "entity": {
     "legal_name": "CELLINO LAW INJURY ATTORNEYS, LLP",
@@ -1003,6 +1003,17 @@
     "text_length": 18498,
     "readable": true,
     "url": "https://www.cellinolaw.com/results/",
+    "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
     "checked_at": "2026-09-10"
   }
 }
