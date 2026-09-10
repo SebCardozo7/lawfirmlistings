@@ -18,7 +18,14 @@ const firms = defineCollection({
     slug: z.string(), name: z.string(), legal_name: z.string().optional(), entity_type: z.string().optional(),
     initials: z.string(), website: z.string().url(), domain: z.string(), phone: z.string(), phone_vanity: z.string().optional(),
     founded_year: z.number().optional(),
-    status: z.enum(['listed', 'certified', 'not_eligible', 'sample']),
+    // 'verified' sits between listed and certified: every eligibility gate passed, which is a
+    // real and checkable claim, without asserting the score a certification needs.
+    status: z.enum(['listed', 'verified', 'certified', 'not_eligible', 'sample']),
+    // Written by scripts/check_ny_dos.py from the state's active corporations register.
+    entity: z.object({
+      legal_name: z.string(), entity_type: z.string().nullable().optional(), dos_id: z.string(),
+      formed: z.string(), source: z.string(), checked_at: z.string(),
+    }).optional(),
     // The firm proved it owns this page and maintains its own information. It says nothing
     // about quality — that is what `status` and `score` are for — so it never touches either,
     // and a claimed profile is deliberately styled apart from the certification badge.
@@ -66,9 +73,13 @@ const firms = defineCollection({
     // written by scripts/score.py — do not edit by hand
     score: z.object({
       total: z.number(), tier: z.string(), verdict: z.string(), computed_at: z.string(), methodology: z.string(),
+      // total is now a percentage of what we could assess. raw and assessed carry the inputs, so
+      // no template can print the score without being able to print its coverage too.
+      raw: z.number().optional(), assessed: z.number().optional(), coverage: z.number().optional(),
+      floor_abc_pct: z.number().optional(),
       pillars: z.object({ A: pillar, B: pillar, C: pillar, D: pillar, E: pillar }),
       floor_abc: z.number(),
-      next_tier: z.object({ name: z.string(), needed: z.number(), gap: z.number(), floor_met: z.boolean(), path: z.array(z.string()) }).nullable(),
+      next_tier: z.object({ name: z.string(), needed: z.number(), gap: z.number(), floor_met: z.boolean(), coverage_met: z.boolean().optional(), path: z.array(z.string()) }).nullable(),
     }).optional(),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     similar: z.array(z.object({ name: z.string(), slug: z.string().nullable(), rating: z.string() })).default([]),

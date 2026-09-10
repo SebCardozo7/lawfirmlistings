@@ -83,7 +83,7 @@
   },
   "offices": [
     {
-      "label": "Manhattan — Main office",
+      "label": "Manhattan (main office)",
       "address": "1825 Park Avenue, 9th Floor, New York, NY 10035",
       "is_hq": true,
       "source_url": "https://www.nyclawfirm.com/"
@@ -125,32 +125,6 @@
   ],
   "attorneys": [
     {
-      "name": "Robert J. Greenstein",
-      "role": "Founding Partner",
-      "bar_state": "NY",
-      "bar_number": "2591121",
-      "admitted_year": 1994,
-      "registry_status": "Currently registered",
-      "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
-    },
-    {
-      "name": "Bartolomeo Andrew Pittari",
-      "role": "Founding Partner",
-      "bar_state": "NY",
-      "bar_number": "5107164",
-      "admitted_year": 2013,
-      "registry_status": "Currently registered",
-      "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
-    },
-    {
-      "name": "Michael A. Barnett",
-      "role": "Attorney",
-      "registry_status": "Not verified — ambiguous (3 attorneys share this name)",
-      "checked_at": "2026-09-09"
-    },
-    {
       "name": "Jake I. Berkowitz",
       "role": "Attorney",
       "bar_state": "NY",
@@ -158,17 +132,8 @@
       "admitted_year": 2022,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
-    },
-    {
-      "name": "Valerie Hernandez",
-      "role": "Attorney",
-      "bar_state": "NY",
-      "bar_number": "5765789",
-      "admitted_year": 2020,
-      "registry_status": "Due to reregister within 30 days of birthday",
-      "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-09",
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/jake-i-berkowitz/"
     },
     {
       "name": "Emily Driscoll",
@@ -178,36 +143,70 @@
       "admitted_year": 2025,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-09",
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/emily-driscoll/"
     },
     {
-      "name": "Michael A. Simon",
+      "name": "Valerie Hernandez",
       "role": "Attorney",
       "bar_state": "NY",
-      "bar_number": "5406582",
-      "admitted_year": 2016,
+      "bar_number": "5765789",
+      "admitted_year": 2020,
+      "registry_status": "Due to reregister within 30 days of birthday",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09",
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/valerie-hernandez/"
+    },
+    {
+      "name": "Bartolomeo Andrew Pittari",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "bar_number": "5107164",
+      "admitted_year": 2013,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-09",
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/bartolomeo-andrew-pittari/"
     },
     {
-      "name": "Sabastina Wiafe",
+      "name": "Frank Trief",
       "role": "Attorney",
       "bar_state": "NY",
-      "bar_number": "6065585",
-      "admitted_year": 2023,
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/frank-trief/",
+      "bar_number": "2598274",
+      "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
       "checked_at": "2026-09-09"
     },
     {
-      "name": "Michael J. Martorelli",
+      "name": "Michael A. Barnett",
+      "role": "Attorney",
+      "registry_status": "Not verified. Ambiguous (3 attorneys share this name)",
+      "checked_at": "2026-09-09",
+      "bar_state": "NY",
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/michael-a-barnett/"
+    },
+    {
+      "name": "Robert J. Greenstein",
       "role": "Attorney",
       "bar_state": "NY",
-      "bar_number": "6285241",
-      "admitted_year": 2026,
+      "bar_number": "2591121",
+      "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09",
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/robert-j-greenstein/"
+    },
+    {
+      "name": "Allan W. Solow",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/allan-w-solow/",
+      "bar_number": "2679728",
+      "admitted_year": 1995,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
       "checked_at": "2026-09-09"
     }
   ],
@@ -225,7 +224,7 @@
     "Claim-tracking mobile app"
   ],
   "about": [
-    "Greenstein & Pittari, LLP is a New York personal injury firm with seven offices across Manhattan, the Bronx, Brooklyn, Queens, Staten Island, Yonkers and Long Island. The firm represents people injured in car, truck and motorcycle accidents, construction and workplace accidents, slip-and-falls, and cases of medical malpractice, nursing home abuse and police misconduct — always on a contingency basis, with no fees unless the case is won.",
+    "Greenstein & Pittari, LLP is a New York personal injury firm with seven offices across Manhattan, the Bronx, Brooklyn, Queens, Staten Island, Yonkers and Long Island. The firm represents people injured in car, truck and motorcycle accidents, construction and workplace accidents, slip-and-falls, and cases of medical malpractice, nursing home abuse and police misconduct, always on a contingency basis, with no fees unless the case is won.",
     "The firm places unusual emphasis on client access: attorneys visit clients in the hospital or at home, offer video consultations, commit to returning calls promptly, and provide a mobile app for tracking the status of an injury claim. Intake and representation are available in English and Spanish."
   ],
   "quote": {
@@ -258,7 +257,7 @@
     "google": {
       "rating": 4.9,
       "count_label": "1,013",
-      "source": "Google Business Profile via Places API — 7 listings, counts summed and rating weighted by count",
+      "source": "Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count",
       "fetched_at": "2026-09-09"
     },
     "quotes": [
@@ -341,6 +340,7 @@
       "measured_at": "2026-09-07"
     },
     "trust_pages": {
+      "attorney_bios": true,
       "privacy_policy": true,
       "disclaimer": true,
       "blog": true
@@ -357,46 +357,46 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "8 of 9 matched; 1 could not be matched — pending",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "evidence": "7 of 8 matched. 1 could not be matched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
       "checked_at": "2026-09-09"
     },
     "G2": {
       "pass": false,
-      "evidence": "1 of 9 attorneys unmatched — pending",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System — partial, pending",
+      "evidence": "1 of 8 attorneys unmatched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
       "checked_at": "2026-09-09"
     },
     "G3": {
       "pass": true,
-      "evidence": "LLP · 7 offices",
-      "source": "Firm website + SoS",
-      "checked_at": "2026-09-07"
+      "evidence": "GREENSTEIN & PITTARI, LLP is an active domestic registered limited liability partnership registered since 2003-12-01, with 7 Google-verified locations",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-09"
     },
     "G4": {
-      "pass": true,
-      "evidence": "None found",
-      "source": "AG / CourtListener / news",
-      "checked_at": "2026-09-07"
+      "pass": false,
+      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
+      "checked_at": "2026-09-09"
     },
     "G5": {
       "pass": true,
-      "evidence": "HTTPS · honest claims",
-      "source": "Crawl",
-      "checked_at": "2026-09-07"
+      "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-09"
     },
     "G6": {
       "pass": true,
-      "evidence": "400+ reviews",
-      "source": "Firm-reported Google count",
-      "checked_at": "2026-09-07"
+      "evidence": "1,013 public client reviews and 23 years since the entity was formed in 2003",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-09"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [
     {
       "q": "How much does Greenstein & Pittari charge?",
-      "a": "The firm works on a contingency fee — \"no fees until we win your injury case.\" In New York that is typically 33⅓% of the recovery for most personal injury matters; medical malpractice fees follow the statutory sliding scale. Confirm the fee agreement and how case expenses are handled at your free consultation."
+      "a": "The firm works on a contingency fee: \"no fees until we win your injury case.\" In New York that is typically 33⅓% of the recovery for most personal injury matters; medical malpractice fees follow the statutory sliding scale. Confirm the fee agreement and how case expenses are handled at your free consultation."
     },
     {
       "q": "Do they offer a free consultation?",
@@ -441,23 +441,23 @@
     }
   },
   "score": {
-    "total": 38,
+    "total": 68,
     "tier": "Under review",
-    "verdict": "2 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar B (0/20).",
+    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
       "A": {
-        "score": 10,
+        "score": 14,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 5,
+            "pts": 9,
             "max": 9,
             "source": "registry",
-            "evidence": "Mean 8.6 years since admission across 8 of 9 named attorneys (longest 32, shortest 0) · NYS Attorney Registration database"
+            "evidence": "Mean 17.0 years since admission across 7 of 8 named attorneys (longest 32, shortest 1) · NYS Attorney Registration database"
           },
           {
             "code": "A1",
@@ -525,7 +525,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "1,013 Google reviews · Google Business Profile via Places API — 7 listings, counts summed and rating weighted by count"
+            "evidence": "1,013 Google reviews · Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -630,17 +630,30 @@
         ]
       }
     },
-    "floor_abc": 20,
+    "floor_abc": 24,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 32,
-      "floor_met": false,
+      "gap": 2,
+      "floor_met": true,
+      "coverage_met": false,
       "path": [
-        "A1 Clean-record depth: +10 available",
-        "B1 Volume of verified results: +6 available",
-        "B2 Magnitude: +6 available"
+        "A1 Clean-record depth: not yet measured (10 pts)",
+        "B1 Volume of verified results: not yet measured (6 pts)",
+        "B2 Magnitude: not yet measured (6 pts)"
       ]
-    }
+    },
+    "raw": 41.5,
+    "assessed": 61,
+    "coverage": 0.61,
+    "floor_abc_pct": 0.904
+  },
+  "entity": {
+    "legal_name": "GREENSTEIN & PITTARI, LLP",
+    "entity_type": "DOMESTIC REGISTERED LIMITED LIABILITY PARTNERSHIP",
+    "dos_id": "2983403",
+    "formed": "2003-12-01",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-09-09"
   }
 }

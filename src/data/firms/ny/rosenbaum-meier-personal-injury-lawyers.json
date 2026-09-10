@@ -42,7 +42,123 @@
       "source_url": "https://maps.google.com/?cid=14455287636237069843&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Andrew G. Meier",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/andrew-g-meier/",
+      "bar_number": "5298971",
+      "admitted_year": 2014,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Edwin Kim",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/edwin-kim/",
+      "bar_number": "5871801",
+      "admitted_year": 2021,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "J. Kiefer Kirk",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/j-kiefer-kirk/",
+      "registry_status": "Not verified. Not found",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Nikki M. Muccio",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/nikki-m-muccio/",
+      "bar_number": "6190912",
+      "admitted_year": 2025,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Erica M. Martini",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/erica-martini/",
+      "bar_number": "5792718",
+      "admitted_year": 2020,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Gianni A. Tribuzio",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/gianni-a-tribuzio/",
+      "bar_number": "5358007",
+      "admitted_year": 2015,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Sara Hosseini",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/sara-hosseini/",
+      "bar_number": "6274989",
+      "admitted_year": 2025,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Vernett Hamilton-Hill",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/vernett-hamilton-hill/",
+      "registry_status": "Not verified. Not found",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Craig D. Rosenbaum",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/craig-d-rosenbaum/",
+      "bar_number": "2761997",
+      "admitted_year": 1996,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Jordan J. Nazarzadeh",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/jordan-j-nazarzadeh/",
+      "bar_number": "5393913",
+      "admitted_year": 2016,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-09"
+    },
+    {
+      "name": "Meran Hamid",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.rosenbaumnylaw.com/attorney/meran-hamid/",
+      "bar_number": "6311179",
+      "admitted_year": 2026,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-09"
+    }
+  ],
   "languages": [
     "English",
     "Español"
@@ -61,15 +177,16 @@
     "google": {
       "rating": 4.81,
       "count_label": "259",
-      "source": "Google Business Profile via Places API — 3 listings, counts summed and rating weighted by count",
+      "source": "Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count",
       "fetched_at": "2026-09-08"
     }
   },
   "results": [],
   "digital": {
     "trust_pages": {
-      "attorney_bios": true,
       "blog": true,
+      "fee_statement": true,
+      "attorney_bios": true,
       "privacy_policy": true,
       "disclaimer": true
     },
@@ -116,62 +233,62 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "Bar registry not yet checked for this firm's attorneys",
-      "source": "pending",
-      "checked_at": "2026-09-08"
+      "evidence": "9 of 11 matched. 2 could not be matched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "checked_at": "2026-09-09"
     },
     "G2": {
       "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
-      "checked_at": "2026-09-08"
+      "evidence": "2 of 11 attorneys unmatched, so this stays open",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "checked_at": "2026-09-09"
     },
     "G3": {
       "pass": false,
-      "evidence": "3 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "checked_at": "2026-09-09"
     },
     "G4": {
       "pass": false,
-      "evidence": "AG, FTC and court-sanction search not yet run",
-      "source": "pending",
-      "checked_at": "2026-09-08"
+      "evidence": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
+      "checked_at": "2026-09-09"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-08"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 11 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-09"
     },
     "G6": {
       "pass": false,
-      "evidence": "259 public reviews across 3 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "Time in operation not established",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "checked_at": "2026-09-09"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "fee_statement": "ction Accidents Get a free Consultation We offer free initial consultations and work on a contingency fee basis. You will owe no attorney’s fees unless and until we succeed in recovering comp",
   "score": {
-    "total": 26,
+    "total": 59,
     "tier": "Under review",
-    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar B (0/20).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 5,
             "max": 9,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "registry",
+            "evidence": "Mean 8.4 years since admission across 9 of 11 named attorneys (longest 30, shortest 0) · NYS Attorney Registration database"
           },
           {
             "code": "A1",
@@ -239,7 +356,7 @@
             "pts": 4,
             "max": 5,
             "source": "observed",
-            "evidence": "259 Google reviews · Google Business Profile via Places API — 3 listings, counts summed and rating weighted by count"
+            "evidence": "259 Google reviews · Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -276,16 +393,16 @@
         ]
       },
       "D": {
-        "score": 11,
+        "score": 12,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 2.0,
+            "pts": 3.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -344,17 +461,22 @@
         ]
       }
     },
-    "floor_abc": 9,
+    "floor_abc": 14,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 44,
-      "floor_met": false,
+      "gap": 11,
+      "floor_met": true,
+      "coverage_met": false,
       "path": [
-        "A1 Clean-record depth: +10 available",
-        "A2 Experience: +9 available",
-        "A5 Accountability: +6 available"
+        "A1 Clean-record depth: not yet measured (10 pts)",
+        "A5 Accountability: not yet measured (6 pts)",
+        "B1 Volume of verified results: not yet measured (6 pts)"
       ]
-    }
+    },
+    "raw": 32.5,
+    "assessed": 55,
+    "coverage": 0.55,
+    "floor_abc_pct": 0.7
   }
 }

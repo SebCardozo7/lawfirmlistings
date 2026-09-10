@@ -18,6 +18,10 @@ const certified = published
 // manifest, so publishing a guide puts it on the home page and nothing here can describe an
 // article that does not exist.
 const homeGuides = publishedGuides(published).slice(0, 3);
+// Sixteen state chips and an "All 50 states" link sat in the hero of a site that publishes
+// one city, three clicks from a /cities/ page saying "one city so far". That is not a dead
+// link, it is a claim of national coverage. The list comes from the collection now.
+const states = [...new Set(published.map(f => f.data.market.state_name))].sort();
 
 const lead = certified[0] ?? published[0] ?? null;
 const leadPrimary = lead?.data.practices.find(pr => pr.primary) ?? lead?.data.practices[0];
@@ -91,14 +95,14 @@ const searchIndex = {
 {/* The description is the snippet Google shows, so it says what the directory holds today.
     It read "top-rated law firms in 100 U.S. cities and every practice area" — one city, one
     practice area. */}
-<Base title="Law Firm Listings — Law Firms Verified, Not Advertised" description="Find and compare US law firms on verified evidence: licensure, disciplinary history, client reviews, case results and fee terms. No firm can pay to rank." nav="home">
+<Base title="Law Firm Listings: Law Firms Verified, Not Advertised" description="Find and compare US law firms on verified evidence: licensure, disciplinary history, client reviews, case results and fee terms. No firm can pay to rank." nav="home">
 <!-- HERO -->
 <section class="hero">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><span class="glow"></span><span class="noise"></span></div>
   <div class="container">
     {ratingAvg && <div class="trust-pill"><span class="avs"><i></i><i></i><i></i><i></i></span><span class="stars">{'★'.repeat(Math.round(ratingAvg))}</span><span><b>{ratingAvg.toFixed(2)}</b> · {reviewTotal.toLocaleString()} client reviews from Google Business Profiles</span></div>}
     <h1>The law firm directory built on <span class="grad-text">verification</span>, not advertising.</h1>
-    <p class="lede">Every firm here is checked for active licensure, clean disciplinary records and verified client outcomes — and no firm can pay to rank. {published.length} {published.length === 1 ? 'firm' : 'firms'} published so far, starting with personal injury in New York.</p>
+    <p class="lede">Every firm here is checked for active licensure, clean disciplinary records and verified client outcomes, and no firm can pay to rank. {published.length} {published.length === 1 ? 'firm' : 'firms'} published so far, starting with personal injury in New York.</p>
     <form class="search-panel" id="firm-search" action="/practice-areas/personal-injury/" method="get">
       <div class="search-field">
         <Icon name="search" />
@@ -162,12 +166,14 @@ const searchIndex = {
     });
   })();
 </script>
-    <div class="hero-popular"><span>Popular:</span><a href="/practice-areas/personal-injury/">Personal injury</a><a href="#">Divorce</a><a href="#">Criminal defense</a><a href="#">Immigration</a><a href="#">Estate planning</a></div>
+    <div class="hero-popular"><span>Popular:</span><a href="/cities/new-york-ny/personal-injury/">Personal injury</a>{['Divorce', 'Criminal defense', 'Immigration', 'Estate planning'].map(p => (
+        <span class="soon">{p}</span>
+      ))}</div>
 
     <div class="hero-preview" aria-hidden="true">
       {lead && (
         <div class="glass">
-          <div class="firm"><div class="avatar">{lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {leadHq?.label.split('—')[0].trim()}, {lead.data.market.state}</span></div></div>
+          <div class="firm"><div class="avatar">{lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {leadHq?.label.split(/[—(]/)[0].trim()}, {lead.data.market.state}</span></div></div>
           {leadGoogle && (
             <div class="stars">{'★'.repeat(Math.round(leadGoogle.rating))} <small>{leadGoogle.rating.toFixed(1)} · {leadGoogle.count_label} reviews{leadSelfReported ? ', as reported by the firm' : ''}</small></div>
           )}
@@ -193,7 +199,7 @@ const searchIndex = {
         {cityCounts.slice(0, 2).map(c => (
           <div class="row"><span>{c.label} <b class="num">{c.count}</b></span></div>
         ))}
-        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Updated <b>{lastUpdated ?? '—'}</b></span><span class="badge badge--live">● Live</span></div>
+        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Updated <b>{lastUpdated ?? 'not yet'}</b></span><span class="badge badge--live">● Live</span></div>
       </div>
     </div>
   </div>
@@ -203,7 +209,7 @@ const searchIndex = {
 <section class="section" style="border-top:0;padding-top:72px">
   <div class="container">
     <div class="section-head">
-      <div><span class="eyebrow">Start with your situation</span><h2 style="margin-top:12px">Tell us what happened. We'll show you who's certified to handle it.</h2><p>Most people don't know which kind of lawyer they need — they know what's going on in their life. Start there.</p></div>
+      <div><span class="eyebrow">Start with your situation</span><h2 style="margin-top:12px">Tell us what happened. We'll show you who's certified to handle it.</h2><p>Most people don't know which kind of lawyer they need. They know what is going on in their life. Start there.</p></div>
       
     </div>
     <div class="sit-grid">
@@ -227,7 +233,7 @@ const searchIndex = {
 <section class="section section--paper">
   <div class="container">
     <div class="section-head">
-      <div><span class="eyebrow">Certified firms near you</span><h2 style="margin-top:12px">Ranked city by city, not nationally.</h2><p>Licensure is checked against each state's bar, and rankings are built city by city — a top firm in Houston is ranked against Houston, not Boston.</p></div>
+      <div><span class="eyebrow">Certified firms near you</span><h2 style="margin-top:12px">Ranked city by city, not nationally.</h2><p>Licensure is checked against each state's bar, and rankings are built city by city, so a top firm in Houston is ranked against Houston and not against Boston.</p></div>
       
     </div>
     <div class="city-grid">
@@ -238,11 +244,12 @@ const searchIndex = {
       ))}
     </div>
     <div class="states">
-      <span class="lbl">Browse by state</span>
-      <div class="chips">
-        <a class="chip" href="#">California</a><a class="chip" href="#">Texas</a><a class="chip" href="#">Florida</a><a class="chip" href="#">New York</a><a class="chip" href="#">Illinois</a><a class="chip" href="#">Pennsylvania</a><a class="chip" href="#">Georgia</a><a class="chip" href="#">Arizona</a><a class="chip" href="#">New Jersey</a><a class="chip" href="#">Washington</a><a class="chip" href="#">Massachusetts</a><a class="chip" href="#">Colorado</a><a class="chip" href="#">All 50 states →</a>
+        <span class="lbl">Where we publish</span>
+        <div class="chips">
+          {states.map(st => <a class="chip" href="/cities/">{st}</a>)}
+          <span class="chip soon">Other states as the evidence is collected</span>
+        </div>
       </div>
-    </div>
   </div>
 </section>
 
@@ -261,7 +268,7 @@ const searchIndex = {
     <div class="cert-grid">
       <div>
         <span class="eyebrow">What "certified" means</span>
-        <h2 style="margin-top:14px">Most directories sell placement. We verify firms — and publish exactly how.</h2>
+        <h2 style="margin-top:14px">Most directories sell placement. We verify firms, and publish exactly how.</h2>
         <p class="lede" style="color:var(--on-night-soft);margin-top:18px">A firm earns the <b style="color:#fff">LFL Certified</b> badge only after four checks pass. It can't be bought, it's re-checked every month, and it's revoked the moment a public disciplinary action appears.</p>
         <div class="criteria" style="margin-top:28px">
           <div class="criterion"><Icon name="shield" /><div><b>1 · Licensure &amp; discipline</b><span>Every named attorney active with the state bar and free of public discipline for 10 years.</span></div></div>
@@ -269,19 +276,19 @@ const searchIndex = {
           <div class="criterion"><Icon name="star" /><div><b>3 · Client experience</b><span>25+ verified client reviews with a 4.5 average, weighted for recency and detail.</span></div></div>
           <div class="criterion"><Icon name="users" /><div><b>4 · Peer recognition</b><span>Confidential evaluations from attorneys in the same market and practice area.</span></div></div>
         </div>
-        <a class="btn btn--white" href="#" style="margin-top:28px">Read the full methodology</a>
+        <a class="btn btn--white" href="/methodology/" style="margin-top:28px">Read the full methodology</a>
       </div>
       <div class="compare-wrap">
         <table class="compare">
           <thead><tr><th>What you get</th><th class="us">Law Firm Listings</th><th>Paid directories</th><th>Search &amp; reviews</th></tr></thead>
           <tbody>
-            <tr><td>Bar licensure checked for every attorney</td><td class="us"><Icon name="check" /></td><td>—</td><td>—</td></tr>
-            <tr><td>Disciplinary history screened</td><td class="us"><Icon name="check" /></td><td>—</td><td>—</td></tr>
-            <tr><td>Case results verified against records</td><td class="us"><Icon name="check" /></td><td>Self-reported</td><td>—</td></tr>
+            <tr><td>Bar licensure checked for every attorney</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
+            <tr><td>Disciplinary history screened</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
+            <tr><td>Case results verified against records</td><td class="us"><Icon name="check" /></td><td>Self-reported</td><td>No</td></tr>
             <tr><td>Firms can pay to rank higher</td><td class="us">Never</td><td>Yes</td><td>Ads</td></tr>
-            <tr><td>Ranked against local competitors</td><td class="us"><Icon name="check" /></td><td>Partial</td><td>—</td></tr>
-            <tr><td>Fee model &amp; free-consult shown up front</td><td class="us"><Icon name="check" /></td><td>Sometimes</td><td>—</td></tr>
-            <tr><td>Re-verified</td><td class="us">Monthly</td><td>Annually</td><td>—</td></tr>
+            <tr><td>Ranked against local competitors</td><td class="us"><Icon name="check" /></td><td>Partial</td><td>No</td></tr>
+            <tr><td>Fee model &amp; free-consult shown up front</td><td class="us"><Icon name="check" /></td><td>Sometimes</td><td>No</td></tr>
+            <tr><td>Re-verified</td><td class="us">Monthly</td><td>Annually</td><td>Never</td></tr>
           </tbody>
         </table>
       </div>
@@ -328,9 +335,9 @@ const searchIndex = {
       <div><span class="eyebrow">How it works</span><h2 style="margin-top:12px">From "what do I do now?" to a booked consultation</h2><p>No account, no forms sold to lead brokers. You choose who to contact, and the firm hears from you directly.</p></div>
     </div>
     <div class="steps">
-      <div class="step"><h3>Describe your situation</h3><p>Pick what's happening and your city. Or just search — "rear-ended on the BQE" works as well as "car accident lawyer".</p></div>
+      <div class="step"><h3>Describe your situation</h3><p>Pick what's happening and your city. Or just search. "Rear-ended on the BQE" works as well as "car accident lawyer".</p></div>
       <div class="step"><h3>Compare certified firms</h3><p>Ratings, fee model, verified results, languages and consultation availability, side by side and in plain English.</p></div>
-      <div class="step"><h3>Talk to the firm — free</h3><p>Request a consultation directly.{freeConsultShare !== null && <> {freeConsultShare}% of the firms published here offer the first call free.</>} None of them pays us a referral fee.</p></div>
+      <div class="step"><h3>Talk to the firm, free</h3><p>Request a consultation directly.{freeConsultShare !== null && <> {freeConsultShare}% of the firms published here offer the first call free.</>} None of them pays us a referral fee.</p></div>
     </div>
   </div>
 </section>
@@ -368,9 +375,9 @@ const searchIndex = {
     <div><span class="eyebrow">Questions people ask first</span><h2 style="margin-top:14px">Before you hire anyone</h2><p style="margin-top:14px;max-width:38ch">Short answers to the questions we hear most. Every guide is reviewed by a licensed attorney in the relevant state.</p><a class="link" href="/guides/" style="margin-top:20px">Browse all guides</a></div>
     <div class="faq">
       <details open><summary>How much does a lawyer cost?</summary><div>It depends on the matter. Personal injury firms almost always work on contingency (typically 33⅓%, nothing up front). Divorce, criminal defense and business work are usually hourly ($250–$1,200) or flat-fee. Every profile shows the fee model before you call.</div></details>
-      <details><summary>Is a "certified" firm better than a highly rated one?</summary><div>Ratings tell you how clients felt. Certification tells you the attorneys are licensed, undisciplined and have results we could verify. The best firms have both — and our rankings weight them together.</div></details>
+      <details><summary>Is a "certified" firm better than a highly rated one?</summary><div>Ratings tell you how clients felt. Certification tells you the attorneys are licensed, undisciplined and have results we could verify. The best firms have both, and our rankings weight them together.</div></details>
       <details><summary>Do law firms pay to be listed here?</summary><div>No. Being listed is free, and so is claiming your profile to keep its information current. The Certification Score, the eligibility gates and the tier cannot be bought or edited by anyone, including a firm that manages its own profile. Firms may buy optional tools and clearly labeled sponsored placements; neither appears inside a ranked list.</div></details>
-      <details><summary>What happens when I request a consultation?</summary><div>Your message goes straight to the firm — we don't sell it to other lawyers and we take no referral fee.{freeConsultShare !== null && <> {freeConsultShare}% of the firms published here offer the first consultation free.</>} How quickly a firm replies is up to the firm; we do not measure it yet, so we do not promise it.</div></details>
+      <details><summary>What happens when I request a consultation?</summary><div>Your message goes straight to the firm. We do not sell it to other lawyers and we take no referral fee.{freeConsultShare !== null && <> {freeConsultShare}% of the firms published here offer the first consultation free.</>} How quickly a firm replies is up to the firm; we do not measure it yet, so we do not promise it.</div></details>
       <details><summary>What if a firm loses its certification?</summary><div>If a public disciplinary action appears or verified reviews fall below our threshold, the badge is removed within 30 days and the firm drops out of ranked lists until it re-qualifies.</div></details>
     </div>
   </div>
@@ -384,13 +391,13 @@ const searchIndex = {
         <span class="eyebrow">For law firms</span>
         <h2 style="margin-top:14px">Is your firm eligible for certification?</h2>
         <p class="lede" style="margin-top:14px">Certification is free and earned, never purchased. Claim your profile to submit verified results, respond to reviews and appear in city and practice-area rankings.</p>
-        <div class="actions"><a class="btn btn--ink" href="#">Claim your firm profile</a><a class="btn btn--ghost" href="/methodology/">See certification criteria</a></div>
+        <div class="actions"><a class="btn btn--ink" href="/contact/">Ask us to claim your profile</a><a class="btn btn--ghost" href="/methodology/">See certification criteria</a></div>
       </div>
       <ul>
         <li><Icon name="check" /><span>Free, permanent profile with verified badge</span></li>
         <li><Icon name="check" /><span>Featured in monthly "Recently certified" rankings</span></li>
         <li><Icon name="check" /><span>Structured data for Google &amp; AI search visibility</span></li>
-        <li><Icon name="check" /><span>Direct consultation requests — no referral fees</span></li>
+        <li><Icon name="check" /><span>Direct consultation requests, with no referral fees</span></li>
       </ul>
     </div>
   </div>

@@ -769,3 +769,14 @@ button,input,select{font:inherit;color:inherit}
 .dg .pill{display:inline-block;margin-top:10px;font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--tint);color:var(--ink)}
 .dg .pill.good{background:#E7F7EF;color:var(--success)}.dg .pill.warn{background:#FEF3DC;color:#9A6700}.dg .pill.bad{background:#FDE8E8;color:#B42318}
 @media (max-width:960px){.sc-top{grid-template-columns:1fr;justify-items:start}.sc-row{grid-template-columns:1fr 56px}.sc-row .ev{grid-column:1/-1;text-align:left}.sc-gates{grid-template-columns:repeat(3,1fr)}.sc-gate:nth-child(4){border-left:0}.sc-gate:nth-child(n+4){border-top:1px solid var(--night-line)}.sc-pillar summary{grid-template-columns:36px 1fr 80px}.sc-pillar .bar{display:none}.sc-sub{padding-left:32px}.digital-grid{grid-template-columns:1fr 1fr}}
+
+/* Verified: the gates were checked and held. A different badge from Certified on purpose,
+   because it is a different and weaker claim, so it must not borrow the gold. */
+.badge--verified{background:rgba(94,234,212,.16);color:#0f766e;border:1px solid rgba(15,118,110,.28)}
+.on-night .badge--verified,.panel--ink .badge--verified,.tier--night .badge--verified,.sc-head .badge--verified{background:rgba(94,234,212,.2);color:#5eead4;border-color:rgba(94,234,212,.4)}
+
+/* Coverage sits with the score, never apart from it. */
+.sc-coverage{display:block;margin:6px 0 2px;font-size:.78rem;line-height:1.5;color:var(--on-night-soft);max-width:52ch}
+
+/* A practice area we have not opened a page for: named, not linked. */
+.pa.is-soon{opacity:.62;cursor:default}

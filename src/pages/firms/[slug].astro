@@ -24,20 +24,22 @@ const ai = ah?.ai_citations;
 const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
 const verifiedLicences = d.attorneys.filter(a => a.bar_number).length;
+// Practice areas that have a page of their own. Everything else is named, not linked.
+const PRACTICE_PAGES = new Set(['personal-injury']);
 // The link attribute is editorial, not commercial: clearing every eligibility gate earns a
 // followed link. Claiming the profile does not change it, and neither does paying for anything —
 // selling followed links is a link scheme and the penalty would land on this site.
 const gateList = Object.values(d.gates ?? {});
 const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
 const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
-const title = `${d.name} — ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
+const title = `${d.name}: ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
 // Built with fitDescription because the length is not knowable here: firm names in this cohort
 // run from 14 to 71 characters, and the longest already sat one character under the limit. The
 // clauses are ordered so a long name loses the tail rather than the subject.
 // No counts here either: offices, attorneys and the score all change. The stable keywords are
 // the firm, its practice and its city, which is also what someone searching for it types.
 const description = fitDescription(
-  `${d.name} — ${(primary[0]?.name ?? d.practices[0]?.name ?? 'law').toLowerCase()} firm in ${d.market.city}, ${d.market.state}.`,
+  `${d.name}, ${(primary[0]?.name ?? d.practices[0]?.name ?? 'law').toLowerCase()} firm in ${d.market.city}, ${d.market.state}.`,
   'Offices, attorneys, reviews and fee terms.',
   'Each value shows its source and date.');
 const schema = {
@@ -101,7 +103,7 @@ const schema = {
         <h2>About {d.name.replace(/,? (LLP|LLC|P\.C\.|PC|PLLC)$/, '')}</h2>
         <div class="prose">
           <p>{d.about[0]}</p>
-          {d.quote && <blockquote>“{d.quote.text}”<br /><small class="muted" style="font-weight:400;font-size:.9rem">— {d.quote.attribution}</small></blockquote>}
+          {d.quote && <blockquote>“{d.quote.text}”<br /><small class="muted" style="font-weight:400;font-size:.9rem">{d.quote.attribution}</small></blockquote>}
           {d.about.slice(1).map(p => <p>{p}</p>)}
         </div>
         {d.highlights.length > 0 && <div class="highlights">{d.highlights.map(h => <div class="hl"><Icon name={h.icon} /><div><b>{h.title}</b>{h.text}</div></div>)}</div>}
@@ -119,7 +121,7 @@ const schema = {
           <div class="dg"><span class="k">Domain authority</span><div class="v">{ah.dr}<small>· {drPct}th percentile</small></div><div class="s">{ah.refdomains.toLocaleString()} ref. domains · cohort median {drMedian} · Ahrefs rank {(ah.ahrefs_rank/1e6).toFixed(1)}M</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>
           {ai && <div class="dg"><span class="k">AI-search citations</span><div class="v">{ai.total}<small>· {ai.pages} pages</small></div><div class="s">{Object.entries(ai.by_platform).map(([k,v]) => `${platformNames[k] ?? k} ${v}`).join(' · ')}</div><span class="pill good">Observed · Ahrefs, {ah.measured_at}</span></div>}
           {d.digital.trust_pages && <div class="dg"><span class="k">Trust pages</span><div class="v">{Object.values(d.digital.trust_pages).filter(Boolean).length} / {Object.keys(d.digital.trust_pages).length}</div><div class="s">{Object.entries(d.digital.trust_pages).map(([k,v]) => v ? k.replace(/_/g,' ') : `✕ ${k.replace(/_/g,' ')}`).join(' · ')}</div><span class="pill good">Observed</span></div>}
-          <div class="dg"><span class="k">Core Web Vitals</span><div class="v">{d.digital.psi ? (d.digital.psi.value.cwv_pass ? 'Pass' : 'Fail') : '—'}<small>mobile</small></div><div class="s">{d.digital.psi ? `Performance ${d.digital.psi.value.performance}` : 'PageSpeed Insights measurement pending'}</div><span class={`pill ${d.digital.psi ? 'good' : ''}`}>{d.digital.psi ? `Observed · PSI, ${d.digital.psi.measured_at}` : 'Pending'}</span></div>
+          <div class="dg"><span class="k">Core Web Vitals</span><div class="v">{d.digital.psi ? (d.digital.psi.value.cwv_pass ? 'Pass' : 'Fail') : 'Not measured'}<small>mobile</small></div><div class="s">{d.digital.psi ? `Performance ${d.digital.psi.value.performance}` : 'PageSpeed Insights measurement pending'}</div><span class={`pill ${d.digital.psi ? 'good' : ''}`}>{d.digital.psi ? `Observed · PSI, ${d.digital.psi.measured_at}` : 'Pending'}</span></div>
         </div>
         </>
         )}
@@ -128,13 +130,21 @@ const schema = {
 
       <div class="block" id="practice">
         <h2>Practice areas <small>{d.practices.length} areas · primary focus highlighted</small></h2>
-        <div class="pa-grid">{d.practices.map(p => <a class={`pa ${p.primary ? 'is-primary' : ''}`} href={p.slug === 'personal-injury' ? '/practice-areas/personal-injury/' : '#'}><Icon name="check" />{p.name}</a>)}</div>
+        {/* An area with a page is a link; an area without one is not. Fourteen of these on a
+            single profile pointed at "#", which reads to a screen reader as a link that goes
+            nowhere and to a search engine as a page we forgot to build. The tag still names what
+            the firm does, which is the information a reader came for. */}
+        <div class="pa-grid">{d.practices.map(p => (
+          PRACTICE_PAGES.has(p.slug)
+            ? <a class={`pa ${p.primary ? 'is-primary' : ''}`} href={`/practice-areas/${p.slug}/`}><Icon name="check" />{p.name}</a>
+            : <span class={`pa is-soon ${p.primary ? 'is-primary' : ''}`}><Icon name="check" />{p.name}</span>
+        ))}</div>
       </div>
 
       <div class="block" id="results">
         <h2>Case results <small>Only results verified against court records or documentation show amounts</small></h2>
         <div class="results">
-          {d.results.map(r => <div class="result"><div class="amt">{r.verified && r.amount ? r.amount : '$—'}<small>{r.type}</small></div><div><b>{r.title}</b><p>{r.description}</p></div><span class={`badge ${r.verified ? 'badge--certified' : 'badge--tier'}`}>{r.verified ? 'Verified' : 'Pending verification'}</span></div>)}
+          {d.results.map(r => <div class="result"><div class="amt">{r.verified && r.amount ? r.amount : 'Not verified'}<small>{r.type}</small></div><div><b>{r.title}</b><p>{r.description}</p></div><span class={`badge ${r.verified ? 'badge--certified' : 'badge--tier'}`}>{r.verified ? 'Verified' : 'Pending verification'}</span></div>)}
         </div>
         <p class="muted" style="font-size:.86rem;margin-top:12px">Results are specific to their facts and do not guarantee similar outcomes. Firms submit results through their claimed profile; only results we can substantiate are published with amounts.</p>
       </div>
@@ -212,7 +222,7 @@ const schema = {
         {d.claimed ? (
           <>
             <h4>Managed by the firm</h4>
-            <p class="muted" style="font-size:.92rem">{d.name} confirmed it owns this page on {d.claimed.claimed_at} and keeps its own details up to date. Claiming is free and does not affect the Certification Score, the eligibility gates or the tier — those stay ours to measure.</p>
+            <p class="muted" style="font-size:.92rem">{d.name} confirmed it owns this page on {d.claimed.claimed_at} and keeps its own details up to date. Claiming is free and does not affect the Certification Score, the eligibility gates or the tier. Those stay ours to measure.</p>
           </>
         ) : (
           <>

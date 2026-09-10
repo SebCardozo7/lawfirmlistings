@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { SITE, mailto } from '../data/site';
 
 const title = 'Contact Law Firm Listings';
-const description = 'One address for corrections, score appeals, profile claims and privacy requests — with what to include in each.';
+const description = 'One address for corrections, score appeals, profile claims and privacy requests, with what to include in each.';
 
 // One inbox, four reasons. Each link pre-fills a subject so a single mailbox can still be
 // triaged, which is the point of centralising rather than paying per address.
@@ -16,12 +16,12 @@ const reasons = [
   {
     subject: 'Score appeal',
     heading: 'You disagree with a score',
-    body: 'A firm can appeal its Certification Score, and the methodology commits us to reviewing an appeal within 30 days. Say which sub-factor you are appealing and what evidence you would like weighed — a docket, a filing, a policy page we missed.',
+    body: 'A firm can appeal its Certification Score, and the methodology commits us to reviewing an appeal within 30 days. Say which sub-factor you are appealing and what evidence you would like weighed: a docket, a filing, a policy page we missed.',
   },
   {
     subject: 'Claim profile',
     heading: 'You want to manage your firm’s profile',
-    body: 'Claiming is free. It lets a firm keep its offices, phone, practice areas, languages and fee terms current, and submit case results with a docket for verification. It does not affect the score, the eligibility gates or the tier — those stay ours to measure. Write from an address at the firm’s own domain so we can tell it is you.',
+    body: 'Claiming is free. It lets a firm keep its offices, phone, practice areas, languages and fee terms current, and submit case results with a docket for verification. It does not affect the score, the eligibility gates or the tier. Those stay ours to measure. Write from an address at the firm’s own domain so we can tell it is you.',
   },
   {
     subject: 'Privacy request',
@@ -55,16 +55,16 @@ const reasons = [
           <>
             <h2>{r.heading}</h2>
             <p>{r.body}</p>
-            <p><a href={mailto(r.subject)}>{SITE.email}</a> — subject <b>{r.subject}</b></p>
+            <p><a href={mailto(r.subject)}>{SITE.email}</a>, subject <b>{r.subject}</b></p>
           </>
         ))}
       </>
     ) : (
-      <div class="callout"><b>Our contact channel is being set up.</b> Rather than publish an address that bounces, this page will carry it once the mailbox is live. If you are a firm that needs a profile corrected before then, the correction will still be applied — the delay is ours, not yours.</div>
+      <div class="callout"><b>Our contact channel is being set up.</b> Rather than publish an address that bounces, this page will carry it once the mailbox is live. If you are a firm that needs a profile corrected before then, the correction will still be applied. The delay is ours, not yours.</div>
     )}
 
     <h2>What we cannot help with</h2>
-    <p>We are not a law firm. We do not give legal advice, review your case, or refer you to a lawyer. If you need advice about a legal matter, contact a licensed attorney directly — the firms in this directory publish their own phone numbers on their profiles, and most state bar associations run a referral service.</p>
+    <p>We are not a law firm. We do not give legal advice, review your case, or refer you to a lawyer. If you need advice about a legal matter, contact a licensed attorney directly. The firms in this directory publish their own phone numbers on their profiles, and most state bar associations run a referral service.</p>
     <p>We also cannot take a firm’s payment to change a score, a gate or a tier. That is not a policy we bend for anyone; it is the reason the score is worth anything. See <a href="/about/">how we make money</a>.</p>
 
   </div>

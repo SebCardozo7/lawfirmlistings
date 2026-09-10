@@ -43,7 +43,18 @@ SUBS = {  # code: (pillar, label, max)
  "E1": ("E", "Free consult & fee transparency", 4), "E3": ("E", "Languages & accessibility", 3), "E4": ("E", "Availability", 3),
 }
 PILLAR_MAX = {"A": 25, "B": 20, "C": 20, "D": 25, "E": 10}
-TIERS = [("Elite", 93, 55), ("Distinguished", 85, 50), ("Certified", 70, 40)]
+# Thresholds are percentages now, of what we could actually assess. The absolute floors the
+# methodology set, 40, 50 and 55 out of the 65 points in pillars A, B and C, carry across as
+# the same proportions.
+TIERS = [("Elite", 93, 55 / 65), ("Distinguished", 85, 50 / 65), ("Certified", 70, 40 / 65)]
+
+# A normalised score is only meaningful over enough of the scale, and is trivially gamed
+# otherwise: a firm with nothing assessed but pillar E could score 90% of it. Certification
+# therefore needs a real share of the whole scale assessed, and needs pillars A, B and C to
+# have been looked at rather than skipped, since those three carry what the certification
+# actually claims. Below that a firm can still be Verified, which is a claim about the gates.
+MIN_COVERAGE = 0.60
+MIN_PILLAR_COVERAGE = 0.50
 
 def review_count(google):
     """count_label is a label, not a number: "1,776" and "400+" both have to parse."""
@@ -248,8 +259,31 @@ def compute(firm):
     for s in out:
         pillars[SUBS[s["code"]][0]]["subs"].append(s); pillars[SUBS[s["code"]][0]]["score"] += s["pts"]
     for p in pillars: pillars[p]["score"] = round(pillars[p]["score"])
-    total = sum(pillars[p]["score"] for p in pillars)
-    abc = pillars["A"]["score"] + pillars["B"]["score"] + pillars["C"]["score"]
+    raw = sum(pillars[p]["score"] for p in pillars)
+
+    # The score is a percentage of what we could assess, not of a hundred points most of
+    # which we have never looked at. Before this, every firm scored zero on all four of
+    # pillar B, not because it has no verified outcomes but because we have no court-records
+    # pipeline. That measured our own coverage and published it as the firm's result, which
+    # put the A+B+C floor of 40 out of 65 arithmetically out of reach for everyone and left a
+    # certification nobody could earn.
+    def spread(codes):
+        earned = assessable = 0.0
+        for pk in codes:
+            for x in pillars[pk]["subs"]:
+                if x["source"] != "pending":
+                    earned += x["pts"]; assessable += x["max"]
+        return earned, assessable
+
+    earned_all, assessed_all = spread(PILLAR_MAX)
+    earned_abc, assessed_abc = spread("ABC")
+    total = round(100 * earned_all / assessed_all) if assessed_all else 0
+    abc_pct = (earned_abc / assessed_abc) if assessed_abc else 0.0
+    coverage = assessed_all / sum(PILLAR_MAX.values())
+    pillar_cover = {pk: (spread(pk)[1] / PILLAR_MAX[pk]) for pk in PILLAR_MAX}
+    coverage_ok = (coverage >= MIN_COVERAGE
+                   and all(pillar_cover[pk] >= MIN_PILLAR_COVERAGE for pk in "ABC"))
+    abc = round(earned_abc)
     # A gate has three real states, not two. "Not eligible" is a finding — the firm failed a
     # documented check — while a gate we have not run yet says nothing about the firm. Calling
     # the second one "Not eligible" publishes a false statement about a real business, so an
@@ -261,26 +295,52 @@ def compute(firm):
     pending_gates = [k for k, g in gates.items() if unchecked(g)]
     failed_gates = [k for k, g in gates.items() if not g["pass"] and not unchecked(g)]
     gates_ok = len(gates) == 6 and not pending_gates and not failed_gates
+    # Clearing all six gates is itself a finding worth publishing. It says licensure,
+    # discipline, entity, offices, website and footprint were checked and held, which is the
+    # part that protects a client, and it claims nothing about the score. Without a rung here
+    # the ladder ran straight from "listed" to a tier no firm could reach.
     tier = ("Not eligible" if failed_gates
             else "Under review" if pending_gates or len(gates) != 6
-            else "Listed")
-    for name, need, floor in TIERS:
-        if gates_ok and total >= need and abc >= floor: tier = name; break
+            else "Verified")
+    if gates_ok and coverage_ok:
+        for name, need, floor in TIERS:
+            if total >= need and abc_pct >= floor: tier = name; break
     nxt = None
     for name, need, floor in reversed(TIERS):
-        if total < need or abc < floor:
+        if total < need or abc_pct < floor or not coverage_ok:
             path = []
-            weakest = sorted([s for s in out if s["pts"] < s["max"]], key=lambda s: s["max"] - s["pts"], reverse=True)[:3]
+            if not coverage_ok:
+                # Naming the unmeasured pillars first, because that is the actual blocker and
+                # a firm reading its own card should not be sent chasing points that cannot
+                # lift it past a coverage requirement.
+                pend = sorted([x for x in out if x["source"] == "pending"],
+                              key=lambda x: -x["max"])[:3]
+                for x in pend:
+                    path.append(f"{x['code']} {x['label']}: not yet measured ({x['max']} pts)")
+            weakest = sorted([s for s in out if s["source"] != "pending" and s["pts"] < s["max"]],
+                             key=lambda s: s["max"] - s["pts"], reverse=True)[:3 - len(path)]
             for s in weakest: path.append(f"{s['code']} {s['label']}: +{round(s['max']-s['pts'],1)} available")
-            nxt = {"name": name, "needed": need, "gap": max(0, need - total), "floor_met": abc >= floor, "path": path}; break
+            nxt = {"name": name, "needed": need, "gap": max(0, need - total),
+                   "floor_met": abc_pct >= floor, "coverage_met": coverage_ok,
+                   "path": path}; break
     lowest = min(pillars, key=lambda p: pillars[p]["score"] / pillars[p]["max"])
+    short = [pk for pk in "ABC" if pillar_cover[pk] < MIN_PILLAR_COVERAGE]
+    coverage_note = ""
+    if not coverage_ok:
+        listed = (" and ".join(short) if len(short) < 3
+                  else ", ".join(short[:-1]) + " and " + short[-1])
+        coverage_note = ("Certification needs more of the scale measured than we have managed "
+                         "here" + (f", pillar{'s' if len(short) > 1 else ''} {listed} "
+                                   f"in particular" if short else "") + ". ")
     verdict = ("All six eligibility gates passed. " if gates_ok
                else f"Eligibility gates not passed: {', '.join(sorted(failed_gates))}. " if failed_gates
-               else f"{len(pending_gates) or 6 - len(gates)} eligibility gate(s) still to be checked; "
-                    "this firm has not been scored yet. ") + \
+               else f"{len(pending_gates) or 6 - len(gates)} eligibility gate(s) still to be checked. ") + \
+              coverage_note + \
               f"Strongest pillar: {max(pillars, key=lambda p: pillars[p]['score']/pillars[p]['max'])}; most headroom in pillar {lowest} ({pillars[lowest]['score']}/{pillars[lowest]['max']})."
     return {"total": total, "tier": tier, "verdict": verdict, "computed_at": TODAY, "methodology": METHOD,
-            "pillars": pillars, "floor_abc": abc, "next_tier": nxt}
+            "pillars": pillars, "floor_abc": abc, "next_tier": nxt,
+            "raw": round(earned_all, 1), "assessed": round(assessed_all),
+            "coverage": round(coverage, 3), "floor_abc_pct": round(abc_pct, 3)}
 
 def main():
     errors = []
@@ -299,6 +359,7 @@ def main():
         # this, and nothing outside the engine writes it.
         was = firm.get("status")
         firm["status"] = ("certified" if score["tier"] in ("Certified", "Distinguished", "Elite")
+                          else "verified" if score["tier"] == "Verified"
                           else "not_eligible" if score["tier"] == "Not eligible"
                           else "listed")
         if was != firm["status"]:

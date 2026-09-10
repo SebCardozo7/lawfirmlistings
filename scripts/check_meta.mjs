@@ -11,6 +11,11 @@
  *   - a duplicate title or description, which makes two pages compete for the same result
  *   - a volatile figure in either: a count that changes whenever a firm is added means the
  *     snippet Google has indexed is wrong more often than it is right
+ *   - an em dash anywhere in the rendered copy, which is a house rule: it is the clearest tell
+ *     of machine-written prose, and this site's whole proposition is that a person is
+ *     accountable for what it publishes. En dashes in numeric ranges (70-84) are correct
+ *     typography and are left alone, as is text inside a blockquote, since altering the
+ *     punctuation of words attributed to a named person is not ours to do.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
@@ -41,6 +46,7 @@ const attr = (html, re) => {
 const pages = walk(DIST).map(p => {
   const html = readFileSync(p, 'utf8');
   return {
+    path: p,
     url: ('/' + relative(DIST, p).split(sep).join('/')).replace(/\/index\.html$/, '/'),
     title: attr(html, /<title>([\s\S]*?)<\/title>/),
     description: attr(html, /<meta name="description" content="([\s\S]*?)"/),
@@ -51,6 +57,20 @@ const pages = walk(DIST).map(p => {
 const problems = [];
 const seenTitle = new Map();
 const seenDesc = new Map();
+
+// Em dashes in rendered copy. Blockquotes are exempt: a pull quote is someone else's sentence.
+for (const { url, path } of pages) {
+  const html = readFileSync(path, 'utf8')
+    .replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '')
+    .replace(/<blockquote[\s\S]*?<\/blockquote>/g, '');
+  const dashes = (html.match(/—/g) || []).length;
+  if (dashes) {
+    const text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+    const where = [...text.matchAll(/—/g)].slice(0, 3)
+      .map(m => text.slice(Math.max(0, m.index - 45), m.index + 45).trim());
+    problems.push([url, `${dashes} em dash${dashes === 1 ? '' : 'es'} in copy: ${where.join(' | ')}`]);
+  }
+}
 
 for (const { url, title, description, noindex } of pages) {
   if (!title) problems.push([url, 'no title']);

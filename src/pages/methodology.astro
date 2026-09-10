@@ -5,7 +5,7 @@ import Scorecard from '../components/Scorecard.astro';
 import { getCollection } from 'astro:content';
 const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-pittari-llp')!;
 ---
-<Base title="LFL Certified™ Methodology — How the Certification Score Works" description="The 0–100 LFL Certification Score explained: six eligibility gates, five weighted pillars, tiers and monthly re-verification. No firm can pay for a point." nav="method">
+<Base title="LFL Certified™ Methodology: How the Certification Score Works" description="The 0–100 LFL Certification Score explained: six eligibility gates, five weighted pillars, tiers and monthly re-verification. No firm can pay for a point." nav="method">
 <section class="page-hero method-hero on-night">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <div class="container">
@@ -13,7 +13,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
       <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Methodology</li></ol>
       <span class="eyebrow">Our Methodology · LFL Certified™ v1.1</span>
       <h1>The score behind the badge.</h1>
-      <p class="lede">Every certified firm earns a 0–100 Certification Score from verifiable evidence: licensure and discipline records, court-confirmed outcomes, authenticated client reviews, published fee and access terms — and the quality and authority of its digital presence. No firm can pay for a point. Here is exactly how it works.</p>
+      <p class="lede">Every certified firm earns a 0–100 Certification Score from verifiable evidence: licensure and discipline records, court-confirmed outcomes, authenticated client reviews, published fee and access terms, and the quality and authority of its digital presence. No firm can pay for a point. Here is exactly how it works.</p>
       <div class="chips on-night" style="margin-top:24px"><a class="chip" href="#gates">Eligibility gates</a><a class="chip" href="#pillars">Five pillars</a><a class="chip" href="#digital">Digital presence</a><a class="chip" href="#tiers">Tiers</a><a class="chip" href="#cadence">Re-verification</a><a class="chip" href="#independence">Independence</a></div>
     </div>
     <div class="glass" style="padding:28px">
@@ -35,7 +35,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
   <div class="container">
     <div class="section-head"><div><span class="eyebrow">Design principles</span><h2 style="margin-top:12px">Gates before points. Evidence before claims. Local before national.</h2></div></div>
     <div class="steps">
-      <div class="step"><h3>Gates before points</h3><p>Licensure, discipline, identity and consumer-protection checks are pass/fail. A suspended partner is not a deduction — it's a zero. Only firms that pass every gate are scored at all.</p></div>
+      <div class="step"><h3>Gates before points</h3><p>Licensure, discipline, identity and consumer-protection checks are pass/fail. A suspended partner is not a deduction. It is a zero. Only firms that pass every gate are scored at all.</p></div>
       <div class="step"><h3>Evidence before claims</h3><p>Court records, bar registries and API-sourced reviews outrank anything a firm tells us about itself. Self-reported "$1B recovered" totals score nothing until we can confirm them.</p></div>
       <div class="step"><h3>Local before national</h3><p>Outcomes, review volume and search authority are compared within the firm's state and practice area, so a strong firm in Tulsa is measured against Tulsa, not Manhattan.</p></div>
     </div>
@@ -44,12 +44,12 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
 
 <section class="section section--paper" id="gates">
   <div class="container">
-    <div class="section-head"><div><span class="eyebrow">Layer 0</span><h2 style="margin-top:12px">Six eligibility gates every firm must pass</h2><p>Fail one and the firm is listed with a neutral profile but cannot be certified — regardless of reviews, results or website.</p></div></div>
+    <div class="section-head"><div><span class="eyebrow">Layer 0</span><h2 style="margin-top:12px">Six eligibility gates every firm must pass</h2><p>Fail one and the firm is listed with a neutral profile but cannot be certified, regardless of reviews, results or website.</p></div></div>
     <div class="gates">
       <div class="gate"><span class="k">G1</span><b>Active licensure</b><span>Every attorney named on the firm's site holds an active license in each state of practice.</span><span class="src">State bar &amp; court attorney registries (50 states + DC)</span></div>
-      <div class="gate"><span class="k">G2</span><b>Clean public discipline</b><span>No disbarment, suspension or public censure of any current attorney in the last 10 years. Older discipline is disclosed on the profile.</span><span class="src">State disciplinary databases · ABA National Lawyer Regulatory Data Bank</span></div>
-      <div class="gate"><span class="k">G3</span><b>Verified entity &amp; office</b><span>Registered legal entity and at least one confirmed physical office — no virtual-office-only listings.</span><span class="src">Secretary of State · GBP verification · postcard/phone check</span></div>
-      <div class="gate"><span class="k">G4</span><b>No consumer-protection actions</b><span>No active state Attorney General, FTC or court sanction for client-related misconduct.</span><span class="src">AG releases · PACER / CourtListener · news monitoring</span></div>
+      <div class="gate"><span class="k">G2</span><b>Clean public discipline</b><span>No current attorney carries a disciplinary status on the public register: disbarred, suspended, or resigned for disciplinary reasons. Those statuses persist, so the check reaches back years, but it will not show a censure or a suspension since lifted. We say which firms this has been run for.</span><span class="src">NYS Attorney Registration database (Department of State open data), per attorney</span></div>
+      <div class="gate"><span class="k">G3</span><b>Verified entity &amp; office</b><span>Registered legal entity and at least one confirmed physical office. No virtual-office-only listings.</span><span class="src">NY Department of State active corporations register · Google Business Profile verification</span></div>
+      <div class="gate"><span class="k">G4</span><b>No consumer-protection actions</b><span>No docket names the firm alongside sanction or consumer-protection language. We search CourtListener’s RECAP collection for three things: Rule 11 sanctions, disciplinary or misconduct proceedings, and consumer-protection actions. RECAP is drawn from PACER and is thinner on state courts, so a pass means a search found nothing, not that nothing exists. A docket that does match is read by a person first, because a firm often appears in one having argued about sanctions against the other side.</span><span class="src">CourtListener docket search (Free Law Project), per firm</span></div>
       <div class="gate"><span class="k">G5</span><b>Honest website baseline</b><span>Live HTTPS site with working contact and named attorneys; no "guaranteed results", fake badges or misleading claims.</span><span class="src">Automated crawl + editorial review</span></div>
       <div class="gate"><span class="k">G6</span><b>Minimum footprint</b><span>At least 10 public client reviews across verified platforms and one year in operation.</span><span class="src">Google · Avvo · Yelp · BBB · SoS filing date</span></div>
     </div>
@@ -69,21 +69,21 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
             <tbody>
               <tr><td>A1 Clean-record depth</td><td class="p">10</td><td>10+ years clean for all attorneys = 10 · 5–10 years = 6 · private admonition on file = 3</td></tr>
               <tr><td>A2 Experience</td><td class="p">9</td><td>Weighted average years since admission: 15+ = 9 · 10–15 = 7 · 5–10 = 5 · under 5 = 2</td></tr>
-              <tr><td>A5 Accountability</td><td class="p">6</td><td>Malpractice insurance disclosed (3) · membership in substantive bar associations — AAJ, state trial lawyers, NACDL, AILA (3)</td></tr>
+              <tr><td>A5 Accountability</td><td class="p">6</td><td>Malpractice insurance disclosed (3) · membership in substantive bar associations such as AAJ, state trial lawyers, NACDL or AILA (3)</td></tr>
             </tbody>
           </table>
         </div>
       </details>
 
       <details class="pillar">
-        <summary><span class="letter wB">B</span><div><h3>Verified Outcomes</h3><div class="desc">What the firm has actually achieved, confirmed against records — cohort-relative</div></div><div class="pts">20<small>points</small></div></summary>
+        <summary><span class="letter wB">B</span><div><h3>Verified Outcomes</h3><div class="desc">What the firm has actually achieved, confirmed against records, cohort by cohort</div></div><div class="pts">20<small>points</small></div></summary>
         <div class="body">
           <table>
             <thead><tr><th>Sub-factor</th><th>Pts</th><th>How it's scored</th></tr></thead>
             <tbody>
               <tr><td>B1 Volume of verified results</td><td class="p">6</td><td>Count of confirmed results over 5 years, percentile within cohort</td></tr>
               <tr><td>B2 Magnitude / significance</td><td class="p">6</td><td>Median verified result vs cohort median. Non-monetary practices (immigration, criminal defense): approval, dismissal or acquittal rates where available</td></tr>
-              <tr><td>B3 Trial &amp; appellate record</td><td class="p">5</td><td>Verdicts taken to trial and published appellate decisions — insurers pay more to firms known to try cases</td></tr>
+              <tr><td>B3 Trial &amp; appellate record</td><td class="p">5</td><td>Verdicts taken to trial and published appellate decisions. Insurers pay more to firms known to try cases</td></tr>
               <tr><td>B4 Recency</td><td class="p">3</td><td>Share of verified results from the last 24 months</td></tr>
             </tbody>
           </table>
@@ -92,13 +92,13 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
       </details>
 
       <details class="pillar">
-        <summary><span class="letter wC">C</span><div><h3>Client Experience</h3><div class="desc">How clients rate and describe the firm — after authenticity filtering</div></div><div class="pts">20<small>points</small></div></summary>
+        <summary><span class="letter wC">C</span><div><h3>Client Experience</h3><div class="desc">How clients rate and describe the firm, after authenticity filtering</div></div><div class="pts">20<small>points</small></div></summary>
         <div class="body">
           <table>
             <thead><tr><th>Sub-factor</th><th>Pts</th><th>How it's scored</th></tr></thead>
             <tbody>
-              <tr><td>C1 Authentic volume</td><td class="p">5</td><td>Log-scaled count of reviews across Google, Avvo, Yelp, BBB, Facebook, Lawyers.com — de-duplicated, percentile within cohort</td></tr>
-              <tr><td>C2 Rating quality</td><td class="p">6</td><td>Bayesian average with the cohort mean as prior — so 3 reviews at 5.0 never beat 400 at 4.8</td></tr>
+              <tr><td>C1 Authentic volume</td><td class="p">5</td><td>Log-scaled count of reviews across Google, Avvo, Yelp, BBB, Facebook, Lawyers.com, de-duplicated, percentile within cohort</td></tr>
+              <tr><td>C2 Rating quality</td><td class="p">6</td><td>Bayesian average with the cohort mean as prior, so 3 reviews at 5.0 never beat 400 at 4.8</td></tr>
               <tr><td>C3 Recency &amp; consistency</td><td class="p">3</td><td>Share of reviews in the last 12 months; variance between platforms</td></tr>
               <tr><td>C4 Firm responsiveness</td><td class="p">3</td><td>Owner-response rate, especially to 3★ and below; tone (non-defensive, no confidentiality breaches)</td></tr>
               <tr><td>C5 Complaints</td><td class="p">3</td><td>BBB complaints, AG consumer complaints, fee-dispute arbitration records (deductions)</td></tr>
@@ -109,19 +109,19 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
       </details>
 
       <details class="pillar pillar--featured" id="digital" open>
-        <summary><span class="letter wD">D</span><div><h3>Digital Presence &amp; Authority</h3><div class="desc">Website trust, search authority, local presence and E-E-A-T — the pillar that rewards firms that move</div></div><div class="pts">25<small>points</small></div></summary>
+        <summary><span class="letter wD">D</span><div><h3>Digital Presence &amp; Authority</h3><div class="desc">Website trust, search authority, local presence and E-E-A-T. The pillar that rewards firms that move</div></div><div class="pts">25<small>points</small></div></summary>
         <div class="body">
           <p style="font-size:.98rem;margin:14px 0 6px;max-width:75ch">Every signal here is a proxy for accountability (a firm that publishes names, bar numbers, fees and fresh content is easier to hold to account) or for real-world demand (brand searches, quality links, local rankings). <b>Paid advertising is excluded:</b> Google Ads, Local Services Ads and paid directory badges contribute nothing.</p>
           <table>
             <thead><tr><th>Sub-factor</th><th>Pts</th><th>Signals</th></tr></thead>
             <tbody>
               <tr><td>D1 Website trust &amp; experience</td><td class="p">7</td><td>Core Web Vitals pass (LCP, INP, CLS via PageSpeed Insights) 2 · mobile-friendly and accessibility score ≥ 90 1 · attorney bios with bar numbers and photos 1 · transparent fee / consultation page 1 · privacy policy, disclaimers, attorney-advertising notice 1 · content updated within 90 days 1</td></tr>
-              <tr><td>D2 Search authority</td><td class="p">8</td><td>Domain authority percentile within cohort (median of Ahrefs DR, Moz DA, Semrush AS) 3 · quality referring domains — legal, news, .edu/.gov, local organizations; spam score under 5% 2 · organic visibility for non-brand practice-area keywords in the firm's market 2 · brand search demand and trend 1</td></tr>
-              <tr><td>D3 Local presence</td><td class="p">5</td><td>Google Business Profile verified and complete — categories, hours, services, 20+ photos, Q&amp;A, posts in last 60 days 2 · NAP consistency across top 30 citations (Apple Business Connect, Bing Places, Avvo, Yelp, FindLaw, Justia…) 1 · local-pack rankings for "[practice] lawyer [city]" core terms, top 3 = full 2</td></tr>
-              <tr><td>D4 Content, E-E-A-T &amp; structured data</td><td class="p">5</td><td>Original legal content with attorney bylines and credentials 2 · schema.org markup (LegalService/Attorney, FAQPage, Review, BreadcrumbList) 1 · earned media and citations — news, court reporters, CLE speaking, publications 1 · AI-search visibility: firm cited in ChatGPT, Gemini, Perplexity and AI Overviews answers for its core queries, sampled quarterly 1</td></tr>
+              <tr><td>D2 Search authority</td><td class="p">8</td><td>Domain authority percentile within cohort (median of Ahrefs DR, Moz DA, Semrush AS) 3 · quality referring domains from legal, news, .edu/.gov and local organisations, spam score under 5% 2 · organic visibility for non-brand practice-area keywords in the firm's market 2 · brand search demand and trend 1</td></tr>
+              <tr><td>D3 Local presence</td><td class="p">5</td><td>Google Business Profile verified and complete: categories, hours, services, 20+ photos, Q&amp;A, posts in last 60 days 2 · NAP consistency across top 30 citations (Apple Business Connect, Bing Places, Avvo, Yelp, FindLaw, Justia…) 1 · local-pack rankings for "[practice] lawyer [city]" core terms, top 3 = full 2</td></tr>
+              <tr><td>D4 Content, E-E-A-T &amp; structured data</td><td class="p">5</td><td>Original legal content with attorney bylines and credentials 2 · schema.org markup (LegalService/Attorney, FAQPage, Review, BreadcrumbList) 1 · earned media and citations in news, court reporters, CLE speaking or publications 1 · AI-search visibility: firm cited in ChatGPT, Gemini, Perplexity and AI Overviews answers for its core queries, sampled quarterly 1</td></tr>
             </tbody>
           </table>
-          <div class="note"><b>Cap rule:</b> Digital Presence can lift a firm's tier but cannot create one. Reaching Certified requires A + B + C ≥ 40 of 65; Distinguished requires 50; Elite requires 55. A brilliant website with thin verified results plateaus at Certified — and the firm sees exactly which D sub-factors would move it up.</div>
+          <div class="note"><b>Cap rule:</b> Digital Presence can lift a firm's tier but cannot create one. Reaching Certified requires Gates all pass · A+B+C ≥ 40 of 65 assessed · at least 60 of 100 points assessed; Distinguished requires 50; Elite requires 55. A brilliant website with thin verified results plateaus at Certified, and the firm sees exactly which D sub-factors would move it up.</div>
         </div>
       </details>
 
@@ -131,7 +131,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
           <table>
             <thead><tr><th>Sub-factor</th><th>Pts</th><th>How it's scored</th></tr></thead>
             <tbody>
-              <tr><td>E1 Free consultation &amp; fee transparency</td><td class="p">4</td><td>Free consultation 1 · fee model stated publicly — contingency %, hourly range or flat fee 2 · the actual fee terms published, not just the model 1</td></tr>
+              <tr><td>E1 Free consultation &amp; fee transparency</td><td class="p">4</td><td>Free consultation 1 · fee model stated publicly, whether contingency %, hourly range or flat fee 2 · the actual fee terms published, not just the model 1</td></tr>
               <tr><td>E3 Languages &amp; accessibility</td><td class="p">3</td><td>Each language beyond English 1 (max 2) · ADA-accessible offices or virtual consultations 1</td></tr>
               <tr><td>E4 Availability</td><td class="p">3</td><td>24/7 intake line 1.5 · evening/weekend, hospital or home visits 1.5</td></tr>
             </tbody>
@@ -144,12 +144,13 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
 
 <section class="section section--paper" id="tiers">
   <div class="container">
-    <div class="section-head"><div><span class="eyebrow">Tiers</span><h2 style="margin-top:12px">What the badge says — and what it takes</h2></div></div>
+    <div class="section-head"><div><span class="eyebrow">Tiers</span><h2 style="margin-top:12px">What the badge says, and what it takes</h2></div></div>
     <div class="tiers">
-      <div class="tier"><span class="eyebrow" style="color:var(--muted)">Listed</span><div class="range">&lt; 70</div><p>All gates pass. Neutral profile, no badge, not eligible for ranked lists.</p><div class="req">Shows the firm its sub-scores and the path to 70</div></div>
-      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> LFL Certified</span><div class="range">70–84</div><p>Trustworthy on every dimension we can verify.</p><div class="req">A + B + C ≥ 40 of 65</div></div>
-      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> Certified · Distinguished</span><div class="range">85–92</div><p>Strong verified outcomes and client record, plus a mature digital presence.</p><div class="req">A + B + C ≥ 50 of 65</div></div>
-      <div class="tier tier--night"><span class="badge badge--certified"><Icon name="shield" /> Certified · Elite</span><div class="range">93–100<small>top 5%</small></div><p>The top 5% of the firm's state × practice cohort.</p><div class="req">A + B + C ≥ 55 of 65 · cohort top 5%</div></div>
+      <div class="tier"><span class="eyebrow" style="color:var(--muted)">Listed</span><div class="range">Gates open</div><p>One or more gates still to be checked, or a gate not passed. A neutral profile with no badge, and the sub-scores we do have.</p><div class="req">Shows the firm which gates are open</div></div>
+      <div class="tier"><span class="badge badge--verified"><Icon name="check" /> LFL Verified</span><div class="range">Gates clear</div><p>All six eligibility gates checked and passed: licensure, discipline, entity and office, consumer-protection actions, website baseline and public footprint. This says the firm is what it says it is. It says nothing about the score.</p><div class="req">Six gates pass · no score threshold</div></div>
+      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> LFL Certified</span><div class="range">70–84</div><p>Every gate passed, and a score of 70 or better across the sub-factors we have assessed.</p><div class="req">Gates all pass · A+B+C ≥ 40 of 65 assessed · at least 60 of 100 points assessed</div></div>
+      <div class="tier"><span class="badge badge--certified"><Icon name="shield" /> Certified · Distinguished</span><div class="range">85–92</div><p>Strong verified outcomes and client record, plus a mature digital presence.</p><div class="req">Gates all pass · A+B+C ≥ 50 of 65 assessed</div></div>
+      <div class="tier tier--night"><span class="badge badge--certified"><Icon name="shield" /> Certified · Elite</span><div class="range">93–100<small>top 5%</small></div><p>The top 5% of the firm's state × practice cohort.</p><div class="req">Gates all pass · A+B+C ≥ 55 of 65 assessed · cohort top 5%</div></div>
     </div>
   </div>
 </section>
@@ -177,7 +178,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
 
 <section class="section section--paper" id="scorecard">
   <div class="container">
-    <div class="section-head"><div><span class="eyebrow">Reading a scorecard</span><h2 style="margin-top:12px">Every certified profile publishes this exact breakdown</h2><p>Gates first, then the five pillars with every sub-score and the evidence behind it. Rows are tagged by source — <b>Registry</b>, <b>Observed</b> or, during onboarding, <b>Illustrative</b> — and the card always states the shortest path to the next tier.</p></div><a class="link" href="/firms/greenstein-pittari-llp/">See it on a live profile</a></div>
+    <div class="section-head"><div><span class="eyebrow">Reading a scorecard</span><h2 style="margin-top:12px">Every certified profile publishes this exact breakdown</h2><p>Gates first, then the five pillars with every sub-score and the evidence behind it. Rows are tagged by source: <b>Registry</b>, <b>Observed</b> or, during onboarding, <b>Illustrative</b>. The card always states the shortest path to the next tier.</p></div><a class="link" href="/firms/greenstein-pittari-llp/">See it on a live profile</a></div>
     <Scorecard firm={gp} cohortLabel="New York × Personal Injury" cohortSize={23} />
   </div>
 </section>
@@ -198,13 +199,13 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
   <div class="container">
     <div class="section-head"><div><span class="eyebrow">Data sources</span><h2 style="margin-top:12px">Where every point comes from</h2></div></div>
     <div class="sources">
-      <div class="src-card"><b>Licensure &amp; discipline</b><span>State bar and court registries for 50 states + DC · ABA National Lawyer Regulatory Data Bank</span></div>
-      <div class="src-card"><b>Entity &amp; office</b><span>Secretary of State business search · USPS validation · Google Business Profile verification</span></div>
-      <div class="src-card"><b>Court outcomes</b><span>PACER via CourtListener/RECAP · state e-filing portals · jury-verdict reporters</span></div>
-      <div class="src-card"><b>Reviews</b><span>Google Places, Yelp Fusion, Avvo, BBB, Facebook — de-duplicated, NLP-scored, authenticity-filtered</span></div>
-      <div class="src-card"><b>Web performance &amp; accessibility</b><span>PageSpeed Insights API · Lighthouse · axe-core</span></div>
-      <div class="src-card"><b>Search authority</b><span>Ahrefs, Semrush, Moz and DataForSEO APIs — cohort percentiles, monthly</span></div>
-      <div class="src-card"><b>Local presence</b><span>Local-pack tracking (5 core queries per firm per market) · citation audits</span></div>
+      <div class="src-card"><b>Licensure &amp; discipline</b><span>NYS Attorney Registration database, published as open data by the Unified Court System. Other states as we open them.</span></div>
+      <div class="src-card"><b>Entity &amp; office</b><span>NY Department of State active corporations register · Google Business Profile verification</span></div>
+      <div class="src-card"><b>Court outcomes</b><span>CourtListener, for the G4 sanction screen. Verified case results need docket-by-docket reading, which is not yet running, so pillar B stays unscored.</span></div>
+      <div class="src-card"><b>Reviews</b><span>Google Places API, summed across every business listing a firm operates and weighted by count. One platform so far, which we label on every profile.</span></div>
+      <div class="src-card"><b>Web performance &amp; accessibility</b><span>PageSpeed Insights API, on mobile. Accessibility auditing is not yet running.</span></div>
+      <div class="src-card"><b>Search authority</b><span>Ahrefs, cohort percentiles. A single provider, so the sub-factor says so.</span></div>
+      <div class="src-card"><b>Local presence</b><span>Google Business Profile completeness. Local-pack rank tracking is not yet running.</span></div>
       <div class="src-card"><b>Content &amp; structured data</b><span>Custom crawler: JSON-LD parsing, byline and credential detection, freshness</span></div>
       <div class="src-card"><b>AI-search visibility</b><span>Sampled prompts across ChatGPT, Gemini, Perplexity and Google AI Overviews, quarterly</span></div>
     </div>
@@ -213,12 +214,12 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
 
 <section class="section section--paper" id="independence">
   <div class="container faq-split">
-    <div><span class="eyebrow">Independence &amp; appeals</span><h2 style="margin-top:14px">No firm can pay for a point</h2><p style="margin-top:14px;max-width:40ch">Certification, profiles and score breakdowns are free. Our revenue comes from clearly labeled sponsored placements and optional profile tools — none of which touch gates, sub-scores or tiers.</p></div>
+    <div><span class="eyebrow">Independence &amp; appeals</span><h2 style="margin-top:14px">No firm can pay for a point</h2><p style="margin-top:14px;max-width:40ch">Certification, profiles and score breakdowns are free. Our revenue comes from clearly labeled sponsored placements and optional profile tools, none of which touch gates, sub-scores or tiers.</p></div>
     <div class="faq">
-      <details open><summary>Can a firm pay to be certified or to rank higher?</summary><div>No. Position in any ranked list comes from the Certification Score, and the score, the eligibility gates and the tier cannot be bought or edited — not even by a firm that manages its own profile. A firm may claim its profile at no cost to keep its information current and to submit case results with a docket for verification, and may buy optional tools. Sponsored placements are always labeled and never appear inside a ranked list.</div></details>
+      <details open><summary>Can a firm pay to be certified or to rank higher?</summary><div>No. Position in any ranked list comes from the Certification Score, and the score, the eligibility gates and the tier cannot be bought or edited, not even by a firm that manages its own profile. A firm may claim its profile at no cost to keep its information current and to submit case results with a docket for verification, and may buy optional tools. Sponsored placements are always labeled and never appear inside a ranked list.</div></details>
       <details><summary>Can a firm see and dispute its score?</summary><div>Yes. Every sub-score and its evidence is visible to the firm. Corrections and new documentation can be submitted at any time; formal appeals are reviewed within 30 days by a licensed attorney on our editorial team.</div></details>
       <details><summary>Why include SEO and website signals in a trust score?</summary><div>Because they are proxies for accountability and real demand. Firms that publish attorney names and bar numbers, state their fees, keep content current and earn links from courts, news outlets and local institutions are easier to verify and harder to fake. Paid ads are excluded, and the pillar is capped so it can never compensate for weak licensure, outcomes or reviews.</div></details>
-      <details><summary>How are small-market firms treated fairly?</summary><div>Percentile-based factors are computed within the firm's cohort — state × practice area, minimum 25 firms — so a regional firm can reach Elite without competing with national brands.</div></details>
+      <details><summary>How are small-market firms treated fairly?</summary><div>Percentile-based factors are computed within the firm's cohort, which is a state and practice area holding at least 25 firms, so a regional firm can reach Elite without competing with national brands.</div></details>
       <details><summary>How often does the methodology change?</summary><div>Changes are versioned and announced 60 days before taking effect; historical scores are preserved. This is version 1.0.</div></details>
     </div>
   </div>
@@ -234,7 +235,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
         <div class="actions"><span class="btn btn--ink soon">Claim your firm profile</span><span class="btn btn--ghost soon">Download the methodology (PDF)</span></div>
       </div>
       <ul>
-        <li><Icon name="check" /><span>Free — certification cannot be purchased</span></li>
+        <li><Icon name="check" /><span>Free: certification cannot be purchased</span></li>
         <li><Icon name="check" /><span>Full sub-score visibility and evidence</span></li>
         <li><Icon name="check" /><span>30-day appeals reviewed by an attorney</span></li>
         <li><Icon name="check" /><span>Monthly re-scoring as you improve</span></li>

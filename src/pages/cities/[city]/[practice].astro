@@ -54,7 +54,7 @@ const certified = ranked.filter(f => f.data.status === 'certified');
 const contingency = ranked.filter(f => /contingency/i.test(f.data.fee_model)).length;
 const freeConsult = ranked.filter(f => f.data.free_consultation).length;
 const offices = ranked.reduce((n, f) => n + f.data.offices.length, 0);
-const share = (n: number) => (ranked.length ? `${Math.round((100 * n) / ranked.length)}%` : '—');
+const share = (n: number) => (ranked.length ? `${Math.round((100 * n) / ranked.length)}%` : 'n/a');
 const logoVariants = ['', 'l2', 'l3'];
 
 const computedDates = ranked.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
@@ -82,7 +82,7 @@ const description = fitDescription(
       </ol>
       <span class="eyebrow">{practiceName} · {place}</span>
       <h1>{practiceName} Law Firms in {market.city}</h1>
-      <p class="lede">Every firm here is checked for active licensure, clean disciplinary history and verified case results, and compared against the other {practiceName.toLowerCase()} firms in {market.city} — not against a national average. {certified.length > 0 && <>{certified.length} of the {ranked.length} {ranked.length === 1 ? 'has' : 'have'} completed certification so far.</>}</p>
+      <p class="lede">Every firm here is checked for active licensure, clean disciplinary history and verified case results, and compared against the other {practiceName.toLowerCase()} firms in {market.city}, not against a national average. {certified.length > 0 && <>{certified.length} of the {ranked.length} {ranked.length === 1 ? 'has' : 'have'} completed certification so far.</>}</p>
     </div>
     <div class="hero-facts">
       <div class="fact"><b class="num">{ranked.length}</b><span>Firms listed</span></div>
@@ -106,13 +106,13 @@ const description = fitDescription(
           <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
         ))}
       </div>
-      <p class="muted" style="font-size:.86rem;margin-top:18px">Firms marked <b>under review</b> have had some pillars measured and are waiting on checks the others need — licensure against the {market.state_name} attorney registry and outcomes against court records. A profile says which is which on every row.</p>
+      <p class="muted" style="font-size:.86rem;margin-top:18px">Firms marked <b>under review</b> have had some pillars measured and are waiting on checks the others need: licensure against the {market.state_name} attorney registry and outcomes against court records. A profile says which is which on every row.</p>
     </div>
 
     <aside class="sidebar">
       <div class="panel">
         <h4>How the order is decided</h4>
-        <p class="muted" style="font-size:.92rem">Position comes from the Certification Score, computed from evidence we can check. Neither the score, the eligibility gates nor the tier can be bought or edited — including by a firm that manages its own profile.</p>
+        <p class="muted" style="font-size:.92rem">Position comes from the Certification Score, computed from evidence we can check. Neither the score, the eligibility gates nor the tier can be bought or edited, including by a firm that manages its own profile.</p>
         <a class="link" href="/methodology/" style="margin-top:12px">Read the methodology</a>
       </div>
       <div class="panel">

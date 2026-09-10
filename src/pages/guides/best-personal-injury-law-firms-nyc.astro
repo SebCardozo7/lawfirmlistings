@@ -35,14 +35,14 @@ const lastUpdated = computedDates.length
 {/* noindex while the ranking is gated. The page explains itself to a visitor who lands on
     it, but a title promising a ranking that is not published should not be in search results.
     Drop the noindex — and the sitemap filter in astro.config.mjs — when the gate opens. */}
-<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City — ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology v1.1, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" noindex={!gateMet}>
+<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City: ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology v1.1, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" noindex={!gateMet}>
 <article>
 <header class="article-head">
   <div class="narrow">
     <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="#">Guides</a></li><li><a href="/practice-areas/personal-injury/">Personal Injury</a></li><li aria-current="page">New York City</li></ol>
     <span class="eyebrow" style="margin-top:18px">Ranking · Personal Injury · New York</span>
     <h1>{gateMet ? 'Best Personal Injury Law Firms in NYC, Ranked for 2026' : 'Personal injury firms in New York City'}</h1>
-    <p class="lede">If you were hurt in a crash on the BQE, fell on an icy Brooklyn sidewalk, or were injured on a Manhattan construction site, the firm you hire will shape everything that follows — the medical care you can afford, how insurers negotiate, and what you ultimately recover. {gateMet ? <>These {ranked.length} came out on top under our methodology.</> : <>We are working through the New York cohort now; this page will carry the ranking once {MIN_CERTIFIED} firms have completed certification.</>}</p>
+    <p class="lede">If you were hurt in a crash on the BQE, fell on an icy Brooklyn sidewalk, or were injured on a Manhattan construction site, the firm you hire will shape everything that follows: the medical care you can afford, how insurers negotiate, and what you ultimately recover. {gateMet ? <>These {ranked.length} came out on top under our methodology.</> : <>We are working through the New York cohort now; this page will carry the ranking once {MIN_CERTIFIED} firms have completed certification.</>}</p>
     <div class="byline">
       {/* The byline claimed review by a licensed New York attorney. Nobody has reviewed this
           page. On a page about choosing a lawyer that is the most consequential thing on it to
@@ -90,7 +90,7 @@ const lastUpdated = computedDates.length
       <li><b>Digital presence and authority (25).</b> Site performance, search authority against local peers, local presence and structured data. Paid advertising is excluded. Capped so it can lift a firm's tier but never create one.</li>
       <li><b>Access and responsiveness (10).</b> Fee transparency, free consultations, languages and availability.</li>
     </ul>
-    <p>A firm is scored only once all six eligibility gates pass, and certification additionally requires professional standing, outcomes and client experience to reach 40 of their combined 65 — which is what stops a firm with a strong website and thin results from certifying. Read the <a href="/methodology/">full methodology</a>.</p>
+    <p>A firm is scored only once all six eligibility gates pass, and certification additionally requires professional standing, outcomes and client experience to reach 40 of their combined 65, which is what stops a firm with a strong website and thin results from certifying. Read the <a href="/methodology/">full methodology</a>.</p>
 
     <h2 id="the-list">The best personal injury law firms in New York City</h2>
 
@@ -164,7 +164,7 @@ const lastUpdated = computedDates.length
     <h2 id="what-to-look-for">What to look for in a New York personal injury firm</h2>
     <p>Rankings are a starting point. The right firm for a trucking case on the Cross Bronx Expressway is not the right firm for a misdiagnosis at a Manhattan hospital. As you narrow the list, weigh five things.</p>
     <h3>A trial record, not just a settlement history</h3>
-    <p>Insurance carriers keep lists of which firms actually pick juries. They pay more, sooner, to the ones that do. Ask any firm for its verdicts in the past three years — in your county.</p>
+    <p>Insurance carriers keep lists of which firms actually pick juries. They pay more, sooner, to the ones that do. Ask any firm for its verdicts in the past three years, in your own county.</p>
     <h3>Independent recognition</h3>
     <p>Peer-reviewed recognition from other attorneys is far harder to buy than a billboard. Certification here requires it, but also ask about appellate decisions the firm has won; they shape the law for every case that follows.</p>
     <h3>Direct access to a senior attorney</h3>
@@ -174,20 +174,20 @@ const lastUpdated = computedDates.length
     <h3>Focus that matches your injury</h3>
     <p>A birth-injury case needs obstetric experts and a seven-figure case budget. A rideshare collision needs someone fluent in New York's no-fault and Serious Injury Threshold rules. Match the firm's verified focus to your facts.</p>
 
-    <blockquote>"The best firms turn down more cases than they take. If a firm says yes before asking about your medical records, be cautious."<br><small class="muted" style="font-weight:400;font-size:.9rem">— A New York plaintiff's attorney interviewed for this ranking</small></blockquote>
+    <blockquote>"The best firms turn down more cases than they take. If a firm says yes before asking about your medical records, be cautious."<br><small class="muted" style="font-weight:400;font-size:.9rem">A New York plaintiff's attorney interviewed for this ranking</small></blockquote>
 
     <h2 id="ny-law">New York personal injury law: the basics</h2>
     <p><b>Statute of limitations.</b> Three years from the date of injury for most negligence claims (CPLR §214), two years and six months for medical malpractice (CPLR §214-a), and two years for wrongful death, measured from the date of death.</p>
     <p><b>Claims against the government.</b> Injured by a city bus, in a NYCHA building or on a city sidewalk? You must serve a Notice of Claim within <b>90 days</b> and file suit within one year and 90 days. This is the single most common reason valid New York cases are lost.</p>
     <p><b>Comparative negligence.</b> New York follows pure comparative negligence: you can recover even if you were mostly at fault, with your award reduced by your percentage of responsibility.</p>
-    <p><b>No-fault and the Serious Injury Threshold.</b> Motor vehicle injuries are first paid through no-fault insurance (up to $50,000 in basic economic loss). To sue for pain and suffering, you must show a "serious injury" as defined by Insurance Law §5102(d) — one reason experienced counsel matters in car cases.</p>
-    <p><b>The Scaffold Law.</b> Labor Law §240(1) imposes absolute liability on owners and contractors for gravity-related construction injuries — a uniquely powerful tool for New York construction workers.</p>
+    <p><b>No-fault and the Serious Injury Threshold.</b> Motor vehicle injuries are first paid through no-fault insurance (up to $50,000 in basic economic loss). To sue for pain and suffering, you must show a "serious injury" as defined by Insurance Law §5102(d), which is one reason experienced counsel matters in car cases.</p>
+    <p><b>The Scaffold Law.</b> Labor Law §240(1) imposes absolute liability on owners and contractors for gravity-related construction injuries, a uniquely powerful tool for New York construction workers.</p>
 
     <h2 id="faq">Frequently asked questions</h2>
     <div class="faq">
       <details open><summary>How much does a personal injury lawyer cost in New York?</summary><div>Almost all New York PI firms work on contingency, typically 33⅓% of the recovery. Medical malpractice fees follow a statutory sliding scale (30% of the first $250,000 down to 10% above $1.25 million). You pay nothing up front and nothing if you don't recover.</div></details>
       <details><summary>How long do I have to file a personal injury lawsuit in New York?</summary><div>Generally three years from the injury, but only 2½ years for medical malpractice and just 90 days to serve a Notice of Claim against New York City, the MTA or NYCHA. Contact a firm as early as possible.</div></details>
-      <details><summary>What is the average personal injury settlement in NYC?</summary><div>There is no meaningful "average" — outcomes range from a few thousand dollars for soft-tissue car injuries to eight-figure verdicts for catastrophic cases. Every firm on this list offers a free evaluation that will give you a realistic range for your facts.</div></details>
+      <details><summary>What is the average personal injury settlement in NYC?</summary><div>There is no meaningful "average". Outcomes range from a few thousand dollars for soft-tissue car injuries to eight-figure verdicts for catastrophic cases. Every firm on this list offers a free evaluation that will give you a realistic range for your facts.</div></details>
       <details><summary>Can I switch personal injury lawyers mid-case?</summary><div>Yes. In New York, your new firm and old firm split the single contingency fee based on work performed; it costs you nothing extra. Several firms on this list regularly take over cases from other attorneys.</div></details>
       <details><summary>Do I need a lawyer for a minor car accident?</summary><div>If your injuries resolved within a few weeks and no-fault covered your bills, possibly not. If you have ongoing treatment, missed work or a possible "serious injury," a free consultation is worth 30 minutes of your time.</div></details>
       <details><summary>How were these firms selected?</summary><div>Our editorial team reviewed 84 New York City personal injury firms against our published methodology: trial record (35%), verified results (25%), client experience (25%) and peer recognition (15%). Firms cannot pay for placement.</div></details>
@@ -220,7 +220,7 @@ const lastUpdated = computedDates.length
     <div class="section-head"><div><span class="eyebrow">Keep reading</span><h2 style="margin-top:12px">Related guides and rankings</h2></div></div>
     <div class="rel-grid">
       <a class="guide" href="/practice-areas/personal-injury/"><div class="thumb"><Icon name="sky_sm" /></div><div class="body"><span class="kicker">Directory</span><h3>Personal injury firms in the directory</h3><span class="meta">{inPractice} {inPractice === 1 ? 'firm' : 'firms'} · {practiceCities} {practiceCities === 1 ? 'city' : 'cities'}</span></div></a>
-      <a class="guide" href="/cities/new-york-ny/"><div class="thumb t3"><Icon name="skyline" /></div><div class="body"><span class="kicker">City guide</span><h3>Law firms in New York, NY — every practice area</h3><span class="meta">{inCity} {inCity === 1 ? 'firm' : 'firms'}</span></div></a>
+      <a class="guide" href="/cities/new-york-ny/"><div class="thumb t3"><Icon name="skyline" /></div><div class="body"><span class="kicker">City guide</span><h3>Law firms in New York, NY: every practice area</h3><span class="meta">{inCity} {inCity === 1 ? 'firm' : 'firms'}</span></div></a>
     </div>
   </div>
 </section>

@@ -45,7 +45,7 @@
     "google": {
       "rating": 4.6,
       "count_label": "110",
-      "source": "Google Business Profile via Places API — 1 listing, counts summed and rating weighted by count",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
       "fetched_at": "2026-09-08"
     }
   },
@@ -112,36 +112,36 @@
     },
     "G3": {
       "pass": false,
-      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "checked_at": "2026-09-09"
     },
     "G4": {
       "pass": false,
-      "evidence": "AG, FTC and court-sanction search not yet run",
-      "source": "pending",
-      "checked_at": "2026-09-08"
+      "evidence": "A docket search found 9 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so this gate is not settled by it. It is open.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only, pending",
+      "checked_at": "2026-09-09"
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-09"
     },
     "G6": {
       "pass": false,
-      "evidence": "110 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-08"
+      "evidence": "Time in operation not established",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "checked_at": "2026-09-09"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "fee_statement": "scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but",
   "score": {
-    "total": 22,
+    "total": 48,
     "tier": "Under review",
-    "verdict": "6 eligibility gate(s) still to be checked; this firm has not been scored yet. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "verdict": "6 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-09",
     "methodology": "v1.1",
     "pillars": {
@@ -223,7 +223,7 @@
             "pts": 3,
             "max": 5,
             "source": "observed",
-            "evidence": "110 Google reviews · Google Business Profile via Places API — 1 listing, counts summed and rating weighted by count"
+            "evidence": "110 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -332,13 +332,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 48,
-      "floor_met": false,
+      "gap": 22,
+      "floor_met": true,
+      "coverage_met": false,
       "path": [
-        "A1 Clean-record depth: +10 available",
-        "A2 Experience: +9 available",
-        "A5 Accountability: +6 available"
+        "A1 Clean-record depth: not yet measured (10 pts)",
+        "A2 Experience: not yet measured (9 pts)",
+        "A5 Accountability: not yet measured (6 pts)"
       ]
-    }
+    },
+    "raw": 22.0,
+    "assessed": 46,
+    "coverage": 0.46,
+    "floor_abc_pct": 0.636
   }
 }

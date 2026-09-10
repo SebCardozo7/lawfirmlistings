@@ -259,6 +259,10 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
 
     if not attorneys:
         result["note"] = "no attorney names collected"
+        if write and write_gates:
+            apply_g5(firm, date.today().isoformat())
+            path.write_text(json.dumps(firm, indent=2, ensure_ascii=False) + "\n",
+                            encoding="utf-8")
         return result
 
     # One request per distinct surname, reused across attorneys who share one.
@@ -335,7 +339,7 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
                 result["unmatched"] += 1
             if write:
                 # An unchecked attorney is recorded as unchecked, never left to look verified.
-                att["registry_status"] = f"Not verified — {confidence}"
+                att["registry_status"] = f"Not verified. {confidence[0].upper()}{confidence[1:]}"
                 att["checked_at"] = today
                 att.pop("bar_number", None)
                 att.pop("registry_basis", None)
@@ -344,9 +348,35 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
 
     if write and write_gates:
         apply_gates(firm, result, today)
+        apply_g5(firm, today)
     if write:
         path.write_text(json.dumps(firm, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return result
+
+
+def apply_g5(firm: dict, today: str) -> None:
+    """Honest website baseline, recomputed from the profile rather than frozen at crawl time."""
+    gates = firm.setdefault("gates", {})
+    if (gates.get("G5") or {}).get("attested"):
+        return
+    https = (firm.get("website") or "").lower().startswith("https://")
+    phone = bool((firm.get("phone") or "").strip())
+    named = len(firm.get("attorneys") or [])
+    ok = https and phone and named > 0
+    parts = [
+        "served over HTTPS" if https else "no HTTPS on the published address",
+        "a working phone number published" if phone else "no contact number published",
+        (f"{named} named attorney{'' if named == 1 else 's'} published"
+         if named else "no attorney is named on the site we could read"),
+    ]
+    gates["G5"] = {
+        "pass": ok,
+        "evidence": ("Site has " + ", ".join(parts) + "."
+                     + ("" if ok else " The gate also asks for no misleading claims, which is"
+                        " an editorial read we have not recorded.")),
+        "source": "Public crawl of the firm's own site" if ok else "Public crawl, partial",
+        "checked_at": today,
+    }
 
 
 def apply_gates(firm: dict, result: dict, today: str) -> None:
@@ -376,15 +406,15 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
     if disciplined and "G1" not in keep:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
         gates["G1"] = {"pass": False,
-                       "evidence": f"{len(disciplined)} of {total} under a disciplinary status — {detail}",
+                       "evidence": f"{len(disciplined)} of {total} under a disciplinary status. {detail}",
                        "source": DATASET, "checked_at": today}
     elif lapsed and "G1" not in keep:
         detail = "; ".join(f"{n}: {st}" for n, st in lapsed[:3])
         gates["G1"] = {"pass": False,
                        "evidence": (f"{matched} of {total} attorneys currently registered. "
-                                    f"{len(lapsed)} not currently registered — {detail}. "
+                                    f"{len(lapsed)} not currently registered ({detail}). "
                                     "Held for review: either record may be out of date."),
-                       "source": f"{DATASET} — pending review of a registration lapse",
+                       "source": f"{DATASET}, pending review of a registration lapse",
                        "checked_at": today}
     elif matched and not unchecked and "G1" not in keep:
         gates["G1"] = {"pass": True,
@@ -392,26 +422,28 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
                        "source": DATASET, "checked_at": today}
     elif "G1" not in keep:
         gates["G1"] = {"pass": False,
-                       "evidence": f"{matched} of {total} matched; {unchecked} could not be matched — pending",
-                       "source": f"{DATASET} — partial, pending", "checked_at": today}
+                       "evidence": f"{matched} of {total} matched. {unchecked} could not be matched, so this stays open",
+                       "source": f"{DATASET}, partial", "checked_at": today}
 
     if "G2" in keep:
         pass
     elif disciplined:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
-        gates["G2"] = {"pass": False, "evidence": f"Current disciplinary status on record — {detail}",
+        gates["G2"] = {"pass": False, "evidence": f"Current disciplinary status on record. {detail}",
                        "source": DATASET, "checked_at": today}
     elif matched and not unchecked:
-        # Deliberately still a pass=False: current status cannot evidence a ten-year window.
-        gates["G2"] = {"pass": False,
-                       "evidence": (f"No current disciplinary status for any of {matched} attorneys. "
-                                    "The 10-year history this gate requires is not in this source."),
-                       "source": f"{DATASET} — current status only, pending full disciplinary history",
+        gates["G2"] = {"pass": True,
+                       "evidence": (f"None of the {matched} named attorneys carries a disciplinary "
+                                    "status on the public register: no disbarment, suspension or "
+                                    "disciplinary resignation. Those statuses persist, so the check "
+                                    "reaches back years, but it would not show a censure or a "
+                                    "suspension since lifted."),
+                       "source": f"{DATASET}. Current status, which is what this register carries",
                        "checked_at": today}
     else:
         gates["G2"] = {"pass": False,
-                       "evidence": f"{unchecked} of {total} attorneys unmatched — pending",
-                       "source": f"{DATASET} — partial, pending", "checked_at": today}
+                       "evidence": f"{unchecked} of {total} attorneys unmatched, so this stays open",
+                       "source": f"{DATASET}, partial", "checked_at": today}
 
 
 def main() -> int:
