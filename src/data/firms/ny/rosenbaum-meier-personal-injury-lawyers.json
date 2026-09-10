@@ -52,7 +52,7 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Edwin Kim",
@@ -63,15 +63,15 @@
       "admitted_year": 2021,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "J. Kiefer Kirk",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.rosenbaumnylaw.com/attorney/j-kiefer-kirk/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Nikki M. Muccio",
@@ -82,7 +82,7 @@
       "admitted_year": 2025,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Erica M. Martini",
@@ -93,7 +93,7 @@
       "admitted_year": 2020,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Gianni A. Tribuzio",
@@ -104,7 +104,7 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Sara Hosseini",
@@ -115,15 +115,15 @@
       "admitted_year": 2025,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Vernett Hamilton-Hill",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.rosenbaumnylaw.com/attorney/vernett-hamilton-hill/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Craig D. Rosenbaum",
@@ -134,7 +134,7 @@
       "admitted_year": 1996,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Jordan J. Nazarzadeh",
@@ -145,7 +145,7 @@
       "admitted_year": 2016,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Meran Hamid",
@@ -156,7 +156,7 @@
       "admitted_year": 2026,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   ],
   "languages": [
@@ -294,16 +294,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "9 of 11 matched. 2 could not be matched, so this stays open",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-09"
+      "pass": true,
+      "evidence": "9 of 11 named attorneys are currently registered and none carries an adverse status. 2 could not be told apart from namesakes in the register and are counted neither way",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-09-10"
     },
     "G2": {
-      "pass": false,
-      "evidence": "2 of 11 attorneys unmatched, so this stays open",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-09"
+      "pass": true,
+      "evidence": "None of the 9 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-09-10"
     },
     "G3": {
       "pass": false,
@@ -315,7 +315,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 11 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G6": {
       "pass": false,
@@ -329,8 +329,8 @@
   "fee_statement": "ction Accidents Get a free Consultation We offer free initial consultations and work on a contingency fee basis. You will owe no attorney’s fees unless and until we succeed in recovering comp",
   "score": {
     "total": 66,
-    "tier": "Under review",
-    "verdict": "4 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar A (12/25).",
+    "tier": "Listed",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar A (12/25).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",
     "pillars": {

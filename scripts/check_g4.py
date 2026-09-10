@@ -113,7 +113,8 @@ def search(query: str) -> tuple[int | None, list[dict], str]:
                 time.sleep(20 * (attempt + 1))
                 continue
             return None, [], f"HTTP {exc.code}"
-        except (urllib.error.URLError, TimeoutError) as exc:
+        except Exception as exc:
+            # See check_ny_registry: RemoteDisconnected sits outside URLError.
             if attempt < 3:
                 time.sleep(5 * (attempt + 1))
                 continue

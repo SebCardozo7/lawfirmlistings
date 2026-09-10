@@ -66,7 +66,7 @@
       "admitted_year": 1997,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   ],
   "languages": [
@@ -238,15 +238,15 @@
   "gates": {
     "G1": {
       "pass": true,
-      "evidence": "All 1 named attorneys currently registered",
+      "evidence": "1 of 1 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 1 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G3": {
       "pass": true,
@@ -258,7 +258,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G6": {
       "pass": true,

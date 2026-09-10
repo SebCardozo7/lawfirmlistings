@@ -112,7 +112,10 @@ def fetch(where: str) -> list[dict]:
                 if exc.code not in (429, 500, 502, 503, 504) or attempt == 3:
                     raise
                 time.sleep(2 ** attempt)
-            except (urllib.error.URLError, TimeoutError):
+            except Exception:
+                # See check_ny_registry: urlopen raises RemoteDisconnected outside the
+                # URLError hierarchy, and one dropped connection should not discard a
+                # run of hundreds of lookups.
                 if attempt == 3:
                     raise
                 time.sleep(2 ** attempt)

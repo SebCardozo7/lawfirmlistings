@@ -36,6 +36,8 @@ import sys
 import html as html_entities
 import unicodedata
 
+from lib_describe import describe
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / ".crawl" / "profiles"
 COHORT_ID = "ny-personal-injury"

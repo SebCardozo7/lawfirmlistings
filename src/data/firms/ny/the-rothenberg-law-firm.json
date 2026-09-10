@@ -55,16 +55,16 @@
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://injurylawyer.com/attorneys/tamar-rothenberg-gluck/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Brian A. Rice",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://injurylawyer.com/attorneys/brian-a-rice-esq/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Barbara Rothenberg",
@@ -75,15 +75,15 @@
       "admitted_year": 1986,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Beth Rothenberg Halperin",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://injurylawyer.com/attorneys/beth-rothenberg-halperin-esq/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Ross B. Rothenberg",
@@ -94,7 +94,7 @@
       "admitted_year": 2002,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Scott J. Rothenberg",
@@ -105,23 +105,23 @@
       "admitted_year": 2005,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Melissa Rothenberg-Kapustin",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://injurylawyer.com/attorneys/melissa-rothenberg-kapustin-esq/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Lori Zeid",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://injurylawyer.com/attorneys/lori-zeid-esq/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Daniel Breen",
@@ -132,7 +132,7 @@
       "admitted_year": 1981,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Adam Drexler",
@@ -143,23 +143,23 @@
       "admitted_year": 2004,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Michael P. Dorsey",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://injurylawyer.com/attorneys/michael-p-dorsey-esq/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Dana H. Augustine",
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://injurylawyer.com/attorneys/dana-h-augustine-esq/",
-      "registry_status": "Not verified. Not found",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10",
+      "registry_note": "not found"
     },
     {
       "name": "Allen L. Rothenberg",
@@ -170,7 +170,7 @@
       "admitted_year": 1981,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Brian L. Strauss",
@@ -181,7 +181,7 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Harry Rothenberg",
@@ -192,7 +192,7 @@
       "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     {
       "name": "Marc J. Rothenberg",
@@ -203,7 +203,7 @@
       "admitted_year": 1998,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   ],
   "languages": [
@@ -357,15 +357,15 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "9 of 16 matched. 7 could not be matched, so this stays open",
+      "evidence": "9 of 16 named attorneys matched to the register, below the 80% this gate asks for",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G2": {
       "pass": false,
-      "evidence": "7 of 16 attorneys unmatched, so this stays open",
+      "evidence": "9 of 16 attorneys matched, below the 80% this gate asks for",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G3": {
       "pass": true,
@@ -377,7 +377,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 16 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G6": {
       "pass": true,
@@ -391,7 +391,7 @@
   "fee_statement": "no upfront fees in working with an injury lawyer. Our personal injury attorneys work on a contingency fee basis, which means that you do not pay anything unless we win your case. This allows",
   "score": {
     "total": 63,
-    "tier": "Under review",
+    "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (5/15).",
     "computed_at": "2026-09-10",
     "methodology": "v2.0",

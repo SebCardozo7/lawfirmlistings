@@ -416,7 +416,12 @@ def compute(firm):
     # part that protects a client, and it claims nothing about the score. Without a rung here
     # the ladder ran straight from "listed" to a tier no firm could reach.
     tier = ("Not eligible" if failed_gates
-            else "Under review" if pending_gates or len(gates) != len(GATES)
+            # "Under review" describes us rather than the firm. It says we have not
+            # finished, which is no use to somebody choosing a lawyer and makes a
+            # directory of real, working practices read as a building site. A firm with an
+            # open gate is Listed, and the scorecard still says which gate and why, row
+            # by row, for anyone who wants it.
+            else "Listed" if pending_gates or len(gates) != len(GATES)
             else "Verified")
     if gates_ok and coverage_ok:
         for name, need, floor in TIERS:
