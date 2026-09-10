@@ -777,3 +777,6 @@ button,input,select{font:inherit;color:inherit}
 
 /* Coverage sits with the score, never apart from it. */
 .sc-coverage{display:block;margin:6px 0 2px;font-size:.78rem;line-height:1.5;color:var(--on-night-soft);max-width:52ch}
+
+/* A practice area we have not opened a page for: named, not linked. */
+.pa.is-soon{opacity:.62;cursor:default}

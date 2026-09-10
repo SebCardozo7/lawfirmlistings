@@ -24,6 +24,8 @@ const ai = ah?.ai_citations;
 const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
 const verifiedLicences = d.attorneys.filter(a => a.bar_number).length;
+// Practice areas that have a page of their own. Everything else is named, not linked.
+const PRACTICE_PAGES = new Set(['personal-injury']);
 // The link attribute is editorial, not commercial: clearing every eligibility gate earns a
 // followed link. Claiming the profile does not change it, and neither does paying for anything —
 // selling followed links is a link scheme and the penalty would land on this site.
@@ -128,7 +130,15 @@ const schema = {
 
       <div class="block" id="practice">
         <h2>Practice areas <small>{d.practices.length} areas · primary focus highlighted</small></h2>
-        <div class="pa-grid">{d.practices.map(p => <a class={`pa ${p.primary ? 'is-primary' : ''}`} href={p.slug === 'personal-injury' ? '/practice-areas/personal-injury/' : '#'}><Icon name="check" />{p.name}</a>)}</div>
+        {/* An area with a page is a link; an area without one is not. Fourteen of these on a
+            single profile pointed at "#", which reads to a screen reader as a link that goes
+            nowhere and to a search engine as a page we forgot to build. The tag still names what
+            the firm does, which is the information a reader came for. */}
+        <div class="pa-grid">{d.practices.map(p => (
+          PRACTICE_PAGES.has(p.slug)
+            ? <a class={`pa ${p.primary ? 'is-primary' : ''}`} href={`/practice-areas/${p.slug}/`}><Icon name="check" />{p.name}</a>
+            : <span class={`pa is-soon ${p.primary ? 'is-primary' : ''}`}><Icon name="check" />{p.name}</span>
+        ))}</div>
       </div>
 
       <div class="block" id="results">

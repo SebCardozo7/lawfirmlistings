@@ -18,6 +18,10 @@ const certified = published
 // manifest, so publishing a guide puts it on the home page and nothing here can describe an
 // article that does not exist.
 const homeGuides = publishedGuides(published).slice(0, 3);
+// Sixteen state chips and an "All 50 states" link sat in the hero of a site that publishes
+// one city, three clicks from a /cities/ page saying "one city so far". That is not a dead
+// link, it is a claim of national coverage. The list comes from the collection now.
+const states = [...new Set(published.map(f => f.data.market.state_name))].sort();
 
 const lead = certified[0] ?? published[0] ?? null;
 const leadPrimary = lead?.data.practices.find(pr => pr.primary) ?? lead?.data.practices[0];
@@ -162,7 +166,9 @@ const searchIndex = {
     });
   })();
 </script>
-    <div class="hero-popular"><span>Popular:</span><a href="/practice-areas/personal-injury/">Personal injury</a><a href="#">Divorce</a><a href="#">Criminal defense</a><a href="#">Immigration</a><a href="#">Estate planning</a></div>
+    <div class="hero-popular"><span>Popular:</span><a href="/cities/new-york-ny/personal-injury/">Personal injury</a>{['Divorce', 'Criminal defense', 'Immigration', 'Estate planning'].map(p => (
+        <span class="soon">{p}</span>
+      ))}</div>
 
     <div class="hero-preview" aria-hidden="true">
       {lead && (
@@ -238,11 +244,12 @@ const searchIndex = {
       ))}
     </div>
     <div class="states">
-      <span class="lbl">Browse by state</span>
-      <div class="chips">
-        <a class="chip" href="#">California</a><a class="chip" href="#">Texas</a><a class="chip" href="#">Florida</a><a class="chip" href="#">New York</a><a class="chip" href="#">Illinois</a><a class="chip" href="#">Pennsylvania</a><a class="chip" href="#">Georgia</a><a class="chip" href="#">Arizona</a><a class="chip" href="#">New Jersey</a><a class="chip" href="#">Washington</a><a class="chip" href="#">Massachusetts</a><a class="chip" href="#">Colorado</a><a class="chip" href="#">All 50 states →</a>
+        <span class="lbl">Where we publish</span>
+        <div class="chips">
+          {states.map(st => <a class="chip" href="/cities/">{st}</a>)}
+          <span class="chip soon">Other states as the evidence is collected</span>
+        </div>
       </div>
-    </div>
   </div>
 </section>
 
@@ -269,7 +276,7 @@ const searchIndex = {
           <div class="criterion"><Icon name="star" /><div><b>3 · Client experience</b><span>25+ verified client reviews with a 4.5 average, weighted for recency and detail.</span></div></div>
           <div class="criterion"><Icon name="users" /><div><b>4 · Peer recognition</b><span>Confidential evaluations from attorneys in the same market and practice area.</span></div></div>
         </div>
-        <a class="btn btn--white" href="#" style="margin-top:28px">Read the full methodology</a>
+        <a class="btn btn--white" href="/methodology/" style="margin-top:28px">Read the full methodology</a>
       </div>
       <div class="compare-wrap">
         <table class="compare">
@@ -384,7 +391,7 @@ const searchIndex = {
         <span class="eyebrow">For law firms</span>
         <h2 style="margin-top:14px">Is your firm eligible for certification?</h2>
         <p class="lede" style="margin-top:14px">Certification is free and earned, never purchased. Claim your profile to submit verified results, respond to reviews and appear in city and practice-area rankings.</p>
-        <div class="actions"><a class="btn btn--ink" href="#">Claim your firm profile</a><a class="btn btn--ghost" href="/methodology/">See certification criteria</a></div>
+        <div class="actions"><a class="btn btn--ink" href="/contact/">Ask us to claim your profile</a><a class="btn btn--ghost" href="/methodology/">See certification criteria</a></div>
       </div>
       <ul>
         <li><Icon name="check" /><span>Free, permanent profile with verified badge</span></li>
