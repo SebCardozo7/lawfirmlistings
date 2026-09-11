@@ -12,7 +12,9 @@ What it can and cannot establish.
 
   G1, active licensure: the registry's `status` is authoritative and current, so this gate can be
   genuinely passed or failed. An attorney we cannot match is not a failure - it is unchecked, and
-  the gate stays pending.
+  counts neither way. What does hold the gate open is an unmatched name whose namesakes in the
+  register include a disbarred or suspended one: that cannot be tied to the firm's attorney and
+  cannot be ruled out either, and a pass would be asserting the second.
 
   G2, clean public discipline, only partly: the dataset carries current status, not a history. A
   currently disbarred or suspended attorney fails G2 outright. But an attorney disciplined six
@@ -51,14 +53,31 @@ for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
         stream.reconfigure(encoding="utf-8")
 
-# A gate needs a substantial check of the roster, not a perfect one. Demanding that every
-# single attorney be matched meant a large firm could essentially never pass: the more
-# people it names, the likelier one of them shares a surname with hundreds of others, and
-# firms sat at 56 to 91 per cent verified with no adverse finding anywhere. That measured
-# how common their partners' names are, not whether their lawyers are licensed. Four
-# fifths matched with none adverse is a real check, and the profile prints the exact
-# count so nobody has to take the gate's word for it.
-MIN_ROSTER_COVERAGE = 0.80
+# There is no roster-coverage threshold any more, and the story of this line is the argument.
+#
+# It started as "every attorney must match", which meant a large firm could never pass: the more
+# people it names, the likelier one shares a surname with hundreds of others. Firms sat at 56 to
+# 91 per cent with no adverse finding anywhere, which measured how common their partners' names
+# are. So it became four fifths. Then Hill & Moin arrived at 4 of 13 and Fuchsberg at 18 of 27,
+# again with nothing adverse, and the reason was not their rosters:
+#
+#   Michael Heffernan at a Garden City firm has four namesakes in the register, at Mirkin and
+#   Gordon, at Weil Gotshal, at Congdon Flaherty, and one suspended with no address. None of
+#   them is at his firm. Matthew Jackson at a Manhattan plaintiff firm has three, in Tampa, at
+#   Snap Inc. and at the NLRB.
+#
+# The register's employer field is stale or blank often enough that the right person frequently
+# is not in the candidate set at all. No tiebreak fixes that, and a city tiebreak would have
+# invented matches, which is the Alex Shulman error with the cause reversed.
+#
+# So the two things were separated. A gate reports findings: nobody we identified is disbarred or
+# suspended, and no name we could not identify has an adverse namesake we are unable to rule out.
+# How much of the roster we could verify is a measurement, and it already has a home worth nine
+# points in pillar A, where A6 scores exactly that share. One number, in the place that reports
+# quality rather than the place that reports safety.
+#
+# Kept as documentation of a threshold that is deliberately gone, not as a value anything reads.
+MIN_ROSTER_COVERAGE = None
 
 ROOT = Path(__file__).resolve().parent.parent
 FIRMS = ROOT / "src" / "data" / "firms"
@@ -338,6 +357,17 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
         else:
             confidence = f"ambiguous ({len(named)} attorneys share this name)"
 
+        # An unmatched name is not automatically clean. If one of its namesakes in the register
+        # carries a disciplinary status, we cannot tie it to this person and we cannot rule it out
+        # either, and a gate that passed in silence would be claiming the second one.
+        if not chosen:
+            for cand in named:
+                st = (cand.get("status") or "").strip()
+                if st.lower() in DISCIPLINED:
+                    result.setdefault("adverse_unresolved", []).append(
+                        (att["name"], st, len(named)))
+                    break
+
         row = {"name": att["name"], "confidence": confidence, "basis": basis}
         if chosen:
             status = (chosen.get("status") or "").strip()
@@ -433,6 +463,7 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
     unchecked = result["ambiguous"] + result["unmatched"]
     disciplined = result["disciplined"]
     lapsed = [(n, st) for n, st in result["inactive"] if st.strip().lower() in LAPSED]
+    adverse_unresolved = result.get("adverse_unresolved") or []
 
     # An attestation cannot survive a finding of actual discipline: if the registry says an
     # attorney is disbarred or suspended, that outranks anything the firm has told us.
@@ -452,7 +483,24 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
                                     "Held for review: either record may be out of date."),
                        "source": f"{DATASET}, pending review of a registration lapse",
                        "checked_at": today}
-    elif matched / max(total, 1) >= MIN_ROSTER_COVERAGE and "G1" not in keep:
+    elif adverse_unresolved and "G1" not in keep:
+        n, st, count = adverse_unresolved[0]
+        gates["G1"] = {
+            "pass": False,
+            "evidence": (f"{matched} of {total} named attorneys are currently registered and none "
+                         f"of those carries an adverse status. {len(adverse_unresolved)} other "
+                         f"name(s) match a register entry that does: {n} shares a name with one "
+                         f"of {count} registrations, one of them {st.lower()}. That entry cannot "
+                         "be tied to this firm's attorney and cannot be ruled out either, so the "
+                         "gate is held open rather than decided."),
+            # "incomplete" is load-bearing: score.py reads that word and keeps the gate out of the
+            # finding column. Without it the first version of this made two firms read
+            # "Not eligible" because one of their attorneys shares a name with a suspended
+            # stranger, which is the worst thing this directory could publish about a
+            # working practice.
+            "source": f"{DATASET}, incomplete: an adverse namesake we cannot resolve",
+            "checked_at": today}
+    elif matched and "G1" not in keep:
         gates["G1"] = {
             "pass": True,
             "evidence": (f"{matched} of {total} named attorneys are currently registered and "
@@ -463,8 +511,8 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
     elif "G1" not in keep:
         gates["G1"] = {
             "pass": False,
-            "evidence": (f"{matched} of {total} named attorneys matched to the register, "
-                         f"below the {int(MIN_ROSTER_COVERAGE * 100)}% this gate asks for"),
+            "evidence": (f"None of the {total} attorneys this firm names could be found in the "
+                         "register, so there is nothing here to clear or to fault."),
             "source": f"{DATASET}, partial", "checked_at": today}
 
     if "G2" in keep:
@@ -473,7 +521,21 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
         gates["G2"] = {"pass": False, "evidence": f"Current disciplinary status on record. {detail}",
                        "source": DATASET, "checked_at": today}
-    elif matched / max(total, 1) >= MIN_ROSTER_COVERAGE:
+    elif adverse_unresolved:
+        n, st, count = adverse_unresolved[0]
+        gates["G2"] = {"pass": False,
+                       "evidence": (f"None of the {matched} attorneys we identified carries a "
+                                    f"disciplinary status. {len(adverse_unresolved)} name(s) we "
+                                    f"could not identify share a name with a registration that "
+                                    f"does, {n} among {count} namesakes. Held open."),
+                       # "incomplete" is load-bearing: score.py reads that word and keeps the gate out of the
+            # finding column. Without it the first version of this made two firms read
+            # "Not eligible" because one of their attorneys shares a name with a suspended
+            # stranger, which is the worst thing this directory could publish about a
+            # working practice.
+            "source": f"{DATASET}, incomplete: an adverse namesake we cannot resolve",
+                       "checked_at": today}
+    elif matched:
         gates["G2"] = {"pass": True,
                        "evidence": (f"None of the {matched} named attorneys carries a disciplinary "
                                     "status on the public register: no disbarment, suspension or "
@@ -484,8 +546,9 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
                        "checked_at": today}
     else:
         gates["G2"] = {"pass": False,
-                       "evidence": (f"{matched} of {total} attorneys matched, below the "
-                                    f"{int(MIN_ROSTER_COVERAGE * 100)}% this gate asks for"),
+                       "evidence": (f"None of the {total} attorneys this firm names could be found "
+                                    "in the register, so no disciplinary history could be read "
+                                    "either way."),
                        "source": f"{DATASET}, partial", "checked_at": today}
 
 

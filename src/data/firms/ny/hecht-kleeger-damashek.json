@@ -5,7 +5,7 @@
   "website": "https://lawyer1.com/",
   "domain": "lawyer1.com",
   "phone": "(212) 490-5700",
-  "status": "verified",
+  "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
@@ -194,15 +194,15 @@
   },
   "gates": {
     "G1": {
-      "pass": true,
-      "evidence": "7 of 8 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "pass": false,
+      "evidence": "7 of 8 named attorneys are currently registered and none of those carries an adverse status. 1 other name(s) match a register entry that does: David Silverman shares a name with one of 8 registrations, one of them suspended, due to reregister. That entry cannot be tied to this firm's attorney and cannot be ruled out either, so the gate is held open rather than decided.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
       "checked_at": "2026-09-11"
     },
     "G2": {
-      "pass": true,
-      "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "pass": false,
+      "evidence": "None of the 7 attorneys we identified carries a disciplinary status. 1 name(s) we could not identify share a name with a registration that does, David Silverman among 8 namesakes. Held open.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
       "checked_at": "2026-09-11"
     },
     "G3": {
@@ -282,8 +282,8 @@
   },
   "score": {
     "total": 69,
-    "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
+    "tier": "Listed",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {

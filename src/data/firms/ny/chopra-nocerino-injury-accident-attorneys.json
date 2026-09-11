@@ -188,14 +188,14 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "5 of 8 named attorneys matched to the register, below the 80% this gate asks for",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "evidence": "5 of 8 named attorneys are currently registered and none of those carries an adverse status. 2 other name(s) match a register entry that does: Taeshin Kyle Kim shares a name with one of 2 registrations, one of them suspended, delinquent. That entry cannot be tied to this firm's attorney and cannot be ruled out either, so the gate is held open rather than decided.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
       "checked_at": "2026-09-11"
     },
     "G2": {
       "pass": false,
-      "evidence": "5 of 8 attorneys matched, below the 80% this gate asks for",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "evidence": "None of the 5 attorneys we identified carries a disciplinary status. 2 name(s) we could not identify share a name with a registration that does, Taeshin Kyle Kim among 2 namesakes. Held open.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
       "checked_at": "2026-09-11"
     },
     "G3": {

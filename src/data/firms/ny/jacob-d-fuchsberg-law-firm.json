@@ -5,7 +5,7 @@
   "website": "https://www.fuchsberg.com/",
   "domain": "fuchsberg.com",
   "phone": "(212) 869-3500",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -392,15 +392,15 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "18 of 27 named attorneys matched to the register, below the 80% this gate asks for",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "pass": true,
+      "evidence": "18 of 27 named attorneys are currently registered and none carries an adverse status. 9 could not be told apart from namesakes in the register and are counted neither way",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
       "checked_at": "2026-09-11"
     },
     "G2": {
-      "pass": false,
-      "evidence": "18 of 27 attorneys matched, below the 80% this gate asks for",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "pass": true,
+      "evidence": "None of the 18 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
       "checked_at": "2026-09-11"
     },
     "G3": {
@@ -427,8 +427,8 @@
   "fee_statement": "eath lawyers will guide you through the legal process and fight for justice. We work on a contingency basis, so no fees unless we win. Schedule a Free Consultation #cta_end Common Causes of D",
   "score": {
     "total": 55,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {

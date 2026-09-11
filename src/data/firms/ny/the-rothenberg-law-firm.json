@@ -5,7 +5,7 @@
   "website": "https://injurylawyer.com/",
   "domain": "injurylawyer.com",
   "phone": "(800) 624-8888",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -356,15 +356,15 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "9 of 16 named attorneys matched to the register, below the 80% this gate asks for",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "pass": true,
+      "evidence": "9 of 16 named attorneys are currently registered and none carries an adverse status. 7 could not be told apart from namesakes in the register and are counted neither way",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
       "checked_at": "2026-09-11"
     },
     "G2": {
-      "pass": false,
-      "evidence": "9 of 16 attorneys matched, below the 80% this gate asks for",
-      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "pass": true,
+      "evidence": "None of the 9 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
       "checked_at": "2026-09-11"
     },
     "G3": {
@@ -391,8 +391,8 @@
   "fee_statement": "no upfront fees in working with an injury lawyer. Our personal injury attorneys work on a contingency fee basis, which means that you do not pay anything unless we win your case. This allows",
   "score": {
     "total": 64,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (5/15).",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (5/15).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
