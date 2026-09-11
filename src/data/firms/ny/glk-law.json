@@ -42,7 +42,7 @@
       "bar_state": "NY",
       "source_url": "https://www.lawyertime.com/attorneys/andrew-l-libo/",
       "registry_note": "sole name match carries an adverse status (Deceased) and is not corroborated by the firm - not published",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Michael A. Fruhling",
@@ -53,7 +53,7 @@
       "admitted_year": 1992,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Anthony Makarov",
@@ -64,7 +64,7 @@
       "admitted_year": 2018,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Edward P. Milstein",
@@ -75,7 +75,7 @@
       "admitted_year": 1975,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Jay W. Dankner",
@@ -86,7 +86,7 @@
       "admitted_year": 1974,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     }
   ],
   "languages": [
@@ -190,13 +190,13 @@
       "pass": true,
       "evidence": "4 of 5 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 4 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G3": {
       "pass": false,
@@ -208,13 +208,13 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 5 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G6": {
-      "pass": false,
-      "evidence": "Time in operation not established",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-10"
+      "pass": true,
+      "evidence": "121 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 1997-01-21, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-11"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -264,7 +264,7 @@
   "score": {
     "total": 58,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (2/15).",
+    "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (2/15).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
@@ -451,7 +451,9 @@
     "raw": 52.0,
     "assessed": 89,
     "coverage": 0.89,
-    "floor_abc_pct": 0.798
+    "floor_abc_pct": 0.798,
+    "gates_unavailable": [],
+    "assessable": 100
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -494,5 +496,11 @@
     "bios_published": 5,
     "source": "observed",
     "checked_at": "2026-09-10"
+  },
+  "operating": {
+    "registered": "1997-01-21",
+    "years": 29.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
   }
 }

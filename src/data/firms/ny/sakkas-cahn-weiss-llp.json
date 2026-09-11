@@ -28,7 +28,38 @@
       "source_url": "https://maps.google.com/?cid=1353084481370290542&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Adam D. Cahn",
+      "role": "Esq.",
+      "bar_state": "NY",
+      "source_url": "https://sakkascahn.com/about-us/adam-d-cahn/",
+      "bar_number": "2661544",
+      "admitted_year": 1995,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Matthew Sakkas",
+      "role": "Esq.",
+      "bar_state": "NY",
+      "source_url": "https://sakkascahn.com/about-us/matthew-sakkas/",
+      "registry_note": "not found",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Mitchel E. Weiss",
+      "role": "Esq.",
+      "bar_state": "NY",
+      "source_url": "https://sakkascahn.com/about-us/mitchel-e-weiss/",
+      "bar_number": "2114759",
+      "admitted_year": 1986,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-11"
+    }
+  ],
   "languages": [
     "English",
     "Spanish"
@@ -109,15 +140,15 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "Bar registry not yet checked for this firm's attorneys",
-      "source": "pending",
-      "checked_at": "2026-09-10"
+      "evidence": "2 of 3 named attorneys matched to the register, below the 80% this gate asks for",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "checked_at": "2026-09-11"
     },
     "G2": {
       "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
-      "checked_at": "2026-09-10"
+      "evidence": "2 of 3 attorneys matched, below the 80% this gate asks for",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
+      "checked_at": "2026-09-11"
     },
     "G3": {
       "pass": true,
@@ -126,10 +157,10 @@
       "checked_at": "2026-09-10"
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-09-10"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-11"
     },
     "G6": {
       "pass": true,
@@ -238,31 +269,31 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 60,
+    "total": 64,
     "tier": "Listed",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 15,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "registry",
+            "evidence": "Mean 35.5 years since admission across 2 of 3 named attorneys (longest 40, shortest 31) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 6,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "registry",
+            "evidence": "2 of 3 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -411,23 +442,25 @@
         ]
       }
     },
-    "floor_abc": 29,
+    "floor_abc": 44,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 6,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "D1 Website trust & experience: +5.0 available",
+        "B3 Results disclosure: +4 available",
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 42.0,
-    "assessed": 70,
-    "coverage": 0.7,
-    "floor_abc_pct": 0.763
+    "raw": 57.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.772,
+    "gates_unavailable": [],
+    "assessable": 100
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -439,5 +472,11 @@
     "bios_published": 0,
     "source": "observed",
     "checked_at": "2026-09-10"
+  },
+  "operating": {
+    "registered": "2005-03-14",
+    "years": 21.5,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
   }
 }

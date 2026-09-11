@@ -272,7 +272,25 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
     if not attorneys:
         result["note"] = "no attorney names collected"
         if write and write_gates:
-            apply_g5(firm, date.today().isoformat())
+            today = date.today().isoformat()
+            apply_g5(firm, today)
+            # G1 and G2 ask about the attorneys a firm names, and three firms here name none: no
+            # roster page, no bio pages, nothing on the home page. Leaving those gates reading
+            # "Bar registry not yet checked" put the gap on us, and it is not ours. The register
+            # is open and free; the names are what is missing, and that is a finding about the
+            # site, which is also what G5 fails them for.
+            for code, what in (("G1", "licensure"), ("G2", "disciplinary history")):
+                gate = (firm.get("gates") or {}).get(code) or {}
+                if gate.get("pass") or gate.get("attested"):
+                    continue
+                firm.setdefault("gates", {})[code] = {
+                    "pass": False,
+                    "evidence": ("This firm names no attorney on its public pages, so there is "
+                                 "no roster whose %s can be checked. The register is open and "
+                                 "free to search; the names are what is missing." % what),
+                    "source": "no roster published",
+                    "checked_at": today,
+                }
             path.write_text(json.dumps(firm, indent=2, ensure_ascii=False) + "\n",
                             encoding="utf-8")
         return result

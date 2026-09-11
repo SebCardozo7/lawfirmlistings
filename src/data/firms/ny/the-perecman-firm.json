@@ -45,7 +45,7 @@
       "admitted_year": 2010,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Steven Dorfman",
@@ -56,7 +56,7 @@
       "admitted_year": 1997,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Adam Hurwitz",
@@ -67,7 +67,7 @@
       "admitted_year": 1986,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Peter Rigelhaupt",
@@ -78,7 +78,7 @@
       "admitted_year": 1989,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Mariusz Sniarowski",
@@ -89,7 +89,7 @@
       "admitted_year": 2004,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Erica Colon",
@@ -100,7 +100,7 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Eileen Kelly",
@@ -111,7 +111,7 @@
       "admitted_year": 2016,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Zach Perecman",
@@ -122,7 +122,7 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     }
   ],
   "languages": [
@@ -242,13 +242,13 @@
       "pass": true,
       "evidence": "8 of 8 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 8 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G3": {
       "pass": true,
@@ -260,7 +260,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G6": {
       "pass": true,
@@ -462,7 +462,9 @@
     "raw": 57.0,
     "assessed": 97,
     "coverage": 0.97,
-    "floor_abc_pct": 0.684
+    "floor_abc_pct": 0.684,
+    "gates_unavailable": [],
+    "assessable": 100
   },
   "entity": {
     "legal_name": "THE PERECMAN FIRM PLLC",
@@ -508,5 +510,11 @@
     "bios_published": 9,
     "source": "observed",
     "checked_at": "2026-09-10"
+  },
+  "operating": {
+    "registered": "2001-05-08",
+    "years": 25.3,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
   }
 }

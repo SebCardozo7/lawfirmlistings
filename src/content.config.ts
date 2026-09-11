@@ -74,6 +74,10 @@ const firms = defineCollection({
     // What the firm publishes about its own results: the input for pillar B at v2.0. `readable`
     // separates "publishes nothing", which is a finding, from "we could not read the page", which
     // leaves the pillar pending rather than scoring the firm zero for our failure.
+    operating: z.object({
+      registered: z.string().nullable(), years: z.number().nullable(),
+      source: z.string(), note: z.string().optional(), checked_at: z.string(),
+    }).optional(),
     accountability: z.object({
       malpractice_insurance: z.boolean(),
       insurance_evidence: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
@@ -104,6 +108,11 @@ const firms = defineCollection({
       // no template can print the score without being able to print its coverage too.
       raw: z.number().optional(), assessed: z.number().optional(), coverage: z.number().optional(),
       floor_abc_pct: z.number().optional(),
+      // `assessable` is the scale that exists in this firm's market, which is a hundred minus
+      // whatever its state publishes no source for. `gates_unavailable` names those gates, so a
+      // profile can state the limit as a fact about the state instead of leaving a gap.
+      assessable: z.number().optional(),
+      gates_unavailable: z.array(z.string()).default([]),
       pillars: z.object({ A: pillar, B: pillar, C: pillar, D: pillar, E: pillar }),
       floor_abc: z.number(),
       next_tier: z.object({ name: z.string(), needed: z.number(), gap: z.number(), floor_met: z.boolean(), coverage_met: z.boolean().optional(), path: z.array(z.string()) }).nullable(),

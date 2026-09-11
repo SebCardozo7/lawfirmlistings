@@ -29,6 +29,18 @@ const NOT_A_FINDING = ['pending', 'partial', 'no queryable source', 'unavailable
 const notAFinding = (source: string) =>
   NOT_A_FINDING.some(w => (source ?? '').toLowerCase().includes(w));
 
+// A gate its state publishes no source for is not a gate we skipped, and labelling it "Not
+// checked" put the blame on us for a register the state does not let anyone read. The row says
+// whose gap it is: "Not published by Maryland", next to evidence that names the register and why
+// we leave it alone.
+const NO_STATE_SOURCE = ['no queryable source', 'unavailable'];
+// A firm that names no attorney anywhere leaves nothing to check, which is a fact about
+// its own site rather than about the state or about us.
+const noRoster = (source: string) =>
+  (source ?? '').toLowerCase().includes('no roster published');
+const noStateSource = (source: string) =>
+  NO_STATE_SOURCE.some(w => (source ?? '').toLowerCase().includes(w));
+
 const CERTIFIED_TIERS = ['Certified', 'Distinguished', 'Elite'];
 const isCertified = CERTIFIED_TIERS.includes(s.tier);
 const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL Certified · ${s.tier}` : s.tier;
@@ -75,7 +87,11 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL 
         <Icon name={g.pass ? 'check' : 'clock'} />
         <div>{code} {gateNames[code]}
           {g.attested && <span class="sc-tag">Firm-attested</span>}
-          {!g.pass && <span class="sc-tag">{notAFinding(g.source) ? 'Not checked' : 'Not passed'}</span>}
+          {!g.pass && <span class="sc-tag">{noRoster(g.source)
+              ? 'No attorneys published'
+              : noStateSource(g.source)
+              ? `Not published by ${d.market.state_name}`
+              : notAFinding(g.source) ? 'Not checked' : 'Not passed'}</span>}
           <small>{g.evidence}</small>
         </div>
       </div>

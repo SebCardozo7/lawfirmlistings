@@ -110,21 +110,21 @@
     },
     "G3": {
       "pass": false,
-      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
+      "evidence": "1 physical office confirmed through verified Google Business Profile listings, but Maryland does not publish a business register we can query, so the registered entity behind this firm is not verified here.",
+      "source": "no queryable source",
       "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-10"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-11"
     },
     "G6": {
-      "pass": false,
-      "evidence": "41 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-10"
+      "pass": true,
+      "evidence": "41 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2009-07-06, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-11"
     }
   },
   "cohort_id": "md-personal-injury",
@@ -177,7 +177,7 @@
   "score": {
     "total": 49,
     "tier": "Listed",
-    "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: B; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: B; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
@@ -364,6 +364,18 @@
     "raw": 34.5,
     "assessed": 70,
     "coverage": 0.7,
-    "floor_abc_pct": 0.697
+    "floor_abc_pct": 0.697,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "assessable": 100
+  },
+  "operating": {
+    "registered": "2009-07-06",
+    "years": 17.2,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
   }
 }

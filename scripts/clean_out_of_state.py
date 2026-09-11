@@ -49,9 +49,20 @@ REGISTRY_KEYS = ("registry_status", "registry_basis", "registry_note", "bar_numb
                  "admitted_year", "checked_at")
 
 
-def entity_wording(market):
-    return (f"{market['state_name']} does not publish a business register we can query, so the "
-            "entity behind this firm is not verified here.", "no queryable source")
+def entity_wording(market, firm=None):
+    """G3 wants a registered entity and a confirmed office. One half is answerable anywhere.
+
+    Saying only "no business register" threw away the half we did establish. The offices are
+    verified Google Business Profile listings with postal addresses, which is the part a client
+    uses to work out whether anyone is actually there, so the evidence says so and then names the
+    half the state does not publish.
+    """
+    listings = (((firm or {}).get("digital") or {}).get("places") or {}).get("listing_count") or 0
+    confirmed = ("%d physical office%s confirmed through verified Google Business Profile "
+                 "listings, but " % (listings, "" if listings == 1 else "s")) if listings else ""
+    return (f"{confirmed}{market['state_name']} does not publish a business register we can "
+            "query, so the registered entity behind this firm is not verified here.",
+            "no queryable source")
 
 
 def footprint_wording(market):
@@ -67,16 +78,30 @@ def clean(firm):
     wording = {
         "G1": registry_wording(market),
         "G2": discipline_wording(market),
-        "G3": entity_wording(market),
+        "G3": entity_wording(market, firm),
         "G6": footprint_wording(market),
     }
     for code in NY_SOURCED:
         gate = (firm.get("gates") or {}).get(code)
         if not gate:
             continue
-        if "data.ny.gov" not in (gate.get("source") or "") and "New York" not in (gate.get("source") or ""):
+        source_now = (gate.get("source") or "")
+        was_ny = "data.ny.gov" in source_now or "New York" in source_now
+        # Also rewrite a gate this script has already reset, so improving the wording does not
+        # need the damage to still be there. What it must never touch is a gate somebody else has
+        # since answered: a pass, an attestation, or a real out-of-state source such as the
+        # published discipline decisions check.
+        # build_profiles.py marks an unfinished gate "(partial)", which is right in New York
+        # where the register can finish it and wrong everywhere else: outside New York nothing
+        # will ever finish G3's entity half, so it reads as work we owe rather than a gap in the
+        # state's publishing.
+        already_ours = ("no queryable source" in source_now.lower()
+                        or "partial" in source_now.lower())
+        if gate.get("pass") or gate.get("attested") or not (was_ny or already_ours):
             continue
         evidence, source = wording[code]
+        if gate.get("evidence") == evidence and source_now == source:
+            continue
         firm["gates"][code] = {"pass": False, "evidence": evidence, "source": source,
                                "checked_at": gate.get("checked_at")}
         changes.append("%s reset to %s" % (code, source))

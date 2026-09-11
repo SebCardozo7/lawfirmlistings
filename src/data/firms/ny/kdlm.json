@@ -5,7 +5,7 @@
   "website": "https://kdlm.com/",
   "domain": "kdlm.com",
   "phone": "(212) 618-6800",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -28,7 +28,112 @@
       "source_url": "https://maps.google.com/?cid=8555640508413194103&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Carmine A. Rubino",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/carmine-a-rubino",
+      "bar_number": "2785723",
+      "admitted_year": 1997,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Gerry M. Oginski",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/gerry-oginski",
+      "registry_note": "not found",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "James G. Moore",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/james-moore",
+      "registry_note": "ambiguous (2 attorneys share this name)",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "John D. Cagney",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/john-cagney",
+      "bar_number": "4794129",
+      "admitted_year": 2010,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "John T. Reardon",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/john-t-reardon",
+      "bar_number": "6116040",
+      "admitted_year": 2024,
+      "registry_status": "Due to reregister within 30 days of birthday",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Joseph Fortunato",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/joseph-fortunato",
+      "bar_number": "5392147",
+      "admitted_year": 2016,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Matthew Gaier",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/matthew-gaier",
+      "bar_number": "2182608",
+      "admitted_year": 1988,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Pani N. Vo",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/pani-vo",
+      "bar_number": "5051834",
+      "admitted_year": 2012,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Samantha Radlevich",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/samantha-radlevich",
+      "bar_number": "5720503",
+      "admitted_year": 2019,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Thomas J. Principe",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://kdlm.com/experienced-personal-injury-attorneys-in-new-york/thomas-j-principe",
+      "bar_number": "1007939",
+      "admitted_year": 1974,
+      "registry_status": "Due to reregister within 30 days of birthday",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-11"
+    }
+  ],
   "languages": [
     "English",
     "Spanish"
@@ -104,16 +209,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "Bar registry not yet checked for this firm's attorneys",
-      "source": "pending",
-      "checked_at": "2026-09-10"
+      "pass": true,
+      "evidence": "8 of 10 named attorneys are currently registered and none carries an adverse status. 2 could not be told apart from namesakes in the register and are counted neither way",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-09-11"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
-      "checked_at": "2026-09-10"
+      "pass": true,
+      "evidence": "None of the 8 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-09-11"
     },
     "G3": {
       "pass": true,
@@ -122,10 +227,10 @@
       "checked_at": "2026-09-10"
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-09-10"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 10 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-11"
     },
     "G6": {
       "pass": true,
@@ -205,31 +310,31 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 46,
-    "tier": "Listed",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "total": 52,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (2/25).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 14,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "registry",
+            "evidence": "Mean 21.0 years since admission across 8 of 10 named attorneys (longest 52, shortest 2) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 4.5,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "registry",
+            "evidence": "8 of 10 named attorneys matched to the New York register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -378,23 +483,25 @@
         ]
       }
     },
-    "floor_abc": 24,
+    "floor_abc": 37,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 24,
+      "gap": 18,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "D1 Website trust & experience: +6.5 available",
+        "E4 Availability: +5 available",
+        "A6 Roster verifiability: +4.5 available"
       ]
     },
-    "raw": 32.5,
-    "assessed": 70,
-    "coverage": 0.7,
-    "floor_abc_pct": 0.618
+    "raw": 46.0,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.649,
+    "gates_unavailable": [],
+    "assessable": 100
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -406,5 +513,11 @@
     "bios_published": 0,
     "source": "observed",
     "checked_at": "2026-09-10"
+  },
+  "operating": {
+    "registered": "2001-02-23",
+    "years": 25.5,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
   }
 }

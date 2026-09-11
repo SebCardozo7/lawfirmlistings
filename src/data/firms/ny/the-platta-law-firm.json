@@ -38,7 +38,7 @@
       "admitted_year": 2004,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Michael Taub",
@@ -49,7 +49,7 @@
       "admitted_year": 1984,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Howard Frederick",
@@ -60,7 +60,7 @@
       "admitted_year": 1991,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Elan Hallhauser",
@@ -71,7 +71,7 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Evi Kallfa",
@@ -82,7 +82,7 @@
       "admitted_year": 2013,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Robert Miraglia",
@@ -93,7 +93,7 @@
       "admitted_year": 2010,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Kyeko M. Stewart",
@@ -104,7 +104,7 @@
       "admitted_year": 2017,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Jordan Weinstein",
@@ -112,7 +112,7 @@
       "bar_state": "NY",
       "source_url": "https://plattalaw.com/our-attorneys/jordan-weinstein/",
       "registry_note": "ambiguous (2 attorneys share this name)",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     }
   ],
   "languages": [
@@ -198,13 +198,13 @@
       "pass": true,
       "evidence": "7 of 8 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G3": {
       "pass": true,
@@ -216,7 +216,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G6": {
       "pass": true,
@@ -436,7 +436,9 @@
     "raw": 51.5,
     "assessed": 89,
     "coverage": 0.89,
-    "floor_abc_pct": 0.675
+    "floor_abc_pct": 0.675,
+    "gates_unavailable": [],
+    "assessable": 100
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -464,5 +466,11 @@
     "bios_published": 8,
     "source": "observed",
     "checked_at": "2026-09-10"
+  },
+  "operating": {
+    "registered": "2007-07-26",
+    "years": 19.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
   }
 }
