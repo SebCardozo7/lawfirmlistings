@@ -63,6 +63,11 @@ SUBS = {  # code: (pillar, label, max)
 }
 PILLAR_MAX = {"A": 25, "B": 15, "C": 20, "D": 25, "E": 15}
 
+# The states whose attorney register we are permitted to query. Sub-factors and gates
+# derived from a register mean nothing outside this set, and must not be scored there.
+# scripts/build_profiles.py holds the same set for the wording it writes.
+OPEN_REGISTER_STATES = {"NY"}
+
 # The eligibility gates, all five checkable by machine from a public source. G4, "no
 # consumer-protection actions", was removed at v2.0: it asked for a negative across every
 # enforcement body in the country and no search can establish it. The reasoning, and the two
@@ -206,7 +211,17 @@ def compute(firm):
     named = len(attys)
     verified = [a for a in attys if a.get("bar_number")]
     with_number = [a for a in attys if a.get("bar_number") and a.get("registry_basis")]
-    if named:
+    # A6 is a share of a register, so it needs a register. Where the state publishes none we may
+    # query, every attorney is unmatched by definition, and the profile said "0 of 7 named
+    # attorneys matched to the Maryland register" and scored the firm 1 out of 9 for it. Maryland
+    # was never queried: mdcourts.gov asks crawlers to stay out of its attorney search. So the
+    # factor leaves the scale rather than charging a firm for a door we agreed not to open.
+    if named and firm.get("market", {}).get("state") not in OPEN_REGISTER_STATES:
+        out.append(sub("A6", 0, "no queryable source",
+                       "%s publishes no attorney register we can query, so the roster is not "
+                       "verified here and this is not scored."
+                       % firm.get("market", {}).get("state_name", "This state")))
+    elif named:
         share = len(verified) / named
         pts = 6 if share >= 0.95 else 4.5 if share >= 0.8 else 3 if share >= 0.5 else 1
         # Three more for publishing the numbers itself, which is a text change any firm can

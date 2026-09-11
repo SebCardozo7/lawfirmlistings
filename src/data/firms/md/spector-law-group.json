@@ -1,10 +1,10 @@
 {
-  "slug": "shaevitz-shaevitz-law-offices",
-  "name": "Shaevitz & Shaevitz Law Offices",
-  "initials": "SS",
-  "website": "https://shaevitzandshaevitz.com/",
-  "domain": "shaevitzandshaevitz.com",
-  "phone": "(718) 223-5344",
+  "slug": "spector-law-group",
+  "name": "Spector Law Group",
+  "initials": "SP",
+  "website": "https://spectorlawgroup.com/",
+  "domain": "spectorlawgroup.com",
+  "phone": "(410) 321-6200",
   "status": "listed",
   "practices": [
     {
@@ -14,18 +14,18 @@
     }
   ],
   "market": {
-    "city_slug": "new-york-ny",
-    "city": "New York",
-    "state": "NY",
-    "state_name": "New York"
+    "city_slug": "baltimore-md",
+    "city": "Baltimore",
+    "state": "MD",
+    "state_name": "Maryland"
   },
   "offices": [
     {
-      "label": "Shaevitz & Shaevitz Law Offices",
-      "address": "148-55 Hillside Ave., Briarwood, NY 11435, USA",
+      "label": "Spector Law Group",
+      "address": "1340 Smith Ave Ste 200, Baltimore, MD 21209, USA",
       "by_appointment": false,
       "is_hq": true,
-      "source_url": "https://maps.google.com/?cid=4956994083502418706&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+      "source_url": "https://maps.google.com/?cid=8565209512772496754&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
   "attorneys": [],
@@ -33,40 +33,42 @@
     "English",
     "Spanish"
   ],
-  "fee_model": "Contingency",
+  "fee_model": "Not stated",
   "free_consultation": true,
-  "availability": [],
+  "availability": [
+    "24/7 intake line"
+  ],
   "about": [
-    "Shaevitz & Shaevitz Law Offices is a personal injury firm with a single office in Briarwood.",
-    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free. It publishes material in English and Spanish."
+    "Spector Law Group is a personal injury firm with a single office in Baltimore.",
+    "The firm states that the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.3,
-      "count_label": "26",
+      "rating": 4.7,
+      "count_label": "41",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
       "fetched_at": "2026-09-10"
     },
     "sample": [
       {
-        "published_at": "2026-07-03T14:41:31.109021399Z",
-        "rating": 2
-      },
-      {
-        "published_at": "2025-02-08T05:42:10.867356Z",
+        "published_at": "2026-02-21T00:35:12.898859744Z",
         "rating": 5
       },
       {
-        "published_at": "2025-03-29T17:17:17.370384Z",
-        "rating": 1
-      },
-      {
-        "published_at": "2025-04-25T19:41:49.682176Z",
+        "published_at": "2025-11-25T01:24:03.893348550Z",
         "rating": 5
       },
       {
-        "published_at": "2022-03-24T00:07:35.802436Z",
+        "published_at": "2025-05-09T14:58:17.289507Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-10T17:39:38.448547720Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-04-16T13:59:35.546402Z",
         "rating": 5
       }
     ]
@@ -74,31 +76,21 @@
   "results": [],
   "digital": {
     "trust_pages": {
-      "privacy_policy": true,
       "blog": true
     },
     "schema_detected": true,
-    "psi": {
-      "value": {
-        "performance": 59,
-        "cwv_pass": false
-      },
-      "source": "PageSpeed Insights API (mobile, lab only)",
-      "measured_at": "2026-09-10",
-      "note": "LCP 4.5 s / CLS 0.003 / TBT 698 ms"
-    },
     "_ahrefs_partial_from_cohort": {
-      "domain": "shaevitzandshaevitz.com",
-      "name": "Shaevitz & Shaevitz Law Offices",
-      "dr": 21,
-      "refdomains": 485,
-      "org_keywords": 138,
-      "org_traffic": 1172
+      "domain": "spectorlawgroup.com",
+      "name": "Spector Law Group",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 26,
-      "rating_weighted": 4.3,
+      "review_count_total": 41,
+      "rating_weighted": 4.7,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
     }
@@ -106,52 +98,86 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "Bar registry not yet checked for this firm's attorneys",
-      "source": "pending",
+      "evidence": "Maryland does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
       "checked_at": "2026-09-10"
     },
     "G2": {
       "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
+      "evidence": "Maryland does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
       "checked_at": "2026-09-10"
     },
     "G3": {
       "pass": false,
-      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
-      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
       "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
       "checked_at": "2026-09-10"
     },
     "G6": {
       "pass": false,
-      "evidence": "Time in operation not established",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "evidence": "41 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
       "checked_at": "2026-09-10"
     }
   },
-  "cohort_id": "ny-personal-injury",
+  "cohort_id": "md-personal-injury",
   "faq": [],
-  "fee_statement": "ce helping injured victims, we won’t stop until you receive the compensation you deserve. No Fee Unless We Win At Shaevitz & Shaevitz, we handle all personal injury cases on a contingency basis",
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-10"
+  },
   "results_published": {
-    "readable": true,
-    "count": 0,
-    "amounts": [],
-    "case_types": [],
-    "disclaimer": false,
+    "count": 12,
+    "counted_from": "stated amounts",
+    "amounts": [
+      150000000,
+      10800000,
+      6000000,
+      4250000,
+      4000000,
+      3500000,
+      1700000,
+      675000,
+      650000,
+      400000,
+      300000,
+      125000
+    ],
+    "largest": 150000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian"
+    ],
+    "disclaimer": true,
     "venues": [],
-    "why": "the site publishes no case-results page",
+    "text_length": 4422,
+    "readable": true,
+    "url": "https://spectorlawgroup.com/case-results/",
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 26,
+    "total": 49,
     "tier": "Listed",
-    "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: B; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
@@ -186,37 +212,37 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 12,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 4.5,
             "max": 6,
             "source": "firm",
-            "evidence": "The firm publishes no case results we could read"
+            "evidence": "12 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 3,
             "max": 5,
             "source": "firm",
-            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+            "evidence": "6 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
             "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
           }
         ]
       },
       "C": {
-        "score": 8,
+        "score": 15,
         "max": 20,
         "subs": [
           {
@@ -225,7 +251,7 @@
             "pts": 2,
             "max": 5,
             "source": "observed",
-            "evidence": "26 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "41 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -233,37 +259,37 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 26 reviews → Bayesian 4.71 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 41 reviews → Bayesian 4.78 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2026-07-03) · a sample of five per business listing, not every review"
+            "evidence": "3 of 5 sampled reviews are from the last 12 months (newest 2026-02-21) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "2 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
       "D": {
-        "score": 4,
+        "score": 3,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 1.5,
+            "pts": 1,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV pending · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -292,16 +318,16 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 5,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 1,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · ce helping injured victims, we won’t stop until you receive the compensation you deserve. No Fee Unless We Win At Shaevitz & Shaevitz, we handle all personal injury cases on a contingency basis · the fee percentage itself is not published"
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -314,20 +340,20 @@
           {
             "code": "E4",
             "label": "Availability",
-            "pts": 0,
+            "pts": 2.5,
             "max": 5,
             "source": "observed",
-            "evidence": "no availability published"
+            "evidence": "24/7 intake line"
           }
         ]
       }
     },
-    "floor_abc": 8,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 44,
-      "floor_met": false,
+      "gap": 21,
+      "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
@@ -335,20 +361,9 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 18.5,
+    "raw": 34.5,
     "assessed": 70,
     "coverage": 0.7,
-    "floor_abc_pct": 0.224
-  },
-  "accountability": {
-    "malpractice_insurance": false,
-    "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
-    "pages_read": 2,
-    "bios_published": 0,
-    "source": "observed",
-    "checked_at": "2026-09-10"
+    "floor_abc_pct": 0.697
   }
 }

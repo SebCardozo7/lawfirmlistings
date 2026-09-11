@@ -1,10 +1,10 @@
 {
-  "slug": "hill-moin-llp",
-  "name": "Hill & Moin LLP",
-  "initials": "HM",
-  "website": "https://hillmoin.com/",
-  "domain": "hillmoin.com",
-  "phone": "(212) 668-6000",
+  "slug": "miller-zois-attorneys-at-law",
+  "name": "Miller & Zois, Attorneys at Law",
+  "initials": "MZ",
+  "website": "https://www.millerandzois.com/",
+  "domain": "millerandzois.com",
+  "phone": "(410) 779-4600",
   "status": "listed",
   "practices": [
     {
@@ -14,24 +14,42 @@
     }
   ],
   "market": {
-    "city_slug": "new-york-ny",
-    "city": "New York",
-    "state": "NY",
-    "state_name": "New York"
+    "city_slug": "baltimore-md",
+    "city": "Baltimore",
+    "state": "MD",
+    "state_name": "Maryland"
   },
   "offices": [
     {
-      "label": "Hill & Moin LLP - Accident Attorneys",
-      "address": "111 Broadway #810, New York, NY 10006, USA",
+      "label": "Miller & Zois, Attorneys at Law",
+      "address": "1 South St #2450, Baltimore, MD 21202, USA",
       "by_appointment": false,
       "is_hq": true,
-      "source_url": "https://maps.google.com/?cid=7189269298569944224&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+      "source_url": "https://maps.google.com/?cid=9567204635867643182&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Ronald V. Miller Jr.",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.millerandzois.com/our-team/ronald-v-miller-jr/"
+    },
+    {
+      "name": "Laura G. Zois",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.millerandzois.com/our-team/laura-g-zois/"
+    },
+    {
+      "name": "Justin P. Zuber",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.millerandzois.com/our-team/justin-p-zuber/"
+    }
+  ],
   "languages": [
-    "English",
-    "Spanish"
+    "English"
   ],
   "fee_model": "Contingency",
   "free_consultation": true,
@@ -40,36 +58,36 @@
     "Hospital & home visits"
   ],
   "about": [
-    "Hill & Moin LLP is a personal injury firm with a single office in Manhattan.",
-    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock; it will visit clients in hospital or at home. It publishes material in English and Spanish."
+    "Miller & Zois, Attorneys at Law is a personal injury firm with a single office in Baltimore.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock; it will visit clients in hospital or at home."
   ],
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 5.0,
-      "count_label": "181",
+      "rating": 4.2,
+      "count_label": "118",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
       "fetched_at": "2026-09-10"
     },
     "sample": [
       {
-        "published_at": "2026-07-07T19:41:37.388919144Z",
+        "published_at": "2026-02-02T23:58:03.721325513Z",
         "rating": 5
       },
       {
-        "published_at": "2026-02-27T18:59:10.046714424Z",
+        "published_at": "2026-03-26T17:11:37.880269108Z",
         "rating": 5
       },
       {
-        "published_at": "2025-10-16T20:20:37.173452970Z",
+        "published_at": "2026-03-30T01:54:44.839048970Z",
         "rating": 5
       },
       {
-        "published_at": "2026-02-17T22:19:04.246599040Z",
+        "published_at": "2023-12-15T17:31:35.894852Z",
         "rating": 5
       },
       {
-        "published_at": "2025-12-22T18:11:35.749249603Z",
+        "published_at": "2025-08-04T15:03:17.569525846Z",
         "rating": 5
       }
     ]
@@ -77,10 +95,10 @@
   "results": [],
   "digital": {
     "trust_pages": {
-      "privacy_policy": true,
+      "attorney_bios": true,
       "disclaimer": true,
-      "blog": true,
-      "attorney_bios": true
+      "privacy_policy": true,
+      "blog": true
     },
     "schema_detected": true,
     "psi": {
@@ -88,22 +106,22 @@
         "performance": 90,
         "cwv_pass": false
       },
-      "source": "PageSpeed Insights API (mobile, lab only)",
+      "source": "PageSpeed Insights API (mobile, field + lab)",
       "measured_at": "2026-09-10",
-      "note": "LCP 3.2 s / CLS 0.082 / TBT 0 ms"
+      "note": "LCP 2.6 s / CLS 0.008 / TBT 251 ms"
     },
     "_ahrefs_partial_from_cohort": {
-      "domain": "hillmoin.com",
-      "name": "Hill & Moin LLP",
-      "dr": 28,
-      "refdomains": 841,
-      "org_keywords": 326,
-      "org_traffic": 2695
+      "domain": "millerandzois.com",
+      "name": "Miller & Zois",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 181,
-      "rating_weighted": 5.0,
+      "review_count_total": 118,
+      "rating_weighted": 4.2,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
     }
@@ -111,128 +129,92 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "Bar registry not yet checked for this firm's attorneys",
-      "source": "pending",
+      "evidence": "Maryland does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
       "checked_at": "2026-09-10"
     },
     "G2": {
       "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
+      "evidence": "Maryland does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
       "checked_at": "2026-09-10"
     },
     "G3": {
-      "pass": true,
-      "evidence": "HILL & MOIN, LLP is an active domestic registered limited liability partnership registered since 2004-11-03, with 1 Google-verified location",
-      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
       "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
       "checked_at": "2026-09-10"
     },
     "G6": {
-      "pass": true,
-      "evidence": "181 public client reviews and 22 years since the entity was formed in 2004",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "pass": false,
+      "evidence": "118 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
       "checked_at": "2026-09-10"
     }
   },
-  "cohort_id": "ny-personal-injury",
+  "cohort_id": "md-personal-injury",
   "faq": [],
-  "fee_statement": "and other experts in order to provide the most complete level of service to our clients. No Fee unless we win. The partners at Hill & Moin have been practicing law since 1980 and have dedicate",
+  "fee_statement": "and, most importantly, pain and suffering. All of our motorcycle accident cases are on a contingency fee basis. This means that there is never an attorney’s fee charged unless we successfull",
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-10"
+  },
   "results_published": {
-    "count": 48,
+    "count": 15,
     "counted_from": "stated amounts",
     "amounts": [
-      25000000,
-      13300000,
-      13000000,
       10000000,
+      8000000,
       5500000,
-      5000000,
-      4850000,
+      5200000,
       3800000,
-      3500000,
-      2750000,
+      3250000,
       2500000,
-      2450000,
-      2250000,
-      2000000,
-      1900000,
-      1800000,
-      1760000,
-      1700000,
-      1600000,
+      2100000,
       1500000,
-      1400000,
-      1250000,
+      1350000,
+      1300000,
       1200000,
-      1125000,
-      1075000,
-      1000000,
-      975000,
-      950000,
-      900000,
-      875000,
-      850000,
-      787500,
-      750000,
-      700000,
-      650000,
-      625000,
-      600000,
-      560000,
-      550000,
-      546000,
-      525000,
-      515000,
-      500000,
-      450000,
-      425000,
-      370000,
-      325000,
-      300000
+      1100000,
+      1000050,
+      25000
     ],
-    "largest": 25000000,
+    "largest": 10000000,
     "aggregate_claims": [
-      14000000,
-      4000000
+      100000000,
+      1000000
     ],
     "case_types": [
-      "construction",
       "motor vehicle",
       "truck",
       "premises",
       "medical malpractice",
-      "wrongful death",
-      "workplace",
-      "pedestrian",
-      "product liability"
+      "wrongful death"
     ],
     "disclaimer": false,
-    "venues": [
-      "Westchester County"
-    ],
-    "text_length": 12805,
+    "venues": [],
+    "text_length": 11307,
     "readable": true,
-    "url": "https://hillmoin.com/verdicts-settlements/",
-    "checked_at": "2026-09-10"
-  },
-  "entity": {
-    "legal_name": "HILL & MOIN, LLP",
-    "entity_type": "DOMESTIC REGISTERED LIMITED LIABILITY PARTNERSHIP",
-    "dos_id": "3121711",
-    "formed": "2004-11-03",
-    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "url": "https://www.millerandzois.com/verdicts-settlements/",
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 65,
+    "total": 52,
     "tier": "Listed",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
@@ -253,8 +235,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no queryable source",
+            "evidence": "Maryland publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",
@@ -267,24 +249,24 @@
         ]
       },
       "B": {
-        "score": 11,
+        "score": 8,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 6,
+            "pts": 4.5,
             "max": 6,
             "source": "firm",
-            "evidence": "48 results published on the firm's own site, counted from stated amounts"
+            "evidence": "15 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 5,
+            "pts": 3,
             "max": 5,
             "source": "firm",
-            "evidence": "9 case types named; 1 court or county reference"
+            "evidence": "5 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
@@ -297,24 +279,24 @@
         ]
       },
       "C": {
-        "score": 19,
+        "score": 15,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 4,
+            "pts": 3,
             "max": 5,
             "source": "observed",
-            "evidence": "181 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "118 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 181 reviews → Bayesian 4.93 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.2 over 118 reviews → Bayesian 4.48 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -322,7 +304,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-07) · a sample of five per business listing, not every review"
+            "evidence": "3 of 5 sampled reviews are from the last 12 months (newest 2026-03-30) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -373,7 +355,7 @@
         ]
       },
       "E": {
-        "score": 12,
+        "score": 10,
         "max": 15,
         "subs": [
           {
@@ -382,15 +364,15 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · and other experts in order to provide the most complete level of service to our clients. No Fee unless we win. The partners at Hill & Moin have been practicing law since 1980 and have dedicate · the fee percentage itself is not published"
+            "evidence": "Free consultation · and, most importantly, pain and suffering. All of our motorcycle accident cases are on a contingency fee basis. This means that there is never an attorney’s fee charged unless we successfull · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 1.5,
+            "pts": 0.0,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Spanish"
+            "evidence": "English"
           },
           {
             "code": "E4",
@@ -403,33 +385,22 @@
         ]
       }
     },
-    "floor_abc": 30,
+    "floor_abc": 22,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 5,
-      "floor_met": true,
+      "gap": 18,
+      "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "D2 Search authority: not yet measured (8 pts)",
+        "A6 Roster verifiability: +9 available"
       ]
     },
-    "raw": 45.5,
+    "raw": 36.5,
     "assessed": 70,
     "coverage": 0.7,
-    "floor_abc_pct": 0.789
-  },
-  "accountability": {
-    "malpractice_insurance": false,
-    "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
-    "pages_read": 3,
-    "bios_published": 0,
-    "source": "observed",
-    "checked_at": "2026-09-10"
+    "floor_abc_pct": 0.592
   }
 }

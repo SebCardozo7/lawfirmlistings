@@ -257,12 +257,25 @@ def main() -> int:
             print(f"no firm with slug {args.firm}", file=sys.stderr)
             return 2
 
+    skipped_out_of_state: list[str] = []
     matched = 0
     total = 0
     today = date.today().isoformat()
     for path in paths:
         firm = json.loads(path.read_text(encoding="utf-8"))
         if firm.get("status") == "sample":
+            continue
+        if firm.get("market", {}).get("state") != "NY":
+            # A New York register has nothing to say about a firm admitted elsewhere. This ran
+            # over every profile, so a Maryland firm came back with G1 and G2 sourced to the NYS
+            # attorney register, an entity gate failed against the New York corporations
+            # register, and an evidence line claiming its attorneys had been matched to "the
+            # Maryland register" when they had been matched to New York's. Two of seven names
+            # happened to appear there, which is what you get from matching common names against
+            # a register of 432,910 people, and the profile then said one of them was not
+            # currently registered. Maryland publishes no register we may query, so a Maryland
+            # profile carries no licence finding at all, and this is where that is enforced.
+            skipped_out_of_state.append(firm["slug"])
             continue
         total += 1
         entity, why = match(firm)
@@ -296,6 +309,10 @@ def main() -> int:
     print("\n" + "=" * 70)
     print(f"{matched} of {total} firms matched to an active registered entity")
     print(f"source: {DATASET}")
+    if skipped_out_of_state:
+        print("%d firm(s) outside New York were left alone: %s"
+              % (len(skipped_out_of_state), ", ".join(skipped_out_of_state)))
+        print("A New York register says nothing about a firm admitted elsewhere.")
     if not args.write:
         print("report only. Add --write to store the entity and update G3/G6.")
     else:

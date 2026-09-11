@@ -1,10 +1,10 @@
 {
-  "slug": "shaevitz-shaevitz-law-offices",
-  "name": "Shaevitz & Shaevitz Law Offices",
-  "initials": "SS",
-  "website": "https://shaevitzandshaevitz.com/",
-  "domain": "shaevitzandshaevitz.com",
-  "phone": "(718) 223-5344",
+  "slug": "law-offices-of-peter-g-angelos",
+  "name": "Law Offices of Peter G. Angelos",
+  "initials": "PA",
+  "website": "https://www.angeloslaw.com/",
+  "domain": "angeloslaw.com",
+  "phone": "(410) 649-2000",
   "status": "listed",
   "practices": [
     {
@@ -14,59 +14,71 @@
     }
   ],
   "market": {
-    "city_slug": "new-york-ny",
-    "city": "New York",
-    "state": "NY",
-    "state_name": "New York"
+    "city_slug": "baltimore-md",
+    "city": "Baltimore",
+    "state": "MD",
+    "state_name": "Maryland"
   },
   "offices": [
     {
-      "label": "Shaevitz & Shaevitz Law Offices",
-      "address": "148-55 Hillside Ave., Briarwood, NY 11435, USA",
+      "label": "Peter Angelos Law",
+      "address": "100 N Charles St 21st Floor, Baltimore, MD 21201, USA",
       "by_appointment": false,
       "is_hq": true,
-      "source_url": "https://maps.google.com/?cid=4956994083502418706&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+      "source_url": "https://maps.google.com/?cid=13051513789629535808&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
-  "languages": [
-    "English",
-    "Spanish"
+  "attorneys": [
+    {
+      "name": "Trevor Brown",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.angeloslaw.com/attorney/brown-trevor/"
+    },
+    {
+      "name": "Ronald E. Richardson",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.angeloslaw.com/attorney/ronald-e-richardson/"
+    }
   ],
-  "fee_model": "Contingency",
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
   "free_consultation": true,
   "availability": [],
   "about": [
-    "Shaevitz & Shaevitz Law Offices is a personal injury firm with a single office in Briarwood.",
-    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free. It publishes material in English and Spanish."
+    "Law Offices of Peter G. Angelos is a personal injury firm with a single office in Baltimore.",
+    "The firm states that the first consultation is free. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.3,
-      "count_label": "26",
+      "rating": 4.5,
+      "count_label": "123",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
       "fetched_at": "2026-09-10"
     },
     "sample": [
       {
-        "published_at": "2026-07-03T14:41:31.109021399Z",
-        "rating": 2
-      },
-      {
-        "published_at": "2025-02-08T05:42:10.867356Z",
+        "published_at": "2026-02-25T13:43:18.719576342Z",
         "rating": 5
       },
       {
-        "published_at": "2025-03-29T17:17:17.370384Z",
-        "rating": 1
-      },
-      {
-        "published_at": "2025-04-25T19:41:49.682176Z",
+        "published_at": "2026-03-10T21:11:13.606123980Z",
         "rating": 5
       },
       {
-        "published_at": "2022-03-24T00:07:35.802436Z",
+        "published_at": "2025-08-07T14:48:27.935687958Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-17T20:29:28.544882694Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-23T17:16:35.687384276Z",
         "rating": 5
       }
     ]
@@ -74,31 +86,33 @@
   "results": [],
   "digital": {
     "trust_pages": {
-      "privacy_policy": true,
-      "blog": true
+      "attorney_bios": true,
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true
     },
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 59,
+        "performance": 48,
         "cwv_pass": false
       },
-      "source": "PageSpeed Insights API (mobile, lab only)",
+      "source": "PageSpeed Insights API (mobile, field + lab)",
       "measured_at": "2026-09-10",
-      "note": "LCP 4.5 s / CLS 0.003 / TBT 698 ms"
+      "note": "LCP 25.2 s / CLS 0.000 / TBT 324 ms"
     },
     "_ahrefs_partial_from_cohort": {
-      "domain": "shaevitzandshaevitz.com",
-      "name": "Shaevitz & Shaevitz Law Offices",
-      "dr": 21,
-      "refdomains": 485,
-      "org_keywords": 138,
-      "org_traffic": 1172
+      "domain": "angeloslaw.com",
+      "name": "Law Offices of Peter Angelos",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 26,
-      "rating_weighted": 4.3,
+      "review_count_total": 123,
+      "rating_weighted": 4.5,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
     }
@@ -106,50 +120,77 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "Bar registry not yet checked for this firm's attorneys",
-      "source": "pending",
+      "evidence": "Maryland does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
       "checked_at": "2026-09-10"
     },
     "G2": {
       "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
+      "evidence": "Maryland does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
       "checked_at": "2026-09-10"
     },
     "G3": {
       "pass": false,
-      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
-      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
       "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
       "checked_at": "2026-09-10"
     },
     "G6": {
       "pass": false,
-      "evidence": "Time in operation not established",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "evidence": "123 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
       "checked_at": "2026-09-10"
     }
   },
-  "cohort_id": "ny-personal-injury",
+  "cohort_id": "md-personal-injury",
   "faq": [],
-  "fee_statement": "ce helping injured victims, we won’t stop until you receive the compensation you deserve. No Fee Unless We Win At Shaevitz & Shaevitz, we handle all personal injury cases on a contingency basis",
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-10"
+  },
   "results_published": {
-    "readable": true,
-    "count": 0,
-    "amounts": [],
-    "case_types": [],
-    "disclaimer": false,
+    "count": 6,
+    "counted_from": "stated amounts",
+    "amounts": [
+      4500000000,
+      500000000,
+      28000000,
+      15300000,
+      2400000,
+      2200000
+    ],
+    "largest": 4500000000,
+    "aggregate_claims": [
+      54000000
+    ],
+    "case_types": [
+      "motor vehicle",
+      "medical malpractice",
+      "product liability"
+    ],
+    "disclaimer": true,
     "venues": [],
-    "why": "the site publishes no case-results page",
+    "text_length": 2995,
+    "readable": true,
+    "url": "https://www.angeloslaw.com/verdicts-settlements/",
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 26,
+    "total": 44,
     "tier": "Listed",
     "verdict": "5 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-11",
@@ -172,8 +213,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no queryable source",
+            "evidence": "Maryland publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",
@@ -186,46 +227,46 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 10,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 3,
             "max": 6,
             "source": "firm",
-            "evidence": "The firm publishes no case results we could read"
+            "evidence": "6 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 3,
             "max": 5,
             "source": "firm",
-            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+            "evidence": "3 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
             "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
           }
         ]
       },
       "C": {
-        "score": 8,
+        "score": 16,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 2,
+            "pts": 3,
             "max": 5,
             "source": "observed",
-            "evidence": "26 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "123 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -233,23 +274,23 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 26 reviews → Bayesian 4.71 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 123 reviews → Bayesian 4.64 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2026-07-03) · a sample of five per business listing, not every review"
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-03-10) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "2 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -260,10 +301,10 @@
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 1.5,
+            "pts": 2.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -292,24 +333,24 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 1,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 1,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · ce helping injured victims, we won’t stop until you receive the compensation you deserve. No Fee Unless We Win At Shaevitz & Shaevitz, we handle all personal injury cases on a contingency basis · the fee percentage itself is not published"
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 1.5,
+            "pts": 0.0,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Spanish"
+            "evidence": "English"
           },
           {
             "code": "E4",
@@ -322,33 +363,22 @@
         ]
       }
     },
-    "floor_abc": 8,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 44,
-      "floor_met": false,
+      "gap": 26,
+      "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "D2 Search authority: not yet measured (8 pts)",
+        "A6 Roster verifiability: +9 available"
       ]
     },
-    "raw": 18.5,
+    "raw": 31.0,
     "assessed": 70,
     "coverage": 0.7,
-    "floor_abc_pct": 0.224
-  },
-  "accountability": {
-    "malpractice_insurance": false,
-    "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
-    "pages_read": 2,
-    "bios_published": 0,
-    "source": "observed",
-    "checked_at": "2026-09-10"
+    "floor_abc_pct": 0.684
   }
 }

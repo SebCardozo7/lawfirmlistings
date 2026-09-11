@@ -489,11 +489,24 @@ def main() -> int:
             print(f"no firm with slug {args.firm}", file=sys.stderr)
             return 2
 
+    skipped_out_of_state: list[str] = []
     totals = {"matched": 0, "ambiguous": 0, "unmatched": 0, "attorneys": 0}
     failures: list[str] = []
     for path in paths:
         firm = json.loads(path.read_text(encoding="utf-8"))
         if firm.get("status") in ("sample", "not_eligible"):
+            continue
+        if firm.get("market", {}).get("state") != "NY":
+            # A New York register has nothing to say about a firm admitted elsewhere. This ran
+            # over every profile, so a Maryland firm came back with G1 and G2 sourced to the NYS
+            # attorney register, an entity gate failed against the New York corporations
+            # register, and an evidence line claiming its attorneys had been matched to "the
+            # Maryland register" when they had been matched to New York's. Two of seven names
+            # happened to appear there, which is what you get from matching common names against
+            # a register of 432,910 people, and the profile then said one of them was not
+            # currently registered. Maryland publishes no register we may query, so a Maryland
+            # profile carries no licence finding at all, and this is where that is enforced.
+            skipped_out_of_state.append(firm["slug"])
             continue
         try:
             res = check_firm(path, args.write, args.gates)
@@ -532,6 +545,10 @@ def main() -> int:
     if failures:
         print(f"lookup failed for {len(failures)}: {', '.join(failures)}")
     print(f"source: {DATASET}")
+    if skipped_out_of_state:
+        print("%d firm(s) outside New York were left alone: %s"
+              % (len(skipped_out_of_state), ", ".join(skipped_out_of_state)))
+        print("A New York register says nothing about a firm admitted elsewhere.")
     if not args.write:
         print("report only — nothing written. Add --write to annotate, --write --gates to set G1/G2.")
     return 0
