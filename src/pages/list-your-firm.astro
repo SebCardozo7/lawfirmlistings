@@ -1,0 +1,344 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, mailto } from '../data/site';
+import { REQUIREMENTS, PRODUCTS, STEPS } from '../data/listing';
+
+/**
+ * The front door for a firm, and the page most likely to be read by somebody deciding whether
+ * this directory is honest.
+ *
+ * Three things it has to do at once, and they pull against each other.
+ *
+ * It has to say plainly that being listed is not for sale. A firm arrives here expecting a rate
+ * card, because that is what every other legal directory has taught it to expect, and the
+ * sentence that corrects it belongs above the fold rather than in the small print.
+ *
+ * It has to be useful to a firm that does not qualify yet, which is most of them. So the
+ * requirements are not a checklist of things to send us: each one says what the firm should go
+ * and change on its own site, and the most valuable line on the page is the one telling a firm
+ * with no attorney page that this is the first thing to fix. That is true whether or not they
+ * ever write to us.
+ *
+ * And it has to collect a real enquiry without a backend. The deploy serves static files, so the
+ * form builds a structured message and hands it to the visitor's own mail client. Nothing is
+ * posted anywhere, no third party receives a firm's details, and the privacy policy stays true
+ * with one sentence added rather than rewritten. When volume justifies a real endpoint this
+ * becomes a fetch and the rest of the page does not change.
+ */
+
+const title = 'List your firm on Law Firm Listings';
+const description =
+  'What a firm has to meet to be listed, what claiming a profile costs, and how to reach us. ' +
+  'Listing is not sold and the score cannot be bought.';
+
+const priced = PRODUCTS.filter(p => p.price);
+const subject = 'List your firm';
+---
+<Base title={title} description={description} nav="list">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">List your firm</li></ol>
+      <span class="eyebrow">For law firms</span>
+      <h1>A listing is not for sale.</h1>
+      <p class="lede">
+        Firms appear here because we found them and read their public record, not because they
+        bought a place. What a firm can do is claim its profile, keep it accurate, and fix the
+        things that are holding its score down. All three are free, and the page below says
+        exactly what they involve.
+      </p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">Free</b><span>To claim a profile</span></div>
+      <div class="fact"><b class="num">0</b><span>Points any payment can buy</span></div>
+      <div class="fact"><b class="num">30</b><span>Days to review an appeal</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">What we check</span>
+        <h2 style="margin-top:12px">Five things a firm has to meet</h2>
+        <p>
+          These are the eligibility gates from the <a href="/methodology/">methodology</a>, written
+          for somebody who runs a firm. Every one is checked from public sources, so there is
+          nothing here to send us and nothing to take on trust. Where a state publishes no register
+          we are allowed to query, the gate that needed it carries no finding at all rather than a
+          guess.
+        </p>
+      </div>
+    </div>
+    <div class="rules">
+      {REQUIREMENTS.map(r => (
+        <div class="rule">
+          <span class="k">{r.gate}</span>
+          <div>
+            <b>{r.title}</b>
+            <p>{r.detail}</p>
+            <p class="todo"><Icon name="check" /> {r.todo}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">What it costs</span><h2 style="margin-top:12px">Prices, in public</h2></div>
+    </div>
+    <div class="products">
+      {priced.map(p => (
+        <div class="product">
+          <b>{p.name}</b>
+          <div class="price">{p.price}{p.cadence && <small>{p.cadence}</small>}</div>
+          <p>{p.summary}</p>
+          <ul>{p.includes.map(i => <li><Icon name="check" />{i}</li>)}</ul>
+          {p.excluded && <p class="excluded">{p.excluded}</p>}
+        </div>
+      ))}
+    </div>
+    <div class="narrow prose" style="margin-top:36px">
+      <p>
+        Prices are on this page rather than behind an email because a directory that says a score
+        cannot be bought, and then asks you to write for a rate card, is asking to be doubted.
+        Anything we sell is named here or it is not sold.
+      </p>
+      <p>
+        There is nothing else on sale today. When there is, it will be an optional tool or a
+        clearly labelled sponsored placement, it will appear on this page with its price, and
+        neither will ever enter a ranked list or move a single point of a score. That is a
+        commitment in our <a href="/terms/">terms</a>, not a marketing line.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="form">
+  <div class="narrow">
+    <span class="eyebrow">Get in touch</span>
+    <h2 style="margin:14px 0 10px">Tell us about your firm</h2>
+    <p class="muted" style="margin-bottom:28px">
+      Three short steps. Nothing is sent anywhere when you fill this in: the last step opens a
+      message in your own mail program with everything already written out, and you send it, or
+      not. We never see a partly finished form.
+    </p>
+
+    {SITE.email ? (
+      <form id="lyf" novalidate data-to={SITE.email}>
+        <ol class="steps-bar" aria-hidden="true">
+          {STEPS.map((s, i) => <li data-step={i} class={i === 0 ? 'is-on' : ''}>{s.title}</li>)}
+        </ol>
+
+        {STEPS.map((s, i) => (
+          <fieldset class="form-step" data-step={i}>
+            <legend>{s.title}</legend>
+            <p class="muted">{s.intro}</p>
+            {s.fields.map(f => (
+              <div class={`field ${f.type === 'checkbox' ? 'field--check' : ''}`}>
+                {f.type === 'checkbox' ? (
+                  <label>
+                    <input type="checkbox" name={f.name} required={f.required} data-short={f.short} />
+                    <span>{f.label}</span>
+                  </label>
+                ) : (
+                  <>
+                    <label for={`f-${f.name}`}>
+                      {f.label}{!f.required && <span class="opt">optional</span>}
+                    </label>
+                    {f.type === 'textarea' ? (
+                      <textarea id={`f-${f.name}`} name={f.name} rows="4"
+                                required={f.required} placeholder={f.placeholder}></textarea>
+                    ) : f.type === 'select' ? (
+                      <select id={`f-${f.name}`} name={f.name} required={f.required}>
+                        <option value="">Choose one</option>
+                        {f.options?.map(o => <option value={o}>{o}</option>)}
+                      </select>
+                    ) : (
+                      <input id={`f-${f.name}`} name={f.name} type={f.type}
+                             required={f.required} placeholder={f.placeholder}
+                             data-short={f.short} />
+                    )}
+                  </>
+                )}
+                {f.help && <small class="help">{f.help}</small>}
+                <small class="err" data-for={f.name} hidden></small>
+              </div>
+            ))}
+          </fieldset>
+        ))}
+
+        {/* Rendered without `hidden`, and the script hides what it needs on load. The other way
+            round, a visitor without JavaScript saw step one, two dead buttons and no way to reach
+            the rest of the form. */}
+        <div class="form-actions">
+          <button type="button" class="btn btn--ghost" data-back>Back</button>
+          <button type="button" class="btn btn--primary" data-next>Continue</button>
+          <button type="submit" class="btn btn--primary" data-send>Open the message</button>
+        </div>
+        <p class="muted form-foot">
+          Goes to <a href={mailto(subject)}>{SITE.email}</a>. If your browser does not open a mail
+          program, write to that address directly and say what you would have said here.
+        </p>
+      </form>
+    ) : (
+      <div class="callout"><b>No address is published yet.</b> The form returns when there is an inbox behind it.</div>
+    )}
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="narrow prose">
+    <span class="eyebrow">What happens next</span>
+    <h2 style="margin-top:14px">What we will and will not do</h2>
+    <p>
+      We read what you send, look at your public record, and reply with where your firm actually
+      stands: which gates it clears, which it does not, and what the evidence says. If your firm
+      is not published yet, that reply is the useful part, and it costs nothing.
+    </p>
+    <p>
+      What we will not do is edit a score, remove a finding, or move a firm up a ranked list
+      because it asked, paid, or objected. A finding comes off when the evidence changes, which
+      is a thing you can go and do: publish your results with their case types, put bar numbers on
+      your bios, state your fee percentage. Those are worth points because they are worth
+      something to a client, which is the only reason anything is worth points here.
+    </p>
+    <p>
+      If a measured value is simply wrong, that is a correction rather than an appeal and we want
+      to hear about it. Every value on a profile names its source and the date we read it, so
+      point at the one that disagrees with your records. See the
+      <a href="/contact/">contact page</a> for what to include.
+    </p>
+  </div>
+</section>
+</Base>
+
+<style>
+  .rules { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .rule { display: flex; gap: 16px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  .rule .k { flex: 0 0 auto; font-weight: 700; font-size: .82rem; letter-spacing: .04em; padding: 4px 9px; border-radius: 999px; background: var(--tint); color: var(--muted); height: fit-content; }
+  .rule b { display: block; margin-bottom: 8px; }
+  .rule p { margin: 0 0 10px; font-size: .93rem; color: var(--muted); line-height: 1.6; }
+  .rule .todo { display: flex; gap: 8px; align-items: flex-start; color: var(--ink); font-weight: 500; margin: 0; }
+  .rule .todo :global(svg) { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 3px; }
+
+  .products { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); max-width: 640px; }
+  .product { padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+  .product > b { font-size: 1.05rem; }
+  .price { font-size: 2rem; font-weight: 700; margin: 10px 0 14px; }
+  .price small { font-size: .9rem; font-weight: 400; color: var(--muted); margin-left: 6px; }
+  .product ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+  .product li { display: flex; gap: 9px; align-items: flex-start; font-size: .93rem; }
+  .product li :global(svg) { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 3px; }
+  .excluded { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .88rem; color: var(--muted); line-height: 1.6; }
+
+  .steps-bar { display: flex; gap: 8px; list-style: none; padding: 0; margin: 0 0 26px; flex-wrap: wrap; }
+  .steps-bar li { font-size: .82rem; padding: 6px 12px; border-radius: 999px; background: var(--tint); color: var(--muted); }
+  .steps-bar li.is-on { background: var(--ink); color: var(--paper); }
+  .form-step { border: 0; padding: 0; margin: 0; }
+  .form-step legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .form-step > .muted { margin: 0 0 22px; }
+  .field { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-weight: 600; font-size: .92rem; }
+  .field .opt { font-weight: 400; color: var(--muted); margin-left: 8px; font-size: .85rem; }
+  .field input, .field select, .field textarea { font: inherit; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); width: 100%; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .field [aria-invalid='true'] { border-color: #b42318; }
+  .field .help { color: var(--muted); font-size: .85rem; line-height: 1.5; }
+  .field .err { color: #b42318; font-size: .85rem; font-weight: 500; }
+  .field--check label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .92rem; line-height: 1.6; }
+  .field--check input { width: auto; margin-top: 3px; flex: 0 0 auto; }
+  .form-actions { display: flex; gap: 10px; margin-top: 8px; }
+  .form-foot { margin-top: 18px; font-size: .88rem; }
+</style>
+
+<script>
+  // The form is three fieldsets and a mailto. No backend, so validation is the whole of the
+  // client's job: a firm that reaches the last step and finds its own mail client open with a
+  // half-empty message has been let down by this page rather than by its browser.
+  //
+  // Without JavaScript every fieldset is visible and the address below the form still works,
+  // which is why the steps are hidden by an attribute the script removes rather than by CSS.
+  const form = document.getElementById('lyf') as HTMLFormElement | null;
+  if (form) {
+    const steps = [...form.querySelectorAll<HTMLFieldSetElement>('.form-step')];
+    const crumbs = [...form.querySelectorAll<HTMLLIElement>('.steps-bar li')];
+    const back = form.querySelector<HTMLButtonElement>('[data-back]')!;
+    const next = form.querySelector<HTMLButtonElement>('[data-next]')!;
+    const send = form.querySelector<HTMLButtonElement>('[data-send]')!;
+    let at = 0;
+
+    const show = (n: number) => {
+      at = n;
+      steps.forEach((s, i) => { s.hidden = i !== n; });
+      crumbs.forEach((c, i) => c.classList.toggle('is-on', i === n));
+      back.hidden = n === 0;
+      next.hidden = n === steps.length - 1;
+      send.hidden = n !== steps.length - 1;
+      steps[n].querySelector<HTMLElement>('input,select,textarea')?.focus();
+    };
+
+    const fail = (el: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) => {
+      // The browser's own message is better than anything invented here, except for the one
+      // case it phrases badly: a required checkbox reads as "Please check this box if you
+      // want to proceed", which is not what this box means.
+      if (el.type === 'checkbox' && !(el as HTMLInputElement).checked) {
+        return 'Please confirm you have read this before sending.';
+      }
+      return el.validationMessage;
+    };
+
+    const validate = (n: number) => {
+      let ok = true;
+      for (const el of steps[n].querySelectorAll<HTMLInputElement>('input,select,textarea')) {
+        const slot = steps[n].querySelector<HTMLElement>(`.err[data-for="${el.name}"]`);
+        const good = el.checkValidity();
+        el.setAttribute('aria-invalid', good ? 'false' : 'true');
+        if (slot) { slot.textContent = good ? '' : fail(el); slot.hidden = good; }
+        if (!good && ok) { el.focus(); ok = false; }
+        else if (!good) ok = false;
+      }
+      return ok;
+    };
+
+    next.addEventListener('click', () => { if (validate(at)) show(at + 1); });
+    back.addEventListener('click', () => show(at - 1));
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      for (let i = 0; i < steps.length; i++) {
+        if (!validate(i)) { show(i); return; }
+      }
+      // Labels rather than field names in the body, so the message reads as a letter somebody
+      // wrote and not as a form dump.
+      const lines: string[] = [];
+      steps.forEach(step => {
+        lines.push('== ' + (step.dataset.title || step.querySelector('legend')?.textContent || ''));
+        for (const el of step.querySelectorAll<HTMLInputElement>('input,select,textarea')) {
+          // data-short wins where a field needs a sentence on screen and a clause in a message.
+          const label = el.dataset.short
+            || (el.type === 'checkbox'
+              ? el.closest('label')?.querySelector('span')?.textContent?.trim()
+              : step.querySelector(`label[for="${el.id}"]`)?.childNodes[0]?.textContent?.trim());
+          const value = el.type === 'checkbox' ? (el.checked ? 'Confirmed' : 'No') : el.value.trim();
+          if (value) lines.push(`${label}: ${value}`);
+        }
+        lines.push('');
+      });
+      const firm = (form.querySelector<HTMLInputElement>('[name="firm"]')?.value || '').trim();
+      const subject = firm ? `List your firm: ${firm}` : 'List your firm';
+      const href = `mailto:${form.dataset.to}`
+        + `?subject=${encodeURIComponent(subject)}`
+        + `&body=${encodeURIComponent(lines.join('\n'))}`;
+      window.location.href = href;
+    });
+
+    show(0);
+  }
+</script>
