@@ -39,8 +39,12 @@ const selfReported = g ? /as reported by the firm/i.test(g.source) : false;
 // earns a followed link. Claiming a profile does not change it and neither does paying for
 // anything — selling followed links is a link scheme, and the penalty would land on this site
 // rather than on the firm.
-const gateList = Object.values(d.gates ?? {});
-const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
+// Counting to six was wrong from the moment G4 was retired: there are five gates, so this was
+// never true and every firm in the directory got a nofollow link, including the ones that clear
+// everything. Ask the engine instead of counting. score.tier reaches "Verified" exactly when all
+// of a firm's gates were checked and held, and the tiers above it are that plus a score.
+const EARNED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
+const gatesPassed = EARNED.includes(s?.tier ?? '');
 const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
 
 const officeLabel = `${d.offices.length} office${d.offices.length === 1 ? '' : 's'}`;
@@ -94,9 +98,15 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
   </div>
 
   <div class="firm-side">
-    {isCertified
-      ? <div class="stat"><b class="num">{s!.total}/100</b>LFL Certification Score</div>
-      : <div class="stat"><b>Listed</b>score pending verification</div>}
+    {/* The score, for every firm that has one. This used to show the number only for certified
+        firms and give everybody else "Listed · score pending verification", on a list that is
+        ordered by that very number: a reader saw seven Baltimore firms in an order nothing on the
+        card explained. The score was never pending either. It is computed for every published
+        firm and printed in full on the profile, so withholding it here only made the card
+        disagree with the page it links to. */}
+    {s
+      ? <div class="stat"><b class="num">{s.total}/100</b>LFL Certification Score</div>
+      : <div class="stat"><b>Listed</b>not yet scored</div>}
     <div class="stat"><b>{d.fee_model}</b>{d.free_consultation ? 'free consultation' : 'fee model'}</div>
     <a class="btn btn--primary btn--sm" href={`/firms/${d.slug}/`}>View profile</a>
     <a class="btn btn--ghost btn--sm" href={d.website} rel={linkRel} target="_blank">Visit website</a>

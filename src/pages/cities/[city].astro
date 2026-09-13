@@ -33,9 +33,10 @@ const { city } = Astro.params;
 const { market, firms } = Astro.props;
 const notes = CITY_NOTES[city] ?? {};
 
-// Certified firms rank by score; the rest follow alphabetically.
+// Ranked by the score. See [city]/[practice].astro: sorting only the certified firms by score
+// left Baltimore, where none is certified, in alphabetical order under a ranked heading.
 const weight = (f: typeof firms[number]) =>
-  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+  f.data.score ? -f.data.score.total : 1;
 const ranked = [...firms].sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
 
 const certified = ranked.filter(f => f.data.status === 'certified');
