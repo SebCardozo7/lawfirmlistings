@@ -113,6 +113,12 @@ const firms = defineCollection({
       // as such on the profile: a reader is entitled to know which is which.
       attested: z.boolean().optional(), attested_by: z.string().optional(),
     })),
+    // Searches that inform review without settling anything. A screen is not a gate, and the
+    // two were briefly the same field: see scripts/check_g4.py.
+    screens: z.record(z.object({
+      note: z.string(), queue: z.number().optional(),
+      source: z.string(), checked_at: z.string(),
+    })).optional(),
     cohort_id: z.string(),
     assessments: z.record(z.object({ pts: z.number(), source: z.string().optional(), evidence: z.string() })).optional(),
     // written by scripts/score.py — do not edit by hand

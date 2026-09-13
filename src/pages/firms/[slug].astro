@@ -6,6 +6,7 @@ import { officeLabel } from '../../lib/labels';
 import { achievementsFor, marksFor } from '../../lib/achievements';
 import Icon from '../../components/Icon.astro';
 import Scorecard from '../../components/Scorecard.astro';
+import { PRACTICE_SLUGS } from '../../data/practices';
 
 export async function getStaticPaths() {
   const firms = await getCollection('firms', f => f.data.status !== 'sample' || import.meta.env.LFL_ENV !== 'production');
@@ -27,11 +28,10 @@ const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overview
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
 const verifiedLicences = d.attorneys.filter(a => a.bar_number).length;
 // Practice areas that have a page of their own. Everything else is named, not linked.
-const PRACTICE_PAGES = new Set(['personal-injury']);
+const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
 // The link attribute is editorial, not commercial: clearing every eligibility gate earns a
 // followed link. Claiming the profile does not change it, and neither does paying for anything —
 // selling followed links is a link scheme and the penalty would land on this site.
-const gateList = Object.values(d.gates ?? {});
 // Six was the count before G4 was retired, so this was never true and every outbound link
 // on every profile carried nofollow, including firms that clear every gate. The engine
 // already says it: tier reaches "Verified" exactly when all gates were checked and held.

@@ -59,7 +59,7 @@
       "admitted_year": 1996,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Brooke Balterman",
@@ -70,7 +70,7 @@
       "admitted_year": 2014,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Gary A. Silverstein",
@@ -81,7 +81,7 @@
       "admitted_year": 1989,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Jesse M. Minc",
@@ -90,9 +90,9 @@
       "source_url": "https://rmfwlaw.com/attorneys/jesse-m-minc",
       "bar_number": "4980520",
       "admitted_year": 2012,
-      "registry_status": "Due to reregister within 30 days of birthday",
+      "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Joyce Randazzo",
@@ -103,7 +103,7 @@
       "admitted_year": 1988,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Peter Rosenberg",
@@ -114,7 +114,7 @@
       "admitted_year": 1979,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Sharon Elmaleh",
@@ -125,7 +125,7 @@
       "admitted_year": 1997,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Steven C. Falkoff",
@@ -136,7 +136,7 @@
       "admitted_year": 1985,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Robert H. Wolff",
@@ -147,7 +147,7 @@
       "admitted_year": 1982,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Daniel C. Minc",
@@ -158,7 +158,7 @@
       "admitted_year": 1978,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     }
   ],
   "languages": [
@@ -295,19 +295,19 @@
       "pass": true,
       "evidence": "10 of 10 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 10 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G3": {
       "pass": true,
       "evidence": "ROSENBERG, MINC, FALKOFF & WOLFF LLP is an active domestic registered limited liability partnership registered since 2000-01-19, with 4 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     },
     "G5": {
       "pass": true,
@@ -319,7 +319,7 @@
       "pass": true,
       "evidence": "143 public client reviews and 27 years since the entity was formed in 2000",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -340,7 +340,7 @@
     "dos_id": "2463460",
     "formed": "2000-01-19",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-10"
+    "checked_at": "2026-09-13"
   },
   "score": {
     "total": 52,
@@ -427,7 +427,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.66 over 143 reviews → Bayesian 4.72 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.66 over 143 reviews → Bayesian 4.73 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -465,7 +465,7 @@
             "pts": 0,
             "max": 8,
             "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "evidence": "Ahrefs data not yet collected for this market"
           },
           {
             "code": "D3",
@@ -574,5 +574,12 @@
     "years": 25.1,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
     "checked_at": "2026-09-11"
+  },
+  "screens": {
+    "court_dockets": {
+      "note": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
+      "checked_at": "2026-09-13"
+    }
   }
 }

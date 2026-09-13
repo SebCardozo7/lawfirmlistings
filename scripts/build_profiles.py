@@ -444,7 +444,11 @@ def main():
     if args.domains:
         files = [ROOT / ".crawl" / (d.strip() + ".json") for d in args.domains.split(",") if d.strip()]
     else:
-        files = sorted(pathlib.Path(p) for p in glob.glob(str(ROOT / ".crawl" / "*.json")))
+        # The cohort's own domains, not every file in the staging directory. Staging holds every
+        # firm ever crawled, across markets and practices, so the glob built a personal injury
+        # firm a profile saying "Workers' Compensation" the moment there were two cohorts. It
+        # also swept up the candidate lists and the run logs, which are not firm records at all.
+        files = [ROOT / ".crawl" / (f["domain"] + ".json") for f in cohort["firms"]]
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     built = skipped = 0
@@ -453,6 +457,8 @@ def main():
             continue
         with io.open(path, encoding="utf-8") as fh:
             rec = json.load(fh)
+        if not rec.get("domain"):
+            continue
         # A site we could not read is usually the end of it. A site that refuses our crawler is
         # not: scripts/seed_from_places.py has already built the offices, the phone and the
         # reviews from listings the firm verified itself, and none of that came from the site.

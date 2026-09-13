@@ -148,14 +148,19 @@ def check(firm: dict, verbose: bool = False) -> dict:
 
 
 def apply_gate(firm: dict, result: dict, today: str) -> None:
-    """Always writes G4 as pending. The screen cannot pass it; see the note at the top.
+    """Record the screen beside the gates, and never as one of them.
 
-    What it can do is say honestly what has been looked at, and carry the size of the review
-    queue so the gate is not a blank "not yet checked" when a search has in fact run.
+    This used to write a G4 entry into `gates`. G4 was retired at methodology v2.0 and the
+    engine counts a firm's gates against the five that exist, so writing a sixth gave every
+    profile an open gate it could never close: twenty-seven firms lost their Verified tier in a
+    single run, for a check the methodology does not make. The firms had done nothing.
+
+    So it writes `screens.court_dockets` instead, which is what this is. Nothing reads it for a
+    tier, the profile can show what was looked at, and the review queue keeps its size.
     """
-    gates = firm.setdefault("gates", {})
-    if (gates.get("G4") or {}).get("attested"):
-        return
+    # A stale G4 from the old behaviour, removed wherever this runs again.
+    (firm.get("gates") or {}).pop("G4", None)
+    screens = firm.setdefault("screens", {})
 
     if result.get("failed"):
         note = (f"A docket search ran but failed on {len(result['failed'])} of "
@@ -165,12 +170,11 @@ def apply_gate(firm: dict, result: dict, today: str) -> None:
                 "alongside sanction or consumer-protection language, none of which is a "
                 "finding against it: a firm appears in such a docket by arguing about "
                 "sanctions, or by bringing consumer-protection claims for its clients.")
-    gates["G4"] = {
-        "pass": False,
-        "evidence": (note + " Text search over this collection cannot separate an action "
-                     "against a firm from its ordinary practice, so this gate is not settled "
-                     "by it. It is open."),
-        "source": f"{SOURCE}, screening only, pending",
+    screens["court_dockets"] = {
+        "note": (note + " Text search over this collection cannot separate an action against a "
+                 "firm from its ordinary practice, so nothing here is settled by it."),
+        "queue": len(result.get("hits") or []),
+        "source": f"{SOURCE}, screening only",
         "checked_at": today,
     }
 

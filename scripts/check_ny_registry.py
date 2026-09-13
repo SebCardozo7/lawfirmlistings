@@ -94,6 +94,14 @@ ACTIVE = {
 }
 # A court's determination about an attorney. These are findings, and a firm that publishes one of
 # these people as current counsel genuinely fails the gate.
+#
+# What this register does not carry is the reason. In New York a suspension comes from the
+# Appellate Division whatever prompted it, and failing to register for several cycles is itself
+# grounds for one, so "suspended, delinquent" can be a sanction for misconduct or the end of a
+# long paperwork lapse and the data cannot tell you which. The gate fails either way, because a
+# suspended attorney cannot practise and that is what G1 asks. The wording below is therefore
+# what the register says rather than a characterisation of it: see the evidence written for G1
+# and G2, which name the dataset and stop there.
 DISCIPLINED = {
     "disbarred",
     "suspended, delinquent",
@@ -473,7 +481,10 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
     if disciplined and "G1" not in keep:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
         gates["G1"] = {"pass": False,
-                       "evidence": f"{len(disciplined)} of {total} under a disciplinary status. {detail}",
+                       "evidence": (f"{len(disciplined)} of {total} named attorneys are recorded "
+                                    f"by the state's attorney register as not able to practise. "
+                                    f"{detail}. The register carries the status and not the reason "
+                                    "for it."),
                        "source": DATASET, "checked_at": today}
     elif lapsed and "G1" not in keep:
         detail = "; ".join(f"{n}: {st}" for n, st in lapsed[:3])
@@ -519,7 +530,10 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
         pass
     elif disciplined:
         detail = "; ".join(f"{n}: {st}" for n, st in disciplined[:3])
-        gates["G2"] = {"pass": False, "evidence": f"Current disciplinary status on record. {detail}",
+        gates["G2"] = {"pass": False,
+                       "evidence": (f"The state's attorney register records a suspension or "
+                                    f"disbarment against a named attorney. {detail}. What the "
+                                    "register does not carry is what prompted it."),
                        "source": DATASET, "checked_at": today}
     elif adverse_unresolved:
         n, st, count = adverse_unresolved[0]

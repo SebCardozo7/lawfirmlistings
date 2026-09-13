@@ -534,7 +534,12 @@ def compute(firm):
     # the second one "Not eligible" publishes a false statement about a real business, so an
     # unchecked gate (source contains "pending" or "partial", the same convention the
     # sub-factors use) puts the firm under review instead.
-    gates = firm.get("gates", {})
+    # Only the gates the methodology has. GATES is the authority on that set, and reading the
+    # profile's whole block instead let a retired one back in: scripts/check_g4.py wrote G4
+    # into twenty-seven profiles, every one of them lost its Verified tier to a sixth gate that
+    # does not exist, and the firms had done nothing. A key here that GATES does not name is an
+    # artefact of some other script, not a gate.
+    gates = {k: v for k, v in (firm.get("gates") or {}).items() if k in GATES}
     def unchecked(g):
         return not g["pass"] and any(w in g.get("source", "").lower() for w in NOT_A_FINDING)
     # A gate has a fourth state, and missing it capped a whole state at Listed. "Pending" is work

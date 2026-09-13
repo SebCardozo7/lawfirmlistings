@@ -66,7 +66,7 @@
       "admitted_year": 1997,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     }
   ],
   "languages": [
@@ -240,19 +240,19 @@
       "pass": true,
       "evidence": "1 of 1 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 1 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G3": {
       "pass": true,
       "evidence": "STEPHEN BILKIS & ASSOCIATES, PLLC is an active domestic professional service limited liability company registered since 2013-08-22, with 5 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     },
     "G5": {
       "pass": true,
@@ -264,7 +264,7 @@
       "pass": true,
       "evidence": "199 public client reviews and 13 years since the entity was formed in 2013",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -354,7 +354,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.35 over 199 reviews → Bayesian 4.50 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.35 over 199 reviews → Bayesian 4.51 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -470,7 +470,7 @@
     "dos_id": "4449766",
     "formed": "2013-08-22",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-10"
+    "checked_at": "2026-09-13"
   },
   "results_published": {
     "count": 6,
@@ -550,5 +550,12 @@
     "bytes": 3014,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-13"
+  },
+  "screens": {
+    "court_dockets": {
+      "note": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
+      "checked_at": "2026-09-13"
+    }
   }
 }

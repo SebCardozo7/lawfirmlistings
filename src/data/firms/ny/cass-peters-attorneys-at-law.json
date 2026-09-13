@@ -1,15 +1,15 @@
 {
-  "slug": "shaevitz-shaevitz-law-offices",
-  "name": "Shaevitz & Shaevitz Law Offices",
-  "initials": "SS",
-  "website": "https://shaevitzandshaevitz.com/",
-  "domain": "shaevitzandshaevitz.com",
-  "phone": "(718) 223-5344",
+  "slug": "cass-peters-attorneys-at-law",
+  "name": "Cass & Peters Attorneys at Law",
+  "initials": "CP",
+  "website": "https://workerscompensationlawfirmnyc.com/",
+  "domain": "workerscompensationlawfirmnyc.com",
+  "phone": "(844) 591-3400",
   "status": "listed",
   "practices": [
     {
-      "slug": "personal-injury",
-      "name": "Personal Injury",
+      "slug": "workers-compensation",
+      "name": "Workers' Compensation",
       "primary": true
     }
   ],
@@ -21,11 +21,11 @@
   },
   "offices": [
     {
-      "label": "Shaevitz & Shaevitz Law Offices",
-      "address": "148-55 Hillside Ave., Briarwood, NY 11435, USA",
+      "label": "Cass & Peters Attorneys at Law",
+      "address": "225 Broadway #1505, New York, NY 10007, USA",
       "by_appointment": false,
       "is_hq": true,
-      "source_url": "https://maps.google.com/?cid=4956994083502418706&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+      "source_url": "https://maps.google.com/?cid=3110095077420285152&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
   "attorneys": [],
@@ -33,40 +33,40 @@
     "English",
     "Spanish"
   ],
-  "fee_model": "Contingency",
+  "fee_model": "Not stated",
   "free_consultation": true,
   "availability": [],
   "about": [
-    "Shaevitz & Shaevitz Law Offices is a personal injury firm with a single office in Briarwood.",
-    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free. It publishes material in English and Spanish."
+    "Cass & Peters Attorneys at Law is a workers' compensation firm with a single office in Manhattan.",
+    "The firm states that the first consultation is free. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.3,
-      "count_label": "26",
+      "rating": 4.5,
+      "count_label": "212",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "fetched_at": "2026-09-13"
     },
     "sample": [
       {
-        "published_at": "2026-07-03T14:41:31.109021399Z",
-        "rating": 2
-      },
-      {
-        "published_at": "2025-02-08T05:42:10.867356Z",
+        "published_at": "2026-04-16T22:13:16.581891513Z",
         "rating": 5
       },
       {
-        "published_at": "2025-03-29T17:17:17.370384Z",
-        "rating": 1
-      },
-      {
-        "published_at": "2025-04-25T19:41:49.682176Z",
+        "published_at": "2026-05-06T22:49:20.493636118Z",
         "rating": 5
       },
       {
-        "published_at": "2022-03-24T00:07:35.802436Z",
+        "published_at": "2026-05-08T17:40:59.922933026Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-18T17:43:15.070160684Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-17T15:20:51.824656879Z",
         "rating": 5
       }
     ]
@@ -80,27 +80,24 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 59,
+        "performance": 76,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, lab only)",
-      "measured_at": "2026-09-10",
-      "note": "LCP 4.5 s / CLS 0.003 / TBT 698 ms"
+      "measured_at": "2026-09-13",
+      "note": "LCP 5.3 s / CLS 0.006 / TBT 0 ms"
     },
     "_ahrefs_partial_from_cohort": {
-      "domain": "shaevitzandshaevitz.com",
-      "name": "Shaevitz & Shaevitz Law Offices",
-      "dr": 21,
-      "refdomains": 485,
-      "org_keywords": 138,
-      "org_traffic": 1172
+      "domain": "workerscompensationlawfirmnyc.com",
+      "name": "Cass & Peters Attorneys at Law",
+      "practice_page": "https://workerscompensationlawfirmnyc.com/nyc-workers-comp-lawyers-practice-areas-2/"
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 26,
-      "rating_weighted": 4.3,
+      "review_count_total": 212,
+      "rating_weighted": 4.5,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-13"
     }
   },
   "gates": {
@@ -117,9 +114,9 @@
       "checked_at": "2026-09-13"
     },
     "G3": {
-      "pass": false,
-      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
-      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "pass": true,
+      "evidence": "LAW OFFICES OF CASS AND PETERS, PLLC is an active domestic professional service limited liability company registered since 2021-04-01, with 1 Google-verified location",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
       "checked_at": "2026-09-13"
     },
     "G5": {
@@ -129,14 +126,59 @@
       "checked_at": "2026-09-13"
     },
     "G6": {
-      "pass": false,
-      "evidence": "Time in operation not established",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "pass": true,
+      "evidence": "212 public client reviews and 5 years since the entity was formed in 2021",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
       "checked_at": "2026-09-13"
     }
   },
-  "cohort_id": "ny-personal-injury",
+  "cohort_id": "ny-workers-compensation",
   "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "cles WORKERS COMP PERSONAL INJURY BLOG TESTIMONIALS VIDEOS QUICK START GUIDE CONTACT Home Free Consultation! NAME EMAIL (Recommended) PHONE (Recommended) Consent * Yes, I agree with the privacy pol",
+          "source_url": "https://workerscompensationlawfirmnyc.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Cass & Peters Attorneys at Law represents injured workers throughout New York City in workers' compensation, construction-accident, New York Labor Law, and Social Security Disability claims, from a Manhattan office at 225 Broadway."
+      ],
+      "pages": {
+        "home": "https://workerscompensationlawfirmnyc.com/",
+        "privacy": "https://workerscompensationlawfirmnyc.com/privacy-policy/",
+        "blog": "https://workerscompensationlawfirmnyc.com/blog/undocumented-immigrant-workers-comp-lawyers-nyc/",
+        "about": "https://workerscompensationlawfirmnyc.com/about-cass-peters-workers-compensation-law-firm-nyc/",
+        "contact": "https://workerscompensationlawfirmnyc.com/workers-comp-lawyers-ny-free-consultation/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2024-03-07",
+    "years": 2.5,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-13"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-13"
+  },
   "results_published": {
     "readable": true,
     "count": 0,
@@ -145,12 +187,20 @@
     "disclaimer": false,
     "venues": [],
     "why": "the site publishes no case-results page",
-    "checked_at": "2026-09-10"
+    "checked_at": "2026-09-13"
+  },
+  "entity": {
+    "legal_name": "LAW OFFICES OF CASS AND PETERS, PLLC",
+    "entity_type": "DOMESTIC PROFESSIONAL SERVICE LIMITED LIABILITY COMPANY",
+    "dos_id": "5979072",
+    "formed": "2021-04-01",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-09-13"
   },
   "score": {
-    "total": 24,
+    "total": 33,
     "tier": "Listed",
-    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
@@ -215,16 +265,16 @@
         ]
       },
       "C": {
-        "score": 8,
+        "score": 17,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 2,
+            "pts": 4,
             "max": 5,
             "source": "observed",
-            "evidence": "26 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "212 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -232,23 +282,23 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 26 reviews → Bayesian 4.71 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 212 reviews → Bayesian 4.60 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2026-07-03) · a sample of five per business listing, not every review"
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-05-08) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "2 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -291,16 +341,16 @@
         ]
       },
       "E": {
-        "score": 4,
+        "score": 2,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 3,
+            "pts": 1,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -321,11 +371,11 @@
         ]
       }
     },
-    "floor_abc": 8,
+    "floor_abc": 17,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 46,
+      "gap": 37,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -334,10 +384,10 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 16.5,
+    "raw": 23.0,
     "assessed": 70,
     "coverage": 0.7,
-    "floor_abc_pct": 0.224,
+    "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
       "G2"
@@ -345,35 +395,9 @@
     "assessable": 100,
     "comparable": true
   },
-  "accountability": {
-    "malpractice_insurance": false,
-    "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
-    "pages_read": 2,
-    "bios_published": 0,
-    "source": "observed",
-    "checked_at": "2026-09-10"
-  },
-  "operating": {
-    "registered": "2000-07-08",
-    "years": 26.2,
-    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
-    "checked_at": "2026-09-11"
-  },
-  "logo": {
-    "file": "/logos/shaevitzandshaevitz.com.png",
-    "source_url": "https://shaevitzandshaevitz.com/wp-content/uploads/2021/01/cropped-icon-192x192.png",
-    "width": 192,
-    "height": 192,
-    "bytes": 3909,
-    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
-    "fetched_at": "2026-09-13"
-  },
   "screens": {
     "court_dockets": {
-      "note": "A docket search found 6 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
+      "note": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
       "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
       "checked_at": "2026-09-13"
     }

@@ -123,19 +123,19 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     },
     "G5": {
       "pass": false,
@@ -144,10 +144,10 @@
       "checked_at": "2026-09-13"
     },
     "G6": {
-      "pass": true,
-      "evidence": "614 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2015-03-28, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-11"
+      "pass": false,
+      "evidence": "Time in operation not established",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "checked_at": "2026-09-13"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -207,7 +207,7 @@
   "score": {
     "total": 60,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "3 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
@@ -289,7 +289,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 614 reviews → Bayesian 4.97 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 614 reviews → Bayesian 4.97 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -327,7 +327,7 @@
             "pts": 0,
             "max": 8,
             "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "evidence": "Ahrefs data not yet collected for this market"
           },
           {
             "code": "D3",
@@ -427,5 +427,12 @@
     "bytes": 5857,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-13"
+  },
+  "screens": {
+    "court_dockets": {
+      "note": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
+      "checked_at": "2026-09-13"
+    }
   }
 }

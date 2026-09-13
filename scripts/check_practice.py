@@ -93,6 +93,12 @@ NOT_A_PRACTICE_PAGE = re.compile(
     # content-marketing page with a friendlier address: /if-i-was-injured-on-the-job-do-i.
     r"(?:^|/)(?:if|what|how|can|do|does|should|when|why|who|is|are|will)[-_]", re.I)
 
+# The same judgement applied to what the page calls itself, for the cases the address hides.
+ARTICLE_TITLE = re.compile(
+    r"\b(?:vs\.?|versus)\b|^\s*(?:what|how|why|when|can|do|does|should|is|are|will)\b|"
+    r"\b(?:glossary|faq|frequently asked|blog|guide to|checklist|explained|"
+    r"everything you need)\b", re.I)
+
 
 def sitemap_urls(origin, robots, rp):
     """URLs from the sitemaps robots.txt declares, plus the conventional location."""
@@ -143,6 +149,12 @@ def confirm(url, spec, rp):
 
     if not (spec["title"].search(title) or spec["title"].search(heading)):
         return None, "page is not titled for the practice"
+
+    # The address is not always the tell. One firm's comparison piece lives at
+    # /construction-site-accident-lawyer/workers-comp-personal-injury/, which no path rule would
+    # catch, and announces itself in the title: "Workers Comp vs Personal Injury".
+    if ARTICLE_TITLE.search(title) or ARTICLE_TITLE.search(heading):
+        return None, "the title is an article's, not a practice page's"
 
     text = strip_tags(html)
     if not spec["corroborating"].search(text):
