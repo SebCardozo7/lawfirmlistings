@@ -26,6 +26,15 @@ const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    {/* Google Search Console ownership. It belongs in the head: Google reads this tag from the
+        head of the page it is verifying and ignores it anywhere else. On every page rather than
+        just the home page, because verification survives whichever URL is submitted, and because
+        a tag that lives in the layout cannot be lost the next time a page is rewritten.
+
+        Not a secret. A verification token proves control of the site to whoever already has the
+        Search Console property; it grants nothing on its own and is meant to be served publicly
+        in the HTML. */}
+    <meta name="google-site-verification" content="sR3JxIaW5fDkrIudyfYNCTgsj2f60U_N-U9T_hFlNT4" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
