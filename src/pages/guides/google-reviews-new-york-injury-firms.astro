@@ -54,7 +54,13 @@ const avgCount = (xs: Firm[]) =>
 
 // C3 is the recency sub-factor. Naming how many firms have it unassessed is more honest than
 // implying we know how old these reviews are.
-const withResults = firms.filter(f => (f.data.results ?? []).length > 0);
+// Outcomes, for the closing section. These were one number and should never have been: a firm
+// publishing a results page is not the same as a result we have confirmed, and the paragraph
+// below was reading the confirmed set while saying "published any at all", which rendered as
+// nobody publishing results when most of them do. The two sets are now counted separately.
+const publishesResults = firms.filter(f =>
+  f.data.results_published?.readable && (f.data.results_published.count ?? 0) > 0);
+const verifiedResults = firms.flatMap(f => f.data.results ?? []).filter(r => r.verified);
 
 const c3Pending = firms.filter(f =>
   f.data.score?.pillars.C.subs.some(s => s.code === 'C3' && s.source === 'pending')).length;
@@ -150,7 +156,7 @@ const description = 'We summed every Google review for the New York injury firms
     {selfReported.length > 0 && (
       <p>The figures above cover the {measured.length} firms whose ratings we measured directly. Where we hold a rating only because a firm publishes it, the profile labels it as firm-reported and it stays out of these averages. An unmeasured number may well be accurate, but mixing it in would make the average impossible to cite.</p>
     )}
-    <p>And reviews are not outcomes. A five-star rating records how clients felt about being treated, which is worth knowing and is not the same as whether the firm won. Verified results sit in pillar B and are checked against court records, and only {withResults.length} of the {firms.length} firms here {withResults.length === 1 ? 'has' : 'have'} published any at all{withResults.length > 0 && withResults.length <= 2 && <>: {withResults.map((f, i) => (<>{i > 0 && ' and '}<a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></>))}, {withResults.length === 1 ? 'the only firm in this cohort to have completed certification' : 'the only firms in this cohort to have completed certification'}</>}. That is the harder half of the work, and it is where the directory is still thin.</p>
+    <p>And reviews are not outcomes. A five-star rating records how clients felt about being treated, which is worth knowing and is not the same as whether the firm won. Outcomes sit in pillar B, which scores what a firm publishes about its own results rather than what anyone has checked: {publishesResults.length} of the {firms.length} firms here publish a results page we could read, and {verifiedResults.length === 0 ? 'none of those results has' : `${verifiedResults.length} of those results have`} been matched to a court record, so no amount from them appears on this site. <a href="/guides/what-a-case-results-page-proves/">We counted what those pages carry</a>, and that is the harder half of the work: it is where the directory is still thin.</p>
     <p class="muted" style="font-size:.86rem">Review counts and ratings come from the Google Places API (New), summed across every business listing we can attribute to the firm's own domain. A firm we cannot match to a listing keeps these sub-factors pending rather than receiving an estimate.</p>
   </div>
 
