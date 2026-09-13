@@ -141,7 +141,12 @@ const cohorts = defineCollection({
   schema: z.object({
     id: z.string(), state: z.string(), practice: z.string(), label: z.string(), measured_at: z.string(), source: z.string(),
     full_size_estimate: z.number().optional(),
-    firms: z.array(z.object({ domain: z.string(), name: z.string().optional(), dr: z.number(), refdomains: z.number(), org_keywords: z.number(), org_traffic: z.number() })),
+    // The four Ahrefs metrics are optional, because a cohort can be assembled before they
+    // exist. Workers' compensation was: the subscription ran out of units, and waiting six
+    // days for the reset would have stopped the market opening for a reason that has nothing
+    // to do with the firms. D2 reads them, finds nothing and scores pending, which keeps the
+    // seven points out of the denominator rather than charging them to the firm.
+    firms: z.array(z.object({ domain: z.string(), name: z.string().optional(), dr: z.number().optional(), refdomains: z.number().optional(), org_keywords: z.number().optional(), org_traffic: z.number().optional() })),
     unresolved: z.array(z.string()).default([]),
   }),
 });

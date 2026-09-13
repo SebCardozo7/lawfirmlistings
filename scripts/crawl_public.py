@@ -391,7 +391,9 @@ def main():
         path = ROOT / "src/data/cohorts" / (args.cohort + ".json")
         with io.open(path, encoding="utf-8") as fh:
             cohort = json.load(fh)
-        firms = sorted(cohort["firms"], key=lambda f: -f["dr"])
+        # A cohort assembled before its Ahrefs measurement has no DR to sort by. Review
+        # order is the cohort's own order in that case, which is the order it was written.
+        firms = sorted(cohort["firms"], key=lambda f: -(f.get("dr") or 0))
         domains = [f["domain"] for f in firms]
     else:
         ap.error("pass --cohort or --domains")

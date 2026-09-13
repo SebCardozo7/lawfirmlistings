@@ -378,20 +378,25 @@ def compute(firm):
 
     # ---- D2: Ahrefs vs cohort ----
     ah = firm.get("digital", {}).get("ahrefs")
-    if ah and cohort:
-        peers = [f for f in cohort["firms"] if f["domain"] != firm["domain"]]
+    # D2 is a percentile, so it needs the peers measured as well as the firm. A cohort assembled
+    # before its Ahrefs run has neither, and a cohort part-way through has too few peers for a
+    # percentile to mean anything: five is the floor, below which this stays pending rather than
+    # ranking a firm against two neighbours.
+    measured = [f for f in (cohort["firms"] if cohort else []) if f.get("dr") is not None]
+    if ah and cohort and len(measured) >= 6:
+        peers = [f for f in measured if f["domain"] != firm["domain"]]
         p_dr = pct(ah["dr"], [f["dr"] for f in peers]); p_rd = pct(ah["refdomains"], [f["refdomains"] for f in peers])
         p_kw = pct(ah["org_keywords"], [f["org_keywords"] for f in peers]); p_tr = pct(ah["org_traffic"], [f["org_traffic"] for f in peers])
         p_vis = (p_kw + p_tr) / 2
         pts = scale(p_dr, 3) + scale(p_rd, 2) + scale(p_vis, 2)
         brand = A.get("D2_brand"); pts += brand["pts"] if brand else 0
-        med = statistics.median([f["dr"] for f in cohort["firms"]])
+        med = statistics.median([f["dr"] for f in measured])
         ev = (f"DR {ah['dr']} → {p_dr}th pct of {len(peers)}-firm cohort (median {med:g}) {scale(p_dr,3)}/3 · "
               f"{ah['refdomains']:,} referring domains, {p_rd}th pct {scale(p_rd,2)}/2 · "
               f"{ah['org_keywords']:,} organic keywords / {ah['org_traffic']:,} visits·mo, {round(p_vis)}th pct {scale(p_vis,2)}/2 · "
               f"brand demand {brand['pts'] if brand else 0}/1" + (" (illustrative)" if brand and brand.get("source","illustrative")=="illustrative" else " (pending)" if not brand else ""))
         out.append(sub("D2", pts, "ahrefs", ev))
-    else: out.append(assessed("D2", "Ahrefs data not yet collected"))
+    else: out.append(assessed("D2", "Ahrefs data not yet collected for this market"))
 
     # D3 local presence, partially. The methodology asks for a verified *and complete* Google
     # Business Profile (categories, hours, services, 20+ photos, Q&A, recent posts) for 2 points,

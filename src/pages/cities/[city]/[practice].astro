@@ -4,6 +4,7 @@ import Base from '../../../layouts/Base.astro';
 import Icon from '../../../components/Icon.astro';
 import FirmCard from '../../../components/FirmCard.astro';
 import { fitDescription } from '../../../lib/seo';
+import { hasPractice } from '../../../data/practices';
 
 /**
  * City × practice: the ranked list, and the page someone searching "personal injury lawyer
@@ -26,7 +27,7 @@ export async function getStaticPaths() {
   for (const f of firms) {
     for (const pr of f.data.practices) {
       // Only practices with a hub page of their own, so breadcrumbs never climb into nothing.
-      if (pr.slug !== 'personal-injury') continue;
+      if (!hasPractice(pr.slug)) continue;
       combos.set(`${f.data.market.city_slug}/${pr.slug}`,
         { city: f.data.market.city_slug, practice: pr.slug });
     }

@@ -43,7 +43,14 @@ OUT_DIR = ROOT / ".crawl" / "profiles"
 # The cohort file carries its own market, so opening a city means writing one of those
 # rather than editing this. The default is the cohort that existed before there were two.
 DEFAULT_COHORT = "ny-personal-injury"
-PRACTICE = {"slug": "personal-injury", "name": "Personal Injury", "primary": True}
+# The practice comes off the cohort file, which has carried a "practice" slug since the first
+# one. Only the display name lives here, and an unknown slug stops the run rather than writing
+# a profile with a slug where its name should be. Keep in step with src/data/practices.ts: a
+# practice missing there gets no hub page, and the profile would link into nothing.
+PRACTICE_NAMES = {
+    "personal-injury": "Personal Injury",
+    "workers-compensation": "Workers' Compensation",
+}
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury
 # lawyer" is a page title someone typed into the profile, and must not become a firm's name.
@@ -248,7 +255,7 @@ def build_offices(rec):
     return offices
 
 
-def build(rec, cohort_lookup, market, cohort_id):
+def build(rec, cohort_lookup, market, cohort_id, practice):
     name, name_source = pick_name(rec)
     if not name:
         return None, "no usable firm name in JSON-LD, GBP or og:site_name"
@@ -338,7 +345,7 @@ def build(rec, cohort_lookup, market, cohort_id):
         "domain": rec["domain"],
         "phone": format_phone(phone),
         "status": "listed",
-        "practices": [dict(PRACTICE)],
+        "practices": [dict(practice)],
         "market": dict(market),
         "offices": built_offices,
         "attorneys": [],
@@ -349,7 +356,7 @@ def build(rec, cohort_lookup, market, cohort_id):
         # Assembled from the fields above rather than left for a person to write. See
         # lib_describe: it states nothing no column carries, and attributes to the firm
         # everything the firm says about itself.
-        "about": describe(name, market, built_offices, [dict(PRACTICE)], languages,
+        "about": describe(name, market, built_offices, [dict(practice)], languages,
                           fee_model, claims, availability),
         "reviews": reviews,
         "results": [],
@@ -425,7 +432,14 @@ def main():
         cohort = json.load(fh)
     cohort_lookup = {f["domain"]: f for f in cohort["firms"]}
     market = cohort["market"]
-    print("cohort %s · %s, %s" % (args.cohort, market["city"], market["state"]))
+    slug = cohort["practice"]
+    if slug not in PRACTICE_NAMES:
+        print("cohort names practice %r, which has no display name in PRACTICE_NAMES "
+              "and no page in src/data/practices.ts" % slug, file=sys.stderr)
+        return 2
+    practice = {"slug": slug, "name": PRACTICE_NAMES[slug], "primary": True}
+    print("cohort %s · %s · %s, %s"
+          % (args.cohort, practice["name"], market["city"], market["state"]))
 
     if args.domains:
         files = [ROOT / ".crawl" / (d.strip() + ".json") for d in args.domains.split(",") if d.strip()]
@@ -448,7 +462,7 @@ def main():
             skipped += 1
             continue
 
-        firm, why = build(rec, cohort_lookup, market, args.cohort)
+        firm, why = build(rec, cohort_lookup, market, args.cohort, practice)
         if not firm:
             print("%-24s skipped — %s" % (rec["domain"], why))
             skipped += 1
