@@ -130,8 +130,10 @@ button,input,select{font:inherit;color:inherit}
 .site-header .container{display:flex;justify-content:center}
 .navpill{pointer-events:auto;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.4) blur(14px);border:1px solid rgba(10,10,12,.08);border-radius:var(--pill);padding:6px 6px 6px 8px;box-shadow:0 12px 40px -16px rgba(10,10,12,.35),0 1px 2px rgba(10,10,12,.05);max-width:100%}
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:700;font-size:1rem;letter-spacing:-.02em;text-decoration:none!important;padding:6px 12px 6px 6px;border-right:1px solid var(--line);margin-right:4px}
-.brand-mark{width:32px;height:32px;flex:none;border-radius:10px;background:var(--ink);display:grid;place-items:center}
-.brand-mark svg{width:18px;height:18px}
+/* Sized by height, never by width: the lockup and the mark have different aspect ratios and
+   only their optical height has to agree with the nav links beside them. */
+.brand-lockup{height:23px;width:auto;display:block}
+.brand-mark-img{display:none;height:30px;width:auto}
 .brand small{display:none}
 .nav-links{display:flex;gap:2px;list-style:none}
 .nav-links a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:500;font-size:.95rem;padding:10px 14px;border-radius:var(--pill);text-decoration:none!important;transition:background .15s}
@@ -142,16 +144,15 @@ button,input,select{font:inherit;color:inherit}
 .nav-actions{display:flex;gap:6px;align-items:center;margin-left:6px;padding-left:8px;border-left:1px solid var(--line)}
 .nav-toggle{display:none}
 @media (max-width:1060px){.nav-links a span{display:none}.nav-links a{padding:10px 12px}}
-@media (max-width:820px){.nav-links,.nav-actions .btn--ghost{display:none}.nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:40px;height:40px;align-items:center;justify-content:center}.brand span{display:none}.brand{border-right:0}}
+@media (max-width:820px){.nav-links,.nav-actions .btn--ghost{display:none}.nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:40px;height:40px;align-items:center;justify-content:center}.brand-lockup{display:none}.brand-mark-img{display:block}.brand{border-right:0;padding-right:6px}}
 
 /* ---------- Footer ---------- */
 .site-footer{background:var(--night);color:var(--on-night-soft);padding:80px 0 32px;position:relative;overflow:hidden}
 .site-footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--aurora);opacity:.7}
 .site-footer a{color:#D7D9E0}.site-footer a:hover{color:#fff}
 .footer-grid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:40px}
-.footer-brand .brand{color:#fff;border:0;padding:0;margin:0;font-size:1.15rem}
-.footer-brand .brand-mark{background:#fff}
-.footer-brand .brand-mark svg path{stroke:var(--night)}
+.footer-brand .brand{color:#fff;border:0;padding:0;margin:0}
+.footer-brand .brand-lockup{height:30px}
 .footer-brand p{margin-top:18px;font-size:.95rem;max-width:34ch}
 .site-footer h4{color:#fff;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;font-weight:600}
 .site-footer ul{list-style:none;display:grid;gap:10px;font-size:.95rem}

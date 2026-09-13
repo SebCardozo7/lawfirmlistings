@@ -7,8 +7,13 @@ const { nav = 'home' } = Astro.props;
   <div class="container">
     <nav class="navpill" aria-label="Main">
       <a class="brand" href="/" aria-label="Law Firm Listings, home">
-        <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 2.6v5.2c0 4.6-3 8.8-7 10.2-4-1.4-7-5.6-7-10.2V5.6L12 3z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.8 12.2l2.2 2.2 4.4-4.8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span>Law Firm Listings<small>Ranked · Verified · Independent</small></span>
+        {/* Two files rather than one: below 820px the pill has no room for a wordmark, and a
+            lockup cannot shed half of itself. Both are eager, because the brand is the first
+            thing painted and a lazy logo flashes empty on every navigation. */}
+        <img class="brand-lockup" src="/brand/logo-dark.png" width="640" height="116"
+             alt="Law Firm Listings" />
+        <img class="brand-mark-img" src="/brand/mark-dark.png" width="256" height="256"
+             alt="" aria-hidden="true" />
       </a>
       <ul class="nav-links">
         <li><a href="/practice-areas/" aria-current={nav==='practice'?'page':undefined}><Icon name="scale" /><span>Practice Areas</span></a></li>
