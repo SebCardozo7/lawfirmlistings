@@ -72,7 +72,7 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
         <span class="badge badge--tier">{s!.tier}</span>
       )}
       {isVerified && (
-        <span class="badge badge--verified" title="Every eligibility gate has been checked and passed. This is not certification, which additionally requires a score."><Icon name="check" /> LFL Verified</span>
+        <span class="badge badge--verified" title="Every eligibility gate has been checked and passed. This is not certification, which additionally requires a score."><Icon name="check" /> LFL Verified {new Date(s!.computed_at).getFullYear()}</span>
       )}
       {d.claimed && (
         <span class="badge badge--claimed" title="The firm confirmed it owns this page and maintains its own information. This says nothing about the firm's certification."><Icon name="check" /> Firm-managed</span>
