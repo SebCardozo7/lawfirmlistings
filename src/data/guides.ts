@@ -77,6 +77,16 @@ export const GUIDES: Guide[] = [
     meta: 'One firm out of thirteen passes',
   },
   {
+    slug: 'what-a-case-results-page-proves',
+    kicker: 'Method',
+    title: 'What a case results page proves, and what it does not',
+    summary:
+      'We read the case results page of every firm in the directory and counted what is on it: how many results, which case types, whether any court is named, whether a disclaimer is there. We publish none of the amounts, and this is why.',
+    thumb: 't2',
+    icon: 'scale',
+    meta: 'What we counted, and what we will not repeat',
+  },
+  {
     slug: 'best-personal-injury-law-firms-nyc',
     kicker: 'Ranking · New York',
     title: 'Best Personal Injury Law Firms in NYC',
