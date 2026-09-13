@@ -60,7 +60,14 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
 
 <article class="firm-card">
   {rank && <span class="rank">{rankLabel ?? `#${rank}`}</span>}
-  <div class={logoVariant ? `firm-logo ${logoVariant}` : 'firm-logo'}>{d.initials}</div>
+  {/* The firm's own mark where we have one, the initials tile where we do not. alt is empty on
+      purpose: the firm's name is the next thing in the reading order, so announcing the logo
+      would say it twice. */}
+  <div class={`firm-logo ${d.logo ? 'has-logo' : (logoVariant || '')}`.trim()}>
+    {d.logo
+      ? <img src={d.logo.file} alt="" width="68" height="68" loading="lazy" decoding="async" />
+      : d.initials}
+  </div>
 
   <div class="firm-body">
     <div class="firm-title">

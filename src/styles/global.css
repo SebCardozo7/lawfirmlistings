@@ -276,6 +276,10 @@ button,input,select{font:inherit;color:inherit}
 .firm-card:hover{border-color:var(--line-2);box-shadow:var(--shadow)}
 .firm-card .rank{position:absolute;left:28px;top:-11px;background:var(--ink);color:#fff;font-weight:600;font-size:.74rem;padding:4px 12px;border-radius:var(--pill);letter-spacing:.04em;text-transform:uppercase}
 .firm-logo{width:68px;height:68px;border-radius:18px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.2rem;letter-spacing:-.02em;flex:none;background:var(--ink)}
+/* A logo tile is paper with a hairline, not the dark monogram tile. These icons are made for a
+   phone home screen, so they bring their own background and only need somewhere to sit. */
+.firm-logo.has-logo,.profile-logo.has-logo{background:var(--paper);border:1px solid var(--line);padding:0;overflow:hidden}
+.firm-logo img,.profile-logo img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
 .firm-logo.l2{background:#1F2937}.firm-logo.l3{background:#3B3C43}.firm-logo.l4{background:linear-gradient(160deg,#8B5CF6,#3B82F6)}.firm-logo.l5{background:linear-gradient(160deg,#3B82F6,#5EEAD4);color:var(--ink)}.firm-logo.l6{background:#6F7079}
 .firm-body{min-width:0}
 .firm-title{display:flex;gap:10px;align-items:center;flex-wrap:wrap}

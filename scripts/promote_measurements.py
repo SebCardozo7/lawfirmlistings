@@ -146,6 +146,14 @@ def promote(rec: dict, firm: dict) -> list[str]:
     # A5 accountability, measured by scripts/check_a5.py off the firm's own pages. It replaces
     # the one hand-entered assessment left on the directory, so it belongs with the measurements
     # rather than beside the prose.
+    # The firm's own logo, from the icon its site declares.
+    logo = rec.get("logo")
+    if logo and logo.get("file"):
+        if (firm.get("logo") or {}).get("file") != logo["file"]:
+            changed.append("logo            %s (%sx%s)"
+                           % (logo["file"], logo.get("width"), logo.get("height")))
+        firm["logo"] = logo
+
     # How long the firm has been going, from the domain's registration date. G6 needs it and
     # outside New York no register we may query carries a formation date.
     oper = rec.get("operating")

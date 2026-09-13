@@ -22,6 +22,14 @@ const firms = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/data/firms' }),
   schema: z.object({
     slug: z.string(), name: z.string(), legal_name: z.string().optional(), entity_type: z.string().optional(),
+    // The firm's own mark, copied from the icon its site declares. Optional on purpose: a firm
+    // whose icon is too small to publish keeps the initials tile, which is a real design and not
+    // a placeholder. See scripts/fetch_logos.py.
+    logo: z.object({
+      file: z.string(), source_url: z.string(),
+      width: z.number().nullable().optional(), height: z.number().nullable().optional(),
+      bytes: z.number().optional(), source: z.string(), fetched_at: z.string(),
+    }).optional(),
     initials: z.string(), website: z.string().url(), domain: z.string(), phone: z.string(), phone_vanity: z.string().optional(),
     founded_year: z.number().optional(),
     // 'verified' sits between listed and certified: every eligibility gate passed, which is a
