@@ -17,6 +17,10 @@ const pool = await getCollection('firms', f =>
 
 const ranked = pool.sort((a, b) => (b.data.score?.total ?? 0) - (a.data.score?.total ?? 0));
 const gateMet = ranked.length >= MIN_CERTIFIED;
+// Read off a score rather than typed here. This said v1.1 for as long as the engine has
+// said v2.0, and it only escaped notice because the sentence is behind the gate. A page
+// that names a methodology version should get it from the same place the scores do.
+const methodVersion = ranked[0]?.data.score?.methodology ?? 'v2.0';
 
 // Counts for the related-guide cards, which used to read "1,240 firms · 100 cities" and
 // "612 certified firms". Both were invented.
@@ -35,7 +39,7 @@ const lastUpdated = computedDates.length
 {/* noindex while the ranking is gated. The page explains itself to a visitor who lands on
     it, but a title promising a ranking that is not published should not be in search results.
     Drop the noindex — and the sitemap filter in astro.config.mjs — when the gate opens. */}
-<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City: ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology v1.1, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" noindex={!gateMet}>
+<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City: ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology ${methodVersion}, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" noindex={!gateMet}>
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -80,7 +84,7 @@ const lastUpdated = computedDates.length
 
     <h2 id="how-we-ranked">How we ranked these firms</h2>
     <p>Personal injury is the most heavily advertised area of law in New York. Subway cars, taxi tops and daytime television are full of firms promising maximum compensation. That noise makes it hard to tell a genuine trial firm from a high-volume settlement mill. So advertising counts for nothing here. Each firm is scored out of 100 across five pillars, and paid search spend is excluded by design.</p>
-    {/* These are the real pillar weights from Methodology v1.1. The list here previously read
+    {/* These are the real pillar weights, kept in step with the methodology page. Previously read
         35/25/25/15 across four factors that do not exist, one of which — peer recognition —
         was removed from the methodology entirely. */}
     <ul>
