@@ -327,6 +327,16 @@ def crawl(domain, fetched_at):
     record["attorney_bio_urls"] = lib_discover.attorney_bio_urls(
         sitemap_pages, plan.get("attorneys"), roster_pages)
 
+    # A guessed path that redirects somewhere else did not exist. Three firms had their
+    # attorney index recorded as their home page and one as /about-us/, because the crawler
+    # tried /attorneys/, the site redirected, and the redirect target was filed under the
+    # kind that had been guessed. That is the same error as recording a measurement we did
+    # not take: the page we wanted was not there.
+    #
+    # So the landing URL has to still look like the kind that asked for it. The home page
+    # never counts as anything but home, and an attorney index has to satisfy the same test
+    # that would have proposed it.
+    guessed = {kind for path, kind in CANDIDATE_PATHS} & set(plan)
     for kind, url in plan.items():
         if not rp.can_fetch(UA, url):
             record["robots_disallowed"].append(url)
@@ -334,6 +344,17 @@ def crawl(domain, fetched_at):
         status, html, final = fetch(url)
         time.sleep(DELAY)
         if status != 200 or not html:
+            continue
+        landed = urllib.parse.urlparse(final).path.rstrip("/") or "/"
+        if kind != "home" and landed == "/":
+            record["notes"].append(
+                "%s: %s redirected to the home page, so no %s page was recorded"
+                % (kind, url, kind))
+            continue
+        if kind == "attorneys" and not lib_discover.is_attorney_path(landed):
+            record["notes"].append(
+                "attorneys: %s redirected to %s, which does not read as a roster, so no "
+                "attorney index was recorded" % (url, landed))
             continue
         harvest(kind, html, final)
 
@@ -387,7 +408,23 @@ def main():
     for i, domain in enumerate(domains, 1):
         print("[%2d/%d] %s" % (i, len(domains), domain), flush=True)
         rec = crawl(domain, fetched_at)
-        with io.open(outdir / (domain + ".json"), "w", encoding="utf-8") as fh:
+        # A staging record is written by four scripts, not one. enrich_places, enrich_psi,
+        # crawl_attorneys and crawl_results each add their own block to this same file, and this
+        # crawler used to dump a fresh record over the top of it. Re-running the crawl therefore
+        # deleted the Google reviews, the PageSpeed measurements and the attorney rosters of every
+        # domain it touched, which is how a re-crawl for an unrelated redirect fix cost 21 firms
+        # their review counts.
+        #
+        # So the record is merged rather than replaced: what this crawler measured wins, and the
+        # blocks it knows nothing about stay where their owner put them.
+        path = outdir / (domain + ".json")
+        if path.exists():
+            try:
+                with io.open(path, encoding="utf-8") as fh:
+                    rec = {**json.load(fh), **rec}
+            except (ValueError, OSError):
+                pass  # An unreadable record is one we are about to replace anyway.
+        with io.open(path, "w", encoding="utf-8") as fh:
             json.dump(rec, fh, indent=2, ensure_ascii=False)
             fh.write("\n")
         name = rec["name_candidates"][0]["value"] if rec["name_candidates"] else "(no name found)"

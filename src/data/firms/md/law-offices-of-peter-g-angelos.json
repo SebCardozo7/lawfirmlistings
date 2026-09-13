@@ -1,0 +1,396 @@
+{
+  "slug": "law-offices-of-peter-g-angelos",
+  "name": "Law Offices of Peter G. Angelos",
+  "initials": "PA",
+  "website": "https://www.angeloslaw.com/",
+  "domain": "angeloslaw.com",
+  "phone": "(410) 649-2000",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true
+    }
+  ],
+  "market": {
+    "city_slug": "baltimore-md",
+    "city": "Baltimore",
+    "state": "MD",
+    "state_name": "Maryland"
+  },
+  "offices": [
+    {
+      "label": "Peter Angelos Law",
+      "address": "100 N Charles St 21st Floor, Baltimore, MD 21201, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=13051513789629535808&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Trevor Brown",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.angeloslaw.com/attorney/brown-trevor/"
+    },
+    {
+      "name": "Ronald E. Richardson",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.angeloslaw.com/attorney/ronald-e-richardson/"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Law Offices of Peter G. Angelos is a personal injury firm with a single office in Baltimore.",
+    "The firm states that the first consultation is free. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.5,
+      "count_label": "123",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-02-25T13:43:18.719576342Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-10T21:11:13.606123980Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-08-07T14:48:27.935687958Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-17T20:29:28.544882694Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-23T17:16:35.687384276Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 48,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-10",
+      "note": "LCP 25.2 s / CLS 0.000 / TBT 324 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "angeloslaw.com",
+      "name": "Law Offices of Peter Angelos",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 123,
+      "rating_weighted": 4.5,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-10"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Maryland does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-10"
+    },
+    "G2": {
+      "pass": false,
+      "source": "unavailable",
+      "checked_at": "2026-09-11",
+      "evidence": "2 of the firm's attorneys share a surname with a disciplined attorney, and for Trevor Brown 2 of 24 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical office confirmed through verified Google Business Profile listings, but Maryland does not publish a business register we can query, so the registered entity behind this firm is not verified here.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-10"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-11"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "123 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2004-02-06, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-11"
+    }
+  },
+  "cohort_id": "md-personal-injury",
+  "faq": [],
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-10"
+  },
+  "results_published": {
+    "count": 6,
+    "counted_from": "stated amounts",
+    "amounts": [
+      4500000000,
+      500000000,
+      28000000,
+      15300000,
+      2400000,
+      2200000
+    ],
+    "largest": 4500000000,
+    "aggregate_claims": [
+      54000000
+    ],
+    "case_types": [
+      "motor vehicle",
+      "medical malpractice",
+      "product liability"
+    ],
+    "disclaimer": true,
+    "venues": [],
+    "text_length": 2995,
+    "readable": true,
+    "url": "https://www.angeloslaw.com/verdicts-settlements/",
+    "checked_at": "2026-09-10"
+  },
+  "score": {
+    "total": 44,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-11",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Maryland publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 10,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 3,
+            "max": 6,
+            "source": "firm",
+            "evidence": "6 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "3 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 4,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "123 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.5 over 123 reviews → Bayesian 4.64 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-03-10) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 1,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 26,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 26,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "A6 Roster verifiability: +9 available"
+      ]
+    },
+    "raw": 31.0,
+    "assessed": 70,
+    "coverage": 0.769,
+    "floor_abc_pct": 0.684,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "assessable": 91
+  },
+  "operating": {
+    "registered": "2004-02-06",
+    "years": 22.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
+  }
+}

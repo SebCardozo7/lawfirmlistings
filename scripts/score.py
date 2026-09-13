@@ -63,6 +63,11 @@ SUBS = {  # code: (pillar, label, max)
 }
 PILLAR_MAX = {"A": 25, "B": 15, "C": 20, "D": 25, "E": 15}
 
+# The states whose attorney register we are permitted to query. Sub-factors and gates
+# derived from a register mean nothing outside this set, and must not be scored there.
+# scripts/build_profiles.py holds the same set for the wording it writes.
+OPEN_REGISTER_STATES = {"NY"}
+
 # The eligibility gates, all five checkable by machine from a public source. G4, "no
 # consumer-protection actions", was removed at v2.0: it asked for a negative across every
 # enforcement body in the country and no search can establish it. The reasoning, and the two
@@ -80,7 +85,11 @@ GATES = ("G1", "G2", "G3", "G5", "G6")
 # real firm for something its state does not publish. Matching on substrings of prose is fragile,
 # which is why the list is named and here rather than inline.
 NOT_A_FINDING = ("pending", "partial", "no queryable source", "unavailable",
-                 "screening only", "incomplete", "not yet")
+                 "screening only", "incomplete", "not yet", "no roster published")
+# The subset of those that mean the source does not exist in this firm's market, as opposed to
+# meaning we have not got there yet. Only these leave the coverage denominator: a check we simply
+# owe is still a gap in our work and should count against us.
+NO_SOURCE_IN_MARKET = ("no queryable source", "unavailable", "no roster published")
 # Thresholds are percentages now, of what we could actually assess. The absolute floors the
 # methodology set, 40, 50 and 55 out of the 65 points in pillars A, B and C, carry across as
 # the same proportions.
@@ -146,8 +155,21 @@ def pct(value, values):
 def scale(p, maxpts):  # percentile → points, rounded half-up, min 0
     return max(0, min(maxpts, round(p / 100 * maxpts + 1e-9)))
 
-def sub(code, pts, source, evidence):
+def sub(code, pts, source, evidence, max_override=None):
+    """One sub-score.
+
+    max_override exists for a factor where part of the scale is not assessable for a firm rather
+    than unearned by it. A5 is the case: three of its six points are for disclosing professional
+    liability cover, and across thirty-eight firms in two states not one publishes it, not even
+    as a phrase on an about page. Plaintiff-side firms in this country do not advertise their own
+    cover, and scoring an absence that is universal charges every firm three points for a fact
+    about the market. It separates nobody, it moves no ranking, and it quietly makes the published
+    thresholds stricter than the page says they are, because 70 out of a scale where three points
+    cannot be reached is really 70 out of 97. So that half leaves the denominator until we see a
+    firm publish it, at which point the firm that does gets the credit.
+    """
     pil, label, mx = SUBS[code]
+    mx = mx if max_override is None else max_override
     return {"code": code, "label": label, "pts": round(min(pts, mx), 1), "max": mx, "source": source, "evidence": evidence}
 
 TODAY_YEAR = int(TODAY[:4])
@@ -193,7 +215,17 @@ def compute(firm):
     named = len(attys)
     verified = [a for a in attys if a.get("bar_number")]
     with_number = [a for a in attys if a.get("bar_number") and a.get("registry_basis")]
-    if named:
+    # A6 is a share of a register, so it needs a register. Where the state publishes none we may
+    # query, every attorney is unmatched by definition, and the profile said "0 of 7 named
+    # attorneys matched to the Maryland register" and scored the firm 1 out of 9 for it. Maryland
+    # was never queried: mdcourts.gov asks crawlers to stay out of its attorney search. So the
+    # factor leaves the scale rather than charging a firm for a door we agreed not to open.
+    if named and firm.get("market", {}).get("state") not in OPEN_REGISTER_STATES:
+        out.append(sub("A6", 0, "no queryable source",
+                       "%s publishes no attorney register we can query, so the roster is not "
+                       "verified here and this is not scored."
+                       % firm.get("market", {}).get("state_name", "This state")))
+    elif named:
         share = len(verified) / named
         pts = 6 if share >= 0.95 else 4.5 if share >= 0.8 else 3 if share >= 0.5 else 1
         # Three more for publishing the numbers itself, which is a text change any firm can
@@ -210,7 +242,21 @@ def compute(firm):
         out.append(sub("A6", 0, "pending", "No attorney is named on the site we could read"))
 
     # ---- A5: only what the firm publishes about itself ----
-    out.append(assessed("A5", "Nothing published about insurance or bar memberships"))
+    # ---- A5 accountability: read off the firm's own pages, not entered by hand ----
+    # This was the last hand-entered sub-factor on the directory, and it was the shape the whole
+    # v2.0 rework set out to remove: six points that only a person could award, pending on every
+    # profile but one. scripts/check_a5.py looks for a disclosure of professional liability cover
+    # with the firm as the subject of the sentence, and for named bar or trial lawyers'
+    # associations. A firm that publishes neither scores nothing here rather than being asked.
+    acc = firm.get("accountability")
+    if acc and "A5" not in A:
+        # Three points for cover disclosed, three for a named association. Where no cover is
+        # published the scale is the association half alone; see sub() for why.
+        cover = acc.get("malpractice_insurance")
+        out.append(sub("A5", acc["pts"], acc.get("source", "observed"),
+                       acc["evidence"], max_override=None if cover else 3))
+    else:
+        out.append(assessed("A5", "Nothing published about insurance or bar memberships"))
 
     # ---- B: Published Outcomes, from the firm's own results page ----
     rp = firm.get("results_published")
@@ -395,11 +441,16 @@ def compute(firm):
     # pipeline. That measured our own coverage and published it as the firm's result, which
     # put the A+B+C floor of 40 out of 65 arithmetically out of reach for everyone and left a
     # certification nobody could earn.
+    # "pending" was the only source treated as unassessed, and NOT_A_FINDING exists precisely
+    # because there are several ways of not having looked. A5 brought the difference to a head: a
+    # firm whose bios we could not all read, and where we found no membership, reports "partial",
+    # and counting that as an assessed zero would charge the firm six points for the reach of our
+    # own crawl. The same vocabulary the gates use, for the same reason.
     def spread(codes):
         earned = assessable = 0.0
         for pk in codes:
             for x in pillars[pk]["subs"]:
-                if x["source"] != "pending":
+                if not any(w in (x["source"] or "").lower() for w in NOT_A_FINDING):
                     earned += x["pts"]; assessable += x["max"]
         return earned, assessable
 
@@ -407,8 +458,37 @@ def compute(firm):
     earned_abc, assessed_abc = spread("ABC")
     total = round(100 * earned_all / assessed_all) if assessed_all else 0
     abc_pct = (earned_abc / assessed_abc) if assessed_abc else 0.0
-    coverage = assessed_all / sum(PILLAR_MAX.values())
-    pillar_cover = {pk: (spread(pk)[1] / PILLAR_MAX[pk]) for pk in PILLAR_MAX}
+
+    # Coverage is a share of what this market lets anyone measure, not of a flat hundred.
+    #
+    # There is a real difference between a check we have not run and a check that cannot be run
+    # where the firm practises. "pending" is ours to fix and counts against us. "no queryable
+    # source" is a fact about the state: Maryland publishes no attorney register we are permitted
+    # to query, so A2 and A6 have no source there for anybody, us or a competitor. Dividing by a
+    # hundred put every Maryland firm at 0.55 coverage against a 0.60 minimum and pillar A at 12%
+    # against 50%, which capped an entire state at Listed for something no firm in it can change.
+    # That is the same error as scoring our own reach, three floors up: it published a fact about
+    # Maryland as a fact about the firm.
+    #
+    # So the denominator is the scale that exists here. A state that publishes less has a shorter
+    # ladder, not an unclimbable one, and the profile says which rungs its state does not have.
+    def market_scale(codes):
+        total_max = absent = 0.0
+        for pk in codes:
+            total_max += PILLAR_MAX[pk]
+            for x in pillars[pk]["subs"]:
+                if any(w in (x["source"] or "").lower() for w in NO_SOURCE_IN_MARKET):
+                    absent += x["max"]
+        return total_max, absent
+
+    all_max, all_absent = market_scale(PILLAR_MAX)
+    assessable_all = all_max - all_absent
+    coverage = assessed_all / assessable_all if assessable_all else 0.0
+    pillar_cover = {}
+    for pk in PILLAR_MAX:
+        pk_max, pk_absent = market_scale(pk)
+        room = pk_max - pk_absent
+        pillar_cover[pk] = (spread(pk)[1] / room) if room else 1.0
     coverage_ok = (coverage >= MIN_COVERAGE
                    and all(pillar_cover[pk] >= MIN_PILLAR_COVERAGE for pk in "ABC"))
     abc = round(earned_abc)
@@ -420,9 +500,22 @@ def compute(firm):
     gates = firm.get("gates", {})
     def unchecked(g):
         return not g["pass"] and any(w in g.get("source", "").lower() for w in NOT_A_FINDING)
-    pending_gates = [k for k, g in gates.items() if unchecked(g)]
+    # A gate has a fourth state, and missing it capped a whole state at Listed. "Pending" is work
+    # we owe. "No queryable source" is a fact about where the firm practises: Maryland publishes
+    # no attorney register we are permitted to query and no business register either, so G1 and
+    # G3 have no answer there for us or for anyone else. Treating those two as unfinished work
+    # meant every Maryland firm sat at Listed forever for something no firm in Maryland can
+    # change, which is the same mistake as scoring our own coverage.
+    #
+    # So they neither block nor pass. They are counted, the number travels with the score, and
+    # the profile says which checks the firm's state does not allow. A gate that failed still
+    # blocks, and a gate we have merely not run still blocks.
+    def no_source(g):
+        return any(w in (g.get("source") or "").lower() for w in NO_SOURCE_IN_MARKET)
+    unavailable_gates = [k for k, g in gates.items() if not g["pass"] and no_source(g)]
+    pending_gates = [k for k, g in gates.items() if unchecked(g) and k not in unavailable_gates]
     failed_gates = [k for k, g in gates.items() if not g["pass"] and not unchecked(g)]
-    gates_ok = len(gates) == len(GATES) and not pending_gates and not failed_gates
+    gates_ok = (len(gates) == len(GATES) and not pending_gates and not failed_gates)
     # Clearing every gate is itself a finding worth publishing. It says licensure,
     # discipline, entity, offices, website and footprint were checked and held, which is the
     # part that protects a client, and it claims nothing about the score. Without a rung here
@@ -473,7 +566,11 @@ def compute(firm):
     return {"total": total, "tier": tier, "verdict": verdict, "computed_at": TODAY, "methodology": METHOD,
             "pillars": pillars, "floor_abc": abc, "next_tier": nxt,
             "raw": round(earned_all, 1), "assessed": round(assessed_all),
-            "coverage": round(coverage, 3), "floor_abc_pct": round(abc_pct, 3)}
+            "coverage": round(coverage, 3), "floor_abc_pct": round(abc_pct, 3),
+            # Which checks the firm's state does not allow anyone to make, so a profile can say
+            # so as a fact about the state rather than leaving a reader to wonder what is missing.
+            "gates_unavailable": sorted(unavailable_gates),
+            "assessable": round(assessable_all)}
 
 def main():
     errors = []

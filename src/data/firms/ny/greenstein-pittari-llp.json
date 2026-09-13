@@ -132,7 +132,7 @@
       "admitted_year": 2022,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10",
+      "checked_at": "2026-09-11",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/jake-i-berkowitz/"
     },
     {
@@ -143,7 +143,7 @@
       "admitted_year": 2025,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-10",
+      "checked_at": "2026-09-11",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/emily-driscoll/"
     },
     {
@@ -154,7 +154,7 @@
       "admitted_year": 2020,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-10",
+      "checked_at": "2026-09-11",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/valerie-hernandez/"
     },
     {
@@ -165,7 +165,7 @@
       "admitted_year": 2013,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10",
+      "checked_at": "2026-09-11",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/bartolomeo-andrew-pittari/"
     },
     {
@@ -177,12 +177,12 @@
       "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     {
       "name": "Michael A. Barnett",
       "role": "Attorney",
-      "checked_at": "2026-09-10",
+      "checked_at": "2026-09-11",
       "bar_state": "NY",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/michael-a-barnett/",
       "registry_note": "ambiguous (3 attorneys share this name)"
@@ -195,7 +195,7 @@
       "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-10",
+      "checked_at": "2026-09-11",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/robert-j-greenstein/"
     },
     {
@@ -207,12 +207,12 @@
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     }
   ],
   "languages": [
     "English",
-    "Español"
+    "Spanish"
   ],
   "fee_model": "Contingency",
   "fee_statement": "No fees until we win your injury case",
@@ -228,7 +228,7 @@
     "The firm places unusual emphasis on client access: attorneys visit clients in the hospital or at home, offer video consultations, commit to returning calls promptly, and provide a mobile app for tracking the status of an injury claim. Intake and representation are available in English and Spanish."
   ],
   "quote": {
-    "text": "When you're injured in an accident, you need a few things as you begin to seek compensation: answers to your questions, support while you recover, world-class legal service, and a lawyer who never forgets you're a person — not just a number.",
+    "text": "When you're injured in an accident, you need a few things as you begin to seek compensation: answers to your questions, support while you recover, world-class legal service, and a lawyer who never forgets you're a person.",
     "attribution": "From the firm's statement of philosophy"
   },
   "highlights": [
@@ -435,29 +435,7 @@
       }
     ]
   },
-  "results": [
-    {
-      "type": "Settlement",
-      "title": "Construction accident · Labor Law §240(1)",
-      "description": "Worker injured in a fall from an unsecured ladder on a Bronx job site.",
-      "amount": null,
-      "verified": false
-    },
-    {
-      "type": "Verdict",
-      "title": "Motor vehicle · Pedestrian knock-down",
-      "description": "Pedestrian struck in a Manhattan crosswalk; serious-injury threshold met.",
-      "amount": null,
-      "verified": false
-    },
-    {
-      "type": "Settlement",
-      "title": "Premises liability · Slip-and-fall",
-      "description": "Fall on an unmaintained stairwell in a Queens residential building.",
-      "amount": null,
-      "verified": false
-    }
-  ],
+  "results": [],
   "digital": {
     "ahrefs": {
       "dr": 28,
@@ -494,6 +472,15 @@
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
+    },
+    "psi": {
+      "value": {
+        "performance": 45,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-10",
+      "note": "LCP 23.0 s / CLS 0.001 / TBT 422 ms"
     }
   },
   "gates": {
@@ -501,31 +488,31 @@
       "pass": true,
       "evidence": "7 of 8 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G3": {
       "pass": true,
       "evidence": "GREENSTEIN & PITTARI, LLP is an active domestic registered limited liability partnership registered since 2003-12-01, with 7 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-11"
     },
     "G6": {
       "pass": true,
       "evidence": "1,013 public client reviews and 23 years since the entity was formed in 2003",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-09"
+      "checked_at": "2026-09-10"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -565,11 +552,6 @@
     }
   ],
   "assessments": {
-    "A5": {
-      "pts": 4.5,
-      "source": "illustrative",
-      "evidence": "Bar memberships; malpractice insurance not disclosed (assessed 3/4 under methodology v1.0; rescaled to the v1.1 weighting)"
-    },
     "D4_content": {
       "pts": 2,
       "source": "observed",
@@ -577,14 +559,14 @@
     }
   },
   "score": {
-    "total": 62,
+    "total": 70,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (3/15).",
-    "computed_at": "2026-09-10",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-11",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 21,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -606,15 +588,15 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 4.5,
-            "max": 6,
-            "source": "illustrative",
-            "evidence": "Bar memberships; malpractice insurance not disclosed (assessed 3/4 under methodology v1.0; rescaled to the v1.1 weighting)"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 2 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
       "B": {
-        "score": 3,
+        "score": 0,
         "max": 15,
         "subs": [
           {
@@ -622,24 +604,24 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "firm",
-            "evidence": "The firm publishes no case results we could read"
+            "source": "pending",
+            "evidence": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 3,
+            "pts": 0,
             "max": 5,
-            "source": "firm",
-            "evidence": "7 case types named; no court or county named, so no result can be looked up"
+            "source": "pending",
+            "evidence": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+            "source": "pending",
+            "evidence": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           }
         ]
       },
@@ -661,7 +643,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 1,013 reviews → Bayesian 4.89 (prior 4.81 weighted as 100 reviews, from 14 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 1,013 reviews → Bayesian 4.89 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -691,7 +673,7 @@
             "pts": 2.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -737,7 +719,7 @@
             "pts": 2.5,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Español · video consults"
+            "evidence": "English, Spanish · video consults"
           },
           {
             "code": "E4",
@@ -750,23 +732,25 @@
         ]
       }
     },
-    "floor_abc": 40,
+    "floor_abc": 36,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 8,
+      "gap": 0,
       "floor_met": true,
-      "coverage_met": true,
+      "coverage_met": false,
       "path": [
-        "B1 Results published: +6 available",
-        "D1 Website trust & experience: +5.0 available",
-        "D2 Search authority: +5 available"
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 62.0,
-    "assessed": 100,
-    "coverage": 1.0,
-    "floor_abc_pct": 0.675
+    "raw": 57.5,
+    "assessed": 82,
+    "coverage": 0.82,
+    "floor_abc_pct": 0.857,
+    "gates_unavailable": [],
+    "assessable": 100
   },
   "entity": {
     "legal_name": "GREENSTEIN & PITTARI, LLP",
@@ -774,28 +758,55 @@
     "dos_id": "2983403",
     "formed": "2003-12-01",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-09"
+    "checked_at": "2026-09-10"
   },
   "results_published": {
-    "count": 0,
-    "counted_from": "result headings",
-    "amounts": [],
-    "largest": null,
-    "aggregate_claims": [],
-    "case_types": [
-      "construction",
-      "motor vehicle",
-      "truck",
-      "medical malpractice",
-      "wrongful death",
-      "pedestrian",
-      "product liability"
-    ],
-    "disclaimer": false,
-    "venues": [],
-    "text_length": 3299,
-    "readable": true,
+    "readable": false,
+    "why": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
     "url": "https://www.nyclawfirm.com/results/",
     "checked_at": "2026-09-10"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/frank-trief",
+        "quote": "2 New York University B.A. – 1984 Professional Associations New York State Trial Lawyers Association New York State Bar Association New York City Ba"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/frank-trief",
+        "quote": "ional Associations New York State Trial Lawyers Association New York State Bar Association New York City Bar Association Fairfield County Bar Associat"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/frank-trief",
+        "quote": "te Trial Lawyers Association New York State Bar Association New York City Bar Association Fairfield County Bar Association Professional Bio Frank Tri"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/michael-a-barnett",
+        "quote": "ty Bar Association, Member American Bar Association, Member American Association for Justice, Member Areas of Practice Personal Injury — Plaintiff Wrong"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/michael-a-barnett",
+        "quote": "Association, Member New York County Bar Association, Member American Bar Association, Member American Association for Justice, Member Areas of P"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 2 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 11,
+    "bios_published": 8,
+    "source": "observed",
+    "checked_at": "2026-09-10"
+  },
+  "operating": {
+    "registered": "2001-11-30",
+    "years": 24.8,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
   }
 }

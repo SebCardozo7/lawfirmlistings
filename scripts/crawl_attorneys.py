@@ -36,7 +36,7 @@ import time
 import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from crawl_public import (LINK_KINDS, UA, fetch, robots_for, strip_tags, meta,  # noqa: E402
+from crawl_public import (LINK_KINDS, UA, fetch, robots_for, strip_tags, meta, unescape,  # noqa: E402
                           json_ld_blocks)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -55,7 +55,17 @@ ATTORNEY_PATTERN = next(p for k, p in LINK_KINDS if k == "attorneys")
 NOT_A_PERSON = re.compile(
     r"\b(lawyer|attorney|law|firm|injury|accident|malpractice|compensation|team|staff|our|meet|"
     r"about|profile|practice|areas|contact|free|consultation|home|welcome|results|verdict|"
-    r"settlement|case|client|review|blog|news|español|abogado)\b", re.I)
+    r"settlement|case|client|review|blog|news|español|abogado|"
+    # Utility links. A roster page also links to its privacy policy and its site map, and
+    # "Privacy Policy" is two capitalised words with nothing in it to say it is not a person.
+    r"privacy|policy|terms|disclaimer|sitemap|map|assistant|menu|search|espanol|english|"
+    r"payment|careers|scholarship|faq|video|testimonial|"
+    # Words that only ever belong to a practice-page title. These reached the name only because
+    # the role peel had already taken "Lawyer" or "Attorneys" off the end of them, which is how
+    # "New York Premises Liability Lawyer" was stored as a person called
+    # "New York Premises Liability La".
+    r"premises|liability|wrongful|death|brutality|subway|disease|union|worker|workers|"
+    r"negligence|abuse|harassment|discrimination|bankruptcy|immigration|divorce)\b", re.I)
 
 SUFFIXES = re.compile(r"\s*[,|–—-]\s*(esq\.?|esquire|jd|j\.d\.|llp|llc|p\.?c\.?|pllc|"
                       r"attorney at law).*$", re.I)
@@ -103,6 +113,37 @@ BAR_NUMBER = re.compile(
     r"(?:bar|attorney|registration)\s*(?:no\.?|number|#|id)\s*:?\s*(\d{6,8})", re.I)
 
 
+# Prefixes that carry a capital inside them. A blanket title-case turns McDonald into Mcdonald
+# and O'Hagan into O'hagan, which is somebody's name spelled wrong.
+#
+# Only these four. The first draft also listed the lowercase particles, de, di, la, le, van and
+# von, and those do not take an inner capital at all: they made DELGADO come back as DeLgado and
+# LEONARD as LeOnard. A particle is a separate word when it is one.
+INNER_CAPS = re.compile(r"^(mc|mac|o'|d')(.+)$", re.I)
+
+
+def normalise_case(name):
+    """Title-case a name the firm published in capitals, and leave every other name alone.
+
+    Frekhtman & Associates sets its roster in capitals, so its attorneys arrived as
+    "ARKADY FREKHTMAN" and would have sat in a list beside "Melisande Hill" shouting. Only a
+    wholly uppercase name is touched: a firm that writes "deGeneres" or "MacIntyre" is spelling
+    it deliberately and knows better than we do.
+    """
+    letters = re.sub(r"[^A-Za-z]", "", name or "")
+    if len(letters) < 4 or not letters.isupper():
+        return name
+
+    def fix(word):
+        m = INNER_CAPS.match(word)
+        if m and len(m.group(2)) > 1:
+            head, tail = m.group(1), m.group(2)
+            return head.capitalize() + tail[0].upper() + tail[1:].lower()
+        return "-".join(part.capitalize() for part in word.split("-"))
+
+    return " ".join(fix(w) for w in name.split())
+
+
 def looks_like_a_person(name):
     if not name or len(name) > 60:
         return False
@@ -140,9 +181,18 @@ def looks_like_a_person(name):
     return all(cased_like_a_name(w) for w in words)
 
 
+# A heading that introduces the person rather than just naming them. Davidoff Law titles every
+# bio "About Attorney Mark Getzoni", and six of its attorneys were thrown out because "about" and
+# "attorney" are in the vocabulary that means a heading is not a name. The words are the firm's
+# furniture, and the name is behind them.
+HEADING_PREFIX = re.compile(r"^(?:about|meet|profile of|introducing)\s+"
+                            r"(?:attorney|our attorney|lawyer|partner)?\s*", re.I)
+
+
 def split_name_and_role(raw):
     """Returns (name, role_as_published). The role is the firm's wording, or None."""
     text = re.sub(r"\s+", " ", (raw or "").replace("&amp;", "&")).strip()
+    text = HEADING_PREFIX.sub("", text).strip()
     text = SUFFIXES.sub("", text).strip(" ,-|")
 
     words = [w for w in re.split(r"[\s,|]+", text) if w]
@@ -157,11 +207,17 @@ def split_name_and_role(raw):
     cjk = any("\u3040" <= ch <= "\u30ff" or "\u4e00" <= ch <= "\u9fff"
               or "\uac00" <= ch <= "\ud7af" for ch in text)
     floor = 1 if cjk else 2
+    # The peel treats an all-caps word as a title because the name beside it is not. On a roster
+    # set entirely in capitals there is no name beside it: every word is capitals, and the rule
+    # ate the surname. "RICHARD R. MOGG" came back as Richard R. with the role "Mogg". Where the
+    # whole heading is uppercase, only the vocabulary may peel.
+    letters_all = re.sub(r"[^A-Za-z]", "", text)
+    all_caps_heading = len(letters_all) >= 4 and letters_all.isupper()
     while len(words) - len(role) > floor:
         w = words[len(words) - len(role) - 1]
         letters = re.sub(r"[^A-Za-z]", "", w)
         is_caps = len(letters) >= 2 and letters.isupper()
-        if w.lower().strip(".") in ROLE_WORDS or is_caps:
+        if w.lower().strip(".") in ROLE_WORDS or (is_caps and not all_caps_heading):
             role.insert(0, w)
         else:
             break
@@ -176,27 +232,148 @@ def h1_of(html):
     return strip_tags(m.group(1)) if m else None
 
 
-def bio_candidates(html, origin, index_url):
-    """Links one segment deeper than the attorney index, on the same site."""
-    index_path = urllib.parse.urlparse(index_url).path.rstrip("/")
-    base_depth = len([s for s in index_path.split("/") if s])
-    out, seen = [], set()
+# What a firm calls the part of its site that holds the lawyers. Matching on vocabulary instead
+# of on these names picked /nyc/premises-liability-lawyer/ as a roster, because "lawyer" is in
+# both a roster's name and a practice page's.
+ROSTER_SECTIONS = {
+    "about", "about-us", "about-our-firm", "our-firm", "the-firm", "firm", "our-team", "team",
+    "our-attorneys", "attorneys", "attorney", "our-lawyers", "lawyers", "our-people", "people",
+    "staff", "profiles", "bios", "meet-our-team", "meet-the-team", "meet-our-attorneys",
+    "who-we-are", "leadership", "nuestro-equipo", "abogados",
+}
+
+
+# "attorneys" and "lawyers", never the singular. /attorneys/ and
+# /experienced-personal-injury-attorneys-in-new-york/ are rosters;
+# /nyc/premises-liability-lawyer/ is a practice page whose children are injuries, not people.
+ROSTER_PLURAL = re.compile(r"attorneys|lawyers|abogados", re.I)
+
+
+def slug_reads_as_a_name(path):
+    """Does the last path segment look like a person rather than a topic?
+
+    "/about-us/adam-d-cahn/" is a bio and "/practice-areas/medical-malpractice-lawyer/" is not,
+    and the difference is legible in the slug alone: hyphenated name tokens against practice
+    vocabulary. The same person test the headings go through decides it, so there is one
+    definition of what a name looks like.
+    """
+    segs = [x for x in (path or "").split("/") if x]
+    if not segs:
+        return False
+    slug = re.sub(r"\.(html?|php|aspx?)$", "", segs[-1])
+    tokens = [t for t in slug.split("-") if t]
+    if not 2 <= len(tokens) <= 4:
+        return False
+    return looks_like_a_person(" ".join(t.capitalize() for t in tokens))
+
+
+def bios_without_index(html, origin):
+    """Bio pages on a site that publishes no attorney index we can recognise.
+
+    Five firms came back with an empty roster and "no attorney index found". Four of them publish
+    bios perfectly openly, from the home page, under a parent we do not read as a roster:
+
+        sakkascahn.com        /about-us/adam-d-cahn/       linked as "view bio"
+        lawfirmdavidoff.com   /our-firm/julia-wetzel/      linked as "View Full Profile"
+        kdlm.com              an index whose own slug is a practice phrase
+
+    The reliable signal is not the parent's name and not the anchor text, both of which vary. It
+    is that a roster leaves siblings: several links sharing one parent path, each ending in a
+    segment that reads as a person. One such link is a coincidence, so two are required before
+    the group counts, and the pages themselves are still fetched and still named from their own
+    heading.
+    """
+    groups = {}
     for m in re.finditer(r'href=["\']([^"\'#\s]+)["\']', html, re.I):
         url = urllib.parse.urljoin(origin + "/", m.group(1).strip())
         if not url.startswith(origin):
             continue
         path = urllib.parse.urlparse(url).path
-        if not re.search(ATTORNEY_PATTERN, path):
+        if not slug_reads_as_a_name(path):
             continue
-        segs = [s for s in path.split("/") if s]
-        # One segment deeper than the index, and not the index itself.
-        if len(segs) != base_depth + 1:
-            continue
+        segs = [x for x in path.split("/") if x]
+        parent = "/".join(segs[:-1])
+        groups.setdefault(parent, []).append(url.split("?")[0].rstrip("/"))
+
+    # Choosing the biggest group was wrong twice over. sakkascahn.com publishes three bios under
+    # /about-us/ and a dozen city pages at the root, where "Garden City" and "Nassau County" read
+    # as people; and it publishes five pages under /nyc/premises-liability-lawyer/, where
+    # "Dog Bite" and "Slip And Fall" do too. The second group won on size and because its parent
+    # path contains the word "lawyer", which is in a roster's vocabulary and in a practice page's
+    # as well.
+    #
+    # So the parent decides, by name and not by keyword. A roster sits in a section about the
+    # firm, and that section is called one of a short list of things. Anything else is a topic.
+    candidates = [(parent, sorted(set(urls))) for parent, urls in groups.items()
+                  if parent and len(set(urls)) >= 2]
+    if not candidates:
+        return []
+
+    def section(parent):
+        return [x for x in parent.split("/") if x][-1].lower().strip("/")
+
+    # An allowlist of section names alone was too strict: kdlm.com keeps its ten bios under
+    # /experienced-personal-injury-attorneys-in-new-york/, which is a roster with a keyword name.
+    # The tell is grammatical number. A roster is "attorneys" or "lawyers"; a practice page is
+    # "premises liability lawyer", singular, with the practice in front of it. So a plural counts
+    # and a singular does not, and an exact section name still wins over both.
+    exact = [(p, u) for p, u in candidates if section(p) in ROSTER_SECTIONS]
+    plural = [(p, u) for p, u in candidates if ROSTER_PLURAL.search(section(p))]
+    pool = exact or plural
+    if not pool:
+        return []
+    return max(pool, key=lambda pair: len(pair[1]))[1]
+
+
+def bio_candidates(html, origin, index_url):
+    """The firm's attorney pages, linked from its attorney index.
+
+    Two passes, because the URL is not the reliable signal. Eleven of the firms published here
+    came back with an empty roster, and four of them had a perfectly good roster page whose bio
+    links this function threw away:
+
+        mirmanlawyers.com   /our-team/  links to  /about/danielle-ciraola/
+        866attylaw.com      /team/      links to  /arkady-frekhtman-personal-injury-attorney/
+
+    The first is two segments deep and says "about", the second is a root-level slug carrying
+    practice words. Neither looks like a bio URL and both plainly are one. What they have in
+    common is the anchor text: on a roster page, the link to a lawyer's page is their name.
+
+    So pass one keeps the old URL shape test, which catches a bio whose link reads "Read more",
+    and pass two accepts any internal link whose anchor text reads as a person's name. Where the
+    anchor says "Danielle Ciraola", the URL has nothing left to tell us.
+    """
+    index_path = urllib.parse.urlparse(index_url).path.rstrip("/")
+    base_depth = len([s for s in index_path.split("/") if s])
+    out, seen = [], set()
+
+    def consider(href, anchor_name=None):
+        url = urllib.parse.urljoin(origin + "/", href.strip())
+        if not url.startswith(origin):
+            return
+        path = urllib.parse.urlparse(url).path
+        if anchor_name is None:
+            if not re.search(ATTORNEY_PATTERN, path):
+                return
+            segs = [s for s in path.split("/") if s]
+            if len(segs) != base_depth + 1:
+                return
         clean = url.split("?")[0].rstrip("/")
         if clean in seen or clean.rstrip("/") == index_url.rstrip("/"):
-            continue
+            return
         seen.add(clean)
         out.append(clean)
+
+    for m in re.finditer(r'href=["\']([^"\'#\s]+)["\']', html, re.I):
+        consider(m.group(1))
+
+    for m in re.finditer(r'<a[^>]+href=["\']([^"\'#\s]+)["\'][^>]*>(.*?)</a>', html, re.S | re.I):
+        text = re.sub(r"<[^>]+>", " ", m.group(2))
+        text = unescape(re.sub(r"\s+", " ", text)).strip()
+        name = split_name_and_role(text)[0] if text else ""
+        if name and looks_like_a_person(name):
+            consider(m.group(1), anchor_name=name)
+
     return out
 
 
@@ -229,7 +406,13 @@ def collect(domain, verbose=False, record=None):
             if index_url is None or len(segs) < len([s for s in urllib.parse.urlparse(index_url).path.split("/") if s]):
                 index_url = url.split("?")[0]
     if not index_url and not seeded_bios:
-        return {"error": "no attorney index found in the sitemap or the navigation"}
+        # No index we recognise. A roster still leaves sibling bio pages on the home page.
+        seeded_bios = bios_without_index(home, origin)
+        if seeded_bios and verbose:
+            print("      no index; %d sibling bio page(s) off the home page"
+                  % len(seeded_bios))
+    if not index_url and not seeded_bios:
+        return {"error": "no attorney index found, and no group of bio pages on the home page"}
 
     index_html, index_final = "", index_url or ""
     if index_url:
@@ -262,6 +445,7 @@ def collect(domain, verbose=False, record=None):
         return {"error": "no bio pages found", "index_url": index_final}
     if not bios:
         name, role = split_name_and_role(h1_of(index_html))
+        name = normalise_case(name)
         if looks_like_a_person(name):
             result["attorneys"].append({"name": name, "source_url": index_final,
                                         "bar_number": None, "role": role or "Attorney"})
@@ -280,6 +464,7 @@ def collect(domain, verbose=False, record=None):
             continue
         heading = h1_of(html) or meta(html, "og:title")
         name, role = split_name_and_role(heading)
+        name = normalise_case(name)
         if name and name.casefold() in seen_names:
             continue
         if not looks_like_a_person(name):
@@ -326,6 +511,18 @@ def main():
         found = collect(rec["domain"], args.verbose, rec)
         # Re-read before writing: another enricher may have written in the meantime.
         fresh = json.loads(io.open(path, encoding="utf-8").read())
+
+        # A failed run must not delete a good one. godoskygentile.com serves an intermittent 403
+        # to crawlers, and one re-run that happened to hit it replaced four collected attorneys
+        # with an error and a count of zero, which then reads as "this firm names nobody" all the
+        # way through to the gates. An error is news about the fetch, not about the roster.
+        had = ((fresh.get("attorneys_found") or {}).get("attorneys")) or []
+        if found.get("error") and had:
+            found = dict(found, attorneys=had,
+                         kept_from=(fresh["attorneys_found"] or {}).get("checked_at"),
+                         note=("this run failed (%s) and the %d name(s) already collected were "
+                               "kept rather than overwritten with nothing"
+                               % (found["error"], len(had))))
         fresh["attorneys_found"] = found
         io.open(path, "w", encoding="utf-8", newline="\n").write(
             json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")

@@ -170,6 +170,13 @@ def money_values(text):
         # or a fragment of a phone number rather than a recovery.
         if value < 10_000:
             continue
+        # And one over ten billion is a parse, not a settlement. One results page read as
+        # a nine trillion dollar recovery, which is more than the annual output of most
+        # countries and would have sat in our data waiting for somebody to render it. The
+        # largest personal injury verdicts in the country are in the low billions, so this
+        # ceiling drops the artefacts without touching a real figure.
+        if value > 10_000_000_000:
+            continue
         before = text[max(0, match.start() - 90):match.start()]
         after = text[match.end():match.end() + 70]
         if AGGREGATE_BEFORE.search(before) or AGGREGATE_AFTER.search(after):
@@ -227,12 +234,17 @@ def collect(domain, results_url, verbose=False):
     has_money = bool(MONEY.search(text))
     has_words = bool(RESULT_WORD.search(text))
     if len(text) < 400 or not (has_money or has_words):
+        # State what we saw, not why we think we saw it. This used to conclude "rendered in the
+        # browser rather than served to a reader or a crawler", which sounds authoritative and
+        # was wrong at least once: one firm's results page turned out to carry no results at all,
+        # in a real browser with scripts running, just a breadcrumb saying Results. Pillar B is
+        # pending either way, so the guess bought nothing and could have been repeated back to a
+        # firm as a technical diagnosis of a page that simply had nothing on it.
         return {"readable": False,
-                "why": ("results page has almost no text, most likely rendered in the browser"
-                        if len(text) < 400 else
-                        "the results page served no figures and no mention of a settlement, "
-                        "verdict or recovery, so its results are rendered in the browser rather "
-                        "than served to a reader or a crawler"),
+                "why": ("the results page served %d characters of text and no figure or mention "
+                        "of a settlement, verdict or recovery, so there was nothing on it to "
+                        "count. Whether the results are held back from the served HTML or the "
+                        "page carries none is not something this check can tell." % len(text)),
                 "url": final, "checked_at": date.today().isoformat()}
     out = extract(text)
     out.update({"readable": True, "url": final, "checked_at": date.today().isoformat()})

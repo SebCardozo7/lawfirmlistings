@@ -7,7 +7,13 @@ const measured = <T extends z.ZodTypeAny>(inner: T) =>
 
 const subScore = z.object({
   code: z.string(), label: z.string(), pts: z.number(), max: z.number(),
-  source: z.enum(['registry', 'observed', 'ahrefs', 'places', 'psi', 'court', 'firm', 'illustrative', 'pending']),
+  // 'partial' means the check ran but could not cover everything it needed to, so an absence
+  // is not yet a finding. score.py keeps those out of the denominator, the same way it
+  // treats 'pending', because a firm must not lose points to the reach of our own crawl.
+  source: z.enum(['registry', 'observed', 'ahrefs', 'places', 'psi', 'court', 'firm', 'illustrative', 'partial', 'no queryable source', 'pending']),
+  // 'no queryable source' is the gates' wording and now a sub-factor's too: A6 is a share
+  // of a register, and where the state publishes none we may query there is nothing to
+  // take a share of. Kept out of the denominator, like the rest of this vocabulary.
   evidence: z.string(),
 });
 const pillar = z.object({ score: z.number(), max: z.number(), subs: z.array(subScore) });
@@ -68,6 +74,17 @@ const firms = defineCollection({
     // What the firm publishes about its own results: the input for pillar B at v2.0. `readable`
     // separates "publishes nothing", which is a finding, from "we could not read the page", which
     // leaves the pillar pending rather than scoring the firm zero for our failure.
+    operating: z.object({
+      registered: z.string().nullable(), years: z.number().nullable(),
+      source: z.string(), note: z.string().optional(), checked_at: z.string(),
+    }).optional(),
+    accountability: z.object({
+      malpractice_insurance: z.boolean(),
+      insurance_evidence: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
+      bar_associations: z.array(z.object({ name: z.string(), source_url: z.string(), quote: z.string().optional() })).default([]),
+      pts: z.number(), evidence: z.string(), pages_read: z.number().optional(),
+      source: z.string(), checked_at: z.string(),
+    }).optional(),
     results_published: z.object({
       readable: z.boolean(), count: z.number().optional(), amounts: z.array(z.number()).default([]),
       largest: z.number().nullable().optional(), aggregate_claims: z.array(z.number()).default([]),
@@ -91,6 +108,11 @@ const firms = defineCollection({
       // no template can print the score without being able to print its coverage too.
       raw: z.number().optional(), assessed: z.number().optional(), coverage: z.number().optional(),
       floor_abc_pct: z.number().optional(),
+      // `assessable` is the scale that exists in this firm's market, which is a hundred minus
+      // whatever its state publishes no source for. `gates_unavailable` names those gates, so a
+      // profile can state the limit as a fact about the state instead of leaving a gap.
+      assessable: z.number().optional(),
+      gates_unavailable: z.array(z.string()).default([]),
       pillars: z.object({ A: pillar, B: pillar, C: pillar, D: pillar, E: pillar }),
       floor_abc: z.number(),
       next_tier: z.object({ name: z.string(), needed: z.number(), gap: z.number(), floor_met: z.boolean(), coverage_met: z.boolean().optional(), path: z.array(z.string()) }).nullable(),

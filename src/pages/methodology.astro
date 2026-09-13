@@ -11,20 +11,20 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
   <div class="container">
     <div>
       <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Methodology</li></ol>
-      <span class="eyebrow">Our Methodology · LFL Certified™ v1.1</span>
+      <span class="eyebrow">Our Methodology · LFL Certified™ v2.0</span>
       <h1>The score behind the badge.</h1>
       <p class="lede">Every certified firm earns a 0–100 Certification Score from verifiable evidence: licensure and discipline records, court-confirmed outcomes, authenticated client reviews, published fee and access terms, and the quality and authority of its digital presence. No firm can pay for a point. Here is exactly how it works.</p>
       <div class="chips on-night" style="margin-top:24px"><a class="chip" href="#gates">Eligibility gates</a><a class="chip" href="#pillars">Five pillars</a><a class="chip" href="#digital">Digital presence</a><a class="chip" href="#tiers">Tiers</a><a class="chip" href="#cadence">Re-verification</a><a class="chip" href="#independence">Independence</a></div>
     </div>
     <div class="glass" style="padding:28px">
       <div class="k">Score composition · 100 points</div>
-      <div class="weight-bar" aria-hidden="true"><i class="wA" style="width:25%"></i><i class="wB" style="width:20%"></i><i class="wC" style="width:20%"></i><i class="wD" style="width:25%"></i><i class="wE" style="width:10%"></i></div>
+      <div class="weight-bar" aria-hidden="true"><i class="wA" style="width:25%"></i><i class="wB" style="width:15%"></i><i class="wC" style="width:20%"></i><i class="wD" style="width:25%"></i><i class="wE" style="width:15%"></i></div>
       <div class="weight-legend">
         <div class="wA"><b>25</b>Professional standing</div>
-        <div class="wB"><b>20</b>Verified outcomes</div>
+        <div class="wB"><b>15</b>Published outcomes</div>
         <div class="wC"><b>20</b>Client experience</div>
         <div class="wD"><b>25</b>Digital presence &amp; authority</div>
-        <div class="wE"><b>10</b>Access &amp; responsiveness</div>
+        <div class="wE"><b>15</b>Access &amp; responsiveness</div>
       </div>
       <div class="row" style="margin-top:22px"><span>Certified from <b>70</b></span><span>Distinguished <b>85</b></span><span>Elite <b>93</b></span></div>
     </div>
@@ -35,7 +35,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
   <div class="container">
     <div class="section-head"><div><span class="eyebrow">Design principles</span><h2 style="margin-top:12px">Gates before points. Evidence before claims. Local before national.</h2></div></div>
     <div class="steps">
-      <div class="step"><h3>Gates before points</h3><p>Licensure, discipline, identity and consumer-protection checks are pass/fail. A suspended partner is not a deduction. It is a zero. Only firms that pass every gate are scored at all.</p></div>
+      <div class="step"><h3>Gates before points</h3><p>Licensure, discipline and identity checks are pass/fail. A suspended partner is not a deduction. It is a zero. Only firms that pass every gate are scored at all.</p></div>
       <div class="step"><h3>Evidence before claims</h3><p>Court records, bar registries and API-sourced reviews outrank anything a firm tells us about itself. Self-reported "$1B recovered" totals score nothing until we can confirm them.</p></div>
       <div class="step"><h3>Local before national</h3><p>Outcomes, review volume and search authority are compared within the firm's state and practice area, so a strong firm in Tulsa is measured against Tulsa, not Manhattan.</p></div>
     </div>
@@ -44,13 +44,14 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
 
 <section class="section section--paper" id="gates">
   <div class="container">
-    <div class="section-head"><div><span class="eyebrow">Layer 0</span><h2 style="margin-top:12px">Six eligibility gates every firm must pass</h2><p>Fail one and the firm is listed with a neutral profile but cannot be certified, regardless of reviews, results or website.</p></div></div>
+    <div class="section-head"><div><span class="eyebrow">Layer 0</span><h2 style="margin-top:12px">Five eligibility gates every firm must pass</h2><p>Fail one and the firm is listed with a neutral profile but cannot be certified, regardless of reviews, results or website.</p></div></div>
     <div class="gates">
-      <div class="gate"><span class="k">G1</span><b>Active licensure</b><span>Every attorney named on the firm's site holds an active license in each state of practice.</span><span class="src">State bar &amp; court attorney registries (50 states + DC)</span></div>
-      <div class="gate"><span class="k">G2</span><b>Clean public discipline</b><span>No current attorney carries a disciplinary status on the public register: disbarred, suspended, or resigned for disciplinary reasons. Those statuses persist, so the check reaches back years, but it will not show a censure or a suspension since lifted. We say which firms this has been run for.</span><span class="src">NYS Attorney Registration database (Department of State open data), per attorney</span></div>
+      <div class="gate"><span class="k">G1</span><b>Active licensure</b><span>Every attorney named on the firm's site holds an active license in each state of practice.</span><span class="src">New York State attorney registrations, published as open data by the Unified Court System. A state without a register we can query carries no licence finding at all rather than an assumed one.</span></div>
+      <div class="gate"><span class="k">G2</span><b>Clean public discipline</b><span>No current attorney carries a disciplinary status on the public register: disbarred, suspended, or resigned for disciplinary reasons. Those statuses persist, so the check reaches back years, but it will not show a censure or a suspension since lifted. We say which firms this has been run for.</span><span class="src">The same New York attorney register, read per attorney</span></div>
       <div class="gate"><span class="k">G3</span><b>Verified entity &amp; office</b><span>Registered legal entity and at least one confirmed physical office. No virtual-office-only listings.</span><span class="src">NY Department of State active corporations register · Google Business Profile verification</span></div><div class="gate"><span class="k">G5</span><b>Honest website baseline</b><span>Live HTTPS site with working contact and named attorneys; no "guaranteed results", fake badges or misleading claims.</span><span class="src">Automated crawl + editorial review</span></div>
-      <div class="gate"><span class="k">G6</span><b>Minimum footprint</b><span>At least 10 public client reviews across verified platforms and one year in operation.</span><span class="src">Google · Avvo · Yelp · BBB · SoS filing date</span></div>
+      <div class="gate"><span class="k">G6</span><b>Minimum footprint</b><span>At least 10 client reviews on the firm's verified Google listings, and one year in operation by its entity filing date.</span><span class="src">Google Business Profile via the Places API, summed across a firm's verified listings · Department of State filing date</span></div>
     </div>
+    <p class="muted" style="margin-top:22px;font-size:.92rem">The numbering skips G4. It asked for the absence of a consumer-protection action across every enforcement body in the country, and no search can establish a negative that broad, so it was retired at v2.0 rather than being reported as passed. The gates that remain are the ones a machine can settle from a public source, and the numbers stay put so a score computed last month still means what it said.</p>
   </div>
 </section>
 
@@ -67,7 +68,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
             <tbody>
               <tr><td>A6 Roster verifiability</td><td class="p">9</td><td>Share of the attorneys a firm names that we can match to the state register: 95%+ = 6 · 80% = 4.5 · 50% = 3 · below that = 1 · plus 3 where the firm publishes bar numbers on its own bios, which is a text change and the cheapest points on this scale</td></tr>
               <tr><td>A2 Experience</td><td class="p">10</td><td>Mean years since admission across the attorneys we matched, from their registration records: 15+ = 10 · 10–15 = 7 · 5–10 = 5 · under 5 = 2. The profile states how many of the firm's attorneys the mean covers.</td></tr>
-              <tr><td>A5 Accountability</td><td class="p">6</td><td>Malpractice insurance disclosed (3) · membership in substantive bar associations such as AAJ, state trial lawyers, NACDL or AILA (3). Scored only from what a firm publishes about itself, so a firm that discloses neither scores nothing here rather than being asked.</td></tr>
+              <tr><td>A5 Accountability</td><td class="p">6</td><td>Professional liability cover disclosed (3) · membership of a substantive bar or trial lawyers' association such as the AAJ, a state trial lawyers association, NACDL or AILA (3). Read off the firm's own pages, so a firm that publishes neither scores nothing here rather than being asked for it. Two things this deliberately will not count: the word insurance where the sentence is about the other side's carrier, which on a personal injury site is nearly every mention of it, and the paid "Top 100" and "Million Dollar" forums a firm can join by invoice, which are the badges G5 exists to screen out.</td></tr>
             </tbody>
           </table>
         </div>
@@ -94,7 +95,7 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
           <table>
             <thead><tr><th>Sub-factor</th><th>Pts</th><th>How it's scored</th></tr></thead>
             <tbody>
-              <tr><td>C1 Authentic volume</td><td class="p">5</td><td>Log-scaled count of reviews across Google, Avvo, Yelp, BBB, Facebook, Lawyers.com, de-duplicated, percentile within cohort</td></tr>
+              <tr><td>C1 Authentic volume</td><td class="p">5</td><td>Total reviews across the firm's verified Google listings, on a fixed ladder rather than a percentile: 300+ = 5 · 150 = 4 · 75 = 3 · 25 = 2 · 10 = 1. A fixed ladder because a firm should be able to read its own row without knowing what its neighbours did, and because volume is the one signal here that needs no interpretation.</td></tr>
               <tr><td>C2 Rating quality</td><td class="p">6</td><td>Bayesian average with the cohort mean as prior, so 3 reviews at 5.0 never beat 400 at 4.8</td></tr>
               <tr><td>C3 Review recency</td><td class="p">5</td><td>Share of the sampled reviews left in the last 12 months: 60%+ = 5 · 40% = 4 · 20% = 2.5 · any at all = 1. Google returns five reviews per business listing, so this is a sample and the profile says how large it was.</td></tr>
               <tr><td>C5 Complaint share</td><td class="p">4</td><td>Share of the sampled reviews rating 1 or 2 stars: none = 4 · up to 10% = 3 · up to 20% = 2 · up to 35% = 1. A sample, so this is the shape of the complaints rather than a count of them.</td></tr>
@@ -155,18 +156,18 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
   <div class="container">
     <div class="example">
       <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b3"></i></div>
-      <div class="score-ring" style="--pct:79%"><b>79<small>/ 100</small></b></div>
+      <div class="score-ring" style="--pct:74%"><b>74<small>/ 100</small></b></div>
       <div>
         <span class="eyebrow" style="color:var(--on-night-soft)">Worked example · illustrative</span>
         <h3 style="margin-top:10px">A New York personal injury firm → LFL Certified</h3>
         <div class="ex-rows">
-          <div class="ex-row"><b>A · Professional standing</b><div class="bar"><i class="wA" style="width:84%"></i></div><span class="v">21 / 25</span></div>
-          <div class="ex-row"><b>B · Verified outcomes</b><div class="bar"><i class="wB" style="width:75%"></i></div><span class="v">15 / 20</span></div>
-          <div class="ex-row"><b>C · Client experience</b><div class="bar"><i class="wC" style="width:85%"></i></div><span class="v">17 / 20</span></div>
-          <div class="ex-row"><b>D · Digital presence</b><div class="bar"><i class="wD" style="width:68%"></i></div><span class="v">17 / 25</span></div>
-          <div class="ex-row"><b>E · Access</b><div class="bar"><i class="wE" style="width:90%"></i></div><span class="v">9 / 10</span></div>
+          <div class="ex-row"><b>A · Professional standing</b><div class="bar"><i class="wA" style="width:80%"></i></div><span class="v">20 / 25</span></div>
+          <div class="ex-row"><b>B · Published outcomes</b><div class="bar"><i class="wB" style="width:67%"></i></div><span class="v">10 / 15</span></div>
+          <div class="ex-row"><b>C · Client experience</b><div class="bar"><i class="wC" style="width:80%"></i></div><span class="v">16 / 20</span></div>
+          <div class="ex-row"><b>D · Digital presence</b><div class="bar"><i class="wD" style="width:64%"></i></div><span class="v">16 / 25</span></div>
+          <div class="ex-row"><b>E · Access</b><div class="bar"><i class="wE" style="width:80%"></i></div><span class="v">12 / 15</span></div>
         </div>
-        <p style="margin-top:18px;font-size:.95rem">A + B + C = 53, so the firm clears the Certified floor. <b style="color:#fff">Path to Distinguished (85):</b> add schema markup and bylined content (+4 in D4) and submit two 2025–26 results for verification (+1 in B4). The score breakdown becomes the firm's to-do list.</p>
+        <p style="margin-top:18px;font-size:.95rem">A + B + C = 46 of 65, so the firm clears the Certified floor. The example assumes every sub-factor was assessable; where one is not, it leaves the scale rather than costing the firm points. <b style="color:#fff">Path to Distinguished (85):</b> publish each result with its case type and date instead of a lump total (+4 in B2 and B3), add JSON-LD and bylined attorney pages (+5 in D1 and D4), and state the fee terms in full (+2 in E1). Every one of those is something a firm changes on its own website, and nothing on that list is submitted to us.</p>
       </div>
     </div>
   </div>
@@ -215,8 +216,8 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
       <details open><summary>Can a firm pay to be certified or to rank higher?</summary><div>No. Position in any ranked list comes from the Certification Score, and the score, the eligibility gates and the tier cannot be bought or edited, not even by a firm that manages its own profile. A firm may claim its profile at no cost to keep its information current and to submit case results with a docket for verification, and may buy optional tools. Sponsored placements are always labeled and never appear inside a ranked list.</div></details>
       <details><summary>Can a firm see and dispute its score?</summary><div>Yes. Every sub-score and its evidence is visible to the firm. Corrections and new documentation can be submitted at any time; formal appeals are reviewed within 30 days by a licensed attorney on our editorial team.</div></details>
       <details><summary>Why include SEO and website signals in a trust score?</summary><div>Because they are proxies for accountability and real demand. Firms that publish attorney names and bar numbers, state their fees, keep content current and earn links from courts, news outlets and local institutions are easier to verify and harder to fake. Paid ads are excluded, and the pillar is capped so it can never compensate for weak licensure, outcomes or reviews.</div></details>
-      <details><summary>How are small-market firms treated fairly?</summary><div>Percentile-based factors are computed within the firm's cohort, which is a state and practice area holding at least 25 firms, so a regional firm can reach Elite without competing with national brands.</div></details>
-      <details><summary>How often does the methodology change?</summary><div>Changes are versioned and announced 60 days before taking effect; historical scores are preserved. This is version 1.0.</div></details>
+      <details><summary>How are small-market firms treated fairly?</summary><div>Percentile-based factors are computed within the firm's cohort, which is a state and practice area, so a regional firm can reach Elite without competing with national brands. A cohort needs enough firms for a percentile to mean anything, and until it has them those factors are left unscored on every profile in it rather than guessed from a handful of peers.</div></details>
+      <details><summary>How often does the methodology change?</summary><div>Changes are versioned and announced 60 days before taking effect; historical scores are preserved. This is version 2.0.</div></details>
     </div>
   </div>
 </section>

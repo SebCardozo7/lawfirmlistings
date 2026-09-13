@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import { officeLabel } from '../lib/labels';
 import { publishedGuides } from '../data/guides';
 
 // The hero preview and the "certified this month" grid both render real firms.
@@ -173,7 +174,7 @@ const searchIndex = {
     <div class="hero-preview" aria-hidden="true">
       {lead && (
         <div class="glass">
-          <div class="firm"><div class="avatar">{lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {leadHq?.label.split(/[—(]/)[0].trim()}, {lead.data.market.state}</span></div></div>
+          <div class="firm"><div class="avatar">{lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {officeLabel(leadHq?.label, leadHq?.address, lead.data.name)}, {lead.data.market.state}</span></div></div>
           {leadGoogle && (
             <div class="stars">{'★'.repeat(Math.round(leadGoogle.rating))} <small>{leadGoogle.rating.toFixed(1)} · {leadGoogle.count_label} reviews{leadSelfReported ? ', as reported by the firm' : ''}</small></div>
           )}

@@ -10,7 +10,7 @@
   "practice": "personal-injury",
   "label": "Maryland x Personal Injury",
   "measured_at": "2026-09-10",
-  "source": "Opened for Malloy Law Offices, whose Baltimore office at 400 E Pratt St is one of seven verified locations. Cohort-relative sub-factors need peers, and there is one firm here, so D2 stays pending until the cohort is real rather than being scored against itself.",
+  "source": "Opened for Malloy Law Offices, whose Baltimore office at 400 E Pratt St is one of eight verified locations, and filled out with eight more Maryland firms. The Ahrefs figures on every entry are zeros standing in for measurements we have not taken, not measurements of zero: no Maryland profile carries a digital.ahrefs block, so D2 is pending on all of them and these peer values are never read. They exist because the percentile helper needs the keys present. Replace them before trusting a single D2 score in this cohort.",
   "firms": [
     {
       "domain": "malloy-law.com",
@@ -19,7 +19,82 @@
       "refdomains": 0,
       "org_keywords": 0,
       "org_traffic": 0
+    },
+    {
+      "domain": "millerandzois.com",
+      "name": "Miller & Zois",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "wgk-law.com",
+      "name": "WGK Personal Injury Lawyers",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "ricelawmd.com",
+      "name": "Rice, Murtha & Psoras",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "angeloslaw.com",
+      "name": "Law Offices of Peter Angelos",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "browngold.com",
+      "name": "Brown, Goldstein & Levy",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "mdtrialfirm.com",
+      "name": "Salsbury Clements Bekman Marder & Adkins",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "spectorlawgroup.com",
+      "name": "Spector Law Group",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "marylandworkerscompensationlaw.com",
+      "name": "Berman Sobin Gross",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
     }
   ],
-  "unresolved": []
+  "unresolved": [
+    "hhtlawyers.com",
+    "pinderplotkin.com",
+    "saiontz.com"
+  ],
+  "licence_register": "None queryable. The Maryland Judiciary publishes an attorney listing at mdcourts.gov/attysearch, but mdcourts.gov/robots.txt carries Disallow: /attysearch, so we do not query it and Maryland profiles carry no licence finding rather than one we did not make. Checked 2026-09-10. New York publishes the equivalent register as open data, which is why G1 and G2 exist on New York profiles and are absent here.",
+  "entity_register": "None queryable. Maryland business filings sit behind egov.maryland.gov, which serves Disallow: / to every crawler. G3 and G6 are therefore absent on Maryland profiles.",
+  "unresolved_notes": {
+    "hhtlawyers.com": "403 to our crawler, which is bot protection. Manual entry, not evasion.",
+    "pinderplotkin.com": "403 to our crawler, which is bot protection. Manual entry, not evasion.",
+    "saiontz.com": "Reachable, but the Places API returned no verified listing and the crawl found no office address and no attorney names, so there is nothing to publish a profile from yet."
+  }
 }

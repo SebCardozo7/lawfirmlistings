@@ -1,0 +1,444 @@
+{
+  "slug": "godosky-gentile",
+  "name": "Godosky & Gentile",
+  "initials": "GG",
+  "website": "https://www.godoskygentile.com/",
+  "domain": "godoskygentile.com",
+  "phone": "(212) 742-9706",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true
+    }
+  ],
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "Godosky & Gentile",
+      "address": "17 State St #800, New York, NY 10004, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=6918781067946525135&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "David M. Godosky",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.godoskygentile.com/staff-profiles/david-m-godosky/",
+      "bar_number": "2543957",
+      "admitted_year": 1993,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "William A. Gentile",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.godoskygentile.com/staff-profiles/william-a-gentile/",
+      "bar_number": "4481701",
+      "admitted_year": 2007,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "Emily Kern",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.godoskygentile.com/staff-profiles/emily-kern/",
+      "bar_number": "4399333",
+      "admitted_year": 2006,
+      "registry_status": "Due to reregister within 30 days of birthday",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-11"
+    },
+    {
+      "name": "James King",
+      "role": "Attorney",
+      "bar_state": "NY",
+      "source_url": "https://www.godoskygentile.com/staff-profiles/james-king/",
+      "bar_number": "5387402",
+      "admitted_year": 2016,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-11"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Godosky & Gentile is a personal injury firm with a single office in Manhattan.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "25",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-10"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-31T15:17:01.080675357Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-24T18:32:03.252591111Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-17T13:28:06.494203064Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-02T13:57:13.959696525Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-13T02:33:00.888321885Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 88,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-10",
+      "note": "LCP 2.6 s / CLS 0.014 / TBT 259 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "godoskygentile.com",
+      "name": "Godosky & Gentile",
+      "dr": 27,
+      "refdomains": 620,
+      "org_keywords": 78,
+      "org_traffic": 266
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 25,
+      "rating_weighted": 4.9,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-10"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": true,
+      "evidence": "4 of 4 named attorneys are currently registered and none carries an adverse status",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-09-11"
+    },
+    "G2": {
+      "pass": true,
+      "evidence": "None of the 4 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-09-11"
+    },
+    "G3": {
+      "pass": true,
+      "evidence": "GODOSKY & GENTILE, P.C. is an active domestic professional service corporation registered since 1995-04-26, with 1 Google-verified location",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-10"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-11"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "25 public client reviews and 31 years since the entity was formed in 1995",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-10"
+    }
+  },
+  "cohort_id": "ny-personal-injury",
+  "faq": [],
+  "fee_statement": "et the standard for personal injury law in New York City and statewide. Our firm works on contingency, meaning you pay no attorney fees unless we win your case. Call (212) 742-9706 or contact",
+  "results_published": {
+    "readable": false,
+    "why": "results page returned 403",
+    "url": "https://www.godoskygentile.com/case-results/",
+    "checked_at": "2026-09-10"
+  },
+  "entity": {
+    "legal_name": "GODOSKY & GENTILE, P.C.",
+    "entity_type": "DOMESTIC PROFESSIONAL SERVICE CORPORATION",
+    "dos_id": "1916493",
+    "formed": "1995-04-26",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-09-10"
+  },
+  "score": {
+    "total": 67,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-11",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 21,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 9,
+            "max": 10,
+            "source": "registry",
+            "evidence": "Mean 20.5 years since admission across 4 of 4 named attorneys (longest 33, shortest 10) · NYS Attorney Registration database"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 9,
+            "max": 9,
+            "source": "registry",
+            "evidence": "4 of 4 named attorneys matched to the New York register; bar numbers published on the bios"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "results page returned 403"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "results page returned 403"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "results page returned 403"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "25 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 25 reviews → Bayesian 4.83 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-04-02) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.5,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 9,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · et the standard for personal injury law in New York City and statewide. Our firm works on contingency, meaning you pay no attorney fees unless we win your case. Call (212) 742-9706 or contact · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 37,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 3,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "D2 Search authority: not yet measured (8 pts)",
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)"
+      ]
+    },
+    "raw": 49.5,
+    "assessed": 74,
+    "coverage": 0.74,
+    "floor_abc_pct": 0.881,
+    "gates_unavailable": [],
+    "assessable": 100
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Trial Lawyers Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/david-m-godosky",
+        "quote": "awyers Guild, Member New York State Bar Association, Member New York State Trial Lawyers Association, Member International Academy of Trial Lawyers,"
+      },
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/david-m-godosky",
+        "quote": "s Alliance (NYCTLA), President Jewish Lawyers Guild, Member New York State Bar Association, Member New York State Trial Lawyers Association, Member In"
+      },
+      {
+        "name": "New York City Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/david-m-godosky",
+        "quote": "City of New York) Professional Associations and Memberships Association of the Bar of the City of New York, Member The New York City Trial Lawyers Alliance (NYC"
+      },
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/jeffrey-r-brecker",
+        "quote": "the City of New York, Member, Medical Malpractice Committee American Association for Justice, Member Association of Trial Lawyers of the City of New Yor"
+      },
+      {
+        "name": "Brooklyn Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/jeffrey-r-brecker",
+        "quote": "ssociation of Trial Lawyers of the City of New York, Member Brooklyn Bar Association, Member Jewish Lawyer's Guild, Member New York State Bar As"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.godoskygentile.com/staff-profiles/jeffrey-r-brecker",
+        "quote": ",\" 1992 - Present Professional Associations and Memberships American Bar Association, Member Association of the Bar of the City of New York, Mem"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Trial Lawyers Association, New York State Bar Association, New York City Bar Association and 3 more · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 8,
+    "source": "observed",
+    "checked_at": "2026-09-10"
+  },
+  "operating": {
+    "registered": "2003-10-30",
+    "years": 22.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-11"
+  }
+}
