@@ -290,6 +290,16 @@ button,input,select{font:inherit;color:inherit}
 .firm-side{display:grid;gap:10px;align-content:start;min-width:190px}
 .firm-side .stat{font-size:.8rem;color:var(--muted);text-align:right}
 .firm-side .stat b{display:block;color:var(--ink);font-size:1.1rem;letter-spacing:-.02em}
+/* A ranked list of numbers is a column of numbers until one of them has a length. The bar
+   is the score as a proportion of a hundred, on the same aurora the certification mark
+   uses, so the eye can sort the page before the reader has read a single figure.
+
+   Its own name rather than the scorecard's .bar: that file already owns one, and reusing
+   a design-system class name is how every fieldset on the firm form ended up with a
+   stray "01" in front of it. */
+.score-bar{height:5px;border-radius:3px;background:var(--tint);overflow:hidden;margin-top:7px;margin-left:auto;width:100%;max-width:160px}
+.score-bar i{display:block;height:100%;border-radius:3px;background:var(--aurora)}
+@media (max-width:760px){.score-bar{margin-left:0}}
 @media (max-width:760px){.firm-card{grid-template-columns:1fr}.firm-side{grid-template-columns:1fr 1fr}.firm-side .stat{text-align:left}}
 
 /* Featured (home) */

@@ -105,7 +105,10 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
         firm and printed in full on the profile, so withholding it here only made the card
         disagree with the page it links to. */}
     {s
-      ? <div class="stat"><b class="num">{s.total}/100</b>LFL Certification Score</div>
+      ? <div class="stat">
+          <b class="num">{s.total}/100</b>LFL Certification Score
+          <div class="score-bar" aria-hidden="true"><i style={`width:${Math.max(s.total, 2)}%`}></i></div>
+        </div>
       : <div class="stat"><b>Listed</b>not yet scored</div>}
     <div class="stat"><b>{d.fee_model}</b>{d.free_consultation ? 'free consultation' : 'fee model'}</div>
     <a class="btn btn--primary btn--sm" href={`/firms/${d.slug}/`}>View profile</a>
