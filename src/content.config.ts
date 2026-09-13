@@ -52,7 +52,10 @@ const firms = defineCollection({
       contact_role: z.string().optional(),
     }).optional(),
     tagline: z.string().optional(),
-    practices: z.array(z.object({ slug: z.string(), name: z.string(), primary: z.boolean().default(false) })),
+    // source_url is the firm's own page about the practice, which is what put it in that
+    // ranking. Optional only because the first cohort predates the check; every practice
+    // added from now on carries it. See scripts/check_practice.py.
+    practices: z.array(z.object({ slug: z.string(), name: z.string(), primary: z.boolean().default(false), source_url: z.string().optional(), checked_at: z.string().optional() })),
     market: z.object({ city_slug: z.string(), city: z.string(), state: z.string(), state_name: z.string() }),
     offices: z.array(z.object({ label: z.string(), address: z.string(), by_appointment: z.boolean().default(false), is_hq: z.boolean().default(false), source_url: z.string().optional() })),
     attorneys: z.array(z.object({ name: z.string(), role: z.string(), bar_state: z.string().optional(), bar_number: z.string().optional(), admitted_year: z.number().optional(), registry_status: z.string().optional(), registry_basis: z.string().optional(), registry_note: z.string().optional(), checked_at: z.string().optional() })),
@@ -110,6 +113,12 @@ const firms = defineCollection({
       // as such on the profile: a reader is entitled to know which is which.
       attested: z.boolean().optional(), attested_by: z.string().optional(),
     })),
+    // Searches that inform review without settling anything. A screen is not a gate, and the
+    // two were briefly the same field: see scripts/check_g4.py.
+    screens: z.record(z.object({
+      note: z.string(), queue: z.number().optional(),
+      source: z.string(), checked_at: z.string(),
+    })).optional(),
     cohort_id: z.string(),
     assessments: z.record(z.object({ pts: z.number(), source: z.string().optional(), evidence: z.string() })).optional(),
     // written by scripts/score.py — do not edit by hand
@@ -141,7 +150,12 @@ const cohorts = defineCollection({
   schema: z.object({
     id: z.string(), state: z.string(), practice: z.string(), label: z.string(), measured_at: z.string(), source: z.string(),
     full_size_estimate: z.number().optional(),
-    firms: z.array(z.object({ domain: z.string(), name: z.string().optional(), dr: z.number(), refdomains: z.number(), org_keywords: z.number(), org_traffic: z.number() })),
+    // The four Ahrefs metrics are optional, because a cohort can be assembled before they
+    // exist. Workers' compensation was: the subscription ran out of units, and waiting six
+    // days for the reset would have stopped the market opening for a reason that has nothing
+    // to do with the firms. D2 reads them, finds nothing and scores pending, which keeps the
+    // seven points out of the denominator rather than charging them to the firm.
+    firms: z.array(z.object({ domain: z.string(), name: z.string().optional(), dr: z.number().optional(), refdomains: z.number().optional(), org_keywords: z.number().optional(), org_traffic: z.number().optional() })),
     unresolved: z.array(z.string()).default([]),
   }),
 });

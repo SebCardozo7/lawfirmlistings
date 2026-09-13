@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import { PRACTICES, PRACTICE_SLUGS } from '../../data/practices';
 
 // Same gap the Cities link had: Practice Areas in the nav went straight to personal injury,
 // with no page showing what the directory covers. Built from the collection.
@@ -9,14 +10,12 @@ const firms = await getCollection('firms', f =>
   f.data.status !== 'sample' && f.data.status !== 'not_eligible');
 
 // Only areas with a page. An area a firm lists but we have not built has nowhere to link.
-const PRACTICE_PAGES: Record<string, string> = { 'personal-injury': 'car' };
-
-const practices = Object.keys(PRACTICE_PAGES).map(slug => {
+const practices = PRACTICE_SLUGS.map(slug => {
   const inPractice = firms.filter(f => f.data.practices.some(pr => pr.slug === slug));
   const name = inPractice[0]?.data.practices.find(pr => pr.slug === slug)?.name ?? slug;
   const cities = [...new Map(inPractice.map(f => [f.data.market.city_slug, f.data.market])).entries()];
   return {
-    slug, name, icon: PRACTICE_PAGES[slug], cities,
+    slug, name, icon: PRACTICES[slug].icon, cities,
     count: inPractice.length,
     certified: inPractice.filter(f => f.data.status === 'certified').length,
   };
@@ -24,7 +23,7 @@ const practices = Object.keys(PRACTICE_PAGES).map(slug => {
 
 // What firms actually practise, beyond the areas we have built pages for. Naming them is how
 // the page says what is coming without pretending those pages exist.
-const covered = new Set(Object.keys(PRACTICE_PAGES));
+const covered = new Set(PRACTICE_SLUGS);
 const alsoPractised = [...new Map(firms.flatMap(f => f.data.practices)
   .filter(pr => !covered.has(pr.slug))
   .map(pr => [pr.slug, pr.name])).entries()].map(([, name]) => name).sort();

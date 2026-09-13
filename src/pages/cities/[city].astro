@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import FirmCard from '../../components/FirmCard.astro';
 import { CITY_NOTES } from '../../data/cities';
+import { PRACTICES, PRACTICE_SLUGS } from '../../data/practices';
 
 /**
  * A city hub, generated per city in the collection.
@@ -47,13 +48,12 @@ const multilingual = ranked.filter(f => f.data.languages.some(l => l !== 'Englis
 const share = (n: number) => (ranked.length ? `${Math.round((100 * n) / ranked.length)}%` : 'n/a');
 const logoVariants = ['', 'l2', 'l3'];
 
-// Only practices with a ranked page of their own, so nothing links into nothing.
-const PRACTICE_ICONS: Record<string, string> = { 'personal-injury': 'car' };
-const practices = Object.keys(PRACTICE_ICONS).map(slug => {
+// Only practices with a hub page of their own, so nothing links into nothing.
+const practices = PRACTICE_SLUGS.map(slug => {
   const matching = ranked.filter(f => f.data.practices.some(pr => pr.slug === slug));
   return {
     slug,
-    icon: PRACTICE_ICONS[slug],
+    icon: PRACTICES[slug].icon,
     name: matching[0]?.data.practices.find(pr => pr.slug === slug)?.name ?? slug,
     listed: matching.length,
     certified: matching.filter(f => f.data.status === 'certified').length,

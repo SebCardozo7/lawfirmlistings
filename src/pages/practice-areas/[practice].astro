@@ -1,0 +1,171 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import FirmCard from '../../components/FirmCard.astro';
+import { PRACTICES, SHARED_FAQ } from '../../data/practices';
+
+/**
+ * The national view of a practice area, generated from the collection.
+ *
+ * This replaces a hand-written personal-injury.astro. Everything derived stays derived, and the
+ * editorial half lives in src/data/practices.ts, the same division the city pages use.
+ *
+ * A route exists only where both halves do: a practice with notes but no firms has nothing to
+ * rank, and a practice a firm lists but we have written nothing about would be a page of counts.
+ */
+export async function getStaticPaths() {
+  const all = await getCollection('firms', f =>
+    f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+  return Object.keys(PRACTICES)
+    .map(practice => ({
+      params: { practice },
+      props: { firms: all.filter(f => f.data.practices.some(p => p.slug === practice)) },
+    }))
+    .filter(route => route.props.firms.length > 0);
+}
+
+const { practice } = Astro.params;
+const { firms: matching } = Astro.props;
+const notes = PRACTICES[practice!];
+
+// Certified firms rank by score; listed firms have no score yet and follow, alphabetically.
+const weight = (f: typeof matching[number]) =>
+  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+const firms = [...matching].sort((a, b) =>
+  weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
+
+const certified = firms.filter(f => f.data.status === 'certified');
+const cities = [...new Set(firms.map(f => `${f.data.market.city}, ${f.data.market.state}`))];
+const contingency = firms.filter(f => /contingency/i.test(f.data.fee_model)).length;
+const freeConsult = firms.filter(f => f.data.free_consultation).length;
+const share = (n: number) => (firms.length ? `${Math.round((100 * n) / firms.length)}%` : 'n/a');
+const logoVariants = ['', 'l2', 'l3'];
+
+// "Updated" reflects the newest score the engine actually wrote, not a hand-typed month.
+const computedDates = firms.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+const lastUpdated = computedDates.length
+  ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US',
+      { month: 'long', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// Cities that actually have a firm in this practice, with their real counts.
+const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slug => {
+  const inCity = firms.filter(f => f.data.market.city_slug === slug);
+  return {
+    slug,
+    label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`,
+    count: inCity.length,
+  };
+}).sort((a, b) => b.count - a.count);
+
+const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
+---
+<Base title={notes.title} description={notes.description} nav="practice">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/practice-areas/">Practice Areas</a></li><li aria-current="page">{notes.name}</li></ol>
+      <span class="eyebrow">Practice area</span>
+      <h1>{notes.name} Law Firms</h1>
+      <p class="lede">{notes.lede} {cities.length === 1 ? <>So far that means {cities[0]}.</> : <>So far that means {cities.length} cities.</>}</p>
+      <div class="chips" style="margin-top:24px">
+        {/* Sub-topics of this practice area. None has a page yet, so they describe the scope
+            without pretending to be navigation. */}
+        {notes.subtopics.map(t => <span class="chip soon">{t}</span>)}
+      </div>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{certified.length}</b><span>Certified {notes.abbr} firms</span></div>
+      <div class="fact"><b class="num">{firms.length}</b><span>Firms listed</span></div>
+      <div class="fact"><b class="num">{share(contingency)}</b><span>{notes.feeFactLabel}</span></div>
+      <div class="fact"><b class="num">{share(freeConsult)}</b><span>Free consultation</span></div>
+      <div class="fact"><b class="num">{cities.length}</b><span>{cities.length === 1 ? 'City covered' : 'Cities covered'}</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="filterbar">
+  <div class="container">
+    <span class="lbl">City</span>
+    {cityCounts.map(c => <a class="chip" href={`/cities/${c.slug}/${practice}/`}>{c.label.split(',')[0]}</a>)}
+  </div>
+</div>
+
+<section class="section--tight">
+  <div class="container layout">
+    <div>
+      {/* This page is the national view of the practice. The ranked list lives at
+          /cities/<city>/<practice>/, because ranking is scoped to a city in the methodology
+          and this URL claims the country. A short teaser stays so the page is not an index
+          of indexes. */}
+      <div class="results-head">
+        <h2>Highest-scoring firms in the practice</h2>
+        <span class="num">{`Top ${Math.min(3, firms.length)} of ${firms.length}${lastUpdated ? ` · updated ${lastUpdated}` : ''}`}</span>
+      </div>
+      <div class="firm-list">
+        {firms.slice(0, 3).map((firm, i) => (
+          <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
+        ))}
+      </div>
+      <div class="ranked-links">
+        <h3>Ranked lists by city</h3>
+        <ul>
+          {cityCounts.map(c => (
+            <li><a href={`/cities/${c.slug}/${practice}/`}>{notes.name} firms in {c.label}</a><span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel panel--ink">
+        <h4>Not sure which firm fits?</h4>
+        <p>A short intake that puts your case in front of the firms whose published evidence fits it. It is not built yet. For now the ranked list and the profiles are the whole product, and nobody pays us to appear in either.</p>
+        {/* No matching service exists yet, so the panel describes it without a dead button. */}
+        <span class="btn btn--white soon">Get matched in 2 minutes</span>
+      </div>
+      <div class="panel">
+        <h4>Related guides</h4>
+        <ul>
+          {practice === 'personal-injury' && (
+            <li><a href="/guides/core-web-vitals-new-york-injury-firms/">Almost every New York injury firm fails Core Web Vitals</a></li>
+          )}
+          {notes.plannedGuides.map(t => <li><span class="soon">{t}</span></li>)}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="narrow prose">
+    <span class="eyebrow">Hiring guide</span>
+    <h2 style="margin-top:14px">{notes.guide.heading}</h2>
+    <p>{notes.guide.intro}</p>
+    {notes.guide.sections.map(s => (
+      <>
+        <h3>{s.heading}</h3>
+        {s.paragraphs.map(p => <p set:html={p} />)}
+      </>
+    ))}
+    {notes.guide.callout && (
+      <div class="callout"><b>{notes.guide.callout.title}</b> {notes.guide.callout.text}</div>
+    )}
+  </div>
+</section>
+
+<section class="section">
+  <div class="narrow">
+    <span class="eyebrow">Frequently asked</span>
+    <h2 style="margin:14px 0 28px">{notes.name} law firm FAQ</h2>
+    <div class="faq">
+      {faq.map((item, i) => (
+        <details open={i === 0}><summary>{item.q}</summary><div set:html={item.a} /></details>
+      ))}
+    </div>
+  </div>
+</section>
+
+</Base>

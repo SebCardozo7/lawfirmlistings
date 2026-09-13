@@ -38,7 +38,7 @@
       "admitted_year": 1977,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Thomas P. Markovits",
@@ -49,7 +49,7 @@
       "admitted_year": 1980,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Ronald J. Landau",
@@ -60,7 +60,7 @@
       "admitted_year": 1985,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Michael O’Hagan",
@@ -68,7 +68,7 @@
       "bar_state": "NY",
       "source_url": "https://mirmanlawyers.com/about/michael-ohagan/",
       "registry_note": "not found",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Jeannie I. Rivera",
@@ -79,7 +79,7 @@
       "admitted_year": 2000,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "David Weissman",
@@ -90,7 +90,7 @@
       "admitted_year": 2009,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Danielle Ciraola",
@@ -101,7 +101,7 @@
       "admitted_year": 2018,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     }
   ],
   "languages": [
@@ -188,19 +188,19 @@
       "pass": true,
       "evidence": "6 of 7 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 6 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G3": {
       "pass": true,
       "evidence": "MIRMAN, MARKOVITS & LANDAU, P.C. is an active domestic professional service corporation registered since 1991-02-26, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     },
     "G5": {
       "pass": true,
@@ -212,7 +212,7 @@
       "pass": true,
       "evidence": "144 public client reviews and 36 years since the entity was formed in 1991",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -278,7 +278,7 @@
     "dos_id": "1511918",
     "formed": "1991-02-26",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-10"
+    "checked_at": "2026-09-13"
   },
   "score": {
     "total": 68,
@@ -365,7 +365,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.5 over 144 reviews → Bayesian 4.63 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 144 reviews → Bayesian 4.63 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -403,7 +403,7 @@
             "pts": 0,
             "max": 8,
             "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "evidence": "Ahrefs data not yet collected for this market"
           },
           {
             "code": "D3",
@@ -506,5 +506,12 @@
     "bytes": 11521,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-13"
+  },
+  "screens": {
+    "court_dockets": {
+      "note": "A docket search found 15 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
+      "checked_at": "2026-09-13"
+    }
   }
 }

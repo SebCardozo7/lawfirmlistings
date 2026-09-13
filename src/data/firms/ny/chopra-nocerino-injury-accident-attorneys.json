@@ -38,7 +38,7 @@
       "admitted_year": 2018,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Sameer Chopra",
@@ -49,7 +49,7 @@
       "admitted_year": 2007,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Taeshin Kyle Kim",
@@ -57,7 +57,7 @@
       "bar_state": "NY",
       "source_url": "https://www.chopranocerino.com/attorneys/taeshin-kyle-kim/",
       "registry_note": "ambiguous (2 attorneys share this name)",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Todd Arbesfeld",
@@ -68,7 +68,7 @@
       "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Pavlo Pavlatos",
@@ -79,7 +79,7 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Hassan Ahmed",
@@ -87,7 +87,7 @@
       "bar_state": "NY",
       "source_url": "https://www.chopranocerino.com/attorneys/hassan-ahmed/",
       "registry_note": "ambiguous (2 attorneys share this name)",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Michael Heffernan",
@@ -95,7 +95,7 @@
       "bar_state": "NY",
       "source_url": "https://www.chopranocerino.com/attorneys/michael-heffernan/",
       "registry_note": "ambiguous (4 attorneys share this name)",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Alex Nocerino",
@@ -106,7 +106,7 @@
       "admitted_year": 2006,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     }
   ],
   "languages": [
@@ -190,19 +190,19 @@
       "pass": false,
       "evidence": "5 of 8 named attorneys are currently registered and none of those carries an adverse status. 2 other name(s) match a register entry that does: Taeshin Kyle Kim shares a name with one of 2 registrations, one of them suspended, delinquent. That entry cannot be tied to this firm's attorney and cannot be ruled out either, so the gate is held open rather than decided.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": false,
       "evidence": "None of the 5 attorneys we identified carries a disciplinary status. 2 name(s) we could not identify share a name with a registration that does, Taeshin Kyle Kim among 2 namesakes. Held open.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G3": {
       "pass": true,
       "evidence": "CHOPRA & NOCERINO, LLP is an active domestic registered limited liability partnership registered since 2010-08-16, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     },
     "G5": {
       "pass": true,
@@ -214,7 +214,7 @@
       "pass": true,
       "evidence": "176 public client reviews and 16 years since the entity was formed in 2010",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -307,7 +307,7 @@
     "dos_id": "3985120",
     "formed": "2010-08-16",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-10"
+    "checked_at": "2026-09-13"
   },
   "score": {
     "total": 62,
@@ -394,7 +394,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 176 reviews → Bayesian 4.80 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 176 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -432,7 +432,7 @@
             "pts": 0,
             "max": 8,
             "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "evidence": "Ahrefs data not yet collected for this market"
           },
           {
             "code": "D3",
@@ -545,5 +545,12 @@
     "bytes": 12074,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-13"
+  },
+  "screens": {
+    "court_dockets": {
+      "note": "A docket search found 13 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
+      "checked_at": "2026-09-13"
+    }
   }
 }

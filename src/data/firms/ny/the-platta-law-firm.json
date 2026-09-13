@@ -11,6 +11,13 @@
       "slug": "personal-injury",
       "name": "Personal Injury",
       "primary": true
+    },
+    {
+      "slug": "workers-compensation",
+      "name": "Workers' Compensation",
+      "primary": false,
+      "source_url": "https://plattalaw.com/new-york-workers-compensation-lawyer/",
+      "checked_at": "2026-09-13"
     }
   ],
   "market": {
@@ -38,7 +45,7 @@
       "admitted_year": 2004,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Michael Taub",
@@ -49,7 +56,7 @@
       "admitted_year": 1984,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Howard Frederick",
@@ -60,7 +67,7 @@
       "admitted_year": 1991,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Elan Hallhauser",
@@ -71,7 +78,7 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Evi Kallfa",
@@ -82,7 +89,7 @@
       "admitted_year": 2013,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Robert Miraglia",
@@ -93,7 +100,7 @@
       "admitted_year": 2010,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Kyeko M. Stewart",
@@ -104,7 +111,7 @@
       "admitted_year": 2017,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     {
       "name": "Jordan Weinstein",
@@ -112,7 +119,7 @@
       "bar_state": "NY",
       "source_url": "https://plattalaw.com/our-attorneys/jordan-weinstein/",
       "registry_note": "ambiguous (2 attorneys share this name)",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     }
   ],
   "languages": [
@@ -198,19 +205,19 @@
       "pass": true,
       "evidence": "7 of 8 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G3": {
       "pass": true,
       "evidence": "THE PLATTA LAW FIRM, PLLC is an active domestic professional service limited liability company registered since 2005-01-10, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     },
     "G5": {
       "pass": true,
@@ -222,7 +229,7 @@
       "pass": true,
       "evidence": "202 public client reviews and 22 years since the entity was formed in 2005",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-10"
+      "checked_at": "2026-09-13"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -243,7 +250,7 @@
     "dos_id": "3148363",
     "formed": "2005-01-10",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-10"
+    "checked_at": "2026-09-13"
   },
   "score": {
     "total": 56,
@@ -330,7 +337,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 202 reviews → Bayesian 4.94 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 202 reviews → Bayesian 4.94 (prior 4.82 weighted as 100 reviews, from 59 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -368,7 +375,7 @@
             "pts": 0,
             "max": 8,
             "source": "pending",
-            "evidence": "Ahrefs data not yet collected"
+            "evidence": "Ahrefs data not yet collected for this market"
           },
           {
             "code": "D3",
@@ -481,5 +488,12 @@
     "bytes": 11047,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-13"
+  },
+  "screens": {
+    "court_dockets": {
+      "note": "A docket search found 4 case(s) naming this firm alongside sanction or consumer-protection language, none of which is a finding against it: a firm appears in such a docket by arguing about sanctions, or by bringing consumer-protection claims for its clients. Text search over this collection cannot separate an action against a firm from its ordinary practice, so nothing here is settled by it.",
+      "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
+      "checked_at": "2026-09-13"
+    }
   }
 }

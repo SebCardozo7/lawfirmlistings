@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Icon from './Icon.astro';
+import { PRACTICE_SLUGS } from '../data/practices';
 
 // The footer listed six cities and "All 100 cities" on every page of the site; five of the six
 // had no page and the hundred do not exist. It now lists the cities that actually have firms.
@@ -12,7 +13,7 @@ const cities = [...new Map(published.map(f =>
 
 // Only practice areas that have both a page and a firm behind them. The footer used to list
 // five more that went to href="#", on every page of the site.
-const PRACTICE_PAGES = new Set(['personal-injury']);
+const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
 const practices = [...new Map(published.flatMap(f => f.data.practices)
   .filter(pr => PRACTICE_PAGES.has(pr.slug))
   .map(pr => [pr.slug, pr.name])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
