@@ -78,10 +78,12 @@ REGISTERS = {
         "case_name": "Attorney Grievance",
         "body": "the Attorney Grievance Commission of Maryland",
     },
-    # Florida is the easier of the two, and for a reason worth recording: its case names carry
-    # the respondent's full name. "The Florida Bar v. Christopher W. Crowley" identifies a person,
-    # where "Attorney Grievance Comm'n v. Kolodner" identifies a surname and leaves the work of
-    # telling four Kolodners apart to a full-text search that often cannot do it.
+    # Florida's recent decisions carry the respondent's full name: "The Florida Bar v.
+    # Christopher W. Crowley" identifies a person where "Attorney Grievance Comm'n v. Kolodner"
+    # identifies only a surname. Recent is the operative word. Across the whole index, 1946 to
+    # today, 91 of 1,237 do it, which is 7 per cent, so the full-name path is a shortcut that
+    # happens to cover the newest cases and not a property of the state. Everything else falls
+    # through to the surname screen and the text search, exactly as Maryland does.
     "FL": {
         "courts": "fla",
         "case_name": "The Florida Bar",
@@ -261,11 +263,13 @@ def verify(state: str, attorney: str, surname: str, hits: list):
     spec = REGISTERS[state]
     variants = name_variants(attorney)
 
-    # Where the state writes the respondent's full name into the case name, the index already
-    # holds the answer and no search is needed. Florida does: "The Florida Bar v. Christopher W.
-    # Crowley". Comparing on the name tokens rather than the string, so "Christopher W. Crowley"
-    # and "Christopher Crowley" are the same person and "Christopher Crowley" and "Daniel
-    # Crowley" are not.
+    # Where every decision naming this surname also names the respondent in full, the index
+    # already holds the answer and no search is needed. That is the case for most of Florida's
+    # recent decisions and for almost none of its older ones, so the condition is "all of them",
+    # not "any of them": one full name among four surname-only cases settles nothing.
+    #
+    # Compared on name tokens rather than strings, so "Christopher W. Crowley" and "Christopher
+    # Crowley" are one person while "Christopher Crowley" and "Daniel Crowley" are two.
     named = [h for h in hits if h.get("full")]
     if named and len(named) == len(hits):
         ours = name_key(attorney)

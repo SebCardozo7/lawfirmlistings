@@ -54,7 +54,7 @@ const practiceName = firms[0].data.practices.find(pr => pr.slug === practice)!.n
 //
 // A firm with no score at all still goes last, because there is nothing to rank it by.
 const weight = (f: typeof firms[number]) =>
-  f.data.score ? -f.data.score.total : 1;
+  f.data.score && f.data.score.comparable !== false ? -f.data.score.total : 1;
 const ranked = [...firms].sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
 
 const certified = ranked.filter(f => f.data.status === 'certified');

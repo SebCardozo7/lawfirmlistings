@@ -422,7 +422,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 27 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G6": {
       "pass": true,
@@ -540,7 +540,7 @@
     "total": 61,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: A; most headroom in pillar E (2/15).",
-    "computed_at": "2026-09-11",
+    "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -621,7 +621,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 112 reviews → Bayesian 4.75 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 112 reviews → Bayesian 4.75 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -728,7 +728,8 @@
     "coverage": 0.89,
     "floor_abc_pct": 0.842,
     "gates_unavailable": [],
-    "assessable": 100
+    "assessable": 100,
+    "comparable": true
   },
   "accountability": {
     "malpractice_insurance": false,

@@ -216,7 +216,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G6": {
       "pass": true,
@@ -250,7 +250,7 @@
     "total": 58,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-11",
+    "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -331,7 +331,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 202 reviews → Bayesian 4.94 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 202 reviews → Bayesian 4.94 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -438,7 +438,8 @@
     "coverage": 0.89,
     "floor_abc_pct": 0.675,
     "gates_unavailable": [],
-    "assessable": 100
+    "assessable": 100,
+    "comparable": true
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -472,5 +473,14 @@
     "years": 19.1,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
     "checked_at": "2026-09-11"
+  },
+  "logo": {
+    "file": "/logos/plattalaw.com.png",
+    "source_url": "https://h2v6q3f5.delivery.rocketcdn.me/wp-content/uploads/2025/01/cropped-ThePlatta_Brandmark_FullColor-2-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 11047,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-13"
   }
 }

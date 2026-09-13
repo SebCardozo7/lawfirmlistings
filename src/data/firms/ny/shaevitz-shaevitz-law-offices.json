@@ -126,7 +126,7 @@
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G6": {
       "pass": true,
@@ -152,7 +152,7 @@
     "total": 26,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-11",
+    "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -233,7 +233,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 26 reviews → Bayesian 4.71 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.3 over 26 reviews → Bayesian 4.71 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -343,7 +343,8 @@
       "G1",
       "G2"
     ],
-    "assessable": 100
+    "assessable": 100,
+    "comparable": true
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -361,5 +362,14 @@
     "years": 26.2,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
     "checked_at": "2026-09-11"
+  },
+  "logo": {
+    "file": "/logos/shaevitzandshaevitz.com.png",
+    "source_url": "https://shaevitzandshaevitz.com/wp-content/uploads/2021/01/cropped-icon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 3909,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-13"
   }
 }

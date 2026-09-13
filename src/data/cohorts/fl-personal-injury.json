@@ -23,14 +23,6 @@
       "org_traffic": 0
     },
     {
-      "domain": "cataniaandcatania.com",
-      "name": "Catania & Catania Injury Lawyers",
-      "dr": 0,
-      "refdomains": 0,
-      "org_keywords": 0,
-      "org_traffic": 0
-    },
-    {
       "domain": "howellthornhill.com",
       "name": "Howell & Thornhill, P.A.",
       "dr": 0,
@@ -47,29 +39,22 @@
       "org_traffic": 0
     },
     {
-      "domain": "deanburnettilaw.com",
-      "name": "Dean Burnetti Law",
-      "dr": 0,
-      "refdomains": 0,
-      "org_keywords": 0,
-      "org_traffic": 0
-    },
-    {
       "domain": "brookslawgroup.com",
       "name": "Brooks Law Group",
       "dr": 0,
       "refdomains": 0,
       "org_keywords": 0,
       "org_traffic": 0
-    },
-    {
-      "domain": "turnbulllawfirm.com",
-      "name": "The Turnbull Law Firm",
-      "dr": 0,
-      "refdomains": 0,
-      "org_keywords": 0,
-      "org_traffic": 0
     }
   ],
-  "unresolved": []
+  "unresolved": [
+    "cataniaandcatania.com",
+    "deanburnettilaw.com",
+    "turnbulllawfirm.com"
+  ],
+  "unresolved_notes": {
+    "turnbulllawfirm.com": "The domain belongs to Turnbull, Moak & Pendergrass of Birmingham and Houston, not to the Turnbull firm in Lakeland. Both verified listings are in Alabama and Texas, so it was removed rather than published in a Florida market it does not practise in.",
+    "cataniaandcatania.com": "Five verified offices, none of them in Polk or Highlands County. The firm publishes a Lakeland landing page and is headquartered in Tampa, and a firm with no verified office in the county does not belong in its directory.",
+    "deanburnettilaw.com": "Reachable, but the Places API returned no verified listing and the crawl found no office address or phone number, so there is nothing to build a profile from."
+  }
 }

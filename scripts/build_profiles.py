@@ -109,13 +109,35 @@ def pick_name(rec):
         if v and not NOT_A_NAME.match(v):
             return v, "JSON-LD %s.name" % (n.get("@type") if isinstance(n.get("@type"), str) else "business")
     for l in rec.get("places", {}).get("listings", []):
-        v = clean(l.get("name"))
+        v = trim_listing_tail(clean(l.get("name")))
         if v and not NOT_A_NAME.match(v):
             return v, "Google Business Profile display name"
     for c in rec.get("name_candidates", []):
         if c["from"] == "og:site_name" and not NOT_A_NAME.match(clean(c["value"])):
             return clean(c["value"]), "og:site_name"
     return None, None
+
+
+LISTING_TAIL = re.compile(r"\s+[–—-]\s+.*$|\s*[(|].*$")
+
+
+def trim_listing_tail(name):
+    """A Google listing name minus the keyword phrase a firm appended to it.
+
+    Firms optimise that field, so it reads "Lopez & Humphries, P.A. - Car Accident Lawyers" and
+    "Shulman & Hill - Manhattan Personal Injury Lawyer". Published as the firm's name it is the
+    name plus an advertisement, and it lands in the slug, which is a URL and permanent.
+
+    The same rule src/lib/labels.ts applies to office labels, kept in step by hand because one is
+    Python at build time and the other TypeScript at render time. Only cut at a separator: a firm
+    genuinely called "Rice, Murtha & Psoras" keeps every word of it.
+    """
+    if not name:
+        return name
+    cut = LISTING_TAIL.sub("", name).strip(" ,-|")
+    # Never trim away the firm. If what is left is too short to be a name, the separator was part
+    # of the name rather than a joint in it.
+    return cut if len(cut) >= 4 else name
 
 
 def plausible_phone(raw):
@@ -251,6 +273,10 @@ def build(rec, cohort_lookup, market, cohort_id):
 
     firm = {
         "slug": slugify(name),
+        # Carried onto the profile because the engine has to know: every sub-factor read
+        # from a firm's own site is unmeasurable for this firm, and scoring those zero
+        # would publish our inability to look as a finding about the practice.
+        **({"site_blocked": rec["site_blocked"]} if rec.get("site_blocked") else {}),
         "name": name,
         "initials": initials(name),
         "website": rec.get("pages_found", {}).get("home", "https://" + rec["domain"]),
@@ -357,7 +383,11 @@ def main():
             continue
         with io.open(path, encoding="utf-8") as fh:
             rec = json.load(fh)
-        if not rec.get("https_ok"):
+        # A site we could not read is usually the end of it. A site that refuses our crawler is
+        # not: scripts/seed_from_places.py has already built the offices, the phone and the
+        # reviews from listings the firm verified itself, and none of that came from the site.
+        # The profile is thinner and says so, rather than the firm simply not existing here.
+        if not rec.get("https_ok") and not (rec.get("site_blocked") and rec.get("places")):
             print("%-24s skipped — site unreachable" % rec["domain"])
             skipped += 1
             continue
