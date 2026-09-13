@@ -46,7 +46,11 @@
       "bar_state": "NY",
       "source_url": "https://www.blockotoole.com/attorneys/daniel-p-o-toole/",
       "registry_note": "not found",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "bar_number": "2552313",
+      "admitted_year": 1993,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration"
     },
     {
       "name": "Stephen J. Murphy",
@@ -328,13 +332,13 @@
   "gates": {
     "G1": {
       "pass": true,
-      "evidence": "17 of 21 named attorneys are currently registered and none carries an adverse status. 4 could not be told apart from namesakes in the register and are counted neither way",
+      "evidence": "18 of 21 named attorneys are currently registered and none carries an adverse status. 3 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
       "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": true,
-      "evidence": "None of the 17 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "evidence": "None of the 18 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
       "checked_at": "2026-09-13"
     },
@@ -480,7 +484,7 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 18.6 years since admission across 17 of 21 named attorneys (longest 38, shortest 0) · NYS Attorney Registration database"
+            "evidence": "Mean 19.4 years since admission across 18 of 21 named attorneys (longest 38, shortest 0) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -488,7 +492,7 @@
             "pts": 7.5,
             "max": 9,
             "source": "registry",
-            "evidence": "17 of 21 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "18 of 21 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",

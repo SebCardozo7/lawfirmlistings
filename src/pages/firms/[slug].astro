@@ -43,7 +43,12 @@ const marks = marksFor(d);
 // Only a results page we could actually read and count is worth a panel.
 const rp = d.results_published;
 const published = rp && rp.readable && rp.count ? rp : null;
-const title = `${d.name}: ${primary[0]?.name ?? d.practices[0].name} Law Firm in ${d.market.city}, ${d.market.state}`;
+// Long firm names are the norm in this practice, not the exception, and the descriptor after
+// the colon is what a search result truncates first. Past sixty characters the name carries the
+// page on its own, with the city kept because two firms in two states can share a name.
+const practiceName = primary[0]?.name ?? d.practices[0].name;
+const longTitle = `${d.name}: ${practiceName} Law Firm in ${d.market.city}, ${d.market.state}`;
+const title = longTitle.length <= 60 ? longTitle : `${d.name} | ${d.market.city}, ${d.market.state}`;
 // Built with fitDescription because the length is not knowable here: firm names in this cohort
 // run from 14 to 71 characters, and the longest already sat one character under the limit. The
 // clauses are ordered so a long name loses the tail rather than the subject.

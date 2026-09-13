@@ -146,8 +146,21 @@ GENERIC = {
 
 
 def norm(text: str) -> str:
-    """Uppercase, strip accents-free punctuation, collapse whitespace."""
-    return re.sub(r"\s+", " ", re.sub(r"[^\w\s&]", " ", (text or "").upper())).strip()
+    """Uppercase, strip punctuation, collapse whitespace.
+
+    An apostrophe closes up rather than becoming a space, and that one character was quietly
+    breaking a whole class of surname. "Dan O'Connor" normalised to "DAN O CONNOR", which
+    split_name then read as first DAN, middle O, last CONNOR, and no O'Connor in the state was
+    ever going to match a last name of CONNOR. The register holds both spellings, "O'CONNOR" and
+    "OCONNOR", so closing the apostrophe on both sides makes the two agree.
+
+    It is not a rare name. O'Brien, O'Connell, O'Donnell, D'Amato, D'Angelo and every other
+    surname of that shape failed the same way, and a failure here is not visible as an error:
+    the attorney is simply reported unmatched, which reads as "we could not find them" rather
+    than as "we looked for the wrong person".
+    """
+    closed = (text or "").upper().replace("'", "").replace("’", "")
+    return re.sub(r"\s+", " ", re.sub(r"[^\w\s&]", " ", closed)).strip()
 
 
 def tokens(text: str) -> set[str]:
@@ -327,7 +340,16 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
     for att in attorneys:
         _, _, last = split_name(att["name"])
         if last and last not in by_surname:
-            by_surname[last] = fetch(f"upper(last_name)='{sql_quote(last)}'")
+            # The register spells the same surname both ways, "O'CONNOR" and "OCONNOR", and
+            # rows are filtered server-side on the exact string. Asking for the closed-up form
+            # alone returned none of the apostrophised ones, which is most of them: every
+            # O'Toole, O'Sullivan, O'Hagan and D'Angelo in the directory came back unmatched
+            # from a query that was never going to find them. Both spellings, one request.
+            where = f"upper(last_name)='{sql_quote(last)}'"
+            if last.startswith(("O", "D", "L")) and len(last) > 2:
+                spaced = last[0] + "'" + last[1:]
+                where += f" OR upper(last_name)='{sql_quote(spaced)}'"
+            by_surname[last] = fetch(where)
             time.sleep(PAUSE)
 
     today = date.today().isoformat()
