@@ -205,7 +205,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "00,000 Settlement Leg Amputation $3,167,000 Settlement Scaffolding Fall Free Consultation No fee unless we win! Δ Company This field is for validation purposes and should be left unchanged. Nam",
   "results_published": {
     "count": 4,
     "counted_from": "stated amounts",
@@ -246,7 +245,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 68,
+    "total": 66,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
@@ -389,16 +388,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · 00,000 Settlement Leg Amputation $3,167,000 Settlement Scaffolding Fall Free Consultation No fee unless we win! Δ Company This field is for validation purposes and should be left unchanged. Nam · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -423,7 +422,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 2,
+      "gap": 4,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -432,7 +431,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 60.5,
+    "raw": 58.5,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.833,

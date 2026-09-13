@@ -5,7 +5,7 @@
   "website": "https://www.msllegal.com/",
   "domain": "msllegal.com",
   "phone": "(212) 962-1020",
-  "status": "certified",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -303,7 +303,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "panies, often leading them to offer significantly higher settlements as trial approaches. No Fee Unless We Win If you or a loved one has been injured, Michael \"The Bull\" is prepared to take agg",
   "results_published": {
     "count": 95,
     "counted_from": "stated amounts",
@@ -409,8 +408,8 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 71,
-    "tier": "Certified",
+    "total": 69,
+    "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
     "methodology": "v2.0",
@@ -552,16 +551,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · panies, often leading them to offer significantly higher settlements as trial approaches. No Fee Unless We Win If you or a loved one has been injured, Michael \"The Bull\" is prepared to take agg · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -584,9 +583,9 @@
     },
     "floor_abc": 50,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 14,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -595,7 +594,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 63.0,
+    "raw": 61.0,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.886,

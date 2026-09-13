@@ -227,7 +227,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "amount of winning multi-million-dollar verdicts. Free Case Evaluation Contact Us Now You Pay Nothing Unless We Win Your Case Read More About it We Changed New York State Construction Law Constructi",
   "results_published": {
     "readable": true,
     "count": 0,
@@ -247,7 +246,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 58,
+    "total": 56,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-13",
@@ -390,16 +389,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · amount of winning multi-million-dollar verdicts. Free Case Evaluation Contact Us Now You Pay Nothing Unless We Win Your Case Read More About it We Changed New York State Construction Law Constructi · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -424,7 +423,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 12,
+      "gap": 14,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -433,7 +432,7 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 51.5,
+    "raw": 49.5,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.675,

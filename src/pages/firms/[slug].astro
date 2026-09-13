@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { fitDescription } from '../../lib/seo';
 import { officeLabel } from '../../lib/labels';
+import { achievementsFor, marksFor } from '../../lib/achievements';
 import Icon from '../../components/Icon.astro';
 import Scorecard from '../../components/Scorecard.astro';
 
@@ -37,6 +38,8 @@ const gateList = Object.values(d.gates ?? {});
 const gatesPassed = ['Verified', 'Certified', 'Distinguished', 'Elite']
   .includes(d.score?.tier ?? '');
 const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
+const achievements = achievementsFor(d);
+const marks = marksFor(d);
 // Only a results page we could actually read and count is worth a panel.
 const rp = d.results_published;
 const published = rp && rp.readable && rp.count ? rp : null;
@@ -109,7 +112,7 @@ const schema = {
   <div class="container">
     {/* Only link the sections this profile actually renders; an anchor to a hidden block
         scrolls nowhere. */}
-    <a href="#overview" class="is-active">Overview</a>{s && <a href="#certification">Score</a>}<a href="#practice">Practice areas</a>{d.results.length > 0 && <a href="#results">Results</a>}{d.attorneys.length > 0 && <a href="#attorneys">Attorneys</a>}<a href="#reviews">Reviews</a><a href="#offices">Offices</a>{d.faq.length > 0 && <a href="#faq">FAQ</a>}
+    <a href="#overview" class="is-active">Overview</a>{achievements.length > 0 && <a href="#achievements">Earned</a>}{s && <a href="#certification">Score</a>}<a href="#practice">Practice areas</a>{d.results.length > 0 && <a href="#results">Results</a>}{d.attorneys.length > 0 && <a href="#attorneys">Attorneys</a>}<a href="#reviews">Reviews</a><a href="#offices">Offices</a>{d.faq.length > 0 && <a href="#faq">FAQ</a>}
     <a class="btn btn--primary btn--sm cta" href="#contact">Request free consultation</a>
   </div>
 </nav>
@@ -127,6 +130,34 @@ const schema = {
         </div>
         {d.highlights.length > 0 && <div class="highlights">{d.highlights.map(h => <div class="hl"><Icon name={h.icon} /><div><b>{h.title}</b>{h.text}</div></div>)}</div>}
       </div>
+
+      {/* Achievements before the scorecard, because they are the same facts in the language a
+          firm and its clients read. The scorecard underneath is the audit, and anybody who wants
+          to check a claim here finds the row it came from a screen below.
+
+          Two lists, never merged. An achievement is a fact about the practice; a mark is a fact
+          about this firm's relationship with this directory, and a page that mixes them invites
+          exactly the reading where managing your own entry looks like an award. */}
+      {(achievements.length > 0 || marks.length > 0) && (
+      <div class="block" id="achievements">
+        <h2>What this firm has earned <small>Every one from a measured value, with the evidence behind it</small></h2>
+        <div class="medals">
+          {achievements.map(a => (
+            <div class={`medal ${a.kind === 'tier' ? 'is-tier' : ''}`}>
+              <span class="medal-ico"><Icon name={a.icon} /></span>
+              <div><b>{a.label}</b><p>{a.detail}</p></div>
+            </div>
+          ))}
+        </div>
+        {marks.length > 0 && (
+          <div class="marks">
+            {marks.map(m => (
+              <div class="mark"><Icon name={m.icon} /><div><b>{m.label}</b><p>{m.detail}</p></div></div>
+            ))}
+          </div>
+        )}
+      </div>
+      )}
 
       {s && (
       <div class="block" id="certification">

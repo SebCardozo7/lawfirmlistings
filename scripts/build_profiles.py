@@ -140,6 +140,61 @@ def trim_listing_tail(name):
     return cut if len(cut) >= 4 else name
 
 
+# Navigation, not a statement about fees. A crawl window that catches these caught a menu.
+FEE_FURNITURE = re.compile(
+    r"learn more|click here|read our|get answers|contact us|free case (?:review|evaluation)|"
+    r"call us|se habla|menu|home\b|past results do not guarantee", re.I)
+
+
+def fee_sentence(quote):
+    """The firm's own sentence about its fees, or nothing.
+
+    What was stored instead was a 190-character window cut around a keyword, which meant 35 of 37
+    profiles published something starting mid-word: "rsonal Attention Trusted Legal Support",
+    "ored to discuss your case with you". Displayed under the word Contingency on the profile of a
+    certified firm, and quoted as the evidence for a fee-transparency medal.
+
+    So the window has to be a sentence before it is published. It has to start where a sentence
+    starts, end where one ends, be short enough to be one, and carry none of the vocabulary that
+    means a menu was scraped. Anything else is dropped: the fee model is a separate signal and
+    survives on its own, and no statement is better than a fragment attributed to the firm.
+    """
+    text = re.sub(r"\s+", " ", (quote or "")).strip()
+    if not text:
+        return None
+    # Start at the first full sentence in the window, since the window rarely begins at one.
+    m = re.search(r"[A-Z][^.!?]{15,200}[.!?]", text)
+    if not m:
+        return None
+    sentence = m.group(0).strip()
+    if len(sentence) > 150 or FEE_FURNITURE.search(sentence):
+        return None
+    # A sentence about fees, rather than the sentence that happened to sit beside the word.
+    if not re.search(r"fee|cost|charge|paid|payment|percent|contingen|owe|unless we win",
+                     sentence, re.I):
+        return None
+    # These blobs carry no sentence punctuation, so "from a capital to the first full stop" ran
+    # across four menu items and a settlement figure before it found one. Three of these tells
+    # were enough to let "Settlement Leg Amputation $3,167,000 Settlement Scaffolding Fall" and
+    # "Attention Trusted Legal Support Florida legal support" through as fee statements.
+    # Any money at all, written any way. The first version asked for four digits and let
+    # "NYC We have won over $1 BILLION for accident injury" through as a fee statement.
+    if re.search(r"\$\s*[\d.,]+\s*(?:billion|million|thousand|k\b)?", sentence, re.I):
+        return None                      # a figure from a results page, not a fee term
+    if re.search(r"(?:\b[A-Z][a-z]+\b[ ,]+){3,}[A-Z][a-z]+", sentence):
+        return None                      # a run of Title Case words is a menu
+    # Two capitalised words straight after a lowercase one is the seam where one menu item was
+    # welded to the next: "...free Consultation We offer free initial consultations...". Ordinary
+    # prose does this once, for a proper noun, and then carries on in lower case.
+    if re.search(r"\b[a-z]+ [A-Z][a-z]+ [A-Z][a-z]+", sentence):
+        return None
+    # A fee statement is the firm addressing a reader. Without a person in it, the window caught
+    # prose about fees in general rather than this firm's terms.
+    if not re.search(r"\b(?:we|our|us|you|your|clients?)\b", sentence, re.I):
+        return None
+    return sentence
+
+
 def plausible_phone(raw):
     """Reject placeholders. Cellino Law publishes (888) 888-8888 in its own JSON-LD, and a
     made-up number on a profile is worse than no number: someone would dial it."""
@@ -320,8 +375,9 @@ def build(rec, cohort_lookup, market, cohort_id):
             ],
         },
     }
-    if "contingency" in claims:
-        firm["fee_statement"] = claims["contingency"]["quote"]
+    statement = fee_sentence(claims.get("contingency", {}).get("quote"))
+    if statement:
+        firm["fee_statement"] = statement
     firm["_review"]["blocking"] = [b for b in firm["_review"]["blocking"] if b]
     return firm, None
 

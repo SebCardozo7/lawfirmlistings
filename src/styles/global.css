@@ -276,6 +276,28 @@ button,input,select{font:inherit;color:inherit}
 .firm-card:hover{border-color:var(--line-2);box-shadow:var(--shadow)}
 .firm-card .rank{position:absolute;left:28px;top:-11px;background:var(--ink);color:#fff;font-weight:600;font-size:.74rem;padding:4px 12px;border-radius:var(--pill);letter-spacing:.04em;text-transform:uppercase}
 .firm-logo{width:68px;height:68px;border-radius:18px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.2rem;letter-spacing:-.02em;flex:none;background:var(--ink)}
+/* Medals. A grid rather than a row, because a firm with eight of them should not scroll and a
+   firm with two should not look short-changed by the gap where six would be.
+
+   The tier medal is the only one with the aurora ring, which is the same ring the certification
+   badge carries: it is the certification, and the rest are the things that went into it. */
+.medals{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.medal{display:flex;gap:14px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.medal b{display:block;margin-bottom:6px;font-size:.98rem}
+.medal p{margin:0;font-size:.88rem;color:var(--muted);line-height:1.6}
+.medal-ico{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--tint);color:var(--ink)}
+.medal-ico svg{width:19px;height:19px}
+.medal.is-tier{position:relative;border-color:transparent;background-clip:padding-box}
+.medal.is-tier::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--aurora);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.medal.is-tier .medal-ico{background:var(--ink);color:#fff}
+/* A mark is an administrative fact and is styled to read as one: no tile, no ring, nothing that
+   could be mistaken at a glance for something the firm earned. */
+.marks{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:12px}
+.mark{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--muted)}
+.mark svg{width:15px;height:15px;flex:none;margin-top:3px;color:var(--muted)}
+.mark b{display:block;color:var(--ink);font-weight:600;margin-bottom:3px}
+.mark p{margin:0;line-height:1.6}
+
 /* A logo tile is paper with a hairline, not the dark monogram tile. These icons are made for a
    phone home screen, so they bring their own background and only need somewhere to sit. */
 .firm-logo.has-logo,.profile-logo.has-logo{background:var(--paper);border:1px solid var(--line);padding:0;overflow:hidden}
@@ -830,7 +852,12 @@ button,input,select{font:inherit;color:inherit}
    Same pill, same paper, same geometry. The ring is a plain hairline instead of the
    gradient, and only the tick keeps the tier colour, which is the difference a reader
    should have to look for rather than be hit by. */
-.badge--verified{background:var(--paper);color:var(--ink);border:1px solid var(--line-2)}
+/* The same ring as Certified, which is what was asked for and is defensible: both are earned
+   states, both are stated in words inside the badge, and the tick against the shield keeps them
+   apart for anyone reading the icon rather than the label. Certification additionally needs a
+   score of 70, which is on the card beside it either way. */
+.badge--verified{position:relative;background:var(--paper);color:var(--ink);border:1px solid transparent;background-clip:padding-box}
+.badge--verified::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--aurora);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 .badge--verified svg{width:13px;height:13px;color:#0f766e}
 .on-night .badge--verified,.panel--ink .badge--verified,.tier--night .badge--verified,.sc-head .badge--verified{background:transparent;color:#fff;border-color:rgba(255,255,255,.22)}
 .on-night .badge--verified svg,.sc-head .badge--verified svg{color:#5eead4}

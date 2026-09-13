@@ -226,7 +226,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "qualified injury lawyer as soon as possible. Schedule a free consultation today. There’s No Fee Unless You Win. We’re Elite Lawyers Fighting for New Yorkers As Million Dollar Advocates with hu",
   "results_published": {
     "count": 18,
     "counted_from": "stated amounts",
@@ -281,7 +280,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 69,
+    "total": 66,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
@@ -424,16 +423,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · qualified injury lawyer as soon as possible. Schedule a free consultation today. There’s No Fee Unless You Win. We’re Elite Lawyers Fighting for New Yorkers As Million Dollar Advocates with hu · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -458,7 +457,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 1,
+      "gap": 4,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -467,7 +466,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 61.0,
+    "raw": 59.0,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.842,

@@ -225,7 +225,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "n No Fee Promise Get Answers Now Don’t Fall For These Insurance Company Tricks Learn More No Recovery, No Fee Promise Learn More Read Our Google Reviews Click Here We Come To You If You Can’t Come To",
   "results_published": {
     "count": 38,
     "counted_from": "stated amounts",
@@ -304,7 +303,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 79,
+    "total": 77,
     "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
@@ -447,16 +446,16 @@
         ]
       },
       "E": {
-        "score": 12,
+        "score": 10,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · n No Fee Promise Get Answers Now Don’t Fall For These Insurance Company Tricks Learn More No Recovery, No Fee Promise Learn More Read Our Google Reviews Click Here We Come To You If You Can’t Come To · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -481,7 +480,7 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 6,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -490,7 +489,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 70.5,
+    "raw": 68.5,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.965,

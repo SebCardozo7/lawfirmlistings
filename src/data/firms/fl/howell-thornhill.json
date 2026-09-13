@@ -182,7 +182,6 @@
   },
   "cohort_id": "fl-personal-injury",
   "faq": [],
-  "fee_statement": "rsonal Attention Trusted Legal Support Florida legal support Expert Legal Representation: Contingency-Based Advocacy throughout the state of Florida. Admitted to State and Federal Courts, How",
   "operating": {
     "registered": "2000-12-08",
     "years": 25.8,
@@ -211,7 +210,7 @@
     "checked_at": "2026-09-13"
   },
   "score": {
-    "total": 41,
+    "total": 38,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-13",
@@ -354,16 +353,16 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 4,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · rsonal Attention Trusted Legal Support Florida legal support Expert Legal Representation: Contingency-Based Advocacy throughout the state of Florida. Admitted to State and Federal Courts, How · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -388,7 +387,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 29,
+      "gap": 32,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -397,7 +396,7 @@
         "A6 Roster verifiability: +9 available"
       ]
     },
-    "raw": 28.5,
+    "raw": 26.5,
     "assessed": 70,
     "coverage": 0.769,
     "floor_abc_pct": 0.474,

@@ -145,7 +145,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "e is worth so early. It could be worth $50,000, or it could be worth $500,000. How Does a Contingency Fee Work? A contingency fee works as such: you hire an attorney, your attorney works on y",
   "results_published": {
     "count": 22,
     "counted_from": "stated amounts",
@@ -199,7 +198,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 63,
+    "total": 60,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-13",
@@ -342,16 +341,16 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 4,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · e is worth so early. It could be worth $50,000, or it could be worth $500,000. How Does a Contingency Fee Work? A contingency fee works as such: you hire an attorney, your attorney works on y · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -376,7 +375,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 7,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -385,7 +384,7 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 44.0,
+    "raw": 42.0,
     "assessed": 70,
     "coverage": 0.7,
     "floor_abc_pct": 0.882,

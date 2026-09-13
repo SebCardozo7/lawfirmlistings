@@ -407,7 +407,6 @@
       "attorneys[] is empty. Names must be read from the bio pages, not guessed"
     ]
   },
-  "fee_statement": "over with the assistance of Malloy Law Offices, LLC. Just remember, we take on cases on a contingency basis, meaning you will never pay us any legal fees unless we win . Medical Malpractice M",
   "results_published": {
     "readable": false,
     "why": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler",
@@ -415,7 +414,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 52,
+    "total": 48,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-13",
@@ -558,16 +557,16 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 4,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · over with the assistance of Malloy Law Offices, LLC. Just remember, we take on cases on a contingency basis, meaning you will never pay us any legal fees unless we win . Medical Malpractice M · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -592,7 +591,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 22,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -601,7 +600,7 @@
         "B1 Results published: not yet measured (6 pts)"
       ]
     },
-    "raw": 28.5,
+    "raw": 26.5,
     "assessed": 55,
     "coverage": 0.604,
     "floor_abc_pct": 0.783,

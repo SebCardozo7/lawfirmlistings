@@ -324,7 +324,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "awyer NYC We have won over $1 BILLION for accident injury and medical malpractice victims NO RECOVERY, NO FEE. Free Consultation Now! $15,000,000 Jury Award Adult Head Injury $10,500,000 Malpractice",
   "results_published": {
     "readable": true,
     "count": 0,
@@ -344,7 +343,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 54,
+    "total": 52,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-13",
@@ -487,16 +486,16 @@
         ]
       },
       "E": {
-        "score": 8,
+        "score": 6,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · awyer NYC We have won over $1 BILLION for accident injury and medical malpractice victims NO RECOVERY, NO FEE. Free Consultation Now! $15,000,000 Jury Award Adult Head Injury $10,500,000 Malpractice · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -521,7 +520,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 16,
+      "gap": 18,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -530,7 +529,7 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 48.0,
+    "raw": 46.0,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.605,

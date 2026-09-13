@@ -5,7 +5,7 @@
   "website": "https://ask4sam.net/",
   "domain": "ask4sam.net",
   "phone": "(877) 275-4726",
-  "status": "certified",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -418,10 +418,9 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "D FOR personal injury clients Learn More THE CONSULTATION IS FREE THE ADVICE IS PRICELESS No fee unless we win Name * First Last Email * Phone * Details * Phone Name Terms Terms of Use * By sub",
   "score": {
-    "total": 70,
-    "tier": "Certified",
+    "total": 68,
+    "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (12/25).",
     "computed_at": "2026-09-13",
     "methodology": "v2.0",
@@ -563,16 +562,16 @@
         ]
       },
       "E": {
-        "score": 12,
+        "score": 10,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · D FOR personal injury clients Learn More THE CONSULTATION IS FREE THE ADVICE IS PRICELESS No fee unless we win Name * First Last Email * Phone * Details * Phone Name Terms Terms of Use * By sub · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -595,9 +594,9 @@
     },
     "floor_abc": 44,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 15,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -606,7 +605,7 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 68.0,
+    "raw": 66.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.781,

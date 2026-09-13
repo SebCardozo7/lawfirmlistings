@@ -330,7 +330,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "man & Associates? Hiring Frekhtman & Associates costs nothing upfront . We work on a 100% contingency fee – clients pay no legal fees unless the firm recovers money. The initial consultation",
   "results_published": {
     "count": 26,
     "counted_from": "stated amounts",
@@ -392,7 +391,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 69,
+    "total": 65,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (5/25).",
     "computed_at": "2026-09-13",
@@ -535,16 +534,16 @@
         ]
       },
       "E": {
-        "score": 11,
+        "score": 8,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 6,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · man & Associates? Hiring Frekhtman & Associates costs nothing upfront . We work on a 100% contingency fee – clients pay no legal fees unless the firm recovers money. The initial consultation"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -569,7 +568,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 1,
+      "gap": 5,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -578,7 +577,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 61.0,
+    "raw": 58.0,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.789,

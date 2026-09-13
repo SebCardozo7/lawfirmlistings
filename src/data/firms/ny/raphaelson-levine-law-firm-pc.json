@@ -355,7 +355,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "in, No Fee\" policy means you don't have to worry about paying any upfront fees – we use a contingency fee agreement which means we only collect payment if we win your case. If you're curious",
   "results_published": {
     "count": 15,
     "counted_from": "stated amounts",
@@ -407,7 +406,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 73,
+    "total": 71,
     "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
@@ -550,16 +549,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · in, No Fee\" policy means you don't have to worry about paying any upfront fees – we use a contingency fee agreement which means we only collect payment if we win your case. If you're curious · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -584,7 +583,7 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 12,
+      "gap": 14,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -593,7 +592,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 65.0,
+    "raw": 63.0,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.912,

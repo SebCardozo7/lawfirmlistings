@@ -184,7 +184,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "et the standard for personal injury law in New York City and statewide. Our firm works on contingency, meaning you pay no attorney fees unless we win your case. Call (212) 742-9706 or contact",
   "results_published": {
     "readable": false,
     "why": "results page returned 403",
@@ -200,7 +199,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 67,
+    "total": 64,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-13",
@@ -343,16 +342,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · et the standard for personal injury law in New York City and statewide. Our firm works on contingency, meaning you pay no attorney fees unless we win your case. Call (212) 742-9706 or contact · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -377,7 +376,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 3,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -386,7 +385,7 @@
         "B2 Specificity: not yet measured (5 pts)"
       ]
     },
-    "raw": 49.5,
+    "raw": 47.5,
     "assessed": 74,
     "coverage": 0.74,
     "floor_abc_pct": 0.881,

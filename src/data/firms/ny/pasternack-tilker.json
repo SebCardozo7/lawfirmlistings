@@ -768,9 +768,8 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "Home Our Attorneys About Our Firm Areas We Serve Contact Us Articles Client Testimonials Contingency Fee Site Map Practice Areas Workers' Compensation Social Security Disability Construction",
   "score": {
-    "total": 55,
+    "total": 53,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-13",
@@ -913,16 +912,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · Home Our Attorneys About Our Firm Areas We Serve Contact Us Articles Client Testimonials Contingency Fee Site Map Practice Areas Workers' Compensation Social Security Disability Construction · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -947,7 +946,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 15,
+      "gap": 17,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -956,7 +955,7 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 53.5,
+    "raw": 51.5,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.605,
