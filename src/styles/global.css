@@ -3,6 +3,16 @@
    Type: Sofia Pro (licensed) → Urbanist (Google Fonts) fallback
    ============================================================ */
 :root{
+  /* How far a dark hero is pulled up so it fills the space behind the transparent sticky
+     header. It was 88px against a header that measures 91, and the three pixels of
+     difference were a white strip across the top of every page on the site.
+
+     Matching the header exactly would only work until the header changed, so this does
+     not try to: the hero pads the same amount back down, which means content lands in the
+     same place whatever the number is, and the background covers the top as long as the
+     number is bigger than the header. Well clear of it, and it can stop being a
+     measurement to keep in step with. */
+  --hero-pull:140px;
   --ink:#0A0A0C;           /* headings, primary buttons */
   --ink-soft:#3B3C43;      /* body */
   --muted:#6F7079;         /* meta */
@@ -141,7 +151,15 @@ button,input,select{font:inherit;color:inherit}
 @media (max-width:960px){.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}}
 
 /* Breadcrumbs */
-.crumbs{display:flex;gap:10px;flex-wrap:wrap;font-size:.88rem;color:var(--muted);list-style:none}
+/* The breadcrumb is navigation, and the eyebrow and heading under it are the page. They were
+   five pixels apart while the eyebrow and the h1 were twenty-four, so the trail read as the
+   first line of the title block rather than as a way back. It was also the larger of the two,
+   which put the emphasis in the wrong place.
+
+   Smaller than the eyebrow now, and given room to be its own thing. The space below it is the
+   change a reader actually feels. */
+.crumbs{display:flex;gap:10px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);list-style:none;margin:0 0 30px;padding:0}
+.crumbs li{display:flex;align-items:center}
 .crumbs a{color:var(--muted)}
 .crumbs li+li::before{content:"/";margin-right:10px;color:var(--line-2)}
 .crumbs [aria-current]{color:var(--ink);font-weight:500}
@@ -161,7 +179,7 @@ button,input,select{font:inherit;color:inherit}
 @keyframes drift3{to{transform:translate(-4vw,5vw) scale(1.15)}}
 
 /* ---------- HERO (home) ---------- */
-.hero{position:relative;background:var(--night);color:var(--on-night-soft);margin-top:-88px;padding-top:88px;overflow:hidden}
+.hero{position:relative;background:var(--night);color:var(--on-night-soft);margin-top:calc(-1 * var(--hero-pull));padding-top:var(--hero-pull);overflow:hidden}
 .hero .container{position:relative;text-align:center;padding:88px 0 0;display:flex;flex-direction:column;align-items:center}
 .trust-pill{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid var(--night-line);border-radius:var(--pill);padding:8px 16px 8px 10px;font-size:.9rem;color:var(--on-night);backdrop-filter:blur(8px)}
 .trust-pill .avs{display:flex}
@@ -349,9 +367,9 @@ button,input,select{font:inherit;color:inherit}
 @media (max-width:960px){.cta-firm{grid-template-columns:1fr;padding:32px}}
 
 /* ---------- Page hero (category / city): compact night ---------- */
-.page-hero{position:relative;background:var(--night);color:var(--on-night-soft);margin-top:-88px;padding-top:88px;overflow:hidden}
+.page-hero{position:relative;background:var(--night);color:var(--on-night-soft);margin-top:calc(-1 * var(--hero-pull));padding-top:var(--hero-pull);overflow:hidden}
 .page-hero .aurora i{opacity:.5}
-.page-hero .container{position:relative;padding:48px 0 56px;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:end}
+.page-hero .container{position:relative;padding:64px 0 64px;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:end}
 .page-hero h1{color:#fff;margin:22px 0 18px;font-size:clamp(2.3rem,4.6vw,3.8rem)}
 .page-hero .lede{color:var(--on-night-soft);font-size:1.1rem}
 .page-hero .eyebrow{color:var(--on-night-soft)}
@@ -726,9 +744,19 @@ button,input,select{font:inherit;color:inherit}
 .sc-next b{display:block;color:#fff;font-size:1rem;margin-bottom:6px}
 .sc-next .track{height:6px;border-radius:3px;background:rgba(255,255,255,.1);margin:10px 0;overflow:hidden;position:relative}
 .sc-next .track i{display:block;height:100%;background:var(--aurora);border-radius:3px}
-.sc-gates{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--night-line);border-bottom:1px solid var(--night-line)}
-.sc-gate{padding:14px 16px;border-left:1px solid var(--night-line);font-size:.78rem;display:flex;gap:8px;align-items:center;color:var(--on-night)}
-.sc-gate:first-child{border-left:0}
+/* Six columns for five gates, from before G4 was retired, and each one a sixth of the width.
+   That was survivable while a gate's evidence was a few words. It is not now: a Maryland
+   profile explains that the state publishes no attorney register we may query, and the sentence
+   came out one or two words per line down a column the width of a thumb.
+
+   Cells size themselves to their content instead of to a count, so a gate always has room to
+   say what it found and nothing has to be renumbered the next time the gate set changes. They
+   align to the top too: five cells of very different heights centred on each other looked
+   accidental. */
+.sc-gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--night-line);border-top:1px solid var(--night-line);border-bottom:1px solid var(--night-line)}
+.sc-gate{padding:14px 16px;font-size:.78rem;display:flex;gap:8px;align-items:flex-start;color:var(--on-night);background:var(--night)}
+.sc-gate>div{min-width:0}
+.sc-gate svg{margin-top:2px}
 .sc-gate svg{width:14px;height:14px;color:var(--a3);flex:none}
 .sc-gate small{display:block;color:var(--on-night-soft);font-size:.7rem}
 /* Gate state. The tick used to be unconditional, so a gate that had not passed looked
@@ -768,7 +796,7 @@ button,input,select{font:inherit;color:inherit}
 .dg .s{font-size:.82rem;color:var(--muted);margin-top:4px}
 .dg .pill{display:inline-block;margin-top:10px;font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--tint);color:var(--ink)}
 .dg .pill.good{background:#E7F7EF;color:var(--success)}.dg .pill.warn{background:#FEF3DC;color:#9A6700}.dg .pill.bad{background:#FDE8E8;color:#B42318}
-@media (max-width:960px){.sc-top{grid-template-columns:1fr;justify-items:start}.sc-row{grid-template-columns:1fr 56px}.sc-row .ev{grid-column:1/-1;text-align:left}.sc-gates{grid-template-columns:repeat(3,1fr)}.sc-gate:nth-child(4){border-left:0}.sc-gate:nth-child(n+4){border-top:1px solid var(--night-line)}.sc-pillar summary{grid-template-columns:36px 1fr 80px}.sc-pillar .bar{display:none}.sc-sub{padding-left:32px}.digital-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:960px){.sc-top{grid-template-columns:1fr;justify-items:start}.sc-row{grid-template-columns:1fr 56px}.sc-row .ev{grid-column:1/-1;text-align:left}.sc-pillar summary{grid-template-columns:36px 1fr 80px}.sc-pillar .bar{display:none}.sc-sub{padding-left:32px}.digital-grid{grid-template-columns:1fr 1fr}}
 
 /* Verified: the gates were checked and held. A different badge from Certified on purpose,
    because it is a different and weaker claim, so it must not borrow the gold. */

@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "score": "python3 scripts/score.py",
     "check": "astro check",
-    "check:meta": "node scripts/check_meta.mjs"
+    "check:meta": "node scripts/check_meta.mjs",
+    "check:rules": "node scripts/check_listing_rules.mjs"
   },
   "keywords": [],
   "author": "",

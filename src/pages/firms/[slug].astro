@@ -31,7 +31,11 @@ const PRACTICE_PAGES = new Set(['personal-injury']);
 // followed link. Claiming the profile does not change it, and neither does paying for anything —
 // selling followed links is a link scheme and the penalty would land on this site.
 const gateList = Object.values(d.gates ?? {});
-const gatesPassed = gateList.length === 6 && gateList.every(g => g.pass);
+// Six was the count before G4 was retired, so this was never true and every outbound link
+// on every profile carried nofollow, including firms that clear every gate. The engine
+// already says it: tier reaches "Verified" exactly when all gates were checked and held.
+const gatesPassed = ['Verified', 'Certified', 'Distinguished', 'Elite']
+  .includes(d.score?.tier ?? '');
 const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
 // Only a results page we could actually read and count is worth a panel.
 const rp = d.results_published;
@@ -66,7 +70,14 @@ const schema = {
           {d.tagline && <p class="tagline">“{d.tagline}”</p>}
           <div class="profile-badges">
             {isCertified && <span class="badge badge--certified"><Icon name="shield" /> LFL Certified {new Date(s!.computed_at).getFullYear()} · Score {s!.total}</span>}
-            {!isCertified && <span class="badge badge--tier">Listed · not yet certified</span>}
+            {/* The engine has four tiers above "Not eligible" and this knew two, so a firm that
+                cleared every gate was announced as "Listed · not yet certified" at the top of its
+                own page while the scorecard below called it Verified. The badge follows the
+                tier. */}
+            {!isCertified && s?.tier === 'Verified' &&
+              <span class="badge badge--verified"><Icon name="check" /> LFL Verified {new Date(s.computed_at).getFullYear()}</span>}
+            {!isCertified && s?.tier !== 'Verified' &&
+              <span class="badge badge--tier">{s?.tier === 'Not eligible' ? 'Not eligible' : 'Listed'}</span>}
             {d.claimed && <span class="badge badge--claimed"><Icon name="check" /> Firm-managed</span>}
             <span class="badge badge--tier">{primary[0]?.name ?? d.practices[0].name}</span>
             <span class="badge badge--tier">{d.market.city}, {d.market.state}</span>

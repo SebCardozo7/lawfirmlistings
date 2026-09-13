@@ -54,10 +54,18 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL 
     <div class="score-ring" style={`--pct:${s.total}%`}><b>{s.total}<small>out of 100</small></b></div>
     <div>
       <span class="tier-name">LFL Certification Score · Methodology {s.methodology}</span>
+      {/* Two different reasons a point is not scored, and saying "evidence we have not
+          collected" about both put a state's decision on our tab. Maryland publishes no attorney
+          register we may query, so the points behind it are not ours to go and collect: they are
+          not on the scale in that market at all, which is why the engine reports `assessable`
+          separately from `assessed`. */}
       {s.assessed !== undefined && (
-        <span class="sc-coverage">Scored across {s.assessed} of the 100 available points. The
-          remaining {100 - s.assessed} cover evidence we have not collected for this firm yet, and
-          count neither for nor against it.</span>
+        <span class="sc-coverage">
+          Scored across {s.assessed} of the {s.assessable ?? 100} points this firm's state lets
+          anyone measure{s.assessable !== undefined && s.assessable < 100 ? (
+            <>, out of 100 in the methodology: {100 - s.assessable} of them need a register that {d.market.state_name} does not publish for us to read</>
+          ) : null}. Anything unscored counts neither for nor against the firm.
+        </span>
       )}
       <h3>{tierLabel}</h3>
       <p>{s.verdict}</p>
@@ -90,7 +98,10 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL 
           {!g.pass && <span class="sc-tag">{noRoster(g.source)
               ? 'No attorneys published'
               : noStateSource(g.source)
-              ? `Not published by ${d.market.state_name}`
+              /* The code, not the name: uppercased in a pill, "NOT PUBLISHED BY MARYLAND"
+                 wrapped into a three-line blob beside a one-line gate. The evidence below
+                 names the state in full and explains which register it means. */
+              ? `Not published by ${d.market.state}`
               : notAFinding(g.source) ? 'Not checked' : 'Not passed'}</span>}
           <small>{g.evidence}</small>
         </div>

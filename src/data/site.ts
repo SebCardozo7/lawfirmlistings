@@ -39,7 +39,7 @@ export const SITE = {
   reviewingAttorney: '',
 
   /** Last substantive revision of the Privacy policy and Terms. */
-  policiesUpdated: '2026-09-09',
+  policiesUpdated: '2026-09-13',
 } as const;
 
 /** mailto: with a subject that says why, so a single inbox can be filtered. */

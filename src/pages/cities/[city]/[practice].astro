@@ -45,9 +45,16 @@ const { firms } = Astro.props;
 const market = firms[0].data.market;
 const practiceName = firms[0].data.practices.find(pr => pr.slug === practice)!.name;
 
-// Certified firms rank by score; listed firms have no score yet and follow alphabetically.
+// Ranked by the score, which is what the heading above the list says it is.
+//
+// This used to sort certified firms by score and drop everybody else into an alphabetical tail,
+// written when a listed firm genuinely had no score. Every published firm has one now, and in
+// Baltimore, where none is certified yet, the whole page came out alphabetically under a heading
+// reading "Ranked by the Certification Score": 39, 44, 52, 52, 61, 49, 67 down the page.
+//
+// A firm with no score at all still goes last, because there is nothing to rank it by.
 const weight = (f: typeof firms[number]) =>
-  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+  f.data.score ? -f.data.score.total : 1;
 const ranked = [...firms].sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
 
 const certified = ranked.filter(f => f.data.status === 'certified');
