@@ -60,7 +60,14 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
 
 <article class="firm-card">
   {rank && <span class="rank">{rankLabel ?? `#${rank}`}</span>}
-  <div class={logoVariant ? `firm-logo ${logoVariant}` : 'firm-logo'}>{d.initials}</div>
+  {/* The firm's own mark where we have one, the initials tile where we do not. alt is empty on
+      purpose: the firm's name is the next thing in the reading order, so announcing the logo
+      would say it twice. */}
+  <div class={`firm-logo ${d.logo ? 'has-logo' : (logoVariant || '')}`.trim()}>
+    {d.logo
+      ? <img src={d.logo.file} alt="" width="68" height="68" loading="lazy" decoding="async" />
+      : d.initials}
+  </div>
 
   <div class="firm-body">
     <div class="firm-title">
@@ -72,7 +79,7 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
         <span class="badge badge--tier">{s!.tier}</span>
       )}
       {isVerified && (
-        <span class="badge badge--verified" title="Every eligibility gate has been checked and passed. This is not certification, which additionally requires a score."><Icon name="check" /> LFL Verified</span>
+        <span class="badge badge--verified" title="Every eligibility gate has been checked and passed. This is not certification, which additionally requires a score."><Icon name="check" /> LFL Verified {new Date(s!.computed_at).getFullYear()}</span>
       )}
       {d.claimed && (
         <span class="badge badge--claimed" title="The firm confirmed it owns this page and maintains its own information. This says nothing about the firm's certification."><Icon name="check" /> Firm-managed</span>
@@ -104,9 +111,18 @@ const seniority = [d.founded_year ? `Est. ${d.founded_year}` : null, attorneyLab
         card explained. The score was never pending either. It is computed for every published
         firm and printed in full on the profile, so withholding it here only made the card
         disagree with the page it links to. */}
-    {s
-      ? <div class="stat"><b class="num">{s.total}/100</b>LFL Certification Score</div>
-      : <div class="stat"><b>Listed</b>not yet scored</div>}
+    {/* A total built from a sixth of the scale is not the same kind of number as one built from
+        nine tenths of it, and a column invites them to be read as though they were. Where too
+        little could be measured the card says how little, and says nothing a reader could sort
+        the page by. */}
+    {s && s.comparable !== false
+      ? <div class="stat">
+          <b class="num">{s.total}/100</b>LFL Certification Score
+          <div class="score-bar" aria-hidden="true"><i style={`width:${Math.max(s.total, 2)}%`}></i></div>
+        </div>
+      : s
+        ? <div class="stat"><b>Not scored</b>{Math.round((s.coverage ?? 0) * 100)}% of the scale could be measured</div>
+        : <div class="stat"><b>Listed</b>not yet scored</div>}
     <div class="stat"><b>{d.fee_model}</b>{d.free_consultation ? 'free consultation' : 'fee model'}</div>
     <a class="btn btn--primary btn--sm" href={`/firms/${d.slug}/`}>View profile</a>
     <a class="btn btn--ghost btn--sm" href={d.website} rel={linkRel} target="_blank">Visit website</a>

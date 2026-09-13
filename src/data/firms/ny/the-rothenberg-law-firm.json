@@ -377,7 +377,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 16 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-11"
+      "checked_at": "2026-09-13"
     },
     "G6": {
       "pass": true,
@@ -393,7 +393,7 @@
     "total": 64,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (5/15).",
-    "computed_at": "2026-09-11",
+    "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -474,7 +474,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.81 over 577 reviews → Bayesian 4.81 (prior 4.81 weighted as 100 reviews, from 43 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.81 over 577 reviews → Bayesian 4.81 (prior 4.81 weighted as 100 reviews, from 47 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -581,7 +581,8 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.807,
     "gates_unavailable": [],
-    "assessable": 100
+    "assessable": 100,
+    "comparable": true
   },
   "entity": {
     "legal_name": "THE ROTHENBERG LAW FIRM LLP",
@@ -711,5 +712,14 @@
     "years": 30.7,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
     "checked_at": "2026-09-11"
+  },
+  "logo": {
+    "file": "/logos/injurylawyer.com.png",
+    "source_url": "https://injurylawyer.com/wp-content/uploads/2026/07/cropped-Injury-Lawyer-Rothenberg-Law-Firm-e1784663622486-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 36885,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-13"
   }
 }

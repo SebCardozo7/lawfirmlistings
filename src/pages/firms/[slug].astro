@@ -64,7 +64,11 @@ const schema = {
     <div>
       <ol class="crumbs"><li><a href="/">Home</a></li><li><a href={`/cities/${d.market.city_slug}/`}>{d.market.city}, {d.market.state}</a></li><li><a href={`/practice-areas/${primary[0]?.slug ?? d.practices[0].slug}/`}>{primary[0]?.name ?? d.practices[0].name}</a></li><li aria-current="page">{d.name}</li></ol>
       <div class="profile-id">
-        <div class="profile-logo">{d.initials}</div>
+        <div class={d.logo ? 'profile-logo has-logo' : 'profile-logo'}>
+          {d.logo
+            ? <img src={d.logo.file} alt="" width="96" height="96" loading="eager" decoding="async" />
+            : d.initials}
+        </div>
         <div>
           <h1>{d.name}</h1>
           {d.tagline && <p class="tagline">“{d.tagline}”</p>}

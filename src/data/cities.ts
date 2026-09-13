@@ -170,4 +170,90 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  'lakeland-fl': {
+    lede:
+      'Florida rewrote its injury law in 2023, and the deadline most people still quote is the ' +
+      'old one. Compare Lakeland firms on what they publish and on what we could check for ' +
+      'ourselves.',
+    areas: ['Downtown Lakeland', 'Lake Morton', 'Dixieland', 'South Lakeland', 'Winter Haven',
+            'Bartow', 'Auburndale', 'Plant City'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Lakeland: what is different',
+        paragraphs: [
+          'Two changes in March 2023 reshaped what an injury claim in Florida is worth and how ' +
+          'long you have to bring it. House Bill 837 cut the deadline for a negligence action ' +
+          'from four years to two, and it replaced pure comparative negligence with a modified ' +
+          'version: a claimant found more than 50 per cent at fault now recovers nothing at all, ' +
+          'where before they recovered what was left after their share. Medical negligence is ' +
+          'the exception and keeps the old rule. If you were told four years by somebody ' +
+          'remembering how this worked, they are remembering a law that changed.',
+          'Lakeland cases are not heard in Lakeland. Polk County sits in the Tenth Judicial ' +
+          'Circuit, whose courthouse is in Bartow, about fifteen miles south, alongside Hardee ' +
+          'and Highlands counties. A firm that is in that building weekly knows its judges and ' +
+          'its calendars, and an office on Florida Avenue is not the same thing as appearing in ' +
+          'Bartow.',
+        ],
+      },
+      {
+        heading: 'The fourteen days that decide your medical bills',
+        paragraphs: [
+          'Florida is a no-fault state. Every driver carries $10,000 of Personal Injury ' +
+          'Protection, and it pays 80 per cent of reasonable medical expenses, but only if you ' +
+          'receive initial care <b>within fourteen days</b> of the crash. Miss that window and ' +
+          'the coverage you paid for pays nothing toward treatment, whoever caused the ' +
+          'collision. It is the single most expensive deadline in Florida injury law and it is ' +
+          'the one nobody is told about at the scene.',
+          'Stepping outside no-fault to claim pain and suffering needs more than bills. Section ' +
+          '627.737 allows it only where there is significant and permanent loss of an important ' +
+          'bodily function, permanent injury within a reasonable degree of medical probability, ' +
+          'significant and permanent scarring or disfigurement, or death. That threshold, rather ' +
+          'than the severity of the crash, is usually what decides whether a claim is worth ' +
+          'bringing.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Floridians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the accident, under Florida Statutes ' +
+          '§ 95.11(5)(a). It was four years until March 2023.',
+          '<b>Wrongful death:</b> two years, under § 95.11(5)(e).',
+          '<b>PIP medical care:</b> fourteen days from the crash to receive initial treatment, ' +
+          'or the $10,000 pays nothing toward it.',
+          '<b>Professional malpractice other than medical:</b> two years from the day it was ' +
+          'discovered or should have been.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Florida lawyer is licensed?',
+        a: 'The Florida Bar publishes a member directory at ' +
+           '<a href="https://www.floridabar.org/directories/find-mbr/" rel="nofollow noopener" ' +
+           'target="_blank">floridabar.org</a>, free to search, showing admission date and any ' +
+           'public discipline. We do not read it: it refuses our requests, so Florida profiles ' +
+           'carry no licence finding rather than one we did not make. What we do check is ' +
+           'discipline, from the Supreme Court of Florida\'s own published decisions, and every ' +
+           'profile says which of the two it is showing you.',
+      },
+      {
+        q: 'The other driver was mostly at fault. Does my share still matter?',
+        a: 'Since March 2023 it can end the claim entirely. Above 50 per cent at fault you ' +
+           'recover nothing, and below it your damages are reduced by your share. That makes how ' +
+           'fault is apportioned the argument worth having early, which is a reason not to give ' +
+           'a recorded statement to an insurer before speaking to someone. Nothing here is legal ' +
+           'advice and how the rule applies to a particular crash is what a first consultation ' +
+           'is for.',
+      },
+      {
+        q: 'Should I hire a firm in Lakeland itself?',
+        a: 'Local matters here more than in a big metro, because the venue is a single ' +
+           'courthouse in Bartow rather than a choice of them. Several firms listed here run ' +
+           'offices across Polk County and into Tampa. What counts is regular practice in the ' +
+           'Tenth Circuit.',
+      },
+    ],
+  },
 };

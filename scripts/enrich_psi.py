@@ -147,6 +147,11 @@ def main():
             rec = json.load(fh)
 
         target = rec.get("pages_found", {}).get("home")
+        if not target and rec.get("site_blocked"):
+            # PageSpeed is measured by Google from Google's own infrastructure, so a site that
+            # refuses our crawler can still be measured here. We are asking Google what it sees,
+            # not fetching the page ourselves, and nothing about the refusal is worked around.
+            target = "https://" + rec["domain"] + "/"
         if not target:
             print("%-24s skipped — home page was never reachable" % rec["domain"])
             skipped += 1

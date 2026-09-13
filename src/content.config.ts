@@ -22,6 +22,17 @@ const firms = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/data/firms' }),
   schema: z.object({
     slug: z.string(), name: z.string(), legal_name: z.string().optional(), entity_type: z.string().optional(),
+    // The firm's own mark, copied from the icon its site declares. Optional on purpose: a firm
+    // whose icon is too small to publish keeps the initials tile, which is a real design and not
+    // a placeholder. See scripts/fetch_logos.py.
+    logo: z.object({
+      file: z.string(), source_url: z.string(),
+      width: z.number().nullable().optional(), height: z.number().nullable().optional(),
+      bytes: z.number().optional(), source: z.string(), fetched_at: z.string(),
+    }).optional(),
+    // Set where the firm's own site answers our crawler with a 403. Every sub-factor read from
+    // a site is pending for such a firm rather than zero: see scripts/seed_from_places.py.
+    site_blocked: z.object({ reason: z.string(), seen_at: z.string() }).optional(),
     initials: z.string(), website: z.string().url(), domain: z.string(), phone: z.string(), phone_vanity: z.string().optional(),
     founded_year: z.number().optional(),
     // 'verified' sits between listed and certified: every eligibility gate passed, which is a
@@ -113,6 +124,9 @@ const firms = defineCollection({
       // profile can state the limit as a fact about the state instead of leaving a gap.
       assessable: z.number().optional(),
       gates_unavailable: z.array(z.string()).default([]),
+      // False where too little of the scale could be measured for the total to be set
+      // beside another firm's. The templates show the evidence instead of the number.
+      comparable: z.boolean().optional(),
       pillars: z.object({ A: pillar, B: pillar, C: pillar, D: pillar, E: pillar }),
       floor_abc: z.number(),
       next_tier: z.object({ name: z.string(), needed: z.number(), gap: z.number(), floor_met: z.boolean(), coverage_met: z.boolean().optional(), path: z.array(z.string()) }).nullable(),

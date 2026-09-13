@@ -78,6 +78,17 @@ REGISTERS = {
         "case_name": "Attorney Grievance",
         "body": "the Attorney Grievance Commission of Maryland",
     },
+    # Florida's recent decisions carry the respondent's full name: "The Florida Bar v.
+    # Christopher W. Crowley" identifies a person where "Attorney Grievance Comm'n v. Kolodner"
+    # identifies only a surname. Recent is the operative word. Across the whole index, 1946 to
+    # today, 91 of 1,237 do it, which is 7 per cent, so the full-name path is a shortcut that
+    # happens to cover the newest cases and not a property of the state. Everything else falls
+    # through to the surname screen and the text search, exactly as Maryland does.
+    "FL": {
+        "courts": "fla",
+        "case_name": "The Florida Bar",
+        "body": "the Supreme Court of Florida on the discipline of Florida Bar members",
+    },
 }
 
 # Words in a case name that are the court's or the commission's, not a respondent's.
@@ -110,15 +121,37 @@ def fetch(params):
     return {}
 
 
-def respondent(case_name: str) -> str | None:
-    """The surname the case is brought against, from 'Attorney Grievance Comm'n v. Shuster'."""
+def respondent_tokens(case_name: str) -> list:
+    """The name the case is brought against, as tokens, or [] where it names nobody.
+
+    "In Re: Amendments to Florida Family Law Rules" sits on the same docket as the discipline
+    decisions and is not about a person, so it has to come back empty rather than nominating
+    "Rules" as a respondent.
+    """
     parts = re.split(r"\bv\.?\s", case_name, maxsplit=1, flags=re.I)
     if len(parts) < 2:
-        return None
+        return []
     tail = parts[1].strip().strip(".,")
     tail = re.split(r"\s*[,(]| and | & ", tail)[0].strip()
-    tokens = [t for t in tail.split() if not SUFFIX.match(t) and not NOT_A_NAME.match(t)]
+    return [t for t in tail.split() if not SUFFIX.match(t) and not NOT_A_NAME.match(t)]
+
+
+def respondent(case_name: str) -> str | None:
+    """The respondent's surname, which is all Maryland's case names carry."""
+    tokens = respondent_tokens(case_name)
     return tokens[-1].strip(".,").casefold() if tokens else None
+
+
+def respondent_full(case_name: str) -> str | None:
+    """The respondent's full name, where the state's case names give one.
+
+    Florida writes "The Florida Bar v. Christopher W. Crowley" and Maryland writes "Attorney
+    Grievance Comm'n v. Kolodner". Where the full name is there it settles in one step what a
+    surname otherwise leaves to a full-text search that frequently cannot answer it, so it is
+    worth keeping rather than reducing every state to the weaker of the two.
+    """
+    tokens = respondent_tokens(case_name)
+    return " ".join(tokens) if len(tokens) >= 2 else None
 
 
 def build_index(state: str, cache: pathlib.Path, refresh: bool):
@@ -136,9 +169,11 @@ def build_index(state: str, cache: pathlib.Path, refresh: bool):
         if total is None:
             total = page.get("count")
         for row in page.get("results") or []:
-            cases.append({"case": row.get("caseName"),
+            name = row.get("caseName") or ""
+            cases.append({"case": name,
                           "date": row.get("dateFiled"),
-                          "surname": respondent(row.get("caseName") or ""),
+                          "surname": respondent(name),
+                          "full": respondent_full(name),
                           "url": "https://www.courtlistener.com" + (row.get("absolute_url") or "")})
         pages += 1
         print("  page %-3d  %d case(s) so far" % (pages, len(cases)), flush=True)
@@ -177,6 +212,20 @@ def first_token(name: str) -> str | None:
     return tokens[0] if tokens else None
 
 
+def name_key(name: str) -> str:
+    """First and last name, lowercased. Middle names and initials are dropped on both sides.
+
+    A decision writes "Christopher W. Crowley" and a firm's roster writes "Christopher Crowley",
+    and they are one person. Two different Crowleys with different first names are not, which is
+    the distinction this has to keep while ignoring the middle.
+    """
+    tokens = [t.strip(".,").casefold() for t in (name or "").replace(".", " ").split()]
+    tokens = [t for t in tokens if t and not SUFFIX.match(t)]
+    if len(tokens) < 2:
+        return " ".join(tokens)
+    return tokens[0] + " " + tokens[-1]
+
+
 def name_variants(attorney: str) -> list:
     """The forms a decision is likely to print, longest first.
 
@@ -195,7 +244,7 @@ def name_variants(attorney: str) -> list:
     return out
 
 
-def verify(state: str, attorney: str, surname: str):
+def verify(state: str, attorney: str, surname: str, hits: list):
     """Is this attorney the respondent? Returns (verdict, note).
 
     True means positively identified: a decision whose case name carries the surname also prints
@@ -212,8 +261,25 @@ def verify(state: str, attorney: str, surname: str):
     and nothing here treats it as one.
     """
     spec = REGISTERS[state]
-    base = 'caseName:("%s" AND %s)' % (spec["case_name"], surname)
     variants = name_variants(attorney)
+
+    # Where every decision naming this surname also names the respondent in full, the index
+    # already holds the answer and no search is needed. That is the case for most of Florida's
+    # recent decisions and for almost none of its older ones, so the condition is "all of them",
+    # not "any of them": one full name among four surname-only cases settles nothing.
+    #
+    # Compared on name tokens rather than strings, so "Christopher W. Crowley" and "Christopher
+    # Crowley" are one person while "Christopher Crowley" and "Daniel Crowley" are two.
+    named = [h for h in hits if h.get("full")]
+    if named and len(named) == len(hits):
+        ours = name_key(attorney)
+        for h in named:
+            if name_key(h["full"]) == ours:
+                return True, None
+        return False, ("every decision naming this surname names the respondent in full, and "
+                       "none of them is this attorney")
+
+    base = 'caseName:("%s" AND %s)' % (spec["case_name"], surname)
     if not variants:
         return None, "only one name token is published for this attorney"
 
@@ -282,7 +348,7 @@ def main():
             # One lookup that will not complete must not cost the other six firms their gate.
             # An attorney we could not ask about is unresolved, which is what unresolved is for.
             try:
-                verdict, note = verify(args.state, attorney["name"], surname)
+                verdict, note = verify(args.state, attorney["name"], surname, hits)
             except Exception as e:
                 verdict, note = None, ("the decisions index could not be reached for this "
                                        "attorney (%s)" % str(e)[:60])

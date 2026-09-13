@@ -90,6 +90,11 @@ NOT_A_FINDING = ("pending", "partial", "no queryable source", "unavailable",
 # meaning we have not got there yet. Only these leave the coverage denominator: a check we simply
 # owe is still a gap in our work and should count against us.
 NO_SOURCE_IN_MARKET = ("no queryable source", "unavailable", "no roster published")
+
+# Sub-factors read from the firm's own website. Every one of them is unmeasurable for a firm whose
+# site refuses us, and none of them may be scored zero on that basis. D1 is here for its trust
+# pages and D3 is not, because D3 is counted from Google listings rather than from the site.
+SITE_DERIVED = {"A5", "A6", "B1", "B2", "B3", "D1", "D4", "E1", "E3", "E4"}
 # Thresholds are percentages now, of what we could actually assess. The absolute floors the
 # methodology set, 40, 50 and 55 out of the 65 points in pillars A, B and C, carry across as
 # the same proportions.
@@ -102,6 +107,16 @@ TIERS = [("Elite", 93, 55 / 65), ("Distinguished", 85, 50 / 65), ("Certified", 7
 # actually claims. Below that a firm can still be Verified, which is a claim about the gates.
 MIN_COVERAGE = 0.60
 MIN_PILLAR_COVERAGE = 0.50
+# Below this, a total is still computed and is no longer offered as a number to compare.
+#
+# The normalised score divides what a firm earned by what we assessed, which is the right shape
+# and stops meaning much when the denominator gets small. A firm whose site refuses our crawler
+# was measured on three sub-factors, came out at 69, and sorted above a firm measured on fifteen
+# that came out at 48. Both numbers are correct and putting them in one column is not.
+#
+# One firm in the directory is below this today and the next lowest sits at 0.60, so the line is
+# drawn where the data already separates rather than where it would be convenient.
+MIN_SCORE_COVERAGE = 0.50
 
 def review_count(google):
     """count_label is a label, not a number: "1,776" and "400+" both have to parse."""
@@ -429,6 +444,23 @@ def compute(firm):
     out.append(sub("E4", e4, "observed", " · ".join(firm.get("availability", [])) or "no availability published"))
 
     # ---- aggregate ----
+    # A firm whose site refuses our crawler cannot be measured on anything that lives on a site,
+    # and the first draft of this scored all of it zero: pillar B read "the firm publishes no case
+    # results we could read" and D4 read "no JSON-LD detected", about pages nobody here had
+    # opened. That is the error this engine exists to avoid, stated about a real business, so
+    # every site-derived sub-factor is pending for such a firm and the profile says why.
+    #
+    # What survives is everything measured somewhere else: the reviews and offices from verified
+    # Google listings, PageSpeed, which Google measures from its own infrastructure, and the
+    # domain's age from RDAP.
+    if firm.get("site_blocked"):
+        reason = ("The firm's site answers our crawler with a 403, so nothing that lives on a "
+                  "site could be read for this firm. Not a finding about the firm.")
+        for x in out:
+            if x["code"] in SITE_DERIVED and not any(
+                    w in (x["source"] or "").lower() for w in NOT_A_FINDING):
+                x["pts"], x["source"], x["evidence"] = 0, "pending", reason
+
     pillars = {p: {"score": 0, "max": PILLAR_MAX[p], "subs": []} for p in PILLAR_MAX}
     for s in out:
         pillars[SUBS[s["code"]][0]]["subs"].append(s); pillars[SUBS[s["code"]][0]]["score"] += s["pts"]
@@ -570,7 +602,9 @@ def compute(firm):
             # Which checks the firm's state does not allow anyone to make, so a profile can say
             # so as a fact about the state rather than leaving a reader to wonder what is missing.
             "gates_unavailable": sorted(unavailable_gates),
-            "assessable": round(assessable_all)}
+            "assessable": round(assessable_all),
+            # Whether the total may be set beside another firm's. See MIN_SCORE_COVERAGE.
+            "comparable": coverage >= MIN_SCORE_COVERAGE}
 
 def main():
     errors = []

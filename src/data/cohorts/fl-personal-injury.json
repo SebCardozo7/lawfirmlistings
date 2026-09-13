@@ -1,0 +1,60 @@
+{
+  "id": "fl-personal-injury",
+  "market": {
+    "city_slug": "lakeland-fl",
+    "city": "Lakeland",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "state": "FL",
+  "practice": "personal-injury",
+  "label": "Florida x Personal Injury",
+  "measured_at": "2026-09-13",
+  "source": "Polk County firms, opened for Lopez & Humphries in Lakeland. The Ahrefs figures on every entry are zeros standing in for measurements not taken rather than measurements of zero: no Florida profile carries a digital.ahrefs block, so D2 is pending on all of them and these peer values are never read. Replace them before trusting a D2 score here.",
+  "licence_register": "The Florida Bar publishes a member directory at floridabar.org and its robots.txt allows general crawlers, but the site refuses our requests outright: every call returns 403 from Cloudflare, including from the crawler's own user agent. That makes G1 a gap of ours rather than one of Florida's, which is the opposite of Maryland, where the state forbids the query. It is recorded as pending, it counts against our coverage, and it is fixable by running the pipeline from somewhere the register will answer.",
+  "discipline_register": "Published decisions of the Supreme Court of Florida, indexed by CourtListener. Florida writes the respondent's full name into the case name, so an attorney is identified or cleared without a full-text search.",
+  "firms": [
+    {
+      "domain": "lopezandhumphries.com",
+      "name": "Lopez & Humphries, P.A.",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "howellthornhill.com",
+      "name": "Howell & Thornhill, P.A.",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "moodylaw.com",
+      "name": "Moody Law, P.A.",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "brookslawgroup.com",
+      "name": "Brooks Law Group",
+      "dr": 0,
+      "refdomains": 0,
+      "org_keywords": 0,
+      "org_traffic": 0
+    }
+  ],
+  "unresolved": [
+    "cataniaandcatania.com",
+    "deanburnettilaw.com",
+    "turnbulllawfirm.com"
+  ],
+  "unresolved_notes": {
+    "turnbulllawfirm.com": "The domain belongs to Turnbull, Moak & Pendergrass of Birmingham and Houston, not to the Turnbull firm in Lakeland. Both verified listings are in Alabama and Texas, so it was removed rather than published in a Florida market it does not practise in.",
+    "cataniaandcatania.com": "Five verified offices, none of them in Polk or Highlands County. The firm publishes a Lakeland landing page and is headquartered in Tampa, and a firm with no verified office in the county does not belong in its directory.",
+    "deanburnettilaw.com": "Reachable, but the Places API returned no verified listing and the crawl found no office address or phone number, so there is nothing to build a profile from."
+  }
+}
