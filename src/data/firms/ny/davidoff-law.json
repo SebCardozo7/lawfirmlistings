@@ -257,7 +257,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "What Are Contingency Fees? Our 108-18 Queens Blvd office is moving to 75-60 188th St, Flushing NY 11366 We've",
   "results_published": {
     "count": 32,
     "counted_from": "stated amounts",
@@ -328,7 +327,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 65,
+    "total": 63,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (5/25).",
     "computed_at": "2026-09-13",
@@ -471,16 +470,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · What Are Contingency Fees? Our 108-18 Queens Blvd office is moving to 75-60 188th St, Flushing NY 11366 We've · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -505,7 +504,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 5,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -514,7 +513,7 @@
         "D1 Website trust & experience: +4.0 available"
       ]
     },
-    "raw": 58.0,
+    "raw": 56.0,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.772,

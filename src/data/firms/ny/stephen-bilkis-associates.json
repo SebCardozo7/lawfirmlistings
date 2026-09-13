@@ -269,11 +269,10 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "s of dollars for clients. 8 Personal attention. 9 We fight diligently for our clients. 10 Contingency cases. The firm does take some cases with no upfront fee. Legal fees can be taken at the",
   "score": {
-    "total": 63,
+    "total": 61,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (11/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (6/15).",
     "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
@@ -414,16 +413,16 @@
         ]
       },
       "E": {
-        "score": 8,
+        "score": 6,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · s of dollars for clients. 8 Personal attention. 9 We fight diligently for our clients. 10 Contingency cases. The firm does take some cases with no upfront fee. Legal fees can be taken at the · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency on some cases · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -448,7 +447,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 7,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -457,7 +456,7 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 61.0,
+    "raw": 59.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.746,

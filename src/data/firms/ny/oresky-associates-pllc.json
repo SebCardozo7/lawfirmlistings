@@ -270,7 +270,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "n Island Westchester Reach out to us today for your free, no-obligation consultation. You pay nothing unless we win for you. tag--> Call Now! 718-993-9999 Choose a New York office close to you: Bron",
   "results_published": {
     "count": 7,
     "counted_from": "stated amounts",
@@ -315,7 +314,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 71,
+    "total": 69,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
@@ -458,16 +457,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · n Island Westchester Reach out to us today for your free, no-obligation consultation. You pay nothing unless we win for you. tag--> Call Now! 718-993-9999 Choose a New York office close to you: Bron · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -490,9 +489,9 @@
     },
     "floor_abc": 50,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 14,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -501,7 +500,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 63.5,
+    "raw": 61.5,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.886,

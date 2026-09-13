@@ -37,8 +37,11 @@ const PLANNED_COMPANY = ['For law firms', 'Editorial standards'];
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="/">
-          <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 2.6v5.2c0 4.6-3 8.8-7 10.2-4-1.4-7-5.6-7-10.2V5.6L12 3z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.8 12.2l2.2 2.2 4.4-4.8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span>Law Firm Listings<small>Ranked · Verified · Independent</small></span>
+          {/* The pale lockup, because the footer is the one dark surface on most pages. The
+              tagline that used to sit under the wordmark is gone: it is the sentence in the
+              paragraph below, and saying it twice in one corner read as filler. */}
+          <img class="brand-lockup" src="/brand/logo-light.png" width="640" height="116"
+               alt="Law Firm Listings" loading="lazy" />
         </a>
         <p>An independent directory of vetted law firms across the United States. We verify licensure, disciplinary history and client outcomes so you can research with confidence.</p>
       </div>

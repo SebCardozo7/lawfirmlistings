@@ -327,9 +327,8 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but",
   "score": {
-    "total": 51,
+    "total": 48,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-13",
@@ -472,16 +471,16 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 4,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · scuss a potential case is usually free as personal injury lawyers often handle cases on a contingent fee basis. It means that a personal injury lawyer doesn’t charge for the consultation but · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -506,7 +505,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 19,
+      "gap": 22,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -515,7 +514,7 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 49.0,
+    "raw": 47.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.57,

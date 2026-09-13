@@ -286,7 +286,6 @@
   },
   "cohort_id": "fl-personal-injury",
   "faq": [],
-  "fee_statement": "throughout Winter Haven , Lakeland , and Tampa since 1992 Free initial consultations and no fee unless we win for you How Can Our Personal Injury Lawyers Help You? Our trusted Florida personal",
   "operating": {
     "registered": "2004-01-12",
     "years": 22.7,
@@ -332,7 +331,7 @@
     "checked_at": "2026-09-13"
   },
   "score": {
-    "total": 48,
+    "total": 45,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-13",
@@ -475,16 +474,16 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 4,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · throughout Winter Haven , Lakeland , and Tampa since 1992 Free initial consultations and no fee unless we win for you How Can Our Personal Injury Lawyers Help You? Our trusted Florida personal · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -509,7 +508,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 22,
+      "gap": 25,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -518,7 +517,7 @@
         "A6 Roster verifiability: +9 available"
       ]
     },
-    "raw": 33.5,
+    "raw": 31.5,
     "assessed": 70,
     "coverage": 0.769,
     "floor_abc_pct": 0.579,

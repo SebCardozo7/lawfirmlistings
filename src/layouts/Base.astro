@@ -45,6 +45,9 @@ const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- iOS ignores an SVG icon, and a home-screen shortcut without this one shows a
+         screenshot of the page. Both are the same gradient, written by scripts/prepare_brand.py. -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

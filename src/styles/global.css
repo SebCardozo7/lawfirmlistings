@@ -130,8 +130,10 @@ button,input,select{font:inherit;color:inherit}
 .site-header .container{display:flex;justify-content:center}
 .navpill{pointer-events:auto;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.4) blur(14px);border:1px solid rgba(10,10,12,.08);border-radius:var(--pill);padding:6px 6px 6px 8px;box-shadow:0 12px 40px -16px rgba(10,10,12,.35),0 1px 2px rgba(10,10,12,.05);max-width:100%}
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:700;font-size:1rem;letter-spacing:-.02em;text-decoration:none!important;padding:6px 12px 6px 6px;border-right:1px solid var(--line);margin-right:4px}
-.brand-mark{width:32px;height:32px;flex:none;border-radius:10px;background:var(--ink);display:grid;place-items:center}
-.brand-mark svg{width:18px;height:18px}
+/* Sized by height, never by width: the lockup and the mark have different aspect ratios and
+   only their optical height has to agree with the nav links beside them. */
+.brand-lockup{height:23px;width:auto;display:block}
+.brand-mark-img{display:none;height:30px;width:auto}
 .brand small{display:none}
 .nav-links{display:flex;gap:2px;list-style:none}
 .nav-links a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:500;font-size:.95rem;padding:10px 14px;border-radius:var(--pill);text-decoration:none!important;transition:background .15s}
@@ -142,16 +144,15 @@ button,input,select{font:inherit;color:inherit}
 .nav-actions{display:flex;gap:6px;align-items:center;margin-left:6px;padding-left:8px;border-left:1px solid var(--line)}
 .nav-toggle{display:none}
 @media (max-width:1060px){.nav-links a span{display:none}.nav-links a{padding:10px 12px}}
-@media (max-width:820px){.nav-links,.nav-actions .btn--ghost{display:none}.nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:40px;height:40px;align-items:center;justify-content:center}.brand span{display:none}.brand{border-right:0}}
+@media (max-width:820px){.nav-links,.nav-actions .btn--ghost{display:none}.nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:40px;height:40px;align-items:center;justify-content:center}.brand-lockup{display:none}.brand-mark-img{display:block}.brand{border-right:0;padding-right:6px}}
 
 /* ---------- Footer ---------- */
 .site-footer{background:var(--night);color:var(--on-night-soft);padding:80px 0 32px;position:relative;overflow:hidden}
 .site-footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--aurora);opacity:.7}
 .site-footer a{color:#D7D9E0}.site-footer a:hover{color:#fff}
 .footer-grid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:40px}
-.footer-brand .brand{color:#fff;border:0;padding:0;margin:0;font-size:1.15rem}
-.footer-brand .brand-mark{background:#fff}
-.footer-brand .brand-mark svg path{stroke:var(--night)}
+.footer-brand .brand{color:#fff;border:0;padding:0;margin:0}
+.footer-brand .brand-lockup{height:30px}
 .footer-brand p{margin-top:18px;font-size:.95rem;max-width:34ch}
 .site-footer h4{color:#fff;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;font-weight:600}
 .site-footer ul{list-style:none;display:grid;gap:10px;font-size:.95rem}
@@ -276,6 +277,28 @@ button,input,select{font:inherit;color:inherit}
 .firm-card:hover{border-color:var(--line-2);box-shadow:var(--shadow)}
 .firm-card .rank{position:absolute;left:28px;top:-11px;background:var(--ink);color:#fff;font-weight:600;font-size:.74rem;padding:4px 12px;border-radius:var(--pill);letter-spacing:.04em;text-transform:uppercase}
 .firm-logo{width:68px;height:68px;border-radius:18px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.2rem;letter-spacing:-.02em;flex:none;background:var(--ink)}
+/* Medals. A grid rather than a row, because a firm with eight of them should not scroll and a
+   firm with two should not look short-changed by the gap where six would be.
+
+   The tier medal is the only one with the aurora ring, which is the same ring the certification
+   badge carries: it is the certification, and the rest are the things that went into it. */
+.medals{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.medal{display:flex;gap:14px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.medal b{display:block;margin-bottom:6px;font-size:.98rem}
+.medal p{margin:0;font-size:.88rem;color:var(--muted);line-height:1.6}
+.medal-ico{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--tint);color:var(--ink)}
+.medal-ico svg{width:19px;height:19px}
+.medal.is-tier{position:relative;border-color:transparent;background-clip:padding-box}
+.medal.is-tier::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--aurora);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.medal.is-tier .medal-ico{background:var(--ink);color:#fff}
+/* A mark is an administrative fact and is styled to read as one: no tile, no ring, nothing that
+   could be mistaken at a glance for something the firm earned. */
+.marks{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:12px}
+.mark{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:var(--muted)}
+.mark svg{width:15px;height:15px;flex:none;margin-top:3px;color:var(--muted)}
+.mark b{display:block;color:var(--ink);font-weight:600;margin-bottom:3px}
+.mark p{margin:0;line-height:1.6}
+
 /* A logo tile is paper with a hairline, not the dark monogram tile. These icons are made for a
    phone home screen, so they bring their own background and only need somewhere to sit. */
 .firm-logo.has-logo,.profile-logo.has-logo{background:var(--paper);border:1px solid var(--line);padding:0;overflow:hidden}
@@ -830,7 +853,12 @@ button,input,select{font:inherit;color:inherit}
    Same pill, same paper, same geometry. The ring is a plain hairline instead of the
    gradient, and only the tick keeps the tier colour, which is the difference a reader
    should have to look for rather than be hit by. */
-.badge--verified{background:var(--paper);color:var(--ink);border:1px solid var(--line-2)}
+/* The same ring as Certified, which is what was asked for and is defensible: both are earned
+   states, both are stated in words inside the badge, and the tick against the shield keeps them
+   apart for anyone reading the icon rather than the label. Certification additionally needs a
+   score of 70, which is on the card beside it either way. */
+.badge--verified{position:relative;background:var(--paper);color:var(--ink);border:1px solid transparent;background-clip:padding-box}
+.badge--verified::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--aurora);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 .badge--verified svg{width:13px;height:13px;color:#0f766e}
 .on-night .badge--verified,.panel--ink .badge--verified,.tier--night .badge--verified,.sc-head .badge--verified{background:transparent;color:#fff;border-color:rgba(255,255,255,.22)}
 .on-night .badge--verified svg,.sc-head .badge--verified svg{color:#5eead4}

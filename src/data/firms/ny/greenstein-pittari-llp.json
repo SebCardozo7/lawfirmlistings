@@ -215,7 +215,6 @@
     "Spanish"
   ],
   "fee_model": "Contingency",
-  "fee_statement": "No fees until we win your injury case",
   "free_consultation": true,
   "availability": [
     "24/7 case evaluation line",
@@ -559,7 +558,7 @@
     }
   },
   "score": {
-    "total": 70,
+    "total": 68,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-13",
@@ -702,16 +701,16 @@
         ]
       },
       "E": {
-        "score": 12,
+        "score": 10,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · No fees until we win your injury case · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -736,7 +735,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 0,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -745,7 +744,7 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 57.5,
+    "raw": 55.5,
     "assessed": 82,
     "coverage": 0.82,
     "floor_abc_pct": 0.857,

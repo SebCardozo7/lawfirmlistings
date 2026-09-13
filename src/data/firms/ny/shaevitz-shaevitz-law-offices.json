@@ -137,7 +137,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "ce helping injured victims, we won’t stop until you receive the compensation you deserve. No Fee Unless We Win At Shaevitz & Shaevitz, we handle all personal injury cases on a contingency basis",
   "results_published": {
     "readable": true,
     "count": 0,
@@ -149,7 +148,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 26,
+    "total": 24,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-13",
@@ -292,16 +291,16 @@
         ]
       },
       "E": {
-        "score": 6,
+        "score": 4,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · ce helping injured victims, we won’t stop until you receive the compensation you deserve. No Fee Unless We Win At Shaevitz & Shaevitz, we handle all personal injury cases on a contingency basis · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -326,7 +325,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 44,
+      "gap": 46,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -335,7 +334,7 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 18.5,
+    "raw": 16.5,
     "assessed": 70,
     "coverage": 0.7,
     "floor_abc_pct": 0.224,

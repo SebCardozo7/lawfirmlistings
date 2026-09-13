@@ -5,7 +5,7 @@
   "website": "https://www.yourlawyer.com/",
   "domain": "yourlawyer.com",
   "phone": "(800) 968-7529",
-  "status": "certified",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -537,11 +537,10 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "ir injuries. Do I Need to Pay Attorney’s Fees Up Front? Personal injury lawyers charge a “contingency fee” to take an injury case. A contingency fee means that the firm will not get paid any",
   "score": {
-    "total": 70,
-    "tier": "Certified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (12/25).",
+    "total": 68,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (7/15).",
     "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
@@ -682,16 +681,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · ir injuries. Do I Need to Pay Attorney’s Fees Up Front? Personal injury lawyers charge a “contingency fee” to take an injury case. A contingency fee means that the firm will not get paid any · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -714,9 +713,9 @@
     },
     "floor_abc": 47,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 15,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -725,7 +724,7 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 68.0,
+    "raw": 66.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.825,

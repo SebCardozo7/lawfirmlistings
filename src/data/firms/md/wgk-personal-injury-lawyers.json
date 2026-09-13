@@ -239,7 +239,6 @@
   },
   "cohort_id": "md-personal-injury",
   "faq": [],
-  "fee_statement": "$100 Million Recovered for Our Clients Past results do not guarantee future outcomes. YOU PAY NOTHING UNLESS WE WIN $2,600,000 Car Accident $1,685,000 Truck Accident $1,500,000 Catastrophic Injury $",
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
@@ -291,7 +290,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 67,
+    "total": 64,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-13",
@@ -434,16 +433,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · $100 Million Recovered for Our Clients Past results do not guarantee future outcomes. YOU PAY NOTHING UNLESS WE WIN $2,600,000 Car Accident $1,685,000 Truck Accident $1,500,000 Catastrophic Injury $ · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -468,7 +467,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 3,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -477,7 +476,7 @@
         "A6 Roster verifiability: +9 available"
       ]
     },
-    "raw": 47.0,
+    "raw": 45.0,
     "assessed": 70,
     "coverage": 0.769,
     "floor_abc_pct": 0.868,

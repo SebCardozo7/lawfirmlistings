@@ -171,7 +171,6 @@
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "fee_statement": "rsonal Attention To Every Client. $700M+ Won for Clients 95+ Years of Combined Experience No Fee Unless You Win Partners Handle Each Case 95+ Years of Combined Experience Sakkas Cahn & Weiss: A",
   "results_published": {
     "count": 119,
     "counted_from": "stated amounts",
@@ -269,7 +268,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 64,
+    "total": 62,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
@@ -412,16 +411,16 @@
         ]
       },
       "E": {
-        "score": 9,
+        "score": 7,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 5,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · rsonal Attention To Every Client. $700M+ Won for Clients 95+ Years of Combined Experience No Fee Unless You Win Partners Handle Each Case 95+ Years of Combined Experience Sakkas Cahn & Weiss: A · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -446,7 +445,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 6,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -455,7 +454,7 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 57.0,
+    "raw": 55.0,
     "assessed": 89,
     "coverage": 0.89,
     "floor_abc_pct": 0.772,
