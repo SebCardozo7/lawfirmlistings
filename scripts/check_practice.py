@@ -79,6 +79,20 @@ CORE_WORDS = {
     "new", "york", "nyc", "ny", "manhattan", "our", "the", "a", "and", "of", "in",
 }
 
+# Writing about the practice is not holding yourself out for it. The first run accepted a
+# glossary of compensation terms, a "workers' comp vs personal injury" comparison piece and a
+# blog post on how to report an injury, all of which a firm with no comp practice could publish
+# and two of which sat under /blog/. A page a firm links from its practice-area menu is a
+# statement about what it does; an article is content marketing, and the difference is the whole
+# point of asking.
+NOT_A_PRACTICE_PAGE = re.compile(
+    r"(^|/)(blog|news|articles?|posts?|resources?|library|glossary|dictionary|terms|"
+    r"faqs?|questions?|category|categories|tag|tags|20\d\d)(/|$)|"
+    r"[-_](?:vs|versus|glossary|faq|guide|checklist)(?:[-_]|$)|"
+    # A slug that opens with a question word is the firm answering one, which is the same
+    # content-marketing page with a friendlier address: /if-i-was-injured-on-the-job-do-i.
+    r"(?:^|/)(?:if|what|how|can|do|does|should|when|why|who|is|are|will)[-_]", re.I)
+
 
 def sitemap_urls(origin, robots, rp):
     """URLs from the sitemaps robots.txt declares, plus the conventional location."""
@@ -160,6 +174,8 @@ def examine(domain, spec):
             continue
         path = urllib.parse.urlparse(url).path
         if not spec["slug"].search(path) or url in seen:
+            continue
+        if NOT_A_PRACTICE_PAGE.search(path):
             continue
         seen.add(url)
         candidates.append(url)

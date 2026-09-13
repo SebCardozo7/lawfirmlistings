@@ -94,6 +94,12 @@ ASSOCIATIONS = [
     ("American Bar Association", r"american bar association|\bABA\b"),
     ("New Jersey State Bar Association", r"new jersey state bar association"),
     ("American Board of Trial Advocates", r"american board of trial advocates|\bABOTA\b"),
+    # The workers' compensation ones. A comp firm belongs to these and to no trial lawyers
+    # association, so a list of injury associations alone reads its membership as an absence
+    # and costs it A5 points for being in a different practice.
+    ("Injured Workers' Bar Association", r"injured workers'? bar association|\bIWBA\b"),
+    ("Workers' Injury Law & Advocacy Group", r"workers'? injury law (?:&|and) advocacy group|"
+                                             r"\bWILG\b"),
 ]
 ASSOCIATIONS = [(name, re.compile(pattern, re.I)) for name, pattern in ASSOCIATIONS]
 
