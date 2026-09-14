@@ -31,6 +31,34 @@ Say it went out.
 No email address goes in this file. This repository is public, and `PushNotification` already
 routes to whoever owns the routine, so writing an address here would publish it and change nothing.
 
+## Computing the figure is only half of it
+
+Found on 2026-09-14, hours after publishing, when twenty-eight firms landed in Baltimore and
+Lakeland and took the directory from 59 to 87. Every figure in the denominator guide recomputed
+correctly, which is the design working. The **prose around them did not**, and the page went out
+reading "they sit in New York and Florida and Florida and Florida and Maryland. Neither is on the
+shorter scale. Both had the whole 100 points available." Three separate breakages in two
+sentences, on a page whose entire subject is numbers that move underneath sentences.
+
+So a computed figure is necessary and not sufficient. Before shipping, read every sentence that
+touches a count and ask what it says when the count is 1, 2 and 20:
+
+- **Never `join(' and ')` a list.** Use a helper that deduplicates and formats. Mapping one state
+  name per firm and joining is what produced the repetition above, and it read perfectly while
+  exactly two firms were involved.
+- **"Neither", "Both", "either", "the other one"** are hardcoded counts wearing words. They pass
+  every check in this repo and go false in silence. Prefer "not one of them", "every one of them".
+- **A count spelled in words is still a count.** "the other two states", "a verdict on two
+  states". Compute it or drop it; dropping it usually reads better.
+- **Named places and firms go stale.** Linking Baltimore and Lakeland by hand is a sentence that
+  is wrong the day a fourth market opens. Derive the list from the records.
+- **Break ties deterministically.** The "firms that share a score" chart picks the widest spread,
+  and two scores tied at the same spread, so which example appeared depended on collection order.
+  Tie-break explicitly or the page changes its own illustration between builds.
+
+`check_meta.mjs` and `audit_seo.mjs` cannot catch any of this. The sentences are grammatical and
+the build is green. Only reading them at a different n catches it.
+
 Rules that decide what goes on this list, restated so they are not re-argued every run:
 
 - **Every guide carries at least one chart.** A measurement is read faster as a shape than as a
