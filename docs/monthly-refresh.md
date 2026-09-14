@@ -87,10 +87,44 @@ it: the whole point of this section is that a person is accountable for what it 
 
 ## Scheduling it
 
-There is no cron in this repository. The refresh is driven by a scheduled task on the account
-that runs the guides work, and the task's prompt should be this file: "follow
-docs/monthly-refresh.md, then report what changed". A session-scoped timer is not enough, because
-those expire long before the month does.
+There is no cron in this repository. The refresh is driven by a **scheduled task on the account
+that runs the guides work**, set to fire once a month. A session-scoped timer is not enough:
+those expire long before a month does.
+
+This is the prompt that task should carry, which is why it is written out in full rather than
+described. It is deliberately a pointer to this file plus the judgement calls a script cannot
+make:
+
+```
+You maintain the Guides section of lawfirmlistings.com. This is the monthly data pass, not a
+content pass: no new guide is written. The firms are re-measured and the guides recompute
+themselves.
+
+Follow docs/monthly-refresh.md in the order it gives: crawl_public.py for each cohort,
+crawl_results.py, promote_measurements.py, score.py, then `npm run build` and the four checks
+(check_meta, check_listing_rules, audit_seo, check_freshness --strict).
+
+The steps needing GOOGLE_API_KEY (enrich_psi.py, enrich_places.py) cannot run without the key.
+Say so in the pull request rather than skipping them silently.
+
+Then read what changed, which is the part no script does:
+
+  1. A conditional that has flipped: a guide says nobody publishes X and now somebody does.
+  2. A firm whose page stopped being readable, which moves several figures at once.
+  3. A chart whose point has gone, because the distribution flattened or a band emptied.
+  4. A hand-typed figure, which does not move with the data. methodology.astro has one.
+
+Write the deltas into docs/guides-backlog.md under the run's date and open ONE pull request
+against main with the data changes and any prose that had to follow them. Do not merge it: a
+person reads everything before it is published.
+
+If the build cannot be made to pass, or the data does not support a change, open no pull
+request: write what you learned into the backlog and stop. A run that publishes nothing is a
+perfectly good outcome.
+```
+
+Keep it in step with this file. If the order of the scripts changes here, the prompt is wrong
+until somebody updates it, and nothing will warn you.
 
 A GitHub Actions schedule would also work for steps 1 to 4, since none of them needs a secret.
 It is deliberately not set up here: it would mean this repository crawls fifty-nine law firm
