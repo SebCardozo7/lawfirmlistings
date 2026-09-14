@@ -9,8 +9,8 @@
   "state": "MD",
   "practice": "personal-injury",
   "label": "Maryland x Personal Injury",
-  "measured_at": "2026-09-10",
-  "source": "Opened for Malloy Law Offices, whose Baltimore office at 400 E Pratt St is one of eight verified locations, and filled out with eight more Maryland firms. The Ahrefs figures on every entry are zeros standing in for measurements we have not taken, not measurements of zero: no Maryland profile carries a digital.ahrefs block, so D2 is pending on all of them and these peer values are never read. They exist because the percentile helper needs the keys present. Replace them before trusting a single D2 score in this cohort.",
+  "measured_at": "2026-09-14",
+  "source": "Opened for Malloy Law Offices, whose Baltimore office at 400 E Pratt St is one of eight verified locations, and filled out with eight more Maryland firms. The Ahrefs figures on every entry are zeros standing in for measurements we have not taken, not measurements of zero: no Maryland profile carries a digital.ahrefs block, so D2 is pending on all of them and these peer values are never read. They exist because the percentile helper needs the keys present. Replace them before trusting a single D2 score in this cohort. Deepened 2026-09-14: candidates from Google Places text search across the metro (scripts/discover_places.py), each kept only where the firm's own site publishes a personal injury practice page (scripts/check_practice.py) and it holds an office in the 21 postal area (scripts/vet_candidates.py). The firms added on this pass carry no Ahrefs metrics, so D2 scores pending for them.",
   "firms": [
     {
       "domain": "malloy-law.com",
@@ -83,6 +83,96 @@
       "refdomains": 0,
       "org_keywords": 0,
       "org_traffic": 0
+    },
+    {
+      "domain": "killianlawgroup.com",
+      "name": "Killian Law Group, LLC",
+      "practice_page": "https://killianlawgroup.com/personal-injury/"
+    },
+    {
+      "domain": "hyattandgoldbloom.com",
+      "name": "Hyatt & Goldbloom",
+      "practice_page": "https://hyattandgoldbloom.com/baltimore-personal-injury-lawyers"
+    },
+    {
+      "domain": "warnkenlaw.com",
+      "name": "Warnken, LLC",
+      "practice_page": "https://www.warnkenlaw.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "portnerandshure.com",
+      "name": "Portner & Shure, P.A.",
+      "practice_page": "https://www.portnerandshure.com/personal-injury/"
+    },
+    {
+      "domain": "zirkinandschmerlinglaw.com",
+      "name": "Zirkin and Schmerling Injury Lawyers",
+      "practice_page": "https://www.zirkinandschmerlinglaw.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "410thefirm.com",
+      "name": "The Snyder Law Group, LLC",
+      "practice_page": "https://www.410thefirm.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "mitchgordonlaw.com",
+      "name": "Law Office of Mitchel M. Gordon",
+      "practice_page": "https://www.mitchgordonlaw.com/baltimore-attorney-services/personal-injury/"
+    },
+    {
+      "domain": "plaxenadler.com",
+      "name": "Plaxen Adler Muncy Maryland Injury & Accident Lawyers",
+      "practice_page": "https://www.plaxenadler.com/aop/personal-injury/"
+    },
+    {
+      "domain": "dubolawfirm.com",
+      "name": "Dubo Law",
+      "practice_page": "https://dubolawfirm.com/areas/bethesda-injury-lawyer/"
+    },
+    {
+      "domain": "bobkatzlaw.com",
+      "name": "Bob Katz Law",
+      "practice_page": "https://www.bobkatzlaw.com/manassas-personal-injury-lawyer/"
+    },
+    {
+      "domain": "shultzlegal.com",
+      "name": "Shultz Legal",
+      "practice_page": "https://www.shultzlegal.com/personal-injury-lawyer-maryland/"
+    },
+    {
+      "domain": "prellerlawfirm.com",
+      "name": "Preller Law Firm, LLC",
+      "practice_page": "https://www.prellerlawfirm.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "ataslaw.com",
+      "name": "The Law Office Of Marc J. Atas",
+      "practice_page": "https://ataslaw.com/areas-of-law-practice/personal-injury-representation/"
+    },
+    {
+      "domain": "greenberglawyers.com",
+      "name": "Greenberg Law Offices",
+      "practice_page": "https://greenberglawyers.com/personal-injury-towson/"
+    },
+    {
+      "domain": "millersternlawyers.com",
+      "name": "Miller | Stern Lawyers",
+      "practice_page": "https://www.millersternlawyers.com/personal-injury/"
+    },
+    {
+      "domain": "jennerlawfirm.com",
+      "name": "Jenner Law, P.C.",
+      "practice_page": "https://www.jennerlawfirm.com/personal-injury-lawyer/"
+    },
+    {
+      "domain": "rafaellaw.com",
+      "name": "Rafael Law, LLC",
+      "practice_page": "https://www.rafaellaw.com/personal-injury"
+    },
+    {
+      "domain": "thekirklawfirm.com",
+      "name": "Eric T. Kirk",
+      "practice_page": "https://www.thekirklawfirm.com/personal-injury/"
     }
   ],
   "unresolved": [
@@ -95,6 +185,9 @@
   "unresolved_notes": {
     "hhtlawyers.com": "403 to our crawler, which is bot protection. Manual entry, not evasion.",
     "pinderplotkin.com": "403 to our crawler, which is bot protection. Manual entry, not evasion.",
-    "saiontz.com": "Reachable, but the Places API returned no verified listing and the crawl found no office address and no attorney names, so there is nothing to publish a profile from yet."
+    "saiontz.com": "Reachable, but the Places API returned no verified listing and the crawl found no office address and no attorney names, so there is nothing to publish a profile from yet.",
+    "sfspa.com": "Schochor, Staton, Goldberg and Cardea is a real Baltimore practice and its site has no page the check can point at: the closest are a verdicts archive and an award announcement. Held for a hand-written evidence URL rather than published on a blog post.",
+    "marylandinjurylawyer.net": "Lebowitz & Mzhen publishes personal injury only as an article under /practice-areas/, not as a practice page. Same call as sfspa.com: a real firm, no page to cite.",
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office in this market and in roughly a thousand others, and a profile on this site asserts one home market: market.city, market.state, one city page, one ranked list. For a national chain that assertion is false everywhere except wherever we happened to file it, and the firm turned up in the Baltimore and Lakeland candidate lists at once, which is how the conflict surfaced. The rule is about the data model rather than about size: a firm we cannot place in one market is a firm this directory cannot describe."
   }
 }

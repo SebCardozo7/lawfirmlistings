@@ -97,6 +97,11 @@ NOT_A_PRACTICE_PAGE = re.compile(
 ARTICLE_TITLE = re.compile(
     r"\b(?:vs\.?|versus)\b|^\s*(?:what|how|why|when|can|do|does|should|is|are|will)\b|"
     r"\b(?:glossary|faq|frequently asked|blog|guide to|checklist|explained|"
+    # A WordPress category archive and a resources hub both title themselves for the practice
+    # and are not a statement that the firm does the work. Three Baltimore and Lakeland
+    # candidates were accepted on "Personal Injury Archives", "Personal Injury Resources" and
+    # "Personal Injury Statistics", which are a listing, a reading list and a page of numbers.
+    r"archives?|resources?|statistics|library|"
     r"everything you need)\b", re.I)
 
 
