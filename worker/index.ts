@@ -69,10 +69,21 @@ function mime(from: string, to: string, subject: string, body: string): string {
 }
 
 async function submit(request: Request, env: Env): Promise<Response> {
-  if (!env.SUBMISSIONS_TO || !env.SUBMISSIONS_FROM) {
-    // Say so rather than accepting a message into nowhere. A form that thanks somebody and
-    // discards what they wrote is worse than a form that admits it is not wired up.
-    return json(503, { error: 'This form is not connected to an inbox yet.' });
+  // Say which half is missing rather than "not connected". The first version said only that,
+  // and the two halves fail for different reasons and are fixed in different places: the
+  // destination is a secret plus a verified address in Email Routing, the sender is a line in
+  // wrangler.jsonc. Naming them reveals no value and no address, only whether a setting exists,
+  // and it is the difference between a diagnosis and a guess.
+  if (!env.SUBMISSIONS_TO) {
+    return json(503, {
+      error: 'No destination is configured. SUBMISSIONS_TO is missing from this Worker, '
+        + 'or the deploy has not picked it up yet.',
+    });
+  }
+  if (!env.SUBMISSIONS_FROM) {
+    return json(503, {
+      error: 'No sender is configured. SUBMISSIONS_FROM is missing from this Worker.',
+    });
   }
 
   let form: FormData;
