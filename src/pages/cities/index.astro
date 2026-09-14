@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import { PRACTICE_SLUGS } from '../../data/practices';
 
 // The Cities link in the nav went straight to New York, so there was no way to see what the
 // directory covers or to reach a second city once one exists. This is that page, and it is
@@ -9,7 +10,7 @@ import Icon from '../../components/Icon.astro';
 const firms = await getCollection('firms', f =>
   f.data.status !== 'sample' && f.data.status !== 'not_eligible');
 
-const PRACTICE_PAGES = new Set(['personal-injury']);
+const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
 
 const cities = [...new Map(firms.map(f => [f.data.market.city_slug, f.data.market])).entries()]
   .map(([slug, market]) => {
@@ -57,9 +58,16 @@ const description = 'Browse law firms by US city. Every ranking is built within 
         {cities.map((c, i) => (
           <a class={`city c${(i % 8) + 1}`} href={`/cities/${c.slug}/`}>
             <Icon name="sky_sm" />
+            {/* The state, not a skyline. Every card carried the same drawing, which told a
+                reader nothing they had not already read in the city's name. Two cities here
+                are in New York and the state decides whether we can check a licence at all. */}
+            <span class="state" data-state={c.market.state}>{c.market.state}</span>
             <div class="t">
-              <b>{c.market.city}, {c.market.state}</b>
+              <b>{c.market.city}</b>
               <span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}{c.certified > 0 && ` · ${c.certified} certified`}</span>
+              <span class="num">{c.practices.length === 1
+                ? c.practices[0][1]
+                : `${c.practices.length} practice areas`} · {c.offices} offices</span>
             </div>
           </a>
         ))}
