@@ -18,7 +18,7 @@
  */
 interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
-  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking';
+  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -129,5 +129,32 @@ const results = { bars: [120, 186, 96, 232, 150, 268, 110, 198, 140], checked: [
       <rect x="180" y="330" width="40" height="70" rx="8" /><rect x="232" y="358" width="40" height="42" rx="8" />
       <rect x="928" y="344" width="40" height="56" rx="8" /><rect x="980" y="366" width="40" height="34" rx="8" />
     </g>
+  </svg>
+)}
+
+{name === 'ladder' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* Two measuring rules of different length, each filled to the same fraction of itself, in
+        the same colour because the score is the same. Each is divided into ten of its own parts,
+        which is the article: a percentage is a percentage of whatever it sits on. The dashed
+        tail is the stretch a market publishes no source for, so there is nothing to measure
+        there and it leaves the scale rather than being scored as a zero. */}
+    {[{ y: 120, len: 880, missing: 0 }, { y: 258, len: 484, missing: 396 }].map(r => (
+      <g transform={`translate(160,${r.y})`}>
+        <rect width={r.len} height="54" rx="16" fill="rgba(255,255,255,.12)" />
+        <rect width={r.len * 0.69} height="54" rx="16" fill={VIOLET} opacity=".95" />
+        {r.missing > 0 && (
+          <rect x={r.len + 20} width={r.missing - 20} height="54" rx="16" fill="none"
+            stroke={MINT} stroke-width="2.5" stroke-dasharray="14 12" opacity=".7" />
+        )}
+        <g stroke="rgba(255,255,255,.30)" stroke-width="2" stroke-linecap="round">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => (
+            <line x1={(r.len / 10) * i} y1="-16" x2={(r.len / 10) * i} y2="-4" />
+          ))}
+        </g>
+        <line x1={r.len * 0.69} y1="-26" x2={r.len * 0.69} y2="80" stroke="#fff"
+          stroke-width="4" stroke-linecap="round" />
+      </g>
+    ))}
   </svg>
 )}

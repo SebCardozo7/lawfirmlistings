@@ -1,0 +1,358 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+/**
+ * The method piece for the score's denominator, which is the part of it nobody publishes.
+ *
+ * Deliberately not filtered to one state. Every other guide here is a New York study and says so
+ * in its filter; this one is about what happens when the directory crosses a state line, so it
+ * has to read all three markets or it cannot make its own argument.
+ *
+ * Every figure is computed from the firms collection at build time. The three fields this piece
+ * turns on are easy to confuse and mean different things, so they are named once here:
+ *
+ *   score.raw        points the firm earned
+ *   score.assessed   points of the scale we actually measured, earned or not
+ *   score.assessable points of the scale that exist in this firm's market at all
+ *
+ * score.total is round(100 * raw / assessed). It is a percentage of what was measured, not of a
+ * hundred, which is the whole subject of the article.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const scored = firms.filter(f => f.data.score);
+
+// The scoring engine's own vocabulary, copied from scripts/score.py rather than re-invented. A
+// sub-factor whose source carries one of these words was not scored. The second list is the
+// subset meaning the source does not exist where the firm practises, as opposed to meaning we
+// have not got to it yet, and that distinction is the article.
+const NOT_SCORED = ['pending', 'partial', 'no queryable source', 'unavailable',
+                    'screening only', 'incomplete', 'not yet', 'no roster published'];
+const ABSENT_IN_MARKET = ['no queryable source', 'unavailable', 'no roster published'];
+const hits = (source: string, words: string[]) =>
+  words.some(w => (source || '').toLowerCase().includes(w));
+
+type Sub = { code: string; label: string; pts: number; max: number; source: string };
+const subsOf = (f: (typeof scored)[number]): Sub[] =>
+  Object.values(f.data.score!.pillars).flatMap(p => p.subs);
+
+const stateNames = [...new Set(firms.map(f => f.data.market.state_name))].sort();
+
+// How much of the scale each firm was actually measured on. The spread across the directory is
+// the first thing a reader needs, because it is what makes two totals incomparable.
+const assessedList = scored.map(f => f.data.score!.assessed ?? 0);
+const minAssessed = Math.min(...assessedList);
+const maxAssessed = Math.max(...assessedList);
+
+// Firms whose market offers a shorter scale than a hundred points.
+const shortScale = scored.filter(f => (f.data.score!.assessable ?? 100) < 100);
+const shortScaleStates = [...new Set(shortScale.map(f => f.data.market.state_name))].sort();
+const absentPoints = shortScale.length
+  ? Math.max(...shortScale.map(f => 100 - (f.data.score!.assessable ?? 100)))
+  : 0;
+
+// Which component leaves the scale, found rather than named, so renaming a sub-factor or adding
+// a second absent one cannot leave this paragraph describing the old world.
+const absentTally = new Map<string, { label: string; max: number; n: number }>();
+for (const f of scored) {
+  for (const x of subsOf(f)) {
+    if (!hits(x.source, ABSENT_IN_MARKET)) continue;
+    const e = absentTally.get(x.code) ?? { label: x.label, max: x.max, n: 0 };
+    e.n += 1;
+    absentTally.set(x.code, e);
+  }
+}
+const absentFactor = [...absentTally.entries()].sort((a, b) => b[1].n - a[1].n)[0] ?? null;
+
+// The same tally for checks that are simply unfinished. These are ours, not a state's, and the
+// largest of them turns out to be larger than everything the state lines cost put together.
+const pendingTally = new Map<string, { label: string; max: number; n: number }>();
+for (const f of scored) {
+  for (const x of subsOf(f)) {
+    if (!hits(x.source, NOT_SCORED) || hits(x.source, ABSENT_IN_MARKET)) continue;
+    const e = pendingTally.get(x.code) ?? { label: x.label, max: x.max, n: 0 };
+    e.n += 1;
+    pendingTally.set(x.code, e);
+  }
+}
+const biggestHole = [...pendingTally.entries()].sort((a, b) => b[1].n - a[1].n)[0] ?? null;
+
+// What scoring the absent factor as a zero would have cost, which is the error the engine used
+// to make. raw over a denominator that includes the points the state publishes no source for.
+const counterfactual = shortScale.map(f => {
+  const sc = f.data.score!;
+  const alt = Math.round((100 * sc.raw!) / ((sc.assessed ?? 0) + (100 - (sc.assessable ?? 100))));
+  return sc.total - alt;
+});
+const cfMin = counterfactual.length ? Math.min(...counterfactual) : 0;
+const cfMax = counterfactual.length ? Math.max(...counterfactual) : 0;
+
+// Totals the engine declines to offer for comparison, because too little of the scale was read.
+const notComparable = scored.filter(f => f.data.score!.comparable === false);
+const fullAndComparable = scored.length - shortScale.length - notComparable.length;
+// The longest scale any market here offers, so the paragraph about the withheld totals can say
+// what those firms had available without typing a hundred into the prose.
+const fullScale = Math.max(...scored.map(f => f.data.score!.assessable ?? 100));
+
+// Gate availability. A gate in this list was not failed: there was nothing to run the check
+// against. Two quite different reasons produce it, which is the pivot of the piece.
+const GATE_ORDER = ['G1', 'G2', 'G3', 'G5', 'G6'];
+const GATE_LABEL: Record<string, string> = {
+  G1: 'Active licensure', G2: 'Clean public discipline', G3: 'Verified entity and office',
+  G5: 'Honest website baseline', G6: 'Minimum public footprint',
+};
+const gateBlocked = (code: string) =>
+  scored.filter(f => (f.data.score!.gates_unavailable ?? []).includes(code));
+const gateRows = GATE_ORDER.map(code => {
+  const blocked = gateBlocked(code).length;
+  return {
+    label: GATE_LABEL[code],
+    value: scored.length - blocked,
+    display: `${scored.length - blocked} of ${scored.length}`,
+    note: blocked ? `${blocked} with no source to check against` : 'Checkable everywhere',
+    emphasis: blocked > 0,
+  };
+});
+const withGateGap = scored.filter(f => (f.data.score!.gates_unavailable ?? []).length > 0);
+const gateGapInNY = withGateGap.filter(f => f.data.market.state === 'NY');
+const gateGapOutside = withGateGap.filter(f => f.data.market.state !== 'NY');
+
+// Coverage, which is assessed over assessable: the share of the scale that exists here which we
+// managed to read. The bands are the engine's own thresholds, so the chart shows where the rule
+// bites rather than an arbitrary shape.
+// The notes describe the band rather than naming a tier. An earlier draft labelled these
+// "certifiable" and put the certification floor at seventy percent; it is sixty, and the floor
+// is only one of three conditions, so the band notes say how much was read and the caption
+// states the thresholds it actually reads from the engine.
+const COVERAGE_BANDS = [
+  { label: 'Under half', note: 'total withheld', lo: 0, hi: 0.5, emphasis: true },
+  { label: '50 to 69%', note: 'thinly measured', lo: 0.5, hi: 0.7, emphasis: false },
+  { label: '70 to 84%', note: 'well measured', lo: 0.7, hi: 0.85, emphasis: false },
+  { label: '85% and up', note: 'nearly complete', lo: 0.85, hi: 1.01, emphasis: false },
+];
+const coverageColumns = COVERAGE_BANDS.map(b => ({
+  label: b.label,
+  note: b.note,
+  value: scored.filter(f => {
+    const c = f.data.score!.coverage ?? 0;
+    return c >= b.lo && c < b.hi;
+  }).length,
+  emphasis: b.emphasis,
+}));
+
+// The example the whole piece exists to make legible: firms that share a total and share almost
+// none of the evidence behind it. Found by taking the score that is held by more than one firm
+// with the widest gap in how much of the scale each was read on.
+const byTotal = new Map<number, typeof scored>();
+for (const f of scored) {
+  const t = f.data.score!.total;
+  byTotal.set(t, [...(byTotal.get(t) ?? []), f]);
+}
+let widest: { total: number; group: typeof scored; spread: number } | null = null;
+for (const [total, group] of byTotal) {
+  if (group.length < 2) continue;
+  const a = group.map(f => f.data.score!.assessed ?? 0);
+  const spread = Math.max(...a) - Math.min(...a);
+  if (!widest || spread > widest.spread) {
+    widest = {
+      total,
+      group: [...group].sort((x, y) => (x.data.score!.assessed ?? 0) - (y.data.score!.assessed ?? 0)),
+      spread,
+    };
+  }
+}
+const sameScoreRows = (widest?.group ?? []).map(f => ({
+  label: f.data.name,
+  href: `/firms/${f.data.slug}/`,
+  value: f.data.score!.assessed ?? 0,
+  display: `${f.data.score!.assessed} of ${f.data.score!.assessable}`,
+  note: `${f.data.market.city}, ${f.data.market.state}`,
+  emphasis: f.data.score!.comparable === false,
+}));
+const thinnest = widest?.group[0] ?? null;
+const thickest = widest?.group[widest.group.length - 1] ?? null;
+
+// A firm on the shorter scale, named as the example in the prose so the paragraph points at a
+// profile a reader can open rather than at a category.
+const shortExample = [...shortScale].sort(
+  (a, b) => b.data.score!.total - a.data.score!.total)[0] ?? null;
+
+const certified = firms.filter(f => f.data.status === 'certified');
+const certifiedStates = [...new Set(certified.map(f => f.data.market.state_name))].sort();
+
+// Why no firm outside New York is certified, taken from the records rather than asserted. The
+// highest total outside New York turns out to be one of the totals we withhold, which is the
+// article's own argument arriving where we did not plan to use it, so the paragraph says so.
+const outsideNY = [...scored.filter(f => f.data.market.state !== 'NY')]
+  .sort((a, b) => b.data.score!.total - a.data.score!.total);
+const bestOutside = outsideNY[0] ?? null;
+const nextOutside = outsideNY.find(f => f.data.score!.comparable !== false) ?? null;
+
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const pct = (x: number) => Math.round(x * 100);
+const covNY = median(scored.filter(f => f.data.market.state === 'NY').map(f => f.data.score!.coverage ?? 0));
+const covOutside = median(outsideNY.map(f => f.data.score!.coverage ?? 0));
+
+const computedOn = scored
+  .map(f => f.data.score!.computed_at)
+  .sort()
+  .at(-1) ?? null;
+const updated = computedOn
+  ? new Date(computedOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// States the finding rather than the subject, and carries no figure: a count in a title is
+// indexed once and moves every month, which is what check_meta.mjs rejects.
+const title = 'New Study: Two Firms Can Share a Score and Not Share the Evidence';
+const description = 'Our score is a share of what we could measure, and what can be measured changes by state and by firm. What it compares, and what it cannot.';
+---
+<Base title={title} description={description} nav="guides" image="/og/ladder.png" imageAlt="Two measuring rules of different lengths, each filled to the same proportion, the shorter one ending in a dashed section">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">What a score cannot compare</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · How the score is built</span>
+    <h1>{title}</h1>
+    <p class="lede">The LFL Certification Score is a percentage of what we could actually measure, not points out of a hundred. Across the {scored.length} firms in this directory, the amount of the scale we read runs from <b>{minAssessed} points</b> to <b>{maxAssessed}</b>. This is what that does to a comparison, and which comparisons we refuse to publish.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Computed {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="ladder" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What the score is a percentage of</a></li>
+      <li><a href="#scale">Where the scale is shorter</a></li>
+      <li><a href="#compare">What actually breaks a comparison</a></li>
+      <li><a href="#ours">The largest gap is ours</a></li>
+      <li><a href="#read">How to read a score here</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Computed across ${scored.length} firms in ${stateNames.length} states${updated ? `, ${updated}` : ''}.`}
+      items={[
+        `A score is a share of what was measured, so the same number can rest on very different evidence: ${widest ? `<b>${widest.group.length} firms score ${widest.total}</b>, one of them read on ${thinnest!.data.score!.assessed} points of the scale and another on ${thickest!.data.score!.assessed}` : 'the amount of scale read varies widely across the directory'}.`,
+        `<b>${shortScale.length} of ${scored.length} firms</b> are scored on a shorter scale, because ${shortScaleStates.join(' and ')} publish no attorney register we can query and ${absentPoints} points of the scale have nothing to measure against.`,
+        `<b>${notComparable.length} totals</b> are withheld from comparison entirely, because less than half of the available scale could be read for those firms.`,
+        biggestHole
+          ? `The biggest hole in the score is not a state line but our own: <b>${biggestHole[1].label} is unmeasured on ${biggestHole[1].n} of ${scored.length} firms</b>, which is ${biggestHole[1].max} points nobody has been scored on.`
+          : `Every sub-factor has been measured on every firm.`,
+        `<b>${certified.length} firms</b> are certified and all of them are in ${certifiedStates.join(' and ')}, which says as much about where we have finished measuring as about the firms.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own records at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What the score is a percentage of</h2>
+    <p>Most directories publish a rating and not its denominator. Ours has three numbers behind it, and a profile shows all three, because the first one on its own is close to meaningless.</p>
+    <p><b>The score is earned points divided by measured points, not by a hundred.</b> A firm's record carries what it earned, how much of the scale we actually read, and how much of the scale exists in its market at all.</p>
+    <p>Those last two come apart for two different reasons, and keeping them apart is the only reason this page can be honest. A check we have not run yet is our failure. A check that cannot be run where a firm practices is a fact about the state, and charging a firm for it publishes a false statement about a real business.</p>
+
+    <h2 id="scale">Where the scale is shorter</h2>
+    <p>Of the {scored.length} firms here, {shortScale.length} are measured against {100 - absentPoints} points rather than a hundred. {shortScaleStates.join(' and ')} publish no attorney register we can query, so {absentFactor ? `${absentFactor[1].label} (${absentFactor[1].max} points)` : 'part of pillar A'} has nothing to be a share of.</p>
+    <p>New York publishes its attorney registrations as open data, so a New York roster can be matched name by name. Maryland asks automated tools to stay out of its attorney search and we honor that, and Florida's directory refuses our requests. The result is not a Maryland firm scoring badly on licensure. It is a Maryland firm not being scored on it.</p>
+    {shortExample && (
+      <p>The correction is worth real points. Counting that absent factor as a zero instead of removing it would have cost the {shortScale.length} firms between {cfMin} and {cfMax} points each. <a href={`/firms/${shortExample.data.slug}/`}>{shortExample.data.name}</a>, the highest scoring of them, would read {shortExample.data.score!.total - counterfactual[shortScale.indexOf(shortExample)]} instead of {shortExample.data.score!.total}. <b>That is the difference between measuring a firm and measuring a state's records policy.</b></p>
+    )}
+    <p>The eligibility gates have the same problem and the same answer. A gate here has three states rather than two: passed, failed, or nothing to check it against.</p>
+    <BarChart
+      heading={`Firms for which each eligibility gate could actually be checked`}
+      max={scored.length}
+      rows={gateRows}
+      caption={`Out of ${scored.length} firms across ${stateNames.length} states. A highlighted row is a gate that is blocked for at least one firm. A blocked gate is not a failed gate: the check had no source to run against, so the firm is shown as under review rather than as not eligible.`}
+    />
+    <p>In total, {withGateGap.length} firms carry at least one gate nobody can check, and {gateGapOutside.length} of them are outside New York, for the reason above.</p>
+    <p><b>The other {gateGapInNY.length} are in New York, and their reason is the opposite one:</b> those firms publish no attorney roster at all, so there is no name to look up in a register that does exist. The register is open. There is simply nobody to check.</p>
+
+    <h2 id="compare">What actually breaks a comparison</h2>
+    <p>That New York case is the hint that the state line is not the real problem. What decides whether two totals can be set beside each other is coverage: how much of the scale available in a firm's market we managed to read.</p>
+    <ColumnChart
+      heading={`How much of the available scale we read, across ${scored.length} firms`}
+      columns={coverageColumns}
+      caption={`Coverage is measured points divided by the points that exist in that firm's market. Below half, the engine stops offering the total as a number to compare at all. Certification is stricter again: sixty percent of the available scale, half of each of pillars A, B and C, and a total that clears the tier threshold.`}
+      emphasisLabel="Total withheld from comparison"
+      quietLabel="Total published for comparison"
+    />
+    <p>Only {notComparable.length} firms fall under that line, and they are the interesting part: they sit in {notComparable.map(f => f.data.market.state_name).join(' and ')}. <b>Neither is on the shorter scale.</b> Both had the whole {fullScale} points available to them, and neither was read on more than {Math.max(...notComparable.map(f => f.data.score!.assessed ?? 0))} of them.</p>
+    {widest && (
+      <>
+        <p>The clearest way to see it is to take a score that more than one firm holds. In this directory, {widest.group.length} firms score {widest.total}.</p>
+        <BarChart
+          heading={`Points of the scale we measured, for the ${widest.group.length} firms that all score ${widest.total}`}
+          max={100}
+          rows={sameScoreRows}
+          caption={`Every one of these firms carries the same total. The bar is how much of the scale that total was computed from. The highlighted row is the firm whose total we withhold from comparison for that reason.`}
+        />
+        <p><a href={`/firms/${thickest!.data.slug}/`}>{thickest!.data.name}</a> earned that {widest.total} across {thickest!.data.score!.assessed} points of evidence. <a href={`/firms/${thinnest!.data.slug}/`}>{thinnest!.data.name}</a> earned the same {widest.total} across {thinnest!.data.score!.assessed}. The second number is not a worse score. It is barely a score at all, which is why the profile shows the evidence instead of offering the number.</p>
+      </>
+    )}
+    <StackBar
+      heading={`What limits the comparison, across all ${scored.length} firms`}
+      segments={[
+        { label: 'Full scale, total published for comparison', value: fullAndComparable },
+        { label: `Shorter scale, ${100 - absentPoints} points available in the market`, value: shortScale.length },
+        { label: 'Too little of the scale read, total withheld', value: notComparable.length },
+      ]}
+      unit="firms"
+      caption="The three groups do not overlap. Every firm on the shorter scale still clears the coverage line, and both withheld totals are firms with the full scale available to them."
+    />
+    <p>That is the finding, and it is not the one we expected to write. The shorter scale is real and it affects {shortScale.length} firms. It breaks no comparison at all. <b>Every firm on the shorter scale still clears the line, and every total we withhold belongs to a firm that had the whole scale available and was barely read.</b></p>
+
+    <h2 id="ours">The largest gap is ours</h2>
+    {biggestHole && (
+      <p>Once the state lines are accounted for, the largest missing piece of the score belongs to us. <b>{biggestHole[1].label} is unmeasured on {biggestHole[1].n} of the {scored.length} firms in the directory</b>, which is {biggestHole[1].max} points of the scale that most of these firms have never been scored on, in any state.</p>
+    )}
+    <p>It is not a source that does not exist. It is a measurement we ran out of budget for, recorded as pending rather than as a zero, which keeps it out of every denominator on the site. That is the right handling and it is not an excuse: a pending check is a gap in our work, and it counts against our coverage exactly as it should.</p>
+    <p>The same arithmetic explains something that would otherwise look like a verdict on two states. Of the firms in this directory, {certified.length} are certified, and every one of them is in {certifiedStates.join(' and ')}.</p>
+    <p><b>The shorter scale is not why.</b> {bestOutside && bestOutside.data.score!.next_tier && (
+      <>The highest total outside New York belongs to <a href={`/firms/${bestOutside.data.slug}/`}>{bestOutside.data.name}</a>, at {bestOutside.data.score!.total}, which is {bestOutside.data.score!.next_tier!.gap} {bestOutside.data.score!.next_tier!.gap === 1 ? 'point' : 'points'} short of the mark. It is also one of the totals we decline to publish for comparison, because it was computed from {bestOutside.data.score!.assessed} points of scale.{nextOutside && <> The highest total outside New York that we do publish is {nextOutside.data.score!.total}.</>}</>
+    )}</p>
+    <p>What separates the markets is not the length of the ladder, then, but how far up it we have got. The median New York firm has been read on {pct(covNY)}% of the scale available to it, against {pct(covOutside)}% for the median firm in the other two states. That is our backlog, not a finding about Maryland or Florida lawyers.</p>
+    <p>We publish the Baltimore and Lakeland pages anyway, with the coverage on every profile, because a thin measurement that says it is thin is more use than a confident one that is not. You can see both markets at <a href="/cities/baltimore-md/">Baltimore</a> and <a href="/cities/lakeland-fl/">Lakeland</a>.</p>
+
+    <h2 id="read">How to read a score here</h2>
+    <p>Three habits, which apply to any rated directory and not only to this one.</p>
+    <p><b>Read the denominator before the number.</b> Every profile here states how much of the scale was measured. A rating that does not tell you what it is a share of is asking to be taken on trust.</p>
+    <p>Compare inside a market, not across one. The ranked pages exist for that: <a href="/practice-areas/personal-injury/">personal injury firms</a> and <a href="/practice-areas/workers-compensation/">workers' compensation firms</a> are ordered within a city, against the firms someone could actually hire instead.</p>
+    <p>Treat a low score and a thin score as different things. A firm we have barely measured is not a bad firm, and the profile will say which of the two it is. <a href="/list-your-firm/">A firm that thinks we have measured it wrongly</a> can see every sub-factor and the source behind it.</p>
+    <p>The rest of this section takes the same approach to individual pillars. We counted <a href="/guides/what-a-case-results-page-proves/">what a case results page actually proves</a> for pillar B, <a href="/guides/google-reviews-new-york-injury-firms/">what a Google star rating is worth</a> for pillar C, and <a href="/guides/core-web-vitals-new-york-injury-firms/">what a speed test measures</a> for pillar D. <a href="/methodology/">The full methodology</a> sets out every gate and sub-factor, and every profile links back to the source for each one.</p>
+    <p class="muted" style="font-size:.86rem">Figures on this page come from the score records committed with each firm: earned points, measured points, available points and coverage, plus the eligibility gates. Firms marked as samples or not eligible are excluded throughout.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the evidence</h4>
+      <p>Every profile shows its sub-scores, its coverage and the source behind each measurement.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-a-case-results-page-proves/">What a case results page proves</a></li>
+        <li><a href="/guides/core-web-vitals-new-york-injury-firms/">Core Web Vitals, measured</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
