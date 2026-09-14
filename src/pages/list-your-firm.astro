@@ -20,11 +20,11 @@ import { REQUIREMENTS, PRODUCTS, STEPS } from '../data/listing';
  * with no attorney page that this is the first thing to fix. That is true whether or not they
  * ever write to us.
  *
- * And it has to collect a real enquiry without a backend. The deploy serves static files, so the
- * form builds a structured message and hands it to the visitor's own mail client. Nothing is
- * posted anywhere, no third party receives a firm's details, and the privacy policy stays true
- * with one sentence added rather than rewritten. When volume justifies a real endpoint this
- * becomes a fetch and the rest of the page does not change.
+ * And it has to collect a real enquiry. It used to do that by handing a pre-written message to
+ * the visitor's own mail client, which asks somebody to have a mail program, to understand what
+ * just happened in it, and to press send in a second application. It posts to
+ * /api/list-your-firm now, which worker/index.ts answers and Cloudflare's own email binding
+ * delivers. No third party receives a firm's details and there is no vendor in the path.
  */
 
 const title = 'List your firm on Law Firm Listings';
@@ -125,9 +125,9 @@ const subject = 'List your firm';
     <span class="eyebrow">Get in touch</span>
     <h2 style="margin:14px 0 10px">Tell us about your firm</h2>
     <p class="muted" style="margin-bottom:28px">
-      Three short steps. Nothing is sent anywhere when you fill this in: the last step opens a
-      message in your own mail program with everything already written out, and you send it, or
-      not. We never see a partly finished form.
+      Three short steps, and the last one sends it. Nothing leaves this page until you press
+      send, so we never see a partly finished form, and nothing you write here is shared with
+      anybody.
     </p>
 
     {SITE.email ? (
@@ -177,14 +177,22 @@ const subject = 'List your firm';
         {/* Rendered without `hidden`, and the script hides what it needs on load. The other way
             round, a visitor without JavaScript saw step one, two dead buttons and no way to reach
             the rest of the form. */}
+        {/* Visible to a bot filling every input it finds and to nobody else. Not `hidden`,
+            because a form control that is hidden is also skipped by some of the things that
+            fill forms, which defeats the point. */}
+        <div class="hp" aria-hidden="true">
+          <label>Company<input name="company" type="text" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
         <div class="form-actions">
           <button type="button" class="btn btn--ghost" data-back>Back</button>
           <button type="button" class="btn btn--primary" data-next>Continue</button>
-          <button type="submit" class="btn btn--primary" data-send>Open the message</button>
+          <button type="submit" class="btn btn--primary" data-send>Send it</button>
         </div>
+        <p class="form-status" data-status role="status" hidden></p>
         <p class="muted form-foot">
-          Goes to <a href={mailto(subject)}>{SITE.email}</a>. If your browser does not open a mail
-          program, write to that address directly and say what you would have said here.
+          It goes straight to us, and nothing about it is shared. If you would rather write
+          yourself, <a href={mailto(subject)}>{SITE.email}</a> reaches the same inbox.
         </p>
       </form>
     ) : (
@@ -317,33 +325,43 @@ const subject = 'List your firm';
     next.addEventListener('click', () => { if (validate(at)) show(at + 1); });
     back.addEventListener('click', () => show(at - 1));
 
-    form.addEventListener('submit', e => {
+    const status = form.querySelector<HTMLParagraphElement>('[data-status]')!;
+    const say = (text: string, kind: 'ok' | 'bad' | 'busy') => {
+      status.textContent = text;
+      status.className = `form-status is-${kind}`;
+      status.hidden = false;
+    };
+
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       for (let i = 0; i < steps.length; i++) {
         if (!validate(i)) { show(i); return; }
       }
-      // Labels rather than field names in the body, so the message reads as a letter somebody
-      // wrote and not as a form dump.
-      const lines: string[] = [];
-      steps.forEach(step => {
-        lines.push('== ' + (step.dataset.title || step.querySelector('legend')?.textContent || ''));
-        for (const el of step.querySelectorAll<HTMLInputElement>('input,select,textarea')) {
-          // data-short wins where a field needs a sentence on screen and a clause in a message.
-          const label = el.dataset.short
-            || (el.type === 'checkbox'
-              ? el.closest('label')?.querySelector('span')?.textContent?.trim()
-              : step.querySelector(`label[for="${el.id}"]`)?.childNodes[0]?.textContent?.trim());
-          const value = el.type === 'checkbox' ? (el.checked ? 'Confirmed' : 'No') : el.value.trim();
-          if (value) lines.push(`${label}: ${value}`);
+
+      send.disabled = true;
+      say('Sending.', 'busy');
+      try {
+        const res = await fetch('/api/list-your-firm', {
+          method: 'POST',
+          body: new FormData(form),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          // The form is replaced rather than cleared. A firm that has just sent something wants
+          // to know it arrived, not to be looking at the empty boxes it filled in.
+          form.innerHTML =
+            '<div class="callout"><b>That reached us.</b> We read every one, and we answer the '
+            + 'ones we can act on within a few days. Nothing about your firm changes on the site '
+            + 'until somebody here has checked it.</div>';
+          return;
         }
-        lines.push('');
-      });
-      const firm = (form.querySelector<HTMLInputElement>('[name="firm"]')?.value || '').trim();
-      const subject = firm ? `List your firm: ${firm}` : 'List your firm';
-      const href = `mailto:${form.dataset.to}`
-        + `?subject=${encodeURIComponent(subject)}`
-        + `&body=${encodeURIComponent(lines.join('\n'))}`;
-      window.location.href = href;
+        // The address below the form is the fallback, and it is on the page already.
+        say((data && data.error) || 'That did not send. Please write to us instead.', 'bad');
+      } catch {
+        say('That did not send, which is usually a connection. Please try again, or write to us.',
+            'bad');
+      }
+      send.disabled = false;
     });
 
     show(0);

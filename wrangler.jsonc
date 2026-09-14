@@ -2,9 +2,21 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "lawfirmlistings",
   "compatibility_date": "2026-09-01",
+  // The site is static and one route is not: worker/index.ts answers POST /api/list-your-firm
+  // and hands everything else to the assets binding, which keeps the 404 page and the
+  // trailing-slash behaviour the site was already built for.
+  "main": "worker/index.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
-  }
+  },
+  // Cloudflare's own email sending. No API key, no third-party account: the binding may only
+  // deliver to a destination address verified in this Cloudflare account, which is the whole
+  // security model. The address itself is the SUBMISSIONS_TO secret and is not in this file,
+  // because this repository is public.
+  "send_email": [
+    { "name": "EMAIL" }
+  ]
 }
