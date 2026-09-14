@@ -159,6 +159,59 @@ Rules for the next one: pick the form from the data's job before touching colour
 figure computed, and look at the rendered chart at 390px before shipping it. The three components
 already handle the mobile reflow; a chart with more than about eight rows is a table.
 
+## House format, set 2026-09-14
+
+- **Headlines are set in Title Case**, with the principal words capitalised: "New Study: Office
+  Count Matters More Than Star Rating for Injury Firms". Sentence case read as a note to a
+  colleague rather than as a published piece.
+- **Links in the body of a guide are underlined without waiting for a hover**, internal and
+  external alike, so a reader scanning the page can see where it will take them. Chart row labels
+  are the exception, because underlining a column of them turns a figure into a list of links.
+- **Paragraphs run one to three sentences.** Every published guide is now under four sentences a
+  paragraph, averaging around thirty-five words. A long paragraph is nearly always two ideas that
+  have not been separated yet.
+- **Bold carries the finding, not the topic.** Roughly one bolded sentence per section, on the
+  line a reader would quote. Bold on every other sentence is the same as no bold at all.
+
+## Editorial standard, after the Ahrefs piece on AI slop
+
+The owner sent through "How We Use AI for Every Article Without Making AI Slop" (Ahrefs, Si Quan
+Ong, reviewed by Ryan Law) as the standard for this section. What it asks for, and where we stand:
+
+> AI slop is content published without enough human understanding, judgement, evidence, or
+> original contribution to justify the reader's attention. In short, slop transfers effort from
+> the creator to the reader.
+
+Their four gates, which are worth running before a guide is written rather than after:
+
+1. **Idea gate.** Do we have something useful to add, or would this piece repeat what already
+   ranks? Their phrasing for it is *information gain*: what can we add that is not already sitting
+   in the search results. For this section the answer is always the same and it is a real one: we
+   measure every firm in the directory, and nobody else has that. A guide that could have been
+   written by reading the law is not ours to write.
+2. **Outline gate.** Does every section serve the reader and the promise in the headline?
+3. **Evidence gate.** Which claims need a source, and what still needs measuring? Our version is
+   stricter than theirs by necessity: a figure that cannot be computed from the committed records
+   does not go in the guide.
+4. **Draft gate.** Has anything smuggled in certainty, filler, or an example we did not earn? This
+   is the one to watch here: the temptation is a confident sentence about firms in general when
+   what we have is a count of fifty-nine of them.
+
+Two of their points land directly on how this repository already works, and are worth keeping:
+
+- **Spend the time saved on better content, not more of it.** They refresh their datasets monthly
+  through tooling rather than publishing more articles; `docs/monthly-refresh.md` is the same
+  move, and it is why a guide here recomputes itself instead of being rewritten.
+- **Someone has to own the result.** "A human in the loop means very little if the human only
+  rubber-stamps the output. They need the knowledge, authority, and willingness to say no." That
+  is what the pull request is for, and it is why nothing in this section is merged by the run that
+  wrote it.
+
+One caution from the same piece, aimed at a rule this repo already has: "Remove every em dash and
+banned phrase and congratulations: you may now have slop with cleaner punctuation." The no-em-dash
+rule is a house convention, not a quality bar, and passing `check_meta.mjs` is not evidence that a
+guide was worth publishing.
+
 ## Corrections, 2026-09-14
 
 Three published guides were counting the wrong firms. `core-web-vitals-...`, `google-reviews-...`

@@ -469,6 +469,21 @@ button,input,select{font:inherit;color:inherit}
 
 /* Prose */
 .prose{font-size:1.1rem;line-height:1.7;color:var(--ink-soft)}
+/* Links in an article are underlined, always, without waiting for a hover. A reader scanning a
+   page should be able to see where it will take them, and the colour alone does not carry that
+   for everyone. The underline sits low and thin so a paragraph with four links in it still reads
+   as a paragraph. Navigation elsewhere on the site keeps the quieter treatment: this is about
+   the body of a piece, where a link is a citation rather than a menu. */
+.prose a,.article-aside .panel a:not(.btn){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--link) 45%,transparent)}
+.prose a:hover,.article-aside .panel a:not(.btn):hover{text-decoration-color:var(--link)}
+/* A chart is a figure, not a sentence: its row labels are links to profiles and underlining a
+   column of them turns the chart into a list of links. They underline on hover like the rest of
+   the site, and the caption says where they go. */
+.prose .chart a{text-decoration:none}
+.prose .chart a:hover{text-decoration:underline;text-underline-offset:3px}
+/* Bold inside a paragraph is the article's own emphasis and should read as the ink of the piece,
+   not as a heading dropped into the middle of it. */
+.prose b,.prose strong{color:var(--ink);font-weight:600}
 .prose>*+*{margin-top:1.35em}
 .prose h2{font-size:1.9rem;margin-top:2.4em}
 .prose h3{font-size:1.35rem;margin-top:1.8em}

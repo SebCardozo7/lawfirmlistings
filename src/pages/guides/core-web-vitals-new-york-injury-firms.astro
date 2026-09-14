@@ -66,7 +66,7 @@ const updated = measuredOn
 
 // Says the finding, not the topic. No count in it: check_meta rejects a figure in a title, and a
 // pass rate that moves every month should not be the thing Google has indexed.
-const title = "New study: almost every New York injury firm fails Google's speed test";
+const title = "New Study: Almost Every New York Injury Firm Fails Google's Speed Test";
 const description = 'We ran PageSpeed Insights against every New York injury firm in this directory. Almost all fail Core Web Vitals. What it costs them, and what fixes it.';
 ---
 <Base title={title} description={description} nav="guides" image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">
@@ -120,14 +120,22 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
       caption="Out of 100, measured on mobile. A highlighted bar is a firm that passes all three Core Web Vitals, which is not the same as scoring well: the note under each name says which it is."
     />
     <p>The spread is wide. {best[0] && <><a href={`/firms/${best[0].data.slug}/`}>{best[0].data.name}</a> scores {best[0].data.digital.psi!.value.performance}</>}{worst[0] && <>, while <a href={`/firms/${worst[0].data.slug}/`}>{worst[0].data.name}</a> scores {worst[0].data.digital.psi!.value.performance}</>}. These are firms competing for the same clients on the same search terms.</p>
-    <p>Two other things turned up while we were looking. {noSchema.length > 0 && <>{noSchema.length === 1 ? 'One firm publishes' : `${noSchema.length} firms publish`} no structured data at all, not a line of JSON-LD, which costs a point and makes the site harder for search engines and AI assistants to read.</>} And of the {attorneyTotal} attorney bios we have collected from firm websites, {withBarNumber === 0 ? 'not one' : withBarNumber} publishes a bar registration number, which is the single easiest way for a firm to make its own attorney roster verifiable.</p>
+    <p>Two other things turned up while we were looking.</p>
+    {noSchema.length > 0 && (
+      <p>{noSchema.length === 1 ? 'One firm publishes' : `${noSchema.length} firms publish`} no structured data at all, not a line of JSON-LD. That costs a point, and it makes the site harder for search engines and AI assistants to read.</p>
+    )}
+    <p>And of the {attorneyTotal} attorney bios we have collected from firm websites, {withBarNumber === 0 ? 'not one' : withBarNumber} publishes a bar registration number. <b>That is the single easiest way for a firm to make its own attorney roster verifiable.</b></p>
 
     <h2 id="why">Why the score counts it</h2>
-    <p>Website performance sits in pillar D of the LFL Certification Score, worth 25 of 100, and Core Web Vitals is the first thing in it. The reasoning is not that a fast site makes a better lawyer. It is that a firm which maintains its own site is a firm that is reachable, current and accountable. It is the same reason the pillar rewards published fee terms, attorney credentials and a working contact method.</p>
-    <p>Pillar D is deliberately capped. It can lift a firm's tier but it cannot create one: certification also requires professional standing, verified outcomes and client experience to reach 40 of their combined 65. A firm with an excellent website and thin verified results plateaus, by design. <a href="/methodology/">The full methodology</a> sets out every sub-factor and the evidence behind it.</p>
+    <p>Website performance sits in pillar D of the LFL Certification Score, worth 25 of 100, and Core Web Vitals is the first thing in it.</p>
+    <p><b>The reasoning is not that a fast site makes a better lawyer.</b> It is that a firm which maintains its own site is a firm that is reachable, current and accountable. It is the same reason the pillar rewards published fee terms, attorney credentials and a working contact method.</p>
+    <p>Pillar D is also deliberately capped. It can lift a firm's tier but it cannot create one: certification requires professional standing, verified outcomes and client experience to reach 40 of their combined 65.</p>
+    <p>A firm with an excellent website and thin verified results plateaus, by design. <a href="/methodology/">The full methodology</a> sets out every sub-factor and the evidence behind it.</p>
 
     <h2 id="fix">What a firm can do</h2>
-    <p>Of everything the score measures, this is the part a firm controls outright and can change in weeks rather than years. Compressing hero images, deferring third-party scripts and serving fonts locally will move all three metrics. Chat widgets and tag managers are the usual culprits behind a long blocking time. Publishing bar admission numbers on attorney bios is a text change.</p>
+    <p><b>Of everything the score measures, this is the part a firm controls outright</b>, and it changes in weeks rather than years.</p>
+    <p>Compressing hero images, deferring third-party scripts and serving fonts locally will move all three metrics. Chat widgets and tag managers are the usual culprits behind a long blocking time.</p>
+    <p>Publishing bar admission numbers on attorney bios is a text change.</p>
     <p>Every firm can see its own sub-scores and the evidence behind each one on its profile. If a measurement looks wrong, the profile links to the source we used.</p>
     <p class="muted" style="font-size:.86rem">Measurements come from the Google PageSpeed Insights API. A site we cannot measure keeps that sub-factor pending rather than receiving an estimated score.</p>
   </div>

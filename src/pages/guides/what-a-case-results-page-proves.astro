@@ -120,7 +120,7 @@ const updated = readDates.length
 // data shows: an amount with no court beside it cannot be looked up by anyone, and most of these
 // pages carry the amount and not the court. No figure in it, because check_meta rejects a count
 // in a title and it is right to: a title is indexed once and a count moves every month.
-const title = 'New study: the court a firm names matters more than the number beside it';
+const title = 'New Study: The Court a Firm Names Matters More Than the Number Beside It';
 const description = 'We read the case results page of every firm we list and counted what is on it: what those pages show, what they leave out, and why we repeat no amounts.';
 ---
 <Base title={title} description={description} nav="guides" image="/og/results.png" imageAlt="Bars standing for the case results firms publish, three of them marked as checkable, beside a verification seal left open">
@@ -158,8 +158,10 @@ const description = 'We read the case results page of every firm we list and cou
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from what each firm publishes on its own website, so it changes when the data does. It describes what firms say about their results, not what their results were. Nothing here is legal information or advice.</div>
 
     <h2 id="what">What we counted</h2>
-    <p>A case results page is a firm's own account of its own work. There is nothing wrong with that, and a firm with a long record should say so. The question is what a reader can do with the page, and the only way to answer it is to read every one of them and count what is actually there.</p>
-    <p>We fetched the results page of each of the {firms.length} firms in the directory, honoring robots.txt, and recorded five things: how many results the page lists, what kinds of case they are attributed to, whether any court or county is named, whether the page carries a prior-results disclaimer, and whether we could read the page at all. That last one matters more than it sounds.</p>
+    <p>A case results page is a firm's own account of its own work. There is nothing wrong with that, and a firm with a long record should say so.</p>
+    <p><b>The question is what a reader can actually do with the page.</b> The only way to answer it is to read every one of them and count what is on it.</p>
+    <p>So we fetched the results page of each of the {firms.length} firms in the directory, honoring robots.txt, and recorded five things: how many results the page lists, what kinds of case they are attributed to, whether any court or county is named, whether the page carries a prior-results disclaimer, and whether we could read the page at all.</p>
+    <p>That last one matters more than it sounds.</p>
     <StackBar
       heading={`What the results page of each of the ${firms.length} firms gave us`}
       unit="firms"
@@ -171,8 +173,9 @@ const description = 'We read the case results page of every firm we list and cou
       ]}
       caption="One bar, every firm in the directory. Read dark to light: the darkest segment is the firms whose page told us something, the lightest is our own unfinished work."
     />
-    <p>We treat the {unreadable.length === 1 ? 'page' : `${unreadable.length} pages`} we could not read as a limit on our crawler rather than as a finding about the {unreadable.length === 1 ? 'firm' : 'firms'}.{' '}{blocked && <>{blocked.data.name}'s page, for instance, answers us with a refusal: our note on that record reads "{rp(blocked)!.why}". <a href={`/firms/${blocked.data.slug}/`}>Its profile</a> leaves pillar B unscored rather than scoring it zero</>}{blocked && '. '}That is the rule everywhere on this site: a page we cannot read leaves the sub-factor out of the denominator, because a firm must not lose points to the reach of our own crawl. {bPending} {bPending === 1 ? 'firm has' : 'firms have'} pillar B unscored for that reason.</p>
-    <p>The {silent.length} firms with a readable page and nothing countable on it are a different case, and a real finding. They have built the page, linked it in the navigation, and put no result on it that a reader or a search engine receives.</p>
+    <p>We treat the {unreadable.length === 1 ? 'page' : `${unreadable.length} pages`} we could not read as a limit on our crawler rather than as a finding about the {unreadable.length === 1 ? 'firm' : 'firms'}.{' '}{blocked && <>{blocked.data.name}'s page, for instance, answers us with a refusal: our note on that record reads "{rp(blocked)!.why}". <a href={`/firms/${blocked.data.slug}/`}>Its profile</a> leaves pillar B unscored rather than scoring it zero.</>}</p>
+    <p><b>A page we cannot read leaves the sub-factor out of the denominator</b>, because a firm must not lose points to the reach of our own crawl. That is the rule everywhere on this site. {bPending} {bPending === 1 ? 'firm has' : 'firms have'} pillar B unscored for that reason.</p>
+    <p>The {silent.length} firms with a readable page and nothing countable on it are a different case, and a real finding. <b>They have built the page, linked it in the navigation, and put no result on it that a reader or a search engine receives.</b></p>
 
     <h2 id="found">What the pages carry</h2>
     <p>Across the {publishers.length} firms that do publish, the pages hold {totalResults.toLocaleString('en-US')} results between them. The median firm publishes {medianCount}. {most && <><a href={`/firms/${most.data.slug}/`}>{most.data.name}</a> publishes {rp(most)!.count}, the most of anyone here.</>}</p>
@@ -195,7 +198,9 @@ const description = 'We read the case results page of every firm we list and cou
       ]}
       caption="Each bar is the share of publishing firms whose page carries that thing. Case types are close to universal; a court or county is not."
     />
-    <p>Case types are close to universal, and they are the most useful thing on the page: a firm whose results are all rear-end collisions has told you very little about a birth injury case. Across these pages the case types named by the most firms are {topTypesList}. Venue is where it thins out. {withVenue.length} of the {publishers.length} name a court or a county somewhere on the page, and even there the reference usually sits beside the page as a whole rather than beside a particular figure. A settlement with no court, no year and no case number cannot be looked up by anyone, including us.</p>
+    <p>Case types are close to universal, and they are the most useful thing on the page. A firm whose results are all rear-end collisions has told you very little about a birth injury case. Across these pages, the types named by the most firms are {topTypesList}.</p>
+    <p>Venue is where it thins out. {withVenue.length} of the {publishers.length} name a court or a county anywhere on the page, and even then the reference usually sits beside the page as a whole rather than beside a particular figure.</p>
+    <p><b>A settlement with no court, no year and no case number cannot be looked up by anyone, including us.</b></p>
     <p>Disclaimers split the set nearly in half: {withDisclaimer.length} pages carry one, {noDisclaimer.length} do not. New York's attorney advertising rules effectively require the line on a page that advertises past results, and most of these firms are in New York.</p>
     <div class="table-wrap">
       <table>
@@ -215,16 +220,22 @@ const description = 'We read the case results page of every firm we list and cou
     <p>The states are not evenly covered, so read that table as a description of this directory rather than of any state's bar. Most of what we have measured so far is <a href="/cities/new-york-ny/personal-injury/">New York injury firms</a>, and the other markets are early.</p>
 
     <h2 id="amounts">Why this page prints no figures</h2>
-    <p>We hold {amountsCount.toLocaleString('en-US')} dollar figures taken off these pages, and we publish none of them. Not on this page, not on the profiles, not in the rankings. The reason is that we have verified {verifiedResults.length === 0 ? 'none' : verifiedResults.length} of them.</p>
-    <p>Verifying a published result means matching it to a docket or to documentation: the court, the case number, the date, the disposition. Our records have fields for exactly that, and {resultEntries.length === 0 ? 'not one firm in the directory has a result in them yet' : `${resultEntries.length} results are in them so far`}. Until a result is in that state, repeating the number would make us a louder version of the firm's own marketing, with the directory's name on it.</p>
-    <p>There is a practical reason too. Reading figures off a page mechanically is unreliable: {billionScale > 0 && <>{billionScale === 1 ? 'one of the figures' : `${billionScale} of the figures`} we extracted {billionScale === 1 ? 'is' : 'are'} in the billions, which is far likelier to be two numbers welded together, or a lifetime total sitting next to a single case, than a recovery of that size. </>}A count of what is on a page survives that kind of error. A dollar amount does not.</p>
+    <p>We hold {amountsCount.toLocaleString('en-US')} dollar figures taken off these pages. <b>We publish none of them.</b> Not on this page, not on the profiles, not in the rankings.</p>
+    <p>The reason is that we have verified {verifiedResults.length === 0 ? 'none' : verifiedResults.length} of them.</p>
+    <p>Verifying a published result means matching it to a docket or to documentation: the court, the case number, the date, the disposition. Our records have fields for exactly that, and {resultEntries.length === 0 ? 'not one firm in the directory has a result in them yet' : `${resultEntries.length} results are in them so far`}.</p>
+    <p>Until a result is in that state, repeating the number would make us a louder version of the firm's own marketing, with the directory's name on it.</p>
+    <p>There is a practical reason too. Reading figures off a page mechanically is unreliable.{billionScale > 0 && <> {billionScale === 1 ? 'One of the figures' : `${billionScale} of the figures`} we extracted {billionScale === 1 ? 'is' : 'are'} in the billions, which is far likelier to be two numbers welded together, or a lifetime total sitting next to a single case, than a recovery of that size.</>}</p>
+    <p>A count of what is on a page survives that kind of error. <b>A dollar amount does not.</b></p>
     <div class="callout"><b>This is not an accusation.</b> Nothing here says a published figure is false, and we have no reason to doubt any particular one. Firms are subject to advertising rules about what they claim. The claim is narrower and it is about us: we cannot confirm them, so we do not repeat them, and neither should any directory that has not done the checking.</div>
     <p>A firm that wants its results on this site with the amounts attached can <a href="/list-your-firm/">claim its profile</a> and submit them with the documentation. That is the only route, it is free, and it is the same route for everyone.</p>
 
     <h2 id="score">What our own pillar B measures</h2>
-    <p>Pillar B of the <a href="/methodology/">LFL Certification Score</a> is worth {bMax} of 100 and it is named for verified outcomes. It does not measure them. It measures what a firm publishes about its outcomes, in three sub-factors: how many results are on the page, how specific they are, and whether the page carries a disclosure. We say so on the methodology page, and it is worth saying plainly here too, because the pillar's name promises more than the pillar delivers.</p>
-    <p>The sharpest edge of that is the first sub-factor. It pays its top band at {B1_TOP_BAND} published results, so the {topBand.length} firms at or above that number earn the same points, whether they publish {B1_TOP_BAND} results or {most ? rp(most)!.count : B1_TOP_BAND}. Publishing more unverified figures past that point earns nothing, which is deliberate. But it does mean a firm that posts many unverifiable figures scores above a firm that posts a handful it could document, and that is the wrong way around.</p>
-    <p>It shows up in the totals. The {publishers.length} firms that publish results average {avgPublishers} out of 100. The {nonPublishers.length} that do not average {avgNonPublishers}. Some of that gap is pillar B directly, by construction: {bZero} firms score zero in it. The rest is probably the same thing that produces a results page in the first place, which is a firm large enough to maintain its own website, so read the gap as an association and not as a measurement of lawyering.</p>
+    <p>Pillar B of the <a href="/methodology/">LFL Certification Score</a> is worth {bMax} of 100, and it is named for verified outcomes. <b>It does not measure them.</b></p>
+    <p>It measures what a firm publishes about its outcomes, in three sub-factors: how many results are on the page, how specific they are, and whether the page carries a disclosure. We say so on the methodology page, and it is worth saying plainly here too, because the pillar's name promises more than the pillar delivers.</p>
+    <p>The sharpest edge of that is the first sub-factor. It pays its top band at {B1_TOP_BAND} published results, so the {topBand.length} firms at or above that number earn the same points, whether they publish {B1_TOP_BAND} results or {most ? rp(most)!.count : B1_TOP_BAND}.</p>
+    <p>Publishing more unverified figures past that point earns nothing, which is deliberate. <b>But it does mean a firm that posts many unverifiable figures scores above a firm that posts a handful it could document, and that is the wrong way around.</b></p>
+    <p>It shows up in the totals. The {publishers.length} firms that publish results average {avgPublishers} out of 100. The {nonPublishers.length} that do not average {avgNonPublishers}.</p>
+    <p>Some of that gap is pillar B directly, by construction: {bZero} firms score zero in it. The rest is probably the same thing that produces a results page in the first place, which is a firm large enough to maintain its own website. <b>Read the gap as an association, not as a measurement of lawyering.</b></p>
     <p>The honest summary is that pillar B currently rewards disclosure and penalizes silence, and that is a defensible thing for {bMax} points out of a hundred to do. It is not the same as knowing who wins. Verified results would need docket-by-docket reading, and where we have done none, the profile says so rather than implying otherwise.</p>
 
     <h2 id="read">Reading a results page yourself</h2>
