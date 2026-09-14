@@ -133,13 +133,18 @@ const subject = 'List your firm';
     {SITE.email ? (
       <form id="lyf" novalidate data-to={SITE.email}>
         <ol class="steps-bar" aria-hidden="true">
-          {STEPS.map((s, i) => <li data-step={i} class={i === 0 ? 'is-on' : ''}>{s.title}</li>)}
+          {STEPS.map((s, i) => (
+            <li data-step={i} class={i === 0 ? 'is-on' : ''}>
+              <span class="n">{i + 1}</span>
+              <span class="t">{s.title}</span>
+            </li>
+          ))}
         </ol>
 
         {STEPS.map((s, i) => (
           <fieldset class="form-step" data-step={i}>
             <legend>{s.title}</legend>
-            <p class="muted">{s.intro}</p>
+            <p class="step-intro">{s.intro}</p>
             {s.fields.map(f => (
               <div class={`field ${f.type === 'checkbox' ? 'field--check' : ''}`}>
                 {f.type === 'checkbox' ? (
@@ -246,27 +251,114 @@ const subject = 'List your firm';
   .product li :global(svg) { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 3px; }
   .excluded { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .88rem; color: var(--muted); line-height: 1.6; }
 
-  .steps-bar { display: flex; gap: 8px; list-style: none; padding: 0; margin: 0 0 26px; flex-wrap: wrap; }
-  .steps-bar li { font-size: .82rem; padding: 6px 12px; border-radius: 999px; background: var(--tint); color: var(--muted); }
-  .steps-bar li.is-on { background: var(--ink); color: var(--paper); }
+  /* The form was a column of grey boxes on a grey page, and it is the one thing on this page a
+     firm is meant to do. It sits on its own surface now, with the site's gradient along the top
+     edge, and the step it is on is the only coloured thing in view. */
+  #lyf {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 34px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -40px rgba(10, 10, 12, .5);
+  }
+  #lyf::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--aurora);
+  }
+
+  /* A progress line rather than three pills. The numbers say how many steps there are, which
+     three words in a row did not, and a finished step is filled rather than merely not current. */
+  .steps-bar {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 30px;
+    gap: 0;
+  }
+  .steps-bar li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex: 1 1 0;
+    font-size: .84rem;
+    color: var(--muted);
+    position: relative;
+    min-width: 0;
+  }
+  .steps-bar li + li::before {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--line-2);
+    margin: 0 12px 0 4px;
+  }
+  .steps-bar .n {
+    flex: none;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: .8rem;
+    font-weight: 600;
+    background: var(--tint);
+    color: var(--muted);
+    border: 1px solid var(--line-2);
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .steps-bar .t { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .steps-bar li.is-on { color: var(--ink); font-weight: 600; }
+  .steps-bar li.is-on .n { background: var(--aurora); color: #fff; border-color: transparent; }
+  .steps-bar li.is-done .n { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .steps-bar li.is-done { color: var(--ink); }
+
   .form-step { border: 0; padding: 0; margin: 0; }
-  .form-step legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  .form-step > .muted { margin: 0 0 22px; }
+  .form-step legend { font-size: 1.24rem; font-weight: 600; color: var(--ink); letter-spacing: -.02em; padding: 0; }
+  .step-intro { margin: 10px 0 24px; color: var(--muted); font-size: .95rem; line-height: 1.6; }
+
   .field { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
   .field label { font-weight: 600; font-size: .92rem; }
   .field .opt { font-weight: 400; color: var(--muted); margin-left: 8px; font-size: .85rem; }
-  .field input, .field select, .field textarea { font: inherit; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); width: 100%; }
-  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .field input, .field select, .field textarea {
+    font: inherit;
+    padding: 12px 14px;
+    border: 1px solid var(--line-2);
+    border-radius: 11px;
+    background: var(--ground);
+    color: var(--ink);
+    width: 100%;
+    transition: border-color .15s, box-shadow .15s, background .15s;
+  }
+  /* The focus ring is the brand's violet rather than a black outline, because this is the one
+     place on the site where a visitor is typing and the page should feel like it is listening. */
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--a1);
+    background: var(--paper);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, .18);
+  }
   .field [aria-invalid='true'] { border-color: #b42318; }
+  .field [aria-invalid='true']:focus { border-color: #b42318; box-shadow: 0 0 0 3px rgba(180, 35, 24, .15); }
   .field .help { color: var(--muted); font-size: .85rem; line-height: 1.5; }
   .field .err { color: #b42318; font-size: .85rem; font-weight: 500; }
-  .field--check label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .92rem; line-height: 1.6; }
-  .field--check input { width: auto; margin-top: 3px; flex: 0 0 auto; }
-  /* Wrapping matters here: on the last step the row holds Back, Continue and Open the message,
-     which on a 430px phone ran the last button off the right edge. That button is the one the
-     whole form exists to reach. */
-  .form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .field--check label { display: flex; gap: 11px; align-items: flex-start; font-weight: 400; font-size: .92rem; line-height: 1.6; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ground); }
+  .field--check input { width: auto; margin-top: 3px; flex: 0 0 auto; accent-color: var(--a1); }
+
+  /* Wrapping matters here: on the last step the row holds Back and Send it, which on a 430px
+     phone ran the last button off the right edge. That button is the one the whole form exists
+     to reach. */
+  .form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--grid); }
+  .form-actions [data-send] { background: var(--aurora); border-color: transparent; }
+  .form-actions [data-send]:hover { filter: brightness(1.08); }
   @media (max-width: 560px) {
+    #lyf { padding: 22px 18px; }
+    .steps-bar .t { display: none; }
+    .steps-bar li + li::before { margin: 0 8px; }
     .form-actions .btn { flex: 1 1 auto; justify-content: center; }
     .form-actions .btn--primary { flex-basis: 100%; order: -1; }
   }
@@ -292,7 +384,10 @@ const subject = 'List your firm';
     const show = (n: number) => {
       at = n;
       steps.forEach((s, i) => { s.hidden = i !== n; });
-      crumbs.forEach((c, i) => c.classList.toggle('is-on', i === n));
+      crumbs.forEach((c, i) => {
+        c.classList.toggle('is-on', i === n);
+        c.classList.toggle('is-done', i < n);
+      });
       back.hidden = n === 0;
       next.hidden = n === steps.length - 1;
       send.hidden = n !== steps.length - 1;

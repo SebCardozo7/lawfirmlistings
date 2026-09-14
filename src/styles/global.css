@@ -90,6 +90,11 @@ button,input,select{font:inherit;color:inherit}
 .link:hover::after{transform:translateX(3px)}
 
 /* Buttons — pills */
+/* A class beats the browser's own [hidden] rule, so any component that sets `display` stays
+   visible after script sets hidden = true. That is how the list-your-firm form showed Back,
+   Continue and Send it at once while the script believed two of them were hidden: the state was
+   right and the screen disagreed. One line, and it has to outrank every component. */
+[hidden]{display:none!important}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:var(--pill);font-weight:600;font-size:.98rem;border:1px solid transparent;cursor:pointer;transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;text-decoration:none!important;white-space:nowrap;letter-spacing:-.01em}
 .btn:active{transform:translateY(1px)}
 .btn--primary,.btn--ink{background:var(--ink);color:#fff;box-shadow:0 10px 24px -10px rgba(10,10,12,.6)}
