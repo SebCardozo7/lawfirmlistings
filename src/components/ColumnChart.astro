@@ -1,0 +1,54 @@
+---
+/**
+ * Columns for a distribution: how many things fall in each band.
+ *
+ * Same construction as BarChart and for the same reasons. Bands are an ordered scale, so the
+ * columns are one hue and the order is the reader's cue; where a threshold in the scoring engine
+ * falls inside the distribution, `emphasis` marks the bands above it and `thresholdNote` says
+ * what the threshold is. A chart that shows where a rule bites is worth more than one that shows
+ * only the shape.
+ */
+export interface Column {
+  label: string;
+  value: number;
+  /** Under the label: what the band means, in a few words. */
+  note?: string;
+  emphasis?: boolean;
+}
+
+interface Props {
+  columns: Column[];
+  heading?: string;
+  caption?: string;
+  /** Rendered as a key beside the emphasised colour, so the highlight is never colour alone. */
+  emphasisLabel?: string;
+  quietLabel?: string;
+  class?: string;
+}
+
+const { columns, heading, caption, emphasisLabel, quietLabel, class: cls } = Astro.props;
+const top = Math.max(...columns.map(c => c.value), 1);
+const hasEmphasis = columns.some(c => c.emphasis);
+// Columns are read against each other, so the tallest fills the plot and the rest are its share.
+// A band with nothing in it keeps its slot and draws no column: an empty band is information.
+const height = (v: number) => (v <= 0 ? 0 : Math.max(4, (v / top) * 100));
+---
+<figure class={cls ? `chart ${cls}` : 'chart'}>
+  {heading && <p class="chart-heading">{heading}</p>}
+  <div class="chart-cols">
+    {columns.map(c => (
+      <div class={hasEmphasis && !c.emphasis ? 'chart-col is-quiet' : 'chart-col'}>
+        <b class="chart-value">{c.value.toLocaleString('en-US')}</b>
+        <span class="chart-plot"><i style={`height:${height(c.value)}%`}></i></span>
+        <span class="chart-label">{c.label}{c.note && <em>{c.note}</em>}</span>
+      </div>
+    ))}
+  </div>
+  {hasEmphasis && emphasisLabel && (
+    <p class="chart-legend">
+      <span class="chart-key"><i></i>{emphasisLabel}</span>
+      {quietLabel && <span class="chart-key is-quiet"><i></i>{quietLabel}</span>}
+    </p>
+  )}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

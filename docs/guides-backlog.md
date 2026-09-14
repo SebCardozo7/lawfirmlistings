@@ -5,6 +5,19 @@ learned so the next one does not repeat the research.
 
 Rules that decide what goes on this list, restated so they are not re-argued every run:
 
+- **Every guide carries at least one chart.** A measurement is read faster as a shape than as a
+  column of numbers, and these pieces are measurements before they are prose. Use the components
+  in `src/components/`: `BarChart` for comparing quantities, `ColumnChart` for a distribution,
+  `StackBar` for the parts of one population. A chart's numbers are passed in already computed,
+  from the same variables the prose uses, so a chart can never disagree with the sentence beside
+  it. Colour is not picked by eye: the steps in `global.css` were validated against the page
+  surface, one hue for magnitude and a quiet grey for the bars a chart is not about, and every
+  bar prints its own value so nothing is legible by colour alone.
+- **The data behind a guide is refreshed monthly**, which is what keeps a study from becoming an
+  essay about September. The order is in `docs/monthly-refresh.md`, and
+  `node scripts/check_freshness.mjs --strict` fails when a family of measurements has no reading
+  inside 35 days.
+
 - A guide is a study across the directory, or a method piece about a component of the score. Every
   figure in it is computed from the firms collection at build time.
 - A guide is never a geographic or practice ranking. Anything phrasable as "best <practice>
@@ -113,6 +126,43 @@ Shapes Nolo earns traffic with:
 The lesson to carry forward: every one of our guides should be a thing only a directory that
 measures firms could have written. If a piece could have been written by reading the law, it is
 Nolo's to win and not worth our run.
+
+## Charts, added 2026-09-13
+
+Every published guide now carries at least one, and the two guides whose tables were doing a
+chart's job lost the table:
+
+| Guide | Chart | Form, and why that form |
+| --- | --- | --- |
+| Case results | Split bar: what each firm's results page gave us | Part-to-whole of one population, four ordered states, so one hue in four steps rather than four colours |
+| Case results | Columns: how many results each publishing firm lists | A distribution, with the bands at or above the B1 threshold highlighted so the chart shows where our own rule stops paying |
+| Case results | Bars: what those pages carry | Magnitude across five measures, all out of the same denominator |
+| Fees | Bars: what firms publish about fees | Same, and the bars shorten as the question gets useful, which is the argument |
+| Google reviews | Bars: reviews per firm, with listing count under each name | The spread is the point, and the highlight marks the multi-listing firms that cause it |
+| Core Web Vitals | Bars: mobile performance, every measured firm | Replaced a table showing only the top three and bottom three, so the chart says more than the table did |
+| NYC ranking (gated) | Bars: the cohort by certification stage, or the scores once it publishes | A reader who lands on a held ranking is owed the count that is holding it |
+
+Rules for the next one: pick the form from the data's job before touching colour, keep every
+figure computed, and look at the rendered chart at 390px before shipping it. The three components
+already handle the mobile reflow; a chart with more than about eight rows is a table.
+
+## Corrections, 2026-09-14
+
+Three published guides were counting the wrong firms. `core-web-vitals-...`, `google-reviews-...`
+and `what-new-york-injury-firms-publish-about-fees` all filter the collection by status only,
+which was right while the directory was New York and quietly wrong from the day Baltimore and
+Lakeland opened: the pages were computing over Maryland and Florida firms while every sentence on
+them says "New York". Each now filters on `market.state === 'NY'`, which is what the titles
+always claimed. Figures moved accordingly, for example Core Web Vitals from 56 measured firms to
+46 and from 3 passing to 2, because one of the passing firms is in Maryland.
+
+The lesson for the next market that opens: a guide scoped to a place has to say so in its filter,
+not only in its title. Check every guide's `getCollection` call when a new state lands.
+
+Two hand-typed lines in `src/data/guides.ts` were stale for the same reason and are now written
+without figures, since nothing in that file is computed: the Core Web Vitals entry said "One firm
+out of thirteen passes", and the fees entry said every firm offers a free consultation, which is
+now forty-seven of forty-eight.
 
 ## Open items for a person
 
