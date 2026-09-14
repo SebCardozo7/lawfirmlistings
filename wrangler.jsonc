@@ -21,9 +21,10 @@
   // config declares, so a variable typed into the dashboard survives exactly until the next
   // deploy and then vanishes. Secrets are not touched, which is why SUBMISSIONS_TO stays one.
   // There is nothing to hide here anyway: it is an address on a domain we own, and it needs no
-  // mailbox behind it.
+  // mailbox behind it, though hello@ has one: it is the address this site already
+  // publishes, so a firm that replies to the notification reaches somebody.
   "vars": {
-    "SUBMISSIONS_FROM": "forms@lawfirmlistings.com"
+    "SUBMISSIONS_FROM": "hello@lawfirmlistings.com"
   },
   "send_email": [
     { "name": "EMAIL" }
