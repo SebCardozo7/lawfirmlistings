@@ -1,13 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
 
 // A short technical piece, written so the article template is in production and so pillar D has
 // something public explaining it. Every figure below is computed from the firms collection at
 // build time rather than typed in, so the article cannot drift away from the data it describes.
+// New York only, which the title has always said and the filter did not. The directory opened in
+// Baltimore and Lakeland after this piece was written, and without the state test the page began
+// counting Maryland and Florida firms while calling every one of them a New York firm.
 const firms = await getCollection('firms', f =>
-  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible' && f.data.market.state === 'NY');
 
 const withPsi = firms.filter(f => f.data.digital.psi);
 const passing = withPsi.filter(f => f.data.digital.psi!.value.cwv_pass);
@@ -26,15 +31,45 @@ const attorneyTotal = firms.reduce((n, f) => n + f.data.attorneys.length, 0);
 const withBarNumber = firms.reduce(
   (n, f) => n + f.data.attorneys.filter(a => a.bar_number).length, 0);
 
+// The distribution, because forty-odd bars is a list and not a chart. Bands are Google's own
+// reporting bands for the performance score, so the shape is comparable to anything else that
+// quotes them. The pass rate is a separate fact and the caption carries it.
+const PERF_BANDS = [
+  { label: '90 to 100', note: 'good', lo: 90 },
+  { label: '50 to 89', note: 'needs work', lo: 50 },
+  { label: 'Under 50', note: 'poor', lo: 0 },
+];
+const perfColumns = PERF_BANDS.map((b, i) => ({
+  label: b.label,
+  note: b.note,
+  value: withPsi.filter(f => {
+    const p = f.data.digital.psi!.value.performance;
+    const hi = i === 0 ? Infinity : PERF_BANDS[i - 1].lo;
+    return p >= b.lo && p < hi;
+  }).length,
+}));
+
+// The named firms stay as the table had them: the three fastest and the three slowest, which is
+// the spread the paragraph is about, with the pass mark carried by the highlight and the note.
+const namedRows = [...best.slice(0, 3), ...worst.slice(0, 3).reverse()].map(f => ({
+  label: f.data.name,
+  href: `/firms/${f.data.slug}/`,
+  value: f.data.digital.psi!.value.performance,
+  note: f.data.digital.psi!.value.cwv_pass ? 'Passes Core Web Vitals' : 'Fails Core Web Vitals',
+  emphasis: f.data.digital.psi!.value.cwv_pass,
+}));
+
 const measuredOn = withPsi[0]?.data.digital.psi!.measured_at ?? null;
 const updated = measuredOn
   ? new Date(measuredOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
   : null;
 
-const title = 'Almost every New York injury firm fails Core Web Vitals';
+// Says the finding, not the topic. No count in it: check_meta rejects a figure in a title, and a
+// pass rate that moves every month should not be the thing Google has indexed.
+const title = "New study: almost every New York injury firm fails Google's speed test";
 const description = 'We ran PageSpeed Insights against every New York injury firm in this directory. Almost all fail Core Web Vitals. What it costs them, and what fixes it.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -51,11 +86,7 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
   </div>
 </header>
 
-<div class="article-cover">
-  <div class="container">
-    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="skyline" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
-  </div>
-</div>
+<GuideCover name="speed" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">
@@ -77,27 +108,17 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
 
     <h2 id="results">The results</h2>
     <p>{withPsi.length} of the {firms.length} firms in the directory could be measured. {passing.length === 1 ? 'One passed.' : `${passing.length} passed.`} The median performance score was {medianPerf}.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Firm</th><th>Performance</th><th>Core Web Vitals</th></tr></thead>
-        <tbody>
-          {best.slice(0, 3).map(f => (
-            <tr>
-              <td><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></td>
-              <td class="num">{f.data.digital.psi!.value.performance}</td>
-              <td>{f.data.digital.psi!.value.cwv_pass ? 'Pass' : 'Fail'}</td>
-            </tr>
-          ))}
-          {worst.slice(0, 3).reverse().map(f => (
-            <tr>
-              <td><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></td>
-              <td class="num">{f.data.digital.psi!.value.performance}</td>
-              <td>{f.data.digital.psi!.value.cwv_pass ? 'Pass' : 'Fail'}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <ColumnChart
+      heading={`Mobile performance score across the ${withPsi.length} firms we could measure`}
+      columns={perfColumns}
+      caption={`Google's own bands for the performance score, out of 100. Passing Core Web Vitals is a separate and stricter test: ${passing.length} of the ${withPsi.length} clear all three.`}
+    />
+    <BarChart
+      heading="The three fastest and the three slowest"
+      max={100}
+      rows={namedRows}
+      caption="Out of 100, measured on mobile. A highlighted bar is a firm that passes all three Core Web Vitals, which is not the same as scoring well: the note under each name says which it is."
+    />
     <p>The spread is wide. {best[0] && <><a href={`/firms/${best[0].data.slug}/`}>{best[0].data.name}</a> scores {best[0].data.digital.psi!.value.performance}</>}{worst[0] && <>, while <a href={`/firms/${worst[0].data.slug}/`}>{worst[0].data.name}</a> scores {worst[0].data.digital.psi!.value.performance}</>}. These are firms competing for the same clients on the same search terms.</p>
     <p>Two other things turned up while we were looking. {noSchema.length > 0 && <>{noSchema.length === 1 ? 'One firm publishes' : `${noSchema.length} firms publish`} no structured data at all, not a line of JSON-LD, which costs a point and makes the site harder for search engines and AI assistants to read.</>} And of the {attorneyTotal} attorney bios we have collected from firm websites, {withBarNumber === 0 ? 'not one' : withBarNumber} publishes a bar registration number, which is the single easiest way for a firm to make its own attorney roster verifiable.</p>
 

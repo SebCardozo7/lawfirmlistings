@@ -1,145 +1,130 @@
 /**
- * Read the built site the way a crawler does, and report what it would find wrong.
+ * Reads the built site and reports the structural SEO faults a page-by-page check cannot see.
  *
- * scripts/check_meta.mjs already guards description length at build time, one page at a time.
- * This asks the questions that only exist across pages: two URLs claiming the same title, a
- * heading a page does not have, a link into nothing, an orphan nobody links to. Those are
- * invisible from inside a single template, which is why they accumulate.
+ * check_meta.mjs already enforces what belongs to a single page: description length, house
+ * punctuation, a title that is not shared with another page. This walks the whole of dist/ and
+ * looks at the graph instead, which is where the faults that cost traffic actually live:
  *
- * It reads dist/, so run a build first. Nothing here fails a build: it prints a list for a
- * person to act on, in the same spirit as scripts/audit_published.py.
+ *   - a broken internal link, which wastes a crawl and dead-ends a reader
+ *   - a duplicate title or canonical, which makes two of our own pages compete
+ *   - a missing canonical, which lets a parameterised URL index in place of the real one
+ *   - an orphan: a page in the sitemap that nothing on the site links to
  *
- *     npm run build && node scripts/audit_seo.mjs
+ * Run it after `npm run build`. Exits non-zero on anything in the first three groups. Orphans are
+ * reported and do not fail the run: a page can be legitimately unlinked for a while, and the
+ * point of the line is that somebody decided it, not that a script did.
+ *
+ * Usage: node scripts/audit_seo.mjs [dist]
  */
-import fs from 'node:fs';
-import path from 'node:path';
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { join, relative, sep } from 'node:path';
 
-const DIST = 'dist';
-const SITE = 'https://lawfirmlistings.com';
+const DIST = process.argv[2] ?? 'dist';
 
-function walk(dir, out = []) {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(full, out);
-    else if (entry.name.endsWith('.html')) out.push(full);
+function walk(dir) {
+  const out = [];
+  for (const name of readdirSync(dir)) {
+    const p = join(dir, name);
+    if (statSync(p).isDirectory()) out.push(...walk(p));
+    else out.push(p);
   }
   return out;
 }
 
-const urlOf = file =>
-  '/' + path.relative(DIST, file).split(path.sep).join('/').replace(/index\.html$/, '');
-
-const text = html => html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-
-if (!fs.existsSync(DIST)) {
-  console.error('no dist/ — run npm run build first');
-  process.exit(2);
-}
-
 const files = walk(DIST);
-const pages = files.map(file => {
-  const html = fs.readFileSync(file, 'utf8');
-  return {
-    url: urlOf(file),
-    html,
-    title: (html.match(/<title[^>]*>([\s\S]*?)<\/title>/) || [])[1]?.trim() ?? '',
-    description: (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] ?? '',
-    canonical: (html.match(/<link rel="canonical" href="([^"]*)"/) || [])[1] ?? '',
-    robots: (html.match(/<meta name="robots" content="([^"]*)"/) || [])[1] ?? '',
-    h1: [...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)].map(m => text(m[1])),
-    jsonld: [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
-      .map(m => { try { return JSON.parse(m[1]); } catch { return null; } }),
-    links: [...html.matchAll(/<a[^>]+href="([^"]+)"/g)].map(m => m[1]),
-    words: text(html.replace(/<(header|footer|nav|script|style)[\s\S]*?<\/\1>/g, '')).split(' ').length,
-  };
-});
+const toUrl = p => ('/' + relative(DIST, p).split(sep).join('/')).replace(/\/index\.html$/, '/');
 
-const findings = [];
-const add = (kind, url, note) => findings.push({ kind, url, note });
+const pages = files.filter(p => p.endsWith(`${sep}index.html`) || p === join(DIST, 'index.html'))
+  .map(p => {
+    const html = readFileSync(p, 'utf8');
+    return {
+      url: toUrl(p),
+      html,
+      title: (html.match(/<title>([\s\S]*?)<\/title>/) ?? [, ''])[1].trim(),
+      canonical: (html.match(/<link rel="canonical" href="([^"]*)"/) ?? [, ''])[1].trim(),
+      noindex: /name="robots"[^>]*noindex/.test(html),
+      h1: [...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)]
+        .map(m => m[1].replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()),
+      jsonld: [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+        .map(m => { try { JSON.parse(m[1]); return true; } catch { return false; } }),
+    };
+  });
 
-// ---- per page -------------------------------------------------------------------------------
-for (const p of pages) {
-  // A firm's name is not editable copy. Where the name alone accounts for the length there is
-  // nothing to fix short of truncating a law firm's name on its own page, so the check asks
-  // whether what we wrote around the name is what pushed it over.
-  const ownName = p.title.split(/ [|:] /)[0];
-  const budget = p.url.startsWith('/firms/') ? Math.max(70, ownName.length + 24) : 70;
-  if (!p.title) add('title', p.url, 'no <title>');
-  else if (p.title.length > budget)
-    add('title', p.url, `title is ${p.title.length} characters, ${p.title.length - budget} over`);
-  if (!p.description) add('description', p.url, 'no meta description');
-  else if (p.description.length > 160) add('description', p.url, `description is ${p.description.length} characters`);
-  if (!p.canonical) add('canonical', p.url, 'no canonical link');
-  else if (p.canonical !== SITE + p.url) add('canonical', p.url, `canonical points at ${p.canonical}`);
-  if (p.h1.length === 0) add('heading', p.url, 'no h1');
-  else if (p.h1.length > 1) add('heading', p.url, `${p.h1.length} h1 elements: ${p.h1.slice(0, 2).join(' / ')}`);
-  if (p.jsonld.some(x => x === null)) add('schema', p.url, 'a JSON-LD block does not parse');
-  if (p.words < 120) add('thin', p.url, `${p.words} words outside the chrome`);
-}
+// Every path the built site actually serves, so a link is checked against the files rather than
+// against the pages: /robots.txt and /sitemap-index.xml are real targets and are not pages.
+const served = new Set(files.map(toUrl));
 
-// ---- across pages ---------------------------------------------------------------------------
-const group = (key) => {
-  const map = new Map();
-  for (const p of pages) {
-    const value = p[key];
-    if (!value) continue;
-    if (!map.has(value)) map.set(value, []);
-    map.get(value).push(p.url);
-  }
-  return [...map.entries()].filter(([, urls]) => urls.length > 1);
-};
-
-for (const [title, urls] of group('title'))
-  add('duplicate-title', urls[0], `${urls.length} pages share this title: ${urls.slice(0, 4).join(', ')}`);
-for (const [, urls] of group('description'))
-  add('duplicate-description', urls[0], `${urls.length} pages share one description: ${urls.slice(0, 4).join(', ')}`);
-
-// ---- internal links -------------------------------------------------------------------------
-const known = new Set(pages.map(p => p.url));
-const assets = new Set(walk(DIST, []).map(urlOf));
+const problems = [];
+const notes = [];
 const inbound = new Map(pages.map(p => [p.url, 0]));
-const broken = new Map();
 
-for (const p of pages) {
-  for (const href of p.links) {
-    if (/^(https?:|mailto:|tel:|#)/.test(href)) continue;
-    const clean = href.split('#')[0].split('?')[0];
-    if (!clean) continue;
-    const target = clean.startsWith('/') ? clean : path.posix.join(p.url, clean);
-    if (known.has(target)) {
-      if (target !== p.url) inbound.set(target, inbound.get(target) + 1);
+const HREF = /<a\b[^>]*\bhref="([^"]+)"[^>]*>/gi;
+
+for (const page of pages) {
+  const body = page.html.replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '');
+  for (const [tag, raw] of [...body.matchAll(HREF)].map(m => [m[0], m[1]])) {
+    if (/^(https?:|mailto:|tel:|#|data:)/i.test(raw)) continue;
+    const href = raw.replace(/[?#].*$/, '');
+    if (!href.startsWith('/')) {
+      problems.push([page.url, `relative link, which breaks when the page moves: ${href}`]);
       continue;
     }
-    // A file on disk (a PNG, the sitemap) is fine; anything else is a link into nothing.
-    if (fs.existsSync(path.join(DIST, target.replace(/^\//, '')))) continue;
-    if (!broken.has(target)) broken.set(target, []);
-    broken.get(target).push(p.url);
+    if (!served.has(href) && !served.has(href.endsWith('/') ? href : `${href}/`)) {
+      problems.push([page.url, `broken internal link: ${href}`]);
+      continue;
+    }
+    // An internal link that is nofollowed is a link we are refusing to pass. Outbound links to
+    // firms follow the gate rule and are not our own pages, so only internal ones are checked.
+    if (/\brel="[^"]*nofollow/i.test(tag)) {
+      problems.push([page.url, `internal link marked nofollow: ${href}`]);
+    }
+    const target = served.has(href) ? href : `${href}/`;
+    if (inbound.has(target) && target !== page.url) inbound.set(target, inbound.get(target) + 1);
   }
 }
-for (const [target, from] of broken)
-  add('broken-link', from[0], `${from.length} page(s) link to ${target}, which is not built`);
-for (const [url, n] of inbound)
-  if (n === 0 && url !== '/') add('orphan', url, 'no other page links to it');
 
-// ---- sitemap --------------------------------------------------------------------------------
-const sitemapFiles = fs.readdirSync(DIST).filter(f => f.startsWith('sitemap'));
-const sitemapUrls = new Set();
-for (const f of sitemapFiles) {
-  const body = fs.readFileSync(path.join(DIST, f), 'utf8');
-  for (const m of body.matchAll(/<loc>([^<]+)<\/loc>/g)) sitemapUrls.add(m[1]);
-}
-for (const p of pages) {
-  if (p.robots.includes('noindex')) continue;
-  if (!sitemapUrls.has(SITE + p.url) && !sitemapUrls.has(SITE + p.url + '/'))
-    add('sitemap', p.url, 'indexable but not in the sitemap');
+const seenTitle = new Map();
+const seenCanonical = new Map();
+for (const page of pages) {
+  if (!page.canonical) problems.push([page.url, 'no canonical']);
+  if (page.noindex) continue;
+  for (const [text, seen, what] of [
+    [page.title, seenTitle, 'title'],
+    [page.canonical, seenCanonical, 'canonical'],
+  ]) {
+    if (!text) continue;
+    if (seen.has(text)) problems.push([page.url, `duplicate ${what}, same as ${seen.get(text)}`]);
+    else seen.set(text, page.url);
+  }
 }
 
-// ---- report ---------------------------------------------------------------------------------
-const kinds = [...new Set(findings.map(f => f.kind))].sort();
-for (const kind of kinds) {
-  const rows = findings.filter(f => f.kind === kind);
-  console.log(`\n== ${kind} (${rows.length})`);
-  for (const r of rows.slice(0, 14)) console.log(`   ${r.url.padEnd(52)} ${r.note}`);
-  if (rows.length > 14) console.log(`   ... and ${rows.length - 14} more`);
+for (const page of pages) {
+  if (page.url === '/' || page.noindex) continue;
+  if (inbound.get(page.url) === 0) notes.push([page.url, 'orphan: nothing on the site links to it']);
 }
-console.log(`\n${findings.length} finding(s) across ${pages.length} built page(s)`);
+
+// A missing or repeated h1, and structured data that does not parse, are faults rather than
+// judgement calls: a page with two h1 elements is telling a crawler two different things it is
+// about, and a JSON-LD block with a syntax error is markup we shipped and nobody can read.
+for (const page of pages) {
+  if (page.h1.length === 0) problems.push([page.url, 'no h1']);
+  else if (page.h1.length > 1)
+    problems.push([page.url, `${page.h1.length} h1 elements: ${page.h1.slice(0, 2).join(' / ')}`]);
+  if (page.jsonld.some(ok => !ok)) problems.push([page.url, 'a JSON-LD block does not parse']);
+}
+
+// Title length is a note, not a problem, because a law firm's name is not editable copy. Where
+// the name alone accounts for the length there is nothing to fix short of truncating the firm's
+// name on its own page, so the budget asks whether what we wrote around the name pushed it over.
+for (const page of pages) {
+  if (page.noindex || !page.title) continue;
+  const ownName = page.title.split(/ [|:] /)[0];
+  const budget = page.url.startsWith('/firms/') ? Math.max(70, ownName.length + 24) : 70;
+  if (page.title.length > budget)
+    notes.push([page.url, `title is ${page.title.length} characters, ${page.title.length - budget} over`]);
+}
+
+for (const [url, problem] of problems) console.error(`${url} — ${problem}`);
+for (const [url, note] of notes) console.warn(`${url} — ${note}`);
+console.log(`\n${pages.length} pages checked, ${problems.length} problem${problems.length === 1 ? '' : 's'}, ${notes.length} note${notes.length === 1 ? '' : 's'}.`);
+process.exit(problems.length ? 1 : 0);

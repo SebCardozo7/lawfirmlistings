@@ -49,9 +49,9 @@ export const GUIDES: Guide[] = [
   {
     slug: 'what-new-york-injury-firms-publish-about-fees',
     kicker: 'Costs',
-    title: 'Every New York injury firm promises “no fee unless we win”. None publishes the fee.',
+    title: 'New study: the free consultation matters less than the fee nobody prints',
     summary:
-      'Every firm in the directory offers a free consultation, so it differentiates nothing. What none of them publishes is the percentage, or how case expenses are handled, which is where a five-figure difference hides.',
+      'Nearly every New York firm in the directory offers a free consultation, so it differentiates nothing. What none of them publishes is the percentage, or how case expenses are handled, which is where a five-figure difference hides.',
     thumb: 't2',
     icon: 'doc',
     meta: 'The four questions to ask on the free call',
@@ -59,9 +59,9 @@ export const GUIDES: Guide[] = [
   {
     slug: 'google-reviews-new-york-injury-firms',
     kicker: 'Data',
-    title: 'Google reviews, and why the ratings barely differ',
+    title: 'New study: office count matters more than star rating for injury firms',
     summary:
-      'We summed every Google review across every business listing these firms operate. The ratings span about half a star; the review counts differ by more than fortyfold, mostly because of office count. Why a star rating ranks almost nothing.',
+      'We summed every Google review across every business listing these New York firms operate. The ratings span well under a star; the review counts differ by orders of magnitude, mostly because of office count. Why a star rating ranks almost nothing.',
     thumb: 't3',
     icon: 'star',
     meta: 'What to read instead of the number',
@@ -69,12 +69,25 @@ export const GUIDES: Guide[] = [
   {
     slug: 'core-web-vitals-new-york-injury-firms',
     kicker: 'Technical',
-    title: 'Almost every New York injury firm fails Core Web Vitals',
+    title: "New study: almost every New York injury firm fails Google's speed test",
+    // Both lines are hand-typed here rather than computed, so neither may carry a figure: this
+    // said "One firm out of thirteen passes" for as long as the cohort has been larger than
+    // thirteen. The page itself counts, and the manifest describes.
     summary:
-      "We measured every firm in the directory against Google's thresholds. One passed. What that means for pillar D of the score, and why it is the cheapest thing on a firm's list to fix.",
+      "We measured every New York firm in the directory against Google's thresholds. Almost none passes. What that means for pillar D of the score, and why it is the cheapest thing on a firm's list to fix.",
     thumb: '',
     icon: 'skyline',
-    meta: 'One firm out of thirteen passes',
+    meta: 'Almost nobody passes, and it is cheap to fix',
+  },
+  {
+    slug: 'what-a-case-results-page-proves',
+    kicker: 'Method',
+    title: 'New study: the court a firm names matters more than the number beside it',
+    summary:
+      'We read the case results page of every firm in the directory and counted what is on it: how many results, which case types, whether any court is named, whether a disclaimer is there. We publish none of the amounts, and this is why.',
+    thumb: 't2',
+    icon: 'scale',
+    meta: 'What we counted, and what we will not repeat',
   },
   {
     slug: 'best-personal-injury-law-firms-nyc',

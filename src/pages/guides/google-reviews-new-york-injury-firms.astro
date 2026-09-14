@@ -1,14 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
 
 // Every figure here is computed from the firms collection at build time, so the article cannot
 // drift away from the data it describes. Firms whose rating we hold only because the firm
 // reports it are excluded from the statistics and named separately: mixing a self-reported
 // number into an average of measured ones would make the average unciteable.
+// New York only, to match what the title and every sentence below claim. Maryland and Florida
+// firms entered the directory after this piece was written and were being counted as New York's.
 const firms = await getCollection('firms', f =>
-  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible' && f.data.market.state === 'NY');
 
 type Firm = typeof firms[number];
 const count = (f: Firm) =>
@@ -54,7 +57,13 @@ const avgCount = (xs: Firm[]) =>
 
 // C3 is the recency sub-factor. Naming how many firms have it unassessed is more honest than
 // implying we know how old these reviews are.
-const withResults = firms.filter(f => (f.data.results ?? []).length > 0);
+// Outcomes, for the closing section. These were one number and should never have been: a firm
+// publishing a results page is not the same as a result we have confirmed, and the paragraph
+// below was reading the confirmed set while saying "published any at all", which rendered as
+// nobody publishing results when most of them do. The two sets are now counted separately.
+const publishesResults = firms.filter(f =>
+  f.data.results_published?.readable && (f.data.results_published.count ?? 0) > 0);
+const verifiedResults = firms.flatMap(f => f.data.results ?? []).filter(r => r.verified);
 
 const c3Pending = firms.filter(f =>
   f.data.score?.pillars.C.subs.some(s => s.code === 'C3' && s.source === 'pending')).length;
@@ -66,10 +75,12 @@ const updated = measuredOn
 
 const fmt = (n: number) => n.toLocaleString('en-US');
 
-const title = 'Google reviews, and why the ratings barely differ';
+// The comparison the data actually supports: the ratings sit within a fraction of a star of each
+// other, while the review counts track how many offices a firm runs. No figure in the title.
+const title = 'New study: office count matters more than star rating for injury firms';
 const description = 'We summed every Google review for the New York injury firms in this directory. The star ratings barely differ, and the counts mostly measure office count.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/reviews.png" imageAlt="Five near-identical star ratings above review-count bars of wildly different lengths">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -86,11 +97,7 @@ const description = 'We summed every Google review for the New York injury firms
   </div>
 </header>
 
-<div class="article-cover">
-  <div class="container">
-    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="star" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
-  </div>
-</div>
+<GuideCover name="reviews" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">
@@ -128,6 +135,16 @@ const description = 'We summed every Google review for the New York injury firms
 
     <h2 id="offices">The counts differ enormously</h2>
     <p>That is where the spread actually is. {byCount[0].data.name} has {fmt(hiCount)} reviews. {byCount[byCount.length - 1].data.name} has {fmt(loCount)}. One is {countRatio} times the other, and both firms take the same kind of case in the same city.</p>
+    <BarChart
+      heading="Google reviews per firm, the twelve largest"
+      rows={byCount.slice(0, 12).map(f => ({
+        label: f.data.name,
+        href: `/firms/${f.data.slug}/`,
+        value: count(f),
+        note: `${f.data.digital.places!.listing_count} ${f.data.digital.places!.listing_count === 1 ? 'listing' : 'listings'}, rated ${f.data.reviews.google!.rating}`,
+      }))}
+      caption={`The listing count under each name is the point: a review attaches to a listing rather than to a firm, so each bar is the sum of however many addresses that firm runs. The ratings behind these bars sit ${ratingSpread} of a star apart, and the table above carries every firm rather than the twelve here.`}
+    />
     <p>Most of that gap is offices, not popularity. A Google review attaches to a business listing, not to a firm, so a practice with {byCount[0].data.digital.places!.listing_count} listings accumulates reviews at {byCount[0].data.digital.places!.listing_count} addresses at once.{multi.length > 0 && single.length > 0 && <> Across this set, the {multi.length} firms with more than one listing average {fmt(avgCount(multi))} reviews; the {single.length} with a single listing average {fmt(avgCount(single))}.</>} A firm that has never opened a satellite office is not worse than one that has. It is counted differently, and any directory that ranks on raw review volume is quietly ranking on office count.</p>
     <p>This is also why our per-firm totals are sums. We add every listing a firm operates and weight the rating by each listing's count, so a firm is described by all of its reviews rather than by whichever office Google decides to show you. The source line on each profile says how many listings went into the number.</p>
 
@@ -150,7 +167,7 @@ const description = 'We summed every Google review for the New York injury firms
     {selfReported.length > 0 && (
       <p>The figures above cover the {measured.length} firms whose ratings we measured directly. Where we hold a rating only because a firm publishes it, the profile labels it as firm-reported and it stays out of these averages. An unmeasured number may well be accurate, but mixing it in would make the average impossible to cite.</p>
     )}
-    <p>And reviews are not outcomes. A five-star rating records how clients felt about being treated, which is worth knowing and is not the same as whether the firm won. Verified results sit in pillar B and are checked against court records, and only {withResults.length} of the {firms.length} firms here {withResults.length === 1 ? 'has' : 'have'} published any at all{withResults.length > 0 && withResults.length <= 2 && <>: {withResults.map((f, i) => (<>{i > 0 && ' and '}<a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></>))}, {withResults.length === 1 ? 'the only firm in this cohort to have completed certification' : 'the only firms in this cohort to have completed certification'}</>}. That is the harder half of the work, and it is where the directory is still thin.</p>
+    <p>And reviews are not outcomes. A five-star rating records how clients felt about being treated, which is worth knowing and is not the same as whether the firm won. Outcomes sit in pillar B, which scores what a firm publishes about its own results rather than what anyone has checked: {publishesResults.length} of the {firms.length} firms here publish a results page we could read, and {verifiedResults.length === 0 ? 'none of those results has' : `${verifiedResults.length} of those results have`} been matched to a court record, so no amount from them appears on this site. <a href="/guides/what-a-case-results-page-proves/">We counted what those pages carry</a>, and that is the harder half of the work: it is where the directory is still thin.</p>
     <p class="muted" style="font-size:.86rem">Review counts and ratings come from the Google Places API (New), summed across every business listing we can attribute to the firm's own domain. A firm we cannot match to a listing keeps these sub-factors pending rather than receiving an estimate.</p>
   </div>
 
