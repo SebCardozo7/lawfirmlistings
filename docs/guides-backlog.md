@@ -44,7 +44,7 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
 
 ## Generated pages, so a topic is not aimed at one of them
 
-As of 2026-09-13 the build produces 83 pages: `/`, `/cities/`, `/cities/new-york-ny/`,
+As of 2026-09-14 the build produces 84 pages: `/`, `/cities/`, `/cities/new-york-ny/`,
 `/cities/baltimore-md/`, `/cities/lakeland-fl/`, `/cities/<city>/personal-injury/` for all three,
 `/cities/new-york-ny/workers-compensation/`, `/practice-areas/`,
 `/practice-areas/personal-injury/`, `/practice-areas/workers-compensation/`, 59 firm profiles,
@@ -55,6 +55,7 @@ and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`, `/contact/
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-09-14 | `/guides/what-a-law-firm-score-cannot-compare/` | "how are lawyer ratings calculated", "law firm rating methodology", "what does a lawyer rating mean", "are lawyer ratings comparable" | The denominator piece. Reads all three states rather than one, because the argument is what happens when the directory crosses a state line. Two corrections were caught in draft and are worth remembering: the certification coverage floor is `MIN_COVERAGE = 0.60`, not 0.70, and the highest total outside New York is a firm whose total we withhold, not the highest comparable one. |
 | 2026-09-13 | `/guides/what-a-case-results-page-proves/` | "how to check a law firm's case results", "law firm case results page", "how to verify a lawyer's track record" | Counts what every firm publishes about its own outcomes and says why we repeat none of the amounts. Doubles as the pillar B method piece. |
 | earlier | `/guides/what-new-york-injury-firms-publish-about-fees/` | contingency fee disclosure | E1 method piece. |
 | earlier | `/guides/google-reviews-new-york-injury-firms/` | Google review ratings for injury firms | C1/C2 method piece. Its closing paragraph was corrected on 2026-09-13: it read the verified-results set while saying "published any at all", and rendered as nobody publishing results when 37 firms do. |
@@ -63,28 +64,75 @@ and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`, `/contact/
 
 ## Next, ranked
 
-1. **What the score cannot compare across states.** `score.assessable`, `gates_unavailable` and
-   `comparable` exist because Maryland and Florida publish different registers than New York. Two
-   firms currently carry `comparable: false`. A method piece saying plainly that a 71 in New York
-   and a 71 in Lakeland are not the same number, and how the denominator is built. Strongest
-   remaining topic: the data is committed, no other directory says this about its own score, and
-   it is the honest answer to "why does this firm score lower than that one".
+Item 1 was taken on 2026-09-14, and item 6 went into it as a section rather than becoming its own
+guide, which is what the old entry predicted. What the writing turned up changed the ranking
+below: the piece set out to be about state lines and found that the state lines are the small
+half of the problem, which leaves a bigger topic behind it.
+
+1. **The pending measurement, as its own study.** The new denominator guide reports that D2
+   Search authority is unmeasured on 46 of 59 firms, which is the single largest hole in the
+   score and is ours rather than any state's. That guide gives it four sentences. It deserves a
+   piece: what D2 measures, why the cohort ran out of Ahrefs units (the reasoning is already
+   written down in `content.config.ts` on the `cohorts` schema), what the score looks like for
+   the thirteen firms that do carry it, and what changes when the rest land. Strongest remaining
+   topic, and the most uncomfortable, which is usually the same thing here.
 2. **How long these firms have actually been operating.** `operating.registered` and
    `operating.years` are filled for 58 of 59 firms from state registers. Founding year claims on
    firm websites are marketing; a register entry is not. Check how often the two disagree before
    committing: if they rarely do, the piece is a paragraph, not a guide.
-3. **Malpractice insurance and bar membership, who says it out loud.** `accountability` holds
+3. **The firms that publish no roster at all.** Fell out of this run and is not the same topic as
+   item 4. Six New York firms have G1 and G2 recorded as `no roster published`: the state register
+   is open, and there is simply no name on the site to look up in it. That is a finding about what
+   a firm chooses to publish, it is measurable today, and it is the demand-side version of the
+   "how do I check my lawyer's licence" query that the registers themselves own (see the SERP note
+   below). Check first whether the six are small firms, which would make it a size story instead.
+4. **Malpractice insurance and bar membership, who says it out loud.** `accountability` holds
    `malpractice_insurance`, `insurance_evidence.quote` and `bar_associations` with source URLs for
    57 firms. Nothing about individual attorneys, which keeps it clear of the registration rule.
-4. **What a firm's own attorney roster does not tell you.** `attorneys[]` has `bar_number` on
+5. **What a firm's own attorney roster does not tell you.** `attorneys[]` has `bar_number` on
    almost nobody. Needs care: no characterisation of any named attorney beyond the record's own
-   words, and the piece works better as a count with no names at all.
-5. **The office-count problem in every directory.** `digital.places.listing_count` versus review
+   words, and the piece works better as a count with no names at all. Overlaps item 3; if item 3
+   is written, this is probably a section of it.
+6. **The office-count problem in every directory.** `digital.places.listing_count` versus review
    totals. Overlaps the Google reviews guide; only worth writing if it is reframed as a directory
    design piece rather than a review piece.
-6. **What "no queryable source" means.** The vocabulary in `content.config.ts` that keeps a
-   sub-factor out of the denominator. Small, honest, probably a section of item 1 rather than its
-   own guide.
+
+## Keyword research, 2026-09-14
+
+**The previous run's advice to budget nothing for Ahrefs was wrong, and the free call is how you
+find that out.** `subscription-info-limits-and-usage` costs no units and reported 400,332 of
+800,000 used with the reset still on the 19th, so roughly 400,000 units were available the whole
+time. Whatever exhausted the key on the 13th was not the workspace quota. Start every run with
+that free call rather than inheriting the last run's conclusion. This run spent four paid calls
+and 1,894 units in total, well inside the six-call rule.
+
+What they returned:
+
+- The head terms are owned outright and are not worth a run. "lawyer ratings" (600/mo, KD 85),
+  "lawyer rating website" (250, KD 89), "lawyer ratings and reviews" (200, KD 88) all carry a
+  parent topic of `avvo` or `best lawyers`. Avvo and Martindale own this cluster and the intent
+  behind it is navigational: people are looking for those sites by description, not for an
+  explainer.
+- The explainer queries around them are close to empty. "how to evaluate a law firm" returns 10
+  a month, "how to compare law firms" returns 0, and "how are lawyer ratings calculated",
+  "law firm rating system" and "lawyer rating systems explained" returned no data at all. This
+  run's guide targets that cluster knowing it is thin: it is a method piece whose job is trust
+  and internal linking, and the volume is not the reason to publish it. Do not let a later run
+  mistake this for a traffic bet.
+- A real cluster does sit next door, in questions: "how to check attorney license" (KD 57),
+  "how to look up attorney license", "how to verify attorney license", "how to find an attorney's
+  bar number", with parent topics `law license lookup` and `attorney search`. Individually small,
+  collectively meaningful, and materially easier than the head terms.
+- **That cluster should not be chased directly, and the SERP is why.** `serp-overview` on "how to
+  check attorney license" returns the registers themselves: americanbar.org at one, the State Bar
+  of California, Texas, Colorado, Illinois, Utah and the New York attorney search at ten. The
+  searcher wants the lookup tool, and the lookup tool is a better answer than we could write. What
+  is unoccupied is the question one step up, which nobody on that SERP answers: whether you can
+  run that check everywhere. You cannot, and we have the measurement. That is backlog item 3.
+- People also ask on that SERP: "How do I verify an attorney's license?", "How can I check if a
+  lawyer is good or not?", "How to look up an attorney license in Florida?" The Florida one is
+  ours to answer with evidence, since Florida is one of the two states whose register we cannot
+  query.
 
 ## Keyword research, 2026-09-13
 
@@ -114,7 +162,38 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: findlaw.com.**
+**Next run: avvo.com.**
+
+### findlaw.com, read 2026-09-14
+
+Blocked by this environment's egress proxy, both `www.findlaw.com` and `lawyers.findlaw.com`, so
+this is a second-hand read through search results and third-party write-ups, the same caveat nolo
+carries. Two of the eight competitors are now known to be unreachable from here; assume the rest
+may be and budget a search-based read.
+
+Shapes FindLaw earns traffic with:
+
+1. **"Learn About the Law", thousands of state-keyed explainers**, plus `codes.findlaw.com` and
+   `caselaw.findlaw.com` carrying the primary sources themselves. Do not chase, for the same
+   reason as Nolo's encyclopedia, and less than Nolo: FindLaw also hosts the actual statutes, so
+   the explainer sits next to the authority. We cannot beat a primary source at being one.
+2. **The directory faceted three ways at once**, by state, by city and by "legal issue"
+   (`lawyers.findlaw.com/legal-issues/`), over a claimed million-plus profiles. Structurally this
+   is what our generated pages are, at a thousand times the size and with no measurement behind
+   any of it. Worth noting as the thing our `/cities/<city>/<practice>/` pages compete with: they
+   win on facet coverage and we win only if the ranking means something.
+3. **Client star ratings, one to five, averaged.** Optional sub-ratings for value, quality of
+   service and professional competence, and, in their own documentation, **the optional
+   sub-ratings do not influence the overall rating**, and attorney ratings do not influence the
+   firm rating. That is the same structural problem this run's guide is about, sitting in a
+   competitor's published methodology: a composite whose components are not all in its
+   denominator. Nobody, including them, writes about the denominator. It is the clearest evidence
+   yet that the angle is unoccupied rather than merely unpopular.
+
+The thing to take: FindLaw's rating is a popularity average with no floor on evidence, and ours is
+a share of measured evidence with the share published. Neither of the two directory giants states
+what its number cannot do. Every method piece we write should make that contrast by demonstration
+rather than by claiming it, because claiming it is what they would do.
 
 ### nolo.com, read 2026-09-13
 
@@ -157,6 +236,10 @@ chart's job lost the table:
 | Google reviews | Bars: reviews per firm, with listing count under each name | The spread is the point, and the highlight marks the multi-listing firms that cause it |
 | Core Web Vitals | Bars: mobile performance, every measured firm | Replaced a table showing only the top three and bottom three, so the chart says more than the table did |
 | NYC ranking (gated) | Bars: the cohort by certification stage, or the scores once it publishes | A reader who lands on a held ranking is owed the count that is holding it |
+| Denominator | Bars: firms for which each eligibility gate could actually be checked | Magnitude across the five gates out of one denominator, with the blocked ones highlighted so a reader sees that a blocked gate is not a failed one |
+| Denominator | Columns: how much of the available scale we read | A distribution, with the band below the comparability line highlighted, which is again where our own rule bites |
+| Denominator | Bars: points of scale measured, for the firms that all share one score | The argument in one picture: identical totals, bars from 16 to 97. Built by finding the shared total with the widest spread rather than by naming firms, so it re-picks itself as the data moves |
+| Denominator | Split bar: what limits the comparison across all firms | Part-to-whole of one population in three non-overlapping states, so one hue in three steps |
 
 Rules for the next one: pick the form from the data's job before touching colour, keep every
 figure computed, and look at the rendered chart at 390px before shipping it. The three components
@@ -245,3 +328,16 @@ now forty-seven of forty-eight.
   is a decision for whoever owns the build.
 - No firm in the directory has a single verified result (`results[]` is empty for all 59 records).
   Until that changes, pillar B is a measure of disclosure and the site should keep saying so.
+- `/guides/what-a-case-results-page-proves/` says the publishing firms "average {avgPublishers}
+  out of 100" and the non-publishers average something lower. Those two averages are means of
+  percentages taken over different denominators, which the new denominator guide is precisely
+  about, so the comparison is softer than the sentence implies. This run added a caveat paragraph
+  and a link rather than rewriting somebody else's argument. Whether the averages should be
+  recomputed over a common scale, or the sentence reworded, is a call for a person.
+- **The score's own vocabulary is not documented anywhere a reader can reach.** `raw`, `assessed`,
+  `assessable`, `coverage` and `comparable` are now explained in a guide, which is the wrong home
+  for a definition the profiles and `/methodology/` both depend on. Consider moving the four-term
+  glossary onto the methodology page and having the guide link to it.
+- Two published pages carry a title over the 70-character mark that `audit_seo.mjs` notes:
+  `/firms/koenigsberg-associates-law-offices/` at 71 and `/practice-areas/personal-injury/` at 72.
+  Both predate this run and both are notes rather than failures, so they were left alone.

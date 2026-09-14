@@ -22,7 +22,7 @@ export interface Guide {
   thumb?: string;
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
-  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking';
+  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -94,6 +94,18 @@ export const GUIDES: Guide[] = [
     thumb: 't2',
     icon: 'scale',
     meta: 'What we counted, and what we will not repeat',
+  },
+  {
+    slug: 'what-a-law-firm-score-cannot-compare',
+    cover: 'ladder',
+    kicker: 'Method',
+    title: 'New Study: Two Firms Can Share a Score and Not Share the Evidence',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Our score is earned points over measured points, not over a hundred, so the same number can rest on very different evidence. Which comparisons the data supports, which we refuse to publish, and why the largest gap in the score turns out to be ours rather than any state\'s.',
+    thumb: '',
+    icon: 'columns',
+    meta: 'Read the denominator before the number',
   },
   {
     slug: 'best-personal-injury-law-firms-nyc',
