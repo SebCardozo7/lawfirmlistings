@@ -1,0 +1,146 @@
+{
+  "id": "or-portland-personal-injury",
+  "market": {
+    "city_slug": "portland-or",
+    "city": "Portland",
+    "state": "OR",
+    "state_name": "Oregon"
+  },
+  "state": "OR",
+  "practice": "personal-injury",
+  "label": "Portland x Personal Injury",
+  "measured_at": "2026-09-14",
+  "source": "Candidates from Google Places text search across Portland, Beaverton, Gresham, Lake Oswego and Hillsboro (scripts/discover_places.py, 107 domains), kept only where the firm's own site publishes a personal injury practice page (scripts/check_practice.py) and it holds an office in the metro (scripts/vet_candidates.py). Multnomah, Washington and Clackamas counties are 970xx to 972xx. Eugene is 974xx and is a different market. No Ahrefs metrics, so D2 scores pending for every firm here.",
+  "full_size_estimate": 107,
+  "firms": [
+    {
+      "domain": "moseleycollins.com",
+      "name": "Moseley Collins Law",
+      "practice_page": "https://www.moseleycollins.com/car-accident.html"
+    },
+    {
+      "domain": "portlandlegalgroup.com",
+      "name": "Portland Legal Group",
+      "practice_page": "https://portlandlegalgroup.com/services/car-accident-lawyer/"
+    },
+    {
+      "domain": "goldbergloren.com",
+      "name": "Goldberg & Loren",
+      "practice_page": "https://goldbergloren.com/auto-accidents/"
+    },
+    {
+      "domain": "bridgecitylawfirm.com",
+      "name": "Bridge City Law Injury Accident & Injury Lawyers",
+      "practice_page": "https://bridgecitylawfirm.com/truck-accident-claims-in-portland/"
+    },
+    {
+      "domain": "tcnf.legal",
+      "name": "Thomas, Coon, Newton & Frost",
+      "practice_page": "https://www.tcnf.legal/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "hclawllp.com",
+      "name": "Hooton & Chen LLP",
+      "practice_page": "https://hclawllp.com/personal-injury/"
+    },
+    {
+      "domain": "johnston-lawfirm.com",
+      "name": "Johnston Accident Law Firm",
+      "practice_page": "https://johnston-lawfirm.com/car-accident/"
+    },
+    {
+      "domain": "edersturm.com",
+      "name": "Eder Sturm Eder",
+      "practice_page": "https://www.edersturm.com/practice-area/motor-vehicle-car-accidents"
+    },
+    {
+      "domain": "johnsonlaw.com",
+      "name": "Johnson Law, P.C.",
+      "practice_page": "https://johnsonlaw.com/practice-areas/personal-injury"
+    },
+    {
+      "domain": "searsinjurylaw.com",
+      "name": "Sears Injury Law",
+      "practice_page": "https://searsinjurylaw.com/landi-car-accident/"
+    },
+    {
+      "domain": "elginjurylaw.com",
+      "name": "ELG Injury & Accident Lawyers - Portland",
+      "practice_page": "https://elginjurylaw.com/oregon/portland-car-accident-lawyer/"
+    },
+    {
+      "domain": "mayorlaw.com",
+      "name": "Mayor Law: Car Accident & Wrongful Death Lawyer",
+      "practice_page": "https://www.mayorlaw.com/car-accident-lawyer-portland/"
+    },
+    {
+      "domain": "dawlaw.net",
+      "name": "Dawson Law Group: Portland Car Accident & Injury Lawyers",
+      "practice_page": "https://www.dawlaw.net/car-accident-lawyer-portland/"
+    },
+    {
+      "domain": "tillmannlaw.com",
+      "name": "Tillmann Law | Car Accident and Personal Injury Lawyers",
+      "practice_page": "https://tillmannlaw.com/oregon-car-accident-lawyer/"
+    },
+    {
+      "domain": "stavleylaw.com",
+      "name": "Law Office of Chad Stavley",
+      "practice_page": "https://www.stavleylaw.com/practice-areas/premises-liability"
+    },
+    {
+      "domain": "pickettdummigan.com",
+      "name": "Pickett Dummigan Weingart LLP",
+      "practice_page": "https://pickettdummigan.com/personal-injury/"
+    },
+    {
+      "domain": "sheldonaronson.com",
+      "name": "Sheldon Aronson",
+      "practice_page": "https://www.sheldonaronson.com/personal-injury/car-accident-attorney-portland.php"
+    },
+    {
+      "domain": "rizklaw.com",
+      "name": "Rizk Law",
+      "practice_page": "https://www.rizklaw.com/oregon-truck-accident-lawyer/"
+    },
+    {
+      "domain": "lawtigers.com",
+      "name": "Law Tigers - Portland Motorcycle Lawyers",
+      "practice_page": "https://lawtigers.com/motorcycle-accident/"
+    },
+    {
+      "domain": "damorelaw.com",
+      "name": "D'Amore Law Group",
+      "practice_page": "https://damorelaw.com/portland-truck-accident-lawyer/"
+    },
+    {
+      "domain": "rosenbaumlawgroup.com",
+      "name": "Rosenbaum Law Group",
+      "practice_page": "https://www.rosenbaumlawgroup.com/portland-car-accident-lawyers/"
+    },
+    {
+      "domain": "pdxinjurylaw.com",
+      "name": "DuBois Law Group - PDX Injury Law",
+      "practice_page": "https://pdxinjurylaw.com/"
+    },
+    {
+      "domain": "senftlegal.com",
+      "name": "Senft Legal",
+      "practice_page": "https://www.senftlegal.com/en/services/car-accident-lawyer"
+    },
+    {
+      "domain": "paulsoncoletti.com",
+      "name": "Paulson Coletti Trial Attorneys PC",
+      "practice_page": "http://www.paulsoncoletti.com/prineville-personal-injury-lawyer/"
+    },
+    {
+      "domain": "rosslawpdx.com",
+      "name": "Ross Law PDX",
+      "practice_page": "https://www.rosslawpdx.com/personal-injury"
+    }
+  ],
+  "unresolved": [],
+  "unresolved_notes": {
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market."
+  }
+}

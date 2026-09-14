@@ -334,4 +334,158 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  'dallas-tx': {
+    lede:
+      'Texas gives you two years to sue and six months to tell a city you were hurt, and the ' +
+      'second deadline is the one nobody hears about. Compare Dallas firms on what they publish ' +
+      'and on what we could verify ourselves.',
+    areas: ['Downtown', 'Uptown', 'Oak Cliff', 'Deep Ellum', 'Plano', 'Irving', 'Garland',
+            'Richardson', 'Mesquite'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Dallas: what is different',
+        paragraphs: [
+          'The limitation period is two years from the day the claim accrues, under section ' +
+          '16.003 of the Civil Practice and Remedies Code, and that is a year shorter than New ' +
+          'York gives. The deadline that catches people is the other one. A claim against a ' +
+          'governmental unit needs notice within <b>six months</b> under section 101.101 of the ' +
+          'Tort Claims Act, and the City of Dallas requires the same six months in writing under ' +
+          'its own charter, saying when, where and how the injury happened. A bus, a city truck, ' +
+          'a pothole or a county hospital all sit behind that rule.',
+          'Dallas County runs one of the largest civil court systems in the country, with ' +
+          'multiple district courts hearing injury cases and county courts at law below them, ' +
+          'all at the George Allen Courts Building downtown. Federal matters go to the Northern ' +
+          'District of Texas. This is also the most advertised legal market in this directory by ' +
+          'a distance, which is worth knowing when you compare: the firm with the most billboards ' +
+          'is not a measurement of anything, and it is the reason this site exists.',
+        ],
+      },
+      {
+        heading: 'What lawyers cost in Dallas',
+        paragraphs: [
+          'Injury work is done on contingency and Texas does not cap the share by statute the ' +
+          'way New York does for injury matters, so the percentage is genuinely negotiable and ' +
+          'genuinely varies. That makes the two questions on our fees guide worth more here than ' +
+          'anywhere else we cover: what the percentage is, and whether case expenses come out ' +
+          'before or after the fee is worked out. Ask both, and get the answer in the agreement ' +
+          'rather than on the phone.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Texans out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the day the claim accrues, under Civil ' +
+          'Practice and Remedies Code § 16.003.',
+          '<b>Any claim against the City of Dallas, the county, DART or a public hospital:</b> ' +
+          'written notice within <b>six months</b>, under Tort Claims Act § 101.101 and the ' +
+          'city charter.',
+          '<b>Wrongful death:</b> two years, and the clock runs from the death rather than from ' +
+          'the injury that caused it.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Texas lawyer is licensed?',
+        a: 'The State Bar of Texas publishes a Find a Lawyer directory at ' +
+           '<a href="https://www.texasbar.com" rel="nofollow noopener" target="_blank">' +
+           'texasbar.com</a>, free to search, showing bar number, admission date and public ' +
+           'disciplinary history. We do not read it: it refuses our requests, so Texas profiles ' +
+           'carry no licence finding rather than one we did not make. New York publishes the ' +
+           'same information as open data, which is why New York profiles do carry it.',
+      },
+      {
+        q: 'Why do so many Dallas firms advertise so heavily?',
+        a: 'Because it works, and because nothing stops it. Advertising spend is not evidence ' +
+           'about a practice, and it is not in this directory’s score at any weight: the ' +
+           'measurements are licensure, discipline, what a firm publishes about its own results, ' +
+           'client reviews it did not collect through us, and the quality of its own site. A ' +
+           'firm can be excellent and loud, or excellent and invisible. We measure the same ' +
+           'things either way.',
+      },
+      {
+        q: 'Should I hire a firm in Dallas itself?',
+        a: 'Dallas County is where most of these cases are heard, and a firm in Plano or Irving ' +
+           'appears there constantly. The metro is one legal market rather than several. What ' +
+           'matters is regular practice in the court that will hear your case, which for a ' +
+           'serious injury claim usually means a Dallas County district court.',
+      },
+    ],
+  },
+
+  'portland-or': {
+    lede:
+      'Oregon gives you two years to sue and 180 days to notify a public body, and the second ' +
+      'deadline ends more claims than the first. Compare Portland firms on what they publish ' +
+      'and on what we could verify ourselves.',
+    areas: ['Downtown', 'Pearl District', 'Northeast', 'Southeast', 'Beaverton', 'Gresham',
+            'Lake Oswego', 'Hillsboro', 'Tigard'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Portland: what is different',
+        paragraphs: [
+          'Two years is the limitation period for an injury claim, under ORS 12.110. The rule ' +
+          'that ends claims quietly is the Oregon Tort Claims Act: a claim against a public body, ' +
+          'the city, the county, TriMet, a public hospital or a school district, needs notice ' +
+          'within <b>180 days</b> of the loss under ORS 30.275, and no action can be maintained ' +
+          'without it. TriMet matters more here than a transit authority does in most cities, ' +
+          'because a great many Portland injury claims involve a bus or a train.',
+          'Cases are heard in the Multnomah County Circuit Court downtown, with Washington ' +
+          'County in Hillsboro and Clackamas County in Oregon City taking the suburbs. Federal ' +
+          'matters go to the District of Oregon. Oregon is also a comparative fault state ' +
+          'without the harsh cut-off Maryland applies: a share of the blame reduces what you ' +
+          'recover rather than ending the claim, up to the point where your share exceeds the ' +
+          'other side’s.',
+        ],
+      },
+      {
+        heading: 'What lawyers cost in Portland',
+        paragraphs: [
+          'Contingency, as everywhere in this directory, and as everywhere in this directory no ' +
+          'firm here publishes its percentage. Oregon does not set the share by statute for ' +
+          'injury work, so it is a term of the agreement rather than a rule, which means it is ' +
+          'worth asking about and worth reading. Ask also whether case expenses come out before ' +
+          'or after the fee is calculated: on a mid-size settlement that order is worth five ' +
+          'figures.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Oregonians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years, under ORS 12.110.',
+          '<b>Any claim against the city, the county, TriMet or another public body:</b> notice ' +
+          'within <b>180 days</b> of the loss, under ORS 30.275. Wrongful death allows a year.',
+          '<b>Medical malpractice:</b> two years from discovery, with an outer limit of five ' +
+          'years from the treatment itself.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if an Oregon lawyer is licensed?',
+        a: 'The Oregon State Bar publishes a member directory at ' +
+           '<a href="https://www.osbar.org" rel="nofollow noopener" target="_blank">osbar.org</a>, ' +
+           'free to search, showing admission date and public discipline. We do not read it: it ' +
+           'refuses our requests, so Oregon profiles carry no licence finding rather than one we ' +
+           'did not make. Every profile says which of the two it is showing you.',
+      },
+      {
+        q: 'My accident involved a TriMet bus. Is that different?',
+        a: 'Yes, and mainly in the time you have. TriMet is a public body, so the Tort Claims ' +
+           'Act notice applies and 180 days is the window rather than two years. It is the single ' +
+           'most common way a Portland claim is lost before anybody argues about who was at ' +
+           'fault. Nothing here is legal advice and how the rule applies to a particular crash ' +
+           'is what a first consultation is for.',
+      },
+      {
+        q: 'Should I hire a firm in Portland itself?',
+        a: 'The metro is one legal market and firms in Beaverton, Gresham and Lake Oswego appear ' +
+           'in Multnomah County constantly. What counts is regular practice in the court that ' +
+           'will hear your case rather than the address on the letterhead.',
+      },
+    ],
+  },
 };
