@@ -269,7 +269,7 @@ const schema = {
 
       <div class="block" id="offices">
         <h2>Offices <small>{d.offices.length} location{d.offices.length > 1 ? 's' : ''} · main office: {officeLabel(hq.label, hq.address, d.name)}</small></h2>
-        <div class="map" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i></div><Icon name="skyline" /><span class="hv-placeholder">Map embed slot</span></div>
+        <div class="map" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i></div><Icon name="skyline" /></div>
         <div class="offices">{d.offices.map(o => <div class={`office ${o.is_hq ? 'is-hq' : ''}`}><Icon name="pin" /><div><b>{officeLabel(o.label, o.address, d.name)}</b><span>{o.address}</span>{o.by_appointment && <div class="note">By appointment</div>}</div></div>)}</div>
       </div>
 

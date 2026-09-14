@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
+import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 
@@ -64,10 +64,12 @@ const updated = measuredOn
   ? new Date(measuredOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
   : null;
 
-const title = 'Almost every New York injury firm fails Core Web Vitals';
+// Says the finding, not the topic. No count in it: check_meta rejects a figure in a title, and a
+// pass rate that moves every month should not be the thing Google has indexed.
+const title = "New study: almost every New York injury firm fails Google's speed test";
 const description = 'We ran PageSpeed Insights against every New York injury firm in this directory. Almost all fail Core Web Vitals. What it costs them, and what fixes it.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -84,11 +86,7 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
   </div>
 </header>
 
-<div class="article-cover">
-  <div class="container">
-    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="skyline" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
-  </div>
-</div>
+<GuideCover name="speed" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">

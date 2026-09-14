@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 
 // Plan section 5: a ranked post publishes only once its cohort has 8 certified firms, so the
@@ -55,7 +56,7 @@ const lastUpdated = computedDates.length
 {/* noindex while the ranking is gated. The page explains itself to a visitor who lands on
     it, but a title promising a ranking that is not published should not be in search results.
     Drop the noindex — and the sitemap filter in astro.config.mjs — when the gate opens. */}
-<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City: ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology ${methodVersion}, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" noindex={!gateMet}>
+<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City: ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology ${methodVersion}, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" image="/og/ranking.png" imageAlt="Three podium columns with a certification mark above the tallest" noindex={!gateMet}>
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -75,11 +76,7 @@ const lastUpdated = computedDates.length
   </div>
 </header>
 
-<div class="article-cover">
-  <div class="container">
-    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="skyline" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
-  </div>
-</div>
+<GuideCover name="ranking" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">

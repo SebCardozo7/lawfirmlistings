@@ -13,6 +13,19 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
   it. Colour is not picked by eye: the steps in `global.css` were validated against the page
   surface, one hue for magnitude and a quiet grey for the bars a chart is not about, and every
   bar prints its own value so nothing is legible by colour alone.
+- **The headline states the finding, not the subject.** "New study: office count matters more
+  than star rating for injury firms" earns a click that "Google reviews, and why the ratings
+  barely differ" does not, and it is the same claim. The constraint is that the comparison has to
+  be one the measurement actually supports, and a headline that would be wrong next month is
+  wrong now: write the conditional version instead, the way the fees guide does. No figure in a
+  title or a description ever, because `check_meta.mjs` rejects it and is right to: a title is
+  indexed once and a count moves every month. Spelling the count in words evades the check and
+  keeps the problem, so do not.
+- **Every guide has a drawn cover and a committed share card.** `GuideCover.astro` holds one
+  vector scene per piece, built from the shapes the article is about. The matching raster in
+  `public/og/` is what Facebook, LinkedIn, Slack and X show, since none of them renders an SVG,
+  and it is passed to `<Base>` as `image` with an `imageAlt` that describes it. Never ship a
+  panel that says "slot" to a reader.
 - **The data behind a guide is refreshed monthly**, which is what keeps a study from becoming an
   essay about September. The order is in `docs/monthly-refresh.md`, and
   `node scripts/check_freshness.mjs --strict` fails when a family of measurements has no reading

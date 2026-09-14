@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
+import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 
 // Computed from the collection at build time. The tests below run against the fee language each
@@ -38,12 +38,15 @@ const e1Max = 4;
 const e1Full = e1.filter(p => p === e1Max).length;
 
 const all = (xs: unknown[]) => xs.length === firms.length;
+// Both variants state the finding rather than the subject, and the page picks whichever is true
+// of the data on the day it builds: the moment a firm prints its percentage, the headline stops
+// saying nobody does. No figure in either, which is the rule for anything Google indexes once.
 const title = publishPct.length === 0
-  ? 'Every New York injury firm promises “no fee unless we win”. None publishes the fee.'
-  : 'What New York injury firms publish about fees';
+  ? 'New study: the free consultation matters less than the fee nobody prints'
+  : 'New study: what New York injury firms will and will not tell you about fees';
 const description = 'Every New York injury firm offers a free consultation, so it tells you nothing. What none publishes is the contingency fee, or who pays case expenses.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/fees.png" imageAlt="A published fee page with one line filled in and the line beside it left blank">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -59,11 +62,7 @@ const description = 'Every New York injury firm offers a free consultation, so i
   </div>
 </header>
 
-<div class="article-cover">
-  <div class="container">
-    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="doc" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
-  </div>
-</div>
+<GuideCover name="fees" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">
