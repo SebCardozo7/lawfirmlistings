@@ -34,6 +34,7 @@ import argparse
 import datetime
 import io
 import json
+import os
 import pathlib
 import re
 import sys
@@ -54,7 +55,9 @@ def api_key():
             m = re.match(r"^GOOGLE_API_KEY=(\S+)", line.strip())
             if m:
                 return m.group(1)
-    return None
+    # The environment is the fallback, so a CI run passes the key as a secret rather than
+    # writing .env to the runner's disk.
+    return os.environ.get("GOOGLE_API_KEY")
 
 
 def search(query: str, key: str):

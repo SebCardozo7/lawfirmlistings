@@ -97,7 +97,7 @@
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.nyworkerslaw.com/our-team/dan-oconnor",
-      "registry_note": "not found",
+      "registry_note": "ambiguous (4 attorneys share this name)",
       "checked_at": "2026-09-13"
     },
     {
@@ -194,11 +194,12 @@
       "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.nyworkerslaw.com/our-team/mary-ellen-oconnor",
-      "bar_number": "4207379",
-      "admitted_year": 2004,
+      "checked_at": "2026-09-13",
+      "registry_note": "not found",
+      "bar_number": "4308847",
+      "admitted_year": 2005,
       "registry_status": "Currently registered",
-      "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-13"
+      "registry_basis": "firm named in the registration"
     },
     {
       "name": "Mary Eustance",
@@ -256,7 +257,7 @@
       "bar_number": "5478078",
       "admitted_year": 2016,
       "registry_status": "Currently registered",
-      "registry_basis": "firm named in the registration",
+      "registry_basis": "sole attorney of this name admitted in New York",
       "checked_at": "2026-09-13"
     },
     {
@@ -487,7 +488,7 @@
             "pts": 5,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 8.0 years since admission across 5 of 27 named attorneys (longest 22, shortest 1) · NYS Attorney Registration database"
+            "evidence": "Mean 7.8 years since admission across 5 of 27 named attorneys (longest 21, shortest 1) · NYS Attorney Registration database"
           },
           {
             "code": "A6",

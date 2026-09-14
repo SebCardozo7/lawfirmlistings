@@ -5,7 +5,7 @@
   "website": "https://www.msllegal.com/",
   "domain": "msllegal.com",
   "phone": "(212) 962-1020",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -89,7 +89,11 @@
       "bar_state": "NY",
       "source_url": "https://www.msllegal.com/attorneys/brendan-o-meara/",
       "registry_note": "not found",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "bar_number": "3892585",
+      "admitted_year": 2000,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration"
     },
     {
       "name": "Hannah Joly",
@@ -279,13 +283,13 @@
   "gates": {
     "G1": {
       "pass": true,
-      "evidence": "12 of 13 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
+      "evidence": "13 of 13 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
       "checked_at": "2026-09-13"
     },
     "G2": {
       "pass": true,
-      "evidence": "None of the 12 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "evidence": "None of the 13 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
       "checked_at": "2026-09-13"
     },
@@ -415,14 +419,14 @@
     "checked_at": "2026-09-13"
   },
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
     "computed_at": "2026-09-13",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 19,
         "max": 25,
         "subs": [
           {
@@ -431,15 +435,15 @@
             "pts": 7,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 11.1 years since admission across 12 of 13 named attorneys (longest 35, shortest 1) · NYS Attorney Registration database"
+            "evidence": "Mean 12.2 years since admission across 13 of 13 named attorneys (longest 35, shortest 1) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 7.5,
+            "pts": 9,
             "max": 9,
             "source": "registry",
-            "evidence": "12 of 13 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "13 of 13 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -588,11 +592,11 @@
         ]
       }
     },
-    "floor_abc": 50,
+    "floor_abc": 52,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -601,10 +605,10 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 61.0,
+    "raw": 62.5,
     "assessed": 89,
     "coverage": 0.89,
-    "floor_abc_pct": 0.886,
+    "floor_abc_pct": 0.912,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true

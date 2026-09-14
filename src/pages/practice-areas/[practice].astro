@@ -77,7 +77,7 @@ const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
       </div>
     </div>
     <div class="hero-facts">
-      <div class="fact"><b class="num">{certified.length}</b><span>Certified {notes.abbr} firms</span></div>
+      <div class="fact"><b class="num">{certified.length}</b><span>Certified {notes.abbr} {certified.length === 1 ? 'firm' : 'firms'}</span></div>
       <div class="fact"><b class="num">{firms.length}</b><span>Firms listed</span></div>
       <div class="fact"><b class="num">{share(contingency)}</b><span>{notes.feeFactLabel}</span></div>
       <div class="fact"><b class="num">{share(freeConsult)}</b><span>Free consultation</span></div>

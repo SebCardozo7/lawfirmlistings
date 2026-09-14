@@ -43,6 +43,10 @@ const pages = files.filter(p => p.endsWith(`${sep}index.html`) || p === join(DIS
       title: (html.match(/<title>([\s\S]*?)<\/title>/) ?? [, ''])[1].trim(),
       canonical: (html.match(/<link rel="canonical" href="([^"]*)"/) ?? [, ''])[1].trim(),
       noindex: /name="robots"[^>]*noindex/.test(html),
+      h1: [...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)]
+        .map(m => m[1].replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()),
+      jsonld: [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+        .map(m => { try { JSON.parse(m[1]); return true; } catch { return false; } }),
     };
   });
 
@@ -99,7 +103,28 @@ for (const page of pages) {
   if (inbound.get(page.url) === 0) notes.push([page.url, 'orphan: nothing on the site links to it']);
 }
 
+// A missing or repeated h1, and structured data that does not parse, are faults rather than
+// judgement calls: a page with two h1 elements is telling a crawler two different things it is
+// about, and a JSON-LD block with a syntax error is markup we shipped and nobody can read.
+for (const page of pages) {
+  if (page.h1.length === 0) problems.push([page.url, 'no h1']);
+  else if (page.h1.length > 1)
+    problems.push([page.url, `${page.h1.length} h1 elements: ${page.h1.slice(0, 2).join(' / ')}`]);
+  if (page.jsonld.some(ok => !ok)) problems.push([page.url, 'a JSON-LD block does not parse']);
+}
+
+// Title length is a note, not a problem, because a law firm's name is not editable copy. Where
+// the name alone accounts for the length there is nothing to fix short of truncating the firm's
+// name on its own page, so the budget asks whether what we wrote around the name pushed it over.
+for (const page of pages) {
+  if (page.noindex || !page.title) continue;
+  const ownName = page.title.split(/ [|:] /)[0];
+  const budget = page.url.startsWith('/firms/') ? Math.max(70, ownName.length + 24) : 70;
+  if (page.title.length > budget)
+    notes.push([page.url, `title is ${page.title.length} characters, ${page.title.length - budget} over`]);
+}
+
 for (const [url, problem] of problems) console.error(`${url} — ${problem}`);
 for (const [url, note] of notes) console.warn(`${url} — ${note}`);
-console.log(`\n${pages.length} pages checked, ${problems.length} problem${problems.length === 1 ? '' : 's'}, ${notes.length} orphan${notes.length === 1 ? '' : 's'}.`);
+console.log(`\n${pages.length} pages checked, ${problems.length} problem${problems.length === 1 ? '' : 's'}, ${notes.length} note${notes.length === 1 ? '' : 's'}.`);
 process.exit(problems.length ? 1 : 0);

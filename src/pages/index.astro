@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { officeLabel } from '../lib/labels';
+import { PRACTICE_SLUGS } from '../data/practices';
 import { publishedGuides } from '../data/guides';
 
 // The hero preview and the "certified this month" grid both render real firms.
@@ -43,9 +44,10 @@ const practiceCount = new Set(published.flatMap(f => f.data.practices.map(pr => 
 // lawyer they need — so the eight entries stay. Their firm counts were invented, and the seven
 // practice areas we have not started have no page to link to. Each tile now shows a count only
 // when there are firms behind it, and links only where a page exists.
-const PAGES = new Set(['personal-injury']);
+const PAGES = new Set(PRACTICE_SLUGS);
 const SITUATIONS = [
-  { slug: 'personal-injury', icon: 'car', name: 'Personal Injury', title: 'I was hurt in an accident', desc: 'Car, truck, work or construction injuries, slip & fall, medical mistakes' },
+  { slug: 'personal-injury', icon: 'car', name: 'Personal Injury', title: 'I was hurt in an accident', desc: 'Car and truck crashes, slip & fall, medical mistakes, wrongful death' },
+  { slug: 'workers-compensation', icon: 'briefcase', name: "Workers' Compensation", title: 'I was hurt at work', desc: 'Workplace and construction injuries, repetitive strain, benefits denied or stopped' },
   { slug: 'family-law', icon: 'heart', name: 'Family Law', title: "I'm getting divorced or need custody help", desc: 'Divorce, child custody and support, prenups, domestic violence orders' },
   { slug: 'criminal-defense', icon: 'gavel', name: 'Criminal Defense', title: "I've been arrested or charged", desc: 'DUI, drug and assault charges, white-collar and federal investigations' },
   { slug: 'immigration', icon: 'globe', name: 'Immigration', title: 'I need a visa, green card or citizenship', desc: 'Family and work visas, asylum, naturalization, removal defense' },
@@ -80,7 +82,7 @@ const lastUpdated = computedDates.length
 const logoVariants = ['', 'l2', 'l3'];
 // The hero search routes in the browser against the pages that exist. Built from the
 // collection, so a new city or practice area is searchable as soon as it has a page.
-const PRACTICE_PAGES = new Set(['personal-injury']);
+const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
 const searchIndex = {
   practices: [...new Map(published.flatMap(f => f.data.practices)
     .filter(pr => PRACTICE_PAGES.has(pr.slug))
@@ -167,7 +169,7 @@ const searchIndex = {
     });
   })();
 </script>
-    <div class="hero-popular"><span>Popular:</span><a href="/cities/new-york-ny/personal-injury/">Personal injury</a>{['Divorce', 'Criminal defense', 'Immigration', 'Estate planning'].map(p => (
+    <div class="hero-popular"><span>Popular:</span><a href="/cities/new-york-ny/personal-injury/">Personal injury</a><a href="/cities/new-york-ny/workers-compensation/">Workers' compensation</a>{['Divorce', 'Criminal defense', 'Immigration', 'Estate planning'].map(p => (
         <span class="soon">{p}</span>
       ))}</div>
 

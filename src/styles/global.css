@@ -144,7 +144,7 @@ button,input,select{font:inherit;color:inherit}
 .nav-actions{display:flex;gap:8px;align-items:center;margin-left:8px;padding-left:12px;border-left:1px solid var(--line)}
 .nav-toggle{display:none}
 @media (max-width:1060px){.nav-links a span{display:none}.nav-links a{padding:10px 12px}}
-@media (max-width:820px){.nav-links,.nav-actions .btn--ghost{display:none}.nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:40px;height:40px;align-items:center;justify-content:center}.brand-lockup{display:none}.brand-mark-img{display:block}.brand{border-right:0;padding:6px}.navpill{padding-left:8px}}
+@media (max-width:820px){.nav-links,.nav-actions .btn--ghost{display:none}.nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:44px;height:44px;align-items:center;justify-content:center;color:var(--ink);flex:none}.site-header{padding:0}.site-header .container{width:100%;display:block}.navpill{width:100%;justify-content:space-between;border-radius:0;border-width:0 0 1px 0;box-shadow:none;background:rgba(255,255,255,.94);padding:12px 16px;gap:10px}.brand{border-right:0;padding:0;margin-right:0}.brand-lockup{height:26px}.brand-mark-img{display:none}.nav-actions{margin-left:0;padding-left:0;border-left:0;gap:8px}.nav-actions .btn--primary{padding:12px 18px;font-size:.95rem}}
 
 /* ---------- Footer ---------- */
 .site-footer{background:var(--night);color:var(--on-night-soft);padding:80px 0 32px;position:relative;overflow:hidden}
@@ -171,7 +171,7 @@ button,input,select{font:inherit;color:inherit}
 .crumbs{display:flex;gap:10px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);list-style:none;margin:0 0 30px;padding:0}
 .crumbs li{display:flex;align-items:center}
 .crumbs a{color:var(--muted)}
-.crumbs li+li::before{content:"/";margin-right:10px;color:var(--line-2)}
+.crumbs li:not(:last-child)::after{content:"/";margin-left:10px;color:var(--line-2)}
 .crumbs [aria-current]{color:var(--ink);font-weight:500}
 .on-night .crumbs,.on-night .crumbs a{color:var(--on-night-soft)}
 .on-night .crumbs [aria-current]{color:#fff}
@@ -424,6 +424,7 @@ button,input,select{font:inherit;color:inherit}
 .fact b{display:block;font-size:1.6rem;color:#fff;font-weight:600;letter-spacing:-.03em}
 .fact span{font-size:.8rem;color:var(--on-night-soft)}
 @media (max-width:960px){.page-hero .container{grid-template-columns:1fr}}
+@media (max-width:640px){.hero-facts{grid-template-columns:repeat(2,1fr);gap:8px}.fact{padding:14px}.fact b{font-size:1.4rem}.page-hero .lede{font-size:1.02rem}}
 
 /* Filter bar */
 .filterbar{position:sticky;top:var(--header-h);z-index:30;background:rgba(246,246,243,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--grid)}
@@ -785,6 +786,11 @@ button,input,select{font:inherit;color:inherit}
 
 /* ---------- Methodology ---------- */
 .method-hero .container{grid-template-columns:1.1fr .9fr;align-items:center}
+/* This sits three hundred lines below the rule that makes every other page hero a single
+   column under 960px, and it has the same specificity, so it won the cascade at every
+   width. On a phone that left the heading in a 131px column, one word per line, with the
+   score card hanging 164px off the right edge of the screen. */
+@media (max-width:960px){.method-hero .container{grid-template-columns:1fr}}
 .weight-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:3px;margin-top:22px}
 .weight-bar i{display:block;height:100%}
 .weight-legend{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
@@ -944,3 +950,60 @@ button,input,select{font:inherit;color:inherit}
 
 /* A practice area we have not opened a page for: named, not linked. */
 .pa.is-soon{opacity:.62;cursor:default}
+
+/* ---------- Phones ----------
+   Collected from an iPhone 16 Plus at 430px, where the desktop rhythm is simply too big: 96px
+   of padding above and below every section is a third of the screen spent on nothing, and the
+   eye reads it as a page that failed to load rather than as generous spacing. Everything here
+   is spacing and density. No layout below this line changes what a page says. */
+/* The sticky offsets read this, and it was a desktop constant. The phone header is 79px, so
+   the filter bar and the profile's own tab strip were parking twelve pixels below where the
+   header ends, which on a scorecard reads as a seam. */
+@media (max-width:820px){ :root{--header-h:75px} }
+
+@media (max-width:640px){
+  .section{padding:56px 0}
+  /* The hero's grid gap separates two columns on a desktop and two stacked blocks on a phone,
+     where 56px plus the facts' own margin left 88px of empty screen under the firm's name. */
+  .page-hero .container{gap:28px}
+  .profile-facts{margin-top:0}
+  .section--tight{padding:40px 0}
+  .profile-main{gap:36px}
+  .page-hero{padding-bottom:48px}
+  .block h2{font-size:1.45rem}
+  .narrow h2,.container>.section-head h2{font-size:1.6rem}
+  /* A 24px gutter each side leaves 382px of content on a 430px phone. 18px leaves 394, and at
+     this width every pixel of line length is worth having. */
+  .container{width:calc(100% - 36px)}
+  .entry,.panel,.method{padding:20px}
+  .crumbs{font-size:.76rem;gap:8px;margin-bottom:22px}
+}
+
+/* ---------- The phone menu ----------
+   It ships in the markup and the script closes it on load, so a reader without JavaScript gets
+   a working set of links instead of a button that does nothing. That is what the button did
+   before this existed: every section of the site was unreachable on a phone. */
+.nav-menu{display:none}
+@media (max-width:820px){
+  .nav-menu{
+    display:block;pointer-events:auto;background:var(--paper);
+    border-bottom:1px solid var(--line);padding:10px 16px 18px;
+    box-shadow:0 18px 40px -24px rgba(10,10,12,.5);
+  }
+  /* Closed is a state on the header rather than the `hidden` attribute, so the panel can
+     animate and so the button and the panel cannot disagree about which one is right. */
+  .site-header.has-js:not(.is-open) .nav-menu{display:none}
+  .nav-menu ul{list-style:none;margin:0 0 12px;padding:0;display:grid}
+  .nav-menu a{
+    display:flex;align-items:center;gap:12px;padding:14px 8px;color:var(--ink);
+    font-weight:500;border-radius:12px;text-decoration:none!important;
+  }
+  .nav-menu li+li a{border-top:1px solid var(--grid)}
+  .nav-menu a[aria-current]{color:var(--link)}
+  .nav-menu svg{width:18px;height:18px;color:var(--muted);flex:none}
+  .nav-menu .btn{width:100%;justify-content:center}
+  .nav-toggle .ico-close{display:none}
+  .site-header.is-open .nav-toggle .ico-open{display:none}
+  .site-header.is-open .nav-toggle .ico-close{display:block}
+  .site-header.is-open .nav-toggle{background:var(--tint);border-color:var(--ink)}
+}

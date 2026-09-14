@@ -1,0 +1,206 @@
+# Re-measure every published firm, once a month, and open a pull request with what moved.
+#
+# Why this exists. Every number on this site has a measured_at date, and until now that date only
+# advanced when somebody ran the scripts by hand. Review counts, PageSpeed scores, bar
+# registrations and corporate filings all change on their own, so a directory whose whole claim
+# is measurement was quietly ageing between sessions.
+#
+# Why the 20th. The Ahrefs subscription's units reset on the 19th of each month, and a run that
+# starts the day after has a full month of budget behind it rather than whatever was left.
+#
+# Why it opens a pull request rather than committing. A score change is a public statement about
+# a real firm. The engine decides the number, a person decides to publish it, and that has caught
+# things a green build never would: a retired gate written back into fifty-eight profiles, and a
+# name matched to the wrong register entry.
+name: Monthly re-measurement
+
+on:
+  schedule:
+    # 13:00 UTC on the 20th, which is 10:00 in America/Montevideo.
+    - cron: '0 13 20 * *'
+  # So the first run does not have to wait for the 20th, and so a month that failed can be
+  # re-run without editing the schedule.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: remeasure
+  cancel-in-progress: false
+
+jobs:
+  # Everything that touches a firm's own web server, split into shards. The crawler waits 1.5
+  # seconds between requests to one host, which is the politeness we score other firms on and is
+  # not negotiable, so the only way to shorten a four-hour run is to give each shard a different
+  # set of firms. Per-host spacing is unchanged.
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Which firms this shard owns
+        id: firms
+        run: |
+          echo "domains=$(python scripts/published_domains.py --shard ${{ matrix.shard }} --of 4 --joined)" >> "$GITHUB_OUTPUT"
+          python scripts/published_domains.py --shard ${{ matrix.shard }} --of 4
+
+      # Read from the firms' own sites. Each step is separate and none of them fails the job: a
+      # site that is down this month is a site that is down, and the rest of the measurement is
+      # still worth having. `continue-on-error` is deliberate here and nowhere else.
+      - name: Public crawl
+        continue-on-error: true
+        run: python scripts/crawl_public.py --domains "${{ steps.firms.outputs.domains }}"
+
+      - name: Attorney rosters
+        continue-on-error: true
+        run: python scripts/crawl_attorneys.py --domains "${{ steps.firms.outputs.domains }}"
+
+      - name: Published results
+        continue-on-error: true
+        run: python scripts/crawl_results.py --domains "${{ steps.firms.outputs.domains }}"
+
+      - name: Bar associations and insurance disclosure
+        continue-on-error: true
+        run: python scripts/check_a5.py --domains "${{ steps.firms.outputs.domains }}"
+
+      - name: Google Business Profiles
+        continue-on-error: true
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python scripts/enrich_places.py --domains "${{ steps.firms.outputs.domains }}"
+
+      - name: PageSpeed Insights
+        continue-on-error: true
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python scripts/enrich_psi.py --domains "${{ steps.firms.outputs.domains }}"
+
+      - name: Domain registration
+        continue-on-error: true
+        run: python scripts/check_operating.py --domains "${{ steps.firms.outputs.domains }}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: staging-${{ matrix.shard }}
+          path: .crawl/*.json
+          retention-days: 3
+          if-no-files-found: warn
+
+  # Everything that reads a public register, plus the engine. One process, because the registers
+  # are single endpoints and hammering them in parallel would be the same discourtesy the shards
+  # exist to avoid.
+  publish:
+    needs: measure
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: staging-*
+          merge-multiple: true
+          path: .crawl
+
+      - name: What the shards collected
+        run: |
+          ls -1 .crawl/*.json 2>/dev/null | wc -l
+          echo "ALL=$(python scripts/published_domains.py --joined)" >> "$GITHUB_ENV"
+
+      # Only the fields a machine measured, in the shape build_profiles writes them. Prose, FAQs
+      # and pull quotes on a published profile are left exactly as they are.
+      - name: Promote the measurements
+        run: python scripts/promote_measurements.py --domains "$ALL" --attorneys
+
+      - name: New York attorney register
+        continue-on-error: true
+        run: python scripts/check_ny_registry.py --write --gates
+
+      - name: New York corporations register
+        continue-on-error: true
+        run: python scripts/check_ny_dos.py --write
+
+      - name: Published discipline decisions
+        continue-on-error: true
+        run: |
+          for state in ny md fl; do
+            python scripts/check_discipline.py --state "$state" --write --gates || true
+          done
+
+      - name: Settle the footprint gate
+        continue-on-error: true
+        run: python scripts/check_operating.py --domains "$ALL" --gates-only
+
+      - name: Score
+        run: python scripts/score.py | tee /tmp/score.log
+
+      - name: Build, and check what the build says
+        run: |
+          npm ci
+          npm run build
+          node scripts/audit_seo.mjs
+          python scripts/audit_published.py | tee /tmp/audit.log
+
+      # score.py stamps computed_at on every profile, so this diff is never empty on a healthy
+      # run: the measurement date advancing is the point of the job. An empty diff means every
+      # script failed, which is worth stopping for rather than opening an empty pull request.
+      - name: Open the pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$(git status --porcelain src/data/firms)" ]; then
+            echo "Not one profile changed, not even its measurement date."
+            echo "That means the run measured nothing. Check the step logs above."
+            exit 1
+          fi
+
+          branch="remeasure/$(date -u +%Y-%m)"
+          git config user.name  "Law Firm Listings measurement"
+          git config user.email "noreply@lawfirmlistings.com"
+          git checkout -b "$branch"
+          git add src/data/firms
+          git commit -m "Monthly re-measurement: $(date -u +'%B %Y')" -m "$(grep -c 'status:' /tmp/score.log || true) firm(s) changed tier. Every figure comes from the scripts named in the workflow; no prose was touched."
+
+          git push -u origin "$branch"
+
+          {
+            echo "Measured on $(date -u +%Y-%m-%d) by \`.github/workflows/remeasure.yml\`."
+            echo
+            echo "## Tier changes"
+            echo '```'
+            grep 'status:' /tmp/score.log || echo "None. Scores moved, tiers did not."
+            echo '```'
+            echo
+            echo "## What the audit says about the result"
+            echo '```'
+            tail -40 /tmp/audit.log
+            echo '```'
+            echo
+            echo "Read the tier changes before merging. A score is a public statement about a real"
+            echo "firm, and the engine is entitled to compute it but not to publish it."
+          } > /tmp/body.md
+
+          gh pr create --base main --head "$branch" \
+            --title "Monthly re-measurement: $(date -u +'%B %Y')" \
+            --body-file /tmp/body.md

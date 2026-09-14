@@ -254,7 +254,14 @@ const subject = 'List your firm';
   .field .err { color: #b42318; font-size: .85rem; font-weight: 500; }
   .field--check label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .92rem; line-height: 1.6; }
   .field--check input { width: auto; margin-top: 3px; flex: 0 0 auto; }
-  .form-actions { display: flex; gap: 10px; margin-top: 8px; }
+  /* Wrapping matters here: on the last step the row holds Back, Continue and Open the message,
+     which on a 430px phone ran the last button off the right edge. That button is the one the
+     whole form exists to reach. */
+  .form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  @media (max-width: 560px) {
+    .form-actions .btn { flex: 1 1 auto; justify-content: center; }
+    .form-actions .btn--primary { flex-basis: 100%; order: -1; }
+  }
   .form-foot { margin-top: 18px; font-size: .88rem; }
 </style>
 

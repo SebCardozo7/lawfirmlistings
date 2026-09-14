@@ -24,7 +24,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 // enforced without each page remembering it.
 checkDescription(description, Astro.url.pathname);
 const siteName = 'Law Firm Listings';
-const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+// The brand suffix is worth about twenty characters, and a search result shows about sixty.
+// On a firm whose own name runs to ten surnames it was pushing the city and the practice past
+// the cut, so the page appeared in results as a name and an ellipsis. Above the threshold the
+// page's own title is the whole title: a reader who has got that far knows whose site it is.
+const fullTitle = title.includes(siteName) || title.length > 52 ? title : `${title} | ${siteName}`;
 ---
 <!doctype html>
 <html lang="en">
