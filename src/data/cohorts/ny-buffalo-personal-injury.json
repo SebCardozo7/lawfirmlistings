@@ -1,0 +1,143 @@
+{
+  "id": "ny-buffalo-personal-injury",
+  "market": {
+    "city_slug": "buffalo-ny",
+    "city": "Buffalo",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "state": "NY",
+  "practice": "personal-injury",
+  "label": "Buffalo x Personal Injury",
+  "measured_at": "2026-09-14",
+  "source": "The second New York market. Candidates from Google Places text search across Buffalo, Amherst, Cheektowaga, Williamsville and Niagara Falls (scripts/discover_places.py, 79 domains), each kept only where the firm's own site publishes a personal injury practice page (scripts/check_practice.py) and it holds an office in Erie or Niagara county, meaning a postal code from 14000 to 14399. Rochester is 144xx and above and is a different market. No Ahrefs metrics: D2 scores pending for every firm here until the subscription is read again.",
+  "full_size_estimate": 79,
+  "firms": [
+    {
+      "domain": "williammattar.com",
+      "name": "William Mattar",
+      "practice_page": "https://williammattar.com/nyc-truck-accident-lawyer/"
+    },
+    {
+      "domain": "richmondvona.com",
+      "name": "Richmond Vona Injury Lawyers",
+      "practice_page": "https://www.richmondvona.com/new-york/car-accident-lawyer/"
+    },
+    {
+      "domain": "buffalolaw.com",
+      "name": "Cantor, Wolff, Nicastro and Hall",
+      "practice_page": "https://www.buffalolaw.com/car-accident-lawyer/"
+    },
+    {
+      "domain": "calljed.com",
+      "name": "Dietrich Law Firm P.C.",
+      "practice_page": "https://www.calljed.com/personal-injury.html"
+    },
+    {
+      "domain": "866nicotra.com",
+      "name": "The Nicotra Law Firm, PC",
+      "practice_page": "https://866nicotra.com/buffalo-personal-injury-lawyers/"
+    },
+    {
+      "domain": "wnyinjurylawyers.com",
+      "name": "Andrews, Bernstein & Maranto, PLLC",
+      "practice_page": "https://www.wnyinjurylawyers.com/buffalo-injury-lawyers/"
+    },
+    {
+      "domain": "johnvelmore.com",
+      "name": "John V. Elmore, P.C.",
+      "practice_page": "https://johnvelmore.com/car-accident/"
+    },
+    {
+      "domain": "lewislaw.com",
+      "name": "Lewis & Lewis, P.C.",
+      "practice_page": "https://www.lewislaw.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "yourbuffalolawyer.com",
+      "name": "Feroleto Law",
+      "practice_page": "https://yourbuffalolawyer.com/personal-injury/"
+    },
+    {
+      "domain": "brownchiari.com",
+      "name": "Brown Chiari LLP",
+      "practice_page": "https://www.brownchiari.com/depew-car-accident-lawyer/"
+    },
+    {
+      "domain": "steenberglaw.com",
+      "name": "Steenberg Law Firm",
+      "practice_page": "https://steenberglaw.com/personal-injury/"
+    },
+    {
+      "domain": "briantoweylaw.com",
+      "name": "Towey Law Personal Injury Attorneys",
+      "practice_page": "https://www.briantoweylaw.com/lockport-personal-injury-lawyer/"
+    },
+    {
+      "domain": "lipsitzgreen.com",
+      "name": "Lipsitz Green Scime Cambria LLP",
+      "practice_page": "https://www.lipsitzgreen.com/practice-areas/accidents-and-personal-injury/car-accidents/"
+    },
+    {
+      "domain": "hurwitzcomp.com",
+      "name": "Hurwitz Whitcher & Molloy Attorneys at Law",
+      "practice_page": "https://www.hurwitzcomp.com/personal-injury/"
+    },
+    {
+      "domain": "obrienandford.com",
+      "name": "O'Brien & Ford Lawyers",
+      "practice_page": "https://obrienandford.com/buffalo-car-accident-lawyer/"
+    },
+    {
+      "domain": "looneyinjurylaw.com",
+      "name": "Looney Injury Law - John W. Looney, Esq.",
+      "practice_page": "https://www.looneyinjurylaw.com/personal-injury/"
+    },
+    {
+      "domain": "collinscollins.com",
+      "name": "Collins & Collins Attorneys, LLC",
+      "practice_page": "https://www.collinscollins.com/truck-accidents"
+    },
+    {
+      "domain": "steveboyd.com",
+      "name": "The Law Offices of Steve Boyd, PC",
+      "practice_page": "https://steveboyd.com/buffalo-personal-injury-lawyer/"
+    },
+    {
+      "domain": "hornwright.com",
+      "name": "Horn Wright, LLP",
+      "practice_page": "https://www.hornwright.com/personal-injury/"
+    },
+    {
+      "domain": "stevefoleylaw.com",
+      "name": "Steve Foley Law Firm",
+      "practice_page": "https://stevefoleylaw.com/albany-ny/car-accident-lawyer/"
+    },
+    {
+      "domain": "paulbbeckerattorney.com",
+      "name": "Becker Law",
+      "practice_page": "https://www.paulbbeckerattorney.com/service/personal-injury/"
+    },
+    {
+      "domain": "fromenlaw.com",
+      "name": "Fromen Injury Law PLLC",
+      "practice_page": "http://www.fromenlaw.com/car-accident-lawyer/"
+    },
+    {
+      "domain": "campbellpersonalinjury.com",
+      "name": "Campbell & Associates",
+      "practice_page": "https://campbellpersonalinjury.com/buffalo-ny-personal-injury-lawyers/"
+    },
+    {
+      "domain": "lipsitzponterio.com",
+      "name": "Lipsitz, Ponterio & Comerford, LLC",
+      "practice_page": "https://lipsitzponterio.com/personal-injury-claims/"
+    }
+  ],
+  "unresolved": [],
+  "unresolved_notes": {
+    "brandonjbroderick.com": "Held back from every market on 2026-09-13 and still held. The state's attorney register records one of the twenty-five attorneys this firm names as suspended, the registration itself names the firm, and the register does not carry the reason. The question is about the firm rather than about the market, so a Buffalo office does not change it.",
+    "sawersandsackel.com": "Reads as a workers' compensation practice rather than an injury one: its only page titled for personal injury is a work-related slip and fall, filed under workers' compensation. A candidate for a Buffalo compensation cohort, not this one.",
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market."
+  }
+}

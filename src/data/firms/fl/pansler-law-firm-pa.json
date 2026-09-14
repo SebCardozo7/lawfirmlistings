@@ -1,0 +1,434 @@
+{
+  "slug": "pansler-law-firm-pa",
+  "name": "Pansler Law Firm, P.A.",
+  "initials": "PP",
+  "website": "https://www.pansler.com/",
+  "domain": "pansler.com",
+  "phone": "(863) 683-7500",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true
+    }
+  ],
+  "market": {
+    "city_slug": "lakeland-fl",
+    "city": "Lakeland",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Pansler Law Firm, P.A.",
+      "address": "223 N Florida Ave, Lakeland, FL 33801, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=10923548638652974973&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Estate Planning",
+      "role": "Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.pansler.com/estate-planning"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Pansler Law Firm, P.A. is a personal injury firm with a single office in Lakeland.",
+    "The firm states that the first consultation is free. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "43",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-14"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-19T19:29:20.248469427Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-23T18:48:07.780745863Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-17T01:41:01.216239152Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-12T17:37:44.365113629Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-08T23:15:13.624607824Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true
+    },
+    "schema_detected": false,
+    "psi": {
+      "value": {
+        "performance": 51,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-14",
+      "note": "LCP 5.9 s / CLS 0.005 / TBT 1179 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "pansler.com",
+      "name": "Pansler Law Firm, P.A.",
+      "practice_page": "https://www.pansler.com/personal-injury"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 43,
+      "rating_weighted": 4.8,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-14"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-14"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Florida does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-14"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-14"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-14"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "43 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2007-01-29, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-14"
+    }
+  },
+  "cohort_id": "fl-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "3-683-7500 Call Us To Learn More CALL US Personalized Service Is The Best Service REQUEST FREE CONSULTATION Contact Us Name: Email: Phone Number: Message: Thank you for contacting us. We will get b",
+          "source_url": "https://www.pansler.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.pansler.com/",
+        "results": "https://www.pansler.com/results",
+        "contact": "https://www.pansler.com/contact-us",
+        "about": "https://www.pansler.com/our-firm",
+        "attorneys": "https://www.pansler.com/meet-our-attorneys"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.pansler.com/meet-our-attorneys"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2007-01-29",
+    "years": 19.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-14"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-14"
+  },
+  "results_published": {
+    "count": 25,
+    "counted_from": "stated amounts",
+    "amounts": [
+      5700000,
+      3000000,
+      2520000,
+      2500000,
+      2250000,
+      1700000,
+      1005000,
+      1000000,
+      500000,
+      450000,
+      400000,
+      260500,
+      250000,
+      200000,
+      175000,
+      150000,
+      125000,
+      100000,
+      60000,
+      50000,
+      45000,
+      40000,
+      36000,
+      25000,
+      20000
+    ],
+    "largest": 5700000,
+    "aggregate_claims": [],
+    "case_types": [
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 14878,
+    "readable": true,
+    "url": "https://www.pansler.com/results",
+    "checked_at": "2026-09-14"
+  },
+  "score": {
+    "total": 39,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-14",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 9,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 6,
+            "max": 6,
+            "source": "firm",
+            "evidence": "25 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "7 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "43 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.8 over 43 reviews → Bayesian 4.83 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-06-23) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 1,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · no fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 1,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 25,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 31,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "A6 Roster verifiability: +9 available"
+      ]
+    },
+    "raw": 27.0,
+    "assessed": 70,
+    "coverage": 0.769,
+    "floor_abc_pct": 0.658,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "assessable": 91,
+    "comparable": true
+  }
+}

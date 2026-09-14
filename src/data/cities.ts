@@ -256,4 +256,82 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  'buffalo-ny': {
+    lede:
+      'Buffalo is the second market this directory covers in New York, and the state register ' +
+      'that makes a New York profile checkable covers it too. Compare firms on what they ' +
+      'publish and on what we could verify for ourselves.',
+    areas: ['Downtown', 'Elmwood Village', 'Allentown', 'North Buffalo', 'South Buffalo',
+            'Amherst', 'Cheektowaga', 'Williamsville', 'Tonawanda', 'Niagara Falls'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Buffalo: what is different',
+        paragraphs: [
+          'The deadlines are New York’s, so three years for an injury claim and two years and ' +
+          'six months for medical malpractice, and the rule that catches people out is the same ' +
+          'one that catches New Yorkers four hundred miles away. A claim against a public body, ' +
+          'the City of Buffalo, Erie County, the NFTA, needs a written notice of claim within ' +
+          '<b>90 days</b> under General Municipal Law § 50-e, sworn, and setting out when, where ' +
+          'and how the claim arose. Nobody sends a reminder.',
+          'Where a case is heard is local, though. Erie County sits in the Eighth Judicial ' +
+          'District, whose Supreme Court is at 25 Delaware Avenue downtown, and the district ' +
+          'also covers Niagara, Chautauqua, Cattaraugus, Genesee, Allegany, Orleans and Wyoming ' +
+          'counties. Federal matters go to the Western District of New York, which sits in ' +
+          'Buffalo rather than in Manhattan. A firm that appears in those buildings weekly knows ' +
+          'their judges and their calendars, and Western New York is a small enough bar that ' +
+          'this is a real difference rather than a marketing line.',
+        ],
+      },
+      {
+        heading: 'What lawyers cost in Buffalo',
+        paragraphs: [
+          'Injury work is done on contingency, and New York regulates the share: one third of ' +
+          'the recovery is the ordinary arrangement, with a statutory sliding scale in medical ' +
+          'malpractice. That is the rule rather than a quote, and no firm in this directory ' +
+          'publishes its own percentage, in Buffalo or anywhere else. Hourly rates upstate run ' +
+          'well below Manhattan’s, which matters for everything billed by the hour and not at ' +
+          'all for a case taken on contingency.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Western New Yorkers out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> three years from the accident, state-wide.',
+          '<b>Any claim against the City of Buffalo, Erie County or the NFTA:</b> a sworn notice ' +
+          'of claim within <b>90 days</b>, then a year and ninety days to sue.',
+          '<b>Medical malpractice:</b> two years and six months, with a discovery rule for ' +
+          'foreign objects and missed cancer diagnoses.',
+          '<b>A crash with a car registered in Ontario:</b> the deadline is still New York’s, ' +
+          'but service and insurance turn into a cross-border problem that is worth raising on ' +
+          'the first call in a border city.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Buffalo lawyer is licensed?',
+        a: 'The same way as anywhere in New York, and it is free: the Unified Court System ' +
+           'publishes attorney registrations as open data, so we run that check ourselves and ' +
+           'every profile says how many of a firm’s attorneys it covers. That is why a New York ' +
+           'profile carries a licence finding and a Maryland one does not.',
+      },
+      {
+        q: 'Are Buffalo firms cheaper than New York City firms?',
+        a: 'Not on a contingency case, because the share is set by the same state rule rather ' +
+           'than by the local market. On anything billed hourly, yes, substantially. What does ' +
+           'differ is caseload: a Western New York firm handles fewer cases at once than a ' +
+           'high-volume Manhattan practice, and asking who will actually work on yours is worth ' +
+           'more than asking what it costs.',
+      },
+      {
+        q: 'Should I hire a firm in Buffalo itself?',
+        a: 'For a case in the Eighth District, local practice matters more here than in a big ' +
+           'metro: it is one courthouse and a bar small enough that the lawyers and the judges ' +
+           'know each other. Several firms listed here run offices across Erie and Niagara ' +
+           'counties. What counts is regular appearance in the court that will hear your case.',
+      },
+    ],
+  },
 };

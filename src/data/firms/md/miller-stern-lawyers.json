@@ -1,0 +1,334 @@
+{
+  "slug": "miller-stern-lawyers",
+  "site_blocked": {
+    "reason": "The firm's site answers our crawler with HTTP 403, which is bot protection. We do not work around it.",
+    "seen_at": "2026-09-14"
+  },
+  "name": "Miller Stern Lawyers",
+  "initials": "MS",
+  "website": "https://millersternlawyers.com",
+  "domain": "millersternlawyers.com",
+  "phone": "(410) 529-3476",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true
+    }
+  ],
+  "market": {
+    "city_slug": "baltimore-md",
+    "city": "Baltimore",
+    "state": "MD",
+    "state_name": "Maryland"
+  },
+  "offices": [
+    {
+      "label": "Miller | Stern Lawyers",
+      "address": "2800 Quarry Lake Dr Suite 280, Baltimore, MD 21209, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=13023864948851537972&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": false,
+  "availability": [],
+  "about": [
+    "Miller Stern Lawyers is a personal injury firm with a single office in Baltimore.",
+    "The firm publishes little about cost or availability on the pages we read. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "143",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-14"
+    }
+  },
+  "results": [],
+  "digital": {
+    "schema_detected": false,
+    "_ahrefs_partial_from_cohort": {
+      "domain": "millersternlawyers.com",
+      "name": "Miller | Stern Lawyers",
+      "practice_page": "https://www.millersternlawyers.com/personal-injury/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 143,
+      "rating_weighted": 5.0,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-14"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Maryland does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-14"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Maryland does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-14"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-14"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-14"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "143 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2020-01-02, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-14"
+    }
+  },
+  "cohort_id": "md-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {},
+      "json_ld_descriptions": [],
+      "pages": {}
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2020-01-02",
+    "years": 6.7,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-14"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-14"
+  },
+  "score": {
+    "total": 62,
+    "tier": "Listed",
+    "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-14",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "Nothing published about insurance or bar memberships"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+          }
+        ]
+      },
+      "C": {
+        "score": 9,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "143 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 143 reviews → Bayesian 4.93 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "No review sample collected yet"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "No review sample collected yet"
+          }
+        ]
+      },
+      "D": {
+        "score": 1,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+          }
+        ]
+      },
+      "E": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+          }
+        ]
+      }
+    },
+    "floor_abc": 9,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 8,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D2 Search authority: not yet measured (8 pts)"
+      ]
+    },
+    "raw": 10.0,
+    "assessed": 16,
+    "coverage": 0.16,
+    "floor_abc_pct": 0.818,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "assessable": 100,
+    "comparable": false
+  }
+}

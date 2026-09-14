@@ -9,8 +9,8 @@
   "state": "FL",
   "practice": "personal-injury",
   "label": "Florida x Personal Injury",
-  "measured_at": "2026-09-13",
-  "source": "Polk County firms, opened for Lopez & Humphries in Lakeland. The Ahrefs figures on every entry are zeros standing in for measurements not taken rather than measurements of zero: no Florida profile carries a digital.ahrefs block, so D2 is pending on all of them and these peer values are never read. Replace them before trusting a D2 score here.",
+  "measured_at": "2026-09-14",
+  "source": "Polk County firms, opened for Lopez & Humphries in Lakeland. The Ahrefs figures on every entry are zeros standing in for measurements not taken rather than measurements of zero: no Florida profile carries a digital.ahrefs block, so D2 is pending on all of them and these peer values are never read. Replace them before trusting a D2 score here. Deepened 2026-09-14: candidates from Google Places text search across the metro (scripts/discover_places.py), each kept only where the firm's own site publishes a personal injury practice page (scripts/check_practice.py) and it holds an office in the 338 postal area (scripts/vet_candidates.py). The firms added on this pass carry no Ahrefs metrics, so D2 scores pending for them.",
   "licence_register": "The Florida Bar publishes a member directory at floridabar.org and its robots.txt allows general crawlers, but the site refuses our requests outright: every call returns 403 from Cloudflare, including from the crawler's own user agent. That makes G1 a gap of ours rather than one of Florida's, which is the opposite of Maryland, where the state forbids the query. It is recorded as pending, it counts against our coverage, and it is fixable by running the pipeline from somewhere the register will answer.",
   "discipline_register": "Published decisions of the Supreme Court of Florida, indexed by CourtListener. Florida writes the respondent's full name into the case name, so an attorney is identified or cleared without a full-text search.",
   "firms": [
@@ -45,6 +45,61 @@
       "refdomains": 0,
       "org_keywords": 0,
       "org_traffic": 0
+    },
+    {
+      "domain": "theinjurylawyers.com",
+      "name": "Abrahamson & Uiterwyk Car Accident and Personal Injury Lawyers",
+      "practice_page": "https://www.theinjurylawyers.com/lutz-car-accident-lawyer/"
+    },
+    {
+      "domain": "dennishernandez.com",
+      "name": "Dennis Hernandez Injury Attorneys",
+      "practice_page": "https://www.dennishernandez.com/brandon-injury-lawyer/"
+    },
+    {
+      "domain": "rhinolawyers.com",
+      "name": "RHINO Lawyers",
+      "practice_page": "https://www.rhinolawyers.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "chrisrussolaw.com",
+      "name": "Russo Law",
+      "practice_page": "https://www.chrisrussolaw.com/practice-area/personal-injury/"
+    },
+    {
+      "domain": "gotocourtforme.com",
+      "name": "Jiles & Fugate Law Group",
+      "practice_page": "https://gotocourtforme.com/personal-injury/"
+    },
+    {
+      "domain": "maranathalaw.com",
+      "name": "Maranatha Law - Accident & Injury Lawyers",
+      "practice_page": "https://maranathalaw.com/practice-areas/lakeland-personal-injury/"
+    },
+    {
+      "domain": "otoolepa.com",
+      "name": "O'Toole Law Group",
+      "practice_page": "https://otoolepa.com/personal-injury/"
+    },
+    {
+      "domain": "dezayaslawgroup.com",
+      "name": "DeZayas Law Group",
+      "practice_page": "https://dezayaslawgroup.com/personal-injury/"
+    },
+    {
+      "domain": "kkllaw.com",
+      "name": "Kaylor, Kaylor & Leto, P.A.",
+      "practice_page": "https://www.kkllaw.com/personal-injury/"
+    },
+    {
+      "domain": "pansler.com",
+      "name": "Pansler Law Firm, P.A.",
+      "practice_page": "https://www.pansler.com/personal-injury"
+    },
+    {
+      "domain": "lillybrownlaw.com",
+      "name": "Lilly & Brown, LLP",
+      "practice_page": "https://www.lillybrownlaw.com/personal-injury/"
     }
   ],
   "unresolved": [
@@ -55,6 +110,9 @@
   "unresolved_notes": {
     "turnbulllawfirm.com": "The domain belongs to Turnbull, Moak & Pendergrass of Birmingham and Houston, not to the Turnbull firm in Lakeland. Both verified listings are in Alabama and Texas, so it was removed rather than published in a Florida market it does not practise in.",
     "cataniaandcatania.com": "Five verified offices, none of them in Polk or Highlands County. The firm publishes a Lakeland landing page and is headquartered in Tampa, and a firm with no verified office in the county does not belong in its directory.",
-    "deanburnettilaw.com": "Reachable, but the Places API returned no verified listing and the crawl found no office address or phone number, so there is nothing to build a profile from."
+    "deanburnettilaw.com": "Reachable, but the Places API returned no verified listing and the crawl found no office address or phone number, so there is nothing to build a profile from.",
+    "dwaccidentlawyer.com": "Weston & Pape's only page titled for the practice is \"Personal Injury Statistics\", which is a page of numbers rather than a statement that the firm does the work.",
+    "nordenleacox.com": "Norden Leacox publishes \"Personal Injury Resources\", a reading list. Its Google listing is named for the practice; its site does not say it.",
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office in this market and in roughly a thousand others, and a profile on this site asserts one home market: market.city, market.state, one city page, one ranked list. For a national chain that assertion is false everywhere except wherever we happened to file it, and the firm turned up in the Baltimore and Lakeland candidate lists at once, which is how the conflict surfaced. The rule is about the data model rather than about size: a firm we cannot place in one market is a firm this directory cannot describe."
   }
 }

@@ -59,9 +59,23 @@ PRACTICES = {
             r"lost\s*wages|third[-\s]party\s*(?:claim|case|action)|light\s*duty|"
             r"independent\s*medical\s*exam", re.I),
     },
+    # Personal injury is the one practice most firms do not name. Buffalo showed it: William
+    # Mattar, Richmond Vona and Cantor Wolff are the three best known injury firms in the city
+    # and all three failed a check that demanded the phrase "personal injury", because upstate
+    # sites are organised by injury type instead. "Buffalo Car Accident Lawyer" is a personal
+    # injury practice page. So the pattern accepts the sub-topics this directory already lists
+    # under the practice in src/data/practices.ts, and the check was excluding real firms in
+    # every market rather than only in this one.
     "personal-injury": {
-        "slug": re.compile(r"personal[-_]?injur|injury[-_]lawyer|accident[-_]lawyer", re.I),
-        "title": re.compile(r"personal\s+injury", re.I),
+        "slug": re.compile(r"personal[-_]?injur|injury[-_]lawyer|accident[-_]lawyer|"
+                           r"(?:car|auto|truck|motorcycle|pedestrian|bicycle|bike|construction|"
+                           r"premises|slip[-_]and[-_]fall|dog[-_]bite|wrongful[-_]death|"
+                           r"catastrophic)[-_](?:accident|injur|death|liability)", re.I),
+        "title": re.compile(
+            r"personal\s+injury|catastrophic\s+injur|wrongful\s+death|medical\s+malpractice|"
+            r"nursing\s+home\s+(?:abuse|neglect)|slip\s+and\s+fall|premises\s+liability|"
+            r"\b(?:car|auto|truck|motorcycle|pedestrian|bicycle|bike|construction|dog\s+bite)"
+            r"[\s\w]{0,14}(?:accident|injur|crash)", re.I),
         "corroborating": re.compile(r"negligen|statute\s+of\s+limitations|pain\s+and\s+suffering|"
                                     r"contingen", re.I),
     },
@@ -97,6 +111,11 @@ NOT_A_PRACTICE_PAGE = re.compile(
 ARTICLE_TITLE = re.compile(
     r"\b(?:vs\.?|versus)\b|^\s*(?:what|how|why|when|can|do|does|should|is|are|will)\b|"
     r"\b(?:glossary|faq|frequently asked|blog|guide to|checklist|explained|"
+    # A WordPress category archive and a resources hub both title themselves for the practice
+    # and are not a statement that the firm does the work. Three Baltimore and Lakeland
+    # candidates were accepted on "Personal Injury Archives", "Personal Injury Resources" and
+    # "Personal Injury Statistics", which are a listing, a reading list and a page of numbers.
+    r"archives?|resources?|statistics|library|"
     r"everything you need)\b", re.I)
 
 
