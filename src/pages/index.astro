@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import CoverArt from '../components/CoverArt.astro';
 import { officeLabel } from '../lib/labels';
 import { PRACTICE_SLUGS } from '../data/practices';
 import { publishedGuides } from '../data/guides';
@@ -356,7 +357,9 @@ const searchIndex = {
       <div class="guide-grid">
         {homeGuides.map((g, i) => (
           <a class={i === 0 ? 'guide guide--lead' : 'guide'} href={`/guides/${g.slug}/`}>
-            <div class={g.thumb ? `thumb ${g.thumb}` : 'thumb'}><Icon name={g.icon ?? 'skyline'} /></div>
+            <div class={g.thumb ? `thumb ${g.thumb}` : 'thumb'}>
+              {g.cover ? <CoverArt name={g.cover} fit="meet" /> : <Icon name={g.icon ?? 'skyline'} />}
+            </div>
             <div class="body">
               <span class="kicker">{g.kicker}</span>
               <h3>{g.title}</h3>

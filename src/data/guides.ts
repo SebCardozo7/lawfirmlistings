@@ -21,6 +21,8 @@ export interface Guide {
   /** Which of the .guide .thumb gradients to use: '', 't2' or 't3'. */
   thumb?: string;
   icon?: string;
+  /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
+  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -48,6 +50,7 @@ export function publishedGuides(
 export const GUIDES: Guide[] = [
   {
     slug: 'what-new-york-injury-firms-publish-about-fees',
+    cover: 'fees',
     kicker: 'Costs',
     title: 'New Study: The Free Consultation Matters Less Than the Unprinted Fee',
     summary:
@@ -58,6 +61,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'google-reviews-new-york-injury-firms',
+    cover: 'reviews',
     kicker: 'Data',
     title: 'New Study: Office Count Matters More Than Star Rating for Injury Firms',
     summary:
@@ -68,6 +72,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'core-web-vitals-new-york-injury-firms',
+    cover: 'speed',
     kicker: 'Technical',
     title: "New Study: Almost Every New York Injury Firm Fails Google's Speed Test",
     // Both lines are hand-typed here rather than computed, so neither may carry a figure: this
@@ -81,6 +86,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'what-a-case-results-page-proves',
+    cover: 'results',
     kicker: 'Method',
     title: 'New Study: The Court a Firm Names Matters More Than Its Number',
     summary:
@@ -91,6 +97,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'best-personal-injury-law-firms-nyc',
+    cover: 'ranking',
     kicker: 'Ranking · New York',
     title: 'Best Personal Injury Law Firms in NYC',
     summary:

@@ -21,8 +21,11 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
   title or a description ever, because `check_meta.mjs` rejects it and is right to: a title is
   indexed once and a count moves every month. Spelling the count in words evades the check and
   keeps the problem, so do not.
-- **Every guide has a drawn cover and a committed share card.** `GuideCover.astro` holds one
-  vector scene per piece, built from the shapes the article is about. The matching raster in
+- **Every guide has a drawn cover and a committed share card.** The scene lives in
+  `CoverArt.astro`, one per piece, built from the shapes the article is about; `GuideCover.astro`
+  frames it at the top of the article and the cards on the home page and the guides index draw
+  the same scene small, so a card advertises its own study instead of repeating a generic icon.
+  A new guide sets `cover` in the manifest or its card falls back to the icon. The matching raster in
   `public/og/` is what Facebook, LinkedIn, Slack and X show, since none of them renders an SVG,
   and it is passed to `<Base>` as `image` with an `imageAlt` that describes it. Never ship a
   panel that says "slot" to a reader.
