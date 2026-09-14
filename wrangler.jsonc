@@ -16,6 +16,15 @@
   // deliver to a destination address verified in this Cloudflare account, which is the whole
   // security model. The address itself is the SUBMISSIONS_TO secret and is not in this file,
   // because this repository is public.
+  // The sender, in the file rather than in the dashboard, and the reason is a trap worth
+  // writing down: `wrangler deploy` replaces a Worker's plain-text variables with whatever this
+  // config declares, so a variable typed into the dashboard survives exactly until the next
+  // deploy and then vanishes. Secrets are not touched, which is why SUBMISSIONS_TO stays one.
+  // There is nothing to hide here anyway: it is an address on a domain we own, and it needs no
+  // mailbox behind it.
+  "vars": {
+    "SUBMISSIONS_FROM": "forms@lawfirmlistings.com"
+  },
   "send_email": [
     { "name": "EMAIL" }
   ]
