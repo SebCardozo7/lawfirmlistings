@@ -59,25 +59,25 @@
   "attorneys": [
     {
       "name": "Randy Jacobs",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://thedisabilityguys.com/our-team/randy-jacobs/",
       "bar_number": "4185435",
       "admitted_year": 2004,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Lauren Jurgens",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://thedisabilityguys.com/our-team/lauren-jurgens/",
       "bar_number": "6053185",
       "admitted_year": 2023,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Kimberly Del Prado",
@@ -85,40 +85,41 @@
       "bar_state": "NY",
       "source_url": "https://thedisabilityguys.com/our-team/kimberly-del-prado/",
       "registry_note": "not found",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Emily Grajales",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://thedisabilityguys.com/our-team/emily-grajales/",
       "bar_number": "4542064",
       "admitted_year": 2007,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Brian M. Mittman",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://thedisabilityguys.com/our-team/brian-mittman/",
       "bar_number": "2646834",
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Benai Lifshitz",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://thedisabilityguys.com/our-team/benai-lifshitz/",
       "bar_number": "4613436",
       "admitted_year": 2008,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     }
   ],
   "languages": [
@@ -408,7 +409,7 @@
     "total": 52,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-13",
+    "computed_at": "2026-09-14",
     "methodology": "v2.0",
     "pillars": {
       "A": {

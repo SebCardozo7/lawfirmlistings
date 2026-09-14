@@ -45,15 +45,16 @@
   "attorneys": [
     {
       "name": "Drew Moody",
-      "role": "Attorney",
       "bar_state": "NY",
-      "source_url": "https://www.moodylaw.com/lawyers/drew-d-moody-esq/"
+      "source_url": "https://www.moodylaw.com/lawyers/drew-d-moody-esq/",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Caroline Moody",
       "role": "Esq.",
       "bar_state": "NY",
-      "source_url": "https://www.moodylaw.com/lawyers/caroline-g-moody/"
+      "source_url": "https://www.moodylaw.com/lawyers/caroline-g-moody/",
+      "role_source": "firm bio heading"
     }
   ],
   "languages": [
@@ -242,7 +243,7 @@
     "total": 41,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-13",
+    "computed_at": "2026-09-14",
     "methodology": "v2.0",
     "pillars": {
       "A": {

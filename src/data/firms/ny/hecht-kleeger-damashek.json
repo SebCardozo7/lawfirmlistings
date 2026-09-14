@@ -31,88 +31,88 @@
   "attorneys": [
     {
       "name": "Michael Rudick",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/michael-rudick/",
       "bar_number": "5069976",
       "admitted_year": 2012,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Jordan Hecht",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/jordan-hecht/",
       "bar_number": "2677029",
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Jonathan Damashek",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/jonathan-damashek/",
       "bar_number": "2870830",
       "admitted_year": 1998,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Judd Kleeger",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/judd-kleeger/",
       "bar_number": "2738128",
       "admitted_year": 1996,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Andrea V. Borden",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/andrea-v-borden/",
       "bar_number": "4395026",
       "admitted_year": 2006,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Matthew Bialor",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/matthew-bialor/",
       "bar_number": "5505839",
       "admitted_year": 2017,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "David Silverman",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/david-silverman/",
       "registry_note": "ambiguous (8 attorneys share this name)",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Daniel Brocco",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/daniel-brocco/",
       "bar_number": "5886932",
       "admitted_year": 2021,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     }
   ],
   "languages": [
@@ -283,7 +283,7 @@
     "total": 66,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-13",
+    "computed_at": "2026-09-14",
     "methodology": "v2.0",
     "pillars": {
       "A": {
