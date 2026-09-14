@@ -49,7 +49,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'what-new-york-injury-firms-publish-about-fees',
     kicker: 'Costs',
-    title: 'New Study: The Free Consultation Matters Less Than the Fee Nobody Prints',
+    title: 'New Study: The Free Consultation Matters Less Than the Unprinted Fee',
     summary:
       'Nearly every New York firm in the directory offers a free consultation, so it differentiates nothing. What none of them publishes is the percentage, or how case expenses are handled, which is where a five-figure difference hides.',
     thumb: 't2',
@@ -82,7 +82,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'what-a-case-results-page-proves',
     kicker: 'Method',
-    title: 'New Study: The Court a Firm Names Matters More Than the Number Beside It',
+    title: 'New Study: The Court a Firm Names Matters More Than Its Number',
     summary:
       'We read the case results page of every firm in the directory and counted what is on it: how many results, which case types, whether any court is named, whether a disclaimer is there. We publish none of the amounts, and this is why.',
     thumb: 't2',

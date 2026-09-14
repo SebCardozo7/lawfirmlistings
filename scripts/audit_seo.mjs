@@ -31,6 +31,12 @@ function walk(dir) {
   return out;
 }
 
+// Character counts in this file are counts of what a reader sees, so entities decode first.
+const decodeEntities = s => s
+  .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+  .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+  .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+
 const files = walk(DIST);
 const toUrl = p => ('/' + relative(DIST, p).split(sep).join('/')).replace(/\/index\.html$/, '/');
 
@@ -40,7 +46,11 @@ const pages = files.filter(p => p.endsWith(`${sep}index.html`) || p === join(DIS
     return {
       url: toUrl(p),
       html,
-      title: (html.match(/<title>([\s\S]*?)<\/title>/) ?? [, ''])[1].trim(),
+      // Entities are decoded before anything measures this. A title carrying an apostrophe
+      // renders as "&#39;" in the file, and counting that as five characters reported a
+      // seventy-character title as seventy-four, which is a truncation warning about a title
+      // that is not truncated.
+      title: decodeEntities((html.match(/<title>([\s\S]*?)<\/title>/) ?? [, ''])[1].trim()),
       canonical: (html.match(/<link rel="canonical" href="([^"]*)"/) ?? [, ''])[1].trim(),
       noindex: /name="robots"[^>]*noindex/.test(html),
       h1: [...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)]
