@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
 
 // Every figure here is computed from the firms collection at build time, so the article cannot
 // drift away from the data it describes. Firms whose rating we hold only because the firm
@@ -112,6 +113,15 @@ const description = 'We summed every Google review for the New York injury firms
   </nav>
 
   <div class="prose">
+    <Takeaways
+      scope={`Summed across ${totalListings} verified Google Business Profile listings held by ${measured.length} firms${updated ? `, ${updated}` : ''}.`}
+      items={[
+        `Every rating here sits within <b>${ratingSpread} of a star</b> of every other, so the number a firm advertises separates almost nothing.`,
+        `Review counts do separate them: the most reviewed firm has <b>${countRatio} times</b> as many as the least, and most of that difference is office count rather than client experience.`,
+        `<b>${clustered} of ${measured.length}</b> firms sit at 4.8 or above once rounded, which is where a star rating stops carrying information.`,
+        `<b>${totalReviews.toLocaleString('en-US')} reviews</b> were counted in total, none of them collected by us and none solicited through us.`,
+      ]}
+    />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 
     <h2 id="spread">The ratings barely differ</h2>

@@ -1,0 +1,142 @@
+---
+/**
+ * The findings of a study, stated before the study.
+ *
+ * A reader who lands on one of these pieces from a search result is deciding in about four
+ * seconds whether it answers their question, and until now the answer was buried in a thousand
+ * words of method. The method still matters and stays below: this is the part somebody can
+ * repeat to a colleague, and the part a search engine can lift into an answer box.
+ *
+ * Every item is passed in already computed from the collection, because the rule that holds
+ * these guides together is that no figure is typed into prose. A takeaway is not an editorial
+ * summary written over the data, it is the same numbers said first.
+ *
+ * `items` accepts HTML so a takeaway can carry a bolded figure and a link to the firm or the
+ * page it is about. Keep each to one sentence: the block earns its place by being scannable,
+ * and four sentences that can be read at a glance are worth more than eight that cannot.
+ */
+interface Props {
+  items: string[];
+  heading?: string;
+  /** A short line under the heading, where the scope of the measurement needs saying. */
+  scope?: string;
+}
+const { items, heading = 'Key takeaways', scope } = Astro.props;
+---
+<aside class="takeaways" aria-labelledby="takeaways-heading">
+  <div class="tk-head">
+    <span class="tk-mark" aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.5 10.5l4 4 9-9" />
+      </svg>
+    </span>
+    <div>
+      <h2 id="takeaways-heading">{heading}</h2>
+      {scope && <p>{scope}</p>}
+    </div>
+  </div>
+  <ol>
+    {items.map(item => <li set:html={item} />)}
+  </ol>
+</aside>
+
+<style>
+  .takeaways {
+    position: relative;
+    margin: 0 0 38px;
+    padding: 26px 28px 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    box-shadow: 0 20px 50px -34px rgba(10, 10, 12, .45);
+    overflow: hidden;
+  }
+  /* The site's own gradient, as a rule down the left edge rather than a tinted panel: the block
+     has to stand out from the prose without competing with the charts below it for colour. */
+  .takeaways::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--aurora);
+  }
+
+  .tk-head {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--grid);
+  }
+  .tk-mark {
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 9px;
+    background: var(--aurora);
+    color: #fff;
+    display: grid;
+    place-items: center;
+  }
+  .tk-mark svg { width: 17px; height: 17px; }
+  .takeaways h2 {
+    font-size: 1.02rem;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    margin: 5px 0 0;
+  }
+  .tk-head p {
+    margin: 6px 0 0;
+    font-size: .88rem;
+    color: var(--muted);
+  }
+
+  .takeaways ol {
+    counter-reset: tk;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 15px;
+  }
+  /* Not a grid, and that is the whole comment. A grid container makes every child its own grid
+     item, and these items come from set:html as a run of text nodes with a <b> among them, so
+     each fragment landed in its own cell and the block rendered one word per line. The counter
+     is positioned out of the flow instead, which leaves the sentence a single inline flow. */
+  .takeaways li {
+    counter-increment: tk;
+    position: relative;
+    padding-left: 39px;
+    min-height: 26px;
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .takeaways li::before {
+    content: counter(tk);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+    display: grid;
+    place-items: center;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .takeaways li :global(b),
+  .takeaways li :global(strong) { color: var(--ink); font-weight: 600; }
+  .takeaways li :global(a) { color: var(--link); }
+
+  @media (max-width: 640px) {
+    .takeaways { padding: 20px 18px 18px; margin-bottom: 30px; }
+    .takeaways li { font-size: .98rem; padding-left: 34px; }
+    .takeaways li::before { width: 24px; height: 24px; }
+  }
+</style>
