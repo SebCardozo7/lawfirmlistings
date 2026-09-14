@@ -497,7 +497,14 @@ button,input,select{font:inherit;color:inherit}
    brand violet at 4.23:1 for everything else, and a quiet grey for the bars a chart is
    deliberately not about. The quiet grey sits under 3:1 on paper, which is allowed only because
    every bar prints its own value: nothing here is legible by colour alone. */
-.chart{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:0}
+.chart{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+/* A chart is a card in a column of text and needs air on both sides of it, equally. It used to
+   set margin:0, which beat the prose rhythm above it and not the paragraph below, so every chart
+   sat tight against the sentence it belonged to and loose against the next one. The margin is set
+   on both sides here and the following element's own top margin is removed, so the spacing is the
+   same above and below whatever follows. */
+.prose .chart{margin:2em 0}
+.prose .chart+*{margin-top:0}
 .chart-heading{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 18px}
 .chart figcaption{font-size:.86rem;color:var(--muted);margin-top:16px}
 .chart .chart-value{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
@@ -574,7 +581,11 @@ button,input,select{font:inherit;color:inherit}
 .cover{border-radius:28px;height:440px;background:var(--night);position:relative;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--night-line)}
 .cover .aurora i{opacity:.6}
 .cover>svg{position:absolute;inset:auto 0 0 0;height:70%;opacity:.3}
+/* A drawn cover fills the panel instead of sitting at the bottom faded out, which is what the
+   old icon treatment did. See GuideCover.astro: the shapes are the article's own subject. */
+.cover .cover-art{position:absolute;inset:0;width:100%;height:100%;opacity:1}
 .cover .hv-placeholder{right:20px;bottom:20px}
+@media (max-width:700px){.cover{height:280px}}
 .article-grid{display:grid;grid-template-columns:220px minmax(0,var(--measure)) 300px;justify-content:space-between;gap:48px;padding:56px 0 96px;align-items:start}
 .toc{position:sticky;top:calc(var(--header-h) + 19px);font-size:.9rem}
 .toc h4{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}

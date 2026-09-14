@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
+import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import StackBar from '../../components/StackBar.astro';
@@ -115,10 +115,15 @@ const updated = readDates.length
     { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
   : null;
 
-const title = 'What a case results page proves, and what it does not';
+// The headline states the study's finding rather than its subject, which is the difference
+// between a piece somebody clicks and a piece somebody scrolls past. It stays inside what the
+// data shows: an amount with no court beside it cannot be looked up by anyone, and most of these
+// pages carry the amount and not the court. No figure in it, because check_meta rejects a count
+// in a title and it is right to: a title is indexed once and a count moves every month.
+const title = 'New study: the court a firm names matters more than the number beside it';
 const description = 'We read the case results page of every firm we list and counted what is on it: what those pages show, what they leave out, and why we repeat no amounts.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/results.png" imageAlt="Bars standing for the case results firms publish, three of them marked as checkable, beside a verification seal left open">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -135,11 +140,7 @@ const description = 'We read the case results page of every firm we list and cou
   </div>
 </header>
 
-<div class="article-cover">
-  <div class="container">
-    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="scale" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
-  </div>
-</div>
+<GuideCover name="results" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">

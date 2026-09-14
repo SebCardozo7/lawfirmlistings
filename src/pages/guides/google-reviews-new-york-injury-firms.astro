@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Icon from '../../components/Icon.astro';
+import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 
 // Every figure here is computed from the firms collection at build time, so the article cannot
@@ -75,10 +75,12 @@ const updated = measuredOn
 
 const fmt = (n: number) => n.toLocaleString('en-US');
 
-const title = 'Google reviews, and why the ratings barely differ';
+// The comparison the data actually supports: the ratings sit within a fraction of a star of each
+// other, while the review counts track how many offices a firm runs. No figure in the title.
+const title = 'New study: office count matters more than star rating for injury firms';
 const description = 'We summed every Google review for the New York injury firms in this directory. The star ratings barely differ, and the counts mostly measure office count.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/reviews.png" imageAlt="Five near-identical star ratings above review-count bars of wildly different lengths">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -95,11 +97,7 @@ const description = 'We summed every Google review for the New York injury firms
   </div>
 </header>
 
-<div class="article-cover">
-  <div class="container">
-    <div class="cover" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div><Icon name="star" /><span class="hv-placeholder">Custom cover image slot · 2400×900</span></div>
-  </div>
-</div>
+<GuideCover name="reviews" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">
