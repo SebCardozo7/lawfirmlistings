@@ -42,8 +42,8 @@ const all = (xs: unknown[]) => xs.length === firms.length;
 // of the data on the day it builds: the moment a firm prints its percentage, the headline stops
 // saying nobody does. No figure in either, which is the rule for anything Google indexes once.
 const title = publishPct.length === 0
-  ? 'New study: the free consultation matters less than the fee nobody prints'
-  : 'New study: what New York injury firms will and will not tell you about fees';
+  ? 'New Study: The Free Consultation Matters Less Than the Fee Nobody Prints'
+  : 'New Study: What New York Injury Firms Will and Will Not Tell You About Fees';
 const description = 'Every New York injury firm offers a free consultation, so it tells you nothing. What none publishes is the contingency fee, or who pays case expenses.';
 ---
 <Base title={title} description={description} nav="guides" image="/og/fees.png" imageAlt="A published fee page with one line filled in and the line beside it left blank">
@@ -80,8 +80,13 @@ const description = 'Every New York injury firm offers a free consultation, so i
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from the fee language each firm publishes on its own website. This is not legal advice, and it is not a statement about what any firm charges, only about what it says publicly.</div>
 
     <h2 id="free">"Free consultation" is not a feature</h2>
-    <p>{all(freeConsult) ? <>Every single firm in this set offers one.</> : <>{freeConsult.length} of the {firms.length} firms offer one.</>} It appears in hero headlines, in sticky banners, in the phone number's alt text. It is presented as a reason to choose one firm over another, and it cannot be, because it is what everybody does. In a contingency practice the first call is a sales conversation. The firm is deciding whether to take your case at least as much as you are deciding whether to hire it. Charging for that would be strange.</p>
-    <p>{all(freeConsult) ? <>So the field is unanimous, and a directory that let you filter on it would return every firm.</> : <>So the field is nearly unanimous.</>} The same is true of the {contingency.length} firms saying they work on contingency: in New York personal injury, contingency is the model, not a differentiator. {spanish.length > 0 && <>({spanish.length} of the {firms.length} also serve clients in Spanish, which <i>is</i> a real difference if you need it.)</>}</p>
+    <p>{all(freeConsult) ? <>Every single firm in this set offers one.</> : <>{freeConsult.length} of the {firms.length} firms offer one.</>} It appears in hero headlines, in sticky banners, in the phone number's alt text.</p>
+    <p><b>It is presented as a reason to choose one firm over another, and it cannot be, because it is what everybody does.</b></p>
+    <p>In a contingency practice the first call is a sales conversation. The firm is deciding whether to take your case at least as much as you are deciding whether to hire it. Charging for that would be strange.</p>
+    <p>{all(freeConsult) ? <>So the field is unanimous, and a directory that let you filter on it would return every firm.</> : <>So the field is nearly unanimous.</>} The same is true of the {contingency.length} firms saying they work on contingency: in New York personal injury, contingency is the model, not a differentiator.</p>
+    {spanish.length > 0 && (
+      <p>{spanish.length} of the {firms.length} also serve clients in Spanish, which <i>is</i> a real difference if you need it.</p>
+    )}
 
     <h2 id="gap">What nobody publishes</h2>
     <p>Here is what we found when we looked past the banner. Of the {firms.length} firms:</p>
@@ -97,15 +102,20 @@ const description = 'Every New York injury firm offers a free consultation, so i
       ]}
       caption="The bars shorten as the question gets useful. The two that decide what a client takes home are the two nobody answers."
     />
-    <p>The written statements exist, and most of them say a version of the same sentence: you pay nothing unless we win. That sentence is true and it is worth saying. It is also not a fee disclosure. It tells you the <i>structure</i> of the arrangement and nothing about the <i>size</i> of it.</p>
+    <p>The written statements exist, and most of them say a version of the same sentence: you pay nothing unless we win. That sentence is true and it is worth saying.</p>
+    <p><b>It is also not a fee disclosure.</b> It tells you the <i>structure</i> of the arrangement and nothing about the <i>size</i> of it.</p>
     {noModel.length > 0 && (
       <p>{noModel.length === 1 ? 'One firm publishes' : `${noModel.length} firms publish`} no fee terms at all on the pages we crawled, not even the contingency sentence. That is recorded as <i>not stated</i> rather than as an assumption, and it costs points in the score. We crawl a firm's own public pages and honour its robots.txt, so it is always possible a disclosure lives somewhere we did not reach; if it does, {noModel.length === 1 ? 'the firm can' : 'those firms can'} <a href="/contact/">tell us where</a> and we will read it.</p>
     )}
 
     <h2 id="expenses">Why expenses are the real number</h2>
-    <p>New York regulates contingency fees in personal injury matters, and the standard arrangement most firms use is one third of the recovery, with a sliding scale required in medical malpractice cases. So the percentage is fairly predictable even when nobody prints it. What is not predictable, and what no firm in this set puts in writing, is the order of operations on expenses.</p>
-    <p>A personal injury case costs money to run: filing fees, deposition transcripts, medical records, and expert witnesses, who are the expensive part. The firm advances that money. The question is whether the fee is calculated before or after those costs come out of the settlement.</p>
-    <p>Take a $300,000 settlement with $30,000 in case expenses and a one-third fee. Deduct the expenses first and the fee is charged on $270,000: the firm takes $90,000 and you receive $180,000. Charge the fee on the gross instead, then subtract expenses, and the firm takes $100,000 and you receive $170,000. Same settlement, same percentage, same firm, and a $10,000 difference in what reaches you, decided by one line in a retainer nobody advertises.</p>
+    <p>New York regulates contingency fees in personal injury matters, and the standard arrangement most firms use is one third of the recovery, with a sliding scale required in medical malpractice cases. So the percentage is fairly predictable even when nobody prints it.</p>
+    <p><b>What is not predictable, and what no firm in this set puts in writing, is the order of operations on expenses.</b></p>
+    <p>A personal injury case costs money to run: filing fees, deposition transcripts, medical records, and expert witnesses, who are the expensive part. The firm advances that money.</p>
+    <p>The question is whether the fee is calculated before or after those costs come out of the settlement.</p>
+    <p>Take a $300,000 settlement with $30,000 in case expenses and a one-third fee. Deduct the expenses first and the fee is charged on $270,000: the firm takes $90,000 and you receive $180,000.</p>
+    <p>Charge the fee on the gross instead, then subtract expenses, and the firm takes $100,000 and you receive $170,000.</p>
+    <p>Same settlement, same percentage, same firm. <b>A ten thousand dollar difference in what reaches you, decided by one line in a retainer nobody advertises.</b></p>
     <div class="callout"><b>This is a question, not an accusation.</b> Both orderings are lawful and both appear in ordinary retainers. The problem is that you cannot compare two firms on it before you are sitting in one of their offices, because none of them publishes the answer.</div>
 
     <h2 id="ask">Four questions to ask on the free call</h2>

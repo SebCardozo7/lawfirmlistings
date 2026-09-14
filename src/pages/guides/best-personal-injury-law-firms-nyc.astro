@@ -56,13 +56,13 @@ const lastUpdated = computedDates.length
 {/* noindex while the ranking is gated. The page explains itself to a visitor who lands on
     it, but a title promising a ranking that is not published should not be in search results.
     Drop the noindex — and the sitemap filter in astro.config.mjs — when the gate opens. */}
-<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal injury firms in New York City: ranking in preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology ${methodVersion}, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" image="/og/ranking.png" imageAlt="Three podium columns with a certification mark above the tallest" noindex={!gateMet}>
+<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal Injury Firms in New York City: Ranking in Preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology ${methodVersion}, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" image="/og/ranking.png" imageAlt="Three podium columns with a certification mark above the tallest" noindex={!gateMet}>
 <article>
 <header class="article-head">
   <div class="narrow">
     <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="#">Guides</a></li><li><a href="/practice-areas/personal-injury/">Personal Injury</a></li><li aria-current="page">New York City</li></ol>
     <span class="eyebrow" style="margin-top:18px">Ranking · Personal Injury · New York</span>
-    <h1>{gateMet ? 'Best Personal Injury Law Firms in NYC, Ranked for 2026' : 'Personal injury firms in New York City'}</h1>
+    <h1>{gateMet ? 'Best Personal Injury Law Firms in NYC, Ranked for 2026' : 'Personal Injury Firms in New York City'}</h1>
     <p class="lede">If you were hurt in a crash on the BQE, fell on an icy Brooklyn sidewalk, or were injured on a Manhattan construction site, the firm you hire will shape everything that follows: the medical care you can afford, how insurers negotiate, and what you ultimately recover. {gateMet ? <>These {ranked.length} came out on top under our methodology.</> : <>We are working through the New York cohort now; this page will carry the ranking once {MIN_CERTIFIED} firms have completed certification.</>}</p>
     <div class="byline">
       {/* The byline claimed review by a licensed New York attorney. Nobody has reviewed this
