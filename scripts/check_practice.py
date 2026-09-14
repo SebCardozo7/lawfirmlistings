@@ -109,7 +109,12 @@ NOT_A_PRACTICE_PAGE = re.compile(
 
 # The same judgement applied to what the page calls itself, for the cases the address hides.
 ARTICLE_TITLE = re.compile(
-    r"\b(?:vs\.?|versus)\b|^\s*(?:what|how|why|when|can|do|does|should|is|are|will)\b|"
+    r"\b(?:vs\.?|versus)\b|"
+    # An explainer announces itself in its first word. "Understanding Liability in
+    # Multi-Vehicle Collisions" is a real page on a real firm's site and is not that firm
+    # telling anybody what it does.
+    r"^\s*(?:what|how|why|when|can|do|does|should|is|are|will|understanding|"
+    r"everything|tips|mistakes|signs|reasons|steps)\b|"
     r"\b(?:glossary|faq|frequently asked|blog|guide to|checklist|explained|"
     # A WordPress category archive and a resources hub both title themselves for the practice
     # and are not a statement that the firm does the work. Three Baltimore and Lakeland
