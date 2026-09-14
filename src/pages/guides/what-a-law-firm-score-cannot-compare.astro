@@ -44,6 +44,21 @@ const subsOf = (f: (typeof scored)[number]): Sub[] =>
 
 const stateNames = [...new Set(firms.map(f => f.data.market.state_name))].sort();
 
+/**
+ * "Florida", "Florida and Maryland", "Florida, Maryland and New York". No serial comma, which
+ * is what the rest of the site does.
+ *
+ * It deduplicates, and that is the whole reason it exists rather than a `join`. A sentence here
+ * mapped one state name per firm and joined on " and ", which read correctly while two firms
+ * were involved and became "New York and Florida and Florida and Florida and Maryland" the day
+ * twenty-eight firms landed in Baltimore and Lakeland. A page about figures that recompute
+ * themselves had prose that did not, which is the exact failure it is about.
+ */
+const listOf = (xs: string[]) => {
+  const u = [...new Set(xs)];
+  return u.length <= 1 ? (u[0] ?? '') : `${u.slice(0, -1).join(', ')} and ${u[u.length - 1]}`;
+};
+
 // How much of the scale each firm was actually measured on. The spread across the directory is
 // the first thing a reader needs, because it is what makes two totals incomparable.
 const assessedList = scored.map(f => f.data.score!.assessed ?? 0);
@@ -159,7 +174,13 @@ for (const [total, group] of byTotal) {
   if (group.length < 2) continue;
   const a = group.map(f => f.data.score!.assessed ?? 0);
   const spread = Math.max(...a) - Math.min(...a);
-  if (!widest || spread > widest.spread) {
+  // Ties are real: two different scores can both span the same range. Break them on the larger
+  // group and then the higher total, so the example is chosen by the data rather than by the
+  // order the collection happened to arrive in, and does not swap between builds for no reason.
+  const better = !widest || spread > widest.spread
+    || (spread === widest.spread && group.length > widest.group.length)
+    || (spread === widest.spread && group.length === widest.group.length && total > widest.total);
+  if (better) {
     widest = {
       total,
       group: [...group].sort((x, y) => (x.data.score!.assessed ?? 0) - (y.data.score!.assessed ?? 0)),
@@ -193,6 +214,11 @@ const outsideNY = [...scored.filter(f => f.data.market.state !== 'NY')]
   .sort((a, b) => b.data.score!.total - a.data.score!.total);
 const bestOutside = outsideNY[0] ?? null;
 const nextOutside = outsideNY.find(f => f.data.score!.comparable !== false) ?? null;
+// The markets outside New York, taken from the records rather than named, so opening a fourth
+// city does not leave this paragraph linking to the two that happened to exist when it was written.
+const outsideMarkets = [...new Map(
+  outsideNY.map(f => [f.data.market.city_slug, f.data.market])).values()]
+  .sort((a, b) => a.city.localeCompare(b.city));
 
 const median = (xs: number[]) => {
   const s = [...xs].sort((a, b) => a - b);
@@ -252,12 +278,12 @@ const description = 'Our score is a share of what we could measure, and what can
       scope={`Computed across ${scored.length} firms in ${stateNames.length} states${updated ? `, ${updated}` : ''}.`}
       items={[
         `A score is a share of what was measured, so the same number can rest on very different evidence: ${widest ? `<b>${widest.group.length} firms score ${widest.total}</b>, one of them read on ${thinnest!.data.score!.assessed} points of the scale and another on ${thickest!.data.score!.assessed}` : 'the amount of scale read varies widely across the directory'}.`,
-        `<b>${shortScale.length} of ${scored.length} firms</b> are scored on a shorter scale, because ${shortScaleStates.join(' and ')} publish no attorney register we can query and ${absentPoints} points of the scale have nothing to measure against.`,
+        `<b>${shortScale.length} of ${scored.length} firms</b> are scored on a shorter scale, because ${listOf(shortScaleStates)} publish no attorney register we can query and ${absentPoints} points of the scale have nothing to measure against.`,
         `<b>${notComparable.length} totals</b> are withheld from comparison entirely, because less than half of the available scale could be read for those firms.`,
         biggestHole
           ? `The biggest hole in the score is not a state line but our own: <b>${biggestHole[1].label} is unmeasured on ${biggestHole[1].n} of ${scored.length} firms</b>, which is ${biggestHole[1].max} points nobody has been scored on.`
           : `Every sub-factor has been measured on every firm.`,
-        `<b>${certified.length} firms</b> are certified and all of them are in ${certifiedStates.join(' and ')}, which says as much about where we have finished measuring as about the firms.`,
+        `<b>${certified.length} firms</b> are certified and all of them are in ${listOf(certifiedStates)}, which says as much about where we have finished measuring as about the firms.`,
       ]}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own records at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
@@ -268,7 +294,7 @@ const description = 'Our score is a share of what we could measure, and what can
     <p>Those last two come apart for two different reasons, and keeping them apart is the only reason this page can be honest. A check we have not run yet is our failure. A check that cannot be run where a firm practices is a fact about the state, and charging a firm for it publishes a false statement about a real business.</p>
 
     <h2 id="scale">Where the scale is shorter</h2>
-    <p>Of the {scored.length} firms here, {shortScale.length} are measured against {100 - absentPoints} points rather than a hundred. {shortScaleStates.join(' and ')} publish no attorney register we can query, so {absentFactor ? `${absentFactor[1].label} (${absentFactor[1].max} points)` : 'part of pillar A'} has nothing to be a share of.</p>
+    <p>Of the {scored.length} firms here, {shortScale.length} are measured against {100 - absentPoints} points rather than a hundred. {listOf(shortScaleStates)} publish no attorney register we can query, so {absentFactor ? `${absentFactor[1].label} (${absentFactor[1].max} points)` : 'part of pillar A'} has nothing to be a share of.</p>
     <p>New York publishes its attorney registrations as open data, so a New York roster can be matched name by name. Maryland asks automated tools to stay out of its attorney search and we honor that, and Florida's directory refuses our requests. The result is not a Maryland firm scoring badly on licensure. It is a Maryland firm not being scored on it.</p>
     {shortExample && (
       <p>The correction is worth real points. Counting that absent factor as a zero instead of removing it would have cost the {shortScale.length} firms between {cfMin} and {cfMax} points each. <a href={`/firms/${shortExample.data.slug}/`}>{shortExample.data.name}</a>, the highest scoring of them, would read {shortExample.data.score!.total - counterfactual[shortScale.indexOf(shortExample)]} instead of {shortExample.data.score!.total}. <b>That is the difference between measuring a firm and measuring a state's records policy.</b></p>
@@ -292,7 +318,9 @@ const description = 'Our score is a share of what we could measure, and what can
       emphasisLabel="Total withheld from comparison"
       quietLabel="Total published for comparison"
     />
-    <p>Only {notComparable.length} firms fall under that line, and they are the interesting part: they sit in {notComparable.map(f => f.data.market.state_name).join(' and ')}. <b>Neither is on the shorter scale.</b> Both had the whole {fullScale} points available to them, and neither was read on more than {Math.max(...notComparable.map(f => f.data.score!.assessed ?? 0))} of them.</p>
+    <p>Only {notComparable.length} firms fall under that line, and they are the interesting part: they sit in {listOf(notComparable.map(f => f.data.market.state_name))}.{notComparable.every(f => (f.data.score!.assessable ?? 100) === fullScale) && (
+      <> <b>Not one of them is on the shorter scale.</b> Every one had the whole {fullScale} points available to it, and not one was read on more than {Math.max(...notComparable.map(f => f.data.score!.assessed ?? 0))} of them.</>
+    )}</p>
     {widest && (
       <>
         <p>The clearest way to see it is to take a score that more than one firm holds. In this directory, {widest.group.length} firms score {widest.total}.</p>
@@ -322,12 +350,14 @@ const description = 'Our score is a share of what we could measure, and what can
       <p>Once the state lines are accounted for, the largest missing piece of the score belongs to us. <b>{biggestHole[1].label} is unmeasured on {biggestHole[1].n} of the {scored.length} firms in the directory</b>, which is {biggestHole[1].max} points of the scale that most of these firms have never been scored on, in any state.</p>
     )}
     <p>It is not a source that does not exist. It is a measurement we ran out of budget for, recorded as pending rather than as a zero, which keeps it out of every denominator on the site. That is the right handling and it is not an excuse: a pending check is a gap in our work, and it counts against our coverage exactly as it should.</p>
-    <p>The same arithmetic explains something that would otherwise look like a verdict on two states. Of the firms in this directory, {certified.length} are certified, and every one of them is in {certifiedStates.join(' and ')}.</p>
+    <p>The same arithmetic explains something that would otherwise look like a verdict on the states that have none. Of the firms in this directory, {certified.length} are certified, and every one of them is in {listOf(certifiedStates)}.</p>
     <p><b>The shorter scale is not why.</b> {bestOutside && bestOutside.data.score!.next_tier && (
       <>The highest total outside New York belongs to <a href={`/firms/${bestOutside.data.slug}/`}>{bestOutside.data.name}</a>, at {bestOutside.data.score!.total}, which is {bestOutside.data.score!.next_tier!.gap} {bestOutside.data.score!.next_tier!.gap === 1 ? 'point' : 'points'} short of the mark. It is also one of the totals we decline to publish for comparison, because it was computed from {bestOutside.data.score!.assessed} points of scale.{nextOutside && <> The highest total outside New York that we do publish is {nextOutside.data.score!.total}.</>}</>
     )}</p>
-    <p>What separates the markets is not the length of the ladder, then, but how far up it we have got. The median New York firm has been read on {pct(covNY)}% of the scale available to it, against {pct(covOutside)}% for the median firm in the other two states. That is our backlog, not a finding about Maryland or Florida lawyers.</p>
-    <p>We publish the Baltimore and Lakeland pages anyway, with the coverage on every profile, because a thin measurement that says it is thin is more use than a confident one that is not. You can see both markets at <a href="/cities/baltimore-md/">Baltimore</a> and <a href="/cities/lakeland-fl/">Lakeland</a>.</p>
+    <p>What separates the markets is not the length of the ladder, then, but how far up it we have got. The median New York firm has been read on {pct(covNY)}% of the scale available to it, against {pct(covOutside)}% for the median firm outside it. That is our backlog, not a finding about {listOf(outsideNY.map(f => f.data.market.state_name))} lawyers.</p>
+    <p>We publish those markets anyway, with the coverage on every profile, because a thin measurement that says it is thin is more use than a confident one that is not. You can see them at {outsideMarkets.map((m, i) => (
+      <>{i > 0 && (i === outsideMarkets.length - 1 ? ' and ' : ', ')}<a href={`/cities/${m.city_slug}/`}>{m.city}</a></>
+    ))}.</p>
 
     <h2 id="read">How to read a score here</h2>
     <p>Three habits, which apply to any rated directory and not only to this one.</p>
