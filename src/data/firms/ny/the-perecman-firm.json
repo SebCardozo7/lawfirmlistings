@@ -52,7 +52,8 @@
       "admitted_year": 2010,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Steven Dorfman",
@@ -63,7 +64,8 @@
       "admitted_year": 1997,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Adam Hurwitz",
@@ -74,7 +76,8 @@
       "admitted_year": 1986,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Peter Rigelhaupt",
@@ -85,7 +88,8 @@
       "admitted_year": 1989,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Mariusz Sniarowski",
@@ -96,7 +100,8 @@
       "admitted_year": 2004,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Erica Colon",
@@ -107,7 +112,8 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Eileen Kelly",
@@ -118,7 +124,8 @@
       "admitted_year": 2016,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     },
     {
       "name": "Zach Perecman",
@@ -129,7 +136,8 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14",
+      "role_source": "firm bio heading"
     }
   ],
   "languages": [
@@ -249,19 +257,19 @@
       "pass": true,
       "evidence": "8 of 8 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 8 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G3": {
       "pass": true,
       "evidence": "THE PERECMAN FIRM PLLC is an active domestic professional service limited liability company registered since 2001-04-02, with 2 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G5": {
       "pass": true,
@@ -273,7 +281,7 @@
       "pass": true,
       "evidence": "807 public client reviews and 25 years since the entity was formed in 2001",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -363,7 +371,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.91 over 807 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.91 over 807 reviews → Bayesian 4.90 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -479,7 +487,7 @@
     "dos_id": "2623290",
     "formed": "2001-04-02",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-13"
+    "checked_at": "2026-09-14"
   },
   "results_published": {
     "readable": true,

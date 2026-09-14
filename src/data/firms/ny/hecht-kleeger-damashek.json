@@ -37,7 +37,7 @@
       "admitted_year": 2012,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -48,7 +48,7 @@
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -59,7 +59,7 @@
       "admitted_year": 1998,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -70,7 +70,7 @@
       "admitted_year": 1996,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -81,7 +81,7 @@
       "admitted_year": 2006,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -92,7 +92,7 @@
       "admitted_year": 2017,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -100,7 +100,7 @@
       "bar_state": "NY",
       "source_url": "https://lawyer1.com/about/david-silverman/",
       "registry_note": "ambiguous (8 attorneys share this name)",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -111,7 +111,7 @@
       "admitted_year": 2021,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     }
   ],
@@ -197,19 +197,19 @@
       "pass": false,
       "evidence": "7 of 8 named attorneys are currently registered and none of those carries an adverse status. 1 other name(s) match a register entry that does: David Silverman shares a name with one of 8 registrations, one of them suspended, due to reregister. That entry cannot be tied to this firm's attorney and cannot be ruled out either, so the gate is held open rather than decided.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G2": {
       "pass": false,
       "evidence": "None of the 7 attorneys we identified carries a disciplinary status. 1 name(s) we could not identify share a name with a registration that does, David Silverman among 8 namesakes. Held open.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G3": {
       "pass": true,
       "evidence": "HECHT, KLEEGER & DAMASHEK, P.C. is an active domestic professional service corporation registered since 2007-12-21, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G5": {
       "pass": true,
@@ -221,7 +221,7 @@
       "pass": true,
       "evidence": "130 public client reviews and 19 years since the entity was formed in 2007",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -277,7 +277,7 @@
     "dos_id": "3608280",
     "formed": "2007-12-21",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-13"
+    "checked_at": "2026-09-14"
   },
   "score": {
     "total": 66,
@@ -364,7 +364,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 130 reviews → Bayesian 4.82 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 130 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

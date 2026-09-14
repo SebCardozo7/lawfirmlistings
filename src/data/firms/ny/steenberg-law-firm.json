@@ -1,0 +1,452 @@
+{
+  "slug": "steenberg-law-firm",
+  "name": "Steenberg Law Firm",
+  "initials": "ST",
+  "website": "https://steenberglaw.com/",
+  "domain": "steenberglaw.com",
+  "phone": "(716) 558-2000",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true
+    }
+  ],
+  "market": {
+    "city_slug": "buffalo-ny",
+    "city": "Buffalo",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "Steenberg Law Firm",
+      "address": "172 Slade Ave, Buffalo, NY 14224, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=8017568766775781399&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Jeffrey M. Steenberg",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://steenberglaw.com/steenberg-jeffrey-m/",
+      "bar_number": "4982229",
+      "admitted_year": 2012,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-14"
+    },
+    {
+      "name": "Eric J. Vogan",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://steenberglaw.com/vogan-eric-j/",
+      "bar_number": "4877825",
+      "admitted_year": 2011,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-14"
+    },
+    {
+      "name": "Alina M. Young",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://steenberglaw.com/alina-m-young/",
+      "bar_number": "6181002",
+      "admitted_year": 2025,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-14"
+    },
+    {
+      "name": "Scott R. Orndoff",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://steenberglaw.com/orndoff-scott-r/",
+      "bar_number": "4223525",
+      "admitted_year": 2003,
+      "registry_status": "Currently registered",
+      "registry_basis": "sole attorney of this name admitted in New York; city matches",
+      "checked_at": "2026-09-14"
+    },
+    {
+      "name": "New York State Disability Retirement",
+      "role": "Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://steenberglaw.com/new-york-state-disability-retirement-attorney/",
+      "registry_note": "not found",
+      "checked_at": "2026-09-14"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Steenberg Law Firm is a personal injury firm with a single office in Buffalo.",
+    "The firm states that the first consultation is free. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.7,
+      "count_label": "95",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-14"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-31T14:06:37.976567530Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-14T04:53:38.153741031Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-11T15:49:27.888752697Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-01-18T16:50:38.336025385Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-04-04T20:36:10.017145Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "disclaimer": true,
+      "attorney_bios": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 33,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-14",
+      "note": "LCP 11.2 s / CLS 0.000 / TBT 1624 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "steenberglaw.com",
+      "name": "Steenberg Law Firm",
+      "practice_page": "https://steenberglaw.com/personal-injury/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 95,
+      "rating_weighted": 4.7,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-14"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": true,
+      "evidence": "4 of 5 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-09-14"
+    },
+    "G2": {
+      "pass": true,
+      "evidence": "None of the 4 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-09-14"
+    },
+    "G3": {
+      "pass": true,
+      "evidence": "STEENBERG LAW FIRM, P.C. is an active domestic professional service corporation registered since 2021-12-23, with 1 Google-verified location",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-14"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 5 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-14"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "95 public client reviews and 5 years since the entity was formed in 2021",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-14"
+    }
+  },
+  "cohort_id": "ny-buffalo-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "Attorneys Your Workers’ Comp Attorneys In The Buffalo, New York Area Call Us Today For A Free Consultation: 716-558-2000 Home About Why Choose Us Past Results Testimonials Video Center Our Team Je",
+          "source_url": "https://steenberglaw.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://steenberglaw.com/",
+        "about": "https://steenberglaw.com/about/",
+        "blog": "https://steenberglaw.com/blog/",
+        "disclaimer": "https://steenberglaw.com/disclaimer/",
+        "contact": "https://steenberglaw.com/contact/",
+        "attorneys": "https://steenberglaw.com/staff/",
+        "privacy": "https://steenberglaw.com/privacy/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://steenberglaw.com/staff/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2013-11-26",
+    "years": 12.8,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-14"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-14"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-14"
+  },
+  "entity": {
+    "legal_name": "STEENBERG LAW FIRM, P.C.",
+    "entity_type": "DOMESTIC PROFESSIONAL SERVICE CORPORATION",
+    "dos_id": "6356852",
+    "formed": "2021-12-23",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-09-14"
+  },
+  "score": {
+    "total": 38,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-14",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 14,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 7,
+            "max": 10,
+            "source": "registry",
+            "evidence": "Mean 13.2 years since admission across 4 of 5 named attorneys (longest 23, shortest 1) · NYS Attorney Registration database"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 7.5,
+            "max": 9,
+            "source": "registry",
+            "evidence": "4 of 5 named attorneys matched to the New York register; bar numbers published on the bios"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 14,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "95 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.7 over 95 reviews → Bayesian 4.77 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-03-31) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 2,
+            "max": 4,
+            "source": "places",
+            "evidence": "1 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 1,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 28,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 32,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "B1 Results published: +6 available",
+        "B2 Specificity: +5 available",
+        "D1 Website trust & experience: +5.0 available"
+      ]
+    },
+    "raw": 33.5,
+    "assessed": 89,
+    "coverage": 0.89,
+    "floor_abc_pct": 0.5,
+    "gates_unavailable": [],
+    "assessable": 100,
+    "comparable": true
+  }
+}

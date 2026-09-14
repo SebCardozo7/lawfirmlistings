@@ -11,6 +11,13 @@
       "slug": "personal-injury",
       "name": "Personal Injury",
       "primary": true
+    },
+    {
+      "slug": "workers-compensation",
+      "name": "Workers' Compensation",
+      "primary": false,
+      "source_url": "https://www.bobkatzlaw.com/practice-areas/workers-compensation/",
+      "checked_at": "2026-09-14"
     }
   ],
   "market": {
@@ -295,7 +302,7 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 61,
+    "total": 60,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-14",
@@ -362,7 +369,7 @@
         ]
       },
       "C": {
-        "score": 20,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -376,10 +383,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.92 over 328 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.92 over 328 reviews → Bayesian 4.90 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -468,11 +475,11 @@
         ]
       }
     },
-    "floor_abc": 33,
+    "floor_abc": 32,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -481,10 +488,10 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 43.0,
+    "raw": 42.0,
     "assessed": 70,
     "coverage": 0.7,
-    "floor_abc_pct": 0.868,
+    "floor_abc_pct": 0.842,
     "gates_unavailable": [
       "G1",
       "G2"
