@@ -2,12 +2,15 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import BarChart from '../../components/BarChart.astro';
 
 // Computed from the collection at build time. The tests below run against the fee language each
 // firm publishes on its own site — the same strings that feed sub-factor E1 — so if a firm adds
 // a real fee page, this article stops saying nobody has one.
+// New York only. Every sentence on this page says "New York injury firm", and once the directory
+// opened in Maryland and Florida this filter quietly stopped matching the claim.
 const firms = await getCollection('firms', f =>
-  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible' && f.data.market.state === 'NY');
 
 const freeConsult = firms.filter(f => f.data.free_consultation);
 
@@ -83,18 +86,18 @@ const description = 'Every New York injury firm offers a free consultation, so i
 
     <h2 id="gap">What nobody publishes</h2>
     <p>Here is what we found when we looked past the banner. Of the {firms.length} firms:</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>What the firm publishes</th><th>Firms</th></tr></thead>
-        <tbody>
-          <tr><td>A free initial consultation</td><td class="num">{freeConsult.length} of {firms.length}</td></tr>
-          <tr><td>A stated fee model at all</td><td class="num">{statesModel.length} of {firms.length}</td></tr>
-          <tr><td>Some written statement about fees</td><td class="num">{withStatement.length} of {firms.length}</td></tr>
-          <tr><td>The actual contingency percentage</td><td class="num">{publishPct.length} of {firms.length}</td></tr>
-          <tr><td>How case expenses are handled</td><td class="num">{publishExpenses.length} of {firms.length}</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <BarChart
+      heading={`What the ${firms.length} firms publish about fees`}
+      max={firms.length}
+      rows={[
+        { label: 'A free initial consultation', value: freeConsult.length, display: `${freeConsult.length} of ${firms.length}` },
+        { label: 'A stated fee model at all', value: statesModel.length, display: `${statesModel.length} of ${firms.length}` },
+        { label: 'Some written statement about fees', value: withStatement.length, display: `${withStatement.length} of ${firms.length}` },
+        { label: 'The actual contingency percentage', value: publishPct.length, display: `${publishPct.length} of ${firms.length}` },
+        { label: 'How case expenses are handled', value: publishExpenses.length, display: `${publishExpenses.length} of ${firms.length}` },
+      ]}
+      caption="The bars shorten as the question gets useful. The two that decide what a client takes home are the two nobody answers."
+    />
     <p>The written statements exist, and most of them say a version of the same sentence: you pay nothing unless we win. That sentence is true and it is worth saying. It is also not a fee disclosure. It tells you the <i>structure</i> of the arrangement and nothing about the <i>size</i> of it.</p>
     {noModel.length > 0 && (
       <p>{noModel.length === 1 ? 'One firm publishes' : `${noModel.length} firms publish`} no fee terms at all on the pages we crawled, not even the contingency sentence. That is recorded as <i>not stated</i> rather than as an assumption, and it costs points in the score. We crawl a firm's own public pages and honour its robots.txt, so it is always possible a disclosure lives somewhere we did not reach; if it does, {noModel.length === 1 ? 'the firm can' : 'those firms can'} <a href="/contact/">tell us where</a> and we will read it.</p>

@@ -1,0 +1,48 @@
+---
+/**
+ * One bar, split into the parts of a single population: how the same set of firms divides.
+ *
+ * The segments are an ordered scale, not identities, so they take one hue in four validated
+ * steps (dark to light, #3B1178 → #6D28D9 → #8B5CF6 → #A78BFA, each step clearing the surface
+ * and its neighbour) rather than four different colours. A 2px gap in the surface colour does
+ * the separating, so no segment needs a border drawn around it.
+ *
+ * The legend carries every label and every value as text, which is what makes a two-percent
+ * segment readable: nobody has to measure a sliver to find out it is one firm.
+ */
+export interface Segment {
+  label: string;
+  value: number;
+}
+
+interface Props {
+  segments: Segment[];
+  heading?: string;
+  caption?: string;
+  /** What one unit is, for the legend: "firms", "results". */
+  unit?: string;
+  class?: string;
+}
+
+const { segments, heading, caption, unit, class: cls } = Astro.props;
+const total = segments.reduce((n, s) => n + s.value, 0) || 1;
+const share = (v: number) => (v / total) * 100;
+---
+<figure class={cls ? `chart chart--stack ${cls}` : 'chart chart--stack'}>
+  {heading && <p class="chart-heading">{heading}</p>}
+  <div class="stack">
+    {segments.map((s, i) => s.value > 0 && (
+      <i class={`s${Math.min(i, 3)}`} style={`flex-basis:${share(s.value)}%`}></i>
+    ))}
+  </div>
+  <ul class="stack-legend">
+    {segments.map((s, i) => (
+      <li class={`s${Math.min(i, 3)}`}>
+        <b>{s.value.toLocaleString('en-US')}</b>
+        <span>{s.label}</span>
+        <em>{Math.round(share(s.value))}%{unit ? ` of ${unit}` : ''}</em>
+      </li>
+    ))}
+  </ul>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

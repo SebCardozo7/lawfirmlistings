@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import BarChart from '../../components/BarChart.astro';
 
 // Plan section 5: a ranked post publishes only once its cohort has 8 certified firms, so the
 // order reflects verified evidence instead of measurement order. Below that, the page explains
@@ -30,6 +31,21 @@ const practiceFirms = listed.filter(f => f.data.practices.some(pr => pr.slug ===
 const inPractice = practiceFirms.length;
 const practiceCities = new Set(practiceFirms.map(f => f.data.market.city_slug)).size;
 const inCity = listed.filter(f => f.data.market.city_slug === CITY_SLUG).length;
+
+// The cohort behind the gate. A reader who lands on a ranking that is not published yet is owed
+// the count that is holding it, not only the sentence saying it is held.
+const cohort = listed.filter(f =>
+  f.data.market.city_slug === CITY_SLUG && f.data.practices.some(pr => pr.slug === PRACTICE));
+const STATUS_ROWS: { status: string; label: string }[] = [
+  { status: 'certified', label: 'Certified' },
+  { status: 'verified', label: 'Verified, not yet certified' },
+  { status: 'listed', label: 'Listed, gates still open' },
+];
+const cohortRows = STATUS_ROWS.map(s => ({
+  label: s.label,
+  value: cohort.filter(f => f.data.status === s.status).length,
+  emphasis: s.status === 'certified',
+}));
 
 const computedDates = listed.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
 const lastUpdated = computedDates.length
@@ -108,6 +124,28 @@ const lastUpdated = computedDates.length
         {' '}<a href="/practice-areas/personal-injury/">personal injury directory</a>, where every firm
         we have verified so far is listed.
       </div>
+    )}
+
+    {!gateMet && (
+      <BarChart
+        heading={`New York personal injury firms, by how far through certification they are`}
+        rows={cohortRows}
+        caption={`The ranking publishes when the top bar reaches ${MIN_CERTIFIED}. Certification is the slow one on purpose: it needs every gate passed and a floor met across professional standing, outcomes and client experience.`}
+      />
+    )}
+
+    {gateMet && (
+      <BarChart
+        heading="Certification score, out of 100"
+        max={100}
+        rows={ranked.map(f => ({
+          label: f.data.name,
+          href: `/firms/${f.data.slug}/`,
+          value: f.data.score?.total ?? 0,
+          note: f.data.score?.tier,
+        }))}
+        caption={`Scored under LFL Certified Methodology ${methodVersion}. A score is a percentage of what we could assess for that firm, and each profile prints its own coverage beside it.`}
+      />
     )}
 
     {gateMet && ranked.map((f, i) => {

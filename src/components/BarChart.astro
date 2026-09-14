@@ -1,0 +1,59 @@
+---
+/**
+ * Horizontal bars for comparing a handful of measured quantities.
+ *
+ * Built from HTML and CSS rather than SVG on purpose: the labels and the values stay real text,
+ * so they are selectable, translatable, readable by a screen reader in the order they are written,
+ * and they reflow at 360px without a viewBox to fight. Nothing here is scripted. Every figure a
+ * chart shows is passed in already computed, the same numbers the prose uses.
+ *
+ * Emphasis: give the row that is the point `emphasis: true` and every other row goes quiet grey.
+ * That is the honest form when one bar is the story, and it is cheaper to read than eight hues.
+ * The quiet grey sits under 3:1 against the surface, which is why every bar carries its value as
+ * visible text: the number never depends on the colour being legible.
+ */
+export interface BarRow {
+  label: string;
+  value: number;
+  /** Overrides the printed value. For "21 of 37" where the bar is drawn from 21. */
+  display?: string;
+  /** Second line under the label: a source, a count, a caveat. */
+  note?: string;
+  /** Links the label. Firm rows link to the profile the number came from. */
+  href?: string;
+  emphasis?: boolean;
+}
+
+interface Props {
+  rows: BarRow[];
+  /** The scale's top. Defaults to the largest value, which makes the bars relative to each other. */
+  max?: number;
+  /** Sits above the bars, in the muted label style. Say what is being counted, and out of what. */
+  heading?: string;
+  caption?: string;
+  class?: string;
+}
+
+const { rows, max, heading, caption, class: cls } = Astro.props;
+const top = max ?? Math.max(...rows.map(r => r.value), 1);
+const hasEmphasis = rows.some(r => r.emphasis);
+// A non-zero value always draws something: a bar of one firm in sixty is a real measurement and
+// should not round away to an empty row. A zero draws nothing, because it is nothing.
+const width = (v: number) => (v <= 0 ? 0 : Math.max(1.5, (v / top) * 100));
+---
+<figure class={cls ? `chart ${cls}` : 'chart'}>
+  {heading && <p class="chart-heading">{heading}</p>}
+  <div class="chart-rows">
+    {rows.map(r => (
+      <div class={hasEmphasis && !r.emphasis ? 'chart-row is-quiet' : 'chart-row'}>
+        <span class="chart-label">
+          {r.href ? <a href={r.href}>{r.label}</a> : r.label}
+          {r.note && <em>{r.note}</em>}
+        </span>
+        <span class="chart-track"><i style={`width:${width(r.value)}%`}></i></span>
+        <b class="chart-value">{r.display ?? r.value.toLocaleString('en-US')}</b>
+      </div>
+    ))}
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

@@ -2,6 +2,9 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
 
 // A method piece about pillar B, and a count of what every firm in the directory publishes about
 // its own outcomes. Every figure is computed from the firms collection at build time, so the
@@ -66,6 +69,20 @@ const bZero = firms.filter(f => f.data.score?.pillars.B.score === 0).length;
 // earns nothing at all.
 const B1_TOP_BAND = 25;
 const topBand = publishers.filter(f => rp(f)!.count! >= B1_TOP_BAND);
+// The distribution in the bands B1 actually pays on, so the chart shows where the rule bites
+// rather than only the shape. Bands are drawn from the same constant the sub-factor uses.
+const BANDS = [
+  { label: 'Under 10', lo: 1, hi: 9 },
+  { label: '10 to 24', lo: 10, hi: 24 },
+  { label: '25 to 49', lo: 25, hi: 49 },
+  { label: '50 or more', lo: 50, hi: Infinity },
+];
+const bandColumns = BANDS.map(b => ({
+  label: b.label,
+  value: publishers.filter(f => rp(f)!.count! >= b.lo && rp(f)!.count! <= b.hi).length,
+  emphasis: b.lo >= B1_TOP_BAND,
+}));
+
 const avgTotal = (xs: Firm[]) => xs.length
   ? +(xs.reduce((n, f) => n + (f.data.score?.total ?? 0), 0) / xs.length).toFixed(1) : 0;
 const nonPublishers = firms.filter(f => !publishers.includes(f));
@@ -142,34 +159,41 @@ const description = 'We read the case results page of every firm we list and cou
     <h2 id="what">What we counted</h2>
     <p>A case results page is a firm's own account of its own work. There is nothing wrong with that, and a firm with a long record should say so. The question is what a reader can do with the page, and the only way to answer it is to read every one of them and count what is actually there.</p>
     <p>We fetched the results page of each of the {firms.length} firms in the directory, honoring robots.txt, and recorded five things: how many results the page lists, what kinds of case they are attributed to, whether any court or county is named, whether the page carries a prior-results disclaimer, and whether we could read the page at all. That last one matters more than it sounds.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>What we found</th><th>Firms</th></tr></thead>
-        <tbody>
-          <tr><td>Publish at least one case result</td><td class="num">{publishers.length} of {firms.length}</td></tr>
-          <tr><td>Readable results page with nothing on it to count</td><td class="num">{silent.length} of {firms.length}</td></tr>
-          <tr><td>Results page we could not read</td><td class="num">{unreadable.length} of {firms.length}</td></tr>
-          <tr><td>Not yet checked</td><td class="num">{unchecked.length} of {firms.length}</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <StackBar
+      heading={`What the results page of each of the ${firms.length} firms gave us`}
+      unit="firms"
+      segments={[
+        { label: 'Publish at least one case result', value: publishers.length },
+        { label: 'Readable page, nothing on it to count', value: silent.length },
+        { label: 'Page we could not read', value: unreadable.length },
+        { label: 'Not yet checked', value: unchecked.length },
+      ]}
+      caption="One bar, every firm in the directory. Read dark to light: the darkest segment is the firms whose page told us something, the lightest is our own unfinished work."
+    />
     <p>We treat the {unreadable.length === 1 ? 'page' : `${unreadable.length} pages`} we could not read as a limit on our crawler rather than as a finding about the {unreadable.length === 1 ? 'firm' : 'firms'}.{' '}{blocked && <>{blocked.data.name}'s page, for instance, answers us with a refusal: our note on that record reads "{rp(blocked)!.why}". <a href={`/firms/${blocked.data.slug}/`}>Its profile</a> leaves pillar B unscored rather than scoring it zero</>}{blocked && '. '}That is the rule everywhere on this site: a page we cannot read leaves the sub-factor out of the denominator, because a firm must not lose points to the reach of our own crawl. {bPending} {bPending === 1 ? 'firm has' : 'firms have'} pillar B unscored for that reason.</p>
     <p>The {silent.length} firms with a readable page and nothing countable on it are a different case, and a real finding. They have built the page, linked it in the navigation, and put no result on it that a reader or a search engine receives.</p>
 
     <h2 id="found">What the pages carry</h2>
     <p>Across the {publishers.length} firms that do publish, the pages hold {totalResults.toLocaleString('en-US')} results between them. The median firm publishes {medianCount}. {most && <><a href={`/firms/${most.data.slug}/`}>{most.data.name}</a> publishes {rp(most)!.count}, the most of anyone here.</>}</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>On the results page</th><th>Firms that publish results</th></tr></thead>
-        <tbody>
-          <tr><td>Name the kinds of case the results came from</td><td class="num">{withCaseTypes.length} of {publishers.length}</td></tr>
-          <tr><td>Attach a figure to individual results</td><td class="num">{withAmounts.length} of {publishers.length}</td></tr>
-          <tr><td>Also state a lifetime or aggregate total</td><td class="num">{withAggregate.length} of {publishers.length}</td></tr>
-          <tr><td>Name a court or county anywhere on the page</td><td class="num">{withVenue.length} of {publishers.length}</td></tr>
-          <tr><td>Carry a prior-results disclaimer</td><td class="num">{withDisclaimer.length} of {publishers.length}</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <ColumnChart
+      heading={`How many results each of the ${publishers.length} publishing firms lists`}
+      columns={bandColumns}
+      emphasisLabel={`At or above ${B1_TOP_BAND} results, where our own B1 sub-factor stops paying more`}
+      quietLabel="Below it, where publishing one more result still earns something"
+      caption={`Median ${medianCount} results per firm. The two right-hand bands earn identical points, which is the part of our method this piece argues with.`}
+    />
+    <BarChart
+      heading={`What those ${publishers.length} pages carry`}
+      max={publishers.length}
+      rows={[
+        { label: 'Name the kinds of case', value: withCaseTypes.length, display: `${withCaseTypes.length} of ${publishers.length}` },
+        { label: 'Attach a figure to individual results', value: withAmounts.length, display: `${withAmounts.length} of ${publishers.length}` },
+        { label: 'State a lifetime or aggregate total', value: withAggregate.length, display: `${withAggregate.length} of ${publishers.length}` },
+        { label: 'Name a court or county', value: withVenue.length, display: `${withVenue.length} of ${publishers.length}` },
+        { label: 'Carry a prior-results disclaimer', value: withDisclaimer.length, display: `${withDisclaimer.length} of ${publishers.length}` },
+      ]}
+      caption="Each bar is the share of publishing firms whose page carries that thing. Case types are close to universal; a court or county is not."
+    />
     <p>Case types are close to universal, and they are the most useful thing on the page: a firm whose results are all rear-end collisions has told you very little about a birth injury case. Across these pages the case types named by the most firms are {topTypesList}. Venue is where it thins out. {withVenue.length} of the {publishers.length} name a court or a county somewhere on the page, and even there the reference usually sits beside the page as a whole rather than beside a particular figure. A settlement with no court, no year and no case number cannot be looked up by anyone, including us.</p>
     <p>Disclaimers split the set nearly in half: {withDisclaimer.length} pages carry one, {noDisclaimer.length} do not. New York's attorney advertising rules effectively require the line on a page that advertises past results, and most of these firms are in New York.</p>
     <div class="table-wrap">
@@ -212,7 +236,7 @@ const description = 'We read the case results page of every firm we list and cou
       <li><b>Weigh it against things you can check.</b> What the firm publishes about fees and what its clients say are both verifiable to some degree. We measured <a href="/guides/what-new-york-injury-firms-publish-about-fees/">what these firms publish about fees</a> and <a href="/guides/google-reviews-new-york-injury-firms/">what their Google reviews are worth</a>, and both hold up better than a settlement figure.</li>
     </ul>
     <p>Every profile in the <a href="/practice-areas/personal-injury/">personal injury directory</a> shows the count and the case types we read off that firm's page, with a link to the page itself and the date we read it. No amounts, for the reason above. If we have got a count wrong, the firm can <a href="/contact/">tell us</a> and we will read the page again.</p>
-    <p class="muted" style="font-size:.86rem">Results pages are read by crawling each firm's own public site and honoring robots.txt, and each record stores the page URL and the date it was read. A page we cannot read leaves pillar B unscored rather than scoring the firm zero. Amounts are stored but never published: only a result verified against a court record or documentation is shown with its figure, and there are {verifiedResults.length === 0 ? 'none' : verifiedResults.length} at present.</p>
+    <p class="muted" style="font-size:.86rem">Results pages are read by crawling each firm's own public site and honoring robots.txt, and each record stores the page URL and the date it was read. Every page is re-read monthly and this study recomputes itself from whatever the new reading says, so the figures above move without anyone editing the sentences around them. The date in the byline is the most recent read. A page we cannot read leaves pillar B unscored rather than scoring the firm zero. Amounts are stored but never published: only a result verified against a court record or documentation is shown with its figure, and there are {verifiedResults.length === 0 ? 'none' : verifiedResults.length} at present.</p>
   </div>
 
   <aside class="article-aside">
