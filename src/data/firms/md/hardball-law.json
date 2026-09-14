@@ -1,0 +1,417 @@
+{
+  "slug": "hardball-law",
+  "name": "Hardball Law",
+  "initials": "HA",
+  "website": "https://www.hardball-law.com/",
+  "domain": "hardball-law.com",
+  "phone": "(443) 300-9800",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "workers-compensation",
+      "name": "Workers' Compensation",
+      "primary": true
+    }
+  ],
+  "market": {
+    "city_slug": "baltimore-md",
+    "city": "Baltimore",
+    "state": "MD",
+    "state_name": "Maryland"
+  },
+  "offices": [
+    {
+      "label": "Hardball Law - Baltimore Personal Injury Lawyer",
+      "address": "606 Baltimore Ave Ste 400, Towson, MD 21204, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=12544048170265027013&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Hardball Law is a workers' compensation firm with a single office in Towson.",
+    "The firm states that the first consultation is free; its intake line is open around the clock. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "55",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-14"
+    },
+    "sample": [
+      {
+        "published_at": "2026-04-21T17:38:29.884458378Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-07T21:51:05.678296294Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-05T21:57:54.942466667Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-08T13:36:16.329218875Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-13T17:04:08.457116430Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "blog": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 60,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-14",
+      "note": "LCP 9.7 s / CLS 0.000 / TBT 88 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "hardball-law.com",
+      "name": "Hardball Law - Baltimore Personal Injury Lawyer",
+      "practice_page": "https://www.hardball-law.com/workers-compensation/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 55,
+      "rating_weighted": 4.9,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-14"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Maryland does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-14"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Maryland does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-14"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-14"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-14"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "55 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 1999-09-15, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-14"
+    }
+  },
+  "cohort_id": "md-workers-compensation",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD business.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "Baltimore Personal Injury Lawyer | Free Consultation 24/7 Skip to content Pioneer in Sexually Transmitted Disease and Gender Bias Litigation F",
+          "source_url": "https://www.hardball-law.com/"
+        },
+        "available_24_7": {
+          "quote": "Baltimore Personal Injury Lawyer | Free Consultation 24/7 Skip to content Pioneer in Sexually Transmitted Disease and Gender Bias Litigation First",
+          "source_url": "https://www.hardball-law.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.hardball-law.com/",
+        "contact": "https://www.hardball-law.com/contact-us/",
+        "privacy": "https://www.hardball-law.com/privacy-policy/",
+        "results": "https://www.hardball-law.com/case-results/",
+        "blog": "https://www.hardball-law.com/blog/",
+        "disclaimer": "https://www.hardball-law.com/disclaimer/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "1999-09-15",
+    "years": 27.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-14"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-14"
+  },
+  "results_published": {
+    "count": 8,
+    "counted_from": "stated amounts",
+    "amounts": [
+      3750000,
+      1000000,
+      900000,
+      50000,
+      30000,
+      23000,
+      14000,
+      13500
+    ],
+    "largest": 3750000,
+    "aggregate_claims": [],
+    "case_types": [
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "workplace",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 7560,
+    "readable": true,
+    "url": "https://www.hardball-law.com/case-results/",
+    "checked_at": "2026-09-14"
+  },
+  "score": {
+    "total": 42,
+    "tier": "Listed",
+    "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-14",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 3,
+            "max": 6,
+            "source": "firm",
+            "evidence": "8 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "8 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "55 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 55 reviews → Bayesian 4.86 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-13) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 22,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 28,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D2 Search authority: not yet measured (8 pts)"
+      ]
+    },
+    "raw": 29.5,
+    "assessed": 70,
+    "coverage": 0.7,
+    "floor_abc_pct": 0.579,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "assessable": 100,
+    "comparable": true
+  }
+}

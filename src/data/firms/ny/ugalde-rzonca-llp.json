@@ -37,7 +37,7 @@
       "admitted_year": 2007,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -48,7 +48,7 @@
       "admitted_year": 2003,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -56,7 +56,7 @@
       "bar_state": "NY",
       "source_url": "https://www.hurtatworknyc.com/lawyers/paul-ikhide/",
       "registry_note": "not found",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -67,7 +67,7 @@
       "admitted_year": 2023,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -78,7 +78,7 @@
       "admitted_year": 1991,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -89,7 +89,7 @@
       "admitted_year": 2008,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     }
   ],
@@ -170,19 +170,19 @@
       "pass": true,
       "evidence": "5 of 6 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 5 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G3": {
       "pass": true,
       "evidence": "UGALDE & RZONCA, LLP is an active domestic registered limited liability partnership registered since 2010-06-18, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G5": {
       "pass": true,
@@ -194,7 +194,7 @@
       "pass": true,
       "evidence": "321 public client reviews and 16 years since the entity was formed in 2010",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     }
   },
   "cohort_id": "ny-workers-compensation",
@@ -273,7 +273,7 @@
     "dos_id": "3963827",
     "formed": "2010-06-18",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-13"
+    "checked_at": "2026-09-14"
   },
   "score": {
     "total": 52,
@@ -360,7 +360,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 321 reviews → Bayesian 4.43 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.3 over 321 reviews → Bayesian 4.43 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

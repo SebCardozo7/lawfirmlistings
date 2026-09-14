@@ -79,13 +79,17 @@ def promote_attorneys(rec: dict, firm: dict) -> list[str]:
         # The existing spelling wins when both name the same person: it is the one the registry
         # matched against, and a middle initial with its full stop is the more careful form.
         keep["name"] = keep.get("name") or person["name"]
-        # No default. A role we never read is not "Attorney": src/lib/roster.ts records what
-        # that default cost. role_source travels with it so a template can tell the two apart.
-        if person.get("role"):
-            keep["role"] = person["role"]
-        elif keep.get("role_source") == "not stated by the firm":
+        # The source decides, not the role field, and that order matters. Staging records
+        # written before the crawler was fixed still carry role "Attorney" alongside
+        # role_source "not stated by the firm", which is the contradiction the whole change
+        # was about. Reading the role first copied it straight back onto a profile: thirty
+        # names at one Baltimore firm, caught by the audit on the run that published it.
+        source = person.get("role_source") or "not stated by the firm"
+        if source == "not stated by the firm":
             keep.pop("role", None)
-        keep["role_source"] = person.get("role_source") or "not stated by the firm"
+        elif person.get("role"):
+            keep["role"] = person["role"]
+        keep["role_source"] = source
         keep.setdefault("bar_state", "NY")
         if person.get("source_url"):
             keep["source_url"] = person["source_url"]

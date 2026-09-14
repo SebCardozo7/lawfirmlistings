@@ -202,17 +202,26 @@ def fee_sentence(quote):
     return sentence
 
 
-def plausible_phone(raw):
+def plausible_phone(raw, verified=False):
     """Reject placeholders. Cellino Law publishes (888) 888-8888 in its own JSON-LD, and a
-    made-up number on a profile is worse than no number: someone would dial it."""
+    made-up number on a profile is worse than no number: someone would dial it.
+
+    `verified` is the whole subtlety. A body of one repeated digit is the shape of a placeholder
+    and also the shape of a vanity line a firm paid for, and the rule that rejected both threw
+    out William Mattar, whose number is 444-4444 and whose entire advertising is that number.
+    What separates the two is who says so: Google verifies a phone number before it appears on a
+    business profile, and nobody verifies a firm's own markup. So a repeated-digit number is
+    trusted from a verified listing and refused from a page we scraped.
+    """
     digits = re.sub(r"\D", "", raw or "")
     if len(digits) == 11 and digits.startswith("1"):
         digits = digits[1:]
     if len(digits) != 10:
         return False
     body = digits[3:]                       # everything after the area code
-    if len(set(body)) == 1:                 # 888-8888, 000-0000
+    if len(set(body)) == 1 and not verified:  # 888-8888, 000-0000
         return False
+    # Never, whoever claims it: 555-01xx is reserved for fiction and the rest are keyboard runs.
     if body in ("1234567", "0000000") or body.startswith("5550"):
         return False
     return True
@@ -226,7 +235,7 @@ def pick_phone(rec):
         if v and plausible_phone(v):
             return v, "JSON-LD telephone"
     for l in rec.get("places", {}).get("listings", []):
-        if l.get("phone") and plausible_phone(l["phone"]):
+        if l.get("phone") and plausible_phone(l["phone"], verified=True):
             return l["phone"], "Google Business Profile"
     for p in rec.get("phones", []):
         if plausible_phone(p["value"]):

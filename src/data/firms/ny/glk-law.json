@@ -41,7 +41,7 @@
       "bar_state": "NY",
       "source_url": "https://www.lawyertime.com/attorneys/andrew-l-libo/",
       "registry_note": "sole name match carries an adverse status (Deceased) and is not corroborated by the firm - not published",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -52,7 +52,7 @@
       "admitted_year": 1992,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -63,7 +63,7 @@
       "admitted_year": 2018,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -74,7 +74,7 @@
       "admitted_year": 1975,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     },
     {
@@ -85,7 +85,7 @@
       "admitted_year": 1974,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     }
   ],
@@ -190,19 +190,19 @@
       "pass": true,
       "evidence": "4 of 5 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 4 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G5": {
       "pass": true,
@@ -346,7 +346,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.91 over 121 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.91 over 121 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

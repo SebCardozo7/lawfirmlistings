@@ -105,19 +105,19 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G3": {
       "pass": true,
       "evidence": "FINKELSTEIN, MEIROWITZ & EIDLISZ, LLP is an active domestic registered limited liability partnership registered since 1999-07-23, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G5": {
       "pass": false,
@@ -129,7 +129,7 @@
       "pass": true,
       "evidence": "121 public client reviews and 27 years since the entity was formed in 1999",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     }
   },
   "cohort_id": "ny-workers-compensation",
@@ -194,7 +194,7 @@
     "dos_id": "2401659",
     "formed": "1999-07-23",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-13"
+    "checked_at": "2026-09-14"
   },
   "score": {
     "total": 21,
@@ -281,7 +281,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.5 over 121 reviews → Bayesian 4.65 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 121 reviews → Bayesian 4.65 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

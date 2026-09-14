@@ -90,7 +90,7 @@
       "bar_state": "NY",
       "source_url": "https://www.ginarte.com/our-attorneys/timothy-bartzos-esq/",
       "registry_note": "not found",
-      "checked_at": "2026-09-13",
+      "checked_at": "2026-09-14",
       "role_source": "not stated by the firm"
     }
   ],
@@ -337,19 +337,19 @@
       "pass": false,
       "evidence": "None of the 1 attorneys this firm names could be found in the register, so there is nothing here to clear or to fault.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G2": {
       "pass": false,
       "evidence": "None of the 1 attorneys this firm names could be found in the register, so no disciplinary history could be read either way.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G3": {
       "pass": true,
       "evidence": "GINARTE GONZALEZ WINOGRAD, LLP is an active new york registered foreign limited liability partnership registered since 2003-12-08, with 9 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     },
     "G5": {
       "pass": true,
@@ -361,7 +361,7 @@
       "pass": true,
       "evidence": "2,867 public client reviews and 23 years since the entity was formed in 2003",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-14"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -382,7 +382,7 @@
     "dos_id": "2985844",
     "formed": "2003-12-08",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-13"
+    "checked_at": "2026-09-14"
   },
   "score": {
     "total": 35,
@@ -469,7 +469,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.73 over 2,867 reviews → Bayesian 4.73 (prior 4.84 weighted as 100 reviews, from 87 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.73 over 2,867 reviews → Bayesian 4.73 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
