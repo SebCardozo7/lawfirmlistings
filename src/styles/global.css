@@ -394,6 +394,10 @@ button,input,select{font:inherit;color:inherit}
 .guide .thumb.t2::before{background:radial-gradient(70% 70% at 20% 0%,rgba(94,234,212,.5),transparent 70%)}
 .guide .thumb.t3::before{background:radial-gradient(70% 70% at 50% 0%,rgba(59,130,246,.6),transparent 70%)}
 .guide .thumb svg{position:absolute;inset:auto 0 0 0;height:70%;opacity:.25}
+/* A card that carries the article's own cover art fills the thumb with it rather than fading an
+   icon along the bottom edge. The scene is drawn for a wide panel, so the card crops it to the
+   middle rather than squashing it. */
+.guide .thumb .cover-art{position:absolute;inset:0;width:100%;height:100%;opacity:1}
 .guide .body{padding:24px;display:grid;gap:10px}
 .guide .kicker{font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .guide h3{font-size:1.2rem}
