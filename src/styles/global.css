@@ -1031,3 +1031,24 @@ button,input,select{font:inherit;color:inherit}
 .roster-rest ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .roster-rest li{background:var(--paper);border:1px solid var(--line);border-radius:var(--pill);padding:7px 14px;font-size:.9rem}
 .roster-rest li a{color:var(--ink)}
+
+/* Cities as a destination rather than as a filter. The chips this replaces were the page's main
+   navigation dressed as a control, and a reader skimmed straight past them. A card carries the
+   count, which is the thing that tells somebody whether the ranking is worth opening. */
+.city-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:26px}
+.city-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px;align-content:start;text-decoration:none!important;color:inherit;position:relative;transition:border-color .18s,box-shadow .18s,transform .18s}
+.city-card::after{content:"→";position:absolute;right:20px;top:20px;color:var(--muted);opacity:0;transform:translateX(-6px);transition:.2s}
+.city-card:hover{border-color:var(--ink);box-shadow:var(--shadow);transform:translateY(-2px)}
+.city-card:hover::after{opacity:1;transform:none}
+/* The state's own two letters, not a pin. A pin on four cards says "these are places", which
+   the reader already knows. The state says which state, and it is the one fact on the card that
+   is not the city's name: Buffalo and New York are both NY, and Maryland and Florida publish no
+   attorney register we may query while New York does. The colours are the site's own three
+   aurora stops, one per state, so a fourth state needs a line here rather than a new palette. */
+.city-card .ico{width:38px;height:38px;border-radius:11px;background:var(--ink);display:grid;place-items:center;color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.04em}
+.city-card .ico[data-state="NY"]{background:var(--a1)}
+.city-card .ico[data-state="MD"]{background:var(--a2)}
+.city-card .ico[data-state="FL"]{background:#0F9488}
+.city-card b{color:var(--ink);font-size:1.22rem;font-weight:600;letter-spacing:-.02em}
+.city-card .meta{font-size:.88rem;color:var(--muted)}
+@media (max-width:640px){.city-cards{grid-template-columns:1fr 1fr;gap:10px}.city-card{padding:16px}.city-card b{font-size:1.05rem}}

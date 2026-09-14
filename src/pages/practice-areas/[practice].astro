@@ -54,8 +54,11 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
   const inCity = firms.filter(f => f.data.market.city_slug === slug);
   return {
     slug,
+    city: inCity[0].data.market.city,
+    state: inCity[0].data.market.state,
     label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`,
     count: inCity.length,
+    certified: inCity.filter(f => f.data.status === 'certified').length,
   };
 }).sort((a, b) => b.count - a.count);
 
@@ -86,12 +89,31 @@ const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
   </div>
 </section>
 
-<div class="filterbar">
+{/* This was a filter bar: a thin strip of chips that looked like a control and was actually
+    the page's main navigation, sitting above the fold and going unnoticed. Ranking is scoped to
+    a city in the methodology, so these links are the product, and the same list was repeated as
+    a plain list further down the page. One strong element instead of two weak ones. */}
+<section class="section--tight" id="by-city">
   <div class="container">
-    <span class="lbl">City</span>
-    {cityCounts.map(c => <a class="chip" href={`/cities/${c.slug}/${practice}/`}>{c.label.split(',')[0]}</a>)}
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Ranked by city</span>
+        <h2 style="margin-top:12px">Where we have measured {notes.name.toLowerCase()} firms</h2>
+        <p>A firm is worth comparing against the firms somebody could hire instead of it, so
+          every ranking is a city and a practice. Pick the city.</p>
+      </div>
+    </div>
+    <div class="city-cards">
+      {cityCounts.map(c => (
+        <a class="city-card" href={`/cities/${c.slug}/${practice}/`}>
+          <span class="ico" data-state={c.state}>{c.state}</span>
+          <b>{c.city}</b>
+          <span class="meta">{c.count} {c.count === 1 ? 'firm' : 'firms'} ranked{c.certified > 0 && <> · {c.certified} certified</>}</span>
+        </a>
+      ))}
+    </div>
   </div>
-</div>
+</section>
 
 <section class="section--tight">
   <div class="container layout">
@@ -108,14 +130,6 @@ const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
         {firms.slice(0, 3).map((firm, i) => (
           <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
         ))}
-      </div>
-      <div class="ranked-links">
-        <h3>Ranked lists by city</h3>
-        <ul>
-          {cityCounts.map(c => (
-            <li><a href={`/cities/${c.slug}/${practice}/`}>{notes.name} firms in {c.label}</a><span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}</span></li>
-          ))}
-        </ul>
       </div>
     </div>
 
