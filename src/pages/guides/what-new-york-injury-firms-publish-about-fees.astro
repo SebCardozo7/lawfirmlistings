@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
 
 // Computed from the collection at build time. The tests below run against the fee language each
 // firm publishes on its own site — the same strings that feed sub-factor E1 — so if a firm adds
@@ -77,6 +78,15 @@ const description = 'Every New York injury firm offers a free consultation, so i
   </nav>
 
   <div class="prose">
+    <Takeaways
+      scope={`Read from the fee language ${firms.length} firms publish on their own websites.`}
+      items={[
+        `<b>${freeConsult.length} of ${firms.length}</b> firms offer a free consultation, which means it differentiates none of them.`,
+        `<b>${publishPct.length === 0 ? 'Not one firm' : `Only ${publishPct.length} of ${firms.length}`}</b> publishes the contingency percentage it actually charges.`,
+        `<b>${publishExpenses.length === 0 ? 'Not one' : String(publishExpenses.length)}</b> says whether case expenses come out before or after the fee is worked out, and on a mid-size settlement that order is worth five figures.`,
+        `<b>${contingency.length}</b> firms state they work on contingency and <b>${noModel.length}</b> state no fee model at all, so the two questions worth asking are the two nobody answers in public.`,
+      ]}
+    />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from the fee language each firm publishes on its own website. This is not legal advice, and it is not a statement about what any firm charges, only about what it says publicly.</div>
 
     <h2 id="free">"Free consultation" is not a feature</h2>

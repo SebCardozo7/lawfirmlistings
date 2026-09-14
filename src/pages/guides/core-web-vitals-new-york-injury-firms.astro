@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
 
 // A short technical piece, written so the article template is in production and so pillar D has
 // something public explaining it. Every figure below is computed from the firms collection at
@@ -28,7 +29,16 @@ const medianPerf = withPsi.length ? median(withPsi.map(f => f.data.digital.psi!.
 
 const noSchema = firms.filter(f => f.data.digital.schema_detected === false);
 const attorneyTotal = firms.reduce((n, f) => n + f.data.attorneys.length, 0);
-const withBarNumber = firms.reduce(
+// Two different things, and conflating them put a false sentence on a live page. `barNumbersOnBios`
+// is what a firm publishes about its own attorneys, read from its bio pages by the crawler.
+// `registryMatched` is how many of those attorneys WE tied to the state register, which is our
+// work and not the firm's. The sentence below used to say "not one publishes a bar registration
+// number" and read the second number, which was 0 until scripts/check_ny_registry.py started
+// writing bar_number onto every attorney it matched. The prose then claimed 419 firms publish
+// something none of them publishes, and nothing failed, because both numbers are real.
+const barNumbersOnBios = firms.filter(
+  f => f.data.digital.trust_pages?.bar_numbers_on_bios).length;
+const registryMatched = firms.reduce(
   (n, f) => n + f.data.attorneys.filter(a => a.bar_number).length, 0);
 
 // The distribution, because forty-odd bars is a list and not a chart. Bands are Google's own
@@ -100,6 +110,15 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
   </nav>
 
   <div class="prose">
+    <Takeaways
+      scope={`Measured with PageSpeed Insights across ${withPsi.length} firms${updated ? `, ${updated}` : ''}.`}
+      items={[
+        `<b>${passing.length} of ${withPsi.length}</b> firms pass Core Web Vitals. The median performance score is <b>${medianPerf}</b> out of 100.`,
+        `The gap between the fastest and the slowest firm here is <b>${(best[0]?.data.digital.psi?.value.performance ?? 0) - (worst[0]?.data.digital.psi?.value.performance ?? 0)} points</b>, which is the difference between a page that loads and one a reader abandons.`,
+        `<b>${noSchema.length} firms</b> publish no structured data at all, so a search engine has to guess what their pages are about.`,
+        `<b>${barNumbersOnBios === 0 ? 'Not one firm' : `Only ${barNumbersOnBios} of ${firms.length}`}</b> publishes a bar registration number on its attorney bios, which is the cheapest thing any of them could do to make a roster checkable.`,
+      ]}
+    />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 
     <h2 id="what">What we measured</h2>
@@ -124,7 +143,7 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
     {noSchema.length > 0 && (
       <p>{noSchema.length === 1 ? 'One firm publishes' : `${noSchema.length} firms publish`} no structured data at all, not a line of JSON-LD. That costs a point, and it makes the site harder for search engines and AI assistants to read.</p>
     )}
-    <p>And of the {attorneyTotal} attorney bios we have collected from firm websites, {withBarNumber === 0 ? 'not one' : withBarNumber} publishes a bar registration number. <b>That is the single easiest way for a firm to make its own attorney roster verifiable.</b></p>
+    <p>And of the {firms.length} firms whose attorney bios we have read, {barNumbersOnBios === 0 ? 'not one' : barNumbersOnBios} publishes a bar registration number on them. <b>That is the single easiest way for a firm to make its own attorney roster verifiable</b>, and it is the reason we have to match {attorneyTotal.toLocaleString('en-US')} names against the state register ourselves: {registryMatched} of them resolve to a registration, and the rest stay unverifiable by anybody.</p>
 
     <h2 id="why">Why the score counts it</h2>
     <p>Website performance sits in pillar D of the LFL Certification Score, worth 25 of 100, and Core Web Vitals is the first thing in it.</p>
