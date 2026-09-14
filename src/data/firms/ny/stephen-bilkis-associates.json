@@ -59,14 +59,14 @@
   "attorneys": [
     {
       "name": "Stephen Bilkis",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.1800nynylaw.com/lawyers/stephen-bilkis/",
       "bar_number": "2842938",
       "admitted_year": 1997,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     }
   ],
   "languages": [
@@ -273,7 +273,7 @@
     "total": 61,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (6/15).",
-    "computed_at": "2026-09-13",
+    "computed_at": "2026-09-14",
     "methodology": "v2.0",
     "pillars": {
       "A": {

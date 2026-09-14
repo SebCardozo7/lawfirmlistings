@@ -52,66 +52,66 @@
   "attorneys": [
     {
       "name": "Paul Koenigsberg",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.kalawyer.com/your-team/about-paul-koenigsberg/",
       "bar_number": "1878552",
       "admitted_year": 1983,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Gil Serrano",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.kalawyer.com/your-team/about-gil-serrano/",
       "bar_number": "2962363",
       "admitted_year": 1999,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Richard Weiss",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.kalawyer.com/your-team/about-richard-weiss/",
       "bar_number": "2372761",
       "admitted_year": 1991,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Kevin Cowie",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.kalawyer.com/your-team/about-kevin-cowie/",
       "bar_number": "4535753",
       "admitted_year": 2007,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Spencer Herman",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.kalawyer.com/your-team/about-spencer-herman/",
       "bar_number": "1623677",
       "admitted_year": 1979,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Robert Rosenberg",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.kalawyer.com/your-team/about-robert-rosenberg/",
       "registry_note": "ambiguous (10 attorneys share this name)",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     }
   ],
   "languages": [
@@ -333,7 +333,7 @@
     "total": 47,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-13",
+    "computed_at": "2026-09-14",
     "methodology": "v2.0",
     "pillars": {
       "A": {

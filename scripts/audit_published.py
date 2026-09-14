@@ -84,23 +84,40 @@ def check_names(firms):
 OPEN_REGISTER_STATES = {"NY"}
 
 
+# A role that says the person practises law. Kept here rather than imported, because the
+# authority is src/lib/roster.ts and this is a second opinion on the same question: a check that
+# shares its subject's code cannot catch its subject's bug.
+LAWYER_ROLE = re.compile(
+    r"\b(attorney|lawyer|partner|associate|of counsel|counsel|esq|shareholder)\b", re.I)
+
+
 def check_roster(firms):
+    """The question is not who is unmatched, it is who we are calling an attorney anyway.
+
+    This used to report every name that came off a team page without a registration, which was
+    the right alarm for the wrong thing: those people are published now as named by the firm
+    without a role, which is what the firm's page actually says. What matters is the regression,
+    a role asserted where the record says the firm never stated one.
+    """
     for path, f in firms:
+        people = f.get("attorneys") or []
+        asserted = [a for a in people
+                    if a.get("role_source") == "not stated by the firm"
+                    and LAWYER_ROLE.search(a.get("role") or "")]
+        if asserted:
+            yield (path, "roster",
+                   "%d name(s) carry a lawyer's role the record says the firm never printed: %s"
+                   % (len(asserted), ", ".join(a["name"] for a in asserted[:4])))
+
         if (f.get("market") or {}).get("state") not in OPEN_REGISTER_STATES:
             continue
-        team = [a for a in (f.get("attorneys") or [])
-                if not a.get("bar_number") and TEAM_PATH.search(a.get("source_url") or "")]
-        unmatched = [a for a in (f.get("attorneys") or []) if not a.get("bar_number")]
-        total = len(f.get("attorneys") or [])
-        if team:
+        # Informational, and a real signal about the firm rather than about us: a practice that
+        # publishes a dozen people and says which two are lawyers is telling a reader very little.
+        roleless = [a for a in people if not a.get("role") and not a.get("bar_number")]
+        if len(people) >= 8 and len(roleless) / len(people) > 0.5:
             yield (path, "roster",
-                   "%d of %d published as attorneys come off a team page with no registration "
-                   "behind them: %s" % (len(team), total,
-                                        ", ".join(a["name"] for a in team[:4])))
-        elif total >= 8 and len(unmatched) / total > 0.6:
-            yield (path, "roster",
-                   "%d of %d named attorneys are not in the register; a roster that is mostly "
-                   "unverifiable is worth reading" % (len(unmatched), total))
+                   "%d of %d people the firm names carry neither a role nor a registration"
+                   % (len(roleless), len(people)))
 
 
 def check_fee(firms):

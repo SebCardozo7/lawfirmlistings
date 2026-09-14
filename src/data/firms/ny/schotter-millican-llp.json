@@ -31,41 +31,41 @@
   "attorneys": [
     {
       "name": "Geoffrey Schotter",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.lawforworkers.com/our-team/geoffrey-schotter",
       "bar_number": "5013057",
       "admitted_year": 2012,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Amy Millican",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.lawforworkers.com/our-team/amy-millican",
       "bar_number": "5239082",
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Joel Fredericson",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.lawforworkers.com/our-team/joel-fredericson",
       "registry_note": "not found",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     },
     {
       "name": "Sarah Hummell",
-      "role": "Attorney",
       "bar_state": "NY",
       "source_url": "https://www.lawforworkers.com/our-team/sarah-hummell",
       "registry_note": "not found",
-      "checked_at": "2026-09-13"
+      "checked_at": "2026-09-13",
+      "role_source": "not stated by the firm"
     }
   ],
   "languages": [
@@ -318,7 +318,7 @@
     "total": 58,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-13",
+    "computed_at": "2026-09-14",
     "methodology": "v2.0",
     "pillars": {
       "A": {

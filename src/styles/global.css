@@ -1026,3 +1026,12 @@ button,input,select{font:inherit;color:inherit}
   .site-header.is-open .nav-toggle .ico-close{display:block}
   .site-header.is-open .nav-toggle{background:var(--tint);border-color:var(--ink)}
 }
+
+/* People a firm names without a role beside the name. They sit under the attorneys rather than
+   among them, because the distinction is the point: see src/lib/roster.ts. */
+.roster-rest{margin-top:26px;padding-top:22px;border-top:1px solid var(--grid)}
+.roster-rest h3{font-size:1.02rem;margin-bottom:8px}
+.roster-rest p{font-size:.92rem;color:var(--muted);max-width:64ch;margin-bottom:14px}
+.roster-rest ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.roster-rest li{background:var(--paper);border:1px solid var(--line);border-radius:var(--pill);padding:7px 14px;font-size:.9rem}
+.roster-rest li a{color:var(--ink)}

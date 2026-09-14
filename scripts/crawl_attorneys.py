@@ -448,7 +448,9 @@ def collect(domain, verbose=False, record=None):
         name = normalise_case(name)
         if looks_like_a_person(name):
             result["attorneys"].append({"name": name, "source_url": index_final,
-                                        "bar_number": None, "role": role or "Attorney"})
+                                        "bar_number": None, "role": role or None,
+                                        "role_source": ("firm bio heading" if role
+                                                        else "not stated by the firm")})
         else:
             result["rejected"].append({"heading": h1_of(index_html), "url": index_final})
         return result
@@ -471,13 +473,17 @@ def collect(domain, verbose=False, record=None):
             result["rejected"].append({"heading": heading, "url": final})
             continue
         bar = BAR_NUMBER.search(strip_tags(html))
-        # The role is whatever the firm printed next to the name, not our inference. Where it
-        # printed none, "Attorney" stands — the handoff's rule that seniority is not assumed.
+        # The role is whatever the firm printed next to the name, and nothing where it printed
+        # nothing. "Attorney" used to stand in that case, which turned every name on an
+        # /our-team/ page into a bar-admitted lawyer on our profile: one firm published
+        # twenty-seven that way and seventeen of them had no registration and read as an
+        # operations team. Calling somebody an attorney is a claim about their credentials, so
+        # the absence is recorded as an absence and src/lib/roster.ts decides what to print.
         seen_names.add(name.casefold())
         result["attorneys"].append({
             "name": name, "source_url": final,
             "bar_number": bar.group(1) if bar else None,
-            "role": role or "Attorney",
+            "role": role or None,
             "role_source": "firm bio heading" if role else "not stated by the firm",
         })
     return result

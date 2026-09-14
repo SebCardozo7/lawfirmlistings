@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { fitDescription } from '../../lib/seo';
 import { officeLabel } from '../../lib/labels';
 import { achievementsFor, marksFor } from '../../lib/achievements';
+import { rosterFor } from '../../lib/roster';
 import Icon from '../../components/Icon.astro';
 import Scorecard from '../../components/Scorecard.astro';
 import { PRACTICE_SLUGS } from '../../data/practices';
@@ -26,7 +27,6 @@ const drMedian = cohort ? median(cohort.data.firms.map(f => f.dr)) : null;
 const ai = ah?.ai_citations;
 const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overviews', perplexity: 'Perplexity', copilot: 'Copilot', chatgpt: 'ChatGPT', gemini: 'Gemini' };
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
-const verifiedLicences = d.attorneys.filter(a => a.bar_number).length;
 // Practice areas that have a page of their own. Everything else is named, not linked.
 const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
 // The link attribute is editorial, not commercial: clearing every eligibility gate earns a
@@ -38,6 +38,12 @@ const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
 const gatesPassed = ['Verified', 'Certified', 'Distinguished', 'Elite']
   .includes(d.score?.tier ?? '');
 const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
+const roster = rosterFor(d);
+// Two letters from a name, first and last, for the avatar tile.
+const initialsOf = (name: string) => {
+  const words = name.split(' ').filter(w => /^[A-Z]/.test(w));
+  return [words[0], words.at(-1)].filter(Boolean).map(w => w![0]).join('');
+};
 const achievements = achievementsFor(d);
 const marks = marksFor(d);
 // Only a results page we could actually read and count is worth a panel.
@@ -243,7 +249,7 @@ const schema = {
       {/* Hidden entirely when no attorney has been collected. An empty section said
           "0 attorneys · licensure checked against the New York attorney registry", because
           [].every() is vacuously true — the strongest claim on the page, made about nobody. */}
-      {d.attorneys.length > 0 && (
+      {roster.attorneys.length + roster.colleagues.length > 0 && (
       <div class="block" id="attorneys">
         {/* The heading used to claim licensure had been checked against the state registry. It
             has not been, for any firm: the names are read from each firm's own bio pages and the
@@ -255,14 +261,24 @@ const schema = {
             number is only ever written on a confident match, so that is the test — and the count
             is stated, because "not yet checked" under-claims eight verified licences as badly as
             the old wording over-claimed the ninth. */}
-        <h2>Attorneys <small>{d.attorneys.length} {d.attorneys.length === 1 ? 'attorney' : 'attorneys'}{
-          verifiedLicences === 0
-            ? ` · listed by the firm · licensure not yet checked against the ${d.market.state_name} attorney registry`
-            : verifiedLicences === d.attorneys.length
-              ? ` · every licence checked against the ${d.market.state_name} attorney registry`
-              : ` · ${verifiedLicences} of ${d.attorneys.length} licences checked against the ${d.market.state_name} attorney registry`
-        }</small></h2>
-        <div class="team">{d.attorneys.map(a => <div class="member"><div class="av">{a.name.split(' ').filter(w => /^[A-Z]/.test(w)).map(w => w[0]).filter((_, i, arr) => i === 0 || i === arr.length - 1).join('')}</div><div><b>{a.name}</b><span>{a.role}</span></div></div>)}</div>
+        <h2>{roster.attorneys.length > 0 ? 'Attorneys' : 'The firm’s people'} <small>{roster.attorneys.length > 0 && `${roster.attorneys.length} ${roster.attorneys.length === 1 ? 'attorney' : 'attorneys'} · `}{roster.note}</small></h2>
+        <div class="team">{roster.attorneys.map(a => (
+          <div class="member">
+            <div class="av">{initialsOf(a.name)}</div>
+            <div><b>{a.name}</b><span>{a.role ?? (a.bar_number ? `Admitted in ${a.bar_state ?? d.market.state}` : 'Attorney')}</span></div>
+          </div>
+        ))}</div>
+        {/* Named by the firm, with no role beside the name. Publishing them as attorneys was
+            the old behaviour and it was a claim about their credentials that nothing supported.
+            They are still here, because the firm names them and a reader asking "who works
+            there" is owed the answer, and they are not counted as attorneys. */}
+        {roster.colleagues.length > 0 && (
+          <div class="roster-rest">
+            <h3>Also named by the firm</h3>
+            <p>The firm lists {roster.colleagues.length === 1 ? 'this person' : 'these people'} among its team and prints no role beside the {roster.colleagues.length === 1 ? 'name' : 'names'}, so we do not describe {roster.colleagues.length === 1 ? 'them' : 'them'} as attorneys.</p>
+            <ul>{roster.colleagues.map(a => <li>{a.source_url ? <a href={a.source_url} rel="nofollow noopener" target="_blank">{a.name}</a> : a.name}</li>)}</ul>
+          </div>
+        )}
       </div>
       )}
 
