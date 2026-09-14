@@ -3,6 +3,34 @@
 Working file for the Guides section. One guide ships per run. This file carries what the last run
 learned so the next one does not repeat the research.
 
+## Telling the owner a piece went out, which is not optional
+
+The owner asked on 2026-09-14 to hear about every new piece, and the run before that had decided
+on its own not to say anything. Do not repeat that. In a scheduled run `PushNotification` is the
+only channel that leaves the session: it reaches the owner's phone and inbox, and anything written
+only into the transcript reaches nobody. Wrap the message in `<routine_summary>` tags, since the
+first sentence becomes the phone banner and the whole text becomes the email body.
+
+Send one at each of these two moments:
+
+1. **When the pull request is opened.** The piece is written and needs a person. This is the one
+   the run can always send, because the run is still alive at that point.
+2. **When the merge event arrives**, if the session is still subscribed to the pull request. That
+   is the moment the piece is actually published, and it is the one the owner asked for.
+
+The second one is best effort and the reason is structural, so do not quietly treat it as covered:
+a run opens the pull request and finishes, and the human merge can land hours later, after the
+session is gone. When that happens nobody sends anything. If the owner wants a guarantee that does
+not depend on a session being alive, that belongs in a workflow on `push` to `main`, not here.
+
+The judgement call that produced the gap, written down so it is not made again: the merge arrived
+while the session was still watching, and the run skipped the notification on the grounds that the
+owner had done the merge themselves and already knew. Whether they already know is not the test.
+Say it went out.
+
+No email address goes in this file. This repository is public, and `PushNotification` already
+routes to whoever owns the routine, so writing an address here would publish it and change nothing.
+
 Rules that decide what goes on this list, restated so they are not re-argued every run:
 
 - **Every guide carries at least one chart.** A measurement is read faster as a shape than as a
