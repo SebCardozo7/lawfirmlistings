@@ -1,0 +1,415 @@
+{
+  "slug": "rad-law-firm",
+  "name": "Rad Law Firm",
+  "initials": "RL",
+  "website": "https://radlawfirm.com/",
+  "domain": "radlawfirm.com",
+  "phone": "(972) 661-1111",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://radlawfirm.com/personal-injury/",
+      "checked_at": "2026-09-14"
+    }
+  ],
+  "market": {
+    "city_slug": "dallas-tx",
+    "city": "Dallas",
+    "state": "TX",
+    "state_name": "Texas"
+  },
+  "offices": [
+    {
+      "label": "Rad Law Firm",
+      "address": "8001 Lyndon B Johnson Fwy Ste 300, Dallas, TX 75251, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=2200564480477399081&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Rad Law Firm",
+      "address": "34 S Coria St, Brownsville, TX 78520, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=9313714750942072924&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Rad Law Firm works from Dallas, publishes a fee statement, a free consultation and home or hospital appointments around the clock, and answers in Spanish.",
+    "Its Google listing took a manual check to attach: the firm publishes a login name rather than its own name in its structured data, so a search by that name returned four other Dallas practices. It names no attorney on the pages we could reach."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.6,
+      "count_label": "551",
+      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-15"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-24T01:17:40.225662163Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-04T16:01:58.201551994Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-27T14:45:08.270728409Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-26T21:12:14.704585457Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-11T03:42:34.336116681Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "fee_statement": true,
+      "attorney_bios": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 54,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-15",
+      "note": "LCP 9.6 s / CLS 0.040 / TBT 242 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "radlawfirm.com",
+      "name": "Rad Law Firm",
+      "practice_page": "https://radlawfirm.com/personal-injury/"
+    },
+    "places": {
+      "listing_count": 2,
+      "review_count_total": 551,
+      "rating_weighted": 4.6,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-15"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Texas does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Texas does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G3": {
+      "pass": false,
+      "source": "unavailable",
+      "checked_at": "2026-09-15",
+      "evidence": "2 physical locations verified on Google Business Profile. We read the Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status and could not identify this firm in it: 1 entity name(s) contain the firm's name and none of them agrees on both the name and the city. A miss there is not evidence that the firm is unregistered, so this gate is unresolved rather than failed. The franchise tax does not reach a sole proprietorship or a general partnership, so this register can confirm an entity and cannot rule one out."
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-15"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "551 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2001-09-13, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-15"
+    }
+  },
+  "cohort_id": "tx-dallas-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD business.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "available_24_7": {
+          "quote": "livering serious results for serious injuries — and we’re just getting started. AVAILABLE 24/7 FOR HOME OR HOSPITAL APPOINTMENTS Too injured to come to us? We’ll come to you — home, ho",
+          "source_url": "https://radlawfirm.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "Dallas Personal Injury Lawyers | Rad Law Firm Skip to content CALL US NOW SE HABLA ESPANOL : (972) INJURED / (817) INJURED Find Out How Much Your Case is Worth Home Practice Areas",
+          "source_url": "https://radlawfirm.com/"
+        },
+        "free_consultation": {
+          "quote": "als Texas Injury Answers Contact Us ACCIDENT & INJURY LAWYERS CLIENTS FIRST. ALWAYS Get A Free Consultation Uncategorized Premises Liability Lawyer: Relentless Advocacy Against Negligent Property O",
+          "source_url": "https://radlawfirm.com/blog/"
+        },
+        "contingency": {
+          "quote": "you need is legal red tape or excuses. You need fighters. That’s exactly who we are. You pay nothing unless we win. Period. We front every cost. We build a relentless case. And we don’t stop until",
+          "source_url": "https://radlawfirm.com/fees/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://radlawfirm.com/",
+        "blog": "https://radlawfirm.com/blog/",
+        "contact": "https://radlawfirm.com/contact-us/",
+        "fees": "https://radlawfirm.com/fees/",
+        "about": "https://radlawfirm.com/about-us/",
+        "attorneys": "https://radlawfirm.com/attorneys/allen-rad/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://radlawfirm.com/attorneys/allen-rad/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2001-09-13",
+    "years": 25.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-15"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-15"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-15"
+  },
+  "score": {
+    "total": 41,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-15",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 18,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "551 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.6 over 551 reviews → Bayesian 4.63 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-24) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · fee statement · no privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 7,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 18,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 29,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D2 Search authority: not yet measured (8 pts)"
+      ]
+    },
+    "raw": 29.0,
+    "assessed": 70,
+    "coverage": 0.7,
+    "floor_abc_pct": 0.474,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "assessable": 100,
+    "comparable": true
+  }
+}

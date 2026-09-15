@@ -10,7 +10,9 @@
     {
       "slug": "personal-injury",
       "name": "Personal Injury",
-      "primary": true
+      "primary": true,
+      "source_url": "https://oreskylaw.com/bronx/construction-accident-lawyers/",
+      "checked_at": "2026-09-15"
     },
     {
       "slug": "workers-compensation",
@@ -58,7 +60,7 @@
       "admitted_year": 2009,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-14",
+      "checked_at": "2026-09-15",
       "role_source": "not stated by the firm"
     },
     {
@@ -69,7 +71,7 @@
       "admitted_year": 2007,
       "registry_status": "Delinquent",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-14",
+      "checked_at": "2026-09-15",
       "role_source": "not stated by the firm"
     },
     {
@@ -80,7 +82,7 @@
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-14",
+      "checked_at": "2026-09-15",
       "role_source": "not stated by the firm"
     },
     {
@@ -88,7 +90,7 @@
       "bar_state": "NY",
       "source_url": "https://oreskylaw.com/es/abogados/michael-reich/",
       "registry_note": "ambiguous (2 attorneys share this name)",
-      "checked_at": "2026-09-14",
+      "checked_at": "2026-09-15",
       "role_source": "not stated by the firm"
     },
     {
@@ -99,7 +101,7 @@
       "admitted_year": 1993,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-14",
+      "checked_at": "2026-09-15",
       "role_source": "not stated by the firm"
     },
     {
@@ -111,7 +113,7 @@
       "admitted_year": 2019,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-14",
+      "checked_at": "2026-09-15",
       "role_source": "firm bio heading"
     },
     {
@@ -122,7 +124,7 @@
       "admitted_year": 1987,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-14",
+      "checked_at": "2026-09-15",
       "role_source": "not stated by the firm"
     }
   ],
@@ -249,13 +251,13 @@
       "pass": false,
       "evidence": "6 of 7 attorneys currently registered. 1 not currently registered (Joshua E. Goldblatt: Delinquent). Held for review: either record may be out of date.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, pending review of a registration lapse",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 6 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G3": {
       "pass": true,
@@ -267,7 +269,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G6": {
       "pass": true,
@@ -325,7 +327,7 @@
     "total": 69,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-14",
+    "computed_at": "2026-09-15",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -406,7 +408,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 727 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 727 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

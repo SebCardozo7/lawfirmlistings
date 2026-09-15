@@ -1,0 +1,414 @@
+{
+  "slug": "portland-legal-group",
+  "name": "Portland Legal Group",
+  "initials": "PL",
+  "website": "https://portlandlegalgroup.com/",
+  "domain": "portlandlegalgroup.com",
+  "phone": "(503) 902-4260",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://portlandlegalgroup.com/services/car-accident-lawyer/",
+      "checked_at": "2026-09-14"
+    }
+  ],
+  "market": {
+    "city_slug": "portland-or",
+    "city": "Portland",
+    "state": "OR",
+    "state_name": "Oregon"
+  },
+  "offices": [
+    {
+      "label": "Portland Legal Group",
+      "address": "9818 E Burnside St, Portland, OR 97216, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=9945867580937407075&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Alexander McTarian",
+      "source_url": "https://portlandlegalgroup.com/alexander-mctarian/",
+      "checked_at": "2026-09-15"
+    },
+    {
+      "name": "Jack Mkhitaryan",
+      "source_url": "https://portlandlegalgroup.com/jack-mkhitarian/",
+      "checked_at": "2026-09-15"
+    },
+    {
+      "name": "James Corcoran",
+      "source_url": "https://portlandlegalgroup.com/james-corcoran/",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Portland Legal Group works from East Burnside Street, names three attorneys and publishes in Spanish. Its Google listing averages a flat five stars across 572 reviews, the largest five-star count in this market.",
+    "Contingency fees and a free consultation, published. No case results we could read."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "572",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-15"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-14T18:24:25.488729002Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-03T05:36:55.205314293Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-16T03:51:21.306308358Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-06T21:31:03.908250518Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-07T00:08:57.208085771Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 68,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-15",
+      "note": "LCP 6.2 s / CLS 0.000 / TBT 62 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "portlandlegalgroup.com",
+      "name": "Portland Legal Group",
+      "practice_page": "https://portlandlegalgroup.com/services/car-accident-lawyer/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 572,
+      "rating_weighted": 5.0,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-15"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Oregon does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G2": {
+      "pass": false,
+      "source": "unavailable",
+      "checked_at": "2026-09-15",
+      "evidence": "1 of the firm's attorneys share a surname with a disciplined attorney, and for James Corcoran 1 of 1 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
+    },
+    "G3": {
+      "pass": true,
+      "source": "Active Businesses register (data.oregon.gov tckn-sxa6), published as open data by the Oregon Secretary of State",
+      "checked_at": "2026-09-15",
+      "evidence": "PORTLAND LEGAL GROUP LLC is registered with the Oregon Secretary of State, under number 189131999, since 2021-11-09, and 1 physical location verified on Google Business Profile.",
+      "registered": "2021-11-09"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-15"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "572 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2020-11-08, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-15"
+    }
+  },
+  "cohort_id": "or-portland-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "o digitize legal proceedings. This is highly beneficial for your case. We take cases on a contingency fee basis — you don't have to spend anything until we recover compensation for damages yo",
+          "source_url": "https://portlandlegalgroup.com/"
+        },
+        "free_consultation": {
+          "quote": "hly experienced personal injury attorneys that will help you get compensated for damages. FREE CONSULTATION $10,000,000 Car Accident Settlement $10,000,000 Car Accident Settlement More $37,000 Dog",
+          "source_url": "https://portlandlegalgroup.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Portland Legal Group offers a customer-centered, diplomatic approach to legal cases. We help our clients navigate challenging legal situations by representing their interests. If you or your loved one have sustained injuries in an accident caused by another person's negligence, our personal injury attorneys are ready to help you. We represent individuals, families, entrepreneurs, and large and small business owners throughout Oregon. Our services are aimed at helping victims of accidents caused by negligence or carelessness."
+      ],
+      "pages": {
+        "home": "https://portlandlegalgroup.com/",
+        "contact": "https://portlandlegalgroup.com/contact-us/",
+        "attorneys": "https://portlandlegalgroup.com/attorneys/",
+        "about": "https://portlandlegalgroup.com/about-us/",
+        "blog": "https://portlandlegalgroup.com/blog/personal-injury-laws/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://portlandlegalgroup.com/attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2020-11-08",
+    "years": 5.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-15"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-15"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-15"
+  },
+  "score": {
+    "total": 39,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-15",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Oregon publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 20,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "572 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 572 reviews → Bayesian 4.97 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-14) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 20,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 31,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "A6 Roster verifiability: +9 available"
+      ]
+    },
+    "raw": 27.5,
+    "assessed": 70,
+    "coverage": 0.769,
+    "floor_abc_pct": 0.526,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "assessable": 91,
+    "comparable": true
+  }
+}

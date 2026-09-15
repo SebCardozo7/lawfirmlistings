@@ -90,9 +90,24 @@ def main() -> int:
             continue                      # not published yet; build_profiles.py will handle it
 
         practices = profile.setdefault("practices", [])
-        if any(p.get("slug") == args.practice for p in practices):
-            print("%-30s already lists it" % domain[:30])
-            skipped += 1
+        listed = next((p for p in practices if p.get("slug") == args.practice), None)
+        if listed:
+            # A practice that is already listed but carries no link to the page behind it. The
+            # first cohorts were published before check_practice.py existed, so their practices
+            # were read off the firm's menu by a person and the evidence never travelled with the
+            # claim: 132 of them by the time the audit started reporting it. This fills in the
+            # link, and only the link, because the practice itself was already right.
+            if not listed.get("source_url"):
+                listed["source_url"] = evidence["url"]
+                listed["checked_at"] = evidence.get("checked_at")
+                print("%-30s evidence %s" % (domain[:30], evidence["url"][:60]))
+                added += 1
+                if not args.dry_run:
+                    io.open(profile_path, "w", encoding="utf-8", newline="\n").write(
+                        json.dumps(profile, ensure_ascii=False, indent=2) + "\n")
+            else:
+                print("%-30s already lists it, with evidence" % domain[:30])
+                skipped += 1
             continue
 
         practices.append({

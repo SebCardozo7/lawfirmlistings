@@ -1,0 +1,425 @@
+{
+  "slug": "foti-law",
+  "name": "Foti Law",
+  "initials": "FO",
+  "website": "https://www.foti-law.com/",
+  "domain": "foti-law.com",
+  "phone": "(833) 368-4529",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.foti-law.com/practice-areas/auto-accidents/",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "market": {
+    "city_slug": "boston-ma",
+    "city": "Boston",
+    "state": "MA",
+    "state_name": "Massachusetts"
+  },
+  "offices": [
+    {
+      "label": "Matthew Foti Injury Lawyers",
+      "address": "380 Pleasant St Ste 14, Malden, MA 02148, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=15498582677754103334&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Zachary D. Margules",
+      "source_url": "https://www.foti-law.com/team/zachary-d-margules/",
+      "role": "Of Counsel",
+      "role_source": "firm bio heading",
+      "checked_at": "2026-09-15"
+    },
+    {
+      "name": "Matthew M. Foti",
+      "source_url": "https://www.foti-law.com/team/matthew-m-foti/",
+      "role": "Principal Attorney",
+      "role_source": "firm bio heading",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Foti Law works from Pleasant Street in Malden and names two attorneys. Contingency fees, a free consultation and a 24 hour line, published, with every trust page pillar D looks for.",
+    "Its Google listing averages a flat five stars across 265 reviews."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "265",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-15"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-27T11:40:13.950820985Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-28T19:26:01.347633543Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-26T14:34:28.641507683Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-02T20:21:13.921762807Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-03T16:46:56.265758371Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true,
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 44,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-15",
+      "note": "LCP 13.5 s / CLS 0.000 / TBT 514 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "foti-law.com",
+      "name": "Matthew Foti Injury Lawyers",
+      "practice_page": "https://www.foti-law.com/practice-areas/auto-accidents/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 265,
+      "rating_weighted": 5.0,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-15"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Massachusetts does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Judicial Court of Massachusetts on the discipline of attorneys, on the recommendation of the Board of Bar Overseers, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-15",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 168 published discipline decisions of the Supreme Judicial Court of Massachusetts on the discipline of attorneys, on the recommendation of the Board of Bar Overseers, 1975 to 2025. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": false,
+      "source": "no queryable source",
+      "checked_at": "2026-09-15",
+      "evidence": "1 physical location verified on Google Business Profile. Massachusetts publishes no business register we can query. The Secretary of the Commonwealth's corporate search answers a request for its robots file with a 403 and its search page with a redirect loop, and the state runs no open data portal carrying the register. This is a limit of the published record and not something the firm can change."
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-15"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "265 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2019-05-08, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-15"
+    }
+  },
+  "cohort_id": "ma-boston-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "Reviews FAQs Videos News Contact 833-FOTI-LAW Malden , MA Boston Personal Injury Attorney No Fee Unless You Win | Available 24/7 Request A Free Consultation Malden Personal Injury Lawyers Life",
+          "source_url": "https://www.foti-law.com/"
+        },
+        "free_consultation": {
+          "quote": "den , MA Boston Personal Injury Attorney No Fee Unless You Win | Available 24/7 Request A Free Consultation Malden Personal Injury Lawyers Life can change in an instant. Unfortunately, the change i",
+          "source_url": "https://www.foti-law.com/"
+        },
+        "available_24_7": {
+          "quote": "33-FOTI-LAW Malden , MA Boston Personal Injury Attorney No Fee Unless You Win | Available 24/7 Request A Free Consultation Malden Personal Injury Lawyers Life can change in an instant.",
+          "source_url": "https://www.foti-law.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation.",
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation.",
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation.",
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation.",
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation.",
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation.",
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation.",
+        "Foti Law LLC serves injury victims in Malden, MA & Boston. Call now for a free consultation and learn how we can help you recover compensation."
+      ],
+      "pages": {
+        "home": "https://www.foti-law.com/",
+        "privacy": "https://www.foti-law.com/privacy-policy/",
+        "disclaimer": "https://www.foti-law.com/disclaimer/",
+        "about": "https://www.foti-law.com/about-us/",
+        "contact": "https://www.foti-law.com/contact/",
+        "attorneys": "https://www.foti-law.com/team/",
+        "blog": "https://www.foti-law.com/blog/",
+        "results": "https://www.foti-law.com/results/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.foti-law.com/team/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2019-05-08",
+    "years": 7.4,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-15"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 6,
+    "bios_published": 3,
+    "source": "observed",
+    "checked_at": "2026-09-15"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.foti-law.com/results/",
+    "checked_at": "2026-09-15"
+  },
+  "score": {
+    "total": 52,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-15",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Massachusetts publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          }
+        ]
+      },
+      "C": {
+        "score": 19,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 4,
+            "max": 5,
+            "source": "observed",
+            "evidence": "265 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 265 reviews → Bayesian 4.95 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-28) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 19,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 18,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "B1 Results published: not yet measured (6 pts)"
+      ]
+    },
+    "raw": 28.5,
+    "assessed": 55,
+    "coverage": 0.604,
+    "floor_abc_pct": 0.826,
+    "gates_unavailable": [
+      "G1",
+      "G3"
+    ],
+    "assessable": 91,
+    "comparable": true
+  }
+}

@@ -5,12 +5,14 @@
   "website": "https://www.marylandworkerscompensationlaw.com/",
   "domain": "marylandworkerscompensationlaw.com",
   "phone": "(301) 670-7030",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "workers-compensation",
       "name": "Workers' Compensation",
-      "primary": true
+      "primary": true,
+      "source_url": "https://www.marylandworkerscompensationlaw.com/essex-work-injury-attorney/",
+      "checked_at": "2026-09-15"
     }
   ],
   "market": {
@@ -400,21 +402,21 @@
     },
     "G2": {
       "pass": false,
-      "evidence": "Maryland does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-14"
+      "source": "unavailable",
+      "checked_at": "2026-09-15",
+      "evidence": "4 of the firm's attorneys share a surname with a disciplined attorney, and for Evan Kelly 2 of 2 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
     },
     "G3": {
       "pass": false,
-      "evidence": "6 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-14"
+      "source": "no queryable source",
+      "checked_at": "2026-09-15",
+      "evidence": "6 physical locations verified on Google Business Profile. Maryland publishes no business register we can query. SDAT's entity search is a form rather than a dataset, its bulk data is sold rather than published, and the state's open data portal carries a count of businesses instead of the register. This is a limit of the published record and not something the firm can change."
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 29 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G6": {
       "pass": true,
@@ -524,9 +526,9 @@
   },
   "score": {
     "total": 41,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-14",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-15",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -607,7 +609,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.87 over 355 reviews → Bayesian 4.86 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.87 over 355 reviews → Bayesian 4.86 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -715,7 +717,8 @@
     "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1",
-      "G2"
+      "G2",
+      "G3"
     ],
     "assessable": 91,
     "comparable": true

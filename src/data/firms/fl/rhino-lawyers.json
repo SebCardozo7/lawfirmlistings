@@ -10,7 +10,9 @@
     {
       "slug": "personal-injury",
       "name": "Personal Injury",
-      "primary": true
+      "primary": true,
+      "source_url": "https://www.rhinolawyers.com/auto-accident/",
+      "checked_at": "2026-09-15"
     }
   ],
   "market": {
@@ -282,9 +284,9 @@
     },
     "G2": {
       "pass": false,
-      "evidence": "Florida does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-14"
+      "source": "unavailable",
+      "checked_at": "2026-09-15",
+      "evidence": "2 of the firm's attorneys share a surname with a disciplined attorney, and for Brandon F. Jones 1 of 3 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
     },
     "G3": {
       "pass": false,
@@ -296,7 +298,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 19 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G6": {
       "pass": true,
@@ -426,7 +428,7 @@
     "total": 56,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-14",
+    "computed_at": "2026-09-15",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -507,7 +509,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.81 over 2,005 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.81 over 2,005 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

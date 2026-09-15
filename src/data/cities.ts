@@ -334,4 +334,314 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  'dallas-tx': {
+    lede:
+      'Texas gives you two years to sue and six months to tell a city you were hurt, and the ' +
+      'second deadline is the one nobody hears about. Compare Dallas firms on what they publish ' +
+      'and on what we could verify ourselves.',
+    areas: ['Downtown', 'Uptown', 'Oak Cliff', 'Deep Ellum', 'Plano', 'Irving', 'Garland',
+            'Richardson', 'Mesquite'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Dallas: what is different',
+        paragraphs: [
+          'The limitation period is two years from the day the claim accrues, under section ' +
+          '16.003 of the Civil Practice and Remedies Code, and that is a year shorter than New ' +
+          'York gives. The deadline that catches people is the other one. A claim against a ' +
+          'governmental unit needs notice within <b>six months</b> under section 101.101 of the ' +
+          'Tort Claims Act, and the City of Dallas requires the same six months in writing under ' +
+          'its own charter, saying when, where and how the injury happened. A bus, a city truck, ' +
+          'a pothole or a county hospital all sit behind that rule.',
+          'Dallas County runs one of the largest civil court systems in the country, with ' +
+          'multiple district courts hearing injury cases and county courts at law below them, ' +
+          'all at the George Allen Courts Building downtown. Federal matters go to the Northern ' +
+          'District of Texas. This is also the most advertised legal market in this directory by ' +
+          'a distance, which is worth knowing when you compare: the firm with the most billboards ' +
+          'is not a measurement of anything, and it is the reason this site exists.',
+        ],
+      },
+      {
+        heading: 'What lawyers cost in Dallas',
+        paragraphs: [
+          'Injury work is done on contingency and Texas does not cap the share by statute the ' +
+          'way New York does for injury matters, so the percentage is genuinely negotiable and ' +
+          'genuinely varies. That makes the two questions on our fees guide worth more here than ' +
+          'anywhere else we cover: what the percentage is, and whether case expenses come out ' +
+          'before or after the fee is worked out. Ask both, and get the answer in the agreement ' +
+          'rather than on the phone.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Texans out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the day the claim accrues, under Civil ' +
+          'Practice and Remedies Code § 16.003.',
+          '<b>Any claim against the City of Dallas, the county, DART or a public hospital:</b> ' +
+          'written notice within <b>six months</b>, under Tort Claims Act § 101.101 and the ' +
+          'city charter.',
+          '<b>Wrongful death:</b> two years, and the clock runs from the death rather than from ' +
+          'the injury that caused it.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Texas lawyer is licensed?',
+        a: 'The State Bar of Texas publishes a Find a Lawyer directory at ' +
+           '<a href="https://www.texasbar.com" rel="nofollow noopener" target="_blank">' +
+           'texasbar.com</a>, free to search, showing bar number, admission date and public ' +
+           'disciplinary history. We do not read it: it refuses our requests, so Texas profiles ' +
+           'carry no licence finding rather than one we did not make. New York publishes the ' +
+           'same information as open data, which is why New York profiles do carry it.',
+      },
+      {
+        q: 'Why do so many Dallas firms advertise so heavily?',
+        a: 'Because it works, and because nothing stops it. Advertising spend is not evidence ' +
+           'about a practice, and it is not in this directory’s score at any weight: the ' +
+           'measurements are licensure, discipline, what a firm publishes about its own results, ' +
+           'client reviews it did not collect through us, and the quality of its own site. A ' +
+           'firm can be excellent and loud, or excellent and invisible. We measure the same ' +
+           'things either way.',
+      },
+      {
+        q: 'Should I hire a firm in Dallas itself?',
+        a: 'Dallas County is where most of these cases are heard, and a firm in Plano or Irving ' +
+           'appears there constantly. The metro is one legal market rather than several. What ' +
+           'matters is regular practice in the court that will hear your case, which for a ' +
+           'serious injury claim usually means a Dallas County district court.',
+      },
+    ],
+  },
+
+  'portland-or': {
+    lede:
+      'Oregon gives you two years to sue and 180 days to notify a public body, and the second ' +
+      'deadline ends more claims than the first. Compare Portland firms on what they publish ' +
+      'and on what we could verify ourselves.',
+    areas: ['Downtown', 'Pearl District', 'Northeast', 'Southeast', 'Beaverton', 'Gresham',
+            'Lake Oswego', 'Hillsboro', 'Tigard'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Portland: what is different',
+        paragraphs: [
+          'Two years is the limitation period for an injury claim, under ORS 12.110. The rule ' +
+          'that ends claims quietly is the Oregon Tort Claims Act: a claim against a public body, ' +
+          'the city, the county, TriMet, a public hospital or a school district, needs notice ' +
+          'within <b>180 days</b> of the loss under ORS 30.275, and no action can be maintained ' +
+          'without it. TriMet matters more here than a transit authority does in most cities, ' +
+          'because a great many Portland injury claims involve a bus or a train.',
+          'Cases are heard in the Multnomah County Circuit Court downtown, with Washington ' +
+          'County in Hillsboro and Clackamas County in Oregon City taking the suburbs. Federal ' +
+          'matters go to the District of Oregon. Oregon is also a comparative fault state ' +
+          'without the harsh cut-off Maryland applies: a share of the blame reduces what you ' +
+          'recover rather than ending the claim, up to the point where your share exceeds the ' +
+          'other side’s.',
+        ],
+      },
+      {
+        heading: 'What lawyers cost in Portland',
+        paragraphs: [
+          'Contingency, as everywhere in this directory, and as everywhere in this directory no ' +
+          'firm here publishes its percentage. Oregon does not set the share by statute for ' +
+          'injury work, so it is a term of the agreement rather than a rule, which means it is ' +
+          'worth asking about and worth reading. Ask also whether case expenses come out before ' +
+          'or after the fee is calculated: on a mid-size settlement that order is worth five ' +
+          'figures.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Oregonians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years, under ORS 12.110.',
+          '<b>Any claim against the city, the county, TriMet or another public body:</b> notice ' +
+          'within <b>180 days</b> of the loss, under ORS 30.275. Wrongful death allows a year.',
+          '<b>Medical malpractice:</b> two years from discovery, with an outer limit of five ' +
+          'years from the treatment itself.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if an Oregon lawyer is licensed?',
+        a: 'The Oregon State Bar publishes a member directory at ' +
+           '<a href="https://www.osbar.org" rel="nofollow noopener" target="_blank">osbar.org</a>, ' +
+           'free to search, showing admission date and public discipline. We do not read it: it ' +
+           'refuses our requests, so Oregon profiles carry no licence finding rather than one we ' +
+           'did not make. Every profile says which of the two it is showing you.',
+      },
+      {
+        q: 'My accident involved a TriMet bus. Is that different?',
+        a: 'Yes, and mainly in the time you have. TriMet is a public body, so the Tort Claims ' +
+           'Act notice applies and 180 days is the window rather than two years. It is the single ' +
+           'most common way a Portland claim is lost before anybody argues about who was at ' +
+           'fault. Nothing here is legal advice and how the rule applies to a particular crash ' +
+           'is what a first consultation is for.',
+      },
+      {
+        q: 'Should I hire a firm in Portland itself?',
+        a: 'The metro is one legal market and firms in Beaverton, Gresham and Lake Oswego appear ' +
+           'in Multnomah County constantly. What counts is regular practice in the court that ' +
+           'will hear your case rather than the address on the letterhead.',
+      },
+    ],
+  },
+
+  // A region, not a city, and the file says so because the field is called `city`. Valparaiso
+  // holds eight of these firms' offices and Merrillville six, across two counties, and naming
+  // either as the market would put the other's firms in the wrong ranking.
+  'northwest-indiana': {
+    lede:
+      'Northwest Indiana is a region rather than a city, and so is its legal market: firms in ' +
+      'Valparaiso, Merrillville, Portage and Crown Point appear in the same two courthouses and ' +
+      'compete for the same clients. Compare them on what they publish and on what we could ' +
+      'verify ourselves.',
+    areas: ['Valparaiso', 'Merrillville', 'Portage', 'Crown Point', 'Hammond', 'Gary',
+            'Chesterton', 'Griffith', 'Dyer', 'Michigan City'],
+    sections: [
+      {
+        heading: 'Why this market is a region and not a city',
+        paragraphs: [
+          'Every other market in this directory is a city. This one is two counties, Lake and ' +
+          'Porter, and the reason is where the firms are. The offices behind this ranking are ' +
+          'spread across Valparaiso, Merrillville, Portage and Crown Point with no town holding ' +
+          'more than a third of them, and somebody hurt in Portage would think nothing of hiring ' +
+          'a firm in Merrillville twenty miles west. Naming one town as the market would file ' +
+          'the others’ firms in the wrong ranking, and splitting the region in two would ' +
+          'produce a pair of rankings too small to rank anything.',
+          'The courts follow the same shape. Lake County sits in Crown Point and Hammond, Porter ' +
+          'County in Valparaiso, and federal matters for both go to the Northern District of ' +
+          'Indiana at Hammond. This is also Chicago’s Indiana side: a crash on the Skyway ' +
+          'or the Indiana Toll Road can put an Illinois driver, an Indiana road authority and two ' +
+          'sets of insurers in the same claim, which is worth raising on a first call.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Hoosiers out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the day the claim accrues, under Indiana Code ' +
+          '34-11-2-4.',
+          '<b>A claim against the State of Indiana:</b> written notice within <b>270 days</b> of ' +
+          'the loss, under the Indiana Tort Claims Act.',
+          '<b>A claim against a city, a county, a school corporation or another political ' +
+          'subdivision:</b> the same Act sets a shorter notice period, and we are not printing a ' +
+          'number here because we could not confirm one against the statute itself. Ask on the ' +
+          'first call, and ask early: this is the deadline that ends these claims.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if an Indiana lawyer is licensed?',
+        a: 'The Indiana Supreme Court publishes a Roll of Attorneys, free to search, showing ' +
+           'admission and any public discipline. We do not read it: Indiana profiles carry no ' +
+           'licence finding rather than one we did not make. New York publishes the same ' +
+           'information as open data, which is why New York profiles do carry it.',
+      },
+      {
+        q: 'Should I hire a firm in my own town?',
+        a: 'Less than anywhere else in this directory. The region is compact, the two county ' +
+           'courthouses hear almost everything, and the firms listed here appear in both. What ' +
+           'matters is regular practice in the court that will hear your case rather than the ' +
+           'distance to the office.',
+      },
+      {
+        q: 'My accident happened in Illinois. Does that change things?',
+        a: 'It can change which state’s law applies, which deadline runs and where the case ' +
+           'is filed, and those are three different questions. Firms here handle it constantly ' +
+           'because the state line runs through the middle of this market, so raise it in the ' +
+           'first conversation. Nothing on this page is legal advice.',
+      },
+    ],
+  },
+
+  // Massachusetts blocks automated readers on both of its official sites: malegislature.gov
+  // refuses the connection and mass.gov answers 403. So every rule below is cited from a
+  // published decision of the state's own appellate courts, which quote the statute, and
+  // nothing is printed that could not be traced to one. That is the same standard that left
+  // Indiana's political-subdivision deadline off the Northwest Indiana page.
+  'boston-ma': {
+    lede:
+      'Massachusetts is a no-fault state, which changes the first question in a car accident ' +
+      'case from who was to blame to how large the medical bills are. Compare Boston firms on ' +
+      'what they publish and on what we could check for ourselves.',
+    areas: ['Downtown', 'Back Bay', 'South Boston', 'Dorchester', 'Cambridge', 'Somerville',
+            'Brookline', 'Quincy', 'Medford', 'Newton'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Boston: what is different',
+        paragraphs: [
+          'In most of the country a car accident claim goes to the other driver’s insurer. ' +
+          'In Massachusetts it starts with your own: personal injury protection pays the first ' +
+          'part of the medical bills whoever caused the crash, and a claim for pain and ' +
+          'suffering is barred outright unless the injury clears a threshold. The Appeals Court ' +
+          'put the figure plainly in <i>Chenell v. Central Wheelchair & Van Transport</i> in ' +
+          '2018: medical expenses have to exceed <b>$2,000</b> under General Laws chapter 231, ' +
+          'section 6D, and the threshold is met without that sum where the injury is a fracture, ' +
+          'permanent and serious disfigurement, or loss of sight or hearing. It means two people ' +
+          'hurt in the same collision can have very different cases, and it is worth asking a ' +
+          'firm early where your bills stand against it.',
+          'Blame is then shared rather than fatal. Massachusetts recovery survives the ' +
+          'plaintiff’s own carelessness as long as it was not greater than the ' +
+          'defendant’s, under chapter 231, section 85, and the award is reduced by the ' +
+          'share. That is the ordinary American rule and the opposite of what happens fifty ' +
+          'miles down the coast: Maryland, where this directory also ranks firms, still ends a ' +
+          'claim entirely when the injured person contributed to it at all.',
+          'Where a case is heard depends on its size and its subject. Larger civil claims in the ' +
+          'city go to the Superior Court for Suffolk County, smaller ones to the Boston ' +
+          'Municipal Court or a District Court, and federal matters to the United States ' +
+          'District Court for the District of Massachusetts. Cambridge and Somerville are ' +
+          'Middlesex County and Quincy is Norfolk, so a firm two stops away on the Red Line may ' +
+          'be appearing in a different courthouse from the one that will hear your case.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Bostonians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> three years, the period the Appeals Court identified in ' +
+          '<i>Davalos v. Bay Watch</i> as specified by General Laws chapter 260, section 2A.',
+          '<b>A claim against the city, the T, a school district or any other public ' +
+          'employer:</b> written presentment to its executive officer <b>within two years</b> of ' +
+          'the day the claim arose, in the words of chapter 258 as the Appeals Court quoted them ' +
+          'in <i>Wang v. City of Chelsea</i> in 2026. This is the deadline that ends these ' +
+          'claims, it runs a year earlier than the ordinary one, and nobody is obliged to remind ' +
+          'you.',
+          '<b>Medical malpractice:</b> shorter and more complicated than the ordinary injury ' +
+          'deadline, with a tribunal step before the case proceeds. We are not printing a period ' +
+          'here because we could not confirm one against the statute itself, and this is a ' +
+          'question to ask on a first call rather than read off a directory.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Massachusetts lawyer is licensed?',
+        a: 'The Board of Bar Overseers publishes an attorney lookup at massbbo.org, free to ' +
+           'search, showing status and public discipline. We do not read it: Massachusetts ' +
+           'profiles carry no licence finding rather than one we did not make. New York ' +
+           'publishes the same information as open data, which is why New York profiles do ' +
+           'carry it.',
+      },
+      {
+        q: 'My medical bills are small. Do I still have a case?',
+        a: 'You may have no claim for pain and suffering, which is a different thing from having ' +
+           'no claim. Personal injury protection covers medical bills and lost wages without ' +
+           'anyone proving fault, and the $2,000 threshold applies to the pain and suffering ' +
+           'part, with fractures and serious permanent injuries exempt from it. A firm that ' +
+           'handles these every week can tell you which side of the line you are on. Nothing on ' +
+           'this page is legal advice.',
+      },
+      {
+        q: 'Should I hire a firm in my own neighbourhood?',
+        a: 'It matters less than the courthouse. Greater Boston is compact and the firms here ' +
+           'appear across Suffolk, Middlesex and Norfolk counties, so what counts is regular ' +
+           'practice in the court that will hear your case rather than the walk from your ' +
+           'front door.',
+      },
+    ],
+  },
 };

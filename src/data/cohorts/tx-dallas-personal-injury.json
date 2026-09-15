@@ -1,0 +1,127 @@
+{
+  "id": "tx-dallas-personal-injury",
+  "market": {
+    "city_slug": "dallas-tx",
+    "city": "Dallas",
+    "state": "TX",
+    "state_name": "Texas"
+  },
+  "state": "TX",
+  "practice": "personal-injury",
+  "label": "Dallas x Personal Injury",
+  "measured_at": "2026-09-14",
+  "source": "Candidates from Google Places text search across Dallas, Plano, Irving, Garland and Richardson (scripts/discover_places.py, 115 domains), kept only where the firm's own site publishes a personal injury practice page (scripts/check_practice.py) and it holds an office in the metro (scripts/vet_candidates.py). Dallas County is 752xx and 753xx and the suburbs are 750xx and 751xx. Tyler and Longview are 756xx and 757xx and are a different market. No Ahrefs metrics, so D2 scores pending for every firm here.",
+  "full_size_estimate": 115,
+  "firms": [
+    {
+      "domain": "reyeslaw.com",
+      "name": "Angel Reyes & Associates",
+      "practice_page": "https://www.reyeslaw.com/car-accidents/"
+    },
+    {
+      "domain": "lawboss.com",
+      "name": "LAWBOSS - Uvalle Law Firm, PLLC",
+      "practice_page": "https://www.lawboss.com/car-accidents/"
+    },
+    {
+      "domain": "1800lionlaw.com",
+      "name": "Thompson Law",
+      "practice_page": "https://1800lionlaw.com/car-accident-lawyers/"
+    },
+    {
+      "domain": "witheritelaw.com",
+      "name": "Witherite Law Group",
+      "practice_page": "https://www.witheritelaw.com/practice-areas/personal-injury"
+    },
+    {
+      "domain": "dfwinjurylawyers.com",
+      "name": "DFW Injury Lawyers",
+      "practice_page": "http://www.dfwinjurylawyers.com/legal-services/dallas-car-accident-lawyer/"
+    },
+    {
+      "domain": "montgomeryfirm.com",
+      "name": "Montgomery Law",
+      "practice_page": "https://www.montgomeryfirm.com/car-accidents/"
+    },
+    {
+      "domain": "fieldinglaw.com",
+      "name": "Fielding Law",
+      "practice_page": "https://www.fieldinglaw.com/personal-injury/"
+    },
+    {
+      "domain": "shamiehlaw.com",
+      "name": "Shamieh Law - Accident & Injury Lawyers",
+      "practice_page": "https://shamiehlaw.com/car-accident-attorney-fayetteville/"
+    },
+    {
+      "domain": "dfwinjury.com",
+      "name": "AMS Law Group Car and Truck Accident Lawyers",
+      "practice_page": "https://www.dfwinjury.com/dallas-car-accident-lawyer/"
+    },
+    {
+      "domain": "radlawfirm.com",
+      "name": "Rad Law Firm",
+      "practice_page": "https://radlawfirm.com/personal-injury/"
+    },
+    {
+      "domain": "severeinjurylawyers.com",
+      "name": "J. Alexander Law Firm",
+      "practice_page": "https://severeinjurylawyers.com/practice-areas/bicycle-accidents/"
+    },
+    {
+      "domain": "mullenandmullen.com",
+      "name": "Mullen & Mullen Law Firm",
+      "practice_page": "https://www.mullenandmullen.com/personal-injury-lawyer/plano-tx/"
+    },
+    {
+      "domain": "maafirm.com",
+      "name": "Anderson Injury Lawyers Dallas",
+      "practice_page": "https://maafirm.com/texas-car-accident-lawyer/"
+    },
+    {
+      "domain": "juanlaw.com",
+      "name": "Hernandez Law Group, P.C.",
+      "practice_page": "https://www.juanlaw.com/premises-liability/"
+    },
+    {
+      "domain": "guerrerolaw.com",
+      "name": "Guerrero Law Injury Lawyers",
+      "practice_page": "https://guerrerolaw.com/personal-injury/"
+    },
+    {
+      "domain": "personalpersonalinjury.com",
+      "name": "Carrollton Injury Law",
+      "practice_page": "https://personalpersonalinjury.com/carrollton-car-accident-lawyer"
+    },
+    {
+      "domain": "jaymurraylaw.com",
+      "name": "Jay Murray Car Accident and Truck Accident Lawyers",
+      "practice_page": "https://jaymurraylaw.com/dallas-birth-injury-lawyer/"
+    },
+    {
+      "domain": "thebarberlawfirm.com",
+      "name": "The Barber Law Firm",
+      "practice_page": "https://www.thebarberlawfirm.com/attorney/car-accident/"
+    },
+    {
+      "domain": "thebentonlawfirm.com",
+      "name": "Benton Accident & Injury Lawyers Dallas",
+      "practice_page": "https://www.thebentonlawfirm.com/dallas-car-accident-lawyer/"
+    },
+    {
+      "domain": "injuryattorneyofdallas.com",
+      "name": "Law Firm of Aaron A. Herbert, P.C.",
+      "practice_page": "https://injuryattorneyofdallas.com/practice-areas/car-accidents/"
+    }
+  ],
+  "unresolved": [],
+  "unresolved_notes": {
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market.",
+    "thetexasattorney.com": "Bailey & Galyen. Eight of the addresses in the firm's own structured data are its Bedford headquarters, which is the Mid-Cities and Fort Worth side of the metroplex rather than Dallas. It has Dallas offices, but a firm's market is where it is based, and the market it is based in is not one this directory covers yet.",
+    "herrmanandherrman.com": "Herrman & Herrman. Seven of the addresses in its structured data are Corpus Christi, with San Antonio, Brownsville and McAllen after it. Corpus Christi is the firm's market and Dallas is a branch of it.",
+    "daspitlaw.com": "The Daspit Law Firm. Its structured data carries one address, 440 Louisiana Street in Houston. Houston is the market, not Dallas.",
+    "akfirm.com": "AK Law Firm. Its structured data carries one address, 333 West Loop North in Houston, and its own title claims Texas rather than a city. Houston is the market.",
+    "mr.law": "MR.LAW. Its site answers an automated reader over HTTPS with a 403 and only serves over plain HTTP, so nothing on it can be measured and G5 asks for a live HTTPS site. Not a judgement about the firm.",
+    "wilhitelawfirm.com": "The Wilhite Law Firm. Six of its seven verified listings are in Colorado, headed by Denver, and its published number is a 303 one. Dallas is a branch of a Colorado firm."
+  }
+}

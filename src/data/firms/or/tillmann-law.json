@@ -1,0 +1,444 @@
+{
+  "slug": "tillmann-law",
+  "name": "Tillmann Law",
+  "initials": "TL",
+  "website": "https://tillmannlaw.com/",
+  "domain": "tillmannlaw.com",
+  "phone": "(503) 272-8986",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://tillmannlaw.com/oregon-car-accident-lawyer/",
+      "checked_at": "2026-09-14"
+    }
+  ],
+  "market": {
+    "city_slug": "portland-or",
+    "city": "Portland",
+    "state": "OR",
+    "state_name": "Oregon"
+  },
+  "offices": [
+    {
+      "label": "Tillmann Law | Car Accident and Personal Injury Lawyers",
+      "address": "101 SW Main St #1905, Portland, OR 97204, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=16220360871278556169&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Aaron Tillmann",
+      "source_url": "https://tillmannlaw.com/about/aaron-tillmann/",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Tillmann Law works from Main Street in Portland and names Aaron Tillmann. It publishes a fee statement as well as a contingency promise, a free consultation and a 24 hour line, and every trust page pillar D looks for.",
+    "101 reviews at 4.8. Its site is among the slowest in this market on Core Web Vitals."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "101",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-15"
+    },
+    "sample": [
+      {
+        "published_at": "2026-08-28T16:11:31.457617764Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-18T21:06:40.943537134Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-19T22:06:50.032202626Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-18T18:22:49.671591553Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-08T17:05:42.705273313Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "disclaimer": true,
+      "attorney_bios": true,
+      "fee_statement": true,
+      "blog": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 35,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-15",
+      "note": "LCP 20.9 s / CLS 0.000 / TBT 1003 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "tillmannlaw.com",
+      "name": "Tillmann Law | Car Accident and Personal Injury Lawyers",
+      "practice_page": "https://tillmannlaw.com/oregon-car-accident-lawyer/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 101,
+      "rating_weighted": 4.8,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-15"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Oregon does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Oregon on the conduct of Oregon State Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-15",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 457 published discipline decisions of the Supreme Court of Oregon on the conduct of Oregon State Bar members, 1951 to 2017. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": true,
+      "source": "Active Businesses register (data.oregon.gov tckn-sxa6), published as open data by the Oregon Secretary of State",
+      "checked_at": "2026-09-15",
+      "evidence": "TILLMANN LAW LLC is registered with the Oregon Secretary of State, under number 117496497, since 2016-01-05, and 1 physical location verified on Google Business Profile.",
+      "registered": "2016-01-05"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-15"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "101 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2014-12-09, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-15"
+    }
+  },
+  "cohort_id": "or-portland-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LegalService.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "orry that you can’t afford an attorney on top of everything else. Fortunately, we work on contingency which means we don’t charge attorney fees until the end of your case — after we recover a",
+          "source_url": "https://tillmannlaw.com/"
+        },
+        "free_consultation": {
+          "quote": "Portland Personal Injury Lawyers | Tillmann Law Skip to main content FREE CONSULTATIONS 24/7 (503) 773-3333 TOLL FREE (855) 503-5035 Hit enter to search or ESC to close Search",
+          "source_url": "https://tillmannlaw.com/"
+        },
+        "available_24_7": {
+          "quote": "Portland Personal Injury Lawyers | Tillmann Law Skip to main content FREE CONSULTATIONS 24/7 (503) 773-3333 TOLL FREE (855) 503-5035 Hit enter to search or ESC to close Search Close",
+          "source_url": "https://tillmannlaw.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Portland injury attorneys at Tillmann Law. Free consultation. Experienced in helping injury victims in Portland, OR. Contact us today."
+      ],
+      "pages": {
+        "home": "https://tillmannlaw.com/",
+        "disclaimer": "https://tillmannlaw.com/disclaimer/",
+        "attorneys": "https://tillmannlaw.com/our-team/",
+        "about": "https://tillmannlaw.com/about/",
+        "fees": "https://tillmannlaw.com/personal-injury-resources/contingency-fee/",
+        "blog": "https://tillmannlaw.com/blog/",
+        "contact": "https://tillmannlaw.com/contact/",
+        "privacy": "https://tillmannlaw.com/privacy-policy/",
+        "results": "https://tillmannlaw.com/about/results/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://tillmannlaw.com/our-team/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2014-12-09",
+    "years": 11.8,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-15"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-15"
+  },
+  "results_published": {
+    "count": 14,
+    "counted_from": "stated amounts",
+    "amounts": [
+      1275000,
+      850000,
+      625000,
+      500000,
+      465000,
+      400000,
+      300000,
+      250000,
+      205000,
+      155000,
+      150000,
+      120000,
+      100000,
+      90000
+    ],
+    "largest": 1275000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "workplace",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 12758,
+    "readable": true,
+    "url": "https://tillmannlaw.com/about/results/",
+    "checked_at": "2026-09-15"
+  },
+  "score": {
+    "total": 50,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-15",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Oregon publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 8,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 4.5,
+            "max": 6,
+            "source": "firm",
+            "evidence": "14 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "9 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 17,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "101 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.8 over 101 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-28) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 5,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 3.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 24,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 20,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "A6 Roster verifiability: +9 available"
+      ]
+    },
+    "raw": 35.0,
+    "assessed": 70,
+    "coverage": 0.769,
+    "floor_abc_pct": 0.645,
+    "gates_unavailable": [
+      "G1"
+    ],
+    "assessable": 91,
+    "comparable": true
+  }
+}

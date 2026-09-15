@@ -56,7 +56,7 @@ def main() -> int:
     ap.add_argument("--id", required=True, help="the candidate file's cohort id")
     ap.add_argument("--practice", required=True)
     ap.add_argument("--zip", required=True,
-                    help="postal prefix the market's offices share, e.g. 21 or 338")
+                    help="postal prefixes the market shares, comma separated: 21, or 750,752,753")
     ap.add_argument("--staging", default=".crawl")
     args = ap.parse_args()
 
@@ -71,7 +71,13 @@ def main() -> int:
         return 2
     data = json.load(io.open(path, encoding="utf-8"))
     already = published_domains()
-    in_market = re.compile(r",\s*[A-Z]{2}\s+%s\d*" % re.escape(args.zip))
+    # One prefix was enough while every market sat inside a single postal block. Dallas does not:
+    # the city is 752xx and 753xx, Plano and Irving and Garland are 750xx, and the shortest prefix
+    # that covers all of them is "75", which also reaches Tyler and Longview a hundred miles away.
+    # A list keeps the boundary honest without widening it.
+    prefixes = [p.strip() for p in args.zip.split(',') if p.strip()]
+    in_market = re.compile(
+        r",\s*[A-Z]{2}\s+(?:%s)\d*" % "|".join(re.escape(p) for p in prefixes))
 
     keep, out_of_market, unverified, national = [], [], [], []
     for cand in data["candidates"]:
