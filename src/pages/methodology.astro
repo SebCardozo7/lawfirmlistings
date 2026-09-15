@@ -85,6 +85,11 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
               <tr><td>B3 Results disclosure</td><td class="p">4</td><td>A prior-results disclaimer on the results page, which New York's advertising rules effectively require. Of the first ten firms we read, four carried one.</td></tr>
             </tbody>
           </table>
+          {/* The pillar measures two different things, because not every practice has outcomes.
+              Written out here rather than left to the profile, since a reader comparing a real
+              estate firm against an injury firm is comparing two scales that add to the same
+              fifteen points. */}
+          <div class="note"><b>Where the work has no outcomes:</b> a property closing that went well produces no verdict and no settlement, so this pillar reads the transaction instead and keeps its fifteen points. <b>B1 Fee terms published</b> pays 6 for a figure the firm prints for its own fee, 4 for a flat fee stated without one and 2 for anything else it says about charging, because the title insurance premium in Florida is fixed by rule under section 627.782 and identical everywhere, which leaves the firm's own settlement fee as the only number worth comparing. <b>B2 The transaction explained</b> pays 1 for each stage of the deal the firm names, to 5: the title search, the commitment, the survey, the lien search, the estoppel, the settlement statement. <b>B3 Escrow disclosed</b> pays 4 where the firm publishes how client funds are held and where, and 2.5 where it names the account without saying where it sits. Every firm doing this work holds client money and every one of them could say so, which is what makes a silence here the firm's choice rather than a limit of ours.</div>
           <div class="note"><b>What counts as verified:</b> court dockets and judgments (PACER via CourtListener, state e-courts), published decisions, jury-verdict reporters, or redacted settlement documentation attested by the attorney under our protocol. Self-reported totals score 0.</div>
         </div>
       </details>

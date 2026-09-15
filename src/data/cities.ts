@@ -644,4 +644,84 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  // The first market here that is not about injuries, and the local knowledge is a different
+  // kind: what the state fixes, what it leaves to custom, and the two deadlines that decide
+  // whether a Collier County closing happens this month or next. Every figure is cited from the
+  // Florida Statutes as the Senate publishes them, which unlike Massachusetts answer a reader.
+  'naples-fl': {
+    lede:
+      'The price of title insurance in Florida is set by the state, so every firm quotes the ' +
+      'same premium and the only fee worth comparing is the one almost nobody publishes. ' +
+      'Compare Naples firms on what they put in writing and on what we could check ourselves.',
+    areas: ['Old Naples', 'Park Shore', 'Pelican Bay', 'North Naples', 'Vanderbilt Beach',
+            'Golden Gate', 'East Naples', 'Marco Island', 'Bonita Springs', 'Immokalee'],
+    sections: [
+      {
+        heading: 'Hiring a real estate lawyer in Naples: what is different',
+        paragraphs: [
+          'Shopping the title premium is a waste of an afternoon. Section 627.782 of the Florida ' +
+          'Statutes requires the Financial Services Commission to adopt a rule "specifying the ' +
+          'premium to be charged in this state by title insurers", and it is the same at every ' +
+          'agency and every law firm in Florida for the same policy amount. What varies is the ' +
+          'firm\u2019s own settlement fee for handling the file, and that one is negotiable, ' +
+          'rarely published, and worth asking for in dollars before anybody signs.',
+          'A law firm here is often not in the state\u2019s title agency register, and that is ' +
+          'the statute working as intended rather than a gap. Section 626.8417(4) exempts ' +
+          '"attorneys duly admitted to practice law in this state and in good standing with The ' +
+          'Florida Bar" from the licensing and appointment rules that apply to an agency. So ' +
+          'where a firm does hold an agency licence we print the number, and where it does not ' +
+          'the profile says the exemption is the ordinary reason. An absence from a register is ' +
+          'never a finding here.',
+          'Collier County is condominium country, and that changes which documents decide a ' +
+          'closing. An association\u2019s estoppel certificate, its reserve position and its ' +
+          'inspection history matter more here than a survey line does, and the two deadlines ' +
+          'below are the ones that move a closing date.',
+        ],
+      },
+      {
+        heading: 'Deadlines that decide a Collier County closing',
+        paragraphs: [],
+        list: [
+          '<b>The estoppel certificate:</b> an association has <b>10 business days</b> from a ' +
+          'written request to issue one, under Florida Statutes section 720.30851, and it has to ' +
+          'publish on its website who receives the request. Nothing closes without it, and two ' +
+          'weeks is the difference between a closing date that holds and one that does not.',
+          '<b>The milestone inspection:</b> under section 553.899 a condominium or cooperative ' +
+          'building must have a structural milestone inspection at <b>30 years</b> from the date ' +
+          'its certificate of occupancy was issued, and every 10 years after that. A building ' +
+          'that turned 30 before 1 July 2022 was required to have its first inspection before ' +
+          '<b>31 December 2024</b>; one reaching 30 between then and the end of 2024 has until ' +
+          '<b>31 December 2025</b>. It does not apply to a one, two, three or four family ' +
+          'dwelling.',
+          '<b>The contract\u2019s own dates:</b> the inspection period and the financing ' +
+          'contingency are written into the purchase agreement rather than into a statute, which ' +
+          'means they are negotiable before signature and unforgiving afterwards.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Florida lawyer is licensed?',
+        a: 'The Florida Bar publishes a member search with each attorney\u2019s status and public ' +
+           'discipline history, free to use. We also read the discipline the Supreme Court of ' +
+           'Florida publishes, through the decisions index, and every Florida profile says what ' +
+           'that check found and what it cannot show.',
+      },
+      {
+        q: 'Do I need a lawyer to close on a house in Naples?',
+        a: 'No. Florida lets a title company handle a closing and most closings are done that ' +
+           'way. A lawyer adds advice about the contract and somebody who can act for you when ' +
+           'the deal stops being routine, which in a condominium purchase happens more often ' +
+           'than people expect. Nothing on this page is legal advice.',
+      },
+      {
+        q: 'Why are there title companies in the search results and not on this page?',
+        a: 'Because this is a directory of law firms. Several of the most reviewed businesses ' +
+           'that come back from a search for a real estate lawyer in Naples are title agencies ' +
+           'rather than law firms, and a title agency handling a dispute would be practising law ' +
+           'without a licence. They are listed in the cohort file as excluded, with the reason.',
+      },
+    ],
+  },
 };

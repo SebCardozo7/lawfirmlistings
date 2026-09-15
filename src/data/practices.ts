@@ -30,6 +30,13 @@ export interface PracticeNotes {
   subtopics: string[];
   /** What the fee share measures in this area, which is not the same sentence in each. */
   feeFactLabel: string;
+  /**
+   * What counts as the fee arrangement worth counting, as a regular expression over the firm's
+   * published fee model. Injury work is contingent and transactional work is not, so counting
+   * contingency in a real estate ranking would report zero for every firm and mean nothing.
+   * Defaults to contingency, which is what the injury practices want.
+   */
+  feePattern?: string;
   guide: {
     heading: string;
     intro: string;
@@ -299,6 +306,145 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     plannedGuides: ["What workers' comp actually pays", 'Section 32 settlements explained',
                     'The third-party case after a construction injury',
                     'When benefits stop: the IME report'],
+  },
+
+  // The first practice here that is not an injury, and it changes what the score can honestly
+  // measure. Pillar B reads published settlements and verdicts, and a firm that closes property
+  // transactions has none: not because it is worse but because the work has no verdicts. Scoring
+  // that zero would publish our own inability as a finding about the firm, which is the mistake
+  // the gates have already had to unlearn twice. scripts/score.py scores pillar B for this
+  // practice on what the firm publishes about the deal instead.
+  //
+  // Title and escrow live inside this practice rather than beside it. Somebody buying a house
+  // searches for a real estate attorney; the title work is how the job gets done, the same way a
+  // car accident page lives inside personal injury.
+  'real-estate': {
+    name: 'Real Estate',
+    abbr: 'real estate',
+    icon: 'home',
+    title: 'Real Estate Law Firms: Rankings and Hiring Guide',
+    description:
+      'How to choose a real estate law firm: why the title premium is the same everywhere, ' +
+      'which fee actually varies, and what a closing attorney does that a title company cannot.',
+    lede:
+      'Real estate firms handling residential and commercial closings, title insurance and ' +
+      'escrow, title defects, condominium and association disputes, and land use. Every firm is ' +
+      'checked for a registered entity, a confirmed office and a clean disciplinary record, and ' +
+      'ranked on what it publishes about the transaction rather than on outcomes it never has.',
+    subtopics: ['Residential closings', 'Commercial purchases', 'Title insurance and escrow',
+                'Title defects and quiet title', 'Condominium and association law',
+                'Land use and zoning', 'Landlord and tenant', 'Construction liens',
+                '1031 exchanges'],
+    feeFactLabel: 'Publish a flat fee',
+    feePattern: 'flat fee',
+    guide: {
+      heading: 'How to choose a real estate law firm',
+      intro:
+        'Comparing these firms the way you would compare injury firms will point you at the ' +
+        'wrong things. There are no verdicts to weigh, no settlements to add up, and the number ' +
+        'most people try to shop on is fixed by the state. What is left is narrower and more ' +
+        'useful: what the firm will charge you, what it will do that a title company cannot, ' +
+        'and who answers when the closing goes wrong.',
+      sections: [
+        {
+          heading: 'The title premium is the same everywhere, so stop shopping it',
+          paragraphs: [
+            'Florida is one of a small number of states where the premium for title insurance ' +
+            'is set by the state rather than by the company selling it. Section 627.782 of the ' +
+            'Florida Statutes requires the Financial Services Commission to adopt a rule ' +
+            '"specifying the premium to be charged in this state by title insurers", and every ' +
+            'agency charges it. A firm advertising a better price on the policy is either ' +
+            'describing something that is not the policy, or describing something it cannot do.',
+            'What does vary, and by a lot, is the settlement or closing fee: the charge for ' +
+            'handling the file, running the searches, holding the money and clearing the title. ' +
+            'That figure is negotiable, it is rarely published, and it is the number to ask for ' +
+            'in writing before anybody signs anything. The firms in this directory that publish ' +
+            'a flat fee are marked, because publishing it at all is unusual.',
+          ],
+        },
+        {
+          heading: 'Why a law firm may not appear in the title agency register',
+          paragraphs: [
+            'Florida licenses title insurance agencies and publishes the register, and a law ' +
+            'firm doing title work often is not in it. That is what the statute intends rather ' +
+            'than a gap: section 626.8417(4) exempts "attorneys duly admitted to practice law ' +
+            'in this state and in good standing with The Florida Bar" from the licensing and ' +
+            'appointment requirements that apply to an agency.',
+            'So the register can confirm that a firm holds an agency licence and can never ' +
+            'establish that one should. Where we find a licence we cite it with its number and ' +
+            'the date the state issued it. Where we do not, the profile says the firm was not ' +
+            'found in the register and that the exemption is the ordinary reason, which is the ' +
+            'rule this directory follows everywhere: an absence from a register is not a ' +
+            'finding about a firm.',
+          ],
+        },
+        {
+          heading: 'What the closing attorney does that a title company does not',
+          paragraphs: [
+            'Both can run a title search, issue a commitment, hold the deposit and record the ' +
+            'deed. Only one of them can tell you what the contract you signed obliges you to ' +
+            'do, negotiate a repair after an inspection, argue about a defect the search turned ' +
+            'up, or represent you if the other side walks away. A title company handling a ' +
+            'dispute is practising law without a licence, and the moment a file stops being ' +
+            'routine is the moment that distinction starts to matter.',
+            'It is also why this directory lists law firms and not title companies, even where ' +
+            'the title company has more reviews and a nicer office. Several of the highest ' +
+            'rated businesses a search for a real estate lawyer returns in these markets are ' +
+            'title agencies, and every one of them was left out.',
+          ],
+        },
+        {
+          heading: 'What to ask before you engage anybody',
+          paragraphs: [
+            'Four questions, and the answers are short. What is your fee for this closing, in ' +
+            'dollars, in writing. Who holds the escrow, and at which bank. Which underwriter ' +
+            'will issue the policy. And who calls me if the survey, the lien search or the ' +
+            'association estoppel comes back wrong, which is the question that separates a firm ' +
+            'from a file number.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'No ranking here is about outcomes.',
+        text: 'A transaction that went well produces no verdict and no settlement, so pillar B ' +
+              'scores what the firm publishes about the deal instead: its fee terms, its escrow ' +
+              'arrangements, the underwriters it works with, and what it tells you about the ' +
+              'process. The methodology page sets out the weighting.',
+      },
+    },
+    faq: [
+      {
+        q: 'Do I need a lawyer to buy a house in Florida?',
+        a: 'No. Florida allows a title company to handle a closing, and most closings are done ' +
+           'that way. What a lawyer adds is advice about the contract and somebody who can act ' +
+           'for you when the transaction stops being routine. Whether that is worth the fee ' +
+           'depends on the deal, and nothing on this page is legal advice.',
+      },
+      {
+        q: 'Why is the title insurance quote identical everywhere I ask?',
+        a: 'Because it is set by rule under section 627.782 of the Florida Statutes rather than ' +
+           'by the agency quoting it. The premium is the same at every firm and every title ' +
+           'company in the state for the same policy amount. The closing fee beside it is not, ' +
+           'and that is the figure worth comparing.',
+      },
+      {
+        q: 'The firm is not in the state title agency register. Is that a problem?',
+        a: 'Ordinarily not. Section 626.8417(4) exempts attorneys in good standing with The ' +
+           'Florida Bar from the agency licensing requirements, so a law firm doing title work ' +
+           'is often absent by design. Where a firm does hold a licence, we publish the number.',
+      },
+      {
+        q: 'Who pays for the title policy?',
+        a: 'It is local custom rather than law, it is not the same in every Florida county, and ' +
+           'it is written into the purchase contract, which means it can be negotiated. Ask ' +
+           'which way it runs where you are buying before you sign, and ask for the figure ' +
+           'rather than for the practice.',
+      },
+    ],
+    plannedGuides: ['What a closing actually costs, firm by firm',
+                    'Who pays for title insurance, by county',
+                    'The milestone inspection deadline and what it did to condo sales',
+                    'Reading a title commitment'],
   },
 };
 

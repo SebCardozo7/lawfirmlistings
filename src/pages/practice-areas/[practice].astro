@@ -37,7 +37,11 @@ const firms = [...matching].sort((a, b) =>
 
 const certified = firms.filter(f => f.data.status === 'certified');
 const cities = [...new Set(firms.map(f => `${f.data.market.city}, ${f.data.market.state}`))];
-const contingency = firms.filter(f => /contingency/i.test(f.data.fee_model)).length;
+// What the fee fact counts is a property of the practice. Injury work is contingent and a
+// closing is not, so counting contingency on a real estate ranking would report zero for every
+// firm and read as a finding about them rather than about the question.
+const feeTest = new RegExp(notes.feePattern ?? 'contingency', 'i');
+const contingency = firms.filter(f => feeTest.test(f.data.fee_model)).length;
 const freeConsult = firms.filter(f => f.data.free_consultation).length;
 const share = (n: number) => (firms.length ? `${Math.round((100 * n) / firms.length)}%` : 'n/a');
 const logoVariants = ['', 'l2', 'l3'];
