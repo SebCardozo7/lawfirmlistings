@@ -13,9 +13,11 @@ run by the Free Law Project, indexes 2,600 Maryland attorney grievance decisions
 decades, and its search API answers without a key. That is a complete, queryable record of who
 has been disciplined in Maryland, which is the thing a client actually wants to know.
 
-Four states are here now: Maryland, Florida, Oregon and Indiana. Each names the disciplined
-attorney in its own way and the table below carries the difference, because the parsing is the
-only part that is state-specific. Texas is absent on purpose. Its discipline is decided by
+Five states are here now: Maryland, Florida, Oregon, Indiana and Massachusetts. Each names the
+disciplined attorney in its own way and the table below carries the difference, because the
+parsing is the only part that is state-specific. Massachusetts needs two entries of its own,
+because the Supreme Judicial Court changed the form of the case name about a decade ago and both
+halves of the record matter. Texas is absent on purpose. Its discipline is decided by
 evidentiary panels and the Board of Disciplinary Appeals rather than by an appellate court, so
 the index holds thirteen Texas cases in total and thirteen cases is not a record. Dallas
 profiles carry G2 unresolved and say why, which is where Maryland started.
@@ -128,6 +130,27 @@ REGISTERS = {
         "require": "Disciplinary Commission",
         "body": "the Supreme Court of Indiana on the discipline of Indiana attorneys",
     },
+    # Massachusetts changed how it titles these about a decade ago, and both forms are live in
+    # the record: 108 decisions read "In re Fletcher" and 62 read "In the Matter of Edward A.
+    # Sargent", the newest from this year. Indexing only the current form would leave a hundred
+    # and eight decisions unread behind a gate that claims to have read them all, so this is the
+    # one state here with two patterns.
+    #
+    # Both need the Board of Bar Overseers as a corroborating term, because "In re" is also how
+    # the court titles an adoption, an estate and a guardianship.
+    "MA": {
+        "courts": "mass",
+        "body": ("the Supreme Judicial Court of Massachusetts on the discipline of attorneys, "
+                 "on the recommendation of the Board of Bar Overseers"),
+        "patterns": [
+            {"case_name": "In the Matter of",
+             "respondent_after": r"In (?:the )?Matter of\s+(?:the\s+)?",
+             "require": "Board of Bar Overseers"},
+            {"case_name": "In re",
+             "respondent_after": r"In re:?\s+",
+             "require": "Board of Bar Overseers"},
+        ],
+    },
 }
 
 # Words in a case name that are the court's, the commission's or a title, not a respondent's.
@@ -138,7 +161,8 @@ REGISTERS = {
 # Doe. "Anonymous" is how Indiana titles a private reprimand, and it names nobody at all.
 NOT_A_NAME = re.compile(
     r"^(?:attorney|grievance|comm|commission|commn|of|maryland|md|state|bar|counsel|"
-    r"in|re|matter|the|and|v|vs|honorable|hon|judge|anonymous)\.?$", re.I)
+    r"in|re|matter|the|and|v|vs|honorable|hon|judge|anonymous|discipline|estate|"
+    r"adoption|guardianship|conservatorship|petition|amendment|rule|two)s?\.?$", re.I)
 
 SUFFIX = re.compile(r"^(?:jr|sr|ii|iii|iv|esq|p\.?a|pc|llc|llp)\.?$", re.I)
 
@@ -163,6 +187,23 @@ def fetch(params):
                 raise
             time.sleep(5)
     return {}
+
+
+def patterns(spec: dict) -> list:
+    """The naming conventions a state uses, as a list of specs this file can query one by one.
+
+    Most states use one. Massachusetts uses two, and both are needed: the Supreme Judicial Court
+    wrote "In re Fletcher" until about 2013 and writes "In the Matter of Edward A. Sargent" now,
+    which is 108 decisions under the old form and 62 under the new. Indexing only the current one
+    would mean a gate that says no attorney here appears in any published discipline decision
+    while a hundred and eight of them went unread.
+
+    A state with one convention is returned as a list of one, so everything downstream has a
+    single shape to handle.
+    """
+    if spec.get("patterns"):
+        return [dict(spec, **p) for p in spec["patterns"]]
+    return [spec]
 
 
 def respondent_tokens(case_name: str, spec: dict | None = None) -> list:
@@ -210,35 +251,44 @@ def build_index(state: str, cache: pathlib.Path, refresh: bool):
             return json.load(fh)
 
     spec = REGISTERS[state]
-    # A term the real decisions all contain, where the case-name pattern alone is not specific
-    # enough to a person. Only Indiana needs it, and the comment on its entry says why.
-    query = 'caseName:("%s")' % spec["case_name"]
-    if spec.get("require"):
-        query += ' AND "%s"' % spec["require"]
-    params = {"type": "o", "court": spec["courts"],
-              "q": query, "order_by": "dateFiled desc"}
-    cases, pages, total = [], 0, None
-    cursor = None
-    while True:
-        page = fetch(dict(params, **({"cursor": cursor} if cursor else {})))
-        if total is None:
-            total = page.get("count")
-        for row in page.get("results") or []:
-            name = row.get("caseName") or ""
-            cases.append({"case": name,
-                          "date": row.get("dateFiled"),
-                          "surname": respondent(name, spec),
-                          "full": respondent_full(name, spec),
-                          "url": "https://www.courtlistener.com" + (row.get("absolute_url") or "")})
-        pages += 1
-        print("  page %-3d  %d case(s) so far" % (pages, len(cases)), flush=True)
-        nxt = page.get("next")
-        if not nxt:
-            break
-        parsed = urllib.parse.parse_qs(urllib.parse.urlparse(nxt).query)
-        cursor = (parsed.get("cursor") or [None])[0]
-        if not cursor:
-            break
+    cases, total, seen = [], 0, set()
+    for index_of, pattern in enumerate(patterns(spec)):
+        # A term the real decisions all contain, where the case-name pattern alone is not
+        # specific enough to a person. Indiana needs it because it titles rule amendments the
+        # same way it titles discipline, and Massachusetts because "In re" is how it titles
+        # adoptions and estates.
+        query = 'caseName:("%s")' % pattern["case_name"]
+        if pattern.get("require"):
+            query += ' AND "%s"' % pattern["require"]
+        params = {"type": "o", "court": pattern["courts"],
+                  "q": query, "order_by": "dateFiled desc"}
+        print("  pattern %d: %s" % (index_of + 1, pattern["case_name"]), flush=True)
+        pages, cursor = 0, None
+        while True:
+            page = fetch(dict(params, **({"cursor": cursor} if cursor else {})))
+            total += page.get("count") or 0 if pages == 0 else 0
+            for row in page.get("results") or []:
+                name = row.get("caseName") or ""
+                url = "https://www.courtlistener.com" + (row.get("absolute_url") or "")
+                if url in seen:
+                    continue
+                seen.add(url)
+                cases.append({"case": name,
+                              "date": row.get("dateFiled"),
+                              "surname": respondent(name, pattern),
+                              "full": respondent_full(name, pattern),
+                              "pattern": index_of,
+                              "url": url})
+            pages += 1
+            print("    page %-3d  %d case(s) so far" % (pages, len(cases)), flush=True)
+            nxt = page.get("next")
+            if not nxt:
+                break
+            parsed = urllib.parse.parse_qs(urllib.parse.urlparse(nxt).query)
+            cursor = (parsed.get("cursor") or [None])[0]
+            if not cursor:
+                break
+            time.sleep(DELAY)
         time.sleep(DELAY)
 
     index = {
@@ -316,6 +366,31 @@ def verify(state: str, attorney: str, surname: str, hits: list):
     and nothing here treats it as one.
     """
     spec = REGISTERS[state]
+    variants = name_variants(attorney)
+    # Hits can come from more than one naming convention, and each has its own query. The
+    # verdicts combine the way the three outcomes demand: one identification anywhere is an
+    # identification, a clearance needs every convention's decisions to have been read, and
+    # anything unreadable leaves the question open.
+    if len(patterns(spec)) > 1:
+        verdicts = []
+        for index_of, pattern in enumerate(patterns(spec)):
+            mine = [h for h in hits if h.get("pattern") == index_of]
+            if not mine:
+                continue
+            verdict, note = verify_one(pattern, attorney, surname, mine)
+            if verdict is True:
+                return True, None
+            verdicts.append((verdict, note))
+        if not verdicts:
+            return None, "no decision under any naming convention names this surname"
+        if all(v is False for v, _ in verdicts):
+            return False, "; ".join(n for _, n in verdicts if n)
+        return None, next((n for v, n in verdicts if v is None and n), None)
+    return verify_one(spec, attorney, surname, hits)
+
+
+def verify_one(spec: dict, attorney: str, surname: str, hits: list):
+    """One naming convention's answer, which for most states is the whole answer."""
     variants = name_variants(attorney)
 
     # Where every decision naming this surname also names the respondent in full, the index

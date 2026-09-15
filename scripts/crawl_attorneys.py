@@ -72,11 +72,20 @@ NOT_A_PERSON = re.compile(
     # Disability" was stored because disability was missing altogether.
     r"disability|criminal|crime|defense|felony|misdemeanor|dui|owi|expungement|molesting|"
     r"pornography|custody|adoption|probate|estate|guardianship|mediation|appeal|theft|"
+    # The plural of a word ending in y is not that word plus an s, and the optional s below
+    # therefore missed every one of them. A Buffalo roster published "Railroad Injuries" and
+    # "Traumatic Brain Injuries" as members of staff, and a Lakeland one published "Asset
+    # Protection", each of them a link on the roster page to a practice page.
+    r"injuries|liabilities|disabilities|policies|protection|planning|railroad|asset|"
     # "trust" is deliberately not on this list even though "Trusts & Estates" is a practice,
     # because Trust is a given name and dropping a real attorney is the worse mistake: a practice
     # title on a roster is visible on the page, a missing lawyer is not. "Estates" catches the
     # practice anyway.
     r"assault|battery|drug|traffic)s?\b", re.I)
+
+# Words a roster puts in front of a name rather than after it. Kept apart from ROLE_WORDS
+# because that set is wide enough to include "of" and "and", which must never lead a peel.
+LEADING_TITLES = {"attorney", "attorneys", "atty", "lawyer", "abogado", "abogada"}
 
 SUFFIXES = re.compile(r"\s*[,|–—-]\s*(esq\.?|esquire|jd|j\.d\.|llp|llc|p\.?c\.?|pllc|"
                       r"attorney at law).*$", re.I)
@@ -99,6 +108,12 @@ ROLE_WORDS = {
     "officer", "legal", "chief", "executive", "director", "president", "vice", "chair",
     "chairman", "chairwoman", "principal", "member", "head", "lead", "practice", "department",
     "operations", "intake", "emeritus", "advocate", "clerk",
+    # Roles a firm publishes that are not lawyers. src/lib/roster.ts already knows an
+    # investigator is staff; without the word here the peel left it inside the name and a Dallas
+    # firm's in-house investigator was stored as a person called "Mike Foster Private
+    # Investigator".
+    "investigator", "private", "nurse", "bookkeeper", "receptionist", "translator",
+    "interpreter", "coordinator", "specialist", "analyst",
     # Adjectives that only ever sit inside a job title. None is a plausible surname, which is the
     # test for adding one here: the peel walks right to left and stops at the first word it does
     # not know, so a missing adjective leaves everything to its left stuck in the name.
@@ -213,6 +228,19 @@ def split_name_and_role(raw):
     text = SUFFIXES.sub("", text).strip(" ,-|")
 
     words = [w for w in re.split(r"[\s,|]+", text) if w]
+
+    # A title in front of the name, which the peel below never looked for because it only works
+    # from the right. Three Dallas attorneys were lost to it: mullenandmullen.com links each of
+    # them as "Attorney Regis L. Mullen", and the word Attorney is in the vocabulary that rejects
+    # a heading outright, so the firm read as naming nobody and failed G5.
+    #
+    # Only these words, and only as the first of at least three. "Dr." is deliberately absent: a
+    # doctor on a law firm's roster is a doctor, and peeling the title into the role would make
+    # src/lib/roster.ts print them as an attorney.
+    lead = None
+    if len(words) >= 3 and words[0].lower().strip(".") in LEADING_TITLES:
+        lead, words = words[0], words[1:]
+
     role = []
     # Peel from the right while the word reads as part of a title, never below the floor so
     # a short name cannot be eaten. A word counts as title if it is a known role word, or is
@@ -241,6 +269,10 @@ def split_name_and_role(raw):
 
     name = " ".join(words[:len(words) - len(role)]).strip(" ,-|")
     role_text = " ".join(role).strip(" ,-|")
+    # A leading title is the role where the firm published no other one, and is dropped where it
+    # did: "Attorney Jane Doe, Managing Partner" is a managing partner.
+    if lead and not role_text:
+        role_text = lead.strip(".")
     return name, (role_text.title() if role_text else None)
 
 
@@ -278,7 +310,15 @@ def slug_reads_as_a_name(path):
     if not segs:
         return False
     slug = re.sub(r"\.(html?|php|aspx?)$", "", segs[-1])
+    # A firm that writes its bio slugs for search engines puts the job on the end of them:
+    # mullenandmullen.com publishes /about/regis-l-mullen-attorney/, and the word attorney is in
+    # the vocabulary that rejects a slug, so all three of its lawyers were unreachable and the
+    # firm read as naming nobody. Peeling one trailing job word leaves the name behind it, and
+    # the page is still fetched and still named from its own heading.
     tokens = [t for t in slug.split("-") if t]
+    if len(tokens) > 2 and tokens[-1].lower() in ("attorney", "attorneys", "lawyer", "lawyers",
+                                                  "esq", "bio", "profile", "abogado", "abogada"):
+        tokens = tokens[:-1]
     if not 2 <= len(tokens) <= 4:
         return False
     return looks_like_a_person(" ".join(t.capitalize() for t in tokens))
@@ -502,6 +542,12 @@ def collect(domain, verbose=False, record=None):
     anchor_roles: dict[str, str] = {}
     if index_html:
         bio_candidates(index_html, origin, index_final, anchor_names, anchor_roles)
+    # And from the home page, because a firm with no index at all still links its people
+    # somewhere. Mullen & Mullen heads every bio page with the single word "attorney", so the
+    # page names nobody and the only place the names appear is the home page, which links them
+    # as "Attorney Regis L. Mullen". These entries are read only for a URL we actually fetched
+    # as a bio, so an anchor pointing anywhere else is never consulted.
+    bio_candidates(home, origin, index_final or origin, anchor_names, anchor_roles)
     bios = seeded_bios or (bio_candidates(index_html, origin, index_final)
                            if index_html else [])
     if verbose:

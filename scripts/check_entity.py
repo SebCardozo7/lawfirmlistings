@@ -25,6 +25,8 @@ Asking turns out to have four different answers, and this file is where they liv
     Indiana     nothing queryable. INBiz answers an automated reader with a 403 and the
                 Secretary of State's business search answers with a 202 and an empty body,
                 which is a bot challenge. We do not work around either.
+    Massachusetts  nothing queryable. The Secretary of the Commonwealth's corporate search
+                answers 403 and redirect-loops, and the state runs no open data portal for it.
 
 The distinction between the last two and "partial" is not cosmetic, and it is the reason this
 script exists. A gate we have not got to yet should block a certification. A gate the state does
@@ -112,6 +114,11 @@ NO_SOURCE = {
            "form rather than a dataset, its bulk data is sold rather than published, and the "
            "state's open data portal carries a count of businesses instead of the register. "
            "This is a limit of the published record and not something the firm can change."),
+    "MA": ("Massachusetts publishes no business register we can query. The Secretary of the "
+           "Commonwealth's corporate search answers a request for its robots file with a 403 "
+           "and its search page with a redirect loop, and the state runs no open data portal "
+           "carrying the register. This is a limit of the published record and not something "
+           "the firm can change."),
     "IN": ("Indiana publishes no business register we can query. INBiz answers an automated "
            "reader with a 403 and the Secretary of State's business search answers with a 202 "
            "and an empty body, which is a bot challenge, and we do not work around either. "

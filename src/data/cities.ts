@@ -557,4 +557,91 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  // Massachusetts blocks automated readers on both of its official sites: malegislature.gov
+  // refuses the connection and mass.gov answers 403. So every rule below is cited from a
+  // published decision of the state's own appellate courts, which quote the statute, and
+  // nothing is printed that could not be traced to one. That is the same standard that left
+  // Indiana's political-subdivision deadline off the Northwest Indiana page.
+  'boston-ma': {
+    lede:
+      'Massachusetts is a no-fault state, which changes the first question in a car accident ' +
+      'case from who was to blame to how large the medical bills are. Compare Boston firms on ' +
+      'what they publish and on what we could check for ourselves.',
+    areas: ['Downtown', 'Back Bay', 'South Boston', 'Dorchester', 'Cambridge', 'Somerville',
+            'Brookline', 'Quincy', 'Medford', 'Newton'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Boston: what is different',
+        paragraphs: [
+          'In most of the country a car accident claim goes to the other driver’s insurer. ' +
+          'In Massachusetts it starts with your own: personal injury protection pays the first ' +
+          'part of the medical bills whoever caused the crash, and a claim for pain and ' +
+          'suffering is barred outright unless the injury clears a threshold. The Appeals Court ' +
+          'put the figure plainly in <i>Chenell v. Central Wheelchair & Van Transport</i> in ' +
+          '2018: medical expenses have to exceed <b>$2,000</b> under General Laws chapter 231, ' +
+          'section 6D, and the threshold is met without that sum where the injury is a fracture, ' +
+          'permanent and serious disfigurement, or loss of sight or hearing. It means two people ' +
+          'hurt in the same collision can have very different cases, and it is worth asking a ' +
+          'firm early where your bills stand against it.',
+          'Blame is then shared rather than fatal. Massachusetts recovery survives the ' +
+          'plaintiff’s own carelessness as long as it was not greater than the ' +
+          'defendant’s, under chapter 231, section 85, and the award is reduced by the ' +
+          'share. That is the ordinary American rule and the opposite of what happens fifty ' +
+          'miles down the coast: Maryland, where this directory also ranks firms, still ends a ' +
+          'claim entirely when the injured person contributed to it at all.',
+          'Where a case is heard depends on its size and its subject. Larger civil claims in the ' +
+          'city go to the Superior Court for Suffolk County, smaller ones to the Boston ' +
+          'Municipal Court or a District Court, and federal matters to the United States ' +
+          'District Court for the District of Massachusetts. Cambridge and Somerville are ' +
+          'Middlesex County and Quincy is Norfolk, so a firm two stops away on the Red Line may ' +
+          'be appearing in a different courthouse from the one that will hear your case.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Bostonians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> three years, the period the Appeals Court identified in ' +
+          '<i>Davalos v. Bay Watch</i> as specified by General Laws chapter 260, section 2A.',
+          '<b>A claim against the city, the T, a school district or any other public ' +
+          'employer:</b> written presentment to its executive officer <b>within two years</b> of ' +
+          'the day the claim arose, in the words of chapter 258 as the Appeals Court quoted them ' +
+          'in <i>Wang v. City of Chelsea</i> in 2026. This is the deadline that ends these ' +
+          'claims, it runs a year earlier than the ordinary one, and nobody is obliged to remind ' +
+          'you.',
+          '<b>Medical malpractice:</b> shorter and more complicated than the ordinary injury ' +
+          'deadline, with a tribunal step before the case proceeds. We are not printing a period ' +
+          'here because we could not confirm one against the statute itself, and this is a ' +
+          'question to ask on a first call rather than read off a directory.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Massachusetts lawyer is licensed?',
+        a: 'The Board of Bar Overseers publishes an attorney lookup at massbbo.org, free to ' +
+           'search, showing status and public discipline. We do not read it: Massachusetts ' +
+           'profiles carry no licence finding rather than one we did not make. New York ' +
+           'publishes the same information as open data, which is why New York profiles do ' +
+           'carry it.',
+      },
+      {
+        q: 'My medical bills are small. Do I still have a case?',
+        a: 'You may have no claim for pain and suffering, which is a different thing from having ' +
+           'no claim. Personal injury protection covers medical bills and lost wages without ' +
+           'anyone proving fault, and the $2,000 threshold applies to the pain and suffering ' +
+           'part, with fractures and serious permanent injuries exempt from it. A firm that ' +
+           'handles these every week can tell you which side of the line you are on. Nothing on ' +
+           'this page is legal advice.',
+      },
+      {
+        q: 'Should I hire a firm in my own neighbourhood?',
+        a: 'It matters less than the courthouse. Greater Boston is compact and the firms here ' +
+           'appear across Suffolk, Middlesex and Norfolk counties, so what counts is regular ' +
+           'practice in the court that will hear your case rather than the walk from your ' +
+           'front door.',
+      },
+    ],
+  },
 };
