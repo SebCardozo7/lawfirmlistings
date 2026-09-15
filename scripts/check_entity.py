@@ -17,6 +17,9 @@ Asking turns out to have four different answers, and this file is where they liv
     Texas       the Comptroller publishes Active Franchise Taxpayers, which carries the
                 Secretary of State file number, the charter date and the status code for every
                 entity that pays franchise tax. data.texas.gov/resource/9cir-efmm
+    Florida     the register is published in full as data files, on an SFTP host that answers
+                an anonymous request with a 401. Reading it is work we owe, so Florida's G3
+                stays pending and keeps blocking, which is the honest reading.
     Maryland    nothing queryable. SDAT's entity search is a form, its bulk data is sold, and
                 the open data portal publishes a count of businesses rather than the register.
     Indiana     nothing queryable. INBiz answers an automated reader with a 403 and the
@@ -90,6 +93,18 @@ REGISTERS = {
         "caveat": (" The franchise tax does not reach a sole proprietorship or a general "
                    "partnership, so this register can confirm an entity and cannot rule one out."),
     },
+}
+
+# A state that does publish its register, to somebody who has arranged access. This is not the
+# same as having no source, and the difference is the whole point of this file: Florida's G3 stays
+# "partial", which blocks a certification, because reading it is work we owe rather than a door
+# the state has closed. Recorded here so the next person does not have to find it out again.
+PENDING = {
+    "FL": ("Florida does publish its corporate register in full, as fixed-width data files, but "
+           "the download sits on an SFTP host that answers an anonymous request with a 401 and "
+           "needs an account arranged with the Division of Corporations. Its web search is a "
+           "form on a host that answers a crawler with a 403. So Florida's G3 stays pending, "
+           "which is honest: the record exists and we have not read it."),
 }
 
 NO_SOURCE = {
@@ -198,13 +213,19 @@ def iso(value: str | None) -> str | None:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--state", required=True,
-                    choices=sorted(set(REGISTERS) | set(NO_SOURCE)))
+                    choices=sorted(set(REGISTERS) | set(NO_SOURCE) | set(PENDING)))
     ap.add_argument("--write", action="store_true")
     args = ap.parse_args()
 
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", line_buffering=True)
+
+    if args.state in PENDING:
+        print(PENDING[args.state])
+        print()
+        print("Nothing written. G3 stays as it is for %s." % args.state)
+        return 0
 
     spec = REGISTERS.get(args.state)
     touched = 0
