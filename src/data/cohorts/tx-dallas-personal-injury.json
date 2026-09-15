@@ -34,11 +34,6 @@
       "practice_page": "https://www.witheritelaw.com/practice-areas/personal-injury"
     },
     {
-      "domain": "thetexasattorney.com",
-      "name": "Bailey & Galyen Attorneys at Law",
-      "practice_page": "https://www.thetexasattorney.com/nationwide-personal-injury-ssd-law-services/"
-    },
-    {
       "domain": "dfwinjurylawyers.com",
       "name": "DFW Injury Lawyers",
       "practice_page": "http://www.dfwinjurylawyers.com/legal-services/dallas-car-accident-lawyer/"
@@ -52,11 +47,6 @@
       "domain": "fieldinglaw.com",
       "name": "Fielding Law",
       "practice_page": "https://www.fieldinglaw.com/personal-injury/"
-    },
-    {
-      "domain": "herrmanandherrman.com",
-      "name": "Herrman & Herrman P.L.L.C.",
-      "practice_page": "https://www.herrmanandherrman.com/car-accident-lawyers/"
     },
     {
       "domain": "shamiehlaw.com",
@@ -124,11 +114,6 @@
       "practice_page": "https://www.thebentonlawfirm.com/dallas-car-accident-lawyer/"
     },
     {
-      "domain": "daspitlaw.com",
-      "name": "Daspit Law Firm",
-      "practice_page": "https://www.daspitlaw.com/austin/car-accidents"
-    },
-    {
       "domain": "mr.law",
       "name": "MR.LAW Accident and Injury Attorneys",
       "practice_page": "https://www.mr.law/personal-injury/"
@@ -137,15 +122,14 @@
       "domain": "injuryattorneyofdallas.com",
       "name": "Law Firm of Aaron A. Herbert, P.C.",
       "practice_page": "https://injuryattorneyofdallas.com/practice-areas/car-accidents/"
-    },
-    {
-      "domain": "akfirm.com",
-      "name": "AK Law Firm Accident & Injury Lawyers",
-      "practice_page": "https://akfirm.com/katy/car-accident-lawyer/"
     }
   ],
   "unresolved": [],
   "unresolved_notes": {
-    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market."
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market.",
+    "thetexasattorney.com": "Bailey & Galyen. Eight of the addresses in the firm's own structured data are its Bedford headquarters, which is the Mid-Cities and Fort Worth side of the metroplex rather than Dallas. It has Dallas offices, but a firm's market is where it is based, and the market it is based in is not one this directory covers yet.",
+    "herrmanandherrman.com": "Herrman & Herrman. Seven of the addresses in its structured data are Corpus Christi, with San Antonio, Brownsville and McAllen after it. Corpus Christi is the firm's market and Dallas is a branch of it.",
+    "daspitlaw.com": "The Daspit Law Firm. Its structured data carries one address, 440 Louisiana Street in Houston. Houston is the market, not Dallas.",
+    "akfirm.com": "AK Law Firm. Its structured data carries one address, 333 West Loop North in Houston, and its own title claims Texas rather than a city. Houston is the market."
   }
 }
