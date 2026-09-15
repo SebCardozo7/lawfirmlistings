@@ -65,7 +65,18 @@ NOT_A_PERSON = re.compile(
     # "New York Premises Liability Lawyer" was stored as a person called
     # "New York Premises Liability La".
     r"premises|liability|wrongful|death|brutality|subway|disease|union|worker|workers|"
-    r"negligence|abuse|harassment|discrimination|bankruptcy|immigration|divorce)\b", re.I)
+    r"negligence|abuse|harassment|discrimination|bankruptcy|immigration|divorce|"
+    # A general practice firm's roster page links to the rest of its menu, and none of these
+    # words had a plural here. "Car Accidents" and "Truck Accidents" were stored as people at a
+    # Portage firm, because \baccident\b does not match "Accidents", and "Social Security
+    # Disability" was stored because disability was missing altogether.
+    r"disability|criminal|crime|defense|felony|misdemeanor|dui|owi|expungement|molesting|"
+    r"pornography|custody|adoption|probate|estate|guardianship|mediation|appeal|theft|"
+    # "trust" is deliberately not on this list even though "Trusts & Estates" is a practice,
+    # because Trust is a given name and dropping a real attorney is the worse mistake: a practice
+    # title on a roster is visible on the page, a missing lawyer is not. "Estates" catches the
+    # practice anyway.
+    r"assault|battery|drug|traffic)s?\b", re.I)
 
 SUFFIXES = re.compile(r"\s*[,|–—-]\s*(esq\.?|esquire|jd|j\.d\.|llp|llc|p\.?c\.?|pllc|"
                       r"attorney at law).*$", re.I)
@@ -166,6 +177,12 @@ def looks_like_a_person(name):
         return False
     # A title word past the given name and surname means the peel stopped early.
     if len(words) > 2 and TITLE_RESIDUE.search(" ".join(words[2:])):
+        return False
+    # Nothing but title words. The peel takes a role off the end of a name and leaves a bare
+    # role alone, so "Founding Partner" and "Of Counsel" arrived here as people: a roster that
+    # links each title to an archive of titles publishes both as plain two-word links. No
+    # surname collision to worry about, because this fires only when every word is a title.
+    if all(w.strip(".,").casefold() in ROLE_WORDS for w in words):
         return False
 
     def cased_like_a_name(w):
@@ -325,7 +342,7 @@ def bios_without_index(html, origin):
     return max(pool, key=lambda pair: len(pair[1]))[1]
 
 
-def bio_candidates(html, origin, index_url):
+def bio_candidates(html, origin, index_url, names=None, roles=None):
     """The firm's attorney pages, linked from its attorney index.
 
     Two passes, because the URL is not the reliable signal. Eleven of the firms published here
@@ -347,7 +364,7 @@ def bio_candidates(html, origin, index_url):
     base_depth = len([s for s in index_path.split("/") if s])
     out, seen = [], set()
 
-    def consider(href, anchor_name=None):
+    def consider(href, anchor_name=None, anchor_role=None):
         url = urllib.parse.urljoin(origin + "/", href.strip())
         if not url.startswith(origin):
             return
@@ -359,6 +376,13 @@ def bio_candidates(html, origin, index_url):
             if len(segs) != base_depth + 1:
                 return
         clean = url.split("?")[0].rstrip("/")
+        # The roster's own link text, kept for the bios whose page does not put the name in a
+        # heading. Wruck Paupore heads each of its three bios "Get to Know Don", so the page
+        # names nobody and the roster link says "Don Wruck".
+        if names is not None and anchor_name:
+            names.setdefault(clean, anchor_name)
+        if roles is not None and anchor_role:
+            roles.setdefault(clean, anchor_role)
         if clean in seen or clean.rstrip("/") == index_url.rstrip("/"):
             return
         seen.add(clean)
@@ -372,9 +396,47 @@ def bio_candidates(html, origin, index_url):
         text = unescape(re.sub(r"\s+", " ", text)).strip()
         name = split_name_and_role(text)[0] if text else ""
         if name and looks_like_a_person(name):
-            consider(m.group(1), anchor_name=name)
+            consider(m.group(1), anchor_name=name,
+                     anchor_role=role_beside(html, m.end()) if roles is not None else None)
 
     return out
+
+
+# What a roster prints under a name. Ordered longest first so "Founding Partner" is not read as
+# "Partner", and deliberately short: a word not on this list is not a role we will assert.
+ROSTER_ROLE = re.compile(
+    r"\b(founding partner|managing partner|senior partner|name partner|of counsel|partner|"
+    r"senior associate|associate attorney|associate|attorney at law|trial attorney|attorney|"
+    r"paralegal|law clerk|legal assistant|case manager|office manager|founder)\b", re.I)
+
+
+def role_beside(html: str, start: int) -> str | None:
+    """The role a roster prints next to a name, where it prints one as its own element.
+
+    Wruck Paupore links each lawyer's name to their bio and their title to a title archive, so
+    "Don Wruck" and "Founding Partner" are two anchors in a row and the bio page itself says
+    neither. Without this the firm's three partners arrive with no role at all, and
+    src/lib/roster.ts would print all three as colleagues rather than attorneys.
+
+    The window closes at the next link to another person, so a role is only ever read from
+    between one name and the next.
+    """
+    window = html[start:start + 500]
+    # Cut at the next person, not at the next link: a roster that links a title to an archive of
+    # titles has "/attorney-titles/of-counsel/" as the very next href, and closing the window
+    # there threw away the role it was looking for.
+    for m in re.finditer(r'<a[^>]+>(.*?)</a>', window, re.S | re.I):
+        text = unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(1)))).strip()
+        if text and looks_like_a_person(split_name_and_role(text)[0]):
+            window = window[:m.start()]
+            break
+    m = ROSTER_ROLE.search(unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", window))))
+    if not m:
+        return None
+    # Rosters style these with CSS, so the text can arrive in one case or the other. A role that
+    # is entirely lowercase is that styling rather than the firm's spelling.
+    role = m.group(1)
+    return role.title() if role.islower() else role
 
 
 def collect(domain, verbose=False, record=None):
@@ -434,6 +496,12 @@ def collect(domain, verbose=False, record=None):
     # where the rest of the profile came from.
     seen_names: set[str] = set()
 
+    # The roster's link text per bio URL, whether or not the bio list came from the sitemap. It
+    # is only read when a bio page's own heading turns out not to name anybody.
+    anchor_names: dict[str, str] = {}
+    anchor_roles: dict[str, str] = {}
+    if index_html:
+        bio_candidates(index_html, origin, index_final, anchor_names, anchor_roles)
     bios = seeded_bios or (bio_candidates(index_html, origin, index_final)
                            if index_html else [])
     if verbose:
@@ -469,9 +537,23 @@ def collect(domain, verbose=False, record=None):
         name = normalise_case(name)
         if name and name.casefold() in seen_names:
             continue
+        name_from = "bio heading"
         if not looks_like_a_person(name):
-            result["rejected"].append({"heading": heading, "url": final})
-            continue
+            # The page does not name them, so ask the roster that linked to it. Three Valparaiso
+            # lawyers were lost this way: every bio at wp-law.com is headed "Get to Know Don",
+            # which is not a name, while the link on the roster page reads "Don Wruck". A firm
+            # that names nobody fails G5, so reading zero attorneys off a roster of three is not
+            # a cosmetic miss.
+            from_link = normalise_case((anchor_names.get(final.split("?")[0].rstrip("/"))
+                                        or anchor_names.get(url.rstrip("/")) or ""))
+            if not looks_like_a_person(from_link):
+                result["rejected"].append({"heading": heading, "url": final})
+                continue
+            if from_link.casefold() in seen_names:
+                continue
+            key = final.split("?")[0].rstrip("/")
+            name, name_from = from_link, "roster link text"
+            role = anchor_roles.get(key) or anchor_roles.get(url.rstrip("/"))
         bar = BAR_NUMBER.search(strip_tags(html))
         # The role is whatever the firm printed next to the name, and nothing where it printed
         # nothing. "Attorney" used to stand in that case, which turned every name on an
@@ -484,7 +566,10 @@ def collect(domain, verbose=False, record=None):
             "name": name, "source_url": final,
             "bar_number": bar.group(1) if bar else None,
             "role": role or None,
-            "role_source": "firm bio heading" if role else "not stated by the firm",
+            "role_source": ("firm bio heading" if role and name_from == "bio heading"
+                            else "firm roster listing" if role
+                            else "not stated by the firm"),
+            "name_source": name_from,
         })
     return result
 

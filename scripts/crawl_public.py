@@ -102,6 +102,54 @@ PHRASE_SIGNALS = [
 ]
 
 
+# What a UTF-8 page looks like after being read as Windows-1252: the two bytes of an accented
+# character become "Ã" or "â" followed by another high character. Used below to tell that mistake
+# apart from the opposite one.
+MOJIBAKE = re.compile(r"[ÃÂâ][-¿ -⃿]")
+
+
+def decode_html(raw: bytes, ctype: str) -> str:
+    """Text from bytes, preferring the charset that decodes cleanly over the one claimed.
+
+    The server's header was taken at its word, and a Valparaiso firm's roster came back holding a
+    lawyer called "Ryan D. O�Day". Its pages are Windows-1252 typography served as UTF-8, so
+    the curly apostrophe in his name was a byte that is not valid UTF-8, and the replacement
+    character was written into the record and would have been published.
+
+    So a replacement character is treated as evidence that the header is wrong, and the other
+    charset is tried. Only cleanly, and only when the result does not read as mojibake: a genuinely
+    UTF-8 page with one stray byte also decodes as Windows-1252 without complaint, and that
+    reading is worse than the original.
+    """
+    declared = None
+    m = re.search(r"charset=([\w-]+)", ctype)
+    if m:
+        declared = m.group(1)
+    if not declared:
+        m = re.search(r"""charset=["']?([\w-]+)""", raw[:4096].decode("ascii", "replace"), re.I)
+        if m:
+            declared = m.group(1)
+
+    try:
+        primary = raw.decode(declared or "utf-8", "replace")
+    except LookupError:
+        declared, primary = None, raw.decode("utf-8", "replace")
+    if "�" not in primary:
+        return primary
+
+    for candidate in ("utf-8", "cp1252"):
+        if candidate == (declared or "utf-8"):
+            continue
+        try:
+            alt = raw.decode(candidate)
+        except (UnicodeDecodeError, LookupError):
+            continue
+        if candidate == "cp1252" and MOJIBAKE.search(alt):
+            continue
+        return alt
+    return primary
+
+
 def fetch(url):
     """GET a URL. Returns (status, text, final_url) with text='' when the body is not HTML."""
     req = urllib.request.Request(url, headers={
@@ -118,11 +166,7 @@ def fetch(url):
             ctype = r.headers.get("Content-Type", "")
             if "html" not in ctype and "xml" not in ctype:
                 return r.status, "", r.geturl()
-            charset = "utf-8"
-            m = re.search(r"charset=([\w-]+)", ctype)
-            if m:
-                charset = m.group(1)
-            return r.status, raw.decode(charset, "replace"), r.geturl()
+            return r.status, decode_html(raw, ctype), r.geturl()
     except urllib.error.HTTPError as e:
         return e.code, "", url
     except Exception as e:
