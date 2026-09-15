@@ -488,4 +488,73 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  // A region, not a city, and the file says so because the field is called `city`. Valparaiso
+  // holds eight of these firms' offices and Merrillville six, across two counties, and naming
+  // either as the market would put the other's firms in the wrong ranking.
+  'northwest-indiana': {
+    lede:
+      'Northwest Indiana is a region rather than a city, and so is its legal market: firms in ' +
+      'Valparaiso, Merrillville, Portage and Crown Point appear in the same two courthouses and ' +
+      'compete for the same clients. Compare them on what they publish and on what we could ' +
+      'verify ourselves.',
+    areas: ['Valparaiso', 'Merrillville', 'Portage', 'Crown Point', 'Hammond', 'Gary',
+            'Chesterton', 'Griffith', 'Dyer', 'Michigan City'],
+    sections: [
+      {
+        heading: 'Why this market is a region and not a city',
+        paragraphs: [
+          'Every other market in this directory is a city. This one is two counties, Lake and ' +
+          'Porter, and the reason is where the firms are. The offices behind this ranking are ' +
+          'spread across Valparaiso, Merrillville, Portage and Crown Point with no town holding ' +
+          'more than a third of them, and somebody hurt in Portage would think nothing of hiring ' +
+          'a firm in Merrillville twenty miles west. Naming one town as the market would file ' +
+          'the others’ firms in the wrong ranking, and splitting the region in two would ' +
+          'produce a pair of rankings too small to rank anything.',
+          'The courts follow the same shape. Lake County sits in Crown Point and Hammond, Porter ' +
+          'County in Valparaiso, and federal matters for both go to the Northern District of ' +
+          'Indiana at Hammond. This is also Chicago’s Indiana side: a crash on the Skyway ' +
+          'or the Indiana Toll Road can put an Illinois driver, an Indiana road authority and two ' +
+          'sets of insurers in the same claim, which is worth raising on a first call.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Hoosiers out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the day the claim accrues, under Indiana Code ' +
+          '34-11-2-4.',
+          '<b>A claim against the State of Indiana:</b> written notice within <b>270 days</b> of ' +
+          'the loss, under the Indiana Tort Claims Act.',
+          '<b>A claim against a city, a county, a school corporation or another political ' +
+          'subdivision:</b> the same Act sets a shorter notice period, and we are not printing a ' +
+          'number here because we could not confirm one against the statute itself. Ask on the ' +
+          'first call, and ask early: this is the deadline that ends these claims.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if an Indiana lawyer is licensed?',
+        a: 'The Indiana Supreme Court publishes a Roll of Attorneys, free to search, showing ' +
+           'admission and any public discipline. We do not read it: Indiana profiles carry no ' +
+           'licence finding rather than one we did not make. New York publishes the same ' +
+           'information as open data, which is why New York profiles do carry it.',
+      },
+      {
+        q: 'Should I hire a firm in my own town?',
+        a: 'Less than anywhere else in this directory. The region is compact, the two county ' +
+           'courthouses hear almost everything, and the firms listed here appear in both. What ' +
+           'matters is regular practice in the court that will hear your case rather than the ' +
+           'distance to the office.',
+      },
+      {
+        q: 'My accident happened in Illinois. Does that change things?',
+        a: 'It can change which state’s law applies, which deadline runs and where the case ' +
+           'is filed, and those are three different questions. Firms here handle it constantly ' +
+           'because the state line runs through the middle of this market, so raise it in the ' +
+           'first conversation. Nothing on this page is legal advice.',
+      },
+    ],
+  },
 };

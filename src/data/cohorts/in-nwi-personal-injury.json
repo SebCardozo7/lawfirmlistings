@@ -1,0 +1,92 @@
+{
+  "id": "in-nwi-personal-injury",
+  "market": {
+    "city_slug": "northwest-indiana",
+    "city": "Northwest Indiana",
+    "state": "IN",
+    "state_name": "Indiana"
+  },
+  "state": "IN",
+  "practice": "personal-injury",
+  "label": "Northwest Indiana x Personal Injury",
+  "measured_at": "2026-09-15",
+  "source": "A region rather than a city, and the offices are the reason. Valparaiso holds eight of these firms' offices, Merrillville six, Portage three and Crown Point two, across Lake and Porter counties, and no town dominates. Naming one of them as the market would put a Merrillville firm in a Valparaiso ranking, which is the mistake this directory already corrected in Maryland, and splitting the market in two would produce two rankings of seven firms each, which is the mistake it already corrected in Baltimore and Lakeland. Somebody hurt in Portage would genuinely consider a firm in Merrillville twenty miles away, so one regional market is the honest comparison set. Candidates from Google Places across Portage, Valparaiso, Merrillville, Hammond, Gary and Crown Point (scripts/discover_places.py, 83 domains), kept only where the firm's own site publishes an injury practice page and it holds an office in postal area 463xx or 464xx. No Ahrefs metrics, so D2 scores pending for every firm here.",
+  "full_size_estimate": 83,
+  "firms": [
+    {
+      "domain": "straccilaw.com",
+      "name": "Stracci Law Group - Personal Injury Attorneys Indiana",
+      "practice_page": "https://www.straccilaw.com/personal-injury"
+    },
+    {
+      "domain": "sarklawfirm.com",
+      "name": "Sarkisian Sarkisian & Associates P.C.",
+      "practice_page": "https://www.sarklawfirm.com/motor-vehicle-accidents/car-accidents/"
+    },
+    {
+      "domain": "allen.law",
+      "name": "Allen Law Group",
+      "practice_page": "https://allen.law/personal-injury-lawyer-whiting/"
+    },
+    {
+      "domain": "harperattorneys.com",
+      "name": "Harper and Harper, LLC",
+      "practice_page": "https://www.harperattorneys.com/personal-injury/"
+    },
+    {
+      "domain": "custylaw.com",
+      "name": "Custy Law Firm | Accident & Injury Lawyers",
+      "practice_page": "https://www.custylaw.com/indiana-car-accident-lawyers/"
+    },
+    {
+      "domain": "langerandlanger.com",
+      "name": "Langer & Langer",
+      "practice_page": "http://www.langerandlanger.com/personal-injury/"
+    },
+    {
+      "domain": "roydominguez.com",
+      "name": "Law Office of Roy Dominguez",
+      "practice_page": "https://roydominguez.com/practice-area/auto-accidents/"
+    },
+    {
+      "domain": "wp-law.com",
+      "name": "Wruck Paupore PC Injury Lawyers",
+      "practice_page": "https://www.wp-law.com/pedestrian-accidents/"
+    },
+    {
+      "domain": "sarkisianlaw.com",
+      "name": "Sarkisian Law Offices",
+      "practice_page": "https://www.sarkisianlaw.com/car-accidents"
+    },
+    {
+      "domain": "doganlaw.com",
+      "name": "Dogan & Dogan Attorneys At Law",
+      "practice_page": "https://www.doganlaw.com/auto-accidents"
+    },
+    {
+      "domain": "eckklaw.com",
+      "name": "Calderaro & Kazmierczak, LLC",
+      "practice_page": "https://www.eckklaw.com/personal-injury-lawyer"
+    },
+    {
+      "domain": "trinjurylaw.com",
+      "name": "Theodoros & Rooth, P.C.",
+      "practice_page": "https://www.trinjurylaw.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "uzelaclaw.com",
+      "name": "Uzelac Law Group",
+      "practice_page": "https://www.uzelaclaw.com/personal-injury"
+    },
+    {
+      "domain": "lawyermps.com",
+      "name": "Michael P. Stryjewski",
+      "practice_page": "https://lawyermps.com/personal-injury.html"
+    }
+  ],
+  "unresolved": [],
+  "unresolved_notes": {
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market.",
+    "wewin.com": "Isaacs & Isaacs. Its own structured data says the firm is headquartered in Louisville, Kentucky and runs thirteen offices across Kentucky, Indiana and Ohio, and the injury practice page our check found is a Lexington, Kentucky page. A firm's market is where it is based, so this one belongs to a market this directory does not cover, whatever its Valparaiso and Griffith listings say."
+  }
+}
