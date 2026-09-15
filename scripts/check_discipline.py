@@ -13,6 +13,13 @@ run by the Free Law Project, indexes 2,600 Maryland attorney grievance decisions
 decades, and its search API answers without a key. That is a complete, queryable record of who
 has been disciplined in Maryland, which is the thing a client actually wants to know.
 
+Four states are here now: Maryland, Florida, Oregon and Indiana. Each names the disciplined
+attorney in its own way and the table below carries the difference, because the parsing is the
+only part that is state-specific. Texas is absent on purpose. Its discipline is decided by
+evidentiary panels and the Board of Disciplinary Appeals rather than by an appellate court, so
+the index holds thirteen Texas cases in total and thirteen cases is not a record. Dallas
+profiles carry G2 unresolved and say why, which is where Maryland started.
+
 What this establishes, and what it does not. A published decisions index is strong on history and
 silent on the present: it shows that somebody was disbarred in 1994, and it cannot show that
 somebody is in good standing today the way a register's status field can. The evidence line says
@@ -46,6 +53,7 @@ Usage:
     python scripts/check_discipline.py --state MD              # build the index, report
     python scripts/check_discipline.py --state MD --write --gates
     python scripts/check_discipline.py --state MD --refresh    # re-download the index
+    python scripts/check_discipline.py --state IN --write --gates
 """
 from __future__ import annotations
 
@@ -89,12 +97,48 @@ REGISTERS = {
         "case_name": "The Florida Bar",
         "body": "the Supreme Court of Florida on the discipline of Florida Bar members",
     },
+    # Oregon names nobody as a plaintiff. The case is "In Re Complaint as to the Conduct of
+    # Kirchoff", so the respondent stands after "Conduct of" and the shape is Maryland's: a
+    # surname alone, settled afterwards against the decision's own text.
+    #
+    # The index stops in 2017, and that is a property of the record rather than of this script:
+    # Oregon publishes current discipline through the State Bar's Disciplinary Board Reporter
+    # rather than as Supreme Court opinions, and a search for anything filed since 2018 returns
+    # nothing. The evidence line on every profile prints the range it read, which is the only
+    # honest way to use an index that ends nine years ago. It answers whether an attorney was
+    # disciplined up to 2017 and it does not answer this year.
+    "OR": {
+        "courts": "or",
+        "case_name": "Conduct of",
+        "respondent_after": r"Conduct of\s+",
+        "body": "the Supreme Court of Oregon on the conduct of Oregon State Bar members",
+    },
+    # Indiana writes the respondent's full name into the case name, "In the Matter of Robert
+    # James Hardy", and keeps publishing: the newest decision in the index is from this year.
+    # That makes it the strongest of the four, with one catch worth the extra term below.
+    #
+    # "In the Matter of" is also how Indiana titles rule amendments, petitions and every other
+    # matter that is not a person, and an attorney whose surname turned up in one of those would
+    # be reported as disciplined. So the index asks for decisions that also mention the
+    # Disciplinary Commission, which is 301 of the 383 and is named in every real one.
+    "IN": {
+        "courts": "ind",
+        "case_name": "In the Matter of",
+        "respondent_after": r"In (?:the )?Matter of\s+(?:the\s+)?",
+        "require": "Disciplinary Commission",
+        "body": "the Supreme Court of Indiana on the discipline of Indiana attorneys",
+    },
 }
 
-# Words in a case name that are the court's or the commission's, not a respondent's.
+# Words in a case name that are the court's, the commission's or a title, not a respondent's.
+#
+# The last four are Indiana's. "In the Matter of the Honorable Jane Doe" is a judicial discipline
+# case, and leaving "Honorable" in the name would be worse than cosmetic: a full name that does
+# not match is read as positively cleared, so a judge called Doe would clear an attorney called
+# Doe. "Anonymous" is how Indiana titles a private reprimand, and it names nobody at all.
 NOT_A_NAME = re.compile(
     r"^(?:attorney|grievance|comm|commission|commn|of|maryland|md|state|bar|counsel|"
-    r"in|re|matter|the|and|v|vs)\.?$", re.I)
+    r"in|re|matter|the|and|v|vs|honorable|hon|judge|anonymous)\.?$", re.I)
 
 SUFFIX = re.compile(r"^(?:jr|sr|ii|iii|iv|esq|p\.?a|pc|llc|llp)\.?$", re.I)
 
@@ -121,14 +165,20 @@ def fetch(params):
     return {}
 
 
-def respondent_tokens(case_name: str) -> list:
+def respondent_tokens(case_name: str, spec: dict | None = None) -> list:
     """The name the case is brought against, as tokens, or [] where it names nobody.
 
     "In Re: Amendments to Florida Family Law Rules" sits on the same docket as the discipline
     decisions and is not about a person, so it has to come back empty rather than nominating
     "Rules" as a respondent.
+
+    Where the respondent's name begins is a property of the state, not of this function. Maryland
+    and Florida bring a case against somebody, so it is after "v.". Oregon and Indiana bring no
+    case against anybody: the name follows "Conduct of" or "In the Matter of". A state whose spec
+    does not say gets the "v." reading, which is what the first two needed.
     """
-    parts = re.split(r"\bv\.?\s", case_name, maxsplit=1, flags=re.I)
+    marker = (spec or {}).get("respondent_after") or r"\bv\.?\s"
+    parts = re.split(marker, case_name, maxsplit=1, flags=re.I)
     if len(parts) < 2:
         return []
     tail = parts[1].strip().strip(".,")
@@ -136,13 +186,13 @@ def respondent_tokens(case_name: str) -> list:
     return [t for t in tail.split() if not SUFFIX.match(t) and not NOT_A_NAME.match(t)]
 
 
-def respondent(case_name: str) -> str | None:
+def respondent(case_name: str, spec: dict | None = None) -> str | None:
     """The respondent's surname, which is all Maryland's case names carry."""
-    tokens = respondent_tokens(case_name)
+    tokens = respondent_tokens(case_name, spec)
     return tokens[-1].strip(".,").casefold() if tokens else None
 
 
-def respondent_full(case_name: str) -> str | None:
+def respondent_full(case_name: str, spec: dict | None = None) -> str | None:
     """The respondent's full name, where the state's case names give one.
 
     Florida writes "The Florida Bar v. Christopher W. Crowley" and Maryland writes "Attorney
@@ -150,7 +200,7 @@ def respondent_full(case_name: str) -> str | None:
     surname otherwise leaves to a full-text search that frequently cannot answer it, so it is
     worth keeping rather than reducing every state to the weaker of the two.
     """
-    tokens = respondent_tokens(case_name)
+    tokens = respondent_tokens(case_name, spec)
     return " ".join(tokens) if len(tokens) >= 2 else None
 
 
@@ -160,8 +210,13 @@ def build_index(state: str, cache: pathlib.Path, refresh: bool):
             return json.load(fh)
 
     spec = REGISTERS[state]
+    # A term the real decisions all contain, where the case-name pattern alone is not specific
+    # enough to a person. Only Indiana needs it, and the comment on its entry says why.
+    query = 'caseName:("%s")' % spec["case_name"]
+    if spec.get("require"):
+        query += ' AND "%s"' % spec["require"]
     params = {"type": "o", "court": spec["courts"],
-              "q": 'caseName:("%s")' % spec["case_name"], "order_by": "dateFiled desc"}
+              "q": query, "order_by": "dateFiled desc"}
     cases, pages, total = [], 0, None
     cursor = None
     while True:
@@ -172,8 +227,8 @@ def build_index(state: str, cache: pathlib.Path, refresh: bool):
             name = row.get("caseName") or ""
             cases.append({"case": name,
                           "date": row.get("dateFiled"),
-                          "surname": respondent(name),
-                          "full": respondent_full(name),
+                          "surname": respondent(name, spec),
+                          "full": respondent_full(name, spec),
                           "url": "https://www.courtlistener.com" + (row.get("absolute_url") or "")})
         pages += 1
         print("  page %-3d  %d case(s) so far" % (pages, len(cases)), flush=True)
@@ -280,6 +335,8 @@ def verify(state: str, attorney: str, surname: str, hits: list):
                        "none of them is this attorney")
 
     base = 'caseName:("%s" AND %s)' % (spec["case_name"], surname)
+    if spec.get("require"):
+        base += ' AND "%s"' % spec["require"]
     if not variants:
         return None, "only one name token is published for this attorney"
 
