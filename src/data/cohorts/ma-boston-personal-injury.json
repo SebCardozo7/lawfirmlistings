@@ -1,0 +1,175 @@
+{
+  "id": "ma-boston-personal-injury",
+  "market": {
+    "city_slug": "boston-ma",
+    "city": "Boston",
+    "state": "MA",
+    "state_name": "Massachusetts"
+  },
+  "state": "MA",
+  "practice": "personal-injury",
+  "label": "Boston x Personal Injury",
+  "measured_at": "2026-09-15",
+  "source": "Candidates from Google Places across Boston, Cambridge, Somerville, Medford, Quincy, Newton, Brookline, Dorchester, East Boston, Malden and Waltham (scripts/discover_places.py, 145 domains), kept only where the firm's own site publishes an injury practice page and it holds an office in postal area 021xx, 022xx or 024xx. That boundary is the inner metro: it keeps Chelsea, Milton, Melrose, Braintree and Newton and drops Framingham, Andover and Bridgewater, which are their own markets. Ranked by nothing here: the order in this file is review count, and the ranking on the site is the score. No Ahrefs metrics, so D2 scores are pending for every firm.",
+  "full_size_estimate": 145,
+  "unresolved": [],
+  "unresolved_notes": {
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market.",
+    "brandonjbroderick.com": "Held back in every market pending a human reading the suspension order behind its New York listing, the same hold that is keeping it out of the New York cohort.",
+    "roblevine.com": "Rob Levine Law. Its own structured data leads with Providence and lists South Kingstown and Newport after it. Rhode Island is the market.",
+    "topdoglaw.com": "TopDog Law. Its structured data carries one address, in Philadelphia. Also already published in the New York cohort, which is a separate problem with that entry rather than a reason to add a second one here.",
+    "sokolovelaw.com": "Sokolove Law. Its structured data leads with Birmingham, Alabama and then Tucson, and the practice it describes is national mass tort intake rather than a Boston office.",
+    "gosimon.com": "Simon & Simon. Its contact page lists offices in Pennsylvania and New Jersey including Philadelphia, Pittsburgh and Erie, so Boston is a branch.",
+    "good-legal-advice.com": "Its structured data leads with East Providence, Rhode Island.",
+    "tomkileylaw.com": "Andover, twenty-five miles north of the city and outside the inner metro this market covers.",
+    "kecheslaw.com": "Keches Law Group. Its own site labels Bridgewater as its headquarters, thirty miles south, and the Milton address is a branch. It publishes an injury practice page and would qualify on everything else.",
+    "georgescotelaw.com": "Answers a crawler with a 403, so nothing on its site can be measured. Not a judgement about the firm.",
+    "brettlevy.com": "Answers a crawler with a 403.",
+    "markeylawpartners.com": "Answers a crawler with a 403.",
+    "gorton.law": "Answers a crawler with a 403.",
+    "anslawyers.com and altmanllp.com": "Two different firms, kept apart deliberately. Altman & Altman LLP works from One State Street, Cambridge and Needham on 617.492.3000; Altman Nussbaum Shunnarah works from 44 School Street and Newton on 617-222-2222. The shared surname is not a duplicate, the way the two Sarkisian firms in Northwest Indiana are not.",
+    "croweandharris.com": "Crowe & Harris. Its site answers an automated reader over HTTPS with a 403 and serves only over plain HTTP, so nothing on it can be measured and G5 asks for a live HTTPS site."
+  },
+  "firms": [
+    {
+      "domain": "callkellycall4.com",
+      "name": "Michael Kelly Injury Lawyers",
+      "practice_page": "https://callkellycall4.com/car-accident-attorney/"
+    },
+    {
+      "domain": "brookslawfirm.com",
+      "name": "Brooks Law Firm",
+      "practice_page": "https://brookslawfirm.com/personal-injury/"
+    },
+    {
+      "domain": "chrisearley.com",
+      "name": "Earley Law Group Injury Lawyers",
+      "practice_page": "https://www.chrisearley.com/boston-ma/car-accident-lawyer/"
+    },
+    {
+      "domain": "anslawyers.com",
+      "name": "Altman Nussbaum Shunnarah Trial Attorneys",
+      "practice_page": "https://www.anslawyers.com/practice-areas/premises-liability/"
+    },
+    {
+      "domain": "jeffreysglassman.com",
+      "name": "Jeffrey Glassman Injury Lawyers",
+      "practice_page": "https://www.jeffreysglassman.com/car-accidents.html"
+    },
+    {
+      "domain": "stoneinjurylawyers.com",
+      "name": "Jason Stone Injury Lawyers",
+      "practice_page": "https://www.stoneinjurylawyers.com/natick/car-accident-lawyer/"
+    },
+    {
+      "domain": "iannellamummolo.com",
+      "name": "Law Offices of Iannella and Mummolo",
+      "practice_page": "https://iannellamummolo.com/auto_accidents"
+    },
+    {
+      "domain": "rightsprotect.com",
+      "name": "Rights Protection Law Group, PLLC",
+      "practice_page": "https://rightsprotect.com/personal-injury-claims/"
+    },
+    {
+      "domain": "dibellalawoffice.com",
+      "name": "DiBella Law Injury and Accident Lawyers",
+      "practice_page": "https://www.dibellalawoffice.com/boston/car-accident-lawyer/"
+    },
+    {
+      "domain": "spadalawgroup.com",
+      "name": "Spada Law Group, LLC",
+      "practice_page": "https://www.spadalawgroup.com/practice_areas/massachusetts-pedestrian-accidents.cfm"
+    },
+    {
+      "domain": "altmanllp.com",
+      "name": "Altman & Altman, LLP - Personal Injury Attorneys",
+      "practice_page": "https://www.altmanllp.com/personal-injury/"
+    },
+    {
+      "domain": "sweeneymerrigan.com",
+      "name": "Sweeney Merrigan Personal Injury Lawyers",
+      "practice_page": "https://www.sweeneymerrigan.com/boston-car-accident-lawyer/"
+    },
+    {
+      "domain": "msmithlawoffices.com",
+      "name": "Mass Injury Group Injury and Accident Attorneys",
+      "practice_page": "https://www.msmithlawoffices.com/car-accidents/"
+    },
+    {
+      "domain": "coluccilaw.com",
+      "name": "Colucci, Colucci & Marcus, P.C.",
+      "practice_page": "https://www.coluccilaw.com/boston-truck-accident-attorney/"
+    },
+    {
+      "domain": "williambarabino.com",
+      "name": "Law Office of William J. Barabino",
+      "practice_page": "https://www.williambarabino.com/representative-case-tag/car-accident/"
+    },
+    {
+      "domain": "foti-law.com",
+      "name": "Matthew Foti Injury Lawyers",
+      "practice_page": "https://www.foti-law.com/practice-areas/auto-accidents/"
+    },
+    {
+      "domain": "bwglaw.com",
+      "name": "Breakstone, White & Gluck",
+      "practice_page": "https://www.bwglaw.com/personal-injury-law/"
+    },
+    {
+      "domain": "martinolawgroup.com",
+      "name": "Martino Law Group",
+      "practice_page": "https://martinolawgroup.com/car-accidents/"
+    },
+    {
+      "domain": "feinbergalban.com",
+      "name": "Feinberg & Alban PC",
+      "practice_page": "https://www.feinbergalban.com/boston/auto-accidents/"
+    },
+    {
+      "domain": "marksalomone.com",
+      "name": "Law Offices of Mark E. Salomone",
+      "practice_page": "https://www.marksalomone.com/car-accidents"
+    },
+    {
+      "domain": "attorneysheehan.com",
+      "name": "Law Office of John J. Sheehan, LLC",
+      "practice_page": "https://attorneysheehan.com/boston-car-accident-lawyer"
+    },
+    {
+      "domain": "lawrjf.com",
+      "name": "Fitzpatrick & Associates",
+      "practice_page": "https://lawrjf.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "joelhschwartz.com",
+      "name": "Joel H. Schwartz, P.C.",
+      "practice_page": "https://www.joelhschwartz.com/boston-car-accident-lawyer/"
+    },
+    {
+      "domain": "dolanconnlylaw.com",
+      "name": "Dolan Connly, P.C.",
+      "practice_page": "https://dolanconnlylaw.com/quincy/car-accident-lawyer/"
+    },
+    {
+      "domain": "schulzelaw.com",
+      "name": "Schulze Law",
+      "practice_page": "https://schulzelaw.com/practice-areas/personal-injury/"
+    },
+    {
+      "domain": "fiorentinolegal.com",
+      "name": "Fiorentino Legal, PC",
+      "practice_page": "https://www.fiorentinolegal.com/personal-injury-lawyer-quincy/"
+    },
+    {
+      "domain": "daneshulmanlaw.com",
+      "name": "Dane Shulman Associates",
+      "practice_page": "https://daneshulmanlaw.com/car-accidents/"
+    },
+    {
+      "domain": "parkerscheer.com",
+      "name": "Parker Scheer LLP",
+      "practice_page": "https://www.parkerscheer.com/personal-injury-lawyer/premises-liability/"
+    }
+  ]
+}

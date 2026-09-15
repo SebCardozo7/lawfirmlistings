@@ -143,6 +143,38 @@ def normalise(name: str) -> str:
     return re.sub(r"\s+", " ", out).strip().upper()
 
 
+# Words that are what the business does rather than which business it is. "Jay Murray Law Firm"
+# and "JAY MURRAY LAW GROUP, P.C." are one practice in Dallas, and a comparison of the whole
+# string says they are two. What has to match is the part that names somebody.
+GENERIC = {
+    "law", "laws", "firm", "firms", "group", "office", "offices", "associates", "associate",
+    "attorney", "attorneys", "lawyer", "lawyers", "legal", "injury", "injuries", "accident",
+    "accidents", "trial", "partners", "the", "and", "of", "at", "pllc", "pc", "llp", "llc",
+}
+
+
+def core(name: str) -> str:
+    """The distinctive part of a normalised name, or the whole of it if that leaves nothing."""
+    # Lowercased for the comparison because normalise() upper-cases everything it returns, and
+    # the first version of this compared "LAW" against a set of lowercase words and stripped
+    # nothing at all.
+    tokens = [t for t in name.split() if t.casefold() not in GENERIC]
+    return " ".join(tokens) if tokens else name
+
+
+def distinctive(core_name: str) -> bool:
+    """Is this distinctive enough to match on alone?
+
+    "J. Alexander Law Firm" reduces to "J ALEXANDER", and that matched "J ALEXANDER AND
+    ASSOCIATES, PLLC", chartered four months ago, against a firm with 670 reviews. An initial is
+    not an identification, which is the same rule scripts/check_discipline.py had to learn about
+    a first name. So a core with a single-letter token, or with fewer than two tokens, is not
+    enough on its own and the firm falls through to no match.
+    """
+    tokens = core_name.split()
+    return len(tokens) >= 2 and all(len(t.strip(".")) > 1 for t in tokens)
+
+
 def fetch(spec, where):
     query = {"$select": spec["fields"], "$where": where, "$limit": 40}
     url = "https://%s/resource/%s.json?" % (spec["host"], spec["resource"])
@@ -207,6 +239,12 @@ def look_up(firm, spec):
             return row, "exact"
         if name.startswith(wanted) and (not cities or city in cities):
             best = best or (row, "the register's name begins with the firm's and the city agrees")
+        # The distinctive halves agree and so does the city. This is what tells "Jay Murray Law
+        # Firm" and "JAY MURRAY LAW GROUP, P.C." in Dallas apart from "JOE GUERRERO LAW FIRM" in
+        # Houston, which shares a surname with a Dallas firm and nothing else.
+        if (core(name) == core(wanted) and cities and city in cities
+                and distinctive(core(wanted))):
+            best = best or (row, "the distinctive part of the name matches and the city agrees")
     if best:
         return best
     return None, ("%d entity name(s) contain the firm's name and none of them agrees on both "
@@ -265,32 +303,45 @@ def main() -> int:
                 print("%-44s register unreachable (%s)" % (firm["slug"][:44], str(e)[:40]))
                 continue
             if not row:
+                # "unavailable", not a failure. Reading the register and not finding the firm is
+                # not a finding that the firm is unregistered: the Texas franchise tax does not
+                # reach a sole proprietorship or a general partnership, an Oregon entity may be
+                # registered under a name this matcher cannot tie to the one the firm trades
+                # under, and neither is the firm's doing. Filed as a failure it labelled eleven
+                # Dallas firms and six Portland ones Not eligible, which is a sentence about
+                # them, on the strength of our own name matching.
                 new = {
                     "pass": False,
-                    "source": "%s, read and no match found" % spec["source"],
+                    "source": "unavailable",
                     "checked_at": TODAY,
-                    "evidence": ("Read the register of %s and could not identify this firm in "
-                                 "it: %s. %d physical location%s verified on Google Business "
-                                 "Profile.%s"
-                                 % (spec["body"], why, listings or offices,
+                    "evidence": ("%d physical location%s verified on Google Business Profile. "
+                                 "We read the %s and could not identify this firm in it: %s. A "
+                                 "miss there is not evidence that the firm is unregistered, so "
+                                 "this gate is unresolved rather than failed.%s"
+                                 % (listings or offices,
                                     "" if (listings or offices) == 1 else "s",
-                                    spec.get("caveat", ""))),
+                                    spec["source"], why, spec.get("caveat", ""))),
                 }
                 print("%-44s no match  (%s)" % (firm["slug"][:44], why[:40]))
             else:
                 registered = iso(row.get(spec["date"]))
                 status = (row.get("sos_status_code") or "").strip()
                 transact = (row.get("right_to_transact_business_code") or "").strip()
-                active = args.state != "TX" or (status == "A" and transact == "A")
+                # Every row in Active Franchise Taxpayers carries the right to transact, so that
+                # is the field that means something; the Secretary of State status letter is A
+                # for most and R for some, the dataset documents neither, and a letter nobody
+                # here can explain must not decide a gate. It is printed, not interpreted.
+                active = args.state != "TX" or transact == "A"
                 parts = ["%s is registered with %s" % (row.get(spec["name"]), spec["body"])]
                 if row.get(spec["id"]):
                     parts.append("under number %s" % row[spec["id"]])
                 if registered:
                     parts.append("since %s" % registered)
                 if args.state == "TX":
-                    parts.append("with an active status and the right to transact business"
-                                 if active else
-                                 "with status code %s and transact code %s" % (status, transact))
+                    parts.append("listed as an active franchise taxpayer with the right to "
+                                 "transact business in Texas (Secretary of State status code %s)"
+                                 % (status or "not given") if active else
+                                 "without the right to transact business (code %s)" % transact)
                 evidence = (", ".join(parts)
                             + ", and %d physical location%s verified on Google Business Profile."
                             % (listings or offices, "" if (listings or offices) == 1 else "s"))

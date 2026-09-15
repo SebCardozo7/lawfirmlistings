@@ -198,23 +198,30 @@ def examine(domain, spec):
     rp = robots_for(origin)
     robots = robots_body(origin)
 
-    urls = sitemap_urls(origin, robots, rp)
-    where = "sitemap"
-    if not urls:
-        urls = home_links(origin, rp)
-        where = "home page links"
+    def matching(urls, seen):
+        out = []
+        for url in urls:
+            if urllib.parse.urlparse(url).netloc.split(":")[0].removeprefix("www.") != domain:
+                continue
+            path = urllib.parse.urlparse(url).path
+            if not spec["slug"].search(path) or url in seen:
+                continue
+            if NOT_A_PRACTICE_PAGE.search(path):
+                continue
+            seen.add(url)
+            out.append(url)
+        return out
 
-    candidates, seen = [], set()
-    for url in urls:
-        if urllib.parse.urlparse(url).netloc.split(":")[0].removeprefix("www.") != domain:
-            continue
-        path = urllib.parse.urlparse(url).path
-        if not spec["slug"].search(path) or url in seen:
-            continue
-        if NOT_A_PRACTICE_PAGE.search(path):
-            continue
-        seen.add(url)
-        candidates.append(url)
+    seen = set()
+    where = "sitemap"
+    candidates = matching(sitemap_urls(origin, robots, rp), seen)
+    if not candidates:
+        # A sitemap that answers and does not list the practice pages used to end the check,
+        # because the home page was only consulted when the sitemap produced nothing at all.
+        # Iannella & Mummolo publishes /personal_injury and its sitemap does not mention it, so
+        # a Boston firm with 688 reviews read as publishing no injury practice.
+        candidates = matching(home_links(origin, rp), seen)
+        where = "sitemap, then the home page's links"
 
     if not candidates:
         return None, "no page whose address names the practice (%s)" % where

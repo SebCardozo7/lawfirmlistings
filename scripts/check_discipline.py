@@ -462,6 +462,7 @@ def main():
              (index["dates"] or ["?", "?"])[0], (index["dates"] or ["?", "?"])[1]))
     print()
 
+    deferred_firms = []
     for path in sorted(FIRMS.rglob("*.json")):
         firm = json.loads(path.read_text(encoding="utf-8"))
         if firm.get("market", {}).get("state") != args.state:
@@ -472,6 +473,11 @@ def main():
             continue
 
         adverse, cleared, unresolved = [], [], []
+        # A transport failure is not a finding about the firm. The first Oregon run left three
+        # firms with G2 unresolved because the search API returned 429 to us, which is a fact
+        # about our rate limit and would have been published as a limit of the record. A firm
+        # with one of these is left exactly as it was, and named at the end for a re-run.
+        deferred = []
         for attorney in attorneys:
             surname = surname_of(attorney["name"])
             hits = surnames.get(surname or "", [])
@@ -482,8 +488,8 @@ def main():
             try:
                 verdict, note = verify(args.state, attorney["name"], surname, hits)
             except Exception as e:
-                verdict, note = None, ("the decisions index could not be reached for this "
-                                       "attorney (%s)" % str(e)[:60])
+                deferred.append((attorney["name"], str(e)[:60]))
+                continue
             if verdict is True:
                 adverse.append((attorney["name"], hits[0]))
             elif verdict is False:
@@ -500,6 +506,12 @@ def main():
         for name, case, note in unresolved:
             print("    note     %-28s %s (%s): %s" % (name, case["case"],
                                                       (case["date"] or "")[:4], note))
+
+        for name, why in deferred:
+            print("    deferred %-28s %s" % (name, why))
+        if deferred:
+            deferred_firms.append(firm["slug"])
+            continue
 
         if not (args.write and args.gates):
             continue
@@ -554,6 +566,13 @@ def main():
             json.dumps(firm, indent=2, ensure_ascii=False) + LF)
 
     print()
+    if deferred_firms:
+        print("%d firm(s) left exactly as they were, because the search API rate-limited us "
+              "rather than because the record is silent. Run this again for them:"
+              % len(deferred_firms))
+        for slug in deferred_firms:
+            print("    %s" % slug)
+        print()
     if args.write and args.gates:
         print("G2 written. Run scripts/score.py to recompute.")
     else:

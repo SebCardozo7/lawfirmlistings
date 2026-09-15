@@ -155,9 +155,29 @@ def market_for(domain):
     return None
 
 
+def cohort_name(domain):
+    """The name a person wrote in the cohort file, which is checked and sometimes the only one.
+
+    radlawfirm.com publishes "nabasheikh" as its JSON-LD name, which is somebody's login, so the
+    search went looking for a firm by that name and came back with four other Dallas practices.
+    The cohort file says Rad Law Firm, because a person read the listing before deciding the firm
+    belonged in the market. Preferred over the site's own name for that reason: it is the name
+    this search is trying to match against.
+    """
+    for path in sorted((ROOT / "src" / "data" / "cohorts").glob("*.json")):
+        try:
+            data = json.load(io.open(path, encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        for firm in data.get("firms") or []:
+            if (firm or {}).get("domain") == domain and firm.get("name"):
+                return firm["name"]
+    return None
+
+
 def collect(rec, key, verbose=False):
     domain = rec["domain"]
-    name = firm_name_from(rec)
+    name = cohort_name(domain) or firm_name_from(rec)
     # Two queries: the firm's name, and the name with its market. Between them the office
     # listings of a multi-location firm show up without paging through unrelated results. A firm
     # whose market we do not know yet gets the first query only, because a guessed city is worse

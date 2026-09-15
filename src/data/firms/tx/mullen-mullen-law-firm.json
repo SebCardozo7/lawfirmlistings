@@ -1,0 +1,499 @@
+{
+  "slug": "mullen-mullen-law-firm",
+  "name": "Mullen & Mullen Law Firm",
+  "initials": "MM",
+  "website": "https://www.mullenandmullen.com/",
+  "domain": "mullenandmullen.com",
+  "phone": "(214) 529-3476",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.mullenandmullen.com/personal-injury-lawyer/plano-tx/",
+      "checked_at": "2026-09-14"
+    }
+  ],
+  "market": {
+    "city_slug": "dallas-tx",
+    "city": "Dallas",
+    "state": "TX",
+    "state_name": "Texas"
+  },
+  "offices": [
+    {
+      "label": "Mullen & Mullen Law Firm",
+      "address": "2770 Main St #258, Frisco, TX 75033, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=4860429613568384700&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Joseph Morrison",
+      "source_url": "https://www.mullenandmullen.com/about/joseph-r-morrison-attorney/",
+      "role": "Senior Associate",
+      "role_source": "firm's home page",
+      "checked_at": "2026-09-15"
+    },
+    {
+      "name": "Regis Mullen",
+      "source_url": "https://www.mullenandmullen.com/about/regis-l-mullen-attorney/",
+      "role": "Founder",
+      "role_source": "firm's home page",
+      "checked_at": "2026-09-15"
+    },
+    {
+      "name": "Shane Mullen",
+      "source_url": "https://www.mullenandmullen.com/about/shane-v-mullen-attorney/",
+      "role": "Managing Partner",
+      "role_source": "firm's home page",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Mullen & Mullen has practised in Dallas since 1982 and names three attorneys: two Mullens and a senior associate. Its verified listing in this market is the Frisco office.",
+    "It is the only firm in this ranking that claims a lower contingency rate than its competitors rather than simply no fee unless it wins, and it says a client can text the legal team directly at any hour. It publishes neither the rate itself nor any case results."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "68",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-15"
+    },
+    "sample": [
+      {
+        "published_at": "2026-04-06T16:18:07.428779316Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-22T23:17:58.080658023Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-27T16:30:07.997556096Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-21T04:30:52.856942375Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-11T20:47:22.305442543Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 53,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-15",
+      "note": "LCP 16.0 s / CLS 0.081 / TBT 139 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "mullenandmullen.com",
+      "name": "Mullen & Mullen Law Firm",
+      "practice_page": "https://www.mullenandmullen.com/personal-injury-lawyer/plano-tx/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 68,
+      "rating_weighted": 5.0,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-15"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Texas does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Texas does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G3": {
+      "pass": false,
+      "source": "unavailable",
+      "checked_at": "2026-09-15",
+      "evidence": "1 physical location verified on Google Business Profile. We read the Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status and could not identify this firm in it: no entity whose name contains the firm's name. A miss there is not evidence that the firm is unregistered, so this gate is unresolved rather than failed. The franchise tax does not reach a sole proprietorship or a general partnership, so this register can confirm an entity and cannot rule one out."
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-15"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "68 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2003-09-18, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-15"
+    }
+  },
+  "cohort_id": "tx-dallas-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Attorney.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "mily, your case will be handled like family. FREE CASE EVALUATION Benefit From The Lowest Contingency Fee Personal injury firms take 33.3% – 35% on pre-suit settlements. Our family puts more",
+          "source_url": "https://www.mullenandmullen.com/"
+        },
+        "free_consultation": {
+          "quote": "Texas Plano, Texas Frisco, Texas Fort Worth, Texas St. Louis, Missouri Community & Events Free Consultation Join The Family ® The injury law firm that fights for you like family What kind of injury",
+          "source_url": "https://www.mullenandmullen.com/"
+        },
+        "available_24_7": {
+          "quote": "ies. Our job is to make your life easier! You can text your dedicated legal team directly 24/7 as your case develops. 02 Strategy Every case is unique, which means each strategy is als",
+          "source_url": "https://www.mullenandmullen.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Personal injury law firm serving Dallas, Texas. Helping injury victims pursue compensation since 1982."
+      ],
+      "pages": {
+        "home": "https://www.mullenandmullen.com/",
+        "about": "https://www.mullenandmullen.com/about/",
+        "results": "https://www.mullenandmullen.com/personal-injury-lawyer/settlements/",
+        "contact": "https://www.mullenandmullen.com/locations/",
+        "blog": "https://www.mullenandmullen.com/blog/",
+        "privacy": "https://www.mullenandmullen.com/privacy-policy/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2003-09-18",
+    "years": 23.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-15"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-15"
+  },
+  "results_published": {
+    "count": 83,
+    "counted_from": "stated amounts",
+    "amounts": [
+      23000000,
+      6150000,
+      5050000,
+      4675000,
+      4400000,
+      4250000,
+      4000000,
+      3878104,
+      3250000,
+      3200000,
+      2978104,
+      2750000,
+      2550000,
+      2500000,
+      2375000,
+      2250000,
+      2200000,
+      2050000,
+      2024050,
+      2000000,
+      1986000,
+      1983537,
+      1936719,
+      1800000,
+      1750000,
+      1680000,
+      1600000,
+      1520000,
+      1505025,
+      1404564,
+      1402500,
+      1400000,
+      1350751,
+      1342831,
+      1330000,
+      1323395,
+      1310000,
+      1300000,
+      1250751,
+      1250000,
+      1200000,
+      1079316,
+      1012475,
+      1000000,
+      996292,
+      995000,
+      982358,
+      978569,
+      968844,
+      960576,
+      954543,
+      935000,
+      920000,
+      900000,
+      897650,
+      890000,
+      880000,
+      877202,
+      875000,
+      850000
+    ],
+    "largest": 23000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "workplace",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 17664,
+    "readable": true,
+    "url": "https://www.mullenandmullen.com/personal-injury-lawyer/settlements/",
+    "checked_at": "2026-09-15"
+  },
+  "score": {
+    "total": 49,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-15",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 9,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 6,
+            "max": 6,
+            "source": "firm",
+            "evidence": "83 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "9 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "68 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 68 reviews → Bayesian 4.90 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-11) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.5,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 25,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 21,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "A6 Roster verifiability: +9 available"
+      ]
+    },
+    "raw": 34.0,
+    "assessed": 70,
+    "coverage": 0.769,
+    "floor_abc_pct": 0.658,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "assessable": 91,
+    "comparable": true
+  }
+}

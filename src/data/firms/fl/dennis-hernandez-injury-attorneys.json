@@ -261,10 +261,10 @@
       "checked_at": "2026-09-14"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Florida does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-14"
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-15",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": false,
@@ -435,7 +435,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.81 over 1,324 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 129 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.81 over 1,324 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -542,8 +542,7 @@
     "coverage": 0.769,
     "floor_abc_pct": 0.408,
     "gates_unavailable": [
-      "G1",
-      "G2"
+      "G1"
     ],
     "assessable": 91,
     "comparable": true

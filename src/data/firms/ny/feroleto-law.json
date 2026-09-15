@@ -37,7 +37,7 @@
       "bar_state": "NY",
       "source_url": "https://yourbuffalolawyer.com/team-members/jordan-boggs/",
       "registry_note": "not found",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     {
       "name": "Cheryl Robinson",
@@ -45,7 +45,7 @@
       "bar_state": "NY",
       "source_url": "https://yourbuffalolawyer.com/team-members/cheryl-robinson/",
       "registry_note": "not found",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     }
   ],
   "languages": [
@@ -123,15 +123,15 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "None of the 4 attorneys this firm names could be found in the register, so there is nothing here to clear or to fault.",
+      "evidence": "None of the 2 attorneys this firm names could be found in the register, so there is nothing here to clear or to fault.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G2": {
       "pass": false,
-      "evidence": "None of the 4 attorneys this firm names could be found in the register, so no disciplinary history could be read either way.",
+      "evidence": "None of the 2 attorneys this firm names could be found in the register, so no disciplinary history could be read either way.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G3": {
       "pass": true,
@@ -306,7 +306,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 170 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 129 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 170 reviews → Bayesian 4.87 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

@@ -38,6 +38,9 @@ for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
         stream.reconfigure(encoding="utf-8")
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from crawl_attorneys import looks_like_a_person  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 FIRMS = ROOT / "src" / "data" / "firms"
 

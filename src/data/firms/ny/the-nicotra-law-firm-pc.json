@@ -156,13 +156,13 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G3": {
       "pass": true,
@@ -252,7 +252,7 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 39,
+    "total": 38,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-15",
@@ -319,7 +319,7 @@
         ]
       },
       "C": {
-        "score": 20,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -333,10 +333,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.92 over 334 reviews → Bayesian 4.90 (prior 4.83 weighted as 100 reviews, from 129 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.92 over 334 reviews → Bayesian 4.90 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -425,11 +425,11 @@
         ]
       }
     },
-    "floor_abc": 23,
+    "floor_abc": 22,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 31,
+      "gap": 32,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -438,10 +438,10 @@
         "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 27.5,
+    "raw": 26.5,
     "assessed": 70,
     "coverage": 0.7,
-    "floor_abc_pct": 0.605,
+    "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1",
       "G2"

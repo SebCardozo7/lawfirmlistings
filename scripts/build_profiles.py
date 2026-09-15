@@ -267,6 +267,15 @@ def build_offices(rec):
 def build(rec, cohort_lookup, market, cohort_id, practice):
     name, name_source = pick_name(rec)
     if not name:
+        # The cohort file's name, which a person wrote while deciding the firm belonged in this
+        # market. Senft Legal publishes no JSON-LD, no Google name we could match and no
+        # og:site_name, so the draft was skipped entirely over a field that was sitting in the
+        # cohort all along. It is the last resort and not the first: a name the firm publishes
+        # about itself is better evidence than a name we typed.
+        fallback = (cohort_lookup.get(rec["domain"]) or {}).get("name")
+        if fallback and not NOT_A_NAME.match(fallback):
+            name, name_source = fallback, "the cohort file, written by hand"
+    if not name:
         return None, "no usable firm name in JSON-LD, GBP or og:site_name"
 
     phone, phone_source = pick_phone(rec)

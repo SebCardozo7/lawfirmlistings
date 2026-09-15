@@ -77,6 +77,18 @@ NOT_A_PERSON = re.compile(
     # "Traumatic Brain Injuries" as members of staff, and a Lakeland one published "Asset
     # Protection", each of them a link on the roster page to a practice page.
     r"injuries|liabilities|disabilities|policies|protection|planning|railroad|asset|"
+    # Menu items on a roster page that are neither a practice nor a person. A Fort Worth
+    # firm's team page linked "Community Involvement" and "Social Media" beside its
+    # lawyers, and both were stored as people.
+    # "press" is left off for the same reason as "trust": Press is somebody's surname.
+    r"community|involvement|social|media|event|award|podcast|newsletter|"
+    # The kinds of collision a firm lists on its menu. "Motorcycle Collisions", "Animal
+    # Attacks" and "Slip And Fall" were each published as a member of staff, at a Portland
+    # firm and a Dallas one, because the list held the practice-area nouns and not these.
+    # Bare "fall", "bite" and "hazard" are left off: Fall, Bite and Hazard are all
+    # surnames, and the phrases are what a menu actually prints.
+    r"motorcycle|collision|crash|rollover|pedestrian|bicycle|animal|attack|"
+    r"slip[-\s]and[-\s]fall|dog[-\s]bite|nursing|toxic|asbestos|mesothelioma|"
     # "trust" is deliberately not on this list even though "Trusts & Estates" is a practice,
     # because Trust is a given name and dropping a real attorney is the worse mistake: a practice
     # title on a roster is visible on the page, a missing lawyer is not. "Estates" catches the
@@ -226,6 +238,20 @@ def split_name_and_role(raw):
     text = re.sub(r"\s+", " ", (raw or "").replace("&amp;", "&")).strip()
     text = HEADING_PREFIX.sub("", text).strip()
     text = SUFFIXES.sub("", text).strip(" ,-|")
+
+    # "Perla Hagemeier - The Barber Law Firm" is a page title with the site's name appended, and
+    # nine of that firm's bios are headed exactly that way, so nine people were unreachable.
+    # Split on the separator and keep the half that reads as a person. A role after the separator
+    # is still a role, so "Jane Doe - Managing Partner" is left for the peel below.
+    for sep in (" | ", " - ", " – ", " — "):
+        if sep not in text:
+            continue
+        head, tail = text.split(sep, 1)
+        tail_words = [w for w in re.split(r"[\s,]+", tail) if w]
+        if not (tail_words and all(w.lower().strip(".") in ROLE_WORDS for w in tail_words)):
+            if looks_like_a_person(head.strip()):
+                text = head.strip()
+        break
 
     words = [w for w in re.split(r"[\s,|]+", text) if w]
 

@@ -131,10 +131,10 @@
       "checked_at": "2026-09-14"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Maryland does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-14"
+      "pass": true,
+      "source": "Published decisions of the Attorney Grievance Commission of Maryland, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-15",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 2614 published discipline decisions of the Attorney Grievance Commission of Maryland, 1976 to 2026. 1 of them share a surname with a disciplined attorney and were read against the text of those decisions, which name somebody else. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": false,
@@ -335,7 +335,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 246 reviews → Bayesian 4.95 (prior 4.83 weighted as 100 reviews, from 129 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 246 reviews → Bayesian 4.95 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -443,7 +443,6 @@
     "floor_abc_pct": 0.776,
     "gates_unavailable": [
       "G1",
-      "G2",
       "G3"
     ],
     "assessable": 91,
