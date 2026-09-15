@@ -124,12 +124,46 @@ def firm_name_from(rec):
     return rec.get("name_candidates", [{}])[0].get("value", rec["domain"])
 
 
+def market_for(domain):
+    """The city this firm belongs to, from the cohort or the profile that carries it.
+
+    This used to be the string "New York", written when New York was the only market, and it
+    stayed wrong quietly: a firm's own name usually finds its listing on the first query, so the
+    second one rarely mattered. It mattered for Calderaro & Kazmierczak in Merrillville, whose
+    site titles itself "Calderaro". A one-word query found nothing, and "Calderaro personal
+    injury New York" returned a Manhattan brain-injury firm and an Italian practice, so a
+    Merrillville firm with fifty-one reviews came back with none and lost G6.
+    """
+    for path in sorted((ROOT / "src" / "data" / "cohorts").glob("*.json")):
+        try:
+            data = json.load(io.open(path, encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if any((f or {}).get("domain") == domain for f in data.get("firms") or []):
+            m = data.get("market") or {}
+            if m.get("city"):
+                return "%s %s" % (m["city"], m.get("state") or "")
+    for path in (ROOT / "src" / "data" / "firms").rglob("*.json"):
+        try:
+            firm = json.load(io.open(path, encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if firm.get("domain") == domain:
+            m = firm.get("market") or {}
+            if m.get("city"):
+                return "%s %s" % (m["city"], m.get("state") or "")
+    return None
+
+
 def collect(rec, key, verbose=False):
     domain = rec["domain"]
     name = firm_name_from(rec)
     # Two queries: the firm's name, and the name with its market. Between them the office
-    # listings of a multi-location firm show up without paging through unrelated results.
-    queries = [name, "%s personal injury %s" % (name, "New York")]
+    # listings of a multi-location firm show up without paging through unrelated results. A firm
+    # whose market we do not know yet gets the first query only, because a guessed city is worse
+    # than no city.
+    market = market_for(domain)
+    queries = [name] + (["%s personal injury %s" % (name, market)] if market else [])
 
     accepted, rejected, seen = [], [], set()
     for q in queries:

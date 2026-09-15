@@ -354,7 +354,14 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
         "domain": rec["domain"],
         "phone": format_phone(phone),
         "status": "listed",
-        "practices": [dict(practice)],
+        # The link to the page the firm publishes about this practice, where check_practice.py
+        # found one. It was left out of the first version, and the audit then reported thirteen
+        # fresh Indiana profiles for the same missing evidence that apply_practice.py had just
+        # backfilled across a hundred and eleven older ones.
+        "practices": [dict(practice, **(
+            {"source_url": evidence["url"], "checked_at": evidence.get("checked_at")}
+            if (evidence := ((rec.get("practice_evidence") or {}).get(practice["slug"]) or {}))
+            .get("url") else {}))],
         "market": dict(market),
         "offices": built_offices,
         "attorneys": [],

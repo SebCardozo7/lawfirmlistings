@@ -1,0 +1,380 @@
+{
+  "slug": "michael-p-stryjewski",
+  "name": "Michael P. Stryjewski",
+  "initials": "MP",
+  "website": "https://lawyermps.com/",
+  "domain": "lawyermps.com",
+  "phone": "(219) 738-2222",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://lawyermps.com/personal-injury.html",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "market": {
+    "city_slug": "northwest-indiana",
+    "city": "Northwest Indiana",
+    "state": "IN",
+    "state_name": "Indiana"
+  },
+  "offices": [
+    {
+      "label": "Michael P. Stryjewski",
+      "address": "658 W 700 N, Portage, IN 46368, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=6013199508169575533&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Michael P. Stryjewski",
+      "role": "Attorney at Law",
+      "role_source": "firm's home page",
+      "source_url": "https://lawyermps.com/",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Michael P. Stryjewski has practised alone from Portage since 1992, across Lake, Porter and LaPorte counties, and the promise on his site is that the client gets him rather than an associate.",
+    "A free consultation, no published fee terms and no case results. His Google listing carries the fewest reviews and the lowest average in this market, 20 reviews at 3.3, and both numbers are small enough to move on one more review."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 3.3,
+      "count_label": "20",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-15"
+    },
+    "sample": [
+      {
+        "published_at": "2026-04-06T20:27:28.931638309Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-08-30T04:30:54.682811772Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-04-24T18:55:47.708415757Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-06-01T11:31:50.770684086Z",
+        "rating": 4
+      },
+      {
+        "published_at": "2026-05-08T21:36:29.814799005Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "schema_detected": false,
+    "_ahrefs_partial_from_cohort": {
+      "domain": "lawyermps.com",
+      "name": "Michael P. Stryjewski",
+      "practice_page": "https://lawyermps.com/personal-injury.html"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 20,
+      "rating_weighted": 3.3,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-15"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Indiana does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Indiana on the discipline of Indiana attorneys, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-15",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 301 published discipline decisions of the Supreme Court of Indiana on the discipline of Indiana attorneys, 1960 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": false,
+      "source": "no queryable source",
+      "checked_at": "2026-09-15",
+      "evidence": "1 physical location verified on Google Business Profile. Indiana publishes no business register we can query. INBiz answers an automated reader with a 403 and the Secretary of State's business search answers with a 202 and an empty body, which is a bot challenge, and we do not work around either. This is a limit of the published record and not something the firm can change."
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-15"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "20 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2000-09-26, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-15"
+    }
+  },
+  "cohort_id": "in-nwi-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "tryjewski Attorney at Law Practice Areas About Location Contact (219) 738-2222 Pay Online Free Consultation Serving Northwest Indiana Since 1992 Personalized Attention. Proven Experience. When you",
+          "source_url": "https://lawyermps.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://lawyermps.com/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2000-09-26",
+    "years": 26.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-15"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-15"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-15"
+  },
+  "score": {
+    "total": 17,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-15",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Indiana publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 9,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "20 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 3.3 over 20 reviews → Bayesian 4.58 (prior 4.83 weighted as 100 reviews, from 129 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-06-01) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 0,
+            "max": 4,
+            "source": "places",
+            "evidence": "2 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 1,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 1,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 9,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 53,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "D1 Website trust & experience: not yet measured (7 pts)"
+      ]
+    },
+    "raw": 11.0,
+    "assessed": 63,
+    "coverage": 0.692,
+    "floor_abc_pct": 0.237,
+    "gates_unavailable": [
+      "G1",
+      "G3"
+    ],
+    "assessable": 91,
+    "comparable": true
+  }
+}

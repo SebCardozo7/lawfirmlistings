@@ -694,9 +694,9 @@
     },
     "G5": {
       "pass": true,
-      "evidence": "Site has served over HTTPS, a working phone number published, 50 named attorneys published.",
+      "evidence": "Site has served over HTTPS, a working phone number published, 49 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-15"
     },
     "G6": {
       "pass": true,
@@ -775,7 +775,7 @@
     "total": 47,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-14",
+    "computed_at": "2026-09-15",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -788,7 +788,7 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 24.4 years since admission across 48 of 50 named attorneys (longest 53, shortest 0) · NYS Attorney Registration database"
+            "evidence": "Mean 24.4 years since admission across 48 of 49 named attorneys (longest 53, shortest 0) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -796,7 +796,7 @@
             "pts": 9,
             "max": 9,
             "source": "registry",
-            "evidence": "48 of 50 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "48 of 49 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -856,7 +856,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.31 over 83 reviews → Bayesian 4.60 (prior 4.83 weighted as 100 reviews, from 116 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.31 over 83 reviews → Bayesian 4.60 (prior 4.83 weighted as 100 reviews, from 129 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
