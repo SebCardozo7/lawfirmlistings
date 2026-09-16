@@ -10,7 +10,7 @@
   "practice": "personal-injury",
   "label": "New York × Personal Injury",
   "measured_at": "2026-09-16",
-  "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us). The 12 published New York firms were re-measured 2026-09-09; the remaining peer rows date from 2026-09-07 and 2026-09-08. jacobyandmeyers.com excluded 2026-09-08: its own JSON-LD and all ten of its Google listings place it in Los Angeles, California. A discovery run over the Google Places API on 2026-09-16 found 185 firms in this market that the SEO-derived cohort had never seen, and the twenty-five largest of them by review count were measured on 2026-09-16 and twenty-four were added, the exception being noted below. Two scored things move with it. D2 is a percentile against this cohort, which is 62 firms where it was 38, and C2's Bayesian prior is a count-weighted mean rating over every scored firm in the directory, so 24 new firms with a mean near 4.9 move it for every market at once. The largest of the new entries are outer-borough practices in Forest Hills, Queens Village, Rosedale and the Bronx, which is where the clients are and not where the backlinks are.",
+  "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us). The 12 published New York firms were re-measured 2026-09-09; the remaining peer rows date from 2026-09-07 and 2026-09-08. jacobyandmeyers.com excluded 2026-09-08: its own JSON-LD and all ten of its Google listings place it in Los Angeles, California. A discovery run over the Google Places API on 2026-09-16 found 185 firms in this market that the SEO-derived cohort had never seen, and the twenty-five largest of them by review count were measured on 2026-09-16 and twenty-four were added, the exception being noted below. Two scored things move with it. D2 is a percentile against this cohort, which is 62 firms where it was 38, and C2's Bayesian prior is a count-weighted mean rating over every scored firm in the directory, so 24 new firms with a mean near 4.9 move it for every market at once. The largest of the new entries are outer-borough practices in Forest Hills, Queens Village, Rosedale and the Bronx, which is where the clients are and not where the backlinks are. Fourteen more were measured and added on 2026-09-16, taking the cohort to 76: the next fourteen by review count after the first pass, each publishing a personal injury practice page or naming the practice among its practice areas.",
   "full_size_estimate": 230,
   "firms": [
     {
@@ -508,6 +508,118 @@
       "refdomains": 1169,
       "org_keywords": 51,
       "org_traffic": 223
+    },
+    {
+      "domain": "levyborukhlaw.com",
+      "name": "Levy & Borukh, PLLC",
+      "dr": 6,
+      "refdomains": 749,
+      "org_keywords": 4,
+      "org_traffic": 15
+    },
+    {
+      "domain": "lawyers24-7.com",
+      "name": "Macaluso & Fafinski, P.C.",
+      "dr": 15,
+      "refdomains": 716,
+      "org_keywords": 130,
+      "org_traffic": 2630
+    },
+    {
+      "domain": "thecasehandler.com",
+      "name": "The Case Handler",
+      "dr": 3.8,
+      "refdomains": 432,
+      "org_keywords": 7,
+      "org_traffic": 23
+    },
+    {
+      "domain": "bronxlawfirm.net",
+      "name": "Law Office of Evan W. Kohn",
+      "dr": 10,
+      "refdomains": 682,
+      "org_keywords": 59,
+      "org_traffic": 188
+    },
+    {
+      "domain": "omranitaub.com",
+      "name": "The Law Offices of Omrani & Taub, P.C.",
+      "dr": 27,
+      "refdomains": 563,
+      "org_keywords": 73,
+      "org_traffic": 321
+    },
+    {
+      "domain": "morellilaw.com",
+      "name": "Morelli Law Firm",
+      "dr": 32,
+      "refdomains": 899,
+      "org_keywords": 433,
+      "org_traffic": 1985
+    },
+    {
+      "domain": "richman-law.com",
+      "name": "The Law Offices of Eric Richman",
+      "dr": 28,
+      "refdomains": 562,
+      "org_keywords": 359,
+      "org_traffic": 2219
+    },
+    {
+      "domain": "brainlaw.com",
+      "name": "De Caro & Kaplen, LLP",
+      "dr": 33,
+      "refdomains": 742,
+      "org_keywords": 661,
+      "org_traffic": 3960
+    },
+    {
+      "domain": "metrolawpllc.com",
+      "name": "Metro Injury Law",
+      "dr": 0,
+      "refdomains": 377,
+      "org_keywords": 2,
+      "org_traffic": 14
+    },
+    {
+      "domain": "stillmanstillmanlaw.com",
+      "name": "Stillman & Stillman PC",
+      "dr": 2.3,
+      "refdomains": 468,
+      "org_keywords": 18,
+      "org_traffic": 36
+    },
+    {
+      "domain": "dcnyclaw.com",
+      "name": "Davidov & Cohen Law, PLLC",
+      "dr": 0,
+      "refdomains": 314,
+      "org_keywords": 5,
+      "org_traffic": 4
+    },
+    {
+      "domain": "gitlegalgroup.com",
+      "name": "Gitelman Legal Group",
+      "dr": 4.2,
+      "refdomains": 384,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "accidentlawyer-queens.com",
+      "name": "K L Sanchez Law Office, P.C.",
+      "dr": 35,
+      "refdomains": 708,
+      "org_keywords": 4,
+      "org_traffic": 19
+    },
+    {
+      "domain": "nyaccidentcase.com",
+      "name": "The Newman Firm, LLP",
+      "dr": 10,
+      "refdomains": 492,
+      "org_keywords": 50,
+      "org_traffic": 211
     }
   ],
   "unresolved": [
@@ -515,11 +627,17 @@
     "pazerepstein.com",
     "leavandsteinberg.com",
     "jacobyandmeyers.com",
-    "855dolor55.com"
+    "855dolor55.com",
+    "sobolaw.com",
+    "splawpc.com",
+    "helenemarkesq.com"
   ],
   "unresolved_notes": {
     "jacobyandmeyers.com": "jacobyandmeyers.com is the California practice: all ten offices the Places API returned sit in California, none in New York, so it was removed from the New York cohort rather than published in a city where it has no verified office.",
     "hachroselaw.com": "hachroselaw.com was listed here as unresolved and is resolved: the firm publishes at unionlawfirm.com, which is measured and ranked in this cohort as Hach & Rose, LLP.",
-    "855dolor55.com": "855dolor55.com is The Ward Law Group, PL, whose own structured data gives Miami Lakes, Florida as the firm's address: it holds 5,859 reviews there and 571 in Orlando against 439 at its New York office, so it was removed from the New York cohort on 2026-09-16 rather than ranked in a market where it keeps one of three offices."
+    "855dolor55.com": "855dolor55.com is The Ward Law Group, PL, whose own structured data gives Miami Lakes, Florida as the firm's address: it holds 5,859 reviews there and 571 in Orlando against 439 at its New York office, so it was removed from the New York cohort on 2026-09-16 rather than ranked in a market where it keeps one of three offices.",
+    "sobolaw.com": "sobolaw.com is the Law Offices of Sobo & Sobo, a Hudson Valley firm: its Google listings hold 2,003 reviews across twelve offices and the largest sits on Dolson Avenue in Middletown, sixty miles from the city, with one office in the Bronx. It was left out of the New York City cohort on 2026-09-16 rather than ranked in a market where it keeps one office of twelve.",
+    "splawpc.com": "splawpc.com and helenemarkesq.com return HTTP 403 to our crawler, which is bot protection. We do not work around it, so both firms are recorded in docs/market-queue.md and are not measured here.",
+    "helenemarkesq.com": "splawpc.com and helenemarkesq.com return HTTP 403 to our crawler, which is bot protection. We do not work around it, so both firms are recorded in docs/market-queue.md and are not measured here."
   }
 }

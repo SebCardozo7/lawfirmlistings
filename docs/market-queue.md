@@ -11,14 +11,20 @@ Review counts are summed across a firm's verified Google listings on the date gi
 ## New York City, personal injury
 
 A Places discovery run on 2026-09-16 returned 218 firms in this market, 185 of which the
-SEO-derived cohort had never seen. The twenty-five largest by review count were crawled and
-twenty-four were published; the rest are below.
+SEO-derived cohort had never seen. Forty-two of them have been crawled in two passes and
+thirty-eight are published; the four that are not, and the firms we could not read at all,
+are below.
 
-### Verified, waiting for a publishing pass
+### Published on 2026-09-16, in the second pass
 
-Each of these publishes a personal-injury practice page or names the practice among its practice
-areas, which is what G2 asks for. They were below the review-count line for this pass and need
-the same eight-step crawl the published firms had.
+The fourteen firms in this table were crawled and published the same day this queue was written.
+They are kept here as the record of where they came from: each was found by the Places run, each
+publishes a personal-injury practice page or names the practice among its practice areas, and
+each was below the first pass's review-count line.
+
+Three of the seventeen crawled in that pass were not published, and are in the tables below:
+Seni Popat's firm and Helene Mark's both return 403 to our crawler, and Sobo & Sobo turns out to
+be a Hudson Valley practice.
 
 | Firm | Domain | Reviews | Based in |
 | --- | --- | --- | --- |
@@ -26,23 +32,22 @@ the same eight-step crawl the published firms had.
 | Macaluso & Fafinski, P.C. | lawyers24-7.com | 229 | Fordham Plaza, Bronx |
 | The Case Handler (Adam Handler) | thecasehandler.com | 220 | Broadway, Manhattan |
 | Law Office of Evan W. Kohn | bronxlawfirm.net | 220 | White Plains Road, Bronx |
-| Omrani & Taub, P.C. | omranitaub.com | 218 | Madison Avenue, Manhattan |
 | Morelli Law Firm | morellilaw.com | 206 | Third Avenue, Manhattan |
 | Law Offices of Eric Richman | richman-law.com | 205 | Lexington Avenue, Manhattan |
 | De Caro & Kaplen, LLP | brainlaw.com | 202 | East 45th Street, Manhattan |
 | Metro Injury Law | metrolawpllc.com | 201 | Metropolitan Avenue, Forest Hills |
-| Sobo & Sobo L.L.P. | sobolaw.com | 201 | Gun Hill Road, Bronx |
 | Stillman & Stillman PC | stillmanstillmanlaw.com | 200 | East Tremont Avenue, Bronx |
-| Davidov & Cohen Law, PLLC | dcnyclaw.com | 169 | Union Turnpike, Fresh Meadows |
+| Davidov & Cohen Law, PLLC | dcnyclaw.com | 170 | Union Turnpike, Fresh Meadows |
 | Gitelman Legal Group | gitlegalgroup.com | 169 | Coney Island Avenue, Brooklyn |
 | K L Sanchez Law Office, P.C. | accidentlawyer-queens.com | 167 | Jackson Heights, Queens |
 | The Newman Firm, LLP | nyaccidentcase.com | 161 | Queens Boulevard, Rego Park |
-| Law Office of Seni Popat, P.C. | splawpc.com | 1,226 | Queens |
-| Law Office of Helene Mark | helenemarkesq.com | 300 | New York |
 
-The last two were read only on the second attempt, after the practice check learned to accept a
-combined practice-areas page. They belong at the top of the next pass: with 1,226 reviews, Seni
-Popat's firm would enter this ranking third by review count.
+Sobo & Sobo left the New York City cohort after the crawl rather than before it. The discovery
+run returned its Bronx office; the crawl returned twelve verified offices holding 2,003 reviews
+between them, the largest of them on Dolson Avenue in Middletown, sixty miles up the Thruway. It
+is a Hudson Valley firm with one office in the city, and it belongs at the top of a Hudson
+Valley market rather than ranked here. Its site also names seventy-seven people, which would
+make it the largest roster in the directory.
 
 ### Verified listing, practice page not readable
 
@@ -56,6 +61,8 @@ practices that names it. Where the reason is ours, it says so.
 | Mikhail Yadgarov & Associates, P.C. | myadgarovlaw.com | 1,611 | Links /personal-injury-attorney/, which also returns 404. Its practice-areas page names the practice and says nothing specific to it. |
 | The Kasen Law Firm | kasenlawfirm.com | 1,388 | No page whose address names the practice, and no page listing its practice areas. |
 | Gregory Spektor & Associates P.C. | spektorlaw.com | 945 | The site returns 403 to our crawler. We do not work around bot protection, so this firm gets a manual entry or none. |
+| Law Office of Seni Popat, P.C. | splawpc.com | 1,226 | Its practice page could be read, and on the crawl its home page returned 403: the same bot protection, reached from the front door. Crawled 2026-09-16 and not published. |
+| Law Office of Helene Mark | helenemarkesq.com | 300 | HTTP 403 on the home page, as above. Crawled 2026-09-16 and not published. |
 | The New York Injury & Malpractice Law Firm | protectingpatientrights.com | 1,113 | No readable practice page. |
 | KOLPLAW (Peter W. Kolp) | kolplaw.com | 605 | No readable practice page. |
 | Abogados de accidentes Cantaso | abogadosde1800cantaso.com | 590 | No readable practice page. |
@@ -82,6 +89,22 @@ is not the same firm as Finkelstein, Meirowitz & Eidlisz, which is already publi
   not published on the strength of a search result.
 - **Brandon J. Broderick.** Not published pending a human reading of the suspension order that a
   register search returned.
+- **The Law Offices of Omrani & Taub, P.C.** (omranitaub.com). Crawled and measured on
+  2026-09-16 and held unpublished. The firm publishes thirteen people on its own bios, and the
+  New York attorney register records one of them, San Razzano, registration 3930930, with the
+  status "Suspended, delinquent" and Omrani & Taub as the company on the registration. The
+  register carries the status and not the reason: in New York a suspension issues from the
+  Appellate Division whatever prompted it, and several missed biennial filings are themselves
+  grounds for one, so that status covers both a sanction and a long paperwork lapse and the data
+  cannot tell them apart.
+
+  The engine reads a suspended attorney on a current roster as a failed G1 and G2, which would
+  make this the first and only firm in the directory labelled "Not eligible", at a score of 60
+  and on one name in thirteen. That label is not going out on a reading a person has not done.
+  What a person needs to check is the Appellate Division's own decisions for this registration
+  number, and whether the firm still lists him. The measured profile is kept outside the
+  repository until then; the firm stays in the cohort, because it is a real practice in this
+  market and belongs in the percentile denominator.
 
 ## Other markets
 

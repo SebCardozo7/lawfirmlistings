@@ -274,7 +274,7 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 59,
+    "total": 60,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-16",
@@ -358,7 +358,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 936 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 936 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -379,7 +379,7 @@
         ]
       },
       "D": {
-        "score": 6,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -393,10 +393,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 4,
+            "pts": 5,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 43 → 81th pct of 61-firm cohort (median 30) 2/3 · 878 referring domains, 56th pct 1/2 · 127 organic keywords / 866 visits·mo, 34th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 43 → 85th pct of 75-firm cohort (median 28.5) 3/3 · 878 referring domains, 63th pct 1/2 · 127 organic keywords / 866 visits·mo, 41th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -451,7 +451,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -460,7 +460,7 @@
         "B2 Specificity: +5 available"
       ]
     },
-    "raw": 57.5,
+    "raw": 58.5,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.702,

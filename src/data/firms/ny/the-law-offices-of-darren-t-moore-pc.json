@@ -233,7 +233,7 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 37,
+    "total": 40,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-16",
@@ -317,7 +317,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 290 reviews → Bayesian 4.96 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 290 reviews → Bayesian 4.96 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -338,7 +338,7 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -352,10 +352,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 1,
+            "pts": 3,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 14 → 13th pct of 61-firm cohort (median 30) 0/3 · 634 referring domains, 20th pct 0/2 · 148 organic keywords / 1,737 visits·mo, 42th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 14 → 21th pct of 75-firm cohort (median 28.5) 1/3 · 634 referring domains, 27th pct 1/2 · 148 organic keywords / 1,737 visits·mo, 48th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -410,16 +410,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 33,
+      "gap": 30,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: +7 available"
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 29.0,
+    "raw": 31.0,
     "assessed": 78,
     "coverage": 0.78,
     "floor_abc_pct": 0.5,

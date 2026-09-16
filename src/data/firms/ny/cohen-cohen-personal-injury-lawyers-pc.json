@@ -374,9 +374,9 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 64,
+    "total": 65,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (6/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (7/25).",
     "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
@@ -458,7 +458,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 261 reviews → Bayesian 4.81 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 261 reviews → Bayesian 4.81 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -479,7 +479,7 @@
         ]
       },
       "D": {
-        "score": 6,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -493,10 +493,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 2,
+            "pts": 3,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 12 → 10th pct of 61-firm cohort (median 30) 0/3 · 885 referring domains, 57th pct 1/2 · 236 organic keywords / 1,189 visits·mo, 44th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 12 → 19th pct of 75-firm cohort (median 28.5) 1/3 · 885 referring domains, 64th pct 1/2 · 236 organic keywords / 1,189 visits·mo, 50th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -551,16 +551,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 6,
+      "gap": 5,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "D2 Search authority: +6 available",
         "D1 Website trust & experience: +5.0 available",
+        "D2 Search authority: +5 available",
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 62.5,
+    "raw": 63.5,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.868,

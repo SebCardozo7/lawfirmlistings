@@ -320,9 +320,9 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 76,
+    "total": 77,
     "tier": "Certified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (9/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (10/25).",
     "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
@@ -404,7 +404,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 539 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 539 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -425,7 +425,7 @@
         ]
       },
       "D": {
-        "score": 9,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -439,10 +439,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 5,
+            "pts": 6,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 35 → 66th pct of 61-firm cohort (median 30) 2/3 · 1,127 referring domains, 72th pct 1/2 · 1,704 organic keywords / 7,310 visits·mo, 88th pct 2/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 35 → 71th pct of 75-firm cohort (median 28.5) 2/3 · 1,127 referring domains, 77th pct 2/2 · 1,704 organic keywords / 7,310 visits·mo, 90th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -497,7 +497,7 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 9,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -506,7 +506,7 @@
         "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 73.5,
+    "raw": 74.5,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.965,

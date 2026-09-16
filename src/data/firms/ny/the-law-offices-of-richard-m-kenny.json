@@ -380,9 +380,9 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 69,
+    "total": 70,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar D (7/25).",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar D (8/25).",
     "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
@@ -464,7 +464,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 363 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 363 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -485,7 +485,7 @@
         ]
       },
       "D": {
-        "score": 7,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -499,10 +499,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 3,
+            "pts": 4,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 30 → 49th pct of 61-firm cohort (median 30) 1/3 · 702 referring domains, 33th pct 1/2 · 164 organic keywords / 759 visits·mo, 34th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 30 → 55th pct of 75-firm cohort (median 28.5) 2/3 · 702 referring domains, 39th pct 1/2 · 164 organic keywords / 759 visits·mo, 42th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -555,18 +555,18 @@
     },
     "floor_abc": 53,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +5.0 available",
-        "D2 Search authority: +5 available",
+        "D2 Search authority: +4 available",
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 67.0,
+    "raw": 68.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.93,

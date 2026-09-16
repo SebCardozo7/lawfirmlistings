@@ -290,7 +290,7 @@
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 60,
+    "total": 61,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-16",
@@ -374,7 +374,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.91 over 807 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.91 over 807 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -395,7 +395,7 @@
         ]
       },
       "D": {
-        "score": 11,
+        "score": 12,
         "max": 25,
         "subs": [
           {
@@ -409,10 +409,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 6,
+            "pts": 7,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 47 → 88th pct of 61-firm cohort (median 30) 3/3 · 1,277 referring domains, 80th pct 2/2 · 693 organic keywords / 6,822 visits·mo, 74th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 47 → 90th pct of 75-firm cohort (median 28.5) 3/3 · 1,277 referring domains, 84th pct 2/2 · 693 organic keywords / 6,822 visits·mo, 79th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -467,7 +467,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -476,7 +476,7 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 58.0,
+    "raw": 59.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.702,

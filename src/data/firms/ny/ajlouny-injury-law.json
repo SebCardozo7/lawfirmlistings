@@ -383,9 +383,9 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 62,
+    "total": 63,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (6/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (8/25).",
     "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
@@ -467,7 +467,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.79 over 360 reviews → Bayesian 4.80 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.79 over 360 reviews → Bayesian 4.80 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -488,7 +488,7 @@
         ]
       },
       "D": {
-        "score": 6,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -502,10 +502,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 3,
+            "pts": 4,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 21 → 30th pct of 61-firm cohort (median 30) 1/3 · 1,169 referring domains, 79th pct 2/2 · 51 organic keywords / 223 visits·mo, 22th pct 0/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 21 → 37th pct of 75-firm cohort (median 28.5) 1/3 · 1,169 referring domains, 83th pct 2/2 · 51 organic keywords / 223 visits·mo, 30th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -560,16 +560,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 8,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +5.5 available",
-        "D2 Search authority: +5 available",
-        "B3 Results disclosure: +4 available"
+        "B3 Results disclosure: +4 available",
+        "D2 Search authority: +4 available"
       ]
     },
-    "raw": 60.5,
+    "raw": 61.5,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.807,
