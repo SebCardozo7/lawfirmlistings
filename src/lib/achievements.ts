@@ -27,6 +27,9 @@ export interface Achievement {
   icon: string;
   /** `tier` is the certification itself; `earned` is everything else. */
   kind: 'tier' | 'earned';
+  /** The detail is the firm's own sentence rather than ours, so the page sets it as a
+   *  quotation. Its punctuation is the firm's and is not ours to tidy. */
+  quoted?: boolean;
 }
 
 const EARNED_TIERS = ['Certified', 'Distinguished', 'Elite'];
@@ -112,6 +115,7 @@ export function achievementsFor(firm: any): Achievement[] {
       id: 'fees', kind: 'earned', icon: 'check',
       label: 'Fee terms published',
       detail: firm.fee_statement,
+      quoted: true,
     });
   }
 

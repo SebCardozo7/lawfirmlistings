@@ -111,7 +111,11 @@ const schema = {
       </div>
     </div>
     <div class="hero-facts profile-facts">
-      <div class="fact"><b>{d.fee_model}</b><span>{d.fee_statement ?? 'Fee model'}</span></div>
+      {/* The fee statement is the firm's own sentence, so it is set as a quotation. It reads
+          as one to anybody looking at the page, and it keeps the house rule about punctuation
+          honest: "NO FEE UNLESS WE WIN — GUARANTEED!" carries an em dash this directory does
+          not use, and altering the punctuation of a firm's own words is not ours to do. */}
+      <div class="fact"><b>{d.fee_model}</b><span>{d.fee_statement ? <q>{d.fee_statement}</q> : 'Fee model'}</span></div>
       <div class="fact"><b>{d.free_consultation ? 'Free' : 'Paid'}</b><span>Initial consultation</span></div>
       {d.availability.slice(0, 3).map(a => { const [h, ...r] = a.split(' '); return <div class="fact"><b>{h}</b><span>{r.join(' ')}</span></div>; })}
       <div class="fact"><b class="num">{d.practices.length}</b><span>Practice areas</span></div>
@@ -156,7 +160,7 @@ const schema = {
           {achievements.map(a => (
             <div class={`medal ${a.kind === 'tier' ? 'is-tier' : ''}`}>
               <span class="medal-ico"><Icon name={a.icon} /></span>
-              <div><b>{a.label}</b><p>{a.detail}</p></div>
+              <div><b>{a.label}</b><p>{a.quoted ? <q>{a.detail}</q> : a.detail}</p></div>
             </div>
           ))}
         </div>

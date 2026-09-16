@@ -526,8 +526,13 @@ def compute(firm):
                                 statement, re.I))
     e1 = ((1 if firm.get("free_consultation") else 0) + (2 if stated else 0)
           + (2 if statement else 0) + (1 if states_pct else 0))
+    # The firm's own sentence is quoted rather than merged into ours. One Boston firm publishes
+    # "NO FEE UNLESS WE WIN — GUARANTEED!", and running those words into our evidence line put
+    # an em dash into this directory's prose, which is a house rule: the dash is the firm's and
+    # tidying somebody's own words is not ours to do, so the quotation marks say whose they are.
     e1_ev = ("Free consultation · " if firm.get("free_consultation") else "") + \
-        (statement or (model if stated else "fee model not published")) + \
+        ("“%s”" % statement if statement
+         else (model if stated else "fee model not published")) + \
         ("" if states_pct else " · the fee percentage itself is not published")
     out.append(sub("E1", e1, "observed", e1_ev))
     langs = [l for l in firm.get("languages", []) if l.lower() != "english"]
