@@ -18,7 +18,7 @@
  */
 interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
-  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder';
+  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -33,6 +33,11 @@ const MINT = '#5EEAD4';
 // Published results: nine figures on a page, three of them attached to something checkable, and
 // a seal that never closes. The dashed ring is the verification we have not done.
 const results = { bars: [120, 186, 96, 232, 150, 268, 110, 198, 140], checked: [1, 3, 5] };
+
+// The roster: eight bio cards, two of them empty outlines, beside the same unclosed seal the
+// results scene uses. A card with a face and two lines is a name somebody can look up; an empty
+// outline is a firm that published no name, and the lookup beside it never completes.
+const roster = { cols: [110, 258, 406, 554], rows: [70, 242], blank: [3, 6] };
 ---
 {name === 'results' && (
   <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
@@ -128,6 +133,34 @@ const results = { bars: [120, 186, 96, 232, 150, 268, 110, 198, 140], checked: [
     <g fill="rgba(255,255,255,.10)">
       <rect x="180" y="330" width="40" height="70" rx="8" /><rect x="232" y="358" width="40" height="42" rx="8" />
       <rect x="928" y="344" width="40" height="56" rx="8" /><rect x="980" y="366" width="40" height="34" rx="8" />
+    </g>
+  </svg>
+)}
+
+{name === 'roster' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {roster.rows.map((y, r) => roster.cols.map((x, c) => {
+      const i = r * roster.cols.length + c;
+      return roster.blank.includes(i) ? (
+        <rect x={x} y={y} width="128" height="152" rx="16" fill="none" stroke={MINT}
+          stroke-width="2.5" stroke-dasharray="14 12" opacity=".8" />
+      ) : (
+        <g>
+          <rect x={x} y={y} width="128" height="152" rx="16" fill="rgba(255,255,255,.08)"
+            stroke="rgba(255,255,255,.20)" stroke-width="1.5" />
+          <circle cx={x + 64} cy={y + 50} r="24" fill={i === 0 ? VIOLET : 'rgba(255,255,255,.30)'} />
+          <rect x={x + 22} y={y + 92} width="84" height="11" rx="5.5" fill="rgba(255,255,255,.28)" />
+          <rect x={x + 34} y={y + 114} width="60" height="11" rx="5.5" fill="rgba(255,255,255,.18)" />
+        </g>
+      );
+    }))}
+    {/* The register, and a check that never closes on it. Same seal as the results scene: the
+        verification we could not complete, rather than one that failed. */}
+    <g transform="translate(930,220)">
+      <circle r="98" fill="none" stroke={BLUE} stroke-width="2" opacity=".45" />
+      <circle r="72" fill="none" stroke={MINT} stroke-width="2.5" stroke-dasharray="16 13" opacity=".85" />
+      <path d="M-30 0l22 22 40-44" fill="none" stroke={MINT} stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round" opacity=".3" />
     </g>
   </svg>
 )}

@@ -20,8 +20,16 @@ Send one at each of these two moments:
 
 The second one is best effort and the reason is structural, so do not quietly treat it as covered:
 a run opens the pull request and finishes, and the human merge can land hours later, after the
-session is gone. When that happens nobody sends anything. If the owner wants a guarantee that does
-not depend on a session being alive, that belongs in a workflow on `push` to `main`, not here.
+session is gone. When that happens no session sends anything.
+
+**That gap is now closed by something that does not depend on a session, and this paragraph used
+to say it was not.** `.github/workflows/announce_guide.yml` fires on `push` to `main` under
+`src/pages/guides/**.astro`, takes added files only so an edit is not a publication, resolves the
+headline through `scripts/guide_title.mjs`, and opens an issue assigned to the repository owner,
+which is what sends the mail. Checked on 2026-09-16 against the new guide's slug: the title
+resolves and the step would run. So the merge is announced whether or not a session is alive, and
+the run's own second notification is now a faster duplicate rather than the only copy. Still send
+it: a duplicate costs nothing and the workflow has never been observed firing on a real merge.
 
 The judgement call that produced the gap, written down so it is not made again: the merge arrived
 while the session was still watching, and the run skipped the notification on the grounds that the
@@ -100,17 +108,27 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
 
 ## Generated pages, so a topic is not aimed at one of them
 
-As of 2026-09-14 the build produces 84 pages: `/`, `/cities/`, `/cities/new-york-ny/`,
-`/cities/baltimore-md/`, `/cities/lakeland-fl/`, `/cities/<city>/personal-injury/` for all three,
-`/cities/new-york-ny/workers-compensation/`, `/practice-areas/`,
-`/practice-areas/personal-injury/`, `/practice-areas/workers-compensation/`, 59 firm profiles,
-and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`, `/contact/`, `/privacy/`,
-`/terms/`). Every city and practice combination in that list is off limits as a guide topic.
+As of 2026-09-16 the build produces 257 pages. **The directory has quadrupled since this section
+was last enumerated: 59 firms in 3 markets then, 217 firms in 9 markets and 7 states now.** Check
+this list against the build rather than inheriting it.
+
+- `/`, `/cities/`, `/practice-areas/`, `/guides/`
+- Nine city hubs: `baltimore-md`, `boston-ma`, `buffalo-ny`, `dallas-tx`, `lakeland-fl`,
+  `naples-fl`, `new-york-ny`, `northwest-indiana`, `portland-or`
+- Eleven city × practice rankings: `personal-injury` in all of the above except `naples-fl`,
+  `workers-compensation` in `baltimore-md` and `new-york-ny`, `real-estate` in `naples-fl`
+- Three practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/real-estate/`,
+  `/practice-areas/workers-compensation/`
+- 217 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
+  `/contact/`, `/privacy/`, `/terms/`)
+
+Every city and practice combination in that list is off limits as a guide topic.
 
 ## Written
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-09-16 | `/guides/what-it-takes-to-check-a-law-firm/` | "how to check if a law firm is legit" (30/mo, KD 3), "how to check if a law firm is registered", "how to check a lawyer credentials", "how to check if a lawyer is legitimate" | Backlog item 3, and much larger than the old entry predicted: 56 of 217 firms name no attorney we could read, not 6. Pillar A's method piece and the study behind gates G1 and G2. Two findings worth remembering: only New York, of the seven states, publishes an attorney register we may query, so G1 passes on 51 firms and never outside it, while published discipline is searchable in six states through CourtListener. **The check people assume is buried is the more open one.** Also: the no-roster firms are indistinguishable from the rest on Google rating, 53 of 56 at 4.5 or better against 196 of 217. |
 | 2026-09-14 | `/guides/what-a-law-firm-score-cannot-compare/` | "how are lawyer ratings calculated", "law firm rating methodology", "what does a lawyer rating mean", "are lawyer ratings comparable" | The denominator piece. Reads all three states rather than one, because the argument is what happens when the directory crosses a state line. Two corrections were caught in draft and are worth remembering: the certification coverage floor is `MIN_COVERAGE = 0.60`, not 0.70, and the highest total outside New York is a firm whose total we withhold, not the highest comparable one. |
 | 2026-09-13 | `/guides/what-a-case-results-page-proves/` | "how to check a law firm's case results", "law firm case results page", "how to verify a lawyer's track record" | Counts what every firm publishes about its own outcomes and says why we repeat none of the amounts. Doubles as the pillar B method piece. |
 | earlier | `/guides/what-new-york-injury-firms-publish-about-fees/` | contingency fee disclosure | E1 method piece. |
@@ -120,38 +138,90 @@ and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`, `/contact/
 
 ## Next, ranked
 
-Item 1 was taken on 2026-09-14, and item 6 went into it as a section rather than becoming its own
-guide, which is what the old entry predicted. What the writing turned up changed the ranking
-below: the piece set out to be about state lines and found that the state lines are the small
-half of the problem, which leaves a bigger topic behind it.
+Item 3 was taken on 2026-09-16 and item 5 went into it as a paragraph, as the old entry
+predicted. **Two of the six entries below were dead when this run checked them against the data,
+which is the argument for checking before committing rather than inheriting a ranking.** Old item
+1 is gone because `digital.ahrefs` is now present on all 217 firms and D2 scores `ahrefs` on every
+one of them, so the largest hole in the score has been filled and the piece it was waiting for has
+no subject. Old item 2 is gone because `founded_year` is set on **zero** of the 217 records: there
+is no website founding claim committed anywhere, so there is nothing for `operating.registered` to
+disagree with. Anyone who wants that piece has to crawl the claims first.
 
-1. **The pending measurement, as its own study.** The new denominator guide reports that D2
-   Search authority is unmeasured on 46 of 59 firms, which is the single largest hole in the
-   score and is ours rather than any state's. That guide gives it four sentences. It deserves a
-   piece: what D2 measures, why the cohort ran out of Ahrefs units (the reasoning is already
-   written down in `content.config.ts` on the `cohorts` schema), what the score looks like for
-   the thirteen firms that do carry it, and what changes when the rest land. Strongest remaining
-   topic, and the most uncomfortable, which is usually the same thing here.
-2. **How long these firms have actually been operating.** `operating.registered` and
-   `operating.years` are filled for 58 of 59 firms from state registers. Founding year claims on
-   firm websites are marketing; a register entry is not. Check how often the two disagree before
-   committing: if they rarely do, the piece is a paragraph, not a guide.
-3. **The firms that publish no roster at all.** Fell out of this run and is not the same topic as
-   item 4. Six New York firms have G1 and G2 recorded as `no roster published`: the state register
-   is open, and there is simply no name on the site to look up in it. That is a finding about what
-   a firm chooses to publish, it is measurable today, and it is the demand-side version of the
-   "how do I check my lawyer's licence" query that the registers themselves own (see the SERP note
-   below). Check first whether the six are small firms, which would make it a size story instead.
-4. **Malpractice insurance and bar membership, who says it out loud.** `accountability` holds
-   `malpractice_insurance`, `insurance_evidence.quote` and `bar_associations` with source URLs for
-   57 firms. Nothing about individual attorneys, which keeps it clear of the registration rule.
-5. **What a firm's own attorney roster does not tell you.** `attorneys[]` has `bar_number` on
-   almost nobody. Needs care: no characterisation of any named attorney beyond the record's own
-   words, and the piece works better as a count with no names at all. Overlaps item 3; if item 3
-   is written, this is probably a section of it.
-6. **The office-count problem in every directory.** `digital.places.listing_count` versus review
+1. **Nobody says they carry malpractice insurance.** `accountability.malpractice_insurance` is
+   recorded on 212 firms and is `true` on **none of them**, while `bar_associations` is non-empty
+   on 87. A client who is harmed by negligent representation is recovering from an insurer or
+   from nobody, most states do not require the cover, and not one firm site we read says either
+   way. That is a real absence across a large population, it is a count rather than a
+   characterisation of anyone, and it is the natural sequel to the licensure piece: same
+   question, different record. Check `scripts/check_a5.py` for what the field actually asserts
+   before writing a sentence on it.
+2. **Is this firm even a company?** The other half of "is this law firm legit", and unwritten.
+   Gate G3 confirms the firm in a state business register for 83 of 217, and the reason it fails
+   elsewhere is the same shape as the licensure finding: New York, Oregon and Texas publish their
+   corporate registers as open data and the others do not, so 72 firms carry `no queryable
+   source`. `entity` holds the legal name, entity type, filing id and formation date for 60
+   firms, and `operating.years` is filled for 216 from state registers. Strong, and it pairs with
+   the piece just published rather than repeating it.
+3. **Texas, the state where neither check runs.** Of the 20 Dallas firms, G1 passes on 0 and G2
+   passes on 0, the only state in the directory where both are blank: the bar refuses automated
+   readers and attorney discipline there is not an order of the supreme court, so CourtListener
+   has nothing to index either. It is also the most heavily advertised market we cover, which the
+   city notes already say. Narrow, and it may be a section of item 2 rather than its own guide.
+4. **The office-count problem in every directory.** `digital.places.listing_count` versus review
    totals. Overlaps the Google reviews guide; only worth writing if it is reframed as a directory
    design piece rather than a review piece.
+5. **What a participation score measures.** Out of the Avvo pass below: Avvo's own documentation
+   says answering questions and publishing guides on Avvo can raise a lawyer's Avvo Rating. A
+   directory whose rating partly measures engagement with the directory is a stronger version of
+   the FindLaw observation from 2026-09-14. We have no measurement of Avvo to publish, so this is
+   a paragraph inside a future method piece rather than a guide, and it must be sourced to their
+   published documentation rather than asserted.
+
+**Dead, so they are not proposed again:**
+
+- *What a firm's own roster does not tell you, from `attorneys[].bar_number`.* We do not measure
+  whether a firm publishes bar numbers. See the open item below: the field that claimed to is
+  empty on every record, and the one that does exist means something else.
+- *D2 as the largest hole.* Filled. See above.
+- *Founding-year claims against the register.* No committed claims to compare. See above.
+
+## Keyword research, 2026-09-16
+
+`subscription-info-limits-and-usage` is free and was the first call again: 468,209 of 800,000
+used, reset still on the 19th, so roughly 330,000 units were available. Three paid calls, 967
+units in total, well inside the six-call rule. Keep starting with the free call.
+
+What they returned:
+
+- **The winnable query is "how to check if a law firm is legit": 30/mo, difficulty 3**, parent
+  topic `law license lookup`. A difficulty of 3 on a question with commercial intent in this
+  vertical is close to unheard of, and it is what this run's guide targets. Around it sit "how to
+  check a lawyer credentials" (80, KD 65), "how to check a lawyer reputation" (80, KD 52), "how to
+  check if a lawyer is legit" (60, KD 52), "how to check if a lawyer is licensed" (30, KD 55),
+  "how to verify a lawyer" (20, KD 55) and a long tail of "how to check if a law firm is
+  registered", "how to check if a lawyer is in good standing", "where can i check if a lawyer is
+  legit", each at 10 to 20. Individually small, collectively a few hundred a month, and the whole
+  cluster shares one parent topic.
+- **The head terms are still not worth a run**, and the 2026-09-14 note on that stands.
+- Nothing returned for "law firm website no attorney names", "attorney license lookup by state",
+  "how to verify a lawyer is real", "who are the lawyers at a law firm" or "law firm
+  transparency". The finding this run published has no query of its own. It is reachable only
+  through the "is this firm legit" cluster, which is why the guide is framed as the check rather
+  than as the absence.
+- **`serp-overview` on "how to check if a law firm is legit" is the reason to write it.** Position
+  one is americanbar.org's Lawyer Licensing page, three is lawyerlegion.com's list of state bar
+  directories, five is calbar.ca.gov on legal services fraud. Four and seven are JustAnswer, Avvo
+  Legal Answers and three Reddit threads. Six is a FindLaw blog post, "5 Quick Ways to See If Your
+  Lawyer Is Legit", at DR 90 and 10 monthly visits. Eight and nine are law firm blog posts at DR
+  36 and DR 29, ranking on a page with the ABA and a state bar. Ten is a Facebook group post
+  reading "How to check if the lawyer is legit? I only have his name."
+- **Nobody on that SERP has measured anything.** Every result is either a list of registers or
+  generic advice, and every one of them says to look the attorney up without asking whether there
+  is an attorney to look up. That is the information gain, and a page where DR 29 ranks is a page
+  we can enter.
+- People also ask: "How can I find out if a lawyer is real?", "How to identify a fake lawyer?",
+  "What are red flags for lawyers?", "How to spot a fake legal notice?" The third one is ours to
+  answer with evidence rather than with a list of vibes.
 
 ## Keyword research, 2026-09-14
 
@@ -218,7 +288,40 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: avvo.com.**
+**Next run: justia.com.**
+
+### avvo.com, read 2026-09-16
+
+`www.avvo.com` is blocked by this environment's egress proxy, so this was read through search
+results and Avvo's own support and legal-guide pages as they appear in them. **Three of the eight
+competitors are now known to be unreachable from here** (nolo, findlaw, avvo), so a search-based
+read is the normal case rather than the exception. Budget for it.
+
+Shapes Avvo earns traffic with:
+
+1. **Consumer Q&A at `/legal-answers/`**, thousands of threads where lawyers answer for free. This
+   is the shape that matters for us, because it is how Avvo occupies exactly the SERP this run's
+   guide targets: two of the top ten for "how to check if a law firm is legit" are Avvo threads.
+   Do not chase it. We have no lawyer community, one cannot be faked, and a thread of opinions is
+   what a measured page beats.
+2. **Lawyer-written Legal Guides at `/legal-guides/ugc/`.** Free content supply, and the incentive
+   is the rating: see below. Structurally clever and not available to us.
+3. **The Avvo Rating, 1 to 10**, from lawyer-supplied profile data plus state bar records. Their
+   published factors include years in practice, peer endorsements, awards, publications, profile
+   completeness, and **"legal thought leadership", which they describe as including answering
+   questions and publishing guides on Avvo**. Advertising does not influence it and they say so
+   prominently, which is true and is not the interesting part. The interesting part is that
+   engaging with the directory can raise the score the directory publishes about you, and that a
+   lawyer who ignores Avvo scores lower for an empty form rather than for anything about their
+   practice.
+4. **A profile for essentially every licensed attorney**, seeded from bar records. Worth knowing
+   for the piece just published: a reader with a name can usually find that lawyer on Avvo. A
+   reader without one cannot, and Avvo does not help them either.
+
+The thing to take: Avvo's rating is self-reported plus participation, ours is measured evidence
+with the coverage published, and the contrast is best made by demonstration. Also the practical
+note that FindLaw and Avvo both rank on the queries we want with content that measures nothing,
+which means the bar is lower than their domain ratings suggest.
 
 ### findlaw.com, read 2026-09-14
 
@@ -296,6 +399,10 @@ chart's job lost the table:
 | Denominator | Columns: how much of the available scale we read | A distribution, with the band below the comparability line highlighted, which is again where our own rule bites |
 | Denominator | Bars: points of scale measured, for the firms that all share one score | The argument in one picture: identical totals, bars from 16 to 97. Built by finding the shared total with the widest spread rather than by naming firms, so it re-picks itself as the data moves |
 | Denominator | Split bar: what limits the comparison across all firms | Part-to-whole of one population in three non-overlapping states, so one hue in three steps |
+| Checking a firm | Split bar: what we found when we went looking for a name | Part-to-whole of one population in four states, ordered by how much evidence we got, so our own two failures sit beside the firms' one rather than being folded into it |
+| Checking a firm | Columns: attorneys named per firm | A distribution, with the empty band highlighted. The rank of that band is computed rather than described, because a hand-written "second largest" was wrong on the first build |
+| Checking a firm | Bars: firms naming nobody, by state | The bar is the share and the printed figure is the count, because the states hold 13 to 71 firms each and a bar drawn from the raw count makes the largest market look like the worst one |
+| Checking a firm | Bars: what we could check, four checks out of one denominator | Magnitude, with the licensure row highlighted because it is the one every competitor recommends and the one that ran least often. The argument is the ordering |
 
 Rules for the next one: pick the form from the data's job before touching colour, keep every
 figure computed, and look at the rendered chart at 390px before shipping it. The three components
@@ -372,18 +479,54 @@ without figures, since nothing in that file is computed: the Core Web Vitals ent
 out of thirteen passes", and the fees entry said every firm offers a free consultation, which is
 now forty-seven of forty-eight.
 
+## Corrections, 2026-09-16
+
+**`digital.trust_pages.bar_numbers_on_bios` is written by nothing and read by three things.** No
+committed record under `src/data/firms/**` carries that key: the `trust_pages` map holds only
+`attorney_bios`, `privacy_policy`, `disclaimer`, `blog` and `fee_statement`, all of them `true`
+where present and absent otherwise. `scripts/crawl_attorneys.py` says in its own docstring that it
+records bar numbers found on bio pages, but it writes into `.crawl/` staging and that value never
+reaches the firm record.
+
+The consequence on the guides side was a published sentence. `core-web-vitals-new-york-injury-firms`
+read that key, got `undefined` for every firm, counted zero, and printed "not one firm publishes a
+bar registration number on its attorney bios" as though it were a measurement. It is the third
+version of the same failure on the same page, after the one the run brief describes, and it is the
+worst of the three: the earlier ones read the wrong real field, this one read no field at all. The
+page now makes no claim about bar numbers, and the new guide says out loud that we do not measure
+it. Both are fixed here.
+
+The other two readers are **not** fixed here, because they are scoring code and changing them
+rescores 217 firms, which is not a guide run's call:
+
+- `scripts/score.py` line 448 awards a point of D1 for `trust_pages["bar_numbers_on_bios"]`. Since
+  no record carries it, **every firm in the directory loses that point**, and every firm's D1
+  evidence string reads "no bar numbers on bios". That is the repository's own stated rule broken
+  in its own engine: a firm must not lose points to the reach of our crawl. Either wire the
+  crawler's finding through to the record, or take the point out of D1.
+- `src/lib/achievements.ts` line 100 gates the "Bar numbers published" achievement on the same
+  key, so no profile can ever earn it.
+- Separately, **A6's evidence string says something it does not measure.** `score.py` line 262
+  computes `on_bios` from `registry_basis` containing the word "firm", which is the value
+  `firm named in the registration`: that is the state register's entry naming this firm as the
+  attorney's address. It then prints "bar numbers published on the bios" and awards 3 points for
+  it. The register naming a firm and the firm printing a number are not the same fact. This is
+  live on profiles.
+
 ## Open items for a person
 
 - `src/pages/methodology.astro` line 85 says of the B3 disclaimer check: "Of the first ten firms
-  we read, four carried one." That figure is now stale: across the 37 firms that publish results,
-  21 carry a disclaimer. It is hand-typed prose on a page outside the guides section, so this run
-  left it alone rather than editing it silently.
+  we read, four carried one." Still there, and now stale twice over: across the 107 firms that
+  publish results, 44 carry a disclaimer. It is hand-typed prose on a page outside the guides
+  section, so two runs have now left it alone rather than editing it silently. Somebody should
+  either compute it or drop the sentence.
 - `scripts/audit_seo.mjs` did not exist when this run was asked to run it. It was written on this
   run: broken internal links, duplicate titles and canonicals, missing canonicals, orphans.
   Orphans warn, everything else exits non-zero. It is not wired into `npm run build`; wiring it in
   is a decision for whoever owns the build.
-- No firm in the directory has a single verified result (`results[]` is empty for all 59 records).
-  Until that changes, pillar B is a measure of disclosure and the site should keep saying so.
+- No firm in the directory has a single verified result. `results[]` is empty on all **217**
+  records, unchanged since this was first noted at 59. Until that changes, pillar B is a measure
+  of disclosure and the site should keep saying so.
 - `/guides/what-a-case-results-page-proves/` says the publishing firms "average {avgPublishers}
   out of 100" and the non-publishers average something lower. Those two averages are means of
   percentages taken over different denominators, which the new denominator guide is precisely
@@ -394,6 +537,27 @@ now forty-seven of forty-eight.
   `assessable`, `coverage` and `comparable` are now explained in a guide, which is the wrong home
   for a definition the profiles and `/methodology/` both depend on. Consider moving the four-term
   glossary onto the methodology page and having the guide link to it.
-- Two published pages carry a title over the 70-character mark that `audit_seo.mjs` notes:
-  `/firms/koenigsberg-associates-law-offices/` at 71 and `/practice-areas/personal-injury/` at 72.
-  Both predate this run and both are notes rather than failures, so they were left alone.
+- Six published pages carry a title over the 70-character mark that `audit_seo.mjs` notes, five of
+  them firm profiles whose length is the firm's own name, plus `/practice-areas/personal-injury/`
+  at 72. All predate this run and all are notes rather than failures, so they were left alone.
+- **`npm run check:meta` has been failing at head since before this run**, on two problems that
+  are not in the guides section and were not introduced here. `/practice-areas/real-estate/` has a
+  172-character description, 17 over the limit, hand-typed in `src/data/practices.ts`.
+  `/firms/jason-stone-injury-lawyers/` carries three em dashes, all of them inside the firm's own
+  published fee wording ("NO FEE UNLESS WE WIN — GUARANTEED!"), which is a quotation of somebody
+  else's copy rather than our prose. The first is a one-line edit somebody should make. The second
+  needs a decision: either the check should exempt quoted firm copy the way it already exempts
+  blockquotes, or the profile should stop reproducing the firm's punctuation. This run left both
+  alone rather than editing another section's copy, and `audit_seo.mjs` is clean.
+- The `attorneys[]` measurement is structural: an attorney index page, then bio pages, then the
+  `<h1>` of each. A firm that names its lawyers only in a paragraph reads as naming nobody, and
+  9 firms have a roster page we found and no name we could lift from it. The new guide counts
+  those 9 apart from the 42 where we found nothing, and says so, but the honest fix is in
+  `scripts/crawl_attorneys.py` rather than in a caveat. If that crawler improves, the headline
+  figure in `/guides/what-it-takes-to-check-a-law-firm/` moves on its own, which is the design
+  working.
+- Firm sites are largely unreachable from this environment: the egress proxy blocked every attempt
+  to spot-check a no-roster firm's site by hand. The two firms the new guide names are named for
+  facts that are complimentary or are about a state's records policy, not for an absence we could
+  not verify independently. Keep that constraint in mind before a future run names a firm as an
+  example of something missing.
