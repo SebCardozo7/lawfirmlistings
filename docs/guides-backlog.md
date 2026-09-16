@@ -20,8 +20,16 @@ Send one at each of these two moments:
 
 The second one is best effort and the reason is structural, so do not quietly treat it as covered:
 a run opens the pull request and finishes, and the human merge can land hours later, after the
-session is gone. When that happens nobody sends anything. If the owner wants a guarantee that does
-not depend on a session being alive, that belongs in a workflow on `push` to `main`, not here.
+session is gone. When that happens no session sends anything.
+
+**That gap is now closed by something that does not depend on a session, and this paragraph used
+to say it was not.** `.github/workflows/announce_guide.yml` fires on `push` to `main` under
+`src/pages/guides/**.astro`, takes added files only so an edit is not a publication, resolves the
+headline through `scripts/guide_title.mjs`, and opens an issue assigned to the repository owner,
+which is what sends the mail. Checked on 2026-09-16 against the new guide's slug: the title
+resolves and the step would run. So the merge is announced whether or not a session is alive, and
+the run's own second notification is now a faster duplicate rather than the only copy. Still send
+it: a duplicate costs nothing and the workflow has never been observed firing on a real merge.
 
 The judgement call that produced the gap, written down so it is not made again: the merge arrived
 while the session was still watching, and the run skipped the notification on the grounds that the
