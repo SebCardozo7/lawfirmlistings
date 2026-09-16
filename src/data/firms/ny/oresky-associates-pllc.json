@@ -60,7 +60,7 @@
       "admitted_year": 2009,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -71,7 +71,7 @@
       "admitted_year": 2007,
       "registry_status": "Delinquent",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -82,7 +82,7 @@
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -90,7 +90,7 @@
       "bar_state": "NY",
       "source_url": "https://oreskylaw.com/es/abogados/michael-reich/",
       "registry_note": "ambiguous (2 attorneys share this name)",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -101,7 +101,7 @@
       "admitted_year": 1993,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -113,7 +113,7 @@
       "admitted_year": 2019,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "firm bio heading"
     },
     {
@@ -124,7 +124,7 @@
       "admitted_year": 1987,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     }
   ],
@@ -263,31 +263,31 @@
       "pass": false,
       "evidence": "6 of 7 attorneys currently registered. 1 not currently registered (Joshua E. Goldblatt: Delinquent). Held for review: either record may be out of date.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, pending review of a registration lapse",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 6 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": true,
       "evidence": "ORESKY & ASSOCIATES, PLLC is an active domestic professional service limited liability company registered since 2003-10-09, with 3 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
       "evidence": "727 public client reviews and 23 years since the entity was formed in 2003",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -333,12 +333,12 @@
     "dos_id": "2963593",
     "formed": "2003-10-09",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 66,
+    "total": 69,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (7/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (9/25).",
     "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
@@ -420,7 +420,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 727 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 727 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -441,7 +441,7 @@
         ]
       },
       "D": {
-        "score": 7,
+        "score": 9,
         "max": 25,
         "subs": [
           {
@@ -455,10 +455,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 3,
+            "pts": 5,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 33 → 46th pct of 37-firm cohort (median 33.5) 1/3 · 718 referring domains, 24th pct 0/2 · 1,145 organic keywords / 10,344 visits·mo, 77th pct 2/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 33 → 61th pct of 61-firm cohort (median 30) 2/3 · 718 referring domains, 39th pct 1/2 · 1,145 organic keywords / 10,344 visits·mo, 86th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -513,16 +513,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 4,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +5.0 available",
-        "D2 Search authority: +5 available",
-        "D3 Local presence: +4 available"
+        "D3 Local presence: +4 available",
+        "D4 Content, E-E-A-T & schema: +4 available"
       ]
     },
-    "raw": 64.5,
+    "raw": 66.5,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.886,

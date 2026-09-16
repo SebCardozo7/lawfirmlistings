@@ -18,6 +18,7 @@ LFL_ENV=production npm run build   # strict: fails on sample firms / illustrativ
 - `src/pages/{index,methodology}.astro`, `practice-areas/`, `cities/`, `guides/` — v0.8 design pages (static copy; firm cards there are still sample content — to be data-driven in Phase 1).
 - `src/components/Scorecard.astro` — the certification scorecard; `Icon.astro` — inline SVG set; `src/styles/global.css` — design system "Aurora + Paper".
 - `scripts/score.py` — Methodology v1.0: gates → pillars A–E → tiers (Certified 70 / Distinguished 85 / Elite 93 with A+B+C floors 40/50/55).
+- `docs/market-queue.md` — firms found in a market and not published, with the review count and the reason. A discovery run finds more firms than a publishing pass can measure, and a firm we could not read is worth recording rather than rediscovering.
 
 ## Deploy (Cloudflare Pages)
 Framework preset **Astro** · build command `npm run build` · output directory `dist` · Node 22. Add env `LFL_ENV=production` for the production branch once sample data is gone.

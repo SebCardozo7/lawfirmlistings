@@ -40,7 +40,7 @@
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "firm bio heading"
     },
     {
@@ -49,7 +49,7 @@
       "bar_state": "NY",
       "source_url": "https://sakkascahn.com/about-us/matthew-sakkas/",
       "registry_note": "not found",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "firm bio heading"
     },
     {
@@ -61,7 +61,7 @@
       "admitted_year": 1986,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "firm bio heading"
     }
   ],
@@ -159,31 +159,31 @@
       "pass": true,
       "evidence": "2 of 3 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 2 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": true,
       "evidence": "SAKKAS. CAHN & WEISS. LLP is an active domestic registered limited liability partnership registered since 2008-10-28, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
       "evidence": "95 public client reviews and 18 years since the entity was formed in 2008",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -282,12 +282,12 @@
     "dos_id": "3736573",
     "formed": "2008-10-28",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 60,
+    "total": 61,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (7/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (8/25).",
     "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
@@ -369,7 +369,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 95 reviews → Bayesian 4.91 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 95 reviews → Bayesian 4.92 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -390,7 +390,7 @@
         ]
       },
       "D": {
-        "score": 7,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -404,10 +404,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 3,
+            "pts": 4,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 32 → 39th pct of 37-firm cohort (median 33.5) 1/3 · 837 referring domains, 32th pct 1/2 · 770 organic keywords / 3,803 visits·mo, 48th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 32 → 57th pct of 61-firm cohort (median 30) 2/3 · 837 referring domains, 51th pct 1/2 · 770 organic keywords / 3,803 visits·mo, 68th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -462,16 +462,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +5.0 available",
-        "D2 Search authority: +5 available",
-        "B3 Results disclosure: +4 available"
+        "B3 Results disclosure: +4 available",
+        "D2 Search authority: +4 available"
       ]
     },
-    "raw": 58.0,
+    "raw": 59.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.772,

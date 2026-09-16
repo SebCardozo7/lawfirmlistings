@@ -1039,6 +1039,9 @@ button,input,select{font:inherit;color:inherit}
 .roster-rest ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .roster-rest li{background:var(--paper);border:1px solid var(--line);border-radius:var(--pill);padding:7px 14px;font-size:.9rem}
 .roster-rest li a{color:var(--ink)}
+/* The role a firm printed beside a name that is not a lawyer's, set quieter than the name it
+   belongs to: the person is the fact, the job title is the reason they are in this list. */
+.roster-rest li .role{color:var(--muted);font-size:.82rem;margin-left:6px}
 
 /* Cities as a destination rather than as a filter. The chips this replaces were the page's main
    navigation dressed as a control, and a reader skimmed straight past them. A card carries the

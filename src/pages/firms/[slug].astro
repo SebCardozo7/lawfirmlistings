@@ -249,7 +249,7 @@ const schema = {
       {/* Hidden entirely when no attorney has been collected. An empty section said
           "0 attorneys · licensure checked against the New York attorney registry", because
           [].every() is vacuously true — the strongest claim on the page, made about nobody. */}
-      {roster.attorneys.length + roster.colleagues.length > 0 && (
+      {roster.attorneys.length + roster.colleagues.length + roster.staff.length > 0 && (
       <div class="block" id="attorneys">
         {/* The heading used to claim licensure had been checked against the state registry. It
             has not been, for any firm: the names are read from each firm's own bio pages and the
@@ -277,6 +277,20 @@ const schema = {
             <h3>Also named by the firm</h3>
             <p>The firm lists {roster.colleagues.length === 1 ? 'this person' : 'these people'} among its team and prints no role beside the {roster.colleagues.length === 1 ? 'name' : 'names'}, so we do not describe {roster.colleagues.length === 1 ? 'them' : 'them'} as attorneys.</p>
             <ul>{roster.colleagues.map(a => <li>{a.source_url ? <a href={a.source_url} rel="nofollow noopener" target="_blank">{a.name}</a> : a.name}</li>)}</ul>
+          </div>
+        )}
+        {/* The third group src/lib/roster.ts sorts people into, and until now the only one the
+            page threw away. One Queens firm names thirty-nine people and prints a role beside
+            every one: four practise law and the rest are case managers, intake and translators.
+            Dropping them made the page answer "who works there" with four names out of
+            thirty-nine, and printing them among the attorneys would have been the credential
+            claim this whole split exists to avoid. So they are here, with the job the firm
+            itself published beside each name. */}
+        {roster.staff.length > 0 && (
+          <div class="roster-rest">
+            <h3>Also named by the firm, in a role that is not a lawyer’s</h3>
+            <p>The firm names {roster.staff.length === 1 ? 'this person' : 'these people'} among its team and prints the role below beside the {roster.staff.length === 1 ? 'name' : 'names'}. They are not counted as attorneys.</p>
+            <ul>{roster.staff.map(a => <li>{a.source_url ? <a href={a.source_url} rel="nofollow noopener" target="_blank">{a.name}</a> : a.name} <span class="role">{a.role}</span></li>)}</ul>
           </div>
         )}
       </div>

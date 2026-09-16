@@ -12,6 +12,11 @@ Guard: LFL_ENV=production fails the build if a firm has status "sample", or a *c
 """
 import json, os, re, sys, glob, statistics, datetime, pathlib
 
+# Who a firm presents as a lawyer, shared with check_ny_registry.py so that A6 and
+# the licence gates count the same roster.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from roster_roles import is_support_role  # noqa: E402
+
 # The data files and this script's own output carry non-ASCII (× in cohort labels, → in tier paths).
 # Windows would otherwise default to cp1252 and crash on them, so pin UTF-8 everywhere.
 def read_json(path):
@@ -90,6 +95,7 @@ NOT_A_FINDING = ("pending", "partial", "no queryable source", "unavailable",
 # meaning we have not got there yet. Only these leave the coverage denominator: a check we simply
 # owe is still a gap in our work and should count against us.
 NO_SOURCE_IN_MARKET = ("no queryable source", "unavailable", "no roster published")
+
 
 # Sub-factors read from the firm's own website. Every one of them is unmeasurable for a firm whose
 # site refuses us, and none of them may be scored zero on that basis. D1 is here for its trust
@@ -223,7 +229,15 @@ def compute(firm):
     # weights, so the word described nothing. Coverage is stated in the evidence rather than
     # gated on a threshold, because the mean over eight of nine attorneys is a sound estimate of
     # the mean over nine and hiding the denominator would be the dishonest part.
-    attys = firm.get("attorneys") or []
+    # The people a firm presents as lawyers, which is not everybody it names. A Queens firm
+    # names thirty-nine people and prints a role beside each: four practise law, the rest are
+    # case managers, intake and translators. Dividing the register matches by thirty-nine would
+    # have published "4 of 39 named attorneys matched to the New York register" about a firm
+    # that never called those thirty-five attorneys, and charged it eight points for our own
+    # misreading. Anyone the firm gave a non-lawyer's title leaves the denominator.
+    #
+    # src/lib/roster.ts makes the same split for the profile page and holds the same list.
+    attys = [a for a in (firm.get("attorneys") or []) if not is_support_role(a)]
     years = [TODAY_YEAR - a["admitted_year"] for a in attys
              if a.get("admitted_year") and a["admitted_year"] <= TODAY_YEAR]
     if years and "A2" not in A:

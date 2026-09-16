@@ -9,9 +9,9 @@
   "state": "NY",
   "practice": "personal-injury",
   "label": "New York × Personal Injury",
-  "measured_at": "2026-09-09",
-  "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us). The 12 published New York firms were re-measured 2026-09-09; the remaining peer rows date from 2026-09-07 and 2026-09-08. jacobyandmeyers.com excluded 2026-09-08: its own JSON-LD and all ten of its Google listings place it in Los Angeles, California.",
-  "full_size_estimate": 148,
+  "measured_at": "2026-09-16",
+  "source": "ahrefs batch-analysis (mode=subdomains, protocol=both, country=us). The 12 published New York firms were re-measured 2026-09-09; the remaining peer rows date from 2026-09-07 and 2026-09-08. jacobyandmeyers.com excluded 2026-09-08: its own JSON-LD and all ten of its Google listings place it in Los Angeles, California. A discovery run over the Google Places API on 2026-09-16 found 185 firms in this market that the SEO-derived cohort had never seen, and the twenty-five largest of them by review count were measured on 2026-09-16 and twenty-four were added, the exception being noted below. Two scored things move with it. D2 is a percentile against this cohort, which is 62 firms where it was 38, and C2's Bayesian prior is a count-weighted mean rating over every scored firm in the directory, so 24 new firms with a mean near 4.9 move it for every market at once. The largest of the new entries are outer-borough practices in Forest Hills, Queens Village, Rosedale and the Bronx, which is where the clients are and not where the backlinks are.",
+  "full_size_estimate": 230,
   "firms": [
     {
       "domain": "yourlawyer.com",
@@ -316,16 +316,210 @@
       "refdomains": 673,
       "org_keywords": 54,
       "org_traffic": 78
+    },
+    {
+      "domain": "shalomlawny.com",
+      "name": "Shalom Law, PLLC",
+      "dr": 15,
+      "refdomains": 523,
+      "org_keywords": 58,
+      "org_traffic": 278
+    },
+    {
+      "domain": "raytsinlaw.com",
+      "name": "Raytsin Law Firm, P.C.",
+      "dr": 0.1,
+      "refdomains": 370,
+      "org_keywords": 7,
+      "org_traffic": 124
+    },
+    {
+      "domain": "accidentnewyork.com",
+      "name": "Alex Yadgarov & Associates",
+      "dr": 43,
+      "refdomains": 878,
+      "org_keywords": 127,
+      "org_traffic": 866
+    },
+    {
+      "domain": "brianjlevy.com",
+      "name": "Brian J. Levy & Associates, P.C.",
+      "dr": 20,
+      "refdomains": 444,
+      "org_keywords": 16,
+      "org_traffic": 179
+    },
+    {
+      "domain": "redmondfirm.com",
+      "name": "Redmond Law Firm, PLLC",
+      "dr": 3.3,
+      "refdomains": 445,
+      "org_keywords": 31,
+      "org_traffic": 272
+    },
+    {
+      "domain": "carrionesq.com",
+      "name": "Carrion Accident & Injury Attorneys, PLLC",
+      "dr": 29,
+      "refdomains": 817,
+      "org_keywords": 51,
+      "org_traffic": 184
+    },
+    {
+      "domain": "888askelliot.com",
+      "name": "Elliot Ifraimoff & Associates, P.C.",
+      "dr": 9,
+      "refdomains": 587,
+      "org_keywords": 102,
+      "org_traffic": 870
+    },
+    {
+      "domain": "mushiyevlaw.com",
+      "name": "Yakov Mushiyev & Associates, P.C.",
+      "dr": 21,
+      "refdomains": 449,
+      "org_keywords": 48,
+      "org_traffic": 222
+    },
+    {
+      "domain": "levilawny.com",
+      "name": "Daniella Levi & Associates, P.C.",
+      "dr": 15,
+      "refdomains": 770,
+      "org_keywords": 35,
+      "org_traffic": 77
+    },
+    {
+      "domain": "dreishpoon.com",
+      "name": "Law Offices of Michael Dreishpoon",
+      "dr": 4.3,
+      "refdomains": 642,
+      "org_keywords": 21,
+      "org_traffic": 178
+    },
+    {
+      "domain": "rmkinjurylaw.com",
+      "name": "The Law Offices of Richard M. Kenny",
+      "dr": 30,
+      "refdomains": 702,
+      "org_keywords": 164,
+      "org_traffic": 759
+    },
+    {
+      "domain": "yourbronxlawyers.com",
+      "name": "Kerner Law Group, P.C.",
+      "dr": 13,
+      "refdomains": 706,
+      "org_keywords": 40,
+      "org_traffic": 83
+    },
+    {
+      "domain": "krupniklawgroup.com",
+      "name": "Krupnik Law Group, P.C.",
+      "dr": 0,
+      "refdomains": 374,
+      "org_keywords": 2,
+      "org_traffic": 8
+    },
+    {
+      "domain": "daglawteam.com",
+      "name": "Jonathan D'Agostino & Associates",
+      "dr": 15,
+      "refdomains": 797,
+      "org_keywords": 50,
+      "org_traffic": 192
+    },
+    {
+      "domain": "gelbstein.com",
+      "name": "Gelbstein & Associates, PLLC",
+      "dr": 4.3,
+      "refdomains": 420,
+      "org_keywords": 5,
+      "org_traffic": 19
+    },
+    {
+      "domain": "seitelman.com",
+      "name": "Mark E. Seitelman Law Offices",
+      "dr": 26,
+      "refdomains": 605,
+      "org_keywords": 686,
+      "org_traffic": 1873
+    },
+    {
+      "domain": "gorayeb.com",
+      "name": "Gorayeb & Associates, P.C.",
+      "dr": 54,
+      "refdomains": 1153,
+      "org_keywords": 544,
+      "org_traffic": 2762
+    },
+    {
+      "domain": "cohenandcohenlawgroup.com",
+      "name": "Cohen & Cohen Law Group",
+      "dr": 12,
+      "refdomains": 885,
+      "org_keywords": 236,
+      "org_traffic": 1189
+    },
+    {
+      "domain": "msainjurylaw.com",
+      "name": "Law Offices of Marc S. Albert",
+      "dr": 15,
+      "refdomains": 711,
+      "org_keywords": 44,
+      "org_traffic": 154
+    },
+    {
+      "domain": "rosenbergfirm.com",
+      "name": "Rosenberg & Rodriguez",
+      "dr": 37,
+      "refdomains": 769,
+      "org_keywords": 226,
+      "org_traffic": 857
+    },
+    {
+      "domain": "becklawny.com",
+      "name": "Beck Law Firm",
+      "dr": 18,
+      "refdomains": 454,
+      "org_keywords": 37,
+      "org_traffic": 207
+    },
+    {
+      "domain": "injurylawatty.com",
+      "name": "MooreJustice",
+      "dr": 14,
+      "refdomains": 634,
+      "org_keywords": 148,
+      "org_traffic": 1737
+    },
+    {
+      "domain": "unionlawfirm.com",
+      "name": "Hach & Rose, LLP",
+      "dr": 43,
+      "refdomains": 1286,
+      "org_keywords": 562,
+      "org_traffic": 2770
+    },
+    {
+      "domain": "ajlounyinjurylaw.com",
+      "name": "Ajlouny Injury Law",
+      "dr": 21,
+      "refdomains": 1169,
+      "org_keywords": 51,
+      "org_traffic": 223
     }
   ],
   "unresolved": [
     "tgcllaw.com",
-    "hachroselaw.com",
     "pazerepstein.com",
     "leavandsteinberg.com",
-    "jacobyandmeyers.com"
+    "jacobyandmeyers.com",
+    "855dolor55.com"
   ],
   "unresolved_notes": {
-    "jacobyandmeyers.com": "jacobyandmeyers.com is the California practice: all ten offices the Places API returned sit in California, none in New York, so it was removed from the New York cohort rather than published in a city where it has no verified office."
+    "jacobyandmeyers.com": "jacobyandmeyers.com is the California practice: all ten offices the Places API returned sit in California, none in New York, so it was removed from the New York cohort rather than published in a city where it has no verified office.",
+    "hachroselaw.com": "hachroselaw.com was listed here as unresolved and is resolved: the firm publishes at unionlawfirm.com, which is measured and ranked in this cohort as Hach & Rose, LLP.",
+    "855dolor55.com": "855dolor55.com is The Ward Law Group, PL, whose own structured data gives Miami Lakes, Florida as the firm's address: it holds 5,859 reviews there and 571 in Orlando against 439 at its New York office, so it was removed from the New York cohort on 2026-09-16 rather than ranked in a market where it keeps one of three offices."
   }
 }

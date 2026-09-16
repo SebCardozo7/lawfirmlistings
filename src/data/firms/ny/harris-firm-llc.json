@@ -106,31 +106,31 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": true,
       "evidence": "HARRIS FIRM LLC is an active domestic professional service limited liability company registered since 2020-05-26, with 4 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
       "evidence": "1,329 public client reviews and 6 years since the entity was formed in 2020",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     }
   },
   "cohort_id": "ny-workers-compensation",
@@ -156,7 +156,7 @@
     "dos_id": "5756459",
     "formed": "2020-05-26",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-16"
   },
   "score": {
     "total": 50,
@@ -243,7 +243,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.97 over 1,329 reviews → Bayesian 4.96 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.97 over 1,329 reviews → Bayesian 4.96 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

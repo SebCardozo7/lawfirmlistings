@@ -40,7 +40,10 @@ const LAWYER_ROLE = /\b(attorney|lawyer|partner|associate|of counsel|counsel|esq
 
 /** A role a firm prints that means they do not. Checked first: "paralegal" contains no lawyer
  *  word, but "litigation paralegal" and "attorney's assistant" both would. */
-const NOT_A_LAWYER_ROLE = /\b(paralegal|legal assistant|assistant|case manager|case worker|intake|receptionist|office manager|administrator|admin|clerk|investigator|nurse|marketing|operations|bookkeeper|accountant|translator|interpreter|coordinator|specialist|analyst)\b/i;
+/*  "operating officer" and its siblings are here because a firm's chief operating officer is
+ *  not its lawyer, and one Queens practice publishes its own as "RN, BSN Chief Operating
+ *  Officer": a nurse running the practice, which the word "officer" alone would not settle. */
+const NOT_A_LAWYER_ROLE = /\b(paralegal|legal assistant|assistant|case manager|case worker|intake|receptionist|office manager|administrator|admin|clerk|investigator|nurse|marketing|operations|operating officer|financial officer|technology officer|bookkeeper|accountant|translator|interpreter|coordinator|specialist|analyst)\b/i;
 
 export function classify(person: RosterPerson): RosterRole {
   const role = person.role ?? '';
@@ -89,6 +92,12 @@ export function rosterFor(firm: {
   if (colleagues.length) {
     parts.push(`${colleagues.length} more ${colleagues.length === 1 ? 'person is' : 'people are'} `
       + 'named by the firm without a role, so we do not call them attorneys');
+  }
+  // Said in the heading as well as listed below it, because the difference between four
+  // attorneys and thirty-nine people is the whole answer to "how big is this firm".
+  if (staff.length) {
+    parts.push(`${staff.length} ${staff.length === 1 ? 'person is' : 'people are'} named in a `
+      + 'role that is not a lawyer’s');
   }
 
   return { attorneys, colleagues, staff, verified, note: parts.join(' · ') || null };

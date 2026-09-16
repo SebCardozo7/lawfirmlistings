@@ -39,7 +39,7 @@
       "admitted_year": 1977,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -50,7 +50,7 @@
       "admitted_year": 1980,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -61,7 +61,7 @@
       "admitted_year": 1985,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -69,7 +69,7 @@
       "bar_state": "NY",
       "source_url": "https://mirmanlawyers.com/about/michael-ohagan/",
       "registry_note": "not found",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "bar_number": "2315604",
       "admitted_year": 1990,
       "registry_status": "Currently registered",
@@ -84,7 +84,7 @@
       "admitted_year": 2000,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -95,7 +95,7 @@
       "admitted_year": 2009,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -106,7 +106,7 @@
       "admitted_year": 2018,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     }
   ],
@@ -206,31 +206,31 @@
       "pass": true,
       "evidence": "7 of 7 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": true,
       "evidence": "MIRMAN, MARKOVITS & LANDAU, P.C. is an active domestic professional service corporation registered since 1991-02-26, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
       "evidence": "144 public client reviews and 36 years since the entity was formed in 1991",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -296,12 +296,12 @@
     "dos_id": "1511918",
     "formed": "1991-02-26",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 67,
+    "total": 68,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (7/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (8/25).",
     "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
@@ -383,7 +383,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.5 over 144 reviews → Bayesian 4.63 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 144 reviews → Bayesian 4.64 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -404,7 +404,7 @@
         ]
       },
       "D": {
-        "score": 7,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -418,10 +418,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 3,
+            "pts": 4,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 33 → 46th pct of 37-firm cohort (median 33.5) 1/3 · 732 referring domains, 27th pct 1/2 · 731 organic keywords / 4,630 visits·mo, 51th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 33 → 61th pct of 61-firm cohort (median 30) 2/3 · 732 referring domains, 41th pct 1/2 · 731 organic keywords / 4,630 visits·mo, 70th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -476,16 +476,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 3,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +5.0 available",
-        "D2 Search authority: +5 available",
-        "B3 Results disclosure: +4 available"
+        "B3 Results disclosure: +4 available",
+        "D2 Search authority: +4 available"
       ]
     },
-    "raw": 65.0,
+    "raw": 66.0,
     "assessed": 97,
     "coverage": 0.97,
     "floor_abc_pct": 0.816,

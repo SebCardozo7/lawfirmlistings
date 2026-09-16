@@ -181,6 +181,59 @@ def home_links(origin, rp):
             for h in re.findall(r'<a[^>]+href=["\']([^"\'#]+)', html, re.I)]
 
 
+# A page that lists what the firm does, rather than a page about one thing it does.
+COMBINED_PAGE = re.compile(
+    r"(?:^|/)(?:practice[-_]areas?|practice|areas?[-_]of[-_]practice|services?|what[-_]we[-_]do|"
+    r"how[-_]we[-_]help|legal[-_]services?|praactice[-_]areas?)(?:/|$|\.)", re.I)
+
+
+def confirm_combined(url, spec, rp, practice_name):
+    """The practice named on a page that lists all of them, which is weaker and still evidence.
+
+    The URL test is the right first question and it is not the only one. The three firms with the
+    largest review counts in New York City publish no page whose address names an injury
+    practice: one lists every practice on a single /practice-areas/ page, one spells its own path
+    "praactice-areas", and the ranking would have omitted the two best known injury practices in
+    Queens on the strength of a typo and a site structure.
+
+    So where no dedicated page exists, a combined page counts if the practice is named in a
+    heading or a link on it and the page carries the vocabulary of that practice. The evidence
+    records which kind it is, because a firm with a page about personal injury has published more
+    than a firm with personal injury in a list of nine things, and a reader can see the
+    difference on the profile.
+    """
+    if not rp.can_fetch("*", url):
+        return None, "robots.txt disallows it"
+    status, html, final = fetch(url)
+    time.sleep(DELAY)
+    if status != 200 or not html:
+        return None, "HTTP %s" % (status if status else "unreachable")
+
+    # Named in a heading or a link, not merely somewhere in the prose: a firm that mentions
+    # personal injury in a paragraph about something else has not told anybody it does the work.
+    labels = []
+    for m in re.finditer(r"<(h[1-5]|a|strong|b|li)[^>]*>(.*?)</\1>", html, re.S | re.I):
+        text = re.sub(r"\s+", " ", unescape(strip_tags(m.group(2)))).strip()
+        if 3 < len(text) < 80:
+            labels.append(text)
+    named = next((t for t in labels if spec["title"].search(t)), None)
+    if not named:
+        return None, "the page lists the firm's practices and this one is not among them"
+    if not spec["corroborating"].search(strip_tags(html)):
+        return None, "names the practice in a list and says nothing specific to it"
+
+    head = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+    return {
+        "url": final,
+        "title": unescape(strip_tags(head.group(1))).strip() if head else named,
+        "heading": named,
+        "checked_at": TODAY,
+        "source": ("the firm's own page listing its practice areas, which names %s among them "
+                   "rather than devoting a page to it" % practice_name),
+        "kind": "listed among the firm's practice areas",
+    }, None
+
+
 def confirm(url, spec, rp):
     """Fetch a candidate page and decide whether it is about the practice."""
     if not rp.can_fetch("*", url):
@@ -214,6 +267,7 @@ def confirm(url, spec, rp):
         "heading": heading or None,
         "checked_at": TODAY,
         "source": "the firm's own practice page",
+        "kind": "a page about this practice",
     }, None
 
 
@@ -276,6 +330,33 @@ def examine(domain, spec):
     return None, last
 
 
+def examine_combined(domain, spec, practice_name):
+    """The second question, asked only when the first one found nothing."""
+    origin = "https://" + domain
+    rp = robots_for(origin)
+    robots = robots_body(origin)
+
+    urls, seen = [], set()
+    for url in list(sitemap_urls(origin, robots, rp)) + list(home_links(origin, rp)):
+        if urllib.parse.urlparse(url).netloc.split(":")[0].removeprefix("www.") != domain:
+            continue
+        path = urllib.parse.urlparse(url).path
+        if not COMBINED_PAGE.search(path) or url in seen:
+            continue
+        seen.add(url)
+        urls.append(url)
+    urls.sort(key=lambda u: len(urllib.parse.urlparse(u).path))
+
+    last = "the firm publishes no page listing its practice areas either"
+    for url in urls[:4]:
+        found, why = confirm_combined(url, spec, rp, practice_name)
+        if found:
+            found["candidates_seen"] = len(seen)
+            return found, None
+        last = why
+    return None, last
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--practice", required=True, choices=sorted(PRACTICES))
@@ -309,6 +390,17 @@ def main() -> int:
     for i, domain in enumerate(domains, 1):
         try:
             found, why = examine(domain, spec)
+            # Where the firm publishes no page about this practice, ask whether it publishes a
+            # page listing its practices and names this one on it. Weaker, cited as such, and
+            # the difference between ranking the two best known injury practices in Queens and
+            # omitting them over a site structure and a typo in somebody's own URL.
+            if not found:
+                combined, why_combined = examine_combined(
+                    domain, spec, args.practice.replace("-", " "))
+                if combined:
+                    found, why = combined, None
+                else:
+                    why = "%s; %s" % (why, why_combined)
         except Exception as err:                      # a site can fail in ways urllib does not
             found, why = None, "error: %s" % err
         label = (names.get(domain) or "")[:34]
@@ -332,7 +424,8 @@ def main() -> int:
         (holds if found else misses).append(domain)
 
     print()
-    print("%d of %d publish a %s practice page" % (len(holds), len(domains), args.practice))
+    print("%d of %d publish a %s practice page, or name it among their practice areas"
+          % (len(holds), len(domains), args.practice))
     print()
     for d in holds:
         print("   %s" % d)

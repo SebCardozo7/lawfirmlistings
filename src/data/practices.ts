@@ -324,8 +324,8 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     icon: 'home',
     title: 'Real Estate Law Firms: Rankings and Hiring Guide',
     description:
-      'How to choose a real estate law firm: why the title premium is the same everywhere, ' +
-      'which fee actually varies, and what a closing attorney does that a title company cannot.',
+      'How to choose a real estate law firm: why the title premium is fixed, which fee ' +
+      'varies, and what a closing attorney does that a title company cannot.',
     lede:
       'Real estate firms handling residential and commercial closings, title insurance and ' +
       'escrow, title defects, condominium and association disputes, and land use. Every firm is ' +

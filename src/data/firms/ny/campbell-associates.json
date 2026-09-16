@@ -58,7 +58,7 @@
       "bar_state": "NY",
       "source_url": "https://campbellpersonalinjury.com/colin-campbell",
       "registry_note": "ambiguous (2 attorneys share this name)",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     {
       "name": "John T. Ryan",
@@ -69,7 +69,7 @@
       "admitted_year": 2015,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     {
       "name": "Jason Telaak",
@@ -80,7 +80,7 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     {
       "name": "Accessibility Statement",
@@ -88,7 +88,7 @@
       "bar_state": "NY",
       "source_url": "https://campbellpersonalinjury.com/accessibility-statement",
       "registry_note": "not found",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     }
   ],
   "languages": [
@@ -240,25 +240,25 @@
       "pass": false,
       "evidence": "2 of 4 named attorneys are currently registered and none of those carries an adverse status. 1 other name(s) match a register entry that does: Colin Campbell shares a name with one of 2 registrations, one of them suspended, delinquent. That entry cannot be tied to this firm's attorney and cannot be ruled out either, so the gate is held open rather than decided.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": false,
       "evidence": "None of the 2 attorneys we identified carries a disciplinary status. 1 name(s) we could not identify share a name with a registration that does, Colin Campbell among 2 namesakes. Held open.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, incomplete: an adverse namesake we cannot resolve",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
@@ -442,7 +442,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.94 over 55 reviews → Bayesian 4.87 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.94 over 55 reviews → Bayesian 4.87 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

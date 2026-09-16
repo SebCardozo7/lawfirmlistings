@@ -161,7 +161,7 @@
       "admitted_year": 2022,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/jake-i-berkowitz/",
       "role_source": "not stated by the firm"
     },
@@ -172,7 +172,7 @@
       "admitted_year": 2025,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/emily-driscoll/",
       "role_source": "not stated by the firm"
     },
@@ -183,7 +183,7 @@
       "admitted_year": 2020,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/valerie-hernandez/",
       "role_source": "not stated by the firm"
     },
@@ -194,7 +194,7 @@
       "admitted_year": 2013,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/bartolomeo-andrew-pittari/",
       "role_source": "not stated by the firm"
     },
@@ -206,12 +206,12 @@
       "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
       "name": "Michael A. Barnett",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "bar_state": "NY",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/michael-a-barnett/",
       "registry_note": "ambiguous (3 attorneys share this name)",
@@ -224,7 +224,7 @@
       "admitted_year": 1994,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "source_url": "https://www.nyclawfirm.com/meet-our-attorneys/robert-j-greenstein/",
       "role_source": "not stated by the firm"
     },
@@ -236,7 +236,7 @@
       "admitted_year": 1995,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York; city matches",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     }
   ],
@@ -518,31 +518,31 @@
       "pass": true,
       "evidence": "7 of 8 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": true,
       "evidence": "GREENSTEIN & PITTARI, LLP is an active domestic registered limited liability partnership registered since 2003-12-01, with 7 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
       "evidence": "1,013 public client reviews and 23 years since the entity was formed in 2003",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -589,7 +589,7 @@
     }
   },
   "score": {
-    "total": 66,
+    "total": 68,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-16",
@@ -673,7 +673,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 1,013 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 1,013 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -694,7 +694,7 @@
         ]
       },
       "D": {
-        "score": 8,
+        "score": 9,
         "max": 25,
         "subs": [
           {
@@ -708,10 +708,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 2,
+            "pts": 3,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 27 → 16th pct of 37-firm cohort (median 33.5) 0/3 · 905 referring domains, 41th pct 1/2 · 494 organic keywords / 2,471 visits·mo, 31th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 27 → 39th pct of 61-firm cohort (median 30) 1/3 · 905 referring domains, 59th pct 1/2 · 494 organic keywords / 2,471 visits·mo, 54th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -766,7 +766,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 4,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -775,7 +775,7 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 54.5,
+    "raw": 55.5,
     "assessed": 82,
     "coverage": 0.82,
     "floor_abc_pct": 0.857,
@@ -789,7 +789,7 @@
     "dos_id": "2983403",
     "formed": "2003-12-01",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-16"
   },
   "results_published": {
     "readable": false,

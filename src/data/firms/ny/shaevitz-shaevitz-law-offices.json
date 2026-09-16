@@ -122,25 +122,25 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
@@ -162,7 +162,7 @@
     "checked_at": "2026-09-10"
   },
   "score": {
-    "total": 21,
+    "total": 24,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-16",
@@ -246,7 +246,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 26 reviews → Bayesian 4.72 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.3 over 26 reviews → Bayesian 4.73 (prior 4.84 weighted as 100 reviews, from 241 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -267,7 +267,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -281,10 +281,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 21 → 7th pct of 37-firm cohort (median 33.5) 0/3 · 485 referring domains, 0th pct 0/2 · 119 organic keywords / 930 visits·mo, 12th pct 0/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 21 → 30th pct of 61-firm cohort (median 30) 1/3 · 485 referring domains, 11th pct 0/2 · 119 organic keywords / 930 visits·mo, 36th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -339,16 +339,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 49,
+      "gap": 46,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: +8 available"
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 16.5,
+    "raw": 18.5,
     "assessed": 78,
     "coverage": 0.78,
     "floor_abc_pct": 0.224,
