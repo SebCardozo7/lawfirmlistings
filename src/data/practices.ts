@@ -371,11 +371,12 @@ export const PRACTICES: Record<string, PracticeNotes> = {
             'in this state and in good standing with The Florida Bar" from the licensing and ' +
             'appointment requirements that apply to an agency.',
             'So the register can confirm that a firm holds an agency licence and can never ' +
-            'establish that one should. Where we find a licence we cite it with its number and ' +
-            'the date the state issued it. Where we do not, the profile says the firm was not ' +
-            'found in the register and that the exemption is the ordinary reason, which is the ' +
-            'rule this directory follows everywhere: an absence from a register is not a ' +
-            'finding about a firm.',
+            'establish that one should, and the numbers bear that out. We read the state’s ' +
+            'list of every valid business licence in Florida, 2,643 of them held by title ' +
+            'agencies, and not one of the twenty firms ranked here appears in it under its own ' +
+            'name. That is the exemption working rather than twenty firms cutting a corner, and ' +
+            'it is why the licence is published as a fact where we find one and never scored: a ' +
+            'test that separates nobody is not a test.',
           ],
         },
         {
@@ -429,9 +430,11 @@ export const PRACTICES: Record<string, PracticeNotes> = {
       },
       {
         q: 'The firm is not in the state title agency register. Is that a problem?',
-        a: 'Ordinarily not. Section 626.8417(4) exempts attorneys in good standing with The ' +
-           'Florida Bar from the agency licensing requirements, so a law firm doing title work ' +
-           'is often absent by design. Where a firm does hold a licence, we publish the number.',
+        a: 'Ordinarily not, and it is the normal case rather than the exception. Section ' +
+           '626.8417(4) exempts attorneys in good standing with The Florida Bar from the agency ' +
+           'licensing requirements, and when we read the state register of 2,643 licensed title ' +
+           'agencies, none of the firms ranked here was in it. Where a firm does hold a licence ' +
+           'we publish the number.',
       },
       {
         q: 'Who pays for the title policy?',

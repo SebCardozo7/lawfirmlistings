@@ -107,6 +107,23 @@ const firms = defineCollection({
       text_length: z.number().optional(), why: z.string().optional(),
       url: z.string().optional(), checked_at: z.string(),
     }).optional(),
+    // What the firm publishes about a transaction, for a practice whose work produces no
+    // verdict and no settlement. Pillar B reads this instead of results_published for those,
+    // which is why both are optional and a profile carries one or the other. See
+    // scripts/check_transaction.py.
+    transaction: z.object({
+      readable: z.boolean(),
+      pages_read: z.number().optional(),
+      price: z.object({ figure: z.string(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      flat_fee: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
+      fee_terms: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
+      escrow: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
+      escrow_location_named: z.boolean().optional(),
+      stages: z.array(z.string()).default([]),
+      stage_evidence: z.record(z.object({ quote: z.string(), source_url: z.string() })).optional(),
+      source: z.string().optional(), why: z.string().optional(), checked_at: z.string(),
+    }).optional(),
     gates: z.record(z.object({
       pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string(),
       // Satisfied by the firm's written attestation rather than by our own measurement. Shown

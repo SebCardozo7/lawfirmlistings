@@ -316,8 +316,10 @@ def compute(firm):
             b1, b1_ev = 2, ('Says something about how it charges, without a figure and without a '
                             'flat fee: "%s"' % tx["fee_terms"]["quote"][:180])
         else:
-            b1, b1_ev = 0, ("Nothing about what the work costs on any page we read, which in this "
-                            "practice is the question a client asks first")
+            b1, b1_ev = 0, ("Nothing about what the work costs on any of the %d page%s we read, "
+                            "which in this practice is the question a client asks first"
+                            % (tx.get("pages_read") or 0,
+                               "" if tx.get("pages_read") == 1 else "s"))
         out.append(sub("B1", b1, "firm", b1_ev, label_override="Fee terms published"))
 
         # One point per stage of the deal the firm names, to five. A page naming the title
@@ -329,7 +331,9 @@ def compute(firm):
                        ("Explains %d stage%s of the transaction: %s"
                         % (len(stages), "" if len(stages) == 1 else "s", named))
                        if stages else
-                       "Names none of the stages of a closing on the pages we read",
+                       ("Names none of the stages of a closing on the %d page%s we read"
+                        % (tx.get("pages_read") or 0,
+                           "" if tx.get("pages_read") == 1 else "s")),
                        label_override="The transaction explained"))
 
         # Who holds the money. Every firm doing this work holds client funds and every one of
@@ -342,8 +346,9 @@ def compute(firm):
             b3, b3_ev = 2.5, ('Mentions the escrow or trust account without saying where it is '
                               'held: "%s"' % tx["escrow"]["quote"][:180])
         else:
-            b3, b3_ev = 0, ("Says nothing about who holds the deposit or where, on any page we "
-                            "read")
+            b3, b3_ev = 0, ("Says nothing about who holds the deposit or where, on any of the "
+                            "%d page%s we read" % (tx.get("pages_read") or 0,
+                                                   "" if tx.get("pages_read") == 1 else "s"))
         out.append(sub("B3", b3, "firm", b3_ev, label_override="Escrow disclosed"))
 
     elif rp and rp.get("readable"):

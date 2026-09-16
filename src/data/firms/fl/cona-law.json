@@ -1,0 +1,400 @@
+{
+  "slug": "cona-law",
+  "name": "Cona Law",
+  "initials": "CL",
+  "website": "https://cona.law/",
+  "domain": "cona.law",
+  "phone": "(239) 776-7163",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "real-estate",
+      "name": "Real Estate",
+      "primary": true,
+      "source_url": "https://cona.law/realestate/",
+      "checked_at": "2026-09-15"
+    }
+  ],
+  "market": {
+    "city_slug": "naples-fl",
+    "city": "Naples",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Cona Law",
+      "address": "3765 Airport-Pulling Rd N Ste 201, Naples, FL 34105, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=14603627811462335752&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "transaction": {
+    "readable": true,
+    "pages_read": 3,
+    "price": null,
+    "flat_fee": null,
+    "fee_terms": null,
+    "escrow": null,
+    "escrow_location_named": false,
+    "stages": [],
+    "stage_evidence": {},
+    "source": "The firm's own fee, closing and practice pages",
+    "checked_at": "2026-09-15"
+  },
+  "free_consultation": false,
+  "availability": [],
+  "about": [
+    "Cona Law works from Airport-Pulling Road North. It publishes none of the trust pages pillar D looks for, no fee terms we could record and none of the stages of a transaction, and it names no attorney on the pages we could reach.",
+    "20 reviews at 4.8. This is a thin profile because the site is thin, and every sentence of it is a measurement rather than a judgement."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "20",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-15"
+    },
+    "sample": [
+      {
+        "published_at": "2025-10-14T18:07:26.515301111Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-08-27T12:12:33.120084057Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-05-29T20:19:48.802388Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-10-26T02:55:21.199011Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-10-17T23:12:50.313180Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 63,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-15",
+      "note": "LCP 10.8 s / CLS 0.000 / TBT 18 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "cona.law",
+      "name": "Cona Law",
+      "practice_page": "https://cona.law/realestate/"
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 20,
+      "rating_weighted": 4.8,
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-15"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Florida does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-15"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-15"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-15"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "20 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2019-04-11, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-15"
+    }
+  },
+  "cohort_id": "fl-naples-real-estate",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {},
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://cona.law/",
+        "contact": "https://cona.law/contact/",
+        "about": "https://cona.law/about/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "logo": {
+    "file": "/logos/cona.law.png",
+    "source_url": "https://cona.law/wp-content/uploads/2024/07/Small-logo-black-300x300.png",
+    "width": 300,
+    "height": 300,
+    "bytes": 3850,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
+  },
+  "operating": {
+    "registered": "2019-04-11",
+    "years": 7.4,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-15"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-15"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-15"
+  },
+  "score": {
+    "total": 23,
+    "tier": "Listed",
+    "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-15",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Fee terms published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "Nothing about what the work costs on any of the 3 pages we read, which in this practice is the question a client asks first"
+          },
+          {
+            "code": "B2",
+            "label": "The transaction explained",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "Names none of the stages of a closing on the 3 pages we read"
+          },
+          {
+            "code": "B3",
+            "label": "Escrow disclosed",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Says nothing about who holds the deposit or where, on any of the 3 pages we read"
+          }
+        ]
+      },
+      "C": {
+        "score": 12,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "20 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.8 over 20 reviews → Bayesian 4.82 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 2.5,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2025-10-14) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 2,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+          }
+        ]
+      },
+      "E": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 0,
+            "max": 6,
+            "source": "observed",
+            "evidence": "fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 12,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 47,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D2 Search authority: not yet measured (8 pts)"
+      ]
+    },
+    "raw": 14.5,
+    "assessed": 63,
+    "coverage": 0.63,
+    "floor_abc_pct": 0.329,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "assessable": 100,
+    "comparable": true
+  }
+}
