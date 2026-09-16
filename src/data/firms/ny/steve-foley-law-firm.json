@@ -142,6 +142,18 @@
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-14"
+    },
+    "ahrefs": {
+      "dr": 27,
+      "ahrefs_rank": 5074582,
+      "refdomains": 636,
+      "refdomains_dofollow": 260,
+      "backlinks": 5345,
+      "org_keywords": 101,
+      "org_traffic": 225,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -288,10 +300,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 56,
+    "total": 55,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: A; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -372,7 +384,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 48 reviews → Bayesian 4.85 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 48 reviews → Bayesian 4.85 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -393,7 +405,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -407,10 +419,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 27 → 73th pct of 22-firm cohort (median 19) 2/3 · 636 referring domains, 68th pct 1/2 · 101 organic keywords / 225 visits·mo, 44th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -425,7 +437,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -465,7 +477,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -474,12 +486,21 @@
         "E4 Availability: +5 available"
       ]
     },
-    "raw": 49.5,
-    "assessed": 89,
-    "coverage": 0.89,
+    "raw": 53.5,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.781,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/stevefoleylaw.com.png",
+    "source_url": "https://cdn-ilepaba.nitrocdn.com/UYouwybVDtTlGCLCucoGzahseStFIWWw/assets/images/optimized/rev-22f6426/stevefoleylaw.com/wp-content/themes/steve-foley-child/assets/favicon/apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 996,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

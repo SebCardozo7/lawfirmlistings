@@ -184,6 +184,18 @@
       "rating_weighted": 4.96,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-15"
+    },
+    "ahrefs": {
+      "dr": 13,
+      "ahrefs_rank": 13999096,
+      "refdomains": 655,
+      "refdomains_dofollow": 236,
+      "backlinks": 11836,
+      "org_keywords": 36,
+      "org_traffic": 69,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -302,10 +314,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 46,
+    "total": 44,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -386,7 +398,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.96 over 218 reviews → Bayesian 4.92 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.96 over 218 reviews → Bayesian 4.92 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -407,7 +419,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 5,
         "max": 25,
         "subs": [
           {
@@ -421,10 +433,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 13 → 37th pct of 27-firm cohort (median 20) 1/3 · 655 referring domains, 39th pct 1/2 · 36 organic keywords / 69 visits·mo, 18th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -439,7 +451,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -479,18 +491,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 24,
+      "gap": 26,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A6 Roster verifiability: +9 available"
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 32.0,
-    "assessed": 70,
-    "coverage": 0.769,
+    "raw": 34.0,
+    "assessed": 78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.737,
     "gates_unavailable": [
       "G1",
@@ -498,5 +510,14 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/feinbergalban.com.png",
+    "source_url": "https://www.feinbergalban.com/plugins/editor/cms/skins/seanz/assets/images/favicons/apple-touch-icons/nolo//icon-180x180.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 8438,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

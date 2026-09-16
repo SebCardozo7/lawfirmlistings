@@ -201,6 +201,18 @@
       "rating_weighted": 4.49,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-14"
+    },
+    "ahrefs": {
+      "dr": 10,
+      "ahrefs_rank": 16680675,
+      "refdomains": 736,
+      "refdomains_dofollow": 235,
+      "backlinks": 8767,
+      "org_keywords": 217,
+      "org_traffic": 588,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -299,10 +311,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 34,
+    "total": 35,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -383,7 +395,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.49 over 189 reviews → Bayesian 4.61 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.49 over 189 reviews → Bayesian 4.61 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -404,7 +416,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -418,10 +430,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 10 → 26th pct of 19-firm cohort (median 20.5) 1/3 · 736 referring domains, 68th pct 1/2 · 217 organic keywords / 588 visits·mo, 44th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -436,7 +448,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -476,18 +488,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 36,
+      "gap": 35,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A6 Roster verifiability: +9 available"
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 24.0,
-    "assessed": 70,
-    "coverage": 0.769,
+    "raw": 27.0,
+    "assessed": 78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.395,
     "gates_unavailable": [
       "G1",
@@ -495,5 +507,14 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/coseklaw.com.png",
+    "source_url": "https://www.coseklaw.com/wp-content/uploads/sites/1504812/2025/06/cropped-Fav-icon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 9674,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

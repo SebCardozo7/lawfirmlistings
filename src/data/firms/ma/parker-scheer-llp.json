@@ -162,6 +162,18 @@
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-15"
+    },
+    "ahrefs": {
+      "dr": 12,
+      "ahrefs_rank": 14910847,
+      "refdomains": 655,
+      "refdomains_dofollow": 184,
+      "backlinks": 3966,
+      "org_keywords": 59,
+      "org_traffic": 251,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -279,10 +291,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 47,
+    "total": 46,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -363,7 +375,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 107 reviews → Bayesian 4.91 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 107 reviews → Bayesian 4.91 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -384,7 +396,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -398,10 +410,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 12 → 31th pct of 27-firm cohort (median 20) 1/3 · 655 referring domains, 39th pct 1/2 · 59 organic keywords / 251 visits·mo, 32th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -416,7 +428,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -456,18 +468,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
+      "gap": 24,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "B1 Results published: not yet measured (6 pts)"
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)"
       ]
     },
-    "raw": 26.0,
-    "assessed": 55,
-    "coverage": 0.604,
+    "raw": 29.0,
+    "assessed": 63,
+    "coverage": 0.692,
     "floor_abc_pct": 0.913,
     "gates_unavailable": [
       "G1",
@@ -475,5 +487,14 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/parkerscheer.com.png",
+    "source_url": "https://www.parkerscheer.com/wp-content/uploads/2020/06/favicon.png",
+    "width": 254,
+    "height": 254,
+    "bytes": 1508,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

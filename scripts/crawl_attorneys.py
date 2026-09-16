@@ -102,6 +102,11 @@ LEADING_TITLES = {"attorney", "attorneys", "atty", "lawyer", "abogado", "abogada
 SUFFIXES = re.compile(r"\s*[,|–—-]\s*(esq\.?|esquire|jd|j\.d\.|llp|llc|p\.?c\.?|pllc|"
                       r"attorney at law).*$", re.I)
 
+# A word a roster puts after a name to say the link goes to their page. Vernon Litigation links
+# "Chris Vernon Bio" and "John J. Truitt Bio", and both were stored with the word inside the
+# name. Stripped only where it is the last word and the name survives without it.
+LINK_WORD = re.compile(r"\s+(?:bio|biography|profile|vcard|v[- ]card|page)\s*$", re.I)
+
 # Several firms put the person and their title in one heading, and the title can run to several
 # words: "Alex Shulman FOUNDING PARTNER AND GENERAL COUNSEL", "Ari R. Lieberman SENIOR ASSOCIATE
 # ATTORNEY". The reliable signal is case — these firms set the name in title case and the title
@@ -238,20 +243,25 @@ def split_name_and_role(raw):
     text = re.sub(r"\s+", " ", (raw or "").replace("&amp;", "&")).strip()
     text = HEADING_PREFIX.sub("", text).strip()
     text = SUFFIXES.sub("", text).strip(" ,-|")
+    stripped = LINK_WORD.sub("", text).strip()
+    if stripped and len(stripped.split()) >= 2:
+        text = stripped
 
     # "Perla Hagemeier - The Barber Law Firm" is a page title with the site's name appended, and
     # nine of that firm's bios are headed exactly that way, so nine people were unreachable.
     # Split on the separator and keep the half that reads as a person. A role after the separator
     # is still a role, so "Jane Doe - Managing Partner" is left for the peel below.
-    for sep in (" | ", " - ", " – ", " — "):
-        if sep not in text:
-            continue
-        head, tail = text.split(sep, 1)
-        tail_words = [w for w in re.split(r"[\s,]+", tail) if w]
+    # Split on every separator rather than the first one found. Goodwin Law heads each bio
+    # "Alexandra Kane - Naples, Collier County, Lee County, FL | Goodwin Law, P.A.", so taking
+    # the half before the pipe left the city and the county in the name and all five of its
+    # people were thrown out.
+    parts = [p.strip() for p in re.split(r"\s[|–—-]\s", text) if p.strip()]
+    if len(parts) > 1:
+        tail_words = [w for w in re.split(r"[\s,]+", parts[1]) if w]
+        # A role after the separator is the role, and the peel below wants the whole string.
         if not (tail_words and all(w.lower().strip(".") in ROLE_WORDS for w in tail_words)):
-            if looks_like_a_person(head.strip()):
-                text = head.strip()
-        break
+            if looks_like_a_person(parts[0]):
+                text = parts[0]
 
     words = [w for w in re.split(r"[\s,|]+", text) if w]
 

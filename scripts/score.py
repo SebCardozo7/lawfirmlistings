@@ -105,6 +105,15 @@ TIERS = [("Elite", 93, 55 / 65), ("Distinguished", 85, 50 / 65), ("Certified", 7
 # therefore needs a real share of the whole scale assessed, and needs pillars A, B and C to
 # have been looked at rather than skipped, since those three carry what the certification
 # actually claims. Below that a firm can still be Verified, which is a claim about the gates.
+# Practices whose work produces no verdict and no settlement. Pillar B cannot read a results page
+# for these and reads scripts/check_transaction.py instead: the fee, the escrow and the stages of
+# the deal the firm explains. The pillar keeps its fifteen points, because the question it asks,
+# what does this firm tell you before you hire it, has an answer in both kinds of practice.
+#
+# Decided by the firm's primary practice rather than by any practice it lists. A firm that does
+# injury work and closings has results to publish, and the results page is the better measure.
+TRANSACTIONAL = {"real-estate"}
+
 MIN_COVERAGE = 0.60
 MIN_PILLAR_COVERAGE = 0.50
 # Below this, a total is still computed and is no longer offered as a number to compare.
@@ -170,7 +179,7 @@ def pct(value, values):
 def scale(p, maxpts):  # percentile → points, rounded half-up, min 0
     return max(0, min(maxpts, round(p / 100 * maxpts + 1e-9)))
 
-def sub(code, pts, source, evidence, max_override=None):
+def sub(code, pts, source, evidence, max_override=None, label_override=None):
     """One sub-score.
 
     max_override exists for a factor where part of the scale is not assessable for a firm rather
@@ -185,6 +194,11 @@ def sub(code, pts, source, evidence, max_override=None):
     """
     pil, label, mx = SUBS[code]
     mx = mx if max_override is None else max_override
+    # The label travels with the sub-score because pillar B measures two different things
+    # depending on the practice: published outcomes where there are outcomes, and the published
+    # terms of the transaction where there are none. A profile printing "Results published" over
+    # a real estate firm's fee disclosure would be describing the wrong thing.
+    label = label if label_override is None else label_override
     return {"code": code, "label": label, "pts": round(min(pts, mx), 1), "max": mx, "source": source, "evidence": evidence}
 
 TODAY_YEAR = int(TODAY[:4])
@@ -273,9 +287,71 @@ def compute(firm):
     else:
         out.append(assessed("A5", "Nothing published about insurance or bar memberships"))
 
-    # ---- B: Published Outcomes, from the firm's own results page ----
+    # ---- B: published outcomes, or the transaction where the practice has none ----
+    practices = firm.get("practices") or []
+    primary = next((p for p in practices if p.get("primary")), practices[0] if practices else {})
+    transactional = primary.get("slug") in TRANSACTIONAL
+    tx = firm.get("transaction")
     rp = firm.get("results_published")
-    if rp and rp.get("readable"):
+
+    if transactional and not (tx and tx.get("readable")):
+        for code, label in (("B1", "Fee terms published"),
+                            ("B2", "The transaction explained"),
+                            ("B3", "Escrow disclosed")):
+            out.append(sub(code, 0, "pending",
+                           (tx or {}).get("why")
+                           or "The firm's fee and closing pages have not been read yet",
+                           label_override=label))
+    elif transactional:
+        # A figure beats a promise. Florida sets the title insurance premium by rule and it is
+        # identical at every agency in the state, so the premium is not a thing to compare; the
+        # firm's own closing fee is, and a firm that prints it has answered the question a client
+        # actually asked. A flat fee stated without a figure is most of the way there.
+        if tx.get("price"):
+            b1, b1_ev = 6, 'Publishes a figure for its own fee: "%s"' % tx["price"]["quote"][:180]
+        elif tx.get("flat_fee"):
+            b1, b1_ev = 4, ('States a flat fee without printing it: "%s"'
+                            % tx["flat_fee"]["quote"][:180])
+        elif tx.get("fee_terms"):
+            b1, b1_ev = 2, ('Says something about how it charges, without a figure and without a '
+                            'flat fee: "%s"' % tx["fee_terms"]["quote"][:180])
+        else:
+            b1, b1_ev = 0, ("Nothing about what the work costs on any of the %d page%s we read, "
+                            "which in this practice is the question a client asks first"
+                            % (tx.get("pages_read") or 0,
+                               "" if tx.get("pages_read") == 1 else "s"))
+        out.append(sub("B1", b1, "firm", b1_ev, label_override="Fee terms published"))
+
+        # One point per stage of the deal the firm names, to five. A page naming the title
+        # search, the survey, the lien search, the estoppel and the settlement statement is
+        # explaining the transaction; a page naming one is mentioning it.
+        stages = tx.get("stages") or []
+        named = ", ".join(stages[:5]) + ("" if len(stages) <= 5 else ", and more")
+        out.append(sub("B2", min(5, len(stages)), "firm",
+                       ("Explains %d stage%s of the transaction: %s"
+                        % (len(stages), "" if len(stages) == 1 else "s", named))
+                       if stages else
+                       ("Names none of the stages of a closing on the %d page%s we read"
+                        % (tx.get("pages_read") or 0,
+                           "" if tx.get("pages_read") == 1 else "s")),
+                       label_override="The transaction explained"))
+
+        # Who holds the money. Every firm doing this work holds client funds and every one of
+        # them could say where, so silence is the firm's choice rather than a limit of ours,
+        # which is what makes it scorable at all.
+        if tx.get("escrow") and tx.get("escrow_location_named"):
+            b3, b3_ev = 4, ('Publishes how client funds are held and where: "%s"'
+                            % tx["escrow"]["quote"][:180])
+        elif tx.get("escrow"):
+            b3, b3_ev = 2.5, ('Mentions the escrow or trust account without saying where it is '
+                              'held: "%s"' % tx["escrow"]["quote"][:180])
+        else:
+            b3, b3_ev = 0, ("Says nothing about who holds the deposit or where, on any of the "
+                            "%d page%s we read" % (tx.get("pages_read") or 0,
+                                                   "" if tx.get("pages_read") == 1 else "s"))
+        out.append(sub("B3", b3, "firm", b3_ev, label_override="Escrow disclosed"))
+
+    elif rp and rp.get("readable"):
         n = rp.get("count") or 0
         b1 = 6 if n >= 25 else 4.5 if n >= 10 else 3 if n >= 3 else 1 if n >= 1 else 0
         out.append(sub("B1", b1, "firm",

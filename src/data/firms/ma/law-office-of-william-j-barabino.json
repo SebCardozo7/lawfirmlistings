@@ -107,6 +107,18 @@
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-15"
+    },
+    "ahrefs": {
+      "dr": 14,
+      "ahrefs_rank": 13244003,
+      "refdomains": 568,
+      "refdomains_dofollow": 176,
+      "backlinks": 3570,
+      "org_keywords": 161,
+      "org_traffic": 392,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -200,10 +212,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 34,
+    "total": 33,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -284,7 +296,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 306 reviews → Bayesian 4.96 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 306 reviews → Bayesian 4.96 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -305,7 +317,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 5,
         "max": 25,
         "subs": [
           {
@@ -319,10 +331,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 14 → 41th pct of 27-firm cohort (median 20) 1/3 · 568 referring domains, 22th pct 0/2 · 161 organic keywords / 392 visits·mo, 48th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -337,7 +349,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
           }
         ]
@@ -377,18 +389,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 36,
+      "gap": 37,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A6 Roster verifiability: +9 available"
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 24.0,
-    "assessed": 70,
-    "coverage": 0.769,
+    "raw": 26.0,
+    "assessed": 78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.526,
     "gates_unavailable": [
       "G1",
@@ -396,5 +408,14 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/williambarabino.com.png",
+    "source_url": "https://www.williambarabino.com/favicon.ico",
+    "width": 80,
+    "height": 80,
+    "bytes": 4119,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

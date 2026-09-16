@@ -5,7 +5,7 @@
   "website": "https://www.msllegal.com/",
   "domain": "msllegal.com",
   "phone": "(212) 962-1020",
-  "status": "certified",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -280,6 +280,18 @@
       "rating_weighted": 4.7,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
+    },
+    "ahrefs": {
+      "dr": 36,
+      "ahrefs_rank": 2228498,
+      "refdomains": 931,
+      "refdomains_dofollow": 429,
+      "backlinks": 29452,
+      "org_keywords": 644,
+      "org_traffic": 3357,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -421,10 +433,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 70,
-    "tier": "Certified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-15",
+    "total": 69,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (8/25).",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -505,7 +517,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 589 reviews → Bayesian 4.72 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 589 reviews → Bayesian 4.72 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -526,7 +538,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -540,10 +552,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 36 → 57th pct of 37-firm cohort (median 33.5) 2/3 · 931 referring domains, 46th pct 1/2 · 644 organic keywords / 3,357 visits·mo, 39th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -558,7 +570,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -596,20 +608,20 @@
     },
     "floor_abc": 52,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 15,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +5.5 available",
-        "D3 Local presence: +4 available",
-        "D4 Content, E-E-A-T & schema: +4 available"
+        "D2 Search authority: +4 available",
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 62.5,
-    "assessed": 89,
-    "coverage": 0.89,
+    "raw": 66.5,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.912,
     "gates_unavailable": [],
     "assessable": 100,

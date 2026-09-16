@@ -165,6 +165,18 @@
       "rating_weighted": 4.3,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-13"
+    },
+    "ahrefs": {
+      "dr": 7,
+      "ahrefs_rank": 23352021,
+      "refdomains": 529,
+      "refdomains_dofollow": 147,
+      "backlinks": 1733,
+      "org_keywords": 27,
+      "org_traffic": 283,
+      "paid_keywords": 2,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -278,10 +290,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 52,
+    "total": 48,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -362,7 +374,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 321 reviews → Bayesian 4.42 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.3 over 321 reviews → Bayesian 4.42 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -397,10 +409,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 7 → 20th pct of 25-firm cohort (median 32.5) 1/3 · 529 referring domains, 16th pct 0/2 · 27 organic keywords / 283 visits·mo, 8th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -415,7 +427,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -455,18 +467,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 22,
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "D2 Search authority: not yet measured (8 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 38.5,
-    "assessed": 74,
-    "coverage": 0.74,
+    "raw": 39.5,
+    "assessed": 82,
+    "coverage": 0.82,
     "floor_abc_pct": 0.774,
     "gates_unavailable": [],
     "assessable": 100,
@@ -478,5 +490,14 @@
       "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
       "checked_at": "2026-09-13"
     }
+  },
+  "logo": {
+    "file": "/logos/hurtatworknyc.com.png",
+    "source_url": "https://cdn-ildgmop.nitrocdn.com/nIzSXbNvVMfKMUCTPiNyYBSUISfGdXyf/assets/images/optimized/rev-5cb5e7d/www.hurtatworknyc.com/wp-content/uploads/2018/10/Logo-small.png",
+    "width": 150,
+    "height": 101,
+    "bytes": 1324,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

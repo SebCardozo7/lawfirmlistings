@@ -66,6 +66,18 @@
       "rating_weighted": 4.8,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-14"
+    },
+    "ahrefs": {
+      "dr": 10,
+      "ahrefs_rank": 18312144,
+      "refdomains": 577,
+      "refdomains_dofollow": 164,
+      "backlinks": 2176,
+      "org_keywords": 20,
+      "org_traffic": 142,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -134,10 +146,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 56,
+    "total": 54,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -218,7 +230,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 138 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 138 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -239,7 +251,7 @@
         ]
       },
       "D": {
-        "score": 1,
+        "score": 5,
         "max": 25,
         "subs": [
           {
@@ -253,10 +265,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 10 → 54th pct of 13-firm cohort (median 9.5) 2/3 · 577 referring domains, 54th pct 1/2 · 20 organic keywords / 142 visits·mo, 34th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -311,18 +323,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 16,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "D1 Website trust & experience: not yet measured (7 pts)"
       ]
     },
-    "raw": 9.0,
-    "assessed": 16,
-    "coverage": 0.16,
+    "raw": 13.0,
+    "assessed": 24,
+    "coverage": 0.24,
     "floor_abc_pct": 0.727,
     "gates_unavailable": [
       "G1",

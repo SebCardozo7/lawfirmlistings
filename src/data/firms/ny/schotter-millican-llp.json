@@ -140,6 +140,18 @@
       "rating_weighted": 4.7,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-13"
+    },
+    "ahrefs": {
+      "dr": 2.6,
+      "ahrefs_rank": 40745812,
+      "refdomains": 423,
+      "refdomains_dofollow": 87,
+      "backlinks": 9196,
+      "org_keywords": 82,
+      "org_traffic": 291,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -317,10 +329,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 58,
+    "total": 54,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -401,7 +413,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 34 reviews → Bayesian 4.79 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 34 reviews → Bayesian 4.79 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -438,8 +450,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 2.6 → 12th pct of 25-firm cohort (median 32.5) 0/3 · 423 referring domains, 8th pct 0/2 · 82 organic keywords / 291 visits·mo, 16th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -454,7 +466,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -494,18 +506,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 12,
+      "gap": 16,
       "floor_met": true,
       "coverage_met": true,
       "path": [
+        "D2 Search authority: +8 available",
         "D1 Website trust & experience: +5.5 available",
-        "E4 Availability: +5 available",
-        "D3 Local presence: +4 available"
+        "E4 Availability: +5 available"
       ]
     },
     "raw": 52.0,
-    "assessed": 89,
-    "coverage": 0.89,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.772,
     "gates_unavailable": [],
     "assessable": 100,
@@ -517,5 +529,14 @@
       "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
       "checked_at": "2026-09-13"
     }
+  },
+  "logo": {
+    "file": "/logos/lawforworkers.com.ico",
+    "source_url": "https://www.lawforworkers.com/favicon.ico?favicon.0uykpm457i0b3.ico",
+    "width": 128,
+    "height": 128,
+    "bytes": 7143,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

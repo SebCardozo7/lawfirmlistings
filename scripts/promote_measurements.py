@@ -159,6 +159,15 @@ def promote(rec: dict, firm: dict) -> list[str]:
     # A5 accountability, measured by scripts/check_a5.py off the firm's own pages. It replaces
     # the one hand-entered assessment left on the directory, so it belongs with the measurements
     # rather than beside the prose.
+    # What the firm publishes about the transaction, for a practice with no outcomes.
+    tx = rec.get("transaction")
+    if tx and json.dumps(tx, sort_keys=True) != json.dumps(firm.get("transaction") or {},
+                                                           sort_keys=True):
+        changed.append("transaction     %d page(s) read · %d stage(s) · price %s"
+                       % (tx.get("pages_read") or 0, len(tx.get("stages") or []),
+                          (tx.get("price") or {}).get("figure", "not published")))
+        firm["transaction"] = tx
+
     # The firm's own logo, from the icon its site declares.
     logo = rec.get("logo")
     if logo and logo.get("file"):

@@ -171,6 +171,18 @@
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
+    },
+    "ahrefs": {
+      "dr": 29,
+      "ahrefs_rank": 4431084,
+      "refdomains": 712,
+      "refdomains_dofollow": 320,
+      "backlinks": 5081,
+      "org_keywords": 27,
+      "org_traffic": 73,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -247,10 +259,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 66,
+    "total": 61,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-15",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (5/25).",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -331,7 +343,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 33 reviews → Bayesian 4.84 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 33 reviews → Bayesian 4.84 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -352,7 +364,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 5,
         "max": 25,
         "subs": [
           {
@@ -366,10 +378,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 29 → 24th pct of 37-firm cohort (median 33.5) 1/3 · 712 referring domains, 22th pct 0/2 · 27 organic keywords / 73 visits·mo, 0th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -384,7 +396,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -424,18 +436,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 4,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": true,
       "path": [
+        "D2 Search authority: +7 available",
         "D1 Website trust & experience: +5.0 available",
-        "D3 Local presence: +4 available",
-        "D4 Content, E-E-A-T & schema: +4 available"
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 58.5,
-    "assessed": 89,
-    "coverage": 0.89,
+    "raw": 59.5,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.833,
     "gates_unavailable": [],
     "assessable": 100,

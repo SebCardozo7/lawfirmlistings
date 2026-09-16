@@ -1,0 +1,221 @@
+{
+  "id": "fl-naples-real-estate",
+  "market": {
+    "city_slug": "naples-fl",
+    "city": "Naples",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "state": "FL",
+  "practice": "real-estate",
+  "label": "Naples x Real Estate",
+  "measured_at": "2026-09-15",
+  "source": "The first market here that is not an injury market. Candidates from Google Places across Naples, Marco Island, Bonita Springs, North Naples, Golden Gate and Immokalee (scripts/discover_places.py, 141 domains), kept only where the firm's own site publishes a real estate, title or closing practice page and it holds an office in postal area 341xx or 342xx. 31 of the first 70 candidates published such a page.\n\nTwo filters this market needed and the injury markets did not. A search for a real estate lawyer returns title agencies, which are not law firms and cannot advise anybody about a contract, and it returns estate planning firms, because the two practices share the word estate. Both kinds are listed below with the reason.\n\nPillar B does not read a results page for these firms. A closing that went well produces no verdict and no settlement, so scripts/check_transaction.py measures what the firm publishes about the deal instead: the fee, who holds the escrow, and the stages of the transaction it explains. No Ahrefs metrics, so D2 is pending for every firm here.\n\nThe state title agency register was read for all twenty: none of them holds a title agency licence in its own name, out of the 2,643 Florida agencies that do (AllValidLicensesBusiness.csv, published by the Department of Financial Services). Section 626.8417(4) of the Florida Statutes exempts attorneys in good standing with The Florida Bar from those licensing requirements, so that is the statute working rather than a finding about any of these firms, and it is why the licence is a published fact here and never a scored one. A test that separates nobody is not a test.",
+  "full_size_estimate": 141,
+  "unresolved": [],
+  "unresolved_notes": {
+    "forthepeople.com": "Excluded from every cohort. Morgan & Morgan holds an office here and in roughly a thousand other markets, and a profile on this site asserts one home market.",
+    "fltitlegroup.com": "Cottrell Title. A title agency rather than a law firm, and this is a directory of law firms. It has the third largest review count a search for a real estate lawyer in Naples returns, which is the reason this note exists: a reader comparing the businesses a search returns is comparing two different kinds of thing.",
+    "rosstitle.com": "Ross Title, Inc. A title agency rather than a law firm. It publishes a genuinely useful page about mistakes in Florida purchase contracts, which is what our practice check found, and it still cannot advise anybody about one.",
+    "paradisecoasttitle.com": "Paradise Coast Title & Escrow. A title agency, and its site answers a crawler with a 403 as well.",
+    "lyons-title.com": "Lyons Title & Trust. A title agency rather than a law firm.",
+    "capecoralattorney.com": "Burandt, Adamski, Feichthaler & Sanchez. Its office is on Cape Coral Parkway in Cape Coral, which is Lee County and its own market.",
+    "lawdefined.com": "Aloia, Roland, Lubell & Morgan. Its verified office is on Second Street in Fort Myers. Its structured data also still carries Lorem Ipsum as the city, which is a placeholder somebody forgot rather than a finding about the practice.",
+    "henlaw.com": "Henderson, Franklin, Starnes & Holt. Founded in Fort Myers in 1924 and headquartered there, at 1715 Monroe Street; the Pelican Bay office is a branch. One of the largest firms in south west Florida and in the wrong market for this ranking.",
+    "cl-law.com": "Cummings & Lockwood. Its own office list begins with Stamford, Greenwich and West Hartford in Connecticut, which is where the firm is based. Naples and Bonita Springs are branches.",
+    "jfrealestatelaw.com": "Farshchian Law. Its own pages give 12955 Biscayne Boulevard in Miami as the firm's address and list Naples and Tampa as further numbers to call. Miami is the market.",
+    "quarles.com": "Quarles & Brady. A Milwaukee firm with a Naples office.",
+    "bsk.com": "Bond, Schoeneck & King. A Syracuse firm with a Naples office.",
+    "nelsonmullins.com": "Nelson Mullins Riley & Scarborough. A Columbia, South Carolina firm with a Naples office.",
+    "mclaughlinstern.com": "McLaughlin & Stern. A New York firm with a Naples office.",
+    "trialpro.com": "Trial Pro. An Orlando injury firm, and its Naples presence is a satellite.",
+    "willkommlaw.com": "The Law Office of Conrad Willkomm. A Naples firm that would otherwise be at the top of this ranking on review count, 767 of them, and its site answers an automated reader with a 403. Nothing on it can be measured, so there is nothing to rank. Not a judgement about the firm.",
+    "cavanaughattorneys.com": "Cavanaugh & Cavanaugh. Answers a crawler with a 403.",
+    "dellutrilawgroup.com": "The Dellutri Law Group. Answers a crawler with a 403.",
+    "familyfirstlegalgroup.com": "Family First Legal Group. Answers a crawler with a 403, and its practice is family law rather than real estate.",
+    "safeharborlawfirm.com": "Safe Harbor Law Firm. Estate planning and Medicaid planning, which a search for a real estate lawyer returns because the two share a word. It publishes no real estate practice page.",
+    "bytnarlaw.com note": "Kept. It publishes both estate planning and a real estate practice page, and the second is what puts it here."
+  },
+  "firms": [
+    {
+      "domain": "bytnarlaw.com",
+      "name": "Law Office of Brandon R. Bytnar, P.L.",
+      "practice_page": "https://www.bytnarlaw.com/practice-areas/real-estate-law/",
+      "dr": 5,
+      "refdomains": 512,
+      "org_keywords": 2,
+      "org_traffic": 9
+    },
+    {
+      "domain": "vernonlitigation.com",
+      "name": "Vernon Litigation Group",
+      "practice_page": "https://www.vernonlitigation.com/bonita-springs/real-estate-law/",
+      "dr": 14,
+      "refdomains": 557,
+      "org_keywords": 44,
+      "org_traffic": 177
+    },
+    {
+      "domain": "saadlegal.com",
+      "name": "Law Office of Sam J. Saad III - Main Office Location",
+      "practice_page": "https://www.saadlegal.com/residential-real-estate-law/",
+      "dr": 24,
+      "refdomains": 590,
+      "org_keywords": 39,
+      "org_traffic": 110
+    },
+    {
+      "domain": "neilmoraleslegal.com",
+      "name": "The Law Offices of Neil Morales, P.A.",
+      "practice_page": "https://neilmoraleslegal.com/practice-areas/real-estate-law",
+      "dr": 4.7,
+      "refdomains": 407,
+      "org_keywords": 2,
+      "org_traffic": 19
+    },
+    {
+      "domain": "willisdavidow.com",
+      "name": "Willis & Davidow, LLC",
+      "practice_page": "https://willisdavidow.com/practice-areas/real-estate-law/",
+      "dr": 3.8,
+      "refdomains": 438,
+      "org_keywords": 5,
+      "org_traffic": 11
+    },
+    {
+      "domain": "boatmanricci.com",
+      "name": "Boatman Ricci",
+      "practice_page": "https://boatmanricci.com/practice-areas/real-estate-disputes/",
+      "dr": 9,
+      "refdomains": 609,
+      "org_keywords": 285,
+      "org_traffic": 859
+    },
+    {
+      "domain": "glpa.law",
+      "name": "GOODWIN LAW, P.A.",
+      "practice_page": "https://glpa.law/practice-areas/real-estate/",
+      "dr": 25,
+      "refdomains": 431,
+      "org_keywords": 11,
+      "org_traffic": 13
+    },
+    {
+      "domain": "gulfcoastlawpa.com",
+      "name": "Gulf Coast Law PA",
+      "practice_page": "https://www.gulfcoastlawpa.com/real-estate-law",
+      "dr": 12,
+      "refdomains": 422,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "lindsayallenlaw.com",
+      "name": "Gulf Coast Counsel",
+      "practice_page": "https://lindsayallenlaw.com/practices/real-estate/",
+      "dr": 0.5,
+      "refdomains": 441,
+      "org_keywords": 1,
+      "org_traffic": 2
+    },
+    {
+      "domain": "mondocklaw.com",
+      "name": "Mondock Law, PLLC",
+      "practice_page": "https://www.mondocklaw.com/real-estate-law",
+      "dr": 1.7,
+      "refdomains": 393,
+      "org_keywords": 3,
+      "org_traffic": 53
+    },
+    {
+      "domain": "lawfirmnaples.com",
+      "name": "Woods, Weidenmiller, Michetti & Rudnick, LLP",
+      "practice_page": "https://www.lawfirmnaples.com/practice-areas/real-estate-law/",
+      "dr": 31,
+      "refdomains": 530,
+      "org_keywords": 124,
+      "org_traffic": 558
+    },
+    {
+      "domain": "gadclaw.com",
+      "name": "Goede, DeBoest & Cross, PLLC",
+      "practice_page": "https://gadclaw.com/practice_areas/hoa/",
+      "dr": 26,
+      "refdomains": 577,
+      "org_keywords": 28,
+      "org_traffic": 261
+    },
+    {
+      "domain": "cona.law",
+      "name": "Cona Law",
+      "practice_page": "https://cona.law/realestate/",
+      "dr": 1.9,
+      "refdomains": 353,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "timothyjcotter.com",
+      "name": "Timothy J. Cotter, P.A.",
+      "practice_page": "https://www.timothyjcotter.com/hoaRepresentation.php",
+      "dr": 4.8,
+      "refdomains": 702,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "dougrankinlaw.com",
+      "name": "The Law Office of Douglas L. Rankin",
+      "practice_page": "https://www.dougrankinlaw.com/practice-areas/real-estate/",
+      "dr": 1.2,
+      "refdomains": 379,
+      "org_keywords": 4,
+      "org_traffic": 29
+    },
+    {
+      "domain": "naplesattorney.biz",
+      "name": "The Law Office of Brantley Oakey",
+      "practice_page": "https://www.naplesattorney.biz/naples-landlord-tenant-attorney/",
+      "dr": 1.2,
+      "refdomains": 517,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "janeirolaw.com",
+      "name": "The Law Office of Jeffrey M. Janeiro, P.L.",
+      "practice_page": "https://www.janeirolaw.com/real-estate-law/",
+      "dr": 2.9,
+      "refdomains": 392,
+      "org_keywords": 8,
+      "org_traffic": 85
+    },
+    {
+      "domain": "napleslaw.com",
+      "name": "Cheffy Passidomo, P.A.",
+      "practice_page": "https://www.napleslaw.com/real-estate-law/",
+      "dr": 13,
+      "refdomains": 450,
+      "org_keywords": 9,
+      "org_traffic": 57
+    },
+    {
+      "domain": "jdshumakelaw.com",
+      "name": "Jim D Shumake PA",
+      "practice_page": "https://jdshumakelaw.com/title-insurance/",
+      "dr": 0.0,
+      "refdomains": 372,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "sdmccann.com",
+      "name": "Stephen D. McCann, P.A.",
+      "practice_page": "https://www.sdmccann.com/real-estate/",
+      "dr": 0.0,
+      "refdomains": 383,
+      "org_keywords": 0,
+      "org_traffic": 0
+    }
+  ]
+}

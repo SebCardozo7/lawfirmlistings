@@ -48,6 +48,30 @@ TODAY = datetime.date.today().isoformat()
 # are deliberately different. A slug is abbreviated ("workers-comp", "work-injury") where a
 # heading is written out, and requiring both to match the same pattern rejected real pages.
 PRACTICES = {
+    # The first practice here that is not an injury. It changes what the corroborating term has
+    # to look for: an injury page argues about negligence and limitation periods, and a real
+    # estate page walks through a closing. So the corroborating pattern is the vocabulary of a
+    # transaction, and "statute of limitations" would find nothing on a perfectly good one.
+    #
+    # Title and escrow are deliberately inside this practice rather than beside it. Somebody
+    # looking for help with a purchase searches for a real estate attorney; the title work is
+    # how the job gets done, the same way a car accident page lives inside personal injury.
+    "real-estate": {
+        "slug": re.compile(r"real[-_]?estate|(?:residential|commercial)[-_](?:closing|purchase|"
+                           r"real[-_]?estate)|title[-_](?:insurance|agency|and[-_]escrow|escrow|"
+                           r"search|work)|closing[s]?[-_](?:service|attorney|lawyer)|escrow|"
+                           r"land[-_]use|zoning|landlord[-_]tenant|hoa|condo(?:minium)?[-_]law",
+                           re.I),
+        "title": re.compile(
+            r"real\s+estate|title\s+(?:insurance|and\s+escrow|agency|company|services)|"
+            r"escrow|closing(?:s)?\b|land\s+use|zoning|landlord[\s/]+tenant|"
+            r"(?:condominium|condo|homeowners?\s+association|hoa)\s+law", re.I),
+        # What a page about a property transaction says, and an injury page never does.
+        "corroborating": re.compile(
+            r"closing|title\s+(?:search|insurance|commitment|defect)|deed|survey|lien|"
+            r"escrow|purchase\s+(?:and\s+sale\s+)?(?:agreement|contract)|seller|buyer|"
+            r"settlement\s+statement|encumbrance", re.I),
+    },
     "workers-compensation": {
         "slug": re.compile(r"work(?:ers?|place)?[-_]?(?:comp\b|compensation|injur)|"
                            r"injured[-_]?(?:at[-_])?work|on[-_]the[-_]job", re.I),

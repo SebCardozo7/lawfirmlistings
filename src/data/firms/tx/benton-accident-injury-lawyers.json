@@ -185,6 +185,18 @@
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-15"
+    },
+    "ahrefs": {
+      "dr": 37,
+      "ahrefs_rank": 2093785,
+      "refdomains": 1179,
+      "refdomains_dofollow": 661,
+      "backlinks": 9102,
+      "org_keywords": 181,
+      "org_traffic": 928,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -363,10 +375,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 55,
+    "total": 54,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -447,7 +459,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 356 reviews → Bayesian 4.88 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 356 reviews → Bayesian 4.88 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -468,7 +480,7 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 9,
         "max": 25,
         "subs": [
           {
@@ -482,10 +494,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 37 → 53th pct of 19-firm cohort (median 37) 2/3 · 1,179 referring domains, 74th pct 1/2 · 181 organic keywords / 928 visits·mo, 55th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -500,7 +512,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -540,18 +552,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 15,
+      "gap": 16,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 38.5,
-    "assessed": 70,
-    "coverage": 0.7,
+    "raw": 42.5,
+    "assessed": 78,
+    "coverage": 0.78,
     "floor_abc_pct": 0.645,
     "gates_unavailable": [
       "G1",
@@ -560,5 +572,14 @@
     ],
     "assessable": 100,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/thebentonlawfirm.com.png",
+    "source_url": "https://cdn-ilcledl.nitrocdn.com/pSzpqEtOCDFoPeAEwddTfjKlFhkXpSVk/assets/images/optimized/rev-4b4e2d7/www.thebentonlawfirm.com/wp-content/uploads/2025/01/cropped-benton-favicon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 1424,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

@@ -468,6 +468,18 @@
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-14"
+    },
+    "ahrefs": {
+      "dr": 44,
+      "ahrefs_rank": 1129123,
+      "refdomains": 881,
+      "refdomains_dofollow": 441,
+      "backlinks": 9485,
+      "org_keywords": 593,
+      "org_traffic": 3204,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -630,10 +642,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 60,
+    "total": 62,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-15",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (4/15).",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -714,7 +726,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 577 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 577 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -735,7 +747,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -749,10 +761,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 7,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 44 → 95th pct of 22-firm cohort (median 19) 3/3 · 881 referring domains, 91th pct 2/2 · 593 organic keywords / 3,204 visits·mo, 96th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -767,7 +779,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -807,7 +819,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -816,12 +828,21 @@
         "E1 Free consult & fee transparency: +5 available"
       ]
     },
-    "raw": 53.5,
-    "assessed": 89,
-    "coverage": 0.89,
+    "raw": 60.5,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.816,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/richmondvona.com.png",
+    "source_url": "https://www.richmondvona.com/apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 3585,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

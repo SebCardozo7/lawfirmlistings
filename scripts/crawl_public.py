@@ -296,10 +296,28 @@ def crawl(domain, fetched_at):
             if blk not in record["json_ld"]:
                 record["json_ld"].append(blk)
 
+        def keep_phone(digits, source, note=None):
+            if len(digits) < 10 or digits in [x["value"] for x in record["phones"]]:
+                return
+            entry = {"value": digits, "source_url": source}
+            if note:
+                entry["from"] = note
+            record["phones"].append(entry)
+
         for m in re.finditer(r'href=["\']tel:([^"\']+)["\']', html, re.I):
-            p = re.sub(r"[^\d+]", "", m.group(1))
-            if len(p) >= 10 and p not in [x["value"] for x in record["phones"]]:
-                record["phones"].append({"value": p, "source_url": final})
+            keep_phone(re.sub(r"[^\d+]", "", m.group(1)), final)
+        # A number printed on the page and not wrapped in a tel: link. Two hundred and forty-one
+        # staging records had no phone at all, and Goede, DeBoest & Cross is the case that shows
+        # why: it publishes 239.331.5100 as text, with dots, and G5 asks whether the firm
+        # publishes a contact method. Failing that gate for a firm with twenty-seven named
+        # attorneys because our reader only understood a hyphen is our limit, not theirs.
+        #
+        # Deliberately narrow. A ten-digit run with no separators is as likely to be an invoice
+        # number as a telephone, so a separator is required, and the area code cannot open with
+        # a zero or a one.
+        for m in re.finditer(r"(?<![\d.])(\(?[2-9]\d{2}\)?[.\-–\s]\s?\d{3}[.\-–\s]\d{4})"
+                             r"(?![\d.])", strip_tags(html)):
+            keep_phone(re.sub(r"[^\d]", "", m.group(1)), final, "printed on the page")
         for m in re.finditer(r'href=["\']mailto:([^"\'?]+)["\']', html, re.I):
             e = m.group(1).strip().lower()
             if e and e not in [x["value"] for x in record["emails"]]:

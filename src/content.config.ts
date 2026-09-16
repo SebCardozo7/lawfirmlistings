@@ -73,7 +73,7 @@ const firms = defineCollection({
     }),
     results: z.array(z.object({ type: z.string(), title: z.string(), description: z.string(), amount: z.string().nullable(), verified: z.boolean(), docket: z.string().optional(), source_url: z.string().optional() })).default([]),
     digital: z.object({
-      ahrefs: z.object({ dr: z.number(), ahrefs_rank: z.number(), refdomains: z.number(), refdomains_dofollow: z.number(), backlinks: z.number(), org_keywords: z.number(), org_traffic: z.number(), paid_keywords: z.number(), ai_citations: z.object({ total: z.number(), pages: z.number(), by_platform: z.record(z.number()) }), measured_at: z.string() }).optional(),
+      ahrefs: z.object({ dr: z.number(), ahrefs_rank: z.number(), refdomains: z.number(), refdomains_dofollow: z.number(), backlinks: z.number(), org_keywords: z.number(), org_traffic: z.number(), paid_keywords: z.number(), ai_citations: z.object({ total: z.number(), pages: z.number(), by_platform: z.record(z.number()) }).optional(), source: z.string().optional(), measured_at: z.string() }).optional(),
       trust_pages: z.record(z.boolean()).optional(),
       schema_detected: z.boolean().optional(),
       psi: measured(z.object({ performance: z.number(), cwv_pass: z.boolean() })).optional(),
@@ -106,6 +106,23 @@ const firms = defineCollection({
       venues: z.array(z.string()).default([]), counted_from: z.string().optional(),
       text_length: z.number().optional(), why: z.string().optional(),
       url: z.string().optional(), checked_at: z.string(),
+    }).optional(),
+    // What the firm publishes about a transaction, for a practice whose work produces no
+    // verdict and no settlement. Pillar B reads this instead of results_published for those,
+    // which is why both are optional and a profile carries one or the other. See
+    // scripts/check_transaction.py.
+    transaction: z.object({
+      readable: z.boolean(),
+      pages_read: z.number().optional(),
+      price: z.object({ figure: z.string(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      flat_fee: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
+      fee_terms: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
+      escrow: z.object({ quote: z.string(), source_url: z.string() }).nullable().optional(),
+      escrow_location_named: z.boolean().optional(),
+      stages: z.array(z.string()).default([]),
+      stage_evidence: z.record(z.object({ quote: z.string(), source_url: z.string() })).optional(),
+      source: z.string().optional(), why: z.string().optional(), checked_at: z.string(),
     }).optional(),
     gates: z.record(z.object({
       pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string(),

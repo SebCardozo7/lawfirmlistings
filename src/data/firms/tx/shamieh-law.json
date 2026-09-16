@@ -154,6 +154,18 @@
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-15"
+    },
+    "ahrefs": {
+      "dr": 45,
+      "ahrefs_rank": 1036852,
+      "refdomains": 978,
+      "refdomains_dofollow": 464,
+      "backlinks": 5463,
+      "org_keywords": 681,
+      "org_traffic": 2804,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -285,10 +297,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 56,
+    "total": 58,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -369,7 +381,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 600 reviews → Bayesian 4.97 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 600 reviews → Bayesian 4.97 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -390,7 +402,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -404,10 +416,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 45 → 87th pct of 19-firm cohort (median 37) 3/3 · 978 referring domains, 63th pct 1/2 · 681 organic keywords / 2,804 visits·mo, 79th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -422,7 +434,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -462,18 +474,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A6 Roster verifiability: +9 available"
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 39.0,
-    "assessed": 70,
-    "coverage": 0.769,
+    "raw": 45.0,
+    "assessed": 78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.803,
     "gates_unavailable": [
       "G1",
@@ -481,5 +493,14 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/shamiehlaw.com.png",
+    "source_url": "https://shamiehlaw.com/wp-content/uploads/2023/09/cropped-favicon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 8171,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

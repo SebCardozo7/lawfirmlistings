@@ -172,6 +172,18 @@
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-14"
+    },
+    "ahrefs": {
+      "dr": 20,
+      "ahrefs_rank": 8678313,
+      "refdomains": 614,
+      "refdomains_dofollow": 224,
+      "backlinks": 10559,
+      "org_keywords": 133,
+      "org_traffic": 667,
+      "paid_keywords": 1,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -302,10 +314,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 56,
+    "total": 55,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -386,7 +398,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 893 reviews → Bayesian 4.98 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 893 reviews → Bayesian 4.98 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -407,7 +419,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -421,10 +433,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 20 → 54th pct of 26-firm cohort (median 19) 2/3 · 614 referring domains, 50th pct 1/2 · 133 organic keywords / 667 visits·mo, 40th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -439,7 +451,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -479,18 +491,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A6 Roster verifiability: +9 available"
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 39.0,
-    "assessed": 70,
-    "coverage": 0.769,
+    "raw": 43.0,
+    "assessed": 78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.868,
     "gates_unavailable": [
       "G1",
@@ -499,5 +511,14 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/warnkenlaw.com.png",
+    "source_url": "https://www.warnkenlaw.com/wp-content/uploads/2025/07/cropped-favicon-512-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 17372,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

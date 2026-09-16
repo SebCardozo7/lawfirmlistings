@@ -401,6 +401,18 @@
       "rating_weighted": 4.88,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-15"
+    },
+    "ahrefs": {
+      "dr": 23,
+      "ahrefs_rank": 7164419,
+      "refdomains": 875,
+      "refdomains_dofollow": 316,
+      "backlinks": 30406,
+      "org_keywords": 185,
+      "org_traffic": 883,
+      "paid_keywords": 2,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -567,10 +579,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 61,
+    "total": 60,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -651,7 +663,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.88 over 1,720 reviews → Bayesian 4.88 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.88 over 1,720 reviews → Bayesian 4.88 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -672,7 +684,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -686,10 +698,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 23 → 56th pct of 27-firm cohort (median 20) 2/3 · 875 referring domains, 67th pct 1/2 · 185 organic keywords / 883 visits·mo, 58th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -704,7 +716,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
           }
         ]
@@ -744,18 +756,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "D4 Content, E-E-A-T & schema: +5 available"
       ]
     },
-    "raw": 43.0,
-    "assessed": 70,
-    "coverage": 0.7,
+    "raw": 47.0,
+    "assessed": 78,
+    "coverage": 0.78,
     "floor_abc_pct": 0.842,
     "gates_unavailable": [
       "G1",
@@ -764,5 +776,14 @@
     ],
     "assessable": 100,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/marksalomone.com.png",
+    "source_url": "https://media.marksalomone.com/wp-content/uploads/20251128141248/touch-icon-iphone.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 3099,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

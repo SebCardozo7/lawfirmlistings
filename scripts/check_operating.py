@@ -70,6 +70,18 @@ def years_since(iso: str) -> float:
 
 
 G6_MIN_REVIEWS = 10
+# Practices where that number is the wrong test. It was calibrated on consumer injury markets,
+# where a client who has just been paid leaves a review and a firm with no reviews at all is
+# usually not a firm. A property closing does not work that way: the work arrives by referral
+# from agents and lenders, and the most established firm in the first real estate market here,
+# eighty years in Naples and fifteen attorneys on its own roster, has five.
+#
+# So for these the footprint gate asks what it means to ask, that the firm is real and trading:
+# a verified Google listing, and a year in operation. The review count still counts, in pillar C,
+# where a thin listing costs a firm points instead of its eligibility. Keep in step with
+# TRANSACTIONAL in scripts/score.py.
+TRANSACTIONAL = {"real-estate"}
+G6_MIN_REVIEWS_TRANSACTIONAL = 1
 G6_MIN_YEARS = 1
 FIRMS = pathlib.Path(__file__).resolve().parents[1] / "src" / "data" / "firms"
 LF = chr(10)   # spelled out because a backslash in this repo's patch scripts keeps collapsing
@@ -118,7 +130,12 @@ def apply_g6(write: bool):
         if years is None:
             continue
 
-        enough = reviews >= G6_MIN_REVIEWS
+        practices = firm.get("practices") or []
+        primary = next((p for p in practices if p.get("primary")),
+                       practices[0] if practices else {})
+        minimum = (G6_MIN_REVIEWS_TRANSACTIONAL if primary.get("slug") in TRANSACTIONAL
+                   else G6_MIN_REVIEWS)
+        enough = reviews >= minimum
         old_enough = years >= G6_MIN_YEARS
         listings = ((firm.get("digital") or {}).get("places") or {}).get("listing_count") or 0
         where = "%d Google listing%s" % (listings, "" if listings == 1 else "s")
@@ -126,7 +143,7 @@ def apply_g6(write: bool):
         if enough and old_enough:
             evidence = ("{:,} public client reviews across {}, above the {} minimum, and the "
                         "firm's domain has been registered since {}, so it has been operating "
-                        "for more than a year".format(reviews, where, G6_MIN_REVIEWS,
+                        "for more than a year".format(reviews, where, minimum,
                                                       oper["registered"]))
             new = {"pass": True, "evidence": evidence,
                    "source": "Google Places API and the domain's registration date over RDAP",
@@ -134,7 +151,8 @@ def apply_g6(write: bool):
         else:
             why = []
             if not enough:
-                why.append("%d reviews, below the %d this gate asks for" % (reviews, G6_MIN_REVIEWS))
+                why.append("%d review%s, below the %d this gate asks for in this practice"
+                           % (reviews, "" if reviews == 1 else "s", minimum))
             if not old_enough:
                 why.append("the domain has been registered for %.1f year(s)" % years)
             new = {"pass": False, "evidence": " and ".join(why),

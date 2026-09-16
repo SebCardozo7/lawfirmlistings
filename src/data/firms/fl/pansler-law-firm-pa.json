@@ -123,6 +123,18 @@
       "rating_weighted": 4.8,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-14"
+    },
+    "ahrefs": {
+      "dr": 2.3,
+      "ahrefs_rank": 43261704,
+      "refdomains": 416,
+      "refdomains_dofollow": 87,
+      "backlinks": 1295,
+      "org_keywords": 16,
+      "org_traffic": 72,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -253,10 +265,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 39,
+    "total": 35,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -337,7 +349,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 43 reviews → Bayesian 4.82 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 43 reviews → Bayesian 4.82 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -374,8 +386,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 2.3 → 15th pct of 13-firm cohort (median 9.5) 0/3 · 416 referring domains, 15th pct 0/2 · 16 organic keywords / 72 visits·mo, 19th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -390,7 +402,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
           }
         ]
@@ -430,23 +442,32 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 31,
+      "gap": 35,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A6 Roster verifiability: +9 available"
+        "A6 Roster verifiability: +9 available",
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 27.0,
-    "assessed": 70,
-    "coverage": 0.769,
+    "assessed": 78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.658,
     "gates_unavailable": [
       "G1"
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/pansler.com.ico",
+    "source_url": "https://irp.cdn-website.com/ee97bafb/fav.ico",
+    "width": 512,
+    "height": 512,
+    "bytes": 12810,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-15"
   }
 }

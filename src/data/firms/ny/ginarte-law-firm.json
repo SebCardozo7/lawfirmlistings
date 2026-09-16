@@ -332,6 +332,18 @@
       "rating_weighted": 4.73,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
+    },
+    "ahrefs": {
+      "dr": 21,
+      "ahrefs_rank": 8011252,
+      "refdomains": 690,
+      "refdomains_dofollow": 248,
+      "backlinks": 15917,
+      "org_keywords": 106,
+      "org_traffic": 1111,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -387,10 +399,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 35,
+    "total": 32,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -471,7 +483,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.73 over 2,867 reviews → Bayesian 4.73 (prior 4.82 weighted as 100 reviews, from 197 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.73 over 2,867 reviews → Bayesian 4.73 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -508,8 +520,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 21 → 7th pct of 37-firm cohort (median 33.5) 0/3 · 690 referring domains, 16th pct 0/2 · 106 organic keywords / 1,111 visits·mo, 12th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -524,7 +536,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -564,18 +576,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 35,
+      "gap": 38,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A6 Roster verifiability: +8 available"
+        "A6 Roster verifiability: +8 available",
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 28.0,
-    "assessed": 79,
-    "coverage": 0.79,
+    "assessed": 87,
+    "coverage": 0.87,
     "floor_abc_pct": 0.404,
     "gates_unavailable": [],
     "assessable": 100,

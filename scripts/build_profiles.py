@@ -50,6 +50,7 @@ DEFAULT_COHORT = "ny-personal-injury"
 PRACTICE_NAMES = {
     "personal-injury": "Personal Injury",
     "workers-compensation": "Workers' Compensation",
+    "real-estate": "Real Estate",
 }
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury
@@ -299,7 +300,19 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
         availability.append("Hospital & home visits")
 
     # A fee model is only stated if the firm states it. No defaulting to contingency.
-    fee_model = "Contingency" if "contingency" in claims else "Not stated"
+    #
+    # And contingency is not the only thing a firm can state. A transactional practice charges a
+    # flat fee or an hourly rate, so reading only the contingency claim reported "Not stated"
+    # for all twenty firms in the first real estate market, five of which say plainly that their
+    # engagements are priced as flat fees. scripts/check_transaction.py found those words; this
+    # just believes them.
+    tx = rec.get("transaction") or {}
+    if "contingency" in claims:
+        fee_model = "Contingency"
+    elif tx.get("flat_fee"):
+        fee_model = "Flat fee"
+    else:
+        fee_model = "Not stated"
     built_offices = build_offices(rec)
 
     reviews = {"quotes": []}
@@ -376,6 +389,9 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
         "attorneys": [],
         "languages": languages,
         "fee_model": fee_model,
+        # What the firm publishes about the transaction, where the practice has no outcomes.
+        # scripts/score.py reads this for pillar B; see scripts/check_transaction.py.
+        **({"transaction": rec["transaction"]} if rec.get("transaction") else {}),
         "free_consultation": "free_consultation" in claims,
         "availability": availability,
         # Assembled from the fields above rather than left for a person to write. See
@@ -408,6 +424,10 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
         },
     }
     statement = fee_sentence(claims.get("contingency", {}).get("quote"))
+    if not statement and tx.get("flat_fee"):
+        statement = fee_sentence(tx["flat_fee"].get("quote"))
+    if not statement and tx.get("price"):
+        statement = fee_sentence(tx["price"].get("quote"))
     if statement:
         firm["fee_statement"] = statement
     firm["_review"]["blocking"] = [b for b in firm["_review"]["blocking"] if b]
