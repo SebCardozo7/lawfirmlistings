@@ -22,7 +22,7 @@ export interface Guide {
   thumb?: string;
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
-  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder';
+  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -48,6 +48,20 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'what-it-takes-to-check-a-law-firm',
+    cover: 'roster',
+    kicker: 'Method',
+    title: 'New Study: A Law Firm Can Be Highly Rated and Name No Lawyer at All',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every guide to hiring a lawyer says to look the attorney up in the state register. We ' +
+      'tried it on every firm in this directory. Two things have to be true before that check ' +
+      'runs, and one of them is usually missing.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'The check needs a name, and a register',
+  },
   {
     slug: 'what-new-york-injury-firms-publish-about-fees',
     cover: 'fees',

@@ -1,0 +1,285 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// Pillar A's method piece, and the study behind gates G1 and G2.
+//
+// Every guide to hiring a lawyer ends with the same instruction: look the attorney up in the
+// state register. Nobody has measured whether that instruction can be followed. It needs two
+// things to be true at once, and this counts how often each of them is.
+//
+// Every figure here is computed from the committed firm records at build time. The whole
+// directory rather than one state, because the argument is about what a state publishes and a
+// single-state page could not make it.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const N = firms.length;
+
+// Deduplicating formatter. Mapping one state name per firm and joining with ' and ' is what put
+// "Florida and Florida and Maryland" on a live page: see docs/guides-backlog.md.
+const listOf = (xs: string[]) => {
+  const u = [...new Set(xs)].sort();
+  return u.length <= 1 ? (u[0] ?? '') : `${u.slice(0, -1).join(', ')} and ${u[u.length - 1]}`;
+};
+
+const stateNames = [...new Set(firms.map(f => f.data.market.state_name))].sort();
+const marketCount = new Set(firms.map(f => f.data.market.city_slug)).size;
+
+// ---- The roster. `attorneys[]` is names read off the firm's own bio pages, one per bio <h1>,
+// by scripts/crawl_attorneys.py. It is what the firm published and we could read, which is not
+// the same as what the firm published: the split below keeps our own reach separate from the
+// firm's choice rather than charging one to the other.
+const named = firms.filter(f => f.data.attorneys.length > 0);
+const unnamed = firms.filter(f => f.data.attorneys.length === 0);
+const nameTotal = firms.reduce((n, f) => n + f.data.attorneys.length, 0);
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : 0;
+};
+const medianRoster = median(named.map(f => f.data.attorneys.length));
+const refused = unnamed.filter(f => f.data.site_blocked);
+const rosterPageOnly = unnamed.filter(
+  f => !f.data.site_blocked && f.data.digital.trust_pages?.attorney_bios);
+const nothingFound = unnamed.filter(
+  f => !f.data.site_blocked && !f.data.digital.trust_pages?.attorney_bios);
+
+// ---- The two gates. G1 is current licensure and G2 is published discipline, both written
+// against the firm's named attorneys. A gate here has three states, not two: passed, failed, or
+// no source to run it against, which is `source: 'no queryable source'`.
+const licensed = firms.filter(f => f.data.gates?.G1?.pass);
+const disciplineChecked = firms.filter(f => f.data.gates?.G2?.pass);
+const entityChecked = firms.filter(f => f.data.gates?.G3?.pass);
+const noRegister = firms.filter(f => f.data.gates?.G1?.source === 'no queryable source');
+const licenseStates = [...new Set(licensed.map(f => f.data.market.state_name))].sort();
+const disciplineStates = [...new Set(disciplineChecked.map(f => f.data.market.state_name))].sort();
+const noRegisterStates = [...new Set(noRegister.map(f => f.data.market.state_name))].sort();
+
+// Our own match against a register, which is our work and not the firm's. `attorneys[].bar_number`
+// is written by scripts/check_ny_registry.py when a published name resolves to a registration.
+// It is not a number the firm printed anywhere, and a guide once said it was.
+const matched = firms.reduce(
+  (n, f) => n + f.data.attorneys.filter(a => a.bar_number).length, 0);
+
+// ---- The rating, for the section that asks what a reader has instead. `rating_weighted` is the
+// firm's Google rating across its verified listings, weighted by review count.
+const WELL_RATED = 4.5;
+const wellRated = (f: typeof firms[number]) =>
+  (f.data.digital.places?.rating_weighted ?? 0) >= WELL_RATED;
+const ratedAll = firms.filter(wellRated);
+const ratedUnnamed = unnamed.filter(wellRated);
+// Status is a claim about the gates rather than about quality, which is why this comparison is a
+// count of statuses and not a difference of two averages: those would be means of percentages
+// taken over different denominators. See the guide linked below.
+const clearedUnnamed = unnamed.filter(f => f.data.status !== 'listed');
+const clearedNamed = named.filter(f => f.data.status !== 'listed');
+
+// ---- Charts.
+const foundSegments = [
+  { label: 'Attorneys named on a page we could read', value: named.length },
+  { label: 'A roster page, but no name we could read', value: rosterPageOnly.length },
+  { label: 'Site refuses our crawler', value: refused.length },
+  { label: 'No roster page and no name', value: nothingFound.length },
+];
+
+const checkRows = [
+  { label: 'A named attorney to check', value: named.length,
+    note: 'The firm publishes at least one name' },
+  { label: 'Published discipline searched', value: disciplineChecked.length,
+    note: 'Gate G2, from published court decisions' },
+  { label: 'Entity confirmed in a state register', value: entityChecked.length,
+    note: 'Gate G3, from business registers' },
+  { label: 'Current license verified', value: licensed.length,
+    note: 'Gate G1, from an attorney register', emphasis: true },
+];
+
+const ROSTER_BANDS = [
+  { label: 'None', note: 'nothing to check', lo: 0, hi: 0 },
+  { label: '1 to 2', note: '', lo: 1, hi: 2 },
+  { label: '3 to 5', note: '', lo: 3, hi: 5 },
+  { label: '6 to 10', note: '', lo: 6, hi: 10 },
+  { label: '11 to 20', note: '', lo: 11, hi: 20 },
+  { label: '21 or more', note: '', lo: 21, hi: Infinity },
+];
+const rosterColumns = ROSTER_BANDS.map(b => ({
+  label: b.label,
+  note: b.note || undefined,
+  value: firms.filter(f => f.data.attorneys.length >= b.lo && f.data.attorneys.length <= b.hi).length,
+  emphasis: b.lo === 0,
+}));
+// Said rather than asserted: "the second largest band" was written by hand while the empty band
+// was in fact the largest one, which is the kind of sentence this file exists to prevent.
+const emptyBand = rosterColumns[0].value;
+const emptyBandRank = rosterColumns.filter(c => c.value > emptyBand).length + 1;
+const smallBand = rosterColumns[1].value;
+
+// The bar is the share, because the states hold very different numbers of firms and a bar drawn
+// from the raw count would make the largest market look like the worst one. The printed figure
+// is the raw count, so nothing is legible only as a proportion.
+const stateRows = stateNames.map(s => {
+  const set = firms.filter(f => f.data.market.state_name === s);
+  const none = set.filter(f => f.data.attorneys.length === 0).length;
+  return {
+    label: s,
+    value: Math.round((none / set.length) * 100),
+    display: `${none} of ${set.length}`,
+    note: `${set.length} firms measured`,
+    none,
+  };
+}).sort((a, b) => b.value - a.value || a.label.localeCompare(b.label));
+const cleanStates = stateRows.filter(r => r.none === 0).map(r => r.label);
+
+// ---- Two firms, picked by the data rather than by hand, and re-picked when the data moves.
+// Ties break on slug so the page does not change its own illustration between builds.
+const bySize = [...named].sort((a, b) =>
+  b.data.attorneys.length - a.data.attorneys.length || a.data.slug.localeCompare(b.data.slug));
+const biggestRoster = bySize[0];
+const biggestChecked = bySize.find(f => f.data.gates?.G1?.pass);
+const biggestRosterMatched = biggestRoster
+  ? biggestRoster.data.attorneys.filter(a => a.bar_number).length : 0;
+const biggestCheckedMatched = biggestChecked
+  ? biggestChecked.data.attorneys.filter(a => a.bar_number).length : 0;
+
+// G5 is the site read, so its date is the day the rosters above were counted.
+const readOn = [...new Set(firms.map(f => f.data.gates?.G5?.checked_at).filter(Boolean))].sort().pop();
+const updated = readOn
+  ? new Date(readOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// States the score's own vocabulary for a blocked check, so the prose and the records agree.
+const title = 'New Study: A Law Firm Can Be Highly Rated and Name No Lawyer at All';
+const description = "Every hiring guide says to look your attorney up in the state register. We tried it on every firm in this directory. Here is what stopped the check.";
+---
+<Base title={title} description={description} nav="guides" image="/og/roster.png" imageAlt="A grid of attorney bio cards with two of them empty outlines, beside a verification seal that never closes">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">What it takes to check a law firm</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Licensure and discipline</span>
+    <h1>{title}</h1>
+    <p class="lede">Every guide to hiring a lawyer ends the same way: look the attorney up in your state's register. Following that advice needs two things to be true at once, and we measured how often each of them holds across the {N} firms in this directory. <b>The check completed on {licensed.length} of them.</b></p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="roster" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#check" class="is-active">The check everyone recommends</a></li>
+      <li><a href="#names">Who these firms name</a></li>
+      <li><a href="#register">What a register will answer</a></li>
+      <li><a href="#rating">The rating is not the check</a></li>
+      <li><a href="#do">What to do instead</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Measured across ${N} firms in ${marketCount} markets and ${stateNames.length} states${updated ? `, ${updated}` : ''}.`}
+      items={[
+        `<b>${named.length} of ${N}</b> firms name at least one attorney on a page we could read, ${nameTotal.toLocaleString('en-US')} lawyers between them. The other <b>${unnamed.length}</b> name nobody we could find.`,
+        `<b>${licenseStates.length} of the ${stateNames.length} states</b> here ${licenseStates.length === 1 ? 'publishes' : 'publish'} an attorney register we may query, so current licensure could be verified for <b>${licensed.length}</b> firms, every one of them in ${listOf(licenseStates)}.`,
+        `Published discipline was searchable across <b>${disciplineStates.length} of the ${stateNames.length} states</b>, for <b>${disciplineChecked.length}</b> firms, so the record people assume is hidden turns out to be the more open of the two.`,
+        `<b>${ratedUnnamed.length} of the ${unnamed.length}</b> firms that name nobody carry a Google rating of ${WELL_RATED} or better, against <b>${ratedAll.length} of ${N}</b> across the directory. A rating does not know whether a firm is checkable.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="check">The check everyone recommends</h2>
+    <p>Search for how to tell whether a law firm is legitimate and every answer says the same thing. Take the attorney's name, put it into your state bar's lookup, and read what comes back: active or not, admitted when, disciplined ever.</p>
+    <p>It is good advice. It is free, it takes a minute, and the register is a better answer than anything a directory could write. <b>What none of that advice mentions is that the check needs two things before it can run at all.</b></p>
+    <p>Somebody has to publish a name. And the state has to publish a register that answers.</p>
+    <p>We run both checks on every firm we list, as eligibility gates G1 and G2 of <a href="/methodology/">the certification methodology</a>. This is what happened when we ran them across {N} firms in {marketCount} markets and {stateNames.length} states.</p>
+
+    <h2 id="names">Who these firms name</h2>
+    <p>{named.length} firms publish at least one attorney on a page our crawler could read, {nameTotal.toLocaleString('en-US')} lawyers in total. {unnamed.length} publish none we could find.</p>
+    <StackBar
+      heading={`What we found when we went looking for a name, across ${N} firms`}
+      segments={foundSegments}
+      unit="firms"
+      caption={`The four groups do not overlap. A name is read from the heading of an individual bio page, so a firm that names its lawyers only in a paragraph would land in the last group: the measure is what we could read, not what exists.`}
+    />
+    <p><b>The last group is the finding and the second and third groups are ours, so they are counted apart.</b> {refused.length} firms answer our crawler with a 403 and we do not work around it, which means we cannot say what those sites publish. {rosterPageOnly.length} more have a roster page we found and no name we could lift from it, which is our crawler falling short rather than their page.</p>
+    <p>That leaves {nothingFound.length} firms where we found no roster page and no attorney name at all. For a reader that is the same problem in a smaller form: there is no obvious place on the site to find out who would be handling the case.</p>
+    <ColumnChart
+      heading={`Attorneys named per firm, across ${N} firms`}
+      columns={rosterColumns}
+      caption={`Counted from individual bio pages. The largest roster here runs to ${biggestRoster ? biggestRoster.data.attorneys.length : 0} names and the median firm that names anybody publishes ${medianRoster}.`}
+      emphasisLabel="No name to check"
+      quietLabel="At least one name"
+    />
+    <p>{emptyBandRank === 1 ? 'No band in that distribution is larger than the empty one.' : `The empty band is the ${emptyBandRank === 2 ? 'second' : `${emptyBandRank}th`} largest band in that distribution.`} It is not a story about small firms being small: {smallBand} firms here name one or two attorneys each, and that clears the same bar.</p>
+    <BarChart
+      heading="Firms naming no attorney we could read, by state"
+      max={100}
+      rows={stateRows}
+      caption={`The bar is the share of that state's firms and the figure beside it is the count, because the states hold very different numbers of firms. ${cleanStates.length > 0 ? `${listOf(cleanStates)} ${cleanStates.length === 1 ? 'is the only state' : 'are the only states'} here where every firm names somebody.` : 'Every state here has at least one.'}`}
+    />
+    <p>There is no rule against this. The American Bar Association's Model Rule 7.2(d) asks a lawyer advertisement to carry the name and contact information of at least one lawyer <b>or law firm</b> responsible for its content, and a firm name satisfies that. <b>The register, though, indexes people.</b> It has no entry for a trade name, so a firm name is the one piece of information that cannot be looked up.</p>
+
+    <h2 id="register">What a register will answer</h2>
+    <p>The second condition is the state's, and it is the one that stops us more often. Of the {N} firms here, {noRegister.length} sit in a state that publishes no attorney register we are permitted to query.</p>
+    <p>That phrasing matters, because it is not the same as the register not existing. Every state here has one and every one is free for a person to search. {listOf(noRegisterStates)} either refuse an automated reader or ask crawlers to stay out, and we honor that, so a profile in those states carries no licensure finding rather than one we did not actually make.</p>
+    <BarChart
+      heading={`What we could check, across the same ${N} firms`}
+      max={N}
+      rows={checkRows}
+      caption={`Four checks out of one denominator. The highlighted row is the one every hiring guide recommends, and it is the one that ran least often.`}
+    />
+    <p><b>Licensure is the check that completed least often, and published discipline is the check that completed most.</b> Discipline was searchable for {disciplineChecked.length} firms across {disciplineStates.length} of the {stateNames.length} states, because a suspension or a disbarment is ordinarily an order of the state's highest court, and published court decisions are indexed and readable. Whether somebody's registration is current today is held in a register, and most registers are closed to us.</p>
+    <p>That is backwards from what people expect. The disciplinary history everybody assumes is buried is the more open of the two records, and the routine administrative fact is the harder one to obtain.</p>
+    {biggestRoster && (
+      <p>Two firms show what each condition is worth. <a href={`/firms/${biggestRoster.data.slug}/`}>{biggestRoster.data.name}</a> publishes {biggestRoster.data.attorneys.length} attorneys, the largest roster in the directory, and we matched {biggestRosterMatched === 0 ? 'none' : biggestRosterMatched} of them to a registration, because {biggestRoster.data.market.state_name} publishes no register we may query. {biggestChecked && (
+        <>By comparison <a href={`/firms/${biggestChecked.data.slug}/`}>{biggestChecked.data.name}</a> publishes {biggestChecked.data.attorneys.length} and {biggestCheckedMatched} of them resolve to a current registration, on the same day, using the same method. The difference between the two is a records policy.</>
+      )}</p>
+    )}
+    <p>Across the whole directory we tied {matched.toLocaleString('en-US')} of the {nameTotal.toLocaleString('en-US')} published names to a registration. That number is our work rather than anything a firm printed, and it is worth saying plainly: <b>we do not measure whether firms publish bar admission numbers on their bios</b>, so this page makes no claim about that either way.</p>
+
+    <h2 id="rating">The rating is not the check</h2>
+    <p>A reader who cannot find a name still has something on the screen, and it is almost always a star rating. It carries no information about any of this.</p>
+    <p>{ratedUnnamed.length} of the {unnamed.length} firms that name nobody we could read hold a Google rating of {WELL_RATED} or better, summed across every listing they operate. Across the directory as a whole, {ratedAll.length} of {N} do. <b>The two groups are indistinguishable on the number a reader is most likely to use.</b></p>
+    <p>That is the same lesson the review study reached from the other direction: <a href="/guides/google-reviews-new-york-injury-firms/">star ratings across these firms barely differ at all</a>, so almost nothing can be separated by them.</p>
+    <p>What does separate the two groups is the gates. {clearedNamed.length} of the {named.length} firms with a roster have cleared enough of them to be listed as verified or better. <b>{clearedUnnamed.length === 0 ? 'Not one' : `Only ${clearedUnnamed.length}`} of the {unnamed.length} without one has.</b> That is not a judgment about the quality of their work, and the site does not present it as one: it is a statement about what can be established from outside.</p>
+    <p>It is also why an unreadable roster costs a firm nothing in score. Roster verifiability is unscored wherever the state publishes no register, and pending wherever we found no name, which keeps both out of the denominator rather than charging the firm for them. <a href="/guides/what-a-law-firm-score-cannot-compare/">The arithmetic behind that</a> is its own study, and the short version is that a firm never loses points for the reach of our crawl or for its state's records policy.</p>
+
+    <h2 id="do">What to do instead</h2>
+    <p><b>Ask for the name of the attorney who will handle your case, and ask on the first call.</b> It is a reasonable question, the answer takes a second, and it is the input every other check needs.</p>
+    <p>Then run the register search yourself. Your state bar publishes one, it is free, and for most people reading this it will answer a question we could not answer from here.</p>
+    <p>Search the same name against published disciplinary decisions, which is the check that turned out to be more available than the register. State supreme court opinions on attorney discipline are public and indexed.</p>
+    <p>And treat a missing roster as a question rather than a verdict. Plenty of reasons for one are dull, and a firm that answers the first question above has resolved it in a sentence.</p>
+    <p>For firms, the fix is a text change. A page with each attorney's name and a link from the main navigation is the difference between a practice anybody can verify in a minute and one nobody can. <a href="/list-your-firm/">A firm that thinks we have read its site wrongly</a> can see every sub-factor, the evidence behind it, and the pages we read.</p>
+    <p>The ranked pages carry all of this on every entry: <a href="/practice-areas/personal-injury/">personal injury firms</a>, and <a href="/cities/new-york-ny/personal-injury/">the New York personal injury ranking</a>, where the licensure finding is one a reader can actually see. We took the same approach to <a href="/guides/what-a-case-results-page-proves/">what a case results page proves</a> for pillar B.</p>
+    <p class="muted" style="font-size:.86rem">Attorney names are read from individual bio pages on each firm's own site. Licensure and discipline come from state attorney registers and published court decisions, as each firm's profile records for that firm. Firms marked as samples or not eligible are excluded throughout.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the evidence</h4>
+      <p>Every firm counted here has a profile showing its roster, which checks we could run against it, and what each one found.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>How scoring works</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li><a href="/guides/google-reviews-new-york-injury-firms/">What a star rating is worth</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
