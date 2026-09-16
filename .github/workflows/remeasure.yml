@@ -35,13 +35,18 @@ jobs:
   # seconds between requests to one host, which is the politeness we score other firms on and is
   # not negotiable, so the only way to shorten a four-hour run is to give each shard a different
   # set of firms. Per-host spacing is unchanged.
+  #
+  # Six shards rather than four, and a step more to run in each. The directory went from 116
+  # firms to 217 in a week, and a shard now also reads the transaction pages for the practices
+  # that have no outcomes. Four shards of fifty-four firms would have come close enough to the
+  # six-hour job ceiling to lose a whole month's measurement to a timeout.
   measure:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 300
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4]
+        shard: [1, 2, 3, 4, 5, 6]
     steps:
       - uses: actions/checkout@v4
 
@@ -52,8 +57,8 @@ jobs:
       - name: Which firms this shard owns
         id: firms
         run: |
-          echo "domains=$(python scripts/published_domains.py --shard ${{ matrix.shard }} --of 4 --joined)" >> "$GITHUB_OUTPUT"
-          python scripts/published_domains.py --shard ${{ matrix.shard }} --of 4
+          echo "domains=$(python scripts/published_domains.py --shard ${{ matrix.shard }} --of 6 --joined)" >> "$GITHUB_OUTPUT"
+          python scripts/published_domains.py --shard ${{ matrix.shard }} --of 6
 
       # Read from the firms' own sites. Each step is separate and none of them fails the job: a
       # site that is down this month is a site that is down, and the rest of the measurement is
@@ -73,6 +78,13 @@ jobs:
       - name: Bar associations and insurance disclosure
         continue-on-error: true
         run: python scripts/check_a5.py --domains "${{ steps.firms.outputs.domains }}"
+
+      # For a practice with no outcomes, this is pillar B. A firm that publishes its closing
+      # fee this month and not last month should move, and nothing else in this workflow would
+      # notice. Harmless for an injury firm: the block is written and score.py ignores it.
+      - name: What firms publish about a transaction
+        continue-on-error: true
+        run: python scripts/check_transaction.py --domains "${{ steps.firms.outputs.domains }}"
 
       - name: Google Business Profiles
         continue-on-error: true
@@ -144,13 +156,24 @@ jobs:
       - name: Published discipline decisions
         continue-on-error: true
         run: |
-          for state in ny md fl; do
+          for state in md fl or in ma; do
             python scripts/check_discipline.py --state "$state" --write --gates || true
           done
 
       - name: Settle the footprint gate
         continue-on-error: true
         run: python scripts/check_operating.py --domains "$ALL" --gates-only
+
+      # G3 where a state publishes its entity register: an entity can be dissolved between
+      # months and the gate should notice. Maryland, Indiana and Massachusetts publish nothing a
+      # machine may read, and re-running those would rewrite the same sentence with a new date,
+      # so they are left alone until the state changes rather than every month.
+      - name: Entity registers
+        continue-on-error: true
+        run: |
+          for state in tx or; do
+            python scripts/check_entity.py --state "$state" --write || true
+          done
 
       - name: Score
         run: python scripts/score.py | tee /tmp/score.log

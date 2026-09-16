@@ -192,6 +192,18 @@
       "rating_weighted": 4.8,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
+    },
+    "ahrefs": {
+      "dr": 21,
+      "ahrefs_rank": 8185592,
+      "refdomains": 772,
+      "refdomains_dofollow": 304,
+      "backlinks": 7677,
+      "org_keywords": 821,
+      "org_traffic": 4139,
+      "paid_keywords": 4,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -282,10 +294,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 66,
+    "total": 63,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-15",
+    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar D (6/25).",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -387,7 +399,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -401,10 +413,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 21 → 7th pct of 37-firm cohort (median 33.5) 0/3 · 772 referring domains, 30th pct 1/2 · 821 organic keywords / 4,139 visits·mo, 54th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -419,7 +431,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -459,18 +471,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 4,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": true,
       "path": [
+        "D2 Search authority: +6 available",
         "D1 Website trust & experience: +5.0 available",
-        "D3 Local presence: +4 available",
-        "D4 Content, E-E-A-T & schema: +4 available"
+        "D3 Local presence: +4 available"
       ]
     },
-    "raw": 59.0,
-    "assessed": 89,
-    "coverage": 0.89,
+    "raw": 61.0,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.842,
     "gates_unavailable": [],
     "assessable": 100,

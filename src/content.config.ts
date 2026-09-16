@@ -73,7 +73,7 @@ const firms = defineCollection({
     }),
     results: z.array(z.object({ type: z.string(), title: z.string(), description: z.string(), amount: z.string().nullable(), verified: z.boolean(), docket: z.string().optional(), source_url: z.string().optional() })).default([]),
     digital: z.object({
-      ahrefs: z.object({ dr: z.number(), ahrefs_rank: z.number(), refdomains: z.number(), refdomains_dofollow: z.number(), backlinks: z.number(), org_keywords: z.number(), org_traffic: z.number(), paid_keywords: z.number(), ai_citations: z.object({ total: z.number(), pages: z.number(), by_platform: z.record(z.number()) }), measured_at: z.string() }).optional(),
+      ahrefs: z.object({ dr: z.number(), ahrefs_rank: z.number(), refdomains: z.number(), refdomains_dofollow: z.number(), backlinks: z.number(), org_keywords: z.number(), org_traffic: z.number(), paid_keywords: z.number(), ai_citations: z.object({ total: z.number(), pages: z.number(), by_platform: z.record(z.number()) }).optional(), source: z.string().optional(), measured_at: z.string() }).optional(),
       trust_pages: z.record(z.boolean()).optional(),
       schema_detected: z.boolean().optional(),
       psi: measured(z.object({ performance: z.number(), cwv_pass: z.boolean() })).optional(),

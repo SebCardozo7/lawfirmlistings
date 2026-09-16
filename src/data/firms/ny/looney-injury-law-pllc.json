@@ -113,6 +113,18 @@
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-14"
+    },
+    "ahrefs": {
+      "dr": 1.3,
+      "ahrefs_rank": 53276462,
+      "refdomains": 397,
+      "refdomains_dofollow": 77,
+      "backlinks": 707,
+      "org_keywords": 4,
+      "org_traffic": 2,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -224,10 +236,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 52,
+    "total": 47,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -345,8 +357,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 1.3 → 0th pct of 22-firm cohort (median 19) 0/3 · 397 referring domains, 0th pct 0/2 · 4 organic keywords / 2 visits·mo, 1th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -361,7 +373,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -401,18 +413,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 23,
       "floor_met": true,
       "coverage_met": true,
       "path": [
+        "D2 Search authority: +8 available",
         "B1 Results published: +6 available",
-        "B2 Specificity: +5 available",
-        "D1 Website trust & experience: +5.0 available"
+        "B2 Specificity: +5 available"
       ]
     },
     "raw": 46.0,
-    "assessed": 89,
-    "coverage": 0.89,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.649,
     "gates_unavailable": [],
     "assessable": 100,

@@ -290,6 +290,18 @@
       "rating_weighted": 4.66,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
+    },
+    "ahrefs": {
+      "dr": 34,
+      "ahrefs_rank": 2678151,
+      "refdomains": 1394,
+      "refdomains_dofollow": 729,
+      "backlinks": 32953,
+      "org_keywords": 203,
+      "org_traffic": 891,
+      "paid_keywords": 12,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -348,7 +360,7 @@
     "total": 52,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -450,7 +462,7 @@
         ]
       },
       "D": {
-        "score": 6,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -464,10 +476,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 34 → 51th pct of 37-firm cohort (median 33.5) 2/3 · 1,394 referring domains, 76th pct 2/2 · 203 organic keywords / 891 visits·mo, 14th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -482,7 +494,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -531,9 +543,9 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 46.0,
-    "assessed": 89,
-    "coverage": 0.89,
+    "raw": 50.0,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.605,
     "gates_unavailable": [],
     "assessable": 100,

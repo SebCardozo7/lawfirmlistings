@@ -200,6 +200,18 @@
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-10"
+    },
+    "ahrefs": {
+      "dr": 32,
+      "ahrefs_rank": 3389428,
+      "refdomains": 673,
+      "refdomains_dofollow": 298,
+      "backlinks": 31445,
+      "org_keywords": 570,
+      "org_traffic": 3764,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -255,10 +267,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 56,
+    "total": 53,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -360,7 +372,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -374,10 +386,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 32 → 39th pct of 37-firm cohort (median 33.5) 1/3 · 673 referring domains, 12th pct 0/2 · 570 organic keywords / 3,764 visits·mo, 36th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -392,7 +404,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
@@ -432,18 +444,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 17,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "B1 Results published: +6 available",
-        "B2 Specificity: +5 available",
-        "D1 Website trust & experience: +5.0 available"
+        "D2 Search authority: +6 available",
+        "B2 Specificity: +5 available"
       ]
     },
-    "raw": 49.5,
-    "assessed": 89,
-    "coverage": 0.89,
+    "raw": 51.5,
+    "assessed": 97,
+    "coverage": 0.97,
     "floor_abc_pct": 0.675,
     "gates_unavailable": [],
     "assessable": 100,

@@ -100,6 +100,18 @@
       "rating_weighted": 4.7,
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-15"
+    },
+    "ahrefs": {
+      "dr": 12,
+      "ahrefs_rank": 15130716,
+      "refdomains": 577,
+      "refdomains_dofollow": 212,
+      "backlinks": 9207,
+      "org_keywords": 14,
+      "org_traffic": 110,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-16"
     }
   },
   "gates": {
@@ -200,7 +212,7 @@
     "total": 29,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-15",
+    "computed_at": "2026-09-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -302,7 +314,7 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -316,10 +328,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 12 → 31th pct of 27-firm cohort (median 20) 1/3 · 577 referring domains, 26th pct 1/2 · 14 organic keywords / 110 visits·mo, 13th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -334,7 +346,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 5,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
           }
         ]
@@ -380,12 +392,12 @@
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "D2 Search authority: +6 available"
       ]
     },
-    "raw": 20.5,
-    "assessed": 70,
-    "coverage": 0.7,
+    "raw": 22.5,
+    "assessed": 78,
+    "coverage": 0.78,
     "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
