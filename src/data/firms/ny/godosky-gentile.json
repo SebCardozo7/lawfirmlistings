@@ -37,7 +37,7 @@
       "admitted_year": 1993,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -48,7 +48,7 @@
       "admitted_year": 2007,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -59,7 +59,7 @@
       "admitted_year": 2006,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -70,7 +70,7 @@
       "admitted_year": 2016,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     }
   ],
@@ -167,31 +167,31 @@
       "pass": true,
       "evidence": "4 of 4 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 4 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": true,
       "evidence": "GODOSKY & GENTILE, P.C. is an active domestic professional service corporation registered since 1995-04-26, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
       "evidence": "25 public client reviews and 31 years since the entity was formed in 1995",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -208,13 +208,13 @@
     "dos_id": "1916493",
     "formed": "1995-04-26",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 58,
+    "total": 62,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-16",
+    "computed_at": "2026-09-17",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -295,7 +295,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 25 reviews → Bayesian 4.84 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 25 reviews → Bayesian 4.85 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -316,7 +316,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -330,10 +330,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 27 → 16th pct of 37-firm cohort (median 33.5) 0/3 · 624 referring domains, 3th pct 0/2 · 74 organic keywords / 265 visits·mo, 5th pct 0/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 27 → 45th pct of 75-firm cohort (median 28.5) 1/3 · 624 referring domains, 25th pct 1/2 · 74 organic keywords / 265 visits·mo, 34th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -388,7 +388,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 12,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -397,7 +397,7 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 47.5,
+    "raw": 50.5,
     "assessed": 82,
     "coverage": 0.82,
     "floor_abc_pct": 0.881,

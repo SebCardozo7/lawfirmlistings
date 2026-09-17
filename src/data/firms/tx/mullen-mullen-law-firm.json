@@ -310,10 +310,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 51,
+    "total": 53,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-16",
+    "computed_at": "2026-09-17",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -377,7 +377,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 17,
         "max": 20,
         "subs": [
           {
@@ -391,10 +391,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 5,
+            "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 68 reviews → Bayesian 4.90 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 68 reviews → Bayesian 4.91 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -483,11 +483,11 @@
         ]
       }
     },
-    "floor_abc": 25,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 19,
+      "gap": 17,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -496,10 +496,10 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 40.0,
+    "raw": 41.0,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.658,
+    "floor_abc_pct": 0.684,
     "gates_unavailable": [
       "G1",
       "G2",

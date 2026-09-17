@@ -39,7 +39,7 @@
       "admitted_year": 2002,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     },
     {
@@ -50,7 +50,7 @@
       "admitted_year": 1977,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-15",
+      "checked_at": "2026-09-16",
       "role_source": "not stated by the firm"
     }
   ],
@@ -144,31 +144,31 @@
       "pass": true,
       "evidence": "2 of 2 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 2 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G3": {
       "pass": true,
       "evidence": "KATZ, LEIDMAN, FREUND & HERMAN, LLP is an active domestic registered limited liability partnership registered since 2020-11-25, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-16"
     },
     "G6": {
       "pass": true,
       "evidence": "217 public client reviews and 6 years since the entity was formed in 2020",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-09-16"
     }
   },
   "cohort_id": "ny-workers-compensation",
@@ -274,13 +274,13 @@
     "dos_id": "5885612",
     "formed": "2020-11-25",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-16"
   },
   "score": {
     "total": 61,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar E (2/15).",
-    "computed_at": "2026-09-16",
+    "computed_at": "2026-09-17",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -361,7 +361,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 217 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 217 reviews → Bayesian 4.81 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

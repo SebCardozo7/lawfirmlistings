@@ -125,9 +125,28 @@ def fetch(where: str) -> list[dict]:
         time.sleep(PAUSE)
 
 
-def candidates(firm: dict) -> list[dict]:
+def listing_tokens(firm: dict) -> set[str]:
+    """Distinctive words in the name on the firm's own Google listing.
+
+    A second name the firm publishes, and sometimes the fuller one: D'Agostino & Associates
+    files as THE LAW FIRM OF JONATHAN D'AGOSTINO, P.C., and "D'Agostino" alone is one token
+    against 111 entities carrying that surname, so the register said nothing about a firm
+    plainly in it. Its listing is headed "Jonathan D'Agostino & Associates".
+
+    These are only ever a second attempt, never part of the first. A listing name carries
+    marketing: Beck Law's reads "Beck Workers Comp & Car Accident Attorney of Queens, P.C.",
+    and folding those words into the first pass moved the search anchor, raised the number of
+    tokens a row had to share, and lost three firms that the plain name had matched exactly.
+    """
+    out: set[str] = set()
+    for office in firm.get("offices") or []:
+        out |= {t for t in tokens(office.get("label") or "")
+                if t not in GENERIC and len(t) > 2}
+    return out
+
+
+def candidates(firm: dict, name_tokens: set[str]) -> list[dict]:
     """Search on the single most distinctive token, then score the rest locally."""
-    name_tokens, _ = distinctive(firm)
     if not name_tokens:
         return []
     anchor = max(name_tokens, key=len)
@@ -135,11 +154,27 @@ def candidates(firm: dict) -> list[dict]:
 
 
 def match(firm: dict) -> tuple[dict | None, str]:
+    """The firm's name first. Its Google listing's name only if that found nothing."""
+    found, why = attempt(firm, set())
+    if found:
+        return found, why
+    extra = listing_tokens(firm) - distinctive(firm)[0]
+    if extra:
+        found, why2 = attempt(firm, extra)
+        if found:
+            return found, why2 + ", matched on the name the firm's Google listing carries"
+    return None, why
+
+
+def attempt(firm: dict, extra: set[str]) -> tuple[dict | None, str]:
     name_tokens, domain_tokens = distinctive(firm)
+    # The anchor stays a word from the firm's own name, so the search never wanders.
+    anchor_tokens = set(name_tokens)
+    name_tokens |= extra
     needed = min(2, len(name_tokens)) or 1
     whole = norm(firm.get("legal_name") or firm["name"])
     scored = []
-    for row in candidates(firm):
+    for row in candidates(firm, anchor_tokens):
         entity_name = row.get("current_entity_name", "")
         company = tokens(entity_name)
         shared = name_tokens & company
@@ -183,6 +218,11 @@ def apply_gates(firm: dict, entity: dict | None, today: str) -> list[str]:
     listings = places.get("listing_count") or 0
     reviews = places.get("review_count_total") or 0
     age = years_since(entity.get("initial_dos_filing_date")) if entity else None
+    # A foreign entity's filing date is the day it registered to do business in New York, not
+    # the day the firm was formed. TopDog Law is a Philadelphia practice that registered here in
+    # May 2026 and has been operating since 2015 by its domain, and reading the New York date as
+    # its age failed a gate on a firm eleven years old.
+    foreign = "FOREIGN" in (entity.get("entity_type") or "").upper() if entity else False
 
     for code in ("G3", "G6"):
         if (gates.get(code) or {}).get("attested"):
@@ -228,6 +268,14 @@ def apply_gates(firm: dict, entity: dict | None, today: str) -> list[str]:
                 "source": f"Google Places API and {DATASET}",
                 "checked_at": today,
             }
+        elif (age is None or foreign) and (gates.get("G6") or {}).get("pass"):
+            # Somebody else has already settled this gate from a source this script does not
+            # read. scripts/check_operating.py establishes the year in operation from the
+            # domain's registration date, which is a lower bound and a real one, and where no
+            # entity matched here there is nothing to add: overwriting it took the gate away
+            # from twelve firms and replaced their evidence with "time in operation not
+            # established", which was a statement about this script rather than about them.
+            notes.append("G6 left as it was: no entity matched and another source has settled it")
         else:
             why = []
             if not enough_reviews:

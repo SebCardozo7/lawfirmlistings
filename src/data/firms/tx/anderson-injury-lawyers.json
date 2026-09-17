@@ -5,7 +5,7 @@
   "website": "https://maafirm.com/",
   "domain": "maafirm.com",
   "phone": "(817) 294-1900",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -51,7 +51,112 @@
       "source_url": "https://maps.google.com/?cid=16975437235496783142&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Mark A. Anderson",
+      "source_url": "https://maafirm.com/about-us/attorneys/mark-a-anderson/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "John M. Groce Jr.",
+      "source_url": "https://maafirm.com/about-us/attorneys/john-m-groce-jr/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Rachael Stevenson",
+      "source_url": "https://maafirm.com/about-us/attorneys/rachael-stevenson/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Cole McNiel",
+      "source_url": "https://maafirm.com/about-us/attorneys/cole-mcniel/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Ana Islas",
+      "source_url": "https://maafirm.com/about-us/attorneys/ana-islas/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Andrew Etter",
+      "source_url": "https://maafirm.com/about-us/attorneys/andrew-etter/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Chase Price",
+      "source_url": "https://maafirm.com/about-us/attorneys/chase-price/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Josh Frechette",
+      "source_url": "https://maafirm.com/about-us/attorneys/josh-frechette/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Bailey Currie",
+      "source_url": "https://maafirm.com/about-us/attorneys/bailey-currie/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Brian Burkhardt",
+      "source_url": "https://maafirm.com/about-us/attorneys/brian-burkhardt/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Anna Lauren Cash",
+      "source_url": "https://maafirm.com/about-us/attorneys/anna-lauren-cash/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Danielle Fox",
+      "source_url": "https://maafirm.com/about-us/attorneys/danielle-fox/",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Joseph Milensky",
+      "source_url": "https://maafirm.com/about-us/attorneys/joseph-milensky/",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Charles Hernandez",
+      "source_url": "https://maafirm.com/about-us/attorneys/charles-hernandez/",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Naved Qazi",
+      "source_url": "https://maafirm.com/about-us/attorneys/naved-qazi/",
+      "checked_at": "2026-09-17"
+    },
+    {
+      "name": "Pedro Bravo",
+      "source_url": "https://maafirm.com/about-us/attorneys/pedro-bravo/",
+      "checked_at": "2026-09-17"
+    }
+  ],
   "languages": [
     "English",
     "Spanish"
@@ -220,10 +325,10 @@
       "evidence": "4 physical locations verified on Google Business Profile. We read the Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status and could not identify this firm in it: no entity whose name contains the firm's name. A miss there is not evidence that the firm is unregistered, so this gate is unresolved rather than failed. The franchise tax does not reach a sole proprietorship or a general partnership, so this register can confirm an entity and cannot rule one out."
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-09-15"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 16 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-17"
     },
     "G6": {
       "pass": true,
@@ -356,9 +461,9 @@
   },
   "score": {
     "total": 67,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-16",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-17",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -378,8 +483,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",
@@ -439,7 +544,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.91 over 2,278 reviews → Bayesian 4.91 (prior 4.82 weighted as 100 reviews, from 217 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.91 over 2,278 reviews → Bayesian 4.91 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -507,7 +612,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · We offer a free consultation and you pay nothing unless we win. · the fee percentage itself is not published"
+            "evidence": "Free consultation · “We offer a free consultation and you pay nothing unless we win.” · the fee percentage itself is not published"
           },
           {
             "code": "E3",
@@ -537,20 +642,20 @@
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A6 Roster verifiability: +9 available",
         "B3 Results disclosure: +4 available"
       ]
     },
     "raw": 52.0,
     "assessed": 78,
-    "coverage": 0.78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.763,
     "gates_unavailable": [
       "G1",
       "G2",
       "G3"
     ],
-    "assessable": 100,
+    "assessable": 91,
     "comparable": true
   },
   "logo": {

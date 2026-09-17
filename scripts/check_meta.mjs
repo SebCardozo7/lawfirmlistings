@@ -58,11 +58,17 @@ const problems = [];
 const seenTitle = new Map();
 const seenDesc = new Map();
 
-// Em dashes in rendered copy. Blockquotes are exempt: a pull quote is someone else's sentence.
+// Em dashes in rendered copy. Quotations are exempt, in all three forms the pages use: a
+// blockquote pull quote, a <q> inline quotation, and a passage inside typographic quotation
+// marks within a sentence of ours. A firm that publishes "NO FEE UNLESS WE WIN — GUARANTEED!"
+// wrote that dash itself, and this rule is about the prose this directory writes. Tidying the
+// punctuation of words attributed to somebody would be worse than carrying their dash.
 for (const { url, path } of pages) {
   const html = readFileSync(path, 'utf8')
     .replace(/<(script|style)\b[\s\S]*?<\/\1>/g, '')
-    .replace(/<blockquote[\s\S]*?<\/blockquote>/g, '');
+    .replace(/<blockquote[\s\S]*?<\/blockquote>/g, '')
+    .replace(/<q\b[\s\S]*?<\/q>/g, '')
+    .replace(/“[^”]{0,400}”/g, '');
   const dashes = (html.match(/—/g) || []).length;
   if (dashes) {
     const text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');

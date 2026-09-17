@@ -49,6 +49,9 @@ import urllib.request
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from roster_roles import is_support_role  # noqa: E402
+
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
         stream.reconfigure(encoding="utf-8")
@@ -303,7 +306,13 @@ def check_firm(path: Path, write: bool, write_gates: bool) -> dict:
     name = firm["name"]
     city = firm.get("market", {}).get("city", "")
     name_tokens, domain_tokens = distinctive(name, firm.get("legal_name"), firm.get("domain"))
-    attorneys = firm.get("attorneys") or []
+    # The people the firm presents as lawyers. G1 and G2 are statements about "the attorneys a
+    # firm names", and one Queens practice names thirty-nine people with a role beside each:
+    # searching the register for its receptionist wastes a lookup, and a namesake match would
+    # have put a registration number on her and made the gate's own count wrong.
+    everyone = firm.get("attorneys") or []
+    support = [a for a in everyone if is_support_role(a)]
+    attorneys = [a for a in everyone if not is_support_role(a)]
 
     result = {"slug": firm["slug"], "name": name, "rows": [],
               "matched": 0, "ambiguous": 0, "unmatched": 0,
@@ -457,13 +466,26 @@ def apply_g5(firm: dict, today: str) -> None:
         return
     https = (firm.get("website") or "").lower().startswith("https://")
     phone = bool((firm.get("phone") or "").strip())
-    named = len(firm.get("attorneys") or [])
+    everyone = firm.get("attorneys") or []
+    named = len(everyone)
+    # G5 asks whether the firm names its people, so everyone it names counts. The wording
+    # separates the two groups rather than calling thirty-five case managers attorneys: the
+    # gate is satisfied either way, and the sentence has to stay true.
+    lawyers = len([a for a in everyone if not is_support_role(a)])
+    support = named - lawyers
     ok = https and phone and named > 0
+    if not named:
+        who = "no attorney is named on the site we could read"
+    elif support:
+        who = (f"{lawyers} named attorney{'' if lawyers == 1 else 's'} published, and "
+               f"{support} more {'person' if support == 1 else 'people'} in roles the firm "
+               "states are not a lawyer's")
+    else:
+        who = f"{named} named attorney{'' if named == 1 else 's'} published"
     parts = [
         "served over HTTPS" if https else "no HTTPS on the published address",
         "a working phone number published" if phone else "no contact number published",
-        (f"{named} named attorney{'' if named == 1 else 's'} published"
-         if named else "no attorney is named on the site we could read"),
+        who,
     ]
     gates["G5"] = {
         "pass": ok,
