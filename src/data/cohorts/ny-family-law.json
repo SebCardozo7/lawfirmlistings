@@ -1,0 +1,224 @@
+{
+  "id": "ny-family-law",
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "state": "NY",
+  "practice": "family-law",
+  "label": "New York × Family Law",
+  "measured_at": "2026-09-17",
+  "source": "The first family law market here, and the first market selected on a rule this directory did not have before. Candidates from the Google Places API across the city and its boroughs (scripts/discover_places.py, 9 queries, 252 domains). Practice evidence from scripts/check_practice.py: 38 of the first 70 candidates by review count publish a family law practice page or name the practice among their practice areas.\n\nThe new rule is about which of those 38 belong in a ranking together. A search for a divorce lawyer on a map returns general practices, and the two largest results by review count are traffic-ticket firms whose listings mention divorce. Worse, pillars C1 and C2 score a firm's Google reviews, and an injury firm with a matrimonial page has 443 reviews written by injury clients: ranking it against a family practice imports a signal from another practice, which is the same error as ranking a Miami firm in New York. So a firm enters this ranking when its own home page presents this practice, in its title or in its name, rather than when it lists the practice among many. That is checkable, it is the firm's own statement about itself, and it left 17 firms out, every one of them recorded in docs/market-queue.md with the reason.\n\nAhrefs figures from the batch endpoint, subdomains mode, United States organic, measured 2026-09-17. rlffamilylaw.com returns no Ahrefs rank at all, which is what an unranked domain gets and is stored as the zero the API returned rather than as a rank.",
+  "full_size_estimate": 252,
+  "firms": [
+    {
+      "domain": "zimmetlaw.com",
+      "name": "Zimmet Law Group, P.C.",
+      "practice_page": "https://www.zimmetlaw.com/new-york-city-divorce-attorney/",
+      "dr": 22,
+      "refdomains": 588,
+      "org_keywords": 63,
+      "org_traffic": 195
+    },
+    {
+      "domain": "mastrodomenicolaw.com",
+      "name": "Law Offices of Donald Mastrodomenico, P.C.",
+      "practice_page": "https://www.mastrodomenicolaw.com/family-law/",
+      "dr": 6,
+      "refdomains": 498,
+      "org_keywords": 123,
+      "org_traffic": 675
+    },
+    {
+      "domain": "lkrasner.com",
+      "name": "Krasner Law, PLLC",
+      "practice_page": "https://lkrasner.com/family-law-attorney-nyc/",
+      "dr": 8,
+      "refdomains": 2321,
+      "org_keywords": 158,
+      "org_traffic": 395
+    },
+    {
+      "domain": "thedivorcecenter.com",
+      "name": "The Divorce Center",
+      "practice_page": "https://thedivorcecenter.com/new-york-divorce/",
+      "dr": 6,
+      "refdomains": 332,
+      "org_keywords": 190,
+      "org_traffic": 764
+    },
+    {
+      "domain": "aglawnyc.com",
+      "name": "Angiuli & Gentile, LLP",
+      "practice_page": "https://www.aglawnyc.com/divorce-and-child-custody/",
+      "dr": 15,
+      "refdomains": 679,
+      "org_keywords": 200,
+      "org_traffic": 618
+    },
+    {
+      "domain": "nyuncontesteddivorceattorney.com",
+      "name": "David Centeno Law, PC",
+      "practice_page": "https://nyuncontesteddivorceattorney.com/divorce/",
+      "dr": 23,
+      "refdomains": 562,
+      "org_keywords": 200,
+      "org_traffic": 1008
+    },
+    {
+      "domain": "nylawyersteam.com",
+      "name": "Gordon Law, P.C.",
+      "practice_page": "https://www.nylawyersteam.com/practice-areas/family-and-divorce",
+      "dr": 27,
+      "refdomains": 1305,
+      "org_keywords": 175,
+      "org_traffic": 409
+    },
+    {
+      "domain": "claudioandassociates.com",
+      "name": "Claudio & Associates",
+      "practice_page": "https://www.claudioandassociates.com/divorce",
+      "dr": 3.5,
+      "refdomains": 475,
+      "org_keywords": 9,
+      "org_traffic": 74
+    },
+    {
+      "domain": "aaalawyer.com",
+      "name": "Jeffrey B. Peltz, P.C.",
+      "practice_page": "https://www.aaalawyer.com/en/area-of-law/family-law/",
+      "dr": 2.9,
+      "refdomains": 802,
+      "org_keywords": 83,
+      "org_traffic": 162
+    },
+    {
+      "domain": "nyc-divorces.com",
+      "name": "Cedeño Law Group, PLLC",
+      "practice_page": "https://nyc-divorces.com/nyc-divorce-lawyer/",
+      "dr": 7,
+      "refdomains": 669,
+      "org_keywords": 30,
+      "org_traffic": 115
+    },
+    {
+      "domain": "rovenlawgroup.com",
+      "name": "Roven Law Group, P.C.",
+      "practice_page": "https://rovenlawgroup.com/family-law-manhattan/",
+      "dr": 31,
+      "refdomains": 592,
+      "org_keywords": 41,
+      "org_traffic": 161
+    },
+    {
+      "domain": "zsdlaw.com",
+      "name": "Zelenitz, Shapiro & D’Agostino, P.C.",
+      "practice_page": "https://www.zsdlaw.com/practice-areas/divorce-and-family-court/",
+      "dr": 14,
+      "refdomains": 583,
+      "org_keywords": 87,
+      "org_traffic": 201
+    },
+    {
+      "domain": "gabriellehartley.com",
+      "name": "Gabrielle Hartley, Esq.",
+      "practice_page": "https://gabriellehartley.com/divorce-litigation-cost/",
+      "dr": 55,
+      "refdomains": 680,
+      "org_keywords": 104,
+      "org_traffic": 159
+    },
+    {
+      "domain": "rlffamilylaw.com",
+      "name": "RLF Family Law",
+      "practice_page": "https://www.cadicny.com/practice-areas/child-custody-and-visitation/",
+      "dr": 0,
+      "refdomains": 349,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "robertgershon.com",
+      "name": "Robert S. Gershon, P.C.",
+      "practice_page": "https://robertgershon.com/brooklyn-matrimonial-lawyer/",
+      "dr": 1.3,
+      "refdomains": 492,
+      "org_keywords": 102,
+      "org_traffic": 365
+    },
+    {
+      "domain": "levitskylawfirm.com",
+      "name": "Levitsky Law Firm PLLC",
+      "practice_page": "https://levitskylawfirm.com/family-law/",
+      "dr": 19,
+      "refdomains": 511,
+      "org_keywords": 143,
+      "org_traffic": 973
+    },
+    {
+      "domain": "elliotgreenlaw.com",
+      "name": "Elliot Green Custody Lawyers",
+      "practice_page": "https://elliotgreenlaw.com/divorce/",
+      "dr": 8,
+      "refdomains": 518,
+      "org_keywords": 436,
+      "org_traffic": 1992
+    },
+    {
+      "domain": "adelolalaw.com",
+      "name": "Dow Divorce Law",
+      "practice_page": "https://www.adelolalaw.com/divorce/",
+      "dr": 6,
+      "refdomains": 583,
+      "org_keywords": 147,
+      "org_traffic": 405
+    },
+    {
+      "domain": "dphlaw.com",
+      "name": "Dayton P. Haigney, Esq.",
+      "practice_page": "https://www.dphlaw.com/new-york-divorce-attorney.html",
+      "dr": 0,
+      "refdomains": 413,
+      "org_keywords": 0,
+      "org_traffic": 0
+    },
+    {
+      "domain": "nikhmanlaw.com",
+      "name": "Nikhman, Nikhman & Associates, PLLC",
+      "practice_page": "https://nikhmanlaw.com/divorce-family-law/",
+      "dr": 2,
+      "refdomains": 489,
+      "org_keywords": 1,
+      "org_traffic": 1
+    },
+    {
+      "domain": "newyorkdivorceattorney.com",
+      "name": "Brian D. Perskin & Associates, P.C.",
+      "practice_page": "https://newyorkdivorceattorney.com/divorce-overview/",
+      "dr": 33,
+      "refdomains": 782,
+      "org_keywords": 162,
+      "org_traffic": 273
+    }
+  ],
+  "unresolved": [
+    "barrowslevy.com",
+    "cabanillaslaw.com",
+    "familylawyer.1800nynylaw.com",
+    "lawjaw.com",
+    "markfeldlaw.com",
+    "nyc-divorcelawyer.com",
+    "premierparalegal.com"
+  ],
+  "unresolved_notes": {
+    "barrowslevy.com": "Barrows Levy PLLC, 908 reviews, the largest count a divorce search returns in this market and not in this market: its office is on Quentin Roosevelt Boulevard in Garden City, Nassau County. It belongs at the top of a Long Island family law ranking.",
+    "lawjaw.com": "Wisselman Harounian Family Law, 146 reviews, in Carle Place, Nassau County. Long Island, for the same reason.",
+    "premierparalegal.com": "Premier Life Solutions, 202 reviews, whose own title reads “Divorce = Freedom”. A paralegal service rather than a law firm, and this is a directory of law firms. It is noted for the same reason the Naples cohort notes a title agency: it ranks high on a search a client would run, and leaving it out silently would look like an oversight.",
+    "cabanillaslaw.com": "Cabanillas & Associates, 443 reviews, publishes a matrimonial page and presents itself as a personal injury firm, which is where its reviews come from. Out under the rule in the source note above rather than for anything about the firm.",
+    "familylawyer.1800nynylaw.com": "Stephen Bilkis & Associates, 148 reviews on a family law subdomain. The firm is already published here in personal injury at 1800nynylaw.com, so this would be a second profile for one firm. How a firm with two real practices should be ranked, and under which score, is a decision nobody has made yet, and it is not being made by adding a duplicate.",
+    "markfeldlaw.com": "Natalie Markfeld Law, 151 reviews. HTTP 403 to our crawler.",
+    "nyc-divorcelawyer.com": "Kleyman Law Firm, 102 reviews. Serves an empty document to a crawler, so there is nothing to read."
+  }
+}
