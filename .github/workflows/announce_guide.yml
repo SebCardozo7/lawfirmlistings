@@ -1,0 +1,128 @@
+# Tell the owner, by email, the moment a guide actually goes live.
+#
+# Why this exists rather than the routine doing it. The run that writes a guide opens a pull
+# request and finishes. A person merges it later, sometimes hours later, by which time that
+# session is gone and there is nobody left to send anything. This fires on the merge itself, so
+# it does not care whether any session is alive.
+#
+# Why an issue rather than mail. Sending mail needs SMTP credentials stored in the repository,
+# which is a secret to create, rotate and leak. GitHub already emails you about issues you are
+# assigned to, so the issue is the delivery mechanism: nothing to store, nothing to rotate. It
+# reaches the address on the GitHub account, which is also why no address is written down
+# anywhere in this repository, which is public.
+#
+# The assignment is what sends the mail, and it works even when you are the one who merged:
+# the issue is opened by github-actions, not by you, so GitHub does not treat it as your own
+# action and suppress it.
+name: Announce a published guide
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/pages/guides/**.astro'
+  # So the delivery can be proved before anybody depends on it, and so a guide that was missed
+  # can be announced by hand without faking a commit.
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Guide slug to announce, for testing delivery'
+        required: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The diff below reaches back to the previous head, which a shallow clone does not have.
+          fetch-depth: 0
+
+      - name: Which guides are new
+        id: new
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          MANUAL: ${{ inputs.slug }}
+        run: |
+          set -euo pipefail
+
+          if [ -n "${MANUAL:-}" ]; then
+            echo "slugs=$MANUAL" >> "$GITHUB_OUTPUT"
+            echo "Announcing by hand: $MANUAL"
+            exit 0
+          fi
+
+          # A first push, a force push or a new branch reports an all-zero or unreachable base.
+          # Fall back to this commit's own first parent rather than guessing at history.
+          base="$BEFORE"
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "${base}^{commit}" 2>/dev/null; then
+            base="$(git rev-parse "${AFTER}^" 2>/dev/null || true)"
+          fi
+          if [ -z "$base" ]; then
+            echo "No usable base for the diff. Nothing announced."
+            echo "slugs=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Added files only. A guide that was edited is not a guide that was published, which is
+          # the difference between this being useful and it mailing on every typo fix. The index
+          # is not a guide.
+          slugs="$(git diff --name-only --diff-filter=A "$base" "$AFTER" -- 'src/pages/guides/*.astro' \
+            | grep -v '/index\.astro$' \
+            | sed 's#.*/##; s#\.astro$##' \
+            | paste -sd ',' - || true)"
+
+          echo "slugs=$slugs" >> "$GITHUB_OUTPUT"
+          echo "New guides in ${base}..${AFTER}: ${slugs:-none}"
+
+      - uses: actions/setup-node@v4
+        if: steps.new.outputs.slugs != ''
+        with:
+          node-version: '20'
+
+      - name: Open one issue per new guide
+        if: steps.new.outputs.slugs != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLUGS: ${{ steps.new.outputs.slugs }}
+          OWNER: ${{ github.repository_owner }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          IFS=',' read -ra LIST <<< "$SLUGS"
+          for slug in "${LIST[@]}"; do
+            [ -n "$slug" ] || continue
+
+            # The headline as the manifest states it. Reading the .astro file does not work:
+            # some guides compute their title from the collection and one has no title constant
+            # at all. See scripts/guide_title.mjs.
+            title="$(node scripts/guide_title.mjs "$slug")"
+
+            {
+              echo "A new guide is live on the site."
+              echo
+              echo "## $title"
+              echo
+              echo "https://lawfirmlistings.com/guides/$slug/"
+              echo
+              echo "Published by commit \`${SHA:0:7}\` on $(date -u +'%d %B %Y at %H:%M UTC')."
+              echo
+              echo "Every figure on that page is computed from the firm records at build time, so"
+              echo "it will keep moving as the directory grows. The prose around those figures does"
+              echo "not move by itself, which is worth a read if the firm count has changed a lot."
+              echo
+              echo "This issue exists to send you an email. Close it once you have seen it."
+            } > /tmp/body.md
+
+            gh issue create \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "Published: $title" \
+              --body-file /tmp/body.md \
+              --assignee "$OWNER"
+          done
