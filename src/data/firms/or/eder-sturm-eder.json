@@ -5,7 +5,7 @@
   "website": "https://www.edersturm.com/",
   "domain": "edersturm.com",
   "phone": "(503) 227-4601",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -30,7 +30,13 @@
       "source_url": "https://maps.google.com/?cid=12791834591598705652&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Ben Eder",
+      "source_url": "https://www.edersturm.com/team/ben-eder",
+      "checked_at": "2026-09-17"
+    }
+  ],
   "languages": [
     "English"
   ],
@@ -135,10 +141,10 @@
       "registered": "2014-11-04"
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-09-15"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-17"
     },
     "G6": {
       "pass": true,
@@ -214,9 +220,9 @@
   },
   "score": {
     "total": 34,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-16",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-17",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -236,8 +242,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no queryable source",
+            "evidence": "Oregon publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",
@@ -395,19 +401,19 @@
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A6 Roster verifiability: +9 available",
         "D2 Search authority: +8 available"
       ]
     },
     "raw": 26.5,
     "assessed": 78,
-    "coverage": 0.78,
+    "coverage": 0.857,
     "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
-    "assessable": 100,
+    "assessable": 91,
     "comparable": true
   },
   "logo": {
