@@ -202,6 +202,16 @@ def first_match(pattern, texts, guard=None):
 
 
 FEE_CONTEXT = re.compile(r"\bfee|\bcharge|\bbill|\brate|\bretainer|\bcost|\bhour", re.I)
+# The firm describing the market rather than itself. Brian D. Perskin & Associates publishes
+# "Attorney fees, which often range between $250 and $500 per hour, are typically the largest
+# expense", which is useful writing about what a divorce costs in New York and is not the firm's
+# rate. Scoring it as one would have paid six points for a sentence about other people's prices.
+#
+# Telling a client what the market charges is worth recording, so a sentence caught here is kept
+# under its own key and never scored.
+MARKET_TALK = re.compile(r"\brange[sd]?\s+(?:from|between)\b|\btypically\b|\bon average\b|"
+                         r"\baverage\b|\busually\b|\bmost (?:attorneys|lawyers|firms|divorce)\b|"
+                         r"\banywhere from\b|\bcan (?:cost|range)\b|\bexpect to pay\b", re.I)
 
 
 def examine(record, verbose=False):
@@ -231,7 +241,13 @@ def examine(record, verbose=False):
                 "checked_at": TODAY}
 
     hourly = first_match(HOURLY, texts, FEE_CONTEXT)
+    # A rate the firm quotes for the market is not the firm's rate. Moved rather than dropped.
+    market_rate = None
+    if hourly and MARKET_TALK.search(hourly["quote"]):
+        market_rate, hourly = hourly, None
     retainer = first_match(RETAINER_FIGURE, texts)
+    if retainer and MARKET_TALK.search(retainer["quote"]):
+        market_rate, retainer = market_rate or retainer, None
     flat = first_match(FLAT_FEE, texts)
     terms = first_match(FEE_TERMS, texts)
     contingent = first_match(CONTINGENT, texts)
@@ -254,6 +270,9 @@ def examine(record, verbose=False):
         "pages_read": len(read),
         "hourly_rate": hourly,
         "retainer": retainer,
+        # What the firm says a divorce costs in this market, as opposed to what it charges.
+        # Recorded because telling a client that is useful, and never scored as the firm's own.
+        "market_rate_quoted": market_rate,
         "flat_fee": flat,
         "fee_terms": terms,
         # Reported, never scored. A contingent fee in a domestic relations matter is prohibited

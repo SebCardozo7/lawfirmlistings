@@ -106,6 +106,25 @@ is not the same firm as Finkelstein, Meirowitz & Eidlisz, which is already publi
   repository until then; the firm stays in the cohort, because it is a real practice in this
   market and belongs in the percentile denominator.
 
+## New York City, family law
+
+The first family law market, opened 2026-09-17 with 18 firms. A Places run across the city and its boroughs returned 252 firms for "divorce lawyer"; 38 of the first 70 by review count publish a family law practice page, and 18 of those present the practice on their own home page, which is the rule the cohort file sets out.
+
+The ten below are the ones left out, in the cohort's own words.
+
+- **barrowslevy.com** Barrows Levy PLLC, 908 reviews, the largest count a divorce search returns in this market and not in this market: its office is on Quentin Roosevelt Boulevard in Garden City, Nassau County. It belongs at the top of a Long Island family law ranking.
+- **cabanillaslaw.com** Cabanillas & Associates, 443 reviews, publishes a matrimonial page and presents itself as a personal injury firm, which is where its reviews come from. Out under the rule in the source note above rather than for anything about the firm.
+- **familylawyer.1800nynylaw.com** Stephen Bilkis & Associates, 148 reviews on a family law subdomain. The firm is already published here in personal injury at 1800nynylaw.com, so this would be a second profile for one firm. How a firm with two real practices should be ranked, and under which score, is a decision nobody has made yet, and it is not being made by adding a duplicate.
+- **lawjaw.com** Wisselman Harounian Family Law, 146 reviews, in Carle Place, Nassau County. Long Island, for the same reason.
+- **markfeldlaw.com** Natalie Markfeld Law, 151 reviews. HTTP 403 to our crawler.
+- **mastrodomenicolaw.com** Law Offices of Donald Mastrodomenico, 510 reviews, the second largest count in this market. Its home page returns HTTP 403 to our crawler, which is bot protection, and we do not work around it. Its own title advertises flat fees and a free phone consult, which is more than most firms here publish and none of it is readable by us.
+- **nyc-divorcelawyer.com** Kleyman Law Firm, 102 reviews. Serves an empty document to a crawler, so there is nothing to read.
+- **nylawyersteam.com** Gordon Law, P.C., 490 reviews across eighteen verified offices, from Valley Stream and Hauppauge to White Plains, New City, the Bronx, Brooklyn, Manhattan and Forest Hills. No office dominates and the largest is in Nassau County, so the sum would rank the firm third here on reviews mostly earned outside the city. A profile on this site asserts one home market, and this firm is a metropolitan network rather than a city practice.
+- **premierparalegal.com** Premier Life Solutions, 202 reviews, whose own title reads “Divorce = Freedom”. A paralegal service rather than a law firm, and this is a directory of law firms. It is noted for the same reason the Naples cohort notes a title agency: it ranks high on a search a client would run, and leaving it out silently would look like an oversight.
+- **thedivorcecenter.com** The Divorce Center, 800 reviews across six offices and the largest count a divorce search returns in this market, is not a law firm. Its own home page reads "Divorce Without a Lawyer for $599" and its title says "No Lawyers". Five of its six offices are in New Jersey. It is recorded here for the same reason the Naples cohort records a title agency: it ranks at the top of a search a client would run, and leaving it out without a word would look like an oversight rather than a rule.
+
+Two more are worth a second pass rather than a note. Natalie Markfeld Law (151 reviews) and Kleyman Law Firm (102) are in the list above because neither site can be read, and the remaining twenty firms that publish a family practice page without presenting it on their home page are a second ranking rather than this one: a general practice that does divorce work is a real thing to be looking for, and comparing it against a matrimonial specialist on client reviews is not.
+
 ## Other markets
 
 - **The Ward Law Group, PL** (855dolor55.com). Found by the New York run, removed from the New

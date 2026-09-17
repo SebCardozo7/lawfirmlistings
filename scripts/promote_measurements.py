@@ -168,6 +168,16 @@ def promote(rec: dict, firm: dict) -> list[str]:
                           (tx.get("price") or {}).get("figure", "not published")))
         firm["transaction"] = tx
 
+    # And what a family law firm publishes about the cost and the case, which is the same
+    # pillar asking a different question. scripts/check_domestic.py writes it.
+    dm = rec.get("domestic")
+    if dm and json.dumps(dm, sort_keys=True) != json.dumps(firm.get("domestic") or {},
+                                                           sort_keys=True):
+        changed.append("domestic        %d page(s) read · %d stage(s) · hourly rate %s"
+                       % (dm.get("pages_read") or 0, len(dm.get("stages") or []),
+                          (dm.get("hourly_rate") or {}).get("figure", "not published")))
+        firm["domestic"] = dm
+
     # The firm's own logo, from the icon its site declares.
     logo = rec.get("logo")
     if logo and logo.get("file"):

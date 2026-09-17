@@ -23,15 +23,6 @@
       "org_traffic": 195
     },
     {
-      "domain": "mastrodomenicolaw.com",
-      "name": "Law Offices of Donald Mastrodomenico, P.C.",
-      "practice_page": "https://www.mastrodomenicolaw.com/family-law/",
-      "dr": 6,
-      "refdomains": 498,
-      "org_keywords": 123,
-      "org_traffic": 675
-    },
-    {
       "domain": "lkrasner.com",
       "name": "Krasner Law, PLLC",
       "practice_page": "https://lkrasner.com/family-law-attorney-nyc/",
@@ -39,15 +30,6 @@
       "refdomains": 2321,
       "org_keywords": 158,
       "org_traffic": 395
-    },
-    {
-      "domain": "thedivorcecenter.com",
-      "name": "The Divorce Center",
-      "practice_page": "https://thedivorcecenter.com/new-york-divorce/",
-      "dr": 6,
-      "refdomains": 332,
-      "org_keywords": 190,
-      "org_traffic": 764
     },
     {
       "domain": "aglawnyc.com",
@@ -66,15 +48,6 @@
       "refdomains": 562,
       "org_keywords": 200,
       "org_traffic": 1008
-    },
-    {
-      "domain": "nylawyersteam.com",
-      "name": "Gordon Law, P.C.",
-      "practice_page": "https://www.nylawyersteam.com/practice-areas/family-and-divorce",
-      "dr": 27,
-      "refdomains": 1305,
-      "org_keywords": 175,
-      "org_traffic": 409
     },
     {
       "domain": "claudioandassociates.com",
@@ -209,8 +182,11 @@
     "familylawyer.1800nynylaw.com",
     "lawjaw.com",
     "markfeldlaw.com",
+    "mastrodomenicolaw.com",
     "nyc-divorcelawyer.com",
-    "premierparalegal.com"
+    "nylawyersteam.com",
+    "premierparalegal.com",
+    "thedivorcecenter.com"
   ],
   "unresolved_notes": {
     "barrowslevy.com": "Barrows Levy PLLC, 908 reviews, the largest count a divorce search returns in this market and not in this market: its office is on Quentin Roosevelt Boulevard in Garden City, Nassau County. It belongs at the top of a Long Island family law ranking.",
@@ -219,6 +195,9 @@
     "cabanillaslaw.com": "Cabanillas & Associates, 443 reviews, publishes a matrimonial page and presents itself as a personal injury firm, which is where its reviews come from. Out under the rule in the source note above rather than for anything about the firm.",
     "familylawyer.1800nynylaw.com": "Stephen Bilkis & Associates, 148 reviews on a family law subdomain. The firm is already published here in personal injury at 1800nynylaw.com, so this would be a second profile for one firm. How a firm with two real practices should be ranked, and under which score, is a decision nobody has made yet, and it is not being made by adding a duplicate.",
     "markfeldlaw.com": "Natalie Markfeld Law, 151 reviews. HTTP 403 to our crawler.",
-    "nyc-divorcelawyer.com": "Kleyman Law Firm, 102 reviews. Serves an empty document to a crawler, so there is nothing to read."
+    "nyc-divorcelawyer.com": "Kleyman Law Firm, 102 reviews. Serves an empty document to a crawler, so there is nothing to read.",
+    "mastrodomenicolaw.com": "Law Offices of Donald Mastrodomenico, 510 reviews, the second largest count in this market. Its home page returns HTTP 403 to our crawler, which is bot protection, and we do not work around it. Its own title advertises flat fees and a free phone consult, which is more than most firms here publish and none of it is readable by us.",
+    "nylawyersteam.com": "Gordon Law, P.C., 490 reviews across eighteen verified offices, from Valley Stream and Hauppauge to White Plains, New City, the Bronx, Brooklyn, Manhattan and Forest Hills. No office dominates and the largest is in Nassau County, so the sum would rank the firm third here on reviews mostly earned outside the city. A profile on this site asserts one home market, and this firm is a metropolitan network rather than a city practice.",
+    "thedivorcecenter.com": "The Divorce Center, 800 reviews across six offices and the largest count a divorce search returns in this market, is not a law firm. Its own home page reads \"Divorce Without a Lawyer for $599\" and its title says \"No Lawyers\". Five of its six offices are in New Jersey. It is recorded here for the same reason the Naples cohort records a title agency: it ranks at the top of a search a client would run, and leaving it out without a word would look like an oversight rather than a rule."
   }
 }

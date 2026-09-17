@@ -330,8 +330,8 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     icon: 'heart',
     title: 'Family Law Firms: Rankings and Hiring Guide',
     description:
-      'How to choose a divorce or custody lawyer: why the fee can never be contingent, what ' +
-      'the retainer agreement must tell you, and which number is set by formula.',
+      'How to choose a divorce or custody lawyer: why the fee can never be contingent, ' +
+      'what the retainer must tell you, and which number is set by formula.',
     lede:
       'Family law firms handling divorce, custody and parenting time, child support and ' +
       'spousal maintenance, prenuptial agreements and orders of protection. Every firm is ' +

@@ -51,6 +51,7 @@ PRACTICE_NAMES = {
     "personal-injury": "Personal Injury",
     "workers-compensation": "Workers' Compensation",
     "real-estate": "Real Estate",
+    "family-law": "Family Law",
 }
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury

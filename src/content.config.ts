@@ -127,6 +127,36 @@ const firms = defineCollection({
       stage_evidence: z.record(z.object({ quote: z.string(), source_url: z.string() })).optional(),
       source: z.string().optional(), why: z.string().optional(), checked_at: z.string(),
     }).optional(),
+    // The same pillar asking a different question, for a family law practice. A divorce
+    // produces a judgment about a family rather than a verdict to publish, so pillar B reads
+    // the cost and the case instead: scripts/check_domestic.py, and the rules it is built on.
+    // contingency_language is recorded and never scored, because Rule 1.5(d)(5)(i) is the
+    // Appellate Division's to enforce and a page is not a retainer agreement.
+    domestic: z.object({
+      readable: z.boolean(),
+      pages_read: z.number().optional(),
+      hourly_rate: z.object({ figure: z.string(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      retainer: z.object({ figure: z.string(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      market_rate_quoted: z.object({ figure: z.string().optional(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      flat_fee: z.object({ figure: z.string().optional(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      fee_terms: z.object({ figure: z.string().optional(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      contingency_language: z.object({ figure: z.string().optional(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      billing_disclosed: z.object({ figure: z.string().optional(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      client_rights_cited: z.object({ figure: z.string().optional(), quote: z.string(), source_url: z.string() })
+        .nullable().optional(),
+      stages: z.array(z.string()).default([]),
+      stage_evidence: z.record(z.object({ quote: z.string(), source_url: z.string() })).optional(),
+      paths: z.array(z.string()).default([]),
+      path_evidence: z.record(z.object({ quote: z.string(), source_url: z.string() })).optional(),
+      source: z.string().optional(), why: z.string().optional(), checked_at: z.string(),
+    }).optional(),
     gates: z.record(z.object({
       pass: z.boolean(), evidence: z.string(), source: z.string(), checked_at: z.string(),
       // Satisfied by the firm's written attestation rather than by our own measurement. Shown
