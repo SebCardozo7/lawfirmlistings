@@ -48,6 +48,41 @@ TODAY = datetime.date.today().isoformat()
 # are deliberately different. A slug is abbreviated ("workers-comp", "work-injury") where a
 # heading is written out, and requiring both to match the same pattern rejected real pages.
 PRACTICES = {
+    # Family law, where the corroborating vocabulary has to work harder than anywhere else.
+    #
+    # A divorce search on a map returns general practices: the two largest results by review
+    # count for "divorce lawyer New York City" are traffic-ticket firms whose listings mention
+    # divorce among fourteen other things. So naming the practice is not enough here, and the
+    # corroborating pattern asks for the words that only appear on a page written about this
+    # work: what the court divides, what it orders paid, and what it decides about children.
+    #
+    # "Family law" and "matrimonial" are both in the title pattern because the profession uses
+    # the second and clients search the first. Prenuptial agreements and domestic violence
+    # orders are inside this practice rather than beside it, the way title work sits inside real
+    # estate: somebody who needs an order of protection is looking for a family lawyer.
+    "family-law": {
+        "slug": re.compile(r"family[-_]?law|matrimonial|divorce|child[-_](?:custody|support)|"
+                           r"custody|visitation|parenting[-_]time|spousal[-_](?:support|"
+                           r"maintenance)|alimony|prenup(?:tial)?|postnup(?:tial)?|"
+                           r"separation[-_]agreement|equitable[-_]distribution|"
+                           r"order[s]?[-_]of[-_]protection|domestic[-_]violence|"
+                           r"paternity|adoption|guardianship[-_]of[-_]a[-_]child", re.I),
+        "title": re.compile(
+            r"family\s+law|matrimonial|divorce|child\s+(?:custody|support)|custody|visitation|"
+            r"parenting\s+time|spousal\s+(?:support|maintenance)|alimony|"
+            r"pre(?:nuptial|marital)|postnuptial|separation\s+agreement|"
+            r"equitable\s+distribution|order\s+of\s+protection|paternity", re.I),
+        # What a page about this work says, and a page that merely lists it does not. Every one
+        # of these is a thing a New York court does: equitable distribution under the Domestic
+        # Relations Law, maintenance on a statutory formula, child support under the CSSA, and
+        # the no-fault ground that has been the only one most people use since 2010.
+        "corroborating": re.compile(
+            r"equitable\s+distribution|marital\s+(?:property|asset|residence|estate)|"
+            r"child\s+support|custody|parenting\s+(?:time|plan)|visitation|"
+            r"maintenance|spousal\s+support|alimony|no[-\s]fault|irretrievab|"
+            r"separation\s+agreement|prenuptial|family\s+court|matrimonial|"
+            r"uncontested\s+divorce|retainer", re.I),
+    },
     # The first practice here that is not an injury. It changes what the corroborating term has
     # to look for: an injury page argues about negligence and limitation periods, and a real
     # estate page walks through a closing. So the corroborating pattern is the vocabulary of a

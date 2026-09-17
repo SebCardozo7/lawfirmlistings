@@ -166,6 +166,7 @@ const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
       <>
         <h3>{s.heading}</h3>
         {s.paragraphs.map(p => <p set:html={p} />)}
+        {s.list && <ul>{s.list.map(item => <li set:html={item} />)}</ul>}
       </>
     ))}
     {notes.guide.callout && (

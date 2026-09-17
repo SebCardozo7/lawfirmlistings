@@ -120,6 +120,23 @@ TIERS = [("Elite", 93, 55 / 65), ("Distinguished", 85, 50 / 65), ("Certified", 7
 # injury work and closings has results to publish, and the results page is the better measure.
 TRANSACTIONAL = {"real-estate"}
 
+# The other practice with no outcomes, and a stronger reason for it. A closing that went well
+# produces no verdict; a divorce produces a judgment about a real family's money and a real
+# child's living arrangements. Custody proceedings concern children, matrimonial files are
+# routinely sealed, and a firm advertising the custody arrangement it obtained is advertising a
+# stranger's private life. So pillar B does not ask these firms for results and a firm that
+# publishes none is not marked down, which is the opposite of what B1 does everywhere else.
+#
+# It asks about the price instead, and the reason that works is a rule. Rule 1.5(d)(5)(i) of the
+# Rules of Professional Conduct forbids a contingent fee in a domestic relations matter, so the
+# promise most firms in this directory make is unavailable here and the hourly rate and the
+# retainer are the only prices there are. 22 NYCRR 1400.3 then requires the firm to put the rate
+# of every person who may bill you, the amount of the retainer and the frequency of itemized
+# billing into a signed agreement before it starts. The client is guaranteed all of it in the
+# room where they sign, after choosing. Nothing requires publishing any of it beforehand, which
+# is the moment somebody is comparing three firms, and that gap is what this measures.
+DOMESTIC = {"family-law"}
+
 MIN_COVERAGE = 0.60
 MIN_PILLAR_COVERAGE = 0.50
 # Below this, a total is still computed and is no longer offered as a number to compare.
@@ -305,10 +322,82 @@ def compute(firm):
     practices = firm.get("practices") or []
     primary = next((p for p in practices if p.get("primary")), practices[0] if practices else {})
     transactional = primary.get("slug") in TRANSACTIONAL
+    domestic = primary.get("slug") in DOMESTIC
     tx = firm.get("transaction")
+    dm = firm.get("domestic")
     rp = firm.get("results_published")
 
-    if transactional and not (tx and tx.get("readable")):
+    if domestic and not (dm and dm.get("readable")):
+        for code, label in (("B1", "Fee terms published"),
+                            ("B2", "The case explained"),
+                            ("B3", "Billing and the retainer disclosed")):
+            out.append(sub(code, 0, "pending",
+                           (dm or {}).get("why")
+                           or "The firm's fee and divorce pages have not been read yet",
+                           label_override=label))
+    elif domestic:
+        pages = dm.get("pages_read") or 0
+        plural = "" if pages == 1 else "s"
+        # The rate is the price. A retainer figure without it is most of the way there: it tells
+        # a client what they have to produce to start, which is the question asked first.
+        if dm.get("hourly_rate"):
+            b1, b1_ev = 6, ('Publishes an hourly rate, which in this practice is the price: "%s"'
+                            % dm["hourly_rate"]["quote"][:180])
+        elif dm.get("retainer"):
+            b1, b1_ev = 4.5, ('Publishes the retainer without an hourly rate: "%s"'
+                              % dm["retainer"]["quote"][:180])
+        elif dm.get("flat_fee"):
+            b1, b1_ev = 4, ('States a flat fee, ordinarily for an uncontested case: "%s"'
+                            % dm["flat_fee"]["quote"][:180])
+        elif dm.get("fee_terms"):
+            b1, b1_ev = 2, ('Says something about how it charges, with no rate, retainer or flat '
+                            'fee: "%s"' % dm["fee_terms"]["quote"][:180])
+        else:
+            b1, b1_ev = 0, ("Nothing about the rate, the retainer or any other price on the %d "
+                            "page%s we read. The court rules guarantee a client all of it in a "
+                            "signed agreement before the work starts; publishing it beforehand "
+                            "is the firm's choice" % (pages, plural))
+        out.append(sub("B1", b1, "firm", b1_ev, label_override="Fee terms published"))
+
+        # One point per stage of a matrimonial case the firm names, to four, plus one for saying
+        # which way through it does: mediation, collaborative divorce or litigation are different
+        # services at different prices, and a firm that names two of them has told a client
+        # something about its own practice rather than about divorce in general.
+        stages = dm.get("stages") or []
+        paths = dm.get("paths") or []
+        b2 = min(4, len(stages)) + (1 if len(paths) >= 2 else 0)
+        named = ", ".join(stages[:5]) + ("" if len(stages) <= 5 else ", and more")
+        b2_ev = (("Explains %d stage%s of a matrimonial case: %s"
+                  % (len(stages), "" if len(stages) == 1 else "s", named))
+                 if stages else
+                 "Names none of the stages of a matrimonial case on the %d page%s we read"
+                 % (pages, plural))
+        b2_ev += (" · names %s" % ", ".join(paths)) if paths else " · names no route through it"
+        out.append(sub("B2", b2, "firm", b2_ev, label_override="The case explained"))
+
+        # The client's money, which is this practice's escrow question. Every one of these firms
+        # takes a retainer in advance and bills against it, 22 NYCRR 1400.3 requires an itemized
+        # bill at least every 60 days and 1400.2 forbids a non-refundable retainer, so a firm
+        # saying nothing about either is choosing not to, and a firm citing the rules is telling
+        # clients rights they have whether or not anybody tells them.
+        if dm.get("billing_disclosed") and dm.get("client_rights_cited"):
+            b3, b3_ev = 4, ('Publishes how it bills and cites the rules that govern it: "%s"'
+                            % dm["billing_disclosed"]["quote"][:180])
+        elif dm.get("billing_disclosed"):
+            b3, b3_ev = 3, ('Publishes how it bills or what happens to the unused retainer: '
+                            '"%s"' % dm["billing_disclosed"]["quote"][:180])
+        elif dm.get("client_rights_cited"):
+            b3, b3_ev = 1.5, ("Cites the client's rights in a domestic relations matter without "
+                              'saying how it bills: "%s"'
+                              % dm["client_rights_cited"]["quote"][:180])
+        else:
+            b3, b3_ev = 0, ("Says nothing about how it bills against the retainer or what "
+                            "happens to the unused part, on any of the %d page%s we read"
+                            % (pages, plural))
+        out.append(sub("B3", b3, "firm", b3_ev,
+                       label_override="Billing and the retainer disclosed"))
+
+    elif transactional and not (tx and tx.get("readable")):
         for code, label in (("B1", "Fee terms published"),
                             ("B2", "The transaction explained"),
                             ("B3", "Escrow disclosed")):
