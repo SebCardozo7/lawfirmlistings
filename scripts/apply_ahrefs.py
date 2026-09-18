@@ -60,6 +60,10 @@ def read_rows(paths):
         with io.open(path, encoding="utf-8") as fh:
             for row in csv.reader(fh):
                 row = [c.strip() for c in row if c.strip() != ""]
+                # The field order is documented at the top of this file, so a file that repeats
+                # it as a header row is doing the readable thing and was crashing on int("dr").
+                if row and row[0].lower() == "domain":
+                    continue
                 if len(row) != 9:
                     print("skipped a row with %d fields in %s: %s"
                           % (len(row), pathlib.Path(path).name, row[:2]), file=sys.stderr)

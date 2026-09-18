@@ -4,7 +4,7 @@ import Base from '../../../layouts/Base.astro';
 import Icon from '../../../components/Icon.astro';
 import FirmCard from '../../../components/FirmCard.astro';
 import { fitDescription } from '../../../lib/seo';
-import { hasPractice } from '../../../data/practices';
+import { hasPractice, PRACTICES } from '../../../data/practices';
 
 /**
  * City × practice: the ranked list, and the page someone searching "personal injury lawyer
@@ -59,7 +59,15 @@ const weight = (f: typeof firms[number]) =>
 const ranked = [...firms].sort((a, b) => weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
 
 const certified = ranked.filter(f => f.data.status === 'certified');
-const contingency = ranked.filter(f => /contingency/i.test(f.data.fee_model)).length;
+// What the fee fact counts is a property of the practice, the same division the practice hub
+// makes. Injury work is contingent and a divorce may not be: Rule 1.5(d)(5)(i) forbids a
+// contingent fee in a domestic relations matter, so this counter read "0% Work on contingency"
+// across the whole Buffalo family law ranking, which is a category error dressed as a finding
+// about twenty-four firms.
+const notes = PRACTICES[practice!];
+const feeTest = new RegExp(notes?.feePattern ?? 'contingency', 'i');
+const feeFactLabel = notes?.feeFactLabel ?? 'Work on contingency';
+const contingency = ranked.filter(f => feeTest.test(f.data.fee_model)).length;
 const freeConsult = ranked.filter(f => f.data.free_consultation).length;
 const offices = ranked.reduce((n, f) => n + f.data.offices.length, 0);
 const share = (n: number) => (ranked.length ? `${Math.round((100 * n) / ranked.length)}%` : 'n/a');
@@ -71,9 +79,14 @@ const lastUpdated = computedDates.length
   : null;
 
 const place = `${market.city}, ${market.state}`;
-const title = `${practiceName} Law Firms in ${place}`;
+// "Family Law" already ends in the word this appends, and "Family Law Law Firms in Buffalo, NY"
+// is what that produced, in the title and in the heading. The practice hub carries the same rule.
+const heading = practiceName.endsWith('Law')
+  ? `${practiceName} Firms`
+  : `${practiceName} Law Firms`;
+const title = `${heading} in ${place}`;
 const description = fitDescription(
-  `${practiceName} law firms in ${place}, ranked on verified offices, attorneys, client reviews and fee terms.`,
+  `${heading} in ${place}, ranked on verified offices, attorneys, client reviews and fee terms.`,
   'Compared locally, not nationally.',
   'No firm can pay to rank.');
 ---
@@ -89,14 +102,14 @@ const description = fitDescription(
         <li aria-current="page">{practiceName}</li>
       </ol>
       <span class="eyebrow">{practiceName} · {place}</span>
-      <h1>{practiceName} Law Firms in {market.city}</h1>
+      <h1>{heading} in {market.city}</h1>
       <p class="lede">Every firm here is checked for active licensure, clean disciplinary history and verified case results, and compared against the other {practiceName.toLowerCase()} firms in {market.city}, not against a national average. {certified.length > 0 && <>{certified.length} of the {ranked.length} {ranked.length === 1 ? 'has' : 'have'} completed certification so far.</>}</p>
     </div>
     <div class="hero-facts">
       <div class="fact"><b class="num">{ranked.length}</b><span>Firms listed</span></div>
       <div class="fact"><b class="num">{certified.length}</b><span>Certified</span></div>
       <div class="fact"><b class="num">{offices}</b><span>Verified offices</span></div>
-      <div class="fact"><b class="num">{share(contingency)}</b><span>Work on contingency</span></div>
+      <div class="fact"><b class="num">{share(contingency)}</b><span>{feeFactLabel}</span></div>
       <div class="fact"><b class="num">{share(freeConsult)}</b><span>Free consultation</span></div>
     </div>
   </div>

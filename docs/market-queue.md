@@ -208,6 +208,20 @@ reviews are on the site that does not present the practice and the practice is o
 reviews. One profile asserts one firm, and merging two domains into one is a decision about
 identity that nothing in the pipeline is built to make.
 
+### Two attorneys the state register does not hold
+
+Both are published, both fail G1 and G2, and the reason printed on each profile is that the
+register has no attorney of that name rather than anything about the lawyer. A person should
+settle these, because a practising attorney missing from the state's own registration dataset is
+more likely a name form than a fact.
+
+- **Christina Lana Shine** (christinashine.com). Ten attorneys named Shine are in the register
+  and none is a Christina. One, Kevin Zinn Shine, is registered in East Amherst.
+- **Linda M. DiPasquale** (divorcelawyerinbuffalo.com), whose own about page says she has served
+  clients in Buffalo and the Greater Niagara region for more than thirty years and practised in
+  South Carolina before returning. Eleven DiPasquales are in the register, including two in Erie
+  and Niagara counties, and none is a Linda. A former name is the obvious thing to check.
+
 ### What their websites are like
 
 Of the 142, 120 could be read and 22 could not, and the reasons are mostly a finding about this
