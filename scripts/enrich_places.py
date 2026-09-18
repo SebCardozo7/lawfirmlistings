@@ -155,6 +155,55 @@ def market_for(domain):
     return None
 
 
+def practice_for(domain):
+    """The practice the cohort puts this firm in, as words a search can use.
+
+    This query used to say "personal injury" for every firm in the directory, written when that
+    was the only practice. It is the firm's own name that finds its listing, so the wrong words
+    here mostly wasted a query; they stop being harmless once a market's firms are matrimonial
+    practices and the second query goes looking for injury lawyers by their names.
+    """
+    for path in sorted((ROOT / "src" / "data" / "cohorts").glob("*.json")):
+        try:
+            data = json.load(io.open(path, encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if any((f or {}).get("domain") == domain for f in data.get("firms") or []):
+            if data.get("practice"):
+                return data["practice"].replace("-", " ")
+    return None
+
+
+def discovered_names(domain):
+    """The names Google's own listings carry for this domain, from the discovery run.
+
+    Discovery finds a listing and reads its website, so a candidates file is a record of listings
+    that already matched this domain, which is stronger evidence than a name search. This script
+    was ignoring it and asking Google for the name the firm's website publishes, and the two are
+    often not the same business name.
+
+    Two firms in Buffalo showed what that costs. Frank S. Ieraci's site calls itself "FSI
+    Lawyer", his listing is "Frank S Ieraci, Attorney at Law" with fourteen reviews, and the
+    search for FSI Lawyer returned a criminal defence firm in another state, so the profile came
+    back with no Google presence at all. Bakshi & Leta's search matched a listing Google built
+    out of a page title, "About Us | Bakshi & Leta DWI Attorneys", carrying no reviews, while the
+    firm's real listing, "Sunil Bakshi Attorney At Law", holds fifty-one. Both would have
+    published a review count of zero and failed G6 on it.
+    """
+    out = []
+    for path in sorted((ROOT / ".crawl").glob("candidates-*.json")):
+        try:
+            data = json.load(io.open(path, encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        for cand in data.get("candidates") or []:
+            if (cand or {}).get("domain") != domain or not cand.get("name"):
+                continue
+            if cand["name"] not in out:
+                out.append(cand["name"])
+    return out
+
+
 def cohort_name(domain):
     """The name a person wrote in the cohort file, which is checked and sometimes the only one.
 
@@ -183,7 +232,13 @@ def collect(rec, key, verbose=False):
     # whose market we do not know yet gets the first query only, because a guessed city is worse
     # than no city.
     market = market_for(domain)
-    queries = [name] + (["%s personal injury %s" % (name, market)] if market else [])
+    practice = practice_for(domain) or "personal injury"
+    queries = [name] + (["%s %s %s" % (name, practice, market)] if market else [])
+    # And the name Google's own listing carries, where a discovery run has already matched a
+    # listing to this domain. Added last so a firm's own name stays the first question asked.
+    for found in discovered_names(domain):
+        if found not in queries:
+            queries.append(found)
 
     accepted, rejected, seen = [], [], set()
     for q in queries:
