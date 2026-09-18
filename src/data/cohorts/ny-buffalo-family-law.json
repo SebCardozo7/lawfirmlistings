@@ -1,0 +1,261 @@
+{
+  "id": "ny-buffalo-family-law",
+  "market": {
+    "city_slug": "buffalo-ny",
+    "city": "Buffalo",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "state": "NY",
+  "practice": "family-law",
+  "label": "Buffalo × Family Law",
+  "measured_at": "2026-09-18",
+  "source": "The second family law market, and the first one that tests whether the rule which selected the New York City cohort travels. Candidates from the Google Places API across Buffalo and eight surrounding towns (scripts/discover_places.py, 9 queries, 151 domains, 142 of them not already published here).\n\nTwo rules decide who is in. The market rule is the one the Buffalo personal injury cohort already uses: an office in Erie or Niagara county, meaning a postal code from 14000 to 14399, with Rochester at 144xx and above being a different market. The practice rule is the New York City one: a firm enters this ranking when its own home page presents this practice, in its title or in its name, rather than when it lists the practice among many. Every one of the 142 had its home page read for that, and 32 present the practice. Practice evidence itself is scripts/check_practice.py, and four of the 32 publish nothing about the practice that we can read.\n\nWhat the rule costs is different here, and it is worth saying rather than leaving for somebody to find. In New York City it kept twenty general practices out of a ranking of eighteen firms that each hold hundreds of reviews. In Buffalo the largest family practice holds 407 reviews and the second holds 80, nothing else reaches fifty, and above them a divorce search returns three criminal defence firms, then elder law, traffic tickets, eviction and personal injury. So the rule is doing more work here on thinner evidence, and seven of these firms hold fewer than the ten reviews gate G6 asks for and are listed rather than certified because of it.\n\nNot one of these 24 firms publishes an hourly rate. One publishes a flat fee and one names the way it bills. In New York City two of eighteen published a rate, so this is the second market to be asked the question and the first to answer it with nothing.\n\nAhrefs figures from the batch endpoint, subdomains mode, United States organic, measured 2026-09-18. One substitution: psasattorneys.com redirects to pasmlaw.com, and the figures stored for it are pasmlaw.com's, because that is the site D2 is meant to measure. The domain here stays the one the firm's Google listing points at, so the reviews still match the firm.",
+  "full_size_estimate": 151,
+  "firms": [
+    {
+      "domain": "paulwalierattorney.com",
+      "name": "Paul Walier Attorneys at Law",
+      "practice_page": "https://paulwalierattorney.com/divorce/",
+      "dr": 0.2,
+      "refdomains": 431,
+      "org_keywords": 15,
+      "org_traffic": 18
+    },
+    {
+      "domain": "randymargulis.com",
+      "name": "Law Offices of Randy S. Margulis",
+      "practice_page": "https://www.randymargulis.com/paternity/",
+      "dr": 2.6,
+      "refdomains": 468,
+      "org_keywords": 58,
+      "org_traffic": 208
+    },
+    {
+      "domain": "weinrieblaw.com",
+      "name": "Weinrieb Law",
+      "practice_page": "https://www.weinrieblaw.com/divorce.html",
+      "dr": 3.4,
+      "refdomains": 408,
+      "org_keywords": 246,
+      "org_traffic": 610
+    },
+    {
+      "domain": "bakshiandleta.com",
+      "name": "Bakshi & Leta",
+      "practice_page": "https://www.bakshiandleta.com/divorce-attorney-lawyers-buffa",
+      "dr": 0.6,
+      "refdomains": 452,
+      "org_keywords": 15,
+      "org_traffic": 48
+    },
+    {
+      "domain": "venzonlawfirm.com",
+      "name": "Venzon Law Firm, PC",
+      "practice_page": "https://venzonlawfirm.com/paternity/",
+      "dr": 1.4,
+      "refdomains": 502,
+      "org_keywords": 5,
+      "org_traffic": 11
+    },
+    {
+      "domain": "michellebullock.com",
+      "name": "Michelle S. Bullock Law & Mediation PLLC",
+      "practice_page": "https://www.michellebullock.com/prenups-postnups",
+      "dr": 1.2,
+      "refdomains": 440,
+      "org_keywords": 27,
+      "org_traffic": 77
+    },
+    {
+      "domain": "hawthornevesper.com",
+      "name": "Hawthorne & Vesper, PLLC",
+      "practice_page": "https://www.hawthornevesper.com/child-custody-and-visitation",
+      "dr": 3.2,
+      "refdomains": 481,
+      "org_keywords": 7,
+      "org_traffic": 14
+    },
+    {
+      "domain": "schulefandlawoffice.com",
+      "name": "Keith B. Schulefand, Esq.",
+      "practice_page": "https://www.schulefandlawoffice.com/paternity",
+      "dr": 1.3,
+      "refdomains": 459,
+      "org_keywords": 7,
+      "org_traffic": 12
+    },
+    {
+      "domain": "feronpoleon.com",
+      "name": "Feron Poleon LLP",
+      "practice_page": "https://www.feronpoleon.com/custody-attorney",
+      "dr": 3.9,
+      "refdomains": 419,
+      "org_keywords": 3,
+      "org_traffic": 11
+    },
+    {
+      "domain": "psasattorneys.com",
+      "name": "Pusatier, Abbott, Sugarman & Martin, LLP",
+      "practice_page": "https://pasmlaw.com/divorce-mediation-divorce-family-law/",
+      "dr": 1.1,
+      "refdomains": 474,
+      "org_keywords": 29,
+      "org_traffic": 107
+    },
+    {
+      "domain": "randygugino.com",
+      "name": "Law Office of Randy H. Gugino",
+      "practice_page": "https://randygugino.com/child-custody/",
+      "dr": 6.0,
+      "refdomains": 456,
+      "org_keywords": 1,
+      "org_traffic": 0
+    },
+    {
+      "domain": "rjtalmudlaw.com",
+      "name": "Talmud Law, PLLC",
+      "practice_page": "https://www.rjtalmudlaw.com/divorce/",
+      "dr": 3.5,
+      "refdomains": 528,
+      "org_keywords": 7,
+      "org_traffic": 35
+    },
+    {
+      "domain": "christinashine.com",
+      "name": "Christina Lana Shine, Esq.",
+      "practice_page": "https://christinashine.com/practice-areas/prenups-postnups/",
+      "dr": 2.1,
+      "refdomains": 446,
+      "org_keywords": 2,
+      "org_traffic": 1
+    },
+    {
+      "domain": "gmwlawyers.com",
+      "name": "Gleichenhaus, Marchese & Weishaar, P.C.",
+      "practice_page": "https://www.gmwlawyers.com/family-law/",
+      "dr": 3.9,
+      "refdomains": 567,
+      "org_keywords": 12,
+      "org_traffic": 59
+    },
+    {
+      "domain": "divorcelawyerinbuffalo.com",
+      "name": "Linda M. DiPasquale, Attorney at Law",
+      "practice_page": "https://www.divorcelawyerinbuffalo.com/divorce/",
+      "dr": 2.3,
+      "refdomains": 445,
+      "org_keywords": 4,
+      "org_traffic": 2
+    },
+    {
+      "domain": "lawfirm-newyork.com",
+      "name": "Patrick M. Noe, Jr., Attorney at Law",
+      "practice_page": "https://www.lawfirm-newyork.com/family-law/",
+      "dr": 2.7,
+      "refdomains": 511,
+      "org_keywords": 13,
+      "org_traffic": 20
+    },
+    {
+      "domain": "abeelfirm.com",
+      "name": "The Abeel Firm PLLC",
+      "practice_page": "https://www.abeelfirm.com/divorce",
+      "dr": 4.4,
+      "refdomains": 455,
+      "org_keywords": 46,
+      "org_traffic": 149
+    },
+    {
+      "domain": "fsilawyer.com",
+      "name": "Frank S. Ieraci, Attorney at Law",
+      "practice_page": "https://www.fsilawyer.com/divorce",
+      "dr": 4.2,
+      "refdomains": 563,
+      "org_keywords": 1,
+      "org_traffic": 6
+    },
+    {
+      "domain": "grocottlaw.com",
+      "name": "Law Offices of Steven H. Grocott",
+      "practice_page": "https://www.grocottlaw.com/divorce-attorney",
+      "dr": 0.0,
+      "refdomains": 429,
+      "org_keywords": 1,
+      "org_traffic": 2
+    },
+    {
+      "domain": "mtlawfirm.com",
+      "name": "Maureen A. McCready, Attorney at Law",
+      "practice_page": "https://www.mtlawfirm.com/divorce-attorney",
+      "dr": 0.0,
+      "refdomains": 423,
+      "org_keywords": 2,
+      "org_traffic": 2
+    },
+    {
+      "domain": "matcavlaw.com",
+      "name": "Mattingly Cavagnaro LLP",
+      "practice_page": "https://www.matcavlaw.com/finances-and-divorce/",
+      "dr": 4.3,
+      "refdomains": 463,
+      "org_keywords": 28,
+      "org_traffic": 100
+    },
+    {
+      "domain": "raimondosundquist.com",
+      "name": "Raimondo & Sundquist LLP",
+      "practice_page": "https://raimondosundquist.com/alimony-lawyers/",
+      "dr": 0.6,
+      "refdomains": 422,
+      "org_keywords": 9,
+      "org_traffic": 22
+    },
+    {
+      "domain": "quarantilloandtruex.com",
+      "name": "Quarantillo & Truex",
+      "practice_page": "https://www.quarantilloandtruex.com/divorce",
+      "dr": 0.6,
+      "refdomains": 414,
+      "org_keywords": 6,
+      "org_traffic": 7
+    },
+    {
+      "domain": "thelenhardtlawfirm.com",
+      "name": "The Lenhardt Law Firm",
+      "practice_page": "https://www.thelenhardtlawfirm.com/matrimonial-law",
+      "dr": 0.0,
+      "refdomains": 254,
+      "org_keywords": 0,
+      "org_traffic": 0
+    }
+  ],
+  "unresolved": [
+    "bengartdemarcolaw.com",
+    "bombardolaw.com",
+    "buffalomediation.com",
+    "clarkpeshkin.com",
+    "divorcemediationofbuffalo.com",
+    "dukelawfirm.net",
+    "familycourtbuffalo.com",
+    "gordondivorcelawfirm.com",
+    "johndwieseresq.net",
+    "marinerolawpllc.com",
+    "scintaesq.com",
+    "uncontesteddivorceny.net"
+  ],
+  "unresolved_notes": {
+    "familycourtbuffalo.com": "Law Office of Scott V. Bernard, 22 reviews. Its own page is headed “Family Law Areas” and its host answered HTTP 429 to three requests in a row, so there was nothing for us to read. A site that rate-limits us is not a firm with nothing published, and this one deserves a slower retry rather than a verdict.",
+    "marinerolawpllc.com": "Marinero Law, PLLC, 10 reviews. Names estate planning and family law on /services-1 in text blocks rather than in headings or links, so its practice list is not readable here.",
+    "scintaesq.com": "The Scinta Law Firm, LLP, 11 reviews. Its entire site is one page and one internal link. There is no practice page to find because there is no second page.",
+    "bengartdemarcolaw.com": "Bengart & DeMarco, 20 reviews. Its home page title names family law and its /practice-areas/ page names no practice at all in any heading or link: twenty-two readable labels on it and every one is navigation or a phone number.",
+    "clarkpeshkin.com": "Clark Peshkin, 196 reviews, has a Main Street office in Buffalo and its own front door says otherwise. Its title reads “Divorce and Family Court Lawyer Rochester” and the address in its structured data is in Albany. A profile here asserts one home market and this firm's own pages name two other cities.",
+    "dukelawfirm.net": "Duke Law Firm, P.C., A Family Law Firm, 239 reviews, the second largest count a divorce search returns here and not in this market: its office is in Lakeville, Livingston County, 14480, which is the Rochester market. It also returns HTTP 403 to us.",
+    "bombardolaw.com": "Bombardo Law Office, P.C., 44 reviews, Syracuse. The obvious first entry for a Syracuse family law market.",
+    "johndwieseresq.net": "John D. Wieser Esq PC, 12 reviews, listed in Getzville and titled “Reliable Family Law | Rochester, NY”.",
+    "gordondivorcelawfirm.com": "Gordon Law, P.C., 73 reviews in Jamaica, Queens. The same firm the New York City family law cohort left out as a metropolitan network rather than a city practice, turning up again three hundred miles away.",
+    "divorcemediationofbuffalo.com": "Divorce Mediation Services of Buffalo LLC, 51 reviews, the third largest count in this market. A mediation service rather than a law practice, and its front page still carries its template's “Slide title” and “Write your caption here”. Recorded for the reason the Naples cohort records a title agency: it ranks near the top of a search a client would run.",
+    "buffalomediation.com": "Matrimonial Mediation Service of Buffalo Inc., 19 reviews. A mediation service, as above, and readable only on its www host.",
+    "uncontesteddivorceny.net": "Stephen K. Underwood publishes a flat fee for an uncontested divorce here, which is more than any firm in this cohort publishes, and underwoodlaw.net is the same attorney and carries his seven Google reviews. Publishing either domain misreports him: the reviews are on the site that does not present the practice and the practice is on the site with no reviews. One profile asserts one firm, and merging two domains into one is a decision about identity that nothing in this pipeline is built to make."
+  }
+}

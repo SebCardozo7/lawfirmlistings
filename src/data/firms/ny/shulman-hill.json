@@ -337,16 +337,12 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.9,
-      "count_label": "523",
-      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "rating": 4.87,
+      "count_label": "1,533",
+      "source": "Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
-      {
-        "published_at": "2026-02-11T20:53:13.038195912Z",
-        "rating": 5
-      },
       {
         "published_at": "2026-07-02T14:31:37.690069667Z",
         "rating": 5
@@ -361,6 +357,110 @@
       },
       {
         "published_at": "2026-02-24T09:09:54.033778880Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-11T19:28:12.839504770Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-09T01:29:16.675395977Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-24T16:18:58.043069741Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-30T22:48:08.829069361Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-16T21:08:05.349207740Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-06T20:31:01.512901985Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-23T16:03:16.954167366Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-23T17:24:51.980031488Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-05T18:57:10.992217640Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-03T19:53:40.951198349Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-23T16:51:31.142397685Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-02T19:52:42.902930294Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-13T19:37:54.842462185Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-09T16:10:09.246375587Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-08T19:50:35.038695784Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-03T23:54:39.615272774Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-26T20:12:45.452141505Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-16T22:38:35.026908126Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-21T15:34:53.898579885Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-24T18:30:24.602133245Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-11T20:34:43.077655638Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-08T19:47:03.439761293Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-13T22:20:27.885016680Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-23T22:10:32.603684580Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-11T17:31:48.462701961Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-01-10T00:58:58.763950Z",
         "rating": 5
       }
     ]
@@ -407,11 +507,11 @@
       "measured_at": "2026-09-16"
     },
     "places": {
-      "listing_count": 1,
-      "review_count_total": 523,
-      "rating_weighted": 4.9,
+      "listing_count": 6,
+      "review_count_total": 1533,
+      "rating_weighted": 4.87,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-18"
     }
   },
   "gates": {
@@ -525,7 +625,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "523 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "1,533 Google reviews · Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -533,7 +633,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 523 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.87 over 1,533 reviews → Bayesian 4.87 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -541,7 +641,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-02) · a sample of five per business listing, not every review"
+            "evidence": "28 of 30 sampled reviews are from the last 12 months (newest 2026-07-09) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -549,7 +649,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 30 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -579,7 +679,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "6 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",

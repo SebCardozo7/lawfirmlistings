@@ -210,8 +210,11 @@ FEE_CONTEXT = re.compile(r"\bfee|\bcharge|\bbill|\brate|\bretainer|\bcost|\bhour
 # Telling a client what the market charges is worth recording, so a sentence caught here is kept
 # under its own key and never scored.
 MARKET_TALK = re.compile(r"\brange[sd]?\s+(?:from|between)\b|\btypically\b|\bon average\b|"
-                         r"\baverage\b|\busually\b|\bmost (?:attorneys|lawyers|firms|divorce)\b|"
-                         r"\banywhere from\b|\bcan (?:cost|range)\b|\bexpect to pay\b", re.I)
+                         r"\baverage\b|\busually\b|"
+                         r"\b(?:most|many|some) (?:attorneys|lawyers|firms|divorce)\b|"
+                         r"\banywhere from\b|\bcan (?:cost|range)\b|\bexpect to pay\b|"
+                         r"\b(?:fees|costs|rates) (?:vary|can vary|will vary)\b|"
+                         r"\bcan vary\b|\bvary (?:significantly|widely|depending)\b", re.I)
 
 
 def examine(record, verbose=False):
@@ -248,8 +251,17 @@ def examine(record, verbose=False):
     retainer = first_match(RETAINER_FIGURE, texts)
     if retainer and MARKET_TALK.search(retainer["quote"]):
         market_rate, retainer = market_rate or retainer, None
+    # The same guard on the two weaker findings, which it was never applied to. The Lenhardt Law
+    # Firm publishes "Many attorneys offer free consultations to discuss your situation and
+    # explain fee structures before you commit", which matched on "fee structure" and is a
+    # sentence about what other attorneys do. B1 pays two points for naming the terms a firm
+    # bills on, and that would have been two points for somebody else's practice.
     flat = first_match(FLAT_FEE, texts)
+    if flat and MARKET_TALK.search(flat["quote"]):
+        market_rate, flat = market_rate or flat, None
     terms = first_match(FEE_TERMS, texts)
+    if terms and MARKET_TALK.search(terms["quote"]):
+        market_rate, terms = market_rate or terms, None
     contingent = first_match(CONTINGENT, texts)
     billing = first_match(BILLING, texts)
     rule = first_match(RULE_CITED, texts)

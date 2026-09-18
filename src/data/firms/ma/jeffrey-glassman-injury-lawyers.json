@@ -154,9 +154,9 @@
     "quotes": [],
     "google": {
       "rating": 4.9,
-      "count_label": "960",
+      "count_label": "961",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-15"
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -168,15 +168,15 @@
         "rating": 5
       },
       {
-        "published_at": "2026-06-11T18:17:52.653291362Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-07-28T17:24:11.473603083Z",
         "rating": 5
       },
       {
         "published_at": "2026-05-13T16:37:25.219561632Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-12T18:55:11.487696436Z",
         "rating": 5
       }
     ]
@@ -207,10 +207,10 @@
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 960,
+      "review_count_total": 961,
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-15"
+      "measured_at": "2026-09-18"
     },
     "ahrefs": {
       "dr": 39,
@@ -419,7 +419,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "960 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "961 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -427,7 +427,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 960 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 961 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
