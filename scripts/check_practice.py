@@ -39,7 +39,8 @@ import time
 import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from crawl_public import DELAY, fetch, robots_body, robots_for, strip_tags, unescape  # noqa: E402
+from crawl_public import (DELAY, fetch, https_origin, robots_body, robots_for,  # noqa: E402
+                          strip_tags, unescape)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 TODAY = datetime.date.today().isoformat()
@@ -307,7 +308,7 @@ def confirm(url, spec, rp):
 
 
 def examine(domain, spec):
-    origin = "https://" + domain
+    origin = https_origin(domain)
     rp = robots_for(origin)
     robots = robots_body(origin)
 
@@ -367,7 +368,7 @@ def examine(domain, spec):
 
 def examine_combined(domain, spec, practice_name):
     """The second question, asked only when the first one found nothing."""
-    origin = "https://" + domain
+    origin = https_origin(domain)
     rp = robots_for(origin)
     robots = robots_body(origin)
 
