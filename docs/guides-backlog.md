@@ -108,18 +108,19 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
 
 ## Generated pages, so a topic is not aimed at one of them
 
-As of 2026-09-16 the build produces 257 pages. **The directory has quadrupled since this section
-was last enumerated: 59 firms in 3 markets then, 217 firms in 9 markets and 7 states now.** Check
-this list against the build rather than inheriting it.
+As of 2026-09-18 the build produces 315 pages, from 272 published firms in 9 markets and 7
+states. **Family law opened since this was last enumerated, which added a practice hub and a
+tenth city-by-practice ranking.** Check this list against the build rather than inheriting it.
 
 - `/`, `/cities/`, `/practice-areas/`, `/guides/`
 - Nine city hubs: `baltimore-md`, `boston-ma`, `buffalo-ny`, `dallas-tx`, `lakeland-fl`,
   `naples-fl`, `new-york-ny`, `northwest-indiana`, `portland-or`
-- Eleven city × practice rankings: `personal-injury` in all of the above except `naples-fl`,
-  `workers-compensation` in `baltimore-md` and `new-york-ny`, `real-estate` in `naples-fl`
-- Three practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/real-estate/`,
-  `/practice-areas/workers-compensation/`
-- 217 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
+- Twelve city × practice rankings: `personal-injury` in all of the above except `naples-fl`,
+  `workers-compensation` in `baltimore-md` and `new-york-ny`, `real-estate` in `naples-fl`,
+  `family-law` in `new-york-ny`
+- Four practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/real-estate/`,
+  `/practice-areas/workers-compensation/`, `/practice-areas/family-law/`
+- 272 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
   `/contact/`, `/privacy/`, `/terms/`)
 
 Every city and practice combination in that list is off limits as a guide topic.
@@ -128,6 +129,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-09-18 | `/guides/what-law-firms-publish-about-malpractice-insurance/` | "do lawyers have malpractice insurance" (40/mo, KD 2), "can i sue my lawyer for malpractice" (70, KD 0), and the client-side phrasings that return no data at all | Backlog item 1, and it held up: `accountability.malpractice_insurance` is `true` on **0 of 267** firms across 2,313 pages, while `bar_associations` is non-empty on 113. The finding that makes the piece is **Oregon**: the one state here where the cover is mandatory, and 0 of its 20 firms mention it, which proves silence measures publishing habits rather than cover. Also published against ourselves: the association half is partly a measure of our own pattern list, 84 of 155 in the two states it carries a local association for against 29 of 112 elsewhere. |
 | 2026-09-16 | `/guides/what-it-takes-to-check-a-law-firm/` | "how to check if a law firm is legit" (30/mo, KD 3), "how to check if a law firm is registered", "how to check a lawyer credentials", "how to check if a lawyer is legitimate" | Backlog item 3, and much larger than the old entry predicted: 56 of 217 firms name no attorney we could read, not 6. Pillar A's method piece and the study behind gates G1 and G2. Two findings worth remembering: only New York, of the seven states, publishes an attorney register we may query, so G1 passes on 51 firms and never outside it, while published discipline is searchable in six states through CourtListener. **The check people assume is buried is the more open one.** Also: the no-roster firms are indistinguishable from the rest on Google rating, 53 of 56 at 4.5 or better against 196 of 217. |
 | 2026-09-14 | `/guides/what-a-law-firm-score-cannot-compare/` | "how are lawyer ratings calculated", "law firm rating methodology", "what does a lawyer rating mean", "are lawyer ratings comparable" | The denominator piece. Reads all three states rather than one, because the argument is what happens when the directory crosses a state line. Two corrections were caught in draft and are worth remembering: the certification coverage floor is `MIN_COVERAGE = 0.60`, not 0.70, and the highest total outside New York is a firm whose total we withhold, not the highest comparable one. |
 | 2026-09-13 | `/guides/what-a-case-results-page-proves/` | "how to check a law firm's case results", "law firm case results page", "how to verify a lawyer's track record" | Counts what every firm publishes about its own outcomes and says why we repeat none of the amounts. Doubles as the pillar B method piece. |
@@ -138,44 +140,39 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 ## Next, ranked
 
-Item 3 was taken on 2026-09-16 and item 5 went into it as a paragraph, as the old entry
-predicted. **Two of the six entries below were dead when this run checked them against the data,
-which is the argument for checking before committing rather than inheriting a ranking.** Old item
-1 is gone because `digital.ahrefs` is now present on all 217 firms and D2 scores `ahrefs` on every
-one of them, so the largest hole in the score has been filled and the piece it was waiting for has
-no subject. Old item 2 is gone because `founded_year` is set on **zero** of the 217 records: there
-is no website founding claim committed anywhere, so there is nothing for `operating.registered` to
-disagree with. Anyone who wants that piece has to crawl the claims first.
+Item 1 was taken on 2026-09-18 and is written. It held up exactly as the last run described it,
+which is the first time an inherited entry has survived contact with the data unchanged. The
+entries below were re-checked against the collection on that run rather than inherited.
 
-1. **Nobody says they carry malpractice insurance.** `accountability.malpractice_insurance` is
-   recorded on 212 firms and is `true` on **none of them**, while `bar_associations` is non-empty
-   on 87. A client who is harmed by negligent representation is recovering from an insurer or
-   from nobody, most states do not require the cover, and not one firm site we read says either
-   way. That is a real absence across a large population, it is a count rather than a
-   characterisation of anyone, and it is the natural sequel to the licensure piece: same
-   question, different record. Check `scripts/check_a5.py` for what the field actually asserts
-   before writing a sentence on it.
-2. **Is this firm even a company?** The other half of "is this law firm legit", and unwritten.
-   Gate G3 confirms the firm in a state business register for 83 of 217, and the reason it fails
-   elsewhere is the same shape as the licensure finding: New York, Oregon and Texas publish their
-   corporate registers as open data and the others do not, so 72 firms carry `no queryable
-   source`. `entity` holds the legal name, entity type, filing id and formation date for 60
-   firms, and `operating.years` is filled for 216 from state registers. Strong, and it pairs with
-   the piece just published rather than repeating it.
-3. **Texas, the state where neither check runs.** Of the 20 Dallas firms, G1 passes on 0 and G2
+1. **Is this firm even a company?** The other half of "is this law firm legit", and still
+   unwritten. Gate G3 confirms the firm in a state business register for **128 of 272** firms,
+   and the reason it fails elsewhere is the same shape as the licensure finding: New York,
+   Oregon and Texas publish their corporate registers as open data and the others do not, so 72
+   firms carry `no queryable source` and 34 fall back to Google Places. `entity` holds the legal
+   name, entity type, filing id and formation date for **105** firms, and `operating.years` is
+   filled for 271 from state registers. Strong, it pairs with the two method pieces already
+   published rather than repeating them, and the counts have grown since it was first proposed.
+2. **Texas, the state where neither check runs.** Of the 20 Dallas firms, G1 passes on 0 and G2
    passes on 0, the only state in the directory where both are blank: the bar refuses automated
    readers and attorney discipline there is not an order of the supreme court, so CourtListener
-   has nothing to index either. It is also the most heavily advertised market we cover, which the
-   city notes already say. Narrow, and it may be a section of item 2 rather than its own guide.
-4. **The office-count problem in every directory.** `digital.places.listing_count` versus review
+   has nothing to index either. Note that Texas *does* publish its corporate register, so it is
+   the state where we can confirm the company and never the lawyer, which is a sharper framing
+   than the original entry had. Narrow, and probably a section of item 1 rather than its own guide.
+3. **The office-count problem in every directory.** `digital.places.listing_count` versus review
    totals. Overlaps the Google reviews guide; only worth writing if it is reframed as a directory
    design piece rather than a review piece.
-5. **What a participation score measures.** Out of the Avvo pass below: Avvo's own documentation
-   says answering questions and publishing guides on Avvo can raise a lawyer's Avvo Rating. A
-   directory whose rating partly measures engagement with the directory is a stronger version of
-   the FindLaw observation from 2026-09-14. We have no measurement of Avvo to publish, so this is
-   a paragraph inside a future method piece rather than a guide, and it must be sourced to their
-   published documentation rather than asserted.
+4. **What a participation score measures.** Out of the Avvo pass: Avvo's own documentation says
+   answering questions and publishing guides on Avvo can raise a lawyer's Avvo Rating. A directory
+   whose rating partly measures engagement with the directory is a stronger version of the FindLaw
+   observation from 2026-09-14, and the Justia pass below adds a second case: paid Platinum and
+   Gold placements buy position in their directory outright. We have no measurement of either to
+   publish, so this is a paragraph inside a future method piece rather than a guide, and it must be
+   sourced to their published documentation rather than asserted.
+5. **What a firm publishes about how it bills, across practices that cannot be compared.** Out of
+   the E1 open item below: `domestic.hourly_rate`, `domestic.retainer` and `transaction.flat_fee`
+   are the family law and real estate answers to the contingency percentage, and the fees guide
+   only ever counted the injury version. Wait until the E1 scoring decision is made, because the
+   guide and the fix would contradict each other otherwise.
 
 **Dead, so they are not proposed again:**
 
@@ -183,7 +180,48 @@ disagree with. Anyone who wants that piece has to crawl the claims first.
   whether a firm publishes bar numbers. See the open item below: the field that claimed to is
   empty on every record, and the one that does exist means something else.
 - *D2 as the largest hole.* Filled. See above.
+- *Nobody says they carry malpractice insurance.* Written 2026-09-18. Do not re-propose the
+  insurance count as a topic: it is now a published page that recomputes itself.
 - *Founding-year claims against the register.* No committed claims to compare. See above.
+
+## Keyword research, 2026-09-18
+
+`subscription-info-limits-and-usage` is free and was the first call again: 497,988 of 800,000
+used, reset still on the 19th, so roughly 302,000 units were available. Two paid calls, 452 units
+in total, well inside the six-call rule. Keep starting with the free call.
+
+What they returned:
+
+- **The target is "do lawyers have malpractice insurance": 40/mo, difficulty 2**, parent topic
+  `legal malpractice insurance`, informational and commercial intent. A difficulty of 2 is the
+  lowest this section has found on anything with commercial intent. Traffic potential reads 2,900,
+  but that number belongs to the parent topic, which is lawyers shopping for cover, not clients
+  checking on one. Do not inherit it as our ceiling.
+- Next to it, "can i sue my lawyer for malpractice" at 70/mo and **KD 0**, parent topic `how to sue
+  a lawyer for malpractice`, traffic potential 1,500. That is a different piece and a real one, but
+  it is legal procedure rather than measurement, so it is Nolo's to win and not ours.
+- "legal malpractice insurance requirements by state" (80, KD 25) is supply side: lawyers checking
+  their own obligations. "lawyer professional liability insurance" (250, KD 3) is the same, and the
+  $10.00 CPC says who is bidding on it. Neither is our reader.
+- **Nothing at all returned for the client-side phrasings**: "does my lawyer have malpractice
+  insurance", "how to check if a lawyer has malpractice insurance", "what happens if my lawyer
+  makes a mistake", "is my lawyer insured". The same shape the last two runs found. The question
+  people actually have has no measured volume, and the query that does have volume is asked in the
+  lawyer's words rather than the client's.
+- **`serp-overview` on "do lawyers have malpractice insurance" is the reason to write it, and it is
+  the clearest unoccupied SERP this section has seen.** Position two is the ABA's "FAQs on
+  Malpractice Insurance for the New or Suddenly Solo Attorney" at DR 90. Four is the Ohio State Bar
+  asking "Do I need malpractice insurance?". Five through nine are insurance sellers:
+  attorneysinsurancemutual at DR 9, lawyersmutual, texasbarpractice, biberk, l2insuranceagency at
+  DR 18 with 14 monthly visits. Ten is the Michigan bar's Rule 21.
+- **Every organic result on that page is written for a lawyer buying insurance. Not one is written
+  for the client the insurance would pay.** The only client-side results are a Reddit thread
+  literally titled "What benefit is there to a client for an attorney to have malpractice
+  insurance" and an Avvo answers thread. Nobody has measured what firms publish. That is the
+  information gain, and a page where DR 9 and DR 18 rank is a page we can enter.
+- People also ask: "How often do lawyers get sued for malpractice?", "How much does a lawyer pay
+  for malpractice insurance?" Both are supply side again. The demand-side version of this query is
+  genuinely vacant rather than merely competitive.
 
 ## Keyword research, 2026-09-16
 
@@ -288,7 +326,45 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: justia.com.**
+**Next run: lawyers.com.**
+
+### justia.com, read 2026-09-18
+
+`www.justia.com` is blocked by this environment's egress proxy, so this was read through search
+results, Justia's own marketing and directory-listing pages as they appear in them, and
+third-party write-ups. **Four of the eight competitors are now known to be unreachable from here**
+(nolo, findlaw, avvo, justia), so a search-based read is now the majority case. Budget for it.
+
+Shapes Justia earns traffic with:
+
+1. **The primary sources themselves**, at `law.justia.com`: case law, state and federal codes,
+   regulations, dockets. This is the largest free law library any of these competitors runs, and it
+   is the reason their domain carries the authority it does. Do not chase any part of it. We cannot
+   beat a primary source at being one, and unlike Nolo's encyclopedia this is not even an
+   explainer we could out-measure: it is the statute.
+2. **The lawyer directory at `lawyers.justia.com`**, faceted by practice area and location, with
+   free claimable profiles seeded at scale. Structurally identical to our generated pages and to
+   FindLaw's, and again with no measurement behind the ordering.
+3. **Paid position, stated openly.** "Justia Platinum Placements" buy fixed top placement for one
+   metro and practice-area combination; "Gold Placements" buy sponsored slots above and among the
+   free profiles. **This is the cleanest statement of the thing our pages are supposed to be the
+   answer to**, and it is worth keeping because it is published by them rather than alleged by us:
+   on that directory the top of a city-by-practice page is for sale, and on ours it is a score.
+   Nolo's paid matching service is the same business model less plainly described.
+4. **Badges and claimed-profile markers** as the engagement hook, the same participation mechanic
+   Avvo uses, minus a numeric rating tied to it.
+
+The thing to take, and it is a sharper version of the FindLaw and Avvo notes: all three of the
+directory giants rank on the queries we want with content that measures nothing, and two of the
+three sell the ordering of the pages that compete with our city-by-practice rankings. **The
+contrast to make is never "their number is wrong", it is that ours is a share of measured evidence
+with the share published and theirs is either popularity or a purchase.** Make it by demonstration.
+Item 4 in the ranked list is where the Avvo and Justia observations belong once we have something
+of our own to measure them against.
+
+Also worth noting for a future run: Justia's malpractice and legal-ethics content did not appear
+anywhere on the SERP this run studied, despite their library covering it. The insurance question
+is not a place their authority reaches.
 
 ### avvo.com, read 2026-09-16
 
@@ -514,6 +590,38 @@ rescores 217 firms, which is not a guide run's call:
   live on profiles.
 
 ## Open items for a person
+
+- **A5's association list only knows three states, and it is scored.** `scripts/check_a5.py`
+  matches bar and trial lawyers' associations against a fixed list of 22 patterns. Every
+  state-keyed entry on it belongs to New York, Maryland or New Jersey, because those were the
+  first markets. There is no Massachusetts, Oregon, Texas, Indiana or Florida bar association on
+  it at all. The consequence is live in the score: a firm in Dallas or Portland that names its own
+  state bar is read as naming nothing and loses three points of A5, which it can only recover by
+  naming a national body. The measured gap is **84 of 155 firms in New York and Maryland against
+  29 of 112 everywhere else**, and some unknown share of that is our list rather than the firms.
+  This is the same class of failure as the `bar_numbers_on_bios` one: a firm losing points to the
+  reach of our own matching, which the repository's own stated rule forbids. The new guide says so
+  out loud rather than publishing the by-state rates as if they were rates, but saying it is not
+  fixing it. The fix is adding each state's bar and trial lawyers' associations to the list and
+  re-running A5, which rescores firms in five states, so it is a decision rather than an edit.
+  Noted 2026-09-18.
+
+- **Every guide page overflows horizontally at 390px in a headless render**, the new one and the
+  already-published ones alike. Checked this run by rendering `/guides/what-law-firms-publish-
+  about-malpractice-insurance/` and `/guides/core-web-vitals-new-york-injury-firms/` at the same
+  width: both clip identically at the right edge, so it is pre-existing and site-wide rather than
+  anything this run introduced, and it was left alone for that reason. It may be an artifact of
+  headless Chrome without device emulation rather than a real mobile bug, which is exactly why
+  somebody should check it on a real phone. If it is real it affects every article on the site.
+  Noted 2026-09-18.
+
+- **`BarChart` emphasis is a trap on a zero row, and it cost this run a rewrite.** Marking the
+  row that is the point with `emphasis: true` quiets every other row, and a row whose value is
+  zero draws no bar, so the chart rendered as six grey bars with nothing highlighted and the
+  argument invisible. The build passed and `check_meta` passed. Only looking at the rendered
+  chart caught it, which is the standing rule working. The published chart uses no emphasis and
+  lets the empty track at the bottom carry the finding. Worth a line in `BarChart.astro`'s own
+  comment if somebody is in there anyway. Noted 2026-09-18.
 
 - **E1's fifth point cannot be earned in two of the four practices.** `scripts/score.py` gives
   the last of E1's six points for publishing the fee percentage, which is the right test in an
