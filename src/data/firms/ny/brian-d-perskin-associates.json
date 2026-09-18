@@ -224,6 +224,15 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-17"
+    },
+    "psi": {
+      "value": {
+        "performance": 70,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-18",
+      "note": "LCP 5.2 s / CLS 0.002 / TBT 4 ms"
     }
   },
   "gates": {
@@ -434,7 +443,7 @@
     "total": 56,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -545,7 +554,7 @@
             "pts": 2.5,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · fee statement · privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · fee statement · privacy policy · no disclaimer · fresh content"
           },
           {
             "code": "D2",

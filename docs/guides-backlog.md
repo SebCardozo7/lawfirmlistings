@@ -515,6 +515,16 @@ rescores 217 firms, which is not a guide run's call:
 
 ## Open items for a person
 
+- **E1's fifth point cannot be earned in two of the four practices.** `scripts/score.py` gives
+  the last of E1's six points for publishing the fee percentage, which is the right test in an
+  injury practice and impossible in the other two. A real estate closing is a flat fee and has no
+  percentage; a family law firm may not charge a percentage at all, because Rule 1.5(d)(5)(i)
+  forbids a contingent fee in a domestic relations matter. So 38 firms are scored out of five
+  points where everybody else is scored out of six, and the normalised total does not know it.
+  The fix is one line, the equivalent test for those practices being whether the firm publishes
+  the figure it does charge, and it rescores every firm in both practices, which is a decision
+  rather than an edit. Noted 2026-09-18 while opening the family law market.
+
 - `src/pages/methodology.astro` line 85 says of the B3 disclaimer check: "Of the first ten firms
   we read, four carried one." Still there, and now stale twice over: across the 107 firms that
   publish results, 44 carry a disclaimer. It is hand-typed prose on a page outside the guides
@@ -540,22 +550,23 @@ rescores 217 firms, which is not a guide run's call:
 - Six published pages carry a title over the 70-character mark that `audit_seo.mjs` notes, five of
   them firm profiles whose length is the firm's own name, plus `/practice-areas/personal-injury/`
   at 72. All predate this run and all are notes rather than failures, so they were left alone.
-- **`npm run check:meta` has been failing at head since before this run**, on two problems that
-  are not in the guides section and were not introduced here. `/practice-areas/real-estate/` has a
-  172-character description, 17 over the limit, hand-typed in `src/data/practices.ts`.
-  `/firms/jason-stone-injury-lawyers/` carries three em dashes, all of them inside the firm's own
-  published fee wording ("NO FEE UNLESS WE WIN — GUARANTEED!"), which is a quotation of somebody
-  else's copy rather than our prose. The first is a one-line edit somebody should make. The second
-  needs a decision: either the check should exempt quoted firm copy the way it already exempts
-  blockquotes, or the profile should stop reproducing the firm's punctuation. This run left both
-  alone rather than editing another section's copy, and `audit_seo.mjs` is clean.
-- The `attorneys[]` measurement is structural: an attorney index page, then bio pages, then the
-  `<h1>` of each. A firm that names its lawyers only in a paragraph reads as naming nobody, and
-  9 firms have a roster page we found and no name we could lift from it. The new guide counts
-  those 9 apart from the 42 where we found nothing, and says so, but the honest fix is in
-  `scripts/crawl_attorneys.py` rather than in a caveat. If that crawler improves, the headline
-  figure in `/guides/what-it-takes-to-check-a-law-firm/` moves on its own, which is the design
-  working.
+- ~~**`npm run check:meta` has been failing at head since before this run**~~, on the
+  real-estate description and on three em dashes inside Jason Stone's own fee wording. **Both
+  fixed 2026-09-17.** The description was trimmed. The decision the second one needed was taken
+  the way this note framed it: the check now exempts quoted firm copy, in all three forms a page
+  uses it, a `<blockquote>`, a `<q>` and a passage inside typographic quotation marks, and the
+  profile sets the firm's fee sentence as a quotation rather than running it into ours.
+  `check_meta` is clean across 314 pages.
+- ~~The `attorneys[]` measurement is structural~~, and a firm that names its lawyers only in a
+  paragraph read as naming nobody. **Largely fixed 2026-09-17.** Eleven changes to
+  `scripts/crawl_attorneys.py` and a re-read of every firm that named nobody: eighteen firms
+  gained a roster and fourteen moved from Listed to Verified on evidence that had always been on
+  their sites. The crawler now reads a title in front of a name, a role in a separate element, a
+  roster kept on an about page, names in unstyled divs, bios WordPress publishes as photo
+  attachments, and a heading whose page title carries the practice before the job. The headline
+  figure in `/guides/what-it-takes-to-check-a-law-firm/` moved on its own, which is the design
+  working. Forty-nine firms still name nobody we can read, and that is now a fact about their
+  sites.
 - Firm sites are largely unreachable from this environment: the egress proxy blocked every attempt
   to spot-check a no-roster firm's site by hand. The two firms the new guide names are named for
   facts that are complimentary or are about a state's records policy, not for an absence we could
