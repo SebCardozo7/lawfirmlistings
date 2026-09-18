@@ -218,9 +218,13 @@ def home_links(origin, rp):
 
 
 # A page that lists what the firm does, rather than a page about one thing it does.
+# The trailing -1 is Squarespace: it appends a number when a page slug collides with one that
+# already exists, so a firm's only practice list is published at /services-1. Marinero Law, PLLC
+# publishes estate planning and family law on that page, and this check read it as a firm with no
+# practice list, on a suffix its website builder chose.
 COMBINED_PAGE = re.compile(
     r"(?:^|/)(?:practice[-_]areas?|practice|areas?[-_]of[-_]practice|services?|what[-_]we[-_]do|"
-    r"how[-_]we[-_]help|legal[-_]services?|praactice[-_]areas?)(?:/|$|\.)", re.I)
+    r"how[-_]we[-_]help|legal[-_]services?|praactice[-_]areas?)(?:[-_]\d+)?(?:/|$|\.)", re.I)
 
 
 def confirm_combined(url, spec, rp, practice_name):
@@ -254,6 +258,22 @@ def confirm_combined(url, spec, rp, practice_name):
             labels.append(text)
     named = next((t for t in labels if spec["title"].search(t)), None)
     if not named:
+        # A page whose own markup yields no practice at all has not told us the firm does not do
+        # this work. Two Buffalo firms showed the two shapes of that. Marinero Law's practice
+        # list is a Squarespace page naming estate planning and family law in text blocks rather
+        # than in headings or links, and this check read one label on it, the firm's name.
+        # Bengart & DeMarco's page yielded twenty-two labels and every one of them was navigation
+        # or a phone number. Both were reported as firms whose practice list does not include
+        # this practice, which is a claim about a firm made from a claim about its markup.
+        if len(labels) < 3:
+            return None, ("the page carries no headings or links we can read, %d in total, so "
+                          "what it lists is not readable here" % len(labels))
+        others = sum(1 for t in labels
+                     for name, other in PRACTICES.items()
+                     if other["title"].search(t))
+        if not others:
+            return None, ("the page names no practice at all in a heading or a link, so its list "
+                          "is not readable here rather than missing this practice")
         return None, "the page lists the firm's practices and this one is not among them"
     if not spec["corroborating"].search(strip_tags(html)):
         return None, "names the practice in a list and says nothing specific to it"
@@ -328,16 +348,27 @@ def examine(domain, spec):
 
     seen = set()
     where = "sitemap"
-    candidates = matching(sitemap_urls(origin, robots, rp), seen)
+    from_sitemap = list(sitemap_urls(origin, robots, rp))
+    from_home = []
+    candidates = matching(from_sitemap, seen)
     if not candidates:
         # A sitemap that answers and does not list the practice pages used to end the check,
         # because the home page was only consulted when the sitemap produced nothing at all.
         # Iannella & Mummolo publishes /personal_injury and its sitemap does not mention it, so
         # a Boston firm with 688 reviews read as publishing no injury practice.
-        candidates = matching(home_links(origin, rp), seen)
+        from_home = list(home_links(origin, rp))
+        candidates = matching(from_home, seen)
         where = "sitemap, then the home page's links"
 
     if not candidates:
+        # No sitemap and no links is not a finding about the firm. familycourtbuffalo.com
+        # publishes a page headed "Family Law Areas" and this check reported that the firm
+        # publishes no such page: its host answered 429 to three requests in a row, so there was
+        # nothing to read and the reason given described the site instead of the refusal.
+        if not from_sitemap and not from_home:
+            return None, ("nothing to read: no sitemap answered and the home page served no "
+                          "links, so this is a site we could not fetch rather than a page the "
+                          "firm does not publish")
         return None, "no page whose address names the practice (%s)" % where
 
     # A site with dozens of matching URLs has a page per borough and per injury type as well as
@@ -373,7 +404,8 @@ def examine_combined(domain, spec, practice_name):
     robots = robots_body(origin)
 
     urls, seen = [], set()
-    for url in list(sitemap_urls(origin, robots, rp)) + list(home_links(origin, rp)):
+    everything = list(sitemap_urls(origin, robots, rp)) + list(home_links(origin, rp))
+    for url in everything:
         if urllib.parse.urlparse(url).netloc.split(":")[0].removeprefix("www.") != domain:
             continue
         path = urllib.parse.urlparse(url).path
@@ -383,6 +415,10 @@ def examine_combined(domain, spec, practice_name):
         urls.append(url)
     urls.sort(key=lambda u: len(urllib.parse.urlparse(u).path))
 
+    if not everything:
+        return None, ("nothing to read: no sitemap answered and the home page served no links, "
+                      "so this is a site we could not fetch rather than a firm with no "
+                      "practice-areas page")
     last = "the firm publishes no page listing its practice areas either"
     for url in urls[:4]:
         found, why = confirm_combined(url, spec, rp, practice_name)
