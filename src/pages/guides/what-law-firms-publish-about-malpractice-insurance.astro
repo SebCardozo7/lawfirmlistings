@@ -1,0 +1,284 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// The A5 study. Every figure below is computed from the firms collection at build time, so the
+// page cannot drift away from the data it describes.
+//
+// Two fields, and they are not the same fact, which is the mistake this section has made before:
+//   accountability.malpractice_insurance  is whether the FIRM's own pages, in the firm's voice,
+//     say it carries professional liability cover. scripts/check_a5.py requires an insurance
+//     phrase and a first-person carrying verb in the same window, so "the hospital's malpractice
+//     insurer denied the claim" does not count and "we maintain professional liability
+//     insurance" does. It is not, and cannot be, a statement about whether a firm is insured.
+//   accountability.bar_associations       is the substantive bar and trial lawyers' associations
+//     named on those same pages, matched against a fixed list in the same script. Paid marketing
+//     clubs are excluded there on purpose.
+//
+// This guide is scoped to the whole directory rather than to one state, because the question is
+// what firms publish about themselves everywhere we measure. Every count below therefore says
+// how many firms it was taken over.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// A5 runs off the firm's own site. Five firms answer our crawler with a 403 and carry no
+// accountability record at all, so they are not in the denominator: an absence we could not look
+// for is not a finding about the firm. Same rule score.py uses.
+const measured = firms.filter(f => f.data.accountability);
+const unmeasured = firms.length - measured.length;
+const acc = (f: (typeof measured)[number]) => f.data.accountability!;
+
+const pagesRead = measured.reduce((n, f) => n + (acc(f).pages_read ?? 0), 0);
+const disclosing = measured.filter(f => acc(f).malpractice_insurance === true);
+const withAssoc = measured.filter(f => acc(f).bar_associations.length > 0);
+// 'partial' means we could not read every bio the firm publishes, so a nil return there is our
+// reach rather than the firm's silence. score.py keeps those out of the denominator too.
+const partial = measured.filter(f => acc(f).source === 'partial');
+const assocNames = new Set(measured.flatMap(f => acc(f).bar_associations.map(a => a.name)));
+
+// The share of the directory that publishes each thing, out of the same measured set. Different
+// fields, one denominator, and the caption names each field so no row is mistaken for another.
+const publishes = [
+  { label: 'Offers a free consultation', value: measured.filter(f => f.data.free_consultation).length },
+  { label: 'Names at least one attorney', value: measured.filter(f => f.data.attorneys.length > 0).length },
+  { label: 'Publishes a privacy policy', value: measured.filter(f => f.data.digital.trust_pages?.privacy_policy).length },
+  { label: 'Names a bar or trial lawyers’ association', value: withAssoc.length },
+  { label: 'Publishes a fee statement in its own words', value: measured.filter(f => f.data.fee_statement).length },
+  // No emphasis on this chart, deliberately. BarChart quiets every unemphasised row, and the row
+  // that is the point has a value of zero, so emphasising it drew no bar and greyed out the five
+  // that do draw: a chart whose argument was invisible. The zero row is the last one and draws
+  // nothing, which says it better than a highlight could.
+  { label: 'Says it carries professional liability cover', value: disclosing.length },
+].sort((a, b) => b.value - a.value).map(r => ({
+  ...r, display: `${r.value} of ${measured.length}`,
+}));
+
+// Which state each association on check_a5.py's list belongs to, transcribed from that list,
+// which is where the matching actually happens. null means a national body any firm in any state
+// can name. Written out rather than inferred because "does our list know this state's bar" is a
+// fact about our code, not about the firms, and the chart below turns on getting it right.
+//
+// An association we have not classified counts as national, which is the conservative reading:
+// it can only ever understate the gap this section is about.
+const ASSOC_STATE: Record<string, string> = {
+  'New York State Bar Association': 'NY',
+  'New York State Trial Lawyers Association': 'NY',
+  'New York City Bar Association': 'NY',
+  'Brooklyn Bar Association': 'NY',
+  'Bronx County Bar Association': 'NY',
+  'Queens County Bar Association': 'NY',
+  'Nassau County Bar Association': 'NY',
+  'Suffolk County Bar Association': 'NY',
+  'Westchester County Bar Association': 'NY',
+  'Maryland State Bar Association': 'MD',
+  'Maryland Association for Justice': 'MD',
+  'Bar Association of Baltimore City': 'MD',
+  'New Jersey State Bar Association': 'NJ',
+};
+const coveredStates = new Set(Object.values(ASSOC_STATE));
+const stateNameOf = new Map(measured.map(f => [f.data.market.state, f.data.market.state_name]));
+// New Jersey sits on the association list without being a market here, so its name is not in the
+// collection to be read off a firm. Named here rather than printing a bare state code.
+const OFF_DIRECTORY: Record<string, string> = { NJ: 'New Jersey' };
+const coveredStateNames = [...coveredStates]
+  .map(code => stateNameOf.get(code) ?? OFF_DIRECTORY[code] ?? code)
+  .sort();
+const stateRows = [...new Map(measured.map(f => [f.data.market.state, f.data.market.state_name])).entries()]
+  .map(([code, name]) => {
+    const inState = measured.filter(f => f.data.market.state === code);
+    const named = inState.filter(f => acc(f).bar_associations.length > 0);
+    // Does our list carry an association of this state at all, or only national ones? This is a
+    // question about the list, so it is asked of the list rather than of what firms happened to
+    // name: a Florida firm naming the New York State Bar would otherwise read as Florida covered.
+    const hasLocal = coveredStates.has(code);
+    return {
+      label: name,
+      value: Math.round((named.length / inState.length) * 100),
+      display: `${named.length} of ${inState.length}`,
+      note: hasLocal
+        ? 'Our list names an association of this state'
+        : 'Our list names no association of this state',
+      emphasis: hasLocal,
+      firms: inState.length,
+    };
+  })
+  .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label));
+const listedStates = stateRows.filter(r => r.emphasis);
+const unlistedStates = stateRows.filter(r => !r.emphasis);
+const sumIn = (rows: typeof stateRows) => {
+  const total = rows.reduce((n, r) => n + r.firms, 0);
+  const named = rows.reduce((n, r) => n + Number(r.display.split(' of ')[0]), 0);
+  return { named, total };
+};
+const listedTally = sumIn(listedStates);
+const unlistedTally = sumIn(unlistedStates);
+
+// How many associations a firm names, as a distribution. The empty band is highlighted because
+// it is the one the score pays nothing for.
+const assocBands = [
+  { label: 'None', note: 'no association named', test: (n: number) => n === 0, emphasis: true },
+  { label: '1', note: 'one named', test: (n: number) => n === 1 },
+  { label: '2', note: 'two named', test: (n: number) => n === 2 },
+  { label: '3', note: 'three named', test: (n: number) => n === 3 },
+  { label: '4 or more', note: 'four or more', test: (n: number) => n >= 4 },
+].map(b => ({
+  label: b.label, note: b.note, emphasis: b.emphasis,
+  value: measured.filter(f => b.test(acc(f).bar_associations.length)).length,
+}));
+
+// Oregon: the one state here where the cover is not optional. Kept as a computed slice rather
+// than a typed number, so it follows the market if it grows.
+const oregon = measured.filter(f => f.data.market.state === 'OR');
+const oregonPages = oregon.reduce((n, f) => n + (acc(f).pages_read ?? 0), 0);
+const oregonDisclosing = oregon.filter(f => acc(f).malpractice_insurance === true);
+const oregonCity = oregon[0]?.data.market.city_slug ?? null;
+
+// The two firms that name the most associations, which is a complimentary fact and a checkable
+// one. Tie broken on slug so the page does not change its own example between builds.
+const mostAssoc = [...measured]
+  .sort((a, b) => acc(b).bar_associations.length - acc(a).bar_associations.length
+    || a.data.slug.localeCompare(b.data.slug))
+  .slice(0, 2);
+
+const checkedAt = measured.map(f => acc(f).checked_at).sort().pop() ?? null;
+const updated = checkedAt
+  ? new Date(checkedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// States the directory covers, derived and deduplicated. Never joined by hand: a list built by
+// mapping one name per firm and joining is what once printed "Florida and Florida and Florida".
+const stateNames = [...new Set(measured.map(f => f.data.market.state_name))].sort();
+const listOf = (xs: string[]) =>
+  xs.length <= 1 ? (xs[0] ?? '') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+
+// The finding, not the subject, and comparative so it does not go false the month one firm
+// publishes a sentence. No figure: check_meta rejects one in a title or a description, and a
+// count that moves every month should not be the thing Google has indexed.
+const title = 'New Study: Law Firms List Their Bar Memberships, Not Their Insurance';
+const description = 'We read every page these firms publish about themselves, looking for one sentence about professional liability cover. Not one firm had written it.';
+---
+<Base title={title} description={description} nav="guides" image="/og/shield.png" imageAlt="A wall of published membership badges beside one empty, dashed shield outline">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Malpractice insurance</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Accountability</span>
+    <h1>{title}</h1>
+    <p class="lede">If your lawyer makes a mistake that costs you money, the money comes from a professional liability policy or it comes from nowhere. We read {pagesRead.toLocaleString('en-US')} pages across {measured.length} firms looking for a firm saying it carries one. <b>{disclosing.length === 0 ? 'Not one had written the sentence' : `${disclosing.length} had written the sentence`}</b>, while {withAssoc.length} of the same firms name a bar association. This is what that does, and does not, tell you.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="shield" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we looked for</a></li>
+      <li><a href="#found">What we found</a></li>
+      {oregon.length > 0 && <li><a href="#oregon">The state where it is not optional</a></li>}
+      <li><a href="#limit">What this measurement gets wrong</a></li>
+      <li><a href="#score">What the score does with it</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read across ${measured.length} firms in ${stateNames.length} states${updated ? `, ${updated}` : ''}.`}
+      items={[
+        `Across <b>${pagesRead.toLocaleString('en-US')} pages</b> on ${measured.length} firms' own sites, <b>${disclosing.length}</b> say the firm carries professional liability cover.`,
+        `<b>${withAssoc.length} of ${measured.length}</b> firms name a bar or trial lawyers' association on those same pages, so these sites do publish credentials. Insurance is the one they leave out.`,
+        ...(oregon.length > 0 ? [
+          `In Oregon, the one state here where the coverage is mandatory, <b>${oregonDisclosing.length} of ${oregon.length}</b> firms mention it, which is the clearest proof that silence here measures publishing habits and not cover.`,
+        ] : []),
+        `The membership half is partly a measure of us: <b>${listedTally.named} of ${listedTally.total}</b> firms name one in the states our own list carries a local association for, against <b>${unlistedTally.named} of ${unlistedTally.total}</b> everywhere else.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we looked for</h2>
+    <p>Professional liability insurance, called malpractice insurance when a lawyer carries it, is what pays a client back when their own lawyer is negligent. A missed filing deadline that kills a claim is the classic example.</p>
+    <p>We read each firm's about page, its attorneys page, its home page and every attorney biography it publishes, up to sixty per firm. That came to {pagesRead.toLocaleString('en-US')} pages across {measured.length} firms.</p>
+    <p><b>We counted a disclosure only when the firm was the subject of its own sentence.</b> "We maintain professional liability insurance" counts. "The hospital's malpractice insurer denied the claim" does not, and on a personal injury site that second kind of sentence is everywhere. Without that rule every medical malpractice page in the directory would have reported that the firm disclosed its own cover.</p>
+    <p>{unmeasured > 0 && <>{unmeasured} firms are missing from every figure on this page, because their sites answer our crawler with a 403 and we could not read them at all. </>}An absence we were not able to go looking for is not a finding about a firm, so those firms are out of the denominator rather than counted as silent.</p>
+
+    <h2 id="found">What we found</h2>
+    <p>{disclosing.length === 0 ? 'Nothing. Not one firm in the directory says it carries cover.' : `${disclosing.length} of ${measured.length} firms say they carry cover.`} {withAssoc.length} of the same {measured.length} firms name at least one bar or trial lawyers' association, drawn from {assocNames.size} different associations.</p>
+    <BarChart
+      heading={`What these firms publish about themselves, out of ${measured.length}`}
+      max={measured.length}
+      rows={publishes}
+      caption={`One denominator, six different records. Reading down: free_consultation, the attorneys roster, digital.trust_pages.privacy_policy, accountability.bar_associations, the firm's own fee_statement, and accountability.malpractice_insurance. The last row draws no bar because it is zero.`}
+    />
+    <p><b>These are not sites that withhold credentials.</b> They publish memberships, bios, privacy policies and a free consultation offer. The insurance sentence is the one thing on the list that nobody writes.</p>
+    <ColumnChart
+      heading={`How many associations each firm names, across ${measured.length} firms`}
+      columns={assocBands}
+      emphasisLabel="Names none"
+      quietLabel="Names at least one"
+      caption={`From accountability.bar_associations. The highlighted band is the ${assocBands[0].value} firms that name none, which is the part of the directory our score pays nothing for here.`}
+    />
+    {mostAssoc.length === 2 && (
+      <p>At the other end, <a href={`/firms/${mostAssoc[0].data.slug}/`}>{mostAssoc[0].data.name}</a> names {acc(mostAssoc[0]).bar_associations.length} associations and <a href={`/firms/${mostAssoc[1].data.slug}/`}>{mostAssoc[1].data.name}</a> names {acc(mostAssoc[1]).bar_associations.length}. Both publish more affiliations than anyone else here, and neither says anything about insurance either.</p>
+    )}
+
+    {oregon.length > 0 && (
+      <>
+        <h2 id="oregon">The state where it is not optional</h2>
+        <p>Almost nowhere in the United States must a lawyer carry this cover. Oregon is the exception: lawyers in private practice there carry primary professional liability coverage through the Oregon State Bar's Professional Liability Fund, which has been mandatory since the fund began operating and is the only arrangement of its kind in the country.</p>
+        <p>The directory holds {oregon.length} Oregon {oregon.length === 1 ? 'firm' : 'firms'}. We read {oregonPages.toLocaleString('en-US')} of their pages. <b>{oregonDisclosing.length === 0 ? 'Not one mentions the cover' : `${oregonDisclosing.length} of them mention the cover`}</b>, although as private practitioners in that state they are required to have it.</p>
+        <p>That is the most useful number on this page, and it is worth being plain about what it proves. It proves that a firm saying nothing about insurance tells you nothing about whether the firm is insured. {oregonCity && <>You can see {oregon.length === 1 ? 'it' : `all ${oregon.length} of them`} ranked on <a href={`/cities/${oregonCity}/personal-injury/`}>our Portland personal injury page</a>.</>}</p>
+      </>
+    )}
+    <p>Elsewhere the rule is softer. The American Bar Association's model court rule asks a lawyer to report coverage to the state's highest court so the public can look it up, and a minority of states have adopted some version of it. <b>No state requires a firm to print it on its own website</b>, which is where we were looking, so what we measured is a publishing habit rather than compliance with anything.</p>
+
+    <h2 id="limit">What this measurement gets wrong</h2>
+    <p>The insurance half of this study is clean: one sentence, either written or not, and the answer is the same everywhere. The membership half is not clean, and the failure is ours rather than the firms'.</p>
+    <p>We match association names against a fixed list. Of the {assocNames.size} associations that list has matched anywhere in the directory, the ones tied to a particular state are tied to {listOf(coveredStateNames)}, which is where this directory started rather than where it now measures. A firm in one of the other {unlistedStates.length} states that proudly names its own state bar is read as naming nothing, unless it also names a national body.</p>
+    <BarChart
+      heading="Firms naming an association, by state"
+      max={100}
+      rows={stateRows}
+      caption={`The bar is the share and the printed figure is the count, because these states hold very different numbers of firms. Highlighted states are the ones our own pattern list carries a local association for, and they are the two highest. That ordering is a fact about our list.`}
+    />
+    <p><b>{listedTally.named} of {listedTally.total} firms name an association in the states whose own associations we can recognize, against {unlistedTally.named} of {unlistedTally.total} everywhere else.</b> Some of that gap is real and some of it is the list. We cannot currently tell you how much is which, and until the list covers every state in the directory, the by-state figures above should be read as a floor rather than a rate.</p>
+    <p>One more limit, smaller. {partial.length === 1 ? 'One firm is' : `${partial.length} firms are`} recorded as partial, meaning we could not read every biography the firm publishes, so a nil result there is our reach and not its silence. {partial.length === 1 ? 'It is counted' : 'They are counted'} in the figures above, but the score leaves this factor out of {partial.length === 1 ? 'its' : 'their'} scale rather than reading the gap as a zero.</p>
+    <p>This is the same problem, in a different record, that <a href="/guides/what-it-takes-to-check-a-law-firm/">we found when we tried to check every firm's licenses</a>: a check that runs in one state and not in another measures the state's records policy as much as the firm.</p>
+
+    <h2 id="score">What the score does with it</h2>
+    <p>Accountability is sub-factor A5 of the LFL Certification Score, worth six points: three for disclosing cover, three for a named association.</p>
+    <p><b>The three insurance points are not in anybody's denominator, and that is deliberate.</b> An absence shared by every firm we measure separates none of them, and charging all {measured.length} firms three points for a fact about the market would quietly make the published thresholds stricter than the methodology says they are. A total of seventy out of a scale where three points cannot be reached is really seventy out of ninety-seven.</p>
+    <p>So the scale for this factor is the membership half alone, until a firm publishes cover, at which point that firm gets the credit for it. <a href="/guides/what-a-law-firm-score-cannot-compare/">We have written about what that kind of moving denominator does to a score</a>, because it is the single largest reason two firms can share a number without sharing the evidence.</p>
+    <p>Worth saying plainly: <b>we do not know whether any of these firms is insured</b>, and nothing on this site should be read as saying so. We know what they publish. That is the only thing a directory reading public pages can know, and a study that measured it should say where it stops. <a href="/guides/what-a-case-results-page-proves/">The same boundary applies to the outcomes a firm advertises</a>.</p>
+    <p>If you are hiring, the question is free to ask and takes one line in an email: do you carry professional liability insurance, and what are the limits. A firm that answers plainly has told you something that no website in this directory currently does. <a href="/methodology/">The full methodology</a> sets out every sub-factor and the evidence behind it, and firms can <a href="/list-your-firm/">add or correct their own record</a>.</p>
+    <p class="muted" style="font-size:.86rem">Measurements come from a public crawl of each firm's own site, recorded in accountability.malpractice_insurance and accountability.bar_associations. A firm whose site we could not read keeps the sub-factor pending rather than receiving a zero. The Oregon and American Bar Association rules described above are published by those bodies and are not our measurement.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted above has a profile showing its offices, fees, client reviews and the evidence behind each part of its score.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>How scoring works</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a firm</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
