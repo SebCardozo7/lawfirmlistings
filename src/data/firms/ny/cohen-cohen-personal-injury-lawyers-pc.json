@@ -130,10 +130,10 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.8,
-      "count_label": "261",
-      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-16"
+      "rating": 4.84,
+      "count_label": "375",
+      "source": "Google Business Profile via Places API. 5 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -149,11 +149,91 @@
         "rating": 5
       },
       {
-        "published_at": "2026-04-24T16:17:26.902178317Z",
+        "published_at": "2026-02-18T23:45:10.338291075Z",
         "rating": 5
       },
       {
-        "published_at": "2025-12-11T02:15:28.997029710Z",
+        "published_at": "2025-12-15T18:06:17.942037774Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-25T19:16:58.909898779Z",
+        "rating": 4
+      },
+      {
+        "published_at": "2025-07-18T14:56:28.974436226Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-05-01T16:44:54.189306Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-06T01:36:30.197226957Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-02-20T19:40:04.837385Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-06T15:54:59.729669322Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-14T12:20:11.327541269Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-17T14:58:26.989147902Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-19T23:00:08.969309529Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-29T20:45:26.566775388Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-06T20:53:04.056828034Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-06T16:16:47.291727600Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-03T20:24:55.174244736Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-03T19:19:46.070149582Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-12T02:48:31.765318002Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-26T18:52:04.209683523Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-10T15:45:56.674374229Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-08T18:35:11.977181777Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-07T17:29:07.095571400Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-19T21:36:00.422277694Z",
         "rating": 5
       }
     ]
@@ -197,11 +277,11 @@
       "measured_at": "2026-09-16"
     },
     "places": {
-      "listing_count": 1,
-      "review_count_total": 261,
-      "rating_weighted": 4.8,
+      "listing_count": 5,
+      "review_count_total": 375,
+      "rating_weighted": 4.84,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-16"
+      "measured_at": "2026-09-18"
     }
   },
   "gates": {
@@ -374,9 +454,9 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 65,
+    "total": 66,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (7/25).",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (7/25).",
     "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
@@ -441,16 +521,16 @@
         ]
       },
       "C": {
-        "score": 18,
+        "score": 19,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 4,
+            "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "261 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "375 Google reviews · Google Business Profile via Places API. 5 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -458,7 +538,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 261 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.84 over 375 reviews → Bayesian 4.84 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -466,7 +546,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-03) · a sample of five per business listing, not every review"
+            "evidence": "21 of 25 sampled reviews are from the last 12 months (newest 2026-09-12) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -474,7 +554,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 25 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -504,7 +584,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "5 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",
@@ -551,7 +631,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 5,
+      "gap": 4,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -560,10 +640,10 @@
         "D3 Local presence: +4 available"
       ]
     },
-    "raw": 63.5,
+    "raw": 64.5,
     "assessed": 97,
     "coverage": 0.97,
-    "floor_abc_pct": 0.868,
+    "floor_abc_pct": 0.886,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true

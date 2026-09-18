@@ -276,17 +276,13 @@
     "quotes": [],
     "google": {
       "rating": 4.29,
-      "count_label": "2,139",
+      "count_label": "2,135",
       "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-15"
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
         "published_at": "2026-03-05T06:52:41.531693896Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-02-26T18:52:57.582625300Z",
         "rating": 5
       },
       {
@@ -302,7 +298,7 @@
         "rating": 5
       },
       {
-        "published_at": "2026-06-30T21:26:44.236791755Z",
+        "published_at": "2026-02-26T18:52:57.582625300Z",
         "rating": 5
       },
       {
@@ -319,6 +315,10 @@
       },
       {
         "published_at": "2026-08-07T17:19:51.134959613Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-30T21:26:44.236791755Z",
         "rating": 5
       }
     ]
@@ -348,10 +348,10 @@
     },
     "places": {
       "listing_count": 2,
-      "review_count_total": 2139,
+      "review_count_total": 2135,
       "rating_weighted": 4.29,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-15"
+      "measured_at": "2026-09-18"
     },
     "ahrefs": {
       "dr": 43,
@@ -587,7 +587,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "2,139 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
+            "evidence": "2,135 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -595,7 +595,7 @@
             "pts": 2,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.29 over 2,139 reviews → Bayesian 4.31 (prior 4.83 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.29 over 2,135 reviews → Bayesian 4.31 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

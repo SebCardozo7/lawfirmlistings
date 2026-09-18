@@ -214,11 +214,15 @@
     "quotes": [],
     "google": {
       "rating": 4.8,
-      "count_label": "80",
+      "count_label": "79",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-15"
+      "fetched_at": "2026-09-18"
     },
     "sample": [
+      {
+        "published_at": "2026-08-16T20:56:58.852652750Z",
+        "rating": 5
+      },
       {
         "published_at": "2026-08-05T21:38:34.491822662Z",
         "rating": 5
@@ -233,10 +237,6 @@
       },
       {
         "published_at": "2026-07-23T22:22:26.787802055Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-04-01T17:38:50.229074934Z",
         "rating": 5
       }
     ]
@@ -266,10 +266,10 @@
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 80,
+      "review_count_total": 79,
       "rating_weighted": 4.8,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-15"
+      "measured_at": "2026-09-18"
     },
     "ahrefs": {
       "dr": 9,
@@ -452,7 +452,7 @@
             "pts": 3,
             "max": 5,
             "source": "observed",
-            "evidence": "80 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "79 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -460,7 +460,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 80 reviews → Bayesian 4.82 (prior 4.83 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 79 reviews → Bayesian 4.82 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -468,7 +468,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-05) · a sample of five per business listing, not every review"
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-16) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",

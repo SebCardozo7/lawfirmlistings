@@ -375,9 +375,9 @@
     "quotes": [],
     "google": {
       "rating": 5.0,
-      "count_label": "710",
-      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-16"
+      "count_label": "762",
+      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -398,6 +398,26 @@
       },
       {
         "published_at": "2026-05-07T21:07:09.755807093Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-11T18:55:56.719839634Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-06-14T21:47:15.650146Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-11-13T19:40:08.100039Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-07-13T23:05:38.970765Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-11-05T23:11:19.410695Z",
         "rating": 5
       }
     ]
@@ -441,11 +461,11 @@
       "measured_at": "2026-09-16"
     },
     "places": {
-      "listing_count": 1,
-      "review_count_total": 710,
+      "listing_count": 2,
+      "review_count_total": 762,
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-16"
+      "measured_at": "2026-09-18"
     }
   },
   "gates": {
@@ -669,7 +689,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "710 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "762 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -677,7 +697,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 710 reviews → Bayesian 4.98 (prior 4.83 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 762 reviews → Bayesian 4.98 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -685,7 +705,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-06-17) · a sample of five per business listing, not every review"
+            "evidence": "6 of 10 sampled reviews are from the last 12 months (newest 2026-06-17) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -693,7 +713,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 10 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -723,7 +743,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",

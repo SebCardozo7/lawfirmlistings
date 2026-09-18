@@ -129,13 +129,17 @@
     "quotes": [],
     "google": {
       "rating": 5.0,
-      "count_label": "718",
+      "count_label": "720",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-16"
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
         "published_at": "2026-06-30T18:57:23.590922357Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-08T16:08:45.102304097Z",
         "rating": 5
       },
       {
@@ -147,11 +151,7 @@
         "rating": 5
       },
       {
-        "published_at": "2026-07-08T16:08:45.102304097Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-06-23T17:17:10.564072329Z",
+        "published_at": "2026-06-04T14:48:18.429641057Z",
         "rating": 5
       }
     ]
@@ -193,10 +193,10 @@
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 718,
+      "review_count_total": 720,
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-16"
+      "measured_at": "2026-09-18"
     }
   },
   "gates": {
@@ -421,7 +421,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "718 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "720 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -429,7 +429,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 718 reviews → Bayesian 4.98 (prior 4.83 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 720 reviews → Bayesian 4.98 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

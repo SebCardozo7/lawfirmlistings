@@ -48,12 +48,16 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.6,
-      "count_label": "454",
-      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-16"
+      "rating": 4.63,
+      "count_label": "489",
+      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
+      {
+        "published_at": "2026-09-03T14:33:12.788723912Z",
+        "rating": 5
+      },
       {
         "published_at": "2026-03-13T16:18:07.964770495Z",
         "rating": 5
@@ -71,7 +75,23 @@
         "rating": 5
       },
       {
-        "published_at": "2025-08-06T15:24:26.960468564Z",
+        "published_at": "2026-06-05T18:09:10.402943537Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-04T15:57:41.048052307Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-05T15:54:55.256881302Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-24T18:30:40.387844068Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-08-25T15:34:31.725035519Z",
         "rating": 5
       }
     ]
@@ -109,11 +129,11 @@
       "measured_at": "2026-09-16"
     },
     "places": {
-      "listing_count": 1,
-      "review_count_total": 454,
-      "rating_weighted": 4.6,
+      "listing_count": 2,
+      "review_count_total": 489,
+      "rating_weighted": 4.63,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-16"
+      "measured_at": "2026-09-18"
     }
   },
   "gates": {
@@ -326,7 +346,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "454 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "489 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -334,7 +354,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.6 over 454 reviews → Bayesian 4.64 (prior 4.83 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.63 over 489 reviews → Bayesian 4.66 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -342,7 +362,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-06-25) · a sample of five per business listing, not every review"
+            "evidence": "9 of 10 sampled reviews are from the last 12 months (newest 2026-09-03) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -350,7 +370,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 10 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -380,7 +400,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",

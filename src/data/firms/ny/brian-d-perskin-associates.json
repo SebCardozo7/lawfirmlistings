@@ -310,11 +310,7 @@
       "source_url": "https://newyorkdivorceattorney.com/divorce-overview/"
     },
     "flat_fee": null,
-    "fee_terms": {
-      "figure": "cost of a divorce",
-      "quote": "The cost of a divorce in New York can vary significantly depending on key issues like the intricacy of the case, number, and type of disputed areas.",
-      "source_url": "https://newyorkdivorceattorney.com"
-    },
+    "fee_terms": null,
     "contingency_language": null,
     "billing_disclosed": null,
     "client_rights_cited": null,
@@ -397,7 +393,7 @@
       }
     },
     "source": "The firm's own fee, divorce and FAQ pages",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-18"
   },
   "logo": {
     "file": "/logos/newyorkdivorceattorney.com.png",
@@ -440,7 +436,7 @@
     "checked_at": "2026-09-17"
   },
   "score": {
-    "total": 56,
+    "total": 54,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (1/15).",
     "computed_at": "2026-09-18",
@@ -477,16 +473,16 @@
         ]
       },
       "B": {
-        "score": 7,
+        "score": 5,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Fee terms published",
-            "pts": 2,
+            "pts": 0,
             "max": 6,
             "source": "firm",
-            "evidence": "Says something about how it charges, with no rate, retainer or flat fee: \"The cost of a divorce in New York can vary significantly depending on key issues like the intricacy of the case, number, and type of disputed areas.\""
+            "evidence": "Nothing about the rate, the retainer or any other price on the 10 pages we read. The court rules guarantee a client all of it in a signed agreement before the work starts; publishing it beforehand is the firm's choice"
           },
           {
             "code": "B2",
@@ -524,7 +520,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.56 over 98 reviews → Bayesian 4.70 (prior 4.83 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.56 over 98 reviews → Bayesian 4.70 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -613,23 +609,23 @@
         ]
       }
     },
-    "floor_abc": 42,
+    "floor_abc": 40,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 16,
       "floor_met": true,
       "coverage_met": true,
       "path": [
+        "B1 Fee terms published: +6 available",
         "E1 Free consult & fee transparency: +5 available",
-        "E4 Availability: +5 available",
-        "D1 Website trust & experience: +4.5 available"
+        "E4 Availability: +5 available"
       ]
     },
-    "raw": 54.0,
+    "raw": 52.0,
     "assessed": 97,
     "coverage": 0.97,
-    "floor_abc_pct": 0.746,
+    "floor_abc_pct": 0.711,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true
