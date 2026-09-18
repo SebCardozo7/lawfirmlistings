@@ -321,7 +321,7 @@
       "pass": true,
       "evidence": "ROSENBERG & RODRIGUEZ, PLLC is an active domestic professional service limited liability company registered since 2004-01-02, with 5 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -333,7 +333,7 @@
       "pass": true,
       "evidence": "490 public client reviews and 23 years since the entity was formed in 2004",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -381,7 +381,7 @@
     "dos_id": "2994842",
     "formed": "2004-01-02",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "logo": {
     "file": "/logos/rosenbergfirm.com.webp",
@@ -489,7 +489,7 @@
     "total": 66,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar E (4/15).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -570,7 +570,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.92 over 490 reviews → Bayesian 4.91 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.92 over 490 reviews → Bayesian 4.91 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

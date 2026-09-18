@@ -202,7 +202,7 @@
       "pass": true,
       "evidence": "LAW OFFICES OF MARC S. ALBERT, LLC is an active domestic professional service limited liability company registered since 2011-09-07, with 3 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -214,7 +214,7 @@
       "pass": true,
       "evidence": "368 public client reviews and 15 years since the entity was formed in 2011",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -260,7 +260,7 @@
     "dos_id": "4138880",
     "formed": "2011-09-07",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "logo": {
     "file": "/logos/msainjurylaw.com.png",
@@ -313,7 +313,7 @@
     "total": 52,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -394,7 +394,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 368 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 368 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -402,7 +402,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "10 of 15 sampled reviews are from the last 12 months (newest 2026-06-10) · a sample of five per business listing, not every review"
+            "evidence": "9 of 15 sampled reviews are from the last 12 months (newest 2026-06-10) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",

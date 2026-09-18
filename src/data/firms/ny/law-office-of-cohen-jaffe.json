@@ -225,7 +225,7 @@
       "pass": true,
       "evidence": "LAW OFFICE OF COHEN & JAFFE, LLP is an active domestic registered limited liability partnership registered since 2003-07-10, with 2 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -237,7 +237,7 @@
       "pass": true,
       "evidence": "539 public client reviews and 23 years since the entity was formed in 2003",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -317,13 +317,13 @@
     "dos_id": "2928755",
     "formed": "2003-07-10",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "score": {
     "total": 77,
     "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (10/25).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -404,7 +404,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 539 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 539 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

@@ -202,7 +202,7 @@
       "pass": true,
       "evidence": "FRIEDMAN, LEVY, GOLDFARB, GREEN & BAGLEY, P.C. is an active domestic professional service corporation registered since 1974-01-28, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -214,7 +214,7 @@
       "pass": true,
       "evidence": "33 public client reviews and 53 years since the entity was formed in 1974",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -256,13 +256,13 @@
     "dos_id": "335522",
     "formed": "1974-01-28",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "score": {
     "total": 63,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (7/25).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -343,7 +343,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 33 reviews → Bayesian 4.86 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 33 reviews → Bayesian 4.85 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

@@ -407,7 +407,7 @@
       "pass": true,
       "evidence": "HACH & ROSE, LLP is an active domestic registered limited liability partnership registered since 2002-02-01, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -419,7 +419,7 @@
       "pass": true,
       "evidence": "277 public client reviews and 25 years since the entity was formed in 2002",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -460,7 +460,7 @@
     "dos_id": "2726337",
     "formed": "2002-02-01",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "logo": {
     "file": "/logos/unionlawfirm.com.png",
@@ -618,7 +618,7 @@
     "total": 62,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -699,7 +699,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 277 reviews → Bayesian 4.81 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 277 reviews → Bayesian 4.81 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

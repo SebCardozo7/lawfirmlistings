@@ -67,6 +67,17 @@ const cityCounts = [...new Set(firms.map(f => f.data.market.city_slug))].map(slu
 }).sort((a, b) => b.count - a.count);
 
 const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
+
+// "Family Law" is the first practice whose own name ends in the word this heading
+// appends, and "Family Law Law Firms" is what that produced. A name that already ends in
+// Law takes "Firms" on its own.
+//
+// Computed here rather than inline in the template. Written inline it was a conditional
+// starting with a regular expression, the heredoc that wrote it turned the escape into a
+// control character, and Astro rendered the else branch without a word.
+const heading = notes.name.endsWith('Law')
+  ? `${notes.name} Firms`
+  : `${notes.name} Law Firms`;
 ---
 <Base title={notes.title} description={notes.description} nav="practice">
 <section class="page-hero on-night">
@@ -75,7 +86,7 @@ const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
     <div>
       <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/practice-areas/">Practice Areas</a></li><li aria-current="page">{notes.name}</li></ol>
       <span class="eyebrow">Practice area</span>
-      <h1>{notes.name} Law Firms</h1>
+      <h1>{heading}</h1>
       <p class="lede">{notes.lede} {cities.length === 1 ? <>So far that means {cities[0]}.</> : <>So far that means {cities.length} cities.</>}</p>
       <div class="chips" style="margin-top:24px">
         {/* Sub-topics of this practice area. None has a page yet, so they describe the scope
@@ -166,6 +177,7 @@ const faq = [...notes.faq.slice(0, 1), ...SHARED_FAQ, ...notes.faq.slice(1)];
       <>
         <h3>{s.heading}</h3>
         {s.paragraphs.map(p => <p set:html={p} />)}
+        {s.list && <ul>{s.list.map(item => <li set:html={item} />)}</ul>}
       </>
     ))}
     {notes.guide.callout && (

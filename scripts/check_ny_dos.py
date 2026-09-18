@@ -68,11 +68,21 @@ GENERIC = {
     "PLC", "LP", "AND", "THE", "OF", "ASSOCIATES", "ASSOCIATION", "PARTNERS", "ATTORNEY",
     "ATTORNEYS", "LAWYER", "LAWYERS", "INJURY", "PERSONAL", "ACCIDENT", "TRIAL", "LEGAL",
     "COUNSEL", "PA", "PLLP", "CO", "INC", "NEW", "YORK", "CITY", "NY", "ESQ",
+    # The practice words of a family law market, which are as generic here as INJURY and
+    # ACCIDENT are in an injury one. RLF Family Law shares RLF and FAMILY with "RLF FAMILY
+    # LIMITED PARTNERSHIP, L.P.", an estate planning vehicle that is not a law firm, and two
+    # shared tokens was enough to publish it as the firm's registered entity.
+    "FAMILY", "DIVORCE", "MATRIMONIAL", "CUSTODY", "SUPPORT",
 }
 
 
 def norm(text: str) -> str:
-    return re.sub(r"\s+", " ", re.sub(r"[^\w\s&]", " ", (text or "").upper())).strip()
+    # "&" and "and" are the same word, and the whole-name similarity is the only place it
+    # showed: Cantor, Wolff, Nicastro and Hall files as CANTOR, WOLFF, NICASTRO & HALL LLC, and
+    # the two spellings of one ampersand were enough to drop the ratio below the threshold that
+    # accepts a firm registered under a form that cannot practise law.
+    text = re.sub(r"\s*&\s*", " AND ", (text or "").upper())
+    return re.sub(r"\s+", " ", re.sub(r"[^\w\s]", " ", text)).strip()
 
 
 def tokens(text: str) -> set[str]:
@@ -197,6 +207,17 @@ def attempt(firm: dict, extra: set[str]) -> tuple[dict | None, str]:
     if rivals:
         names = ", ".join(r[3]["current_entity_name"] for r in [top] + rivals[:2])
         return None, f"ambiguous, {len(rivals) + 1} entities score alike ({names})"
+    # Only a professional service corporation, a professional service LLC or a registered LLP
+    # may practise law in New York. Where the best candidate is none of those, it is somebody's
+    # holding company or, in one case here, a family limited partnership that shares a surname,
+    # and G3 asks whether this firm is registered rather than whether the name appears anywhere
+    # in the register. An almost exact name match is still accepted: Cantor, Wolff, Nicastro &
+    # Hall files an LLC under its own full name, and that is the firm however it is organised.
+    if not top[1] and top[2] < 0.9:
+        return None, ("best match %s is a %s, which cannot practise law in New York, and the "
+                      "name is not close enough to be this firm under another form"
+                      % (top[3]["current_entity_name"],
+                         (top[3].get("entity_type") or "entity").lower()))
     kind = "professional entity" if top[1] else "entity"
     return top[3], f"matched as the {kind}, name similarity {top[2]:.2f}"
 
@@ -345,6 +366,15 @@ def main() -> int:
                 }
         else:
             print(f"  --   {why}")
+            # An entity this script wrote and no longer matches has to go with the match. RLF
+            # Family Law carried "RLF FAMILY LIMITED PARTNERSHIP, L.P." on its profile after
+            # the matcher stopped accepting it, so the gate said the check could not be
+            # completed while the page still printed a legal name belonging to somebody else.
+            # A hand-attested entity is left alone: it did not come from here.
+            if args.write and (firm.get("entity") or {}).get("source") == DATASET:
+                firm.pop("entity")
+                print("       (the entity this script had written no longer matches and was "
+                      "removed)")
 
         if args.write:
             for note in apply_gates(firm, entity, today):

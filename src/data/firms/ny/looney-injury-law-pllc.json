@@ -144,7 +144,7 @@
       "pass": true,
       "evidence": "LOONEY INJURY LAW, PLLC is an active domestic professional service limited liability company registered since 2021-12-14, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -156,7 +156,7 @@
       "pass": true,
       "evidence": "58 public client reviews and 5 years since the entity was formed in 2021",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-buffalo-personal-injury",
@@ -233,13 +233,13 @@
     "dos_id": "6349039",
     "formed": "2021-12-14",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "score": {
     "total": 47,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -320,7 +320,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 58 reviews → Bayesian 4.86 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 58 reviews → Bayesian 4.86 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -328,7 +328,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-06-09) · a sample of five per business listing, not every review"
+            "evidence": "3 of 5 sampled reviews are from the last 12 months (newest 2026-06-09) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",

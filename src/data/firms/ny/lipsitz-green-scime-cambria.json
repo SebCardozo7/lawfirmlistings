@@ -702,7 +702,7 @@
       "pass": true,
       "evidence": "LIPSITZ GREEN SCIME CAMBRIA LLP is an active domestic registered limited liability partnership registered since 1995-02-14, with 3 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -714,7 +714,7 @@
       "pass": true,
       "evidence": "83 public client reviews and 32 years since the entity was formed in 1995",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-buffalo-personal-injury",
@@ -781,13 +781,13 @@
     "dos_id": "1894358",
     "formed": "1995-02-14",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "score": {
-    "total": 52,
+    "total": 51,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -851,7 +851,7 @@
         ]
       },
       "C": {
-        "score": 14,
+        "score": 13,
         "max": 20,
         "subs": [
           {
@@ -865,10 +865,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 4,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.31 over 83 reviews → Bayesian 4.60 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.31 over 83 reviews → Bayesian 4.60 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -957,11 +957,11 @@
         ]
       }
     },
-    "floor_abc": 32,
+    "floor_abc": 31,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 19,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -970,10 +970,10 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 42.5,
+    "raw": 41.5,
     "assessed": 82,
     "coverage": 0.82,
-    "floor_abc_pct": 0.762,
+    "floor_abc_pct": 0.738,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true

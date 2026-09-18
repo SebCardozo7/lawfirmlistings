@@ -40,7 +40,9 @@ export interface PracticeNotes {
   guide: {
     heading: string;
     intro: string;
-    sections: { heading: string; paragraphs: string[] }[];
+    /** A section may end in a checklist. The questions to ask a firm are a list of
+     *  questions, and running them together as prose helps nobody read them. */
+    sections: { heading: string; paragraphs: string[]; list?: string[] }[];
     callout?: { title: string; text: string };
   };
   faq: { q: string; a: string }[];
@@ -318,6 +320,178 @@ export const PRACTICES: Record<string, PracticeNotes> = {
   // Title and escrow live inside this practice rather than beside it. Somebody buying a house
   // searches for a real estate attorney; the title work is how the job gets done, the same way a
   // car accident page lives inside personal injury.
+  // The first practice here where the price cannot be contingent, by rule of the court rather
+  // than by custom. That one fact reorganises the whole comparison: there are no settlements to
+  // weigh, the biggest number in the case is set by a statutory formula, and what a client can
+  // actually shop for is the hourly rate and the retainer.
+  'family-law': {
+    name: 'Family Law',
+    abbr: 'family law',
+    icon: 'heart',
+    title: 'Family Law Firms: Rankings and Hiring Guide',
+    description:
+      'How to choose a divorce or custody lawyer: why the fee can never be contingent, ' +
+      'what the retainer must tell you, and which number is set by formula.',
+    lede:
+      'Family law firms handling divorce, custody and parenting time, child support and ' +
+      'spousal maintenance, prenuptial agreements and orders of protection. Every firm is ' +
+      'checked for active licensure, a clean disciplinary record and a registered entity, and ' +
+      'ranked on what it publishes about the cost and the process rather than on outcomes that ' +
+      'belong to somebody\'s children.',
+    subtopics: ['Divorce, contested and uncontested', 'Child custody and parenting time',
+                'Child support', 'Spousal maintenance', 'Equitable distribution',
+                'Prenuptial and postnuptial agreements', 'Separation agreements',
+                'Orders of protection', 'Modification and enforcement', 'Paternity',
+                'Divorce mediation and collaborative divorce'],
+    feeFactLabel: 'Publish an hourly rate',
+    feePattern: 'hourly',
+    guide: {
+      heading: 'How to choose a family law firm',
+      intro:
+        'Every other practice in this directory can be compared on outcomes. This one cannot, ' +
+        'and not because the data is missing. A custody file is about somebody\'s children, a ' +
+        'divorce judgment divides two people\'s property, and the one number everybody wants ' +
+        'to know is set by a formula that no lawyer can argue down. What is left to compare is ' +
+        'narrower, harder to find and far more useful: what the firm charges, what it will tell ' +
+        'you before you hire it, and which of the several ways through this it actually does.',
+      sections: [
+        {
+          heading: 'The fee cannot be contingent, so nobody here says "no fee unless we win"',
+          paragraphs: [
+            'Two hundred and fifty firms in this directory make some version of that promise. ' +
+            'A matrimonial firm in New York cannot. Rule 1.5(d)(5)(i) of the Rules of ' +
+            'Professional Conduct forbids any fee in a domestic relations matter where "the ' +
+            'payment or amount of the fee is contingent upon the securing of a divorce or of ' +
+            'obtaining child custody or visitation or is in any way determined by reference to ' +
+            'the amount of maintenance, support, equitable distribution, or property ' +
+            'settlement". A firm advertising a contingency here would be advertising something ' +
+            'the rule prohibits.',
+            'What you pay instead is an hourly rate drawn against a retainer paid in advance. ' +
+            'That makes the rate and the retainer the only prices there are, which is why this ' +
+            'ranking counts whether a firm publishes them.',
+          ],
+        },
+        {
+          heading: 'The court already guarantees you the price, at the moment you hire',
+          paragraphs: [
+            'Part 1400 of the court rules applies to every attorney taking a divorce, ' +
+            'separation, custody, support or maintenance matter. Section 1400.3 requires a ' +
+            'written agreement, signed by both of you before the work starts, and it has to set ' +
+            'out the amount of the advance retainer and what it covers, the hourly rate of each ' +
+            'person whose time may be charged to you, how the fee is determined if you ' +
+            'discharge the firm, and the frequency of itemized billing, "which shall be at ' +
+            'least every 60 days". Section 1400.2 adds the statement of client\'s rights: you ' +
+            'are entitled to understand the rates and the retainer before you sign, an ' +
+            'attorney "may not request a retainer fee that is non-refundable", the unused ' +
+            'balance comes back to you, and a fee dispute between one and fifty thousand ' +
+            'dollars can go to arbitration under Part 137.',
+            'So the law already makes sure you learn the price. It makes sure of it in the room ' +
+            'where you are signing, after you have chosen. Nothing requires a firm to publish ' +
+            'any of it beforehand, which is the moment you are comparing three firms and ' +
+            'deciding which one to call. That gap is what pillar B measures in this practice: ' +
+            'not results, but whether the firm will tell you the rate, the retainer or a flat ' +
+            'fee for an uncontested case while you are still a stranger reading its website.',
+          ],
+        },
+        {
+          heading: 'Child support is arithmetic, and the arithmetic is published',
+          paragraphs: [
+            'Section 413 of the Family Court Act sets the basic obligation as a share of ' +
+            'combined parental income: seventeen percent for one child, twenty-five for two, ' +
+            'twenty-nine for three, thirty-one for four and no less than thirty-five percent ' +
+            'for five or more. The percentage applies up to a cap the state adjusts every two ' +
+            'years, published at $193,000 in the March 2026 chart, and a court may apply it to ' +
+            'income above that or not. A firm cannot win you a better percentage; the fight, ' +
+            'where there is one, is about what counts as income and what happens above the cap.',
+            'Maintenance works the same way, on its own statutory formula with its own cap. ' +
+            'Between them, they take the two largest numbers in most divorces out of the ' +
+            'category of things a lawyer can promise you, which is worth knowing before you ' +
+            'read anybody\'s marketing.',
+          ],
+        },
+        {
+          heading: 'Fault stopped being the argument in 2010',
+          paragraphs: [
+            'Since section 170(7) of the Domestic Relations Law took effect, one spouse stating ' +
+            'under oath that "the relationship between husband and wife has broken down ' +
+            'irretrievably for a period of at least six months" is a ground for divorce on its ' +
+            'own. No cruelty to prove, no abandonment, no consent required from the other side.',
+            'The same subdivision carries the condition that matters to how long your case ' +
+            'takes: no judgment is granted until the economics and the arrangements for the ' +
+            'children are settled, by agreement or by the court. The divorce is not what takes ' +
+            'a year. Property, support and custody are.',
+          ],
+        },
+        {
+          heading: 'Why this ranking publishes no case results',
+          paragraphs: [
+            'In every other practice here, pillar B reads the firm\'s own results page and ' +
+            'counts what it publishes. In this one there is nothing we would want a firm to ' +
+            'publish. Custody proceedings concern children, matrimonial files are routinely ' +
+            'sealed, and a firm advertising the custody arrangement it obtained is advertising ' +
+            'a real family\'s private arrangement as a sales aid.',
+            'So the pillar asks different questions in this practice, and a firm that publishes ' +
+            'no results is not marked down for it. What it is marked on is the cost, the ' +
+            'process and the paths: whether it explains what actually happens between filing ' +
+            'and judgment, and whether it says which of mediation, collaborative divorce and ' +
+            'litigation it does.',
+          ],
+        },
+        {
+          heading: 'What to ask before you pay a retainer',
+          paragraphs: [
+            'The retainer agreement is going to answer all of this in writing, because the rule ' +
+            'requires it. Asking first tells you what the answers are while you can still walk ' +
+            'to the next firm on the list.',
+          ],
+          list: [
+            'What is the retainer, and what does it cover.',
+            'What is the hourly rate of everybody whose time can be billed to me, including ' +
+            'the paralegal.',
+            'How often will I get an itemized bill.',
+            'What happens to the part of the retainer you do not use.',
+            'Is any part of my case something you would send to mediation instead.',
+            'Who will actually be at the courthouse, you or somebody I have not met.',
+          ],
+        },
+      ],
+    },
+    faq: [
+        {
+          q: 'Can a divorce lawyer work on contingency?',
+          a: 'Not in New York. Rule 1.5(d)(5)(i) prohibits a fee in a domestic relations ' +
+             'matter that is contingent on securing a divorce or custody, or determined by ' +
+             'reference to the maintenance, support, equitable distribution or property ' +
+             'settlement. Expect an hourly rate against a retainer paid in advance.',
+        },
+        {
+          q: 'Is a non-refundable retainer allowed?',
+          a: 'No. The statement of client\'s rights in section 1400.2 of the court rules says ' +
+             'an attorney "may not request a retainer fee that is non-refundable", and the ' +
+             'unused balance is yours. A firm that describes its retainer as non-refundable is ' +
+             'describing something the rules do not permit.',
+        },
+        {
+          q: 'How long does a divorce take in New York?',
+          a: 'The ground is the fast part: six months of irretrievable breakdown, stated under ' +
+             'oath by one spouse. Section 170(7) then bars the judgment until property, ' +
+             'support and the arrangements for any children are resolved, which is where the ' +
+             'time goes. An uncontested case with an agreement already signed is measured in ' +
+             'months; a contested custody case is measured in years.',
+        },
+        {
+          q: 'Will the firm publish its hourly rate?',
+          a: 'Most do not. The rule guarantees you the rate in a signed agreement before the ' +
+             'work starts, and nothing requires publishing it beforehand, so the firms that do ' +
+             'are unusual and are marked here.',
+        },
+      ],
+    plannedGuides: ['What a divorce lawyer costs in New York City, firm by firm',
+                    'Reading a matrimonial retainer agreement',
+                    'The income cap and what courts do above it',
+                    'Mediation, collaborative divorce and litigation compared'],
+  },
+
   'real-estate': {
     name: 'Real Estate',
     abbr: 'real estate',

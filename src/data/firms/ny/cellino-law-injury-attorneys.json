@@ -739,7 +739,7 @@
       "pass": true,
       "evidence": "CELLINO LAW INJURY ATTORNEYS, LLP is an active domestic registered limited liability partnership registered since 2020-01-02, with 9 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     },
     "G5": {
       "pass": true,
@@ -751,7 +751,7 @@
       "pass": true,
       "evidence": "1,726 public client reviews and 7 years since the entity was formed in 2020",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-17"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -761,7 +761,7 @@
     "total": 71,
     "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (12/25).",
-    "computed_at": "2026-09-17",
+    "computed_at": "2026-09-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -842,7 +842,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 1,726 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 254 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 1,726 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -850,7 +850,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "35 of 40 sampled reviews are from the last 12 months (newest 2026-08-01) · a sample of five per business listing, not every review"
+            "evidence": "34 of 40 sampled reviews are from the last 12 months (newest 2026-08-01) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -958,7 +958,7 @@
     "dos_id": "5680608",
     "formed": "2020-01-02",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-17"
   },
   "results_published": {
     "count": 30,

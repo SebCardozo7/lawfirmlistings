@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 
 // The sitemap is generated from the routes on every build, so a new firm, city or practice area
 // appears in it as soon as its page exists. Nothing to maintain by hand.
@@ -27,6 +27,62 @@ function isIndexable(url) {
   return true;
 }
 
+// When a firm's page last changed, which for these pages means when the firm was last measured.
+//
+// The sitemap carried no lastmod at all, and for a directory whose value is the freshness of a
+// measurement that is the one field worth filling: it tells a crawler which of two hundred and
+// fifty-four pages moved. The date is taken from the measurements in the firm's own record, the
+// measured_at and checked_at stamps the crawlers and register checks write, and never from
+// score.computed_at or the build clock. A score recomputes on every run whether or not anything
+// about the firm changed, and a lastmod that moves when nothing moved is the reason crawlers
+// learn to ignore the field.
+//
+// Pages without a date of their own get none. A guide recomputes its figures from every firm at
+// build time, so its honest lastmod is the newest measurement in the directory, and claiming
+// that for it would mark it modified every time any firm anywhere was re-crawled. A missing
+// lastmod says nothing; a wrong one says something false.
+const DATE_KEYS = new Set(['measured_at', 'checked_at', 'fetched_at']);
+
+function newestDate(node, best = '') {
+  if (Array.isArray(node)) {
+    for (const item of node) best = newestDate(item, best);
+    return best;
+  }
+  if (node && typeof node === 'object') {
+    for (const [key, value] of Object.entries(node)) {
+      if (DATE_KEYS.has(key) && typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)) {
+        const date = value.slice(0, 10);
+        if (date > best) best = date;
+      } else {
+        best = newestDate(value, best);
+      }
+    }
+  }
+  return best;
+}
+
+function firmDates() {
+  const out = new Map();
+  const root = 'src/data/firms';
+  if (!existsSync(root)) return out;
+  for (const state of readdirSync(root)) {
+    for (const file of readdirSync(`${root}/${state}`)) {
+      if (!file.endsWith('.json')) continue;
+      const firm = JSON.parse(readFileSync(`${root}/${state}/${file}`, 'utf8'));
+      const date = newestDate(firm);
+      if (firm.slug && date) out.set(`/firms/${firm.slug}/`, date);
+    }
+  }
+  return out;
+}
+
+const LASTMOD = firmDates();
+
+function withLastmod(item) {
+  const lastmod = LASTMOD.get(new URL(item.url).pathname);
+  return lastmod ? { ...item, lastmod } : item;
+}
+
 export default defineConfig({
   site: 'https://lawfirmlistings.com',
   trailingSlash: 'always',
@@ -35,5 +91,5 @@ export default defineConfig({
   // browser renders public/sitemap.xsl instead of raw XML. A crawler ignores it entirely,
   // which is the point: the file a crawler reads is unchanged, and the file a person opens
   // before a launch is legible.
-  integrations: [sitemap({ filter: isIndexable, xslURL: '/sitemap.xsl' })],
+  integrations: [sitemap({ filter: isIndexable, serialize: withLastmod, xslURL: '/sitemap.xsl' })],
 });

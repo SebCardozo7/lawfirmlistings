@@ -102,9 +102,18 @@ def measure(url, key, strategy="mobile"):
     if not have_all:
         note_bits.append("some metrics unavailable, so cwv_pass is false rather than assumed")
 
+    # Lighthouse returns a null category score when it could not score the run, and the metrics
+    # above are guarded for that while this line was not: one Queens firm came back as
+    # "unsupported operand type(s) for *: 'NoneType' and 'int'", which reads like a crawler bug
+    # because it was one. A run with no score is a measurement we did not get, so it is reported
+    # as such and D1 stays pending rather than carrying a number nobody computed.
+    score = (lh.get("categories") or {}).get("performance", {}).get("score")
+    if score is None:
+        raise ValueError("PageSpeed ran and returned no performance score for this page")
+
     return {
         "value": {
-            "performance": round(lh["categories"]["performance"]["score"] * 100),
+            "performance": round(score * 100),
             "cwv_pass": cwv_pass,
         },
         "source": "PageSpeed Insights API (%s, %s)" % (strategy, source_kind),
