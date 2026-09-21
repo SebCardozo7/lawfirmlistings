@@ -23,7 +23,7 @@ export interface Guide {
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
-    | 'shield' | 'register' | 'headcount' | 'offices';
+    | 'shield' | 'register' | 'headcount' | 'offices' | 'screens';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -49,6 +49,21 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'best-law-firm-websites',
+    cover: 'screens',
+    kicker: 'Method',
+    title: '20 Best Law Firm Websites, Measured',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts,
+    // and the page's own title carries the count because it derives it.
+    summary:
+      'Every other list of the best law firm websites is a design agency showing its portfolio. ' +
+      'We do not design websites, so we ran the speed test Google publishes on every firm in ' +
+      'this directory instead, and kept the screenshot it took while measuring each one.',
+    thumb: '',
+    icon: 'columns',
+    meta: 'Ranked on a measured number, not on taste',
+  },
   {
     slug: 'law-firm-statistics-new-york',
     cover: 'offices',

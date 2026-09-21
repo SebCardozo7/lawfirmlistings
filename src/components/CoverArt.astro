@@ -19,7 +19,7 @@
 interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
-      | 'shield' | 'register' | 'headcount' | 'offices';
+      | 'shield' | 'register' | 'headcount' | 'offices' | 'screens';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -378,5 +378,42 @@ const ledger = {
     })}
     <line x1="80" y1="400" x2="1120" y2="400" stroke="rgba(255,255,255,.28)" stroke-width="2.5"
       stroke-linecap="round" />
+  </svg>
+)}
+
+{name === 'screens' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* Twenty phone frames in a grid, each holding a wireframe of a home page and a gauge arc
+        along its top edge filled to that site's score. Most arcs are short, because most of
+        this market is slow; four are nearly full. The article is the gap between the two. */}
+    {[0, 1, 2, 3, 4].map(row => (
+      <g transform={`translate(0,${28 + row * 80})`}>
+        {[0, 1, 2, 3].map(col => {
+          const i = row * 4 + col;
+          // A descending run with a few standouts, so the grid reads as a ranking rather than
+          // as decoration. Deliberately not the real numbers: this is a cover, not a chart.
+          const fill = [0.98, 0.95, 0.92, 0.88, 0.74, 0.66, 0.61, 0.58, 0.52, 0.48,
+                        0.44, 0.41, 0.38, 0.34, 0.31, 0.28, 0.24, 0.2, 0.16, 0.12][i];
+          const hot = fill > 0.85;
+          const tint = hot ? MINT : fill > 0.5 ? BLUE : VIOLET;
+          return (
+            <g transform={`translate(${112 + col * 262},0)`}>
+              <rect width="188" height="62" rx="12" fill="rgba(255,255,255,.07)"
+                stroke="rgba(255,255,255,.16)" stroke-width="1.5" />
+              {/* The page inside: a header band and three lines of content. */}
+              <rect x="14" y="13" width={70 + i * 2} height="9" rx="4.5" fill={tint}
+                opacity=".85" />
+              {[30, 41].map(y => (
+                <rect x="14" y={y} width={152 - (i % 4) * 16} height="6" rx="3"
+                  fill="rgba(255,255,255,.18)" />
+              ))}
+              {/* The gauge along the top edge, as long as the score. */}
+              <line x1="14" y1="6" x2={14 + 160 * fill} y2="6" stroke={tint} stroke-width="3.5"
+                stroke-linecap="round" opacity={hot ? '1' : '.7'} />
+            </g>
+          );
+        })}
+      </g>
+    ))}
   </svg>
 )}

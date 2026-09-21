@@ -1,0 +1,299 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import screens from '../../data/research/site-screens.json';
+
+/**
+ * A study, not a reference article: every figure is our own measurement of the firms in this
+ * directory, computed from the collection at build time.
+ *
+ * Why it is ranked on one number. The obvious way to build "best law firm websites" is a
+ * composite, and the first draft was one: performance weighted against structured data, trust
+ * pages, a published fee and a named roster. It ranked plausibly and it was indefensible, because
+ * every weight in it was mine. A reader cannot check my opinion that schema is worth eight points
+ * and a privacy policy three.
+ *
+ * So the ranking is Google's own performance score, with two measured tiebreaks: whether Core Web
+ * Vitals passed, and how many of eight publishing signals the site carries. Nothing is weighted
+ * here. The other signals are shown beside each site as evidence rather than folded into a number,
+ * which is also more useful: a reader who cares about one of them can see it.
+ *
+ * The screenshots are Lighthouse's own final frame, saved by scripts/fetch_site_screens.py from
+ * the same API call the score comes from. That matters for a page competing against agency
+ * portfolios: the picture and the number cannot disagree, because they are the same render.
+ */
+const firms = await getCollection('firms', f => f.data.status !== 'sample');
+
+type Row = {
+  slug: string; name: string; domain: string; website: string;
+  city: string; state: string;
+  performance: number; cwv: boolean; note: string;
+  signals: number; has: Record<string, boolean>;
+  gatesPassed: boolean;
+};
+
+// The eight publishing signals, each one a thing the site either does or does not do. Named here
+// so the page can label them and count them from one definition.
+const SIGNALS: { key: string; label: string; of: (f: any) => boolean }[] = [
+  { key: 'schema', label: 'Structured data', of: f => !!f.data.digital.schema_detected },
+  { key: 'roster', label: 'Names its lawyers', of: f => f.data.attorneys.length > 0 },
+  { key: 'bios', label: 'Attorney bios', of: f => !!f.data.digital.trust_pages?.attorney_bios },
+  { key: 'privacy', label: 'Privacy policy', of: f => !!f.data.digital.trust_pages?.privacy_policy },
+  { key: 'disclaimer', label: 'Disclaimer', of: f => !!f.data.digital.trust_pages?.disclaimer },
+  { key: 'fees', label: 'Fees page', of: f => !!f.data.digital.trust_pages?.fee_statement },
+  { key: 'blog', label: 'Blog', of: f => !!f.data.digital.trust_pages?.blog },
+  { key: 'statement', label: 'Fee in its own words', of: f => !!f.data.fee_statement },
+];
+
+const measured: Row[] = firms
+  .filter(f => f.data.digital.psi?.value?.performance != null)
+  .map(f => {
+    const has: Record<string, boolean> = {};
+    for (const s of SIGNALS) has[s.key] = s.of(f);
+    return {
+      slug: f.data.slug, name: f.data.name, domain: f.data.domain,
+      website: f.data.website, city: f.data.market.city, state: f.data.market.state,
+      performance: f.data.digital.psi!.value.performance!,
+      cwv: !!f.data.digital.psi!.value.cwv_pass,
+      note: f.data.digital.psi!.note ?? '',
+      signals: Object.values(has).filter(Boolean).length,
+      has,
+      // The same rule the profiles use: clearing every eligibility gate earns a followed link.
+      // Nothing about appearing on this page changes it.
+      gatesPassed: ['Verified', 'Certified', 'Distinguished', 'Elite']
+        .includes(f.data.score?.tier ?? ''),
+    };
+  })
+  .sort((a, b) => b.performance - a.performance
+    || Number(b.cwv) - Number(a.cwv)
+    || b.signals - a.signals);
+
+const TOP = 20;
+const top = measured.slice(0, TOP).map((r, i) => ({ ...r, rank: i + 1 }));
+const withShot = top.filter(r => (screens.screens as Record<string, any>)[r.slug]);
+const shotFor = (slug: string) => (screens.screens as Record<string, any>)[slug];
+
+const passing = measured.filter(r => r.cwv);
+const ninetyPlus = measured.filter(r => r.performance >= 90);
+const underFifty = measured.filter(r => r.performance < 50);
+const sorted = [...measured].map(r => r.performance).sort((a, b) => a - b);
+const median = sorted[Math.floor(sorted.length / 2)];
+const best = top[0];
+// The site that is fast and publishes least, which is the tension the ranking exposes. Found
+// rather than named, so it moves with the data.
+const thin = [...top].sort((a, b) => a.signals - b.signals || b.performance - a.performance)[0];
+const fullHouse = top.filter(r => r.signals === SIGNALS.length);
+
+// How the whole directory distributes, in the bands Google itself uses on a Lighthouse report.
+const bands = [
+  { label: '90-100', note: 'Google calls this good', lo: 90, hi: 100 },
+  { label: '50-89', note: 'needs improvement', lo: 50, hi: 89 },
+  { label: '0-49', note: 'poor', lo: 0, hi: 49, emphasis: true },
+].map(b => ({
+  label: b.label, note: b.note, emphasis: b.emphasis,
+  value: measured.filter(r => r.performance >= b.lo && r.performance <= b.hi).length,
+}));
+
+// Which of the eight signals the directory publishes, as a share of every measured site. The
+// ranking is about speed; this is what the same sites do about everything else.
+const signalRows = SIGNALS.map(s => ({
+  label: s.label,
+  value: measured.filter(r => r.has[s.key]).length,
+  display: `${measured.filter(r => r.has[s.key]).length} of ${measured.length}`,
+  emphasis: s.key === 'statement',
+})).sort((a, b) => b.value - a.value);
+
+const captured = new Date(screens.measured_at).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const psiDates = firms
+  .map(f => f.data.digital.psi?.measured_at)
+  .filter(Boolean) as string[];
+const measuredOn = psiDates.length ? psiDates.sort().at(-1)! : screens.measured_at;
+const updated = new Date(measuredOn).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+
+// Computed, so the count in it can never be stale, and declared as a snapshot so check_meta
+// allows the figure at all. The keyword stays in front of the finding.
+const title = `${TOP} Best Law Firm Websites, Measured (${passing.length} of ${measured.length} Pass Google)`;
+const description = `We ran Google's own speed test on ${measured.length} law firm websites. ${passing.length} passed. Here are the ${TOP} fastest, with the screenshot Google took of each one.`;
+---
+<Base title={title} description={description} nav="guides"
+  figuresFrom={`PageSpeed Insights, mobile, ${measured.length} law firm sites, read ${updated}`}
+  image="/og/speed.png"
+  imageAlt="A grid of twenty phone screens, each with a speed gauge along its top edge, most of them barely filled">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Best law firm websites</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Measured</span>
+    <h1>{title}</h1>
+    <p class="lede">Every other list of the best law firm websites is a design agency showing you its portfolio. We do not design websites, so we did the other thing: ran Google's own test on <b>{measured.length}</b> law firm sites and ranked them on the number it gave back. <b>{passing.length}</b> passed Core Web Vitals. The median score was <b>{median}</b>. Here are the {TOP} at the top, with the screenshot Google took while it was measuring them.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Measured {updated}</span>
+      <span class="sep" aria-hidden="true"></span><span>7 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="screens" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#ranking" class="is-active">The {TOP}, with screenshots</a></li>
+      <li><a href="#rest">What the other {measured.length - TOP} look like</a></li>
+      <li><a href="#fast-and-empty">Fast is not the same as good</a></li>
+      <li><a href="#signals">What these sites publish</a></li>
+      <li><a href="#method">How we ranked them</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Google PageSpeed Insights, mobile, over ${measured.length} published law firm websites. Scores read ${updated}, screenshots captured ${captured}.`}
+      items={[
+        `<b>${passing.length} of ${measured.length}</b> law firm websites pass Core Web Vitals. That is ${Math.round((passing.length / measured.length) * 100)}%.`,
+        `<b>${best.name}</b> scores ${best.performance} out of 100 and carries ${best.signals} of the ${SIGNALS.length} publishing signals we check, which no other site in the ${TOP} manages.`,
+        `<b>${underFifty.length}</b> sites score under 50, which Google labels poor. Only <b>${ninetyPlus.length}</b> reach 90.`,
+        `Speed and substance come apart: <b>${thin.name}</b> scores ${thin.performance} and carries ${thin.signals} of ${SIGNALS.length}.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> The rank is Google's performance score for the site's home page on a mobile connection, and the screenshot is the frame Lighthouse kept from the same run, so the picture and the number are the same render. This measures how a site is built, not how it looks and not how good the firm is. Nothing here is legal information or advice.</div>
+
+    <h2 id="ranking">The {TOP} fastest law firm websites</h2>
+    <p>Ranked on Google's score. Where two sites tie, the one that passes Core Web Vitals goes first, and after that the one publishing more of the eight signals below. Every number is measured and none of them is weighted by us.</p>
+
+    <ol class="sitelist">
+      {top.map(r => {
+        const shot = shotFor(r.slug);
+        return (
+          <li class="site">
+            <div class="site-shot">
+              {shot ? (
+                <img src={shot.file} width={shot.width} height={shot.height} loading="lazy"
+                  alt={`The home page of ${r.domain} as Google's Lighthouse rendered it on a phone`} />
+              ) : (
+                <span class="site-noshot">No screenshot: Lighthouse could not keep a frame for this site</span>
+              )}
+            </div>
+            <div class="site-body">
+              <p class="site-rank">#{r.rank}</p>
+              <h3><a href={`/firms/${r.slug}/`}>{r.name}</a></h3>
+              <p class="site-meta">
+                <a href={r.website} rel={r.gatesPassed ? 'noopener' : 'nofollow noopener'}
+                  target="_blank">{r.domain} ↗</a>
+                <span> · {r.city}, {r.state}</span>
+              </p>
+              <p class="site-score">
+                <b>{r.performance}</b><span>/100</span>
+                <em class={r.cwv ? 'ok' : 'no'}>{r.cwv ? 'Core Web Vitals pass' : 'Core Web Vitals fail'}</em>
+              </p>
+              {r.note && <p class="site-note">{r.note}</p>}
+              <ul class="site-signals">
+                {SIGNALS.map(s => (
+                  <li class={r.has[s.key] ? 'on' : 'off'}>{s.label}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+    <p class="muted" style="font-size:.86rem">{withShot.length} of the {TOP} have a screenshot. Where one is missing, Lighthouse measured the page and kept no final frame, which happens on a site that never finishes painting.</p>
+
+    <h2 id="rest">What the other {measured.length - TOP} look like</h2>
+    <p>The top {TOP} is not the market. It is the tail of it.</p>
+    <ColumnChart
+      heading={`All ${measured.length} sites, in Google's own bands`}
+      columns={bands}
+      emphasisLabel="poor, by Google's label"
+      quietLabel="the rest"
+      caption="The bands are Lighthouse's, not ours: 90 and above is good, 50 to 89 needs improvement, below 50 is poor."
+    />
+    <p><b>{underFifty.length}</b> of these sites score under 50. The median is <b>{median}</b>. And <b>{passing.length}</b> pass Core Web Vitals, the standard Google actually uses in ranking, because a good performance score is not the same test: <a href="/guides/core-web-vitals-new-york-injury-firms/">we wrote about that difference here</a>.</p>
+
+    <h2 id="fast-and-empty">Fast is not the same as good</h2>
+    <p>This is the thing a ranking on one number makes visible, and a composite would have hidden.</p>
+    <p><b>{thin.name}</b> scores <b>{thin.performance}</b> out of 100, which puts it in the top {TOP} of the whole directory. It carries <b>{thin.signals}</b> of the {SIGNALS.length} publishing signals. A site can be near perfect on the measure Google publishes and still not tell you who works there or what it charges.</p>
+    {fullHouse.length > 0 && (
+      <p>At the other end, <b>{fullHouse.map(r => r.name).join(' and ')}</b> {fullHouse.length === 1 ? 'carries' : 'carry'} all {SIGNALS.length}. That is the combination worth copying: a site that loads fast and answers the questions a client came with.</p>
+    )}
+
+    <h2 id="signals">What these sites publish</h2>
+    <p>Across all {measured.length} of them, how many do each of the eight things.</p>
+    <BarChart
+      heading={`Publishing signals across ${measured.length} law firm websites`}
+      rows={signalRows}
+      max={measured.length}
+      caption="Highlighted is the one almost nobody does. A fees page is a page about fees; a fee in its own words is a sentence saying what the firm charges."
+    />
+    <p>The order is the interesting part. A privacy policy is nearly universal because a template ships with one. A sentence stating what the firm charges is the rarest thing on the list, which is <a href="/guides/what-new-york-injury-firms-publish-about-fees/">the subject of its own study</a>.</p>
+
+    <h2 id="method">How we ranked them</h2>
+    <p>Google's PageSpeed Insights API, mobile strategy, against each firm's home page. The score is Lighthouse's performance category, out of 100, and the Core Web Vitals result is its own pass or fail on largest contentful paint, layout shift and blocking time.</p>
+    <p>The screenshot is the final frame of that same run, which is why it can be trusted next to the number: it is not a picture somebody chose, it is what Google saw.</p>
+    <p><b>We did not build a composite.</b> The first version of this page weighted performance against the eight signals, and every weight in it was ours. A reader cannot check an opinion that structured data is worth eight points and a privacy policy three, so the ranking is one measured number with two measured tiebreaks, and the signals sit beside each site as evidence.</p>
+    <p><b>What this does not measure.</b> Not design, not copy, not whether the site converts, and not whether the firm is any good. A fast site is a well built site and nothing more. What the firm publishes about itself is a different question and <a href="/methodology/">it is the one the score on each profile answers</a>.</p>
+    <p>{measured.length} of the firms in this directory have a reading. The rest either answer our crawler with a 403 or could not be rendered, and a site we could not measure is left out rather than ranked last.</p>
+  </div>
+</div>
+</article>
+
+<style>
+  .sitelist { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 22px; }
+  .site {
+    display: grid; grid-template-columns: 132px 1fr; gap: 20px; align-items: start;
+    padding: 18px; border: 1px solid rgba(17, 17, 17, .1); border-radius: 16px;
+  }
+  .site-shot img {
+    width: 100%; height: auto; display: block; border-radius: 10px;
+    border: 1px solid rgba(17, 17, 17, .12);
+  }
+  .site-noshot {
+    display: block; font-size: .74rem; line-height: 1.35; padding: 14px 10px;
+    border: 1px dashed rgba(17, 17, 17, .22); border-radius: 10px; opacity: .7;
+  }
+  .site-body { min-width: 0; }
+  .site-rank { margin: 0; font-size: .8rem; letter-spacing: .06em; opacity: .55; }
+  .site h3 { margin: 2px 0 4px; font-size: 1.12rem; }
+  .site-meta { margin: 0 0 10px; font-size: .86rem; opacity: .75; }
+  .site-score { margin: 0 0 8px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .site-score b { font-size: 1.5rem; line-height: 1; }
+  .site-score span { opacity: .55; font-size: .9rem; }
+  .site-score em {
+    font-style: normal; font-size: .76rem; padding: 3px 9px; border-radius: 999px;
+    margin-left: 4px;
+  }
+  .site-score em.ok { background: rgba(16, 150, 120, .14); color: #0b6b55; }
+  .site-score em.no { background: rgba(17, 17, 17, .07); opacity: .7; }
+  .site-note { margin: 0 0 10px; font-size: .82rem; opacity: .7; }
+  .site-signals {
+    list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .site-signals li {
+    font-size: .73rem; padding: 3px 9px; border-radius: 999px;
+    border: 1px solid rgba(17, 17, 17, .14);
+  }
+  .site-signals li.on { background: rgba(17, 17, 17, .06); }
+  .site-signals li.off { opacity: .4; text-decoration: line-through; }
+  @media (max-width: 560px) {
+    .site { grid-template-columns: 1fr; }
+    .site-shot { max-width: 180px; }
+  }
+  @media (prefers-color-scheme: dark) {
+    .site { border-color: rgba(255, 255, 255, .14); }
+    .site-shot img { border-color: rgba(255, 255, 255, .16); }
+    .site-noshot { border-color: rgba(255, 255, 255, .24); }
+    .site-signals li { border-color: rgba(255, 255, 255, .18); }
+    .site-signals li.on { background: rgba(255, 255, 255, .09); }
+    .site-score em.ok { background: rgba(94, 234, 212, .16); color: #5eead4; }
+    .site-score em.no { background: rgba(255, 255, 255, .08); }
+  }
+</style>
+</Base>
