@@ -45,9 +45,9 @@
     "quotes": [],
     "google": {
       "rating": 5.0,
-      "count_label": "459",
+      "count_label": "460",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-16"
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -109,10 +109,10 @@
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 459,
+      "review_count_total": 460,
       "rating_weighted": 5.0,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-16"
+      "measured_at": "2026-09-18"
     }
   },
   "gates": {
@@ -296,7 +296,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "459 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "460 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -304,7 +304,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 459 reviews → Bayesian 4.97 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 460 reviews → Bayesian 4.97 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

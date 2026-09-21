@@ -173,6 +173,25 @@ def fetch(url):
         return None, "", str(e)
 
 
+def https_origin(domain):
+    """The https origin that answers for this domain, bare host first, then www.
+
+    Several firms serve https://www.<domain>/ and refuse a TLS connection on the bare host. A
+    caller that hardcodes "https://" + domain reads those sites as having no website at all, so
+    every question asked of the site, its practice pages, its sitemap, its robots.txt, is asked
+    of a host that is not listening. Only a transport failure moves to the second host: an HTTP
+    status is the firm's own server answering, and a 403 is bot protection rather than a wrong
+    hostname.
+    """
+    bare = "https://" + domain
+    status, html, _ = fetch(bare + "/")
+    if status is not None or html:
+        return bare
+    other = domain[4:] if domain.startswith("www.") else "www." + domain
+    alt, alt_html, _ = fetch("https://" + other + "/")
+    return ("https://" + other) if (alt == 200 and alt_html) else bare
+
+
 def robots_body(origin):
     """The raw robots.txt, kept because it carries the Sitemap directives."""
     try:
@@ -344,7 +363,42 @@ def crawl(domain, fetched_at):
     # domain to www) and supplies the navigation we read the rest of the site from.
     status, home_html, final_home = fetch(origin + "/")
     time.sleep(DELAY)
+
+    # A bare domain with no HTTPS listener is not a firm with no website. Three Buffalo firms
+    # answer https://www.<domain>/ perfectly and refuse a TLS connection on the bare host, which
+    # this crawler read as unreachable: no staging record, no measurement, and the firm dropped
+    # out of the market before anything about it was scored. The redirect case was already
+    # handled, because a redirect is an answer; this is the case where nothing answers at all.
+    #
+    # Only a transport failure gets the second attempt. An HTTP status is an answer from the
+    # firm's own server, and a 403 in particular is bot protection we do not work around by
+    # trying another hostname.
+    if status is None and not home_html:
+        other = domain[4:] if domain.startswith("www.") else "www." + domain
+        alt_status, alt_html, alt_final = fetch("https://" + other + "/")
+        time.sleep(DELAY)
+        if alt_status == 200 and alt_html:
+            record["notes"].append(
+                "https://%s/ does not answer, and https://%s/ serves the site. Measured on the "
+                "host that answers." % (domain, other))
+            status, home_html, final_home = alt_status, alt_html, alt_final
+
     if status != 200 or not home_html:
+        # Distinguish a site that has no HTTPS from a site that is not there. Both were recorded
+        # as the same failure, and they are different facts about a firm: one is a security
+        # finding a reader can check, the other is a dead domain. Nothing is read from the plain
+        # HTTP page; it is asked only whether it answers.
+        if status is None:
+            for host in dict.fromkeys([domain, domain[4:] if domain.startswith("www.")
+                                       else "www." + domain]):
+                plain, _, _ = fetch("http://" + host + "/")
+                time.sleep(DELAY)
+                if plain == 200:
+                    record["notes"].append(
+                        "No HTTPS on either host, and http://%s/ answers: the site is published "
+                        "over plain HTTP. Nothing was read from it, because every measurement "
+                        "here is of a page served securely." % host)
+                    break
         record["notes"].append(
             "Home page returned %s over HTTPS, so nothing else was collected. A 403 here is bot "
             "protection; this firm needs manual entry rather than evasion." % status)

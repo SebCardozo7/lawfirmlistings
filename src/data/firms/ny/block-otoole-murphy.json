@@ -270,9 +270,9 @@
     "quotes": [],
     "google": {
       "rating": 4.9,
-      "count_label": "203",
+      "count_label": "207",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -284,15 +284,15 @@
         "rating": 5
       },
       {
-        "published_at": "2026-05-11T14:55:02.992220182Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-05-01T01:27:10.161630122Z",
         "rating": 5
       },
       {
-        "published_at": "2026-05-01T04:30:12.061179232Z",
+        "published_at": "2026-05-25T17:01:07.935261544Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-22T01:46:00.139968868Z",
         "rating": 5
       }
     ]
@@ -325,10 +325,10 @@
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 203,
+      "review_count_total": 207,
       "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-18"
     },
     "ahrefs": {
       "dr": 41,
@@ -558,7 +558,7 @@
             "pts": 4,
             "max": 5,
             "source": "observed",
-            "evidence": "203 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "207 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -566,7 +566,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 203 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 207 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

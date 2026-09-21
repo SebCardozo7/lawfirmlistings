@@ -36,8 +36,8 @@ import time
 import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from crawl_public import (LINK_KINDS, UA, fetch, robots_for, strip_tags, meta, unescape,  # noqa: E402
-                          json_ld_blocks)
+from crawl_public import (LINK_KINDS, UA, fetch, https_origin, robots_for, strip_tags,  # noqa: E402
+                          meta, unescape, json_ld_blocks)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DELAY = 1.5
@@ -684,7 +684,11 @@ def role_on_bio(html):
 
 
 def collect(domain, verbose=False, record=None):
-    origin = "https://" + domain
+    # The staging record already knows which host answered, because crawl_public followed the
+    # redirects and wrote it down. Asking the bare domain again cost Feron Poleon LLP its whole
+    # roster: its site is on the www host, this returned "home returned None", and a firm with
+    # three named lawyers read as naming nobody.
+    origin = (record or {}).get("canonical_origin") or https_origin(domain)
     status, home, final_home = fetch(origin + "/")
     time.sleep(DELAY)
     if status != 200 or not home:

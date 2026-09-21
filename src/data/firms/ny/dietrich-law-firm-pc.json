@@ -124,9 +124,9 @@
     "quotes": [],
     "google": {
       "rating": 4.7,
-      "count_label": "284",
-      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-14"
+      "count_label": "285",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -175,11 +175,11 @@
       "practice_page": "https://www.calljed.com/personal-injury.html"
     },
     "places": {
-      "listing_count": 2,
-      "review_count_total": 284,
+      "listing_count": 1,
+      "review_count_total": 285,
       "rating_weighted": 4.7,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-14"
+      "measured_at": "2026-09-18"
     },
     "ahrefs": {
       "dr": 30,
@@ -424,7 +424,7 @@
             "pts": 4,
             "max": 5,
             "source": "observed",
-            "evidence": "284 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
+            "evidence": "285 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -432,7 +432,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 284 reviews → Bayesian 4.74 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 285 reviews → Bayesian 4.74 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -478,7 +478,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",

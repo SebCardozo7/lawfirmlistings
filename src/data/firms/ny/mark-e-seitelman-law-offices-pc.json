@@ -167,16 +167,12 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.9,
-      "count_label": "272",
-      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-16"
+      "rating": 4.93,
+      "count_label": "415",
+      "source": "Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
-      {
-        "published_at": "2026-07-31T14:35:57.567875471Z",
-        "rating": 5
-      },
       {
         "published_at": "2026-05-08T15:20:40.466291253Z",
         "rating": 5
@@ -191,6 +187,50 @@
       },
       {
         "published_at": "2026-04-09T17:05:01.438917288Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-02T13:40:33.488946493Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-23T13:48:42.556578871Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-05T15:04:42.306972053Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-04-10T01:20:36.827282Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-12T17:49:05.689334027Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-07-19T17:50:35.610026Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-07T21:22:21.588752491Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-23T20:21:27.091888544Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-18T17:21:52.908636754Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-09-12T20:55:45.068051Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-05T16:59:55.224746768Z",
         "rating": 5
       }
     ]
@@ -233,11 +273,11 @@
       "measured_at": "2026-09-16"
     },
     "places": {
-      "listing_count": 1,
-      "review_count_total": 272,
-      "rating_weighted": 4.9,
+      "listing_count": 3,
+      "review_count_total": 415,
+      "rating_weighted": 4.93,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-16"
+      "measured_at": "2026-09-18"
     }
   },
   "gates": {
@@ -426,7 +466,7 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 57,
+    "total": 59,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (8/25).",
     "computed_at": "2026-09-18",
@@ -493,24 +533,24 @@
         ]
       },
       "C": {
-        "score": 18,
+        "score": 20,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 4,
+            "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "272 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "415 Google reviews · Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 5,
+            "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 272 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.93 over 415 reviews → Bayesian 4.91 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -518,7 +558,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-31) · a sample of five per business listing, not every review"
+            "evidence": "12 of 15 sampled reviews are from the last 12 months (newest 2026-07-02) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -526,7 +566,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 15 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -556,7 +596,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "3 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",
@@ -599,11 +639,11 @@
         ]
       }
     },
-    "floor_abc": 40,
+    "floor_abc": 42,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 13,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -612,10 +652,10 @@
         "E1 Free consult & fee transparency: +5 available"
       ]
     },
-    "raw": 55.0,
+    "raw": 57.0,
     "assessed": 97,
     "coverage": 0.97,
-    "floor_abc_pct": 0.702,
+    "floor_abc_pct": 0.737,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true

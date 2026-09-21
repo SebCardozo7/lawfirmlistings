@@ -412,10 +412,10 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.9,
-      "count_label": "577",
-      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-14"
+      "rating": 4.91,
+      "count_label": "725",
+      "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -436,6 +436,66 @@
       },
       {
         "published_at": "2026-02-20T18:28:47.227426596Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-11-15T19:39:39.481760Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-10-06T14:29:36.551733Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-10-09T17:36:25.179985Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-11-07T01:32:44.278883Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-12-14T23:34:43.091236Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-09T14:08:20.212837490Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-27T17:07:04.544202138Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-27T21:24:45.081592628Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-10T01:32:15.525260783Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-09T00:42:48.687458554Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-03-31T13:50:04.154385Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-09-04T20:34:13.915064Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-15T18:57:24.061684138Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-09-13T19:50:55.980005Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-09-25T07:02:40.149908Z",
         "rating": 5
       }
     ]
@@ -463,11 +523,11 @@
       "practice_page": "https://www.richmondvona.com/new-york/car-accident-lawyer/"
     },
     "places": {
-      "listing_count": 1,
-      "review_count_total": 577,
-      "rating_weighted": 4.9,
+      "listing_count": 4,
+      "review_count_total": 725,
+      "rating_weighted": 4.91,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-14"
+      "measured_at": "2026-09-18"
     },
     "ahrefs": {
       "dr": 44,
@@ -718,23 +778,23 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "577 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "725 Google reviews · Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 5,
+            "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 577 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.91 over 725 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 5,
+            "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-27) · a sample of five per business listing, not every review"
+            "evidence": "11 of 20 sampled reviews are from the last 12 months (newest 2026-07-27) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -742,7 +802,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -772,7 +832,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "4 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",

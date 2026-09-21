@@ -151,10 +151,10 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.8,
-      "count_label": "146",
-      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-14"
+      "rating": 4.86,
+      "count_label": "484",
+      "source": "Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-18"
     },
     "sample": [
       {
@@ -166,6 +166,10 @@
         "rating": 5
       },
       {
+        "published_at": "2026-08-10T20:13:29.064502712Z",
+        "rating": 5
+      },
+      {
         "published_at": "2026-06-09T06:28:50.061382507Z",
         "rating": 5
       },
@@ -174,7 +178,39 @@
         "rating": 5
       },
       {
-        "published_at": "2026-05-27T13:37:35.453594164Z",
+        "published_at": "2026-06-23T22:03:12.497568375Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-12T20:35:50.644809164Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-20T22:56:49.973439817Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-22T14:59:09.204943549Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-24T19:23:30.093467708Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-30T19:48:52.835727790Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2025-12-30T20:24:53.850807533Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2020-09-16T06:13:13.080529Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2017-11-03T20:37:13.503Z",
         "rating": 5
       }
     ]
@@ -202,11 +238,11 @@
       "practice_page": "https://www.plaxenadler.com/aop/personal-injury/"
     },
     "places": {
-      "listing_count": 1,
-      "review_count_total": 146,
-      "rating_weighted": 4.8,
+      "listing_count": 7,
+      "review_count_total": 484,
+      "rating_weighted": 4.86,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-14"
+      "measured_at": "2026-09-18"
     },
     "ahrefs": {
       "dr": 30,
@@ -339,7 +375,7 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 47,
+    "total": 48,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-18",
@@ -406,16 +442,16 @@
         ]
       },
       "C": {
-        "score": 17,
+        "score": 18,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 3,
+            "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "146 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "484 Google reviews · Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -423,7 +459,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 146 reviews → Bayesian 4.82 (prior 4.84 weighted as 100 reviews, from 272 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.86 over 484 reviews → Bayesian 4.86 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -431,15 +467,15 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-09-08) · a sample of five per business listing, not every review"
+            "evidence": "12 of 14 sampled reviews are from the last 12 months (newest 2026-09-08) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 4,
+            "pts": 3,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "1 of 14 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -469,7 +505,7 @@
             "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "7 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
           },
           {
             "code": "D4",
@@ -512,11 +548,11 @@
         ]
       }
     },
-    "floor_abc": 20,
+    "floor_abc": 21,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
+      "gap": 22,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -525,10 +561,10 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 36.5,
+    "raw": 37.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.526,
+    "floor_abc_pct": 0.553,
     "gates_unavailable": [
       "G1",
       "G2",

@@ -53,7 +53,11 @@ const published = rp && rp.readable && rp.count ? rp : null;
 // the colon is what a search result truncates first. Past sixty characters the name carries the
 // page on its own, with the city kept because two firms in two states can share a name.
 const practiceName = primary[0]?.name ?? d.practices[0].name;
-const longTitle = `${d.name}: ${practiceName} Law Firm in ${d.market.city}, ${d.market.state}`;
+// "Family Law" already ends in the word this line appends, and forty-two profiles were titled
+// "<firm>: Family Law Law Firm in <city>". The practice hub and the city ranking carry the same
+// rule, because the practice name is data and this sentence is built around it.
+const practiceLabel = practiceName.endsWith('Law') ? `${practiceName} Firm` : `${practiceName} Law Firm`;
+const longTitle = `${d.name}: ${practiceLabel} in ${d.market.city}, ${d.market.state}`;
 const title = longTitle.length <= 60 ? longTitle : `${d.name} | ${d.market.city}, ${d.market.state}`;
 // Built with fitDescription because the length is not knowable here: firm names in this cohort
 // run from 14 to 71 characters, and the longest already sat one character under the limit. The
