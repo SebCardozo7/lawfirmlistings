@@ -70,6 +70,18 @@ DATASET = ("Corporate Data File, quarterly full snapshot, published by the Flori
            "State Division of Corporations")
 G6_MIN_REVIEWS = 10
 G6_MIN_YEARS = 1.0
+# The practices G6 does not ask ten reviews of, which is the same set scripts/score.py names.
+# The methodology says why: the ten-review minimum was calibrated on consumer injury markets,
+# where a client who has just been paid leaves a review, and transactional practices work by
+# referral and do not. For those, the gate asks for a verified listing and the year in operation,
+# and the thin listing costs the firm points in pillar C instead of its eligibility.
+#
+# Written down here because leaving it out cost three Naples firms their eligibility on the first
+# run of this script. One of them was Cheffy Passidomo, which is the firm the methodology itself
+# cites as the reason the exemption exists: eighty years in Naples, fifteen attorneys, five
+# reviews. Publishing "Not eligible" about it would have contradicted our own published rule on
+# the same site.
+TRANSACTIONAL = {"real-estate"}
 
 # The state's own field positions, one-based in its documentation and zero-based here.
 FIELDS = {
@@ -336,21 +348,31 @@ def apply_gates(firm: dict, entity: dict | None) -> list[str]:
             "checked_at": TODAY,
         }
 
+    practice = (firm.get("practices") or [{}])[0].get("slug")
+    transactional = practice in TRANSACTIONAL
     if (gates.get("G6") or {}).get("attested"):
         notes.append("G6 left as attested")
     elif age is not None and not foreign:
-        enough = reviews >= G6_MIN_REVIEWS
+        enough = listings >= 1 if transactional else reviews >= G6_MIN_REVIEWS
         old = age >= G6_MIN_YEARS
         gates["G6"] = {
             "pass": bool(enough and old),
-            "evidence": ("%s public client review%s and %.0f years since the entity was filed in "
-                         "%s" % ("{:,}".format(reviews), "" if reviews == 1 else "s", age,
-                                 entity["file_date"][:4])
-                         if enough and old else
-                         "%s public client review%s, %s the ten this gate asks for, and %.1f "
-                         "years since the entity was filed"
-                         % ("{:,}".format(reviews), "" if reviews == 1 else "s",
-                            "at or above" if enough else "below", age)),
+            "evidence": (
+                ("%d Google-verified location%s and %.0f years since the entity was filed in %s. "
+                 "This practice is transactional, so the gate asks for a verified listing and the "
+                 "year in operation rather than ten reviews, and its %s review%s are scored in "
+                 "pillar C instead"
+                 % (listings, "" if listings == 1 else "s", age, entity["file_date"][:4],
+                    "{:,}".format(reviews), "" if reviews == 1 else "s"))
+                if transactional and enough and old else
+                ("%s public client review%s and %.0f years since the entity was filed in %s"
+                 % ("{:,}".format(reviews), "" if reviews == 1 else "s", age,
+                    entity["file_date"][:4]))
+                if enough and old else
+                ("%s public client review%s, %s the ten this gate asks for, and %.1f years since "
+                 "the entity was filed"
+                 % ("{:,}".format(reviews), "" if reviews == 1 else "s",
+                    "at or above" if enough else "below", age))),
             "source": "Google Places API and %s" % DATASET,
             "checked_at": TODAY,
         }
@@ -383,7 +405,13 @@ def main() -> int:
     firms = {}
     for path in paths:
         firm = json.loads(path.read_text(encoding="utf-8"))
-        if firm.get("status") in ("sample", "not_eligible"):
+        # A sample is a fixture and is skipped. A firm marked not eligible is not: it is a real
+        # firm that failed a gate, and the whole point of re-reading a register is that a gate
+        # can stop failing. Copying the usual skip from the other scripts locked in this script's
+        # own first mistake, because the three firms it wrongly made ineligible were then the
+        # three it refused to look at again. "Not eligible" is the harshest thing this directory
+        # publishes about a business, and it must never be the one state a check cannot leave.
+        if firm.get("status") == "sample":
             continue
         firms[path.stem] = (path, firm)
     if not firms:
@@ -411,13 +439,15 @@ def main() -> int:
         if not args.write:
             continue
         if entity:
+            # The field names the collection schema already uses, not new ones. Florida calls
+            # this a document number and New York calls it a DOS id, and inventing a second
+            # spelling for the same idea would mean every reader of a profile has to know which
+            # state it came from before it can look the entity up.
             firm["entity"] = {
                 "legal_name": entity["entity_name"],
-                "number": entity["document_number"],
-                "type": entity["filing_type"],
-                "status": "Active",
-                "filed_at": entity["file_date"],
-                "city": entity["city"].title(),
+                "entity_type": entity["filing_type"] or None,
+                "dos_id": entity["document_number"],
+                "formed": entity["file_date"] or "",
                 "source": DATASET,
                 "checked_at": TODAY,
             }

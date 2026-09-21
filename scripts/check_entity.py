@@ -17,16 +17,9 @@ Asking turns out to have four different answers, and this file is where they liv
     Texas       the Comptroller publishes Active Franchise Taxpayers, which carries the
                 Secretary of State file number, the charter date and the status code for every
                 entity that pays franchise tax. data.texas.gov/resource/9cir-efmm
-    Florida     the register is published in full as data files, on an SFTP host that answers
-                an anonymous request with a 401. Reading it is work we owe, so Florida's G3
-                stays pending and keeps blocking, which is the honest reading.
-    Maryland    nothing queryable. SDAT's entity search is a form, its bulk data is sold, and
-                the open data portal publishes a count of businesses rather than the register.
-    Indiana     nothing queryable. INBiz answers an automated reader with a 403 and the
-                Secretary of State's business search answers with a 202 and an empty body,
-                which is a bot challenge. We do not work around either.
-    Massachusetts  nothing queryable. The Secretary of the Commonwealth's corporate search
-                answers 403 and redirect-loops, and the state runs no open data portal for it.
+    Florida     read by scripts/check_fl_register.py since 2026-09-21. The SFTP host the
+                docstring below used to call blocked answers plain HTTPS with the credentials
+                the state publishes on its own data-downloads page.
 
 The distinction between the last two and "partial" is not cosmetic, and it is the reason this
 script exists. A gate we have not got to yet should block a certification. A gate the state does
@@ -101,13 +94,23 @@ REGISTERS = {
 # same as having no source, and the difference is the whole point of this file: Florida's G3 stays
 # "partial", which blocks a certification, because reading it is work we owe rather than a door
 # the state has closed. Recorded here so the next person does not have to find it out again.
-PENDING = {
-    "FL": ("Florida does publish its corporate register in full, as fixed-width data files, but "
-           "the download sits on an SFTP host that answers an anonymous request with a 401 and "
-           "needs an account arranged with the Division of Corporations. Its web search is a "
-           "form on a host that answers a crawler with a 403. So Florida's G3 stays pending, "
-           "which is honest: the record exists and we have not read it."),
-}
+# Emptied on 2026-09-21, when the one state on it turned out not to belong there.
+#
+# Florida sat here with this reason: the register is published in full as fixed-width data files,
+# "but the download sits on an SFTP host that answers an anonymous request with a 401 and needs
+# an account arranged with the Division of Corporations". The first half was true and the second
+# half was never tested. No account is needed: the Division of Corporations publishes the
+# credentials for that host on its own data-downloads page, because a public register is meant to
+# be read, and the host answers plain HTTPS with them.
+#
+# So the only gate in this directory blocked by our own unfinished work was blocked by a sentence
+# somebody wrote once and nobody re-read. scripts/check_fl_register.py now reads the quarterly
+# snapshot, and seventeen of the thirty-four Florida firms hold a confirmed active entity.
+#
+# The dict stays rather than being deleted, because the distinction it draws is the useful part:
+# a state that publishes a register we have not read is not the same as a state that publishes
+# none, and the next state to land in the first category should land here.
+PENDING: dict[str, str] = {}
 
 NO_SOURCE = {
     "MD": ("Maryland publishes no business register we can query. SDAT's entity search is a "

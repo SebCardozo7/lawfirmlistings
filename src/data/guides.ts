@@ -22,7 +22,8 @@ export interface Guide {
   thumb?: string;
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
-  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster' | 'shield' | 'register';
+  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
+    | 'shield' | 'register' | 'headcount' | 'offices';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -50,7 +51,7 @@ export function publishedGuides(
 export const GUIDES: Guide[] = [
   {
     slug: 'law-firm-statistics-new-york',
-    cover: 'ranking',
+    cover: 'offices',
     kicker: 'Reference',
     title: 'Law Firm Statistics in New York: Fewer Offices, More Lawyers',
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
@@ -64,7 +65,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'how-many-lawyers-in-new-york',
-    cover: 'ladder',
+    cover: 'headcount',
     // "Reference" rather than "Method": the nine guides before this one measure the firms in
     // this directory, and this one aggregates somebody else's dataset and makes no claim about
     // our firms at all. The kicker is how a reader tells them apart.
