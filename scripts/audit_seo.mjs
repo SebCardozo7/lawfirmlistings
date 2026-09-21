@@ -134,6 +134,32 @@ for (const page of pages) {
     notes.push([page.url, `title is ${page.title.length} characters, ${page.title.length - budget} over`]);
 }
 
+// Whether this build is one that tells Google to go away, said out loud.
+//
+// LFL_NOINDEX is a pre-launch switch: with it set, robots.txt serves a site-wide Disallow, every
+// page carries noindex and the sitemap comes out empty. All three of those are right before
+// launch and catastrophic after it, and nothing in this repository said which kind of build it
+// had just produced. Search Console reported a page "bloqueada por el archivo robots.txt" long
+// after the switch was off, and answering that meant checking the live file, the live meta tags,
+// the canonical and both sitemaps by hand to establish that the build was fine.
+//
+// So a build now states its own indexability. This is not a problem and does not fail: a
+// pre-launch build is meant to be blocked. It is a line nobody can ship without reading.
+const robots = join(DIST, 'robots.txt');
+if (existsSync(robots)) {
+  const body = readFileSync(robots, 'utf8');
+  const blocked = /^\s*Disallow:\s*\/\s*$/mi.test(body);
+  const indexable = pages.filter(p => !p.noindex).length;
+  console.log(blocked
+    ? `\nrobots.txt SERVES A SITE-WIDE DISALLOW. ${pages.length} pages built, `
+      + `${indexable} without noindex, and none of them is reachable by a search engine. `
+      + `This is what LFL_NOINDEX=true produces. Unset it in Cloudflare to launch.`
+    : `\nrobots.txt allows crawling · ${indexable} of ${pages.length} built pages carry no `
+      + `noindex and are offered to search engines.`);
+} else {
+  problems.push(['/robots.txt', 'no robots.txt in the build at all']);
+}
+
 for (const [url, problem] of problems) console.error(`${url} — ${problem}`);
 for (const [url, note] of notes) console.warn(`${url} — ${note}`);
 console.log(`\n${pages.length} pages checked, ${problems.length} problem${problems.length === 1 ? '' : 's'}, ${notes.length} note${notes.length === 1 ? '' : 's'}.`);
