@@ -191,13 +191,24 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Massachusetts Bar Association",
+        "source_url": "https://www.fiorentinolegal.com/about-us/",
+        "quote": "Becoming Useless. Massachusetts Academy of Trial Attorneys Massachusetts Bar Association Milton Chamber of Commerce Since then, Attorney Fiorentino"
+      },
+      {
+        "name": "Massachusetts Academy of Trial Attorneys",
+        "source_url": "https://www.fiorentinolegal.com/about-us/",
+        "quote": "rts to Fill the Gaps Left by Crawford are Becoming Useless. Massachusetts Academy of Trial Attorneys Massachusetts Bar Association Milton Chamber of Commerce Si"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Massachusetts Bar Association, Massachusetts Academy of Trial Attorneys · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": true,
@@ -210,14 +221,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 35,
+    "total": 38,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -239,10 +250,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Massachusetts Bar Association, Massachusetts Academy of Trial Attorneys · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -383,11 +394,11 @@
         ]
       }
     },
-    "floor_abc": 18,
+    "floor_abc": 21,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 35,
+      "gap": 32,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -396,10 +407,10 @@
         "D2 Search authority: +8 available"
       ]
     },
-    "raw": 27.0,
+    "raw": 30.0,
     "assessed": 78,
     "coverage": 0.78,
-    "floor_abc_pct": 0.474,
+    "floor_abc_pct": 0.553,
     "gates_unavailable": [
       "G1",
       "G2",

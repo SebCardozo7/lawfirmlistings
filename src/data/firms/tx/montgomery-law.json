@@ -190,13 +190,24 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Dallas Bar Association",
+        "source_url": "https://www.montgomeryfirm.com/about/",
+        "quote": "est Lawyers: Ones to Watch® JL Turner Legal Association The Dallas Bar Association Successful Verdicts Platinum Member National Academy of PI"
+      },
+      {
+        "name": "Dallas Trial Lawyers Association",
+        "source_url": "https://www.montgomeryfirm.com/about/",
+        "quote": "izations, including (but not limited to) the following: The Dallas Trial Lawyers Association Texas Trial Lawyers Association Thomson Reuters Super Lawye"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Dallas Bar Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 14,
@@ -234,14 +245,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 43,
+    "total": 47,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -263,10 +274,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Dallas Bar Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -407,11 +418,11 @@
         ]
       }
     },
-    "floor_abc": 26,
+    "floor_abc": 28,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 27,
+      "gap": 23,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -420,10 +431,10 @@
         "D2 Search authority: +7 available"
       ]
     },
-    "raw": 33.5,
+    "raw": 36.5,
     "assessed": 78,
     "coverage": 0.78,
-    "floor_abc_pct": 0.671,
+    "floor_abc_pct": 0.75,
     "gates_unavailable": [
       "G1",
       "G2"

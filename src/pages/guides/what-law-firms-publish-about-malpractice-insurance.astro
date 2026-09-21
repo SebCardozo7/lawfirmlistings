@@ -78,6 +78,27 @@ const ASSOC_STATE: Record<string, string> = {
   'Maryland Association for Justice': 'MD',
   'Bar Association of Baltimore City': 'MD',
   'New Jersey State Bar Association': 'NJ',
+  // Added on 2026-09-21, when the gap this page was written to disclose was closed. The
+  // associations came from the firms' own about and attorney pages in those five states rather
+  // than from a guess at what a state bar is called.
+  'The Florida Bar': 'FL',
+  'Florida Justice Association': 'FL',
+  'Collier County Bar Association': 'FL',
+  'Polk County Trial Lawyers Association': 'FL',
+  'Polk County Bar Association': 'FL',
+  'Massachusetts Bar Association': 'MA',
+  'Massachusetts Academy of Trial Attorneys': 'MA',
+  'Boston Bar Association': 'MA',
+  'Oregon State Bar': 'OR',
+  'Oregon Trial Lawyers Association': 'OR',
+  'State Bar of Texas': 'TX',
+  'Texas Trial Lawyers Association': 'TX',
+  'Dallas Bar Association': 'TX',
+  'Dallas Trial Lawyers Association': 'TX',
+  'Tarrant County Bar Association': 'TX',
+  'Indiana State Bar Association': 'IN',
+  'Indiana Trial Lawyers Association': 'IN',
+  'Lake County Bar Association': 'IN',
 };
 const coveredStates = new Set(Object.values(ASSOC_STATE));
 const stateNameOf = new Map(measured.map(f => [f.data.market.state, f.data.market.state_name]));
@@ -99,16 +120,25 @@ const stateRows = [...new Map(measured.map(f => [f.data.market.state, f.data.mar
       label: name,
       value: Math.round((named.length / inState.length) * 100),
       display: `${named.length} of ${inState.length}`,
+      // A row whose state the list covers has nothing to warn about, and printing "our list
+      // names an association of this state" on every row is a label nobody needs. It carries
+      // the number of firms the share was taken over instead, which is what makes a set of
+      // percentages over 13 firms and 149 firms readable side by side.
       note: hasLocal
-        ? 'Our list names an association of this state'
+        ? `${inState.length} firm${inState.length === 1 ? '' : 's'}`
         : 'Our list names no association of this state',
-      emphasis: hasLocal,
+      hasLocal,
       firms: inState.length,
     };
   })
   .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label));
-const listedStates = stateRows.filter(r => r.emphasis);
-const unlistedStates = stateRows.filter(r => !r.emphasis);
+const listedStates = stateRows.filter(r => r.hasLocal);
+const unlistedStates = stateRows.filter(r => !r.hasLocal);
+// Whether the caveat this page was written to disclose still applies. It did when the page was
+// published: the list knew three states and the directory measured eight. Everything downstream
+// branches on this rather than on a sentence somebody has to remember to delete, because the
+// next state opened puts the gap back and the page should say so again on its own.
+const listCoversEverywhere = unlistedStates.length === 0;
 const sumIn = (rows: typeof stateRows) => {
   const total = rows.reduce((n, r) => n + r.firms, 0);
   const named = rows.reduce((n, r) => n + Number(r.display.split(' of ')[0]), 0);
@@ -201,7 +231,9 @@ const description = 'We read every page these firms publish about themselves, lo
         ...(oregon.length > 0 ? [
           `In Oregon, the one state here where the coverage is mandatory, <b>${oregonDisclosing.length} of ${oregon.length}</b> firms mention it, which is the clearest proof that silence here measures publishing habits and not cover.`,
         ] : []),
-        `The membership half is partly a measure of us: <b>${listedTally.named} of ${listedTally.total}</b> firms name one in the states our own list carries a local association for, against <b>${unlistedTally.named} of ${unlistedTally.total}</b> everywhere else.`,
+        listCoversEverywhere
+          ? `Our matching list now carries an association of every state in this directory. It did not when this page was first published, and the states it knew were the two with the highest rates, so the by-state figures below are rates rather than the floor they used to be.`
+          : `The membership half is partly a measure of us: <b>${listedTally.named} of ${listedTally.total}</b> firms name one in the states our own list carries a local association for, against <b>${unlistedTally.named} of ${unlistedTally.total}</b> everywhere else.`,
       ]}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
@@ -243,15 +275,25 @@ const description = 'We read every page these firms publish about themselves, lo
     <p>Elsewhere the rule is softer. The American Bar Association's model court rule asks a lawyer to report coverage to the state's highest court so the public can look it up, and a minority of states have adopted some version of it. <b>No state requires a firm to print it on its own website</b>, which is where we were looking, so what we measured is a publishing habit rather than compliance with anything.</p>
 
     <h2 id="limit">What this measurement gets wrong</h2>
-    <p>The insurance half of this study is clean: one sentence, either written or not, and the answer is the same everywhere. The membership half is not clean, and the failure is ours rather than the firms'.</p>
-    <p>We match association names against a fixed list. Of the {assocNames.size} associations that list has matched anywhere in the directory, the ones tied to a particular state are tied to {listOf(coveredStateNames)}, which is where this directory started rather than where it now measures. A firm in one of the other {unlistedStates.length} states that proudly names its own state bar is read as naming nothing, unless it also names a national body.</p>
+    <p>The insurance half of this study is clean: one sentence, either written or not, and the answer is the same everywhere. The membership half was not, and the failure was ours rather than the firms'.</p>
+    {listCoversEverywhere ? (
+      <p>We match association names against a fixed list, and when this page was first published that list knew three states while the directory measured eight. A firm in Dallas or Portland that named its own state bar was read as naming nothing, and lost three points of its score for it. The list now carries an association of every state here, {listOf(coveredStateNames)}, taken from the firms' own pages rather than from a guess at what a state bar is called. The figures below are what the firms publish. What follows is the record of a caveat this page made and then had to answer.</p>
+    ) : (
+      <p>We match association names against a fixed list. Of the {assocNames.size} associations that list has matched anywhere in the directory, the ones tied to a particular state are tied to {listOf(coveredStateNames)}, which is where this directory started rather than where it now measures. A firm in one of the other {unlistedStates.length} states that proudly names its own state bar is read as naming nothing, unless it also names a national body.</p>
+    )}
     <BarChart
       heading="Firms naming an association, by state"
       max={100}
       rows={stateRows}
-      caption={`The bar is the share and the printed figure is the count, because these states hold very different numbers of firms. Highlighted states are the ones our own pattern list carries a local association for, and they are the two highest. That ordering is a fact about our list.`}
+      caption={listCoversEverywhere
+        ? `The bar is the share and the printed figure is the count, because these states hold very different numbers of firms. Our pattern list carries a local association of every state shown, so this ordering is now a fact about the firms.`
+        : `The bar is the share and the printed figure is the count, because these states hold very different numbers of firms. Highlighted states are the ones our own pattern list carries a local association for, and they are the two highest. That ordering is a fact about our list.`}
     />
-    <p><b>{listedTally.named} of {listedTally.total} firms name an association in the states whose own associations we can recognize, against {unlistedTally.named} of {unlistedTally.total} everywhere else.</b> Some of that gap is real and some of it is the list. We cannot currently tell you how much is which, and until the list covers every state in the directory, the by-state figures above should be read as a floor rather than a rate.</p>
+    {listCoversEverywhere ? (
+      <p><b>{withAssoc.length} of {measured.length} firms name a bar or trial lawyers' association</b>, measured against a list that can now recognise one in every state here. The spread between states that remains is the firms' own. We are recording the shape of the old gap rather than deleting it, because a directory that opens a market in a ninth state will put it back, and this page is written to say so again on its own when that happens.</p>
+    ) : (
+      <p><b>{listedTally.named} of {listedTally.total} firms name an association in the states whose own associations we can recognize, against {unlistedTally.named} of {unlistedTally.total} everywhere else.</b> Some of that gap is real and some of it is the list. We cannot currently tell you how much is which, and until the list covers every state in the directory, the by-state figures above should be read as a floor rather than a rate.</p>
+    )}
     <p>One more limit, smaller. {partial.length === 1 ? 'One firm is' : `${partial.length} firms are`} recorded as partial, meaning we could not read every biography the firm publishes, so a nil result there is our reach and not its silence. {partial.length === 1 ? 'It is counted' : 'They are counted'} in the figures above, but the score leaves this factor out of {partial.length === 1 ? 'its' : 'their'} scale rather than reading the gap as a zero.</p>
     <p>This is the same problem, in a different record, that <a href="/guides/what-it-takes-to-check-a-law-firm/">we found when we tried to check every firm's licenses</a>: a check that runs in one state and not in another measures the state's records policy as much as the firm.</p>
 

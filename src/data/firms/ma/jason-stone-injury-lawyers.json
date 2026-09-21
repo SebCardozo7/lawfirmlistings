@@ -470,13 +470,24 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
-    "pages_read": 35,
+    "bar_associations": [
+      {
+        "name": "Massachusetts Bar Association",
+        "source_url": "https://www.stoneinjurylawyers.com/about-us/our-team/ross-greenstein",
+        "quote": "and Federal Bar, First Circuit. He has been a member of the Massachusetts Bar Association and Boston Bar Association. Mr. Greenstein is also a Board"
+      },
+      {
+        "name": "Boston Bar Association",
+        "source_url": "https://www.stoneinjurylawyers.com/about-us/our-team/ross-greenstein",
+        "quote": "has been a member of the Massachusetts Bar Association and Boston Bar Association. Mr. Greenstein is also a Board Member and Legal Advisor fo"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Massachusetts Bar Association, Boston Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 34,
     "bios_published": 32,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 49,
@@ -555,14 +566,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 60,
+    "total": 63,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -584,10 +595,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Massachusetts Bar Association, Boston Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -728,11 +739,11 @@
         ]
       }
     },
-    "floor_abc": 28,
+    "floor_abc": 31,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -741,10 +752,10 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 46.5,
+    "raw": 49.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.737,
+    "floor_abc_pct": 0.816,
     "gates_unavailable": [
       "G1",
       "G3"

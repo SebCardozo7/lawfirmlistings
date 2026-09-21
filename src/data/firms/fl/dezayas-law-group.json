@@ -187,13 +187,24 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://dezayaslawgroup.com/about/",
+        "quote": "rial Lawyers Association Chairman of Grievance Committee to the Florida Bar BAR ADMITTANCES Florida Bar, 1992 Middle District of Florid"
+      },
+      {
+        "name": "Polk County Trial Lawyers Association",
+        "source_url": "https://dezayaslawgroup.com/about/",
+        "quote": "l Injury PROFESSIONAL ASSOCIATIONS Lakeland Bar Association Polk County Trial Lawyers Association Chairman of Grievance Committee to the Florida Bar BAR ADMI"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of The Florida Bar, Polk County Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-14"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": true,
@@ -206,14 +217,14 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 25,
+    "total": 29,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -235,10 +246,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of The Florida Bar, Polk County Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -379,11 +390,11 @@
         ]
       }
     },
-    "floor_abc": 15,
+    "floor_abc": 18,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 45,
+      "gap": 41,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -392,10 +403,10 @@
         "D2 Search authority: +8 available"
       ]
     },
-    "raw": 19.5,
+    "raw": 22.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.395,
+    "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1"
     ],

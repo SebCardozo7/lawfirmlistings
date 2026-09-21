@@ -222,13 +222,29 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Massachusetts Bar Association",
+        "source_url": "https://www.foti-law.com/team/matthew-m-foti",
+        "quote": "in the Commonwealth of Massachusetts and is a member of the Massachusetts Bar Association, Boston Bar Association, Massachusetts Academy of Trial Att"
+      },
+      {
+        "name": "Massachusetts Academy of Trial Attorneys",
+        "source_url": "https://www.foti-law.com/team/matthew-m-foti",
+        "quote": "4 Bar Associations Boston Bar Massachusetts Bar Free Masons Massachusetts Academy of Trial Attorneys Education Suffolk University Law School – J.D. – 2016 UMASS"
+      },
+      {
+        "name": "Boston Bar Association",
+        "source_url": "https://www.foti-law.com/team/matthew-m-foti",
+        "quote": "setts and is a member of the Massachusetts Bar Association, Boston Bar Association, Massachusetts Academy of Trial Attorneys, and the Free Mas"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Massachusetts Bar Association, Massachusetts Academy of Trial Attorneys, Boston Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 6,
     "bios_published": 3,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": false,
@@ -237,14 +253,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 45,
+    "total": 50,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -266,10 +282,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Massachusetts Bar Association, Massachusetts Academy of Trial Attorneys, Boston Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -410,11 +426,11 @@
         ]
       }
     },
-    "floor_abc": 19,
+    "floor_abc": 22,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 25,
+      "gap": 20,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -423,10 +439,10 @@
         "B2 Specificity: not yet measured (5 pts)"
       ]
     },
-    "raw": 28.5,
+    "raw": 31.5,
     "assessed": 63,
     "coverage": 0.692,
-    "floor_abc_pct": 0.826,
+    "floor_abc_pct": 0.957,
     "gates_unavailable": [
       "G1",
       "G3"

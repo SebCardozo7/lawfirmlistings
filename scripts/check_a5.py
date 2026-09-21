@@ -100,6 +100,58 @@ ASSOCIATIONS = [
     ("Injured Workers' Bar Association", r"injured workers'? bar association|\bIWBA\b"),
     ("Workers' Injury Law & Advocacy Group", r"workers'? injury law (?:&|and) advocacy group|"
                                              r"\bWILG\b"),
+
+    # Everything above this line is New York, Maryland, New Jersey or national, because those
+    # were the markets when this list was written. Five states have been opened since and not
+    # one of their bar associations was on it, so a firm in Dallas or Portland that named its
+    # own state bar was read as naming nothing and lost three points to the reach of our own
+    # matching. The share of firms matching anything was 48% in New York and 60% in Maryland
+    # against 18% in Massachusetts and 20% in Oregon, and that difference was ours.
+    #
+    # These are not guessed. They are the bodies the firms in those states actually name, read
+    # off their own about and attorney pages, with three confirmed from the associations' own
+    # publications because a three-page read happened to miss them.
+
+    # Florida. "The Florida Bar" is the mandatory bar and "Florida Bar Association" is what
+    # firms write when they mean it.
+    ("The Florida Bar", r"\bthe florida bar\b|florida bar association"),
+    ("Florida Justice Association", r"florida justice association|\bFJA\b"),
+    ("Collier County Bar Association", r"collier county bar association"),
+    ("Polk County Trial Lawyers Association", r"polk county trial lawyers association"),
+    ("Polk County Bar Association", r"polk county bar association"),
+
+    # Massachusetts. Not "MBA": it is a business degree, and it is also what the Multnomah Bar
+    # Association calls itself in Oregon.
+    ("Massachusetts Bar Association", r"massachusetts bar association"),
+    ("Massachusetts Academy of Trial Attorneys", r"massachusetts academy of trial attorneys|"
+                                                 r"\bMATA\b"),
+    ("Boston Bar Association", r"boston bar association"),
+
+    # Oregon. The state bar is mandatory here too. "OSB" is left off as too short to be safe.
+    ("Oregon State Bar", r"oregon state bar"),
+    ("Oregon Trial Lawyers Association", r"oregon trial lawyers association|\bOTLA\b"),
+
+    # Texas.
+    ("State Bar of Texas", r"state bar of texas|texas state bar"),
+    ("Texas Trial Lawyers Association", r"texas trial lawyers association|\bTTLA\b"),
+    ("Dallas Bar Association", r"dallas bar association"),
+    ("Dallas Trial Lawyers Association", r"dallas trial lawyers association|\bDTLA\b"),
+    ("Tarrant County Bar Association", r"tarrant county bar association"),
+
+    # Indiana. "ISBA" is also the Illinois State Bar Association, and either way the firm has
+    # named a real state bar, which is what these three points are for.
+    ("Indiana State Bar Association", r"indiana state bar association|\bISBA\b"),
+    ("Indiana Trial Lawyers Association", r"indiana trial lawyers association|\bITLA\b"),
+    ("Lake County Bar Association", r"lake county bar association"),
+
+    # Two national bodies, for the same reason the compensation ones are here. The American
+    # College of Trial Lawyers turned up on an Indiana roster and was read as nothing, and the
+    # American Academy of Matrimonial Lawyers is the specialist body in a practice this
+    # directory now publishes forty-two firms in: a matrimonial firm belongs to it and to no
+    # trial lawyers association.
+    ("American College of Trial Lawyers", r"american college of trial lawyers|\bACTL\b"),
+    ("American Academy of Matrimonial Lawyers", r"american academy of matrimonial lawyers|"
+                                                r"\bAAML\b"),
 ]
 ASSOCIATIONS = [(name, re.compile(pattern, re.I)) for name, pattern in ASSOCIATIONS]
 

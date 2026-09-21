@@ -247,13 +247,24 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://www.saadlegal.com/attorney/sam-j-saad-iii/",
+        "quote": "ticipates in numerous professional organizations, including the Florida Bar Association, the Collier County Bar Association, and the Na"
+      },
+      {
+        "name": "Collier County Bar Association",
+        "source_url": "https://www.saadlegal.com/attorney/sam-j-saad-iii/",
+        "quote": "l organizations, including the Florida Bar Association, the Collier County Bar Association, and the Naples Area Board of Realtors (NABOR). He also ser"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of The Florida Bar, Collier County Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 3,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": true,
@@ -266,14 +277,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 48,
+    "total": 52,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -295,10 +306,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of The Florida Bar, Collier County Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -439,12 +450,12 @@
         ]
       }
     },
-    "floor_abc": 22,
+    "floor_abc": 25,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 22,
-      "floor_met": false,
+      "gap": 18,
+      "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
@@ -452,10 +463,10 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 37.5,
+    "raw": 40.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.579,
+    "floor_abc_pct": 0.658,
     "gates_unavailable": [
       "G1",
       "G2"
