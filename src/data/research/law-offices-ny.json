@@ -1,0 +1,731 @@
+{
+  "state": "NY",
+  "state_name": "New York",
+  "latest_year": 2025,
+  "measured_at": "2026-09-21",
+  "dataset": "Quarterly Census of Employment and Wages, annual averages, private ownership, NAICS 541110 Offices of Lawyers",
+  "publisher": "the U.S. Bureau of Labor Statistics",
+  "landing": "https://www.bls.gov/cew/",
+  "series": [
+    {
+      "year": 2016,
+      "law_offices": {
+        "establishments": 13178,
+        "employment": 115757,
+        "annual_wages": 14444267186,
+        "avg_weekly_wage": 2400
+      },
+      "legal_services": {
+        "establishments": 14098,
+        "employment": 122219,
+        "annual_wages": 14882639569,
+        "avg_weekly_wage": 2342
+      }
+    },
+    {
+      "year": 2017,
+      "law_offices": {
+        "establishments": 13246,
+        "employment": 117585,
+        "annual_wages": 15272241958,
+        "avg_weekly_wage": 2498
+      },
+      "legal_services": {
+        "establishments": 14176,
+        "employment": 124072,
+        "annual_wages": 15723494882,
+        "avg_weekly_wage": 2437
+      }
+    },
+    {
+      "year": 2018,
+      "law_offices": {
+        "establishments": 12989,
+        "employment": 118105,
+        "annual_wages": 15975934169,
+        "avg_weekly_wage": 2601
+      },
+      "legal_services": {
+        "establishments": 13892,
+        "employment": 124257,
+        "annual_wages": 16422688662,
+        "avg_weekly_wage": 2542
+      }
+    },
+    {
+      "year": 2019,
+      "law_offices": {
+        "establishments": 12668,
+        "employment": 119129,
+        "annual_wages": 16637592840,
+        "avg_weekly_wage": 2686
+      },
+      "legal_services": {
+        "establishments": 13565,
+        "employment": 125359,
+        "annual_wages": 17114957594,
+        "avg_weekly_wage": 2626
+      }
+    },
+    {
+      "year": 2020,
+      "law_offices": {
+        "establishments": 12639,
+        "employment": 113424,
+        "annual_wages": 16977963580,
+        "avg_weekly_wage": 2879
+      },
+      "legal_services": {
+        "establishments": 13540,
+        "employment": 119387,
+        "annual_wages": 17472920798,
+        "avg_weekly_wage": 2815
+      }
+    },
+    {
+      "year": 2021,
+      "law_offices": {
+        "establishments": 12255,
+        "employment": 113318,
+        "annual_wages": 18403941054,
+        "avg_weekly_wage": 3123
+      },
+      "legal_services": {
+        "establishments": 13141,
+        "employment": 119594,
+        "annual_wages": 18962550901,
+        "avg_weekly_wage": 3049
+      }
+    },
+    {
+      "year": 2022,
+      "law_offices": {
+        "establishments": 12334,
+        "employment": 116556,
+        "annual_wages": 19469986352,
+        "avg_weekly_wage": 3212
+      },
+      "legal_services": {
+        "establishments": 13244,
+        "employment": 123073,
+        "annual_wages": 20178639451,
+        "avg_weekly_wage": 3153
+      }
+    },
+    {
+      "year": 2023,
+      "law_offices": {
+        "establishments": 12488,
+        "employment": 119100,
+        "annual_wages": 20364051823,
+        "avg_weekly_wage": 3288
+      },
+      "legal_services": {
+        "establishments": 13477,
+        "employment": 125246,
+        "annual_wages": 20930837895,
+        "avg_weekly_wage": 3214
+      }
+    },
+    {
+      "year": 2024,
+      "law_offices": {
+        "establishments": 12545,
+        "employment": 120937,
+        "annual_wages": 22116441980,
+        "avg_weekly_wage": 3517
+      },
+      "legal_services": {
+        "establishments": 13581,
+        "employment": 127165,
+        "annual_wages": 22722197208,
+        "avg_weekly_wage": 3436
+      }
+    },
+    {
+      "year": 2025,
+      "law_offices": {
+        "establishments": 12532,
+        "employment": 123736,
+        "annual_wages": 23759487241,
+        "avg_weekly_wage": 3693
+      },
+      "legal_services": {
+        "establishments": 13629,
+        "employment": 129854,
+        "annual_wages": 24378341623,
+        "avg_weekly_wage": 3610
+      }
+    }
+  ],
+  "counties": [
+    {
+      "fips": "36061",
+      "county": "New York County",
+      "title": "New York County, New York",
+      "establishments": 3660,
+      "employment": 73665,
+      "avg_weekly_wage": 4822,
+      "unallocated": false
+    },
+    {
+      "fips": "36059",
+      "county": "Nassau County",
+      "title": "Nassau County, New York",
+      "establishments": 1653,
+      "employment": 10950,
+      "avg_weekly_wage": 2279,
+      "unallocated": false
+    },
+    {
+      "fips": "36103",
+      "county": "Suffolk County",
+      "title": "Suffolk County, New York",
+      "establishments": 1026,
+      "employment": 5276,
+      "avg_weekly_wage": 1873,
+      "unallocated": false
+    },
+    {
+      "fips": "36119",
+      "county": "Westchester County",
+      "title": "Westchester County, New York",
+      "establishments": 861,
+      "employment": 4565,
+      "avg_weekly_wage": 2538,
+      "unallocated": false
+    },
+    {
+      "fips": "36047",
+      "county": "Kings County",
+      "title": "Kings County, New York",
+      "establishments": 729,
+      "employment": 4432,
+      "avg_weekly_wage": 2165,
+      "unallocated": false
+    },
+    {
+      "fips": "36081",
+      "county": "Queens County",
+      "title": "Queens County, New York",
+      "establishments": 728,
+      "employment": 3377,
+      "avg_weekly_wage": 1815,
+      "unallocated": false
+    },
+    {
+      "fips": "36999",
+      "county": "Unknown Or Undefined",
+      "title": "Unknown Or Undefined, New York",
+      "establishments": 685,
+      "employment": 995,
+      "avg_weekly_wage": 2977,
+      "unallocated": true
+    },
+    {
+      "fips": "36029",
+      "county": "Erie County",
+      "title": "Erie County, New York",
+      "establishments": 466,
+      "employment": 4937,
+      "avg_weekly_wage": 1770,
+      "unallocated": false
+    },
+    {
+      "fips": "36055",
+      "county": "Monroe County",
+      "title": "Monroe County, New York",
+      "establishments": 281,
+      "employment": 2482,
+      "avg_weekly_wage": 1789,
+      "unallocated": false
+    },
+    {
+      "fips": "36067",
+      "county": "Onondaga County",
+      "title": "Onondaga County, New York",
+      "establishments": 261,
+      "employment": 1891,
+      "avg_weekly_wage": 1681,
+      "unallocated": false
+    },
+    {
+      "fips": "36001",
+      "county": "Albany County",
+      "title": "Albany County, New York",
+      "establishments": 260,
+      "employment": 2499,
+      "avg_weekly_wage": 2705,
+      "unallocated": false
+    },
+    {
+      "fips": "36087",
+      "county": "Rockland County",
+      "title": "Rockland County, New York",
+      "establishments": 225,
+      "employment": 639,
+      "avg_weekly_wage": 1763,
+      "unallocated": false
+    },
+    {
+      "fips": "36085",
+      "county": "Richmond County",
+      "title": "Richmond County, New York",
+      "establishments": 176,
+      "employment": 715,
+      "avg_weekly_wage": 1733,
+      "unallocated": false
+    },
+    {
+      "fips": "36005",
+      "county": "Bronx County",
+      "title": "Bronx County, New York",
+      "establishments": 158,
+      "employment": 1582,
+      "avg_weekly_wage": 1987,
+      "unallocated": false
+    },
+    {
+      "fips": "36071",
+      "county": "Orange County",
+      "title": "Orange County, New York",
+      "establishments": 148,
+      "employment": 1091,
+      "avg_weekly_wage": 1703,
+      "unallocated": false
+    },
+    {
+      "fips": "36027",
+      "county": "Dutchess County",
+      "title": "Dutchess County, New York",
+      "establishments": 128,
+      "employment": 495,
+      "avg_weekly_wage": 1550,
+      "unallocated": false
+    },
+    {
+      "fips": "36065",
+      "county": "Oneida County",
+      "title": "Oneida County, New York",
+      "establishments": 82,
+      "employment": 309,
+      "avg_weekly_wage": 1238,
+      "unallocated": false
+    },
+    {
+      "fips": "36091",
+      "county": "Saratoga County",
+      "title": "Saratoga County, New York",
+      "establishments": 78,
+      "employment": 289,
+      "avg_weekly_wage": 1280,
+      "unallocated": false
+    },
+    {
+      "fips": "36111",
+      "county": "Ulster County",
+      "title": "Ulster County, New York",
+      "establishments": 72,
+      "employment": 269,
+      "avg_weekly_wage": 1560,
+      "unallocated": false
+    },
+    {
+      "fips": "36063",
+      "county": "Niagara County",
+      "title": "Niagara County, New York",
+      "establishments": 56,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36007",
+      "county": "Broome County",
+      "title": "Broome County, New York",
+      "establishments": 49,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36093",
+      "county": "Schenectady County",
+      "title": "Schenectady County, New York",
+      "establishments": 44,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36109",
+      "county": "Tompkins County",
+      "title": "Tompkins County, New York",
+      "establishments": 43,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36013",
+      "county": "Chautauqua County",
+      "title": "Chautauqua County, New York",
+      "establishments": 42,
+      "employment": 132,
+      "avg_weekly_wage": 985,
+      "unallocated": false
+    },
+    {
+      "fips": "36069",
+      "county": "Ontario County",
+      "title": "Ontario County, New York",
+      "establishments": 40,
+      "employment": 135,
+      "avg_weekly_wage": 1165,
+      "unallocated": false
+    },
+    {
+      "fips": "36083",
+      "county": "Rensselaer County",
+      "title": "Rensselaer County, New York",
+      "establishments": 35,
+      "employment": 78,
+      "avg_weekly_wage": 1114,
+      "unallocated": false
+    },
+    {
+      "fips": "36079",
+      "county": "Putnam County",
+      "title": "Putnam County, New York",
+      "establishments": 34,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36105",
+      "county": "Sullivan County",
+      "title": "Sullivan County, New York",
+      "establishments": 33,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36075",
+      "county": "Oswego County",
+      "title": "Oswego County, New York",
+      "establishments": 30,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36113",
+      "county": "Warren County",
+      "title": "Warren County, New York",
+      "establishments": 27,
+      "employment": 167,
+      "avg_weekly_wage": 1517,
+      "unallocated": false
+    },
+    {
+      "fips": "36021",
+      "county": "Columbia County",
+      "title": "Columbia County, New York",
+      "establishments": 26,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36009",
+      "county": "Cattaraugus County",
+      "title": "Cattaraugus County, New York",
+      "establishments": 24,
+      "employment": 88,
+      "avg_weekly_wage": 1076,
+      "unallocated": false
+    },
+    {
+      "fips": "36011",
+      "county": "Cayuga County",
+      "title": "Cayuga County, New York",
+      "establishments": 24,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36015",
+      "county": "Chemung County",
+      "title": "Chemung County, New York",
+      "establishments": 22,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36045",
+      "county": "Jefferson County",
+      "title": "Jefferson County, New York",
+      "establishments": 22,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36101",
+      "county": "Steuben County",
+      "title": "Steuben County, New York",
+      "establishments": 22,
+      "employment": 108,
+      "avg_weekly_wage": 1103,
+      "unallocated": false
+    },
+    {
+      "fips": "36031",
+      "county": "Essex County",
+      "title": "Essex County, New York",
+      "establishments": 21,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36019",
+      "county": "Clinton County",
+      "title": "Clinton County, New York",
+      "establishments": 20,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36077",
+      "county": "Otsego County",
+      "title": "Otsego County, New York",
+      "establishments": 19,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36089",
+      "county": "St. Lawrence County",
+      "title": "St. Lawrence County, New York",
+      "establishments": 17,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36043",
+      "county": "Herkimer County",
+      "title": "Herkimer County, New York",
+      "establishments": 16,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36053",
+      "county": "Madison County",
+      "title": "Madison County, New York",
+      "establishments": 15,
+      "employment": 28,
+      "avg_weekly_wage": 899,
+      "unallocated": false
+    },
+    {
+      "fips": "36057",
+      "county": "Montgomery County",
+      "title": "Montgomery County, New York",
+      "establishments": 14,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36035",
+      "county": "Fulton County",
+      "title": "Fulton County, New York",
+      "establishments": 13,
+      "employment": 37,
+      "avg_weekly_wage": 789,
+      "unallocated": false
+    },
+    {
+      "fips": "36037",
+      "county": "Genesee County",
+      "title": "Genesee County, New York",
+      "establishments": 13,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36039",
+      "county": "Greene County",
+      "title": "Greene County, New York",
+      "establishments": 12,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36033",
+      "county": "Franklin County",
+      "title": "Franklin County, New York",
+      "establishments": 11,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36051",
+      "county": "Livingston County",
+      "title": "Livingston County, New York",
+      "establishments": 11,
+      "employment": 55,
+      "avg_weekly_wage": 1180,
+      "unallocated": false
+    },
+    {
+      "fips": "36121",
+      "county": "Wyoming County",
+      "title": "Wyoming County, New York",
+      "establishments": 11,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36023",
+      "county": "Cortland County",
+      "title": "Cortland County, New York",
+      "establishments": 10,
+      "employment": 26,
+      "avg_weekly_wage": 685,
+      "unallocated": false
+    },
+    {
+      "fips": "36073",
+      "county": "Orleans County",
+      "title": "Orleans County, New York",
+      "establishments": 10,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36017",
+      "county": "Chenango County",
+      "title": "Chenango County, New York",
+      "establishments": 9,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36117",
+      "county": "Wayne County",
+      "title": "Wayne County, New York",
+      "establishments": 9,
+      "employment": 29,
+      "avg_weekly_wage": 1379,
+      "unallocated": false
+    },
+    {
+      "fips": "36025",
+      "county": "Delaware County",
+      "title": "Delaware County, New York",
+      "establishments": 8,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36095",
+      "county": "Schoharie County",
+      "title": "Schoharie County, New York",
+      "establishments": 6,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36115",
+      "county": "Washington County",
+      "title": "Washington County, New York",
+      "establishments": 6,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36003",
+      "county": "Allegany County",
+      "title": "Allegany County, New York",
+      "establishments": 5,
+      "employment": 19,
+      "avg_weekly_wage": 955,
+      "unallocated": false
+    },
+    {
+      "fips": "36099",
+      "county": "Seneca County",
+      "title": "Seneca County, New York",
+      "establishments": 5,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36123",
+      "county": "Yates County",
+      "title": "Yates County, New York",
+      "establishments": 5,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36049",
+      "county": "Lewis County",
+      "title": "Lewis County, New York",
+      "establishments": 4,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36097",
+      "county": "Schuyler County",
+      "title": "Schuyler County, New York",
+      "establishments": 4,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    },
+    {
+      "fips": "36107",
+      "county": "Tioga County",
+      "title": "Tioga County, New York",
+      "establishments": 4,
+      "employment": 0,
+      "avg_weekly_wage": 0,
+      "unallocated": false
+    }
+  ],
+  "citations": [
+    {
+      "label": "Median annual wage, lawyers, United States",
+      "value": 159670,
+      "who": "U.S. Bureau of Labor Statistics",
+      "what": "Occupational Outlook Handbook, May 2025",
+      "url": "https://www.bls.gov/ooh/legal/lawyers.htm",
+      "read_at": "2026-09-21"
+    }
+  ]
+}
