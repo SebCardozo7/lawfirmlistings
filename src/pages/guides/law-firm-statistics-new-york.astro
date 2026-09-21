@@ -92,10 +92,19 @@ const moreLicensed = residentAttorneys - latest.law_offices.employment;
 const measured = new Date(offices.measured_at).toLocaleDateString('en-US',
   { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
-const title = 'Law Firm Statistics in New York: Fewer Offices, More Lawyers';
-const description = 'The federal payroll record counts law offices in New York. Over ten years there are fewer of them, employing more people, paid half again as much.';
+// The headline is computed rather than typed, which is the only way a figure belongs in one.
+// A number in an indexed title goes stale the moment the source updates, and this dataset
+// publishes a new year every year; deriving it means the year the page ships is the year the
+// title claims, and nobody has to remember to come back and edit it.
+//
+// The shape is the one the trade press uses for a study: the finding is the headline and the
+// scale is the credential, rather than the subject followed by a colon. "Law firm statistics"
+// stays in it because that is the phrase somebody types.
+const title = `Law Firm Statistics: New York Lost ${Math.abs(officeChange)} Offices, Gained ${n(jobChange)} Jobs`;
+const description = `New York has ${n(latest.law_offices.establishments)} law offices, ${Math.abs(officeChange)} fewer than ten years ago. They employ ${n(jobChange)} more people than they did, and pay them ${wageGrowth}% more a week.`;
 ---
-<Base title={title} description={description} nav="guides" image="/og/ranking.png"
+<Base title={title} description={description} nav="guides"
+  figuresFrom={`${offices.dataset}, read ${measured}`} image="/og/ranking.png"
   imageAlt="A row of doorways thinning across ten years while the stacks of people above them grow taller">
 <article>
 <header class="article-head">
@@ -103,7 +112,7 @@ const description = 'The federal payroll record counts law offices in New York. 
     <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Law firm statistics</li></ol>
     <span class="eyebrow" style="margin-top:18px">Reference · Public statistics</span>
     <h1>{title}</h1>
-    <p class="lede">New York had {n(first.law_offices.establishments)} law offices in {first.year} and {n(latest.law_offices.establishments)} in {latest.year}. Over the same ten years the number of people working in them rose by {n(jobChange)} and the average weekly wage rose {wageGrowth}%. Fewer doors, more people behind them, paid considerably more.</p>
+    <p class="lede">The number of law offices in New York has fallen every few years for a decade. The number of people working in them has not. We pulled ten years of the federal payroll record and the two lines go in opposite directions: <b>{Math.abs(officeChange)} fewer offices</b>, <b>{n(jobChange)} more jobs</b>, and <b>{wageGrowth}% more</b> in the average weekly pay packet. Here is what that looks like, county by county.</p>
     <div class="byline">
       <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Public statistics, no legal content</div></div>
       <span class="sep" aria-hidden="true"></span><span>Read {measured}</span>
@@ -118,12 +127,12 @@ const description = 'The federal payroll record counts law offices in New York. 
   <nav class="toc" aria-label="On this page">
     <h4>On this page</h4>
     <ol>
-      <li><a href="#count" class="is-active">How many law firms</a></li>
-      <li><a href="#shrinking">Fewer offices, more people</a></li>
-      <li><a href="#where">Where they are</a></li>
-      <li><a href="#pay">What they pay</a></li>
-      <li><a href="#licences">Licences are not jobs</a></li>
-      <li><a href="#limits">What this count misses</a></li>
+      <li><a href="#shrinking" class="is-active">The two lines that diverge</a></li>
+      <li><a href="#where">Manhattan takes 60% of the jobs</a></li>
+      <li><a href="#pay">A 2.9x pay gap inside one state</a></li>
+      <li><a href="#licences">More lawyers than legal jobs</a></li>
+      <li><a href="#count">What counts as a law firm here</a></li>
+      <li><a href="#limits">Three things this misses</a></li>
     </ol>
   </nav>
 
@@ -139,14 +148,8 @@ const description = 'The federal payroll record counts law offices in New York. 
     />
     <div class="callout"><b>How to read this.</b> Every figure here is aggregated from the federal payroll record, which counts offices that report payroll rather than firms: a practice with four offices is four of these. Nothing here is legal information or advice.</div>
 
-    <h2 id="count">How many law firms are in New York</h2>
-    <p>The honest answer is that nobody counts law firms. What is counted is establishments that report payroll, and in {latest.year} New York had <b>{n(latest.law_offices.establishments)}</b> of them under the code for offices of lawyers, employing <b>{n(latest.law_offices.employment)}</b> people.</p>
-    <p>Two things that number is not. It is not firms: a practice with four offices files as four establishments, so the count of firms is lower than {n(latest.law_offices.establishments)} and nothing published says by how much. And it is not everybody: a solo practitioner with no employees may report no payroll at all and never appear here.</p>
-    {wider && (
-      <p>The wider industry code, legal services, has <b>{n(wider.establishments)}</b> establishments in the same year. The <b>{n(notFirms)}</b> that are not offices of lawyers are title abstract offices, notaries, process servers and the rest of the legal economy that is not a law practice. This page uses the narrower code throughout.</p>
-    )}
-
-    <h2 id="shrinking">Fewer offices, more people in them</h2>
+    <h2 id="shrinking">The two lines that diverge</h2>
+    <p>Start with the doors. New York had {n(first.law_offices.establishments)} law offices in {first.year}. It has {n(latest.law_offices.establishments)} now, and the peak was {peak.year}.</p>
     <ColumnChart
       heading={`Law offices in New York, ${first.year} to ${latest.year}`}
       columns={officeColumns}
@@ -154,7 +157,8 @@ const description = 'The federal payroll record counts law offices in New York. 
       quietLabel="earlier years"
       caption="Annual averages of establishments reporting payroll under NAICS 541110."
     />
-    <p>The count peaked in <b>{peak.year}</b> at {n(peak.law_offices.establishments)} and fell for four straight years after it. It has not recovered: {latest.year} is still {n(peak.law_offices.establishments - latest.law_offices.establishments)} offices below the peak.</p>
+    <p>It fell for four straight years after that peak and it has not recovered. {latest.year} is still <b>{n(peak.law_offices.establishments - latest.law_offices.establishments)} offices below</b> where the state was in {peak.year}.</p>
+    <p>Now the people.</p>
     <ColumnChart
       heading={`People employed in those offices, ${first.year} to ${latest.year}`}
       columns={jobColumns}
@@ -162,35 +166,46 @@ const description = 'The federal payroll record counts law offices in New York. 
       quietLabel="earlier years"
       caption="The same establishments, counted by the people on their payroll."
     />
-    <p>Employment went the other way. It dipped in 2020 and 2021, which needs no explaining, and then passed its old level: {n(latest.law_offices.employment)} people in {latest.year} against {n(first.law_offices.employment)} in {first.year}. Put the two series together and the average office has grown from {(first.law_offices.employment / first.law_offices.establishments).toFixed(1)} people to <b>{perOffice.toFixed(1)}</b>.</p>
-    <p>That is consolidation, and it is the single most useful thing on this page for anybody choosing a lawyer: the profession is arranging itself into fewer, larger practices, and a small firm is a smaller share of the market than it was a decade ago.</p>
+    <p>Employment went the other way. It dipped in 2020 and 2021, which needs no explaining, then passed its old level: <b>{n(latest.law_offices.employment)}</b> people against {n(first.law_offices.employment)} ten years earlier.</p>
+    <p>Put the two charts together and you get the finding. The average New York law office has grown from <b>{(first.law_offices.employment / first.law_offices.establishments).toFixed(1)} people to {perOffice.toFixed(1)}</b>.</p>
+    <p>That is consolidation, and it is the most useful line on this page if you are choosing a lawyer. The profession is arranging itself into fewer, larger practices, and the small firm is a smaller share of the market than it was a decade ago.</p>
 
-    <h2 id="where">Where they are</h2>
+    <h2 id="where">Manhattan takes {jobShare}% of the jobs</h2>
     <BarChart
       heading={`Law offices by county, ${latest.year}, top ${countyRows.length}`}
       rows={countyRows}
       caption="Counties as the Bureau of Labor Statistics names them. Kings is Brooklyn, Richmond is Staten Island, and New York County is Manhattan."
     />
-    <p>{manhattan.county} holds <b>{officeShare}%</b> of New York's law offices and <b>{jobShare}%</b> of the jobs in them. That gap is the whole story of the state's legal market: the offices are spread across the state and the large ones are in Manhattan. The average {manhattan.county} office holds {(manhattan.employment / manhattan.establishments).toFixed(1)} people against {(placed[1].employment / placed[1].establishments).toFixed(1)} in {placed[1].county}.</p>
+    <p>{manhattan.county} has <b>{officeShare}%</b> of the offices and <b>{jobShare}%</b> of the jobs. That gap is the whole story of this market.</p>
+    <p>The offices are spread across the state. The big ones are not. An average {manhattan.county} office holds <b>{(manhattan.employment / manhattan.establishments).toFixed(1)} people</b>; in {placed[1].county}, next on the list, it holds {(placed[1].employment / placed[1].establishments).toFixed(1)}.</p>
     {unplaced && (
       <p>A further {n(unplaced.establishments)} establishments are recorded statewide without a county, which the Bureau labels {unplaced.county.toLowerCase()}. They are left out of the ranking above rather than assigned somewhere, because an establishment nobody could place is not a county.</p>
     )}
 
-    <h2 id="pay">What they pay</h2>
+    <h2 id="pay">The same job pays {payRatio} times more in one county</h2>
     <BarChart
       heading={`Average weekly wage in a law office, ${latest.year}`}
       rows={payRows}
       caption="The same counties, ranked by pay instead of by size. The note is how many offices the average is taken over."
     />
-    <p>A week in a {manhattan.county} law office pays <b>${n(manhattan.avg_weekly_wage)}</b> and a week in {cheapest.label} pays <b>${n(cheapest.value)}</b>, a factor of {payRatio} for the same industry code in the same state. Some of that is seniority and some of it is the kind of work: the firms doing corporate deals are in Manhattan and the firms doing closings and injury cases are everywhere.</p>
+    <p>A week in a {manhattan.county} law office pays <b>${n(manhattan.avg_weekly_wage)}</b>. The same week in {cheapest.label} pays <b>${n(cheapest.value)}</b>. Same industry code, same state, <b>{payRatio} times</b> the money.</p>
+    <p>Some of that is seniority and some of it is the work. The corporate deals are in Manhattan. The closings and the injury cases are everywhere.</p>
     <p>For national context, the <a href={bls.url} rel="noopener" target="_blank">{bls.who}</a> puts the median annual wage for lawyers at <b>${n(bls.value)}</b> as of {bls.what.replace('Occupational Outlook Handbook, ', '')}. That is a different measure again: it counts people whose occupation is lawyer, wherever they work, while everything above counts everybody on a law office's payroll including the people who are not lawyers.</p>
 
-    <h2 id="licences">A licence is not a job</h2>
+    <h2 id="licences">There are more lawyers than legal jobs</h2>
     <p>New York's own register of attorneys holds <b>{n(residentAttorneys)}</b> live registrations with a New York address. Its law offices employ <b>{n(latest.law_offices.employment)}</b> people, and not all of those are lawyers.</p>
-    <p>So there are at least <b>{n(moreLicensed)}</b> more resident licensed attorneys in New York than there are people working in its law offices. They are in-house at companies, in government, on the bench, teaching, retired but still registered, or doing something else entirely. If you have ever wondered why a state can report a record number of lawyers while the number of law firms falls, this is the reason.</p>
+    <p>So New York has at least <b>{n(moreLicensed)}</b> more resident licensed attorneys than people working in its law offices. They are in-house, in government, on the bench, teaching, retired but still registered, or doing something else entirely.</p>
+    <p>If you have ever wondered how a state reports a record number of lawyers in the same decade its law firms shrink, that is the answer.</p>
     <p>We have written separately about <a href="/guides/how-many-lawyers-in-new-york/">what that register does and does not say</a>, including the four different answers it gives to how many lawyers the state has.</p>
 
-    <h2 id="limits">What this count misses</h2>
+    <h2 id="count">What counts as a law firm here</h2>
+    <p>Nobody counts law firms. What gets counted is establishments that report payroll, and that is what every figure above is.</p>
+    <p>It is not a count of firms. A practice with four offices files as four establishments, so the real number of firms is lower than {n(latest.law_offices.establishments)} and nothing published says by how much.</p>
+    {wider && (
+      <p>The wider industry code, legal services, has <b>{n(wider.establishments)}</b> establishments in the same year. The <b>{n(notFirms)}</b> that are not offices of lawyers are title abstract offices, notaries, process servers and the rest of the legal economy that is not a law practice. This page uses the narrower code throughout.</p>
+    )}
+
+    <h2 id="limits">Three things this misses</h2>
     <p><b>It counts offices, not firms.</b> Nothing published reconciles the two, so the number of law firms in New York is smaller than {n(latest.law_offices.establishments)} by an amount nobody measures.</p>
     <p><b>It misses practices with no payroll.</b> A solo practitioner who employs nobody may not appear at all, which means the smallest end of the profession is the part this dataset sees least.</p>
     <p><b>It says nothing about quality, and neither does any count.</b> A county with more offices is not a county with better lawyers. What a firm publishes about itself is checkable and is a different question, which is <a href="/methodology/">the one this directory measures</a>.</p>

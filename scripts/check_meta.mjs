@@ -49,6 +49,7 @@ const pages = walk(DIST).map(p => {
     path: p,
     url: ('/' + relative(DIST, p).split(sep).join('/')).replace(/\/index\.html$/, '/'),
     title: attr(html, /<title>([\s\S]*?)<\/title>/),
+    figuresFrom: attr(html, /<meta name="lfl:figures-from" content="([^"]*)"/),
     description: attr(html, /<meta name="description" content="([\s\S]*?)"/),
     noindex: /name="robots"[^>]*noindex/.test(html),
   };
@@ -78,7 +79,7 @@ for (const { url, path } of pages) {
   }
 }
 
-for (const { url, title, description, noindex } of pages) {
+for (const { url, title, description, noindex, figuresFrom } of pages) {
   if (!title) problems.push([url, 'no title']);
   if (!description) {
     problems.push([url, 'no description']);
@@ -97,6 +98,14 @@ for (const { url, title, description, noindex } of pages) {
     if (seen.has(text)) problems.push([url, `duplicate ${what}, same as ${seen.get(text)}`]);
     else seen.set(text, url);
   }
+
+  // Unless the page declares what date its figures are a snapshot of. The ban exists because a
+  // count that moves whenever a firm is added leaves Google serving a snippet that is wrong more
+  // often than it is right. A reference article built on an annual dataset is the case it was not
+  // written for: the figure moves once a year, on a date we choose, and the headline carrying it
+  // is the reason anybody clicks. Declaring the snapshot is the page accepting that trade, and it
+  // puts the date in the markup, so a stale snippet is a true statement about a stated date.
+  if (figuresFrom) continue;
 
   for (const [text, what] of [[title, 'title'], [description, 'description']]) {
     let stripped = text;

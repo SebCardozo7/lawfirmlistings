@@ -14,9 +14,21 @@ interface Props {
   image?: string;
   /** What the share card shows, for the platforms and readers that surface it. */
   imageAlt?: string;
+  /**
+   * What the figures in this page's title and description are a snapshot of, where they carry
+   * one. check_meta.mjs bans a figure in either, because a count that moves whenever a firm is
+   * added leaves Google serving an indexed snippet that is wrong more often than it is right.
+   *
+   * A reference article built on somebody else's annual dataset is the case that rule was not
+   * written for: the figure moves once a year, on a date we choose by re-running the fetch, and
+   * a headline that carries it is the reason anybody clicks. Declaring the snapshot lifts the
+   * ban for this page and puts the date in the markup, so a stale snippet is still a true
+   * statement about a stated date rather than a wrong one about today.
+   */
+  figuresFrom?: string;
 }
 const { title, description, nav = 'home', schema, noindex: pageNoindex = false,
-        image, imageAlt } = Astro.props;
+        image, imageAlt, figuresFrom } = Astro.props;
 // Build-time switch (Cloudflare → Settings → Build → Variables): LFL_NOINDEX=true keeps the whole site out of search engines until launch.
 const noindex = pageNoindex || import.meta.env.LFL_NOINDEX === 'true';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -46,6 +58,7 @@ const fullTitle = title.includes(siteName) || title.length > 52 ? title : `${tit
     <meta name="google-site-verification" content="sR3JxIaW5fDkrIudyfYNCTgsj2f60U_N-U9T_hFlNT4" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {figuresFrom && <meta name="lfl:figures-from" content={figuresFrom} />}
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     <meta property="og:site_name" content={siteName} />
