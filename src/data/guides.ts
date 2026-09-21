@@ -22,7 +22,7 @@ export interface Guide {
   thumb?: string;
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
-  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster';
+  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster' | 'shield';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -48,6 +48,20 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'what-law-firms-publish-about-malpractice-insurance',
+    cover: 'shield',
+    kicker: 'Method',
+    title: 'New Study: Law Firms List Their Bar Memberships, Not Their Insurance',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Professional liability cover is what pays a client back when their own lawyer is ' +
+      'negligent. We read every page these firms publish about themselves looking for one that ' +
+      'says they carry it, including in the one state where carrying it is mandatory.',
+    thumb: 't3',
+    icon: 'scale',
+    meta: 'The credential nobody prints',
+  },
   {
     slug: 'what-it-takes-to-check-a-law-firm',
     cover: 'roster',
