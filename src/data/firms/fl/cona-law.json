@@ -5,7 +5,7 @@
   "website": "https://cona.law/",
   "domain": "cona.law",
   "phone": "(239) 776-7163",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "real-estate",
@@ -161,10 +161,10 @@
       "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
-      "pass": false,
-      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-15"
+      "pass": true,
+      "evidence": "CONA LAW PLLC is an active FLAL on the Florida register, document L19000097044, filed 2019-04-08, with 1 Google-verified location",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     },
     "G5": {
       "pass": true,
@@ -174,9 +174,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "20 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2019-04-11, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "1 Google-verified location and 7 years since the entity was filed in 2019. This practice is transactional, so the gate asks for a verified listing and the year in operation rather than ten reviews, and its 20 reviews are scored in pillar C instead",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     }
   },
   "cohort_id": "fl-naples-real-estate",
@@ -249,8 +249,8 @@
   },
   "score": {
     "total": 26,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
@@ -443,5 +443,13 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "entity": {
+    "legal_name": "CONA LAW PLLC",
+    "entity_type": "FLAL",
+    "dos_id": "L19000097044",
+    "formed": "2019-04-08",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-21"
   }
 }

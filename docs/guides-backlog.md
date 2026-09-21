@@ -698,14 +698,24 @@ rescores 217 firms, which is not a guide run's call:
 
 ## Open items for a person
 
-- **Florida's register is the only gate in the directory blocked by us rather than by a state, and
-  it is now published in a guide.** 34 Florida firms carry `Google Places API (partial)` on G3
-  because `check_entity.py` says Florida's register is "published in full as data files, on an SFTP
-  host that answers an anonymous request with a 401. Reading it is work we owe". The registers
-  guide says that out loud, in those terms, because the alternative was letting a reader think
-  Florida is like Indiana and Maryland. It is not: those states publish nothing, and Florida
-  publishes everything. Doing the work moves 34 firms off a blocked gate. Ranked item 1.
-  Noted 2026-09-21.
+- ~~**Florida's register is the only gate in the directory blocked by us rather than by a state**~~
+  **Done 2026-09-21, and the blocker did not exist.** `check_entity.py` said the bulk data "needs
+  an account arranged with the Division of Corporations". No account is needed: the state
+  publishes the credentials for that host on its own data-downloads page, and the host answers
+  plain HTTPS with them. The sentence had been written once and never retested.
+  `scripts/check_fl_register.py` reads the 1.8 GB quarterly snapshot, 17.2 GB uncompressed, in
+  one pass for all 34 firms. **17 of 34 matched an active entity and all 11 whose G3 was the last
+  gate went from Listed to Verified.** The 17 misses were spot-checked against the raw file and
+  are genuine absences, which is what a Florida sole proprietorship looks like: an attorney may
+  practise without registering an entity, and the gate's evidence says so rather than counting it
+  against the firm. Two things were found on the way. Florida's file carries no professional
+  entity field, so the tie-break that settles a shared surname in New York has nothing to read
+  and the city of a verified office does that work instead. And the first run made three Naples
+  real estate firms **not eligible** by applying G6's ten-review minimum to a transactional
+  practice the methodology exempts, one of them the very firm the methodology cites as the reason
+  the exemption exists. The script now knows the exemption, and it no longer skips a firm marked
+  not eligible, because that skip made the harshest label this directory publishes the one state
+  a check could not leave.
 
 - **`operating.years` is a domain age and this file said it was a register date.** Corrected in the
   ranked list above. Worth repeating here because it is the third time two fields that sound like

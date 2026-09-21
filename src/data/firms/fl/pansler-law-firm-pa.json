@@ -5,7 +5,7 @@
   "website": "https://www.pansler.com/",
   "domain": "pansler.com",
   "phone": "(863) 683-7500",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -151,10 +151,10 @@
       "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. 1 of them share a surname with a disciplined attorney and were read against the text of those decisions, which name somebody else. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
-      "pass": false,
-      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-14"
+      "pass": true,
+      "evidence": "THE PANSLER LAW FIRM, P.A. is an active DOMP on the Florida register, document P07000008926, filed 2007-01-19, with 1 Google-verified location",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     },
     "G5": {
       "pass": true,
@@ -164,9 +164,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "43 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2007-01-29, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-14"
+      "evidence": "43 public client reviews and 20 years since the entity was filed in 2007",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     }
   },
   "cohort_id": "fl-personal-injury",
@@ -266,8 +266,8 @@
   },
   "score": {
     "total": 35,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
@@ -469,5 +469,13 @@
     "bytes": 12810,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "entity": {
+    "legal_name": "THE PANSLER LAW FIRM, P.A.",
+    "entity_type": "DOMP",
+    "dos_id": "P07000008926",
+    "formed": "2007-01-19",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-21"
   }
 }

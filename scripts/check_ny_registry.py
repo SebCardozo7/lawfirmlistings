@@ -633,7 +633,12 @@ def main() -> int:
     failures: list[str] = []
     for path in paths:
         firm = json.loads(path.read_text(encoding="utf-8"))
-        if firm.get("status") in ("sample", "not_eligible"):
+        # A sample is a fixture. A firm marked not eligible is not one, and skipping it makes
+        # that label the one state a check cannot leave: the gate that failed is exactly the gate
+        # a fresh read of the register might clear, and refusing to look again means a wrong
+        # "Not eligible" stays on a real business until somebody notices by hand. The Florida
+        # register script locked in its own first mistake this way before the skip was narrowed.
+        if firm.get("status") == "sample":
             continue
         if firm.get("market", {}).get("state") != "NY":
             # A New York register has nothing to say about a firm admitted elsewhere. This ran

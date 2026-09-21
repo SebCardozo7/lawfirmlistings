@@ -5,7 +5,7 @@
   "website": "https://glpa.law/",
   "domain": "glpa.law",
   "phone": "(239) 207-3403",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "real-estate",
@@ -197,10 +197,10 @@
       "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. 1 of them share a surname with a disciplined attorney and were read against the text of those decisions, which name somebody else. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
-      "pass": false,
-      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-15"
+      "pass": true,
+      "evidence": "GOODWIN LAW, P.A. is an active DOMP on the Florida register, document P15000026521, filed 2015-03-19, with 1 Google-verified location",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     },
     "G5": {
       "pass": true,
@@ -210,9 +210,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "67 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2022-04-08, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "1 Google-verified location and 12 years since the entity was filed in 2015. This practice is transactional, so the gate asks for a verified listing and the year in operation rather than ten reviews, and its 67 reviews are scored in pillar C instead",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     }
   },
   "cohort_id": "fl-naples-real-estate",
@@ -296,8 +296,8 @@
   },
   "score": {
     "total": 55,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
@@ -490,5 +490,13 @@
     ],
     "assessable": 91,
     "comparable": true
+  },
+  "entity": {
+    "legal_name": "GOODWIN LAW, P.A.",
+    "entity_type": "DOMP",
+    "dos_id": "P15000026521",
+    "formed": "2015-03-19",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-21"
   }
 }

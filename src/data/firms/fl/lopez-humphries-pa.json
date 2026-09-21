@@ -9,7 +9,7 @@
   "website": "https://lopezandhumphries.com",
   "domain": "lopezandhumphries.com",
   "phone": "(863) 777-4191",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -164,10 +164,10 @@
       "evidence": "1 of the firm's attorneys share a surname with a disciplined attorney, and for Joseph W. Brown 3 of 7 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
     },
     "G3": {
-      "pass": false,
-      "evidence": "4 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-13"
+      "pass": true,
+      "evidence": "LOPEZ & HUMPHRIES, P.A. is an active DOMP on the Florida register, document P09000048369, filed 2009-06-03, with 4 Google-verified locations",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     },
     "G5": {
       "pass": true,
@@ -177,9 +177,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "542 public client reviews across 4 Google listings, above the 10 minimum, and the firm's domain has been registered since 2012-11-02, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-13"
+      "evidence": "542 public client reviews and 17 years since the entity was filed in 2009",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-21"
     }
   },
   "cohort_id": "fl-personal-injury",
@@ -202,8 +202,8 @@
   },
   "score": {
     "total": 67,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
@@ -404,5 +404,13 @@
       "source": "CourtListener docket search (Free Law Project), RECAP collection, screening only",
       "checked_at": "2026-09-13"
     }
+  },
+  "entity": {
+    "legal_name": "LOPEZ & HUMPHRIES, P.A.",
+    "entity_type": "DOMP",
+    "dos_id": "P09000048369",
+    "formed": "2009-06-03",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-21"
   }
 }
