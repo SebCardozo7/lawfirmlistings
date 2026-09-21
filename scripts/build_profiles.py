@@ -155,8 +155,15 @@ FEE_FURNITURE = re.compile(
     r"call us|se habla|menu|home\b|past results do not guarantee", re.I)
 
 
-def fee_sentence(quote):
+def fee_sentence(quote, priced=False):
     """The firm's own sentence about its fees, or nothing.
+
+    `priced` says the window came from a fee finding by scripts/check_domestic.py or
+    scripts/check_transaction.py rather than from a keyword sweep of the whole site. Those two
+    read a fee page, matched a fee pattern and kept the source URL, so a money figure inside the
+    sentence is a price and not a verdict from a results page. Without it the guard below threw
+    away the only real fee sentences in two practices: a firm publishing "Flat fees for a NY
+    uncontested divorce are: $1,500" had that read as a settlement and dropped.
 
     What was stored instead was a 190-character window cut around a keyword, which meant 35 of 37
     profiles published something starting mid-word: "rsonal Attention Trusted Legal Support",
@@ -188,8 +195,16 @@ def fee_sentence(quote):
     # "Attention Trusted Legal Support Florida legal support" through as fee statements.
     # Any money at all, written any way. The first version asked for four digits and let
     # "NYC We have won over $1 BILLION for accident injury" through as a fee statement.
-    if re.search(r"\$\s*[\d.,]+\s*(?:billion|million|thousand|k\b)?", sentence, re.I):
+    if not priced and re.search(r"\$\s*[\d.,]+\s*(?:billion|million|thousand|k\b)?",
+                                sentence, re.I):
         return None                      # a figure from a results page, not a fee term
+    # Even on a fee page, a seven-figure number is a recovery rather than a price. Written as a
+    # word or as digits: "$1 BILLION" and "$3,167,000" are both somebody's settlement.
+    if priced and (re.search(r"\$\s*[\d.,]+\s*(?:billion|million)", sentence, re.I)
+                   or re.search(r"\$\s*\d[\d,]*", sentence)
+                   and max(int(re.sub(r"\D", "", m) or 0)
+                           for m in re.findall(r"\$\s*\d[\d,]*", sentence)) >= 1000000):
+        return None
     if re.search(r"(?:\b[A-Z][a-z]+\b[ ,]+){3,}[A-Z][a-z]+", sentence):
         return None                      # a run of Title Case words is a menu
     # Two capitalised words straight after a lowercase one is the seam where one menu item was
@@ -199,7 +214,15 @@ def fee_sentence(quote):
         return None
     # A fee statement is the firm addressing a reader. Without a person in it, the window caught
     # prose about fees in general rather than this firm's terms.
-    if not re.search(r"\b(?:we|our|us|you|your|clients?)\b", sentence, re.I):
+    #
+    # Unless it carries a price. "Flat fees for a NY uncontested divorce are: $1,500 with no
+    # children and $2,500 with children" names nobody and is the plainest fee disclosure in the
+    # directory, and this guard was dropping it. A figure on a fee page is this firm's figure:
+    # general prose about what a divorce costs does not quote a number and call it a fee, and
+    # scripts/check_domestic.py moves the sentences that do to market_rate_quoted before they
+    # reach here.
+    priced_here = priced and re.search(r"\$\s*[\d.,]+", sentence)
+    if not priced_here and not re.search(r"\b(?:we|our|us|you|your|clients?)\b", sentence, re.I):
         return None
     return sentence
 
@@ -308,10 +331,25 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
     # engagements are priced as flat fees. scripts/check_transaction.py found those words; this
     # just believes them.
     tx = rec.get("transaction") or {}
+    # And the same again for a domestic relations practice, with a stronger reason. Rule
+    # 1.5(d)(5)(i) forbids a contingent fee in a matrimonial matter outright, so reading only the
+    # contingency claim reported "Not stated" for all forty-two family law firms in the directory,
+    # including the four that publish a price. The New York City and Buffalo passes each patched
+    # this by hand in a scratchpad script; it belongs here, so the next family market does not
+    # need one. scripts/check_domestic.py found the words.
+    dm = rec.get("domestic") or {}
     if "contingency" in claims:
         fee_model = "Contingency"
     elif tx.get("flat_fee"):
         fee_model = "Flat fee"
+    elif dm.get("hourly"):
+        fee_model = "Hourly rate published"
+    elif dm.get("retainer_figure"):
+        fee_model = "Retainer figure published"
+    elif dm.get("flat_fee"):
+        fee_model = "Flat fee published"
+    elif dm.get("fee_terms"):
+        fee_model = "Billing terms published, no figure"
     else:
         fee_model = "Not stated"
     built_offices = build_offices(rec)
@@ -393,6 +431,10 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
         # What the firm publishes about the transaction, where the practice has no outcomes.
         # scripts/score.py reads this for pillar B; see scripts/check_transaction.py.
         **({"transaction": rec["transaction"]} if rec.get("transaction") else {}),
+        # The same for a domestic relations practice, which also has no outcomes to read and a
+        # different pillar B. promote_measurements.py copies this onto a published profile; a
+        # new draft was going out without it and getting it on the next promote.
+        **({"domestic": rec["domestic"]} if rec.get("domestic") else {}),
         "free_consultation": "free_consultation" in claims,
         "availability": availability,
         # Assembled from the fields above rather than left for a person to write. See
@@ -424,11 +466,19 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
             ],
         },
     }
+    # The firm's own sentence about its price, from whichever pillar B measured this practice
+    # with. Reading only the injury and real estate blocks meant no family law firm in the
+    # directory could have a fee statement at all, so E1's two points for publishing one were
+    # out of reach for forty-two firms whatever they published, and the profile of a firm
+    # advertising "Transparent Flat Fees" said it had published nothing.
     statement = fee_sentence(claims.get("contingency", {}).get("quote"))
-    if not statement and tx.get("flat_fee"):
-        statement = fee_sentence(tx["flat_fee"].get("quote"))
-    if not statement and tx.get("price"):
-        statement = fee_sentence(tx["price"].get("quote"))
+    for block, keys in ((tx, ("flat_fee", "price")),
+                        (dm, ("hourly", "retainer_figure", "flat_fee", "fee_terms"))):
+        for key in keys:
+            if statement:
+                break
+            if block.get(key):
+                statement = fee_sentence(block[key].get("quote"), priced=True)
     if statement:
         firm["fee_statement"] = statement
     firm["_review"]["blocking"] = [b for b in firm["_review"]["blocking"] if b]

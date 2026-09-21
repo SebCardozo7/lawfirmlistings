@@ -80,6 +80,13 @@ OPEN_REGISTER_STATES = {"NY"}
 # than counting to six inline means removing or adding a gate is one edit.
 GATES = ("G1", "G2", "G3", "G5", "G6")
 
+# A published price, in the forms a law firm writes one. E1's last point asks for the figure the
+# firm charges, and in a practice with no contingency percentage the words alone are not it:
+# "flat rates where possible" and "Transparent Flat Fees" name a model, which E1 already pays two
+# points for, and tell a client nothing about the size of the bill.
+FEE_FIGURE = re.compile(r"\$\s?[\d,]+|\b\d[\d,]*\s*(?:dollars|per hour|an hour|/\s*h(?:r|our))\b",
+                        re.I)
+
 # A gate that did not pass is a finding only if we ran a check and it came back adverse. These
 # markers in a gate's source mean we did not, and the difference is the whole reason the gates
 # have three states rather than two.
@@ -607,14 +614,42 @@ def compute(firm):
     # points to firms that publish no fee model at all. A model only counts when it says something.
     model = (firm.get("fee_model") or "").strip()
     stated = bool(model) and not re.match(r"^(not stated|unknown|n/?a|pending)$", model, re.I)
-    # The fourth point is for publishing the actual percentage, which the fee guide found no
-    # firm in the directory does. It is a real differentiator precisely because it is empty:
-    # every firm here says "no fee unless we win" and none says what the fee is.
+    # The last point is for publishing the figure the firm actually charges, and what that
+    # figure is depends on the practice. Written as a contingency percentage it was a real
+    # differentiator sitting empty, because every injury firm says "no fee unless we win" and
+    # none says what the fee is. In the other two practices it was not empty, it was impossible:
+    # a real estate closing is priced as a flat fee and has no percentage, and Rule 1.5(d)(5)(i)
+    # forbids a contingent fee in a matrimonial matter outright. Sixty-two firms, a fifth of the
+    # directory, were scored out of six on a point their practice does not allow, and every one
+    # of their profiles carried the sentence "the fee percentage itself is not published".
+    #
+    # So the question is the same in each practice and the form of the answer is not: the
+    # percentage in an injury matter, the flat fee at a closing, the rate or retainer in a
+    # divorce. In every case it has to be a number. A firm advertising "Transparent Flat Fees"
+    # has named its model, which the two points above already pay for, and has not said what it
+    # charges.
     statement = firm.get("fee_statement") or ""
-    states_pct = bool(re.search(r"(\d{2}(?:[.,]\d+)?\s*(?:%|percent)|33\s*1/3|one[-\s]third)",
-                                statement, re.I))
+    primary = (firm.get("practices") or [{}])[0].get("slug")
+    if primary in DOMESTIC:
+        block = firm.get("domestic") or {}
+        quotes = [(block.get(k) or {}).get("quote") or ""
+                  for k in ("hourly", "retainer_figure", "flat_fee", "fee_terms")]
+        figure_word = "the rate, retainer or flat fee itself is not published"
+    elif primary in TRANSACTIONAL:
+        block = firm.get("transaction") or {}
+        quotes = [(block.get(k) or {}).get("quote") or ""
+                  for k in ("flat_fee", "price", "fee_terms")]
+        figure_word = "the flat fee itself is not published"
+    else:
+        quotes = None
+        figure_word = "the fee percentage itself is not published"
+    if quotes is None:
+        states_figure = bool(re.search(
+            r"(\d{2}(?:[.,]\d+)?\s*(?:%|percent)|33\s*1/3|one[-\s]third)", statement, re.I))
+    else:
+        states_figure = any(FEE_FIGURE.search(q) for q in quotes)
     e1 = ((1 if firm.get("free_consultation") else 0) + (2 if stated else 0)
-          + (2 if statement else 0) + (1 if states_pct else 0))
+          + (2 if statement else 0) + (1 if states_figure else 0))
     # The firm's own sentence is quoted rather than merged into ours. One Boston firm publishes
     # "NO FEE UNLESS WE WIN — GUARANTEED!", and running those words into our evidence line put
     # an em dash into this directory's prose, which is a house rule: the dash is the firm's and
@@ -622,7 +657,7 @@ def compute(firm):
     e1_ev = ("Free consultation · " if firm.get("free_consultation") else "") + \
         ("“%s”" % statement if statement
          else (model if stated else "fee model not published")) + \
-        ("" if states_pct else " · the fee percentage itself is not published")
+        ("" if states_figure else " · " + figure_word)
     out.append(sub("E1", e1, "observed", e1_ev))
     langs = [l for l in firm.get("languages", []) if l.lower() != "english"]
     av = " ".join(firm.get("availability", [])).lower()

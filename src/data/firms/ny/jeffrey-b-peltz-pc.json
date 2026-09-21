@@ -35,7 +35,7 @@
     "English",
     "Spanish"
   ],
-  "fee_model": "Not stated",
+  "fee_model": "Billing terms published, no figure",
   "free_consultation": true,
   "availability": [
     "Hospital & home visits"
@@ -319,10 +319,10 @@
     "checked_at": "2026-09-17"
   },
   "score": {
-    "total": 47,
+    "total": 53,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-18",
+    "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -462,16 +462,16 @@
         ]
       },
       "E": {
-        "score": 5,
+        "score": 10,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 1,
+            "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+            "evidence": "Free consultation · “We charge a $200 consultation fee for the following types of matters: contested divorces, family court, and immigration.”"
           },
           {
             "code": "E3",
@@ -496,7 +496,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
+      "gap": 17,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -505,7 +505,7 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 36.5,
+    "raw": 41.5,
     "assessed": 78,
     "coverage": 0.78,
     "floor_abc_pct": 0.658,
@@ -515,5 +515,6 @@
     ],
     "assessable": 100,
     "comparable": true
-  }
+  },
+  "fee_statement": "We charge a $200 consultation fee for the following types of matters: contested divorces, family court, and immigration."
 }

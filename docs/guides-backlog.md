@@ -515,15 +515,18 @@ rescores 217 firms, which is not a guide run's call:
 
 ## Open items for a person
 
-- **E1's fifth point cannot be earned in two of the four practices.** `scripts/score.py` gives
-  the last of E1's six points for publishing the fee percentage, which is the right test in an
-  injury practice and impossible in the other two. A real estate closing is a flat fee and has no
-  percentage; a family law firm may not charge a percentage at all, because Rule 1.5(d)(5)(i)
-  forbids a contingent fee in a domestic relations matter. So 38 firms are scored out of five
-  points where everybody else is scored out of six, and the normalised total does not know it.
-  The fix is one line, the equivalent test for those practices being whether the firm publishes
-  the figure it does charge, and it rescores every firm in both practices, which is a decision
-  rather than an edit. Noted 2026-09-18 while opening the family law market.
+- ~~**E1's fifth point cannot be earned in two of the four practices.**~~ **Fixed 2026-09-21**,
+  and it was worse than this note said. Nobody in the directory earned the point, in any
+  practice: it asks for a contingency percentage and all 296 firms were scored out of six on it.
+  In injury work that was the design, a differentiator sitting empty waiting for the first firm
+  to publish its percentage. In the other two it was impossible, and 62 profiles carried the
+  sentence "the fee percentage itself is not published" about a practice that forbids one.
+  The point now asks for the figure the firm charges in the form its practice allows, and it
+  has to be a number: the percentage in an injury matter, the flat fee at a closing, the rate or
+  retainer in a divorce. Two firms gain it. Two more things were found underneath. `fee_model`
+  and `fee_statement` were derived only from the injury and real estate blocks, so no family law
+  firm could have a fee statement at all whatever it published, and `fee_sentence` threw away any
+  sentence carrying a dollar figure, which is right on a results page and wrong on a fee page.
 
 - `src/pages/methodology.astro` line 85 says of the B3 disclaimer check: "Of the first ten firms
   we read, four carried one." Still there, and now stale twice over: across the 107 firms that
