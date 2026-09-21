@@ -1,0 +1,293 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+/**
+ * The other half of "is this law firm legit". The roster study asked whether there is a lawyer to
+ * look up; this one asks whether there is a company to look up, and then asks what the only date
+ * most of these firms carry is actually worth.
+ *
+ * Every figure is computed from the firms collection at build time. Two fields carry dates that
+ * look like the same fact and are not, which is the failure this section has made before:
+ *
+ *   entity.formed            the date the CURRENT registered entity was filed with the state,
+ *                            from the register itself. Written by scripts/check_ny_dos.py from
+ *                            `initial_dos_filing_date`. Not the date the practice began.
+ *   operating.registered     the date somebody registered the DOMAIN NAME, read over RDAP by
+ *                            scripts/check_operating.py. That script says in its own docstring
+ *                            that it is a lower bound and "this figure is never published as the
+ *                            firm's age". This page does not publish it as the firm's age. It
+ *                            measures how far the two dates sit apart, which is the argument.
+ *
+ * A foreign entity's filing date is the day it registered to do business in New York rather than
+ * the day it was formed, which check_ny_dos.py already warns about, so the date comparison below
+ * excludes them. Three records are affected.
+ *
+ * Nothing on this page says a firm is unregistered. Every non-passing G3 record says in its own
+ * evidence string that a miss is not evidence against the firm, and that is the finding: the
+ * check mostly cannot be run, for reasons that belong to the states and to us.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const total = firms.length;
+
+// G3 asks for two things: a registered legal entity and a confirmed physical office. These four
+// groups are the four answers the gate actually returns, ordered by how much evidence we got, and
+// they are mutually exclusive and cover every firm. The assertion below holds them to that.
+const confirmed = firms.filter(f => f.data.gates.G3?.pass);
+const noSource = firms.filter(f => f.data.gates.G3?.source === 'no queryable source');
+const unread = firms.filter(f => !f.data.gates.G3?.pass
+  && (f.data.gates.G3?.source ?? '').startsWith('Google Places'));
+const noMatch = firms.filter(f => !f.data.gates.G3?.pass
+  && !['no queryable source'].includes(f.data.gates.G3?.source ?? '')
+  && !(f.data.gates.G3?.source ?? '').startsWith('Google Places'));
+if (confirmed.length + noSource.length + unread.length + noMatch.length !== total) {
+  throw new Error('G3 groups do not partition the collection; the page would misreport.');
+}
+
+// The two reasons a register we could read returned nothing, which are different facts and are
+// split in the caption rather than in the chart.
+const notFiled = noMatch.filter(f => (f.data.gates.G3?.source ?? '').includes('Active Corporations'));
+const notIdentified = noMatch.filter(f => f.data.gates.G3?.source === 'unavailable');
+
+// Derive the state lists rather than naming states by hand: a market opens and a hand-written
+// list is wrong the same day. Sorted so the order is stable between builds.
+const uniq = (xs: string[]) => [...new Set(xs)].sort();
+const allStates = uniq(firms.map(f => f.data.market.state));
+const answeringStates = uniq(confirmed.map(f => f.data.market.state));
+// Three different reasons, and collapsing them was a factual error in draft. A state that
+// publishes nothing queryable is not the same as a state that publishes its register on a host
+// we have not got into yet: the first is the state's policy and the second is our own backlog.
+const noSourceStates = uniq(noSource.map(f => f.data.market.state));
+const unreadStates = uniq(unread.map(f => f.data.market.state));
+
+// The licence check for comparison, computed rather than asserted: the sibling guide's finding is
+// that one state answers, and a hand-typed "one" goes stale the day a second register opens.
+const g1States = uniq(firms.filter(f => f.data.gates.G1?.pass).map(f => f.data.market.state));
+
+// A list of names read as a sentence, deduplicated, without join(' and ').
+const list = (xs: string[]) => xs.length <= 1 ? (xs[0] ?? '')
+  : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const STATE_NAME: Record<string, string> = {
+  FL: 'Florida', IN: 'Indiana', MA: 'Massachusetts', MD: 'Maryland',
+  NY: 'New York', OR: 'Oregon', TX: 'Texas',
+};
+const named = (codes: string[]) => list(codes.map(c => STATE_NAME[c] ?? c));
+
+// Confirmation rate by state. The bar is the share and the printed figure is the count, because
+// the states hold 13 to 150 firms each and a bar drawn from the raw count would make the largest
+// market look like the best one.
+const stateRows = allStates.map(s => {
+  const inState = firms.filter(f => f.data.market.state === s);
+  const ok = inState.filter(f => f.data.gates.G3?.pass);
+  // The note carries the reason, because a zero means three different things on this chart.
+  const why = ok.length ? 'Publishes a register we can query'
+    : unreadStates.includes(s) ? 'Register published, we have not read it'
+    : 'No register we can query';
+  return {
+    label: STATE_NAME[s] ?? s,
+    value: (ok.length / inState.length) * 100,
+    display: `${ok.length} of ${inState.length}`,
+    note: why,
+  };
+}).sort((a, b) => b.value - a.value || a.label.localeCompare(b.label));
+
+// The date study. entity.formed exists only where a register gave us one; operating.registered
+// exists almost everywhere, because every firm has a domain. Foreign entities are excluded: their
+// filing date is the day they registered in this state, not the day they were formed.
+const withEntity = firms.filter(f => f.data.entity);
+const onlyDomain = firms.filter(f => !f.data.entity && f.data.operating?.registered);
+const YEAR = 365.2425 * 864e5;
+const paired = firms
+  .filter(f => f.data.entity && f.data.operating?.registered
+    && !/FOREIGN/i.test(f.data.entity!.entity_type ?? ''))
+  .map(f => ({
+    firm: f,
+    formed: f.data.entity!.formed,
+    domain: f.data.operating!.registered as string,
+    gap: (new Date(f.data.operating!.registered as string).getTime()
+      - new Date(f.data.entity!.formed).getTime()) / YEAR,
+  }));
+
+const beyond = (t: number) => paired.filter(p => Math.abs(p.gap) > t).length;
+const agree = paired.filter(p => Math.abs(p.gap) <= 1).length;
+const domainLater = paired.filter(p => p.gap > 1).length;
+const domainEarlier = paired.filter(p => p.gap < -1).length;
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const medianGap = paired.length ? median(paired.map(p => Math.abs(p.gap))) : 0;
+
+const GAP_BANDS = [
+  { label: 'Within a year', note: 'the two agree', lo: 0, hi: 1 },
+  { label: '1 to 5 years', note: 'apart', lo: 1, hi: 5 },
+  { label: '5 to 10 years', note: 'apart', lo: 5, hi: 10 },
+  { label: '10 to 20 years', note: 'apart', lo: 10, hi: 20 },
+  { label: 'Over 20 years', note: 'apart', lo: 20, hi: Infinity },
+];
+const gapColumns = GAP_BANDS.map(b => ({
+  label: b.label,
+  note: b.note,
+  value: paired.filter(p => Math.abs(p.gap) > b.lo && Math.abs(p.gap) <= b.hi).length,
+  emphasis: b.lo >= 5,
+}));
+
+// The two firms named below are named for a complimentary fact: the register shows them older
+// than their web address does. Picked by the widest gap in that direction and tie-broken on slug
+// so the page does not change its own example between builds. Nobody is named on the other side
+// of the distribution, where an entity newer than its domain would read as an accusation we
+// cannot check: a firm that reorganized and kept its domain looks identical in this data to one
+// that did not, and firm sites are not reachable from our build environment to tell them apart.
+const understated = [...paired]
+  .filter(p => p.gap > 0)
+  .sort((a, b) => b.gap - a.gap || a.firm.data.slug.localeCompare(b.firm.data.slug))
+  .slice(0, 2);
+
+const yearOf = (iso: string) => iso.slice(0, 4);
+const whole = (n: number) => Math.round(n);
+
+const dates = [
+  ...firms.map(f => f.data.gates.G3?.checked_at),
+  ...withEntity.map(f => f.data.entity!.checked_at),
+].filter(Boolean) as string[];
+const measuredOn = dates.length ? dates.sort()[dates.length - 1] : null;
+const updated = measuredOn
+  ? new Date(measuredOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// States the finding, not the subject, and carries no figure: check_meta rejects one, and a count
+// in an indexed title is wrong more often than it is right. The claim is about what the two dates
+// are rather than about this month's spread, so it does not go stale when a market opens.
+const title = "New Study: A Law Firm's Website Age Is Not How Old the Firm Is";
+const description = 'We checked every firm in this directory against its state business register, then compared that date with the age of the firm’s website. The two disagree.';
+---
+<Base title={title} description={description} nav="guides" image="/og/register.png" imageAlt="Rows of paired date markers on separate tracks, the register's date and the domain's date never lining up">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Business registers</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Public records</span>
+    <h1>{title}</h1>
+    <p class="lede">Every guide to hiring a lawyer says to confirm the firm is a real registered business. We tried it on all {total} firms in this directory, across {allStates.length} states. The register answered for {confirmed.length} of them, and where it answered it disagreed with the firm's own web address more often than it agreed.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="register" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#answers">Where the register answers</a></li>
+      <li><a href="#dates">The two dates, and the gap</a></li>
+      <li><a href="#check">What to do with this</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Across all ${total} firms in the directory, in ${allStates.length} states${updated ? `, ${updated}` : ''}.`}
+      items={[
+        `We confirmed a registered company for <b>${confirmed.length} of ${total}</b> firms, and every one of them sits in ${answeringStates.length === 1 ? 'the one state' : `the ${answeringStates.length} states`} that publish a register we can query.`,
+        `<b>${noSource.length} firms</b> are in ${noSourceStates.length === 1 ? 'a state' : `${noSourceStates.length} states`} that publish no business register an automated reader may query, so the check every hiring guide recommends cannot be run on them at all.`,
+        `Where we hold both a register date and a domain registration date, they agree within a year on <b>${agree} of ${paired.length}</b> firms and sit more than a decade apart on <b>${beyond(10)}</b>.`,
+        `Of the ${paired.length - agree} firms whose two dates differ by more than a year, <b>${domainLater}</b> are older in the register and <b>${domainEarlier}</b> are older on the web, so the error is noise rather than a bias anyone could correct for.`,
+        `For <b>${onlyDomain.length} of ${total}</b> firms the only date we hold at all is the day somebody registered the web address, which is not the day the firm began.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here says a firm is unregistered: it says what we could and could not confirm. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Two questions, asked of every firm we publish. Is there a registered company behind the name, and how long has it been there?</p>
+    <p>The first is eligibility gate G3 in our score. It asks for two things together: an active legal entity in a state register, and at least one physically verified office. The office half is settled by Google Business Profile data almost everywhere. The entity half is a public record, and whether that record can be read at all turns out to be the whole story.</p>
+    <p><b>The second question has no single source, and that is the part nobody writes about.</b> Where a state register answered, we hold the date the entity was filed. Everywhere else the only date attached to a firm is the day its domain name was registered, which we read over RDAP, the registries' own successor to WHOIS.</p>
+    <p>Those two dates are not the same fact, and neither is the firm's founding date. A register entry is created when a practice incorporates or reorganizes, which can be decades after the first client walked in. A domain is registered when somebody decides the firm needs a website. We measured how far apart they sit.</p>
+
+    <h2 id="answers">Where the register answers</h2>
+    <p>We could confirm a registered company for {confirmed.length} of the {total} firms. The other {total - confirmed.length} divide into three groups, and not one of those groups is a finding against a firm.</p>
+    <StackBar
+      heading={`What happened when we asked for a business registration, across all ${total} firms`}
+      unit="firms"
+      segments={[
+        { label: 'Confirmed in the state register', value: confirmed.length },
+        { label: 'Register read, no matching entity', value: noMatch.length },
+        { label: 'Register published, we have not read it', value: unread.length },
+        { label: 'State publishes no register we can query', value: noSource.length },
+      ]}
+      caption={`Ordered by how much evidence we obtained. The second group splits into ${notFiled.length} firms absent from New York's corporations register, which does not require a general partnership to file at all, and ${notIdentified.length} we could not identify in a register we did read. In every one of those cases the record says a miss is not evidence against the firm.`}
+    />
+    <p><b>The third group is ours rather than anyone else's.</b> {unread.length} firms are in {named(unreadStates)}, which publishes its register in full, as data files on a host that answers an anonymous request with a 401. Reading it is work we owe, and until we do it those firms carry an unfinished check through no fault of their own.</p>
+    <p>The fourth group is the finding. {noSource.length} firms are in {noSourceStates.length === 1 ? 'a state' : `${noSourceStates.length} states`} that publish no business register an automated reader may query: {named(noSourceStates)}. Their business searches are forms, their bulk data is sold, or their portals answer a script with a 403 or a bot challenge. We do not work around any of those.</p>
+    <BarChart
+      heading="Firms whose registered company we could confirm, by state"
+      max={100}
+      rows={stateRows}
+      caption={`The bar is the share within that state and the printed figure is the count, because the markets range from ${Math.min(...allStates.map(s => firms.filter(f => f.data.market.state === s).length))} firms to ${Math.max(...allStates.map(s => firms.filter(f => f.data.market.state === s).length))}. A state at zero is a state whose records we cannot reach, not a state full of unregistered firms.`}
+    />
+    <p>The pattern is a records policy, not a quality difference. {named(answeringStates)} publish their registers as open data, so the check runs. {named(noSourceStates)} do not, so it never runs, and a firm there can do nothing whatever about the gate it fails.</p>
+    <p>That is the same shape we found when we went looking for the lawyers rather than the company. <a href="/guides/what-it-takes-to-check-a-law-firm/">The licence check has exactly this problem</a>. The two are not blocked in the same places, though: an attorney register answers us in {g1States.length} of these {allStates.length} states, a business register in {answeringStates.length}.</p>
+    <p>One caveat travels with the two smaller registers. Texas publishes active franchise taxpayers, and the franchise tax does not reach a sole proprietorship or a general partnership, so a match there is strong evidence and a miss is no evidence at all. The same asymmetry applies to every register on this page.</p>
+
+    <h2 id="dates">The two dates, and the gap</h2>
+    <p>{withEntity.length} firms carry a filing date from a state register. For the remaining {onlyDomain.length}, the only date we hold is the day the domain was registered.</p>
+    <p>{paired.length} firms carry both, which lets us ask what the domain date is worth as a stand-in. <b>The answer is that it is worth very little for any individual firm.</b></p>
+    <ColumnChart
+      heading={`How far apart the two dates sit, across the ${paired.length} firms holding both`}
+      columns={gapColumns}
+      emphasisLabel="Five years apart or more"
+      quietLabel="Under five years"
+      caption={`Absolute difference between the entity's filing date in the state register and the domain's registration date. The median gap is ${medianGap.toFixed(1)} years. Foreign entities are excluded, because their filing date is the day they registered to do business in this state rather than the day they were formed.`}
+    />
+    <p>The two dates agree within a year on {agree} of these {paired.length} firms. They sit more than five years apart on {beyond(5)}, and more than twenty years apart on {beyond(20)}.</p>
+    <p><b>What makes the domain date useless as a proxy is not the size of the error but its direction.</b> Of the {paired.length - agree} firms whose dates differ by more than a year, {domainLater} are older in the register than their web address suggests and {domainEarlier} are the other way around. An error that runs both ways in almost equal measure cannot be corrected for, only avoided.</p>
+    {understated.length >= 2 && (
+      <p>The widest gaps in the flattering direction belong to firms that were practicing long before anybody bought a domain name. <a href={`/firms/${understated[0].firm.data.slug}/`}>{understated[0].firm.data.name}</a> was filed with the state in {yearOf(understated[0].formed)} and registered its domain in {yearOf(understated[0].domain)}, a gap of {whole(understated[0].gap)} years. <a href={`/firms/${understated[1].firm.data.slug}/`}>{understated[1].firm.data.name}</a> shows {whole(understated[1].gap)} years between the two. Read either firm's web address as its age and you would take decades off it.</p>
+    )}
+    <p>The gaps that run the other way have an innocent explanation we cannot confirm from the record: a firm that reorganizes as a new professional corporation gets a new filing date and keeps its old domain. In this data that firm is indistinguishable from a new practice on an old web address, so we name nobody on that side of the distribution.</p>
+    <p>This is also why our own score never publishes the domain date as a firm's age. It is used for one thing, gate G6, which asks whether a firm has been going for at least a year. <b>A lower bound is the right instrument for a threshold and the wrong one for a magnitude</b>, and the measurement above is how far wrong the magnitude would be.</p>
+    <p>The same caution applies to the register's date in the other direction. It tells you when the current legal entity was filed, not when the practice started, so a firm founded in the 1950s that incorporated in the 1990s reads as a 1990s firm.</p>
+
+    <h2 id="check">What to do with this</h2>
+    <p>If the firm you are checking is in a state that publishes an open register, the check is quick and worth doing. Search the Secretary of State's business database for the firm's legal name, which is often not its trading name, and confirm the entity is active.</p>
+    <p><b>If it is in a state that does not, no amount of effort on your part will produce that record either</b>, and the advice to go and look it up is worth less than the pages giving it suggest. Ask the firm for its legal name and filing number instead. A firm that has one will tell you.</p>
+    <p>What a domain registration date can tell you is narrow and real: a web address registered last month is a web address registered last month. It cannot tell you the firm is new, and it cannot tell you the firm is old.</p>
+    <p>Our own profiles show which of these checks ran for each firm and what the evidence was. The entity we found, where we found one, is printed with its filing number and date. <a href="/methodology/">The full methodology</a> sets out gate G3 and the rest of the scale.</p>
+    <p>A gate that could not be checked is kept out of the denominator rather than scored as a failure, which means a firm's total is a share of what we could read rather than of a hundred. <a href="/guides/what-a-law-firm-score-cannot-compare/">We measured how far that moves a score</a>, and it moves it further than any state line does.</p>
+    <p>If you are comparing firms, the rankings are a better starting point than a register search: <a href="/cities/new-york-ny/personal-injury/">personal injury firms in New York City</a> and <a href="/cities/portland-or/personal-injury/">in Portland</a> are both ordered by measured evidence, and <a href="/practice-areas/personal-injury/">the practice hub</a> covers every market we publish.</p>
+    <p class="muted" style="font-size:.86rem">Entity records come from each state's own published register: the Active Corporations register on data.ny.gov, the Active Businesses register on data.oregon.gov, and Active Franchise Taxpayers on data.texas.gov. Domain registration dates come from RDAP. A check a state does not permit is recorded as unavailable rather than as a failure. Firms can correct or complete their own record from <a href="/list-your-firm/">the listing page</a>.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm above has a profile showing the entity we found, its offices, fees and measured digital presence.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a law firm</a></li>
+        <li><a href="/guides/what-law-firms-publish-about-malpractice-insurance/">What firms publish about insurance</a></li>
+        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

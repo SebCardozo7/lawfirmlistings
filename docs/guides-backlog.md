@@ -108,20 +108,23 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
 
 ## Generated pages, so a topic is not aimed at one of them
 
-As of 2026-09-18 the build produces 315 pages, from 272 published firms in 9 markets and 7
-states. **Family law opened since this was last enumerated, which added a practice hub and a
-tenth city-by-practice ranking.** Check this list against the build rather than inheriting it.
+As of 2026-09-21 the build produces **341 pages, from 296 published firms in 9 markets and 7
+states**, and there are now 8 published guides plus the gated ranking. Re-enumerated against the
+build on this run rather than inherited. No new market opened since 2026-09-18; the growth is
+firms inside the markets that already existed, plus this run's guide.
 
 - `/`, `/cities/`, `/practice-areas/`, `/guides/`
 - Nine city hubs: `baltimore-md`, `boston-ma`, `buffalo-ny`, `dallas-tx`, `lakeland-fl`,
   `naples-fl`, `new-york-ny`, `northwest-indiana`, `portland-or`
-- Twelve city × practice rankings: `personal-injury` in all of the above except `naples-fl`,
+- Twelve city x practice rankings: `personal-injury` in all of the above except `naples-fl`,
   `workers-compensation` in `baltimore-md` and `new-york-ny`, `real-estate` in `naples-fl`,
   `family-law` in `new-york-ny`
 - Four practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/real-estate/`,
   `/practice-areas/workers-compensation/`, `/practice-areas/family-law/`
-- 272 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
+- 296 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
   `/contact/`, `/privacy/`, `/terms/`)
+
+Firm counts by state, for scoping a study: NY 150, FL 34, MD 31, MA 28, OR 20, TX 20, IN 13.
 
 Every city and practice combination in that list is off limits as a guide topic.
 
@@ -129,6 +132,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-09-21 | `/guides/what-a-business-register-proves-about-a-law-firm/` | "how to check if a law firm is registered" (10/mo US, 20 global), and the business-entity verification cluster around it. Deliberately **not** "how to check if a law firm is legit" (30/mo, KD 3), which the 2026-09-16 guide already holds | Backlog item 1, and it was larger and sharper than the entry predicted. `gates.G3.pass` is true on **140 of 296**, and the four non-pass reasons are genuinely different facts: 72 in states publishing nothing queryable (IN, MA, MD), 34 in Florida whose register is published and **we have not read it**, 33 New York general partnerships the state does not require to file, 17 we could not identify in a register we did read. The second half is the new finding: for the **113** domestic New York firms holding both `entity.formed` and `operating.registered`, the two dates agree within a year on only 37, sit more than a decade apart on 25, and the error is **symmetric** (39 older in the register, 37 older on the web), so it is noise rather than a correctable bias. |
 | 2026-09-18 | `/guides/what-law-firms-publish-about-malpractice-insurance/` | "do lawyers have malpractice insurance" (40/mo, KD 2), "can i sue my lawyer for malpractice" (70, KD 0), and the client-side phrasings that return no data at all | Backlog item 1, and it held up: `accountability.malpractice_insurance` is `true` on **0 of 267** firms across 2,313 pages, while `bar_associations` is non-empty on 113. The finding that makes the piece is **Oregon**: the one state here where the cover is mandatory, and 0 of its 20 firms mention it, which proves silence measures publishing habits rather than cover. Also published against ourselves: the association half is partly a measure of our own pattern list, 84 of 155 in the two states it carries a local association for against 29 of 112 elsewhere. |
 | 2026-09-16 | `/guides/what-it-takes-to-check-a-law-firm/` | "how to check if a law firm is legit" (30/mo, KD 3), "how to check if a law firm is registered", "how to check a lawyer credentials", "how to check if a lawyer is legitimate" | Backlog item 3, and much larger than the old entry predicted: 56 of 217 firms name no attorney we could read, not 6. Pillar A's method piece and the study behind gates G1 and G2. Two findings worth remembering: only New York, of the seven states, publishes an attorney register we may query, so G1 passes on 51 firms and never outside it, while published discipline is searchable in six states through CourtListener. **The check people assume is buried is the more open one.** Also: the no-roster firms are indistinguishable from the rest on Google rating, 53 of 56 at 4.5 or better against 196 of 217. |
 | 2026-09-14 | `/guides/what-a-law-firm-score-cannot-compare/` | "how are lawyer ratings calculated", "law firm rating methodology", "what does a lawyer rating mean", "are lawyer ratings comparable" | The denominator piece. Reads all three states rather than one, because the argument is what happens when the directory crosses a state line. Two corrections were caught in draft and are worth remembering: the certification coverage floor is `MIN_COVERAGE = 0.60`, not 0.70, and the highest total outside New York is a firm whose total we withhold, not the highest comparable one. |
@@ -140,49 +144,116 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 ## Next, ranked
 
-Item 1 was taken on 2026-09-18 and is written. It held up exactly as the last run described it,
-which is the first time an inherited entry has survived contact with the data unchanged. The
-entries below were re-checked against the collection on that run rather than inherited.
+Item 1 was taken on 2026-09-21 and is written. Two things in the old entry were wrong, and both are
+corrected here rather than silently dropped.
 
-1. **Is this firm even a company?** The other half of "is this law firm legit", and still
-   unwritten. Gate G3 confirms the firm in a state business register for **128 of 272** firms,
-   and the reason it fails elsewhere is the same shape as the licensure finding: New York,
-   Oregon and Texas publish their corporate registers as open data and the others do not, so 72
-   firms carry `no queryable source` and 34 fall back to Google Places. `entity` holds the legal
-   name, entity type, filing id and formation date for **105** firms, and `operating.years` is
-   filled for 271 from state registers. Strong, it pairs with the two method pieces already
-   published rather than repeating them, and the counts have grown since it was first proposed.
+**The correction that matters: `operating.years` does not come from state registers.** The old item
+1 said it was "filled for 271 from state registers". It is filled for 295 of 296 firms and every
+single one carries the source `Domain registration date over RDAP`. There is no state register
+anywhere in that field. `scripts/check_operating.py` says so in its own docstring, and says more
+than that: the value is a lower bound, and "this figure is never published as the firm's age". This
+is the same class of mistake as the `bar_numbers_on_bios` one, two fields that sound like the same
+fact, and it was caught this run only by reading the script that writes a field before building a
+sentence on it. Keep doing that. The rest of the stale figures: `entity` is on 117 firms and not
+105, and G3 passes on 140 of 296 and not 128 of 272.
+
+The entries below were re-checked against the collection on 2026-09-21.
+
+1. **Read Florida's business register.** Not a guide, a data job, and it is now the only place in
+   the directory where a gate is blocked by our own backlog rather than by a state. 34 Florida
+   firms carry `Google Places API (partial)` on G3 because the register is published in full on an
+   SFTP host that answers an anonymous request with a 401. Every other non-pass on G3 is either the
+   state's policy or a firm that genuinely need not file. Doing this moves 34 firms and makes the
+   next version of the registers guide say something better about ourselves. It is the highest
+   value item on this list and it is not writing.
 2. **Texas, the state where neither check runs.** Of the 20 Dallas firms, G1 passes on 0 and G2
    passes on 0, the only state in the directory where both are blank: the bar refuses automated
-   readers and attorney discipline there is not an order of the supreme court, so CourtListener
-   has nothing to index either. Note that Texas *does* publish its corporate register, so it is
-   the state where we can confirm the company and never the lawyer, which is a sharper framing
-   than the original entry had. Narrow, and probably a section of item 1 rather than its own guide.
+   readers and attorney discipline there is not an order of the supreme court, so CourtListener has
+   nothing to index either. Texas *does* publish its corporate register, and the registers guide
+   now carries the franchise-tax caveat (a match is strong, a miss says nothing), so this is a
+   section of a future piece rather than its own guide. Narrower than it was.
 3. **The office-count problem in every directory.** `digital.places.listing_count` versus review
    totals. Overlaps the Google reviews guide; only worth writing if it is reframed as a directory
    design piece rather than a review piece.
 4. **What a participation score measures.** Out of the Avvo pass: Avvo's own documentation says
-   answering questions and publishing guides on Avvo can raise a lawyer's Avvo Rating. A directory
-   whose rating partly measures engagement with the directory is a stronger version of the FindLaw
-   observation from 2026-09-14, and the Justia pass below adds a second case: paid Platinum and
-   Gold placements buy position in their directory outright. We have no measurement of either to
-   publish, so this is a paragraph inside a future method piece rather than a guide, and it must be
-   sourced to their published documentation rather than asserted.
-5. **What a firm publishes about how it bills, across practices that cannot be compared.** Out of
-   the E1 open item below: `domestic.hourly_rate`, `domestic.retainer` and `transaction.flat_fee`
-   are the family law and real estate answers to the contingency percentage, and the fees guide
-   only ever counted the injury version. Wait until the E1 scoring decision is made, because the
-   guide and the fix would contradict each other otherwise.
+   answering questions and publishing guides on Avvo can raise a lawyer's Avvo Rating. The Justia
+   pass added paid Platinum and Gold placements buying position outright, and the lawyers.com pass
+   below adds a third and cleaner case: a Martindale-Hubbell peer rating is initiated from
+   references **the rated attorney submits**. Three directories, three ways the rated party feeds
+   its own rating. We have no measurement of any of them, so this is a sourced paragraph inside a
+   future method piece and not a guide, and every claim has to cite their published documentation.
+5. **What a firm publishes about how it bills, across practices that cannot be compared.**
+   `domestic.hourly_rate`, `domestic.retainer` and `transaction.flat_fee` are the family law and
+   real estate answers to the contingency percentage, and the fees guide only ever counted the
+   injury version. The E1 blocker on this cleared on 2026-09-21 (see the open items), so this is
+   now writable and is the strongest remaining *writing* topic.
+6. **How old is a law firm, outside New York.** The registers guide could only compare the two
+   dates in New York, because `entity` exists nowhere else. Oregon and Texas both publish a
+   registration or charter date in the registers we already read, and neither is currently stored
+   on the firm record. Storing them would take the date comparison from 113 firms to roughly 136
+   and let the piece speak about three states instead of one. Data job first, then a refresh of
+   the guide rather than a new one.
 
 **Dead, so they are not proposed again:**
 
 - *What a firm's own roster does not tell you, from `attorneys[].bar_number`.* We do not measure
   whether a firm publishes bar numbers. See the open item below: the field that claimed to is
   empty on every record, and the one that does exist means something else.
-- *D2 as the largest hole.* Filled. See above.
+- *D2 as the largest hole.* Filled.
 - *Nobody says they carry malpractice insurance.* Written 2026-09-18. Do not re-propose the
   insurance count as a topic: it is now a published page that recomputes itself.
-- *Founding-year claims against the register.* No committed claims to compare. See above.
+- *Founding-year claims against the register.* No committed claims to compare: `founded_year` is
+  absent on all 296 records. Re-checked 2026-09-21. This is why the registers guide compares the
+  register against the domain rather than against anything a firm asserts.
+- *Is this firm even a company?* Written 2026-09-21.
+
+## Keyword research, 2026-09-21
+
+`subscription-info-limits-and-usage` is free and was the first call again: **27,006 of 800,000
+used**, because the reset landed on the 19th, two days before this run. Roughly 773,000 units were
+available, the most any run has had. Four paid calls, 1,635 units in total, well inside the
+six-call rule. Keep starting with the free call.
+
+What they returned, and the answer is mostly "nothing", which is itself the finding:
+
+- **The registration cluster is close to empty.** Of eight seed phrasings only "how to check if a
+  law firm is registered" returned data at all: **10/mo US, 20 global**, no difficulty, no parent
+  topic. "how to check if a law firm is a real business", "how to look up a law firm business
+  registration", "how old is a law firm", "how to find out how long a law firm has been in
+  business", "law firm business entity search", "is my law firm a real company" and "how to verify
+  a law firm exists" all returned no data.
+- **`serp-overview` on that keyword returned an empty position list**, so there is no Ahrefs SERP
+  to read for it. The SERP was read through WebSearch instead, and that is where the case for the
+  piece actually came from. Do not treat an empty `positions` array as a reason to drop a topic.
+- **Do not run `matching-terms` on "law firm business".** It was one of this run's four paid calls
+  and it was wasted: the term is owned by firms that *practise* business law. Forty rows of
+  "business litigation law firm", "small business law firm atlanta", "law firm business plan",
+  "law firm business cards". The word "business" cannot reach the entity-verification intent in
+  this vertical. One genuinely useful row came out of it: **"is marble law firm legit", 200/mo,
+  KD 0, CPC $7.00, branded.** People search "is <firm name> legit" by name. That is demand our firm
+  profiles should answer rather than a guide, and it is worth a separate look at whether our
+  profiles rank for `is <firm> legit`.
+- **The adjacent winnable query is already ours and was deliberately avoided.** "how to check if a
+  law firm is legit" is 30/mo at **KD 3** with traffic potential 900, and the 2026-09-16 guide
+  holds it. Pointing a second page at it would have been us competing with ourselves. This run
+  targeted the registration phrasing instead and linked the two pages together in both directions.
+- "how to check if a business is registered" is 80/mo, KD 28, parent topic `how to verify a
+  business`, traffic potential 50. Generic, not law-specific, owned by business-formation services.
+  Not our reader and not worth a run.
+
+**The SERP read is the reason to publish.** WebSearch on "how to check if a law firm is a
+registered business entity" returns LegalZoom's LLC lookup tool, TailorBrands, iDenfy's KYB guides,
+Collective and LegalClarity. Every one of them is generic business-entity advice with no law-firm
+specificity, and **every one of them says "go to the state's business search database" without ever
+asking whether that database exists for the state you are in.** In four of our seven states it does
+not. Nobody has measured that, and nobody has measured what the fallback everyone reaches for, the
+age of the firm's website, is actually worth. That is the information gain.
+
+Alongside it, "how long has this law firm been in business" returns Guinness World Records on the
+oldest law firm, plus a derrick-app listicle, "Company Founding Year: 5 Ways to Find It", which
+recommends state registries, LinkedIn, the company's own website and Crunchbase. It does not ask
+whether those sources agree with each other. We measured that they do not: on the 113 firms where
+we hold two of them, they agree within a year on 37.
 
 ## Keyword research, 2026-09-18
 
@@ -326,7 +397,40 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: lawyers.com.**
+**Next run: superlawyers.com.**
+
+### lawyers.com, read 2026-09-21
+
+`www.lawyers.com` is blocked by this environment's egress proxy, so this was read through search
+results, its own pages as they appear in them, and Martindale's published documentation.
+**Five of the eight competitors are now known to be unreachable from here** (nolo, findlaw, avvo,
+justia, lawyers), so the search-based read is the normal case and not the exception. Budget for it.
+
+Shapes lawyers.com earns traffic with:
+
+1. **A consumer legal-information hub on its own subdomain**, `legal-info.lawyers.com`, organised
+   by practice area, with a "Research Basics" section underneath it: "Should You Sue?", "How, and
+   How Much, Do Lawyers Charge?", "Client's Bill of Rights When Dealing With Lawyers". Restating
+   procedure and general advice. We have no advantage here and should not chase it.
+2. **Directory profiles shared with martindale.com**, carrying Martindale-Hubbell Peer Review
+   Ratings and client reviews on the same page. The two sites are one content asset presented
+   twice, which is worth noting: the peer rating is the product and the directory is its shelf.
+3. **"A Consumer's Guide to Peer and Client Review Ratings"**, a page whose whole job is explaining
+   their own rating to the people it is aimed at. That shape is one we should copy and can do
+   better: `/methodology/` is ours and it is written as a specification rather than as an
+   explainer. The guides are currently doing that job instead.
+
+What is worth taking, as a measurement rather than a topic: **the Martindale-Hubbell peer rating is
+initiated from references the rated attorney submits.** Their own documentation says an attorney
+"may submit as many or a few references as they choose" to start the process, and Martindale then
+adds reviewers in the same geography and practice area. Ratings publish to the profile within 24
+hours. That is the third instance of the pattern this rotation keeps finding, after Avvo's
+engagement inputs and Justia's paid placements, and it now has enough cases to be a section in a
+method piece. See ranked item 4. Source it to their documentation; we cannot measure it.
+
+What we should not chase: their practice-area explainer library. It is thousands of pages of
+restated law, it is what every one of these eight competitors does, and it is the exact thing the
+editorial standard in this file rules out.
 
 ### justia.com, read 2026-09-18
 
@@ -479,6 +583,9 @@ chart's job lost the table:
 | Checking a firm | Columns: attorneys named per firm | A distribution, with the empty band highlighted. The rank of that band is computed rather than described, because a hand-written "second largest" was wrong on the first build |
 | Checking a firm | Bars: firms naming nobody, by state | The bar is the share and the printed figure is the count, because the states hold 13 to 71 firms each and a bar drawn from the raw count makes the largest market look like the worst one |
 | Checking a firm | Bars: what we could check, four checks out of one denominator | Magnitude, with the licensure row highlighted because it is the one every competitor recommends and the one that ran least often. The argument is the ordering |
+| Business registers | Split bar: what happened when we asked for a registration | Part-to-whole of one population in four states ordered by how much evidence we got, so the failure that is ours and the one that is the state's sit beside the firms' rather than being folded in. Four segments and not five, because `StackBar` caps its hue steps at four (`Math.min(i, 3)`) and a fifth would have drawn identical to the fourth |
+| Business registers | Bars: firms whose company we could confirm, by state | The bar is the share and the printed figure is the count, following the roster guide's lesson: the markets hold 13 to 150 firms. The note on each row carries the reason, because a zero means three different things here and one of them is our own unread register |
+| Business registers | Columns: how far apart the register's date and the domain's date sit | A distribution, with the bands at five years and above highlighted, which is where the proxy stops being usable. The shape is the argument: the tallest band is agreement and the tail past it is longer than anyone would guess |
 
 Rules for the next one: pick the form from the data's job before touching colour, keep every
 figure computed, and look at the rendered chart at 390px before shipping it. The three components
@@ -591,6 +698,51 @@ rescores 217 firms, which is not a guide run's call:
 
 ## Open items for a person
 
+- **Florida's register is the only gate in the directory blocked by us rather than by a state, and
+  it is now published in a guide.** 34 Florida firms carry `Google Places API (partial)` on G3
+  because `check_entity.py` says Florida's register is "published in full as data files, on an SFTP
+  host that answers an anonymous request with a 401. Reading it is work we owe". The registers
+  guide says that out loud, in those terms, because the alternative was letting a reader think
+  Florida is like Indiana and Maryland. It is not: those states publish nothing, and Florida
+  publishes everything. Doing the work moves 34 firms off a blocked gate. Ranked item 1.
+  Noted 2026-09-21.
+
+- **`operating.years` is a domain age and this file said it was a register date.** Corrected in the
+  ranked list above. Worth repeating here because it is the third time two fields that sound like
+  one fact have nearly reached a published page, after `bar_numbers_on_bios` and
+  `attorneys[].bar_number`. The thing that caught it was the run brief's instruction to read the
+  script that writes a field before building a sentence on it, and it caught it before anything was
+  written rather than after. That instruction is earning its place. Noted 2026-09-21.
+
+- **The registers guide names firms on only one side of its own distribution, deliberately.** 57 of
+  113 New York firms have a domain older than their current registered entity, which has an
+  innocent explanation (a practice reorganises as a new P.C. and keeps its domain) that the record
+  cannot confirm. A firm in that group is indistinguishable in our data from a new practice on an
+  old web address, and firm sites are unreachable from this environment, so no firm is named there.
+  Only the flattering direction is named. If Oregon and Texas registration dates are ever stored
+  (ranked item 6), this constraint should be revisited rather than inherited. Noted 2026-09-21.
+
+- **The 390px horizontal overflow is still there and is still site-wide.** Re-checked this run by
+  rendering the new guide and `/guides/core-web-vitals-new-york-injury-firms/` at 390 in headless
+  Chromium without device emulation: both clip identically at the right edge, so the new page
+  introduces nothing. Third run in a row this has been noted and left alone. It needs somebody with
+  a real phone, not another headless render. Noted 2026-09-21.
+
+- **`StackBar` silently caps at four hue steps.** `Math.min(i, 3)` in both the bar and the legend,
+  so a fifth segment renders identical to the fourth and the chart reads as though two categories
+  were one. This run wanted five segments on the G3 outcomes and grouped down to four instead,
+  which turned out to read better anyway. Nothing is broken, but the component should either say so
+  in its own comment or clamp loudly. Noted 2026-09-21.
+
+- **No OG card generator exists; this run built one by hand and did not commit it.**
+  `public/og/register.png` was produced by extracting the rendered `cover-art` SVG from the built
+  page, framing it on the night ground with static aurora blobs, and screenshotting it at 1200x630
+  with the preinstalled Chromium (`/opt/pw-browsers/chromium*/chrome-linux/chrome --headless
+  --screenshot`). The scene must be rendered `xMidYMid meet` and not `slice`: at 1200x630 the
+  440-high viewBox crops badly with `slice` and the first version lost the whole right-hand panel.
+  Somebody should make this a script in `scripts/`, because every future guide needs one and this
+  recipe is currently only written down here. Noted 2026-09-21.
+
 - ~~**A5's association list only knows three states, and it is scored.**~~ **Fixed 2026-09-21.**
   The associations were not guessed at: a script read the same pages `check_a5.py` reads on all
   115 firms in the five uncovered states and printed every phrase in them that looks like the
@@ -606,7 +758,6 @@ rescores 217 firms, which is not a guide run's call:
   The guide that disclosed the gap is rewritten to say what happened, and it branches on a
   computed `listCoversEverywhere`, so opening a market in a ninth state puts the caveat back
   without anybody having to remember the page exists.
-
 - **Every guide page overflows horizontally at 390px in a headless render**, the new one and the
   already-published ones alike. Checked this run by rendering `/guides/what-law-firms-publish-
   about-malpractice-insurance/` and `/guides/core-web-vitals-new-york-injury-firms/` at the same

@@ -18,7 +18,7 @@
  */
 interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
-  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster' | 'shield';
+  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster' | 'shield' | 'register';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -49,6 +49,29 @@ const badges = {
   widths: [[196, 132, 244], [148, 228, 158], [214, 150, 186], [136, 246, 162], [204, 138, 210]],
   // The three drawn in violet: enough to read as "these are real and published", not a pattern.
   filled: ['0-0', '2-1', '3-2'],
+};
+
+// Business registers: one row per firm, each carrying the two dates the study compares. The
+// violet marker is the date the state register holds, the blue one is the day the domain was
+// registered, and the mint rule between them is the gap. Two rows carry no violet marker at all,
+// because their state publishes no register we may query, and those rows keep the dashed outline
+// the other scenes use for a check that never completes. The positions are the shape of the
+// finding rather than any firm's figures: wide gaps in both directions, a couple of near matches.
+const ledger = {
+  x0: 96,
+  span: 648,
+  rows: [60, 112, 164, 216, 268, 320, 372],
+  // r is the register's date, d is the domain's, each as a fraction of the track. r null is a
+  // state that answers nobody.
+  pairs: [
+    { r: 0.08, d: 0.54 },
+    { r: 0.32, d: 0.38 },
+    { r: 0.66, d: 0.18 },
+    { r: 0.12, d: 0.80 },
+    { r: null, d: 0.46 },
+    { r: 0.48, d: 0.52 },
+    { r: null, d: 0.72 },
+  ] as { r: number | null; d: number }[],
 };
 ---
 {name === 'results' && (
@@ -206,6 +229,56 @@ const badges = {
         stroke-dasharray="17 14" stroke-linejoin="round" opacity=".85" />
       <path d="M-38 2l28 28 52-58" fill="none" stroke={MINT} stroke-width="4.5"
         stroke-linecap="round" stroke-linejoin="round" opacity=".28" />
+    </g>
+  </svg>
+)}
+
+{name === 'register' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {ledger.rows.map((y, i) => {
+      const p = ledger.pairs[i];
+      const at = (frac: number) => ledger.x0 + frac * ledger.span;
+      const xd = at(p.d);
+      const xr = p.r === null ? null : at(p.r);
+      const lo = xr === null ? xd : Math.min(xr, xd);
+      const hi = xr === null ? xd : Math.max(xr, xd);
+      return (
+        <g>
+          {/* The year the firm could fall anywhere along. */}
+          <rect x={ledger.x0} y={y + 14} width={ledger.span} height="3" rx="1.5"
+            fill="rgba(255,255,255,.10)" />
+          {/* The gap between the two dates, which is what the piece measures. */}
+          {xr !== null && hi - lo > 8 && (
+            <rect x={lo} y={y + 13} width={hi - lo} height="5" rx="2.5" fill={MINT} opacity=".55" />
+          )}
+          {xr === null ? (
+            <circle cx={at(0.08)} cy={y + 15.5} r="11" fill="none" stroke={MINT}
+              stroke-width="2.5" stroke-dasharray="7 6" opacity=".85" />
+          ) : (
+            <circle cx={xr} cy={y + 15.5} r="11" fill={VIOLET} opacity=".95" />
+          )}
+          <rect x={xd - 8} y={y + 7} width="16" height="17" rx="4" fill={BLUE} opacity=".95" />
+        </g>
+      );
+    })}
+    {/* The registers themselves: three states answer and four do not, so three panels are filled
+        and the rest stay outlines that never close. */}
+    <g transform="translate(852,54)">
+      <rect x="0" y="0" width="264" height="332" rx="22" fill="rgba(255,255,255,.05)"
+        stroke="rgba(255,255,255,.18)" stroke-width="1.5" />
+      {[0, 1, 2, 3, 4, 5, 6].map(i => {
+        const y = 30 + i * 42;
+        return i < 3 ? (
+          <g>
+            <rect x="28" y={y} width="208" height="26" rx="13" fill={VIOLET} opacity=".85" />
+            <path d={`M46 ${y + 13}l8 8 16 -18`} fill="none" stroke="#1B0B3A" stroke-width="3.2"
+              stroke-linecap="round" stroke-linejoin="round" opacity=".75" />
+          </g>
+        ) : (
+          <rect x="28" y={y} width="208" height="26" rx="13" fill="none" stroke={MINT}
+            stroke-width="2" stroke-dasharray="12 10" opacity=".7" />
+        );
+      })}
     </g>
   </svg>
 )}
