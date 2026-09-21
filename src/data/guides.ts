@@ -22,7 +22,7 @@ export interface Guide {
   thumb?: string;
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
-  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster' | 'shield';
+  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster' | 'shield' | 'register';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -48,6 +48,20 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'what-a-business-register-proves-about-a-law-firm',
+    cover: 'register',
+    kicker: 'Method',
+    title: "New Study: A Law Firm's Website Age Is Not How Old the Firm Is",
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every guide to hiring a lawyer says to confirm the firm is a registered company. We ' +
+      'tried it in every state we publish in, then compared the date the register gives with ' +
+      'the age of the firm’s own web address. The two disagree in both directions.',
+    thumb: '',
+    icon: 'columns',
+    meta: 'Two public dates, and neither is the firm’s age',
+  },
   {
     slug: 'what-law-firms-publish-about-malpractice-insurance',
     cover: 'shield',
