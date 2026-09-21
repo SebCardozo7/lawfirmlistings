@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
@@ -94,7 +95,8 @@ const measured = new Date(register.measured_at).toLocaleDateString('en-US',
 const title = 'How Many Lawyers Are in New York? We Counted the State Register';
 const description = 'New York publishes its attorney register as open data. It gives four answers to how many lawyers the state has, and the ABA reports a fifth.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/ladder.png"
+  imageAlt="Four columns of the same crowd, each thinned by a stricter question, with a shorter rule under each">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -109,6 +111,8 @@ const description = 'New York publishes its attorney register as open data. It g
     </div>
   </div>
 </header>
+
+<GuideCover name="headcount" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">
@@ -132,7 +136,7 @@ const description = 'New York publishes its attorney register as open data. It g
         `<b>${n(topCounty.count)}</b> of them, ${countyShare}% of every in-state registration in force, give an address in ${topCounty.county} County alone.`,
       ]}
     />
-    <div class="callout"><b>How to read this.</b> Every figure on this page is aggregated from the state's own dataset by <code>scripts/fetch_register_stats.py</code>, which stores each answer with the query that produced it. The two figures we did not compute are attributed where they appear. Nothing here is legal information or advice.</div>
+    <div class="callout"><b>How to read this.</b> Every figure on this page is aggregated from New York's own published dataset, each one from a filter a reader can re-apply. The two figures we did not compute are attributed where they appear. Nothing here is legal information or advice.</div>
 
     <h2 id="four">Four answers to one question</h2>
     <p>Ask how many lawyers are in New York and the register can answer four ways. They are not four attempts at one number. They are four different questions, and which one you want depends entirely on why you are asking.</p>
@@ -186,9 +190,6 @@ const description = 'New York publishes its attorney register as open data. It g
       caption="Highlighted rows are the same university under two spellings, which is why this is a count of strings and not a ranking of schools."
     />
     <p>That is not a criticism of the state. It is what happens to any field a human types, and it is the same problem this directory hits from the other side: matching a firm's name to its entry in a public register is the hardest part of checking a firm, and <a href="/guides/what-a-business-register-proves-about-a-law-firm/">we have written about where that goes wrong</a>. A dataset is only as precise as the question you can ask it.</p>
-
-    <h2 id="source">The source</h2>
-    <p>Everything above is aggregated from <a href={register.landing} rel="noopener" target="_blank">{register.dataset}</a>, published as open data by {register.publisher}, read on {measured}. The queries are in <code>scripts/fetch_register_stats.py</code> and the answers in <code>src/data/research/attorney-register-ny.json</code>, each with the filter that produced it, so any figure on this page can be re-asked.</p>
   </div>
 </div>
 </article>

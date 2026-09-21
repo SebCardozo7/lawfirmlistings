@@ -18,7 +18,8 @@
  */
 interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
-  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster' | 'shield' | 'register';
+  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
+      | 'shield' | 'register' | 'headcount' | 'offices';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -307,5 +308,75 @@ const ledger = {
           stroke-width="4" stroke-linecap="round" />
       </g>
     ))}
+  </svg>
+)}
+
+{name === 'headcount' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* Four columns of the same crowd, each cut down by a different question, and the answer
+        shrinking as the question gets stricter. Every column is the same grid of figures: the
+        first is filled whole, and each one after it keeps fewer, so what the reader sees is one
+        population measured four ways rather than four populations. The dashed outlines are the
+        records the question excludes, still drawn, because the register never deletes them. */}
+    {[{ x: 120, keep: 1 }, { x: 400, keep: 0.65 }, { x: 680, keep: 0.38 }, { x: 960, keep: 0.30 }]
+      .map((col, ci) => (
+      <g transform={`translate(${col.x},70)`}>
+        {[0, 1, 2, 3, 4, 5, 6, 7].map(row => (
+          <g transform={`translate(0,${row * 38})`}>
+            {[0, 1, 2, 3].map(i => {
+              const seat = row * 4 + i;
+              const on = seat < Math.round(32 * col.keep);
+              return (
+                <g transform={`translate(${i * 40},0)`}>
+                  <circle cx="12" cy="10" r="7.5" fill={on ? (ci === 3 ? MINT : VIOLET) : 'none'}
+                    stroke={on ? 'none' : 'rgba(255,255,255,.22)'} stroke-width="2"
+                    stroke-dasharray={on ? undefined : '3 3'} opacity={on ? '.95' : '1'} />
+                  <path d="M2 30c0-6.5 4.5-11 10-11s10 4.5 10 11" fill="none"
+                    stroke={on ? (ci === 3 ? MINT : VIOLET) : 'rgba(255,255,255,.22)'}
+                    stroke-width={on ? '3' : '2'} stroke-linecap="round"
+                    stroke-dasharray={on ? undefined : '3 3'} opacity={on ? '.95' : '1'} />
+                </g>
+              );
+            })}
+          </g>
+        ))}
+        {/* The rule under each column, as long as the part it keeps. Four answers, four lengths. */}
+        <line x1="0" y1="330" x2={160 * col.keep} y2="330" stroke="#fff" stroke-width="5"
+          stroke-linecap="round" opacity=".85" />
+      </g>
+    ))}
+  </svg>
+)}
+
+{name === 'offices' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* Ten years across, as doors and as the people behind them. The row of doorways thins from
+        left to right, a couple of them closing into dashed outlines, while the stacked figures
+        above each doorway grow taller: fewer offices, more people in them. The one on the right
+        is mint because it is the latest year, which is the figure the page leads with. */}
+    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => {
+      const x = 96 + i * 104;
+      const closed = i === 4 || i === 6;
+      const heads = 2 + Math.round(i * 0.55);
+      const last = i === 9;
+      const tint = last ? MINT : closed ? 'rgba(255,255,255,.22)' : BLUE;
+      return (
+        <g transform={`translate(${x},0)`}>
+          {/* The people, stacked upward, one pill per unit of employment. */}
+          {Array.from({ length: heads }).map((_, h) => (
+            <rect x="14" y={250 - h * 26} width="44" height="18" rx="9"
+              fill={last ? MINT : VIOLET} opacity={0.35 + h * 0.08} />
+          ))}
+          {/* The doorway. A closed one is dashed and has no handle. */}
+          <path d="M6 400V318c0-18 15-32 33-32s33 14 33 32v82"
+            fill={closed ? 'none' : 'rgba(255,255,255,.10)'}
+            stroke={tint} stroke-width={closed ? '2.5' : '4'}
+            stroke-dasharray={closed ? '12 10' : undefined} stroke-linejoin="round" />
+          {!closed && <circle cx="58" cy="356" r="4" fill={tint} opacity=".9" />}
+        </g>
+      );
+    })}
+    <line x1="80" y1="400" x2="1120" y2="400" stroke="rgba(255,255,255,.28)" stroke-width="2.5"
+      stroke-linecap="round" />
   </svg>
 )}

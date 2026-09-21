@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
@@ -94,7 +95,8 @@ const measured = new Date(offices.measured_at).toLocaleDateString('en-US',
 const title = 'Law Firm Statistics in New York: Fewer Offices, More Lawyers';
 const description = 'The federal payroll record counts law offices in New York. Over ten years there are fewer of them, employing more people, paid half again as much.';
 ---
-<Base title={title} description={description} nav="guides">
+<Base title={title} description={description} nav="guides" image="/og/ranking.png"
+  imageAlt="A row of doorways thinning across ten years while the stacks of people above them grow taller">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -109,6 +111,8 @@ const description = 'The federal payroll record counts law offices in New York. 
     </div>
   </div>
 </header>
+
+<GuideCover name="offices" />
 
 <div class="container article-grid">
   <nav class="toc" aria-label="On this page">
@@ -133,7 +137,7 @@ const description = 'The federal payroll record counts law offices in New York. 
         `The state has <b>${n(residentAttorneys)}</b> resident attorneys with a live registration, <b>${n(moreLicensed)}</b> more than its law offices employ people. A licence is not a job.`,
       ]}
     />
-    <div class="callout"><b>How to read this.</b> Every figure here is aggregated from the federal payroll record by <code>scripts/fetch_firm_stats.py</code>. It counts offices that report payroll, not firms, so a firm with four offices is four of these. Nothing here is legal information or advice.</div>
+    <div class="callout"><b>How to read this.</b> Every figure here is aggregated from the federal payroll record, which counts offices that report payroll rather than firms: a practice with four offices is four of these. Nothing here is legal information or advice.</div>
 
     <h2 id="count">How many law firms are in New York</h2>
     <p>The honest answer is that nobody counts law firms. What is counted is establishments that report payroll, and in {latest.year} New York had <b>{n(latest.law_offices.establishments)}</b> of them under the code for offices of lawyers, employing <b>{n(latest.law_offices.employment)}</b> people.</p>
@@ -190,9 +194,6 @@ const description = 'The federal payroll record counts law offices in New York. 
     <p><b>It counts offices, not firms.</b> Nothing published reconciles the two, so the number of law firms in New York is smaller than {n(latest.law_offices.establishments)} by an amount nobody measures.</p>
     <p><b>It misses practices with no payroll.</b> A solo practitioner who employs nobody may not appear at all, which means the smallest end of the profession is the part this dataset sees least.</p>
     <p><b>It says nothing about quality, and neither does any count.</b> A county with more offices is not a county with better lawyers. What a firm publishes about itself is checkable and is a different question, which is <a href="/methodology/">the one this directory measures</a>.</p>
-
-    <h2 id="source">The source</h2>
-    <p>Aggregated from the <a href={offices.landing} rel="noopener" target="_blank">{offices.dataset}</a>, published by {offices.publisher}, read on {measured}. The queries are in <code>scripts/fetch_firm_stats.py</code> and the answers in <code>src/data/research/law-offices-ny.json</code>, so any figure above can be re-asked. The Census Bureau's County Business Patterns measures the same thing and now requires an API key; this uses the Bureau of Labor Statistics' open data instead, so nobody has to register for anything to check us.</p>
   </div>
 </div>
 </article>
