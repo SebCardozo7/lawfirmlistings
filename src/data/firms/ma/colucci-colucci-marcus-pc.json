@@ -241,13 +241,19 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Boston Bar Association",
+        "source_url": "https://www.coluccilaw.com/firm-overview/",
+        "quote": "r eight years (1999-2006) and served as the co-chair of the Boston Bar Association’s Elder Law Committee. He has served as a Hearing Officer f"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Boston Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 3,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": true,
@@ -260,14 +266,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 37,
+    "total": 41,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -289,10 +295,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Boston Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -433,11 +439,11 @@
         ]
       }
     },
-    "floor_abc": 19,
+    "floor_abc": 22,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 33,
+      "gap": 29,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -446,10 +452,10 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 29.0,
+    "raw": 32.0,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.5,
+    "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1",
       "G3"

@@ -216,13 +216,19 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Oregon State Bar",
+        "source_url": "https://www.dawlaw.net/",
+        "quote": "t McKenna College. Professional Associations: Member of the Oregon State Bar, U.S. Ninth Circuit Court of Appeals, Oregon Association of"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Oregon State Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 1,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 21,
@@ -271,14 +277,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 49,
+    "total": 53,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -300,10 +306,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Oregon State Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -444,11 +450,11 @@
         ]
       }
     },
-    "floor_abc": 24,
+    "floor_abc": 28,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 21,
+      "gap": 17,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -457,10 +463,10 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 38.5,
+    "raw": 41.5,
     "assessed": 78,
     "coverage": 0.78,
-    "floor_abc_pct": 0.645,
+    "floor_abc_pct": 0.724,
     "gates_unavailable": [
       "G1",
       "G2"

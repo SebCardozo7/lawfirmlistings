@@ -288,13 +288,29 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Texas Trial Lawyers Association",
+        "source_url": "https://www.thebentonlawfirm.com/about-us/",
+        "quote": "ff is a member of the Dallas Trial Lawyers Association, the Texas Trial Lawyers Association, and the Dallas Bar Association. In 2013, he was honored wi"
+      },
+      {
+        "name": "Dallas Bar Association",
+        "source_url": "https://www.thebentonlawfirm.com/about-us/",
+        "quote": "s Association, the Texas Trial Lawyers Association, and the Dallas Bar Association. In 2013, he was honored with the Dallas Trial Lawyers Asso"
+      },
+      {
+        "name": "Dallas Trial Lawyers Association",
+        "source_url": "https://www.thebentonlawfirm.com/about-us/",
+        "quote": "ompensation is recovered. Jeff Benton is a recipient of the Dallas Trial Lawyers Association’s John Howie Award (2013) and has been named one of D Magaz"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Texas Trial Lawyers Association, Dallas Bar Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 86,
@@ -381,14 +397,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 54,
+    "total": 58,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -410,10 +426,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Texas Trial Lawyers Association, Dallas Bar Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -554,11 +570,11 @@
         ]
       }
     },
-    "floor_abc": 24,
+    "floor_abc": 28,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 16,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -567,10 +583,10 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 42.5,
+    "raw": 45.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.645,
+    "floor_abc_pct": 0.724,
     "gates_unavailable": [
       "G1",
       "G2",

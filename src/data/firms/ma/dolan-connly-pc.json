@@ -254,13 +254,19 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Massachusetts Bar Association",
+        "source_url": "https://dolanconnlylaw.com/people/david-a-marsocci",
+        "quote": "st, Massachusetts Professional Associations and Memberships Massachusetts Bar Association New Hampshire Bar Association Zoning Board of Appeals, Hull"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Massachusetts Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 9,
     "bios_published": 6,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 6,
@@ -293,14 +299,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 41,
+    "total": 45,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -322,10 +328,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Massachusetts Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -466,12 +472,12 @@
         ]
       }
     },
-    "floor_abc": 23,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 29,
-      "floor_met": false,
+      "gap": 25,
+      "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
@@ -479,10 +485,10 @@
         "D2 Search authority: +6 available"
       ]
     },
-    "raw": 32.0,
+    "raw": 35.0,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.605,
+    "floor_abc_pct": 0.684,
     "gates_unavailable": [
       "G1",
       "G3"

@@ -223,13 +223,24 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Indiana State Bar Association",
+        "source_url": "https://www.straccilaw.com/about-us",
+        "quote": "ules and select a panel of prospective federal magistrates. Indiana state bar association Members of Indiana State Bar Association. Paul regularly re"
+      },
+      {
+        "name": "Lake County Bar Association",
+        "source_url": "https://www.straccilaw.com/about-us",
+        "quote": "rts of Lake County Indiana. Criminal Defense Section of the Lake County Bar Association Longtime Chairman/Co-chairman the Criminal Defense Section"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Indiana State Bar Association, Lake County Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": true,
@@ -242,14 +253,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 39,
+    "total": 43,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -271,10 +282,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Indiana State Bar Association, Lake County Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -415,11 +426,11 @@
         ]
       }
     },
-    "floor_abc": 19,
+    "floor_abc": 22,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 31,
+      "gap": 27,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -428,10 +439,10 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 30.5,
+    "raw": 33.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.5,
+    "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1",
       "G3"

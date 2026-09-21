@@ -743,21 +743,21 @@ rescores 217 firms, which is not a guide run's call:
   Somebody should make this a script in `scripts/`, because every future guide needs one and this
   recipe is currently only written down here. Noted 2026-09-21.
 
-- **A5's association list only knows three states, and it is scored.** `scripts/check_a5.py`
-  matches bar and trial lawyers' associations against a fixed list of 22 patterns. Every
-  state-keyed entry on it belongs to New York, Maryland or New Jersey, because those were the
-  first markets. There is no Massachusetts, Oregon, Texas, Indiana or Florida bar association on
-  it at all. The consequence is live in the score: a firm in Dallas or Portland that names its own
-  state bar is read as naming nothing and loses three points of A5, which it can only recover by
-  naming a national body. The measured gap is **84 of 155 firms in New York and Maryland against
-  29 of 112 everywhere else**, and some unknown share of that is our list rather than the firms.
-  This is the same class of failure as the `bar_numbers_on_bios` one: a firm losing points to the
-  reach of our own matching, which the repository's own stated rule forbids. The new guide says so
-  out loud rather than publishing the by-state rates as if they were rates, but saying it is not
-  fixing it. The fix is adding each state's bar and trial lawyers' associations to the list and
-  re-running A5, which rescores firms in five states, so it is a decision rather than an edit.
-  Noted 2026-09-18.
-
+- ~~**A5's association list only knows three states, and it is scored.**~~ **Fixed 2026-09-21.**
+  The associations were not guessed at: a script read the same pages `check_a5.py` reads on all
+  115 firms in the five uncovered states and printed every phrase in them that looks like the
+  name of an association, so the list got the bodies those firms actually name, in their own
+  words. Three more were confirmed from the associations' own publications because a three-page
+  read had missed them. The list went from 22 patterns to 41, and the American Academy of
+  Matrimonial Lawyers went on it for the reason the workers' compensation bodies are already
+  there: it is the specialist body of a practice this directory now publishes 42 firms in.
+  Re-reading 154 firms moved 64 of them and 34 went from nothing to the full three points.
+  Florida went from 26% to 71% and Massachusetts from 18% to 54%, and the by-state ordering
+  inverted: New York and Maryland were the top two because ours was the only list that knew
+  their associations, and Florida and Texas now lead. Thirty-five scores moved, no tier did.
+  The guide that disclosed the gap is rewritten to say what happened, and it branches on a
+  computed `listCoversEverywhere`, so opening a market in a ninth state puts the caveat back
+  without anybody having to remember the page exists.
 - **Every guide page overflows horizontally at 390px in a headless render**, the new one and the
   already-published ones alike. Checked this run by rendering `/guides/what-law-firms-publish-
   about-malpractice-insurance/` and `/guides/core-web-vitals-new-york-injury-firms/` at the same

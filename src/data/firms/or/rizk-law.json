@@ -209,13 +209,19 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "Oregon State Bar",
+        "source_url": "https://www.rizklaw.com/attorneys/richard-rizk/rizk-essentials",
+        "quote": "8. His leadership at Cascade Ski club was documented in the Oregon State Bar Bulletin in 2011. osbar.org “I loved Cascade so much Jill a"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Oregon State Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 7,
     "bios_published": 4,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": true,
@@ -228,14 +234,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 38,
+    "total": 42,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -257,10 +263,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of Oregon State Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -401,11 +407,11 @@
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 19,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 32,
+      "gap": 28,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -414,10 +420,10 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 30.0,
+    "raw": 33.0,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.421,
+    "floor_abc_pct": 0.5,
     "gates_unavailable": [
       "G1"
     ],

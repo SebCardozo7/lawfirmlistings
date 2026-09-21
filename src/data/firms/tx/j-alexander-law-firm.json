@@ -269,13 +269,29 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "State Bar of Texas",
+        "source_url": "https://severeinjurylawyers.com/about-us/",
+        "quote": "inst an insurer’s lawyers in front of a jury. Bar Admission Texas State Bar; in good standing since 2017 Joshua Alexander has been lice"
+      },
+      {
+        "name": "Texas Trial Lawyers Association",
+        "source_url": "https://severeinjurylawyers.com/about-us/",
+        "quote": "Dallas Trial Lawyers Associations Active member of both the Texas Trial Lawyers Association and Dallas Trial Lawyers Association; the two leading bodie"
+      },
+      {
+        "name": "Dallas Trial Lawyers Association",
+        "source_url": "https://severeinjurylawyers.com/about-us/",
+        "quote": "egal forums in the U.S. Active member Trial Lawyers Texas & Dallas Trial Lawyers Associations Active member of both the Texas Trial Lawyers Association"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of State Bar of Texas, Texas Trial Lawyers Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 1,
@@ -303,14 +319,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 53,
+    "total": 56,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -332,10 +348,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of State Bar of Texas, Texas Trial Lawyers Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -476,11 +492,11 @@
         ]
       }
     },
-    "floor_abc": 27,
+    "floor_abc": 30,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 17,
+      "gap": 14,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -489,10 +505,10 @@
         "D1 Website trust & experience: +6.5 available"
       ]
     },
-    "raw": 41.0,
+    "raw": 44.0,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.711,
+    "floor_abc_pct": 0.789,
     "gates_unavailable": [
       "G1",
       "G2",

@@ -310,13 +310,29 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://brookslawgroup.com/about-us/",
+        "quote": ". Mohammed is an associate in our Tampa office. Admitted to the Florida Bar in 2004, he spent... Mark Mohammed Beach’s Background Beach"
+      },
+      {
+        "name": "Polk County Trial Lawyers Association",
+        "source_url": "https://brookslawgroup.com/attorneys/beach-a-brooks-jr",
+        "quote": "and truck accidents. He is a member of the Florida Bar, the Polk County Trial Lawyers Association, and is a past president of the Polk County Family Lawyers"
+      },
+      {
+        "name": "Florida Justice Association",
+        "source_url": "https://brookslawgroup.com/attorneys/stephen-k-brooks",
+        "quote": "lk County Trial Lawyers Association, an Eagle member of The Florida Justice Association and a member of the Association of Plaintiff Interstate Tru"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of The Florida Bar, Polk County Trial Lawyers Association, Florida Justice Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 17,
     "bios_published": 14,
     "source": "observed",
-    "checked_at": "2026-09-13"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 4,
@@ -346,14 +362,14 @@
     "checked_at": "2026-09-13"
   },
   "score": {
-    "total": 49,
+    "total": 53,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -375,10 +391,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of The Florida Bar, Polk County Trial Lawyers Association, Florida Justice Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -519,12 +535,12 @@
         ]
       }
     },
-    "floor_abc": 22,
+    "floor_abc": 25,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 21,
-      "floor_met": false,
+      "gap": 17,
+      "floor_met": true,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
@@ -532,10 +548,10 @@
         "E4 Availability: +5 available"
       ]
     },
-    "raw": 38.5,
+    "raw": 41.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.579,
+    "floor_abc_pct": 0.658,
     "gates_unavailable": [
       "G1",
       "G2"

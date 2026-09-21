@@ -218,13 +218,24 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://cona.law/about/",
+        "quote": "them with customized legal assistance. Chris is a member of the Florida Bar Association and the Collier County Bar Association. Contact"
+      },
+      {
+        "name": "Collier County Bar Association",
+        "source_url": "https://cona.law/about/",
+        "quote": "e. Chris is a member of the Florida Bar Association and the Collier County Bar Association. Contact Chris Our Team In addition to efficient and creati"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of The Florida Bar, Collier County Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "readable": true,
@@ -237,14 +248,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 22,
+    "total": 26,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -266,10 +277,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of The Florida Bar, Collier County Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -410,11 +421,11 @@
         ]
       }
     },
-    "floor_abc": 12,
+    "floor_abc": 16,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 48,
+      "gap": 44,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -423,10 +434,10 @@
         "A6 Roster verifiability: +9 available"
       ]
     },
-    "raw": 15.5,
+    "raw": 18.5,
     "assessed": 71,
     "coverage": 0.78,
-    "floor_abc_pct": 0.329,
+    "floor_abc_pct": 0.408,
     "gates_unavailable": [
       "G1"
     ],

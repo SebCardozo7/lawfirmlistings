@@ -335,13 +335,29 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "State Bar of Texas",
+        "source_url": "https://www.dfwinjurylawyers.com/team/pedro-de-la-cerda",
+        "quote": "injury cases. Schedule A Free Case Consultation Admissions: Texas State Bar, 2004 California State Bar, 2007 U.S. Court of Appeals Fift"
+      },
+      {
+        "name": "Texas Trial Lawyers Association",
+        "source_url": "https://www.dfwinjurylawyers.com/team/kevin-l-edwards",
+        "quote": "tive member of the Dallas Trial Lawyers Association and the Texas Trial Lawyers Association , and has been featured in publications such as Attorney At"
+      },
+      {
+        "name": "Dallas Trial Lawyers Association",
+        "source_url": "https://www.dfwinjurylawyers.com/team/kevin-l-edwards",
+        "quote": "0 Personal Injury Attorneys . He is an active member of the Dallas Trial Lawyers Association and the Texas Trial Lawyers Association , and has been feat"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of State Bar of Texas, Texas Trial Lawyers Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 5,
     "bios_published": 2,
     "source": "observed",
-    "checked_at": "2026-09-15"
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 54,
@@ -420,14 +436,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 57,
+    "total": 61,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -449,10 +465,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of State Bar of Texas, Texas Trial Lawyers Association, Dallas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -593,11 +609,11 @@
         ]
       }
     },
-    "floor_abc": 32,
+    "floor_abc": 35,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 13,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -606,10 +622,10 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 44.5,
+    "raw": 47.5,
     "assessed": 78,
     "coverage": 0.857,
-    "floor_abc_pct": 0.842,
+    "floor_abc_pct": 0.921,
     "gates_unavailable": [
       "G1",
       "G2",

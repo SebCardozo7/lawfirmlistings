@@ -508,13 +508,19 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them · read 63 page(s) against a roster of 92, so an absence is not yet a finding about the firm",
+    "bar_associations": [
+      {
+        "name": "Massachusetts Bar Association",
+        "source_url": "https://brookslawfirm.com/our-team/arinda-brooks",
+        "quote": "heard, empowered, and supported. Arinda is a member of the Massachusetts Bar Association and the Women’s Bar Association of Massachusetts. She lives"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Massachusetts Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 63,
     "bios_published": 92,
-    "source": "partial",
-    "checked_at": "2026-09-15"
+    "source": "observed",
+    "checked_at": "2026-09-21"
   },
   "results_published": {
     "count": 22,
@@ -562,14 +568,14 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 49,
+    "total": 51,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -591,10 +597,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
-            "source": "partial",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them · read 63 page(s) against a roster of 92, so an absence is not yet a finding about the firm"
+            "source": "observed",
+            "evidence": "member of Massachusetts Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -735,11 +741,11 @@
         ]
       }
     },
-    "floor_abc": 26,
+    "floor_abc": 30,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 21,
+      "gap": 19,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -748,10 +754,10 @@
         "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 37.0,
-    "assessed": 75,
-    "coverage": 0.824,
-    "floor_abc_pct": 0.757,
+    "raw": 40.0,
+    "assessed": 78,
+    "coverage": 0.857,
+    "floor_abc_pct": 0.776,
     "gates_unavailable": [
       "G1",
       "G2",
