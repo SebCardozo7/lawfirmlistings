@@ -131,8 +131,41 @@ NOT_A_PERSON = re.compile(
     r"referral|program|insurance|claim|sidewalk|read[-\s]more|bronx|staten[-\s]island|"
     # More of the same, from the same reading: a link to a city page, a defective-product page
     # or an advertising-disclosure page, each of which is two capitalised words.
-    r"lawsuit|uninsured|commercial|advertisement|collapse|new[-\s]york|view[-\s]all)s?\b",
+    r"lawsuit|uninsured|commercial|advertisement|collapse|new[-\s]york|view[-\s]all|"
+    # Re-reading the fifty-seven firms that name nobody put twelve rosters in front of a person
+    # again, and only two of them held a person. The other ten were the same menu problem in a
+    # practice this list had never been tested against: Jeffrey B. Peltz was stored alongside
+    # "Green Cards", "Fiancee Visa" and "Consumer Credit Counseling Companies", and Robert S.
+    # Gershon's roster came back as fourteen matrimonial and criminal practice pages.
+    #
+    # Family and matrimonial pages. "Support" is the word that carries most of them, and it is
+    # not a surname; "separation", "prenuptial", "postnuptial" and "paternity" only ever title a
+    # practice page.
+    r"support|separation|prenuptial|postnuptial|paternity|neglect|"
+    # Immigration sub-pages. The list held "immigration" and none of what a firm files under it.
+    r"visa|visas|green[-\s]card|citizenship|deportation|asylum|naturalization|"
+    # Criminal sub-pages, and the tickets and sealings a defence firm lists beside them.
+    r"violence|violation|misconduct|conduct|sealing|ticket|expunction|arraignment|"
+    # Money and property pages: a bankruptcy firm's menu, and a closing.
+    r"debt|credit|counseling|foreclosure|mortgage|refinanc\w*|probat\w*|deed|escrow|"
+    # Disability vocabulary, from a social security practice's own menu.
+    r"impairment|functional|capacity|vocational|"
+    # The rest of a menu. "Victim" and "tort" title a page and name nobody; "personal" reaches
+    # "Queens Personal", which is what a role peel leaves of "Queens Personal Injury Attorney".
+    r"victim|tort|torts|form|forms|vehicle|personal|fee|contingency|"
+    # Page furniture in the first person. No person's name contains "we" or "us" as a word, and
+    # a roster page headed "Who We Are", "What We Do" or "Who We Help" was giving all three.
+    r"\bwe\b|\bus\b|mobile|pop[-\s]up|"
+    # The last of them, each a word no person in this directory carries. "Court" is left off
+    # because Court is a surname and "family" catches "Family Court" on its own, and "new" is
+    # here as the first word of a city rather than of a name: New Britain and New Haven are two
+    # of the towns a Connecticut firm links from its about page.
+    r"family|property|division|enforcement|systemic|failure|patient|safety|new)s?\b",
     re.I)
+
+# A two-letter capitalised word at the end is a state, not a surname: "Brooklyn NY" came off a
+# roster page as a person because a borough and a state code are two capitalised words.
+STATE_TAIL = re.compile(r"^[A-Z]{2}$")
 
 # Words a roster puts in front of a name rather than after it. Kept apart from ROLE_WORDS
 # because that set is wide enough to include "of" and "and", which must never lead a peel.
@@ -254,7 +287,10 @@ def looks_like_a_person(name):
     name = name.strip()
     if any(ch.isdigit() for ch in name):
         return False
-    if NOT_A_PERSON.search(name):
+    # Tested with the full stops taken out as well as with them in. An acronym a site writes as
+    # "SSD F.A.Q’s" hides its own word from a boundary test, and that heading was read as a
+    # person at a Staten Island firm because "faq" is on the list and "F.A.Q" is not the word.
+    if NOT_A_PERSON.search(name) or NOT_A_PERSON.search(name.replace(".", "")):
         return False
     words = [w for w in re.split(r"\s+", name) if w]
     # A name written in a script without cases or spaces between given and family name is
@@ -275,6 +311,8 @@ def looks_like_a_person(name):
     # firm's attorney is published under his full name and the rest of that staff list is not
     # ours to complete. Publishing a client as an employee is the worse of the two errors.
     if len(words) == 2 and len(words[1].strip(".")) == 1:
+        return False
+    if STATE_TAIL.match(words[-1]):
         return False
     # A title word past the given name and surname means the peel stopped early.
     if len(words) > 2 and TITLE_RESIDUE.search(" ".join(words[2:])):

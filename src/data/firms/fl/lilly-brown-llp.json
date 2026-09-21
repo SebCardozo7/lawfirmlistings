@@ -87,6 +87,10 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-16"
+    },
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true
     }
   },
   "gates": {
@@ -269,7 +273,7 @@
             "pts": 0,
             "max": 7,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
           },
           {
             "code": "D2",

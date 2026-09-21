@@ -47,7 +47,7 @@
       "admitted_year": 1999,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-21"
     },
     {
       "name": "Leah Costanzo",
@@ -58,15 +58,7 @@
       "admitted_year": 2012,
       "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-09-16"
-    },
-    {
-      "name": "NY Child Victims Act",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://steveboyd.com/new-york-child-victims-act/",
-      "registry_note": "not found",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-21"
     }
   ],
   "languages": [
@@ -159,15 +151,15 @@
   "gates": {
     "G1": {
       "pass": true,
-      "evidence": "2 of 3 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
+      "evidence": "2 of 2 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-21"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 2 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-21"
     },
     "G3": {
       "pass": true,
@@ -177,9 +169,9 @@
     },
     "G5": {
       "pass": true,
-      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-21"
     },
     "G6": {
       "pass": true,
@@ -278,14 +270,14 @@
     "checked_at": "2026-09-17"
   },
   "score": {
-    "total": 47,
+    "total": 51,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (3/15).",
     "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 15,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -294,15 +286,15 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 20.5 years since admission across 2 of 3 named attorneys (longest 27, shortest 14) · NYS Attorney Registration database"
+            "evidence": "Mean 20.5 years since admission across 2 of 2 named attorneys (longest 27, shortest 14) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 6,
+            "pts": 9,
             "max": 9,
             "source": "registry",
-            "evidence": "2 of 3 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "2 of 2 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -451,11 +443,11 @@
         ]
       }
     },
-    "floor_abc": 37,
+    "floor_abc": 40,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
+      "gap": 19,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -464,10 +456,10 @@
         "E4 Availability: +5 available"
       ]
     },
-    "raw": 46.0,
+    "raw": 49.0,
     "assessed": 97,
     "coverage": 0.97,
-    "floor_abc_pct": 0.649,
+    "floor_abc_pct": 0.702,
     "gates_unavailable": [],
     "assessable": 100,
     "comparable": true
