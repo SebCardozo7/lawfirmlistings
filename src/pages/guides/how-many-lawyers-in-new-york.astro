@@ -1,0 +1,195 @@
+---
+import Base from '../../layouts/Base.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import register from '../../data/research/attorney-register-ny.json';
+
+/**
+ * The first reference article on this site, as opposed to the first nine, which are studies.
+ *
+ * The difference matters enough to be written down. A study measures the firms in this directory
+ * and every figure in it is computed from the collection at build time, so the page cannot drift
+ * from our own data. This page is about somebody else's dataset: the state's register of every
+ * attorney admitted in New York. It carries no figure about our firms and makes no claim about
+ * them, and it is not titled "New Study" for that reason.
+ *
+ * The rule that no figure may be hand-typed still holds, which is why nothing below is a literal.
+ * scripts/fetch_register_stats.py asks the register each question and writes the answers to
+ * src/data/research/, each one carrying the query that produced it. Re-running the script updates
+ * every number on this page, and the same article for another state is another run of it.
+ *
+ * The two figures that are not ours and not fetchable, the ABA's lawyer count and the Bureau of
+ * Labor Statistics' median wage, are published as documents rather than as data. They sit in the
+ * file's citations block with a source and the date they were read, and they are presented below
+ * as somebody else's count rather than as a measurement.
+ */
+const c = register.counts;
+const n = (v: number) => v.toLocaleString('en-US');
+const aba = register.citations.find(x => x.who === 'American Bar Association')!;
+const bls = register.citations.find(x => x.who === 'U.S. Bureau of Labor Statistics')!;
+
+// The four answers, largest first, as the bars a reader compares. Each keeps the filter that
+// produced it in its note, because the point of the chart is that these are different questions
+// rather than four attempts at one.
+const answers = [
+  { key: 'records', note: 'every record in the dataset, including the deceased' },
+  { key: 'current', note: 'a registration in force, anywhere in the world' },
+  { key: 'in_state', note: 'a New York address, in any status' },
+  { key: 'current_in_state', note: 'both: in force, and here' },
+].map(({ key, note }) => ({
+  label: (c as any)[key].label,
+  value: (c as any)[key].value,
+  display: n((c as any)[key].value),
+  note,
+  emphasis: key === 'current_in_state',
+}));
+
+// Every status the register records, which is where the interesting ones are. The two that carry
+// a suspension are emphasised together: they are the reason this dataset is hard to publish
+// anything about a named person from.
+const SUSPENDED = /suspend/i;
+const statuses = register.status.map(s => ({
+  label: s.status,
+  value: s.count,
+  display: n(s.count),
+  emphasis: SUSPENDED.test(s.status),
+}));
+const suspended = register.status.filter(s => SUSPENDED.test(s.status));
+const suspendedTotal = suspended.reduce((t, s) => t + s.count, 0);
+const disbarred = register.status.find(s => /disbarred/i.test(s.status));
+const deceased = register.status.find(s => /deceased/i.test(s.status));
+
+const counties = register.counties.slice(0, 10).map(r => ({
+  label: r.county,
+  value: r.count,
+  display: n(r.count),
+  emphasis: r.county === register.counties[0].county,
+}));
+const topCounty = register.counties[0];
+const countyShare = Math.round((topCounty.count / c.current_in_state.value) * 100);
+
+const decades = register.decades.map(d => ({
+  label: `${d.decade}s`,
+  value: d.count,
+  note: d.decade === 2020 ? 'still filling' : undefined,
+  emphasis: d.count === Math.max(...register.decades.map(x => x.count)),
+}));
+const peak = register.decades.reduce((a, b) => (b.count > a.count ? b : a));
+
+// The two spellings of one university, which is the cleanest illustration of why a count by
+// school is a count of spellings. Found rather than named: if the register is ever tidied, this
+// falls out of the page by itself.
+const nyuRows = register.schools.filter(s => /new york university/i.test(s.school));
+const schools = register.schools.slice(0, 10).map(s => ({
+  label: s.school,
+  value: s.count,
+  display: n(s.count),
+  emphasis: /new york university/i.test(s.school),
+}));
+
+const measured = new Date(register.measured_at).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+
+const title = 'How Many Lawyers Are in New York? We Counted the State Register';
+const description = 'New York publishes its attorney register as open data. It gives four answers to how many lawyers the state has, and the ABA reports a fifth.';
+---
+<Base title={title} description={description} nav="guides">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Lawyers in New York</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Public records</span>
+    <h1>{title}</h1>
+    <p class="lede">New York publishes every attorney registration it holds as open data: {n(c.records.value)} records, going back to an admission in {c.earliest_admission.value}. We asked it how many lawyers the state has and got four different answers, because that question has four meanings. The American Bar Association reports a fifth number, and the gap between them is not an error.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Public records, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Read {measured}</span>
+      <span class="sep" aria-hidden="true"></span><span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#four" class="is-active">Four answers</a></li>
+      <li><a href="#status">What the statuses say</a></li>
+      <li><a href="#where">Where they are</a></li>
+      <li><a href="#when">When they were admitted</a></li>
+      <li><a href="#limits">What the register cannot tell you</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read from ${register.dataset} on ${measured}, published by ${register.publisher}.`}
+      items={[
+        `The register holds <b>${n(c.records.value)}</b> registration records. <b>${n(c.current.value)}</b> are currently in force, and <b>${n(c.current_in_state.value)}</b> of those belong to somebody with a New York address.`,
+        `The American Bar Association reports <b>${n(aba.value)}</b> lawyers resident in New York, more than any other state. That figure sits between two of ours and matches neither.`,
+        `<b>${n(suspendedTotal)}</b> registrations carry a suspension and <b>${n(disbarred?.count ?? 0)}</b> record a disbarment. The register says what the status is and never why.`,
+        `<b>${n(topCounty.count)}</b> of them, ${countyShare}% of every in-state registration in force, give an address in ${topCounty.county} County alone.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is aggregated from the state's own dataset by <code>scripts/fetch_register_stats.py</code>, which stores each answer with the query that produced it. The two figures we did not compute are attributed where they appear. Nothing here is legal information or advice.</div>
+
+    <h2 id="four">Four answers to one question</h2>
+    <p>Ask how many lawyers are in New York and the register can answer four ways. They are not four attempts at one number. They are four different questions, and which one you want depends entirely on why you are asking.</p>
+    <BarChart
+      heading="What the register answers, by what you mean"
+      rows={answers}
+      caption="The note under each label is the filter that produced it. A record is created once and never deleted, so the top bar counts people who died decades ago; the bottom bar is the one most people mean."
+    />
+    <p>If you are asking how many lawyers could take your case in New York tomorrow, the answer is the bottom bar: <b>{n(c.current_in_state.value)}</b>. If you are asking how many people hold a live New York licence from anywhere in the world, it is <b>{n(c.current.value)}</b>, because a licence does not require you to live here. The difference between those two, {n(c.current.value - c.current_in_state.value)} registrations, is mostly lawyers admitted in New York who practise somewhere else.</p>
+    <p>The <a href={aba.url} rel="noopener" target="_blank">{aba.who}'s {aba.what}</a> reports <b>{n(aba.value)}</b> lawyers resident in New York. {aba.note} That number is larger than our in-state count and smaller than the count of live registrations, which is what you would expect: the ABA is counting resident lawyers rather than addresses on a registration form, and an address in a dataset is only ever where the mail goes.</p>
+    <p>The <a href={bls.url} rel="noopener" target="_blank">{bls.who}</a> gives a third kind of figure again, a median annual wage of <b>${n(bls.value)}</b> for lawyers nationally as of {bls.what.replace('Occupational Outlook Handbook, ', '')}. {bls.note}</p>
+
+    <h2 id="status">What the statuses say, and what they do not</h2>
+    <p>The register records a status against every registration, and the distribution is the part of this dataset most worth understanding before anybody quotes it.</p>
+    <BarChart
+      heading="Every status the register records"
+      rows={statuses}
+      caption="Highlighted rows carry a suspension. A record is never removed, which is why the deceased are the third largest group."
+    />
+    <p><b>{n(deceased?.count ?? 0)}</b> records belong to people who have died. That is not an oversight: a register of admissions is a historical record, and the state keeps it rather than editing people out of it. It is also the single easiest way to get a lawyer count wrong, because the total looks like a population and is not one.</p>
+    <p>The rows that matter most are the ones carrying a suspension: <b>{n(suspendedTotal)}</b> registrations across {suspended.length} statuses, plus <b>{n(disbarred?.count ?? 0)}</b> disbarments and {n(register.status.find(s => /disciplinary/i.test(s.status))?.count ?? 0)} resignations for a disciplinary reason.</p>
+    <p><b>The register carries the status and never the reason.</b> In New York a suspension issues from the Appellate Division whatever prompted it, and several missed biennial registration filings are themselves grounds for one. So a single status covers both a sanction for misconduct and a long paperwork lapse, and nothing in the dataset separates them. That is why this directory has never published a conclusion about a named attorney from this field: <a href="/guides/what-it-takes-to-check-a-law-firm/">we use it to confirm a licence exists</a>, and a person reads the Appellate Division's own decisions for anything else.</p>
+
+    <h2 id="where">Where they are</h2>
+    <p>Of the {n(c.current_in_state.value)} in-force registrations with a New York address, the concentration is extreme.</p>
+    <BarChart
+      heading={`Currently registered, by county, top ${counties.length}`}
+      rows={counties}
+      caption="Counties as the register spells them. Kings is Brooklyn, Richmond is Staten Island, and New York County is Manhattan."
+    />
+    <p>{topCounty.county} County holds <b>{countyShare}%</b> of them by itself, {(topCounty.count / (register.counties[1]?.count || 1)).toFixed(1)} times the next county. That is Manhattan, and it is the reason a directory that ranks law firms has to rank them by city and practice rather than by state: <a href="/methodology/">comparing a Manhattan firm against an upstate one</a> compares two different markets that happen to share a licence.</p>
+
+    <h2 id="when">When they were admitted</h2>
+    <p>Every registration in force carries the year its holder was admitted, and the shape of that is a profession that has grown steadily and then stopped growing quite so fast.</p>
+    <ColumnChart
+      heading="Currently registered, by decade of admission"
+      columns={decades}
+      emphasisLabel={`${peak.decade}s, the largest cohort still in force`}
+      quietLabel="other decades"
+      caption="Only registrations currently in force, so the early decades are thinned by retirement and death rather than by how many were admitted at the time."
+    />
+    <p>The {peak.decade}s are the largest cohort still practising, at <b>{n(peak.count)}</b>. The earliest admission still in force is <b>{c.earliest_admission.value}</b>, which is a lawyer who has held a New York licence for {new Date().getFullYear() - Number(c.earliest_admission.value)} years.</p>
+
+    <h2 id="limits">What the register cannot tell you</h2>
+    <p>Two limits worth knowing before anybody builds on this dataset, and the second one is our own problem too.</p>
+    <p><b>It does not say what anybody does.</b> A registration is a licence, not a job and not a practice area. Nothing in it says whether a person litigates, whether they have clients, or whether they have worked as a lawyer in twenty years. The Bureau of Labor Statistics counts employment and gets a different kind of number for that reason.</p>
+    <p><b>Its free-text fields are spellings rather than facts.</b> The register holds <b>{n(c.school_spellings.value)}</b> distinct law school strings, which is roughly a hundred times the number of law schools in the United States, because the field is typed rather than chosen.{nyuRows.length > 1 && <> One university appears twice in the top ten on its own: {nyuRows.map((s, i) => <>{i > 0 && ' and '}<b>{s.school}</b> with {n(s.count)}</>)}, the same institution under two spellings.</>}</p>
+    <BarChart
+      heading={`Currently registered, by law school as the register spells it, top ${schools.length}`}
+      rows={schools}
+      caption="Highlighted rows are the same university under two spellings, which is why this is a count of strings and not a ranking of schools."
+    />
+    <p>That is not a criticism of the state. It is what happens to any field a human types, and it is the same problem this directory hits from the other side: matching a firm's name to its entry in a public register is the hardest part of checking a firm, and <a href="/guides/what-a-business-register-proves-about-a-law-firm/">we have written about where that goes wrong</a>. A dataset is only as precise as the question you can ask it.</p>
+
+    <h2 id="source">The source</h2>
+    <p>Everything above is aggregated from <a href={register.landing} rel="noopener" target="_blank">{register.dataset}</a>, published as open data by {register.publisher}, read on {measured}. The queries are in <code>scripts/fetch_register_stats.py</code> and the answers in <code>src/data/research/attorney-register-ny.json</code>, each with the filter that produced it, so any figure on this page can be re-asked.</p>
+  </div>
+</div>
+</article>
+</Base>

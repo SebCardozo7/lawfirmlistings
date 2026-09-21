@@ -49,6 +49,38 @@ export function publishedGuides(
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'law-firm-statistics-new-york',
+    cover: 'ranking',
+    kicker: 'Reference',
+    title: 'Law Firm Statistics in New York: Fewer Offices, More Lawyers',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Nobody counts law firms, so we counted what is counted: the offices that report payroll. ' +
+      'Over ten years New York has fewer of them, employing more people, paid half again as ' +
+      'much. The profession is arranging itself into fewer and larger practices.',
+    thumb: 't2',
+    icon: 'columns',
+    meta: 'Fewer doors, more people behind them',
+  },
+  {
+    slug: 'how-many-lawyers-in-new-york',
+    cover: 'ladder',
+    // "Reference" rather than "Method": the nine guides before this one measure the firms in
+    // this directory, and this one aggregates somebody else's dataset and makes no claim about
+    // our firms at all. The kicker is how a reader tells them apart.
+    kicker: 'Reference',
+    title: 'How Many Lawyers Are in New York? We Counted the State Register',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'New York publishes every attorney registration it holds as open data. Ask it how many ' +
+      'lawyers the state has and it answers four different ways, because that question has ' +
+      'four meanings, and the American Bar Association reports a fifth number that matches ' +
+      'none of them.',
+    thumb: 't3',
+    icon: 'columns',
+    meta: 'One question, five different numbers',
+  },
+  {
     slug: 'what-a-business-register-proves-about-a-law-firm',
     cover: 'register',
     kicker: 'Method',
