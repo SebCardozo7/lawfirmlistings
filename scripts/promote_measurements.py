@@ -66,6 +66,21 @@ def promote_attorneys(rec: dict, firm: dict) -> list[str]:
     found = ((rec.get("attorneys_found") or {}).get("attorneys")) or []
     if not found:
         return []
+    # The same test the crawler applies, applied again here. It was imported into this file and
+    # never called, which left the one automated path into a published roster with no filter on
+    # it at all: this would have written "Green Cards", "Burn Victims" and "Who We Are" onto
+    # eight profiles as named attorneys, and sent those names to the state register for the
+    # licence check behind G1.
+    #
+    # Asking twice is not redundant. A staging record can be older than the crawler that reads
+    # it, and every one of those names came out of a record written before the list of words
+    # that are not a person had been tested against a matrimonial or an immigration menu.
+    skipped = [p["name"] for p in found if not looks_like_a_person(p["name"])]
+    found = [p for p in found if looks_like_a_person(p["name"])]
+    if not found:
+        return (["attorneys      nothing published that reads as a person: %s%s"
+                 % (", ".join(skipped[:6]), " ..." if len(skipped) > 6 else "")]
+                if skipped else [])
     # Matched on a normalised name, because the same person is spelled two ways: the bio heading
     # reads "Robert J Greenstein" and the profile, which carries his verified registration
     # number, reads "Robert J. Greenstein". Matching the raw strings treated one man as a
@@ -103,6 +118,10 @@ def promote_attorneys(rec: dict, firm: dict) -> list[str]:
     dropped = [a["name"] for k, a in existing.items() if k not in still_published]
 
     changed = []
+    if skipped:
+        changed.append("attorneys      %d name(s) read as a page rather than a person: %s%s"
+                       % (len(skipped), ", ".join(skipped[:6]),
+                          " ..." if len(skipped) > 6 else ""))
     if added:
         changed.append("attorneys      +%d: %s%s"
                        % (len(added), ", ".join(added[:6]), " ..." if len(added) > 6 else ""))

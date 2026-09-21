@@ -34,7 +34,7 @@
   "languages": [
     "English"
   ],
-  "fee_model": "Flat fee",
+  "fee_model": "Flat fee published",
   "free_consultation": true,
   "availability": [],
   "about": [
@@ -311,10 +311,10 @@
     "checked_at": "2026-09-17"
   },
   "score": {
-    "total": 50,
+    "total": 51,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-18",
+    "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -454,16 +454,16 @@
         ]
       },
       "E": {
-        "score": 3,
+        "score": 4,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 3,
+            "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · Flat fee · the fee percentage itself is not published"
+            "evidence": "Free consultation · Flat fee published"
           },
           {
             "code": "E3",
@@ -488,7 +488,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 20,
+      "gap": 19,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -497,7 +497,7 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 39.0,
+    "raw": 40.0,
     "assessed": 78,
     "coverage": 0.78,
     "floor_abc_pct": 0.724,

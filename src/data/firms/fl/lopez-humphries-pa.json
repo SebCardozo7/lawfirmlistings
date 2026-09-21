@@ -55,7 +55,36 @@
       "source_url": "https://maps.google.com/?cid=2123042323378980067&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Melodie López",
+      "role": "Partner",
+      "role_source": "firm bio page",
+      "bar_state": "NY",
+      "source_url": "https://www.lopezandhumphries.com/melodie-lopez/"
+    },
+    {
+      "name": "Kevin Humphries",
+      "role": "Partner",
+      "role_source": "firm bio page",
+      "bar_state": "NY",
+      "source_url": "https://www.lopezandhumphries.com/kevin-humphries/"
+    },
+    {
+      "name": "Timothy O. Coyle",
+      "role": "Partner",
+      "role_source": "firm bio page",
+      "bar_state": "NY",
+      "source_url": "https://www.lopezandhumphries.com/timothy-o-coyle-esq/"
+    },
+    {
+      "name": "Joseph W. Brown",
+      "role": "Ii",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.lopezandhumphries.com/joseph-brown/"
+    }
+  ],
   "languages": [
     "English"
   ],
@@ -113,6 +142,12 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-16"
+    },
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true
     }
   },
   "gates": {
@@ -124,9 +159,9 @@
     },
     "G2": {
       "pass": false,
-      "evidence": "Florida does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-13"
+      "source": "unavailable",
+      "checked_at": "2026-09-21",
+      "evidence": "1 of the firm's attorneys share a surname with a disciplined attorney, and for Joseph W. Brown 3 of 7 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
     },
     "G3": {
       "pass": false,
@@ -169,7 +204,7 @@
     "total": 67,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-18",
+    "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -189,8 +224,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",
@@ -280,7 +315,7 @@
             "pts": 0,
             "max": 7,
             "source": "pending",
-            "evidence": "Not yet assessed"
+            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
           },
           {
             "code": "D2",
@@ -348,19 +383,19 @@
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "D1 Website trust & experience: not yet measured (7 pts)",
+        "A5 Accountability: not yet measured (6 pts)"
       ]
     },
     "raw": 16.0,
     "assessed": 24,
-    "coverage": 0.24,
+    "coverage": 0.264,
     "floor_abc_pct": 0.909,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
-    "assessable": 100,
+    "assessable": 91,
     "comparable": false
   },
   "screens": {

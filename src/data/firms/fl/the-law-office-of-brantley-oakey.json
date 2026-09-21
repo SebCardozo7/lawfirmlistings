@@ -120,6 +120,9 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-16"
+    },
+    "trust_pages": {
+      "blog": true
     }
   },
   "gates": {
@@ -212,10 +215,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 23,
+    "total": 22,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-18",
+    "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -317,16 +320,16 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
+            "pts": 1,
             "max": 7,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -364,7 +367,7 @@
             "pts": 0,
             "max": 6,
             "source": "observed",
-            "evidence": "fee model not published · the fee percentage itself is not published"
+            "evidence": "fee model not published · the flat fee itself is not published"
           },
           {
             "code": "E3",
@@ -389,18 +392,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 47,
+      "gap": 48,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "B1 Fee terms published: +6 available"
       ]
     },
-    "raw": 16.5,
-    "assessed": 71,
-    "coverage": 0.71,
+    "raw": 17.5,
+    "assessed": 78,
+    "coverage": 0.78,
     "floor_abc_pct": 0.329,
     "gates_unavailable": [
       "G1",

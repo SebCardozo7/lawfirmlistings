@@ -5,7 +5,7 @@
   "website": "https://www.aaalawyer.com/",
   "domain": "aaalawyer.com",
   "phone": "(718) 625-0800",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "family-law",
@@ -30,12 +30,24 @@
       "source_url": "https://maps.google.com/?cid=1315411123819672099&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Jeffrey B. Peltz",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.aaalawyer.com/en/about-us/profile/jeffrey-b-peltz",
+      "bar_number": "1948355",
+      "admitted_year": 1984,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-09-21"
+    }
+  ],
   "languages": [
     "English",
     "Spanish"
   ],
-  "fee_model": "Not stated",
+  "fee_model": "Billing terms published, no figure",
   "free_consultation": true,
   "availability": [
     "Hospital & home visits"
@@ -123,16 +135,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
-      "source": "no roster published",
-      "checked_at": "2026-09-17"
+      "pass": true,
+      "evidence": "1 of 1 named attorneys are currently registered and none carries an adverse status",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-09-21"
     },
     "G2": {
-      "pass": false,
-      "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
-      "source": "no roster published",
-      "checked_at": "2026-09-17"
+      "pass": true,
+      "evidence": "None of the 1 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-09-21"
     },
     "G3": {
       "pass": true,
@@ -141,10 +153,10 @@
       "checked_at": "2026-09-17"
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-09-17"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-21"
     },
     "G6": {
       "pass": true,
@@ -319,31 +331,31 @@
     "checked_at": "2026-09-17"
   },
   "score": {
-    "total": 47,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-18",
+    "total": 61,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (6/25).",
+    "computed_at": "2026-09-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 18,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "registry",
+            "evidence": "Mean 42.0 years since admission across 1 of 1 named attorneys (longest 42, shortest 42) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 9,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "registry",
+            "evidence": "1 of 1 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -462,16 +474,16 @@
         ]
       },
       "E": {
-        "score": 5,
+        "score": 10,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 1,
+            "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+            "evidence": "Free consultation · “We charge a $200 consultation fee for the following types of matters: contested divorces, family court, and immigration.”"
           },
           {
             "code": "E3",
@@ -492,28 +504,26 @@
         ]
       }
     },
-    "floor_abc": 25,
+    "floor_abc": 43,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
+      "gap": 9,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D1 Website trust & experience: +5.5 available"
+        "D1 Website trust & experience: +5.5 available",
+        "D4 Content, E-E-A-T & schema: +5 available",
+        "B1 Fee terms published: +4 available"
       ]
     },
-    "raw": 36.5,
-    "assessed": 78,
-    "coverage": 0.78,
-    "floor_abc_pct": 0.658,
-    "gates_unavailable": [
-      "G1",
-      "G2"
-    ],
+    "raw": 59.5,
+    "assessed": 97,
+    "coverage": 0.97,
+    "floor_abc_pct": 0.754,
+    "gates_unavailable": [],
     "assessable": 100,
     "comparable": true
-  }
+  },
+  "fee_statement": "We charge a $200 consultation fee for the following types of matters: contested divorces, family court, and immigration."
 }
