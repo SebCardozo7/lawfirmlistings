@@ -1,0 +1,256 @@
+{
+  "state": "NY",
+  "state_name": "New York",
+  "dataset": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb)",
+  "publisher": "the New York State Unified Court System",
+  "landing": "https://data.ny.gov/Transparency/NYS-Attorney-Registrations/eqw2-r5nb",
+  "measured_at": "2026-09-21",
+  "counts": {
+    "records": {
+      "label": "Registration records in the dataset",
+      "value": 433817,
+      "query": "no filter"
+    },
+    "current": {
+      "label": "Registrations currently in force",
+      "value": 283928,
+      "query": "status='Currently registered'"
+    },
+    "in_state": {
+      "label": "Records with a New York address",
+      "value": 163323,
+      "query": "upper(state)='NY'"
+    },
+    "current_in_state": {
+      "label": "Currently registered, with a New York address",
+      "value": 131062,
+      "query": "upper(state)='NY' AND status='Currently registered'"
+    },
+    "earliest_admission": {
+      "label": "Earliest admission year still currently registered",
+      "value": 1948,
+      "query": "min(year_admitted) where status='Currently registered'"
+    },
+    "school_spellings": {
+      "label": "Distinct law school spellings in the dataset",
+      "value": 21080,
+      "query": "count(distinct law_school)"
+    }
+  },
+  "status": [
+    {
+      "status": "Currently registered",
+      "count": 283928
+    },
+    {
+      "status": "Due to reregister within 30 days of birthday",
+      "count": 50815
+    },
+    {
+      "status": "Deceased",
+      "count": 49350
+    },
+    {
+      "status": "Suspended, delinquent",
+      "count": 20247
+    },
+    {
+      "status": "Delinquent",
+      "count": 15584
+    },
+    {
+      "status": "Resigned",
+      "count": 7167
+    },
+    {
+      "status": "Disbarred",
+      "count": 2189
+    },
+    {
+      "status": "Incapacitated",
+      "count": 1897
+    },
+    {
+      "status": "Suspended, currently registered",
+      "count": 1414
+    },
+    {
+      "status": "Resigned from bar - disciplinary reason",
+      "count": 719
+    },
+    {
+      "status": "Suspended, due to reregister",
+      "count": 507
+    }
+  ],
+  "counties": [
+    {
+      "county": "New York",
+      "count": 75208
+    },
+    {
+      "county": "Nassau",
+      "count": 9518
+    },
+    {
+      "county": "Westchester",
+      "count": 7149
+    },
+    {
+      "county": "Kings",
+      "count": 5870
+    },
+    {
+      "county": "Suffolk",
+      "count": 5756
+    },
+    {
+      "county": "Queens",
+      "count": 4126
+    },
+    {
+      "county": "Erie",
+      "count": 4096
+    },
+    {
+      "county": "Albany",
+      "count": 3719
+    },
+    {
+      "county": "Monroe",
+      "count": 2405
+    },
+    {
+      "county": "Bronx",
+      "count": 2069
+    },
+    {
+      "county": "Onondaga",
+      "count": 1706
+    },
+    {
+      "county": "Rockland",
+      "count": 954
+    },
+    {
+      "county": "Richmond",
+      "count": 864
+    },
+    {
+      "county": "Orange",
+      "count": 753
+    },
+    {
+      "county": "Dutchess",
+      "count": 740
+    }
+  ],
+  "decades": [
+    {
+      "decade": 1940,
+      "count": 1
+    },
+    {
+      "decade": 1950,
+      "count": 302
+    },
+    {
+      "decade": 1960,
+      "count": 3163
+    },
+    {
+      "decade": 1970,
+      "count": 12657
+    },
+    {
+      "decade": 1980,
+      "count": 33918
+    },
+    {
+      "decade": 1990,
+      "count": 46231
+    },
+    {
+      "decade": 2000,
+      "count": 63346
+    },
+    {
+      "decade": 2010,
+      "count": 73987
+    },
+    {
+      "decade": 2020,
+      "count": 50323
+    }
+  ],
+  "schools": [
+    {
+      "school": "Brooklyn Law School",
+      "count": 10606
+    },
+    {
+      "school": "New York Law School",
+      "count": 9744
+    },
+    {
+      "school": "New York University School of Law",
+      "count": 9278
+    },
+    {
+      "school": "Columbia Law School",
+      "count": 8705
+    },
+    {
+      "school": "Fordham University School of Law",
+      "count": 7871
+    },
+    {
+      "school": "Harvard Law School",
+      "count": 6432
+    },
+    {
+      "school": "Albany Law School",
+      "count": 5489
+    },
+    {
+      "school": "Georgetown University Law Center",
+      "count": 5261
+    },
+    {
+      "school": "NEW YORK UNIVERSITY",
+      "count": 5128
+    },
+    {
+      "school": "Hofstra University Maurice A. Deane School of Law",
+      "count": 3704
+    },
+    {
+      "school": "Yeshiva University Cardozo School of Law",
+      "count": 3646
+    },
+    {
+      "school": "Cornell Law School",
+      "count": 3485
+    }
+  ],
+  "citations": [
+    {
+      "label": "Lawyers resident in New York",
+      "value": 190015,
+      "who": "American Bar Association",
+      "what": "National Lawyer Population Survey",
+      "url": "https://nysba.org/wp-content/uploads/2025/11/2024-aba-nlps.pdf",
+      "note": "The highest count of any state. California is second at 181,048.",
+      "read_at": "2026-09-21"
+    },
+    {
+      "label": "Median annual wage, lawyers, United States",
+      "value": 159670,
+      "who": "U.S. Bureau of Labor Statistics",
+      "what": "Occupational Outlook Handbook, May 2025",
+      "url": "https://www.bls.gov/ooh/legal/lawyers.htm",
+      "note": "The Bureau counts people employed as lawyers, which is a third question again: a licence is not a job.",
+      "read_at": "2026-09-21"
+    }
+  ]
+}
