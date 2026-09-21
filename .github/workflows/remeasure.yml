@@ -102,12 +102,23 @@ jobs:
         continue-on-error: true
         run: python scripts/check_operating.py --domains "${{ steps.firms.outputs.domains }}"
 
+      # include-hidden-files, because .crawl is a dot directory and upload-artifact@v4 skips
+      # anything under one by default. Without it the first real run of this workflow crawled
+      # every published firm across six shards, spent about nine hours doing it, wrote all 262
+      # staging records and uploaded none of them: "No files were found with the provided path:
+      # .crawl/*.json". The publish job then reported "no staging record" for every firm in the
+      # directory, which read as a pipeline that had lost its data and was a checkbox.
+      #
+      # if-no-files-found: error, because that shard went green. A shard that measured nothing
+      # is a failed shard, and finding that out an hour later in another job, from 262 lines
+      # about missing files, is the expensive way to learn it.
       - uses: actions/upload-artifact@v4
         with:
           name: staging-${{ matrix.shard }}
           path: .crawl/*.json
+          include-hidden-files: true
           retention-days: 3
-          if-no-files-found: warn
+          if-no-files-found: error
 
   # Everything that reads a public register, plus the engine. One process, because the registers
   # are single endpoints and hammering them in parallel would be the same discourtesy the shards
@@ -135,9 +146,18 @@ jobs:
           merge-multiple: true
           path: .crawl
 
+      # Stop here rather than at the promote step. With no staging records that step prints one
+      # line per published firm saying it has none, which is 262 lines describing a single fact
+      # about this job and not about any firm.
       - name: What the shards collected
         run: |
-          ls -1 .crawl/*.json 2>/dev/null | wc -l
+          count=$(ls -1 .crawl/*.json 2>/dev/null | wc -l)
+          echo "$count staging record(s) from the shards."
+          if [ "$count" -eq 0 ]; then
+            echo "Nothing to promote. Every shard measured and uploaded nothing, so this run has"
+            echo "no measurement in it. Check the upload-artifact step in the measure jobs."
+            exit 1
+          fi
           echo "ALL=$(python scripts/published_domains.py --joined)" >> "$GITHUB_ENV"
 
       # Only the fields a machine measured, in the shape build_profiles writes them. Prose, FAQs
