@@ -78,6 +78,15 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-16"
+    },
+    "psi": {
+      "value": {
+        "performance": 58,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-22",
+      "note": "LCP 9.1 s / CLS 0.000 / TBT 101 ms"
     }
   },
   "gates": {
@@ -97,13 +106,14 @@
       "pass": false,
       "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
-      "checked_at": "2026-09-21"
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
@@ -148,8 +158,8 @@
   "score": {
     "total": 54,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-21",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -161,8 +171,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
           },
           {
             "code": "A6",
@@ -327,20 +337,23 @@
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "D1 Website trust & experience: not yet measured (7 pts)",
+        "A5 Accountability: not yet measured (6 pts)"
       ]
     },
     "raw": 13.0,
     "assessed": 24,
-    "coverage": 0.24,
+    "coverage": 0.267,
     "floor_abc_pct": 0.727,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
-    "assessable": 100,
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 90,
     "comparable": false
   }
 }

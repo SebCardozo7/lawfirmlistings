@@ -43,7 +43,7 @@
       "source_url": "https://newyorkdivorceattorney.com/team-members/stephanie-perskin/",
       "role": "Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2459949",
       "admitted_year": 1992,
@@ -53,7 +53,7 @@
     {
       "name": "Christin Grech",
       "source_url": "https://newyorkdivorceattorney.com/team-members/christin-grech/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
@@ -61,7 +61,7 @@
       "source_url": "https://newyorkdivorceattorney.com/team-members/julia-f-singer/",
       "role": "Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "1854645",
       "admitted_year": 1983,
@@ -71,7 +71,7 @@
     {
       "name": "Sarah E. Persico",
       "source_url": "https://newyorkdivorceattorney.com/team-members/sarah-e-persico/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "6316731",
       "admitted_year": 2026,
@@ -83,7 +83,7 @@
       "source_url": "https://newyorkdivorceattorney.com/team-members/brian-d-perskin/",
       "role": "Founder",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2379790",
       "admitted_year": 1991,
@@ -95,7 +95,7 @@
       "source_url": "https://newyorkdivorceattorney.com/team-members/evan-s-seckular/",
       "role": "Partner",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4675872",
       "admitted_year": 2009,
@@ -107,7 +107,7 @@
       "source_url": "https://newyorkdivorceattorney.com/team-members/samantha-a-hunt/",
       "role": "Associate Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "6116487",
       "admitted_year": 2024,
@@ -119,7 +119,7 @@
       "source_url": "https://newyorkdivorceattorney.com/team-members/jared-perskin/",
       "role": "Associate Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "6188528",
       "admitted_year": 2025,
@@ -240,31 +240,31 @@
       "pass": true,
       "evidence": "7 of 8 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "BRIAN D. PERSKIN & ASSOCIATES P.C. is an active domestic professional service corporation registered since 2011-07-18, with 2 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "98 public client reviews and 15 years since the entity was formed in 2011",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-family-law",
@@ -433,13 +433,13 @@
     "dos_id": "4119306",
     "formed": "2011-07-18",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 54,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -627,6 +627,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.711,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

@@ -135,6 +135,19 @@ const gateRows = GATE_ORDER.map(code => {
   };
 });
 const withGateGap = scored.filter(f => (f.data.score!.gates_unavailable ?? []).length > 0);
+// The fourth state, added after a third of the directory turned out to be sitting in the lowest
+// tier on it. A source exists and we read it, and it has no answer about this particular firm:
+// a filing its entity type is not required to make, or a namesake the register cannot separate
+// from its attorney. Counted separately from the list above because that one is a fact about the
+// state and this one is a fact about the record.
+const withUnresolvable = scored.filter(f => (f.data.score!.gates_unresolvable ?? []).length > 0);
+const unresolvableRows = GATE_ORDER
+  .map(code => ({
+    code,
+    firms: scored.filter(f => (f.data.score!.gates_unresolvable ?? []).includes(code)),
+  }))
+  .filter(r => r.firms.length > 0)
+  .sort((a, b) => b.firms.length - a.firms.length);
 const gateGapInNY = withGateGap.filter(f => f.data.market.state === 'NY');
 const gateGapOutside = withGateGap.filter(f => f.data.market.state !== 'NY');
 
@@ -299,7 +312,7 @@ const description = 'Our score is a share of what we could measure, and what can
     {shortExample && (
       <p>The correction is worth real points. Counting that absent factor as a zero instead of removing it would have cost the {shortScale.length} firms between {cfMin} and {cfMax} points each. <a href={`/firms/${shortExample.data.slug}/`}>{shortExample.data.name}</a>, the highest scoring of them, would read {shortExample.data.score!.total - counterfactual[shortScale.indexOf(shortExample)]} instead of {shortExample.data.score!.total}. <b>That is the difference between measuring a firm and measuring a state's records policy.</b></p>
     )}
-    <p>The eligibility gates have the same problem and the same answer. A gate here has three states rather than two: passed, failed, or nothing to check it against.</p>
+    <p>The eligibility gates have the same problem and the same answer. A gate here has four states rather than two: passed, failed, nothing to check it against, and a record that exists and has no answer about this particular firm.</p>
     <BarChart
       heading={`Firms for which each eligibility gate could actually be checked`}
       max={scored.length}
@@ -308,6 +321,14 @@ const description = 'Our score is a share of what we could measure, and what can
     />
     <p>In total, {withGateGap.length} firms carry at least one gate nobody can check, and {gateGapOutside.length} of them are outside New York, for the reason above.</p>
     <p><b>The other {gateGapInNY.length} are in New York, and their reason is the opposite one:</b> those firms publish no attorney roster at all, so there is no name to look up in a register that does exist. The register is open. There is simply nobody to check. <a href="/guides/what-it-takes-to-check-a-law-firm/">We counted how often each of those two things stops the check</a> across the whole directory, and the firm side of it is larger than this page's New York figure suggests.</p>
+    {withUnresolvable.length > 0 && (
+      <>
+        <h3>The fourth state, which cost us more than the other three</h3>
+        <p>Then there is the case where the register exists, we read it, and it has nothing to say about this firm in particular. <b>{withUnresolvable.length} of the {scored.length} firms here</b> carry at least one gate in that condition{unresolvableRows.length > 0 && <>, most often {unresolvableRows[0].code} {GATE_LABEL[unresolvableRows[0].code].toLowerCase()} at {unresolvableRows[0].firms.length}</>}.</p>
+        <p>Two things produce it, and neither is the firm's doing. <b>New York does not require a general partnership to file with the Department of State</b>, so the entity register has nothing to return for one and never will: waiting does not turn that gate into a pass. And a register that lists several people under one common name <b>cannot tell us which of them works at the firm</b>, so where one of those namesakes carries an adverse status the check can neither clear the firm nor fault it.</p>
+        <p><b>We got this wrong until recently and it is worth saying how.</b> Both of those were held open, which is the honest thing to do with the check itself, and an open gate also capped the firm at the bottom tier. So a firm was ranked below its own score because of the legal form it trades under, or because a stranger shares a name with somebody who works there. That is the same mistake this whole page is about, made by us, one layer further in: it read as a statement about the firm and it was a statement about the record. Those gates still do not pass, they are still named on the scorecard with the reason in words, and they no longer cost the firm its tier.</p>
+      </>
+    )}
 
     <h2 id="compare">What actually breaks a comparison</h2>
     <p>That New York case is the hint that the state line is not the real problem. What decides whether two totals can be set beside each other is coverage: how much of the scale available in a firm's market we managed to read.</p>

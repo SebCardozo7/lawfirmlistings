@@ -162,6 +162,12 @@ const firms = defineCollection({
       // Satisfied by the firm's written attestation rather than by our own measurement. Shown
       // as such on the profile: a reader is entitled to know which is which.
       attested: z.boolean().optional(), attested_by: z.string().optional(),
+      // Why a check that ran against a real source cannot answer for this firm: a filing its
+      // entity type is not required to make, or a namesake the register cannot separate. Written
+      // by whichever script did the reading, because it is the only thing that knows. Set here
+      // rather than inferred from the prose, so the engine never has to pattern-match a sentence
+      // to decide whether a firm keeps its tier.
+      unresolvable: z.string().optional(),
     })),
     // Searches that inform review without settling anything. A screen is not a gate, and the
     // two were briefly the same field: see scripts/check_g4.py.
@@ -183,6 +189,11 @@ const firms = defineCollection({
       // profile can state the limit as a fact about the state instead of leaving a gap.
       assessable: z.number().optional(),
       gates_unavailable: z.array(z.string()).default([]),
+      // Gates where a source does exist and we read it, and it could not answer for this firm:
+      // a filing its entity type is not required to make, or a namesake it cannot distinguish.
+      // Separate from the list above because that one is a fact about the state and this one is
+      // a fact about the record. Neither counts against the firm.
+      gates_unresolvable: z.array(z.string()).default([]),
       // False where too little of the scale could be measured for the total to be set
       // beside another firm's. The templates show the evidence instead of the number.
       comparable: z.boolean().optional(),

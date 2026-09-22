@@ -184,19 +184,19 @@
       "pass": true,
       "evidence": "WILLIS & DAVIDOW, ATTORNEYS AT LAW, LLC is an active FLAL on the Florida register, document L13000174525, filed 2013-12-17, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-21"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 5 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "1 Google-verified location and 13 years since the entity was filed in 2013. This practice is transactional, so the gate asks for a verified listing and the year in operation rather than ten reviews, and its 84 reviews are scored in pillar C instead",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-21"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "fl-naples-real-estate",
@@ -272,8 +272,8 @@
   "score": {
     "total": 45,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-21",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G1) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -285,8 +285,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
           },
           {
             "code": "A6",
@@ -449,21 +449,22 @@
       "needed": 70,
       "gap": 25,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
+        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +6 available"
       ]
     },
     "raw": 35.0,
     "assessed": 78,
-    "coverage": 0.857,
+    "coverage": 0.963,
     "floor_abc_pct": 0.711,
     "gates_unavailable": [
       "G1"
     ],
-    "assessable": 91,
+    "gates_unresolvable": [],
+    "assessable": 81,
     "comparable": true
   },
   "entity": {
@@ -472,6 +473,6 @@
     "dos_id": "L13000174525",
     "formed": "2013-12-17",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-21"
+    "checked_at": "2026-09-22"
   }
 }

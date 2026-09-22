@@ -167,6 +167,15 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-16"
+    },
+    "psi": {
+      "value": {
+        "performance": 80,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-22",
+      "note": "LCP 2.0 s / CLS 0.413 / TBT 35 ms"
     }
   },
   "gates": {
@@ -193,7 +202,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 12 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
@@ -322,8 +331,8 @@
   "score": {
     "total": 52,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-21",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -335,8 +344,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
           },
           {
             "code": "A6",
@@ -434,7 +443,7 @@
             "pts": 2.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -499,22 +508,23 @@
       "needed": 70,
       "gap": 18,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
+        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
         "D2 Search authority: +6 available"
       ]
     },
     "raw": 40.5,
     "assessed": 78,
-    "coverage": 0.857,
+    "coverage": 0.963,
     "floor_abc_pct": 0.671,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
-    "assessable": 91,
+    "gates_unresolvable": [],
+    "assessable": 81,
     "comparable": true
   },
   "logo": {

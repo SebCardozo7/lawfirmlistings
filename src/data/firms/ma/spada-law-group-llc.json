@@ -212,7 +212,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
@@ -296,8 +296,8 @@
   "score": {
     "total": 48,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-21",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -309,8 +309,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no queryable source",
+            "evidence": "Massachusetts publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
           },
           {
             "code": "A6",
@@ -475,20 +475,21 @@
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
     "raw": 30.0,
     "assessed": 63,
-    "coverage": 0.692,
+    "coverage": 0.778,
     "floor_abc_pct": 0.717,
     "gates_unavailable": [
       "G1",
       "G3"
     ],
-    "assessable": 91,
+    "gates_unresolvable": [],
+    "assessable": 81,
     "comparable": true
   },
   "logo": {

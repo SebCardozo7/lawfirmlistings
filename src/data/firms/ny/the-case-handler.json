@@ -5,7 +5,7 @@
   "website": "https://www.thecasehandler.com/",
   "domain": "thecasehandler.com",
   "phone": "(212) 608-3734",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -36,7 +36,7 @@
       "source_url": "https://www.thecasehandler.com/my-practice/matthew-goodstein-esq/",
       "role": "Esq.",
       "role_source": "firm bio heading",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5253612",
       "admitted_year": 2014,
@@ -48,7 +48,7 @@
       "source_url": "https://www.thecasehandler.com/my-practice/adam-handler-esq/",
       "role": "Esq.",
       "role_source": "firm bio heading",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4218681",
       "admitted_year": 2004,
@@ -174,31 +174,32 @@
       "pass": true,
       "evidence": "2 of 6 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 2 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-17"
+      "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published, and 4 more people in roles the firm states are not a lawyer's.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
-      "pass": false,
-      "evidence": "Time in operation not established",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-17"
+      "pass": true,
+      "evidence": "220 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2015-05-01, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -355,9 +356,9 @@
   },
   "score": {
     "total": 58,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-21",
+    "tier": "Verified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar E (1/15).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -545,6 +546,9 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.912,
     "gates_unavailable": [],
+    "gates_unresolvable": [
+      "G3"
+    ],
     "assessable": 100,
     "comparable": true
   }

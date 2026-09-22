@@ -271,6 +271,18 @@ def compute(firm):
                        f"Mean {avg:.1f} years since admission across {len(years)} of {len(attys)} "
                        f"named attorneys (longest {max(years)}, shortest {min(years)}) · "
                        f"NYS Attorney Registration database"))
+    elif firm.get("market", {}).get("state") not in OPEN_REGISTER_STATES:
+        # A2 is the year an attorney was admitted, and that year lives in a state attorney
+        # register. A6 was given this exact treatment and A2 was missed, which left ten points
+        # marked "not yet assessed" on 146 firms in six states where no register exists for
+        # anybody to read. It was the single largest block of unmeasured points in the directory
+        # and none of it was ours to measure: "pending" says we owe the work, and we do not owe
+        # what the state does not publish. It stays out of the denominator, the same way A6 does,
+        # and the profile says which state and why.
+        out.append(sub("A2", 0, "no queryable source",
+                       "%s publishes no attorney register we can query, so years since admission "
+                       "cannot be established here for any firm and this is not scored."
+                       % firm.get("market", {}).get("state_name", "This state")))
     else:
         out.append(assessed("A2"))
 
@@ -773,9 +785,35 @@ def compute(firm):
     # blocks, and a gate we have merely not run still blocks.
     def no_source(g):
         return any(w in (g.get("source") or "").lower() for w in NO_SOURCE_IN_MARKET)
+    # And a fifth state, which is the fourth one seen from the other side. "No queryable source"
+    # is a fact about the market: nobody can run this check on any firm there. "Unresolvable" is
+    # a fact about this firm's paperwork against a source that does exist and that we did read.
+    # Two shapes of it turned up, and holding a firm down for either was the Florida mistake
+    # again in a different costume:
+    #
+    #   New York does not require a general partnership to file with the Department of State, so
+    #   the entity register has nothing to return for one and never will. The evidence we already
+    #   wrote said in so many words "this is not evidence against the firm", and the engine
+    #   demoted the firm anyway.
+    #
+    #   A common name matches several registrations, one of which carries an adverse status, and
+    #   nothing in the register ties that entry to this firm's attorney or rules it out. A firm
+    #   should not sit below its score because a stranger shares a name with somebody who works
+    #   there. It is also the thing our own register article is about.
+    #
+    # A check we have merely not run still blocks, and a check that ran and found something still
+    # blocks. This is neither. The reason is written on the gate record by whichever script did
+    # the reading, because that script is the only thing that knows why the source came back
+    # empty, and it travels to the profile so the limit is published rather than hidden.
+    def unresolvable(g):
+        return bool(g.get("unresolvable"))
     unavailable_gates = [k for k, g in gates.items() if not g["pass"] and no_source(g)]
-    pending_gates = [k for k, g in gates.items() if unchecked(g) and k not in unavailable_gates]
-    failed_gates = [k for k, g in gates.items() if not g["pass"] and not unchecked(g)]
+    unresolvable_gates = [k for k, g in gates.items()
+                          if not g["pass"] and unresolvable(g) and k not in unavailable_gates]
+    excused = set(unavailable_gates) | set(unresolvable_gates)
+    pending_gates = [k for k, g in gates.items() if unchecked(g) and k not in excused]
+    failed_gates = [k for k, g in gates.items()
+                    if not g["pass"] and not unchecked(g) and k not in excused]
     gates_ok = (len(gates) == len(GATES) and not pending_gates and not failed_gates)
     # Clearing every gate is itself a finding worth publishing. It says licensure,
     # discipline, entity, offices, website and footprint were checked and held, which is the
@@ -819,9 +857,18 @@ def compute(firm):
         coverage_note = ("Certification needs more of the scale measured than we have managed "
                          "here" + (f", pillar{'s' if len(short) > 1 else ''} {listed} "
                                    f"in particular" if short else "") + ". ")
-    verdict = (f"All {len(GATES)} eligibility gates passed. " if gates_ok
+    # An excused gate must never be reported as one that passed. "All five passed" is a claim
+    # about evidence, and a gate the register could not answer produced none, so a firm that
+    # clears the rest is described as clearing the rest and the excused ones are named.
+    passed_count = len(GATES) - len(excused)
+    excused_note = (f"{len(excused)} could not be answered from the available records "
+                    f"({', '.join(sorted(excused))}) and {'does' if len(excused) == 1 else 'do'} "
+                    f"not count against the firm. " if excused else "")
+    verdict = ((f"All {len(GATES)} eligibility gates passed. " if not excused
+                else f"{passed_count} of {len(GATES)} eligibility gates passed. " + excused_note)
+               if gates_ok
                else f"Eligibility gates not passed: {', '.join(sorted(failed_gates))}. " if failed_gates
-               else f"{len(pending_gates) or len(GATES) - len(gates)} eligibility gate(s) still to be checked. ") + \
+               else f"{len(pending_gates) or len(GATES) - len(gates)} eligibility gate(s) still to be checked. " + excused_note) + \
               coverage_note + \
               f"Strongest pillar: {max(pillars, key=lambda p: pillars[p]['score']/pillars[p]['max'])}; most headroom in pillar {lowest} ({pillars[lowest]['score']}/{pillars[lowest]['max']})."
     return {"total": total, "tier": tier, "verdict": verdict, "computed_at": TODAY, "methodology": METHOD,
@@ -831,6 +878,11 @@ def compute(firm):
             # Which checks the firm's state does not allow anyone to make, so a profile can say
             # so as a fact about the state rather than leaving a reader to wonder what is missing.
             "gates_unavailable": sorted(unavailable_gates),
+            # Which checks ran against a real source and could not resolve for a reason that is
+            # not this firm's doing. Kept apart from gates_unavailable because the two say
+            # different things to a reader: one is "nobody can check this here" and the other is
+            # "we checked and the record cannot answer for this firm".
+            "gates_unresolvable": sorted(unresolvable_gates),
             "assessable": round(assessable_all),
             # Whether the total may be set beside another firm's. See MIN_SCORE_COVERAGE.
             "comparable": coverage >= MIN_SCORE_COVERAGE}

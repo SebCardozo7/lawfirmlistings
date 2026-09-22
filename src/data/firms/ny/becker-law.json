@@ -34,7 +34,7 @@
     {
       "name": "Paul B. Becker",
       "source_url": "https://www.paulbbeckerattorney.com/paul-b-becker-esq/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2936342",
       "admitted_year": 1999,
@@ -129,31 +129,31 @@
       "pass": true,
       "evidence": "1 of 1 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 1 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "BECKER LAW, PLLC is an active domestic professional service limited liability company registered since 2020-11-02, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "48 public client reviews and 6 years since the entity was formed in 2020",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-buffalo-personal-injury",
@@ -238,13 +238,13 @@
     "dos_id": "5870158",
     "formed": "2020-11-02",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 44,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -432,6 +432,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.64,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   },

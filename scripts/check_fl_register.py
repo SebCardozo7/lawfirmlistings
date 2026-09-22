@@ -82,6 +82,11 @@ G6_MIN_YEARS = 1.0
 # reviews. Publishing "Not eligible" about it would have contradicted our own published rule on
 # the same site.
 TRANSACTIONAL = {"real-estate"}
+# Family law is the same exemption for a stronger reason: a client who has just been
+# through a custody dispute does not review their lawyer under their own name. Five Buffalo
+# practices were published as "Not eligible" before this was seen. No Florida market here
+# runs family law yet, and the set is kept in step anyway so the next one does not repeat it.
+DOMESTIC = {"family-law"}
 
 # The state's own field positions, one-based in its documentation and zero-based here.
 FIELDS = {
@@ -345,11 +350,16 @@ def apply_gates(firm: dict, entity: dict | None) -> list[str]:
                          "register, so this is a check we could not complete from this source "
                          "rather than evidence against the firm"),
             "source": "%s, partial" % DATASET,
+            # Same reasoning as the New York register: a firm that is not obliged to appear here
+            # will never appear here, so the gate cannot become a pass by being run again, and
+            # leaving it open capped the firm at the bottom tier for its own entity type.
+            "unresolvable": ("Florida does not require every law firm to register, so this "
+                             "register cannot answer for one that is not obliged to appear in it"),
             "checked_at": TODAY,
         }
 
     practice = (firm.get("practices") or [{}])[0].get("slug")
-    transactional = practice in TRANSACTIONAL
+    transactional = practice in (TRANSACTIONAL | DOMESTIC)
     if (gates.get("G6") or {}).get("attested"):
         notes.append("G6 left as attested")
     elif age is not None and not foreign:

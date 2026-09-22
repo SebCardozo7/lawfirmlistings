@@ -554,6 +554,13 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
             # stranger, which is the worst thing this directory could publish about a
             # working practice.
             "source": f"{DATASET}, incomplete: an adverse namesake we cannot resolve",
+            # And keeping it out of the finding column was only half the job. The gate still sat
+            # open, which held the firm at the bottom tier for as long as the namesake exists,
+            # which is forever: the register carries no field that would separate them, so no
+            # amount of re-running resolves this. A firm does not lose its tier because a
+            # stranger shares a name with somebody who works there.
+            "unresolvable": ("The register cannot separate this firm's attorney from a namesake "
+                             "who carries an adverse status, and carries no field that would"),
             "checked_at": today}
     elif matched and "G1" not in keep:
         gates["G1"] = {
@@ -586,12 +593,17 @@ def apply_gates(firm: dict, result: dict, today: str) -> None:
                                     f"disciplinary status. {len(adverse_unresolved)} name(s) we "
                                     f"could not identify share a name with a registration that "
                                     f"does, {n} among {count} namesakes. Held open."),
-                       # "incomplete" is load-bearing: score.py reads that word and keeps the gate out of the
-            # finding column. Without it the first version of this made two firms read
-            # "Not eligible" because one of their attorneys shares a name with a suspended
-            # stranger, which is the worst thing this directory could publish about a
-            # working practice.
-            "source": f"{DATASET}, incomplete: an adverse namesake we cannot resolve",
+                       # "incomplete" is load-bearing: score.py reads that word and keeps the gate
+                       # out of the finding column. Without it the first version of this made two
+                       # firms read "Not eligible" because one of their attorneys shares a name
+                       # with a suspended stranger, which is the worst thing this directory could
+                       # publish about a working practice.
+                       "source": f"{DATASET}, incomplete: an adverse namesake we cannot resolve",
+                       # See G1 above: out of the finding column was not enough on its own, because
+                       # the open gate still capped the firm at Listed permanently.
+                       "unresolvable": ("The register cannot separate this firm's attorney from a "
+                                        "namesake who carries an adverse status, and carries no "
+                                        "field that would"),
                        "checked_at": today}
     elif matched:
         gates["G2"] = {"pass": True,

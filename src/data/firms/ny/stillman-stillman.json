@@ -34,7 +34,7 @@
     {
       "name": "Jeffrey Stillman",
       "source_url": "https://www.stillmanstillmanlaw.com/our-legal-team/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2252013",
       "admitted_year": 1989,
@@ -44,7 +44,7 @@
     {
       "name": "Robert Birnbaum",
       "source_url": "https://www.stillmanstillmanlaw.com/our-legal-team/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2183697",
       "admitted_year": 1988,
@@ -54,7 +54,7 @@
     {
       "name": "Howard Trepp",
       "source_url": "https://www.stillmanstillmanlaw.com/our-legal-team/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2518405",
       "admitted_year": 1993,
@@ -64,7 +64,7 @@
     {
       "name": "Adam Raclaw",
       "source_url": "https://www.stillmanstillmanlaw.com/our-legal-team/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2814689",
       "admitted_year": 1997,
@@ -168,31 +168,31 @@
       "pass": true,
       "evidence": "4 of 4 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 4 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "STILLMAN & STILLMAN, P.C. is an active domestic professional service corporation registered since 2005-11-29, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "200 public client reviews and 21 years since the entity was formed in 2005",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -345,13 +345,13 @@
     "dos_id": "3285995",
     "formed": "2005-11-29",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 69,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -539,6 +539,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.93,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

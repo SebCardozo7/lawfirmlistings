@@ -5,7 +5,7 @@
   "website": "https://www.vernonlitigation.com/",
   "domain": "vernonlitigation.com",
   "phone": "(239) 319-4434",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "real-estate",
@@ -171,13 +171,14 @@
       "pass": false,
       "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
-      "checked_at": "2026-09-21"
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
@@ -252,9 +253,9 @@
   },
   "score": {
     "total": 49,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-21",
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -266,8 +267,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
           },
           {
             "code": "A6",
@@ -430,21 +431,24 @@
       "needed": 70,
       "gap": 21,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
+        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.0 available"
       ]
     },
     "raw": 38.0,
     "assessed": 78,
-    "coverage": 0.857,
+    "coverage": 0.963,
     "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1"
     ],
-    "assessable": 91,
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 81,
     "comparable": true
   }
 }

@@ -34,7 +34,7 @@
     {
       "name": "Elliot Ifraimoff",
       "source_url": "https://888askelliot.com/elliot-ifraimoff-esq/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "3981982",
       "admitted_year": 2001,
@@ -44,7 +44,7 @@
     {
       "name": "Dmitriy Shulman",
       "source_url": "https://888askelliot.com/dmitriy-shulman-esq/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4108767",
       "admitted_year": 2003,
@@ -54,7 +54,7 @@
     {
       "name": "Stephen Z. Williamson",
       "source_url": "https://888askelliot.com/stephen-z-williamson-esq/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "3995396",
       "admitted_year": 2001,
@@ -64,7 +64,7 @@
     {
       "name": "Diane Bernard",
       "source_url": "https://888askelliot.com/diane-bernard/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5618871",
       "admitted_year": 2018,
@@ -74,7 +74,7 @@
     {
       "name": "Sharon Shimon",
       "source_url": "https://888askelliot.com/sharon-shimon-esq/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "6058317",
       "admitted_year": 2023,
@@ -84,7 +84,7 @@
     {
       "name": "Sydney Burrus",
       "source_url": "https://888askelliot.com/sydney-burrus-esq/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5978218",
       "admitted_year": 2023,
@@ -94,7 +94,7 @@
     {
       "name": "Yaangil Mikhaylov",
       "source_url": "https://888askelliot.com/yaangil-mikhaylov-esq/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "6173934",
       "admitted_year": 2025,
@@ -104,7 +104,7 @@
     {
       "name": "Salah Shawa",
       "source_url": "https://888askelliot.com/salah-shawa-esq/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5740501",
       "admitted_year": 2019,
@@ -204,31 +204,31 @@
       "pass": true,
       "evidence": "8 of 8 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 8 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "ELLIOT IFRAIMOFF & ASSOCIATES, P.C. is an active domestic professional service corporation registered since 2001-11-01, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
-      "evidence": "718 public client reviews and 25 years since the entity was formed in 2001",
+      "evidence": "720 public client reviews and 25 years since the entity was formed in 2001",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -275,7 +275,7 @@
     "dos_id": "2695097",
     "formed": "2001-11-01",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "logo": {
     "file": "/logos/888askelliot.com.png",
@@ -348,7 +348,7 @@
     "total": 58,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -536,6 +536,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.833,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

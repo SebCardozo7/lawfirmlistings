@@ -41,7 +41,7 @@
     {
       "name": "Melanie Seleznyov",
       "source_url": "https://levitskylawfirm.com/team/melanie-seleznyov/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5864525",
       "admitted_year": 2021,
@@ -51,19 +51,19 @@
     {
       "name": "Dennis Dontsov",
       "source_url": "https://levitskylawfirm.com/team/dennis-dontsov/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Liza Nikolaeva",
       "source_url": "https://levitskylawfirm.com/team/liza-nikolaeva/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Dean G. Delianites",
       "source_url": "https://levitskylawfirm.com/team/dean-delianites-esq/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2460970",
       "admitted_year": 1992,
@@ -73,7 +73,7 @@
     {
       "name": "Dmitry Levitsky",
       "source_url": "https://levitskylawfirm.com/team/dmitry-levitsky-esq/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5197033",
       "admitted_year": 2014,
@@ -83,13 +83,13 @@
     {
       "name": "Natalie Mota",
       "source_url": "https://levitskylawfirm.com/team/natalie-mota/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Yuriy Yaroslavskiy",
       "source_url": "https://levitskylawfirm.com/team/yuriy-yaroslavskiy-esq/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5325931",
       "admitted_year": 2015,
@@ -99,13 +99,13 @@
     {
       "name": "Joanna Zieba-Wylaz",
       "source_url": "https://levitskylawfirm.com/team/joanna-zieba-wylaz-esq/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Susan Friedland",
       "source_url": "https://levitskylawfirm.com/team/susan-friedland-esq/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2408201",
       "admitted_year": 1991,
@@ -222,31 +222,31 @@
       "pass": true,
       "evidence": "5 of 9 named attorneys are currently registered and none carries an adverse status. 4 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 5 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "LEVITSKY LAW FIRM, PLLC is an active domestic professional service limited liability company registered since 2021-08-03, with 2 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 9 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "112 public client reviews and 5 years since the entity was formed in 2021",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-family-law",
@@ -398,13 +398,13 @@
     "dos_id": "6236395",
     "formed": "2021-08-03",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 52,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (4/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -592,6 +592,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.684,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

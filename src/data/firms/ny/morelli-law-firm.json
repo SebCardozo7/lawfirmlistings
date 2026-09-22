@@ -34,7 +34,7 @@
     {
       "name": "Benedict P. Morelli",
       "source_url": "https://www.morellilaw.com/attorneys/benedict-p-morelli/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "1060441",
       "admitted_year": 1977,
@@ -44,7 +44,7 @@
     {
       "name": "Alexander R. Morelli",
       "source_url": "https://www.morellilaw.com/attorneys/alexander-r-morelli/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5592522",
       "admitted_year": 2018,
@@ -54,7 +54,7 @@
     {
       "name": "David T. Sirotkin",
       "source_url": "https://www.morellilaw.com/attorneys/david-t-sirotkin/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4891339",
       "admitted_year": 2011,
@@ -64,13 +64,13 @@
     {
       "name": "Erin P. Mullen Sala",
       "source_url": "https://www.morellilaw.com/attorneys/erin-p-mullen/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Perry S. Fallick",
       "source_url": "https://www.morellilaw.com/attorneys/perry-s-fallick/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5111273",
       "admitted_year": 2013,
@@ -80,7 +80,7 @@
     {
       "name": "Michael S. Schlesinger",
       "source_url": "https://www.morellilaw.com/attorneys/michael-s-schlesinger/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2726115",
       "admitted_year": 1996,
@@ -90,7 +90,7 @@
     {
       "name": "Thomas P. Riley",
       "source_url": "https://www.morellilaw.com/attorneys/thomas-p-riley/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "6302533",
       "admitted_year": 2026,
@@ -100,7 +100,7 @@
     {
       "name": "Joseph M. Nejathaim",
       "source_url": "https://www.morellilaw.com/attorneys/joseph-m-nejathaim/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5752423",
       "admitted_year": 2020,
@@ -110,7 +110,7 @@
     {
       "name": "Sara A. Mahoney",
       "source_url": "https://www.morellilaw.com/attorneys/sara-a-mahoney/",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5128434",
       "admitted_year": 2013,
@@ -212,31 +212,31 @@
       "pass": true,
       "evidence": "8 of 9 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 8 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "MORELLI LAW FIRM, PLLC is an active domestic professional service limited liability company registered since 2015-05-22, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 9 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "207 public client reviews and 11 years since the entity was formed in 2015",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -410,13 +410,13 @@
     "dos_id": "4763515",
     "formed": "2015-05-22",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 62,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (8/25).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -604,6 +604,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.798,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

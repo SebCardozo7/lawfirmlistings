@@ -34,25 +34,25 @@
     {
       "name": "Nestle Jean Roldan",
       "source_url": "https://www.adelolalaw.com/about/nestle-jean-roldan/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Xiomara Gay",
       "source_url": "https://www.adelolalaw.com/about/xiomara-gay/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Nicole Goncalves-Krysinski",
       "source_url": "https://www.adelolalaw.com/about/nicole-goncalves-krysinski/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Loui-Ann MacKnight",
       "source_url": "https://www.adelolalaw.com/about/loui-ann-macknight/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5756572",
       "admitted_year": 2020,
@@ -62,19 +62,19 @@
     {
       "name": "Caroline Kudya",
       "source_url": "https://www.adelolalaw.com/about/caroline-kudya/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Sonia Fields",
       "source_url": "https://www.adelolalaw.com/about/sonia-fields/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
       "name": "Adelola Sheralynn Dow",
       "source_url": "https://www.adelolalaw.com/about/adelola-sheralynn-dow/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4588141",
       "admitted_year": 2008,
@@ -84,7 +84,7 @@
     {
       "name": "Alliah Rivera",
       "source_url": "https://www.adelolalaw.com/about/alliah-rivera/",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     }
   ],
@@ -182,31 +182,31 @@
       "pass": true,
       "evidence": "2 of 8 named attorneys are currently registered and none carries an adverse status. 6 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 2 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "DOW DIVORCE LAW PLLC is an active domestic professional service limited liability company registered since 2009-06-24, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "106 public client reviews and 17 years since the entity was formed in 2009",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-family-law",
@@ -349,13 +349,13 @@
     "dos_id": "3825952",
     "formed": "2009-06-24",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 44,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (2/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -543,6 +543,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.579,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }
