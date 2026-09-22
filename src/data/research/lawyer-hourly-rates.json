@@ -1,0 +1,796 @@
+{
+  "source": {
+    "who": "Clio",
+    "what": "Compare Average Lawyer Hourly Rate by State, updated March 2026",
+    "url": "https://www.clio.com/resources/legal-trends/compare-lawyer-rates/",
+    "covers": 2025,
+    "method": "aggregated and anonymized billing data from tens of thousands of legal professionals using Clio, published annually in the Legal Trends Report",
+    "read_at": "2026-09-22"
+  },
+  "measured_at": "2026-09-22",
+  "national": {
+    "lawyer": 349,
+    "non_lawyer": 187,
+    "firm": 311,
+    "yoy_percent": 4
+  },
+  "non_lawyer_label": "paralegals and other unlicensed staff whose time appears on the same bill",
+  "states": [
+    {
+      "state": "Alabama",
+      "code": "AL",
+      "lawyer": 248,
+      "non_lawyer": 141,
+      "firm": 228,
+      "adjusted_lawyer": 275,
+      "adjusted_non_lawyer": 157,
+      "adjusted_firm": 253
+    },
+    {
+      "state": "Alaska",
+      "code": "AK",
+      "lawyer": 327,
+      "non_lawyer": 196,
+      "firm": 290,
+      "adjusted_lawyer": 321,
+      "adjusted_non_lawyer": 193,
+      "adjusted_firm": 285
+    },
+    {
+      "state": "Arizona",
+      "code": "AZ",
+      "lawyer": 324,
+      "non_lawyer": 179,
+      "firm": 279,
+      "adjusted_lawyer": 321,
+      "adjusted_non_lawyer": 177,
+      "adjusted_firm": 276
+    },
+    {
+      "state": "Arkansas",
+      "code": "AR",
+      "lawyer": 269,
+      "non_lawyer": 146,
+      "firm": 250,
+      "adjusted_lawyer": 311,
+      "adjusted_non_lawyer": 169,
+      "adjusted_firm": 288
+    },
+    {
+      "state": "California",
+      "code": "CA",
+      "lawyer": 422,
+      "non_lawyer": 214,
+      "firm": 361,
+      "adjusted_lawyer": 375,
+      "adjusted_non_lawyer": 190,
+      "adjusted_firm": 321
+    },
+    {
+      "state": "Colorado",
+      "code": "CO",
+      "lawyer": 321,
+      "non_lawyer": 177,
+      "firm": 287,
+      "adjusted_lawyer": 317,
+      "adjusted_non_lawyer": 174,
+      "adjusted_firm": 283
+    },
+    {
+      "state": "Connecticut",
+      "code": "CT",
+      "lawyer": 406,
+      "non_lawyer": 224,
+      "firm": 357,
+      "adjusted_lawyer": 391,
+      "adjusted_non_lawyer": 216,
+      "adjusted_firm": 345
+    },
+    {
+      "state": "Delaware",
+      "code": "DE",
+      "lawyer": 475,
+      "non_lawyer": 226,
+      "firm": 419,
+      "adjusted_lawyer": 478,
+      "adjusted_non_lawyer": 227,
+      "adjusted_firm": 422
+    },
+    {
+      "state": "District of Columbia",
+      "code": "DC",
+      "lawyer": 492,
+      "non_lawyer": 224,
+      "firm": 456,
+      "adjusted_lawyer": 444,
+      "adjusted_non_lawyer": 202,
+      "adjusted_firm": 411
+    },
+    {
+      "state": "Florida",
+      "code": "FL",
+      "lawyer": 353,
+      "non_lawyer": 183,
+      "firm": 305,
+      "adjusted_lawyer": 342,
+      "adjusted_non_lawyer": 177,
+      "adjusted_firm": 295
+    },
+    {
+      "state": "Georgia",
+      "code": "GA",
+      "lawyer": 369,
+      "non_lawyer": 205,
+      "firm": 325,
+      "adjusted_lawyer": 381,
+      "adjusted_non_lawyer": 212,
+      "adjusted_firm": 336
+    },
+    {
+      "state": "Hawaii",
+      "code": "HI",
+      "lawyer": 339,
+      "non_lawyer": 172,
+      "firm": 305,
+      "adjusted_lawyer": 312,
+      "adjusted_non_lawyer": 159,
+      "adjusted_firm": 281
+    },
+    {
+      "state": "Idaho",
+      "code": "ID",
+      "lawyer": 305,
+      "non_lawyer": 153,
+      "firm": 271,
+      "adjusted_lawyer": 334,
+      "adjusted_non_lawyer": 168,
+      "adjusted_firm": 297
+    },
+    {
+      "state": "Illinois",
+      "code": "IL",
+      "lawyer": 350,
+      "non_lawyer": 204,
+      "firm": 325,
+      "adjusted_lawyer": 354,
+      "adjusted_non_lawyer": 206,
+      "adjusted_firm": 329
+    },
+    {
+      "state": "Indiana",
+      "code": "IN",
+      "lawyer": 291,
+      "non_lawyer": 171,
+      "firm": 267,
+      "adjusted_lawyer": 316,
+      "adjusted_non_lawyer": 185,
+      "adjusted_firm": 290
+    },
+    {
+      "state": "Iowa",
+      "code": "IA",
+      "lawyer": 252,
+      "non_lawyer": 151,
+      "firm": 234,
+      "adjusted_lawyer": 284,
+      "adjusted_non_lawyer": 170,
+      "adjusted_firm": 264
+    },
+    {
+      "state": "Kansas",
+      "code": "KS",
+      "lawyer": 312,
+      "non_lawyer": 159,
+      "firm": 287,
+      "adjusted_lawyer": 346,
+      "adjusted_non_lawyer": 177,
+      "adjusted_firm": 319
+    },
+    {
+      "state": "Kentucky",
+      "code": "KY",
+      "lawyer": 245,
+      "non_lawyer": 135,
+      "firm": 226,
+      "adjusted_lawyer": 271,
+      "adjusted_non_lawyer": 149,
+      "adjusted_firm": 250
+    },
+    {
+      "state": "Louisiana",
+      "code": "LA",
+      "lawyer": 266,
+      "non_lawyer": 119,
+      "firm": 242,
+      "adjusted_lawyer": 302,
+      "adjusted_non_lawyer": 135,
+      "adjusted_firm": 274
+    },
+    {
+      "state": "Maine",
+      "code": "ME",
+      "lawyer": 254,
+      "non_lawyer": 167,
+      "firm": 238,
+      "adjusted_lawyer": 261,
+      "adjusted_non_lawyer": 172,
+      "adjusted_firm": 245
+    },
+    {
+      "state": "Maryland",
+      "code": "MD",
+      "lawyer": 362,
+      "non_lawyer": 200,
+      "firm": 329,
+      "adjusted_lawyer": 349,
+      "adjusted_non_lawyer": 193,
+      "adjusted_firm": 317
+    },
+    {
+      "state": "Massachusetts",
+      "code": "MA",
+      "lawyer": 335,
+      "non_lawyer": 237,
+      "firm": 312,
+      "adjusted_lawyer": 309,
+      "adjusted_non_lawyer": 219,
+      "adjusted_firm": 288
+    },
+    {
+      "state": "Michigan",
+      "code": "MI",
+      "lawyer": 297,
+      "non_lawyer": 159,
+      "firm": 270,
+      "adjusted_lawyer": 316,
+      "adjusted_non_lawyer": 169,
+      "adjusted_firm": 286
+    },
+    {
+      "state": "Minnesota",
+      "code": "MN",
+      "lawyer": 326,
+      "non_lawyer": 176,
+      "firm": 293,
+      "adjusted_lawyer": 332,
+      "adjusted_non_lawyer": 178,
+      "adjusted_firm": 298
+    },
+    {
+      "state": "Mississippi",
+      "code": "MS",
+      "lawyer": 249,
+      "non_lawyer": 142,
+      "firm": 225,
+      "adjusted_lawyer": 285,
+      "adjusted_non_lawyer": 163,
+      "adjusted_firm": 258
+    },
+    {
+      "state": "Missouri",
+      "code": "MO",
+      "lawyer": 300,
+      "non_lawyer": 149,
+      "firm": 269,
+      "adjusted_lawyer": 327,
+      "adjusted_non_lawyer": 163,
+      "adjusted_firm": 293
+    },
+    {
+      "state": "Montana",
+      "code": "MT",
+      "lawyer": 261,
+      "non_lawyer": 142,
+      "firm": 240,
+      "adjusted_lawyer": 289,
+      "adjusted_non_lawyer": 157,
+      "adjusted_firm": 266
+    },
+    {
+      "state": "Nebraska",
+      "code": "NE",
+      "lawyer": 260,
+      "non_lawyer": 156,
+      "firm": 235,
+      "adjusted_lawyer": 287,
+      "adjusted_non_lawyer": 173,
+      "adjusted_firm": 260
+    },
+    {
+      "state": "Nevada",
+      "code": "NV",
+      "lawyer": 326,
+      "non_lawyer": 172,
+      "firm": 285,
+      "adjusted_lawyer": 336,
+      "adjusted_non_lawyer": 178,
+      "adjusted_firm": 293
+    },
+    {
+      "state": "New Hampshire",
+      "code": "NH",
+      "lawyer": 295,
+      "non_lawyer": 200,
+      "firm": 273,
+      "adjusted_lawyer": 280,
+      "adjusted_non_lawyer": 190,
+      "adjusted_firm": 260
+    },
+    {
+      "state": "New Jersey",
+      "code": "NJ",
+      "lawyer": 363,
+      "non_lawyer": 196,
+      "firm": 328,
+      "adjusted_lawyer": 334,
+      "adjusted_non_lawyer": 180,
+      "adjusted_firm": 301
+    },
+    {
+      "state": "New Mexico",
+      "code": "NM",
+      "lawyer": 280,
+      "non_lawyer": 144,
+      "firm": 242,
+      "adjusted_lawyer": 310,
+      "adjusted_non_lawyer": 160,
+      "adjusted_firm": 267
+    },
+    {
+      "state": "New York",
+      "code": "NY",
+      "lawyer": 426,
+      "non_lawyer": 227,
+      "firm": 393,
+      "adjusted_lawyer": 395,
+      "adjusted_non_lawyer": 211,
+      "adjusted_firm": 365
+    },
+    {
+      "state": "North Carolina",
+      "code": "NC",
+      "lawyer": 316,
+      "non_lawyer": 164,
+      "firm": 277,
+      "adjusted_lawyer": 336,
+      "adjusted_non_lawyer": 174,
+      "adjusted_firm": 294
+    },
+    {
+      "state": "North Dakota",
+      "code": "ND",
+      "lawyer": 324,
+      "non_lawyer": 210,
+      "firm": 301,
+      "adjusted_lawyer": 366,
+      "adjusted_non_lawyer": 237,
+      "adjusted_firm": 340
+    },
+    {
+      "state": "Ohio",
+      "code": "OH",
+      "lawyer": 276,
+      "non_lawyer": 146,
+      "firm": 250,
+      "adjusted_lawyer": 301,
+      "adjusted_non_lawyer": 158,
+      "adjusted_firm": 272
+    },
+    {
+      "state": "Oklahoma",
+      "code": "OK",
+      "lawyer": 280,
+      "non_lawyer": 145,
+      "firm": 256,
+      "adjusted_lawyer": 318,
+      "adjusted_non_lawyer": 164,
+      "adjusted_firm": 290
+    },
+    {
+      "state": "Oregon",
+      "code": "OR",
+      "lawyer": 325,
+      "non_lawyer": 169,
+      "firm": 284,
+      "adjusted_lawyer": 311,
+      "adjusted_non_lawyer": 161,
+      "adjusted_firm": 271
+    },
+    {
+      "state": "Pennsylvania",
+      "code": "PA",
+      "lawyer": 311,
+      "non_lawyer": 197,
+      "firm": 292,
+      "adjusted_lawyer": 319,
+      "adjusted_non_lawyer": 202,
+      "adjusted_firm": 299
+    },
+    {
+      "state": "Rhode Island",
+      "code": "RI",
+      "lawyer": 369,
+      "non_lawyer": 207,
+      "firm": 349,
+      "adjusted_lawyer": 364,
+      "adjusted_non_lawyer": 204,
+      "adjusted_firm": 344
+    },
+    {
+      "state": "South Carolina",
+      "code": "SC",
+      "lawyer": 300,
+      "non_lawyer": 145,
+      "firm": 254,
+      "adjusted_lawyer": 322,
+      "adjusted_non_lawyer": 156,
+      "adjusted_firm": 273
+    },
+    {
+      "state": "South Dakota",
+      "code": "SD",
+      "lawyer": 252,
+      "non_lawyer": 155,
+      "firm": 242,
+      "adjusted_lawyer": 287,
+      "adjusted_non_lawyer": 176,
+      "adjusted_firm": 274
+    },
+    {
+      "state": "Tennessee",
+      "code": "TN",
+      "lawyer": 299,
+      "non_lawyer": 156,
+      "firm": 270,
+      "adjusted_lawyer": 323,
+      "adjusted_non_lawyer": 168,
+      "adjusted_firm": 292
+    },
+    {
+      "state": "Texas",
+      "code": "TX",
+      "lawyer": 366,
+      "non_lawyer": 185,
+      "firm": 314,
+      "adjusted_lawyer": 377,
+      "adjusted_non_lawyer": 190,
+      "adjusted_firm": 323
+    },
+    {
+      "state": "Utah",
+      "code": "UT",
+      "lawyer": 337,
+      "non_lawyer": 174,
+      "firm": 302,
+      "adjusted_lawyer": 355,
+      "adjusted_non_lawyer": 183,
+      "adjusted_firm": 318
+    },
+    {
+      "state": "Vermont",
+      "code": "VT",
+      "lawyer": 282,
+      "non_lawyer": 131,
+      "firm": 254,
+      "adjusted_lawyer": 291,
+      "adjusted_non_lawyer": 136,
+      "adjusted_firm": 263
+    },
+    {
+      "state": "Virginia",
+      "code": "VA",
+      "lawyer": 380,
+      "non_lawyer": 201,
+      "firm": 344,
+      "adjusted_lawyer": 377,
+      "adjusted_non_lawyer": 200,
+      "adjusted_firm": 341
+    },
+    {
+      "state": "Washington",
+      "code": "WA",
+      "lawyer": 346,
+      "non_lawyer": 187,
+      "firm": 301,
+      "adjusted_lawyer": 318,
+      "adjusted_non_lawyer": 173,
+      "adjusted_firm": 277
+    },
+    {
+      "state": "West Virginia",
+      "code": "WV",
+      "lawyer": 196,
+      "non_lawyer": 118,
+      "firm": 186,
+      "adjusted_lawyer": 218,
+      "adjusted_non_lawyer": 131,
+      "adjusted_firm": 207
+    },
+    {
+      "state": "Wisconsin",
+      "code": "WI",
+      "lawyer": 278,
+      "non_lawyer": 191,
+      "firm": 264,
+      "adjusted_lawyer": 298,
+      "adjusted_non_lawyer": 205,
+      "adjusted_firm": 283
+    },
+    {
+      "state": "Wyoming",
+      "code": "WY",
+      "lawyer": 309,
+      "non_lawyer": 138,
+      "firm": 280,
+      "adjusted_lawyer": 340,
+      "adjusted_non_lawyer": 152,
+      "adjusted_firm": 308
+    }
+  ],
+  "adjustment": "Adjusted rates apply the Bureau of Economic Analysis regional price parities, so a rate is expressed in what it buys where it is charged.",
+  "practices": [
+    {
+      "practice": "Administrative Law",
+      "lawyer": 328,
+      "non_lawyer": 150,
+      "firm": 278
+    },
+    {
+      "practice": "Appellate",
+      "lawyer": 324,
+      "non_lawyer": 165,
+      "firm": 307
+    },
+    {
+      "practice": "Bankruptcy",
+      "lawyer": 460,
+      "non_lawyer": 212,
+      "firm": 394
+    },
+    {
+      "practice": "Business Formation / Compliance",
+      "lawyer": 378,
+      "non_lawyer": 190,
+      "firm": 353
+    },
+    {
+      "practice": "Civil Litigation",
+      "lawyer": 353,
+      "non_lawyer": 173,
+      "firm": 321
+    },
+    {
+      "practice": "Civil Rights / Constitutional Law",
+      "lawyer": 377,
+      "non_lawyer": 171,
+      "firm": 331
+    },
+    {
+      "practice": "Collections & Debt",
+      "lawyer": 320,
+      "non_lawyer": 174,
+      "firm": 280
+    },
+    {
+      "practice": "Commercial / Sale of Goods",
+      "lawyer": 414,
+      "non_lawyer": 192,
+      "firm": 395
+    },
+    {
+      "practice": "Construction",
+      "lawyer": 313,
+      "non_lawyer": 154,
+      "firm": 284
+    },
+    {
+      "practice": "Contracts",
+      "lawyer": 373,
+      "non_lawyer": 193,
+      "firm": 356
+    },
+    {
+      "practice": "Corporate Litigation",
+      "lawyer": 461,
+      "non_lawyer": 224,
+      "firm": 432
+    },
+    {
+      "practice": "Criminal",
+      "lawyer": 216,
+      "non_lawyer": 186,
+      "firm": 211
+    },
+    {
+      "practice": "Elder Law",
+      "lawyer": 292,
+      "non_lawyer": 178,
+      "firm": 257
+    },
+    {
+      "practice": "Employment / Labor",
+      "lawyer": 387,
+      "non_lawyer": 181,
+      "firm": 354
+    },
+    {
+      "practice": "Family",
+      "lawyer": 344,
+      "non_lawyer": 183,
+      "firm": 295
+    },
+    {
+      "practice": "Government",
+      "lawyer": 245,
+      "non_lawyer": 162,
+      "firm": 236
+    },
+    {
+      "practice": "Immigration",
+      "lawyer": 366,
+      "non_lawyer": 314,
+      "firm": 343
+    },
+    {
+      "practice": "Insurance",
+      "lawyer": 220,
+      "non_lawyer": 116,
+      "firm": 205
+    },
+    {
+      "practice": "Intellectual Property",
+      "lawyer": 453,
+      "non_lawyer": 241,
+      "firm": 409
+    },
+    {
+      "practice": "Juvenile",
+      "lawyer": 135,
+      "non_lawyer": 147,
+      "firm": 136
+    },
+    {
+      "practice": "Mediation / Arbitration",
+      "lawyer": 371,
+      "non_lawyer": 216,
+      "firm": 348
+    },
+    {
+      "practice": "Medical Malpractice",
+      "lawyer": 249,
+      "non_lawyer": 132,
+      "firm": 223
+    },
+    {
+      "practice": "Personal Injury",
+      "lawyer": 337,
+      "non_lawyer": 164,
+      "firm": 287
+    },
+    {
+      "practice": "Real Estate",
+      "lawyer": 377,
+      "non_lawyer": 200,
+      "firm": 348
+    },
+    {
+      "practice": "Small Claims",
+      "lawyer": 265,
+      "non_lawyer": 258,
+      "firm": 263
+    },
+    {
+      "practice": "Tax",
+      "lawyer": 444,
+      "non_lawyer": 236,
+      "firm": 395
+    },
+    {
+      "practice": "Traffic Offenses",
+      "lawyer": 326,
+      "non_lawyer": 312,
+      "firm": 322
+    },
+    {
+      "practice": "Trusts",
+      "lawyer": 397,
+      "non_lawyer": 203,
+      "firm": 333
+    },
+    {
+      "practice": "Wills & Estates",
+      "lawyer": 371,
+      "non_lawyer": 194,
+      "firm": 316
+    },
+    {
+      "practice": "Workers Compensation",
+      "lawyer": 180,
+      "non_lawyer": 133,
+      "firm": 170
+    }
+  ],
+  "funnel": {
+    "source": {
+      "who": "Clio",
+      "what": "Law Firm KPIs and benchmarks, 2025",
+      "url": "https://www.clio.com/resources/legal-trends/benchmarks/",
+      "read_at": "2026-09-22"
+    },
+    "hours_in_day": 8,
+    "steps": [
+      {
+        "key": "worked",
+        "label": "Hours worked",
+        "hours": 8.0,
+        "rate": null,
+        "note": "the day the lawyer turns up for"
+      },
+      {
+        "key": "utilization",
+        "label": "Recorded as billable",
+        "hours": 3.0,
+        "rate": 38,
+        "note": "utilization rate: the share of the working day that becomes billable time"
+      },
+      {
+        "key": "realization",
+        "label": "Actually invoiced",
+        "hours": 2.6,
+        "rate": 88,
+        "note": "realization rate: the share of billable time that reaches an invoice"
+      },
+      {
+        "key": "collection",
+        "label": "Actually paid",
+        "hours": 2.4,
+        "rate": 93,
+        "note": "collection rate: the share of invoiced time the client pays"
+      }
+    ],
+    "utilization_history": [
+      {
+        "year": 2019,
+        "value": 30
+      },
+      {
+        "year": 2023,
+        "value": 35
+      },
+      {
+        "year": 2024,
+        "value": 37
+      },
+      {
+        "year": 2025,
+        "value": 38
+      }
+    ],
+    "lockup_days": {
+      "realization": 43,
+      "collection": 32,
+      "total": 93
+    }
+  },
+  "citations": [
+    {
+      "label": "Median annual wage, lawyers, United States",
+      "value": 159670,
+      "unit": "dollars per year",
+      "who": "U.S. Bureau of Labor Statistics",
+      "what": "Occupational Outlook Handbook, May 2025",
+      "url": "https://www.bls.gov/ooh/legal/lawyers.htm",
+      "note": "What a lawyer earns, rather than what a lawyer charges. The Bureau surveys employers, so it counts salaried lawyers and misses the owner of a firm.",
+      "read_at": "2026-09-22"
+    },
+    {
+      "label": "Fees must be reasonable",
+      "value": null,
+      "who": "American Bar Association",
+      "what": "Model Rules of Professional Conduct, Rule 1.5",
+      "url": "https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/rule_1_5_fees/",
+      "note": "The rule lists eight factors for judging a fee, and the prevailing rate in the locality for similar services is one of them. It sets no number.",
+      "read_at": "2026-09-22"
+    }
+  ]
+}

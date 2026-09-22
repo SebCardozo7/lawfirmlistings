@@ -1,0 +1,332 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import rates from '../../data/research/lawyer-hourly-rates.json';
+
+/**
+ * A reference article, not a study. Every headline figure here was measured by somebody else and
+ * carries their name: the rate tables are Clio's, computed from its own customers' billing
+ * records, and the wage figure is the Bureau of Labor Statistics'.
+ *
+ * Why it is written that way. This is a money keyword, and our own sample is a few hundred firms
+ * in nine cities. A national average built from that would be a worse number than the one already
+ * published, and publishing it would be the exact thing this site exists to argue against. So the
+ * research is external, and our own data appears once, at the end, answering a question the
+ * external data cannot: whether any of these rates is visible to the person paying them.
+ *
+ * Nothing on this page is a hand-typed figure. Every dollar amount is read from the research file
+ * or computed here from it, and the one paragraph of our own data is computed from the firms
+ * collection at build time, so it cannot drift from the profiles.
+ */
+const src = rates.source;
+const nat = rates.national;
+const f = rates.funnel;
+const usd = (v: number) => '$' + Math.round(v).toLocaleString('en-US');
+const n = (v: number) => v.toLocaleString('en-US');
+// One row on the table is not a state and does not read like one in a sentence. Written as a
+// test on the name rather than on the code, so it also covers a future territory.
+const place = (name: string) => (/^District of/.test(name) ? 'the ' + name : name);
+
+// The funnel, which is the piece nobody else on this search publishes beside the rate. Three
+// published percentages applied to one eight-hour day, so the last row is what a client's money
+// is actually buying.
+const paid = f.steps[f.steps.length - 1].hours;
+const worked = f.hours_in_day;
+const unpaid = worked - paid;
+const paidShare = Math.round((paid / worked) * 100);
+const effective = nat.lawyer * (paid / worked);
+const funnelRows = f.steps.map((s, i) => ({
+  label: s.label,
+  value: s.hours,
+  display: s.hours.toFixed(1) + ' h' + (s.rate ? `  ·  ${s.rate}%` : ''),
+  note: s.note,
+  emphasis: i === f.steps.length - 1,
+}));
+
+// A year of that day, stated with its assumption in the open rather than smuggled in. Five days
+// and forty-eight weeks is a working year with holiday in it, and the arithmetic is shown so a
+// reader who prefers different inputs can redo it.
+const DAYS = 5, WEEKS = 48;
+const billedYear = paid * DAYS * WEEKS * nat.lawyer;
+const bls = rates.citations.find(c => /Labor Statistics/.test(c.who))!;
+const aba = rates.citations.find(c => /American Bar/.test(c.who))!;
+
+// States, ranked both ways. The reordering is the finding, so the ranks are computed rather than
+// described: if the publisher's next update changes the order, this page changes with it.
+const byLawyer = [...rates.states].sort((a, b) => b.lawyer - a.lawyer);
+const byAdjusted = [...rates.states].sort((a, b) => b.adjusted_lawyer - a.adjusted_lawyer);
+const rank = (list: typeof rates.states, code: string) =>
+  list.findIndex(s => s.code === code) + 1;
+const topState = byLawyer[0];
+const bottomState = byLawyer[byLawyer.length - 1];
+const topAdjusted = byAdjusted[0];
+const bottomAdjusted = byAdjusted[byAdjusted.length - 1];
+const stateSpread = topState.lawyer / bottomState.lawyer;
+const adjustedSpread = topAdjusted.adjusted_lawyer / bottomAdjusted.adjusted_lawyer;
+const reordered = topAdjusted.code !== topState.code;
+
+// Who the cost-of-living adjustment moves furthest, in either direction.
+const movers = [...rates.states]
+  .map(s => ({ ...s, move: rank(byLawyer, s.code) - rank(byAdjusted, s.code) }))
+  .sort((a, b) => b.move - a.move);
+const climbers = movers.slice(0, 3);
+const fallers = movers.slice(-3).reverse();
+
+// Practice areas, which turn out to be the wider of the two spreads.
+const byPractice = [...rates.practices].sort((a, b) => b.lawyer - a.lawyer);
+const topPractice = byPractice[0];
+const bottomPractice = byPractice[byPractice.length - 1];
+const practiceSpread = topPractice.lawyer / bottomPractice.lawyer;
+
+// The two practice areas this directory covers most, pulled by name so they cannot fall out of
+// step with the table above them.
+const injury = rates.practices.find(p => p.practice === 'Personal Injury')!;
+const comp = rates.practices.find(p => p.practice === 'Workers Compensation')!;
+const family = rates.practices.find(p => p.practice === 'Family')!;
+const crime = rates.practices.find(p => p.practice === 'Criminal')!;
+
+// The blended rate, which is the number that actually lands on a bill, and the gap between it
+// and the rate everybody quotes.
+const blendGap = Math.round(((nat.lawyer - nat.firm) / nat.lawyer) * 100);
+
+// Our own data, and only here. The question is not what firms charge, which we cannot measure
+// from the outside. It is whether a person shopping for a lawyer can see any of the numbers on
+// this page on the website of a firm that would take their case.
+const firms = await getCollection('firms', e => e.data.status !== 'sample');
+const NOT_STATED = /^(not stated|unknown|n\/?a|pending)$/i;
+const FEE_FIGURE = /\$\s?[\d,]+|\b\d[\d,]*\s*(?:dollars|per hour|an hour|\/\s*h(?:r|our))\b/i;
+const HOURLY = /hourly/i;
+const statesModel = firms.filter(e => e.data.fee_model && !NOT_STATED.test(e.data.fee_model.trim()));
+// Narrowed to the firms the claim is about. The sentence beside these counts is about injury and
+// compensation work, so a family or real estate firm stating an hourly model does not belong in
+// the denominator: it would make the contingency share look lower than it is for the practices
+// being discussed.
+const CONTINGENT_PRACTICE = /personal-injury|workers-compensation|accidents?$|malpractice|wrongful-death|liability|abuse|disability/;
+const injuryFirms = statesModel.filter(e =>
+  e.data.practices.some(p => CONTINGENT_PRACTICE.test(p.slug)));
+const contingency = injuryFirms.filter(e => /contingen/i.test(e.data.fee_model!));
+const saysHourly = injuryFirms.filter(e => HOURLY.test(e.data.fee_model!));
+const withFigure = firms.filter(e => e.data.fee_statement && FEE_FIGURE.test(e.data.fee_statement));
+const publishRate = withFigure.filter(e => /per hour|an hour|\/\s*h(?:r|our)/i.test(e.data.fee_statement!));
+
+// The states this directory publishes in, each beside what the research says a lawyer there
+// charges. Built from the firms rather than typed, so opening a tenth market adds a row.
+const marketCodes = [...new Set(firms.map(e => e.data.market.state))];
+const markets = rates.states
+  .filter(s => marketCodes.includes(s.code))
+  .map(s => ({
+    ...s,
+    firms: firms.filter(e => e.data.market.state === s.code).length,
+    nominalRank: rank(byLawyer, s.code),
+    adjustedRank: rank(byAdjusted, s.code),
+  }))
+  .sort((a, b) => b.lawyer - a.lawyer);
+
+const read = new Date(rates.measured_at).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+
+// Interpolated, never typed. Both figures come out of the research file, so an update to the
+// tables rewrites the headline rather than leaving it stale, and the page declares where they
+// came from in its head. The head term stays in front of the finding.
+const title = `Average Lawyer Hourly Rate: ${usd(nat.lawyer)}, and the ${unpaid.toFixed(1)} Hours Nobody Pays For`;
+const description = `US lawyers charge ${usd(nat.lawyer)} an hour on average, ${usd(bottomState.lawyer)} to ${usd(topState.lawyer)} depending on the state. They collect ${paid.toFixed(1)} hours of an ${worked}-hour day, which is what the rate prices.`;
+---
+<Base title={title} description={description} nav="guides"
+  figuresFrom={`${src.who}, ${src.what}, read ${read}`} image="/og/fees.png"
+  imageAlt="An eight-hour day drawn as eight blocks, with five and a half of them left as empty outlines">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Average lawyer hourly rate</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Costs</span>
+    <h1>{title}</h1>
+    <p class="lede">The average lawyer in the United States charges <b>{usd(nat.lawyer)} an hour</b>, {nat.yoy_percent}% more than last year, and somewhere between {usd(bottomState.lawyer)} in {place(bottomState.state)} and {usd(topState.lawyer)} in {place(topState.state)} depending on where you stand. That is the number everybody publishes. The number almost nobody publishes beside it is what a working day looks like underneath: {paid.toFixed(1)} hours of every {worked} get paid for. The rate is not what an hour of legal work costs. It is what {paidShare}% of a day has to earn.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Published research, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>8 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="rates" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#day" class="is-active">The {paid.toFixed(1)}-hour day</a></li>
+      <li><a href="#bill">Why the bill says {usd(nat.firm)}</a></li>
+      <li><a href="#states">Every state, ranked</a></li>
+      <li><a href="#adjusted">What the ranking hides</a></li>
+      <li><a href="#practice">Every practice area, ranked</a></li>
+      <li><a href="#fiction">Where the hourly rate is not the price</a></li>
+      <li><a href="#visible">We looked for one of these numbers</a></li>
+      <li><a href="#method">Where these figures come from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Rates from ${src.who}, ${src.what}, read ${read}. Covering ${src.covers}. Our own figures are computed from the ${n(firms.length)} firms in this directory.`}
+      items={[
+        `The US average is <b>${usd(nat.lawyer)} an hour</b> for a lawyer and <b>${usd(nat.firm)}</b> for a law firm, because paralegal hours land on the same bill.`,
+        `Of an ${worked}-hour working day, <b>${paid.toFixed(1)} hours</b> get paid for. Spread across the whole day that is <b>${usd(effective)} an hour worked</b>.`,
+        `State moves the rate <b>${stateSpread.toFixed(1)}x</b>, from ${usd(bottomState.lawyer)} to ${usd(topState.lawyer)}. Practice area moves it <b>${practiceSpread.toFixed(1)}x</b>, from ${usd(bottomPractice.lawyer)} to ${usd(topPractice.lawyer)}. What you need matters more than where you are.`,
+        `We checked all ${n(firms.length)} firm websites in this directory for an hourly rate. <b>${publishRate.length === 0 ? 'None publishes one' : `${publishRate.length} publish one`}.</b>`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every rate on this page was measured by {src.who} from its own customers' billing records and is presented as their figure, not ours. We did not survey anybody and we do not publish a rate of our own. The last section is the only place our own data appears, and it answers a different question. Nothing here is legal advice, and no figure here is a quote from any firm.</div>
+
+    <h2 id="day">An {worked}-hour day contains {paid.toFixed(1)} billable hours</h2>
+    <p>Start here, because every other number on this page means something different once you have seen it.</p>
+    <p>A law firm's hourly rate is not a wage. It is a price, and the thing being priced is not an hour. Three published percentages stand between a lawyer sitting down to work and money arriving, and each one takes a cut of the day.</p>
+    <BarChart
+      heading={`One ${worked}-hour working day, after each stage`}
+      rows={funnelRows}
+      caption={`${f.source.who}'s law firm benchmarks for ${src.covers}, from the same billing records as the rate tables. Utilization is the share of the day that becomes billable time, realization the share of that which reaches an invoice, collection the share of that which the client pays.`}
+    />
+    <p>The first cut is the largest and the least discussed. <b>{f.steps[1].rate}%</b> of a lawyer's day becomes billable time. The other {Math.round(100 - (f.steps[1].rate ?? 0))}% is the business of running a law firm: answering people who will never become clients, chasing invoices, filing, malpractice cover, the client intake that goes nowhere, the trust accounting, the marketing. None of it is billable and all of it is compulsory.</p>
+    <p>Then <b>{f.steps[2].rate}%</b> of what was billable actually reaches an invoice, because partners write time off before sending it. Then <b>{f.steps[3].rate}%</b> of what was invoiced gets paid.</p>
+    <p>Multiply through and <b>{paid.toFixed(1)} hours of {worked}</b> turn into money. At {usd(nat.lawyer)} an hour, a lawyer who works a full day collects <b>{usd(effective)} for each hour they were at work</b>, before the firm has paid rent, staff, insurance or the lawyer.</p>
+    <p>That is the honest answer to why lawyers cost what they cost, and it cuts both ways. If you are a client looking at {usd(nat.lawyer)} and reading it as somebody's wage, it is not. If you are a lawyer setting a rate against that average, the average already has {unpaid.toFixed(1)} unpaid hours priced into it.</p>
+    <p>The utilization figure is also the fastest-moving number in this research. It was {f.utilization_history[0].value}% in {f.utilization_history[0].year} and is {f.utilization_history[f.utilization_history.length - 1].value}% now, a gain of {(f.utilization_history[f.utilization_history.length - 1].value - f.utilization_history[0].value)} points in {f.utilization_history[f.utilization_history.length - 1].year - f.utilization_history[0].year} years. Every point of it is roughly five minutes a day that used to be admin.</p>
+    <p class="note">One way to size that: at {paid.toFixed(1)} collected hours a day, {DAYS} days a week, {WEEKS} weeks a year, a lawyer billing the national average brings in about <b>{usd(billedYear)}</b> of collected fees. The {bls.who} puts the median annual wage for a lawyer at <b>{usd(bls.value ?? 0)}</b>. The difference is the firm: the staff, the premises, the insurance and the {unpaid.toFixed(1)} hours. Change the weeks and days to suit your own year and the arithmetic is there to redo.</p>
+
+    <h2 id="bill">The lawyer charges {usd(nat.lawyer)}. The firm charges {usd(nat.firm)}.</h2>
+    <p>A second number sits under the headline and is the one more likely to describe your actual invoice.</p>
+    <p>{src.who} publishes three rates: {usd(nat.lawyer)} for a lawyer, {usd(nat.non_lawyer)} for a non-lawyer, and <b>{usd(nat.firm)} blended for a law firm</b>. The non-lawyer rate covers {rates.non_lawyer_label}.</p>
+    <p>The blended rate is <b>{blendGap}% below</b> the lawyer rate, and the reason is straightforward: a real matter is not handled entirely by the partner whose rate you were quoted. Document review, filings, scheduling and the first draft of most things are done by somebody billed lower, and every hour of that pulls the average on your bill down.</p>
+    <p>This is worth knowing in both directions. A firm quoting you one rate for everything is either doing all the work at that level or rounding up. A firm that quotes you a range is describing how the work is actually staffed.</p>
+    <p>It also means the number to ask for is not the rate. It is who does what, at which rate, and roughly how many hours each. A rate without a staffing plan prices nothing.</p>
+
+    <h2 id="states">{usd(topState.lawyer)} in {place(topState.state)}, {usd(bottomState.lawyer)} in {place(bottomState.state)}</h2>
+    <p>The spread across the country is <b>{stateSpread.toFixed(1)}x</b>. Here is every state, with the blended firm rate beside the lawyer rate, because the firm column is the one that resembles a bill.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th class="num">Lawyer</th><th class="num">Non-lawyer</th><th class="num">Law firm</th></tr></thead>
+        <tbody>
+          <tr class="row-total"><td><b>National average</b></td><td class="num"><b>{usd(nat.lawyer)}</b></td><td class="num">{usd(nat.non_lawyer)}</td><td class="num"><b>{usd(nat.firm)}</b></td></tr>
+          {byLawyer.map(s => (
+            <tr>
+              <td>{s.state}</td>
+              <td class="num">{usd(s.lawyer)}</td>
+              <td class="num">{usd(s.non_lawyer)}</td>
+              <td class="num">{usd(s.firm)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Ranked by the lawyer rate. {src.who}, {src.what}, covering {src.covers}.</p>
+    <p>The two at the top, {place(topState.state)} and {place(byLawyer[1].state)}, are not really competing with the rest of the list. Both are places where corporate work is filed rather than places where most people hire a lawyer, and the rate follows the matter rather than the postcode.</p>
+
+    <h2 id="adjusted">Adjust for cost of living and the ranking reorders</h2>
+    <p>A rate is only high relative to what it buys where it is charged. {src.who} publishes a second version of the table using regional price parities, which is the Bureau of Economic Analysis measure of what a dollar is worth locally.</p>
+    <p>Two things happen.</p>
+    <p><b>The gap narrows.</b> The nominal spread is {stateSpread.toFixed(1)}x. Adjusted, it is <b>{adjustedSpread.toFixed(1)}x</b>. A lawyer in {place(bottomState.state)} charging {usd(bottomState.lawyer)} is charging {usd(bottomState.adjusted_lawyer)} in national money, and a lot of the headline difference between states turns out to be the price of everything else.</p>
+    {reordered && <p><b>And the top changes hands.</b> The nominal table is led by {place(topState.state)} at {usd(topState.lawyer)}. Adjusted, it drops to {usd(topState.adjusted_lawyer)} and <b>{place(topAdjusted.state)} takes first place</b> at {usd(topAdjusted.adjusted_lawyer)}, because it charges nearly as much and costs considerably less to live in.</p>}
+    <BarChart
+      heading="The states the adjustment moves furthest, by places gained or lost"
+      rows={[...climbers, ...fallers].map(s => ({
+        label: s.state,
+        value: Math.abs(s.move),
+        display: (s.move > 0 ? '+' : '') + s.move + ' places',
+        note: `${usd(s.lawyer)} nominal, ${usd(s.adjusted_lawyer)} adjusted`,
+        emphasis: s.move > 0,
+      }))}
+      caption="Highlighted states gain places once the rate is expressed in what it buys locally; the rest lose them. Movement in both directions is a cost-of-living difference, not a difference in what lawyers charge."
+    />
+    <p>The practical use of this is narrow but real. If you are comparing a quote from a firm in one state against a quote from another, the adjusted column tells you which one is expensive and which one is simply somewhere expensive.</p>
+
+    <h2 id="practice">What you need moves the rate more than where you are</h2>
+    <p>State spread: {stateSpread.toFixed(1)}x. Practice area spread: <b>{practiceSpread.toFixed(1)}x</b>, from {usd(bottomPractice.lawyer)} for {bottomPractice.practice.toLowerCase()} work to {usd(topPractice.lawyer)} for {topPractice.practice.toLowerCase()}.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Practice area</th><th class="num">Lawyer</th><th class="num">Non-lawyer</th><th class="num">Law firm</th></tr></thead>
+        <tbody>
+          {byPractice.map(p => (
+            <tr>
+              <td>{p.practice}</td>
+              <td class="num">{usd(p.lawyer)}</td>
+              <td class="num">{usd(p.non_lawyer)}</td>
+              <td class="num">{usd(p.firm)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Ranked by the lawyer rate. {src.who}, {src.what}, covering {src.covers}.</p>
+    <p>The order is mostly a map of who pays. The expensive end is work billed to a company: {byPractice.slice(0, 3).map(p => p.practice.toLowerCase()).join(', ')}. The cheap end is work billed to a person in trouble: {[...byPractice].slice(-3).reverse().map(p => p.practice.toLowerCase()).join(', ')}.</p>
+    <p>{topPractice.practice} at {usd(topPractice.lawyer)} and {bottomPractice.practice} at {usd(bottomPractice.lawyer)} are not two prices for the same service. They are two different clients, and the market prices the client.</p>
+    <p>One row breaks the pattern and is worth a second look. Immigration carries the highest non-lawyer rate on the table at {usd(rates.practices.find(p => /Immigration/.test(p.practice))!.non_lawyer)}, within {usd(rates.practices.find(p => /Immigration/.test(p.practice))!.lawyer - rates.practices.find(p => /Immigration/.test(p.practice))!.non_lawyer)} of the lawyer rate beside it. That is what a practice looks like when most of the work is forms and deadlines handled by trained staff, and it is the clearest case on the page for asking who will actually be doing your work.</p>
+
+    <h2 id="fiction">In three of these rows, the hourly rate is not the price</h2>
+    <p>The table gives an hourly rate for {injury.practice.toLowerCase()} ({usd(injury.lawyer)}) and for {comp.practice.toLowerCase()} ({usd(comp.lawyer)}). Almost nobody pays either of them.</p>
+    <p>Injury and compensation work is overwhelmingly contingent: the firm takes a percentage of what it recovers and nothing if it recovers nothing. {contingency.length === injuryFirms.length
+      ? <><b>Every one of the {injuryFirms.length} firms</b> in this directory that does that work and states a fee model at all says contingency</>
+      : <><b>{contingency.length} of the {injuryFirms.length} firms</b> in this directory that do that work and state a fee model say contingency</>}{saysHourly.length > 0 && <>, and {saysHourly.length === 1 ? 'one of them also offers' : `${saysHourly.length} of them also offer`} an hourly option for part of the work</>}. The hourly figure in the table is the rate for the minority of that work billed by the hour, usually defense-side or an insurer's panel, and it is not what a claimant is quoted.</p>
+    <p>Criminal defense at {usd(crime.lawyer)} has the same problem from a different direction. A great deal of it is a flat fee agreed up front for one stage of a case, so the hourly rate is an average of whichever matters happened to be billed hourly rather than a price anybody was offered.</p>
+    <p>{family.practice} law at {usd(family.lawyer)} is the row where the hourly rate really is the rate. Which is why it is the practice area where the question that decides everything is "how many hours?", and the answer is almost never in writing.</p>
+    <p>The professional rules cover half of this. The <a href={aba.url} rel="noopener" target="_blank">{aba.who}'s {aba.what}</a> requires a fee to be reasonable, and a contingent fee has to be in writing with the percentage in it. {aba.note} So the rules make a firm tell <i>you</i> its price, in writing, once you are a client. Nothing makes it tell anybody beforehand.</p>
+
+    <h2 id="visible">We checked {n(firms.length)} law firm websites for a single one of these numbers</h2>
+    <p>Everything above is somebody else's measurement of what lawyers charge. This is our own measurement of something the rate tables cannot tell you: whether any of it is visible to the person who has to pay it.</p>
+    <p>This directory holds <b>{n(firms.length)}</b> law firms across {markets.length} states, and every page each one publishes about itself has been read. The results:</p>
+    <ul>
+      <li><b>{statesModel.length} of {n(firms.length)}</b> state a fee model anywhere on their site, meaning they say in words whether they work on contingency, hourly or a flat fee.</li>
+      <li><b>{withFigure.length === 1 ? 'One' : withFigure.length} of {n(firms.length)}</b> {withFigure.length === 1 ? 'prints' : 'print'} any dollar figure at all in the context of fees{withFigure.length === 1 ? ', and it is a consultation fee rather than a rate' : ''}.</li>
+      <li><b>{publishRate.length === 0 ? 'None' : publishRate.length}</b> publishes an hourly rate.</li>
+    </ul>
+    <p>So the average lawyer in New York charges {usd(rates.states.find(s => s.code === 'NY')!.lawyer)} an hour, and no firm in New York tells you that, or anything else, before you call.</p>
+    <p>That is not an accusation. Advertising rules in several states make published prices awkward, most of these firms are contingency practices where an hourly rate would be misleading, and a serious matter genuinely cannot be priced from a web page. But it does mean the tables above are, for most people, the only price information available before the first conversation, which is a strange thing for an industry to have settled on.</p>
+    <p>Here is what the research says about each state this directory covers, with the number of firms we have measured in each.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th class="num">Lawyer</th><th class="num">Adjusted</th><th class="num">Rank</th><th class="num">Firms</th></tr></thead>
+        <tbody>
+          {markets.map(m => (
+            <tr>
+              <td>{m.state}</td>
+              <td class="num">{usd(m.lawyer)}</td>
+              <td class="num">{usd(m.adjusted_lawyer)}</td>
+              <td class="num">{m.nominalRank} &rarr; {m.adjustedRank}</td>
+              <td class="num">{m.firms}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Rank is the state's place among the {rates.states.length} on the nominal table, then on the cost-of-living adjusted one. Firm counts are computed from this directory when the page is built.</p>
+    <p>What a firm will not print, it will usually say. <a href="/guides/what-new-york-injury-firms-publish-about-fees/">The four questions worth asking on the free consultation</a> are the ones that turn a rate into a number you can compare, and <a href="/methodology/">fee transparency is one of the things we score</a>.</p>
+
+    <h2 id="method">Where these figures come from</h2>
+    <p>The rate tables, the blended firm rate and the three percentages in the funnel are all published by <a href={src.url} rel="noopener" target="_blank">{src.who}</a>, computed from {src.method}. They cover {src.covers}. We read the tables on {read} and record them with that date attached, because they are a document rather than a dataset: there is no feed to re-query, so the figures here are as current as the publisher's last update and no more.</p>
+    <p>That is a real limitation and worth stating plainly. These rates describe firms that use one practice management platform, which skews toward solo and small firms and away from the large commercial practices where the highest rates in the country actually are. It is the best public dataset on the question, and it is a sample, not a census.</p>
+    <p>The median wage figure is the <a href={bls.url} rel="noopener" target="_blank">{bls.who}</a>, {bls.what}. {bls.note}</p>
+    <p>The counts of what firms publish are ours, computed from the {n(firms.length)} firms in this directory each time this page is built. They describe what those firms put on their own websites and nothing else. We hold no billing data, we have asked no firm what it charges, and no figure in this article is a quote from any named firm.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  /* The line under a table, saying who measured it. Matches the caption a chart already gets,
+     because a table without an attribution line reads as if the figures were ours. */
+  .prose p.note {
+    font-size: .86rem; color: var(--muted); line-height: 1.6;
+    margin: 0 0 24px; padding-left: 2px;
+  }
+  /* Directly under a table it is that table's caption, so it sits tight against it. */
+  .prose .table-wrap + p.note { margin-top: -12px; }
+  .prose p.note b { color: var(--ink); }
+  .prose .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .prose .row-total td { border-bottom: 2px solid var(--line); }
+  .prose .table-wrap { margin: 22px 0; max-height: 620px; overflow: auto; }
+  .prose .table-wrap thead th {
+    position: sticky; top: 0; background: var(--paper); z-index: 1;
+  }
+</style>

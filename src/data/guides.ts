@@ -23,7 +23,7 @@ export interface Guide {
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
-    | 'shield' | 'register' | 'headcount' | 'offices' | 'screens';
+    | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -49,6 +49,21 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'average-lawyer-hourly-rate',
+    cover: 'rates',
+    kicker: 'Reference',
+    title: 'Average Lawyer Hourly Rate, and the Hours Nobody Pays For',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page computes
+    // its own headline from the research file, which is why the two are worded differently.
+    summary:
+      'Every page on this search publishes the same table of rates by state and stops there. ' +
+      'The number missing beside it is how much of a working day actually gets paid for, which ' +
+      'is published too, and changes what the rate means.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'The rate prices a fraction of the day',
+  },
   {
     slug: 'best-law-firm-websites',
     cover: 'screens',
