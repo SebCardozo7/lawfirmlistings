@@ -314,3 +314,20 @@ boutique personal injury practice located in Staten Island".
 | Law Office of Helene Mark | 300 | Same. |
 | NY Injury Lawyers PLLC | 325 | The domain redirects to a parking lander. There is no site. |
 | Mikhail Yadgarov & Associates | 1,611 | Its own home page links `/personal-injury-attorney/`, which 404s in a browser too. Their site is broken, not ours. Worth one more look for the real URL before writing it off. |
+
+## Published 2026-09-22, after the practice check learned to read Chinese and Spanish
+
+| Firm | Reviews | Tier | Why it is not higher |
+| --- | --- | --- | --- |
+| Ofshtein Law Firm, P.C. | 2,659 | Listed | The largest review count in this market, and it names no attorney on any page we can read: /attorneys redirects to the home page. G1, G2 and G5 stay open for that reason, which is a finding about the firm rather than a gap, and it is the thesis of our own study on rosters. Its entity is on the New York register. |
+| Caesar, Napoli & Spivak | 290 | Listed | Publishes in Chinese as 黎保利. Entity on the register. Names no attorney we can read. |
+| GW Law Group | 343 | Listed | Publishes in Chinese. No entity matched on the New York register under this name, so G3 is open too. |
+
+### Held: a brand rather than a firm
+
+- **Abogados de accidentes Cantaso** (abogadosde1800cantaso.com, 590 reviews). Its site names no
+  firm and no attorney anywhere: it is "Abogados de accidentes" over a phone-number brand,
+  1-800-CANTASO, with seventeen Spanish practice pages behind it and nobody's name on any of them.
+  That may be a law firm and it may be a referral service, and telling those apart is the subject
+  of one of our own studies rather than something to guess at. Not published. A person should read
+  it, and the question to answer is whether any admitted attorney is named or identifiable at all.

@@ -1,18 +1,18 @@
 {
-  "slug": "krupnik-law-group-pc",
-  "name": "Krupnik Law Group, PC",
-  "initials": "KR",
-  "website": "https://krupniklawgroup.com/",
-  "domain": "krupniklawgroup.com",
-  "phone": "(718) 532-4400",
+  "slug": "gw-law-group",
+  "name": "GW Law Group",
+  "initials": "法G",
+  "website": "https://www.gwlawgroups.com/",
+  "domain": "gwlawgroups.com",
+  "phone": "(212) 899-8888",
   "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
       "name": "Personal Injury",
       "primary": true,
-      "source_url": "https://krupniklawgroup.com/personal-injury/",
-      "checked_at": "2026-09-16"
+      "source_url": "https://www.gwlawgroups.com/car-accident-lawyers",
+      "checked_at": "2026-09-22"
     }
   ],
   "market": {
@@ -23,51 +23,52 @@
   },
   "offices": [
     {
-      "label": "Krupnik Law Group, PC",
-      "address": "108-18 Queens Blvd Suite 803, Forest Hills, NY 11375, USA",
+      "label": "GW Law Group - Flushing, Queens",
+      "address": "37-02 Main St, Flushing, NY 11354, USA",
       "by_appointment": false,
       "is_hq": true,
-      "source_url": "https://maps.google.com/?cid=4169019981841776820&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+      "source_url": "https://maps.google.com/?cid=5529075109537426451&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
   "attorneys": [],
   "languages": [
-    "English"
+    "English",
+    "Chinese"
   ],
   "fee_model": "Not stated",
-  "free_consultation": true,
+  "free_consultation": false,
   "availability": [],
   "about": [
-    "Krupnik Law Group works from Queens Boulevard in Forest Hills. Its team page serves no content to a crawler, so the firm names no attorney on the pages we could read, and that is a fact about the page rather than about the practice.",
-    "459 reviews at 5.0. A free consultation, published. It publishes no case results we could read, and it publishes none of the trust pages pillar D looks for beyond its own bios."
+    "GW Law Group is a personal injury firm with a single office on Main Street in Flushing.",
+    "It publishes chiefly in Chinese, covering car accidents, construction accidents, medical misdiagnosis and slip and fall claims. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 5.0,
-      "count_label": "460",
+      "rating": 4.9,
+      "count_label": "343",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-18"
+      "fetched_at": "2026-09-22"
     },
     "sample": [
       {
-        "published_at": "2026-08-10T15:19:47.997686226Z",
+        "published_at": "2026-02-19T17:09:07.338899735Z",
         "rating": 5
       },
       {
-        "published_at": "2026-06-23T19:24:44.461151887Z",
+        "published_at": "2026-05-19T16:12:26.288010467Z",
         "rating": 5
       },
       {
-        "published_at": "2026-06-11T19:55:17.230002670Z",
-        "rating": 4
-      },
-      {
-        "published_at": "2026-06-23T14:25:18.812495428Z",
+        "published_at": "2026-05-14T21:06:33.812861377Z",
         "rating": 5
       },
       {
-        "published_at": "2026-02-26T12:51:08.800625165Z",
+        "published_at": "2026-06-16T14:29:15.478533930Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-13T15:14:27.466801550Z",
         "rating": 5
       }
     ]
@@ -75,44 +76,28 @@
   "results": [],
   "digital": {
     "trust_pages": {
-      "attorney_bios": true
+      "blog": true
     },
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 57,
+        "performance": 59,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, lab only)",
-      "measured_at": "2026-09-16",
-      "note": "LCP 7.3 s / CLS 0.148 / TBT 275 ms"
+      "measured_at": "2026-09-22",
+      "note": "LCP 5.9 s / CLS 0.002 / TBT 464 ms"
     },
     "_ahrefs_partial_from_cohort": {
-      "domain": "krupniklawgroup.com",
-      "name": "Krupnik Law Group, P.C.",
-      "dr": 0,
-      "refdomains": 374,
-      "org_keywords": 2,
-      "org_traffic": 8
-    },
-    "ahrefs": {
-      "dr": 0,
-      "ahrefs_rank": 112357707,
-      "refdomains": 374,
-      "refdomains_dofollow": 61,
-      "backlinks": 435,
-      "org_keywords": 2,
-      "org_traffic": 8,
-      "paid_keywords": 0,
-      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
-      "measured_at": "2026-09-16"
+      "domain": "gwlawgroups.com",
+      "name": "GW Law Group"
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 460,
-      "rating_weighted": 5.0,
+      "review_count_total": 343,
+      "rating_weighted": 4.9,
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-18"
+      "measured_at": "2026-09-22"
     }
   },
   "gates": {
@@ -129,9 +114,10 @@
       "checked_at": "2026-09-22"
     },
     "G3": {
-      "pass": true,
-      "evidence": "KRUPNIK LAW GROUP, P.C. is an active domestic professional service corporation registered since 2019-07-12, with 1 Google-verified location",
-      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "pass": false,
+      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
       "checked_at": "2026-09-22"
     },
     "G5": {
@@ -142,72 +128,18 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "460 public client reviews and 7 years since the entity was formed in 2019",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "evidence": "343 public client reviews and 4 years since its web address was registered in 2022",
+      "source": "Google Places API and the domain's registration date over RDAP",
       "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-personal-injury",
   "faq": [],
-  "_review": {
-    "name_source": "Google Business Profile display name",
-    "phone_source": "Google Business Profile",
-    "about_material": {
-      "claims": {
-        "free_consultation": {
-          "quote": "ersonal Injury Accident Attorneys Queens, Forest Hills, Corona Skip to content CALL FOR A FREE CONSULTATION (718) 532-4400 Home Practice Areas Motor Vehicle Accidents Personal injury Construction A",
-          "source_url": "https://krupniklawgroup.com/"
-        }
-      },
-      "json_ld_descriptions": [],
-      "pages": {
-        "home": "https://krupniklawgroup.com/",
-        "attorneys": "https://krupniklawgroup.com/meet-our-team/",
-        "contact": "https://krupniklawgroup.com/contact-us/"
-      }
-    },
-    "attorney_page_urls": [
-      "https://krupniklawgroup.com/meet-our-team/"
-    ],
-    "blocking": [
-      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
-      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
-      "fee_statement omitted"
-    ]
-  },
-  "entity": {
-    "legal_name": "KRUPNIK LAW GROUP, P.C.",
-    "entity_type": "DOMESTIC PROFESSIONAL SERVICE CORPORATION",
-    "dos_id": "5586026",
-    "formed": "2019-07-12",
-    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-22"
-  },
-  "logo": {
-    "file": "/logos/krupniklawgroup.com.png",
-    "source_url": "https://krupniklawgroup.com/favicon.ico",
-    "width": 80,
-    "height": 80,
-    "bytes": 4119,
-    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
-    "fetched_at": "2026-09-16"
-  },
   "operating": {
-    "registered": "2019-09-30",
-    "years": 7.0,
+    "registered": "2022-04-12",
+    "years": 4.4,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
-    "checked_at": "2026-09-16"
-  },
-  "accountability": {
-    "malpractice_insurance": false,
-    "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
-    "pages_read": 2,
-    "bios_published": 0,
-    "source": "observed",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-22"
   },
   "results_published": {
     "readable": true,
@@ -217,12 +149,12 @@
     "disclaimer": false,
     "venues": [],
     "why": "the site publishes no case-results page",
-    "checked_at": "2026-09-16"
+    "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 29,
+    "total": 35,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
@@ -250,9 +182,9 @@
             "code": "A5",
             "label": "Accountability",
             "pts": 0,
-            "max": 3,
-            "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "max": 6,
+            "source": "pending",
+            "evidence": "Nothing published about insurance or bar memberships"
           }
         ]
       },
@@ -287,7 +219,7 @@
         ]
       },
       "C": {
-        "score": 20,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -296,15 +228,15 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "460 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "343 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 460 reviews → Bayesian 4.97 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 343 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -312,7 +244,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-10) · a sample of five per business listing, not every review"
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-06-16) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -325,24 +257,24 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 3,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
+            "pts": 1,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · no fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
           },
           {
             "code": "D2",
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "ahrefs",
-            "evidence": "DR 0 → 1th pct of 76-firm cohort (median 28) 0/3 · 374 referring domains, 3th pct 0/2 · 2 organic keywords / 8 visits·mo, 2th pct 0/2 · brand demand 0/1 (pending)"
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
           },
           {
             "code": "D3",
@@ -357,30 +289,30 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 5,
-            "source": "ahrefs",
+            "source": "observed",
             "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
           }
         ]
       },
       "E": {
-        "score": 1,
+        "score": 2,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 1,
+            "pts": 0,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+            "evidence": "fee model not published · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 0.0,
+            "pts": 1.5,
             "max": 4,
             "source": "observed",
-            "evidence": "English"
+            "evidence": "English, Chinese"
           },
           {
             "code": "E4",
@@ -393,28 +325,30 @@
         ]
       }
     },
-    "floor_abc": 20,
+    "floor_abc": 19,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 41,
+      "gap": 35,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: +8 available"
+        "D2 Search authority: not yet measured (8 pts)"
       ]
     },
-    "raw": 23.0,
-    "assessed": 78,
-    "coverage": 0.78,
-    "floor_abc_pct": 0.526,
+    "raw": 23.5,
+    "assessed": 67,
+    "coverage": 0.67,
+    "floor_abc_pct": 0.543,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G3"
+    ],
     "assessable": 100,
     "comparable": true
   }
