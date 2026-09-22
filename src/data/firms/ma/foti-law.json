@@ -247,15 +247,20 @@
     "checked_at": "2026-09-21"
   },
   "results_published": {
-    "readable": false,
-    "why": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
-    "url": "https://www.foti-law.com/results/",
-    "checked_at": "2026-09-15"
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "The page at /results/ renders an empty archive: a heading, and no entries under it.",
+    "source": "the firm's own results page, opened in a browser so its JavaScript ran, because our crawler reads served HTML and could not tell an empty page from a deferred one",
+    "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 50,
+    "total": 40,
     "tier": "Verified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
@@ -298,24 +303,24 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "the results page served 1512 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
           }
         ]
       },
@@ -430,19 +435,19 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 20,
-      "floor_met": true,
-      "coverage_met": false,
+      "gap": 30,
+      "floor_met": false,
+      "coverage_met": true,
       "path": [
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)",
-        "B3 Results disclosure: not yet measured (4 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 31.5,
-    "assessed": 63,
-    "coverage": 0.778,
-    "floor_abc_pct": 0.957,
+    "assessed": 78,
+    "coverage": 0.963,
+    "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1",
       "G3"

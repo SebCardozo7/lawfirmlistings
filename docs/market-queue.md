@@ -249,3 +249,23 @@ Poleon LLP, is in the published cohort.
   address, and its Google listings hold 5,859 reviews there and 571 in Orlando against 439 on
   Fifth Avenue. It is the obvious first entry for a Miami market and is not comparable against
   firms whose whole practice is in New York.
+
+## Results pages a crawler cannot read, checked in a browser on 2026-09-22
+
+`scripts/crawl_results.py` reads served HTML. Ten firms had a results page that came back with
+text on it and no figure, where the crawler correctly said it could not tell an empty page from
+one whose results arrive with JavaScript. Each was opened in a real browser. Five rendered nothing
+and are now recorded as a finding by `scripts/record_rendered_results.py`. These five are the
+other outcomes, and none of them is a finding about the firm. They are ours to fix.
+
+| Firm | What the browser showed | What we owe |
+| --- | --- | --- |
+| Godosky & Gentile | Nine verdicts and settlements with figures, $65M down to $7.75M, across two pages | The site returns 403 to our crawler and renders fine to a person. Nothing is recorded, because the figures would have to be typed by hand. Needs a crawler that renders, or a polite retry that this host accepts. |
+| Law Office of Evan W. Kohn | `bronxlawfirm.net/results` is a 404 | The URL we hold is wrong. Find the real one. |
+| Spada Law Group | `spadalawgroup.com/results/` is a 404, and the site's own nav carries a RESULTS link | Same: our URL is stale. |
+| Parker Scheer | `/case-results/` is an index of twenty per-practice results pages, with no figures on it | The crawl needs a second level here. The results exist one click down. |
+| Metro Injury Law | Nine headings reading "Criminal Tax Evasion", "Public Company Fraud", "Tax Consultancy", "Trade and Markets" and "Marriage Agreements" | Unmodified template content on a firm that calls itself Metro Injury Law. Counting these as case results would be worse than counting none, so pillar B stays pending. Worth a person's eye before this firm is ranked. |
+
+The five that rendered empty, for the record: Greenstein & Pittari, Malloy Law, Lipsitz Green
+Scime Cambria, Ugalde & Rzonca, Foti Law. Each publishes a page headed Results or Case Results
+carrying no case. That cost each of them the fifteen points of pillar B, which is the right price.
