@@ -1,0 +1,132 @@
+{
+  "state": "NY",
+  "state_name": "New York",
+  "measured_at": "2026-09-22",
+  "court_fees": {
+    "publisher": "New York State, Civil Practice Law and Rules",
+    "read_at": "2026-09-22",
+    "mandatory": [
+      {
+        "label": "Index number",
+        "amount": 210,
+        "section": "CPLR 8018(a)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8018",
+        "note": "$190 for the index number, plus $5 to the records management fund and $15 to the cultural education account. Buying the index number is what starts the case."
+      },
+      {
+        "label": "Request for Judicial Intervention",
+        "amount": 95,
+        "section": "CPLR 8020(a)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8020",
+        "note": "The filing that puts the case in front of a judge."
+      },
+      {
+        "label": "Note of issue",
+        "amount": 30,
+        "section": "CPLR 8020(a)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8020",
+        "note": "The additional amount for placing the cause on the calendar. The statute sets $125 for the two together."
+      }
+    ],
+    "mandatory_total": 335,
+    "conditional": [
+      {
+        "label": "Each motion or cross motion",
+        "amount": 45,
+        "section": "CPLR 8020(a)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8020",
+        "note": "Charged every time either side asks the judge to decide something."
+      },
+      {
+        "label": "Demand for a jury trial",
+        "amount": 65,
+        "section": "CPLR 8020(b)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8020",
+        "note": "Only the grounds for the divorce can go to a jury, and since New York added a no-fault ground in 2010 almost nothing does."
+      },
+      {
+        "label": "Filing a stipulation of settlement",
+        "amount": 35,
+        "section": "CPLR 8020(c)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8020",
+        "note": "The fee for agreeing, which is the cheapest line on the list."
+      },
+      {
+        "label": "Certified copy of the judgment",
+        "amount": 8,
+        "section": "CPLR 8020(d)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8020",
+        "note": "$8 in New York City, the Bronx, Kings, Queens, Richmond, Nassau, Suffolk, Westchester and Rockland; $4 in every other county. Most people need at least one, to change a name or a title or a beneficiary."
+      },
+      {
+        "label": "Certificate of exemplification",
+        "amount": 25,
+        "section": "CPLR 8020(d)",
+        "url": "https://www.nysenate.gov/legislation/laws/CVP/8020",
+        "note": "$25 in the same counties, $10 elsewhere. Needed to use the judgment out of state."
+      }
+    ],
+    "waiver": {
+      "section": "CPLR 1101",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/1101",
+      "title": "Motion to waive costs, fees, and expenses",
+      "note": "A party who swears out an affidavit of their income and assets showing they lack sufficient means may be relieved of the costs, fees and expenses entirely. A party represented by a legal aid society or a nonprofit legal services organisation gets the waiver without having to move for it."
+    },
+    "note": "Set by statute, so these are the only figures on the subject that are not an estimate. A county clerk may charge for copies and searches on top."
+  },
+  "survey": {
+    "who": "Martindale-Nolo Research",
+    "what": "divorce study of readers who had recently been through a divorce",
+    "url": "https://www.nolo.com/legal-encyclopedia/ctp/cost-of-divorce.html",
+    "year": 2019,
+    "scope": "United States",
+    "read_at": "2026-09-22",
+    "limits": [
+      "Respondents volunteered: they had given an email address while researching how to hire a divorce lawyer, so the sample is people who were shopping for one.",
+      "It is national. Nothing in it is specific to New York.",
+      "It reports what people remembered paying, not what any firm billed."
+    ],
+    "average_rate": 270,
+    "rate_spread": [
+      {
+        "label": "Paid $200 to $300 an hour",
+        "share": 69
+      },
+      {
+        "label": "Paid $400 an hour or more",
+        "share": 20
+      },
+      {
+        "label": "Paid around $100 an hour",
+        "share": 11
+      }
+    ],
+    "outcomes": [
+      {
+        "key": "uncontested",
+        "label": "Uncontested, with a lawyer",
+        "total": 4100,
+        "note": "Nothing in dispute by the time the lawyer was hired"
+      },
+      {
+        "key": "settled",
+        "label": "Disputed, then settled",
+        "total": 10600,
+        "note": "Issues in dispute at the start, all of them agreed before trial"
+      },
+      {
+        "key": "trial_one",
+        "label": "Trial on one issue",
+        "total": 20400,
+        "note": "One issue the parties could not agree, decided by a judge"
+      },
+      {
+        "key": "trial_many",
+        "label": "Trial on two or more issues",
+        "total": 23300,
+        "note": "More than one issue decided by a judge"
+      }
+    ]
+  },
+  "rates_from": "src/data/research/lawyer-hourly-rates.json, so the rate used to turn hours into money is the same one the hourly rate article publishes"
+}
