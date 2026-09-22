@@ -269,3 +269,48 @@ other outcomes, and none of them is a finding about the firm. They are ours to f
 The five that rendered empty, for the record: Greenstein & Pittari, Malloy Law, Lipsitz Green
 Scime Cambria, Ugalde & Rzonca, Foti Law. Each publishes a page headed Results or Case Results
 carrying no case. That cost each of them the fifteen points of pillar B, which is the right price.
+
+## Triage of the seventeen unread NYC injury firms, in a browser, 2026-09-22
+
+Each was opened as a person opens it. The question was narrow: is this firm unreadable to anybody,
+or only to us? Twelve of the seventeen are readable to a person, and the reasons we could not read
+them fall into four groups, three of which are ours.
+
+**Our practice check only reads English, and this is a market that does not only work in English.**
+Four of these firms publish the practice plainly, in Chinese or in Spanish, and our check looked
+for English headings and links and found none. This is the same failure that hid Krause & Glassmith
+for four days, and it is not an edge case in New York City: a large part of this market's injury
+practice is conducted in Chinese, Spanish and Russian, and a directory that cannot read those sites
+is not measuring the market it claims to rank.
+
+| Firm | Reviews | What the browser showed |
+| --- | --- | --- |
+| Abogados de accidentes Cantaso | 590 | Entire site in Spanish, with seventeen practice pages linked from the home page: accidente de auto, de construcción, de andamio, de peatón, en el trabajo. |
+| GW Law Group | 344 | Site in Chinese, and it also carries the line "GW Law Groups: Personal Injury, Car Accidents, Medical Malpractice Attorneys" in English. |
+| Caesar, Napoli & Spivak | 287 | Trades as 黎保利 and publishes in Chinese: 车祸 (car accident), 工伤 (work injury), 意外伤害 (personal injury). |
+| The Kasen Law Firm | 1,388 | Now The Kasen&Liu Law Firm, PLLC 凯森律师楼. Renders its practice headings with JavaScript, which is the second reason below. |
+
+**We hold the wrong domain for the largest firm in the market.** Ofshtein Law Firm is on
+`olf.law`; `olf.nyc` redirects there. Its home page is titled "Personal Injury Lawyer NYC |
+Ofshtein Law Firm". 2,652 reviews, the largest count in this market, missing from a ranking over a
+redirect nobody followed.
+
+**Three sites render their content with JavaScript and serve a crawler nothing.** Kasen Law,
+Linden Law and Kalra Law all render complete practice pages to a person. Kalra's is at
+`https://www.unionlawyer.com/personal-injury-attorney/`, on the www host.
+
+**Two more are readable and were recorded as unreadable.** Yuriy Prakhin links `/personal-injury`
+and leads with "$300M+ Recovered, No Fee Unless We Win". Charles DeStefano's home page reads "a
+boutique personal injury practice located in Staten Island".
+
+### The five that are not ours to fix
+
+| Firm | Reviews | Why |
+| --- | --- | --- |
+| KOLPLAW (Peter W. Kolp) | 605 | **Not a consumer firm.** It is trial counsel for other injury firms: "We support personal injury law firms, not compete with them." It does not belong in a ranking a client reads, at any score. |
+| Gregory Spektor & Associates | 945 | 403 to a browser as well as to us. We do not work around bot protection. |
+| Law Office of Seni Popat | 1,226 | Same. |
+| The New York Injury & Malpractice Law Firm | 1,113 | Same. |
+| Law Office of Helene Mark | 300 | Same. |
+| NY Injury Lawyers PLLC | 325 | The domain redirects to a parking lander. There is no site. |
+| Mikhail Yadgarov & Associates | 1,611 | Its own home page links `/personal-injury-attorney/`, which 404s in a browser too. Their site is broken, not ours. Worth one more look for the real URL before writing it off. |
