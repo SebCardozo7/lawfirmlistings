@@ -71,7 +71,7 @@ practices that names it. Where the reason is ours, it says so.
 | NY Injury Lawyers PLLC | nyinjurypllc.com | 325 | The site renders in the browser and serves an empty document to a crawler, so there is nothing to read. |
 | Kalra Law Firm | unionlawyer.com | 289 | Nothing to read: no sitemap answers and its home page serves us no links. Re-checked 2026-09-18. |
 | Caesar, Napoli & Spivak | libaolilaw.com | 287 | Its practice-areas page names no practice in any heading or link we can read, so what it lists is unreadable rather than missing this practice. Re-checked 2026-09-18. |
-| Krause & Glassmith, LLP | krauseandglassmith.com | 198 | **Ready to publish.** It was queued on cn.krauseandglassmith.com, its Chinese-language subdomain, and its apex domain publishes /new-york-car-accident-lawyer/. The reason it was not published is that we asked the wrong host. Found 2026-09-18. |
+| Krause & Glassmith, LLP | krauseandglassmith.com | 198 | **Published 2026-09-22**, Verified at 53 with all five gates passed. Its D2 stays pending until this market's next Ahrefs run, because that is applied per market from a CSV rather than per firm. Was queued on cn.krauseandglassmith.com, its Chinese-language subdomain, and its apex domain publishes /new-york-car-accident-lawyer/. The reason it was not published is that we asked the wrong host. |
 | Linden Law | linden.law | 187 | Nothing to read: no sitemap answers and its home page serves us no links. Re-checked 2026-09-18. |
 | Law Office of Charles C. DeStefano | charlesdestefanolaw.com | 161 | No readable practice page. |
 
