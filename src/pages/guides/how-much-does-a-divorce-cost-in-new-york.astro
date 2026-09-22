@@ -1,0 +1,270 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import divorce from '../../data/research/divorce-cost-ny.json';
+import rates from '../../data/research/lawyer-hourly-rates.json';
+
+/**
+ * The fifth reference article, and the one where the sources differ most in quality.
+ *
+ * Everything ranking on this search publishes a single average with nothing behind it. The honest
+ * structure is that the question has two halves and only one of them has an answer: the court's
+ * fees are set by statute and can be quoted to the dollar, and everything above them is hours at
+ * a rate. So the page leads with the statute, because it is checkable, and treats the survey as
+ * one input to a stated model rather than as the answer.
+ *
+ * The model is the piece worth being careful about. It takes a national survey's total cost,
+ * removes New York's court fees, divides by the rate that survey's own respondents reported, and
+ * re-prices the resulting hours at a New York family law rate derived from the rate tables. Every
+ * step is printed on the page beside the result and the assumption is named, because a number a
+ * reader cannot rebuild is the thing this article is complaining about.
+ *
+ * Rates are read from the same file the hourly rate article uses, so the two cannot disagree.
+ * Nothing here is typed as a literal: every figure is read from a research file or computed here.
+ */
+const fees = divorce.court_fees;
+const survey = divorce.survey;
+const usd = (v: number) => '$' + Math.round(v).toLocaleString('en-US');
+const n = (v: number) => v.toLocaleString('en-US');
+const fixed = fees.mandatory_total;
+
+// The rate. New York's lawyer rate runs above the national one, and family law runs below it, so
+// neither published figure is the right multiplier on its own. The page uses the national family
+// law rate scaled by New York's premium over the national lawyer rate, and says so where it uses
+// it, because a derived figure that hides its derivation is the problem rather than the fix.
+const ny = rates.states.find(s => s.code === 'NY')!;
+const familyNat = rates.practices.find(p => p.practice === 'Family')!.lawyer;
+const nyPremium = ny.lawyer / rates.national.lawyer;
+const nyFamilyRate = Math.round(familyNat * nyPremium);
+
+// Each survey outcome, converted into hours at the rate the survey's own respondents reported,
+// then re-priced in New York. The hours are the interesting column: they are the only thing in
+// the answer that a person can actually check against a bill.
+const model = survey.outcomes.map(o => {
+  const hours = (o.total - fixed) / survey.average_rate;
+  return { ...o, hours, nyTotal: fixed + hours * nyFamilyRate };
+});
+const uncontested = model.find(m => m.key === 'uncontested')!;
+const settled = model.find(m => m.key === 'settled')!;
+const trialOne = model.find(m => m.key === 'trial_one')!;
+const trialMany = model.find(m => m.key === 'trial_many')!;
+const settleGap = trialOne.nyTotal - settled.nyTotal;
+
+const motionFee = fees.conditional.find(c => /motion/i.test(c.label))!;
+const stipFee = fees.conditional.find(c => /stipulation/i.test(c.label))!;
+const copyFee = fees.conditional.find(c => /certified copy/i.test(c.label))!;
+
+const feeRows = fees.mandatory.map(f => ({
+  label: f.label,
+  value: f.amount,
+  display: usd(f.amount),
+  note: f.section,
+  emphasis: f.amount === Math.max(...fees.mandatory.map(x => x.amount)),
+}));
+
+const outcomeRows = model.map(m => ({
+  label: m.label,
+  value: m.nyTotal,
+  display: usd(m.nyTotal),
+  note: `${m.hours.toFixed(0)} hours of a lawyer's time, modelled at ${usd(nyFamilyRate)}`,
+  emphasis: m.key === 'settled',
+}));
+
+// Our own data, at the end and nowhere else. The directory cannot measure what a divorce costs,
+// and does not try. It can measure what the firms that do this work say about price before
+// somebody calls them, which is the one thing the research above cannot answer.
+const firms = await getCollection('firms', e => e.data.status !== 'sample');
+const familyFirms = firms.filter(e => e.data.practices.some(p => p.slug === 'family-law'));
+const nyFamily = familyFirms.filter(e => e.data.market.state === 'NY');
+const NOT_STATED = /^(not stated|unknown|n\/?a|pending)$/i;
+const FEE_FIGURE = /\$\s?[\d,]+|\b\d[\d,]*\s*(?:dollars|per hour|an hour|\/\s*h(?:r|our))\b/i;
+const familyModel = familyFirms.filter(e => e.data.fee_model && !NOT_STATED.test(e.data.fee_model.trim()));
+const familyFree = familyFirms.filter(e => e.data.free_consultation);
+const anyFigure = firms.filter(e => e.data.fee_statement && FEE_FIGURE.test(e.data.fee_statement));
+const familyFigure = anyFigure.filter(e => e.data.practices.some(p => p.slug === 'family-law'));
+// A price for the meeting is not a price for the case, and the difference is the whole point of
+// the section. The one firm in this directory that prints a figure prints a consultation fee, so
+// the two counts are kept apart rather than collapsed into a flattering one.
+const CONSULT_ONLY = /consult/i;
+const familyPriced = familyFigure.filter(e => !CONSULT_ONLY.test(e.data.fee_statement!));
+
+const read = new Date(divorce.measured_at).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+
+// Computed from the statute rather than typed. The figure in the title is the one number in the
+// answer that is not an estimate, which is the whole argument of the page.
+const title = `How Much Does a Divorce Cost in New York? ${usd(fixed)} Is the Only Fixed Price`;
+const description = `New York sets its divorce court fees by statute: ${usd(fixed)} to file. Everything above that is hours at a rate, so we turned the survey totals back into hours.`;
+---
+<Base title={title} description={description} nav="guides"
+  figuresFrom={`New York CPLR fee schedule and ${survey.who}, read ${read}`} image="/og/fees.png"
+  imageAlt="A price list with three lines priced to the dollar and every line under them left blank">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Cost of a divorce in New York</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Costs</span>
+    <h1>{title}</h1>
+    <p class="lede">Every page answering this question gives you one average and no way to check it. Here is the honest shape of the answer. New York's courts charge <b>{usd(fixed)}</b> to take a divorce from filing to judgment, set by statute, the same in every county, and you can read the sections that set it. Everything above that number is a lawyer's hours, nobody publishes how many, and that is the entire rest of the bill. So this page does the one useful thing available: it takes the totals people actually reported paying and turns them back into <b>hours</b>, which is the only unit you can hold a bill against.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Published research, no legal advice</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>8 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="divorce" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#fixed" class="is-active">The {usd(fixed)} the statute sets</a></li>
+      <li><a href="#hours">The rest of it is hours</a></li>
+      <li><a href="#model">The totals, converted into hours</a></li>
+      <li><a href="#fighting">The fees that appear when you fight</a></li>
+      <li><a href="#zero">Two ways the fees drop to nothing</a></li>
+      <li><a href="#firms">What the firms themselves publish</a></li>
+      <li><a href="#method">Where these figures come from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Court fees from ${fees.publisher}. Cost outcomes from ${survey.who}, ${survey.year}, ${survey.scope}. Rates from ${rates.source.who}. Read ${read}.`}
+      items={[
+        `Filing a divorce in New York costs <b>${usd(fixed)}</b> in court fees: ${fees.mandatory.map(f => `${usd(f.amount)} ${f.label.toLowerCase()}`).join(', ')}. Set by statute, identical in every county.`,
+        `The survey's typical contested case that settled came to <b>${usd(settled.total)}</b> nationally. That is about <b>${settled.hours.toFixed(0)} hours</b> of a lawyer's time, which at a New York rate is roughly <b>${usd(settled.nyTotal)}</b>.`,
+        `Going to trial on one issue rather than settling it costs about <b>${usd(settleGap)}</b> more in New York money, and roughly <b>${(trialOne.hours - settled.hours).toFixed(0)} extra hours</b>.`,
+        `Of the ${familyFirms.length} family law firms in this directory, <b>${familyPriced.length === 0 ? 'none' : familyPriced.length}</b> publishes a price for the divorce itself${familyFigure.length > familyPriced.length ? `. ${familyFigure.length === familyPriced.length + 1 ? 'One' : familyFigure.length - familyPriced.length} prints a dollar figure at all, and it is the price of the first meeting` : ''}.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> The court fees are quoted from the statute and are exact. Everything else on this page is modelled from a national survey and a published rate table, the arithmetic is printed beside every figure, and none of it is a quote from any firm or a prediction about any case. This is not legal advice and it is not a fee estimate.</div>
+
+    <h2 id="fixed">{usd(fixed)} is the part with an exact answer</h2>
+    <p>New York does not estimate its court fees. It legislates them, in the Civil Practice Law and Rules, and the amounts are the same whether you file in Manhattan or in Chautauqua County.</p>
+    <BarChart
+      heading="Court fees a divorce cannot avoid"
+      rows={feeRows}
+      caption={`The section under each label is the one that fixes the amount. ${fees.note}`}
+    />
+    <ul>
+      {fees.mandatory.map(f => (
+        <li><b>{usd(f.amount)}, {f.label.toLowerCase()}</b> (<a href={f.url} rel="noopener" target="_blank">{f.section}</a>). {f.note}</li>
+      ))}
+    </ul>
+    <p>That is <b>{usd(fixed)}</b>, and it is the number to hold on to, because it is the only figure in the answer to this question that somebody can be wrong about in a checkable way.</p>
+    <p>One more you will probably pay: <b>{usd(copyFee.amount)}</b> for a certified copy of the judgment. {copyFee.note}</p>
+
+    <h2 id="hours">Everything above {usd(fixed)} is hours</h2>
+    <p>There is no second price list. A divorce lawyer's bill is time multiplied by a rate, and of the two numbers only the rate is ever published.</p>
+    <p>{rates.source.who} puts the average US rate for family law work at <b>{usd(familyNat)} an hour</b> and the average New York lawyer at <b>{usd(ny.lawyer)}</b> against a national {usd(rates.national.lawyer)}. New York therefore runs about <b>{Math.round((nyPremium - 1) * 100)}% above the national rate</b>, and applying that to the family law figure gives roughly <b>{usd(nyFamilyRate)} an hour</b> for this work in New York. That is a derived number, not a measured one, and it is used below purely as a multiplier so the arithmetic stays visible.</p>
+    <p>The survey's own respondents reported paying <b>{usd(survey.average_rate)}</b> on average, nationally, and the spread underneath that average is the more useful fact.</p>
+    <BarChart
+      heading="What people reported paying their divorce lawyer, per hour"
+      rows={survey.rate_spread.map(r => ({
+        label: r.label, value: r.share, display: r.share + '%',
+        emphasis: r.share === Math.max(...survey.rate_spread.map(x => x.share)),
+      }))}
+      caption={`${survey.who}, ${survey.year}. Shares of respondents who hired a lawyer, nationally.`}
+    />
+    <p><b>{survey.rate_spread[1].share}%</b> of them were in the top band. That band, rather than the {usd(survey.average_rate)} average, is where a New York quote is going to sit, because New York is one of the states pulling that average up in the first place.</p>
+
+    <h2 id="model">The reported totals, turned back into hours</h2>
+    <p>Here is the part every competing page leaves out. A total cost is useless to somebody holding an invoice. Hours are not.</p>
+    <p>So: take each total the survey reports, subtract New York's {usd(fixed)} in court fees, and divide by the {usd(survey.average_rate)} its own respondents said they paid. What comes out is the number of lawyer hours that total represents. Then re-price those hours at {usd(nyFamilyRate)}.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>How the case went</th><th class="num">Reported total</th><th class="num">Implied hours</th><th class="num">At a New York rate</th></tr></thead>
+        <tbody>
+          {model.map(m => (
+            <tr>
+              <td>{m.label}<br /><span class="sub">{m.note}</span></td>
+              <td class="num">{usd(m.total)}</td>
+              <td class="num">{m.hours.toFixed(0)}</td>
+              <td class="num">{usd(m.nyTotal)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Reported totals are {survey.who}'s, {survey.year}, national. Implied hours and the New York column are ours, computed as described above. They are a model, not a measurement, and no case is obliged to resemble them.</p>
+    <BarChart
+      heading="The same four outcomes, modelled in New York money"
+      rows={outcomeRows}
+      caption="Highlighted is the case most people actually have: things in dispute at the start, all of them agreed before a judge decided anything."
+    />
+    <p>Three things fall out of that table.</p>
+    <p><b>An uncontested divorce with a lawyer is about {uncontested.hours.toFixed(0)} hours of work.</b> Not a week of work. Two days. If a quote for an uncontested divorce is a large multiple of {usd(uncontested.nyTotal)}, the useful question is which hours are being added and why.</p>
+    <p><b>Disagreeing is the expensive decision, and going to trial is a second expensive decision on top of it.</b> Settling after a dispute runs about {settled.hours.toFixed(0)} hours. Taking one issue to trial runs about {trialOne.hours.toFixed(0)}. That single difference, roughly <b>{usd(settleGap)}</b> in New York money, is what one unresolved issue costs.</p>
+    <p><b>The second contested issue is nearly free by comparison.</b> Going from one tried issue to two or more adds about {(trialMany.hours - trialOne.hours).toFixed(0)} hours, against the {(trialOne.hours - settled.hours).toFixed(0)} the first one added. Most of the cost of a trial is the trial existing at all.</p>
+
+    <h2 id="fighting">The court's price list also charges you for fighting</h2>
+    <p>The {usd(fixed)} covers a case that behaves. The statute has a second set of fees that appear only when somebody asks a judge to decide something.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>What triggers it</th><th class="num">Fee</th><th>Section</th></tr></thead>
+        <tbody>
+          {fees.conditional.map(c => (
+            <tr>
+              <td>{c.label}<br /><span class="sub">{c.note}</span></td>
+              <td class="num">{usd(c.amount)}</td>
+              <td><a href={c.url} rel="noopener" target="_blank">{c.section}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Amounts set by statute. Where a fee has two figures, the higher one applies in New York City and the surrounding counties the section names, and the column shows the higher.</p>
+    <p>Notice the shape of it. Filing a stipulation of settlement costs <b>{usd(stipFee.amount)}</b>. Each motion costs <b>{usd(motionFee.amount)}</b>. The court charges you slightly less for agreeing than for arguing.</p>
+    <p>The court's version of that incentive is trivial. Your lawyer's version is not: a motion is a few hours of drafting, a reply, an appearance and the wait. At {usd(nyFamilyRate)} an hour, the {usd(motionFee.amount)} filing fee is the smallest part of what a motion costs by a factor of tens.</p>
+
+    <h2 id="zero">Two ways the fees drop to nothing</h2>
+    <p><b>You can ask to have them waived.</b> The section that does it is <a href={fees.waiver.url} rel="noopener" target="_blank">{fees.waiver.section}</a>, {fees.waiver.title.toLowerCase()}. {fees.waiver.note}</p>
+    <p><b>And an uncontested divorce does not require a lawyer.</b> The New York courts publish a free, guided program that produces the uncontested divorce papers by asking questions, and the court fees are the only cost. That is the {usd(fixed)} floor being a real floor rather than a rhetorical one.</p>
+    <p>Neither of those is advice about your own case, and an uncontested divorce that involves property, a pension or children is uncontested only until somebody reads the paperwork. But a page about the cost of a divorce that does not mention that the fees can be waived is not describing the cost of a divorce.</p>
+
+    <h2 id="firms">What divorce firms themselves publish about price</h2>
+    <p>Everything above is somebody else's research. This last part is ours, and it answers the question the research cannot: before you call anybody, what can you find out?</p>
+    <p>This directory holds <b>{familyFirms.length}</b> firms that do family law work{nyFamily.length < familyFirms.length
+      ? <>, {nyFamily.length} of them in New York</>
+      : <>, all of them in New York</>}, and every page each one publishes about itself has been read.</p>
+    <ul>
+      <li><b>{familyFree.length} of {familyFirms.length}</b> offer a free consultation.</li>
+      <li><b>{familyModel.length} of {familyFirms.length}</b> say anywhere on the site how they charge, meaning hourly, flat fee or retainer.</li>
+      <li><b>{familyFigure.length === 0 ? 'None' : `${familyFigure.length} of ${familyFirms.length}`}</b> {familyFigure.length === 1 ? 'prints' : 'print'} any dollar figure at all in the context of fees.</li>
+      <li><b>{familyPriced.length === 0 ? 'None' : familyPriced.length}</b> publishes a price for the divorce itself.</li>
+    </ul>
+    {anyFigure.length > 0 && (
+      <p>That last pair of lines is the finding. Across all <b>{n(firms.length)}</b> firms in this directory, in every practice area and every state, {anyFigure.length === 1 ? 'exactly one' : `${anyFigure.length}`} prints a dollar figure anywhere near the subject of fees. It is a family law firm, and what it prints is the price of the first meeting rather than the price of the case.</p>
+    )}
+    <p>That is the state of the market, and it is why an article like this one has to be built out of a statute and a survey. The firms that know the answer to "how much does a divorce cost" have collectively decided not to publish it, so a person shopping is left with a court fee schedule and somebody else's average.</p>
+    <p>Which makes the first phone call the whole of your price research, so it is worth going in with the right questions: what is the hourly rate and whose, what is the retainer and what happens when it runs out, how are paralegal hours billed, and what does it cost to bring one motion. <a href="/guides/what-new-york-injury-firms-publish-about-fees/">We have written the injury version of that list</a>, and <a href="/practice-areas/family-law/">the family law firms in this directory</a> are scored partly on whether they answer any of it in public.</p>
+
+    <h2 id="method">Where these figures come from</h2>
+    <p><b>The court fees are quoted from the statute.</b> Each one links to the section that sets it, on the New York State Senate's own publication of the law. They are exact and they are not our figures.</p>
+    <p><b>The cost outcomes are a survey, and a limited one.</b> {survey.who} ran it in {survey.year}, {survey.scope}. Its limits, which matter more than the numbers:</p>
+    <ul>{survey.limits.map(l => <li>{l}</li>)}</ul>
+    <p>We use it anyway, because the alternative sources on this question are law firms estimating their own market. But we use it as hours rather than as dollars, and we show the conversion, so a reader who thinks the survey is wrong can put a different total in and get a different answer out.</p>
+    <p><b>The rates come from the same tables as <a href="/guides/average-lawyer-hourly-rate/">our article on lawyer hourly rates</a></b>, published by {rates.source.who} from its own customers' billing records. The {usd(nyFamilyRate)} used here is derived rather than published, as described above.</p>
+    <p><b>The counts of what firms publish are ours</b>, computed from the {n(firms.length)} firms in this directory each time this page is built. They describe what those firms put on their own websites. We hold no billing data and we have asked no firm what it charges.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  .prose p.note {
+    font-size: .86rem; color: var(--muted); line-height: 1.6;
+    margin: 0 0 24px; padding-left: 2px;
+  }
+  .prose .table-wrap + p.note { margin-top: -12px; }
+  .prose .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  /* The second line in a table cell, carrying what the row is about rather than what it costs. */
+  .prose .sub { font-size: .82rem; color: var(--muted); }
+  .prose .table-wrap { margin: 22px 0; }
+</style>

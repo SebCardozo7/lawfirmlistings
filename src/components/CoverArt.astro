@@ -19,7 +19,8 @@
 interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
-      | 'shield' | 'register' | 'headcount' | 'offices' | 'screens';
+      | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
+      | 'divorce';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -415,5 +416,72 @@ const ledger = {
         })}
       </g>
     ))}
+  </svg>
+)}
+
+{name === 'rates' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* One working day, four times over, losing hours at every step. The top row is the eight
+        hours a lawyer works; each row below keeps only what survives the next stage, and the
+        hours that fall out stay on the page as dashed outlines rather than disappearing. The
+        bottom row is what the client pays for, and it is mint because it is the only row that
+        is money. The last block in a row is drawn part width when the hour is a fraction. */}
+    {[{ keep: 8, tint: 'rgba(255,255,255,.75)' }, { keep: 3, tint: VIOLET },
+      { keep: 2.6, tint: BLUE }, { keep: 2.4, tint: MINT }].map((band, bi) => (
+      <g transform={`translate(110,${34 + bi * 100})`}>
+        {[0, 1, 2, 3, 4, 5, 6, 7].map(i => {
+          const left = band.keep - i;
+          const part = left >= 1 ? 1 : left > 0 ? left : 0;
+          return (
+            <g transform={`translate(${i * 130},0)`}>
+              <rect width="118" height="62" rx="10" fill="none"
+                stroke="rgba(255,255,255,.20)" stroke-width="2"
+                stroke-dasharray={part === 0 ? '8 8' : undefined} />
+              {part > 0 && (
+                <rect width={118 * part} height="62" rx="10" fill={band.tint}
+                  opacity={bi === 3 ? '.95' : bi === 0 ? '.5' : '.8'} />
+              )}
+            </g>
+          );
+        })}
+        {/* The rule under each row, as long as the part that survives. */}
+        <line x1="0" y1="76" x2={Math.max(8, 130 * band.keep - 12)} y2="76" stroke={band.tint}
+          stroke-width="4" stroke-linecap="round" opacity=".9" />
+      </g>
+    ))}
+  </svg>
+)}
+
+{name === 'divorce' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* A price list with three lines priced and the rest of it blank. The top three rows carry a
+        label and a real amount, because the court's fees are set by statute and can be quoted to
+        the dollar. Every row under them has a label and a dashed box where the amount should be:
+        those are the hours, which nobody publishes. The total at the bottom is dashed too. */}
+    <g transform="translate(300,44)">
+      <rect width="600" height="356" rx="20" fill="rgba(255,255,255,.06)"
+        stroke="rgba(255,255,255,.18)" stroke-width="1.5" />
+      {[0, 1, 2, 3, 4, 5, 6].map(i => {
+        const known = i < 3;
+        return (
+          <g transform={`translate(38,${40 + i * 38})`}>
+            {/* The label, always there: everybody can name the things you pay for. */}
+            <rect width={i % 2 ? 214 : 262} height="11" rx="5.5"
+              fill={known ? 'rgba(255,255,255,.55)' : 'rgba(255,255,255,.20)'} />
+            {/* The amount, only where there is one. */}
+            {known
+              ? <rect x="400" width={i === 0 ? 124 : 92} height="11" rx="5.5" fill={MINT}
+                  opacity=".9" />
+              : <rect x="400" y="-5" width="124" height="21" rx="6" fill="none"
+                  stroke={VIOLET} stroke-width="2" stroke-dasharray="7 6" opacity=".7" />}
+          </g>
+        );
+      })}
+      <line x1="38" y1="308" x2="562" y2="308" stroke="rgba(255,255,255,.28)" stroke-width="2" />
+      {/* The total, which is the one line the whole search is asking for, and it is empty. */}
+      <rect x="38" y="322" width="150" height="13" rx="6.5" fill="rgba(255,255,255,.45)" />
+      <rect x="400" y="314" width="162" height="28" rx="8" fill="none" stroke={BLUE}
+        stroke-width="2.5" stroke-dasharray="9 7" />
+    </g>
   </svg>
 )}
