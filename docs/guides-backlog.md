@@ -108,23 +108,29 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
 
 ## Generated pages, so a topic is not aimed at one of them
 
-As of 2026-09-21 the build produces **341 pages, from 296 published firms in 9 markets and 7
-states**, and there are now 8 published guides plus the gated ranking. Re-enumerated against the
-build on this run rather than inherited. No new market opened since 2026-09-18; the growth is
-firms inside the markets that already existed, plus this run's guide.
+As of 2026-09-23 the build produces **351 pages, from 300 published firms in 9 markets and 7
+states**, and there are now 9 published guides plus the gated ranking. Re-enumerated against the
+build on this run rather than inherited. No new market opened; the growth is four more firms
+inside markets that already existed, plus this run's guide. Buffalo now carries enough family law
+firms to have generated its own ranking, so the city-by-practice count went from twelve to
+thirteen without anybody opening a market.
 
 - `/`, `/cities/`, `/practice-areas/`, `/guides/`
 - Nine city hubs: `baltimore-md`, `boston-ma`, `buffalo-ny`, `dallas-tx`, `lakeland-fl`,
   `naples-fl`, `new-york-ny`, `northwest-indiana`, `portland-or`
-- Twelve city x practice rankings: `personal-injury` in all of the above except `naples-fl`,
+- Thirteen city x practice rankings: `personal-injury` in all of the above except `naples-fl`,
   `workers-compensation` in `baltimore-md` and `new-york-ny`, `real-estate` in `naples-fl`,
-  `family-law` in `new-york-ny`
+  `family-law` in `new-york-ny` and `buffalo-ny`
 - Four practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/real-estate/`,
   `/practice-areas/workers-compensation/`, `/practice-areas/family-law/`
-- 296 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
+- 300 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
   `/contact/`, `/privacy/`, `/terms/`)
 
-Firm counts by state, for scoping a study: NY 150, FL 34, MD 31, MA 28, OR 20, TX 20, IN 13.
+Firm counts by state, for scoping a study: NY 154, FL 34, MD 31, MA 28, OR 20, TX 20, IN 13.
+
+**No generated page is faceted by language**, which is what made this run's topic available. If a
+language facet is ever added to the city or practice routes, the guide published on 2026-09-23
+becomes a page competing with our own and should be re-pointed rather than left alone.
 
 Every city and practice combination in that list is off limits as a guide topic.
 
@@ -132,6 +138,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-09-23 | `/guides/what-law-firms-publish-in-spanish/` | "spanish speaking lawyer" (100/mo, **KD 0**, parent `spanish speaking lawyers near me`), and the People Also Ask question sitting on that SERP, "What percent of lawyers speak Spanish?", which nobody on the page answers | Not from the ranked list: found by reading the `languages` field while surveying what else the collection could carry a study on. **131 of 295** readable firms publish something in Spanish. Two things move it and each survives holding the other still: the market (Dallas 16 of 20, Buffalo 1 of 47) and the practice (personal injury 115 of 217, family law 4 of 42). Inside New York City alone it is 58 of 77 injury firms against 4 of 18 family law firms; holding the practice still instead, injury runs 58 of 77 in New York City against 1 of 23 in Buffalo. **The market moves it further than the practice does**, which the first draft had backwards and only the charts caught. The self-critical half: Spanish is the only language the pipeline detects, so the 4 records carrying Chinese or Russian measure our reading, and E3's accessibility point is earned by 1 firm in 300. |
 | 2026-09-21 | `/guides/what-a-business-register-proves-about-a-law-firm/` | "how to check if a law firm is registered" (10/mo US, 20 global), and the business-entity verification cluster around it. Deliberately **not** "how to check if a law firm is legit" (30/mo, KD 3), which the 2026-09-16 guide already holds | Backlog item 1, and it was larger and sharper than the entry predicted. `gates.G3.pass` is true on **140 of 296**, and the four non-pass reasons are genuinely different facts: 72 in states publishing nothing queryable (IN, MA, MD), 34 in Florida whose register is published and **we have not read it**, 33 New York general partnerships the state does not require to file, 17 we could not identify in a register we did read. The second half is the new finding: for the **113** domestic New York firms holding both `entity.formed` and `operating.registered`, the two dates agree within a year on only 37, sit more than a decade apart on 25, and the error is **symmetric** (39 older in the register, 37 older on the web), so it is noise rather than a correctable bias. |
 | 2026-09-18 | `/guides/what-law-firms-publish-about-malpractice-insurance/` | "do lawyers have malpractice insurance" (40/mo, KD 2), "can i sue my lawyer for malpractice" (70, KD 0), and the client-side phrasings that return no data at all | Backlog item 1, and it held up: `accountability.malpractice_insurance` is `true` on **0 of 267** firms across 2,313 pages, while `bar_associations` is non-empty on 113. The finding that makes the piece is **Oregon**: the one state here where the cover is mandatory, and 0 of its 20 firms mention it, which proves silence measures publishing habits rather than cover. Also published against ourselves: the association half is partly a measure of our own pattern list, 84 of 155 in the two states it carries a local association for against 29 of 112 elsewhere. |
 | 2026-09-16 | `/guides/what-it-takes-to-check-a-law-firm/` | "how to check if a law firm is legit" (30/mo, KD 3), "how to check if a law firm is registered", "how to check a lawyer credentials", "how to check if a lawyer is legitimate" | Backlog item 3, and much larger than the old entry predicted: 56 of 217 firms name no attorney we could read, not 6. Pillar A's method piece and the study behind gates G1 and G2. Two findings worth remembering: only New York, of the seven states, publishes an attorney register we may query, so G1 passes on 51 firms and never outside it, while published discipline is searchable in six states through CourtListener. **The check people assume is buried is the more open one.** Also: the no-roster firms are indistinguishable from the rest on Google rating, 53 of 56 at 4.5 or better against 196 of 217. |
@@ -143,6 +150,14 @@ Every city and practice combination in that list is off limits as a guide topic.
 | gated | `/guides/best-personal-injury-law-firms-nyc/` | ranking | Publishes at 8 certified firms in New York. Currently 3. |
 
 ## Next, ranked
+
+Nothing on this list was taken on 2026-09-23. The guide published that day came out of reading
+fields rather than the list, and that is worth a rule: **before picking from this list, spend ten
+minutes counting fill rates across the whole schema.** `languages` had been sitting in
+`content.config.ts` since the beginning, it is read by the scoring engine, and no entry here had
+ever mentioned it. The survey that found it took one script and covered `offices`, `availability`,
+`attorneys[].admitted_year`, `digital.places.completeness`, `reviews.sample` and `entity_type` at
+the same time. Three of those are live topics now and are on the list below.
 
 Item 1 was taken on 2026-09-21 and is written. Two things in the old entry were wrong, and both are
 corrected here rather than silently dropped.
@@ -193,6 +208,27 @@ The entries below were re-checked against the collection on 2026-09-21.
    on the firm record. Storing them would take the date comparison from 113 firms to roughly 136
    and let the piece speak about three states instead of one. Data job first, then a refresh of
    the guide rather than a new one.
+7. **How long the lawyers have been admitted.** `attorneys[].admitted_year` is filled on **790 of
+   2,189** attorney records, every one of them in New York, because it comes from the state
+   register that only New York lets us query. The spread is 1962 to 2026 with a median admission
+   year of 2008, and the decade counts are 2, 37, 88, 144, 159, 229, 131 from the 1960s forward.
+   That is a real distribution nobody else holds, against a SERP ("how many years experience
+   should a lawyer have") that is entirely generic advice. The reason it is not ranked higher: it
+   can only speak about one state, and `registry_status` sitting beside it carries values about
+   named individuals, so the piece has to be written in aggregate throughout. Check the keyword
+   before committing a run to it.
+8. **What a firm leaves blank on its Google Business Profile.** `digital.places.completeness` is
+   present on 298 of 300 records. Do not write it on the numbers as they stand: `has_description`
+   is `false` on all 298 and `photos` has a median of exactly 10, which are the shapes of an API
+   cap and an unreturned field rather than of a firm's behaviour. Establish what the Places API
+   actually returns for each of those before building a sentence on either. The `unobtainable`
+   list on each record is the honest part and is the piece's real subject.
+9. **What the review sample says that the review count does not.** `reviews.sample` holds **2,895
+   dated reviews with ratings** across 298 firms, five per business listing, and the Places API
+   returns its own choice of five rather than a random five. So the sample mean and the published
+   weighted rating are two different numbers about the same firm, and the gap between them is
+   measurable. That is an original measurement about how a star rating is assembled, which is a
+   different piece from the 2026 review study and should be framed as one.
 
 **Dead, so they are not proposed again:**
 
@@ -206,6 +242,58 @@ The entries below were re-checked against the collection on 2026-09-21.
   absent on all 296 records. Re-checked 2026-09-21. This is why the registers guide compares the
   register against the domain rather than against anything a firm asserts.
 - *Is this firm even a company?* Written 2026-09-21.
+- *Which firms speak Spanish.* Written 2026-09-23. Do not re-propose the Spanish count: it is a
+  published page that recomputes itself. The unwritten part next door is what happens if the
+  crawler ever learns a second language pattern, which would be a data job first.
+- *Whether a law firm's office is real, from `offices[].by_appointment`.* Dead on the data:
+  the flag is true on exactly **1 firm of 300**, so there is nothing to count. Checked 2026-09-23.
+- *What a firm's entity type says about it.* Dead on the data: `entity_type` is absent on 299 of
+  300 records. Checked 2026-09-23.
+
+## Keyword research, 2026-09-23
+
+`subscription-info-limits-and-usage` is free and was the first call again: **98,404 of 800,000
+used**, reset on 19 October, so roughly 700,000 units were available. Two paid calls, 510 units in
+total, well inside the six-call rule. Keep starting with the free call.
+
+What they returned:
+
+- **The target is "spanish speaking lawyer": 100/mo US, 150 global, difficulty 0**, parent topic
+  `spanish speaking lawyers near me`, traffic potential 200, intents informational, commercial and
+  **local**, with a local pack on the SERP. A local pack and a "near me" parent are the warning
+  signs this file keeps recording, and they are why the guide is written as a study across the
+  whole directory and not as a list. A list would have been a ranking aimed at a query our own
+  city pages would rather own.
+- Around it: "bilingual lawyer" (80/mo, KD 0, parent `bilingual law firm`, local pack) and
+  "spanish speaking divorce lawyer" (80/mo, CPC $3.00). Both local, both small, both the same
+  shape.
+- **"abogado de accidentes" is 3,600/mo at KD 0 with a CPC of $55.00.** That is the largest
+  winnable-looking number this section has ever turned up and it is not ours: it is a transactional
+  local query asked in Spanish, the site publishes in English, and answering it properly means a
+  Spanish-language directory rather than a guide. Recorded so a future run does not rediscover it
+  and mistake it for an opportunity. If the owner ever wants a Spanish surface, that CPC is the
+  argument for it.
+- **Nothing at all returned for the question phrasings**: "how to find a spanish speaking lawyer",
+  "se habla espanol lawyer", "do lawyers speak spanish", "lawyer who speaks my language". Same
+  shape as the last four runs. The question people have has no measured volume and the query with
+  volume is a directory lookup.
+- **`serp-overview` on "spanish speaking lawyer" is the reason to write it, and it is the clearest
+  case this section has had.** Position one is a local pack of three firms. Every organic result is
+  a law firm's own page or an attorney bio: abogadascolorado.com at **DR 2**, rubenrodriguezlaw.com
+  at **DR 0**, meneses.law at DR 3, johnnichlaw.com at DR 10, hispaniclawyersnetwork.com at DR 21,
+  harrislawsite.com at DR 23. The highest DR on the page is **37**. Position two is the Hispanic
+  Bar Association of New Jersey's find-a-lawyer widget at DR 24.
+- **The People Also Ask block asks our question outright: "What percent of lawyers speak
+  Spanish?"** Nobody on that page answers it, and the answers that exist elsewhere are a single
+  ABA-attributed figure repeated across firm blog posts with no primary source anybody links. We
+  cannot answer it about lawyers either, and the guide says so: we measure firms and publishing,
+  not people and speaking. The other three PAA entries are "Is $400 an hour a lot for a lawyer?",
+  "What is a lawyer called in Spanish?" and "Do bilingual lawyers make more money?", the last of
+  which is supply side.
+- **No third-party figure was published in the guide.** The 5%-of-lawyers statistic is everywhere
+  on this SERP and nowhere with a citation that survives being followed, so it was left out
+  entirely rather than attributed to "widely reported". Worth a note for the next run tempted by
+  it.
 
 ## Keyword research, 2026-09-21
 
@@ -397,7 +485,44 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: superlawyers.com.**
+**Next run: martindale.com.**
+
+### superlawyers.com, read 2026-09-23
+
+`www.superlawyers.com` is blocked by this environment's egress proxy, so this was read through
+search results, its own pages as they appear in them, and its published selection documentation.
+**Six of the eight competitors are now known to be unreachable from here** (nolo, findlaw, avvo,
+justia, lawyers, superlawyers). Assume the search-based read is the method and budget for it.
+
+Shapes Super Lawyers earns traffic with:
+
+1. **`/resources/<practice>/` and `/resources/<practice>/<state>/`**, state-keyed legal explainers
+   written by legal-content writers "in consultation with the top attorneys that make Super
+   Lawyers lists". Structurally identical to Nolo's and FindLaw's libraries with a byline device
+   on top. Do not chase it, for the reason this file has now recorded four times.
+2. **`/legal-issues/<practice>/articles/`**, feature journalism about the attorneys they selected,
+   carried over from the print magazine. The one shape here we genuinely cannot copy: it needs
+   interviews and a magazine, and we have neither. Worth knowing it exists, because it is how a
+   directory turns its own list into linkable content without measuring anything.
+3. **`attorneys.superlawyers.com/<practice>/<state>/<city>/`**, the faceted directory, ordered by
+   the badge. What our `/cities/<city>/<practice>/` pages compete with.
+4. **The selection process published as its own content asset**: "The Super Lawyers Selection
+   Process", the attorney FAQ, the nominations page. Third competitor in a row whose explanation
+   of its own rating is a ranking page in its own right. That is the shape `/methodology/` should
+   be and currently is not, which is why the guides keep doing that job instead.
+
+The thing to take, and it is sharper than the Avvo, Justia and Martindale notes it joins.
+**Super Lawyers is capped: their own documentation says the process selects "the top 5% of
+attorneys" each year.** So the list is a rank order, not a standard. No firm can earn its way in
+by meeting a published bar, because whether it gets in depends on how many other lawyers did
+worse. Ours is the opposite shape and we have never said so out loud: the LFL score is an
+absolute share of measured evidence, so every firm in the directory could in principle score 100,
+and the distribution we publish is a finding rather than a quota. Alongside that, the first phase
+is **peer nomination**, the fourth instance of this rotation's recurring pattern after Avvo's
+participation inputs, Justia's paid placements and Martindale's attorney-submitted references.
+Item 4 in the ranked list now has four cases and should be written.
+
+What we should not chase: the resources library, for the fourth time, and the magazine.
 
 ### lawyers.com, read 2026-09-21
 
@@ -587,6 +712,11 @@ chart's job lost the table:
 | Business registers | Bars: firms whose company we could confirm, by state | The bar is the share and the printed figure is the count, following the roster guide's lesson: the markets hold 13 to 150 firms. The note on each row carries the reason, because a zero means three different things here and one of them is our own unread register |
 | Business registers | Columns: how far apart the register's date and the domain's date sit | A distribution, with the bands at five years and above highlighted, which is where the proxy stops being usable. The shape is the argument: the tallest band is agreement and the tail past it is longer than anyone would guess |
 
+| Publishing in Spanish | Bars: firms publishing in Spanish, by market | The bar is the share and the printed figure is the count, following the roster and registers guides: the markets hold 11 to 106 firms. Each label links its city hub, because a market row on a chart is a page a reader may want |
+| Publishing in Spanish | Bars: the same measurement by primary practice | Magnitude across four practices out of one denominator. Two of the four round to the same percentage and sort on the exact value, so the ordering is right and the printed shares tie |
+| Publishing in Spanish | Bars: the same measurement inside one market | The control, as a third chart rather than as a sentence, so a reader can see that holding the city still does not flatten the practice gap |
+| Publishing in Spanish | Columns: E3 points earned | A distribution, with the zero band highlighted. The shape is the argument: two thirds of the mass at zero, one band carrying nearly all the rest, and two lonely firms above it on a four-point scale nobody reaches |
+
 Rules for the next one: pick the form from the data's job before touching colour, keep every
 figure computed, and look at the rendered chart at 390px before shipping it. The three components
 already handle the mobile reflow; a chart with more than about eight rows is a table.
@@ -732,11 +862,37 @@ rescores 217 firms, which is not a guide run's call:
   Only the flattering direction is named. If Oregon and Texas registration dates are ever stored
   (ranked item 6), this constraint should be revisited rather than inherited. Noted 2026-09-21.
 
-- **The 390px horizontal overflow is still there and is still site-wide.** Re-checked this run by
-  rendering the new guide and `/guides/core-web-vitals-new-york-injury-firms/` at 390 in headless
-  Chromium without device emulation: both clip identically at the right edge, so the new page
-  introduces nothing. Third run in a row this has been noted and left alone. It needs somebody with
-  a real phone, not another headless render. Noted 2026-09-21.
+- **The 390px horizontal overflow is still there and is still site-wide.** Re-checked again on
+  2026-09-23 by rendering the new guide and `/guides/core-web-vitals-new-york-injury-firms/` at 390
+  in headless Chromium without device emulation: both clip identically at the right edge, so the
+  new page introduces nothing. **Fourth run in a row this has been noted and left alone**, which is
+  now the thing worth saying rather than the clipping. It needs somebody with a real phone, not a
+  fifth headless render. If the next run confirms it the same way again, stop re-checking it and
+  either fix it or delete this note.
+
+- **`languages` is the only measurement on a firm record with no date on it.** Found on
+  2026-09-23 while writing the guide that rests on it. Every other family of measurements carries
+  a `measured_at` or `checked_at`; `crawl_public.py` finds the Spanish signal, `build_profiles.py`
+  writes the conclusion, and neither stores when. The published page says so out loud rather than
+  implying a freshness it cannot support, and `check_freshness.mjs` cannot cover a family with no
+  dates in it. Fixing it is a one-line change in the writer plus a schema field, and it is a
+  person's call because it touches 300 records.
+
+- **The pipeline detects exactly one language, and the scoring engine pays for any of them.**
+  E3 awards 1.5 points per language beyond English, `crawl_public.py` has a pattern for Spanish
+  and for nothing else, and the 4 records carrying Chinese or Russian were typed in by hand while
+  other problems were being fixed. So a firm publishing in Korean or Polish scores zero on a
+  sub-factor it should score on, which is the rule this repository states about its own crawl
+  being broken in the engine. Same class as the `bar_numbers_on_bios` finding and cheaper to fix:
+  the patterns are a short list, and `check_practice.py` already carries Chinese vocabulary taken
+  from real firm pages. Noted 2026-09-23.
+
+- **E3's accessibility point is earned by one firm in 300.** It asks for ADA-accessible offices or
+  virtual consultations and reads `availability`, which only ever holds five distinct values, one
+  of which is "Video consultations" and none of which is about ADA. So the point is measuring
+  whether a firm happens to have published one phrase. The guide published this against ourselves.
+  Either widen what can earn it or take it out of the denominator; leaving it is a point nobody
+  can win. Noted 2026-09-23.
 
 - **`StackBar` silently caps at four hue steps.** `Math.min(i, 3)` in both the bar and the legend,
   so a fifth segment renders identical to the fourth and the chart reads as though two categories
@@ -744,14 +900,27 @@ rescores 217 firms, which is not a guide run's call:
   which turned out to read better anyway. Nothing is broken, but the component should either say so
   in its own comment or clamp loudly. Noted 2026-09-21.
 
-- **No OG card generator exists; this run built one by hand and did not commit it.**
+- ~~**No OG card generator exists; this run built one by hand and did not commit it.**~~
+  **Done 2026-09-23.** `scripts/make_og.mjs` is the recipe below as a script: it lifts the
+  rendered `cover-art` SVG out of the built page, forces `xMidYMid meet`, frames it on the night
+  ground with the three aurora blobs at rest, screenshots it with the preinstalled Chromium and
+  writes `public/og/<cover>.png`. The cover name comes from `src/data/guides.ts`, so the file
+  lands where `<Base image>` already points. One thing had to be solved that the handwritten
+  recipe had not: **headless Chromium here paints a viewport 87px shorter than the window it is
+  given, and screenshots the window**, so asking for exactly 1200x630 returns a correctly sized
+  image with a white band along the bottom. A build passes either way and the card is ruined. The
+  script overshoots the window and crops the PNG back to 630 in pure Node, because adding an image
+  dependency to crop a rectangle would be the tail wagging the dog. Usage:
+  `npm run build && node scripts/make_og.mjs <guide-slug>`. The old note is kept below for the
+  reasoning behind the fit.
+
+- **The original hand recipe, kept for the reasoning.**
   `public/og/register.png` was produced by extracting the rendered `cover-art` SVG from the built
   page, framing it on the night ground with static aurora blobs, and screenshotting it at 1200x630
   with the preinstalled Chromium (`/opt/pw-browsers/chromium*/chrome-linux/chrome --headless
   --screenshot`). The scene must be rendered `xMidYMid meet` and not `slice`: at 1200x630 the
   440-high viewBox crops badly with `slice` and the first version lost the whole right-hand panel.
-  Somebody should make this a script in `scripts/`, because every future guide needs one and this
-  recipe is currently only written down here. Noted 2026-09-21.
+  Noted 2026-09-21, and made a script on 2026-09-23.
 
 - ~~**A5's association list only knows three states, and it is scored.**~~ **Fixed 2026-09-21.**
   The associations were not guessed at: a script read the same pages `check_a5.py` reads on all

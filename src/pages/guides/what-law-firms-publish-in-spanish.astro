@@ -1,0 +1,372 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// The study behind sub-factor E3, and the first piece here about who a firm is written for.
+//
+// Every figure is computed from the firms collection at build time. The field this whole page
+// rests on is `languages`, and it is worth saying exactly what writes it before anything is
+// built on top of it, because two runs have now nearly published a sentence about a field that
+// meant something other than it sounded like.
+//
+// `languages` is written by scripts/build_profiles.py and by nothing else. It starts as
+// ["English"] for every firm and gains "Spanish" when the crawl of the firm's own site found a
+// Spanish marker: scripts/crawl_public.py matches `se habla espa\w+|hablamos espa\w+` as a
+// claim, and `se habla espa|hablamos espa|español|abogado|/es/|lang="es"` as a looser signal.
+// So a Spanish entry means the firm publishes something in Spanish on its own site. It does not
+// mean an attorney there speaks Spanish, and nothing in this repository measures that.
+//
+// No pattern exists for any other language. The handful of records carrying Chinese or Russian
+// were typed in by a person while a different problem was being fixed, so those counts are a
+// fact about our detector and not about the market. The page says so rather than reporting them
+// as a measurement.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// A site that answers our crawler with a 403 was never read, so it cannot have been read for a
+// language either. Those firms keep E3 pending in the engine and they are out of the denominator
+// here for the same reason: an absence we did not look for is not a finding.
+const blocked = firms.filter(f => f.data.site_blocked);
+const measured = firms.filter(f => !f.data.site_blocked);
+
+const speaksSpanish = (f: (typeof measured)[number]) => f.data.languages.includes('Spanish');
+const spanish = measured.filter(speaksSpanish);
+const otherLang = measured.filter(f =>
+  f.data.languages.some(l => l !== 'English' && l !== 'Spanish'));
+// Deduplicated and formatted rather than joined, because a list built by mapping one value per
+// firm repeats itself the moment two firms share one. See docs/guides-backlog.md.
+const formatList = (xs: string[]) => {
+  const u = [...new Set(xs)].sort();
+  if (u.length <= 1) return u[0] ?? '';
+  if (u.length === 2) return `${u[0]} and ${u[1]}`;
+  return `${u.slice(0, -1).join(', ')} and ${u[u.length - 1]}`;
+};
+const otherNames = formatList(
+  otherLang.flatMap(f => f.data.languages).filter(l => l !== 'English' && l !== 'Spanish'));
+
+const primaryOf = (f: (typeof measured)[number]) =>
+  f.data.practices.find(p => p.primary) ?? f.data.practices[0];
+
+const share = (part: number, whole: number) => (whole ? Math.round((part / whole) * 100) : 0);
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  if (!s.length) return 0;
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
+// Grouped once and reused by every chart and sentence below, so a figure in the prose and the
+// bar beside it cannot disagree. Ties break on the label, so the ordering is the same on every
+// build rather than following whatever order the collection happened to load in.
+type Group = { key: string; label: string; n: number; es: number };
+const groupBy = (
+  set: typeof measured,
+  key: (f: (typeof measured)[number]) => { key: string; label: string },
+): Group[] => {
+  const out = new Map<string, Group>();
+  for (const f of set) {
+    const { key: k, label } = key(f);
+    const g = out.get(k) ?? { key: k, label, n: 0, es: 0 };
+    g.n += 1;
+    if (speaksSpanish(f)) g.es += 1;
+    out.set(k, g);
+  }
+  return [...out.values()].sort((a, b) =>
+    b.es / b.n - a.es / a.n || b.n - a.n || a.label.localeCompare(b.label));
+};
+
+const byMarket = groupBy(measured, f => ({
+  key: f.data.market.city_slug,
+  label: `${f.data.market.city}, ${f.data.market.state}`,
+}));
+const byPractice = groupBy(measured, f => ({
+  key: primaryOf(f).slug,
+  label: primaryOf(f).name,
+}));
+
+const topMarket = byMarket[0];
+const bottomMarket = byMarket[byMarket.length - 1];
+const topPractice = byPractice[0];
+const bottomPractice = byPractice[byPractice.length - 1];
+// The comparison a reader can least explain away, found rather than asserted: the state holding
+// more than one of our markets whose own markets sit furthest apart. Same bar, same rules of
+// professional conduct, same register, and a different answer. Written this way because naming
+// two cities by hand is a sentence that goes wrong the day a tenth market opens.
+const stateOf = new Map(measured.map(f => [f.data.market.city_slug, f.data.market]));
+const splitStates = [...new Set(measured.map(f => f.data.market.state))]
+  .map(code => {
+    const inState = byMarket.filter(g => stateOf.get(g.key)!.state === code);
+    return {
+      name: stateOf.get(inState[0].key)!.state_name,
+      markets: inState,
+      spread: share(inState[0].es, inState[0].n)
+        - share(inState[inState.length - 1].es, inState[inState.length - 1].n),
+    };
+  })
+  .filter(s => s.markets.length > 1)
+  .sort((a, b) => b.spread - a.spread || a.name.localeCompare(b.name));
+const splitState = splitStates[0] ?? null;
+
+// The practice contrast the takeaway carries. The chart is ordered by share, but the sentence
+// leads with the practice holding the most firms, because a share taken over a dozen records is
+// not the one to put in front of a reader as the headline.
+const largestPractice = [...byPractice]
+  .sort((a, b) => b.n - a.n || a.label.localeCompare(b.label))[0];
+const contrastHigh = largestPractice.key === bottomPractice.key ? topPractice : largestPractice;
+
+// The controlled version of the same question. Market and practice both move this number, so the
+// only way to show that practice moves it on its own is to hold the market still. New York City
+// is the one market here with enough firms in more than two practices to do that.
+const NYC = 'new-york-ny';
+const nyc = measured.filter(f => f.data.market.city_slug === NYC);
+// The market's own label rather than its city name. The city here is called New York and so is
+// the state, and a sentence reading "among New York firms" cannot be told apart from one about
+// the whole state, which is the comparison this section exists to separate.
+const nycLabel = byMarket.find(g => g.key === NYC)?.label ?? 'New York, NY';
+const nycByPractice = groupBy(nyc, f => ({ key: primaryOf(f).slug, label: primaryOf(f).name }));
+const nycInjury = nyc.filter(f => primaryOf(f).slug === 'personal-injury');
+const nycFamily = nyc.filter(f => primaryOf(f).slug === 'family-law');
+const nycInjuryEs = nycInjury.filter(speaksSpanish);
+const nycInjuryNoEs = nycInjury.filter(f => !speaksSpanish(f));
+
+// Whether publishing Spanish is really a proxy for being a large firm. Held inside one market
+// and one practice, because across the whole directory it plainly is: the raw gap in review
+// count is driven by which markets we publish, not by the language.
+const reviewsOf = (f: (typeof measured)[number]) =>
+  f.data.digital.places?.review_count_total ?? 0;
+const rosterOf = (f: (typeof measured)[number]) => f.data.attorneys.length;
+const rawEsReviews = median(spanish.map(reviewsOf));
+const rawNoEsReviews = median(measured.filter(f => !speaksSpanish(f)).map(reviewsOf));
+const nycEsReviews = median(nycInjuryEs.map(reviewsOf));
+const nycNoEsReviews = median(nycInjuryNoEs.map(reviewsOf));
+const nycEsRoster = median(nycInjuryEs.map(rosterOf));
+const nycNoEsRoster = median(nycInjuryNoEs.map(rosterOf));
+
+// The other half of the control, and the reason this page claims both things move the figure
+// rather than picking a winner. Above, the market is held still and the practice changes. Here
+// the practice is held still and the market changes, inside the one state holding more than one
+// of our markets, so the state's own bar and rules stay constant too.
+const splitStatePractice = splitState
+  ? splitState.markets.map(g => {
+      const set = measured.filter(f =>
+        f.data.market.city_slug === g.key && primaryOf(f).slug === largestPractice.key);
+      return { label: g.label, n: set.length, es: set.filter(speaksSpanish).length };
+    }).filter(r => r.n > 0)
+  : [];
+
+// Every firm whose record names no language but English. E3 can only be earned by a second
+// language or by the accessibility point, so this set and the set scoring zero are the same set
+// until some firm publishes an accessibility claim without publishing a second language.
+const englishOnly = measured.filter(f => f.data.languages.length === 1);
+
+// What the score does with all of this. E3 is worth four points: 1.5 for each language beyond
+// English up to three, and one more for ADA-accessible offices or virtual consultations. The
+// accessibility half is recomputed here from `availability` the same way scripts/score.py reads
+// it, rather than pattern-matched out of the evidence string the engine already wrote.
+const e3subs = measured
+  .map(f => f.data.score?.pillars.E.subs.find(s => s.code === 'E3'))
+  .filter((s): s is NonNullable<typeof s> => Boolean(s));
+const e3Max = e3subs.length ? Math.max(...e3subs.map(s => s.max)) : 0;
+const e3Zero = e3subs.filter(s => s.pts === 0).length;
+const e3Best = e3subs.length ? Math.max(...e3subs.map(s => s.pts)) : 0;
+const e3AtBest = e3subs.filter(s => s.pts === e3Best).length;
+const e3Bands = [...new Set(e3subs.map(s => s.pts))].sort((a, b) => a - b).map(pts => ({
+  label: `${pts} of ${e3Max}`,
+  value: e3subs.filter(s => s.pts === pts).length,
+  emphasis: pts === 0,
+}));
+const accessible = measured.filter(f => {
+  const av = (f.data.availability ?? []).join(' ').toLowerCase();
+  return av.includes('video') || av.includes('ada');
+});
+
+// The examples this page names, picked by a rule rather than by hand so they re-pick themselves
+// as the data moves. Both are named for something they publish, never for something missing:
+// firm sites are unreachable from our build environment, so an absence we could not re-check by
+// hand is not a thing to put a firm's name beside.
+const mostLanguages = [...measured].sort((a, b) =>
+  b.data.languages.length - a.data.languages.length ||
+  a.data.name.localeCompare(b.data.name))[0];
+const accessExample = [...accessible].sort((a, b) => a.data.name.localeCompare(b.data.name))[0];
+
+const markets = new Set(measured.map(f => f.data.market.city_slug)).size;
+const states = new Set(measured.map(f => f.data.market.state)).size;
+
+// How far our crawl actually reached in the market that publishes least, so the low figure can be
+// read as a finding about those firms rather than as a gap in our own reading. A firm carrying
+// trust pages is a firm whose site we opened and walked.
+const lowMarketFirms = measured.filter(f => f.data.market.city_slug === bottomMarket.key);
+const lowMarketCrawled = lowMarketFirms.filter(f =>
+  Object.keys(f.data.digital.trust_pages ?? {}).length > 0);
+
+const scoredAt = measured
+  .map(f => f.data.score?.computed_at).filter(Boolean).sort().at(-1) as string | undefined;
+const scored = scoredAt
+  ? new Date(scoredAt).toLocaleDateString('en-US',
+      { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// States the finding and carries no figure, because check_meta rejects one in a title and is
+// right to: a share that moves whenever a firm is added should not be the sentence Google has
+// indexed.
+const title = 'New Study: Law Firms Publish in Spanish for Injury Work, Not Divorce';
+const description = 'We read every firm in this directory for a page published in Spanish. Whether one exists tracks the practice area more than the city the firm works in.';
+---
+<Base title={title} description={description} nav="guides" image="/og/language.png" imageAlt="Two columns of law firm pages, the left column mostly carrying a second language and the right column mostly not">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Publishing in Spanish</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Data · Access &amp; responsiveness</span>
+    <h1>{title}</h1>
+    <p class="lede">We read the website of every firm in this directory looking for something published in Spanish. <b>{spanish.length} of {measured.length}</b> publish one. Two things decide which, and each one survives holding the other still: the market a firm works in, and the kind of case it takes.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {scored && <><span class="sep" aria-hidden="true"></span><span>Scored {scored}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="language" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#markets">Where it is published</a></li>
+      <li><a href="#practice">The practice gap</a></li>
+      <li><a href="#size">Is it just the bigger firms?</a></li>
+      <li><a href="#blind">What we cannot see</a></li>
+      <li><a href="#score">What the score does with it</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read across ${measured.length} firms in ${markets} markets and ${states} states. ${blocked.length} firms whose sites refuse our crawler are excluded rather than counted as publishing nothing.`}
+      items={[
+        `<b>${spanish.length} of ${measured.length}</b> firms publish something in Spanish on their own site, and <b>${otherLang.length}</b> carry any other language at all.`,
+        `<b>${contrastHigh.es} of ${contrastHigh.n}</b> ${contrastHigh.label.toLowerCase()} firms publish in Spanish, against <b>${bottomPractice.es} of ${bottomPractice.n}</b> ${bottomPractice.label.toLowerCase()} firms.`,
+        `It holds inside one market. Among firms in ${nycLabel} it is <b>${nycInjuryEs.length} of ${nycInjury.length}</b> injury practices against <b>${nycFamily.filter(speaksSpanish).length} of ${nycFamily.length}</b> family law practices.`,
+        `Across markets the range is <b>${share(topMarket.es, topMarket.n)}%</b> in ${topMarket.label} down to <b>${share(bottomMarket.es, bottomMarket.n)}%</b> in ${bottomMarket.label}.`,
+        `Spanish is the only language this directory detects on its own, so the <b>${otherLang.length} firms</b> recorded as publishing ${otherNames} are a measure of our reading rather than of the market.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Our crawler reads each firm's own website and records whether anything on it is published in Spanish: the phrase "se habla español", a page path under "/es/", a language attribute set to Spanish, or Spanish words in the firm's own copy. Where it finds one, the firm's record gains Spanish alongside English.</p>
+    <p><b>That measures what a firm publishes, not who works there.</b> A firm with a Spanish landing page may have one bilingual paralegal, and a firm with no Spanish page may have a partner who grew up speaking it. We hold no evidence about either, and this page makes no claim about it.</p>
+    <p>{blocked.length} of the {firms.length} firms in the directory answer our crawler with a block, so their sites were never read. They are out of every figure here rather than counted as publishing nothing, which is the same rule the scoring engine applies.</p>
+
+    <h2 id="markets">Where it is published</h2>
+    <p>{spanish.length} of the {measured.length} firms we could read publish in Spanish, which is {share(spanish.length, measured.length)}% of the directory. The markets are nothing like each other.</p>
+    <BarChart
+      heading="Firms publishing in Spanish, by market"
+      max={100}
+      rows={byMarket.map(g => ({
+        label: g.label,
+        href: `/cities/${g.key}/`,
+        value: share(g.es, g.n),
+        display: `${g.es} of ${g.n}`,
+        note: `${share(g.es, g.n)}% of the market`,
+      }))}
+      caption={`The bar is the share and the printed figure is the count, because these markets hold ${Math.min(...byMarket.map(g => g.n))} to ${Math.max(...byMarket.map(g => g.n))} firms each and a bar drawn from the raw count would make the largest market look like the most bilingual one.`}
+    />
+    <p>{topMarket.label} sits at the top and {bottomMarket.label} at the bottom, a range of {share(topMarket.es, topMarket.n) - share(bottomMarket.es, bottomMarket.n)} percentage points inside one directory.</p>
+    {splitState && (
+      <p><b>State lines do not explain it.</b> {splitState.name} holds more than one of our markets, and inside that one state the figures are {splitState.markets.map((g, i) => (
+        <>{i > 0 ? ' and ' : ''}{g.es} of {g.n} in {g.label}</>
+      ))}. Same bar, same rules of professional conduct, same register.</p>
+    )}
+    <p>Before reading the low end as a fact about our own reach, note what it is not. {lowMarketCrawled.length} of the {lowMarketFirms.length} firms in {bottomMarket.label} carry the trust pages that only a successful crawl of a site produces. Those pages were opened, and they are in English.</p>
+    {splitStatePractice.length > 1 && (
+      <p>It is not the practice mix either. Comparing only {largestPractice.label.toLowerCase()} firms, so the practice is held still, {splitState!.name}'s markets run {splitStatePractice.map((r, i) => (
+        <>{i > 0 ? ' and ' : ''}{r.es} of {r.n} in {r.label}</>
+      ))}. <b>Where a firm works moves this figure further than what it practices does.</b></p>
+    )}
+
+    <h2 id="practice">The practice gap</h2>
+    <p>Sorting the same firms by what they practice rather than by where, the spread is narrower and it points somewhere more uncomfortable.</p>
+    <BarChart
+      heading="Firms publishing in Spanish, by primary practice"
+      max={100}
+      rows={byPractice.map(g => ({
+        label: g.label,
+        value: share(g.es, g.n),
+        display: `${g.es} of ${g.n}`,
+        note: `${share(g.es, g.n)}% of these firms`,
+      }))}
+      caption="A firm's primary practice, the one its ranking is built on. The bar is the share and the printed figure is the count."
+    />
+    <p><b>The practice where a client and a lawyer have to talk most is the practice where the second language is least often advertised.</b> A contingency injury case is largely handled around the client; a divorce is a year of conversations about that person's children, their house and their money.</p>
+    <p>Market and practice are tangled together, since our markets do not carry the same mix of practices. So we held the market still and asked the question again inside one city.</p>
+    <BarChart
+      heading={`Firms publishing in Spanish, ${nycLabel} alone`}
+      max={100}
+      rows={nycByPractice.map(g => ({
+        label: g.label,
+        value: share(g.es, g.n),
+        display: `${g.es} of ${g.n}`,
+        note: `${share(g.es, g.n)}% of these firms`,
+      }))}
+      caption={`The same measurement across the ${nyc.length} firms in ${nycLabel}, so the city, the courts and the client population are held constant and only the practice changes.`}
+    />
+    <p>It survives the control. In one city, <a href={`/cities/${NYC}/personal-injury/`}>the injury firms</a> publish in Spanish at {nycInjuryEs.length} of {nycInjury.length} and <a href={`/cities/${NYC}/family-law/`}>the family law firms</a> at {nycFamily.filter(speaksSpanish).length} of {nycFamily.length}.</p>
+    <p>So neither reading cancels the other. The market and the practice each move this figure on their own, and the practice is the one nobody would have predicted.</p>
+    <p>We are describing an advertising decision, not a shortage of bilingual divorce lawyers. Injury work is bought on the open market by people who have just been hurt, and the firms compete for that attention in whatever language reaches it. Nobody advertises a divorce the same way.</p>
+
+    <h2 id="size">Is it just the bigger firms?</h2>
+    <p>It looks like it at first. Across the whole directory, a firm publishing in Spanish has a median of {rawEsReviews.toLocaleString('en-US')} Google reviews against {rawNoEsReviews.toLocaleString('en-US')} for a firm that does not, which is a gap of the kind that usually means we have measured firm size by accident.</p>
+    <p><b>Most of that gap is the map, not the language.</b> Holding the market and the practice constant, among injury firms in {nycLabel} the medians are {nycEsReviews.toLocaleString('en-US')} reviews against {nycNoEsReviews.toLocaleString('en-US')}: still a difference, and a much smaller one.</p>
+    <p>What does not shrink is the roster. The same injury firms publishing in Spanish name a median of {nycEsRoster} attorneys against {nycNoEsRoster} for those that do not. A second language on the site travels with a firm large enough to staff one, which is worth knowing before anyone reads it as a promise. <a href="/guides/what-it-takes-to-check-a-law-firm/">We counted the rosters across the whole directory here</a>.</p>
+
+    <h2 id="blind">What we cannot see</h2>
+    <p>Spanish is the only language this directory detects. There is a pattern for it in the crawler and there is a pattern for nothing else, so a firm publishing in Korean, Polish or Haitian Creole reads to us exactly like a firm publishing in English only.</p>
+    <p>{otherLang.length} records carry another language, {otherNames}, and every one of them was typed in by a person who happened to be fixing something else about that firm. <b>That count measures our reading, not the market.</b> {mostLanguages && mostLanguages.data.languages.length > 2 && (<><a href={`/firms/${mostLanguages.data.slug}/`}>{mostLanguages.data.name}</a> carries the longest list on any record here, at {formatList(mostLanguages.data.languages)}.</>)}</p>
+    <p>We know the gap is not small, because a different check here already hit it. Our practice-area reader had to learn the Spanish and Chinese words for an injury page before it stopped recording firms as publishing no practice page at all, while their home pages said so plainly in a language it could not read.</p>
+    <p>The record also carries no date for this reading. Every other measurement here is stamped with the day it was taken; the language field is written during the site crawl and stores only the conclusion. <b>We should fix that, and until we do, the figures on this page are as fresh as the last crawl and no page can say when that was.</b></p>
+
+    <h2 id="score">What the score does with it</h2>
+    <p>Languages sit in sub-factor E3 of the LFL Certification Score, inside pillar E, which is worth 15 of 100. E3 is worth {e3Max} of those points: 1.5 for each language beyond English up to three, and one more point for ADA-accessible offices or virtual consultations.</p>
+    <ColumnChart
+      heading={`E3 points earned, across ${e3subs.length} firms`}
+      columns={e3Bands}
+      emphasisLabel="Earns nothing"
+      quietLabel="Earns something"
+      caption={`The sub-factor is worth ${e3Max} points and the best any firm in the directory reaches is ${e3Best}. ${e3AtBest === 1 ? 'One firm' : `${e3AtBest} firms`} sits there.`}
+    />
+    <p>E3 gives nothing at all to {e3Zero} of the {e3subs.length} firms, which is exactly the set publishing in English only, all {englishOnly.length} of them. A second language is very nearly the only way to score on this sub-factor, for the reason below.</p>
+    <p><b>The accessibility point is the part of our own scale that is not working.</b> It is earned by {accessible.length === 1 ? 'one firm' : `${accessible.length} firms`} in the directory, because the only evidence that can earn it is a published claim about video consultations or an accessible office, and almost nobody publishes one.{accessExample && <> <a href={`/firms/${accessExample.data.slug}/`}>{accessExample.data.name}</a> is the firm that does.</>} A point that one firm can earn is not measuring a difference between firms, it is measuring a phrase.</p>
+    <p>A guide here has found this shape before. <a href="/guides/what-a-law-firm-score-cannot-compare/">The denominator piece</a> is the general version of the problem, and <a href="/guides/what-new-york-injury-firms-publish-about-fees/">the fee study</a> is the same thing inside pillar E: a question worth asking, scored against whichever answer a firm happened to publish.</p>
+    <p>If you are a client, the useful reading is narrow and real. A Spanish page tells you the firm wants Spanish-speaking clients and has spent money saying so. It does not tell you who will answer the phone, and the place to find that out is the free consultation, which is <a href="/guides/what-new-york-injury-firms-publish-about-fees/">the other thing we counted across this directory</a>.</p>
+    <p><a href="/methodology/">The full methodology</a> sets out every sub-factor and the evidence behind it. A firm that thinks we have read its site wrong can <a href="/list-your-firm/">tell us so here</a>, and every profile links the source behind each measurement.</p>
+    <p class="muted" style="font-size:.86rem">Language signals come from our own crawl of each firm's website. Review counts and listing data come from the Google Places API. A site we cannot open keeps its site-derived sub-factors pending rather than receiving a zero.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted above has a profile showing its offices, languages, fees, client reviews and measured digital presence.</p>
+      <a class="btn btn--white" href="/practice-areas/family-law/">Family law firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/guides/what-new-york-injury-firms-publish-about-fees/">What firms publish about fees</a></li>
+        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a firm</a></li>
+        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

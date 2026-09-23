@@ -20,7 +20,7 @@ interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-      | 'divorce';
+      | 'divorce' | 'language';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -74,6 +74,16 @@ const ledger = {
     { r: 0.48, d: 0.52 },
     { r: null, d: 0.72 },
   ] as { r: number | null; d: number }[],
+};
+// Language: two stacks of firm pages under one roof each. Every page carries a white line, which
+// is the English every firm publishes, and under it either a violet line or a dashed outline: a
+// second language published, or the space where one is not. The left stack is dense with violet
+// and the right stack is nearly empty of it, which is the finding. The ratios are the shape of
+// the measurement rather than any market's exact figures, because the figures move monthly and
+// a drawing cannot recompute itself.
+const tongues = {
+  left: [true, true, false, true, true, true, false, true],
+  right: [false, true, false, false, false, false, true, false],
 };
 ---
 {name === 'results' && (
@@ -482,6 +492,53 @@ const ledger = {
       <rect x="38" y="322" width="150" height="13" rx="6.5" fill="rgba(255,255,255,.45)" />
       <rect x="400" y="314" width="162" height="28" rx="8" fill="none" stroke={BLUE}
         stroke-width="2.5" stroke-dasharray="9 7" />
+    </g>
+  </svg>
+)}
+
+{name === 'language' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {[tongues.left, tongues.right].map((stack, col) => (
+      <g transform={`translate(${col === 0 ? 132 : 660},52)`}>
+        {/* The practice each stack stands for, as a header rule rather than as a word: the
+            headline beside this says which is which, so the art never spells it twice. */}
+        <rect x="0" y="0" width="408" height="10" rx="5"
+          fill={col === 0 ? VIOLET : 'rgba(255,255,255,.28)'} opacity=".9" />
+        {stack.map((second, i) => {
+          const y = 36 + i * 42;
+          return (
+            <g transform={`translate(0,${y})`}>
+              {/* The page itself. */}
+              <rect x="0" y="0" width="408" height="32" rx="10" fill="rgba(255,255,255,.06)"
+                stroke="rgba(255,255,255,.16)" stroke-width="1.2" />
+              {/* English, which every firm here publishes. */}
+              <rect x="18" y="8" width={i % 3 === 0 ? 172 : 148} height="7" rx="3.5"
+                fill="rgba(255,255,255,.55)" />
+              {/* The second language, or the space where one is not. */}
+              {second
+                ? <rect x="18" y="20" width={i % 2 ? 128 : 104} height="7" rx="3.5"
+                    fill={VIOLET} opacity=".95" />
+                : <rect x="17" y="17" width="112" height="13" rx="5" fill="none" stroke={MINT}
+                    stroke-width="1.8" stroke-dasharray="7 6" opacity=".6" />}
+              {/* A speech mark on the pages that carry a second language, so the row reads as
+                  somebody being spoken to rather than as another bar chart. */}
+              {second && (
+                <path d="M356 9h28a7 7 0 0 1 7 7v6a7 7 0 0 1-7 7h-13l-9 8v-8h-6a7 7 0 0 1-7-7v-6a7 7 0 0 1 7-7z"
+                  fill="none" stroke={BLUE} stroke-width="2" opacity=".85" />
+              )}
+            </g>
+          );
+        })}
+      </g>
+    ))}
+    {/* The detector, off to one side: one pattern exists and the rest of the languages a market
+        speaks have no pattern at all, so they are dashes that never close. */}
+    <g transform="translate(1092,150)">
+      <rect x="0" y="0" width="60" height="26" rx="13" fill={VIOLET} opacity=".9" />
+      {[0, 1, 2].map(i => (
+        <rect x="0" y={42 + i * 34} width="60" height="26" rx="13" fill="none" stroke={MINT}
+          stroke-width="2" stroke-dasharray="9 7" opacity=".55" />
+      ))}
     </g>
   </svg>
 )}
