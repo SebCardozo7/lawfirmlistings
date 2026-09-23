@@ -86,6 +86,15 @@ const firms = defineCollection({
       places: z.object({
         listing_count: z.number(), review_count_total: z.number(),
         rating_weighted: z.number().nullable(), source: z.string(), measured_at: z.string(),
+        // How filled-in the firm's Business Profile is, which is the half of sub-factor D3 we
+        // can actually read. `unobtainable` names the completeness items the Places API does not
+        // expose, so a profile can say which part of the question went unanswered and why
+        // instead of implying the firm left those fields blank.
+        completeness: z.object({
+          categories: z.number(), hours_published: z.boolean(), photos: z.number(),
+          has_description: z.boolean(),
+          unobtainable: z.array(z.string()).default([]), note: z.string().optional(),
+        }).optional(),
       }).optional(),
     }),
     // What the firm publishes about its own results: the input for pillar B at v2.0. `readable`

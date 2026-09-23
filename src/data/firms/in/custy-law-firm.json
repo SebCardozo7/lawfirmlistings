@@ -5,7 +5,7 @@
   "website": "https://www.custylaw.com/",
   "domain": "custylaw.com",
   "phone": "(219) 255-3900",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -83,9 +83,9 @@
     "quotes": [],
     "google": {
       "rating": 5.0,
-      "count_label": "153",
+      "count_label": "154",
       "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-15"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -117,15 +117,15 @@
         "rating": 5
       },
       {
-        "published_at": "2026-02-09T18:42:53.562260525Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-07-29T19:48:29.865326586Z",
         "rating": 5
       },
       {
         "published_at": "2025-10-27T13:55:44.120778736Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-07T19:40:57.790960294Z",
         "rating": 5
       }
     ]
@@ -145,10 +145,22 @@
     },
     "places": {
       "listing_count": 2,
-      "review_count_total": 153,
+      "review_count_total": 154,
       "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-15"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 8,
@@ -330,10 +342,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 67,
-    "tier": "Verified",
+    "total": 74,
+    "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -406,7 +418,7 @@
             "pts": 4,
             "max": 5,
             "source": "observed",
-            "evidence": "153 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
+            "evidence": "154 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -414,7 +426,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 153 reviews → Bayesian 4.94 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 154 reviews → Bayesian 4.93 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -457,18 +469,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "2 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -505,20 +517,20 @@
     },
     "floor_abc": 34,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 3,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D3 Local presence: +4 available"
+        "E3 Languages & accessibility: +4.0 available"
       ]
     },
     "raw": 52.0,
-    "assessed": 78,
-    "coverage": 0.963,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.882,
     "gates_unavailable": [
       "G1",
@@ -526,7 +538,7 @@
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 81,
+    "assessable": 70,
     "comparable": true
   },
   "logo": {

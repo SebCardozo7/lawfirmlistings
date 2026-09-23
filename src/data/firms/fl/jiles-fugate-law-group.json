@@ -49,8 +49,30 @@
       "rating": 4.8,
       "count_label": "138",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-14"
-    }
+      "fetched_at": "2026-09-23"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-24T16:31:18.679111075Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-31T15:56:03.437369210Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-15T22:35:23.667545783Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-20T16:55:33.603567016Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-05T04:08:36.261639938Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -64,8 +86,20 @@
       "listing_count": 1,
       "review_count_total": 138,
       "rating_weighted": 4.8,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 0,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-14"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 10,
@@ -156,10 +190,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 54,
+    "total": 72,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -223,7 +257,7 @@
         ]
       },
       "C": {
-        "score": 8,
+        "score": 17,
         "max": 20,
         "subs": [
           {
@@ -240,28 +274,28 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 138 reviews → Bayesian 4.82 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 138 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 0,
+            "pts": 5,
             "max": 5,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-31) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
       "D": {
-        "score": 5,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -283,16 +317,16 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 0.0,
+            "max": 1,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 0 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
-            "max": 5,
+            "max": 1,
             "source": "pending",
             "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
           }
@@ -329,11 +363,11 @@
         ]
       }
     },
-    "floor_abc": 8,
+    "floor_abc": 17,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 16,
+      "gap": 0,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -342,10 +376,10 @@
         "A5 Accountability: not yet measured (6 pts)"
       ]
     },
-    "raw": 13.0,
-    "assessed": 24,
-    "coverage": 0.267,
-    "floor_abc_pct": 0.727,
+    "raw": 21.0,
+    "assessed": 29,
+    "coverage": 0.354,
+    "floor_abc_pct": 0.85,
     "gates_unavailable": [
       "G1",
       "G2"
@@ -353,7 +387,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 90,
+    "assessable": 82,
     "comparable": false
   }
 }

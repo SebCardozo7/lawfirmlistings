@@ -287,7 +287,7 @@
       "rating": 4.9,
       "count_label": "1,013",
       "source": "Google Business Profile via Places API. 7 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "fetched_at": "2026-09-23"
     },
     "quotes": [
       {
@@ -335,11 +335,11 @@
         "rating": 5
       },
       {
-        "published_at": "2026-08-05T14:19:33.729834810Z",
+        "published_at": "2026-08-06T15:17:58.769767325Z",
         "rating": 5
       },
       {
-        "published_at": "2026-04-22T02:23:54.124860288Z",
+        "published_at": "2026-06-11T20:30:33.892273395Z",
         "rating": 5
       },
       {
@@ -395,11 +395,11 @@
         "rating": 5
       },
       {
-        "published_at": "2023-04-03T17:42:53.697371Z",
+        "published_at": "2026-08-13T23:56:45.437445073Z",
         "rating": 5
       },
       {
-        "published_at": "2023-04-02T21:50:41.493409Z",
+        "published_at": "2023-04-03T17:42:53.697371Z",
         "rating": 5
       },
       {
@@ -447,11 +447,11 @@
         "rating": 5
       },
       {
-        "published_at": "2023-08-28T18:35:00.011099Z",
+        "published_at": "2023-08-09T16:34:49.482189Z",
         "rating": 5
       },
       {
-        "published_at": "2023-08-09T16:34:49.482189Z",
+        "published_at": "2023-08-28T18:35:00.011099Z",
         "rating": 5
       },
       {
@@ -500,8 +500,20 @@
       "listing_count": 7,
       "review_count_total": 1013,
       "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-23"
     },
     "psi": {
       "value": {
@@ -589,10 +601,10 @@
     }
   },
   "score": {
-    "total": 57,
+    "total": 72,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-22",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -634,24 +646,24 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "firm",
-            "evidence": "The firm publishes no case results we could read"
+            "source": "pending",
+            "evidence": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "firm",
-            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+            "source": "pending",
+            "evidence": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+            "source": "pending",
+            "evidence": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           }
         ]
       },
@@ -673,7 +685,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 1,013 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 1,013 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -681,7 +693,7 @@
             "pts": 2.5,
             "max": 5,
             "source": "places",
-            "evidence": "7 of 35 sampled reviews are from the last 12 months (newest 2026-08-05) · a sample of five per business listing, not every review"
+            "evidence": "8 of 35 sampled reviews are from the last 12 months (newest 2026-08-13) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -716,18 +728,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "7 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "7 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 3,
-            "max": 5,
+            "max": 4,
             "source": "ahrefs",
-            "evidence": "content 2/2 · no JSON-LD detected 0/1 · earned media 0/1 · cited in AI answers: 155 citations / 75 pages 1/1"
+            "evidence": "content 2/2 · no JSON-LD detected 0/1 · cited in AI answers: 155 citations / 75 pages 1/1 · not assessed on any firm yet, so earned media leave the scale (1 pts)"
           }
         ]
       },
@@ -766,22 +778,22 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 13,
+      "gap": 0,
       "floor_met": true,
-      "coverage_met": true,
+      "coverage_met": false,
       "path": [
-        "B1 Results published: +6 available",
-        "B2 Specificity: +5 available",
-        "D1 Website trust & experience: +5.0 available"
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
     "raw": 55.5,
-    "assessed": 97,
-    "coverage": 0.97,
-    "floor_abc_pct": 0.632,
+    "assessed": 77,
+    "coverage": 0.837,
+    "floor_abc_pct": 0.857,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 92,
     "comparable": true
   },
   "entity": {
@@ -793,15 +805,10 @@
     "checked_at": "2026-09-22"
   },
   "results_published": {
-    "readable": true,
-    "count": 0,
-    "amounts": [],
-    "case_types": [],
-    "disclaimer": false,
-    "venues": [],
-    "why": "The page at /results/ renders a heading, the site navigation, a contact form and seven office addresses. It names no case, states no figure and mentions no settlement, verdict or recovery.",
-    "source": "the firm's own results page, opened in a browser so its JavaScript ran, because our crawler reads served HTML and could not tell an empty page from a deferred one",
-    "checked_at": "2026-09-22"
+    "readable": false,
+    "why": "the results page served 3296 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.nyclawfirm.com/results/",
+    "checked_at": "2026-09-10"
   },
   "accountability": {
     "malpractice_insurance": false,

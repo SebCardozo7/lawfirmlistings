@@ -156,9 +156,9 @@
     "quotes": [],
     "google": {
       "rating": 4.85,
-      "count_label": "528",
+      "count_label": "529",
       "source": "Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-16"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -190,10 +190,6 @@
         "rating": 5
       },
       {
-        "published_at": "2026-01-22T22:59:57.763525011Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-03-25T18:28:28.356995599Z",
         "rating": 5
       },
@@ -202,23 +198,27 @@
         "rating": 5
       },
       {
-        "published_at": "2026-04-28T22:06:35.585103693Z",
+        "published_at": "2026-05-09T00:25:56.867403964Z",
         "rating": 5
       },
       {
-        "published_at": "2026-05-01T21:04:00.036193816Z",
+        "published_at": "2024-11-15T22:29:47.391986Z",
         "rating": 5
       },
       {
-        "published_at": "2026-04-29T21:42:47.703025943Z",
+        "published_at": "2024-11-22T15:26:53.446756Z",
         "rating": 5
       },
       {
-        "published_at": "2026-04-28T21:41:32.812040952Z",
+        "published_at": "2024-11-19T22:10:24.469434Z",
         "rating": 5
       },
       {
-        "published_at": "2026-05-05T15:55:58.488356603Z",
+        "published_at": "2024-11-26T16:41:21.829634Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-01-13T00:11:09.332268Z",
         "rating": 5
       },
       {
@@ -262,23 +262,23 @@
         "rating": 5
       },
       {
-        "published_at": "2024-11-15T22:29:47.391986Z",
+        "published_at": "2026-04-28T22:06:35.585103693Z",
         "rating": 5
       },
       {
-        "published_at": "2024-11-22T15:26:53.446756Z",
+        "published_at": "2026-05-01T21:04:00.036193816Z",
         "rating": 5
       },
       {
-        "published_at": "2024-11-19T22:10:24.469434Z",
+        "published_at": "2026-04-29T21:42:47.703025943Z",
         "rating": 5
       },
       {
-        "published_at": "2024-11-26T16:41:21.829634Z",
+        "published_at": "2026-04-28T21:41:32.812040952Z",
         "rating": 5
       },
       {
-        "published_at": "2025-01-13T00:11:09.332268Z",
+        "published_at": "2026-05-05T15:55:58.488356603Z",
         "rating": 5
       }
     ]
@@ -323,10 +323,22 @@
     },
     "places": {
       "listing_count": 6,
-      "review_count_total": 528,
+      "review_count_total": 529,
       "rating_weighted": 4.85,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-16"
+      "measured_at": "2026-09-23"
     }
   },
   "gates": {
@@ -480,10 +492,10 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 54,
+    "total": 59,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (6/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -556,7 +568,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "528 Google reviews · Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count"
+            "evidence": "529 Google reviews · Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -564,7 +576,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.85 over 528 reviews → Bayesian 4.85 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.85 over 529 reviews → Bayesian 4.85 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -607,18 +619,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "6 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "6 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -657,7 +669,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 16,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -667,12 +679,12 @@
       ]
     },
     "raw": 52.5,
-    "assessed": 97,
-    "coverage": 0.97,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.693,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
   }
 }

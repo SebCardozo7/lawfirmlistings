@@ -5,7 +5,7 @@
   "website": "https://866attylaw.com/",
   "domain": "866attylaw.com",
   "phone": "(718) 331-7700",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -145,11 +145,19 @@
       "rating": 4.79,
       "count_label": "330",
       "source": "Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
+        "published_at": "2026-02-03T12:15:45.203121149Z",
+        "rating": 5
+      },
+      {
         "published_at": "2026-06-16T23:08:41.902614135Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-19T20:17:38.299492284Z",
         "rating": 5
       },
       {
@@ -157,15 +165,7 @@
         "rating": 5
       },
       {
-        "published_at": "2026-02-03T12:15:45.203121149Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-01-15T17:06:00.768523051Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-02-19T20:17:38.299492284Z",
+        "published_at": "2026-07-09T04:40:34.935527537Z",
         "rating": 5
       },
       {
@@ -189,10 +189,6 @@
         "rating": 5
       },
       {
-        "published_at": "2023-04-26T17:03:03.441080Z",
-        "rating": 5
-      },
-      {
         "published_at": "2023-04-24T16:29:45.983116Z",
         "rating": 5
       },
@@ -205,7 +201,31 @@
         "rating": 5
       },
       {
+        "published_at": "2023-04-26T17:03:03.441080Z",
+        "rating": 5
+      },
+      {
         "published_at": "2015-07-24T18:13:17.669Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-03-22T19:30:46.733527Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-10-29T15:41:24.099083Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-02-04T23:39:43.410402Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2021-09-15T20:22:35.239004Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-09-16T16:15:08.650724Z",
         "rating": 5
       },
       {
@@ -226,26 +246,6 @@
       },
       {
         "published_at": "2020-07-07T06:19:25.188599Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-03-22T19:30:46.733527Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2024-10-29T15:41:24.099083Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2023-02-04T23:39:43.410402Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2024-09-16T16:15:08.650724Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2021-09-15T20:22:35.239004Z",
         "rating": 5
       },
       {
@@ -301,8 +301,20 @@
       "listing_count": 6,
       "review_count_total": 330,
       "rating_weighted": 4.79,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 30,
@@ -412,14 +424,14 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 65,
-    "tier": "Verified",
+    "total": 74,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (9/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 16,
+        "score": 20,
         "max": 25,
         "subs": [
           {
@@ -441,10 +453,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -496,7 +508,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.79 over 330 reviews → Bayesian 4.80 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.79 over 330 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -504,7 +516,7 @@
             "pts": 2.5,
             "max": 5,
             "source": "places",
-            "evidence": "11 of 30 sampled reviews are from the last 12 months (newest 2026-06-16) · a sample of five per business listing, not every review"
+            "evidence": "11 of 30 sampled reviews are from the last 12 months (newest 2026-07-09) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -539,18 +551,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "6 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "6 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -585,38 +597,44 @@
         ]
       }
     },
-    "floor_abc": 46,
+    "floor_abc": 49,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 5,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +4.0 available",
         "D2 Search authority: +4 available",
-        "D3 Local presence: +4 available"
+        "E3 Languages & accessibility: +4.0 available"
       ]
     },
-    "raw": 63.0,
-    "assessed": 97,
-    "coverage": 0.97,
-    "floor_abc_pct": 0.807,
+    "raw": 66.0,
+    "assessed": 89,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.86,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
   },
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "bar_associations": [
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://866attylaw.com/",
+        "quote": "r Lawyers Rising Stars, 2018. Member of NYSTLA, the ABA and NYSBA. Learn more about Micheal Arleen Polishchuk Associate Attor"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
     "pages_read": 3,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-10"
+    "checked_at": "2026-09-21"
   },
   "operating": {
     "registered": "2004-02-21",

@@ -5,7 +5,7 @@
   "website": "https://www.cohenandcohenlawgroup.com/",
   "domain": "cohenandcohenlawgroup.com",
   "phone": "(718) 736-2567",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -131,9 +131,9 @@
     "quotes": [],
     "google": {
       "rating": 4.84,
-      "count_label": "375",
+      "count_label": "376",
       "source": "Google Business Profile via Places API. 5 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-18"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -149,11 +149,15 @@
         "rating": 5
       },
       {
-        "published_at": "2026-02-18T23:45:10.338291075Z",
+        "published_at": "2025-12-15T18:06:17.942037774Z",
         "rating": 5
       },
       {
-        "published_at": "2025-12-15T18:06:17.942037774Z",
+        "published_at": "2025-12-09T22:36:47.841925075Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-13T15:13:31.316870126Z",
         "rating": 5
       },
       {
@@ -169,10 +173,6 @@
         "rating": 5
       },
       {
-        "published_at": "2025-12-06T01:36:30.197226957Z",
-        "rating": 5
-      },
-      {
         "published_at": "2025-02-20T19:40:04.837385Z",
         "rating": 5
       },
@@ -181,15 +181,15 @@
         "rating": 5
       },
       {
-        "published_at": "2026-05-14T12:20:11.327541269Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-05-17T14:58:26.989147902Z",
         "rating": 5
       },
       {
         "published_at": "2026-05-19T23:00:08.969309529Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-14T12:20:11.327541269Z",
         "rating": 5
       },
       {
@@ -205,19 +205,23 @@
         "rating": 5
       },
       {
+        "published_at": "2026-09-03T16:41:45.784414387Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-26T14:56:57.832524185Z",
+        "rating": 5
+      },
+      {
         "published_at": "2026-08-03T20:24:55.174244736Z",
         "rating": 5
       },
       {
-        "published_at": "2026-09-03T19:19:46.070149582Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-09-12T02:48:31.765318002Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-08-26T18:52:04.209683523Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-14T23:37:08.801812694Z",
         "rating": 5
       },
       {
@@ -226,10 +230,6 @@
       },
       {
         "published_at": "2026-06-08T18:35:11.977181777Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-05-07T17:29:07.095571400Z",
         "rating": 5
       },
       {
@@ -278,10 +278,22 @@
     },
     "places": {
       "listing_count": 5,
-      "review_count_total": 375,
+      "review_count_total": 376,
       "rating_weighted": 4.84,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-18"
+      "measured_at": "2026-09-23"
     }
   },
   "gates": {
@@ -454,10 +466,10 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 66,
-    "tier": "Verified",
+    "total": 72,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (7/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -530,7 +542,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "375 Google reviews · Google Business Profile via Places API. 5 listings, counts summed and rating weighted by count"
+            "evidence": "376 Google reviews · Google Business Profile via Places API. 5 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -538,7 +550,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.84 over 375 reviews → Bayesian 4.84 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.84 over 376 reviews → Bayesian 4.84 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -546,7 +558,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "21 of 25 sampled reviews are from the last 12 months (newest 2026-09-12) · a sample of five per business listing, not every review"
+            "evidence": "21 of 25 sampled reviews are from the last 12 months (newest 2026-09-03) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -581,18 +593,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "5 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "5 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -629,24 +641,24 @@
     },
     "floor_abc": 50,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 4,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 13,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +5.0 available",
         "D2 Search authority: +5 available",
-        "D3 Local presence: +4 available"
+        "A6 Roster verifiability: +3 available"
       ]
     },
     "raw": 64.5,
-    "assessed": 97,
-    "coverage": 0.97,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.886,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
   }
 }

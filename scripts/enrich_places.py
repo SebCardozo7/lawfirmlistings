@@ -65,6 +65,16 @@ FIELDS = ",".join("places." + f for f in [
     # what the evidence on the profile says: eleven listings give fifty-five dated reviews,
     # one listing gives five.
     "reviews",
+    # The completeness half of sub-factor D3, which the engine scored as a zero on all three
+    # hundred firms because nothing ever fetched it. Every field here is one the methodology
+    # names: the categories a listing claims, whether it publishes opening hours, how many
+    # photos it carries, and whether it carries a description at all.
+    #
+    # Three of the methodology's completeness items are not in this API at any price: the
+    # services list, the Q&A, and recent posts are owner-side data that Places does not expose.
+    # They are reported as unobtainable rather than as absent, which is the difference between
+    # a firm that has not filled its profile in and a field we cannot see.
+    "types", "primaryType", "regularOpeningHours", "photos", "editorialSummary",
 ])
 G6_MIN_REVIEWS = 10
 DELAY = 0.6
@@ -302,6 +312,16 @@ def collect(rec, key, verbose=False):
                 "status": p.get("businessStatus"),
                 "maps_uri": p.get("googleMapsUri"),
                 "type": p.get("primaryTypeDisplayName", {}).get("text"),
+                # What the methodology's "complete profile" item asks for, as far as this API
+                # will answer. Counts rather than booleans where a count is the question: the
+                # methodology asks for twenty photos, not for a photo.
+                "completeness": {
+                    "categories": len(p.get("types") or []),
+                    "primary_category": p.get("primaryType"),
+                    "hours_published": bool(p.get("regularOpeningHours")),
+                    "photos": len(p.get("photos") or []),
+                    "has_description": bool((p.get("editorialSummary") or {}).get("text")),
+                },
                 # Only what the two sub-factors read: when it was left and how it rated. The
                 # text is not kept, because nothing on the site quotes it and holding
                 # strangers' words about a named business with no use for them is not worth
@@ -339,6 +359,21 @@ def collect(rec, key, verbose=False):
         },
         "g6_reviews_ok": total >= G6_MIN_REVIEWS,
         "d3_gbp_present": len(accepted) > 0,
+        # The completeness half of D3, taken from the firm's best-filled listing rather than
+        # averaged: a firm with a full Manhattan profile and a thin satellite one has filled its
+        # profile in, and averaging would say it half did. Names what the API cannot answer, so
+        # the engine can leave those points out of the scale instead of scoring them zero.
+        "d3_completeness": ({
+            "categories": max((l["completeness"]["categories"] for l in accepted), default=0),
+            "hours_published": any(l["completeness"]["hours_published"] for l in accepted),
+            "photos": max((l["completeness"]["photos"] for l in accepted), default=0),
+            "has_description": any(l["completeness"]["has_description"] for l in accepted),
+            "unobtainable": ["services list", "questions and answers", "recent posts"],
+            "note": ("Categories, opening hours, photo count and description come from the "
+                     "Places API. The services list, the Q&A and recent posts are owner-side "
+                     "fields the API does not expose at any price, so they are not scored "
+                     "either way."),
+        } if accepted else None),
         "source": "Google Places API (New) places:searchText",
         "measured_at": datetime.date.today().isoformat(),
     }
