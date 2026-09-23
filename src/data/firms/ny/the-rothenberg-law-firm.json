@@ -5,7 +5,7 @@
   "website": "https://injurylawyer.com/",
   "domain": "injurylawyer.com",
   "phone": "(800) 624-8888",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -229,9 +229,9 @@
     "quotes": [],
     "google": {
       "rating": 4.81,
-      "count_label": "577",
-      "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "count_label": "573",
+      "source": "Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -239,11 +239,11 @@
         "rating": 5
       },
       {
-        "published_at": "2026-05-19T23:06:17.828338312Z",
+        "published_at": "2026-03-02T22:17:08.431705177Z",
         "rating": 5
       },
       {
-        "published_at": "2026-03-02T22:17:08.431705177Z",
+        "published_at": "2026-05-19T23:06:17.828338312Z",
         "rating": 5
       },
       {
@@ -263,10 +263,6 @@
         "rating": 5
       },
       {
-        "published_at": "2025-11-29T20:09:36.502110301Z",
-        "rating": 5
-      },
-      {
         "published_at": "2025-12-19T13:08:58.771491965Z",
         "rating": 5
       },
@@ -275,7 +271,7 @@
         "rating": 5
       },
       {
-        "published_at": "2025-12-19T23:22:44.574165207Z",
+        "published_at": "2025-03-17T13:48:09.899557Z",
         "rating": 5
       },
       {
@@ -295,11 +291,11 @@
         "rating": 5
       },
       {
-        "published_at": "2026-06-09T19:55:29.025314447Z",
+        "published_at": "2026-01-09T01:58:39.995552290Z",
         "rating": 5
       },
       {
-        "published_at": "2025-04-01T10:13:39.608637Z",
+        "published_at": "2026-06-09T19:55:29.025314447Z",
         "rating": 5
       },
       {
@@ -311,7 +307,27 @@
         "rating": 5
       },
       {
+        "published_at": "2025-04-01T10:13:39.608637Z",
+        "rating": 5
+      },
+      {
         "published_at": "2025-03-17T13:48:51.187209Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-24T13:30:47.473879122Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-23T19:27:17.286916161Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-04-07T19:55:39.255494Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2021-06-05T17:39:54.343749Z",
         "rating": 5
       }
     ]
@@ -357,11 +373,23 @@
       "measured_at": "2026-09-16"
     },
     "places": {
-      "listing_count": 4,
-      "review_count_total": 577,
+      "listing_count": 6,
+      "review_count_total": 573,
       "rating_weighted": 4.81,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-23"
     }
   },
   "gates": {
@@ -400,10 +428,10 @@
   "faq": [],
   "fee_statement": "Our personal injury attorneys work on a contingency fee basis, which means that you do not pay anything unless we win your case.",
   "score": {
-    "total": 65,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (5/15).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -476,7 +504,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "577 Google reviews · Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count"
+            "evidence": "573 Google reviews · Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -484,7 +512,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.81 over 577 reviews → Bayesian 4.81 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.81 over 573 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -492,7 +520,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "14 of 20 sampled reviews are from the last 12 months (newest 2026-06-12) · a sample of five per business listing, not every review"
+            "evidence": "15 of 24 sampled reviews are from the last 12 months (newest 2026-06-12) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -500,7 +528,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 24 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -527,18 +555,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "4 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "6 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 2,
-            "max": 5,
+            "max": 2,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1 · cited in AI answers: 320 citations / 98 pages 1/1"
+            "evidence": "JSON-LD detected 1/1 · cited in AI answers: 320 citations / 98 pages 1/1 · not assessed on any firm yet, so content depth and earned media leave the scale (3 pts)"
           }
         ]
       },
@@ -575,9 +603,9 @@
     },
     "floor_abc": 46,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 5,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -587,12 +615,12 @@
       ]
     },
     "raw": 63.0,
-    "assessed": 97,
-    "coverage": 0.97,
+    "assessed": 90,
+    "coverage": 1.0,
     "floor_abc_pct": 0.807,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 90,
     "comparable": true
   },
   "entity": {

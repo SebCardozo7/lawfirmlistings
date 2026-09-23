@@ -58,8 +58,50 @@
       "rating": 4.79,
       "count_label": "38",
       "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-14"
-    }
+      "fetched_at": "2026-09-23"
+    },
+    "sample": [
+      {
+        "published_at": "2020-12-22T18:46:37.625701Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2020-09-22T00:10:11.538161Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-07-22T04:57:33.545754Z",
+        "rating": 2
+      },
+      {
+        "published_at": "2020-01-31T14:34:40.485620Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2019-12-04T20:32:23.033857Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-16T21:37:26.655323772Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-26T03:25:24.752740245Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-02T15:47:44.265968435Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-19T21:13:14.075641714Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-28T20:20:48.480878549Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -73,8 +115,20 @@
       "listing_count": 2,
       "review_count_total": 38,
       "rating_weighted": 4.79,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 6,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-14"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 6,
@@ -169,10 +223,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 46,
+    "total": 61,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -236,7 +290,7 @@
         ]
       },
       "C": {
-        "score": 7,
+        "score": 14,
         "max": 20,
         "subs": [
           {
@@ -253,23 +307,23 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.79 over 38 reviews → Bayesian 4.82 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.79 over 38 reviews → Bayesian 4.82 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 0,
+            "pts": 4,
             "max": 5,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "5 of 10 sampled reviews are from the last 12 months (newest 2026-07-16) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 3,
             "max": 4,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "1 of 10 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -296,16 +350,16 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 0.6,
+            "max": 1,
             "source": "places",
-            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "2 operational Google Business Profile listings · 6 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
-            "max": 5,
+            "max": 1,
             "source": "pending",
             "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
           }
@@ -342,11 +396,11 @@
         ]
       }
     },
-    "floor_abc": 7,
+    "floor_abc": 14,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 24,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -355,10 +409,10 @@
         "A5 Accountability: not yet measured (6 pts)"
       ]
     },
-    "raw": 11.0,
-    "assessed": 24,
-    "coverage": 0.267,
-    "floor_abc_pct": 0.636,
+    "raw": 17.6,
+    "assessed": 29,
+    "coverage": 0.354,
+    "floor_abc_pct": 0.7,
     "gates_unavailable": [
       "G1",
       "G2"
@@ -366,7 +420,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 90,
+    "assessable": 82,
     "comparable": false
   }
 }

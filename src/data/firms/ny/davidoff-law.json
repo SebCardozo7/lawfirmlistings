@@ -5,7 +5,7 @@
   "website": "https://www.lawfirmdavidoff.com/",
   "domain": "lawfirmdavidoff.com",
   "phone": "(929) 207-5913",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -153,11 +153,15 @@
       "rating": 4.88,
       "count_label": "594",
       "source": "Google Business Profile via Places API. 5 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-18"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
-        "published_at": "2026-01-15T21:05:15.365335286Z",
+        "published_at": "2026-04-19T19:49:46.296487760Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-04T20:21:59.975217375Z",
         "rating": 5
       },
       {
@@ -165,15 +169,11 @@
         "rating": 5
       },
       {
-        "published_at": "2026-05-02T22:33:50.323533686Z",
+        "published_at": "2026-02-18T17:29:40.040090893Z",
         "rating": 5
       },
       {
-        "published_at": "2026-04-19T19:49:46.296487760Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-05-04T20:21:59.975217375Z",
+        "published_at": "2026-02-15T15:33:01.731571301Z",
         "rating": 5
       },
       {
@@ -201,11 +201,11 @@
         "rating": 5
       },
       {
-        "published_at": "2026-01-15T00:47:01.014151834Z",
+        "published_at": "2026-01-20T14:37:56.613790336Z",
         "rating": 5
       },
       {
-        "published_at": "2026-01-20T14:37:56.613790336Z",
+        "published_at": "2026-01-15T00:47:01.014151834Z",
         "rating": 5
       },
       {
@@ -276,8 +276,20 @@
       "listing_count": 5,
       "review_count_total": 594,
       "rating_weighted": 4.88,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-18"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 33,
@@ -396,10 +408,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (11/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -480,7 +492,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.88 over 594 reviews → Bayesian 4.87 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.88 over 594 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -523,18 +535,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "5 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "5 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -571,9 +583,9 @@
     },
     "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 6,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -583,12 +595,12 @@
       ]
     },
     "raw": 62.0,
-    "assessed": 97,
-    "coverage": 0.97,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.772,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
   },
   "accountability": {

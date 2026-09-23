@@ -158,15 +158,23 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.91,
-      "count_label": "807",
-      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "rating": 4.9,
+      "count_label": "735",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
+        "published_at": "2026-09-04T17:37:33.897785572Z",
+        "rating": 5
+      },
+      {
         "published_at": "2026-04-30T13:17:41.233680625Z",
         "rating": 1
+      },
+      {
+        "published_at": "2026-08-13T21:18:52.556129824Z",
+        "rating": 5
       },
       {
         "published_at": "2026-07-20T15:37:04.959288698Z",
@@ -174,34 +182,6 @@
       },
       {
         "published_at": "2026-03-03T19:41:07.538005214Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-04-09T18:30:59.849694005Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-11-14T00:09:12.559201548Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-06-25T16:58:54.696978019Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-10-03T17:37:16.649452850Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-01-15T18:15:10.312089318Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-07-22T00:22:25.969022659Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-04-28T20:09:18.781210Z",
         "rating": 5
       }
     ]
@@ -248,11 +228,23 @@
       "measured_at": "2026-09-16"
     },
     "places": {
-      "listing_count": 2,
-      "review_count_total": 807,
-      "rating_weighted": 4.91,
+      "listing_count": 1,
+      "review_count_total": 735,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-23"
     }
   },
   "gates": {
@@ -290,10 +282,10 @@
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 61,
+    "total": 63,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -357,7 +349,7 @@
         ]
       },
       "C": {
-        "score": 19,
+        "score": 17,
         "max": 20,
         "subs": [
           {
@@ -366,15 +358,15 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "807 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
+            "evidence": "735 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.91 over 807 reviews → Bayesian 4.90 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 735 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -382,15 +374,15 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "8 of 10 sampled reviews are from the last 12 months (newest 2026-07-20) · a sample of five per business listing, not every review"
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-09-04) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 3,
+            "pts": 2,
             "max": 4,
             "source": "places",
-            "evidence": "1 of 10 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "1 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -417,18 +409,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 2,
-            "max": 5,
+            "max": 2,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1 · cited in AI answers: 263 citations / 105 pages 1/1"
+            "evidence": "JSON-LD detected 1/1 · cited in AI answers: 263 citations / 105 pages 1/1 · not assessed on any firm yet, so content depth and earned media leave the scale (3 pts)"
           }
         ]
       },
@@ -463,11 +455,11 @@
         ]
       }
     },
-    "floor_abc": 40,
+    "floor_abc": 38,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -476,13 +468,13 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 59.0,
-    "assessed": 97,
-    "coverage": 0.97,
-    "floor_abc_pct": 0.702,
+    "raw": 57.0,
+    "assessed": 90,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.667,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 90,
     "comparable": true
   },
   "entity": {

@@ -126,6 +126,13 @@ NO_SOURCE = {
            "reader with a 403 and the Secretary of State's business search answers with a 202 "
            "and an empty body, which is a bot challenge, and we do not work around either. "
            "This is a limit of the published record and not something the firm can change."),
+    "GA": ("Georgia publishes no business register we can query for free. The Secretary of "
+           "State sells the bulk corporations file over FTP, $500 for a single extract or "
+           "$5,000 a year for weekly ones, and its free entity search answers an automated "
+           "reader with a 403 on every path including its own robots file, which is a bot "
+           "challenge we do not work around. A register that is for sale is a published record "
+           "in the sense that matters here only if somebody buys it. This is a limit of the "
+           "published record and not something the firm can change."),
 }
 
 # Endings that are the form of the entity rather than its name, so "Rizk Law, P.C." and "RIZK

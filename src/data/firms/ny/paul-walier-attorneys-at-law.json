@@ -45,9 +45,9 @@
     "quotes": [],
     "google": {
       "rating": 4.6,
-      "count_label": "407",
+      "count_label": "408",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-18"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -55,19 +55,19 @@
         "rating": 5
       },
       {
-        "published_at": "2025-12-13T03:51:27.925044544Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-08-05T16:49:48.861581423Z",
         "rating": 5
       },
       {
-        "published_at": "2026-04-18T06:55:36.278841395Z",
+        "published_at": "2026-06-01T12:30:49.080760475Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-03-24T20:12:24.166459050Z",
         "rating": 5
       },
       {
-        "published_at": "2026-06-03T17:32:14.455300652Z",
+        "published_at": "2026-05-01T16:30:01.868883677Z",
         "rating": 5
       }
     ]
@@ -98,10 +98,22 @@
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 407,
+      "review_count_total": 408,
       "rating_weighted": 4.6,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 2,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-18"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 0.2,
@@ -249,7 +261,7 @@
     "total": 35,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -313,7 +325,7 @@
         ]
       },
       "C": {
-        "score": 18,
+        "score": 16,
         "max": 20,
         "subs": [
           {
@@ -322,7 +334,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "407 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "408 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -330,7 +342,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.6 over 407 reviews → Bayesian 4.65 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.6 over 408 reviews → Bayesian 4.65 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -343,15 +355,15 @@
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 4,
+            "pts": 2,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "1 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
       "D": {
-        "score": 5,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -373,18 +385,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 0.2,
+            "max": 1,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 2 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -419,7 +431,7 @@
         ]
       }
     },
-    "floor_abc": 22,
+    "floor_abc": 20,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
@@ -432,10 +444,10 @@
         "B1 Fee terms published: +6 available"
       ]
     },
-    "raw": 27.0,
-    "assessed": 78,
-    "coverage": 0.78,
-    "floor_abc_pct": 0.579,
+    "raw": 24.2,
+    "assessed": 70,
+    "coverage": 0.787,
+    "floor_abc_pct": 0.526,
     "gates_unavailable": [
       "G1",
       "G2"
@@ -443,7 +455,17 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-22"
   }
 }

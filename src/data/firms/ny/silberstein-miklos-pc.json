@@ -5,7 +5,7 @@
   "website": "https://ask4sam.net/",
   "domain": "ask4sam.net",
   "phone": "(877) 275-4726",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -216,9 +216,9 @@
     "quotes": [],
     "google": {
       "rating": 4.9,
-      "count_label": "585",
+      "count_label": "584",
       "source": "Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-10"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -234,31 +234,11 @@
         "rating": 5
       },
       {
-        "published_at": "2025-11-18T21:54:01.985115692Z",
-        "rating": 5
-      },
-      {
         "published_at": "2025-04-30T23:05:50.877528Z",
         "rating": 5
       },
       {
-        "published_at": "2026-04-25T17:45:46.063915254Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-09-29T22:56:02.160303498Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-11-17T16:56:36.055921578Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-11-10T03:49:07.217789968Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-11-03T12:23:06.998718147Z",
+        "published_at": "2024-12-19T04:16:04.098666Z",
         "rating": 5
       },
       {
@@ -270,15 +250,55 @@
         "rating": 5
       },
       {
-        "published_at": "2026-04-03T15:24:01.316355918Z",
-        "rating": 5
-      },
-      {
         "published_at": "2025-11-03T13:05:44.473767335Z",
         "rating": 5
       },
       {
+        "published_at": "2026-04-03T15:24:01.316355918Z",
+        "rating": 5
+      },
+      {
         "published_at": "2025-11-18T15:55:21.363666807Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-25T17:45:46.063915254Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-29T22:56:02.160303498Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-10T03:49:07.217789968Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-17T16:56:36.055921578Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-03T12:23:06.998718147Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2021-12-03T16:06:43.046005Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-09-11T03:45:51.867056Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-12-22T14:11:48.565196Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-10-14T13:48:50.424003Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2021-12-01T23:36:17.941230Z",
         "rating": 5
       },
       {
@@ -302,26 +322,6 @@
         "rating": 5
       },
       {
-        "published_at": "2021-12-03T16:06:43.046005Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2023-09-22T19:54:25.063323Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2022-09-11T03:45:51.867056Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2023-12-22T14:11:48.565196Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2022-10-14T13:48:50.424003Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-02-07T03:03:59.519932646Z",
         "rating": 5
       },
@@ -330,15 +330,15 @@
         "rating": 5
       },
       {
-        "published_at": "2023-11-26T23:15:49.190970Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2023-09-20T17:31:24.116103Z",
-        "rating": 5
-      },
-      {
         "published_at": "2022-04-18T19:04:53.323076Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-03-19T15:18:18.542947Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2018-05-25T22:33:24.792Z",
         "rating": 5
       }
     ]
@@ -386,10 +386,22 @@
     },
     "places": {
       "listing_count": 6,
-      "review_count_total": 585,
+      "review_count_total": 584,
       "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-10"
+      "measured_at": "2026-09-23"
     }
   },
   "gates": {
@@ -427,10 +439,10 @@
   "cohort_id": "ny-personal-injury",
   "faq": [],
   "score": {
-    "total": 68,
-    "tier": "Verified",
+    "total": 73,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (12/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -503,7 +515,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "585 Google reviews · Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count"
+            "evidence": "584 Google reviews · Google Business Profile via Places API. 6 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -511,7 +523,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 585 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 584 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -519,7 +531,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "19 of 30 sampled reviews are from the last 12 months (newest 2026-06-10) · a sample of five per business listing, not every review"
+            "evidence": "18 of 30 sampled reviews are from the last 12 months (newest 2026-06-10) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -554,18 +566,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "6 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "6 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 2,
-            "max": 5,
+            "max": 2,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1 · cited in AI answers: 83 citations / 46 pages 1/1"
+            "evidence": "JSON-LD detected 1/1 · cited in AI answers: 83 citations / 46 pages 1/1 · not assessed on any firm yet, so content depth and earned media leave the scale (3 pts)"
           }
         ]
       },
@@ -602,24 +614,24 @@
     },
     "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 2,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "B3 Results disclosure: +4 available",
         "D1 Website trust & experience: +4.0 available",
-        "D3 Local presence: +4 available"
+        "A2 Experience: +3 available"
       ]
     },
     "raw": 66.0,
-    "assessed": 97,
-    "coverage": 0.97,
+    "assessed": 90,
+    "coverage": 1.0,
     "floor_abc_pct": 0.781,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 90,
     "comparable": true
   },
   "entity": {

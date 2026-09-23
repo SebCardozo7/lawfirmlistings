@@ -602,24 +602,102 @@ def compute(firm):
     # of the first item is collected: that listings exist, are operational and carry reviews.
     # That earns 1 point, not 2 — completeness is not something we have looked at, and the
     # evidence says which half is missing so the row is not mistaken for a full measurement.
+    # This row used to award 1 point out of 5 and say in its own evidence that the other four
+    # were "not yet measured". Every one of the three hundred firms lost exactly four points to
+    # it, which is the tell: a sub-factor where the whole directory loses the same amount is not
+    # measuring anything, it is a constant subtracted from everybody and dressed as a score. It
+    # was our unfinished work charged to the firms, which is the error this whole engine exists
+    # to avoid.
+    #
+    # The methodology's five points are three separate things, and they have three different
+    # answers. Profile completeness is now really measured, from fields scripts/enrich_places.py
+    # asks the Places API for. NAP consistency across thirty citations needs a citation dataset
+    # we do not have. Local-pack rank needs per-keyword local rank tracking we do not run. So
+    # the completeness half is scored and the other three points leave the scale, exactly as A5's
+    # unreachable half does, rather than being charged to a firm that could not have earned them.
     places = firm.get("digital", {}).get("places")
+    comp = (places or {}).get("completeness")
     if places and places.get("listing_count") and "D3" not in A:
         n = places["listing_count"]
-        out.append(sub("D3", 1, "places",
-                       f"{n} operational Google Business Profile listing{'' if n == 1 else 's'} "
-                       f"with reviews · profile completeness, NAP consistency across citations "
-                       f"and local-pack rank not yet measured (4 of 5 pts still available)"))
+        listings = f"{n} operational Google Business Profile listing{'' if n == 1 else 's'}"
+        if comp:
+            # Only the photo count is scored, and the first version of this scored four things.
+            # Reading the distribution across the directory settled it: 279 of 298 listings carry
+            # exactly five categories and 296 publish hours, because Google asks for both before
+            # it will show a business at all, and not one listing in the directory carries a
+            # description, because that field is Google's to write and it has not written any.
+            # A field every firm has identically measures Google's requirements, and a field no
+            # firm has measures nothing; awarding points for either hands the same fraction to
+            # everybody and separates nobody. That is the objection sub()'s own docstring makes
+            # to A5's unreachable half, and it applies to a presence exactly as it does to an
+            # absence. The first draft of this replaced a constant of 1-in-5 with a constant of
+            # 1.5-in-2 on 291 of 300 firms, which is the same mistake in a smaller box.
+            #
+            # Photos do vary: 6 firms publish none, 205 are at or above the ten the API will
+            # return, and 87 sit in between. So that is the measurement, and it is honest about
+            # its ceiling: the methodology asks for twenty and this API stops counting at ten, so
+            # a firm at the cap is credited in full and the evidence says the count was truncated.
+            n_photos = comp.get("photos") or 0
+            pts = min(n_photos, 10) / 10.0
+            shown = (f"{n_photos} photos" if n_photos < 10
+                     else "10 or more photos, which is where the API stops counting")
+            skipped = []
+            if comp.get("categories"):
+                skipped.append(f"{comp['categories']} categories")
+            if comp.get("hours_published"):
+                skipped.append("hours published")
+            out.append(sub("D3", pts, "places",
+                           listings + " · " + shown +
+                           (" · " + ", ".join(skipped) +
+                            ", which almost every listing here has and so separates nobody"
+                            if skipped else "") +
+                           " · the services list, Q&A and recent posts are owner-side fields the "
+                           "Places API does not expose, and NAP consistency across citations and "
+                           "local-pack rank have no source here, so the rest of this sub-factor "
+                           "leaves the scale rather than being scored as unearned",
+                           max_override=1))
+        else:
+            # A listing matched before this data was collected. Pending rather than zero.
+            out.append(sub("D3", 0, "pending",
+                           listings + " · profile completeness not collected on this reading",
+                           max_override=1))
     else: out.append(assessed("D3"))
 
     # ---- D4: content(2) assessed, schema(1) observed, media(1) assessed, AI(1) ahrefs ----
-    d4 = 0; ev = []
-    c = A.get("D4_content"); d4 += c["pts"] if c else 0; ev.append(f"content {c['pts'] if c else 0}/2")
-    sd = firm.get("digital", {}).get("schema_detected"); d4 += 1 if sd else 0; ev.append("JSON-LD detected 1/1" if sd else "no JSON-LD detected 0/1")
-    m = A.get("D4_media"); d4 += m["pts"] if m else 0; ev.append(f"earned media {m['pts'] if m else 0}/1" + (" (illustrative)" if m and m.get("source","illustrative")=="illustrative" else ""))
+    #
+    # Two of these four are hand-assessed and nobody has ever assessed them, on any firm. They
+    # were being folded into the row as zeros, so every firm in the directory lost the same three
+    # points for work we had not done: the same error D3 carried, in the same pillar. A point
+    # nobody has ever awarded is not a point a firm failed to earn.
+    #
+    # So the scale shrinks to what is actually read, and the evidence names what left it. These
+    # two are measurable, unlike D3's local-pack rank: content depth is in the crawl and earned
+    # media is in the Ahrefs referring domains. They should come back when somebody measures
+    # them, and until then they cost nobody anything.
+    d4 = 0; ev = []; d4_max = 0
+    c = A.get("D4_content")
+    if c:
+        d4 += c["pts"]; d4_max += 2; ev.append(f"content {c['pts']}/2")
+    sd = firm.get("digital", {}).get("schema_detected")
+    d4 += 1 if sd else 0; d4_max += 1
+    ev.append("JSON-LD detected 1/1" if sd else "no JSON-LD detected 0/1")
+    m = A.get("D4_media")
+    if m:
+        d4 += m["pts"]; d4_max += 1
+        ev.append(f"earned media {m['pts']}/1"
+                  + (" (illustrative)" if m.get("source", "illustrative") == "illustrative" else ""))
     if ah and ah.get("ai_citations"):
-        ai = ah["ai_citations"]; d4 += 1 if ai["total"] > 0 else 0
-        ev.append(f"cited in AI answers: {ai['total']} citations / {ai['pages']} pages 1/1" if ai["total"] else "no AI citations 0/1")
-    out.append(sub("D4", d4, "ahrefs" if ah else "observed", " · ".join(ev)))
+        ai = ah["ai_citations"]; d4 += 1 if ai["total"] > 0 else 0; d4_max += 1
+        ev.append(f"cited in AI answers: {ai['total']} citations / {ai['pages']} pages 1/1"
+                  if ai["total"] else "no AI citations 0/1")
+    absent = [name for name, present in (("content depth", c), ("earned media", m),
+                                         ("AI citations", ah and ah.get("ai_citations")))
+              if not present]
+    if absent:
+        ev.append("not assessed on any firm yet, so "
+                  + " and ".join(absent) + f" leave the scale ({SUBS['D4'][2] - d4_max} pts)")
+    out.append(sub("D4", d4, "ahrefs" if ah else "observed", " · ".join(ev),
+                   max_override=d4_max))
 
     # ---- E ----
     # "Not stated" is a non-empty string, so the old truthiness test handed two transparency
@@ -740,11 +818,19 @@ def compute(firm):
     #
     # So the denominator is the scale that exists here. A state that publishes less has a shorter
     # ladder, not an unclimbable one, and the profile says which rungs its state does not have.
+    # The scale is the sum of the sub-factors actually in play, not the flat hundred the
+    # methodology allocates. Those differ wherever a sub-factor hands back a shorter max because
+    # part of it is unreachable: A5's professional liability half, D3's local-pack rank and
+    # citation audit, D4's unassessed content and media rows. Reading PILLAR_MAX here instead
+    # left coverage dividing a shrunken numerator by a full-size denominator, so every firm's
+    # coverage fell by however many points had left the scale, for no reason of its own, and
+    # coverage is one of the three conditions for certification. Summing what is really there
+    # keeps "how much of what could be read did we read" answering that question.
     def market_scale(codes):
         total_max = absent = 0.0
         for pk in codes:
-            total_max += PILLAR_MAX[pk]
             for x in pillars[pk]["subs"]:
+                total_max += x["max"]
                 if any(w in (x["source"] or "").lower() for w in NO_SOURCE_IN_MARKET):
                     absent += x["max"]
         return total_max, absent

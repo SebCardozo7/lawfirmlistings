@@ -101,8 +101,90 @@
       "rating": 4.81,
       "count_label": "542",
       "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-13"
-    }
+      "fetched_at": "2026-09-23"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-17T16:20:32.600525376Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-23T17:58:05.396686632Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-26T19:39:39.409513964Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-03T20:33:19.738917595Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-29T16:44:38.011397663Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-07T15:14:29.507400209Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-03T17:36:26.799753076Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-05T19:11:00.100826277Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-08T13:03:27.498149755Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-05T15:00:54.277617541Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-02T13:42:36.118042088Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-31T15:32:10.665930676Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-09T15:34:57.350774697Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-05T16:22:02.616777307Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-27T14:31:43.298266871Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-09T16:49:05.186210461Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-17T18:27:58.236738944Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-17T13:07:15.037246715Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-24T15:49:53.782162237Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-16T17:25:37.794223552Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -128,8 +210,20 @@
       "listing_count": 4,
       "review_count_total": 542,
       "rating_weighted": 4.81,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-13"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 17,
@@ -201,10 +295,10 @@
     "checked_at": "2026-09-13"
   },
   "score": {
-    "total": 67,
+    "total": 86,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -268,7 +362,7 @@
         ]
       },
       "C": {
-        "score": 10,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -285,23 +379,23 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.81 over 542 reviews → Bayesian 4.81 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.81 over 542 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 0,
+            "pts": 5,
             "max": 5,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "19 of 20 sampled reviews are from the last 12 months (newest 2026-09-02) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "0 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -328,16 +422,16 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "4 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "4 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
-            "max": 5,
+            "max": 1,
             "source": "pending",
             "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
           }
@@ -374,11 +468,11 @@
         ]
       }
     },
-    "floor_abc": 10,
+    "floor_abc": 19,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 3,
+      "gap": 0,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -387,16 +481,16 @@
         "B1 Results published: not yet measured (6 pts)"
       ]
     },
-    "raw": 16.0,
-    "assessed": 24,
-    "coverage": 0.296,
-    "floor_abc_pct": 0.909,
+    "raw": 25.0,
+    "assessed": 29,
+    "coverage": 0.397,
+    "floor_abc_pct": 0.95,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 81,
+    "assessable": 73,
     "comparable": false
   },
   "screens": {

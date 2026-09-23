@@ -213,8 +213,8 @@ const gp = (await getCollection('firms')).find(f => f.data.slug === 'greenstein-
       <div class="src-card"><b>Reviews</b><span>Google Places API, summed across every business listing a firm operates and weighted by count. One platform so far, which we label on every profile.</span></div>
       <div class="src-card"><b>Web performance &amp; accessibility</b><span>PageSpeed Insights API, on mobile. Accessibility auditing is not yet running.</span></div>
       <div class="src-card"><b>Search authority</b><span>Ahrefs, cohort percentiles. A single provider, so the sub-factor says so.</span></div>
-      <div class="src-card"><b>Local presence</b><span>Google Business Profile completeness. Local-pack rank tracking is not yet running.</span></div>
-      <div class="src-card"><b>Content &amp; structured data</b><span>Custom crawler: JSON-LD parsing, byline and credential detection, freshness</span></div>
+      <div class="src-card"><b>Local presence</b><span>Google Business Profile completeness, read from the Places API: the categories a listing claims, its opening hours, its photos and its description. Three things the sub-factor asks for have no source we can reach. The services list, the Q&amp;A and recent posts are owner-side fields the API does not expose at any price, and we run no citation audit or local-pack rank tracking. Those points leave the scale rather than being scored against a firm that could not have earned them.</span></div>
+      <div class="src-card"><b>Content &amp; structured data</b><span>Custom crawler: JSON-LD parsing, byline and credential detection, freshness. Content depth and earned media are not yet assessed on any firm, so those points are out of the scale until they are. Unlike local-pack rank they are measurable, and they should come back.</span></div>
       <div class="src-card"><b>AI-search visibility</b><span>Sampled prompts across ChatGPT, Gemini, Perplexity and Google AI Overviews, quarterly</span></div>
     </div>
   </div>

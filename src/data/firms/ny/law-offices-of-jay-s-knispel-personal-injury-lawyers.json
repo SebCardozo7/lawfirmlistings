@@ -5,7 +5,7 @@
   "website": "https://jknylaw.com/",
   "domain": "jknylaw.com",
   "phone": "(212) 564-2800",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "workers-compensation",
@@ -67,9 +67,9 @@
     "quotes": [],
     "google": {
       "rating": 5.0,
-      "count_label": "96",
-      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-13"
+      "count_label": "95",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -90,14 +90,6 @@
       },
       {
         "published_at": "2025-12-25T20:37:17.030189146Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-03-27T15:33:23.596807431Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2022-10-24T23:32:17.044750Z",
         "rating": 5
       }
     ]
@@ -126,11 +118,23 @@
       "practice_page": "https://jknylaw.com/new-york-workers-compensation-lawyer/"
     },
     "places": {
-      "listing_count": 2,
-      "review_count_total": 96,
+      "listing_count": 1,
+      "review_count_total": 95,
       "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-13"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 41,
@@ -284,10 +288,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (9/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -360,7 +364,7 @@
             "pts": 3,
             "max": 5,
             "source": "observed",
-            "evidence": "96 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
+            "evidence": "95 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -368,7 +372,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 96 reviews → Bayesian 4.92 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 95 reviews → Bayesian 4.91 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -376,7 +380,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "6 of 7 sampled reviews are from the last 12 months (newest 2026-07-27) · a sample of five per business listing, not every review"
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-27) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -384,7 +388,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 7 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -411,18 +415,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "2 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -459,10 +463,10 @@
     },
     "floor_abc": 42,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 6,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "B3 Results disclosure: +4 available",
@@ -471,12 +475,12 @@
       ]
     },
     "raw": 62.5,
-    "assessed": 97,
-    "coverage": 0.97,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.737,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
   },
   "screens": {

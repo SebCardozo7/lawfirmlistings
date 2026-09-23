@@ -595,10 +595,10 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.31,
-      "count_label": "83",
-      "source": "Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-14"
+      "rating": 4.3,
+      "count_label": "75",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -619,26 +619,6 @@
       },
       {
         "published_at": "2025-09-09T18:09:58.555252531Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2023-04-19T14:54:41.465411Z",
-        "rating": 1
-      },
-      {
-        "published_at": "2025-08-20T12:06:52.079800799Z",
-        "rating": 4
-      },
-      {
-        "published_at": "2022-08-14T00:55:15.154514Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2021-01-09T16:39:53.042544Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2020-11-13T17:05:08.436142Z",
         "rating": 5
       }
     ]
@@ -666,11 +646,23 @@
       "practice_page": "https://www.lipsitzgreen.com/practice-areas/accidents-and-personal-injury/car-accidents/"
     },
     "places": {
-      "listing_count": 3,
-      "review_count_total": 83,
-      "rating_weighted": 4.31,
+      "listing_count": 1,
+      "review_count_total": 75,
+      "rating_weighted": 4.3,
+      "completeness": {
+        "categories": 7,
+        "hours_published": true,
+        "photos": 8,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-14"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 32,
@@ -770,15 +762,10 @@
     "checked_at": "2026-09-14"
   },
   "results_published": {
-    "readable": true,
-    "count": 0,
-    "amounts": [],
-    "case_types": [],
-    "disclaimer": true,
-    "venues": [],
-    "why": "The page at /results/ renders three paragraphs about obtaining the best possible results for clients and directs the reader to the practice pages. It names no case and states no figure. It does carry the prior-results disclaimer.",
-    "source": "the firm's own results page, opened in a browser so its JavaScript ran, because our crawler reads served HTML and could not tell an empty page from a deferred one",
-    "checked_at": "2026-09-22"
+    "readable": false,
+    "why": "the results page served 2676 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.lipsitzgreen.com/results/",
+    "checked_at": "2026-09-14"
   },
   "entity": {
     "legal_name": "LIPSITZ GREEN SCIME CAMBRIA LLP",
@@ -789,10 +776,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 47,
+    "total": 60,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (0/15).",
-    "computed_at": "2026-09-22",
+    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -826,7 +813,7 @@
         ]
       },
       "B": {
-        "score": 4,
+        "score": 0,
         "max": 15,
         "subs": [
           {
@@ -834,29 +821,29 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "firm",
-            "evidence": "The firm publishes no case results we could read"
+            "source": "pending",
+            "evidence": "the results page served 2676 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "firm",
-            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+            "source": "pending",
+            "evidence": "the results page served 2676 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B3",
             "label": "Results disclosure",
-            "pts": 4,
+            "pts": 0,
             "max": 4,
-            "source": "firm",
-            "evidence": "Prior-results disclaimer present, as the advertising rules require"
+            "source": "pending",
+            "evidence": "the results page served 2676 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           }
         ]
       },
       "C": {
-        "score": 13,
+        "score": 16,
         "max": 20,
         "subs": [
           {
@@ -865,31 +852,31 @@
             "pts": 3,
             "max": 5,
             "source": "observed",
-            "evidence": "83 Google reviews · Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count"
+            "evidence": "75 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 3,
+            "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.31 over 83 reviews → Bayesian 4.60 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.3 over 75 reviews → Bayesian 4.61 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 4,
+            "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "4 of 10 sampled reviews are from the last 12 months (newest 2026-04-08) · a sample of five per business listing, not every review"
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-04-08) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 3,
+            "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "1 of 10 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -916,18 +903,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 0.8,
+            "max": 1,
             "source": "places",
-            "evidence": "3 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 8 photos · 7 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -962,26 +949,26 @@
         ]
       }
     },
-    "floor_abc": 35,
+    "floor_abc": 34,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
-      "floor_met": false,
-      "coverage_met": true,
+      "gap": 10,
+      "floor_met": true,
+      "coverage_met": false,
       "path": [
-        "B1 Results published: +6 available",
-        "E1 Free consult & fee transparency: +6 available",
-        "D1 Website trust & experience: +5.5 available"
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 45.5,
-    "assessed": 97,
-    "coverage": 0.97,
-    "floor_abc_pct": 0.614,
+    "raw": 44.3,
+    "assessed": 74,
+    "coverage": 0.831,
+    "floor_abc_pct": 0.81,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
   }
 }

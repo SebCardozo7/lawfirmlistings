@@ -168,10 +168,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 50,
+    "total": 58,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -252,7 +252,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.97 over 1,329 reviews → Bayesian 4.96 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.97 over 1,329 reviews → Bayesian 4.96 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -273,7 +273,7 @@
         ]
       },
       "D": {
-        "score": 1,
+        "score": 0,
         "max": 25,
         "subs": [
           {
@@ -295,16 +295,16 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
-            "source": "places",
-            "evidence": "4 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "pts": 0,
+            "max": 1,
+            "source": "pending",
+            "evidence": "4 operational Google Business Profile listings · profile completeness not collected on this reading"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
-            "max": 5,
+            "max": 1,
             "source": "pending",
             "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
           }
@@ -345,7 +345,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 20,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -354,16 +354,16 @@
         "D1 Website trust & experience: not yet measured (7 pts)"
       ]
     },
-    "raw": 12.0,
-    "assessed": 24,
-    "coverage": 0.24,
+    "raw": 11.0,
+    "assessed": 19,
+    "coverage": 0.207,
     "floor_abc_pct": 1.0,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 92,
     "comparable": false
   },
   "screens": {

@@ -47,7 +47,7 @@
       "rating": 4.9,
       "count_label": "113",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-17"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -63,12 +63,12 @@
         "rating": 5
       },
       {
-        "published_at": "2026-04-06T19:21:18.079807111Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-02-05T18:54:33.955988500Z",
         "rating": 4
+      },
+      {
+        "published_at": "2026-03-27T22:13:38.626300549Z",
+        "rating": 5
       }
     ]
   },
@@ -91,8 +91,20 @@
       "listing_count": 1,
       "review_count_total": 113,
       "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 1,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-17"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 1.3,
@@ -287,10 +299,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 36,
+    "total": 39,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -371,7 +383,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 113 reviews → Bayesian 4.87 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 113 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -392,7 +404,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 2,
         "max": 25,
         "subs": [
           {
@@ -414,18 +426,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 0.1,
+            "max": 1,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 1 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · no JSON-LD detected 0/1 · earned media 0/1"
+            "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -464,7 +476,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 34,
+      "gap": 31,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -473,16 +485,16 @@
         "D2 Search authority: +7 available"
       ]
     },
-    "raw": 28.0,
-    "assessed": 78,
-    "coverage": 0.78,
+    "raw": 27.1,
+    "assessed": 70,
+    "coverage": 0.787,
     "floor_abc_pct": 0.658,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
   },
   "results_published": {

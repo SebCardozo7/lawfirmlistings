@@ -155,6 +155,12 @@ def promote(rec: dict, firm: dict) -> list[str]:
             "listing_count": listings,
             "review_count_total": n,
             "rating_weighted": agg["rating_weighted"],
+            # Sub-factor D3's completeness half, which for a long time nothing collected and the
+            # engine scored as a zero on every firm. Carried through only when the staging record
+            # actually holds it, so a profile measured before this existed keeps D3 pending
+            # rather than acquiring an empty block that reads as "we looked and found nothing".
+            **({"completeness": places["d3_completeness"]}
+               if places.get("d3_completeness") else {}),
             "source": "Google Places API (New) places:searchText",
             "measured_at": places.get("measured_at"),
         }

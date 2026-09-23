@@ -54,7 +54,7 @@
       "rating": 4.1,
       "count_label": "23",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-18"
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
@@ -108,8 +108,20 @@
       "listing_count": 1,
       "review_count_total": 23,
       "rating_weighted": 4.1,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 9,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-18"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 2.1,
@@ -286,10 +298,10 @@
     "checked_at": "2026-09-21"
   },
   "score": {
-    "total": 32,
+    "total": 35,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-09-22",
+    "verdict": "2 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar E (0/15).",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -370,7 +382,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.1 over 23 reviews → Bayesian 4.70 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.1 over 23 reviews → Bayesian 4.70 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -413,18 +425,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 0.9,
+            "max": 1,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 9 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -463,24 +475,34 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 38,
+      "gap": 35,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: +8 available",
-        "B1 Fee terms published: +6 available"
+        "B1 Fee terms published: +6 available",
+        "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 28.0,
-    "assessed": 87,
-    "coverage": 0.87,
+    "raw": 27.9,
+    "assessed": 79,
+    "coverage": 0.888,
     "floor_abc_pct": 0.489,
     "gates_unavailable": [],
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 100,
+    "assessable": 89,
     "comparable": true
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-22"
   }
 }

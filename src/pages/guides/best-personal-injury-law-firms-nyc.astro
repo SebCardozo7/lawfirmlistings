@@ -56,7 +56,7 @@ const lastUpdated = computedDates.length
 {/* noindex while the ranking is gated. The page explains itself to a visitor who lands on
     it, but a title promising a ranking that is not published should not be in search results.
     Drop the noindex — and the sitemap filter in astro.config.mjs — when the gate opens. */}
-<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal Injury Firms in New York City: Ranking in Preparation"} description={gateMet ? `The ${ranked.length} highest-scoring personal injury firms in New York City under LFL Certified Methodology ${methodVersion}, with the evidence behind each score.` : `This ranking publishes once ${MIN_CERTIFIED} New York personal injury firms have completed certification. ${ranked.length} ${ranked.length === 1 ? "has" : "have"} so far.`} nav="guides" image="/og/ranking.png" imageAlt="Three podium columns with a certification mark above the tallest" noindex={!gateMet}>
+<Base title={gateMet ? "Best Personal Injury Law Firms in NYC, Ranked for 2026" : "Personal Injury Firms in New York City: Ranking in Preparation"} description={gateMet ? `The highest-scoring personal injury firms in New York City under LFL Certified Methodology ${methodVersion}, with the working shown for every score.` : `This ranking publishes once enough New York personal injury firms have completed certification, and it is not there yet.`} nav="guides" image="/og/ranking.png" imageAlt="Three podium columns with a certification mark above the tallest" noindex={!gateMet}>
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -177,19 +177,28 @@ const lastUpdated = computedDates.length
         <h2 id="compare">Side-by-side comparison</h2>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>#</th><th>Firm</th><th>Best for</th><th>Rating</th><th>Largest verified result</th><th>Free consult</th></tr></thead>
+            {/* The column here used to be "Largest verified result", and it printed a placeholder
+                on every row for as long as this page has existed. It asked for a result this
+                directory had verified, and verifying a case amount means reading the docket,
+                which we have published a study explaining that we do not do. So the column was
+                structurally empty rather than waiting on data, and a table that prints the same
+                placeholder seventeen times is telling a reader nothing while looking like it is.
+                What replaces it is the number the rows are actually sorted by, which the table
+                should have shown from the start: a ranking that hides its own ranking key asks
+                to be taken on trust. */}
+            <thead><tr><th>#</th><th>Firm</th><th>Best for</th><th>Score</th><th>Rating</th><th>Reviews</th><th>Free consult</th></tr></thead>
             <tbody>
               {ranked.map((f, i) => {
                 const d = f.data;
                 const g = d.reviews.google;
-                const notable = d.results.find(r => r.verified && r.amount);
                 return (
                   <tr>
                     <td class="num">{i + 1}</td>
                     <td><b><a href={`/firms/${d.slug}/`}>{d.name}</a></b></td>
                     <td>{d.practices.filter(pr => pr.primary).map(pr => pr.name).join(', ')}</td>
-                    <td class="num">{g ? g.rating.toFixed(1) : '\u2014'}</td>
-                    <td class="num">{notable ? notable.amount : '$\u2014'}</td>
+                    <td class="num"><b>{d.score!.total}</b></td>
+                    <td class="num">{g ? g.rating.toFixed(1) : 'Not rated'}</td>
+                    <td class="num">{g ? g.count_label : 'None'}</td>
                     <td>{d.free_consultation ? 'Yes' : 'No'}</td>
                   </tr>
                 );

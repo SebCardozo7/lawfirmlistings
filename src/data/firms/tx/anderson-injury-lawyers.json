@@ -5,7 +5,7 @@
   "website": "https://maafirm.com/",
   "domain": "maafirm.com",
   "phone": "(817) 294-1900",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -173,58 +173,14 @@
   "reviews": {
     "quotes": [],
     "google": {
-      "rating": 4.91,
-      "count_label": "2,278",
-      "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-15"
+      "rating": 4.9,
+      "count_label": "505",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-23"
     },
     "sample": [
       {
-        "published_at": "2026-08-25T17:00:04.731664301Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-07-09T16:58:34.783096510Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-06-23T18:33:32.157930606Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-08-05T09:09:20.073000013Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-06-16T15:30:46.309260178Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-06-18T16:54:40.659822803Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-07-28T19:55:59.199559207Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-08-02T21:40:28.687536633Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-12-15T19:50:16.133410312Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-07-03T04:02:06.058974658Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-07-06T17:10:10.684235931Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-08-04T21:51:52.272596073Z",
         "rating": 5
       },
       {
@@ -232,31 +188,15 @@
         "rating": 5
       },
       {
-        "published_at": "2026-08-05T05:48:11.600317805Z",
-        "rating": 5
-      },
-      {
         "published_at": "2026-07-03T04:49:02.151096701Z",
         "rating": 5
       },
       {
-        "published_at": "2026-07-31T19:21:49.962510366Z",
+        "published_at": "2026-07-22T14:56:42.067839203Z",
         "rating": 5
       },
       {
-        "published_at": "2026-06-15T20:56:54.907138186Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-06-04T20:36:06.284076884Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-07-14T14:01:57.387813578Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2026-06-04T20:32:28.727547662Z",
+        "published_at": "2026-08-04T21:51:52.272596073Z",
         "rating": 5
       }
     ]
@@ -286,11 +226,23 @@
       "practice_page": "https://maafirm.com/texas-car-accident-lawyer/"
     },
     "places": {
-      "listing_count": 4,
-      "review_count_total": 2278,
-      "rating_weighted": 4.91,
+      "listing_count": 1,
+      "review_count_total": 505,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-15"
+      "measured_at": "2026-09-23"
     },
     "ahrefs": {
       "dr": 48,
@@ -460,10 +412,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 67,
-    "tier": "Verified",
+    "total": 73,
+    "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-22",
+    "computed_at": "2026-09-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -527,7 +479,7 @@
         ]
       },
       "C": {
-        "score": 20,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -536,15 +488,15 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "2,278 Google reviews · Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count"
+            "evidence": "505 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.91 over 2,278 reviews → Bayesian 4.91 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 505 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -552,7 +504,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "20 of 20 sampled reviews are from the last 12 months (newest 2026-08-28) · a sample of five per business listing, not every review"
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-28) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -560,7 +512,7 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -587,18 +539,18 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
-            "max": 5,
+            "pts": 1.0,
+            "max": 1,
             "source": "places",
-            "evidence": "4 operational Google Business Profile listings with reviews · profile completeness, NAP consistency across citations and local-pack rank not yet measured (4 of 5 pts still available)"
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
-            "max": 5,
+            "max": 1,
             "source": "ahrefs",
-            "evidence": "content 0/2 · JSON-LD detected 1/1 · earned media 0/1"
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -633,12 +585,12 @@
         ]
       }
     },
-    "floor_abc": 29,
+    "floor_abc": 28,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 3,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
@@ -646,17 +598,17 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 52.0,
-    "assessed": 78,
-    "coverage": 0.963,
-    "floor_abc_pct": 0.763,
+    "raw": 51.0,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.737,
     "gates_unavailable": [
       "G1",
       "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 81,
+    "assessable": 70,
     "comparable": true
   },
   "logo": {
