@@ -54,6 +54,13 @@ PAUSE = 0.4
 PAGE = 1000
 
 G6_MIN_REVIEWS = 10
+# Two practices where the ten-review minimum measures the client rather than the firm, and where
+# the gate therefore asks for a verified listing and a year in operation instead. Real estate
+# arrives by referral from agents and lenders; family law clients do not review the lawyer who
+# handled their divorce under their own name. The count still costs points in pillar C.
+# Keep in step with TRANSACTIONAL and DOMESTIC in scripts/score.py.
+EXEMPT_FROM_REVIEW_MINIMUM = {"real-estate", "family-law"}
+G6_MIN_REVIEWS_EXEMPT = 1
 G6_MIN_YEARS = 1
 
 # Only a professional entity may practise law in New York: a professional service corporation, a
@@ -239,6 +246,16 @@ def apply_gates(firm: dict, entity: dict | None, today: str) -> list[str]:
     listings = places.get("listing_count") or 0
     reviews = places.get("review_count_total") or 0
     age = years_since(entity.get("initial_dos_filing_date")) if entity else None
+    # Where no entity matched, the firm's own operating block usually holds the answer already:
+    # scripts/check_operating.py reads the domain's registration date over RDAP, which is a lower
+    # bound on how long the firm has been going and exactly the right instrument for a gate that
+    # asks whether it has been a year. Without this line the branch below wrote "time in operation
+    # not established" over seventeen firms that had a registered date and a decade of years
+    # sitting in the same file, and held every one of them at the bottom tier. One of them was
+    # eleven years old with three hundred and sixty-three reviews. That was a sentence about the
+    # order these scripts happen to run in, not about the firm.
+    if age is None:
+        age = (firm.get("operating") or {}).get("years")
     # A foreign entity's filing date is the day it registered to do business in New York, not
     # the day the firm was formed. TopDog Law is a Philadelphia practice that registered here in
     # May 2026 and has been operating since 2015 by its domain, and reading the New York date as
@@ -275,18 +292,37 @@ def apply_gates(firm: dict, entity: dict | None, today: str) -> list[str]:
                              "State, so this is not evidence against the firm, only a check we "
                              "could not complete from this source"),
                 "source": f"{DATASET}, partial",
+                # The register has nothing to return for a firm that is not required to file with
+                # it, and never will, so this cannot become a pass by waiting. The evidence above
+                # has always said so in words; this is the same sentence in a field the scoring
+                # engine reads, so the firm stops being demoted for its own entity type.
+                "unresolvable": ("New York does not require every law firm to file with the "
+                                 "Department of State, so this register cannot answer for one "
+                                 "that is not obliged to appear in it"),
                 "checked_at": today,
             }
 
     if not (gates.get("G6") or {}).get("attested"):
-        enough_reviews = reviews >= G6_MIN_REVIEWS
+        practices = firm.get("practices") or []
+        primary = next((x for x in practices if x.get("primary")),
+                       practices[0] if practices else {})
+        minimum = (G6_MIN_REVIEWS_EXEMPT
+                   if primary.get("slug") in EXEMPT_FROM_REVIEW_MINIMUM else G6_MIN_REVIEWS)
+        enough_reviews = reviews >= minimum
         old_enough = age is not None and age >= G6_MIN_YEARS
         if enough_reviews and old_enough:
+            # Which of the two sources settled the age has to be said, not assumed. Reading the
+            # entity's filing year here unconditionally would raise the moment the age came from
+            # the domain instead, and would in any case claim a formation date we never read.
+            since = (f"the entity was formed in {entity['initial_dos_filing_date'][:4]}" if entity
+                     else f"its web address was registered in "
+                          f"{((firm.get('operating') or {}).get('registered') or '')[:4]}")
             gates["G6"] = {
                 "pass": True,
-                "evidence": (f"{reviews:,} public client reviews and {age:.0f} years since the entity "
-                             f"was formed in {entity['initial_dos_filing_date'][:4]}"),
-                "source": f"Google Places API and {DATASET}",
+                "evidence": (f"{reviews:,} public client reviews and {age:.0f} years since "
+                             f"{since}"),
+                "source": (f"Google Places API and {DATASET}" if entity
+                           else "Google Places API and the domain's registration date over RDAP"),
                 "checked_at": today,
             }
         elif (age is None or foreign) and (gates.get("G6") or {}).get("pass"):
@@ -300,7 +336,7 @@ def apply_gates(firm: dict, entity: dict | None, today: str) -> list[str]:
         else:
             why = []
             if not enough_reviews:
-                why.append(f"{reviews:,} public reviews against a minimum of {G6_MIN_REVIEWS}")
+                why.append(f"{reviews:,} public reviews against a minimum of {minimum}")
             if not old_enough:
                 why.append("time in operation not established" if age is None
                            else f"only {age:.1f} years since formation")

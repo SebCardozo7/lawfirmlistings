@@ -48,6 +48,30 @@ TODAY = datetime.date.today().isoformat()
 # Per practice: what the URL of such a page looks like, and what its title has to say. The two
 # are deliberately different. A slug is abbreviated ("workers-comp", "work-injury") where a
 # heading is written out, and requiring both to match the same pattern rejected real pages.
+# Why several of these patterns carry Spanish and Chinese.
+#
+# This check reads a firm's own pages and asks whether it holds itself out for a practice. For a
+# year it asked that question only in English, and in New York City that is not a neutral choice.
+# Four firms in the first injury cohort were recorded as publishing no practice page while their
+# home pages said so plainly: Abogados de accidentes Cantaso links seventeen Spanish practice
+# pages, GW Law Group and Caesar, Napoli & Spivak publish in Chinese, and Kasen & Liu trades as
+# 凯森律师楼. A fifth, Krause & Glassmith, went unpublished for four days because the cohort held
+# its Chinese subdomain and we asked the wrong host for an English page.
+#
+# So this was not a gap at the edges. A large part of this market's injury practice is conducted
+# in Chinese, Spanish and Russian, and a directory that can only read English is not measuring the
+# market it claims to rank; it is ranking the English-speaking part of it and calling that the
+# whole. The alternatives below are the words these firms actually use, taken from their own
+# pages rather than from a dictionary.
+#
+# Chinese needs one thing noted: it is written without spaces, so none of those alternatives can
+# use a word boundary and each is matched as a plain substring.
+#
+# Two gaps, named rather than left to be discovered. Russian is not here, and Brooklyn and Queens
+# have a large Russian-speaking injury bar. And only personal-injury carries the alternatives so
+# far, because that is the only practice where we have firms in hand whose pages prove the
+# vocabulary; adding words to family-law or real-estate from a dictionary rather than from a
+# firm's own page is how a corroborating test starts accepting things it should not.
 PRACTICES = {
     # Family law, where the corroborating vocabulary has to work harder than anywhere else.
     #
@@ -126,18 +150,51 @@ PRACTICES = {
     # injury practice page. So the pattern accepts the sub-topics this directory already lists
     # under the practice in src/data/practices.ts, and the check was excluding real firms in
     # every market rather than only in this one.
+    # The practice this directory has most of, and the one where reading only English cost us the
+    # most. See the note under PRACTICES about why the Spanish and Chinese alternatives are here.
     "personal-injury": {
         "slug": re.compile(r"personal[-_]?injur|injury[-_]lawyer|accident[-_]lawyer|"
                            r"(?:car|auto|truck|motorcycle|pedestrian|bicycle|bike|construction|"
                            r"premises|slip[-_]and[-_]fall|dog[-_]bite|wrongful[-_]death|"
-                           r"catastrophic)[-_](?:accident|injur|death|liability)", re.I),
+                           r"catastrophic)[-_](?:accident|injur|death|liability)|"
+                           # Spanish slugs, which is how these firms actually address their
+                           # pages: abogadosde1800cantaso.com links seventeen of them, from
+                           # /accidente-de-auto-new-york/ to /abogado-accidentes-andamio-ny/.
+                           r"abogad[oa]s?[-_]?(?:de[-_])?(?:accidente|lesion)|"
+                           r"accidente[-_]de[-_](?:auto|carro|coche|trabajo|construcci|camion|"
+                           r"bicicleta|moto|peaton|uber)|accidentes?[-_]de[-_]|"
+                           r"lesiones[-_]personales|resbalon|caida[s]?[-_]|negligencia[-_]medica",
+                           re.I),
         "title": re.compile(
             r"personal\s+injury|catastrophic\s+injur|wrongful\s+death|medical\s+malpractice|"
             r"nursing\s+home\s+(?:abuse|neglect)|slip\s+and\s+fall|premises\s+liability|"
             r"\b(?:car|auto|truck|motorcycle|pedestrian|bicycle|bike|construction|dog\s+bite)"
-            r"[\s\w]{0,14}(?:accident|injur|crash)", re.I),
+            r"[\s\w]{0,14}(?:accident|injur|crash)|"
+            # Spanish. "Abogado de accidentes" is the phrase these firms title with, and it is
+            # what a Spanish-speaking client types.
+            r"abogad[oa]s?\s+de\s+(?:accidentes?|lesiones)|accidente\s+de\s+(?:auto|carro|coche|"
+            r"trabajo|construcci|cami|bicicleta|moto)|lesiones\s+personales|"
+            r"muerte\s+por\s+negligencia|negligencia\s+médica|resbal|caída[s]?\s+y\s+resbal|"
+            # Chinese, which carries no spaces and no word boundaries, so these are plain
+            # substrings: car accident, traffic accident, personal injury, accidental injury,
+            # work injury, medical malpractice, misdiagnosis, slip and fall, wrongful death.
+            r"车祸|交通事故|人身伤害|意外伤害|工伤|医疗事故|误诊|滑倒|摔伤|意外死亡",
+            re.I),
+        # Every word here has to be one a page written about this work uses and a page that
+        # merely lists the practice does not. That rules out the fee promise and the free
+        # consultation in any language: "consulta gratis" and 免费咨询 sit in the header of every
+        # page on these sites, exactly like "no fee unless we win" does in English, so accepting
+        # them would let the banner corroborate the page it sits on. What is left is the
+        # vocabulary of the claim itself.
         "corroborating": re.compile(r"negligen|statute\s+of\s+limitations|pain\s+and\s+suffering|"
-                                    r"contingen", re.I),
+                                    r"contingen|"
+                                    # Spanish: negligence, compensation, damages, claim, suit,
+                                    # liability, the limitation period.
+                                    r"negligencia|indemnizaci|compensaci|daños\s+y\s+perjuicios|"
+                                    r"reclamaci|responsabilidad\s+civil|prescripci|"
+                                    # Chinese: compensation, to claim compensation, damages,
+                                    # liability, negligence, statute of limitations.
+                                    r"赔偿|索赔|损害赔偿|责任|过失|诉讼时效", re.I),
     },
 }
 

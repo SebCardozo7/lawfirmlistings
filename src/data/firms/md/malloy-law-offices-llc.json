@@ -381,7 +381,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-15"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
@@ -429,16 +429,21 @@
     ]
   },
   "results_published": {
-    "readable": false,
-    "why": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler",
-    "url": "https://www.malloy-law.com/results/",
-    "checked_at": "2026-09-10"
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "The page at /results/ renders the word Results and nothing else.",
+    "source": "the firm's own results page, opened in a browser so its JavaScript ran, because our crawler reads served HTML and could not tell an empty page from a deferred one",
+    "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 52,
+    "total": 42,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-21",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -450,8 +455,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no queryable source",
+            "evidence": "Maryland publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
           },
           {
             "code": "A6",
@@ -480,24 +485,24 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler"
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler"
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler"
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
           }
         ]
       },
@@ -519,7 +524,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.88 over 2,120 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.88 over 2,120 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -612,24 +617,25 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
-      "floor_met": true,
-      "coverage_met": false,
+      "gap": 28,
+      "floor_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
       ]
     },
     "raw": 32.5,
-    "assessed": 63,
-    "coverage": 0.692,
-    "floor_abc_pct": 0.783,
+    "assessed": 78,
+    "coverage": 0.963,
+    "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",
       "G3"
     ],
-    "assessable": 91,
+    "gates_unresolvable": [],
+    "assessable": 81,
     "comparable": true
   },
   "accountability": {

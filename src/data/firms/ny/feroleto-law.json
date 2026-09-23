@@ -37,7 +37,7 @@
       "bar_state": "NY",
       "source_url": "https://yourbuffalolawyer.com/team-members/jordan-boggs/",
       "registry_note": "not found",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     {
       "name": "Cheryl Robinson",
@@ -45,7 +45,7 @@
       "bar_state": "NY",
       "source_url": "https://yourbuffalolawyer.com/team-members/cheryl-robinson/",
       "registry_note": "not found",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     }
   ],
   "languages": [
@@ -137,31 +137,31 @@
       "pass": false,
       "evidence": "None of the 2 attorneys this firm names could be found in the register, so there is nothing here to clear or to fault.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": false,
       "evidence": "None of the 2 attorneys this firm names could be found in the register, so no disciplinary history could be read either way.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System, partial",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "FEROLETO LAW PLLC is an active domestic professional service limited liability company registered since 2025-04-25, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "170 public client reviews and 1 years since the entity was formed in 2025",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-buffalo-personal-injury",
@@ -231,13 +231,13 @@
     "dos_id": "7595799",
     "formed": "2025-04-25",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 33,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -318,7 +318,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 170 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 170 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -425,6 +425,7 @@
     "coverage": 0.87,
     "floor_abc_pct": 0.404,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

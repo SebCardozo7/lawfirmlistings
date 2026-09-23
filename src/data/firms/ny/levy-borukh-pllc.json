@@ -123,31 +123,31 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "LEVY & BORUKH, PLLC is an active domestic professional service limited liability company registered since 2019-12-24, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "256 public client reviews and 7 years since the entity was formed in 2019",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -226,13 +226,13 @@
     "dos_id": "5677043",
     "formed": "2019-12-24",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 35,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-21",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -313,7 +313,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 256 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 256 reviews → Bayesian 4.88 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -351,7 +351,7 @@
             "pts": 1,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 6 → 13th pct of 75-firm cohort (median 28.5) 0/3 · 749 referring domains, 51th pct 1/2 · 4 organic keywords / 15 visits·mo, 5th pct 0/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 6 → 14th pct of 76-firm cohort (median 28) 0/3 · 749 referring domains, 51th pct 1/2 · 4 organic keywords / 15 visits·mo, 5th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -423,6 +423,7 @@
       "G1",
       "G2"
     ],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

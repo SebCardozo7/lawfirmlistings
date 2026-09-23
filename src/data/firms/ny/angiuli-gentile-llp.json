@@ -36,7 +36,7 @@
       "source_url": "https://www.aglawnyc.com/attorneys/annamarie-g-gentile/",
       "role": "Supervising Partner/Founder",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "1895291",
       "admitted_year": 1983,
@@ -48,7 +48,7 @@
       "source_url": "https://www.aglawnyc.com/attorneys/elizabeth-r-rerick/",
       "role": "Of Counsel",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5576616",
       "admitted_year": 2018,
@@ -60,7 +60,7 @@
       "source_url": "https://www.aglawnyc.com/attorneys/gary-c-angiuli/",
       "role": "Managing Partner/Founder",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "1913870",
       "admitted_year": 1984,
@@ -72,7 +72,7 @@
       "source_url": "https://www.aglawnyc.com/attorneys/erin-k-colgan/",
       "role": "Partner",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4076188",
       "admitted_year": 2003,
@@ -84,7 +84,7 @@
       "source_url": "https://www.aglawnyc.com/attorneys/stefanie-l-demario-germershausen/",
       "role": "Partner",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     }
   ],
@@ -183,31 +183,31 @@
       "pass": true,
       "evidence": "4 of 5 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 4 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "ANGIULI & GENTILE, LLP is an active domestic registered limited liability partnership registered since 1995-10-12, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 5 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "285 public client reviews and 31 years since the entity was formed in 1995",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-family-law",
@@ -376,13 +376,13 @@
     "dos_id": "1964006",
     "formed": "1995-10-12",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-17"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 57,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (4/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -463,7 +463,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.6 over 285 reviews → Bayesian 4.66 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.6 over 285 reviews → Bayesian 4.66 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -570,7 +570,37 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.728,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
+  },
+  "results_published": {
+    "count": 7,
+    "counted_from": "stated amounts",
+    "amounts": [
+      1500000,
+      1200000,
+      525000,
+      425000,
+      400000,
+      350000,
+      300000
+    ],
+    "largest": 1500000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "wrongful death",
+      "pedestrian"
+    ],
+    "disclaimer": true,
+    "venues": [],
+    "text_length": 7652,
+    "readable": true,
+    "url": "https://www.aglawnyc.com/case-results/",
+    "checked_at": "2026-09-22"
   }
 }

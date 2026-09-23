@@ -71,7 +71,7 @@ practices that names it. Where the reason is ours, it says so.
 | NY Injury Lawyers PLLC | nyinjurypllc.com | 325 | The site renders in the browser and serves an empty document to a crawler, so there is nothing to read. |
 | Kalra Law Firm | unionlawyer.com | 289 | Nothing to read: no sitemap answers and its home page serves us no links. Re-checked 2026-09-18. |
 | Caesar, Napoli & Spivak | libaolilaw.com | 287 | Its practice-areas page names no practice in any heading or link we can read, so what it lists is unreadable rather than missing this practice. Re-checked 2026-09-18. |
-| Krause & Glassmith, LLP | krauseandglassmith.com | 198 | **Ready to publish.** It was queued on cn.krauseandglassmith.com, its Chinese-language subdomain, and its apex domain publishes /new-york-car-accident-lawyer/. The reason it was not published is that we asked the wrong host. Found 2026-09-18. |
+| Krause & Glassmith, LLP | krauseandglassmith.com | 198 | **Published 2026-09-22**, Verified at 53 with all five gates passed. Its D2 stays pending until this market's next Ahrefs run, because that is applied per market from a CSV rather than per firm. Was queued on cn.krauseandglassmith.com, its Chinese-language subdomain, and its apex domain publishes /new-york-car-accident-lawyer/. The reason it was not published is that we asked the wrong host. |
 | Linden Law | linden.law | 187 | Nothing to read: no sitemap answers and its home page serves us no links. Re-checked 2026-09-18. |
 | Law Office of Charles C. DeStefano | charlesdestefanolaw.com | 161 | No readable practice page. |
 
@@ -249,3 +249,85 @@ Poleon LLP, is in the published cohort.
   address, and its Google listings hold 5,859 reviews there and 571 in Orlando against 439 on
   Fifth Avenue. It is the obvious first entry for a Miami market and is not comparable against
   firms whose whole practice is in New York.
+
+## Results pages a crawler cannot read, checked in a browser on 2026-09-22
+
+`scripts/crawl_results.py` reads served HTML. Ten firms had a results page that came back with
+text on it and no figure, where the crawler correctly said it could not tell an empty page from
+one whose results arrive with JavaScript. Each was opened in a real browser. Five rendered nothing
+and are now recorded as a finding by `scripts/record_rendered_results.py`. These five are the
+other outcomes, and none of them is a finding about the firm. They are ours to fix.
+
+| Firm | What the browser showed | What we owe |
+| --- | --- | --- |
+| Godosky & Gentile | Nine verdicts and settlements with figures, $65M down to $7.75M, across two pages | The site returns 403 to our crawler and renders fine to a person. Nothing is recorded, because the figures would have to be typed by hand. Needs a crawler that renders, or a polite retry that this host accepts. |
+| Law Office of Evan W. Kohn | `bronxlawfirm.net/results` is a 404 | The URL we hold is wrong. Find the real one. |
+| Spada Law Group | `spadalawgroup.com/results/` is a 404, and the site's own nav carries a RESULTS link | Same: our URL is stale. |
+| Parker Scheer | `/case-results/` is an index of twenty per-practice results pages, with no figures on it | The crawl needs a second level here. The results exist one click down. |
+| Metro Injury Law | Nine headings reading "Criminal Tax Evasion", "Public Company Fraud", "Tax Consultancy", "Trade and Markets" and "Marriage Agreements" | Unmodified template content on a firm that calls itself Metro Injury Law. Counting these as case results would be worse than counting none, so pillar B stays pending. Worth a person's eye before this firm is ranked. |
+
+The five that rendered empty, for the record: Greenstein & Pittari, Malloy Law, Lipsitz Green
+Scime Cambria, Ugalde & Rzonca, Foti Law. Each publishes a page headed Results or Case Results
+carrying no case. That cost each of them the fifteen points of pillar B, which is the right price.
+
+## Triage of the seventeen unread NYC injury firms, in a browser, 2026-09-22
+
+Each was opened as a person opens it. The question was narrow: is this firm unreadable to anybody,
+or only to us? Twelve of the seventeen are readable to a person, and the reasons we could not read
+them fall into four groups, three of which are ours.
+
+**Our practice check only reads English, and this is a market that does not only work in English.**
+Four of these firms publish the practice plainly, in Chinese or in Spanish, and our check looked
+for English headings and links and found none. This is the same failure that hid Krause & Glassmith
+for four days, and it is not an edge case in New York City: a large part of this market's injury
+practice is conducted in Chinese, Spanish and Russian, and a directory that cannot read those sites
+is not measuring the market it claims to rank.
+
+| Firm | Reviews | What the browser showed |
+| --- | --- | --- |
+| Abogados de accidentes Cantaso | 590 | Entire site in Spanish, with seventeen practice pages linked from the home page: accidente de auto, de construcción, de andamio, de peatón, en el trabajo. |
+| GW Law Group | 344 | Site in Chinese, and it also carries the line "GW Law Groups: Personal Injury, Car Accidents, Medical Malpractice Attorneys" in English. |
+| Caesar, Napoli & Spivak | 287 | Trades as 黎保利 and publishes in Chinese: 车祸 (car accident), 工伤 (work injury), 意外伤害 (personal injury). |
+| The Kasen Law Firm | 1,388 | Now The Kasen&Liu Law Firm, PLLC 凯森律师楼. Renders its practice headings with JavaScript, which is the second reason below. |
+
+**We hold the wrong domain for the largest firm in the market.** Ofshtein Law Firm is on
+`olf.law`; `olf.nyc` redirects there. Its home page is titled "Personal Injury Lawyer NYC |
+Ofshtein Law Firm". 2,652 reviews, the largest count in this market, missing from a ranking over a
+redirect nobody followed.
+
+**Three sites render their content with JavaScript and serve a crawler nothing.** Kasen Law,
+Linden Law and Kalra Law all render complete practice pages to a person. Kalra's is at
+`https://www.unionlawyer.com/personal-injury-attorney/`, on the www host.
+
+**Two more are readable and were recorded as unreadable.** Yuriy Prakhin links `/personal-injury`
+and leads with "$300M+ Recovered, No Fee Unless We Win". Charles DeStefano's home page reads "a
+boutique personal injury practice located in Staten Island".
+
+### The five that are not ours to fix
+
+| Firm | Reviews | Why |
+| --- | --- | --- |
+| KOLPLAW (Peter W. Kolp) | 605 | **Not a consumer firm.** It is trial counsel for other injury firms: "We support personal injury law firms, not compete with them." It does not belong in a ranking a client reads, at any score. |
+| Gregory Spektor & Associates | 945 | 403 to a browser as well as to us. We do not work around bot protection. |
+| Law Office of Seni Popat | 1,226 | Same. |
+| The New York Injury & Malpractice Law Firm | 1,113 | Same. |
+| Law Office of Helene Mark | 300 | Same. |
+| NY Injury Lawyers PLLC | 325 | The domain redirects to a parking lander. There is no site. |
+| Mikhail Yadgarov & Associates | 1,611 | Its own home page links `/personal-injury-attorney/`, which 404s in a browser too. Their site is broken, not ours. Worth one more look for the real URL before writing it off. |
+
+## Published 2026-09-22, after the practice check learned to read Chinese and Spanish
+
+| Firm | Reviews | Tier | Why it is not higher |
+| --- | --- | --- | --- |
+| Ofshtein Law Firm, P.C. | 2,659 | Listed | The largest review count in this market, and it names no attorney on any page we can read: /attorneys redirects to the home page. G1, G2 and G5 stay open for that reason, which is a finding about the firm rather than a gap, and it is the thesis of our own study on rosters. Its entity is on the New York register. |
+| Caesar, Napoli & Spivak | 290 | Listed | Publishes in Chinese as 黎保利. Entity on the register. Names no attorney we can read. |
+| GW Law Group | 343 | Listed | Publishes in Chinese. No entity matched on the New York register under this name, so G3 is open too. |
+
+### Held: a brand rather than a firm
+
+- **Abogados de accidentes Cantaso** (abogadosde1800cantaso.com, 590 reviews). Its site names no
+  firm and no attorney anywhere: it is "Abogados de accidentes" over a phone-number brand,
+  1-800-CANTASO, with seventeen Spanish practice pages behind it and nobody's name on any of them.
+  That may be a law firm and it may be a referral service, and telling those apart is the subject
+  of one of our own studies rather than something to guess at. Not published. A person should read
+  it, and the question to answer is whether any admitted attorney is named or identifiable at all.

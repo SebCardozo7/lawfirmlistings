@@ -5,7 +5,7 @@
   "website": "https://www.cadicny.com/",
   "domain": "rlffamilylaw.com",
   "phone": "(212) 706-2001",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "family-law",
@@ -36,7 +36,7 @@
       "source_url": "https://www.cadicny.com/team/howard-gardner/",
       "role": "Senior Litigation Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2181170",
       "admitted_year": 1988,
@@ -48,7 +48,7 @@
       "source_url": "https://www.cadicny.com/team/jaclyn-zackowitz/",
       "role": "Associate Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5703756",
       "admitted_year": 2019,
@@ -60,7 +60,7 @@
       "source_url": "https://www.cadicny.com/team/ksenia-rudyuk/",
       "role": "Founding Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-17",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4604195",
       "admitted_year": 2008,
@@ -160,31 +160,31 @@
       "pass": true,
       "evidence": "3 of 3 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 3 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G3": {
-      "pass": false,
-      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
-      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-17"
+      "pass": true,
+      "evidence": "RLF FAMILY LAW, P.C. is an active domestic professional service corporation registered since 2009-05-19, with 1 Google-verified location",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
-      "evidence": "120 public client reviews and 5 years since the entity was formed in 2022",
+      "evidence": "120 public client reviews and 17 years since the entity was formed in 2009",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-17"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-family-law",
@@ -347,9 +347,9 @@
   },
   "score": {
     "total": 51,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-09-21",
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (0/15).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -430,7 +430,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 120 reviews → Bayesian 4.82 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 120 reviews → Bayesian 4.82 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -537,7 +537,16 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.807,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
+  },
+  "entity": {
+    "legal_name": "RLF FAMILY LAW, P.C.",
+    "entity_type": "DOMESTIC PROFESSIONAL SERVICE CORPORATION",
+    "dos_id": "3812444",
+    "formed": "2009-05-19",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-09-22"
   }
 }

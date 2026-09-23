@@ -5,7 +5,7 @@
   "website": "https://grigorlaw.com/",
   "domain": "grigorlaw.com",
   "phone": "(718) 249-7447",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "workers-compensation",
@@ -53,7 +53,7 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "role_source": "not stated by the firm"
     },
     {
@@ -64,7 +64,7 @@
       "admitted_year": 2018,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "role_source": "not stated by the firm"
     },
     {
@@ -75,7 +75,7 @@
       "admitted_year": 2019,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "role_source": "not stated by the firm"
     },
     {
@@ -86,7 +86,7 @@
       "admitted_year": 2001,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "role_source": "not stated by the firm"
     },
     {
@@ -97,7 +97,7 @@
       "admitted_year": 2005,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "role_source": "not stated by the firm"
     },
     {
@@ -108,7 +108,7 @@
       "admitted_year": 2022,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "role_source": "not stated by the firm"
     },
     {
@@ -119,7 +119,7 @@
       "admitted_year": 2013,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "role_source": "not stated by the firm"
     }
   ],
@@ -252,25 +252,26 @@
       "pass": true,
       "evidence": "7 of 7 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-17"
+      "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
@@ -377,9 +378,9 @@
   },
   "score": {
     "total": 57,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-21",
+    "tier": "Verified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar E (1/15).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -460,7 +461,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 669 reviews → Bayesian 4.98 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 669 reviews → Bayesian 4.98 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -567,6 +568,9 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.825,
     "gates_unavailable": [],
+    "gates_unresolvable": [
+      "G3"
+    ],
     "assessable": 100,
     "comparable": true
   },

@@ -97,6 +97,12 @@ const tierLabel = s.tier === 'Certified' ? 'LFL Certified' : isCertified ? `LFL 
           {g.attested && <span class="sc-tag">Firm-attested</span>}
           {!g.pass && <span class="sc-tag">{noRoster(g.source)
               ? 'No attorneys published'
+              /* A check that ran and cannot resolve is neither open work nor a finding, and
+                 "Not checked" said the first of those about the second. The record answered;
+                 it just could not answer about this firm, and the evidence line underneath
+                 says which record and why. */
+              : g.unresolvable
+              ? 'No answer in the record'
               : noStateSource(g.source)
               /* The code, not the name: uppercased in a pill, "NOT PUBLISHED BY MARYLAND"
                  wrapped into a three-line blob beside a one-line gate. The evidence below

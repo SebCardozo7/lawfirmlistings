@@ -43,7 +43,7 @@
       "source_url": "https://raimondosundquist.com/about/edward-sundquist/",
       "role": "Partner",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5386438",
       "admitted_year": 2016,
@@ -55,7 +55,7 @@
       "source_url": "https://raimondosundquist.com/about/elliot-raimondo/",
       "role": "Partner",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5387188",
       "admitted_year": 2016,
@@ -65,7 +65,7 @@
     {
       "name": "Peter Larson",
       "source_url": "https://raimondosundquist.com/about/peter-larson/",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "5310685",
       "admitted_year": 2015,
@@ -178,31 +178,31 @@
       "pass": true,
       "evidence": "3 of 3 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 3 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "RAIMONDO & SUNDQUIST LLP is an active domestic registered limited liability partnership registered since 2019-11-27, with 2 Google-verified locations",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "21 public client reviews and 7 years since the entity was formed in 2019",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-buffalo-family-law",
@@ -334,13 +334,13 @@
     "dos_id": "5663629",
     "formed": "2019-11-27",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-18"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 45,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (1/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -421,7 +421,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 21 reviews → Bayesian 4.86 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 21 reviews → Bayesian 4.86 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -528,6 +528,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.64,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

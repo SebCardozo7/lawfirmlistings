@@ -5,7 +5,7 @@
   "website": "https://www.rmkinjurylaw.com/",
   "domain": "rmkinjurylaw.com",
   "phone": "(212) 421-0300",
-  "status": "listed",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -36,7 +36,7 @@
       "source_url": "https://www.rmkinjurylaw.com/about/richard-m-kenny/",
       "role": "Founding Partner",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2382620",
       "admitted_year": 1991,
@@ -48,11 +48,11 @@
       "source_url": "https://www.rmkinjurylaw.com/about/james-p-lundy/",
       "role": "Partner",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "2508653",
       "admitted_year": 1992,
-      "registry_status": "Currently registered",
+      "registry_status": "Due to reregister within 30 days of birthday",
       "registry_basis": "firm named in the registration"
     },
     {
@@ -60,7 +60,7 @@
       "source_url": "https://www.rmkinjurylaw.com/about/sean-r-kenny/",
       "role": "Attorney",
       "role_source": "firm bio page",
-      "checked_at": "2026-09-16",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "6222277",
       "admitted_year": 2025,
@@ -163,31 +163,32 @@
       "pass": true,
       "evidence": "3 of 3 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 3 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-17"
+      "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-22"
     },
     "G6": {
-      "pass": false,
-      "evidence": "Time in operation not established",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-09-17"
+      "pass": true,
+      "evidence": "363 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2009-06-17, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -381,9 +382,9 @@
   },
   "score": {
     "total": 70,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: B; most headroom in pillar D (8/25).",
-    "computed_at": "2026-09-21",
+    "tier": "Certified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar D (8/25).",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -464,7 +465,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 363 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 363 reviews → Bayesian 4.89 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -502,7 +503,7 @@
             "pts": 4,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 30 → 55th pct of 75-firm cohort (median 28.5) 2/3 · 702 referring domains, 39th pct 1/2 · 164 organic keywords / 759 visits·mo, 42th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 30 → 55th pct of 76-firm cohort (median 28) 2/3 · 702 referring domains, 38th pct 1/2 · 164 organic keywords / 759 visits·mo, 42th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -571,6 +572,9 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.93,
     "gates_unavailable": [],
+    "gates_unresolvable": [
+      "G3"
+    ],
     "assessable": 100,
     "comparable": true
   }

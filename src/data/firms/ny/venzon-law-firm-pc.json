@@ -36,7 +36,7 @@
       "source_url": "https://venzonlawfirm.com/attorneys-and-staff/venzon-catharine-m/",
       "role": "Attorney",
       "role_source": "the firm's own roster page, which lists its attorneys and its staff separately",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "1842244",
       "admitted_year": 1983,
@@ -48,7 +48,7 @@
       "source_url": "https://venzonlawfirm.com/attorneys-and-staff/pidanick-chad-t/",
       "role": "Attorney",
       "role_source": "the firm's own roster page, which lists its attorneys and its staff separately",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "bar_state": "NY",
       "bar_number": "4480919",
       "admitted_year": 2007,
@@ -60,7 +60,7 @@
       "source_url": "https://venzonlawfirm.com/attorneys-and-staff/warren-joan/",
       "role": "Of Counsel",
       "role_source": "the firm's own roster page, which lists its attorneys and its staff separately",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "registry_note": "ambiguous (2 attorneys share this name)"
     },
     {
@@ -68,7 +68,7 @@
       "source_url": "https://venzonlawfirm.com/attorneys-and-staff/jodi-l-held/",
       "role": "Staff",
       "role_source": "the firm's own roster page, which lists its attorneys and its staff separately",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     },
     {
@@ -76,7 +76,7 @@
       "source_url": "https://venzonlawfirm.com/attorneys-and-staff/jeffrey-s-triz/",
       "role": "Staff",
       "role_source": "the firm's own roster page, which lists its attorneys and its staff separately",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "registry_note": "not found"
     }
   ],
@@ -172,31 +172,31 @@
       "pass": true,
       "evidence": "2 of 5 named attorneys are currently registered and none carries an adverse status. 3 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 2 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "VENZON LAW FIRM P.C. is an active domestic professional service corporation registered since 2005-09-01, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 5 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "50 public client reviews and 21 years since the entity was formed in 2005",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-buffalo-family-law",
@@ -322,13 +322,13 @@
     "dos_id": "3251072",
     "formed": "2005-09-01",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-18"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 39,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -409,7 +409,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 50 reviews → Bayesian 4.66 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.3 over 50 reviews → Bayesian 4.66 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -516,6 +516,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.518,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

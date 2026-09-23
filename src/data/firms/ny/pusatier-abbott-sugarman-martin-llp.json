@@ -34,7 +34,7 @@
     {
       "name": "Stephen Pusatier",
       "source_url": "https://pasmlaw.com/",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "name_source": "read off the firm's own page by a person",
       "bar_state": "NY",
       "bar_number": "1329820",
@@ -45,7 +45,7 @@
     {
       "name": "Richard Abbott",
       "source_url": "https://pasmlaw.com/",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "name_source": "read off the firm's own page by a person",
       "bar_state": "NY",
       "bar_number": "2076339",
@@ -56,7 +56,7 @@
     {
       "name": "Steven Sugarman",
       "source_url": "https://pasmlaw.com/",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "name_source": "read off the firm's own page by a person",
       "bar_state": "NY",
       "bar_number": "1995281",
@@ -67,7 +67,7 @@
     {
       "name": "Katie Kestel Martin",
       "source_url": "https://pasmlaw.com/",
-      "checked_at": "2026-09-18",
+      "checked_at": "2026-09-22",
       "name_source": "read off the firm's own page by a person",
       "registry_note": "not found"
     }
@@ -162,31 +162,31 @@
       "pass": true,
       "evidence": "3 of 4 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 3 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G3": {
       "pass": true,
       "evidence": "PUSATIER ABBOTT SUGARMAN & MARTIN, LLP is an active domestic registered limited liability partnership registered since 2010-07-09, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     },
     "G6": {
       "pass": true,
       "evidence": "33 public client reviews and 16 years since the entity was formed in 2010",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-18"
+      "checked_at": "2026-09-22"
     }
   },
   "cohort_id": "ny-buffalo-family-law",
@@ -305,13 +305,13 @@
     "dos_id": "3971326",
     "formed": "2010-07-09",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-18"
+    "checked_at": "2026-09-22"
   },
   "score": {
     "total": 41,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-09-21",
+    "computed_at": "2026-09-22",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -392,7 +392,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.6 over 33 reviews → Bayesian 4.78 (prior 4.84 weighted as 100 reviews, from 296 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.6 over 33 reviews → Bayesian 4.78 (prior 4.84 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -499,6 +499,7 @@
     "coverage": 0.97,
     "floor_abc_pct": 0.579,
     "gates_unavailable": [],
+    "gates_unresolvable": [],
     "assessable": 100,
     "comparable": true
   }

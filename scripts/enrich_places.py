@@ -54,6 +54,10 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
+# Only used by resolves_to, which asks a firm's old domain where it lands. Named the same way the
+# crawlers name themselves, because a HEAD request from this repository should be as identifiable
+# as a GET from it.
+UA = "LawFirmListingsBot/1.0 (+https://lawfirmlistings.com/methodology/)"
 FIELDS = ",".join("places." + f for f in [
     "displayName", "websiteUri", "rating", "userRatingCount", "formattedAddress",
     "nationalPhoneNumber", "businessStatus", "googleMapsUri", "primaryTypeDisplayName",
@@ -85,12 +89,47 @@ def registrable(host):
     return host
 
 
+def resolves_to(host, target):
+    """Whether `host` is the same site as `target` after following its redirects.
+
+    A firm that changes domain does not get to update Google's copy of its own listing the same
+    afternoon, and often never bothers. Ofshtein Law Firm moved to olf.law and its Business
+    Profile still published olf.nyc, which redirects there; comparing the two strings rejected a
+    listing carrying 2,659 reviews as belonging to a different firm. That is the largest review
+    count in the New York injury market, kept out of the directory by a redirect nobody followed.
+
+    Only ever asked after the plain comparison fails, and only about a host Google already
+    published on the listing, so this costs one request per near miss rather than per firm.
+    A redirect that leaves the target is not a match, which is the case that matters: a parked
+    domain pointing at somebody else must not pull their listing in.
+
+    HEAD first and GET if that is refused. olf.nyc answers HEAD with 405 Method Not Allowed and
+    answers GET with a redirect to olf.law, which is the exact firm this exists for, so treating
+    a 405 as "does not resolve" would have left the feature not working on its own test case.
+    """
+    for method in ("HEAD", "GET"):
+        try:
+            req = urllib.request.Request("https://" + host + "/", method=method,
+                                         headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=20) as r:
+                landed = registrable(urllib.parse.urlparse(r.url).netloc)
+            return landed == target or landed.endswith("." + target)
+        except urllib.error.HTTPError as e:
+            if e.code != 405:
+                return False
+        except Exception:
+            return False
+    return False
+
+
 def same_site(website_uri, domain):
     if not website_uri:
         return False
     host = registrable(urllib.parse.urlparse(website_uri).netloc)
     target = registrable(domain)
-    return host == target or host.endswith("." + target) or target.endswith("." + host)
+    if host == target or host.endswith("." + target) or target.endswith("." + host):
+        return True
+    return resolves_to(host, target)
 
 
 def search(query, key):

@@ -81,6 +81,16 @@ G6_MIN_REVIEWS = 10
 # where a thin listing costs a firm points instead of its eligibility. Keep in step with
 # TRANSACTIONAL in scripts/score.py.
 TRANSACTIONAL = {"real-estate"}
+# Family law is the same exemption for a stronger reason, and it took publishing "Not eligible"
+# about five working Buffalo practices to see it. The ten-review minimum assumes a client who is
+# willing to be seen recommending their lawyer. A person who has just been through a custody
+# dispute or a divorce is the least likely client in the profession to write a public review
+# under their own name, and the firms in this market have 8, 7, 5, 2 and 1. That measures how
+# private the matter was, not how established the firm is, and eligibility is the wrong place to
+# charge somebody for their clients' discretion. Same treatment as above: the gate asks for a
+# verified listing and a year in operation, and the count is scored in pillar C.
+# Keep in step with DOMESTIC in scripts/score.py.
+DOMESTIC = {"family-law"}
 G6_MIN_REVIEWS_TRANSACTIONAL = 1
 G6_MIN_YEARS = 1
 FIRMS = pathlib.Path(__file__).resolve().parents[1] / "src" / "data" / "firms"
@@ -133,7 +143,8 @@ def apply_g6(write: bool):
         practices = firm.get("practices") or []
         primary = next((p for p in practices if p.get("primary")),
                        practices[0] if practices else {})
-        minimum = (G6_MIN_REVIEWS_TRANSACTIONAL if primary.get("slug") in TRANSACTIONAL
+        minimum = (G6_MIN_REVIEWS_TRANSACTIONAL
+                   if primary.get("slug") in (TRANSACTIONAL | DOMESTIC)
                    else G6_MIN_REVIEWS)
         enough = reviews >= minimum
         old_enough = years >= G6_MIN_YEARS
