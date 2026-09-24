@@ -24,7 +24,7 @@ export interface Guide {
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-    | 'divorce';
+    | 'divorce' | 'language';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -50,6 +50,21 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'what-law-firms-publish-in-spanish',
+    cover: 'language',
+    kicker: 'Data',
+    title: 'New Study: Law Firms Publish in Spanish for Injury Work, Not Divorce',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'We read every firm\u2019s website looking for a page published in Spanish. Two things ' +
+      'decide whether one is there, the market and the kind of case, and the practice where a ' +
+      'client and a lawyer have to talk most is the one that advertises a second language ' +
+      'least.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'The practice that talks most advertises least',
+  },
   {
     slug: 'how-much-does-a-divorce-cost-in-new-york',
     cover: 'divorce',
