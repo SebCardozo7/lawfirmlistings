@@ -396,10 +396,10 @@
       "checked_at": "2026-09-23"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Georgia does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-23"
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-24",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 662 published discipline decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, 1979 to 2026. 2 of them share a surname with a disciplined attorney and were read against the text of those decisions, which name somebody else. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": false,
@@ -503,7 +503,7 @@
   "score": {
     "total": 66,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-24",
     "methodology": "v2.0",
     "pillars": {
@@ -693,7 +693,6 @@
     "floor_abc_pct": 0.789,
     "gates_unavailable": [
       "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
