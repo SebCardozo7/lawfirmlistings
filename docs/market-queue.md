@@ -352,13 +352,23 @@ those points leave the scale rather than being charged to the firms.
 | G2 discipline | Supreme Court of Florida | no source: Texas discipline is decided by panels, not an appellate court | **Supreme Court of Georgia, added for this market** |
 | G3 entity | Florida's quarterly corporate file | **unreachable today**, see below | no source: Georgia sells the file for $500 and answers a crawler with 403 |
 
-**Texas needs a certificate chain fixed on the machine that runs this.** data.texas.gov serves a
-chain this host cannot verify, so `check_entity --state TX` failed on every Houston firm today
-with CERTIFICATE_VERIFY_FAILED. It is not the register being down: nine Dallas firms already hold
-a G3 pass from that same dataset. Disabling verification would work and is not on the table, since
-we refuse to work around a site's protections elsewhere and this is our own trust store. Install
-`certifi`, or add the intermediate, and re-run. Until then Houston's G3 is pending, which is the
-truthful state: work we owe, not a finding against 37 firms.
+**Texas failed on a certificate chain, and the fix is probably to run it somewhere else.**
+data.texas.gov serves a chain this Windows host cannot verify, so `check_entity --state TX` failed
+on all 37 Houston firms with CERTIFICATE_VERIFY_FAILED. Three things were ruled out before writing
+this down. It is not the register being down: nine Dallas firms already hold a G3 pass from that
+same dataset. It is not Python missing the Windows store: the default context loads 53 roots, and
+loading the intermediate store as well brings it to 68 and still fails. And it is not worth
+disabling verification to get past, which would work and is not on the table, because we refuse to
+work around a site's protections elsewhere and this one is our own trust store.
+
+What is left is that the server does not send its intermediate and this machine has no cached copy,
+where a browser would fetch it from the certificate's own AIA URL. A CI runner ships a full CA
+bundle, so the monthly job on GitHub Actions is the most likely place this simply works, and the
+cheapest next step is to let it run there rather than to change anything. Installing `certifi`
+locally would also do it, at the cost of this repository's first Python dependency.
+
+Until then Houston's G3 is pending, which is the truthful state: work we owe, not a finding against
+37 firms. Several of them score into the seventies and would move once it clears.
 
 ### Held rather than published
 
