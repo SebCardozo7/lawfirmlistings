@@ -68,7 +68,19 @@ NOT_A_BIO_PATH = re.compile(
 # Vocabulary that means the heading is a page title, not a person. "Personal Injury Lawyer" and
 # "Meet Our Attorneys" are headings; "Daniel Perecman" is a name.
 NOT_A_PERSON = re.compile(
-    r"\b(lawyer|attorney|law|firm|injury|accident|malpractice|compensation|team|staff|our|meet|"
+    # The Spanish half, which opening Miami and Houston made necessary. Abogado Javier Marcos
+    # publishes a practice menu whose links read "Abogado de Accidentes de Bicicleta" and
+    # "Abogado de Accidente de Uber Eats", and with only the English words here the crawler
+    # collected eight of them as members of the firm's roster. A name that survives this filter
+    # gets published as a person who works there, so a practice area promoted to an attorney is
+    # among the worst things this directory can print.
+    r"\b(accidentes?|lesion|lesiones|choque|caida|caída|resbal|muerte|negligencia|indemnizaci|"
+    r"bicicleta|peaton|peatón|autobus|autobús|camion|camión|carro|moto|"
+    # And the English terms that got through the first pass on three thousand new names:
+    # "Negligent Security", "Defective Products", "Defective Tires", "Semi Truck".
+    r"negligent|defective|security|products?|devices?|tires?|semi|truck|vehicle|rideshare|"
+    r"premises|liability|wrongful|dog\s*bite|slip|nursing|"
+    r"lawyer|attorney|law|firm|injury|accident|malpractice|compensation|team|staff|our|meet|"
     r"about|profile|practice|areas|contact|free|consultation|home|welcome|results|verdict|"
     r"settlement|case|client|review|blog|news|español|abogado|"
     # Utility links. A roster page also links to its privacy policy and its site map, and

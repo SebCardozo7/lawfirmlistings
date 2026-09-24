@@ -56,8 +56,42 @@ PRACTICE_NAMES = {
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury
 # lawyer" is a page title someone typed into the profile, and must not become a firm's name.
-NOT_A_NAME = re.compile(r"^(new york|nyc|personal injury|injury|accident|best|top)\b.*\b"
-                        r"(lawyer|attorney|law firm|lawyers|attorneys)s?$", re.I)
+# A page title somebody typed into a name field. The first version of this listed New York and
+# its own practice words, which worked for one city and silently stopped working at the next:
+# "Houston Personal Injury Lawyer" sat in a firm's own JSON-LD, ahead of "Attorney Brian White"
+# in the same document, and was published as the firm's name.
+#
+# So the test is what the string is made of rather than which city it names. A name is a title
+# when every word in it is a place, a practice or a legal-services noun, because a firm's name
+# has a proper noun in it: somebody's surname, or a coined word. "Montlick Injury Attorneys" and
+# "Alexander Shunnarah Trial Attorneys" keep every word; "Car Accident Attorney" and "Houston
+# Personal Injury Lawyer" have nothing in them that belongs to one firm rather than a thousand.
+GENERIC_NAME_WORD = re.compile(
+    r"^(the|and|of|in|at|for|a|an|&|"
+    r"law|laws|legal|firm|firms|group|office|offices|practice|associates|partners|team|"
+    r"lawyer|lawyers|attorney|attorneys|counsel|esq|abogado|abogados|de|en|"
+    r"personal|injury|injuries|accident|accidents|trial|trials|compensation|malpractice|"
+    r"car|auto|truck|motorcycle|pedestrian|bicycle|construction|premises|"
+    r"best|top|free|now|com|net|"
+    r"new|york|nyc|manhattan|brooklyn|queens|bronx|buffalo|miami|houston|atlanta|dallas|"
+    r"boston|baltimore|portland|naples|lakeland|tampa|indiana|"
+    r"ny|fl|tx|ga|ma|md|or|in|"
+    r"llp|llc|pc|pllc|pa|plc|inc)$", re.I)
+
+
+def NOT_A_NAME_match(value):
+    words = [w for w in re.split(r"[\s,.]+", (value or "").strip()) if w]
+    return bool(words) and all(GENERIC_NAME_WORD.match(w) for w in words)
+
+
+class _NotAName:
+    """Kept callable as `.match` so the three call sites below read unchanged."""
+    @staticmethod
+    def match(value):
+        return NOT_A_NAME_match(value)
+
+
+NOT_A_NAME = _NotAName
 
 
 def slugify(value):
@@ -114,7 +148,13 @@ def clean(value):
 def pick_name(rec):
     """The firm's own name, with its provenance. Falls back down a ranked list of sources."""
     for n in json_ld_business(rec):
-        v = clean(n.get("name"))
+        # Trimmed like a listing name, because a firm that puts its page title into its own
+        # JSON-LD has published a title rather than a name. Opening three markets turned up
+        # "Alex Hanna Law | Miami, FL", "Rodney Jones Law Group | Houston Personal Injury Lawyer
+        # | Houston Car Accident Lawyer" and "Ryan Nguyen Attorney at Law | Abogado Ryan", all
+        # from structured data. The trim was only ever applied to the Google display name, on
+        # the assumption that structured data would carry the name proper. It does not always.
+        v = trim_listing_tail(clean(n.get("name")))
         if v and not NOT_A_NAME.match(v):
             return v, "JSON-LD %s.name" % (n.get("@type") if isinstance(n.get("@type"), str) else "business")
     for l in rec.get("places", {}).get("listings", []):
@@ -561,6 +601,21 @@ def main():
         # The profile is thinner and says so, rather than the firm simply not existing here.
         if not rec.get("https_ok") and not (rec.get("site_blocked") and rec.get("places")):
             print("%-24s skipped — site unreachable" % rec["domain"])
+            skipped += 1
+            continue
+
+        # A firm that does not hold itself out for this practice does not belong in this cohort,
+        # and this used to build a draft for it anyway. Opening three markets at once produced
+        # twelve of them, and among them an immigration firm whose own title says so, a site
+        # returning 404 on every path, and a domain now serving an Indonesian gambling brand
+        # under the name "Naga303". None of those would have been published, because a draft is
+        # not a profile and a person reads them first. But leaving them in the pile makes that
+        # person's job the one thing a script can do reliably, and the one mistake that costs
+        # most here is moving a firm into a practice it does not do.
+        held = ((rec.get("practice_evidence") or {}).get(slug) or {})
+        if not held.get("url"):
+            print("%-24s skipped — does not publish a %s practice page: %s"
+                  % (rec["domain"], slug, (held.get("why") or "not checked")[:60]))
             skipped += 1
             continue
 

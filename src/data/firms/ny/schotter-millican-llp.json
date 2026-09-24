@@ -189,7 +189,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-09-24"
     },
     "G6": {
       "pass": true,
@@ -341,10 +341,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 60,
+    "total": 58,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (4/25).",
-    "computed_at": "2026-09-23",
+    "computed_at": "2026-09-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -408,7 +408,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 15,
         "max": 20,
         "subs": [
           {
@@ -422,10 +422,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 5,
+            "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 34 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 34 reviews → Bayesian 4.79 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -514,11 +514,11 @@
         ]
       }
     },
-    "floor_abc": 45,
+    "floor_abc": 44,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -527,10 +527,10 @@
         "E4 Availability: +5 available"
       ]
     },
-    "raw": 53.0,
+    "raw": 52.0,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.789,
+    "floor_abc_pct": 0.772,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

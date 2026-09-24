@@ -155,7 +155,7 @@
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-09-24"
     },
     "G6": {
       "pass": true,
@@ -225,7 +225,7 @@
     "total": 29,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-23",
+    "computed_at": "2026-09-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -306,7 +306,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 109 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 109 reviews → Bayesian 4.86 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
