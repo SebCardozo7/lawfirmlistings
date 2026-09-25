@@ -407,6 +407,23 @@ def main():
     staging = ROOT / args.staging
     if args.domains:
         files = [staging / (d.strip() + ".json") for d in args.domains.split(",") if d.strip()]
+        # Naming a domain that has no staging record is almost always a step run out of order:
+        # this reads what scripts/crawl_public.py writes, and started twice while that crawl was
+        # still going. Both times it exited 0 and reported "0 enriched", which reads exactly like
+        # "there was nothing to do" and is the quietest way for a pipeline step to be skipped.
+        # Asked for a hundred and fifty domains and given three, say so.
+        absent = [p.stem for p in files if not p.exists()]
+        if absent:
+            print("%d of %d named domains have no staging record yet. %s has not run for them, "
+                  "or is still running." % (len(absent), len(files), "crawl_public.py"),
+                  file=sys.stderr)
+            print("missing: %s%s" % (", ".join(absent[:8]),
+                                     " and %d more" % (len(absent) - 8) if len(absent) > 8 else ""),
+                  file=sys.stderr)
+            if len(absent) > len(files) // 2:
+                print("Refusing to run on a minority of the batch. Re-run when the crawl is done.",
+                      file=sys.stderr)
+                return 1
     else:
         files = sorted(pathlib.Path(p) for p in glob.glob(str(staging / "*.json")))
 
