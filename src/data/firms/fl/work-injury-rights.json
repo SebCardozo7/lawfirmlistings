@@ -379,8 +379,8 @@
   "score": {
     "total": 62,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-24",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -568,8 +568,7 @@
     "coverage": 0.886,
     "floor_abc_pct": 0.737,
     "gates_unavailable": [
-      "G1",
-      "G2"
+      "G1"
     ],
     "gates_unresolvable": [
       "G3"

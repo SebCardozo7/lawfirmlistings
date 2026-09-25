@@ -308,10 +308,15 @@
     "checked_at": "2026-09-13"
   },
   "results_published": {
-    "readable": false,
-    "why": "the results page served 2721 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
-    "url": "https://www.hurtatworknyc.com/case-results/",
-    "checked_at": "2026-09-13"
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": true,
+    "venues": [],
+    "why": "The page at /case-results/ renders the words Coming Soon and the prior-results disclaimer.",
+    "source": "the firm's own results page, opened in a browser so its JavaScript ran, because our crawler reads served HTML and could not tell an empty page from a deferred one",
+    "checked_at": "2026-09-25"
   },
   "entity": {
     "legal_name": "UGALDE & RZONCA, LLP",
@@ -322,10 +327,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 56,
+    "total": 51,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-24",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (2/15).",
+    "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -359,7 +364,7 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 4,
         "max": 15,
         "subs": [
           {
@@ -367,24 +372,24 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "the results page served 2721 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "the results page served 2721 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
-            "source": "pending",
-            "evidence": "the results page served 2721 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
           }
         ]
       },
@@ -495,23 +500,23 @@
         ]
       }
     },
-    "floor_abc": 34,
+    "floor_abc": 38,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 19,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)",
-        "B3 Results disclosure: not yet measured (4 pts)"
+        "D2 Search authority: +7 available",
+        "B1 Results published: +6 available",
+        "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 41.3,
-    "assessed": 74,
-    "coverage": 0.831,
-    "floor_abc_pct": 0.821,
+    "raw": 45.3,
+    "assessed": 89,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.675,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

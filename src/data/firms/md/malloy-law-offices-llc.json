@@ -421,16 +421,21 @@
     ]
   },
   "results_published": {
-    "readable": false,
-    "why": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler",
-    "url": "https://www.malloy-law.com/results/",
-    "checked_at": "2026-09-10"
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "The page at /results/ renders the word Results and nothing else.",
+    "source": "the firm's own results page, opened in a browser so its JavaScript ran, because our crawler reads served HTML and could not tell an empty page from a deferred one",
+    "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 59,
+    "total": 46,
     "tier": "Verified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-24",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -472,24 +477,24 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler"
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler"
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "the results page served no figures and no mention of a settlement, verdict or recovery, so its results are rendered in the browser rather than served to a reader or a crawler"
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
           }
         ]
       },
@@ -604,19 +609,19 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
-      "floor_met": true,
-      "coverage_met": false,
+      "gap": 24,
+      "floor_met": false,
+      "coverage_met": true,
       "path": [
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)",
-        "B3 Results disclosure: not yet measured (4 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
       ]
     },
     "raw": 32.5,
-    "assessed": 55,
-    "coverage": 0.786,
-    "floor_abc_pct": 0.783,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",
       "G3"
