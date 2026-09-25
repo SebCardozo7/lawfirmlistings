@@ -106,31 +106,62 @@ Rules that decide what goes on this list, restated so they are not re-argued eve
 - Nothing is published that the committed records under `src/data/firms/**` cannot support. No
   dollar amount for a result the record does not mark verified.
 
+## Try to falsify the headline before writing under it, added 2026-09-25
+
+This run's first draft was headlined on Google returning better reviews than a firm has. Every
+figure under it was computed and correct: 93.7% of returned reviews rate five stars, 289 of 408
+firms return an all-five set, only 92 average five. The draft then asserted the obvious next
+sentence, that no real population looks like that, **and that sentence was not computed.**
+
+Computing it took four lines and it came back the other way. Pool every returned review: mean
+4.79. Take each firm's published rating weighted by the reviews it covers: mean 4.82. They agree
+to 0.03 of a star, so the returned set is not better than the population, and the thin middle is
+consistent with law firm reviews genuinely being five-star heavy. The headline was wrong.
+
+The piece that survived is better, because what is left is the finding the check could not kill:
+the sample is honest across 408 firms and worthless about any one of them. But nothing in the
+build would have caught the first version. `check_meta` passed, `audit_seo` passed, every figure
+recomputed itself correctly, and the page would have published a claim the same records refute.
+
+So, as a step rather than as a virtue:
+
+- **Write down the sentence your headline rests on, then find the number that would disprove it.**
+  Usually it exists. Here it was an aggregate the piece had no other reason to compute.
+- **The dangerous sentence is the uncomputed one next to the computed ones.** It inherits their
+  authority. "No real population looks like that" sat between two correct figures and read as
+  though it were one of them.
+- **A check that changes the headline is the check working**, not a setback. Budget for it before
+  the prose, because after the prose exists there is a pull to keep it.
+- **Say the falsification on the page.** The published guide spends three paragraphs on the test
+  that killed its own first draft, which is the most credible thing on it.
+
 ## Generated pages, so a topic is not aimed at one of them
 
-As of 2026-09-23 the build produces **351 pages, from 300 published firms in 9 markets and 7
-states**, and there are now 9 published guides plus the gated ranking. Re-enumerated against the
-build on this run rather than inherited. No new market opened; the growth is four more firms
-inside markets that already existed, plus this run's guide. Buffalo now carries enough family law
-firms to have generated its own ranking, so the city-by-practice count went from twelve to
-thirteen without anybody opening a market.
+As of 2026-09-25 the build produces **468 pages, from 410 published firms in 12 markets and 8
+states**, and there are 10 published guides plus the gated ranking. Re-enumerated against the
+build on this run rather than inherited, and the jump is large: commit `d02bf4d` opened Miami,
+Houston and Atlanta and added 110 firms, so every "of 300" figure a previous run wrote down is
+stale. Check this section against a build before scoping anything.
 
 - `/`, `/cities/`, `/practice-areas/`, `/guides/`
-- Nine city hubs: `baltimore-md`, `boston-ma`, `buffalo-ny`, `dallas-tx`, `lakeland-fl`,
-  `naples-fl`, `new-york-ny`, `northwest-indiana`, `portland-or`
-- Thirteen city x practice rankings: `personal-injury` in all of the above except `naples-fl`,
+- Twelve city hubs: `atlanta-ga`, `baltimore-md`, `boston-ma`, `buffalo-ny`, `dallas-tx`,
+  `houston-tx`, `lakeland-fl`, `miami-fl`, `naples-fl`, `new-york-ny`, `northwest-indiana`,
+  `portland-or`
+- Sixteen city x practice rankings: `personal-injury` in all of the above except `naples-fl`,
   `workers-compensation` in `baltimore-md` and `new-york-ny`, `real-estate` in `naples-fl`,
   `family-law` in `new-york-ny` and `buffalo-ny`
 - Four practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/real-estate/`,
   `/practice-areas/workers-compensation/`, `/practice-areas/family-law/`
-- 300 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
+- 410 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
   `/contact/`, `/privacy/`, `/terms/`)
 
-Firm counts by state, for scoping a study: NY 154, FL 34, MD 31, MA 28, OR 20, TX 20, IN 13.
+Firm counts by state, for scoping a study: NY 154, FL 68, TX 57, GA 39, MD 31, MA 28, OR 20,
+IN 13. Primary practice: personal injury 331, family law 42, real estate 20, workers'
+compensation 17.
 
-**No generated page is faceted by language**, which is what made this run's topic available. If a
-language facet is ever added to the city or practice routes, the guide published on 2026-09-23
-becomes a page competing with our own and should be re-pointed rather than left alone.
+**No generated page is faceted by how a rating was assembled**, which is what made this run's
+topic available: the city and practice routes rank firms *by* the score, and nothing on the site
+is about where one input to that score comes from.
 
 Every city and practice combination in that list is off limits as a guide topic.
 
@@ -138,6 +169,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-09-25 | `/guides/are-google-reviews-reliable/` | "are google reviews reliable" (200/mo US, 400 global, **KD 0**, CPC $2.50, parent topic itself), with "how to spot fake google reviews" (150/mo, KD 4) next door | Ranked item 9, and it turned into a better piece than the entry predicted because **the first draft's headline was wrong and the data said so**. `reviews.sample` now holds **4,215 dated and rated reviews across 408 firms**, against **300,297** reviews Google counted: the API returns **1.4%** of them, five per listing, capped, which we verified rather than assumed. The draft claimed Google inflates the average. It does not: pooled, the returned reviews mean **4.79** against a review-weighted published mean of **4.82**, agreeing to **0.03** of a star. That check killed the "missing middle" as evidence too, because a published 4.82 across 300,297 reviews is consistent with a genuinely five-star-heavy population. **What survives is the per-firm finding, which is stronger:** 289 of 408 firms return an all-five-star set while only 92 average five, so 202 firms are shown a record their own rating does not support; and the far tails run *against* firms, 33 undersold by half a star or more against 16 flattered. Recency is labelled an inference, not a measurement, because Google publishes no date beside a review count. Self-critical half: **C3 and C5, 9 points of the hundred, are read straight off this 1.4% sample**, and 331 firms take full marks on recency. |
 | 2026-09-23 | `/guides/what-law-firms-publish-in-spanish/` | "spanish speaking lawyer" (100/mo, **KD 0**, parent `spanish speaking lawyers near me`), and the People Also Ask question sitting on that SERP, "What percent of lawyers speak Spanish?", which nobody on the page answers | Not from the ranked list: found by reading the `languages` field while surveying what else the collection could carry a study on. **131 of 295** readable firms publish something in Spanish. Two things move it and each survives holding the other still: the market (Dallas 16 of 20, Buffalo 1 of 47) and the practice (personal injury 115 of 217, family law 4 of 42). Inside New York City alone it is 58 of 77 injury firms against 4 of 18 family law firms; holding the practice still instead, injury runs 58 of 77 in New York City against 1 of 23 in Buffalo. **The market moves it further than the practice does**, which the first draft had backwards and only the charts caught. The self-critical half: Spanish is the only language the pipeline detects, so the 4 records carrying Chinese or Russian measure our reading, and E3's accessibility point is earned by 1 firm in 300. |
 | 2026-09-21 | `/guides/what-a-business-register-proves-about-a-law-firm/` | "how to check if a law firm is registered" (10/mo US, 20 global), and the business-entity verification cluster around it. Deliberately **not** "how to check if a law firm is legit" (30/mo, KD 3), which the 2026-09-16 guide already holds | Backlog item 1, and it was larger and sharper than the entry predicted. `gates.G3.pass` is true on **140 of 296**, and the four non-pass reasons are genuinely different facts: 72 in states publishing nothing queryable (IN, MA, MD), 34 in Florida whose register is published and **we have not read it**, 33 New York general partnerships the state does not require to file, 17 we could not identify in a register we did read. The second half is the new finding: for the **113** domestic New York firms holding both `entity.formed` and `operating.registered`, the two dates agree within a year on only 37, sit more than a decade apart on 25, and the error is **symmetric** (39 older in the register, 37 older on the web), so it is noise rather than a correctable bias. |
 | 2026-09-18 | `/guides/what-law-firms-publish-about-malpractice-insurance/` | "do lawyers have malpractice insurance" (40/mo, KD 2), "can i sue my lawyer for malpractice" (70, KD 0), and the client-side phrasings that return no data at all | Backlog item 1, and it held up: `accountability.malpractice_insurance` is `true` on **0 of 267** firms across 2,313 pages, while `bar_associations` is non-empty on 113. The finding that makes the piece is **Oregon**: the one state here where the cover is mandatory, and 0 of its 20 firms mention it, which proves silence measures publishing habits rather than cover. Also published against ourselves: the association half is partly a measure of our own pattern list, 84 of 155 in the two states it carries a local association for against 29 of 112 elsewhere. |
@@ -151,9 +183,11 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 ## Next, ranked
 
-Nothing on this list was taken on 2026-09-23. The guide published that day came out of reading
-fields rather than the list, and that is worth a rule: **before picking from this list, spend ten
-minutes counting fill rates across the whole schema.** `languages` had been sitting in
+Item 9 was taken on 2026-09-25 and is written. **Re-count the fill rates before trusting anything
+below**: this run found the directory had gone from 300 firms to 410 since the last entry was
+written, so every denominator on this page had moved. The rule from the run before still stands,
+and it is now two for two: **before picking from this list, spend ten minutes counting fill rates
+across the whole schema.** `languages` had been sitting in
 `content.config.ts` since the beginning, it is read by the scoring engine, and no entry here had
 ever mentioned it. The survey that found it took one script and covered `offices`, `availability`,
 `attorneys[].admitted_year`, `digital.places.completeness`, `reviews.sample` and `entity_type` at
@@ -223,12 +257,30 @@ The entries below were re-checked against the collection on 2026-09-21.
    cap and an unreturned field rather than of a firm's behaviour. Establish what the Places API
    actually returns for each of those before building a sentence on either. The `unobtainable`
    list on each record is the honest part and is the piece's real subject.
-9. **What the review sample says that the review count does not.** `reviews.sample` holds **2,895
-   dated reviews with ratings** across 298 firms, five per business listing, and the Places API
-   returns its own choice of five rather than a random five. So the sample mean and the published
-   weighted rating are two different numbers about the same firm, and the gap between them is
-   measurable. That is an original measurement about how a star rating is assembled, which is a
-   different piece from the 2026 review study and should be framed as one.
+9. ~~**What the review sample says that the review count does not.**~~ **Written 2026-09-25.**
+   Do not re-propose the sample-versus-published comparison: it is a published page that
+   recomputes itself. Two things it left behind that are *not* written, both real:
+   - **The per-firm sample size is a confound nobody controlled for.** A single-office firm's C3
+     and C5 rest on five reviews; the firm with 18 listings has up to 90. So the two sub-factors
+     are measured to wildly different precision across the directory and the score does not say
+     so. That is a scoring-engine question before it is a guide.
+   - **Nothing dates `review_count_total`.** The recency half of this run's guide had to be
+     published as a labelled inference for exactly that reason. If a future crawl stored the
+     count at two points in time, the difference would be real review velocity, which is what C3
+     is trying to measure and currently cannot.
+
+10. **"Is <firm name> legit" is demand our profiles should answer.** Carried over unresolved from
+    2026-09-21, where "is marble law firm legit" came back at 200/mo, KD 0, CPC $7.00. This run's
+    SERP work is a second argument for it: the branded-check intent is real, it is transactional,
+    and a firm profile is the right page for it rather than a guide. Somebody should check whether
+    our profiles rank for it at all. Still not a writing topic, and it has now been recorded
+    twice without anybody looking.
+
+11. **What a firm publishes about how it bills, across practices that cannot be compared.** Was
+    item 5 and is unchanged, but the denominators have moved with the new markets and should be
+    re-counted: `domestic` is on 42 records and `transaction` on 20, so this is a 62-firm study
+    against a 410-firm directory. That is the thing to weigh before committing a run to it. It is
+    still the strongest remaining *writing* topic that is purely about firms.
 
 **Dead, so they are not proposed again:**
 
@@ -247,8 +299,55 @@ The entries below were re-checked against the collection on 2026-09-21.
   crawler ever learns a second language pattern, which would be a data job first.
 - *Whether a law firm's office is real, from `offices[].by_appointment`.* Dead on the data:
   the flag is true on exactly **1 firm of 300**, so there is nothing to count. Checked 2026-09-23.
-- *What a firm's entity type says about it.* Dead on the data: `entity_type` is absent on 299 of
-  300 records. Checked 2026-09-23.
+- *What a firm's entity type says about it.* Dead on the data: `entity_type` is absent on 409 of
+  410 records. Re-checked 2026-09-25.
+- *Whether Google flatters law firms on average.* Dead on the data, and this is the useful kind of
+  dead: it was measured on 2026-09-25 and the answer is no. Pooled returned mean 4.79 against a
+  review-weighted published mean 4.82. Any future run tempted by "Google inflates ratings" should
+  read that line before writing a word, because it is the draft this run had to throw away.
+- *`founded_year` against anything.* Still absent on all 410 records. Re-checked 2026-09-25.
+
+## Keyword research, 2026-09-25
+
+`subscription-info-limits-and-usage` is free and was the first call again: **145,394 of 800,000
+used**, reset on 19 October, so roughly 655,000 units were available. Two paid calls, 756 units in
+total, well inside the six-call rule. Keep starting with the free call.
+
+What they returned:
+
+- **The target is "are google reviews reliable": 200/mo US, 400 global, difficulty 0**, CPC
+  $2.50, traffic potential 100, informational and commercial intent, and the parent topic is the
+  keyword itself. A KD of 0 on a 200/mo query with commercial intent is the best combination of
+  volume and difficulty this section has found, and it carries **no local pack**, which is the
+  first time that has been true. Every previous run's target was a local lookup wearing a
+  question's clothes.
+- Next to it, "how to spot fake google reviews" (150/mo, KD 4, parent `how to tell if google
+  reviews are fake`, traffic potential 400) and "can you trust google reviews" (60/mo, KD 5). The
+  cluster is a few hundred a month and it is all one question.
+- **Nothing at all returned for the law-specific phrasings**: "are lawyer reviews fake", "are
+  google reviews for lawyers reliable", "why do all lawyers have 5 star reviews", "how many
+  reviews does google show". Sixth run in a row with this shape. The vertical-specific version of
+  a question never has volume; the generic version does. Stop testing for it and assume it.
+- **`serp-overview` on "are google reviews reliable" is the reason to write it.** Position 1 is an
+  AI Overview. Position 2 is Reddit at DR 95, position 4 a Medium opinion piece at DR 94, position
+  5 two Facebook group threads, position 9 Quora. The actual articles are review-management SaaS
+  and an ISP blog: smartap.me at **DR 18 with 17 monthly visits at position 6**, frontier.com at
+  DR 78, birdeye.com at DR 86 with 12 visits, wiserreview.com at DR 78 with 8 visits.
+- **Not one organic result on that page contains an original measurement.** It is anecdote,
+  opinion, and vendors whose customers are businesses wanting more reviews, which is the opposite
+  end of the transaction from the reader asking the question. Nobody has compared what a review
+  API returns against the rating on the same profile, because almost nobody holds both. We hold
+  both for 408 firms. That is the information gain, and a page where DR 18 ranks at position 6 is
+  a page we can enter.
+- People also ask: "How can you tell if a Google review is real?", "Can Google take down bad
+  reviews?", "How to check if a review is genuine?", "What is the most trusted site for reviews?"
+  All four are demand-side, which is unusual and good, and the piece answers none of them
+  directly. That is a gap a second piece could take rather than a fault in this one.
+- **No third-party figure was published.** Google's own support documentation was unreachable
+  through the egress proxy, so the one claim sourced to Google, that the API returns its most
+  relevant reviews rather than a random or recent draw, is attributed to its developer
+  documentation by link and is separately corroborated by our own records: no firm returned more
+  than five per listing, checked in the page itself.
 
 ## Keyword research, 2026-09-23
 
@@ -485,7 +584,40 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: martindale.com.**
+**Next run: thelawfirmlist.us.**
+
+### martindale.com, read 2026-09-25
+
+`www.martindale.com` is blocked by this environment's egress proxy, so this was read through
+search results and its own pages as they appear in them. **Seven of the eight competitors are now
+known to be unreachable from here** (nolo, findlaw, avvo, justia, lawyers, superlawyers,
+martindale). Only `thelawfirmlist.us` is untested, and it is next. Stop budgeting for a direct
+read; the search-based read is the method.
+
+Shapes martindale.com earns traffic with:
+
+1. **`/ratings-and-reviews/`, split by audience**: one page for consumers, one for attorneys, one
+   for firms marketing themselves. The same asset explained three ways to three readers. That is
+   the shape `/methodology/` should have and does not, and this is now the fourth rotation entry
+   to say so. It should stop being an observation and become a ticket.
+2. **The peer rating published as a vocabulary**: AV Preeminent, Distinguished, Notable, each with
+   its own explainer page and badge. A tier name is a search term, and they own all of them. Ours
+   are Listed, Verified and Certified, and none of the three has a page of its own.
+3. **Profiles shared with lawyers.com**, one content asset on two shelves, noted on the previous
+   rotation and unchanged.
+4. **The practice-area explainer library.** Not ours to chase, for the fifth time.
+
+What is worth taking, and this run took it: **a subscribing attorney may choose up to two reviews
+with written feedback to display at the top of their peer review section.** That is the fifth
+instance of this rotation's recurring pattern, after Avvo's participation inputs, Justia's paid
+placements, Martindale's attorney-submitted references and Super Lawyers' peer nomination, and it
+is the first one that lands *directly* on a run's own topic rather than beside it. The guide
+published this run cites it: Google decides which reviews get shown by algorithm, Martindale lets
+the rated party decide, and both mean the reviews on a page are a curated subset. Ranked item 4
+now has five cases and a published page it can hang off.
+
+What we should not chase: the explainer library, and the badge vocabulary, which needs a sales
+motion rather than a measurement.
 
 ### superlawyers.com, read 2026-09-23
 
@@ -717,6 +849,12 @@ chart's job lost the table:
 | Publishing in Spanish | Bars: the same measurement inside one market | The control, as a third chart rather than as a sentence, so a reader can see that holding the city still does not flatten the practice gap |
 | Publishing in Spanish | Columns: E3 points earned | A distribution, with the zero band highlighted. The shape is the argument: two thirds of the mass at zero, one band carrying nearly all the rest, and two lonely firms above it on a four-point scale nobody reaches |
 
+| Google's review sample | Columns: how the returned reviews rate | A distribution across the five rating positions, with the three middle bands emphasised. The middle draws as slivers against 3,950 and that *is* the picture, which is why every column prints its own count and the legend names both groups: nothing here is legible by colour or by height alone |
+| Google's review sample | Split bar: returned mean against published rating | Part-to-whole of one population in three non-overlapping states, ordered higher, agrees, lower. Agreement is a band rather than a point, because a published rating carries one decimal and a gap inside the rounding is not a finding |
+| Google's review sample | Columns: how far apart the two averages sit | The same comparison banded, which is the only chart that shows the tails, and the tails run against the firms. Labels are one line each with the direction in the note: `.chart-col` is bottom-aligned, so a label wrapping to two lines while its neighbours wrap to one knocks that column's value out of the row. Caught in the rendered chart, not the build |
+| Google's review sample | Bars: the widest gap in each direction | Two named firms, both picked by the size of the gap and tie-broken on the slug, so the page re-picks its own illustration as the data moves. `display` carries "mean vs published" because one bar cannot show two numbers |
+| Google's review sample | Bars: firms taking full marks on the two sub-factors read from this sample | Magnitude out of one denominator, and the chart is the page auditing its own scoring engine rather than the firms |
+
 Rules for the next one: pick the form from the data's job before touching colour, keep every
 figure computed, and look at the rendered chart at 390px before shipping it. The three components
 already handle the mobile reflow; a chart with more than about eight rows is a table.
@@ -862,7 +1000,26 @@ rescores 217 firms, which is not a guide run's call:
   Only the flattering direction is named. If Oregon and Texas registration dates are ever stored
   (ranked item 6), this constraint should be revisited rather than inherited. Noted 2026-09-21.
 
-- **The 390px horizontal overflow is still there and is still site-wide.** Re-checked again on
+- ~~**The 390px horizontal overflow is still there and is still site-wide.**~~ **Measured rather
+  than eyeballed on 2026-09-25, and there is no document-level overflow.** Four runs reported this
+  from looking at a headless render; this run measured `documentElement.scrollWidth` against the
+  viewport for the new guide and two published ones in the same pass. All three report a scroll
+  width *under* the viewport, so nothing overflows the document. The only boxes whose right edge
+  passes 390px are `<g>` groups inside the cover-art SVG, which sits in an `overflow:hidden`
+  frame, and they are identical on all three pages. **So the clipping four runs saw is the cover
+  art being cropped by its own frame, which is what `xMidYMid slice` is for, and it is not a bug.**
+  Per the standing instruction, this note stops being re-checked. If somebody with a real phone
+  sees something else, reopen it with what they saw.
+
+- **A sub-factor's precision varies by a factor of eighteen and the score does not say so.** Found
+  2026-09-25 while writing the review-sample guide. C3 and C5 are computed from `reviews.sample`,
+  which holds five reviews per business listing. 251 firms have one listing, so their two
+  sub-factors rest on five reviews; the largest holds 18 listings and up to 90. The engine treats
+  both readings as equally good. It already has the vocabulary to do better, since `partial` keeps
+  a thinly-covered check out of the denominator, and this is a case for it. A person's call
+  because it moves scores.
+
+- **The old 390px note, kept for what it was.** Re-checked again on
   2026-09-23 by rendering the new guide and `/guides/core-web-vitals-new-york-injury-firms/` at 390
   in headless Chromium without device emulation: both clip identically at the right edge, so the
   new page introduces nothing. **Fourth run in a row this has been noted and left alone**, which is
@@ -938,7 +1095,8 @@ rescores 217 firms, which is not a guide run's call:
   computed `listCoversEverywhere`, so opening a market in a ninth state puts the caveat back
   without anybody having to remember the page exists.
 - **Every guide page overflows horizontally at 390px in a headless render**, the new one and the
-  already-published ones alike. Checked this run by rendering `/guides/what-law-firms-publish-
+  already-published ones alike. (Superseded 2026-09-25: measured, and it is the cover art being
+  cropped by its own frame. See above.) Checked this run by rendering `/guides/what-law-firms-publish-
   about-malpractice-insurance/` and `/guides/core-web-vitals-new-york-injury-firms/` at the same
   width: both clip identically at the right edge, so it is pre-existing and site-wide rather than
   anything this run introduced, and it was left alone for that reason. It may be an artifact of
