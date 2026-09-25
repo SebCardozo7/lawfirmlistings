@@ -700,7 +700,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 49 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-09-24"
     },
     "G6": {
       "pass": true,
@@ -776,10 +776,10 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 60,
+    "total": 59,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-23",
+    "computed_at": "2026-09-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -843,7 +843,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 15,
         "max": 20,
         "subs": [
           {
@@ -857,10 +857,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 4,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.3 over 75 reviews → Bayesian 4.61 (prior 4.83 weighted as 100 reviews, from 300 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.3 over 75 reviews → Bayesian 4.59 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -949,11 +949,11 @@
         ]
       }
     },
-    "floor_abc": 34,
+    "floor_abc": 33,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -962,10 +962,10 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 44.3,
+    "raw": 43.3,
     "assessed": 74,
     "coverage": 0.831,
-    "floor_abc_pct": 0.81,
+    "floor_abc_pct": 0.786,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

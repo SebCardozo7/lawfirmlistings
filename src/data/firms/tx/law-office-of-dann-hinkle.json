@@ -1,0 +1,373 @@
+{
+  "slug": "law-office-of-dann-hinkle",
+  "name": "Law Office of D'Ann Hinkle",
+  "initials": "OD",
+  "website": "https://dhinklelaw.com/",
+  "domain": "dhinklelaw.com",
+  "phone": "(713) 328-0297",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://dhinklelaw.com/auto-accidents",
+      "checked_at": "2026-09-23"
+    }
+  ],
+  "market": {
+    "city_slug": "houston-tx",
+    "city": "Houston",
+    "state": "TX",
+    "state_name": "Texas"
+  },
+  "offices": [
+    {
+      "label": "Law Office of D'Ann Hinkle",
+      "address": "10190 Katy Fwy #360, Houston, TX 77043, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=965510999262111480&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Drunk Driving",
+      "role": "Accidents",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://dhinklelaw.com/drunk-driving-accidents"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Law Office of D'Ann Hinkle is a personal injury firm with a single office in Houston.",
+    "The firm states that the first consultation is free; its intake line is open around the clock. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "512",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-23"
+    },
+    "sample": [
+      {
+        "published_at": "2026-05-27T06:51:34.137203574Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-10T00:14:33.590428360Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-31T13:00:47.675076726Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-23T22:08:43.026812578Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-28T00:54:18.490583070Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "schema_detected": true,
+    "_ahrefs_partial_from_cohort": {
+      "domain": "dhinklelaw.com",
+      "name": "Law Office of D'Ann Hinkle",
+      "review_count_at_discovery": 512
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 512,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 5,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-23"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Texas does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-23"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Texas does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-23"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-23"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-24"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "512 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2014-10-23, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-24"
+    }
+  },
+  "cohort_id": "tx-houston-personal-injury",
+  "faq": [],
+  "operating": {
+    "registered": "2014-10-23",
+    "years": 11.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-23"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-23"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-23"
+  },
+  "score": {
+    "total": 45,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-24",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 20,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "512 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 512 reviews → Bayesian 4.97 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-23) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 2,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.5,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 5 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 20,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 25,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 25.0,
+    "assessed": 55,
+    "coverage": 0.786,
+    "floor_abc_pct": 0.526,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  }
+}

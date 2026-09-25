@@ -99,6 +99,19 @@ REGISTERS = {
         "case_name": "The Florida Bar",
         "body": "the Supreme Court of Florida on the discipline of Florida Bar members",
     },
+    # Georgia, added when Atlanta opened. The State Bar of Georgia brings discipline to the
+    # Supreme Court of Georgia and the decisions are styled "In the Matter of Kevin Charles
+    # Ford", so the respondent stands after "Matter of" and carries a full name, which is
+    # Indiana's shape rather than Maryland's. Worth having: Georgia publishes no business
+    # register we may read and no attorney register at all, so this is the only gate in that
+    # state with a source behind it, and without it every Atlanta profile would carry three
+    # unanswered checks instead of two.
+    "GA": {
+        "courts": "ga",
+        "case_name": "In the Matter of",
+        "respondent_after": r"(?:In the )?Matter of\s+",
+        "body": "the Supreme Court of Georgia on the discipline of State Bar of Georgia members",
+    },
     # Oregon names nobody as a plaintiff. The case is "In Re Complaint as to the Conduct of
     # Kirchoff", so the respondent stands after "Conduct of" and the shape is Maryland's: a
     # surname alone, settled afterwards against the decision's own text.

@@ -331,3 +331,53 @@ boutique personal injury practice located in Staten Island".
   That may be a law firm and it may be a referral service, and telling those apart is the subject
   of one of our own studies rather than something to guess at. Not published. A person should read
   it, and the question to answer is whether any admitted attorney is named or identifiable at all.
+
+## Three markets opened 2026-09-24: Miami, Houston, Atlanta
+
+600 firms discovered by the terms a client would type, 150 taken into cohorts, 110 published.
+Chosen on search volume for "personal injury lawyer [city]", which put Houston at 4,900 a month
+and Atlanta at 4,200 ahead of Chicago, Phoenix and Las Vegas, with Miami requested and carrying
+the advantage that Florida is the one other state whose business register we can read.
+
+Only New York publishes an attorney register as open data. That was checked against the open data
+portals of Illinois, Washington, Colorado, Pennsylvania and Michigan, and California, which sells
+nothing in bulk. So G1, A2 and A6 have no source in any of these three, the same as Maryland, and
+those points leave the scale rather than being charged to the firms.
+
+### What each gate can answer in each state
+
+| | Miami (FL) | Houston (TX) | Atlanta (GA) |
+| --- | --- | --- | --- |
+| G1 licensure | no register | no register | no register |
+| G2 discipline | Supreme Court of Florida | no source: Texas discipline is decided by panels, not an appellate court | **Supreme Court of Georgia, added for this market** |
+| G3 entity | Florida's quarterly corporate file | **unreachable today**, see below | no source: Georgia sells the file for $500 and answers a crawler with 403 |
+
+**Texas failed on a certificate chain, and the fix is probably to run it somewhere else.**
+data.texas.gov serves a chain this Windows host cannot verify, so `check_entity --state TX` failed
+on all 37 Houston firms with CERTIFICATE_VERIFY_FAILED. Three things were ruled out before writing
+this down. It is not the register being down: nine Dallas firms already hold a G3 pass from that
+same dataset. It is not Python missing the Windows store: the default context loads 53 roots, and
+loading the intermediate store as well brings it to 68 and still fails. And it is not worth
+disabling verification to get past, which would work and is not on the table, because we refuse to
+work around a site's protections elsewhere and this one is our own trust store.
+
+What is left is that the server does not send its intermediate and this machine has no cached copy,
+where a browser would fetch it from the certificate's own AIA URL. A CI runner ships a full CA
+bundle, so the monthly job on GitHub Actions is the most likely place this simply works, and the
+cheapest next step is to let it run there rather than to change anything. Installing `certifi`
+locally would also do it, at the cost of this repository's first Python dependency.
+
+Until then Houston's G3 is pending, which is the truthful state: work we owe, not a finding against
+37 firms. Several of them score into the seventies and would move once it clears.
+
+### Held rather than published
+
+| Firm | Why |
+| --- | --- |
+| 713 Abogado (713abogado.com) | Publishes a phone number spelled out as its name and names no attorney anywhere. Same question as Cantaso: a firm, or a referral brand. |
+| My 25% Lawyer (my25lawyer.com) | Publishes a fee promise as its name and names no attorney anywhere. |
+| CarAccidentAttorney.com | Titles its own pages "Tampa Car Accident Settlement Lawyer". A Tampa firm, so it belongs at the top of a Tampa cohort rather than inside Miami's. |
+
+Twelve more were skipped before reaching a draft because they do not hold themselves out for this
+practice, among them an immigration firm whose own title says so, three sites returning 404 on
+every path, and a domain now serving an Indonesian gambling brand under the name "Naga303".

@@ -169,6 +169,26 @@ def apply_g6(write: bool):
             new = {"pass": False, "evidence": " and ".join(why),
                    "source": "Google Places API and the domain's registration date over RDAP",
                    "checked_at": TODAY}
+            # A domain date under the threshold proves nothing, and this used to read it as
+            # proof. The docstring at the top of this file says the registration date is a lower
+            # bound and gives its own example of one understating a practice by decades; that
+            # reasoning covers the case where the bound clears the threshold and quietly stops
+            # covering the case where it does not. A firm that rebranded onto a new address last
+            # year looks exactly like a firm founded last year from here, and the two are not
+            # the same thing.
+            #
+            # It cost Gerber & Elkins its eligibility: a Georgia practice with two verified
+            # offices and 553 client reviews, published as "Not eligible" on a domain seven
+            # months old. Reviews accumulate over years and 553 of them contradict the reading
+            # outright. So where the age is the only thing missing and it rests on the domain
+            # alone, the gate is unresolved rather than failed, and a person can settle it from
+            # the firm's own about page or a filing.
+            if enough and not old_enough:
+                new["unresolvable"] = (
+                    "A domain registration date is a lower bound on a firm's age, so one below "
+                    "the threshold fails to establish the age rather than establishing that the "
+                    "firm is new. This state publishes no entity filing date we can read "
+                    "against it.")
 
         firm.setdefault("gates", {})["G6"] = new
         touched.append((firm["slug"], new["pass"], new["evidence"][:70]))

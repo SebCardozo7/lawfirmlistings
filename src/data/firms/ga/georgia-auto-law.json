@@ -1,0 +1,427 @@
+{
+  "slug": "georgia-auto-law",
+  "name": "Georgia Auto Law",
+  "initials": "GA",
+  "website": "https://georgiaautolaw.com/",
+  "domain": "georgiaautolaw.com",
+  "phone": "(404) 662-4949",
+  "status": "certified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://georgiaautolaw.com/practice-areas/macon-car-accident-lawyer",
+      "checked_at": "2026-09-23"
+    }
+  ],
+  "market": {
+    "city_slug": "atlanta-ga",
+    "city": "Atlanta",
+    "state": "GA",
+    "state_name": "Georgia"
+  },
+  "offices": [
+    {
+      "label": "Georgia Auto Law: Auto Accident Attorneys",
+      "address": "120 Ottley Dr NE Studio B, Atlanta, GA 30324, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=1269475938424681311&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Mark Wade",
+      "role": "Founder & Lead Attorney",
+      "role_source": "firm bio page",
+      "bar_state": "NY",
+      "source_url": "https://georgiaautolaw.com/about/mark-wade"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Georgia Auto Law is a personal injury firm with a single office in Atlanta.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "1,204",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-23"
+    },
+    "sample": [
+      {
+        "published_at": "2026-05-28T19:57:15.420227766Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-17T20:18:43.869040332Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-10T16:14:58.468262538Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-12T19:40:24.746913304Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-11T19:35:14.334361849Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 49,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-23",
+      "note": "LCP 12.1 s / CLS 0.002 / TBT 667 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "georgiaautolaw.com",
+      "name": "Georgia Auto Law: Auto Accident Attorneys",
+      "review_count_at_discovery": 1204
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 1204,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-23"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Georgia does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-23"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-24",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 662 published discipline decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, 1979 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": false,
+      "source": "no queryable source",
+      "checked_at": "2026-09-24",
+      "evidence": "1 physical location verified on Google Business Profile. Georgia publishes no business register we can query for free. The Secretary of State sells the bulk corporations file over FTP, $500 for a single extract or $5,000 a year for weekly ones, and its free entity search answers an automated reader with a 403 on every path including its own robots file, which is a bot challenge we do not work around. A register that is for sale is a published record in the sense that matters here only if somebody buys it. This is a limit of the published record and not something the firm can change."
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-24"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "1,204 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2019-08-27, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-24"
+    }
+  },
+  "cohort_id": "ga-atlanta-personal-injury",
+  "faq": [],
+  "fee_statement": "Free consultation, and you pay nothing unless we win.",
+  "operating": {
+    "registered": "2019-08-27",
+    "years": 7.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-23"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://georgiaautolaw.com/about",
+        "quote": "s a member of the Georgia Trial Lawyers Association and the American Association for Justice. Car Accidents Truck Accidents Wrongful Death Our Offices A"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-23"
+  },
+  "results_published": {
+    "count": 20,
+    "counted_from": "stated amounts",
+    "amounts": [
+      1500000,
+      1400000,
+      1100000,
+      950000,
+      850000,
+      800000,
+      700000,
+      650000,
+      550000,
+      525000,
+      500000,
+      150000,
+      85000,
+      75000,
+      65000,
+      50000,
+      40000,
+      35000,
+      30000,
+      10000
+    ],
+    "largest": 1500000,
+    "aggregate_claims": [
+      2500000
+    ],
+    "case_types": [
+      "motor vehicle",
+      "truck",
+      "wrongful death",
+      "pedestrian"
+    ],
+    "disclaimer": true,
+    "venues": [],
+    "text_length": 6634,
+    "readable": true,
+    "url": "https://georgiaautolaw.com/results",
+    "checked_at": "2026-09-23"
+  },
+  "score": {
+    "total": 75,
+    "tier": "Certified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-24",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Georgia publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Georgia publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 12,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 4.5,
+            "max": 6,
+            "source": "firm",
+            "evidence": "20 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "4 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 4,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
+          }
+        ]
+      },
+      "C": {
+        "score": 19,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "1,204 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 1,204 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-06-17) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 9,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · “Free consultation, and you pay nothing unless we win.” · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 34,
+    "next_tier": {
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 10,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +5.0 available"
+      ]
+    },
+    "raw": 46.5,
+    "assessed": 62,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.882,
+    "gates_unavailable": [
+      "G1",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  }
+}
