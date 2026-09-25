@@ -428,12 +428,30 @@ def verify_one(spec: dict, attorney: str, surname: str, hits: list):
     if not variants:
         return None, "only one name token is published for this attorney"
 
+    # Decisions whose case name already says who the respondent is, and says it is not this
+    # attorney. A full-text hit inside one of those is not an identification: it means the name
+    # appears in the opinion, and a lawyer appears in a colleague's disciplinary case as counsel
+    # of record all the time. Georgia made this visible because its Supreme Court publishes whole
+    # opinions with the bar listed; it reported Andrew W. Jones as the respondent in In the Matter
+    # of Allen Charles Jones, which is a different person, and would have published "Not eligible"
+    # about a working firm on the strength of it.
+    #
+    # The docstring above says a first name is not an identification. Neither is a full name
+    # inside a decision that names somebody else in its title.
+    ours = name_key(attorney)
+    settled = {h.get("id") for h in hits
+               if h.get("full") and name_key(h["full"]) != ours}
     for variant in variants:
         page = fetch({"type": "o", "court": spec["courts"],
                       "q": '%s AND "%s"' % (base, variant)})
         time.sleep(DELAY)
-        if page.get("count"):
+        found = [r for r in (page.get("results") or [])
+                 if r.get("id") not in settled and r.get("cluster_id") not in settled]
+        if page.get("count") and (found or not settled):
             return True, None
+        if page.get("count") and not found:
+            return False, ("this attorney's name appears only inside decision(s) whose "
+                           "respondent is named in the title and is somebody else")
 
     # Was the text actually searchable? Every one of these decisions contains the word
     # Respondent, so it doubles as a test of whether the opinion is full-text indexed at all.

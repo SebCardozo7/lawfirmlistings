@@ -396,3 +396,13 @@ every path, and a domain now serving an Indonesian gambling brand under the name
   whether it has since been lifted. The profile is kept out of the repository until then. The firm
   stays in the cohort, because it is a real practice in this market and belongs in the percentile
   denominator.
+
+- **Jones & Swanson Personal Injury Lawyers** (Marietta, GA, 2026-09-25). Withheld while the
+  Georgia discipline check is re-run against a correction it needed. It reported Andrew W. Jones
+  as the respondent in *In the Matter of Allen Charles Jones* (2025), which is a different person:
+  the identification came from the decision's full text rather than its title, and a lawyer's name
+  appears in a colleague's disciplinary opinion as counsel of record all the time. Georgia exposed
+  this because its Supreme Court publishes whole opinions with the bar listed. The check now
+  refuses a text hit inside a decision whose title names somebody else as the respondent. Republish
+  once the re-run clears it; if it does not, a person reads the 2025 decision before anything is
+  said about this firm.

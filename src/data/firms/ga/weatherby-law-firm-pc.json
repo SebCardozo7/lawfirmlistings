@@ -167,6 +167,15 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "psi": {
+      "value": {
+        "performance": 100,
+        "cwv_pass": true
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-25",
+      "note": "LCP 1.2 s / CLS 0.024 / TBT 0 ms"
     }
   },
   "gates": {
@@ -177,10 +186,10 @@
       "checked_at": "2026-09-25"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Georgia does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-25"
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-25",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 662 published discipline decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, 1979 to 2026. 1 of them share a surname with a disciplined attorney and were read against the text of those decisions, which name somebody else. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": false,
@@ -244,9 +253,9 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 51,
+    "total": 54,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
@@ -328,7 +337,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 338 reviews → Bayesian 4.96 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 338 reviews → Bayesian 4.96 (prior 4.83 weighted as 100 reviews, from 527 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -349,16 +358,16 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 1.5,
+            "pts": 3.5,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · no privacy policy · disclaimer · fresh content"
+            "evidence": "CWV pass · no bar numbers on bios · no fee statement · no privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -421,22 +430,21 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 19,
+      "gap": 16,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +5.5 available"
+        "E4 Availability: +5 available"
       ]
     },
-    "raw": 31.5,
+    "raw": 33.5,
     "assessed": 62,
     "coverage": 0.886,
     "floor_abc_pct": 0.658,
     "gates_unavailable": [
       "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],

@@ -112,6 +112,15 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "psi": {
+      "value": {
+        "performance": 83,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-25",
+      "note": "LCP 3.9 s / CLS 0.002 / TBT 0 ms"
     }
   },
   "gates": {
@@ -287,7 +296,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 270 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 270 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 527 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -317,7 +326,7 @@
             "pts": 1,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
           },
           {
             "code": "D2",

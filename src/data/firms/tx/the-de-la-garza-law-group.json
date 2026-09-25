@@ -129,6 +129,15 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "psi": {
+      "value": {
+        "performance": 96,
+        "cwv_pass": true
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-25",
+      "note": "LCP 2.3 s / CLS 0.027 / TBT 26 ms"
     }
   },
   "gates": {
@@ -215,7 +224,7 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 59,
+    "total": 62,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-25",
@@ -299,7 +308,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 219 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 219 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 527 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -320,16 +329,16 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 2.0,
+            "pts": 4.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV pass · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -392,16 +401,16 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +5.0 available"
+        "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 36.5,
+    "raw": 38.5,
     "assessed": 62,
     "coverage": 0.886,
     "floor_abc_pct": 0.671,

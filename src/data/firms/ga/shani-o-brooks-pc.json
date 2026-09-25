@@ -164,6 +164,15 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "psi": {
+      "value": {
+        "performance": 64,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-25",
+      "note": "LCP 6.0 s / CLS 0.000 / TBT 211 ms"
     }
   },
   "gates": {
@@ -175,9 +184,9 @@
     },
     "G2": {
       "pass": false,
-      "evidence": "Georgia does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-25"
+      "source": "unavailable",
+      "checked_at": "2026-09-25",
+      "evidence": "1 of the firm's attorneys share a surname with a disciplined attorney, and for LaTia Johnson 3 of 6 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
     },
     "G3": {
       "pass": false,
@@ -318,7 +327,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 280 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 280 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 527 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -348,7 +357,7 @@
             "pts": 2.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
