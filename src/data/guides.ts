@@ -51,6 +51,21 @@ export function publishedGuides(
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'are-google-reviews-reliable',
+    cover: 'sample',
+    kicker: 'Method',
+    title: 'New Study: The Reviews Google Shows Are Not the Reviews It Counted',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Google counts every review on a law firm’s profile and hands back five per listing. ' +
+      'We compared the two across the whole directory. Pooled, the two agree almost exactly, ' +
+      'so nobody is being flattered on average. Firm by firm is another matter, and that is ' +
+      'the situation every client is actually in.',
+    thumb: 't3',
+    icon: 'star',
+    meta: 'The reviews shown are not the reviews counted',
+  },
+  {
     slug: 'what-law-firms-publish-in-spanish',
     cover: 'language',
     kicker: 'Data',

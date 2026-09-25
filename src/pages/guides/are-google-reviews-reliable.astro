@@ -1,0 +1,357 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// Every figure on this page is computed from the firms collection at build time, so the article
+// cannot drift away from the data it describes.
+//
+// This piece rests on two fields that sound like one fact and are not, which is the mistake this
+// repository has now made three times. Written down here so the fourth time is not on this page:
+//
+//   digital.places.rating_weighted   Each listing's own published Google rating, averaged and
+//                                    weighted by that listing's review count. It is Google's
+//                                    average over EVERY review on the profile.
+//   reviews.sample[].rating          The star rating on each individual review the Places API
+//                                    handed back, at most five per business listing.
+//
+// Both are written by scripts/enrich_places.py, whose own comment calls the second one "a sample,
+// not a census". The whole study is the distance between them, so conflating them would not
+// produce a wrong sentence, it would delete the subject.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+type Firm = typeof firms[number];
+
+// A firm counts here only if we hold both halves of the comparison: the reviews Google returned
+// and the rating Google publishes over all of them. Either one alone says nothing.
+const rated = (f: Firm) => (f.data.reviews.sample ?? []).filter(r => r.rating != null);
+const measured = firms.filter(f =>
+  rated(f).length > 0 && f.data.digital.places?.rating_weighted != null);
+
+const markets = new Set(measured.map(f => f.data.market.city_slug)).size;
+const states = new Set(measured.map(f => f.data.market.state)).size;
+
+// The two populations. `census` is what Google counted; `returned` is what it handed back.
+const census = measured.reduce((n, f) => n + (f.data.digital.places!.review_count_total ?? 0), 0);
+const returned = measured.reduce((n, f) => n + rated(f).length, 0);
+const returnedShare = +((returned / census) * 100).toFixed(2);
+const listings = measured.reduce((n, f) => n + f.data.digital.places!.listing_count, 0);
+const maxListings = Math.max(...measured.map(f => f.data.digital.places!.listing_count));
+
+// The cap, measured rather than assumed. Google's documentation says the field returns at most
+// five reviews per place; this asks our own records whether any firm came back with more.
+const overCap = measured.filter(f => rated(f).length > 5 * f.data.digital.places!.listing_count);
+
+// ---- What comes back, by star rating ----
+const starCount = (s: number) =>
+  measured.reduce((n, f) => n + rated(f).filter(r => r.rating === s).length, 0);
+const stars = [5, 4, 3, 2, 1].map(s => ({ star: s, n: starCount(s) }));
+const fiveStar = starCount(5);
+const oneStar = starCount(1);
+const middle = starCount(4) + starCount(3) + starCount(2);
+const pct = (n: number) => +((n / returned) * 100).toFixed(1);
+
+// The check that keeps this piece honest, and it cost the first draft its headline.
+// Pool every returned review and take the mean; then take the mean Google publishes, weighted by
+// how many reviews each firm's rating actually covers. If the returned set were systematically
+// better than the population, these two would separate. They do not, so no sentence on this page
+// may claim that Google inflates the average. The distortion this study can prove is per firm.
+const returnedPooledMean =
+  measured.reduce((s, f) => s + rated(f).reduce((t, r) => t + r.rating!, 0), 0) / returned;
+const publishedPooledMean =
+  measured.reduce((s, f) =>
+    s + f.data.digital.places!.rating_weighted! * (f.data.digital.places!.review_count_total ?? 0), 0)
+  / census;
+const pooledGap = Math.abs(returnedPooledMean - publishedPooledMean);
+
+// ---- The comparison, per firm ----
+// The mean of the reviews Google returned, against the rating Google publishes over all of them.
+// Rounding matters here and is handled by banding rather than hidden: a listing's published
+// rating carries one decimal, so a gap under a tenth of a star is inside the rounding and is
+// reported as agreement rather than as a finding.
+const AGREE = 0.1;
+type Row = {
+  f: Firm; n: number; mean: number; published: number; gap: number;
+  count: number; listingCount: number;
+};
+const rows: Row[] = measured.map(f => {
+  const rs = rated(f);
+  const mean = rs.reduce((s, r) => s + r.rating!, 0) / rs.length;
+  const published = f.data.digital.places!.rating_weighted!;
+  return {
+    f, n: rs.length, mean, published, gap: mean - published,
+    count: f.data.digital.places!.review_count_total ?? 0,
+    listingCount: f.data.digital.places!.listing_count,
+  };
+});
+const higher = rows.filter(r => r.gap > AGREE);
+const lower = rows.filter(r => r.gap < -AGREE);
+const agrees = rows.filter(r => Math.abs(r.gap) <= AGREE);
+
+// The cleanest version of the finding, and the one that owes nothing to rounding: firms whose
+// returned reviews are perfect, set against firms that actually average a perfect rating.
+const allFive = rows.filter(r => rated(r.f).every(x => x.rating === 5));
+const trulyFive = rows.filter(r => r.published === 5);
+const flattered = allFive.filter(r => r.published < 5);
+const flatteredWorst = [...flattered].sort((a, b) => a.published - b.published)[0];
+
+// The two ends of the distribution, picked by measurement and tie-broken on the slug so the page
+// never changes its own illustration between builds.
+const bySpread = (a: Row, b: Row, dir: number) =>
+  (b.gap - a.gap) * dir || a.f.data.slug.localeCompare(b.f.data.slug);
+const mostFlattering = [...rows].sort((a, b) => bySpread(a, b, 1))[0];
+const leastFlattering = [...rows].sort((a, b) => bySpread(a, b, -1))[0];
+
+// ---- Recency, which is the other axis the selection moves ----
+const years = measured.flatMap(f =>
+  (f.data.reviews.sample ?? []).map(r => r.published_at).filter(Boolean) as string[])
+  .map(d => Number(d.slice(0, 4)));
+const latestYear = Math.max(...years);
+const oldestYear = Math.min(...years);
+const thisYear = years.filter(y => y === latestYear).length;
+const thisYearPct = +((thisYear / years.length) * 100).toFixed(1);
+
+// ---- What our own score does with all this ----
+// C3 and C5 are read straight off the sample by scripts/score.py, so this section is the page
+// measuring the thing that measures the firms. Maxima are read from the records rather than
+// typed, so a change to the engine's weights moves this sentence with it.
+const sub = (f: Firm, code: string) =>
+  f.data.score?.pillars.C.subs.find(s => s.code === code);
+const c3Max = Math.max(...measured.map(f => sub(f, 'C3')?.max ?? 0));
+const c5Max = Math.max(...measured.map(f => sub(f, 'C5')?.max ?? 0));
+const sampleWeight = c3Max + c5Max;
+const c3Full = measured.filter(f => sub(f, 'C3')?.pts === c3Max).length;
+const c5Full = measured.filter(f => sub(f, 'C5')?.pts === c5Max).length;
+
+const measuredOn = measured[0]?.data.digital.places!.measured_at ?? null;
+const updated = measuredOn
+  ? new Date(measuredOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+const fmt = (n: number) => n.toLocaleString('en-US');
+// "1 firms are flattered" is the failure this guards. Counts in the hundreds do not need it;
+// the tail counts and the over-cap count are small enough to reach one.
+const firmsWord = (n: number) => `${fmt(n)} firm${n === 1 ? '' : 's'}`;
+const starLabel = (s: number) => `${s} star${s === 1 ? '' : 's'}`;
+
+// ---- Charts ----
+// A distribution across the rating scale, so the empty middle is a shape rather than a sentence.
+// The tallest column fills the plot and the rest are its share, which is the argument: the middle
+// bands draw as slivers and print their own counts, so nothing depends on seeing them.
+const starColumns = stars.map(s => ({
+  label: starLabel(s.star),
+  note: `${pct(s.n)}%`,
+  value: s.n,
+  emphasis: s.star > 1 && s.star < 5,
+}));
+
+// Part-to-whole of one population in three non-overlapping states, which is what StackBar is for.
+const directionSegments = [
+  { label: 'Returned reviews rate higher than the published rating', value: higher.length },
+  { label: 'The two agree within a tenth of a star', value: agrees.length },
+  { label: 'Returned reviews rate lower', value: lower.length },
+];
+
+// The size of the gap, banded. The bands either side of agreement are the same width, so the
+// asymmetry in the chart is the data's rather than the banding's.
+// Written as five explicit predicates rather than as an interval walk. The bands have to be
+// mutually exclusive and cover every firm, and an off-by-one in a clever version of this would
+// silently drop firms out of a chart that reads as a complete population.
+const GAP_BANDS: {
+  label: string; note: string; hit: (g: number) => boolean; emphasis?: boolean;
+}[] = [
+  { label: '0.5+', note: 'lower', hit: g => g < -0.5 },
+  { label: '0.1 to 0.5', note: 'lower', hit: g => g >= -0.5 && g < -AGREE },
+  { label: 'Under 0.1', note: 'agrees', hit: g => g >= -AGREE && g <= AGREE },
+  { label: '0.1 to 0.5', note: 'higher', hit: g => g > AGREE && g <= 0.5, emphasis: true },
+  { label: '0.5+', note: 'higher', hit: g => g > 0.5, emphasis: true },
+];
+const gapColumns = GAP_BANDS.map(b => ({
+  label: b.label,
+  note: b.note,
+  value: rows.filter(r => b.hit(r.gap)).length,
+  emphasis: b.emphasis ?? false,
+}));
+// The far tails, which run against the piece's own headline and are reported for that reason.
+const tailLower = rows.filter(r => r.gap < -0.5).length;
+const tailHigher = rows.filter(r => r.gap > 0.5).length;
+// Every firm lands in exactly one band, or the chart is lying about being a whole population.
+const gapBanded = gapColumns.reduce((n, c) => n + c.value, 0);
+if (gapBanded !== rows.length) {
+  throw new Error(`gap bands cover ${gapBanded} firms, expected ${rows.length}`);
+}
+
+// The two sub-factors this sample decides, as a share of the firms earning full marks on each.
+const scoreRows = [
+  {
+    label: 'Review recency (C3)',
+    note: `full marks: ${c3Max} points`,
+    value: c3Full,
+    display: `${fmt(c3Full)} of ${fmt(measured.length)}`,
+  },
+  {
+    label: 'Complaint share (C5)',
+    note: `full marks: ${c5Max} points`,
+    value: c5Full,
+    display: `${fmt(c5Full)} of ${fmt(measured.length)}`,
+  },
+];
+
+// States the finding, not the topic. No figure in either line: check_meta rejects one, and a
+// share that moves every month should not be the thing Google has indexed.
+const title = 'New Study: The Reviews Google Shows Are Not the Reviews It Counted';
+const description = 'We compared the reviews Google returns for a law firm against the rating on its profile. Across the directory they agree. About any one firm they do not.';
+---
+<Base title={title} description={description} nav="guides" image="/og/sample.png"
+  imageAlt="A field of review marks with five of them lifted out into a bright window, beside two gauges of unequal height">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Are Google reviews reliable</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Client reviews</span>
+    <h1>{title}</h1>
+    <p class="lede">Google counted {fmt(census)} reviews across the {fmt(listings)} business listings held by {fmt(measured.length)} law firms in this directory. When we asked for those reviews, it returned {fmt(returned)} of them, which is {returnedShare}%. Those {fmt(returned)} average almost exactly what the profiles average, so Google is not inflating the industry. What it does instead is decide, firm by firm, and the firms it makes look perfect are mostly firms that are not.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="sample" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#missing">What comes back</a></li>
+      <li><a href="#gap">Firm by firm, it decides</a></li>
+      <li><a href="#recent">Newer, too</a></li>
+      <li><a href="#ours">What this costs our own score</a></li>
+      <li><a href="#limits">What this does not show</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Across ${fmt(measured.length)} firms in ${markets} markets and ${states} states, ${updated ? `measured ${updated}` : 'measured from the Google Places API'}.`}
+      items={[
+        `Google counted <b>${fmt(census)}</b> reviews for these firms and handed back <b>${fmt(returned)}</b> of them, <b>${returnedShare}%</b>, capped at five per business listing.`,
+        `Pooled, the returned reviews average <b>${returnedPooledMean.toFixed(2)}</b> against a published <b>${publishedPooledMean.toFixed(2)}</b>, so in aggregate the sample is not flattering anybody.`,
+        `<b>${fmt(allFive.length)} of ${fmt(measured.length)}</b> firms came back with a set in which every returned review rates five stars, and <b>${fmt(flattered.length)}</b> of those firms do not average five on the same profile.`,
+        `Firm by firm it is a different story: the returned reviews rate higher for <b>${fmt(higher.length)}</b> and lower for <b>${fmt(lower.length)}</b>, and <b>${fmt(tailLower)}</b> firms are undersold by half a star or more.`,
+        `Two sub-factors of our own score, worth <b>${sampleWeight} points</b> of the hundred, are read off this sample, and <b>${fmt(c3Full)}</b> firms take full marks on recency largely because of how Google chose.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>A law firm's Google Business Profile shows one number in large type and a column of reviews underneath it. Most people read the number, scroll a little and decide. This piece is about whether the column underneath is a fair sample of the number above it.</p>
+    <p>We hold two different facts for every firm here, and keeping them apart is the whole exercise. The first is the rating Google publishes on each listing, averaged across a firm's listings and weighted by how many reviews each one carries. That is Google's own average over every review it counted. The second is the set of individual reviews the Places API hands back when we ask, each with its own star rating and its own date.</p>
+    <p><b>The second is capped at five per business listing.</b> A firm with one listing gets five. The firm here holding the most listings has {fmt(maxListings)} of them, so it can get up to {fmt(maxListings * 5)}. {overCap.length === 0 ? 'No firm in this directory came back with more than that cap allows, which we checked rather than assumed.' : `${fmt(overCap.length)} firms came back with more than that cap allows.`} Google's documentation describes the reviews it returns as <a href="https://developers.google.com/maps/documentation/javascript/place-reviews" rel="noopener" target="_blank">its most relevant ones</a>, not as a random draw and not as the most recent. There is no parameter to ask for either.</p>
+    <p>So across {fmt(measured.length)} firms in {markets} markets and {states} states, Google counted {fmt(census)} reviews and gave us {fmt(returned)}. Everything below is what those {fmt(returned)} look like next to the {fmt(census)} they came out of.</p>
+
+    <h2 id="missing">What comes back</h2>
+    <p>{fmt(fiveStar)} of the {fmt(returned)} returned reviews rate five stars, which is {pct(fiveStar)}% of them. {fmt(oneStar)} rate one star. Everything between those two poles, the two, three and four star reviews, comes to <b>{fmt(middle)} reviews in total</b>.</p>
+    <ColumnChart
+      heading={`How the ${fmt(returned)} returned reviews rate`}
+      columns={starColumns}
+      emphasisLabel="The middle of the scale"
+      quietLabel="Five stars and one star"
+      caption={`Each column prints its own count, because the middle bands are slivers against ${fmt(fiveStar)}. That is the finding rather than a drawing problem: a rating scale has five positions and what comes back uses two of them.`}
+    />
+    <p>The obvious thing to say next is that no real population looks like that, so the selection must be inflating it. We checked, and that is not what the data says.</p>
+    <p>Pool every returned review and the mean is <b>{returnedPooledMean.toFixed(2)}</b>. Take the rating Google publishes for each firm, weight it by how many reviews that rating actually covers, and the mean is <b>{publishedPooledMean.toFixed(2)}</b>. <b>The two agree to within {pooledGap.toFixed(2)} of a star.</b></p>
+    <p>So the returned reviews are not, in aggregate, better than the population they came from, and this page is not going to claim they are. A published average of {publishedPooledMean.toFixed(2)} across {fmt(census)} reviews is consistent with a population that genuinely is overwhelmingly five stars. The thin middle above may simply be what law firm reviews look like.</p>
+    <p><b>That check is what makes the rest of this piece worth reading.</b> The problem with this sample is not that it flatters the industry. It is that it decides, one firm at a time.</p>
+
+    <h2 id="gap">Firm by firm, it decides</h2>
+    <p>An average that is right across {fmt(measured.length)} firms can still be wrong about every one of them. So compare the two numbers per firm instead: the mean of the reviews Google returned for that firm, and the rating Google publishes over all of that firm's reviews.</p>
+    <p>A published listing rating carries one decimal, so a gap under a tenth of a star is inside the rounding and we count it as agreement. Past that, the split is not even.</p>
+    <StackBar
+      heading={`The returned reviews against the published rating, ${fmt(measured.length)} firms`}
+      segments={directionSegments}
+      unit="firms"
+      caption="One bar, split three ways, with no firm in more than one segment. Agreement is a gap of a tenth of a star or less in either direction, which is the width of the rounding on a published rating."
+    />
+    <ColumnChart
+      heading="How far apart the two averages sit"
+      columns={gapColumns}
+      emphasisLabel="Returned reviews rate higher"
+      quietLabel="Agrees, or rates lower"
+      caption="The bands either side of agreement are the same width, so whatever asymmetry the chart shows belongs to the data rather than to the banding."
+    />
+    <p><b>The far tails run against the firms, not for them.</b> {firmsWord(tailHigher)} are flattered by half a star or more, while {firmsWord(tailLower)} are undersold by that much. A firm is more likely to be badly misrepresented downward than upward, which is the opposite of what a story about Google showing off its businesses would predict.</p>
+    <p>The sharpest version of this owes nothing to rounding. <b>{fmt(allFive.length)} of the {fmt(measured.length)} firms came back with a set in which every single returned review rates five stars.</b> Only {fmt(trulyFive.length)} firms here average exactly five. So for {fmt(flattered.length)} firms, a caller asking Google for reviews is shown a perfect record that the same profile's own rating does not support.</p>
+    {flatteredWorst && (
+      <p>The furthest case of that is <a href={`/firms/${flatteredWorst.f.data.slug}/`}>{flatteredWorst.f.data.name}</a> in {flatteredWorst.f.data.market.city}: every review Google returned for it rates five stars, while the rating printed on the same profile is {flatteredWorst.published} across {fmt(flatteredWorst.count)} counted reviews.</p>
+    )}
+    <BarChart
+      heading="The widest gap in each direction"
+      max={5}
+      rows={[mostFlattering, leastFlattering].map(r => ({
+        label: r.f.data.name,
+        href: `/firms/${r.f.data.slug}/`,
+        value: +r.mean.toFixed(2),
+        display: `${r.mean.toFixed(2)} vs ${r.published}`,
+        note: `${r.f.data.market.city} · ${r.n} returned of ${fmt(r.count)} counted`,
+      }))}
+      caption="The bar is the mean of what Google returned, out of five. The figure beside it carries that mean and then the rating published on the same profile. Both firms are picked by the size of the gap rather than by hand, so this chart re-picks itself as the data moves."
+    />
+    <p>It runs the other way too, and that matters for the argument. <a href={`/firms/${leastFlattering.f.data.slug}/`}>{leastFlattering.f.data.name}</a> is shown worse by its returned reviews than by its own rating: {leastFlattering.mean.toFixed(2)} against {leastFlattering.published} across {fmt(leastFlattering.count)} counted reviews. <b>An unrepresentative sample is not the same as a flattering one</b>, and a firm can lose from it as easily as gain.</p>
+    <p>That is the finding in one line. <b>Across the directory the sample is honest. About any particular firm it is not evidence.</b> Neither of those sentences is much use to somebody reading one firm's profile, which is the situation every client is actually in.</p>
+
+    <h2 id="recent">Newer, too</h2>
+    <p>Every returned review carries a date, and the dates skew hard. <b>{fmt(thisYear)} of the {fmt(years.length)} dated reviews Google returned, {thisYearPct}% of them, were published in {latestYear}.</b> The oldest in the set dates from {oldestYear}.</p>
+    <p>We cannot check this one the way we checked the ratings, because Google publishes no date alongside a firm's review count. So this is an inference and we will label it as one: a body of reviews accumulated since {oldestYear} is unlikely to be {thisYearPct}% written in a single year, and the year is not over.</p>
+    <p>If that inference holds, the consequence is plain. A firm that collected nothing this year and a firm that collected two hundred can both come back looking current.</p>
+
+    <h2 id="ours">What this costs our own score</h2>
+    <p>Here is the part that is about us rather than about Google.</p>
+    <p>Two sub-factors of the LFL Certification Score are computed from exactly this sample. C3 rewards review recency, worth {c3Max} points, and it reads the share of returned reviews dated inside the last twelve months. C5 rewards a low complaint share, worth {c5Max} points, and it reads how many returned reviews rate one or two stars. <b>That is {sampleWeight} points of the hundred, resting on {returnedShare}% of the evidence, chosen by somebody else.</b></p>
+    <BarChart
+      heading={`Firms taking full marks on the two sub-factors read from this sample`}
+      max={measured.length}
+      rows={scoreRows}
+      caption={`Out of ${fmt(measured.length)} firms. Both sub-factors are computed by our scoring engine directly from the reviews the Places API returned, which is why this page is able to check its own denominator.`}
+    />
+    <p>{fmt(c3Full)} of {fmt(measured.length)} firms take full marks on recency. That looks like an industry keeping its reviews fresh until you set it beside the {thisYearPct}% figure above, which says the returned set is recent across the board. If that skew is Google's rather than the profession's, and we think it is, then <b>C3 is measuring the selection at least as much as it is measuring the firm.</b></p>
+    <p>C5 has the same weakness, and it is the per-firm one rather than a claim about the industry. {fmt(c5Full)} firms take full marks because not one returned review rated one or two stars. For a single-office firm that verdict rests on five reviews, so a practice with hundreds of reviews and a real pattern of complaints inside them can return five clean ones and score exactly what a practice with no complaints scores.</p>
+    <p>We are not removing either sub-factor on the strength of one study, and we are not going to pretend the reading is stronger than it is. The evidence line on every firm's profile already says this measurement comes from a sample of five per listing rather than from every review, and it says so because the engine was written that way from the start. <a href="/methodology/">The full methodology</a> sets out each sub-factor and the evidence behind it. This is a live limitation and it is now on a page a reader can find.</p>
+    <p>It is the same species of problem as the one we published about the denominator: <a href="/guides/what-a-law-firm-score-cannot-compare/">two firms can share a score without sharing the evidence under it</a>, and a sub-factor read from somebody else's selection is a thinner kind of evidence than one read from a register.</p>
+
+    <h2 id="limits">What this does not show</h2>
+    <p>This is a study of a selection, not of honesty. Nothing here says a returned review is fake, bought or solicited. Every one of them may be a real client writing what they thought. The finding is about which real reviews get handed to whoever asks, and that is a different question from whether the reviews are true.</p>
+    <p>We also cannot see the reviews that were not returned. The {fmt(census)} is Google's own count and we have {fmt(returned)} of them, so every statement above about the population is made through the published average rather than by reading the population directly. If Google's published average is itself filtered, this page cannot tell.</p>
+    <p>Nor is this peculiar to Google. Directories that carry lawyer ratings generally decide what is shown rather than showing everything: Martindale-Hubbell, whose peer rating is <a href="https://www.martindale.com/ratings-and-reviews/consumers/" rel="noopener" target="_blank">initiated from references the rated attorney submits</a>, also lets a subscribing attorney choose which written reviews sit at the top of their profile. That is a stronger form of the same thing, and it is chosen by the firm rather than by an algorithm.</p>
+    <p>One practical consequence for anybody reading a firm's reviews. <b>The five reviews on the screen are the weakest evidence on the page.</b> The count is worth more than the rating, and the rating is worth more than the reviews you are shown, which is the reverse of the order most people read them in. <a href="/guides/google-reviews-new-york-injury-firms/">We measured what the count and the rating are each worth</a> across the New York injury market, and the short answer is that the count mostly tracks how many offices a firm runs.</p>
+    <p>Reviews are one pillar of five, and the score deliberately does not let any of them carry a firm on its own. You can see every sub-score and the evidence behind it on any profile, or compare firms directly on the <a href="/practice-areas/personal-injury/">personal injury</a> and <a href="/cities/new-york-ny/personal-injury/">New York personal injury</a> pages.</p>
+    <p class="muted" style="font-size:.86rem">Review counts, published ratings and the returned review sample all come from the Google Places API. A firm whose listings we could not verify keeps these sub-factors pending rather than receiving an estimated score. If a firm believes a measurement is wrong, the profile links to the source we used, and a firm can <a href="/list-your-firm/">add or correct its listing</a>.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm above has a profile showing its offices, fees, client reviews and the evidence behind each sub-score.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>How scoring works</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li><a href="/guides/google-reviews-new-york-injury-firms/">Ratings, counts and office count</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

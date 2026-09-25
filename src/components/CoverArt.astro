@@ -20,7 +20,7 @@ interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-      | 'divorce' | 'language';
+      | 'divorce' | 'language' | 'sample';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -85,6 +85,19 @@ const tongues = {
   left: [true, true, false, true, true, true, false, true],
   right: [false, true, false, false, false, false, true, false],
 };
+
+// What Google returns of a firm's reviews: a field of marks standing for every review counted on
+// the profile, and the handful lifted out of it that a caller actually gets back. The returned
+// few are drawn as filled stars and the field behind them is nearly uniform, because the point is
+// not that the reviews differ but that the selection does. A scatter of dashed marks carries the
+// middle of the scale, the two- and three-star reviews that are in the count and almost never in
+// what comes back. The two gauges on the right are the two averages the study compares: the one
+// computed from what was returned, and the one printed on the profile. Ratios are the shape of
+// the finding rather than any month's exact figures, because a drawing cannot recompute itself.
+const field = { cols: 15, rows: 8 };
+// The window's position, and which marks fall inside it. Fixed rather than derived, so the scene
+// draws identically on every build.
+const lens = { col: 4, row: 3, span: 5 };
 ---
 {name === 'results' && (
   <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
@@ -539,6 +552,50 @@ const tongues = {
         <rect x="0" y={42 + i * 34} width="60" height="26" rx="13" fill="none" stroke={MINT}
           stroke-width="2" stroke-dasharray="9 7" opacity=".55" />
       ))}
+    </g>
+  </svg>
+)}
+
+{name === 'sample' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* The field: one mark per review Google counted. Nearly uniform, because the count is not
+        what the study is about. */}
+    <g>
+      {Array.from({ length: field.rows }).map((_, r) =>
+        Array.from({ length: field.cols }).map((_, c) => {
+          const inWindow = r === lens.row && c >= lens.col && c < lens.col + lens.span;
+          // The middle of the scale, scattered through the field and never inside the window.
+          const middling = !inWindow && (r * field.cols + c) % 17 === 5;
+          const x = 96 + c * 48;
+          const y = 66 + r * 42;
+          if (inWindow) return null;
+          return middling
+            ? <rect x={x} y={y} width="30" height="12" rx="6" fill="none" stroke={MINT}
+                stroke-width="1.6" stroke-dasharray="6 5" opacity=".55" />
+            : <rect x={x} y={y} width="30" height="12" rx="6" fill="rgba(255,255,255,.13)" />;
+        }))}
+    </g>
+    {/* The window: the five per listing that come back, drawn as filled stars rather than as
+        more marks, because what comes back is not a slice of the field but the top of it. */}
+    <g>
+      <rect x={96 + lens.col * 48 - 14} y={66 + lens.row * 42 - 22} rx="16"
+        width={lens.span * 48 + 16} height="56" fill="rgba(167,139,250,.14)"
+        stroke={VIOLET} stroke-width="2" />
+      {Array.from({ length: lens.span }).map((_, i) => (
+        <path transform={`translate(${96 + (lens.col + i) * 48 + 15},${66 + lens.row * 42 + 6}) scale(1.05)`}
+          d="M0 -16l4.9 9.9 10.9 1.6-7.9 7.7 1.9 10.9L0 18.9l-9.8 5.2 1.9-10.9-7.9-7.7 10.9-1.6z"
+          fill={VIOLET} />
+      ))}
+    </g>
+    {/* The two averages, as gauges: what the returned few come to, and what the profile prints.
+        The taller one is the returned set, which is the finding in one shape. */}
+    <g transform="translate(944,72)">
+      {[{ h: 232, fill: VIOLET, x: 0 }, { h: 168, fill: 'rgba(255,255,255,.22)', x: 92 }].map(g => (
+        <rect x={g.x} y={264 - g.h} width="56" height={g.h} rx="14" fill={g.fill} />
+      ))}
+      {/* A rule at the height the two would share if the selection were even. */}
+      <line x1="-16" y1="96" x2="164" y2="96" stroke={BLUE} stroke-width="2"
+        stroke-dasharray="8 7" opacity=".6" />
     </g>
   </svg>
 )}
