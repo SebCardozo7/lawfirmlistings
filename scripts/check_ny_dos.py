@@ -346,7 +346,24 @@ def apply_gates(firm: dict, entity: dict | None, today: str) -> list[str]:
                 "source": f"Google Places API and {DATASET}, partial",
                 "checked_at": today,
             }
+            # The third copy of one correction, which is three copies too many and is noted at
+            # the bottom of this block. An age below the threshold, from a filing date or a
+            # domain, does not establish that a firm is new: a practice that reorganises files
+            # again and the register shows the new date. Where the review half clears and only
+            # the age fails, the gate has conflicting evidence rather than a finding.
+            if enough_reviews and age is not None and not old_enough:
+                gates["G6"]["unresolvable"] = (
+                    "An entity filing date is when this entity was registered rather than when "
+                    "the practice began. The review count contradicts it, so the age is "
+                    "unestablished rather than disproved.")
     return notes
+
+
+# G6 is now written by three scripts, each with its own copy of the same two thresholds and the
+# same correction above. That is a seam worth closing: the next state added will be the fourth
+# copy, and the first two took a published "Not eligible" on a real firm each to find. The reason
+# it is not closed here is that the three read different sources for the age, so the shared part
+# is the rule and not the lookup.
 
 
 def main() -> int:

@@ -1,0 +1,423 @@
+{
+  "slug": "prosper-injury-attorneys",
+  "name": "Prosper Injury Attorneys",
+  "initials": "PR",
+  "website": "https://prosperlaw.com/",
+  "domain": "prosperlaw.com",
+  "phone": "(305) 694-2676",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://prosperlaw.com/car-accidents/",
+      "checked_at": "2026-09-25"
+    }
+  ],
+  "market": {
+    "city_slug": "miami-fl",
+    "city": "Miami",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Prosper Injury Attorneys",
+      "address": "15520 W Dixie Hwy, North Miami Beach, FL 33162, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=9231937438204426185&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Prosper Shaked",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://prosperlaw.com/attorneys/prosper-shaked/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line",
+    "Hospital & home visits"
+  ],
+  "about": [
+    "Prosper Injury Attorneys is a personal injury firm with a single office in North Miami Beach.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock; it will visit clients in hospital or at home. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "154",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-25"
+    },
+    "sample": [
+      {
+        "published_at": "2026-05-19T21:58:11.632021444Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-26T16:40:41.569858113Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-29T01:10:13.790600938Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-08T05:53:59.912510633Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-09T23:17:00.923662104Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "_ahrefs_partial_from_cohort": {
+      "domain": "prosperlaw.com",
+      "name": "Prosper Injury Attorneys",
+      "review_count_at_discovery": 154
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 154,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 8,
+        "has_description": false,
+        "unobtainable": [
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-25"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-25"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Florida does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-25"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-25"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-25"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "154 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2005-02-25, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-25"
+    }
+  },
+  "cohort_id": "fl-miami-personal-injury",
+  "faq": [],
+  "operating": {
+    "registered": "2005-02-25",
+    "years": 21.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-25"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://prosperlaw.com/attorneys/prosper-shaked/",
+        "quote": "onal Trial Lawyers: Top 40 Under 40 , member since 2018 The American Association for Justice Florida Justice Association Miami-Dade Trial Lawyers Associ"
+      },
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://prosperlaw.com/attorneys/prosper-shaked/",
+        "quote": "versity of Miami School of Law in 2014, and was admitted to The Florida Bar that same year. He began his legal career as an Assistant S"
+      },
+      {
+        "name": "Florida Justice Association",
+        "source_url": "https://prosperlaw.com/attorneys/prosper-shaked/",
+        "quote": "40 , member since 2018 The American Association for Justice Florida Justice Association Miami-Dade Trial Lawyers Association Miami Beach Bar Associ"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, The Florida Bar, Florida Justice Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 4,
+    "bios_published": 2,
+    "source": "observed",
+    "checked_at": "2026-09-25"
+  },
+  "results_published": {
+    "count": 13,
+    "counted_from": "stated amounts",
+    "amounts": [
+      4500000,
+      1375000,
+      1225000,
+      750000,
+      500000,
+      350000,
+      300000,
+      250000,
+      225000,
+      195000,
+      175000,
+      150000,
+      125000
+    ],
+    "largest": 4500000,
+    "aggregate_claims": [],
+    "case_types": [
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 1950,
+    "readable": true,
+    "url": "https://prosperlaw.com/results/",
+    "checked_at": "2026-09-25"
+  },
+  "score": {
+    "total": 68,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-25",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, The Florida Bar, Florida Justice Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 8,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 4.5,
+            "max": 6,
+            "source": "firm",
+            "evidence": "13 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "6 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 19,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 4,
+            "max": 5,
+            "source": "observed",
+            "evidence": "154 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 154 reviews → Bayesian 4.93 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-08) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.5,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV pending · no bar numbers on bios · no fee statement · no privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.8,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 8 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 10,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 5.0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line · Hospital & home visits"
+          }
+        ]
+      }
+    },
+    "floor_abc": 30,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 2,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +5.5 available"
+      ]
+    },
+    "raw": 42.3,
+    "assessed": 62,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.776,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 70,
+    "comparable": true
+  }
+}

@@ -381,3 +381,18 @@ Until then Houston's G3 is pending, which is the truthful state: work we owe, no
 Twelve more were skipped before reaching a draft because they do not hold themselves out for this
 practice, among them an immigration firm whose own title says so, three sites returning 404 on
 every path, and a domain now serving an Indonesian gambling brand under the name "Naga303".
+
+### Held for a person to read: Atlanta
+
+- **Buckhead Law Saxton Car Accident and Personal Injury Lawyers** (2026-09-25). The Georgia
+  discipline check, added for this market, returned a match: Daniel Saxton is the respondent in
+  *In the Matter of Daniel J. Saxton* (2014), and the firm publishes a Daniel Saxton on its own
+  roster. It scores 59 and would have been the first firm in the directory published as "Not
+  eligible" on a name.
+
+  That label is not going out on a search result. Unlike New York's register, which carries a
+  status and never a reason, a Georgia decision is an opinion with reasoning in it, so what a
+  person needs to do here is read the 2014 decision: what it found, what sanction issued, and
+  whether it has since been lifted. The profile is kept out of the repository until then. The firm
+  stays in the cohort, because it is a real practice in this market and belongs in the percentile
+  denominator.

@@ -130,19 +130,19 @@
       "pass": true,
       "evidence": "JAMES PICCOLINO LAW, P.A. is an active DOMP on the Florida register, document P19000079496, filed 2019-10-10, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G6": {
       "pass": true,
       "evidence": "405 public client reviews and 7 years since the entity was filed in 2019",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     }
   },
   "cohort_id": "fl-miami-personal-injury",
@@ -180,7 +180,7 @@
     "dos_id": "P19000079496",
     "formed": "2019-10-10",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-24"
+    "checked_at": "2026-09-25"
   },
   "score": {
     "total": 40,
@@ -267,7 +267,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 405 reviews → Bayesian 4.96 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 405 reviews → Bayesian 4.97 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

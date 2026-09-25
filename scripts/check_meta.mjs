@@ -26,7 +26,14 @@ const MAX = 155;
 
 // Digits that legitimately belong in a description: a statute, a methodology version, a score
 // scale. Anything else numeric on a directory page is almost always a live count.
-const ALLOWED = [/\bv\d+(\.\d+)?\b/gi, /\b0-100\b/g, /\b0–100\b/g, /\b33⅓\b/g, /\b20\d\d\b/g];
+// A figure that drifts is always a standalone count: "296 firms", "17 of them". A digit welded to
+// letters is part of a word, and firms are named that way: Abogadas305 after Miami's area code,
+// the 1-800 brands, 716 for Buffalo. Flagging those told a firm its own name would go stale.
+const NAME_TOKEN = /\b(?:\w*[A-Za-z]\d\w*|\d+[A-Za-z]\w*)\b/g;
+// NAME_TOKEN goes last, and the order is load-bearing. Put first, it took the "v2" out of "v2.0"
+// and left ".0" behind for the version rule to miss, so the methodology version this page has
+// carried since it was written was reported as a drifting figure.
+const ALLOWED = [/\bv\d+(\.\d+)?\b/gi, /\b0-100\b/g, /\b0–100\b/g, /\b33⅓\b/g, /\b20\d\d\b/g, NAME_TOKEN];
 
 function walk(dir) {
   const out = [];

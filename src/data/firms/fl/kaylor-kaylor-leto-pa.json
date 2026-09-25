@@ -178,19 +178,19 @@
       "pass": true,
       "evidence": "KAYLOR, KAYLOR & LETO, P.A. is an active DOMP on the Florida register, document P94000094243, filed 1994-12-30, with 2 Google-verified locations",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G6": {
       "pass": true,
       "evidence": "57 public client reviews and 32 years since the entity was filed in 1994",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     }
   },
   "cohort_id": "fl-personal-injury",
@@ -329,7 +329,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.17 over 57 reviews → Bayesian 4.58 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.17 over 57 reviews → Bayesian 4.59 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -449,6 +449,6 @@
     "dos_id": "P94000094243",
     "formed": "1994-12-30",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-24"
+    "checked_at": "2026-09-25"
   }
 }
