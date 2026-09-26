@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="5" fill="#004680"/>
+  <!-- Georgia state outline -->
+  <path d="M9 4 L22 4 L22 5.5 L23 6 L23.5 7 L23 8 L23.5 9 L24 10 L24.5 11.5 L24 13 L23.5 14 L24 15 L24.5 16 L24 17 L23 18 L22.5 19.5 L22 21 L21 22 L20 23 L19 24 L18.5 25 L18 25.5 L17 25.5 L16.5 26 L16 27 L15.5 27.5 L14.5 27.5 L14 27 L13 27 L12 26.5 L11 26 L10 26 L9 25.5 L9 4 Z" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.6"/>
+  <!-- Road/highway swoosh -->
+  <path d="M11 26 C13 20, 17 16, 15 10 C14 7, 13 5.5, 12 4" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M13 26.5 C15 20, 19 15.5, 17 9.5 C16 6.5, 15 5, 14 4" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Filled area between road lines (left side) -->
+  <path d="M11 26 C13 20, 17 16, 15 10 C14 7, 13 5.5, 12 4 L14 4 C15 5, 16 6.5, 17 9.5 C19 15.5, 15 20, 13 26.5 Z" fill="rgba(255,255,255,0.3)"/>
+</svg>
