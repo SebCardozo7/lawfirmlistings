@@ -139,6 +139,34 @@ def main() -> int:
         for cand in out_of_market:
             first = (cand["offices"][0].get("address") or "?") if cand["offices"] else "?"
             print("  %-32s %s" % (cand["domain"][:32], first[:62]))
+
+    # A firm the map returns in several cities is a national practice with a local office, and
+    # publishing it as a local firm in each of them counts it once per city and tells a reader it
+    # is something it is not. The office count above catches the ones with many addresses, and
+    # misses the ones whose branch network is only visible when two markets are opened together:
+    # Morgan and Morgan came back in all three cities opened on 2026-09-26, and Lerner and Rowe
+    # and Karns and Karns in two each.
+    #
+    # Which market keeps such a firm is an editorial decision and this does not make it, the same
+    # way the postal prefix is passed in rather than inferred. It says where else the firm turned
+    # up, which is the part a person cannot see from one candidate file.
+    elsewhere = {}
+    for other in sorted(staging.glob("candidates-*.json")):
+        if other.name == path.name:
+            continue
+        try:
+            rival = json.load(io.open(other, encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        for cand in rival.get("candidates") or []:
+            elsewhere.setdefault(cand["domain"], []).append(
+                other.name[len("candidates-"):-len(".json")])
+    shared = [(c, elsewhere[c["domain"]]) for c, _, _ in keep if c["domain"] in elsewhere]
+    if shared:
+        print()
+        print("Also a candidate in another market, so one market has to give them up:")
+        for cand, where in shared:
+            print("  %-32s %s" % (cand["domain"][:32], ", ".join(sorted(set(where)))[:62]))
     return 0
 
 
