@@ -426,11 +426,7 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
     gates = {
         "G1": gate(False, *registry_wording(market)),
         "G2": gate(False, *discipline_wording(market)),
-        "G3": gate(False,
-                   "%d physical location%s verified on Google Business Profile; Secretary of State "
-                   "registration still to confirm" % (agg.get("listing_count", 0),
-                                                      "" if agg.get("listing_count") == 1 else "s"),
-                   "Google Places API (partial)"),
+        "G3": gate(False, *entity_wording(market, agg.get("listing_count", 0))),
         "G5": gate(False,
                    "HTTPS reachable: %s; contact method published: %s; attorney names not yet "
                    "extracted from bio pages" % (g5.get("https_reachable"), g5.get("contact_method")),
@@ -534,6 +530,21 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
 # of claim as a score we never measured.
 OPEN_REGISTER_STATES = {"NY"}
 
+# The states where a script in this repo reads a business register and can settle G3. Everywhere
+# else the gate has no source, and saying so is the whole point of this set.
+#
+# G1 and G2 have had a per-state wording since Baltimore, and G3 never did: every new market was
+# written "Secretary of State registration still to confirm", which is pending, and a pending gate
+# holds a firm at Listed. That is correct in New York, Florida and Texas, where a check really is
+# coming. In a state with no readable register it is a promise nothing can keep, and it cost
+# Houston seventy five firms until the Texas register was read today.
+#
+# Illinois, Pennsylvania and Nevada were checked on 2026-09-26 before opening those markets, and
+# none of the three can be read: apps.ilsos.gov and file.dos.pa.gov both answer an automated
+# request with a 403, and Nevada's register moved to a portal behind Imperva. Bot protection is
+# never worked around, so these are facts about the states in the same way Georgia's are.
+ENTITY_REGISTER_STATES = {"NY", "FL", "TX"}
+
 
 def registry_wording(market):
     if market["state"] in OPEN_REGISTER_STATES:
@@ -547,6 +558,19 @@ def discipline_wording(market):
     if market["state"] in OPEN_REGISTER_STATES:
         return ("Disciplinary history not yet checked", "pending")
     return (f"{market['state_name']} does not publish a disciplinary register we can query.",
+            "no queryable source")
+
+
+def entity_wording(market, listings):
+    """G3's opening line, which has to know whether a register check is actually coming."""
+    where = "%d physical location%s verified on Google Business Profile" % (
+        listings, "" if listings == 1 else "s")
+    if market["state"] in ENTITY_REGISTER_STATES:
+        return ("%s; Secretary of State registration still to confirm" % where,
+                "Google Places API (partial)")
+    return ("%s. %s publishes no business register we are able to query, so the registration "
+            "itself is not verified here. The state's own business search is the place to check "
+            "it." % (where, market["state_name"]),
             "no queryable source")
 
 def main():

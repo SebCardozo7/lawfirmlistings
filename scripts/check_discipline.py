@@ -151,6 +151,33 @@ REGISTERS = {
     #
     # Both need the Board of Bar Overseers as a corroborating term, because "In re" is also how
     # the court titles an adoption, an estate and a guardianship.
+    # Pennsylvania, added when Philadelphia opened. The Disciplinary Board prosecutes in the
+    # Supreme Court of Pennsylvania and the cases are styled "Office of Disciplinary Counsel v.
+    # Mirarchi", so the respondent stands after "v." and this is Maryland's shape: a surname
+    # alone, settled afterwards against the decision's own text. 2,173 decisions, which is the
+    # largest index of the eight and second only to Florida's for depth.
+    #
+    # No corroborating term is needed. Nothing else in that court is titled "Office of
+    # Disciplinary Counsel", which is the problem "In re" and "In the Matter of" create elsewhere.
+    "PA": {
+        "courts": "pa",
+        "case_name": "Office of Disciplinary Counsel",
+        "body": ("the Supreme Court of Pennsylvania on the discipline of members of the "
+                 "Pennsylvania bar, prosecuted by its Disciplinary Board"),
+    },
+    # Nevada, added when Las Vegas opened. "In Re: Discipline Of Gianna M. Orlandi" carries the
+    # full name, which is Indiana's shape and the strongest kind, and the court writes the whole
+    # title in capitals about half the time, which the case-insensitive split already handles.
+    #
+    # 173 decisions, the smallest index here. That is a fact about the state rather than about the
+    # search: Nevada has roughly a tenth of Pennsylvania's lawyers and publishes discipline as
+    # Supreme Court opinions only when it reaches the court.
+    "NV": {
+        "courts": "nev",
+        "case_name": "Discipline of",
+        "respondent_after": r"Discipline [Oo]f\s+",
+        "body": ("the Supreme Court of Nevada on the discipline of State Bar of Nevada members"),
+    },
     "MA": {
         "courts": "mass",
         "body": ("the Supreme Judicial Court of Massachusetts on the discipline of attorneys, "
