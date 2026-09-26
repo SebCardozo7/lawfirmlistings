@@ -92,7 +92,11 @@ const firms = defineCollection({
         // instead of implying the firm left those fields blank.
         completeness: z.object({
           categories: z.number(), hours_published: z.boolean(), photos: z.number(),
-          has_description: z.boolean(),
+          // Not the firm's own description, which this was called and is not. The API exposes
+          // Google's editorial summary, a paragraph Google's editors write about a notable
+          // place, and the owner-written description is not exposed at all. It is false for
+          // every firm in this directory and true for the Empire State Building.
+          google_wrote_a_summary: z.boolean(),
           unobtainable: z.array(z.string()).default([]), note: z.string().optional(),
         }).optional(),
       }).optional(),
