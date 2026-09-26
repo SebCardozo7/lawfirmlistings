@@ -724,4 +724,257 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  'houston-tx': {
+    lede:
+      'Texas gives you two years to sue, six months to tell a city you were hurt, and a separate ' +
+      'set of rules again if the defendant is a hospital. Compare Houston firms on what they ' +
+      'publish and on what we could verify ourselves.',
+    areas: ['Downtown', 'Midtown', 'The Heights', 'Montrose', 'Sugar Land', 'Katy', 'Pasadena',
+            'Pearland', 'Spring'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Houston: what is different',
+        paragraphs: [
+          'The limitation period is two years from the day the claim accrues, under section ' +
+          '16.003 of the Civil Practice and Remedies Code. A claim against a governmental unit ' +
+          'needs written notice within <b>six months</b> under section 101.101 of the Tort Claims ' +
+          'Act, and that covers METRO, a county hospital district, a city truck and a flooded ' +
+          'road alike.',
+          'What sets Houston apart from the rest of Texas is the Texas Medical Center, the ' +
+          'largest concentration of hospitals in the world, and with it a volume of medical ' +
+          'claims no other city in this directory carries. Those claims run on their own track. ' +
+          'Chapter 74 of the Civil Practice and Remedies Code requires notice sixty days before ' +
+          'suit and an expert report served within <b>120 days</b> of the defendant answering, ' +
+          'and a case without that report is dismissed with the defendant’s fees attached. It is ' +
+          'the single most unforgiving deadline on this page, and it is why a firm that does ' +
+          'medical work and a firm that does car accidents are not interchangeable here.',
+          'Harris County hears these cases in its civil district courts, and federal matters go ' +
+          'to the Southern District of Texas. Houston is also, like Dallas, one of the most ' +
+          'heavily advertised legal markets in the country, which is worth remembering while ' +
+          'comparing: billboards are not a measurement, and their absence from our score is the ' +
+          'reason this directory exists.',
+        ],
+      },
+      {
+        heading: 'What lawyers cost in Houston',
+        paragraphs: [
+          'Injury work is done on contingency and Texas sets no statutory cap on the share, so ' +
+          'the percentage is genuinely negotiable and genuinely varies between firms. Ask what ' +
+          'the percentage is, ask whether it rises if the case is filed or tried, and ask ' +
+          'whether case expenses come out before or after the fee is calculated. That last one ' +
+          'moves the number more than most people expect, and the answer belongs in the written ' +
+          'agreement rather than on the phone.',
+          'Medical claims carry a second cost worth asking about. Texas caps non-economic ' +
+          'damages against physicians under Chapter 74, and the expert report the statute ' +
+          'demands has to be paid for early, long before any recovery. A firm that takes these ' +
+          'cases advances that money; ask what happens to it if the case does not succeed.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Houstonians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the day the claim accrues, under Civil ' +
+          'Practice and Remedies Code § 16.003.',
+          '<b>Any claim against the City of Houston, Harris County, METRO or a public hospital ' +
+          'district:</b> written notice within <b>six months</b>, under Tort Claims Act § 101.101.',
+          '<b>Medical malpractice:</b> two years, plus sixty days’ notice before filing and an ' +
+          'expert report within <b>120 days</b> of the answer, under Chapter 74.',
+          '<b>Wrongful death:</b> two years, running from the death rather than from the injury ' +
+          'that caused it.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Houston lawyer is licensed?',
+        a: 'The State Bar of Texas publishes a Find a Lawyer directory at ' +
+           '<a href="https://www.texasbar.com" rel="nofollow noopener" target="_blank">' +
+           'texasbar.com</a>, free to search, showing bar number, admission date and public ' +
+           'disciplinary history. We do not read it: it refuses our requests, so Texas profiles ' +
+           'carry no licence finding rather than one we did not make.',
+      },
+      {
+        q: 'What can you verify about a Texas firm that you cannot verify elsewhere?',
+        a: 'Its registration. The Texas Comptroller publishes every active franchise taxpayer as ' +
+           'open data, refreshed daily, with the Secretary of State file number and usually the ' +
+           'charter date, so a Houston profile can show that the entity exists and holds the ' +
+           'right to transact business. A firm missing from that list is not a firm in trouble: ' +
+           'a sole proprietor and a general partnership are not franchise taxpayers at all, so ' +
+           'the profile says the check could not be completed rather than that it failed.',
+      },
+      {
+        q: 'Should I hire a firm in Houston itself?',
+        a: 'Harris County is where most of these cases are heard, and a firm in Sugar Land or ' +
+           'Katy appears there constantly. The metro is one legal market. What matters is ' +
+           'regular practice in the court that will hear your case, and for a medical claim, ' +
+           'whether the firm does that work at all rather than referring it on.',
+      },
+    ],
+  },
+
+  'atlanta-ga': {
+    lede:
+      'Georgia gives you two years to sue and as little as six months to notify a city, and the ' +
+      'notice deadline changes depending on whether you are suing a city, a county or the state. ' +
+      'Compare Atlanta firms on what they publish and on what we could verify ourselves.',
+    areas: ['Downtown', 'Midtown', 'Buckhead', 'West End', 'Decatur', 'Sandy Springs', 'Marietta',
+            'Alpharetta', 'East Point'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Atlanta: what is different',
+        paragraphs: [
+          'The limitation period for a personal injury is two years from the injury, under ' +
+          'section 9-3-33 of the Official Code of Georgia. The deadlines that catch people are ' +
+          'the notice rules, and Georgia has three different ones depending on who you are ' +
+          'suing. A municipality wants written ante litem notice within <b>six months</b> under ' +
+          'section 36-33-5. A county wants <b>twelve months</b> under section 36-11-1. The State ' +
+          'of Georgia and its agencies want twelve months under the Tort Claims Act at section ' +
+          '50-21-26, delivered to the Department of Administrative Services. Miss the right one ' +
+          'and the claim is gone regardless of its merits.',
+          'Georgia also bars recovery entirely once you are found fifty per cent or more at ' +
+          'fault, under section 51-12-33, which is stricter than a pure comparative state and ' +
+          'makes the apportionment argument the whole case in a contested crash.',
+          'Fulton County hears civil matters in both its State Court and its Superior Court, ' +
+          'and injury cases commonly go to the State Court. DeKalb, Cobb and Gwinnett run their ' +
+          'own. Federal matters go to the Northern District of Georgia.',
+        ],
+      },
+      {
+        heading: 'What we can and cannot verify about a Georgia firm',
+        paragraphs: [
+          'Less than anywhere else in this directory, and the profiles say so rather than ' +
+          'quietly scoring a zero. Georgia publishes no attorney register we are able to query ' +
+          'and no business register we may read, so licensure and entity registration are both ' +
+          'recorded as checks without a source rather than as findings against a firm.',
+          'One check does have a source. Attorney discipline in Georgia is decided by the ' +
+          'Supreme Court of Georgia and published as opinions styled “In the Matter of”, which ' +
+          'are indexed and readable, so that is the one gate in this state standing on evidence ' +
+          'rather than on an absence. Without it every Atlanta profile would carry three ' +
+          'unanswered checks instead of two.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Georgians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the injury, under OCGA § 9-3-33.',
+          '<b>A claim against the City of Atlanta or another municipality:</b> written ante ' +
+          'litem notice within <b>six months</b>, under OCGA § 36-33-5.',
+          '<b>A claim against Fulton, DeKalb or another county:</b> <b>twelve months</b>, under ' +
+          'OCGA § 36-11-1.',
+          '<b>A claim against the State or MARTA:</b> twelve months’ notice under the Georgia ' +
+          'Tort Claims Act, OCGA § 50-21-26.',
+          '<b>Loss of consortium:</b> four years, which outlives the injury claim it arises ' +
+          'from and is routinely missed for that reason.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Georgia lawyer is licensed?',
+        a: 'The State Bar of Georgia publishes a member directory at ' +
+           '<a href="https://www.gabar.org" rel="nofollow noopener" target="_blank">gabar.org</a>, ' +
+           'free to search, showing admission date and public discipline. We do not read it, so ' +
+           'Atlanta profiles carry no licence finding rather than one we did not make. Checking ' +
+           'it yourself takes a minute and is worth doing.',
+      },
+      {
+        q: 'Why does the ante litem deadline differ between a city and a county?',
+        a: 'Because they come from different statutes written at different times, and Georgia ' +
+           'never harmonised them. It is a genuine trap rather than a technicality: a crash ' +
+           'involving a county ambulance and a city police car can carry both deadlines at once, ' +
+           'and the shorter one governs that half of the claim. This is not legal advice, and a ' +
+           'claim against any public body is a reason to talk to a lawyer early rather than ' +
+           'after six months.',
+      },
+    ],
+  },
+
+  'miami-fl': {
+    lede:
+      'Florida halved its deadline for injury claims in 2023, from four years to two, and a lot ' +
+      'of advice online still says four. Compare Miami firms on what they publish and on what we ' +
+      'could verify ourselves.',
+    areas: ['Downtown', 'Brickell', 'Little Havana', 'Coral Gables', 'Hialeah', 'Miami Beach',
+            'Kendall', 'Doral', 'Homestead'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Miami: what is different',
+        paragraphs: [
+          'In March 2023 Florida rewrote the rules for injury claims. The limitation period for ' +
+          'general negligence went from four years to <b>two</b>, under section 95.11 of the ' +
+          'Florida Statutes, and it applies to causes of action accruing after the change. A ' +
+          'great deal of the advice still published online was written before it. If you are ' +
+          'reading a page that says four years, check when it was written.',
+          'The same reform moved Florida to modified comparative negligence: a claimant found ' +
+          'more than fifty per cent at fault recovers nothing, under section 768.81. Florida ' +
+          'used to be a pure comparative state where fault only reduced the recovery, so this is ' +
+          'a real change in what a contested case is worth.',
+          'Miami-Dade hears civil matters in the Eleventh Judicial Circuit, and federal cases go ' +
+          'to the Southern District of Florida. Two local facts shape the practice here more ' +
+          'than the statutes do. Florida runs a no-fault auto system, so a car claim starts with ' +
+          'personal injury protection and only becomes a lawsuit once the injury meets the ' +
+          'statutory threshold. And this is the most Spanish-speaking legal market in this ' +
+          'directory by a distance, which is why our profiles record which firms publish in ' +
+          'Spanish rather than merely saying they speak it.',
+        ],
+      },
+      {
+        heading: 'What lawyers cost in Miami',
+        paragraphs: [
+          'Injury work is done on contingency, and Florida is unusual in setting a sliding scale ' +
+          'in its Bar rules rather than leaving the share entirely to negotiation. The ' +
+          'percentage ordinarily steps down as the recovery rises and steps up once a case is ' +
+          'answered or tried, so the number quoted on a first call is not necessarily the number ' +
+          'that applies later. Ask which tier applies to your case and what moves it.',
+          'Ask the expenses question too. Whether case costs come out before or after the fee is ' +
+          'calculated changes the final figure materially, and it is answered in the written ' +
+          'agreement rather than on the phone.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Floridians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> <b>two years</b> for causes of action accruing after the 2023 ' +
+          'reform, under Fla. Stat. § 95.11. Older claims may still carry the four-year rule.',
+          '<b>A claim against the city, the county or the State:</b> written notice under Fla. ' +
+          'Stat. § 768.28, and the agency has six months to respond before suit can be filed, so ' +
+          'the practical deadline is earlier than it looks.',
+          '<b>Medical malpractice:</b> two years from when the incident was or should have been ' +
+          'discovered, with a longer outer limit, plus a pre-suit investigation period.',
+          '<b>Wrongful death:</b> two years from the death.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Florida lawyer is licensed?',
+        a: 'The Florida Bar publishes a member search at ' +
+           '<a href="https://www.floridabar.org" rel="nofollow noopener" target="_blank">' +
+           'floridabar.org</a>, showing admission date and public discipline. We do not read it, ' +
+           'so Miami profiles carry no licence finding. Discipline is different: it is decided by ' +
+           'the Supreme Court of Florida and published as opinions, which we do read, so that ' +
+           'gate stands on evidence.',
+      },
+      {
+        q: 'What does the Florida register tell you about a firm?',
+        a: 'Whether the entity is active, what type it is and when it was filed, from the ' +
+           'Division of Corporations. It is worth reading carefully: a filing date is when that ' +
+           'entity was registered, not when the practice began, and a firm that reorganised or ' +
+           'changed its name files again and shows a new date. Where the two disagree our ' +
+           'profiles say so rather than publishing the register date as the firm’s age.',
+      },
+      {
+        q: 'Does it matter that a firm publishes in Spanish?',
+        a: 'For a client who needs it, entirely. We record it because it is checkable rather ' +
+           'than because we are scoring it heavily: a firm that publishes a real page in Spanish ' +
+           'has done something a badge saying “se habla español” does not prove. Our study of ' +
+           'what law firms publish in Spanish found injury firms do it far more often than ' +
+           'divorce firms, which is the opposite of where a client most needs to be understood.',
+      },
+    ],
+  },
 };
