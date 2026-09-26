@@ -197,6 +197,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "ahrefs": {
+      "dr": 32,
+      "ahrefs_rank": 3163463,
+      "refdomains": 1477,
+      "refdomains_dofollow": 851,
+      "backlinks": 11064,
+      "org_keywords": 214,
+      "org_traffic": 874,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -269,10 +281,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 69,
+    "total": 68,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -374,7 +386,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 9,
         "max": 25,
         "subs": [
           {
@@ -388,10 +400,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 32 → 78th pct of 74-firm cohort (median 19) 2/3 · 1,477 referring domains, 80th pct 2/2 · 214 organic keywords / 874 visits·mo, 60th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -406,7 +418,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -446,18 +458,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 1,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "D2 Search authority: not yet measured (8 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 32.5,
-    "assessed": 47,
-    "coverage": 0.671,
+    "raw": 37.5,
+    "assessed": 55,
+    "coverage": 0.786,
     "floor_abc_pct": 0.913,
     "gates_unavailable": [
       "G1",

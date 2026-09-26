@@ -5,7 +5,7 @@
   "website": "https://www.855dolor55.com/",
   "domain": "855dolor55.com",
   "phone": "(855) 365-6755",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -248,6 +248,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
+    },
+    "ahrefs": {
+      "dr": 42,
+      "ahrefs_rank": 1366005,
+      "refdomains": 1023,
+      "refdomains_dofollow": 488,
+      "backlinks": 8438,
+      "org_keywords": 498,
+      "org_traffic": 4504,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -364,10 +376,10 @@
     "checked_at": "2026-09-23"
   },
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -469,7 +481,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -483,10 +495,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 42 → 88th pct of 72-firm cohort (median 19) 3/3 · 1,023 referring domains, 51th pct 1/2 · 498 organic keywords / 4,504 visits·mo, 87th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -501,7 +513,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -539,9 +551,9 @@
     },
     "floor_abc": 32,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -550,9 +562,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 43.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 49.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.855,
     "gates_unavailable": [
       "G1",

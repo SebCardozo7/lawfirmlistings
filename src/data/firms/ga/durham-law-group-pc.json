@@ -158,6 +158,18 @@
       "source": "PageSpeed Insights API (mobile, lab only)",
       "measured_at": "2026-09-25",
       "note": "LCP 24.1 s / CLS 0.000 / TBT 166 ms"
+    },
+    "ahrefs": {
+      "dr": 5,
+      "ahrefs_rank": 28378254,
+      "refdomains": 1133,
+      "refdomains_dofollow": 665,
+      "backlinks": 3733,
+      "org_keywords": 56,
+      "org_traffic": 313,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -256,10 +268,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 67,
+    "total": 62,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -361,7 +373,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 5,
         "max": 25,
         "subs": [
           {
@@ -375,10 +387,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 5 → 8th pct of 79-firm cohort (median 24) 0/3 · 1,133 referring domains, 56th pct 1/2 · 56 organic keywords / 313 visits·mo, 34th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -393,7 +405,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -433,18 +445,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 3,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +5.0 available"
+        "D2 Search authority: +6 available"
       ]
     },
-    "raw": 41.7,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 43.7,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.803,
     "gates_unavailable": [
       "G1",

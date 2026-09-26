@@ -122,6 +122,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
+    },
+    "ahrefs": {
+      "dr": 2.6,
+      "ahrefs_rank": 41611894,
+      "refdomains": 837,
+      "refdomains_dofollow": 436,
+      "backlinks": 1543,
+      "org_keywords": 2,
+      "org_traffic": 25,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -186,10 +198,10 @@
     "checked_at": "2026-09-23"
   },
   "score": {
-    "total": 44,
+    "total": 39,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -307,8 +319,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 2.6 → 4th pct of 79-firm cohort (median 24) 0/3 · 837 referring domains, 20th pct 0/2 · 2 organic keywords / 25 visits·mo, 2th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -323,7 +335,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -363,18 +375,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 26,
+      "gap": 31,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 27.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",

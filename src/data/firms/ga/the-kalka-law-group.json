@@ -186,6 +186,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
+    },
+    "ahrefs": {
+      "dr": 24,
+      "ahrefs_rank": 6956825,
+      "refdomains": 1970,
+      "refdomains_dofollow": 1257,
+      "backlinks": 16607,
+      "org_keywords": 100,
+      "org_traffic": 215,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -335,7 +347,7 @@
     "total": 63,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -437,7 +449,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -451,10 +463,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 24 → 50th pct of 79-firm cohort (median 24) 2/3 · 1,970 referring domains, 95th pct 2/2 · 100 organic keywords / 215 visits·mo, 38th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -469,7 +481,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -518,9 +530,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 39.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 44.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.816,
     "gates_unavailable": [
       "G1",
