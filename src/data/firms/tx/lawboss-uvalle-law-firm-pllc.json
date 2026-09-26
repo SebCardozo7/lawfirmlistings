@@ -234,9 +234,10 @@
     },
     "G3": {
       "pass": false,
-      "source": "unavailable",
-      "checked_at": "2026-09-15",
-      "evidence": "3 physical locations verified on Google Business Profile. We read the Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status and could not identify this firm in it: no entity whose name contains the firm's name. A miss there is not evidence that the firm is unregistered, so this gate is unresolved rather than failed. The franchise tax does not reach a sole proprietorship or a general partnership, so this register can confirm an entity and cannot rule one out."
+      "evidence": "No matching entity on the Texas list of active franchise taxpayers. Texas does not require a sole proprietorship or a general partnership to pay franchise tax, and an exempt entity is left off as well, so this is a check this source cannot complete rather than evidence against the firm. The state's own SOSDirect service can settle it for a fee",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts, partial",
+      "unresolvable": "Texas lists only active franchise taxpayers, so a firm that is not obliged to be one cannot be found here however often we look",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -538,10 +539,11 @@
     "floor_abc_pct": 0.855,
     "gates_unavailable": [
       "G1",
-      "G2",
+      "G2"
+    ],
+    "gates_unresolvable": [
       "G3"
     ],
-    "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
   },
@@ -553,5 +555,11 @@
     "bytes": 3393,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": false,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "note": "Texas lists only active franchise taxpayers, so a firm with no franchise tax obligation is absent by design",
+    "checked_at": "2026-09-26"
   }
 }

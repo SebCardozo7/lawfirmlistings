@@ -172,11 +172,11 @@
       "checked_at": "2026-09-15"
     },
     "G3": {
-      "pass": true,
-      "source": "Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status",
-      "checked_at": "2026-09-15",
-      "evidence": "AMS LAW GROUP, PLLC is registered with the Texas Comptroller of Public Accounts, under number 0804051298, since 2021-04-29, listed as an active franchise taxpayer with the right to transact business in Texas (Secretary of State status code R), and 1 physical location verified on Google Business Profile.",
-      "registered": "2021-04-29"
+      "pass": false,
+      "evidence": "No matching entity on the Texas list of active franchise taxpayers. Texas does not require a sole proprietorship or a general partnership to pay franchise tax, and an exempt entity is left off as well, so this is a check this source cannot complete rather than evidence against the firm. The state's own SOSDirect service can settle it for a fee",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts, partial",
+      "unresolvable": "Texas lists only active franchise taxpayers, so a firm that is not obliged to be one cannot be found here however often we look",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -276,7 +276,7 @@
   "score": {
     "total": 53,
     "tier": "Verified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -468,7 +468,9 @@
       "G1",
       "G2"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G3"
+    ],
     "assessable": 70,
     "comparable": true
   },
@@ -480,5 +482,11 @@
     "bytes": 3441,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": false,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "note": "Texas lists only active franchise taxpayers, so a firm with no franchise tax obligation is absent by design",
+    "checked_at": "2026-09-26"
   }
 }

@@ -534,10 +534,9 @@
     },
     "G3": {
       "pass": true,
-      "source": "Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status",
-      "checked_at": "2026-09-15",
-      "evidence": "WITHERITE LAW GROUP, P.L.L.C. is registered with the Texas Comptroller of Public Accounts, under number 0803560494, since 2020-02-27, with an active status and the right to transact business, and 3 physical locations verified on Google Business Profile.",
-      "registered": "2020-02-27"
+      "evidence": "WITHERITE LAW GROUP, P.L.L.C. holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0803560494, chartered 2020-02-27, and 3 Google-verified locations. Identified because the name is close and the address is one we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -547,9 +546,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "4,324 public client reviews across 3 Google listings, above the 10 minimum, and the firm's domain has been registered since 2018-05-31, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "4,340 public client reviews and 7 years since the entity was chartered in 2020",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-dallas-personal-injury",
@@ -903,5 +902,19 @@
     "bytes": 59148,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "WITHERITE LAW GROUP, P.L.L.C.",
+    "taxpayer_number": "32036843699",
+    "sos_file_number": "0803560494",
+    "chartered": "2020-02-27",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "DALLAS",
+    "identified_by": "the name is close and the address is one we verified",
+    "name_similarity": 0.826,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

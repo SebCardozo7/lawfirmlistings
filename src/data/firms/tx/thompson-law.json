@@ -438,10 +438,9 @@
     },
     "G3": {
       "pass": true,
-      "source": "Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status",
-      "checked_at": "2026-09-15",
-      "evidence": "THOMPSON LAW PLLC is registered with the Texas Comptroller of Public Accounts, under number 0805225674, since 2023-09-14, with an active status and the right to transact business, and 3 physical locations verified on Google Business Profile.",
-      "registered": "2023-09-14"
+      "evidence": "THOMPSON LAW LLP holds an active franchise tax responsibility in Texas with the right to transact business, and 9 Google-verified locations. Identified because the name matches, at an address we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -746,5 +745,19 @@
     "bytes": 4854,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "THOMPSON LAW LLP",
+    "taxpayer_number": "32064338158",
+    "sos_file_number": null,
+    "chartered": null,
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "DALLAS",
+    "identified_by": "the name matches, at an address we verified",
+    "name_similarity": 0.857,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

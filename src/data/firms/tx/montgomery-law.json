@@ -142,10 +142,9 @@
     },
     "G3": {
       "pass": true,
-      "source": "Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status",
-      "checked_at": "2026-09-15",
-      "evidence": "MONTGOMERY LAW, PLLC is registered with the Texas Comptroller of Public Accounts, under number 0801876697, since 2013-11-03, with an active status and the right to transact business, and 1 physical location verified on Google Business Profile.",
-      "registered": "2013-11-03"
+      "evidence": "MONTGOMERY LAW, PLLC holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0801876697, chartered 2013-11-03, and 1 Google-verified location. Identified because the name is close and the address is one we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": false,
@@ -155,9 +154,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "944 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2013-11-03, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "945 public client reviews and 13 years since the entity was chartered in 2013",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-dallas-personal-injury",
@@ -463,5 +462,19 @@
     "bytes": 3242,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "MONTGOMERY LAW, PLLC",
+    "taxpayer_number": "32052384156",
+    "sos_file_number": "0801876697",
+    "chartered": "2013-11-03",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "DALLAS",
+    "identified_by": "the name is close and the address is one we verified",
+    "name_similarity": 0.848,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

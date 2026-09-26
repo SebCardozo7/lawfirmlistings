@@ -5,7 +5,7 @@
   "website": "https://bayoucitylaw.com/",
   "domain": "bayoucitylaw.com",
   "phone": "(713) 572-6446",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -166,10 +166,10 @@
       "checked_at": "2026-09-25"
     },
     "G3": {
-      "pass": false,
-      "evidence": "2 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-25"
+      "pass": true,
+      "evidence": "JEROME O. FJELD, PLLC holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0800894194, chartered 2007-11-05, and 2 Google-verified locations. Identified because the name is close and the address is one we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -179,9 +179,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "264 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2005-12-04, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-25"
+      "evidence": "264 public client reviews and 19 years since the entity was chartered in 2007",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-houston-personal-injury",
@@ -231,8 +231,8 @@
   },
   "score": {
     "total": 61,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (3/25).",
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -436,5 +436,19 @@
     "bytes": 5665,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-26"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "JEROME O. FJELD, PLLC",
+    "taxpayer_number": "32034087778",
+    "sos_file_number": "0800894194",
+    "chartered": "2007-11-05",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "HOUSTON",
+    "identified_by": "the name is close and the address is one we verified",
+    "name_similarity": 0.623,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }
