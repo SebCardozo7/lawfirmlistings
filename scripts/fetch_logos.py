@@ -71,6 +71,36 @@ def attr(tag: str, name: str):
     return m.group(1) if m else None
 
 
+def ico_directory(blob: bytes):
+    """Every image an .ico holds, as (width, height, length, offset).
+
+    An .ico is a container rather than a picture. Bytes 4 and 5 count the images it holds, and one
+    16-byte entry per image follows, each stating that image's size and where in the file it sits.
+    A zero in a size byte means 256, which is the only size that does not fit in a byte.
+
+    Reading only the first entry, which is what this used to do, turns down a file holding a 256
+    pixel logo on the grounds that it is 16 pixels, because generators conventionally write the
+    small sizes first.
+    """
+    if blob[:4] != b"\x00\x00\x01\x00" or len(blob) < 6:
+        return []
+    count = struct.unpack("<H", blob[4:6])[0]
+    out = []
+    for i in range(count):
+        at = 6 + i * 16
+        if at + 16 > len(blob):
+            break
+        length, offset = struct.unpack("<II", blob[at + 8:at + 16])
+        out.append((blob[at] or 256, blob[at + 1] or 256, length, offset))
+    return out
+
+
+def ico_best(blob: bytes):
+    """The largest image an .ico declares, or None when it declares none."""
+    entries = ico_directory(blob)
+    return max(entries, key=lambda e: min(e[0], e[1])) if entries else None
+
+
 def dimensions(blob: bytes):
     """(width, height) read from the file's own header, or None.
 
@@ -108,9 +138,9 @@ def dimensions(blob: bytes):
                 continue
             i += 2 + int.from_bytes(blob[i + 2:i + 4], "big")
         return None
-    if blob[:4] == b"\x00\x00\x01\x00" and len(blob) > 8:   # ICO: 0 in the byte means 256
-        w, h = blob[6] or 256, blob[7] or 256
-        return w, h
+    if blob[:4] == b"\x00\x00\x01\x00" and len(blob) > 8:
+        best = ico_best(blob)
+        return (best[0], best[1]) if best else None
     if b"<svg" in blob[:400].lower():
         return "svg", "svg"
     return None
@@ -199,8 +229,13 @@ def main():
             blob, meta = download(url)
             time.sleep(DELAY)
             if not blob:
+                # download() hands back the content type on success and the error on failure, so a
+                # media type here means the server answered 200 with nothing in the body. Twenty
+                # five sites in the directory do exactly that, and printing the bare type read as
+                # though we had failed to measure a file rather than been given an empty one.
                 if args.verbose:
-                    print("      %s: %s" % (url[:60], meta))
+                    print("      %s: %s" % (url[:60],
+                          "served empty" if meta.startswith("image/") else meta))
                 continue
             if len(blob) > MAX_BYTES:
                 if args.verbose:
@@ -215,6 +250,20 @@ def main():
                     print("      %s: %sx%s, under the %d minimum" % (url[:60], w, h, MIN_EDGE))
                 continue
             ext = EXT.get(meta) or pathlib.Path(urllib.parse.urlparse(url).path).suffix or ".png"
+            if ext == ".ico":
+                # The size that cleared the minimum is one image inside a container, and a browser
+                # asked to draw the container in an <img> picks whichever size it likes. Publish
+                # that image on its own, which works when it is a PNG, and that is how every
+                # generator stores the large sizes. When it is not, keep the monogram: it is a
+                # better picture than a 16 pixel icon a browser happened to reach for.
+                best = ico_best(blob)
+                inner = blob[best[3]:best[3] + best[2]] if best else b""
+                if inner[:8] != b"\x89PNG\r\n\x1a\n":
+                    if args.verbose:
+                        print("      %s: %sx%s sits in an .ico we cannot unpack"
+                              % (url[:60], w, h))
+                    continue
+                blob, ext = inner, ".png"
             chosen = (url, blob, ext, w, h)
             break
 
