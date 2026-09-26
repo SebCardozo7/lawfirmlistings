@@ -131,6 +131,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 26,
+      "ahrefs_rank": 5920140,
+      "refdomains": 1025,
+      "refdomains_dofollow": 523,
+      "backlinks": 3472,
+      "org_keywords": 28,
+      "org_traffic": 138,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -292,7 +304,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 61,
+    "total": 60,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -397,7 +409,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -411,10 +423,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 26 → 63th pct of 83-firm cohort (median 19) 2/3 · 1,025 referring domains, 45th pct 1/2 · 28 organic keywords / 138 visits·mo, 42th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -429,7 +441,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -469,7 +481,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -478,9 +490,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 38.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 42.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.711,
     "gates_unavailable": [
       "G1",
@@ -490,5 +502,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/highstakesinjurylaw.com.jpg",
+    "source_url": "https://www.highstakesinjurylaw.com/wp-content/uploads/2025/02/cropped-cropped-Favicon-192x192.jpg",
+    "width": 192,
+    "height": 192,
+    "bytes": 5010,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

@@ -132,6 +132,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 0,
+      "ahrefs_rank": 110539175,
+      "refdomains": 701,
+      "refdomains_dofollow": 309,
+      "backlinks": 901,
+      "org_keywords": 1,
+      "org_traffic": 2,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -238,7 +250,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 45,
+    "total": 40,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -359,8 +371,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0 → 2th pct of 83-firm cohort (median 19) 0/3 · 701 referring domains, 6th pct 0/2 · 1 organic keywords / 2 visits·mo, 9th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -375,7 +387,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -415,18 +427,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 25,
+      "gap": 30,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 28.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.421,
     "gates_unavailable": [
       "G1",
@@ -436,5 +448,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/lavignelawfirm.com.png",
+    "source_url": "https://lavignelawfirm.com/wp-content/uploads/2025/04/Favicon-300x300.png",
+    "width": 300,
+    "height": 300,
+    "bytes": 4922,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

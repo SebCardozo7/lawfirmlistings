@@ -122,6 +122,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 18,
+      "ahrefs_rank": 9602295,
+      "refdomains": 855,
+      "refdomains_dofollow": 370,
+      "backlinks": 1636,
+      "org_keywords": 40,
+      "org_traffic": 324,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -239,7 +251,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 61,
+    "total": 59,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar E (1/15).",
     "computed_at": "2026-09-26",
@@ -344,7 +356,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -358,10 +370,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 18 → 48th pct of 83-firm cohort (median 19) 1/3 · 855 referring domains, 25th pct 1/2 · 40 organic keywords / 324 visits·mo, 52th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -376,7 +388,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -416,7 +428,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -425,9 +437,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 38.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 41.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.868,
     "gates_unavailable": [
       "G1",
@@ -437,5 +449,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/injuryattorneyvegas.com.png",
+    "source_url": "https://www.injuryattorneyvegas.com/tenants/clark-law/favicon/android-chrome-512x512.png",
+    "width": 512,
+    "height": 512,
+    "bytes": 21722,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

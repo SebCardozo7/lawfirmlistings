@@ -129,6 +129,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 28,
+      "ahrefs_rank": 4589325,
+      "refdomains": 1545,
+      "refdomains_dofollow": 591,
+      "backlinks": 4006,
+      "org_keywords": 37,
+      "org_traffic": 623,
+      "paid_keywords": 2,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -362,7 +374,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -376,10 +388,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 28 → 68th pct of 83-firm cohort (median 19) 2/3 · 1,545 referring domains, 77th pct 2/2 · 37 organic keywords / 623 visits·mo, 54th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -394,7 +406,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -443,9 +455,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 36.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 41.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.803,
     "gates_unavailable": [
       "G1",
@@ -455,5 +467,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/morrisinjurylaw.com.png",
+    "source_url": "https://www.morrisinjurylaw.com/wp-content/uploads/2025/01/m.png",
+    "width": 219,
+    "height": 219,
+    "bytes": 5428,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

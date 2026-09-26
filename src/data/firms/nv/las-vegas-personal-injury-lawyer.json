@@ -228,6 +228,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 36,
+      "ahrefs_rank": 2318771,
+      "refdomains": 2083,
+      "refdomains_dofollow": 1133,
+      "backlinks": 14360,
+      "org_keywords": 1113,
+      "org_traffic": 5980,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -500,7 +512,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -514,10 +526,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 36 → 83th pct of 83-firm cohort (median 19) 2/3 · 2,083 referring domains, 92th pct 2/2 · 1,113 organic keywords / 5,980 visits·mo, 95th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -532,7 +544,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -581,9 +593,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 44.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 50.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.868,
     "gates_unavailable": [
       "G1",
@@ -593,5 +605,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/shookandstone.com.jpg",
+    "source_url": "https://www.shookandstone.com/wp-content/uploads/2023/07/cropped-SS_Icon_Color-192x192.jpg",
+    "width": 192,
+    "height": 192,
+    "bytes": 22482,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

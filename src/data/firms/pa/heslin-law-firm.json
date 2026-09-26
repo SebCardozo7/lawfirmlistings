@@ -125,6 +125,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 9,
+      "ahrefs_rank": 18955076,
+      "refdomains": 868,
+      "refdomains_dofollow": 393,
+      "backlinks": 6210,
+      "org_keywords": 13,
+      "org_traffic": 10,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -228,7 +240,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 55,
+    "total": 50,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -333,7 +345,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -347,10 +359,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 9 → 32th pct of 73-firm cohort (median 19) 1/3 · 868 referring domains, 26th pct 1/2 · 13 organic keywords / 10 visits·mo, 18th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -365,7 +377,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -405,18 +417,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 15,
+      "gap": 20,
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "D2 Search authority: not yet measured (8 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 25.7,
-    "assessed": 47,
-    "coverage": 0.671,
+    "raw": 27.7,
+    "assessed": 55,
+    "coverage": 0.786,
     "floor_abc_pct": 0.696,
     "gates_unavailable": [
       "G1",
@@ -426,5 +438,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/heslinlawfirm.com.png",
+    "source_url": "https://www.heslinlawfirm.com/includes/default/images/apple-touch-icon.png?v=4.02.38",
+    "width": 600,
+    "height": 600,
+    "bytes": 7048,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

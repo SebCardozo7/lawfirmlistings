@@ -317,6 +317,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 36,
+      "ahrefs_rank": 2172192,
+      "refdomains": 1565,
+      "refdomains_dofollow": 745,
+      "backlinks": 5811,
+      "org_keywords": 453,
+      "org_traffic": 2796,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -447,7 +459,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 63,
+    "total": 64,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -552,7 +564,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -566,10 +578,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 36 → 83th pct of 83-firm cohort (median 19) 2/3 · 1,565 referring domains, 80th pct 2/2 · 453 organic keywords / 2,796 visits·mo, 86th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -584,7 +596,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -624,7 +636,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 7,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -633,9 +645,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 39.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 45.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.803,
     "gates_unavailable": [
       "G1",
@@ -645,5 +657,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/battleborninjurylawyers.com.jpg",
+    "source_url": "https://www.datocms-assets.com/196680/1774979674-favicon.png?auto=format,compress&w=96",
+    "width": 96,
+    "height": 96,
+    "bytes": 2555,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

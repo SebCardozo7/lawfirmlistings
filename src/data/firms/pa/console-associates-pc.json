@@ -180,6 +180,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 36,
+      "ahrefs_rank": 2285180,
+      "refdomains": 1903,
+      "refdomains_dofollow": 1158,
+      "backlinks": 23825,
+      "org_keywords": 491,
+      "org_traffic": 1553,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -306,7 +318,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 56,
+    "total": 58,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -411,7 +423,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -425,10 +437,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 36 → 82th pct of 73-firm cohort (median 19) 2/3 · 1,903 referring domains, 92th pct 2/2 · 491 organic keywords / 1,553 visits·mo, 80th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -443,7 +455,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -483,7 +495,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -492,9 +504,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 34.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 40.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.724,
     "gates_unavailable": [
       "G1",
@@ -504,5 +516,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/myinjuryattorney.com.png",
+    "source_url": "https://www.myinjuryattorney.com/wp-content/themes/wp-calaw/images/favicon/apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 6384,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

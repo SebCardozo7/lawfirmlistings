@@ -286,6 +286,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 25,
+      "ahrefs_rank": 6381717,
+      "refdomains": 1547,
+      "refdomains_dofollow": 730,
+      "backlinks": 6652,
+      "org_keywords": 262,
+      "org_traffic": 885,
+      "paid_keywords": 1,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -431,7 +443,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 65,
+    "total": 66,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-26",
@@ -536,7 +548,7 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 11,
         "max": 25,
         "subs": [
           {
@@ -550,10 +562,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 25 → 61th pct of 83-firm cohort (median 19) 2/3 · 1,547 referring domains, 78th pct 2/2 · 262 organic keywords / 885 visits·mo, 75th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -568,7 +580,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -608,7 +620,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 5,
+      "gap": 4,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -617,9 +629,9 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 40.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 46.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.803,
     "gates_unavailable": [
       "G1",
@@ -629,5 +641,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/cdinjury.com.jpg",
+    "source_url": "https://www.datocms-assets.com/177665/1760881005-favicon.svg?auto=format,compress&w=96",
+    "width": 96,
+    "height": 96,
+    "bytes": 2066,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

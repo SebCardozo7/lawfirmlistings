@@ -120,6 +120,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 30,
+      "ahrefs_rank": 4054900,
+      "refdomains": 914,
+      "refdomains_dofollow": 298,
+      "backlinks": 9404,
+      "org_keywords": 148,
+      "org_traffic": 1790,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -316,7 +328,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -330,10 +342,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 30 → 71th pct of 83-firm cohort (median 19) 2/3 · 914 referring domains, 33th pct 1/2 · 148 organic keywords / 1,790 visits·mo, 74th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -348,7 +360,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -392,14 +404,14 @@
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "D2 Search authority: not yet measured (8 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 22.0,
-    "assessed": 47,
-    "coverage": 0.671,
+    "raw": 26.0,
+    "assessed": 55,
+    "coverage": 0.786,
     "floor_abc_pct": 0.739,
     "gates_unavailable": [
       "G1",
@@ -409,5 +421,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/lasvegasaccidentlawyer.law.png",
+    "source_url": "https://lasvegasaccidentlawyer.law/wp-content/uploads/2026/03/cropped-Favicon-1-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 3491,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

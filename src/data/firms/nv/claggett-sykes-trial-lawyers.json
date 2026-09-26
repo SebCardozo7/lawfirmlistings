@@ -390,6 +390,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 37,
+      "ahrefs_rank": 1991712,
+      "refdomains": 1489,
+      "refdomains_dofollow": 556,
+      "backlinks": 17195,
+      "org_keywords": 432,
+      "org_traffic": 7644,
+      "paid_keywords": 1,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -584,7 +596,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 70,
+    "total": 71,
     "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-26",
@@ -689,7 +701,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -703,10 +715,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 37 → 86th pct of 83-firm cohort (median 19) 3/3 · 1,489 referring domains, 73th pct 1/2 · 432 organic keywords / 7,644 visits·mo, 90th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -721,7 +733,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -761,7 +773,7 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 15,
+      "gap": 14,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -770,9 +782,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 43.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 49.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.921,
     "gates_unavailable": [
       "G1",
@@ -782,5 +794,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/claggettlaw.com.png",
+    "source_url": "https://www.claggettlaw.com/wp-content/uploads/2021/12/cropped-clagget-sykespsd-300x300.png",
+    "width": 300,
+    "height": 300,
+    "bytes": 1012,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

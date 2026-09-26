@@ -111,6 +111,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 1,
+      "ahrefs_rank": 57537028,
+      "refdomains": 1234,
+      "refdomains_dofollow": 804,
+      "backlinks": 2976,
+      "org_keywords": 1,
+      "org_traffic": 69,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -204,7 +216,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 36,
+    "total": 34,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -323,10 +335,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 1 → 11th pct of 83-firm cohort (median 19) 0/3 · 1,234 referring domains, 66th pct 1/2 · 1 organic keywords / 69 visits·mo, 20th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -341,7 +353,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -381,18 +393,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 34,
+      "gap": 36,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A2 Experience: +10 available"
+        "A2 Experience: +10 available",
+        "D2 Search authority: +7 available"
       ]
     },
-    "raw": 22.5,
-    "assessed": 62,
-    "coverage": 0.785,
+    "raw": 23.5,
+    "assessed": 70,
+    "coverage": 0.886,
     "floor_abc_pct": 0.421,
     "gates_unavailable": [
       "G1",
@@ -402,5 +414,14 @@
     "gates_unresolvable": [],
     "assessable": 79,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/safetyovershares.com.png",
+    "source_url": "https://safetyovershares.com/wp-content/uploads/2022/06/Untitled-1.png",
+    "width": 100,
+    "height": 100,
+    "bytes": 8111,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

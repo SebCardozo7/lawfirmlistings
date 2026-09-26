@@ -248,6 +248,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 43,
+      "ahrefs_rank": 1206527,
+      "refdomains": 4778,
+      "refdomains_dofollow": 3263,
+      "backlinks": 34389,
+      "org_keywords": 2407,
+      "org_traffic": 10619,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -393,7 +405,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 56,
+    "total": 59,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-26",
@@ -498,7 +510,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 11,
         "max": 25,
         "subs": [
           {
@@ -512,10 +524,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 7,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 43 → 93th pct of 83-firm cohort (median 19) 3/3 · 4,778 referring domains, 100th pct 2/2 · 2,407 organic keywords / 10,619 visits·mo, 98th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -530,7 +542,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -570,7 +582,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 11,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -579,9 +591,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 34.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 41.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.605,
     "gates_unavailable": [
       "G1",
@@ -591,5 +603,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/askadamskutner.com.png",
+    "source_url": "https://www.askadamskutner.com/wp-content/uploads/2023/03/cropped-kutner-siteicon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 3597,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

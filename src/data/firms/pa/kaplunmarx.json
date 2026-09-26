@@ -142,6 +142,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 41,
+      "ahrefs_rank": 1436525,
+      "refdomains": 1256,
+      "refdomains_dofollow": 726,
+      "backlinks": 47777,
+      "org_keywords": 129,
+      "org_traffic": 1099,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -377,7 +389,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 9,
         "max": 25,
         "subs": [
           {
@@ -391,10 +403,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 41 → 88th pct of 73-firm cohort (median 19) 3/3 · 1,256 referring domains, 62th pct 1/2 · 129 organic keywords / 1,099 visits·mo, 58th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -409,7 +421,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -458,9 +470,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 37.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 42.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.684,
     "gates_unavailable": [
       "G1",
@@ -470,5 +482,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/kaplunmarx.com.webp",
+    "source_url": "https://cdn-ilegpgj.nitrocdn.com/pdusyzTmPgJtVfPdWBCUHJyfNnaJmpTJ/assets/images/optimized/rev-8b876b4/kaplunmarx.com/wp-content/uploads/2024/07/KMLetters3.webp",
+    "width": 780,
+    "height": 447,
+    "bytes": 4474,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

@@ -175,6 +175,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 33,
+      "ahrefs_rank": 3137496,
+      "refdomains": 1363,
+      "refdomains_dofollow": 619,
+      "backlinks": 3360,
+      "org_keywords": 287,
+      "org_traffic": 2246,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -273,7 +285,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 48,
+    "total": 50,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -378,7 +390,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -392,10 +404,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 33 → 77th pct of 83-firm cohort (median 19) 2/3 · 1,363 referring domains, 71th pct 1/2 · 287 organic keywords / 2,246 visits·mo, 82th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -410,7 +422,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -450,7 +462,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 22,
+      "gap": 20,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -459,9 +471,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 30.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 35.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.526,
     "gates_unavailable": [
       "G1",
@@ -471,5 +483,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/cameronlawlv.com.png",
+    "source_url": "https://cdn.prod.website-files.com/666c33eb2d2febd0b0bb6c48/66afc1aa07fac6c647584a3b_webclip-cameron-law.png",
+    "width": 256,
+    "height": 256,
+    "bytes": 10374,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

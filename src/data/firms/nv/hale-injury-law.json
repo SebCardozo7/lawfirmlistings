@@ -383,6 +383,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 24,
+      "ahrefs_rank": 6728540,
+      "refdomains": 1143,
+      "refdomains_dofollow": 778,
+      "backlinks": 2843,
+      "org_keywords": 81,
+      "org_traffic": 411,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -475,7 +487,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 39,
+    "total": 40,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -580,7 +592,7 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -594,10 +606,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 24 → 58th pct of 83-firm cohort (median 19) 2/3 · 1,143 referring domains, 58th pct 1/2 · 81 organic keywords / 411 visits·mo, 61th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -612,7 +624,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -652,7 +664,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 31,
+      "gap": 30,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -661,9 +673,9 @@
         "D1 Website trust & experience: +6.5 available"
       ]
     },
-    "raw": 24.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 28.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.5,
     "gates_unavailable": [
       "G1",
@@ -673,5 +685,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/haleinjurylaw.com.png",
+    "source_url": "https://haleinjurylaw.com/wp-content/uploads/2025/02/cropped-hale_favicon-1-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 24209,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

@@ -269,6 +269,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 50,
+      "ahrefs_rank": 719455,
+      "refdomains": 2261,
+      "refdomains_dofollow": 1394,
+      "backlinks": 13263,
+      "org_keywords": 592,
+      "org_traffic": 2385,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -450,7 +462,7 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 59,
+    "total": 62,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
@@ -555,7 +567,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 11,
         "max": 25,
         "subs": [
           {
@@ -569,10 +581,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 7,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 50 → 99th pct of 83-firm cohort (median 19) 3/3 · 2,261 referring domains, 94th pct 2/2 · 592 organic keywords / 2,385 visits·mo, 87th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -587,7 +599,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -627,7 +639,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -636,9 +648,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 36.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 43.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.711,
     "gates_unavailable": [
       "G1",
@@ -648,5 +660,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/ladahlaw.com.png",
+    "source_url": "https://www.ladahlaw.com/wp-content/uploads/2025/04/cropped-LLF-Site-Icon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 9498,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }
