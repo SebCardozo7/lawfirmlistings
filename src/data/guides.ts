@@ -37,14 +37,30 @@ export interface Guide {
  * cohort qualifies and nobody has to remember to flip a flag.
  */
 export function publishedGuides(
-  firms: { data: { status: string; market: { city_slug: string }; practices: { slug: string }[] } }[],
+  firms: {
+    data: {
+      status: string;
+      market: { city_slug: string };
+      practices: { slug: string; primary?: boolean }[];
+    };
+  }[],
 ): Guide[] {
   return GUIDES.filter(g => {
     if (!g.gate) return true;
+    // The firm's own practice, not a practice it happens to list. A firm names every area it
+    // will take, so counting mentions counts the wrong thing: New York has nine certified firms
+    // listing workers' compensation and two whose practice it is, the other seven being injury
+    // firms from the injury cohort. A ranking gated on the loose count would publish an injury
+    // ranking under a workers' compensation title, which is the sort of page this directory
+    // exists to be an alternative to.
+    //
+    // It changes nothing that is published today: the New York injury ranking counts seventeen
+    // either way, and workers' compensation is the only pair in the directory where the two
+    // numbers differ at all.
     const certified = firms.filter(f =>
       f.data.status === 'certified' &&
       f.data.market.city_slug === g.gate!.citySlug &&
-      f.data.practices.some(pr => pr.slug === g.gate!.practice));
+      f.data.practices.some(pr => pr.slug === g.gate!.practice && pr.primary));
     return certified.length >= g.gate.minCertified;
   });
 }
