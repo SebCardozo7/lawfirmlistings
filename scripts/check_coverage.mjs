@@ -81,6 +81,28 @@ for (const [label, has, script] of FIELDS) {
   }
 }
 
+// A market can carry every measurement and still be wrong, and Houston was: all eight fields
+// present on all seventy five firms, and all seventy five at Listed, because G3 said "Secretary
+// of State registration still to confirm" and a gate we owe holds a firm at the bottom tier. The
+// field checks above passed it without a word for a week.
+//
+// So this asks the same comparative question about the outcome rather than the inputs. Nothing
+// here says what a tier should be: it says that a market where nobody at all clears the bottom
+// rung, in a directory where four out of five firms elsewhere do, is a finding about the pipeline
+// and not about the firms. A low share is a market, and only a zero is reported.
+const tiers = markets.map(city => {
+  const m = firms.filter(f => f.market.city === city);
+  return { city, n: m.length, got: m.filter(f => f.status !== 'listed').length };
+});
+const bestTier = Math.max(...tiers.map(t => t.got / t.n));
+for (const t of tiers) {
+  if (t.got === 0 && bestTier > 0.5) {
+    problems.push(`${t.city}: not one of ${t.n} firms is above Listed, and other markets reach `
+      + `${Math.round(bestTier * 100)}%. That is a gate nobody has answered rather than a market `
+      + `of weak firms: read the G3 and G5 rows on any profile there.`);
+  }
+}
+
 for (const p of problems) console.log(p);
 if (notes.length) {
   if (problems.length) console.log('');
