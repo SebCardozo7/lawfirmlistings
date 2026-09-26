@@ -146,6 +146,18 @@
       "source": "PageSpeed Insights API (mobile, lab only)",
       "measured_at": "2026-09-25",
       "note": "LCP 11.3 s / CLS 0.000 / TBT 468 ms"
+    },
+    "ahrefs": {
+      "dr": 23,
+      "ahrefs_rank": 7374785,
+      "refdomains": 840,
+      "refdomains_dofollow": 379,
+      "backlinks": 1573,
+      "org_keywords": 60,
+      "org_traffic": 586,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -243,10 +255,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 46,
+    "total": 44,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -348,7 +360,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -362,10 +374,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 23 → 46th pct of 79-firm cohort (median 24) 1/3 · 840 referring domains, 23th pct 0/2 · 60 organic keywords / 586 visits·mo, 42th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -380,7 +392,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -420,18 +432,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 24,
+      "gap": 26,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +4.5 available"
+        "D2 Search authority: +6 available"
       ]
     },
-    "raw": 28.7,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 30.7,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.513,
     "gates_unavailable": [
       "G1",
@@ -440,5 +452,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/balamslaw.com.png",
+    "source_url": "https://www.balamslaw.com/wp-content/uploads/2018/06/cropped-webicon-3-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 12001,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

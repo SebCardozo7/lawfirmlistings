@@ -293,6 +293,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
+    },
+    "ahrefs": {
+      "dr": 48,
+      "ahrefs_rank": 841516,
+      "refdomains": 1708,
+      "refdomains_dofollow": 1093,
+      "backlinks": 29736,
+      "org_keywords": 255,
+      "org_traffic": 9168,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -377,10 +389,10 @@
     "checked_at": "2026-09-23"
   },
   "score": {
-    "total": 62,
+    "total": 65,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -482,7 +494,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -496,10 +508,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 7,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 48 → 99th pct of 72-firm cohort (median 19) 3/3 · 1,708 referring domains, 94th pct 2/2 · 255 organic keywords / 9,168 visits·mo, 84th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -514,7 +526,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -554,7 +566,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 8,
+      "gap": 5,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -563,9 +575,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 38.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 45.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.737,
     "gates_unavailable": [
       "G1"
@@ -575,5 +587,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/workinjuryrights.com.webp",
+    "source_url": "https://cdn-dlpie.nitrocdn.com/aKYHpooaFByYjfBIwaIhDKAuFCfnputP/assets/images/optimized/rev-3ed48c7/workinjuryrights.com/wp-content/uploads/2020/12/cropped-cropped-Work-Injury-Rights-favicon2-300x300.webp",
+    "width": 300,
+    "height": 300,
+    "bytes": 17458,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

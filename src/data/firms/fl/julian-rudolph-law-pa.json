@@ -113,6 +113,18 @@
       "source": "PageSpeed Insights API (mobile, lab only)",
       "measured_at": "2026-09-25",
       "note": "LCP 20.3 s / CLS 0.000 / TBT 381 ms"
+    },
+    "ahrefs": {
+      "dr": 0.7,
+      "ahrefs_rank": 62697660,
+      "refdomains": 763,
+      "refdomains_dofollow": 356,
+      "backlinks": 865,
+      "org_keywords": 14,
+      "org_traffic": 90,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -187,10 +199,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 57,
+    "total": 50,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -292,7 +304,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -306,10 +318,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0.7 → 8th pct of 72-firm cohort (median 19) 0/3 · 763 referring domains, 17th pct 0/2 · 14 organic keywords / 90 visits·mo, 27th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -324,7 +336,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -364,18 +376,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 13,
+      "gap": 20,
       "floor_met": true,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "B1 Results published: not yet measured (6 pts)"
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)"
       ]
     },
-    "raw": 26.6,
-    "assessed": 47,
-    "coverage": 0.595,
+    "raw": 27.6,
+    "assessed": 55,
+    "coverage": 0.696,
     "floor_abc_pct": 0.87,
     "gates_unavailable": [
       "G1",
@@ -384,5 +396,14 @@
     "gates_unresolvable": [],
     "assessable": 79,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/getjrlaw.com.svg",
+    "source_url": "https://getjrlaw.com/wp-content/themes/julianrudolph/static/img/favicons/safari-pinned-tab.svg",
+    "width": null,
+    "height": null,
+    "bytes": 1920,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

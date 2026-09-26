@@ -424,6 +424,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
+    },
+    "ahrefs": {
+      "dr": 36,
+      "ahrefs_rank": 2242144,
+      "refdomains": 1790,
+      "refdomains_dofollow": 953,
+      "backlinks": 6665,
+      "org_keywords": 471,
+      "org_traffic": 2423,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -578,7 +590,7 @@
     "total": 76,
     "tier": "Certified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -680,7 +692,7 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 11,
         "max": 25,
         "subs": [
           {
@@ -694,10 +706,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 36 → 82th pct of 79-firm cohort (median 24) 2/3 · 1,790 referring domains, 89th pct 2/2 · 471 organic keywords / 2,423 visits·mo, 84th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -712,7 +724,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -761,9 +773,9 @@
         "D1 Website trust & experience: +4.0 available"
       ]
     },
-    "raw": 47.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 53.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.921,
     "gates_unavailable": [
       "G1",
@@ -772,5 +784,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/thechampionfirm.com.png",
+    "source_url": "https://www.thechampionfirm.com/wp-content/uploads/2024/11/cropped-Website-Favicon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 8233,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

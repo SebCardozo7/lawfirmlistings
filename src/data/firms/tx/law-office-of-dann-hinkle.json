@@ -108,6 +108,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
+    },
+    "ahrefs": {
+      "dr": 5,
+      "ahrefs_rank": 28435806,
+      "refdomains": 740,
+      "refdomains_dofollow": 349,
+      "backlinks": 1355,
+      "org_keywords": 2,
+      "org_traffic": 2,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -172,10 +184,10 @@
     "checked_at": "2026-09-23"
   },
   "score": {
-    "total": 45,
+    "total": 41,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -291,10 +303,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 5 → 18th pct of 74-firm cohort (median 19) 1/3 · 740 referring domains, 1th pct 0/2 · 2 organic keywords / 2 visits·mo, 1th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -309,7 +321,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -349,18 +361,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 25,
+      "gap": 29,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "D2 Search authority: +7 available"
       ]
     },
-    "raw": 25.0,
-    "assessed": 55,
-    "coverage": 0.786,
+    "raw": 26.0,
+    "assessed": 63,
+    "coverage": 0.9,
     "floor_abc_pct": 0.526,
     "gates_unavailable": [
       "G1",
@@ -369,5 +381,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/dhinklelaw.com.jpg",
+    "source_url": "https://img1.wsimg.com/isteam/ip/63b8364a-262e-4e60-9571-3e34a953855f/DH%20LOGO%20ONLY%20GODADDY.png/:/rs=w:180,h:180,m",
+    "width": 307,
+    "height": 180,
+    "bytes": 8443,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

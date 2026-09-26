@@ -114,6 +114,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
+    },
+    "ahrefs": {
+      "dr": 0.4,
+      "ahrefs_rank": 72241133,
+      "refdomains": 751,
+      "refdomains_dofollow": 350,
+      "backlinks": 837,
+      "org_keywords": 5,
+      "org_traffic": 50,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -178,10 +190,10 @@
     "checked_at": "2026-09-23"
   },
   "score": {
-    "total": 37,
+    "total": 33,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -299,8 +311,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0.4 → 0th pct of 74-firm cohort (median 19) 0/3 · 751 referring domains, 3th pct 0/2 · 5 organic keywords / 50 visits·mo, 12th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -315,7 +327,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -355,18 +367,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 33,
+      "gap": 37,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 20.6,
-    "assessed": 55,
-    "coverage": 0.786,
+    "assessed": 63,
+    "coverage": 0.9,
     "floor_abc_pct": 0.5,
     "gates_unavailable": [
       "G1",
@@ -375,5 +387,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/ozlatlawyers.com.png",
+    "source_url": "https://www.ozlatlawyers.com/favicon.ico",
+    "width": 80,
+    "height": 80,
+    "bytes": 3241,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }
