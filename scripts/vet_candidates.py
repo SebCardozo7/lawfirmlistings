@@ -79,6 +79,23 @@ def main() -> int:
     in_market = re.compile(
         r",\s*[A-Z]{2}\s+(?:%s)\d*" % "|".join(re.escape(p) for p in prefixes))
 
+    # This reads practice_evidence off the staging record and fetches nothing itself, so running
+    # it before scripts/check_practice.py has run reports every candidate as having no practice
+    # page when what it means is that nobody has looked. Chicago came back "3 to publish, 145
+    # without a practice page" that way, which reads like a market with no firms in it.
+    #
+    # The same guard enrich_places.py carries, for the same reason: a step that ran too early
+    # exits 0 and prints a small number, and a small number reads like there was not much to do.
+    pending = [c["domain"] for c in data["candidates"]
+               if c["domain"] not in already and not (staging / (c["domain"] + ".json")).exists()]
+    fresh = [c for c in data["candidates"] if c["domain"] not in already]
+    if fresh and len(pending) > len(fresh) / 2:
+        print("%d of %d candidates have no staging record, so the crawl has not run for this "
+              "market yet and every one of them would be reported as having no practice page.\n"
+              "Run scripts/crawl_public.py and scripts/check_practice.py first."
+              % (len(pending), len(fresh)), file=sys.stderr)
+        return 2
+
     keep, out_of_market, unverified, national = [], [], [], []
     for cand in data["candidates"]:
         domain = cand["domain"]
