@@ -271,6 +271,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "ahrefs": {
+      "dr": 36,
+      "ahrefs_rank": 2298243,
+      "refdomains": 1337,
+      "refdomains_dofollow": 733,
+      "backlinks": 33651,
+      "org_keywords": 162,
+      "org_traffic": 606,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -385,10 +397,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 63,
+    "total": 61,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -490,7 +502,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -504,10 +516,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 36 → 82th pct of 79-firm cohort (median 24) 2/3 · 1,337 referring domains, 66th pct 1/2 · 162 organic keywords / 606 visits·mo, 56th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -522,7 +534,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -562,7 +574,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 7,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -571,9 +583,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 39.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 43.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.671,
     "gates_unavailable": [
       "G1",
@@ -583,5 +595,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/vansantlaw.com.png",
+    "source_url": "https://cdn-ilemjcf.nitrocdn.com/IsmRSjPwZUAbKhZhybmOGXoePMTlwdUk/assets/images/optimized/rev-c44a650/www.vansantlaw.com/wp-content/themes/van-sant-law/assets/favicon/apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 781,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

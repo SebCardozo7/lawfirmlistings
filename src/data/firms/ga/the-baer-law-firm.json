@@ -110,6 +110,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "ahrefs": {
+      "dr": 21,
+      "ahrefs_rank": 8100413,
+      "refdomains": 889,
+      "refdomains_dofollow": 467,
+      "backlinks": 6485,
+      "org_keywords": 439,
+      "org_traffic": 3868,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -220,10 +232,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 52,
+    "total": 51,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -325,7 +337,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -339,10 +351,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 21 → 39th pct of 79-firm cohort (median 24) 1/3 · 889 referring domains, 28th pct 1/2 · 439 organic keywords / 3,868 visits·mo, 84th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -357,7 +369,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -397,7 +409,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 19,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -406,9 +418,9 @@
         "E1 Free consult & fee transparency: +6 available"
       ]
     },
-    "raw": 32.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 36.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.737,
     "gates_unavailable": [
       "G1",
@@ -417,5 +429,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/thebaerfirm.com.png",
+    "source_url": "https://thebaerfirm.com/wp-content/favicon/apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 6336,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

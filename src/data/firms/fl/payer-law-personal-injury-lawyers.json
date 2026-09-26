@@ -5,7 +5,7 @@
   "website": "https://www.payerlawgroup.com/",
   "domain": "payerlawgroup.com",
   "phone": "(305) 306-2993",
-  "status": "certified",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -165,6 +165,18 @@
       "source": "PageSpeed Insights API (mobile, lab only)",
       "measured_at": "2026-09-25",
       "note": "LCP 15.5 s / CLS 0.000 / TBT 288 ms"
+    },
+    "ahrefs": {
+      "dr": 31,
+      "ahrefs_rank": 3705997,
+      "refdomains": 1113,
+      "refdomains_dofollow": 631,
+      "backlinks": 3968,
+      "org_keywords": 61,
+      "org_traffic": 267,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -277,10 +289,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 72,
-    "tier": "Certified",
+    "total": 69,
+    "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -382,7 +394,7 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 9,
         "max": 25,
         "subs": [
           {
@@ -396,10 +408,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 31 → 78th pct of 72-firm cohort (median 19) 2/3 · 1,113 referring domains, 56th pct 1/2 · 61 organic keywords / 267 visits·mo, 44th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -414,7 +426,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -452,9 +464,9 @@
     },
     "floor_abc": 30,
     "next_tier": {
-      "name": "Distinguished",
-      "needed": 85,
-      "gap": 13,
+      "name": "Certified",
+      "needed": 70,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -463,9 +475,9 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 44.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 48.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.803,
     "gates_unavailable": [
       "G1",
@@ -476,5 +488,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/payerlawgroup.com.png",
+    "source_url": "https://www.payerlawgroup.com/wp-content/uploads/2025/04/cropped-payer-law-logo-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 7611,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

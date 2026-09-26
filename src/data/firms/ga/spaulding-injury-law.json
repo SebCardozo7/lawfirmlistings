@@ -146,6 +146,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "ahrefs": {
+      "dr": 40,
+      "ahrefs_rank": 1604445,
+      "refdomains": 1614,
+      "refdomains_dofollow": 1034,
+      "backlinks": 13281,
+      "org_keywords": 173,
+      "org_traffic": 1364,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -300,7 +312,7 @@
     "total": 72,
     "tier": "Certified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -402,7 +414,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -416,10 +428,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 40 → 90th pct of 79-firm cohort (median 24) 3/3 · 1,614 referring domains, 84th pct 2/2 · 173 organic keywords / 1,364 visits·mo, 68th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -434,7 +446,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -483,9 +495,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 44.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 50.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.921,
     "gates_unavailable": [
       "G1",
@@ -494,5 +506,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/spauldinginjurylaw.com.jpg",
+    "source_url": "https://www.spauldinginjurylaw.com/wp-content/uploads/2026/02/cropped-fav-192x192.jpg",
+    "width": 192,
+    "height": 192,
+    "bytes": 4507,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

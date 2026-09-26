@@ -118,6 +118,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-25"
+    },
+    "ahrefs": {
+      "dr": 0.2,
+      "ahrefs_rank": 80508000,
+      "refdomains": 749,
+      "refdomains_dofollow": 336,
+      "backlinks": 847,
+      "org_keywords": 1,
+      "org_traffic": 8,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -183,10 +195,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 35,
+    "total": 31,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -304,8 +316,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0.2 → 2th pct of 72-firm cohort (median 19) 0/3 · 749 referring domains, 10th pct 0/2 · 1 organic keywords / 8 visits·mo, 10th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -320,7 +332,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -360,18 +372,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 35,
+      "gap": 39,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +6.5 available"
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 21.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",
@@ -382,5 +394,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/maxlawpa.com.png",
+    "source_url": "https://maxlawpa.com/nitropack_static/uNZleyVmBzxyWnesDJqGnuZvsXbemBrx/assets/images/optimized/rev-2319648/maxlawpa.com/wp-content/uploads/2024/07/cropped-FINAL-LOGO-MAX-LAW-1-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 2255,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }

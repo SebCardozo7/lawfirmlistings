@@ -163,6 +163,18 @@
       "source": "PageSpeed Insights API (mobile, field + lab)",
       "measured_at": "2026-09-25",
       "note": "LCP 12.0 s / CLS 0.000 / TBT 327 ms"
+    },
+    "ahrefs": {
+      "dr": 23,
+      "ahrefs_rank": 7273068,
+      "refdomains": 875,
+      "refdomains_dofollow": 430,
+      "backlinks": 1363,
+      "org_keywords": 67,
+      "org_traffic": 269,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
     }
   },
   "gates": {
@@ -249,10 +261,10 @@
     "checked_at": "2026-09-25"
   },
   "score": {
-    "total": 41,
+    "total": 40,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-25",
+    "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -316,7 +328,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 14,
         "max": 20,
         "subs": [
           {
@@ -338,10 +350,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2025-09-25) · a sample of five per business listing, not every review"
+            "evidence": "0 of 5 sampled reviews are from the last 12 months (newest 2025-09-25) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -354,7 +366,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -368,10 +380,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 23 → 64th pct of 72-firm cohort (median 19) 2/3 · 875 referring domains, 33th pct 1/2 · 67 organic keywords / 269 visits·mo, 46th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -386,7 +398,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -422,11 +434,11 @@
         ]
       }
     },
-    "floor_abc": 18,
+    "floor_abc": 17,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 29,
+      "gap": 30,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -435,10 +447,10 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 25.5,
-    "assessed": 62,
-    "coverage": 0.886,
-    "floor_abc_pct": 0.487,
+    "raw": 28.0,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
       "G2"
@@ -448,5 +460,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/downslawgroup.com.png",
+    "source_url": "https://downslawgroup.com/content/uploads/2024/12/downs-law-favicon-300x300.png",
+    "width": 300,
+    "height": 300,
+    "bytes": 16935,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
   }
 }
