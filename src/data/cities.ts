@@ -977,4 +977,267 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  'chicago-il': {
+    lede:
+      'Illinois gives you two years to sue almost anybody and <b>one year</b> to sue the city, ' +
+      'the park district or the CTA. That second rule ends more Chicago claims than any argument ' +
+      'about fault. Compare Chicago firms on what they publish and on what we could verify ' +
+      'ourselves.',
+    areas: ['The Loop', 'Near North Side', 'Lincoln Park', 'Wicker Park', 'Hyde Park',
+            'Logan Square', 'Pilsen', 'Rogers Park', 'South Loop'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Chicago: what is different',
+        paragraphs: [
+          'The ordinary limitation period for a personal injury is two years, under section ' +
+          '13-202 of the Code of Civil Procedure. Then there is the rule that catches Chicagoans ' +
+          'specifically. A claim against a local public entity is cut to <b>one year</b> by ' +
+          'section 8-101 of the Tort Immunity Act, and “local public entity” is a wide net here: ' +
+          'the City of Chicago, the Park District, the Housing Authority, a public school, a ' +
+          'community college, a forest preserve. A slip on a city pavement and a slip in a ' +
+          'private lobby carry deadlines a year apart.',
+          'The Chicago Transit Authority is stricter again. Section 41 of the Metropolitan ' +
+          'Transit Authority Act gives one year to sue and requires written notice within ' +
+          '<b>six months</b> of the injury, naming the date, the place and the treating ' +
+          'hospital. A bus or an L platform is the most common way an ordinary commuter falls ' +
+          'into a six-month deadline without knowing one exists.',
+          'Cook County runs the largest unified court system in the country. Civil cases above ' +
+          'thirty thousand dollars go to the Law Division at the Daley Center and smaller ones ' +
+          'to the Municipal Department, with the suburban districts hearing matters from their ' +
+          'own areas. Federal cases go to the Northern District of Illinois. Illinois also bars ' +
+          'recovery entirely once a claimant is more than fifty per cent at fault, under section ' +
+          '2-1116, so apportionment is not a side issue in a contested crash.',
+        ],
+      },
+      {
+        heading: 'What we can and cannot verify about an Illinois firm',
+        paragraphs: [
+          'Less here than in most states we cover, and the profiles say so rather than scoring a ' +
+          'zero. Illinois publishes no business register we are able to read: the Secretary of ' +
+          'State’s search answers an automated request with a refusal, and we do not work around ' +
+          'that. So entity registration is recorded as a check without a source.',
+          'Discipline is the same, for a different reason. Illinois runs attorney discipline ' +
+          'through the Attorney Registration and Disciplinary Commission, and the Supreme Court ' +
+          'acts on those matters by order on an M.R. docket rather than by published opinion. ' +
+          'The opinion indexes that carry Pennsylvania’s and Nevada’s discipline therefore hold ' +
+          'none of Illinois’s. A Chicago profile carries that gate unanswered and says why.',
+          'The ARDC does publish a public lawyer search of its own, showing registration status ' +
+          'and public discipline, and checking a name there takes a minute. It is worth doing, ' +
+          'and it is the check we cannot do for you.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Chicagoans out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years, under 735 ILCS 5/13-202.',
+          '<b>A claim against the City of Chicago, the Park District, a public school or any ' +
+          'local public entity:</b> <b>one year</b>, under the Tort Immunity Act, 745 ILCS ' +
+          '10/8-101.',
+          '<b>A claim against the CTA:</b> one year to sue, and written notice within <b>six ' +
+          'months</b>, under 70 ILCS 3605/41.',
+          '<b>Medical malpractice:</b> two years from when the injury was or should have been ' +
+          'discovered, with a four-year outer limit under 735 ILCS 5/13-212.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if an Illinois lawyer is licensed?',
+        a: 'The Attorney Registration and Disciplinary Commission publishes a lawyer search at ' +
+           '<a href="https://www.iardc.org" rel="nofollow noopener" target="_blank">iardc.org</a>, ' +
+           'free, showing registration status and public discipline. We do not read it, so ' +
+           'Chicago profiles carry no licence finding rather than one we did not make.',
+      },
+      {
+        q: 'Why does a Chicago profile show fewer verified checks than a New York one?',
+        a: 'Because New York publishes more. Its attorney register is open data and its ' +
+           'Department of State register is readable, so a New York profile can show licensure ' +
+           'and entity registration as findings. Illinois publishes neither in a form we may ' +
+           'read. The score is earned points over measured points rather than over a hundred, so ' +
+           'a Chicago firm is not punished for its state’s policy, but fewer of its rows rest on ' +
+           'evidence and the profile says which ones.',
+      },
+      {
+        q: 'Is the one-year deadline really that common a problem?',
+        a: 'It is the reason this section exists. A person hurt on a Chicago pavement, in a ' +
+           'public park, on a CTA bus or at a public school has a year rather than two, and ' +
+           'nothing about the injury announces which rule applies. Nothing here is legal advice, ' +
+           'and any injury involving a public body is a reason to talk to a lawyer in weeks ' +
+           'rather than months.',
+      },
+    ],
+  },
+
+  'philadelphia-pa': {
+    lede:
+      'Pennsylvania lets drivers give up the right to sue for pain and suffering in exchange for ' +
+      'a cheaper premium, and many people do it without realising. Compare Philadelphia firms on ' +
+      'what they publish and on what we could verify ourselves.',
+    areas: ['Center City', 'South Philadelphia', 'North Philadelphia', 'West Philadelphia',
+            'Northeast Philadelphia', 'Germantown', 'Fishtown', 'University City'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Philadelphia: what is different',
+        paragraphs: [
+          'One rule matters more than every other on this page. Pennsylvania auto policies ask ' +
+          'the buyer to choose between <b>full tort</b> and <b>limited tort</b> under section ' +
+          '1705 of the Vehicle Code. Limited tort is cheaper, and it gives up the right to ' +
+          'recover for pain and suffering unless the injury is a serious one as the statute ' +
+          'defines it. The choice is made once, often years before any crash, usually on a form ' +
+          'nobody reread. It is the first thing a Philadelphia injury lawyer asks about and it ' +
+          'is worth knowing your own answer before you call one. There are exceptions, including ' +
+          'for some claims against drunk drivers and out-of-state vehicles.',
+          'The ordinary limitation period is two years, under section 5524 of the Judicial Code. ' +
+          'A claim against a local agency needs written notice within <b>six months</b> under ' +
+          'section 5522, which covers the city, SEPTA and a public school district alike.',
+          'Philadelphia hears civil matters in the Court of Common Pleas of the First Judicial ' +
+          'District, which runs compulsory arbitration for smaller claims and a Complex ' +
+          'Litigation Center for mass tort work that draws cases from well beyond the city. ' +
+          'Federal matters go to the Eastern District of Pennsylvania. Pennsylvania bars ' +
+          'recovery once a claimant is more than fifty per cent at fault, under section 7102.',
+        ],
+      },
+      {
+        heading: 'What we can and cannot verify about a Pennsylvania firm',
+        paragraphs: [
+          'Discipline, yes, and well. The Disciplinary Board prosecutes in the Supreme Court of ' +
+          'Pennsylvania and the decisions are published as opinions styled “Office of ' +
+          'Disciplinary Counsel v.”, which gives this directory its largest disciplinary index ' +
+          'after Florida’s. That gate stands on evidence on a Philadelphia profile.',
+          'Entity registration, no. The Department of State’s business search answers an ' +
+          'automated request with a refusal, and we do not work around that, so registration is ' +
+          'recorded as a check without a source. Licensure is the same: the attorney register is ' +
+          'not published in a form we may query.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Philadelphians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years, under 42 Pa.C.S. § 5524.',
+          '<b>A claim against the City of Philadelphia, SEPTA or a school district:</b> written ' +
+          'notice within <b>six months</b>, under 42 Pa.C.S. § 5522.',
+          '<b>Wrongful death:</b> two years from the death.',
+          '<b>The limited tort election:</b> not a deadline, but it is decided before the ' +
+          'accident and it governs what a claim is worth. 75 Pa.C.S. § 1705.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Pennsylvania lawyer is licensed?',
+        a: 'The Disciplinary Board of the Supreme Court of Pennsylvania publishes an attorney ' +
+           'search at <a href="https://www.padisciplinaryboard.org" rel="nofollow noopener" ' +
+           'target="_blank">padisciplinaryboard.org</a>, showing status and public discipline. ' +
+           'We do not read it, so Philadelphia profiles carry no licence finding. We do read the ' +
+           'court’s published discipline decisions, so that gate does rest on evidence.',
+      },
+      {
+        q: 'How do I find out whether I have limited tort?',
+        a: 'It is on your own auto policy declarations page, and your insurer will tell you. ' +
+           'Nothing here is legal advice and the exceptions are genuinely technical, which is ' +
+           'the argument for asking a lawyer rather than reading a summary. It is also the ' +
+           'reason two people with identical injuries from the same crash can have claims worth ' +
+           'very different amounts in this state.',
+      },
+      {
+        q: 'Why do so many mass tort cases end up in Philadelphia?',
+        a: 'The Court of Common Pleas runs a Complex Litigation Center that consolidates them, ' +
+           'and it has done for decades, so firms far outside the city file here. It is worth ' +
+           'knowing when you compare: a firm with a Philadelphia address may do most of its work ' +
+           'in that programme rather than in the ordinary injury courts, and those are different ' +
+           'practices. The profiles record what each firm publishes about its own results.',
+      },
+    ],
+  },
+
+  'las-vegas-nv': {
+    lede:
+      'Nevada gives you two years to sue, sends most smaller cases to compulsory arbitration ' +
+      'before a courtroom, and caps what a medical claim can recover for suffering. Compare Las ' +
+      'Vegas firms on what they publish and on what we could verify ourselves.',
+    areas: ['Downtown', 'The Strip', 'Summerlin', 'Henderson', 'North Las Vegas', 'Paradise',
+            'Spring Valley', 'Enterprise'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Las Vegas: what is different',
+        paragraphs: [
+          'The limitation period for a personal injury is two years, under section 11.190 of the ' +
+          'Nevada Revised Statutes. A claim against the State or one of its political ' +
+          'subdivisions has to be presented to the right body under section 41.036 before it can ' +
+          'be sued on, which is a step rather than a shorter clock and is still routinely missed.',
+          'Two local features shape what a case looks like here. The first is that Clark ' +
+          'County sends most civil cases below fifty thousand dollars to compulsory arbitration ' +
+          'before they ever reach a courtroom, under the Nevada Arbitration Rules, with a path ' +
+          'to a trial afterwards for a party willing to risk the costs. A great many ordinary ' +
+          'injury claims are resolved in that programme, and it is worth asking a firm how much ' +
+          'of its work happens there.',
+          'The second is the visitors. Las Vegas receives tens of millions of them a year, and a ' +
+          'large share of the claims in this market are brought by people who were hurt here and ' +
+          'live somewhere else: on a casino floor, in a hotel, in a rideshare on the Strip. That ' +
+          'raises questions of where a case is heard and under which state’s law that simply do ' +
+          'not arise in the other markets in this directory, and it is a reasonable thing to ask ' +
+          'a firm about directly if you were a visitor.',
+          'Clark County hears these cases in the Eighth Judicial District Court, and federal ' +
+          'matters go to the District of Nevada. Nevada bars recovery once a claimant is more ' +
+          'than fifty per cent at fault, under section 41.141.',
+        ],
+      },
+      {
+        heading: 'Medical claims are a different practice here',
+        paragraphs: [
+          'Nevada caps what a medical malpractice claim can recover for non-economic loss, under ' +
+          'chapter 41A, and the legislature reset that cap in 2023 on a schedule that raises it ' +
+          'by a fixed amount each year. The figure that applies depends on when the claim ' +
+          'accrues, so it is a question for a lawyer rather than a number to read off a page.',
+          'A medical complaint also has to be filed with a supporting affidavit from a ' +
+          'practitioner in the relevant specialty, under section 41A.071, and one filed without ' +
+          'it is void. As in Houston, that means the firm has to pay an expert before there is ' +
+          'any recovery to pay them from. Ask what happens to that money if the case does not ' +
+          'succeed.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Nevadans out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years, under NRS 11.190(4)(e).',
+          '<b>A claim against the State, Clark County or the City of Las Vegas:</b> it has to be ' +
+          'presented under NRS 41.036 before suit.',
+          '<b>Medical malpractice:</b> filed with a supporting expert affidavit under NRS ' +
+          '41A.071, or the complaint is void.',
+          '<b>Wrongful death:</b> two years from the death.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Nevada lawyer is licensed?',
+        a: 'The State Bar of Nevada publishes a member search at ' +
+           '<a href="https://www.nvbar.org" rel="nofollow noopener" target="_blank">nvbar.org</a>, ' +
+           'showing status and public discipline. We do not read it, so Las Vegas profiles carry ' +
+           'no licence finding. We do read the Supreme Court of Nevada’s published discipline ' +
+           'decisions, which name the attorney in full, so that gate rests on evidence.',
+      },
+      {
+        q: 'I was visiting and got hurt. Do I need a lawyer in Las Vegas?',
+        a: 'Usually yes, because the case will ordinarily be heard where the injury happened and ' +
+           'the firm needs to appear there. Nothing here is legal advice. What is worth asking ' +
+           'any firm you call is how it handles a client who lives in another state: how much ' +
+           'has to be done in person, what happens with medical treatment at home, and who pays ' +
+           'for travel if the case is tried.',
+      },
+      {
+        q: 'What does compulsory arbitration mean for my case?',
+        a: 'That a smaller claim is heard by an arbitrator rather than a jury first, more ' +
+           'quickly and far more cheaply. A party unhappy with the result can request a trial, ' +
+           'with a cost risk attached if the outcome does not improve. It is not a lesser ' +
+           'process, but it is a different one, and a firm that mostly works in it is doing ' +
+           'different work from one that mostly tries cases. The profiles record what each firm ' +
+           'publishes about its own results, which is where that difference usually shows.',
+      },
+    ],
+  },
 };
