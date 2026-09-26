@@ -229,8 +229,23 @@ def promote(rec: dict, firm: dict) -> list[str]:
             changed.append("accountability  %s/6 · %s" % (acc.get("pts"), acc.get("evidence", "")[:88]))
 
     published = rec.get("results_published")
+    was = firm.get("results_published") or {}
+    # A reading taken in a browser outranks a crawler that could not tell, and used to be quietly
+    # replaced by it. scripts/record_rendered_results.py opened ten results pages that came back
+    # with text and no figures, where crawl_results.py had correctly said it could not distinguish
+    # an empty page from one whose results arrive with JavaScript. Five rendered nothing, and that
+    # was recorded as a finding. Running the ordinary pipeline afterwards put the crawler's "not
+    # readable" back over the top of it, so two firms went back to having pillar B pending on a
+    # question that had already been answered, and nothing said so.
+    #
+    # The rule is narrow on purpose: only an unreadable crawl is refused, and only against a
+    # reading that says where it came from. A crawl that can actually read the page is better
+    # evidence than a browser visit from some Tuesday, because it is repeatable and dated.
+    if published and not published.get("readable") and was.get("source") and not was.get("source", "").startswith("crawl"):
+        changed.append("results_published  kept the browser reading over an unreadable crawl: %s"
+                     % (was.get("why") or "")[:70])
+        published = None
     if published:
-        was = firm.get("results_published") or {}
         firm["results_published"] = published
         if was.get("count") != published.get("count") or was.get("readable") != published.get("readable"):
             changed.append(

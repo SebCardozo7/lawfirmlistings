@@ -95,6 +95,16 @@ FIELDS = {
 }
 RECORD_LEN = 1440
 
+# An entity whose name carries a street address holds property; it does not practise law. Florida
+# has no professional-entity flag to tell the two apart, so the name is the only signal, and this
+# is the shape it takes: a surname or firm word, then a number, then a street type. "LABOVICK 10
+# NE 3RD STREET, LLC" is the office building. Matching it gave LaBovick Law Group that entity's
+# filing date and published "Not eligible" about a firm with 1,279 client reviews.
+ADDRESS_ENTITY = re.compile(
+    r"\b\d+\s+(?:\w+\.?\s+){0,3}"
+    r"(?:ST|STREET|AVE|AVENUE|RD|ROAD|BLVD|BOULEVARD|DR|DRIVE|LN|LANE|WAY|CT|COURT|PL|PLACE|"
+    r"TER|TERRACE|PKWY|PARKWAY|HWY|HIGHWAY|CIR|CIRCLE|SUITE|STE|UNIT|FLOOR|FL)\b", re.I)
+
 # Words that separate no two law firms in this state. Florida's own practice vocabulary is on it
 # for the same reason New York's is: a token every second firm carries cannot anchor a match.
 GENERIC = {
@@ -275,6 +285,14 @@ def choose(firm: dict, rows: list[dict]) -> tuple[dict | None, str]:
         shared = toks & tokens(row["entity_name"])
         if len(shared) < needed:
             continue
+        # A firm's surname plus a street address is the vehicle that holds the office, not the
+        # practice. LaBovick Law Group matched "LABOVICK 10 NE 3RD STREET, LLC" on the strength of
+        # one shared token and a Miami address, took that entity's filing date, and was published
+        # "Not eligible" for being six months old with 1,279 client reviews behind it. Property
+        # LLCs are named this way as a rule, so the shape is worth rejecting outright rather than
+        # hoping the similarity score catches it.
+        if ADDRESS_ENTITY.search(row["entity_name"]):
+            continue
         here = 1 if row["city"].upper() in cities else 0
         ratio = difflib.SequenceMatcher(None, whole, norm(row["entity_name"])).ratio()
         scored.append((len(shared), here, ratio, row))
@@ -290,6 +308,15 @@ def choose(firm: dict, rows: list[dict]) -> tuple[dict | None, str]:
     # A name that is not close and an address that is not the firm's is somebody else with the
     # same surname. Florida has no professional-entity flag to fall back on, so this is the whole
     # guard, and it is deliberately the strict half of the two.
+    # In-city used to be enough on its own, with no floor on the name at all, which is how a 0.43
+    # match was accepted. A verified office in the same city is real corroboration and should stay
+    # cheaper than a cold name match, but not free: a surname is shared by strangers and a city is
+    # shared by millions. 0.55 admits the forms a firm genuinely files under, "RICE MURTHA &
+    # PSORAS LLC" against "Rice, Murtha & Psoras", and refuses a surname bolted to something else.
+    if top[1] and top[2] < 0.55:
+        return None, ("best match %s is in the right city but its name is only %.2f like this "
+                      "firm's, which a shared surname will do on its own"
+                      % (top[3]["entity_name"], top[2]))
     if not top[1] and top[2] < 0.82:
         return None, ("best match %s is in %s, where this firm has no verified office, and the "
                       "name is not close enough to be it under another form"
@@ -386,6 +413,22 @@ def apply_gates(firm: dict, entity: dict | None) -> list[str]:
             "source": "Google Places API and %s" % DATASET,
             "checked_at": TODAY,
         }
+        # The same correction check_operating.py already carries, for the other source of an age.
+        # An entity's filing date says when that entity was registered, not when the practice
+        # started: a firm that reorganised, changed name or moved from one LLC to another files
+        # again, and the register shows the new date. LaBovick Law Group was published "Not
+        # eligible" on one, at half a year old with 1,279 client reviews behind it, and reviews do
+        # not accumulate at two thousand a year.
+        #
+        # So where the review half clears comfortably and only the age fails, the two proxies for
+        # "real and trading" disagree, and a gate that has found conflicting evidence has not
+        # established that the firm is new. It stays unresolved, and a person can settle it from
+        # the firm's own about page.
+        if enough and not old:
+            gates["G6"]["unresolvable"] = (
+                "An entity filing date is when this entity was registered rather than when the "
+                "practice began, and a firm that reorganises files again. The review count "
+                "contradicts it, so the age is unestablished rather than disproved.")
     elif (gates.get("G6") or {}).get("pass"):
         # Another source has already settled this gate. check_operating.py establishes a year in
         # operation from the domain's registration date, which is a real lower bound, and

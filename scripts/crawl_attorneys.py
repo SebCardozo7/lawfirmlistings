@@ -27,6 +27,7 @@ Usage:
 import argparse
 import datetime
 import glob
+import html as html_entities
 import io
 import json
 import pathlib
@@ -359,7 +360,11 @@ HEADING_PREFIX = re.compile(r"^(?:about|meet|profile of|introducing)\s+"
 
 def split_name_and_role(raw):
     """Returns (name, role_as_published). The role is the firm's wording, or None."""
-    text = re.sub(r"\s+", " ", (raw or "").replace("&amp;", "&")).strip()
+    # Every entity, not just the ampersand that was special-cased here. A roster heading reading
+    # James &quot;Allen&quot; Hammontree was published with the entities intact, as the name of a
+    # real person on a real firm's profile. html.unescape covers the numeric forms too, which a
+    # replace() chain never will.
+    text = re.sub(r"\s+", " ", html_entities.unescape(raw or "")).strip()
     text = HEADING_PREFIX.sub("", text).strip()
     text = SUFFIXES.sub("", text).strip(" ,-|")
     stripped = LINK_WORD.sub("", text).strip()

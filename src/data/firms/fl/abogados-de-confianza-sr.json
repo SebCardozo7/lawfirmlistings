@@ -120,19 +120,19 @@
       "pass": true,
       "evidence": "ABOGADOS DE CONFIANZA SR LLC is an active FLAL on the Florida register, document L24000397487, filed 2024-09-11, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G6": {
       "pass": true,
       "evidence": "433 public client reviews and 2 years since the entity was filed in 2024",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     }
   },
   "cohort_id": "fl-miami-personal-injury",
@@ -170,13 +170,13 @@
     "dos_id": "L24000397487",
     "formed": "2024-09-11",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-24"
+    "checked_at": "2026-09-25"
   },
   "score": {
     "total": 47,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-24",
+    "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -257,7 +257,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 433 reviews → Bayesian 4.97 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 433 reviews → Bayesian 4.97 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

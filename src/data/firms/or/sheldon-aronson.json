@@ -153,7 +153,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G6": {
       "pass": true,
@@ -217,10 +217,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 26,
+    "total": 27,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-24",
+    "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -284,7 +284,7 @@
         ]
       },
       "C": {
-        "score": 17,
+        "score": 18,
         "max": 20,
         "subs": [
           {
@@ -298,10 +298,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 5,
+            "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 84 reviews → Bayesian 4.90 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 84 reviews → Bayesian 4.91 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -390,11 +390,11 @@
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 18,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 44,
+      "gap": 43,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -403,10 +403,10 @@
         "D2 Search authority: +8 available"
       ]
     },
-    "raw": 18.1,
+    "raw": 19.1,
     "assessed": 70,
     "coverage": 1.0,
-    "floor_abc_pct": 0.447,
+    "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",
       "G3"

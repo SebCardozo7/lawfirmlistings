@@ -381,3 +381,32 @@ Until then Houston's G3 is pending, which is the truthful state: work we owe, no
 Twelve more were skipped before reaching a draft because they do not hold themselves out for this
 practice, among them an immigration firm whose own title says so, three sites returning 404 on
 every path, and a domain now serving an Indonesian gambling brand under the name "Naga303".
+
+### Held for a person to read: Atlanta
+
+- **Buckhead Law Saxton Car Accident and Personal Injury Lawyers** (2026-09-25). The Georgia
+  discipline check, added for this market, returned a match: Daniel Saxton is the respondent in
+  *In the Matter of Daniel J. Saxton* (2014), and the firm publishes a Daniel Saxton on its own
+  roster. It scores 59 and would have been the first firm in the directory published as "Not
+  eligible" on a name.
+
+  That label is not going out on a search result. Unlike New York's register, which carries a
+  status and never a reason, a Georgia decision is an opinion with reasoning in it, so what a
+  person needs to do here is read the 2014 decision: what it found, what sanction issued, and
+  whether it has since been lifted. The profile is kept out of the repository until then. The firm
+  stays in the cohort, because it is a real practice in this market and belongs in the percentile
+  denominator.
+
+- **Jones & Swanson Personal Injury Lawyers** (Marietta, GA, 2026-09-25). **Republished.** It was
+  withheld while the
+  Georgia discipline check is re-run against a correction it needed. It reported Andrew W. Jones
+  as the respondent in *In the Matter of Allen Charles Jones* (2025), which is a different person:
+  the identification came from the decision's full text rather than its title, and a lawyer's name
+  appears in a colleague's disciplinary opinion as counsel of record all the time. Georgia exposed
+  this because its Supreme Court publishes whole opinions with the bar listed. The check now
+  refuses a text hit inside a decision whose title names somebody else as the respondent. The re-run cleared it: with the text-hit guard in place the check no longer names Andrew W. Jones
+  at all, and reports instead that a different partner, Rutledge W. Jones, shares a surname with a
+  disciplined attorney whose decisions are 6-of-10 unsearchable scans. That is the third outcome
+  this check was built to have, an unanswered question rather than a finding, and it is what the
+  firm's profile now says. Withdrawing it was the right precaution on what was known at the time
+  and turned out to be unnecessary.

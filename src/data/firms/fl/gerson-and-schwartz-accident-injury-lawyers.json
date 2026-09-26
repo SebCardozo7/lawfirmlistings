@@ -212,19 +212,19 @@
       "pass": true,
       "evidence": "GERSON & SCHWARTZ, P.A. is an active DOMP on the Florida register, document P03000010566, filed 2003-01-21, with 3 Google-verified locations",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 9 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G6": {
       "pass": true,
       "evidence": "283 public client reviews and 24 years since the entity was filed in 2003",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     }
   },
   "cohort_id": "fl-miami-personal-injury",
@@ -273,13 +273,13 @@
     "dos_id": "P03000010566",
     "formed": "2003-01-21",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-24"
+    "checked_at": "2026-09-25"
   },
   "score": {
     "total": 50,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G1) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-09-24",
+    "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -360,7 +360,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 283 reviews → Bayesian 4.73 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 283 reviews → Bayesian 4.73 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

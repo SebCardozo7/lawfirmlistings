@@ -156,14 +156,14 @@
     "G3": {
       "pass": false,
       "source": "no queryable source",
-      "checked_at": "2026-09-24",
+      "checked_at": "2026-09-25",
       "evidence": "2 physical locations verified on Google Business Profile. Georgia publishes no business register we can query for free. The Secretary of State sells the bulk corporations file over FTP, $500 for a single extract or $5,000 a year for weekly ones, and its free entity search answers an automated reader with a 403 on every path including its own robots file, which is a bot challenge we do not work around. A register that is for sale is a published record in the sense that matters here only if somebody buys it. This is a limit of the published record and not something the firm can change."
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-24"
+      "checked_at": "2026-09-25"
     },
     "G6": {
       "pass": true,
@@ -224,7 +224,7 @@
     "total": 48,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-24",
+    "computed_at": "2026-09-25",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -305,7 +305,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.89 over 694 reviews → Bayesian 4.88 (prior 4.82 weighted as 100 reviews, from 410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.89 over 694 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
