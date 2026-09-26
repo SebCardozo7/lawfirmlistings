@@ -1,0 +1,496 @@
+{
+  "slug": "shrager-sachs-blanco",
+  "name": "Shrager, Sachs, & Blanco",
+  "initials": "SS",
+  "website": "https://www.shragerlaw.com/",
+  "domain": "shragerlaw.com",
+  "phone": "(215) 568-7771",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.shragerlaw.com/practice-areas/car-accidents/",
+      "checked_at": "2026-09-26"
+    }
+  ],
+  "market": {
+    "city_slug": "philadelphia-pa",
+    "city": "Philadelphia",
+    "state": "PA",
+    "state_name": "Pennsylvania"
+  },
+  "offices": [
+    {
+      "label": "Shrager, Sachs, & Blanco",
+      "address": "15 W Highland Ave Ste 15A, Philadelphia, PA 19118, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=17904332551159266596&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "David S. Shrager",
+      "role": "Attorneys",
+      "role_source": "firm bio page",
+      "bar_state": "NY",
+      "source_url": "https://www.shragerlaw.com/team/david-s-shrager/"
+    },
+    {
+      "name": "Theresa Blanco",
+      "role": "Attorneys",
+      "role_source": "firm bio page",
+      "bar_state": "NY",
+      "source_url": "https://www.shragerlaw.com/team/theresa-blanco/"
+    },
+    {
+      "name": "Robert L. Sachs Jr.",
+      "role": "Attorneys",
+      "role_source": "firm bio page",
+      "bar_state": "NY",
+      "source_url": "https://www.shragerlaw.com/team/robert-l-sachs-jr/"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Shrager, Sachs, & Blanco is a personal injury firm with a single office in Philadelphia.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "19",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-26"
+    },
+    "sample": [
+      {
+        "published_at": "2025-04-02T13:26:39.267473Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-03-27T15:49:55.228038Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2018-04-18T13:38:51.375Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2018-02-12T22:27:09.703Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2019-05-15T12:49:56.959869Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "privacy_policy": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 98,
+        "cwv_pass": true
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-26",
+      "note": "LCP 2.1 s / CLS 0.000 / TBT 0 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "shragerlaw.com",
+      "name": "Shrager, Sachs, & Blanco",
+      "review_count_at_discovery": 19
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 19,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 3,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-26"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Pennsylvania does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Pennsylvania does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Pennsylvania publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-26"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "19 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2000-11-08, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-26"
+    }
+  },
+  "cohort_id": "pa-philadelphia-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "e type, don’t hesitate to reach out to us. Shrager, Sachs, & Blanco takes most cases on a contingency fee basis and is happy to speak with you about your potential case during a free consulta",
+          "source_url": "https://www.shragerlaw.com/"
+        },
+        "free_consultation": {
+          "quote": "wyers, Med Mal, Injury | Shrager, Sachs, & Blanco Shrager, Sachs, & Blanco (215) 568-7771 Free Consultation Attorneys Practice Areas Medical Malpractice Birth Injuries Misdiagnoses Medication Error",
+          "source_url": "https://www.shragerlaw.com/"
+        },
+        "available_24_7": {
+          "quote": "eizures, and respiratory problems. He can never be left alone and needs care from a nurse 24 hours a day. Following a lengthy mediation, this case settled for an amount that will be life-changin",
+          "source_url": "https://www.shragerlaw.com/case-results/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.shragerlaw.com/",
+        "about": "https://www.shragerlaw.com/about-us/",
+        "attorneys": "https://www.shragerlaw.com/attorneys/",
+        "privacy": "https://www.shragerlaw.com/privacy-policy/",
+        "results": "https://www.shragerlaw.com/case-results/",
+        "contact": "https://www.shragerlaw.com/contact/",
+        "blog": "https://www.shragerlaw.com/blog/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.shragerlaw.com/attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2000-11-08",
+    "years": 25.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-26"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://www.shragerlaw.com/attorneys/",
+        "quote": "rved as one of Pennsylvania's Governors on the Board of the American Association for Justice. From 2010-2013, he served as Chair of the Publications Com"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 7,
+    "bios_published": 4,
+    "source": "observed",
+    "checked_at": "2026-09-26"
+  },
+  "results_published": {
+    "count": 33,
+    "counted_from": "stated amounts",
+    "amounts": [
+      1275000000,
+      8750000,
+      8000000,
+      6500000,
+      5440000,
+      5400000,
+      4000000,
+      3300000,
+      3200000,
+      2900000,
+      2300000,
+      2290000,
+      2289856,
+      2100000,
+      1660000,
+      1600000,
+      1525000,
+      1450000,
+      1200000,
+      1000000,
+      900000,
+      750000,
+      650000,
+      425000,
+      400000,
+      360000,
+      350000,
+      320000,
+      250000,
+      225000,
+      200000,
+      185000,
+      175000
+    ],
+    "largest": 1275000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "workplace",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": true,
+    "venues": [
+      "Supreme Court"
+    ],
+    "text_length": 99576,
+    "readable": true,
+    "url": "https://www.shragerlaw.com/case-results/",
+    "checked_at": "2026-09-26"
+  },
+  "score": {
+    "total": 63,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-26",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Pennsylvania publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Pennsylvania publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 15,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 6,
+            "max": 6,
+            "source": "firm",
+            "evidence": "33 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 5,
+            "max": 5,
+            "source": "firm",
+            "evidence": "9 case types named; 1 court or county reference"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 4,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
+          }
+        ]
+      },
+      "C": {
+        "score": 11,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "19 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 19 reviews → Bayesian 4.86 (prior 4.83 weighted as 100 reviews, from 685 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews are from the last 12 months (newest 2025-04-02) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 5,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 3.5,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV pass · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.3,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 3 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 29,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 7,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "C1 Authentic volume: +4 available"
+      ]
+    },
+    "raw": 39.3,
+    "assessed": 62,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.763,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  }
+}

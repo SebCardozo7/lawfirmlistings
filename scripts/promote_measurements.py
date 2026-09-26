@@ -40,6 +40,9 @@ for stream in (sys.stdout, sys.stderr):
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from crawl_attorneys import looks_like_a_person  # noqa: E402
+# The vocabulary lives in build_profiles because that is where it was written and this repo
+# already carries one rule in three copies. Importing it is the alternative to a fourth.
+from build_profiles import NOT_A_NAME_match  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 FIRMS = ROOT / "src" / "data" / "firms"
@@ -75,8 +78,21 @@ def promote_attorneys(rec: dict, firm: dict) -> list[str]:
     # Asking twice is not redundant. A staging record can be older than the crawler that reads
     # it, and every one of those names came out of a record written before the list of words
     # that are not a person had been tested against a matrimonial or an immigration menu.
-    skipped = [p["name"] for p in found if not looks_like_a_person(p["name"])]
-    found = [p for p in found if looks_like_a_person(p["name"])]
+    # Two tests, because they fail differently. looks_like_a_person rejects a phrase that could
+    # not be anybody's name. NOT_A_NAME_match rejects one that reads like a name and is a page
+    # title: every word in it is a place, a practice or a piece of site furniture, and no word is
+    # a person's. Las Vegas published "Las Vegas Drunk Driving", "Henderson Traumatic Brain" and
+    # "Las Vegas Fender Bender" as attorneys, six per cent of that market's roster, and thirty six
+    # of the same kind were already live in Miami, Atlanta and Houston: "Accessibility Statement",
+    # "Miami Uber", "Left Turn".
+    #
+    # Neither test alone catches those. They come from a firm's practice-area menu, where the
+    # heading really is a noun phrase in title case sitting exactly where a bio heading sits.
+    def is_a_person(name):
+        return looks_like_a_person(name) and not NOT_A_NAME_match(name)
+
+    skipped = [p["name"] for p in found if not is_a_person(p["name"])]
+    found = [p for p in found if is_a_person(p["name"])]
     if not found:
         return (["attorneys      nothing published that reads as a person: %s%s"
                  % (", ".join(skipped[:6]), " ..." if len(skipped) > 6 else "")]

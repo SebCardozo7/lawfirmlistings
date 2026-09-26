@@ -73,9 +73,37 @@ GENERIC_NAME_WORD = re.compile(
     r"personal|injury|injuries|accident|accidents|trial|trials|compensation|malpractice|"
     r"car|auto|truck|motorcycle|pedestrian|bicycle|construction|premises|"
     r"best|top|free|now|com|net|"
+    # How a practice page is titled, which is where these names come from. Las Vegas published
+    # "Las Vegas Drunk Driving Accident Lawyer" and forty two of its six hundred and sixty nine
+    # attorney names were page titles cut short: "Las Vegas Taxi Cab", "Henderson Traumatic
+    # Brain", "Las Vegas Fender Bender". Each word below appears in one of those and in no
+    # person's name.
+    r"drunk|drowsy|distracted|reckless|aggressive|driving|driver|drivers|"
+    r"fender|bender|taxi|cab|bus|rideshare|ride|sharing|uber|lyft|scooter|rollover|"
+    r"traumatic|brain|spinal|burn|burns|dog|bite|bites|slip|fall|falls|wrongful|death|"
+    r"turn|left|right|rear|end|head|"
+    r"first|responder|worker|workers|comp|"
+    # Site furniture that sits on a roster page next to the bios.
+    r"accessibility|statement|notice|policy|privacy|terms|disclaimer|sitemap|"
+    r"menu|home|contact|about|blog|reviews|review|results|español|espanol|"
     r"new|york|nyc|manhattan|brooklyn|queens|bronx|buffalo|miami|houston|atlanta|dallas|"
     r"boston|baltimore|portland|naples|lakeland|tampa|indiana|"
-    r"ny|fl|tx|ga|ma|md|or|in|"
+    # The three markets opened on 2026-09-26, and the places around them that title a page.
+    r"chicago|philadelphia|philly|vegas|las|henderson|nevada|illinois|pennsylvania|"
+    r"summerlin|paradise|enterprise|north|south|east|west|northwest|northeast|"
+    r"southwest|southeast|downtown|loop|county|city|"
+    # The transit authority is how a whole set of practice pages is titled, and it is different
+    # in every city: Philadelphia published "SEPTA Train", "Septa Trolley" and "Septa Bus".
+    r"septa|cta|metra|marta|metro|mass|transit|trolley|train|subway|rail|"
+    # County names title a page in the suburbs of both new eastern markets. Every one of these is
+    # also somebody's surname, which is why the rule is that EVERY word has to match: "Montgomery
+    # County" goes and "Sarah Montgomery" stays. "Will" and "Cook" are deliberately absent for
+    # the same reason, since "Will Cook" is a person and "Cook County" survives without them.
+    r"delaware|montgomery|bucks|chester|camden|lake|dupage|"
+    r"civil|rights|retaliation|discrimination|harassment|defect|defects|defective|"
+    r"mesothelioma|asbestos|birth|nursing|abuse|neglect|medical|hotel|casino|premises|"
+    r"class|action|actions|liability|dram|shop|roadway|workplace|automotive|"
+    r"ny|fl|tx|ga|ma|md|or|in|il|pa|nv|"
     r"llp|llc|pc|pllc|pa|plc|inc)$", re.I)
 
 
