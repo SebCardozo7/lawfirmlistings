@@ -203,10 +203,10 @@
       "checked_at": "2026-09-15"
     },
     "G3": {
-      "pass": false,
-      "source": "unavailable",
-      "checked_at": "2026-09-15",
-      "evidence": "1 physical location verified on Google Business Profile. We read the Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status and could not identify this firm in it: no entity whose name contains the firm's name. A miss there is not evidence that the firm is unregistered, so this gate is unresolved rather than failed. The franchise tax does not reach a sole proprietorship or a general partnership, so this register can confirm an entity and cannot rule one out."
+      "pass": true,
+      "evidence": "MULLEN & MULLEN LAW FIRM, INC. holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0090914302, chartered 1983-10-07, and 3 Google-verified locations. Identified because the name matches",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -216,9 +216,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "68 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2003-09-18, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "601 public client reviews and 43 years since the entity was chartered in 1983",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-dallas-personal-injury",
@@ -364,7 +364,7 @@
   "score": {
     "total": 61,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -554,8 +554,7 @@
     "floor_abc_pct": 0.737,
     "gates_unavailable": [
       "G1",
-      "G2",
-      "G3"
+      "G2"
     ],
     "gates_unresolvable": [],
     "assessable": 70,
@@ -569,5 +568,19 @@
     "bytes": 2134,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "MULLEN & MULLEN LAW FIRM, INC.",
+    "taxpayer_number": "17519115061",
+    "sos_file_number": "0090914302",
+    "chartered": "1983-10-07",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "DALLAS",
+    "identified_by": "the name matches",
+    "name_similarity": 0.929,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

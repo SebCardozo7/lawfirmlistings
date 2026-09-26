@@ -5,7 +5,7 @@
   "website": "https://albtriallawyers.com/",
   "domain": "albtriallawyers.com",
   "phone": "(832) 402-7844",
-  "status": "listed",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -355,10 +355,10 @@
       "checked_at": "2026-09-25"
     },
     "G3": {
-      "pass": false,
-      "evidence": "2 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-25"
+      "pass": true,
+      "evidence": "ARMSTRONG LEE & BAKER LLP holds an active franchise tax responsibility in Texas with the right to transact business, and 2 Google-verified locations. Identified because the name matches, at an address we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -438,8 +438,8 @@
   },
   "score": {
     "total": 73,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "tier": "Certified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -634,5 +634,19 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "ARMSTRONG LEE & BAKER LLP",
+    "taxpayer_number": "32064168290",
+    "sos_file_number": null,
+    "chartered": null,
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "HOUSTON",
+    "identified_by": "the name matches, at an address we verified",
+    "name_similarity": 1.0,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

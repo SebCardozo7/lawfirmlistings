@@ -245,10 +245,9 @@
     },
     "G3": {
       "pass": true,
-      "source": "Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status",
-      "checked_at": "2026-09-15",
-      "evidence": "JAY MURRAY LAW GROUP, P.C. is registered with the Texas Comptroller of Public Accounts, under number 0805006043, since 2023-04-07, listed as an active franchise taxpayer with the right to transact business in Texas (Secretary of State status code R), and 1 physical location verified on Google Business Profile.",
-      "registered": "2023-04-07"
+      "evidence": "JAY MURRAY LAW GROUP, P.C. holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0805006043, chartered 2023-04-07, and 3 Google-verified locations. Identified because the name is close and the address is one we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -258,9 +257,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "314 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2022-04-11, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "568 public client reviews and 3 years since the entity was chartered in 2023",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-dallas-personal-injury",
@@ -587,5 +586,19 @@
     "bytes": 3374,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "JAY MURRAY LAW GROUP, P.C.",
+    "taxpayer_number": "32089274537",
+    "sos_file_number": "0805006043",
+    "chartered": "2023-04-07",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "DALLAS",
+    "identified_by": "the name is close and the address is one we verified",
+    "name_similarity": 0.744,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

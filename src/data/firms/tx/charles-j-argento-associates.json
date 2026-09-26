@@ -5,7 +5,7 @@
   "website": "https://charlesargento.com/",
   "domain": "charlesargento.com",
   "phone": "(713) 225-5050",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -156,10 +156,10 @@
       "checked_at": "2026-09-23"
     },
     "G3": {
-      "pass": false,
-      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-23"
+      "pass": true,
+      "evidence": "CHARLEST & ASSOCIATES LLC holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0806237435, chartered 2025-10-01, and 1 Google-verified location. Identified because the name is close and the address is one we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -168,10 +168,11 @@
       "checked_at": "2026-09-25"
     },
     "G6": {
-      "pass": true,
-      "evidence": "784 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2005-03-07, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-24"
+      "pass": false,
+      "evidence": "784 public client reviews, at or above the ten this gate asks for, and 1.0 years since the entity was chartered",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26",
+      "unresolvable": "A charter date is when this entity was registered rather than when the practice began, and a firm that reorganises charters again. The review count contradicts it, so the age is unestablished rather than disproved."
     }
   },
   "cohort_id": "tx-houston-personal-injury",
@@ -222,8 +223,8 @@
   },
   "score": {
     "total": 59,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G6) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -415,8 +416,24 @@
       "G1",
       "G2"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G6"
+    ],
     "assessable": 70,
     "comparable": true
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "CHARLEST & ASSOCIATES LLC",
+    "taxpayer_number": "32102334342",
+    "sos_file_number": "0806237435",
+    "chartered": "2025-10-01",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "HOUSTON",
+    "identified_by": "the name is close and the address is one we verified",
+    "name_similarity": 0.78,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

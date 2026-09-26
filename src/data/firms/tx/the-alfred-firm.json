@@ -5,7 +5,7 @@
   "website": "https://www.alfredfirm.com/",
   "domain": "alfredfirm.com",
   "phone": "(713) 489-1875",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -228,10 +228,10 @@
       "checked_at": "2026-09-25"
     },
     "G3": {
-      "pass": false,
-      "evidence": "1 physical location verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-25"
+      "pass": true,
+      "evidence": "THE ALFRED FIRM, P.C. holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0802350389, chartered 2015-12-15, and 1 Google-verified location. Identified because the name matches, at an address we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -241,9 +241,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "371 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2020-01-03, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-25"
+      "evidence": "371 public client reviews and 11 years since the entity was chartered in 2015",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-houston-personal-injury",
@@ -294,8 +294,8 @@
   },
   "score": {
     "total": 50,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -499,5 +499,19 @@
     "bytes": 4718,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-26"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "THE ALFRED FIRM, P.C.",
+    "taxpayer_number": "32059071012",
+    "sos_file_number": "0802350389",
+    "chartered": "2015-12-15",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "HOUSTON",
+    "identified_by": "the name matches, at an address we verified",
+    "name_similarity": 0.882,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

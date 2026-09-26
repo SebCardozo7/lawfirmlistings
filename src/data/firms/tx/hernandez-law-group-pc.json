@@ -170,10 +170,9 @@
     },
     "G3": {
       "pass": true,
-      "source": "Active Franchise Taxpayers (data.texas.gov 9cir-efmm), published as open data by the Texas Comptroller of Public Accounts, which carries the Secretary of State file number, charter date and status",
-      "checked_at": "2026-09-15",
-      "evidence": "HERNANDEZ LAW GROUP, P.C. is registered with the Texas Comptroller of Public Accounts, under number 0803411833, since 2019-09-04, listed as an active franchise taxpayer with the right to transact business in Texas (Secretary of State status code R), and 2 physical locations verified on Google Business Profile.",
-      "registered": "2019-09-04"
+      "evidence": "HERNANDEZ LAW GROUP, P.C. holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0803411833, chartered 2019-09-04, and 2 Google-verified locations. Identified because the name matches, at an address we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": false,
@@ -183,9 +182,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "504 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2003-10-09, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "503 public client reviews and 7 years since the entity was chartered in 2019",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-dallas-personal-injury",
@@ -479,5 +478,19 @@
     "bytes": 3611,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-15"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "HERNANDEZ LAW GROUP, P.C.",
+    "taxpayer_number": "32071836566",
+    "sos_file_number": "0803411833",
+    "chartered": "2019-09-04",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "DALLAS",
+    "identified_by": "the name matches, at an address we verified",
+    "name_similarity": 1.0,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }

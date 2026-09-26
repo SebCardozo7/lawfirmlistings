@@ -5,7 +5,7 @@
   "website": "https://zplawgrouptx.com/",
   "domain": "zplawgrouptx.com",
   "phone": "(832) 464-7667",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -184,9 +184,10 @@
     },
     "G3": {
       "pass": false,
-      "evidence": "2 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-25"
+      "evidence": "No matching entity on the Texas list of active franchise taxpayers. Texas does not require a sole proprietorship or a general partnership to pay franchise tax, and an exempt entity is left off as well, so this is a check this source cannot complete rather than evidence against the firm. The state's own SOSDirect service can settle it for a fee",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts, partial",
+      "unresolvable": "Texas lists only active franchise taxpayers, so a firm that is not obliged to be one cannot be found here however often we look",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -232,8 +233,8 @@
   },
   "score": {
     "total": 39,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -425,8 +426,16 @@
       "G1",
       "G2"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G3"
+    ],
     "assessable": 70,
     "comparable": true
+  },
+  "tx_register": {
+    "matched": false,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "note": "Texas lists only active franchise taxpayers, so a firm with no franchise tax obligation is absent by design",
+    "checked_at": "2026-09-26"
   }
 }

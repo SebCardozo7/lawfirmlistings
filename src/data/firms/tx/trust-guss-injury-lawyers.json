@@ -5,7 +5,7 @@
   "website": "https://attorneyguss.com/",
   "domain": "attorneyguss.com",
   "phone": "(866) 781-1994",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -341,10 +341,10 @@
       "checked_at": "2026-09-23"
     },
     "G3": {
-      "pass": false,
-      "evidence": "6 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-23"
+      "pass": true,
+      "evidence": "TRUST GUSS INJURY LAWYERS, PLLC holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0806050123, chartered 2025-05-22, and 6 Google-verified locations. Identified because the name matches, at an address we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     },
     "G5": {
       "pass": true,
@@ -354,9 +354,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "1,711 public client reviews across 6 Google listings, above the 10 minimum, and the firm's domain has been registered since 2006-01-30, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-24"
+      "evidence": "1,711 public client reviews and 1 years since the entity was chartered in 2025",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-26"
     }
   },
   "cohort_id": "tx-houston-personal-injury",
@@ -406,8 +406,8 @@
   },
   "score": {
     "total": 55,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-26",
     "methodology": "v2.0",
     "pillars": {
@@ -611,5 +611,19 @@
     "bytes": 3614,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
     "fetched_at": "2026-09-26"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "TRUST GUSS INJURY LAWYERS, PLLC",
+    "taxpayer_number": "32100367104",
+    "sos_file_number": "0806050123",
+    "chartered": "2025-05-22",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "HOUSTON",
+    "identified_by": "the name matches, at an address we verified",
+    "name_similarity": 0.909,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-26"
   }
 }
