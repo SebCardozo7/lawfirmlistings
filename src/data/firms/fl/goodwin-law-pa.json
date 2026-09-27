@@ -317,7 +317,7 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 61,
+    "total": 60,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G1) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-26",
@@ -384,7 +384,7 @@
         ]
       },
       "C": {
-        "score": 17,
+        "score": 16,
         "max": 20,
         "subs": [
           {
@@ -398,10 +398,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 69 reviews → Bayesian 4.90 (prior 4.83 weighted as 100 reviews, from 685 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 69 reviews → Bayesian 4.90 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -490,11 +490,11 @@
         ]
       }
     },
-    "floor_abc": 29,
+    "floor_abc": 28,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -503,10 +503,10 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 43.0,
+    "raw": 42.0,
     "assessed": 70,
     "coverage": 1.0,
-    "floor_abc_pct": 0.763,
+    "floor_abc_pct": 0.737,
     "gates_unavailable": [
       "G1"
     ],

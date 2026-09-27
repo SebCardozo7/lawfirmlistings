@@ -715,7 +715,7 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 68,
+    "total": 67,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (4/15).",
     "computed_at": "2026-09-26",
@@ -782,7 +782,7 @@
         ]
       },
       "C": {
-        "score": 19,
+        "score": 18,
         "max": 20,
         "subs": [
           {
@@ -796,10 +796,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 6,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.91 over 726 reviews → Bayesian 4.90 (prior 4.83 weighted as 100 reviews, from 685 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.91 over 726 reviews → Bayesian 4.90 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -892,7 +892,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 2,
+      "gap": 3,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -901,10 +901,10 @@
         "E1 Free consult & fee transparency: +5 available"
       ]
     },
-    "raw": 60.5,
+    "raw": 59.5,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.816,
+    "floor_abc_pct": 0.798,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

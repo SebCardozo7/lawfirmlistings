@@ -1,0 +1,468 @@
+{
+  "slug": "pullanolawcom",
+  "name": "pullanolaw.com",
+  "initials": "PC",
+  "website": "https://pullanolaw.com/",
+  "domain": "pullanolaw.com",
+  "phone": "(312) 551-1100",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://pullanolaw.com/practice-areas/construction-accidents/",
+      "checked_at": "2026-09-26"
+    }
+  ],
+  "market": {
+    "city_slug": "chicago-il",
+    "city": "Chicago",
+    "state": "IL",
+    "state_name": "Illinois"
+  },
+  "offices": [
+    {
+      "label": "Pullano & Siporin",
+      "address": "134 N LaSalle St #2200, Chicago, IL 60602, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=8240859159699064789&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Mathew T. Siporin",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://pullanolaw.com/attorneys/mathew-t-siporin-2/"
+    },
+    {
+      "name": "Michael J. Pullano",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://pullanolaw.com/attorneys/michael-j-pullano-2/"
+    },
+    {
+      "name": "Richard L. Pullano",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://pullanolaw.com/attorneys/richard-l-pullano-2/"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line",
+    "Hospital & home visits"
+  ],
+  "about": [
+    "pullanolaw.com is a personal injury firm with a single office in Chicago.",
+    "The firm states that the first consultation is free; its intake line is open around the clock; it will visit clients in hospital or at home. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "14",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-26"
+    },
+    "sample": [
+      {
+        "published_at": "2026-01-12T23:32:00.493456335Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-04T22:28:47.692818848Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-26T20:14:42.469493288Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-07-23T19:55:47.861684Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-13T15:05:37.995247262Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 56,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-26",
+      "note": "LCP 41.2 s / CLS 0.003 / TBT 216 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "pullanolaw.com",
+      "name": "Pullano & Siporin",
+      "review_count_at_discovery": 14
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 14,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 7,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 7,
+      "ahrefs_rank": 24165911,
+      "refdomains": 792,
+      "refdomains_dofollow": 363,
+      "backlinks": 9162,
+      "org_keywords": 26,
+      "org_traffic": 27,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Illinois does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Illinois does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Illinois publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-26"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "14 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2003-08-01, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-26"
+    }
+  },
+  "cohort_id": "il-chicago-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD business.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "log Contact Us Experience the Power of Promises Kept. Personal Injury | Chicago, Illinois FREE CONSULTATION Experience the Power of Promises Kept. FREE CONSULTATION Personal Injury | Chicago, Illin",
+          "source_url": "https://pullanolaw.com/"
+        },
+        "available_24_7": {
+          "quote": "Top-notch client service is at the core of everything we do. Our firm has staff available 24/7 to answer your questions and address your concerns so you can stay comfortable with the p",
+          "source_url": "https://pullanolaw.com/"
+        },
+        "hospital_visits": {
+          "quote": "ct us Connect with our firm to discuss your case and to meet our team of trial attorneys. We will come to you Our attorneys will travel to your kitchen table, a location of your choosing or even virt",
+          "source_url": "https://pullanolaw.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://pullanolaw.com/",
+        "contact": "https://pullanolaw.com/contact-us/",
+        "attorneys": "https://pullanolaw.com/attorneys/",
+        "blog": "https://pullanolaw.com/news/",
+        "about": "https://pullanolaw.com/about-the-firm/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://pullanolaw.com/attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2003-08-01",
+    "years": 23.2,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-26"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://pullanolaw.com/attorneys/mathew-t-siporin-2",
+        "quote": "tive member in the Illinois Trial Lawyer’s Association, the American Association for Justice and the Decalogue Society. He has spoken at numerous legal"
+      },
+      {
+        "name": "Indiana Trial Lawyers Association",
+        "source_url": "https://pullanolaw.com/attorneys/richard-l-pullano-2",
+        "quote": "oard of Managers at the Illinois Trial Lawyers Association (ITLA), which gave Mr. Pullano The President’s Award for his outs"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, Indiana Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 6,
+    "bios_published": 3,
+    "source": "observed",
+    "checked_at": "2026-09-26"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-26"
+  },
+  "score": {
+    "total": 41,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-26",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Illinois publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Illinois publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, Indiana Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 15,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "14 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 14 reviews → Bayesian 4.85 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "3 of 5 sampled reviews are from the last 12 months (newest 2026-01-12) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 5,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 2,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 7 → 28th pct of 109-firm cohort (median 18) 1/3 · 792 referring domains, 16th pct 0/2 · 26 organic keywords / 27 visits·mo, 28th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.7,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 7 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 5.0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line · Hospital & home visits"
+          }
+        ]
+      }
+    },
+    "floor_abc": 18,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 29,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 28.7,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.474,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/pullanolaw.com.png",
+    "source_url": "https://pullanolaw.com/wp-content/uploads/2021/03/favicon-300x300.png",
+    "width": 300,
+    "height": 300,
+    "bytes": 58547,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
+  }
+}
