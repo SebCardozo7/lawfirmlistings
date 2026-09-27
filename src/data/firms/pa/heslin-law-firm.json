@@ -1,0 +1,450 @@
+{
+  "slug": "heslin-law-firm",
+  "name": "Heslin Law Firm",
+  "initials": "HE",
+  "website": "https://www.heslinlawfirm.com/",
+  "domain": "heslinlawfirm.com",
+  "phone": "(215) 332-0300",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.heslinlawfirm.com/practice_areas/philadelphia-car-accident-lawyer.cfm",
+      "checked_at": "2026-09-26"
+    }
+  ],
+  "market": {
+    "city_slug": "philadelphia-pa",
+    "city": "Philadelphia",
+    "state": "PA",
+    "state_name": "Pennsylvania"
+  },
+  "offices": [
+    {
+      "label": "The Heslin Law Firm",
+      "address": "2834 Cottman Ave, Philadelphia, PA 19149, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=1218964783362220352&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Gary P. Heslin",
+      "role": "Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.heslinlawfirm.com/bio/philadelphia-personal-injury-attorney-gary-heslin.cfm"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Heslin Law Firm is a personal injury firm with a single office in Philadelphia.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "58",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-26"
+    },
+    "sample": [
+      {
+        "published_at": "2026-04-15T18:04:02.034746085Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-21T17:28:37.521706619Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-25T11:55:54.454761189Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-29T19:38:15.443408770Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-15T23:22:41.953847732Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true,
+      "fee_statement": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 70,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-26",
+      "note": "LCP 4.0 s / CLS 0.262 / TBT 224 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "heslinlawfirm.com",
+      "name": "The Heslin Law Firm",
+      "review_count_at_discovery": 58
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 58,
+      "rating_weighted": 4.8,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 2,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 9,
+      "ahrefs_rank": 18955076,
+      "refdomains": 868,
+      "refdomains_dofollow": 393,
+      "backlinks": 6210,
+      "org_keywords": 13,
+      "org_traffic": 10,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Pennsylvania does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Pennsylvania on the discipline of members of the Pennsylvania bar, prosecuted by its Disciplinary Board, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-26",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 2173 published discipline decisions of the Supreme Court of Pennsylvania on the discipline of members of the Pennsylvania bar, prosecuted by its Disciplinary Board, 1976 to 2019. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Pennsylvania publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-26"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "58 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2008-02-14, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-26"
+    }
+  },
+  "cohort_id": "pa-philadelphia-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "not currently working due to your injuries. However, we accept personal injury cases on a contingency fee basis—which means there’s no cost for representation until we successfully negotiate",
+          "source_url": "https://www.heslinlawfirm.com/"
+        },
+        "free_consultation": {
+          "quote": "Can Trust and Depend On - Service in Philadelphia, East Kensington, Mayfair, Cheltenham - Free Consultation Personal Injury Attorneys Near Me | Heslin Law Firm Our offices are open and we are here",
+          "source_url": "https://www.heslinlawfirm.com/"
+        },
+        "available_24_7": {
+          "quote": "Heslin Law Firm 2834 Cottman Avenue Philadelphia , PA 19149 Phone: 215-332-0300 Available 24/7: 267-366-7770 Fax: 215-332-6224 Hours: 8am - 4pm and by appointment Office Info Get Direc",
+          "source_url": "https://www.heslinlawfirm.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "You don’t have to go downtown to get an experienced Philadelphia personal injury attorney to help with your car accident or slip and fall case.",
+        "Born and raised in Philadelphia, personal injury attorney Gary Heslin is dedicated to helping clients get justice after negligence-related accidents.",
+        "Our regularly updated blog discusses car accidents, SEPTA accidents, slip and fall accidents, and other types of personal injury claims."
+      ],
+      "pages": {
+        "home": "https://www.heslinlawfirm.com/",
+        "attorneys": "https://www.heslinlawfirm.com/bio/philadelphia-personal-injury-attorney-gary-heslin.cfm",
+        "blog": "https://www.heslinlawfirm.com/blog/",
+        "contact": "https://www.heslinlawfirm.com/offices/philadelphia-personal-injury-attorney.cfm",
+        "about": "https://www.heslinlawfirm.com/about/",
+        "results": "https://www.heslinlawfirm.com/results/",
+        "privacy": "https://www.heslinlawfirm.com/privacy-policy/",
+        "disclaimer": "https://www.heslinlawfirm.com/disclaimer/",
+        "fees": "https://www.heslinlawfirm.com/fees/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.heslinlawfirm.com/bio/philadelphia-personal-injury-attorney-gary-heslin.cfm"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2008-02-14",
+    "years": 18.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-26"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-26"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 2621 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.heslinlawfirm.com/results/",
+    "checked_at": "2026-09-26"
+  },
+  "score": {
+    "total": 50,
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-26",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Pennsylvania publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Pennsylvania publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "the results page served 2621 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "the results page served 2621 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "the results page served 2621 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "58 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.8 over 58 reviews → Bayesian 4.82 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-21) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 6,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 3.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 2,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 9 → 32th pct of 73-firm cohort (median 19) 1/3 · 868 referring domains, 26th pct 1/2 · 13 organic keywords / 10 visits·mo, 18th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.2,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 2 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 16,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 20,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
+      ]
+    },
+    "raw": 27.7,
+    "assessed": 55,
+    "coverage": 0.786,
+    "floor_abc_pct": 0.696,
+    "gates_unavailable": [
+      "G1",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/heslinlawfirm.com.png",
+    "source_url": "https://www.heslinlawfirm.com/includes/default/images/apple-touch-icon.png?v=4.02.38",
+    "width": 600,
+    "height": 600,
+    "bytes": 7048,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
+  }
+}

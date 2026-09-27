@@ -1,0 +1,465 @@
+{
+  "slug": "budin-law-offices",
+  "name": "Budin Law Offices",
+  "initials": "BO",
+  "website": "https://budinlawoffices.com/",
+  "domain": "budinlawoffices.com",
+  "phone": "(312) 377-0700",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://budinlawoffices.com/car-accident-lawyer-chicago/",
+      "checked_at": "2026-09-26"
+    }
+  ],
+  "market": {
+    "city_slug": "chicago-il",
+    "city": "Chicago",
+    "state": "IL",
+    "state_name": "Illinois"
+  },
+  "offices": [
+    {
+      "label": "Budin Law Offices",
+      "address": "134 N LaSalle St Ste 210, Chicago, IL 60602, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=11201252531650047182&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Budin Law Offices is a personal injury firm with a single office in Chicago.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "122",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-26"
+    },
+    "sample": [
+      {
+        "published_at": "2026-05-04T10:14:37.366866441Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-24T22:39:44.918937145Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-27T15:06:14.538492710Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-25T21:42:46.060366709Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-08-28T22:26:30.455401565Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "blog": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 56,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-26",
+      "note": "LCP 10.4 s / CLS 0.035 / TBT 13 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "budinlawoffices.com",
+      "name": "Budin Law Offices",
+      "review_count_at_discovery": 122
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 122,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 2,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 15,
+      "ahrefs_rank": 12415343,
+      "refdomains": 1086,
+      "refdomains_dofollow": 596,
+      "backlinks": 2405,
+      "org_keywords": 1,
+      "org_traffic": 11,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Illinois does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Illinois does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Illinois publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-26"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "122 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2008-07-01, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-26"
+    }
+  },
+  "cohort_id": "il-chicago-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Attorney.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "Top Personal Injury Lawyer Chicago - Budin Law Offices --> No Recovery, No Fee - 312-377-0700 - CALL 24/7 134 North La Salle Street, Suite 210, Chicago, Illinois 60602",
+          "source_url": "https://budinlawoffices.com/"
+        },
+        "free_consultation": {
+          "quote": "ies Wrongful Death Claims Vs. Lawsuits 10 Questions To Ask Your Lawyer Preparing For Your Free Consultation Truck Accidents What To Do After A Truck Accident Truck Accident FAQ Workers Compensation",
+          "source_url": "https://budinlawoffices.com/"
+        },
+        "available_24_7": {
+          "quote": "l Injury Lawyer Chicago - Budin Law Offices --> No Recovery, No Fee - 312-377-0700 - CALL 24/7 134 North La Salle Street, Suite 210, Chicago, Illinois 60602 Home About Practice Areas P",
+          "source_url": "https://budinlawoffices.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Budin Law Offices, a trusted Chicago Personal Injury Law Firm, helps victims of car accidents, workplace injuries, and personal injury cases get fair compensation.",
+        "Budin Law Offices, a trusted Chicago Personal Injury Law Firm, helps victims of car accidents, workplace injuries, and personal injury cases get fair compensation."
+      ],
+      "pages": {
+        "home": "https://budinlawoffices.com/",
+        "privacy": "https://budinlawoffices.com/privacy-policy/",
+        "about": "https://budinlawoffices.com/about/",
+        "results": "https://budinlawoffices.com/results/",
+        "blog": "https://budinlawoffices.com/blog/",
+        "contact": "https://budinlawoffices.com/contact/",
+        "disclaimer": "https://budinlawoffices.com/disclaimer/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2008-07-01",
+    "years": 18.2,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-26"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "Indiana Trial Lawyers Association",
+        "source_url": "https://budinlawoffices.com/",
+        "quote": "that is a member of the Illinois Trial Lawyers Association (ITLA). Members of ITLA have shown, by the fact that they are mem"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of Indiana Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-26"
+  },
+  "results_published": {
+    "count": 15,
+    "counted_from": "stated amounts",
+    "amounts": [
+      10000000,
+      4000000,
+      2550000,
+      2000000,
+      1800000,
+      1200000,
+      750000,
+      700000,
+      650000,
+      450000,
+      425000,
+      423000,
+      350000,
+      250000,
+      200000
+    ],
+    "largest": 10000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "workplace"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 4619,
+    "readable": true,
+    "url": "https://budinlawoffices.com/results/",
+    "checked_at": "2026-09-26"
+  },
+  "score": {
+    "total": 55,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-26",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Illinois publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of Indiana Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 8,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 4.5,
+            "max": 6,
+            "source": "firm",
+            "evidence": "15 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "7 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 17,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "122 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 122 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-05-04) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 5,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 2,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 15 → 44th pct of 109-firm cohort (median 18) 1/3 · 1,086 referring domains, 61th pct 1/2 · 1 organic keywords / 11 visits·mo, 10th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.2,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 2 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 28,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 15,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A2 Experience: +10 available",
+        "D2 Search authority: +6 available"
+      ]
+    },
+    "raw": 38.2,
+    "assessed": 70,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.724,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 79,
+    "comparable": true
+  }
+}

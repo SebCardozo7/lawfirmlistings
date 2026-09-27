@@ -313,11 +313,19 @@ def build_index(state: str, cache: pathlib.Path, refresh: bool):
                 if url in seen:
                     continue
                 seen.add(url)
+                # The opening lines of the order, which is where a court says what it decided.
+                # Without them this index knows who a case is about and nothing about how it
+                # ended, and being named as a respondent was treated as discipline. See
+                # disposition() below for what that nearly published.
+                opinions = row.get("opinions") or []
+                head = " ".join((opinions[0].get("snippet") or "").split())[:600] if opinions \
+                    else ""
                 cases.append({"case": name,
                               "date": row.get("dateFiled"),
                               "surname": respondent(name, pattern),
                               "full": respondent_full(name, pattern),
                               "pattern": index_of,
+                              "head": head,
                               "url": url})
             pages += 1
             print("    page %-3d  %d case(s) so far" % (pages, len(cases)), flush=True)
@@ -387,6 +395,80 @@ def name_variants(attorney: str) -> list:
         if first_last not in out:
             out.append(first_last)
     return out
+
+
+# What a court did, read from the opening lines of its order. Being the respondent in a
+# disciplinary matter is not the same as having been disciplined, and treating the two as one
+# thing was one run away from publishing that a working Las Vegas attorney had a disciplinary
+# record. The decision naming her is titled "ORDER REJECTING RECOMMENDATION AND REMANDING": the
+# Supreme Court of Nevada declined to impose what the panel proposed and sent it back.
+#
+# "In re Discipline of" is the title a state gives the whole matter, and the same docket carries
+# the suspension, the appeal, the reinstatement five years later and every interim order.
+ADVERSE_ORDER = re.compile(
+    # SUSPEN, not SUSPEND: the order is titled "ORDER OF SUSPENSION" as often as "SUSPENDING",
+    # and the first draft of this matched only the second and read the first as saying nothing.
+    r"\b(SUSPEN\w*|DISBAR\w*|REPRIMAND\w*|CENSUR\w*|REVO[KC]\w*|"
+    r"ACCEPTING\s+(?:THE\s+)?CONDITIONAL\s+GUILTY\s+PLEA|"
+    r"APPROVING\s+(?:THE\s+)?CONDITIONAL\s+GUILTY\s+PLEA|"
+    r"ACCEPTING\s+(?:THE\s+)?RESIGNATION|DISBARMENT|"
+    r"ORDER\s+OF\s+DISCIPLINE|IMPOSING\s+DISCIPLINE|"
+    r"TRANSFER\w*\s+TO\s+DISABILITY)\b", re.I)
+
+NOT_ADVERSE_ORDER = re.compile(
+    r"\b(REJECTING|REMAND\w*|REINSTAT\w*|DISMISS\w*|VACAT\w*|WITHDRAW\w*|"
+    r"DENYING\s+(?:THE\s+)?PETITION\s+FOR\s+DISCIPLINE|"
+    r"DECLINING|TERMINATING|ABATING)\b", re.I)
+
+
+def order_title(head: str) -> str | None:
+    """The order's own title, tidied for quoting, or None when it does not carry one.
+
+    Published beside the finding, because "the court did not decide against them" is a summary
+    and this is the thing itself. A reader checking one sentence about a named attorney's record
+    should be reading the court's words rather than ours.
+    """
+    m = re.search(r"\bORDER\b[^.\n]{0,120}", head or "", re.I)
+    if not m:
+        return None
+    title = " ".join(m.group(0).split())
+    # The caption often runs on into the body, and a date stamp is not part of the title.
+    title = re.split(r"\s{2,}|\bFILED\b|\bNo\.?\s*\d", title)[0].strip(" ,;:")
+    # Only a title that states a disposition, so a stray "order" in a sentence of the body cannot
+    # be quoted to a reader as the name of a decision.
+    if not (ADVERSE_ORDER.search(title) or NOT_ADVERSE_ORDER.search(title)):
+        return None
+    if title.isupper():
+        small = {"of", "and", "the", "for", "to", "in", "a", "an", "or"}
+        words = [w.capitalize() for w in title.split()]
+        title = " ".join(w if i == 0 or w.lower() not in small else w.lower()
+                         for i, w in enumerate(words))
+    return title
+
+
+def disposition(head: str):
+    """'adverse', 'not adverse', or None when the order does not say in its opening lines.
+
+    None is the common case and it is not a failure. An order that reads only "ORDER" has not
+    told us what it decided, and the honest answer is that the question is open, not that the
+    attorney is clear and not that they were disciplined. Everything here follows the rule the
+    rest of this pipeline follows: a check that cannot complete never reads as a verdict.
+
+    An adverse word wins over a not-adverse one, because "ORDER REJECTING THE PETITION AND
+    SUSPENDING" is a suspension, while "ORDER OF REINSTATEMENT" after a suspension is not a new
+    finding against anybody.
+    """
+    if not head:
+        return None
+    # Only the order's own title, which is the line after the caption and before the body. Words
+    # like "suspended" appear in the recital of any disciplinary opinion whatever it decided.
+    m = re.search(r"\bORDER\b[^.]{0,120}", head, re.I)
+    title = m.group(0) if m else head[:160]
+    if ADVERSE_ORDER.search(title):
+        return "adverse"
+    if NOT_ADVERSE_ORDER.search(title):
+        return "not adverse"
+    return None
 
 
 def verify(state: str, attorney: str, surname: str, hits: list):
@@ -530,7 +612,7 @@ def main():
             print("%-44s no attorney named, nothing to check" % firm["slug"][:44])
             continue
 
-        adverse, cleared, unresolved = [], [], []
+        adverse, cleared, unresolved, undecided = [], [], [], []
         # A transport failure is not a finding about the firm. The first Oregon run left three
         # firms with G2 unresolved because the search API returned 429 to us, which is a fact
         # about our rate limit and would have been published as a limit of the record. A firm
@@ -549,14 +631,36 @@ def main():
                 deferred.append((attorney["name"], str(e)[:60]))
                 continue
             if verdict is True:
-                adverse.append((attorney["name"], hits[0]))
+                # Identified as the respondent. That settles who the case is about and says
+                # nothing yet about how it ended, so the order itself decides what this is. An
+                # order we cannot read leaves the question open rather than resolving it against
+                # the attorney.
+                named = [h for h in hits if h.get("full") and
+                         name_key(h["full"]) == name_key(attorney["name"])] or hits[:1]
+                calls = [disposition(h.get("head") or "") for h in named]
+                if "adverse" in calls:
+                    adverse.append((attorney["name"], named[calls.index("adverse")]))
+                elif all(c == "not adverse" for c in calls):
+                    # Not "cleared": cleared means the disciplined lawyer is somebody else, and
+                    # saying that about a person who really is the respondent would be its own
+                    # false statement. This is its own finding and gets its own sentence.
+                    undecided.append((attorney["name"], named[0]))
+                else:
+                    unresolved.append((attorney["name"], named[0],
+                                       "named as the respondent, and the order does not say in "
+                                       "its opening lines what was decided"))
             elif verdict is False:
                 cleared.append((attorney["name"], note))
             else:
                 unresolved.append((attorney["name"], hits[0], note))
 
-        print("%-44s %d attorney(s) · %d adverse · %d cleared · %d unreadable"
-              % (firm["slug"][:44], len(attorneys), len(adverse), len(cleared), len(unresolved)))
+        print("%-44s %d attorney(s) · %d adverse · %d cleared · %d not decided against · "
+              "%d unreadable"
+              % (firm["slug"][:44], len(attorneys), len(adverse), len(cleared), len(undecided),
+                 len(unresolved)))
+        for name, case in undecided:
+            print("    named    %-28s %s (%s): the court did not decide against them"
+                  % (name, case["case"], (case["date"] or "")[:4]))
         for name, case in adverse:
             print("    ADVERSE  %-28s %s (%s)" % (name, case["case"], (case["date"] or "")[:4]))
         for name, note in cleared:
@@ -606,6 +710,31 @@ def main():
                                 "published record. Nothing here says the firm's attorney is that "
                                 "person."
                                 % (len(unresolved), name, note))}
+        elif undecided:
+            # Named as the respondent, and the court did not decide against them. Both halves go
+            # in the sentence, because either one alone is misleading: leaving out the case hides
+            # something a reader could find in a minute, and leaving out the outcome is what this
+            # check did until it nearly published a Las Vegas attorney as disciplined on the
+            # strength of an order rejecting the recommendation against her.
+            #
+            # The gate passes. A matter the court declined to decide against somebody is not
+            # discipline, and holding a firm below its score for one would be publishing an
+            # accusation the court itself did not make.
+            name, case = undecided[0]
+            others = len(undecided) - 1
+            new = {"pass": True, "source": source, "checked_at": TODAY,
+                   "evidence": ("%s is named as the respondent in %s (%s), and the court did not "
+                                "decide against them: %s. A disciplinary matter is titled this "
+                                "way from the first filing to the last order in it.%s"
+                                % (name, case["case"], (case["date"] or "")[:4],
+                                   ("the decision is the court's “%s”" % order_title(case["head"]))
+                                   if order_title(case.get("head") or "")
+                                   else "the order rejects, remands, dismisses or reinstates "
+                                        "rather than imposing discipline",
+                                   " %d other attorney at this firm is in the same position."
+                                   % others if others == 1 else
+                                   " %d others at this firm are in the same position." % others
+                                   if others else ""))}
         else:
             note = ""
             if cleared:

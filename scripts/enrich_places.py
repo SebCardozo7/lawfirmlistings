@@ -367,12 +367,25 @@ def collect(rec, key, verbose=False):
             "categories": max((l["completeness"]["categories"] for l in accepted), default=0),
             "hours_published": any(l["completeness"]["hours_published"] for l in accepted),
             "photos": max((l["completeness"]["photos"] for l in accepted), default=0),
-            "has_description": any(l["completeness"]["has_description"] for l in accepted),
-            "unobtainable": ["services list", "questions and answers", "recent posts"],
-            "note": ("Categories, opening hours, photo count and description come from the "
-                     "Places API. The services list, the Q&A and recent posts are owner-side "
-                     "fields the API does not expose at any price, so they are not scored "
-                     "either way."),
+            # Kept because it is read, and recorded as unobtainable because of what it is. This
+            # is editorialSummary, which is a paragraph Google's own editors write about a
+            # notable place, and not the description a business owner writes about themselves.
+            # It came back false for all 528 firms in the directory, and a field every firm
+            # scores the same on is measuring nothing. Asking the API directly settles which of
+            # the two it is: the Empire State Building and the Metropolitan Museum both return
+            # one, and every law firm asked returns nothing. So it records whether Google chose
+            # to write about the firm, which is not a thing the firm can do anything about and
+            # not what a reader would take "has a description" to mean.
+            "google_wrote_a_summary": any(l["completeness"]["has_description"]
+                                          for l in accepted),
+            "unobtainable": ["the owner's own description", "services list",
+                             "questions and answers", "recent posts"],
+            "note": ("Categories, opening hours and photo count come from the Places API. The "
+                     "owner's own description, the services list, the Q&A and recent posts are "
+                     "owner-side fields the API does not expose at any price, so they are not "
+                     "scored either way. The API does expose Google's editorial summary, which "
+                     "is a different thing: Google writes those about notable places and has "
+                     "written one for no firm in this directory."),
         } if accepted else None),
         "source": "Google Places API (New) places:searchText",
         "measured_at": datetime.date.today().isoformat(),

@@ -38,13 +38,6 @@
       "source_url": "https://www.alfredfirm.com/houston-apartment-fires/"
     },
     {
-      "name": "Houston Drunk Driving",
-      "role": "Accident Attorneys",
-      "role_source": "firm bio heading",
-      "bar_state": "NY",
-      "source_url": "https://www.alfredfirm.com/houston-drunk-driving-accidents/"
-    },
-    {
       "name": "Industrial Explosions",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
@@ -181,8 +174,9 @@
         "categories": 5,
         "hours_published": true,
         "photos": 10,
-        "has_description": false,
+        "google_wrote_a_summary": false,
         "unobtainable": [
+          "the owner's own description",
           "services list",
           "questions and answers",
           "recent posts"
@@ -235,9 +229,9 @@
     },
     "G5": {
       "pass": true,
-      "evidence": "Site has served over HTTPS, a working phone number published, 13 named attorneys published.",
+      "evidence": "Site has served over HTTPS, a working phone number published, 12 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-25"
+      "checked_at": "2026-09-26"
     },
     "G6": {
       "pass": true,
@@ -377,7 +371,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 371 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 528 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 371 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

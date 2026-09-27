@@ -1,0 +1,485 @@
+{
+  "slug": "lloyd-miller-law",
+  "name": "Lloyd Miller Law",
+  "initials": "LM",
+  "website": "https://myaccidentlaw.com/",
+  "domain": "myaccidentlaw.com",
+  "phone": "(773) 232-3664",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://myaccidentlaw.com/practice-areas/bicycle-accident-lawyer/",
+      "checked_at": "2026-09-26"
+    }
+  ],
+  "market": {
+    "city_slug": "chicago-il",
+    "city": "Chicago",
+    "state": "IL",
+    "state_name": "Illinois"
+  },
+  "offices": [
+    {
+      "label": "Lloyd Miller Law",
+      "address": "5722 W 63rd St, Chicago, IL 60638, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=11665926443089369509&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Kurt D. Lloyd",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://myaccidentlaw.com/about/attorneys/kurt-d-lloyd/"
+    },
+    {
+      "name": "James B. Miller",
+      "role": "Partner",
+      "role_source": "firm roster listing",
+      "bar_state": "NY",
+      "source_url": "https://myaccidentlaw.com/about/attorneys/james-b-miller/"
+    },
+    {
+      "name": "John Grazian",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://myaccidentlaw.com/about/attorneys/john-l-grazian/"
+    },
+    {
+      "name": "Kristen M. Lyons",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "bar_state": "NY",
+      "source_url": "https://myaccidentlaw.com/about/attorneys/kristen-m-lyons/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "Hospital & home visits"
+  ],
+  "about": [
+    "Lloyd Miller Law is a personal injury firm with a single office in Chicago.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; it will visit clients in hospital or at home. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.7,
+      "count_label": "129",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-26"
+    },
+    "sample": [
+      {
+        "published_at": "2026-04-16T17:26:09.533695702Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-14T23:17:54.857574751Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-15T15:45:08.282756370Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-23T19:36:09.461464935Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-16T18:14:56.242293749Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 56,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-26",
+      "note": "LCP 18.4 s / CLS 0.000 / TBT 228 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "myaccidentlaw.com",
+      "name": "Lloyd Miller Law",
+      "review_count_at_discovery": 129
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 129,
+      "rating_weighted": 4.7,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 19,
+      "ahrefs_rank": 9100741,
+      "refdomains": 1175,
+      "refdomains_dofollow": 723,
+      "backlinks": 2350,
+      "org_keywords": 77,
+      "org_traffic": 241,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Illinois does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Illinois does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Illinois publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-26"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "129 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2007-05-01, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-26"
+    }
+  },
+  "cohort_id": "il-chicago-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "re you are treated fairly and your injury award is appropriate. 5 Offer our services on a contingency fee basis to make sure you have access to some of the top injury attorneys in Chicago. Co",
+          "source_url": "https://myaccidentlaw.com/"
+        },
+        "free_consultation": {
+          "quote": "Wrongful Death Our Results Blog Contact En Español Compensación de trabajadores Contacto Free Consultation 773-838-8100 FEATURED PRACTICE AREAS: Car Accidents Workers’ Compensation Premises Liabil",
+          "source_url": "https://myaccidentlaw.com/"
+        },
+        "hospital_visits": {
+          "quote": "South Chicago. When clients are unable to visit the firm, we are willing to make home and hospital visits. Schedule Your Free Consultation Our win rate is three times higher than the average law",
+          "source_url": "https://myaccidentlaw.com/contact/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://myaccidentlaw.com/",
+        "contact": "https://myaccidentlaw.com/contact/",
+        "attorneys": "https://myaccidentlaw.com/about/attorneys/",
+        "about": "https://myaccidentlaw.com/about/",
+        "blog": "https://myaccidentlaw.com/blog/",
+        "disclaimer": "https://myaccidentlaw.com/disclaimer/",
+        "privacy": "https://myaccidentlaw.com/privacy-policy/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://myaccidentlaw.com/about/attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "fee_statement": "Offer our services on a contingency fee basis to make sure you have access to some of the top injury attorneys in Chicago.",
+  "operating": {
+    "registered": "2007-05-01",
+    "years": 19.4,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-26"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://myaccidentlaw.com/about/attorneys/kurt-d-lloyd",
+        "quote": "Lawyers, now known as the American Association of Justice (AAJ). This is the largest personal injury lawyer association in"
+      },
+      {
+        "name": "American Board of Trial Advocates",
+        "source_url": "https://myaccidentlaw.com/about/attorneys/kurt-d-lloyd",
+        "quote": "Mr. Lloyd received an invitation to become a member of the American Board of Trial Advocates, where he remains a member today. In the coming years, inju"
+      },
+      {
+        "name": "Indiana State Bar Association",
+        "source_url": "https://myaccidentlaw.com/about/attorneys/kurt-d-lloyd",
+        "quote": "s frequently invited by the Illinois State Bar Association (ISBA) and other professional organizations to lecture and teach"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, American Board of Trial Advocates, Indiana State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 7,
+    "bios_published": 4,
+    "source": "observed",
+    "checked_at": "2026-09-26"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-26"
+  },
+  "score": {
+    "total": 51,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-26",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Illinois publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Illinois publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, American Board of Trial Advocates, Indiana State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "129 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.7 over 129 reviews → Bayesian 4.76 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-05-15) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 8,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 4,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 19 → 55th pct of 109-firm cohort (median 18) 2/3 · 1,175 referring domains, 65th pct 1/2 · 77 organic keywords / 241 visits·mo, 45th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 9,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · “Offer our services on a contingency fee basis to make sure you have access to some of the top injury attorneys in Chicago.” · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "Hospital & home visits"
+          }
+        ]
+      }
+    },
+    "floor_abc": 19,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 19,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 36.0,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.5,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/myaccidentlaw.com.svg",
+    "source_url": "https://myaccidentlaw.com/wp-content/uploads/2022/05/lloyd-favicon.svg",
+    "width": null,
+    "height": null,
+    "bytes": 568,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
+  }
+}

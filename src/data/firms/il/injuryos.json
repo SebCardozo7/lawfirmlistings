@@ -1,0 +1,484 @@
+{
+  "slug": "injuryos",
+  "name": "InjuryOS",
+  "initials": "IN",
+  "website": "https://injuryos.com/",
+  "domain": "injuryos.com",
+  "phone": "(855) 465-8796",
+  "status": "not_eligible",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://injuryos.com/practice-areas/car-accidents",
+      "checked_at": "2026-09-26"
+    }
+  ],
+  "market": {
+    "city_slug": "chicago-il",
+    "city": "Chicago",
+    "state": "IL",
+    "state_name": "Illinois"
+  },
+  "offices": [
+    {
+      "label": "InjuryOS Personal Injury Attorneys",
+      "address": "1132 S Wabash Ave Ste 303 B, Chicago, IL 60605, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=2655623718651243885&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "How It Works",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://injuryos.com/how-it-works"
+    },
+    {
+      "name": "AI Transparency",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://injuryos.com/ai-transparency"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line",
+    "Hospital & home visits"
+  ],
+  "about": [
+    "InjuryOS is a personal injury firm with a single office in Chicago.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock; it will visit clients in hospital or at home."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "1",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-26"
+    },
+    "sample": [
+      {
+        "published_at": "2026-09-09T20:53:15.108989170Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-09T20:30:45.309917112Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-09T20:22:44.283046765Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 57,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-26",
+      "note": "LCP 12.8 s / CLS 0.000 / TBT 256 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "injuryos.com",
+      "name": "InjuryOS Personal Injury Attorneys",
+      "review_count_at_discovery": 1
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 1,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-26"
+    },
+    "ahrefs": {
+      "dr": 0,
+      "ahrefs_rank": 126914956,
+      "refdomains": 664,
+      "refdomains_dofollow": 314,
+      "backlinks": 869,
+      "org_keywords": 0,
+      "org_traffic": 0,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-26"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Illinois does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Illinois does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Illinois publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-26"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-26"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "1 review, below the 10 this gate asks for in this practice and the domain has been registered for 0.8 year(s)",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-26"
+    }
+  },
+  "cohort_id": "il-chicago-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD business.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "s we win. The Injury Operating System Injured? Get help now. You don’t pay unless we win. No fee unless we win Start Your Free Case Review → → 1-855-INJURYOS Available 24/7 $150,000,000+ Recove",
+          "source_url": "https://injuryos.com/"
+        },
+        "free_consultation": {
+          "quote": "Injury Operating System Practice Areas How It Works Results About Contact 1-855-INJURYOS Free Case Review Practice Areas How It Works Results About Contact Free Case Review 1-855-INJURYOS InjuryO",
+          "source_url": "https://injuryos.com/"
+        },
+        "available_24_7": {
+          "quote": "ess we win. No fee unless we win Start Your Free Case Review → → 1-855-INJURYOS Available 24/7 $150,000,000+ Recovered Real people. Real results. Thousands of clients helped No Fees Up",
+          "source_url": "https://injuryos.com/"
+        },
+        "hospital_visits": {
+          "quote": "e, wrongful death, and nursing home neglect. You don’t pay unless we win. Available 24/7, we come to you. Powered by Practice Areas Car Accidents Truck Accidents Motorcycle Accidents Medical Mal",
+          "source_url": "https://injuryos.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://injuryos.com/",
+        "results": "https://injuryos.com/results",
+        "about": "https://injuryos.com/about",
+        "contact": "https://injuryos.com/contact",
+        "privacy": "https://injuryos.com/privacy-policy",
+        "disclaimer": "https://injuryos.com/terms"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2025-12-07",
+    "years": 0.8,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-26"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://injuryos.com/about",
+        "quote": "n DuPage County Bar Association Will County Bar Association American Association for Justice Association of Plaintiff Interstate Trucking Lawyers of Ame"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://injuryos.com/about",
+        "quote": "ating Chicago Daily Law Bulletin — 40 Under 40 Associations American Bar Association — Board of Fellows (2018–Present) Illinois Trial Lawyers As"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-26"
+  },
+  "results_published": {
+    "count": 15,
+    "counted_from": "stated amounts",
+    "amounts": [
+      5100000,
+      3000000,
+      2750000,
+      2500000,
+      2350000,
+      2250000,
+      2122000,
+      2000000,
+      1770000,
+      1500000,
+      1300000,
+      1250000,
+      1100000,
+      1025000,
+      1000000
+    ],
+    "largest": 5100000,
+    "aggregate_claims": [
+      150000000
+    ],
+    "case_types": [
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death"
+    ],
+    "disclaimer": true,
+    "venues": [],
+    "text_length": 8635,
+    "readable": true,
+    "url": "https://injuryos.com/results",
+    "checked_at": "2026-09-26"
+  },
+  "score": {
+    "total": 56,
+    "tier": "Not eligible",
+    "verdict": "Eligibility gates not passed: G6. Strongest pillar: B; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-26",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Illinois publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Illinois publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Association for Justice, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 12,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 4.5,
+            "max": 6,
+            "source": "firm",
+            "evidence": "15 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "5 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 4,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present, as the advertising rules require"
+          }
+        ]
+      },
+      "C": {
+        "score": 14,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "1 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 1 reviews → Bayesian 4.83 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "3 of 3 sampled reviews are from the last 12 months (newest 2026-09-09) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 3 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · no fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 0 → 0th pct of 109-firm cohort (median 18) 0/3 · 664 referring domains, 2th pct 0/2 · 0 organic keywords / 0 visits·mo, 4th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 8,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 5.0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line · Hospital & home visits"
+          }
+        ]
+      }
+    },
+    "floor_abc": 28,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 14,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D2 Search authority: +8 available"
+      ]
+    },
+    "raw": 39.5,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.75,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/injuryos.com.svg",
+    "source_url": "https://injuryos.com/icon.svg",
+    "width": null,
+    "height": null,
+    "bytes": 515,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-26"
+  }
+}
