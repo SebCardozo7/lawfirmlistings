@@ -610,8 +610,16 @@ def registry_wording(market):
             "check it.", "no queryable source")
 
 
+# The states whose attorney discipline scripts/check_discipline.py can read, which is not the
+# same set as the states publishing an attorney register and was being treated as if it were.
+# Imported from that script so the two cannot drift: the eight here are the eight in REGISTERS.
+def _discipline_states():
+    from check_discipline import REGISTERS
+    return set(REGISTERS)
+
+
 def discipline_wording(market):
-    if market["state"] in OPEN_REGISTER_STATES:
+    if market["state"] in OPEN_REGISTER_STATES or market["state"] in _discipline_states():
         return ("Disciplinary history not yet checked", "pending")
     return (f"{market['state_name']} does not publish a disciplinary register we can query.",
             "no queryable source")

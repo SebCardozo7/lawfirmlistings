@@ -609,7 +609,28 @@ def main():
             continue
         attorneys = firm.get("attorneys") or []
         if not attorneys:
-            print("%-44s no attorney named, nothing to check" % firm["slug"][:44])
+            # Skipping left these firms holding build_profiles' placeholder, which says the state
+            # publishes no disciplinary register we can query. In a state this script reads that
+            # is simply false, and it was on 129 published profiles across all eight of them.
+            #
+            # The true sentence is about the firm rather than the state: the register is there,
+            # the firm names nobody to look up in it. It neither passes nor blocks, for the same
+            # reason G1 does not when a roster is empty.
+            print("%-44s names no attorney, so there is nobody to look up" % firm["slug"][:44])
+            if args.gates and not (firm.get("gates", {}).get("G2") or {}).get("attested"):
+                firm.setdefault("gates", {})["G2"] = {
+                    "pass": False,
+                    "evidence": ("This firm names no attorney on the pages we could read, so "
+                                 "there is nobody to look up. The register itself exists: %s "
+                                 "publishes its attorney discipline as court decisions and we "
+                                 "read them for the other firms in this market."
+                                 % firm["market"].get("state_name", args.state)),
+                    "source": "no roster published",
+                    "checked_at": TODAY,
+                }
+                if args.write:
+                    io.open(path, "w", encoding="utf-8", newline=LF).write(
+                        json.dumps(firm, indent=2, ensure_ascii=False) + LF)
             continue
 
         adverse, cleared, unresolved, undecided = [], [], [], []
