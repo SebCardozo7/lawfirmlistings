@@ -137,31 +137,33 @@ So, as a step rather than as a virtue:
 
 ## Generated pages, so a topic is not aimed at one of them
 
-As of 2026-09-25 the build produces **468 pages, from 410 published firms in 12 markets and 8
-states**, and there are 10 published guides plus the gated ranking. Re-enumerated against the
-build on this run rather than inherited, and the jump is large: commit `d02bf4d` opened Miami,
-Houston and Atlanta and added 110 firms, so every "of 300" figure a previous run wrote down is
-stale. Check this section against a build before scoping anything.
+As of 2026-09-28 the build produces **855 pages, from 786 published firms in 15 markets and 11
+states**, and there are 16 published guides plus the gated ranking. Re-enumerated against the
+build on this run, and **the directory has very nearly doubled since the last entry**: commit
+`3fa94d7` opened Chicago, Philadelphia and Las Vegas. Every "of 410" figure written down before
+today is stale, and so is every "of 300" one before that. This is now the third consecutive run
+that has found the denominators moved underneath it. Check this section against a build before
+scoping anything at all.
 
 - `/`, `/cities/`, `/practice-areas/`, `/guides/`
-- Twelve city hubs: `atlanta-ga`, `baltimore-md`, `boston-ma`, `buffalo-ny`, `dallas-tx`,
-  `houston-tx`, `lakeland-fl`, `miami-fl`, `naples-fl`, `new-york-ny`, `northwest-indiana`,
-  `portland-or`
-- Sixteen city x practice rankings: `personal-injury` in all of the above except `naples-fl`,
+- Fifteen city hubs: `atlanta-ga`, `baltimore-md`, `boston-ma`, `buffalo-ny`, `chicago-il`,
+  `dallas-tx`, `houston-tx`, `lakeland-fl`, `las-vegas-nv`, `miami-fl`, `naples-fl`,
+  `new-york-ny`, `northwest-indiana`, `philadelphia-pa`, `portland-or`
+- Nineteen city x practice rankings: `personal-injury` in all of the above except `naples-fl`,
   `workers-compensation` in `baltimore-md` and `new-york-ny`, `real-estate` in `naples-fl`,
   `family-law` in `new-york-ny` and `buffalo-ny`
 - Four practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/real-estate/`,
   `/practice-areas/workers-compensation/`, `/practice-areas/family-law/`
-- 410 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
+- 786 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
   `/contact/`, `/privacy/`, `/terms/`)
 
-Firm counts by state, for scoping a study: NY 154, FL 68, TX 57, GA 39, MD 31, MA 28, OR 20,
-IN 13. Primary practice: personal injury 331, family law 42, real estate 20, workers'
-compensation 17.
+Firm counts by state, for scoping a study: NY 154, FL 107, IL 103, TX 95, NV 84, GA 80, PA 71,
+MD 31, MA 28, OR 20, IN 13. Primary practice: personal injury 707, family law 42, real estate 20,
+workers' compensation 17. By status: 575 verified, 169 listed, 42 certified.
 
-**No generated page is faceted by how a rating was assembled**, which is what made this run's
-topic available: the city and practice routes rank firms *by* the score, and nothing on the site
-is about where one input to that score comes from.
+**No generated page is faceted by what a firm publishes about itself**, which is what made this
+run's topic available: the city and practice routes rank firms *by* the score, and nothing on the
+site is about which pages a firm's website actually carries.
 
 Every city and practice combination in that list is off limits as a guide topic.
 
@@ -169,6 +171,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-09-28 | `/guides/what-law-firm-websites-publish/` | **"law firm website content" (450/mo US, 600 global, KD 0, CPC $3.00, traffic potential 1,200)**, inside the cluster `attorney website content` (600/mo, KD 0, CPC $17.00), `content for law firm website` (300/mo, KD 0, CPC $18.00) and `law firm website content writing` (250/mo, KD 3). Roughly 1,600/mo at KD 0 to 3. **The best cluster this section has found**, ahead of the 200/mo KD 0 the last run called the best combination yet | Not from the ranked list. Found by re-counting fill rates across the schema, as the rule above says to: `digital.trust_pages` is on **764 of 786** firms and no entry here had ever proposed it. Counts which of five page types a firm's site carries: blog **693**, privacy policy **626**, attorney index **525**, disclaimer or terms **434**, fees **70**. **The asymmetry is the piece: 625 firms publish a blog and no fees page, and 2 go the other way.** Being generous and counting the separate top-level `fee_statement` sentence as well still leaves 594 of 764 saying nothing about price. The self-critical half is the strongest yet and is about the engine rather than the guides: **D1 is marked out of 7 and no firm in the directory has ever scored above 5**, because its first page check reads `bar_numbers_on_bios`, which **0 of 790 records carry**, and its accessibility slot needs a `D1_a11y` assessment that **0 firms carry**. All 762 scored firms publish an evidence line reading "no bar numbers on bios" on their own profiles, asserting an absence nobody measured. Also found: **the site crawl behind this entire page is the one measurement family with no date and no freshness check**. |
 | 2026-09-25 | `/guides/are-google-reviews-reliable/` | "are google reviews reliable" (200/mo US, 400 global, **KD 0**, CPC $2.50, parent topic itself), with "how to spot fake google reviews" (150/mo, KD 4) next door | Ranked item 9, and it turned into a better piece than the entry predicted because **the first draft's headline was wrong and the data said so**. `reviews.sample` now holds **4,215 dated and rated reviews across 408 firms**, against **300,297** reviews Google counted: the API returns **1.4%** of them, five per listing, capped, which we verified rather than assumed. The draft claimed Google inflates the average. It does not: pooled, the returned reviews mean **4.79** against a review-weighted published mean of **4.82**, agreeing to **0.03** of a star. That check killed the "missing middle" as evidence too, because a published 4.82 across 300,297 reviews is consistent with a genuinely five-star-heavy population. **What survives is the per-firm finding, which is stronger:** 289 of 408 firms return an all-five-star set while only 92 average five, so 202 firms are shown a record their own rating does not support; and the far tails run *against* firms, 33 undersold by half a star or more against 16 flattered. Recency is labelled an inference, not a measurement, because Google publishes no date beside a review count. Self-critical half: **C3 and C5, 9 points of the hundred, are read straight off this 1.4% sample**, and 331 firms take full marks on recency. |
 | 2026-09-23 | `/guides/what-law-firms-publish-in-spanish/` | "spanish speaking lawyer" (100/mo, **KD 0**, parent `spanish speaking lawyers near me`), and the People Also Ask question sitting on that SERP, "What percent of lawyers speak Spanish?", which nobody on the page answers | Not from the ranked list: found by reading the `languages` field while surveying what else the collection could carry a study on. **131 of 295** readable firms publish something in Spanish. Two things move it and each survives holding the other still: the market (Dallas 16 of 20, Buffalo 1 of 47) and the practice (personal injury 115 of 217, family law 4 of 42). Inside New York City alone it is 58 of 77 injury firms against 4 of 18 family law firms; holding the practice still instead, injury runs 58 of 77 in New York City against 1 of 23 in Buffalo. **The market moves it further than the practice does**, which the first draft had backwards and only the charts caught. The self-critical half: Spanish is the only language the pipeline detects, so the 4 records carrying Chinese or Russian measure our reading, and E3's accessibility point is earned by 1 firm in 300. |
 | 2026-09-21 | `/guides/what-a-business-register-proves-about-a-law-firm/` | "how to check if a law firm is registered" (10/mo US, 20 global), and the business-entity verification cluster around it. Deliberately **not** "how to check if a law firm is legit" (30/mo, KD 3), which the 2026-09-16 guide already holds | Backlog item 1, and it was larger and sharper than the entry predicted. `gates.G3.pass` is true on **140 of 296**, and the four non-pass reasons are genuinely different facts: 72 in states publishing nothing queryable (IN, MA, MD), 34 in Florida whose register is published and **we have not read it**, 33 New York general partnerships the state does not require to file, 17 we could not identify in a register we did read. The second half is the new finding: for the **113** domestic New York firms holding both `entity.formed` and `operating.registered`, the two dates agree within a year on only 37, sit more than a decade apart on 25, and the error is **symmetric** (39 older in the register, 37 older on the web), so it is noise rather than a correctable bias. |
@@ -183,12 +186,68 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 ## Next, ranked
 
-Item 9 was taken on 2026-09-25 and is written. **Re-count the fill rates before trusting anything
-below**: this run found the directory had gone from 300 firms to 410 since the last entry was
-written, so every denominator on this page had moved. The rule from the run before still stands,
-and it is now two for two: **before picking from this list, spend ten minutes counting fill rates
-across the whole schema.** `languages` had been sitting in
-`content.config.ts` since the beginning, it is read by the scoring engine, and no entry here had
+Nothing on this list was taken on 2026-09-28. The topic that shipped came out of the fill-rate
+survey instead, for the third run running, and the survey is now clearly worth more than the list:
+`digital.trust_pages` is filled on 764 of 786 firms, is read by the scoring engine, and **no entry
+here had ever mentioned it** in the same way `languages` had never been mentioned before
+2026-09-23. Two of the last three guides came from ten minutes of counting rather than from this
+ranking. Keep doing the counting first.
+
+**Re-count the fill rates before trusting anything below.** The directory went 300 to 410 to
+**786** over three runs, so every denominator written before 2026-09-28 is wrong, usually by
+about half. The old warning about 410 is kept below because the lesson kept repeating.
+
+**New, and ranked at the top, because they are the engine bugs this run's guide published:**
+
+0a. **D1 gives away two of its seven points and no firm can take them.** `score.py` line 570
+    awards 1 point for `trust_pages["bar_numbers_on_bios"]`, which **0 of 790 records carry**, and
+    line 569 adds a `D1_a11y` assessment that **0 firms carry**. The enumerated automatic checks
+    add to 6 of the declared 7, so between them the ceiling is 5, and 5 is exactly the highest D1
+    any firm has reached (2 firms, Anderson Injury Lawyers and Law Offices of Suarez & Montero).
+    The mean is 1.80 of 7. This was reported as a correction on 2026-09-16 and left for a person,
+    and it is now **live on 762 public profiles** whose D1 evidence string reads "no bar numbers on
+    bios", an absence we never measured. It is the repository's own stated rule broken in its own
+    engine: a firm must not lose points to the reach of our crawl. Fixing it rescores the
+    directory and moves tiers, so it is still not a guide run's call, but it is no longer only a
+    footnote: it is published.
+0b. **Nothing dates the site crawl.** `check_freshness.mjs` tracks six families and
+    `digital.trust_pages` is not one of them, because the field carries no date at all, unlike
+    `psi`, `places`, `accountability`, `operating`, `results_published` and `score`. Most of D1
+    therefore rests on the one measurement in the directory whose age nobody can state, and
+    `--strict` cannot fail on it. Add a `checked_at` in `crawl_public.py` and a seventh family.
+    Small job, and the guide published this run says out loud that it is missing.
+0c. **Two fields are both called a fee statement and they are not the same fact.** Fourth instance
+    of this pattern after `bar_numbers_on_bios`, `attorneys[].bar_number` and `operating.years`.
+    `digital.trust_pages.fee_statement` is "a /fees/, /our-fees/, /contingency-fees/, /no-fee/ or
+    /pricing/ page exists" (70 firms). Top-level `firm.fee_statement` is the firm's own sentence
+    about price, lifted by `build_profiles.py` from whichever pillar B block measured the practice
+    (112 firms, 111 of them inside the readable set). **They overlap on only 11 firms.** The guide
+    counts both and says which is which. Anybody writing about fees must read both definitions
+    first. Worth a rename in the schema so the next person cannot conflate them.
+0d. **Check whether the top-level `fee_statement` sentences are actually about the firm.** Spot
+    reading turned up "Personal injury attorneys should work on a contingency fee basis, meaning
+    they don't get paid until you get paid", which is the firm's own page text but reads as
+    generic advice about the profession rather than a statement of what *this* firm charges. E1
+    scores on it. Nothing was published on it this run for that reason. Somebody should read a
+    sample of the 112 before a guide leans on the field.
+
+**New writing topic, out of the competitor pass, and the strongest one on this page:**
+
+0e. **Which court does a firm actually name?** `results_published.venues` records the courts a
+    firm names on its own results page, and `what-a-case-results-page-proves` already established
+    that naming a court is worth more than the figure beside it. The sibling site
+    `thelawfirmlist.us` publishes county-level pages asserting "local court knowledge" about named
+    firms with nothing behind the claim; we hold the field that would test it, across 786 firms in
+    15 markets. **Count the fill rate on `venues` first**, per the rule at the top of this
+    section, and check whether the counties named line up with the markets the firms sit in. If it
+    is thin, it is dead; if it is filled, it is a better piece than anything else listed here and
+    it has a natural link into a competitor's whole content strategy.
+
+The older list follows, and its denominators are stale by roughly half.
+
+Item 9 was taken on 2026-09-25 and is written. The rule from the run before still stands, and it
+is now three for three: **before picking from this list, spend ten minutes counting fill rates
+across the whole schema.** `languages` had been sitting in `content.config.ts` since the beginning, it is read by the scoring engine, and no entry here had
 ever mentioned it. The survey that found it took one script and covered `offices`, `availability`,
 `attorneys[].admitted_year`, `digital.places.completeness`, `reviews.sample` and `entity_type` at
 the same time. Three of those are live topics now and are on the list below.
@@ -305,7 +364,62 @@ The entries below were re-checked against the collection on 2026-09-21.
   dead: it was measured on 2026-09-25 and the answer is no. Pooled returned mean 4.79 against a
   review-weighted published mean 4.82. Any future run tempted by "Google inflates ratings" should
   read that line before writing a word, because it is the draft this run had to throw away.
-- *`founded_year` against anything.* Still absent on all 410 records. Re-checked 2026-09-25.
+- *`founded_year` against anything.* Still absent on all 786 records. Re-checked 2026-09-28.
+- *Which pages a law firm website publishes.* Written 2026-09-28. Do not re-propose the
+  trust-pages count: it is a published page that recomputes itself. What it left behind and did
+  **not** answer is item 0d above, and whether a fees page says anything: the guide counts that a
+  `/fees/` page exists and explicitly refuses to claim it is informative, because nothing in the
+  record reads its contents.
+- *AI citations per firm, from `digital.ahrefs.ai_citations`.* Dead on the data for now, and it
+  looked promising: the field carries real counts (6,815 citations across perplexity, google AI
+  overviews, gemini, chatgpt and copilot) but it is present on **13 of 786 records**. A study
+  needs the batch endpoint run across the directory first, which is a data job. Checked
+  2026-09-28. Revisit if that ever runs; the topic is good and nobody else holds the data.
+- *Whether a firm's office is staffed, from `availability`.* Weaker than it looks but not dead:
+  `24/7 intake line` is on 401 of 786 and `Hospital & home visits` on 80, and the other three
+  values are on 1 record each. The problem is that we measure the *claim* and never test it, so
+  the honest piece is one paragraph long. Checked 2026-09-28.
+
+## Keyword research, 2026-09-28
+
+`subscription-info-limits-and-usage` is free and was the first call again: **223,082 of 800,000
+used**, reset on 19 October, so roughly 577,000 units were available. Three paid calls, **1,118
+units** in total, well inside the six-call rule. Keep starting with the free call, and keep using
+`doc` first: it is free and it stopped a malformed paid call twice on this run.
+
+What they returned:
+
+- **The target is "law firm website content": 450/mo US, 600 global, difficulty 0**, CPC $3.00,
+  traffic potential 1,200, informational and commercial intent, parent topic `attorney website
+  content`. **This is the best cluster this section has found**, and by some distance:
+  `attorney website content` 600/mo KD 0 at **CPC $17.00**, `content for law firm website` 300/mo
+  KD 0 at **CPC $18.00**, `law firm website content writing` 250/mo KD 3. About **1,600/mo at KD 0
+  to 3**, and the CPCs say advertisers value this traffic far above anything we have targeted.
+- **The head term is not ours.** "law firm website" is 1,300/mo but **KD 79**, and its parent
+  topic is `latham and watkins`, so the query is substantially navigational. Do not chase it.
+- Everything else tested came back empty or tiny: "attorney website disclaimer" 0, "law firm
+  transparency" 0, "how to evaluate a law firm" 10, "law firm website requirements" 10, "how to
+  choose a law firm" 50 with traffic potential 10. **Seventh run in a row** where the
+  consumer-phrased vertical question has no volume and the industry-phrased one does. This is now
+  a settled fact about this niche and it should change how topics are picked: the demand sits with
+  people building and marketing law firms, and our advantage is that we have measured 786 of them.
+- **`serp-overview` on "law firm website content" is the reason to write it.** Position 1 is
+  practiceproof.com, DR 46, **URL rating 0**, an agency opinion piece ranking for exactly one
+  keyword. Position 6 is lawyersgrowthpartners.com at **DR 0**. Positions 8 and 9 are **paid press
+  releases** syndicated through usatoday.com and patriotledger.com. Position 4 is a Reddit thread
+  about domain names, which is not even the topic. **Every organic URL rating in the top ten is 0
+  or 4**: nobody has earned a single link to any of these pages.
+- **Not one result on that page contains a measurement.** The closest is 5wpr.com at position 3,
+  a PR agency's trade research about AI visibility for elite firms, which is a different question.
+  A WebSearch pass over the same query returned nine more results and **every one of them is
+  prescriptive**: "12 Important Things to Include", "Must-Have Content", "what to include on the
+  homepage". The whole SERP tells law firms what a website *should* have and nobody counts what
+  they *do* have. That is the information gain, and it is the cleanest one this section has had.
+- People also ask: "What makes a good law firm website?" (which this guide answers with counts),
+  "Is $900 an hour a lot for a lawyer?" (which lands on the fee half), "What is the 80/20 rule for
+  lawyers?" and "Can you get in trouble for viewing illegal websites?" (junk, the SERP is loose).
+- **No third-party figure was published**, and none was needed: every number on the page is from
+  our own records.
 
 ## Keyword research, 2026-09-25
 
@@ -584,7 +698,43 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: thelawfirmlist.us.**
+**Next run: nolo.com**, which starts the rotation over. All eight have now been read once.
+
+### thelawfirmlist.us, read 2026-09-28
+
+`thelawfirmlist.us` is blocked by this environment's egress proxy, so this was read through
+search results and its own pages as they appear in them. **That completes the set: all eight
+competitors are unreachable from here.** The search-based read is the method, permanently. Stop
+budgeting a direct fetch for any of them.
+
+This one belongs to the same owner as this site, so it is a sibling rather than a competitor, and
+what it publishes is worth reading as a question about our own coverage.
+
+Shapes it earns traffic with:
+
+1. **The query as the title, verbatim.** "Who are the best attorneys for traumatic brain injury
+   cases in Portland, Oregon?" and "What Law Firms Handle Permanent Brain Injury Cases in
+   Multnomah County, Oregon?" Our generated rankings are titled as statements ("Best Personal
+   Injury Lawyers in New York"); theirs are titled as the question somebody typed. Worth testing
+   on one of our city x practice pages, since it costs a template change and nothing else.
+2. **Two axes we do not have: sub-practice and county.** `traumatic brain injury` and `permanent
+   brain injury` are narrower than `personal-injury`, and `Multnomah County` is narrower than
+   `portland-or`. Both are real long-tail geography. **This is a generated-page question, not a
+   guide**: if we ever build those axes they belong under `/cities/` and `/practice-areas/`, and
+   a guide aimed at them would be competing with our own roadmap.
+3. **A `/legal-marketing/` section selling to firms**, e.g. "Best 3 Agencies That Specialize in
+   LLM Optimization for Law Firms". A consumer directory with a B2B shelf bolted on.
+
+What is worth taking: their pages assert "proven trial experience and local court knowledge"
+about named firms with nothing behind the claim. **We hold the measurable version of that
+sentence.** `results_published.venues` records the courts a firm actually names on its own
+results page, and `what-a-case-results-page-proves` already found that naming a court matters
+more than the number beside it. "Which firms name a court, and which county" is a study we could
+run and they cannot. Added to the list below as a real candidate.
+
+What we should not chase: the agency listicle, which is a marketing play with no measurement
+behind it and would put us on the opposite side of the transaction from our readers; and the
+county-level rankings, which are generated-page work rather than guide work.
 
 ### martindale.com, read 2026-09-25
 
@@ -955,6 +1105,11 @@ rescores 217 firms, which is not a guide run's call:
   evidence string reads "no bar numbers on bios". That is the repository's own stated rule broken
   in its own engine: a firm must not lose points to the reach of our crawl. Either wire the
   crawler's finding through to the record, or take the point out of D1.
+  **Still true on 2026-09-28, at line 570 now, and no longer only a footnote.** The field is
+  carried by 0 of 790 records, the evidence line is live on 762 public profiles, and the guide
+  published this run states it on the record, along with the second unearnable point: the
+  `D1_a11y` assessment slot, which 0 firms carry. Between them D1's ceiling is 5 of a declared 7,
+  and 5 is exactly the best any firm has ever scored. See ranked item 0a.
 - `src/lib/achievements.ts` line 100 gates the "Bar numbers published" achievement on the same
   key, so no profile can ever earn it.
 - Separately, **A6's evidence string says something it does not measure.** `score.py` line 262
