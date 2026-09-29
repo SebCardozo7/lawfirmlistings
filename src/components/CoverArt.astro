@@ -18,7 +18,7 @@
  */
 interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
-  name: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
+  name: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
       | 'divorce' | 'language' | 'sample';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
@@ -177,6 +177,35 @@ const lens = { col: 4, row: 3, span: 5 };
       <circle cx="30" cy="30" r="20" fill="none" stroke={MINT} stroke-width="5" />
       <line x1="-44" y1="46" x2="44" y2="-46" stroke="#fff" stroke-width="5" stroke-linecap="round" />
     </g>
+  </svg>
+)}
+
+{name === 'statutes' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* Four states, four different sets of rules, and the same blank in every one. The filled
+        lines differ card to card because the regulation does. The dashed slot does not. */}
+    {[0, 1, 2, 3].map(i => (
+      <g transform={`translate(${168 + i * 232},76)`}>
+        <rect width="196" height="288" rx="20" fill="rgba(255,255,255,.07)"
+              stroke="rgba(255,255,255,.22)" stroke-width="1.5" />
+        <rect x="28" y="30" width={[110, 74, 132, 96][i]} height="11" rx="5"
+              fill="rgba(255,255,255,.34)" />
+        {[0, 1, 2].map(j => (
+          <rect x="28" y={62 + j * 26} width={[140, 96, 118, 132, 88, 150, 104, 126,
+                                               112, 142, 92, 136][i * 3 + j]}
+                height="9" rx="4.5" fill="rgba(255,255,255,.2)" />
+        ))}
+        <rect x="28" y="158" width={[86, 122, 70, 104][i]} height="9" rx="4.5"
+              fill="rgba(255,255,255,.2)" />
+        {/* The one line none of them prints, in the same place on every card. */}
+        <rect x="28" y="196" width="140" height="34" rx="9" fill="rgba(255,255,255,.05)"
+              stroke={MINT} stroke-width="1.5" stroke-dasharray="7 6" />
+        <rect x="28" y="248" width={[118, 84, 130, 100][i]} height="9" rx="4.5"
+              fill="rgba(255,255,255,.2)" />
+      </g>
+    ))}
+    <line x1="168" y1="290" x2="1032" y2="290" stroke={VIOLET} stroke-width="3"
+          stroke-linecap="round" opacity=".75" />
   </svg>
 )}
 
