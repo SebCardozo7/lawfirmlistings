@@ -600,6 +600,21 @@ def main():
     print("%d decision(s) collected of %s reported · %d distinct surname(s) · %s to %s"
           % (index["collected"], index["reported_total"], len(surnames),
              (index["dates"] or ["?", "?"])[0], (index["dates"] or ["?", "?"])[1]))
+    # An index built before disposition() existed carries no order text, and without it every
+    # identified respondent falls through to unresolved: the check cannot report the finding it
+    # exists to report, and says nothing about it. That is the silent degradation this refuses.
+    #
+    # It was real. Seven of the eight state indexes were in that state the morning after the
+    # order text was added, and a Florida run reported "0 adverse" that no possible input could
+    # have made say anything else.
+    if index["cases"] and not any(c.get("head") for c in index["cases"]):
+        print()
+        print("This index was built before the order text was read, so nothing in it says what "
+              "any decision decided.\nEvery identified respondent would come back unresolved and "
+              "no adverse finding could be reported at all.\nRebuild it first:\n"
+              "    python scripts/check_discipline.py --state %s --refresh --write --gates"
+              % args.state, file=sys.stderr)
+        return 2
     print()
 
     deferred_firms = []

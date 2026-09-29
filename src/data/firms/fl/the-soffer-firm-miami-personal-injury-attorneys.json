@@ -151,10 +151,10 @@
       "checked_at": "2026-09-25"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Florida does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-25"
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-28",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": false,
@@ -225,8 +225,8 @@
   "score": {
     "total": 61,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-28",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -285,7 +285,7 @@
             "pts": 4,
             "max": 4,
             "source": "firm",
-            "evidence": "Prior-results disclaimer present, as the advertising rules require"
+            "evidence": "Prior-results disclaimer present beside the published results"
           }
         ]
       },
@@ -414,8 +414,7 @@
     "coverage": 1.0,
     "floor_abc_pct": 0.737,
     "gates_unavailable": [
-      "G1",
-      "G2"
+      "G1"
     ],
     "gates_unresolvable": [
       "G3"

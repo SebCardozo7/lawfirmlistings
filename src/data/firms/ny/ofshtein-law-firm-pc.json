@@ -5,7 +5,7 @@
   "website": "https://olf.law/",
   "domain": "olf.law",
   "phone": "(718) 455-5252",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -30,7 +30,14 @@
       "source_url": "https://maps.google.com/?cid=9971678729345352887&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Akiva Ofshtein",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://olf.law/attorneys/akiva-ofshtein"
+    }
+  ],
   "languages": [
     "English",
     "Spanish",
@@ -104,9 +111,8 @@
         "categories": 6,
         "hours_published": true,
         "photos": 6,
-        "google_wrote_a_summary": false,
+        "has_description": false,
         "unobtainable": [
-          "the owner's own description",
           "services list",
           "questions and answers",
           "recent posts"
@@ -137,10 +143,10 @@
       "checked_at": "2026-09-22"
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-09-26"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-29"
     },
     "G6": {
       "pass": true,
@@ -187,14 +193,14 @@
     "checked_at": "2026-09-22"
   },
   "score": {
-    "total": 45,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-28",
+    "total": 40,
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 1,
         "max": 25,
         "subs": [
           {
@@ -208,10 +214,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 1,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "registry",
+            "evidence": "0 of 1 named attorneys matched to the New York register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -249,7 +255,7 @@
             "pts": 0,
             "max": 4,
             "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+            "evidence": "No prior-results disclaimer on the results page, which New York's advertising rules effectively require"
           }
         ]
       },
@@ -360,23 +366,23 @@
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 18,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 25,
+      "gap": 30,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "A6 Roster verifiability: +8 available",
+        "D1 Website trust & experience: +6.5 available",
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 27.6,
-    "assessed": 62,
-    "coverage": 0.697,
-    "floor_abc_pct": 0.447,
+    "raw": 28.6,
+    "assessed": 71,
+    "coverage": 0.798,
+    "floor_abc_pct": 0.383,
     "gates_unavailable": [
       "G1",
       "G2"
