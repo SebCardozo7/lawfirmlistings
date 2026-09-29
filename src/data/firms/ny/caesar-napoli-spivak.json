@@ -104,13 +104,14 @@
         "categories": 5,
         "hours_published": true,
         "photos": 10,
-        "has_description": false,
         "unobtainable": [
+          "the owner's own description",
           "services list",
           "questions and answers",
           "recent posts"
         ],
-        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way.",
+        "google_wrote_a_summary": false
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
