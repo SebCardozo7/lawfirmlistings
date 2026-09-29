@@ -492,6 +492,111 @@ export const PRACTICES: Record<string, PracticeNotes> = {
                     'Mediation, collaborative divorce and litigation compared'],
   },
 
+  immigration: {
+    name: 'Immigration',
+    abbr: 'immigration',
+    icon: 'globe',
+    title: 'Immigration Law Firms: Rankings and Hiring Guide',
+    description:
+      'How to choose an immigration law firm: why the state on the licence matters less here '
+      + 'than anywhere else, what a notario is not, and which fee the quote leaves out.',
+    lede:
+      'Immigration firms handling family and employment petitions, asylum, removal defense, '
+      + 'naturalization and waivers. Every firm is checked for a registered entity, a confirmed '
+      + 'office and a clean disciplinary record, and ranked on what it publishes rather than on '
+      + 'outcomes nobody can verify.',
+    subtopics: ['Family petitions', 'Employment visas', 'Green cards and adjustment',
+                'Naturalization', 'Asylum', 'Removal defense', 'DACA and TPS',
+                'Waivers', 'Consular processing', 'U visas and VAWA'],
+    feeFactLabel: 'Publish a flat fee',
+    feePattern: 'flat fee',
+    guide: {
+      heading: 'How to choose an immigration law firm',
+      intro:
+        'Two things make this different from every other area in this directory. The lawyer does '
+        + 'not have to be licensed in your state, which changes what "local" is worth. And this '
+        + 'is the one area where the person who takes your money may not be a lawyer at all.',
+      sections: [
+        {
+          heading: 'A notario is not a lawyer, and that is not a translation problem',
+          paragraphs: [
+            'In most of Latin America a <i>notario público</i> is a senior legal professional '
+            + 'with authority the job simply does not carry in the United States. Here a notary '
+            + 'public witnesses signatures. The two words look identical and the roles are not '
+            + 'related.',
+            'Immigration is the area where that gap does the most damage, because the filings '
+            + 'look like paperwork. Someone who is not a lawyer can fill in a form, charge for '
+            + 'it, get it wrong, and the consequence lands on the applicant years later as a '
+            + 'denial or a removal order rather than on the person who took the fee.',
+            'Only two kinds of people may represent you before the immigration agencies: a '
+            + 'lawyer in good standing with a state bar, and a representative accredited by the '
+            + 'Department of Justice working for a recognised organisation. Everyone else may '
+            + 'type. Ask which of the two you are speaking to and ask it plainly.',
+          ],
+          checklist: [
+            'Ask for the bar number and the state, then check it on that state bar’s own site.',
+            'If the answer is "accredited representative", ask which recognised organisation '
+            + 'accredits them, and confirm it on the Department of Justice list.',
+            'A business that advertises as a notario, a <i>consultor de inmigración</i> or a '
+            + 'typing service and offers advice on which form to file is doing something it may '
+            + 'not do.',
+          ],
+        },
+        {
+          heading: 'The state on the licence matters less here than anywhere else',
+          paragraphs: [
+            'Immigration is federal. A lawyer admitted in any single state and in good standing '
+            + 'may represent you before the immigration agencies and the immigration courts '
+            + 'anywhere in the country.',
+            'So a firm three time zones away is not the compromise it would be in an injury case '
+            + 'or a divorce, and the directory’s market pages matter less in this area than '
+            + 'in any other we publish.',
+            'What does stay local is the immigration court. If your case is in removal '
+            + 'proceedings it is heard in a specific court with its own backlog and its own '
+            + 'judges, and a firm that appears there constantly knows things about it that do '
+            + 'not appear in any filing.',
+          ],
+        },
+        {
+          heading: 'The quote and the cost are two different numbers',
+          paragraphs: [
+            'Most immigration work is quoted as a flat fee per petition, which is genuinely '
+            + 'easier to compare than an hourly rate. The catch is what the flat fee covers.',
+            'Government filing fees are paid to the agency and are separate from anything the '
+            + 'firm charges. A family petition and the adjustment application behind it carry '
+            + 'their own fees, and on a household filing for several people the government side '
+            + 'alone runs into thousands.',
+            '<b>The question that separates two quotes is not the number, it is the scope.</b> '
+            + 'A case that starts as one petition frequently becomes a request for evidence, a '
+            + 'waiver, an interview and sometimes an appeal, and each of those is either inside '
+            + 'the quoted fee or it is not.',
+          ],
+          checklist: [
+            'Does the flat fee include a response to a request for evidence?',
+            'Does it include the interview, and does a lawyer attend it or only prepare you?',
+            'Which government filing fees apply, and are they paid by you directly?',
+            'If the petition is denied, what is the fee to appeal or to refile?',
+          ],
+        },
+        {
+          heading: 'What this directory can and cannot tell you here',
+          paragraphs: [
+            'We check that the firm is a registered business where the state lets us read one, '
+            + 'that its offices exist, that the attorneys it names are real people, and that '
+            + 'nobody it names has been disciplined where the state publishes discipline. Those '
+            + 'checks are the same in every practice area and they are worth the same here.',
+            '<b>We publish no success rates, and you should be careful with anyone who does.</b> '
+            + 'Approval depends on the facts of a case, the service centre, the officer and the '
+            + 'year, and a percentage without a denominator is a marketing number.',
+            'What we can compare is what each firm publishes about itself: whether it names its '
+            + 'lawyers, whether it states a fee, whether it publishes in the language its '
+            + 'clients read. That last one is not a small thing in this area.',
+          ],
+        },
+      ],
+    },
+  },
+
   'real-estate': {
     name: 'Real Estate',
     abbr: 'real estate',

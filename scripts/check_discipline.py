@@ -600,6 +600,21 @@ def main():
     print("%d decision(s) collected of %s reported · %d distinct surname(s) · %s to %s"
           % (index["collected"], index["reported_total"], len(surnames),
              (index["dates"] or ["?", "?"])[0], (index["dates"] or ["?", "?"])[1]))
+    # An index built before disposition() existed carries no order text, and without it every
+    # identified respondent falls through to unresolved: the check cannot report the finding it
+    # exists to report, and says nothing about it. That is the silent degradation this refuses.
+    #
+    # It was real. Seven of the eight state indexes were in that state the morning after the
+    # order text was added, and a Florida run reported "0 adverse" that no possible input could
+    # have made say anything else.
+    if index["cases"] and not any(c.get("head") for c in index["cases"]):
+        print()
+        print("This index was built before the order text was read, so nothing in it says what "
+              "any decision decided.\nEvery identified respondent would come back unresolved and "
+              "no adverse finding could be reported at all.\nRebuild it first:\n"
+              "    python scripts/check_discipline.py --state %s --refresh --write --gates"
+              % args.state, file=sys.stderr)
+        return 2
     print()
 
     deferred_firms = []
@@ -609,7 +624,28 @@ def main():
             continue
         attorneys = firm.get("attorneys") or []
         if not attorneys:
-            print("%-44s no attorney named, nothing to check" % firm["slug"][:44])
+            # Skipping left these firms holding build_profiles' placeholder, which says the state
+            # publishes no disciplinary register we can query. In a state this script reads that
+            # is simply false, and it was on 129 published profiles across all eight of them.
+            #
+            # The true sentence is about the firm rather than the state: the register is there,
+            # the firm names nobody to look up in it. It neither passes nor blocks, for the same
+            # reason G1 does not when a roster is empty.
+            print("%-44s names no attorney, so there is nobody to look up" % firm["slug"][:44])
+            if args.gates and not (firm.get("gates", {}).get("G2") or {}).get("attested"):
+                firm.setdefault("gates", {})["G2"] = {
+                    "pass": False,
+                    "evidence": ("This firm names no attorney on the pages we could read, so "
+                                 "there is nobody to look up. The register itself exists: %s "
+                                 "publishes its attorney discipline as court decisions and we "
+                                 "read them for the other firms in this market."
+                                 % firm["market"].get("state_name", args.state)),
+                    "source": "no roster published",
+                    "checked_at": TODAY,
+                }
+                if args.write:
+                    io.open(path, "w", encoding="utf-8", newline=LF).write(
+                        json.dumps(firm, indent=2, ensure_ascii=False) + LF)
             continue
 
         adverse, cleared, unresolved, undecided = [], [], [], []
