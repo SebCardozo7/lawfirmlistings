@@ -20,7 +20,7 @@ interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-      | 'divorce' | 'language' | 'sample';
+      | 'divorce' | 'language' | 'sample' | 'pages';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -626,5 +626,43 @@ const lens = { col: 4, row: 3, span: 5 };
       <line x1="-16" y1="96" x2="164" y2="96" stroke={BLUE} stroke-width="2"
         stroke-dasharray="8 7" opacity=".6" />
     </g>
+  </svg>
+)}
+
+{name === 'pages' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* The five kinds of page a firm can publish, each as a stack of tiles: one tile per twenty
+        firms in the directory, filled as far as that page type actually reaches and left as a
+        dashed outline above it. The stacks fall away left to right and the last one is almost
+        entirely outline, which is the study in one shape. The proportions are the measured
+        ones, rounded to whole tiles; this is a cover rather than a chart, so the article beside
+        it carries the counts and this carries the shape. */}
+    {[
+      { share: 0.91, tint: MINT },
+      { share: 0.82, tint: MINT },
+      { share: 0.69, tint: BLUE },
+      { share: 0.57, tint: BLUE },
+      { share: 0.09, tint: VIOLET },
+    ].map((col, ci) => {
+      const ROWS = 11;
+      const filled = Math.round(col.share * ROWS);
+      return (
+        <g transform={`translate(${150 + ci * 192},28)`}>
+          {Array.from({ length: ROWS }).map((_, r) => {
+            // Drawn from the bottom up, so a short stack sits on the floor rather than hanging.
+            const y = (ROWS - 1 - r) * 34;
+            return r < filled
+              ? <rect y={y} width="146" height="24" rx="7" fill={col.tint}
+                  opacity={ci === 4 ? '.95' : '.62'} />
+              : <rect y={y} width="146" height="24" rx="7" fill="none"
+                  stroke="rgba(255,255,255,.20)" stroke-width="1.6" stroke-dasharray="7 6" />;
+          })}
+          {/* The rule under each stack, as long as the part that is filled in. */}
+          <line x1="0" y1={ROWS * 34 + 12} x2={Math.max(10, 146 * col.share)}
+            y2={ROWS * 34 + 12} stroke={col.tint} stroke-width="4" stroke-linecap="round"
+            opacity=".9" />
+        </g>
+      );
+    })}
   </svg>
 )}

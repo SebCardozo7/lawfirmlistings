@@ -1,0 +1,314 @@
+---
+import { getCollection } from 'astro:content';
+import { hasPractice } from '../../data/practices';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// Every figure on this page is computed from the firms collection at build time. Nothing is
+// typed into the prose, so the article cannot drift away from the data underneath it.
+//
+// The field this piece is built on is `digital.trust_pages`, written by scripts/crawl_public.py.
+// Read that script before changing a sentence here, because the field means something narrower
+// than it sounds like: a key is set to `true` when the crawler found a page of that kind at a
+// recognisable URL, either in the fixed candidate-path list or in a link on the firm's own
+// navigation. A key is never written `false`. So an absent key is "we did not find one", which
+// is not the same claim as "the firm does not have one", and every sentence below is written to
+// that weaker claim.
+//
+// Two different fields are both called a fee statement and they are NOT the same fact:
+//   - digital.trust_pages.fee_statement : a /fees/, /our-fees/, /contingency-fees/, /no-fee/ or
+//     /pricing/ page exists. A page about price.
+//   - firm.fee_statement (top level)    : the firm's own sentence about its price, lifted from
+//     whichever pillar B block measured this practice. A sentence about price, anywhere.
+// They overlap on very few firms, which is itself one of this study's findings. Conflating them
+// would be the third repeat of the bar-numbers mistake. See docs/guides-backlog.md.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// A firm is in the study only if it carries a non-empty trust-pages record. A firm with no
+// record at all is unread, not empty-handed, and counting it as a firm that publishes nothing
+// would charge our own crawl's reach to the firm.
+const readable = firms.filter(f => {
+  const tp = f.data.digital.trust_pages;
+  return tp && Object.keys(tp).length > 0;
+});
+const unread = firms.length - readable.length;
+const blocked = firms.filter(f => f.data.site_blocked).length;
+const has = (f: (typeof readable)[number], key: string) => !!f.data.digital.trust_pages![key];
+
+// The five kinds of page the crawler recognises, in the order score.py reads them. Counted, then
+// sorted by how many firms publish each, so the chart is the finding rather than the schema.
+const PAGE_KINDS = [
+  { key: 'blog', label: 'Blog or news', note: 'articles, insights' },
+  { key: 'privacy_policy', label: 'Privacy policy', note: 'how data is handled' },
+  { key: 'attorney_bios', label: 'Attorney index', note: 'who works here' },
+  { key: 'disclaimer', label: 'Disclaimer or terms', note: 'legal notice' },
+  { key: 'fee_statement', label: 'Fees', note: 'what it costs' },
+];
+const kinds = PAGE_KINDS
+  .map(k => ({ ...k, value: readable.filter(f => has(f, k.key)).length }))
+  .sort((a, b) => b.value - a.value || a.key.localeCompare(b.key));
+const commonest = kinds[0];
+const rarest = kinds[kinds.length - 1];
+
+// The asymmetry the piece turns on, as the four cells of one cross-tabulation. Every firm in the
+// study lands in exactly one of them, so the four sum to the population.
+const blogAndFee = readable.filter(f => has(f, 'blog') && has(f, 'fee_statement')).length;
+const blogNotFee = readable.filter(f => has(f, 'blog') && !has(f, 'fee_statement')).length;
+const feeNotBlog = readable.filter(f => !has(f, 'blog') && has(f, 'fee_statement')).length;
+const neither = readable.filter(f => !has(f, 'blog') && !has(f, 'fee_statement')).length;
+
+// The other fee field, which catches a firm that writes about price without giving price a page.
+// Counting both is the fairest version of the question a reader is actually asking.
+const feePage = readable.filter(f => has(f, 'fee_statement')).length;
+const feeSentence = readable.filter(f => f.data.fee_statement).length;
+const feeEither = readable.filter(f => has(f, 'fee_statement') || f.data.fee_statement).length;
+const feeSilent = readable.length - feeEither;
+
+// How many of the five a firm publishes, as a distribution. Zero is impossible by construction:
+// a firm the crawler found nothing for carries no record and is in `unread` instead, which the
+// method section says out loud rather than letting the chart imply a floor that is not real.
+const spread = [1, 2, 3, 4, 5].map(n => ({
+  label: n === 1 ? 'One' : n === 5 ? 'All five' : ['', '', 'Two', 'Three', 'Four'][n],
+  value: readable.filter(f => PAGE_KINDS.filter(k => has(f, k.key)).length === n).length,
+  emphasis: n === 5,
+}));
+const allFive = readable.filter(f => PAGE_KINDS.every(k => has(f, k.key)));
+// Deterministic: highest total, then slug, so the named example does not change between builds
+// when two firms tie.
+const allFiveTop = [...allFive].sort((a, b) =>
+  (b.data.score?.total ?? 0) - (a.data.score?.total ?? 0) || a.data.slug.localeCompare(b.data.slug))[0];
+
+// ---- what our own score does with all of this ----
+const d1Of = (f: (typeof firms)[number]) =>
+  f.data.score?.pillars.D.subs.find(s => s.code === 'D1');
+const d1Scored = firms.filter(f => {
+  const s = d1Of(f);
+  return s && s.source !== 'pending';
+});
+const d1Max = d1Of(d1Scored[0])?.max ?? 0;
+const d1Best = Math.max(...d1Scored.map(f => d1Of(f)!.pts));
+const d1Leaders = d1Scored
+  .filter(f => d1Of(f)!.pts === d1Best)
+  .sort((a, b) => a.data.slug.localeCompare(b.data.slug));
+const d1Mean = d1Scored.length
+  ? d1Scored.reduce((n, f) => n + d1Of(f)!.pts, 0) / d1Scored.length
+  : 0;
+// The point nobody can earn. D1's first page check reads `bar_numbers_on_bios`, and this counts
+// the records that carry that key at all rather than the ones set true, because the honest
+// question is whether the field exists to be read. If a future crawl starts writing it, this
+// goes above zero by itself and the sentences below change with it.
+const barKeyPresent = firms.filter(f =>
+  f.data.digital.trust_pages && 'bar_numbers_on_bios' in f.data.digital.trust_pages).length;
+
+// ---- where it differs ----
+// States with enough firms for a rate to mean anything. Sorted by rate, ties broken by name, so
+// the chart is stable across builds.
+const MIN_STATE = 20;
+const stateNames = [...new Set(readable.map(f => f.data.market.state_name))];
+const states = stateNames
+  .map(name => {
+    const group = readable.filter(f => f.data.market.state_name === name);
+    return {
+      name,
+      n: group.length,
+      fee: group.filter(f => has(f, 'fee_statement')).length,
+      blog: group.filter(f => has(f, 'blog')).length,
+    };
+  })
+  .filter(s => s.n >= MIN_STATE)
+  .sort((a, b) => b.fee / b.n - a.fee / a.n || a.name.localeCompare(b.name));
+const feeTop = states[0];
+const feeBottom = states[states.length - 1];
+const blogRates = [...states].sort((a, b) => b.blog / b.n - a.blog / a.n || a.name.localeCompare(b.name));
+const blogTop = blogRates[0];
+const blogBottom = blogRates[blogRates.length - 1];
+
+const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+// "1 firms" reads as a bug, and a count spelled in words is still a count, so the number stays
+// a numeral and only the noun moves.
+const nFirms = (n: number) => `${n} firm${n === 1 ? '' : 's'}`;
+
+// The city x practice ranking a firm belongs to. The route is generated for every combination a
+// published firm lists, filtered to practices with a hub, so resolving it this way can only
+// produce a page that exists. Naming Dallas and Miami by hand here would be wrong the day the
+// two firms at the top of D1 change.
+const rankingHref = (f: (typeof firms)[number]) => {
+  const pr = f.data.practices.find(p => p.primary && hasPractice(p.slug))
+    ?? f.data.practices.find(p => hasPractice(p.slug));
+  return pr ? `/cities/${f.data.market.city_slug}/${pr.slug}/` : null;
+};
+
+// The trust-pages record carries no date of its own, which the limits section says out loud. The
+// date in the byline is therefore the date the scores were last computed, which is the most
+// recent thing any of these figures passed through.
+const scoredOn = firms
+  .map(f => f.data.score?.computed_at)
+  .filter((d): d is string => !!d)
+  .sort()
+  .at(-1);
+const updated = scoredOn
+  ? new Date(scoredOn).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// States the finding, not the subject, and carries no figure: check_meta rejects a count in a
+// title or a description, and the ranking of these five page types is what is being claimed.
+const title = 'New Study: The Last Thing a Law Firm Website Publishes Is Its Price';
+const description = 'We read every law firm website in this directory and counted which pages are really there. A blog is the commonest. A page about fees is the rarest.';
+---
+<Base title={title} description={description} nav="guides" image="/og/pages.png" imageAlt="Five stacks of page tiles falling away from left to right, the last one almost entirely empty outlines">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">What law firm websites publish</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Digital presence</span>
+    <h1>{title}</h1>
+    <p class="lede">Every page telling a law firm what belongs on its website is written by somebody selling websites. We went the other way and counted what is on the {readable.length} firm websites in this directory we could read. <b>{commonest.value}</b> publish a {commonest.label.toLowerCase()}. <b>{rarest.value}</b> publish a page about {rarest.note}.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Scored {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="pages" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#results">What is actually there</a></li>
+      <li><a href="#price">The blog and the price</a></li>
+      <li><a href="#where">Where it differs</a></li>
+      <li><a href="#score">What our own score does with it</a></li>
+      <li><a href="#limits">What this cannot tell you</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Across ${readable.length} law firm websites in ${states.length > 0 ? `${stateNames.length} states` : 'this directory'}, read by our own crawler.`}
+      items={[
+        `Of the <b>${readable.length}</b> firm websites we could read, <b>${kinds[0].value}</b> give a ${kinds[0].label.toLowerCase()} section its own page and <b>${rarest.value}</b> give one to ${rarest.note}.`,
+        `<b>${blogNotFee} firms</b> publish a blog and no page about fees. Going the other way, <b>${feeNotBlog}</b> ${feeNotBlog === 1 ? 'firm does' : 'firms do'} the opposite.`,
+        `Counting a sentence about price anywhere on the site as well as a dedicated page, <b>${feeEither} of ${readable.length}</b> firms say what they charge in some form, so <b>${feeSilent}</b> say nothing we could find.`,
+        barKeyPresent === 0
+          ? `Our own website sub-score is marked out of <b>${d1Max}</b>, and the best any firm in the directory reaches is <b>${d1Best}</b>, because one of its checks reads a field that <b>no record here carries</b>.`
+          : `Our own website sub-score is marked out of <b>${d1Max}</b> and the best any firm reaches is <b>${d1Best}</b>. <b>${barKeyPresent} records</b> now carry the field that used to be unreadable.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Our crawler reads each firm's own website and records which of five kinds of page it can find: a blog or news section, a privacy policy, an index of the attorneys, a disclaimer or terms page, and a page about fees. It finds them two ways, by trying a list of common paths and by reading the firm's own navigation links.</p>
+    <p>All five are looked for with the same effort on the same pass, which is what makes them comparable to each other. That is the whole design of this study: not whether any one number is high, but which of the five a firm gets to first.</p>
+    <p><b>A page we did not find is not the same as a page that does not exist.</b> The record only ever stores a page we found, so every count below is a floor. {unread === 1 ? 'One published firm carries' : `${unread} published firms carry`} no record of this kind at all and {unread === 1 ? 'is' : 'are'} left out of every figure on this page, rather than counted as publishing nothing. {blocked === 1 ? 'One firm' : `${blocked} firms`} in the directory answer our crawler with a refusal, which is their right and not a finding about them.</p>
+
+    <h2 id="results">What is actually there</h2>
+    <p>Here is the order, across {readable.length} websites.</p>
+    <ColumnChart
+      heading={`Firms publishing each kind of page, of ${readable.length} websites we could read`}
+      columns={kinds.map(k => ({ label: k.label, note: k.note, value: k.value, emphasis: k.key === rarest.key }))}
+      emphasisLabel="What it costs"
+      quietLabel="Everything else"
+      caption={`Counted on one pass, looking for all five with the same method. A page we could not find is not stored, so each column is a floor rather than an exact count.`}
+    />
+    <p><b>The ranking is the finding.</b> The thing a law firm website is likeliest to have is the section that brings in search traffic, and the thing it is least likely to have is the one a client would open first.</p>
+    <p>An attorney index sits in the middle at {kinds.find(k => k.key === 'attorney_bios')!.value}. That page is the input every credential check needs, and <a href="/guides/what-it-takes-to-check-a-law-firm/">we have measured separately what happens when it is missing</a>: the check people assume is routine cannot start.</p>
+    <p>Very few firms publish the full set.</p>
+    <ColumnChart
+      heading={`How many of the five each firm publishes, of ${readable.length}`}
+      columns={spread}
+      emphasisLabel="All five"
+      quietLabel="Fewer than five"
+      caption={`No firm appears at zero, because a firm we found nothing for carries no record and is not in this population at all. The floor here is an artifact of the method, not a fact about firms.`}
+    />
+    {allFiveTop && (
+      <p>{allFive.length} firms publish all five. <a href={`/firms/${allFiveTop.data.slug}/`}>{allFiveTop.data.name}</a> in {allFiveTop.data.market.city} is the highest-scoring of them, and it is worth saying that publishing all five is not what earned that score: it is a few points in one pillar of twenty-five.</p>
+    )}
+
+    <h2 id="price">The blog and the price</h2>
+    <p>Set the commonest page and the rarest one against each other and the asymmetry is not close.</p>
+    <StackBar
+      heading={`A blog, a fees page, both or neither, across ${readable.length} firms`}
+      unit="firms"
+      segments={[
+        { label: 'Blog, no fees page', value: blogNotFee },
+        { label: 'Both', value: blogAndFee },
+        { label: 'Neither', value: neither },
+        { label: 'Fees page, no blog', value: feeNotBlog },
+      ]}
+      caption={`Every firm in the study falls in exactly one group, so the four add up to ${readable.length}.`}
+    />
+    <p><b>{blogNotFee} firms publish a blog and no page about fees, and {nFirms(feeNotBlog)} {feeNotBlog === 1 ? 'goes' : 'go'} the other way.</b> Whatever else is true about how law firms build websites, writing comes before pricing by a margin that leaves no room for argument.</p>
+    <p>The fair objection is that a firm can be perfectly open about money without giving it a page. So we counted that too, from a different field: the firm's own sentence about what it charges, wherever on the site it appears. {feeSentence} firms have one.</p>
+    <p>Those two groups barely overlap. Put together, <b>{feeEither} of {readable.length} firms say something about price in one form or the other</b>, which leaves {feeSilent} where we found nothing either way. Being generous with the definition moves the number and does not change the answer.</p>
+    <p>What a firm says is a separate question from whether it says anything, and usually thinner than it looks. <a href="/guides/what-new-york-injury-firms-publish-about-fees/">We read the fee language of the New York injury firms line by line</a>: the free consultation is nearly universal and therefore differentiates nothing, while the percentage itself, and who carries case expenses if the case is lost, is almost never printed.</p>
+
+    <h2 id="where">Where it differs, and where it does not</h2>
+    <p>Split by state and the blog holds steady nearly everywhere. {blogTop.name} is the highest at {blogTop.blog} of {blogTop.n} and {blogBottom.name} the lowest at {blogBottom.blog} of {blogBottom.n}, which is a narrow band for a practice this scattered.</p>
+    <p>The fees page moves much more.</p>
+    <BarChart
+      heading={`Firms publishing a page about fees, by state, in states with at least ${MIN_STATE} firms here`}
+      rows={states.map(s => ({
+        label: s.name,
+        value: pct(s.fee, s.n),
+        display: `${s.fee} of ${s.n}`,
+        emphasis: s.name === feeTop.name,
+      }))}
+      caption={`As a share of the firms we could read in each state. The bar is the rate and the figure beside it is the count it came from, because a rate over twenty firms and a rate over a hundred and fifty are not the same evidence.`}
+    />
+    <p>{feeTop.name} leads at {feeTop.fee} of {feeTop.n}, which is {pct(feeTop.fee, feeTop.n)}%, and {feeBottom.name} sits last at {feeBottom.fee} of {feeBottom.n}. <b>Even the state in front leaves most of its firms silent about price</b>, so the variation here is between bad and worse rather than between good and bad.</p>
+    <p>We have no evidence for why the states differ, and the honest thing is to say so. The obvious suspect is the state's own rules, and one set of them has been tested: <a href="/guides/what-injury-firms-publish-about-fees-by-state/">we compared the states whose bar rules fix the contingency percentage with the states where it is negotiable</a>, and what firms publish about their fees does not follow the rules. Advertising rules are the other candidate, and nothing in our records reads them. The firms that reach the top of our website sub-score sit in {d1Leaders.map((f, i) => (<>{i > 0 && (i === d1Leaders.length - 1 ? ' and ' : ', ')}{rankingHref(f) ? <a href={rankingHref(f)!}>{f.data.market.city}</a> : f.data.market.city}</>))}, and {new Set(d1Leaders.map(f => f.data.market.state)).size === d1Leaders.length ? 'no two of them answer to the same rule book' : 'they do not all answer to the same rule book'}.</p>
+
+    <h2 id="score">What our own score does with it</h2>
+    <p>These five pages are most of sub-factor D1, "Website trust and experience", worth {d1Max} points inside <a href="/methodology/">the certification score</a>. A fees page and a blog earn a full point each, a privacy policy and a disclaimer half a point each, and passing Google's speed test earns two.</p>
+    <p><b>Spot the design problem.</b> The blog earns the same weight as the fees page while {pct(kinds.find(k => k.key === 'blog')!.value, readable.length)}% of the field already has one, so that point separates almost nobody, and the point that would separate firms is the one almost none of them can earn.</p>
+    {barKeyPresent === 0 && (
+      <>
+        <p>It gets worse, and this part is ours rather than theirs. D1's first page check reads a field recording whether a firm publishes bar registration numbers on its attorney bios. <b>No record in this directory carries that field.</b> The crawler that was meant to write it stages the value and never puts it on the firm record.</p>
+        <p>So the check runs on every firm, finds nothing, and takes the point away. All {d1Scored.length} firms with a scored D1 carry the same line of evidence saying so, on their own public profiles, and not one of them has ever earned that point. The arithmetic shows through: D1 is marked out of {d1Max} and the best score any firm in this directory has reached is {d1Best}.</p>
+        <p>At that ceiling {d1Leaders.length === 1 ? 'sits' : 'sit'} {nFirms(d1Leaders.length)}: {d1Leaders.map((f, i) => (<>{i > 0 && (i === d1Leaders.length - 1 ? ' and ' : ', ')}<a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></>))}. {d1Leaders.length === 1 ? 'It has' : 'They have'} everything D1 can actually award and still {d1Leaders.length === 1 ? 'shows' : 'show'} a gap of {d1Max - d1Best} against the published maximum. The mean across the directory is {d1Mean.toFixed(1)}.</p>
+        <p><b>A firm must never lose points to the reach of our own crawl</b>, and this is that rule broken in our own engine. It is not a rounding error hidden in a spreadsheet: it is a sentence on {d1Scored.length} public profiles asserting an absence we never measured.</p>
+      </>
+    )}
+    {barKeyPresent > 0 && (
+      <p>D1's first page check reads whether a firm publishes bar registration numbers on its attorney bios, a field that was empty on every record when this page was first written. {barKeyPresent} records carry it now, so the point is live and the paragraph that used to sit here no longer describes the data.</p>
+    )}
+    <p>Fixing it is a decision about the scoring engine rather than about any guide, because rescoring the directory moves tiers. <a href="/guides/what-a-law-firm-score-cannot-compare/">The denominator behind every score on this site</a> is the wider version of the same argument: the number is earned points over measured points, and what we failed to measure belongs in that sentence too.</p>
+
+    <h2 id="limits">What this cannot tell you</h2>
+    <p>Three things, and the first is the largest.</p>
+    <p><b>A page is not the same as an answer.</b> We counted whether a fees page exists, not whether it says anything useful. A page headed "No Fee Unless We Win" is counted here exactly like one printing a percentage and naming who pays costs on a loss, and those are not the same document.</p>
+    <p><b>The record cannot say zero.</b> A key is written only when a page is found, so a firm publishing none of the five is indistinguishable in our data from a firm the crawler never reached. That is why {unread} firms are excluded rather than scored, and why every column on this page is a floor.</p>
+    <p><b>Nothing dates this measurement.</b> Six families of data in this directory carry the date they were read, and a freshness check fails the build when one goes stale. The site crawl behind this entire page is not one of them: the trust-pages record has no date on it and no staleness check over it. <a href="/guides/core-web-vitals-new-york-injury-firms/">The speed measurement next to it in the same pillar</a> carries both. So the single field feeding most of D1 is the one measurement here that nobody can tell the age of, which is a gap in our record-keeping and not in anybody's website.</p>
+    <p>If you run a firm and your site has more on it than we found, that is worth telling us. <a href="/list-your-firm/">Every profile links the source behind each measurement</a>, and a page we missed is a correction we want. The same goes for a firm that would rather we did not guess: <a href="/practice-areas/personal-injury/">the directory</a> shows the evidence behind every sub-score, including the ones marked pending.</p>
+    <p class="muted" style="font-size:.86rem">Page counts come from our own crawl of each firm's website, which reads the site's own navigation and a fixed list of candidate paths, and follows robots.txt. Score components come from LFL Certified Methodology v2.0.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted above has a profile showing which pages we found, what we could not read, and the evidence behind each sub-score.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a law firm</a></li>
+        <li><a href="/guides/what-new-york-injury-firms-publish-about-fees/">What firms publish about fees</a></li>
+        <li><a href="/guides/best-law-firm-websites/">The best law firm websites, measured</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

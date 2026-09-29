@@ -24,7 +24,7 @@ export interface Guide {
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-    | 'divorce' | 'language';
+    | 'divorce' | 'language' | 'sample' | 'pages';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -66,6 +66,21 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'what-law-firm-websites-publish',
+    cover: 'pages',
+    kicker: 'Method',
+    title: 'New Study: The Last Thing a Law Firm Website Publishes Is Its Price',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every page telling a law firm what belongs on its website is written by somebody who ' +
+      'sells websites. We counted what is on the firm websites in this directory instead. A ' +
+      'blog is the page a firm reaches for first and a page about fees is the one it reaches ' +
+      'for last, and the gap between the two is not close.',
+    thumb: 't2',
+    icon: 'columns',
+    meta: 'A blog comes first, the price comes last',
+  },
   {
     slug: 'what-injury-firms-publish-about-fees-by-state',
     cover: 'statutes',
