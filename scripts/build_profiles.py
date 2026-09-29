@@ -132,8 +132,26 @@ PLACE_PREFIX = re.compile(
     r"downers\s+grove|summerlin|germantown|fishtown)\b\s+\S+\s+\S", re.I)
 
 
+# Site furniture on a Chinese-language page, which a firm serving Chinese-speaking clients
+# publishes alongside its English one. Caesar, Napoli & Spivak had "成功案例" and "联系我们",
+# success stories and contact us, sitting in its roster where two people's names would be.
+#
+# A vocabulary rather than a rule about the script, because a Chinese attorney's name written in
+# characters is a name and rejecting the writing system would delete her. Four characters is the
+# length of both a heading and a name, so nothing about the shape separates them. These are the
+# headings that recur; anything else in Chinese is treated as a name, which is the right way
+# round for the same reason the city rule needs two words after the city.
+CJK_FURNITURE = {
+    "成功案例", "联系我们", "关于我们", "我们的团队", "法律团队", "免费咨询", "首页",
+    "服务项目", "业务范围", "律师团队", "案例分析", "新闻", "博客", "常见问题",
+    "회사소개", "문의하기", "변호사소개", "お問い合わせ", "会社概要", "弁護士紹介",
+}
+
+
 def NOT_A_NAME_match(value):
     text = (value or "").strip()
+    if text in CJK_FURNITURE:
+        return True
     if PLACE_SUFFIX.search(text) or PLACE_PREFIX.match(text):
         return True
     words = [w for w in re.split(r"[\s,.]+", text) if w]
@@ -610,8 +628,16 @@ def registry_wording(market):
             "check it.", "no queryable source")
 
 
+# The states whose attorney discipline scripts/check_discipline.py can read, which is not the
+# same set as the states publishing an attorney register and was being treated as if it were.
+# Imported from that script so the two cannot drift: the eight here are the eight in REGISTERS.
+def _discipline_states():
+    from check_discipline import REGISTERS
+    return set(REGISTERS)
+
+
 def discipline_wording(market):
-    if market["state"] in OPEN_REGISTER_STATES:
+    if market["state"] in OPEN_REGISTER_STATES or market["state"] in _discipline_states():
         return ("Disciplinary history not yet checked", "pending")
     return (f"{market['state_name']} does not publish a disciplinary register we can query.",
             "no queryable source")

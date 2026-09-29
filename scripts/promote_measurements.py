@@ -57,6 +57,28 @@ def by_domain(domain: str) -> Path | None:
     return None
 
 
+def normalise_completeness(block: dict) -> dict:
+    """The D3 completeness block in the shape the schema requires today.
+
+    `has_description` was renamed to `google_wrote_a_summary` when it turned out to be reading
+    Google's editorial summary rather than anything the firm writes. The schema, the enricher and
+    526 profiles were renamed with it. 824 staging records were not, because staging is evidence
+    and is not versioned, and promoting any one of them writes the old key back and fails the
+    build on a required field.
+
+    That is a landmine rather than a bug: nothing is wrong until the next routine promotion, and
+    then the site does not build. It cost one profile and one puzzled build already. Translating
+    here means an old record can be promoted at any time and still produce the current shape.
+    """
+    out = dict(block or {})
+    if "has_description" in out:
+        out.setdefault("google_wrote_a_summary", out.pop("has_description"))
+        out.pop("has_description", None)
+    if "the owner's own description" not in (out.get("unobtainable") or []):
+        out["unobtainable"] = ["the owner's own description"] + list(out.get("unobtainable") or [])
+    return out
+
+
 def promote_attorneys(rec: dict, firm: dict) -> list[str]:
     """Merge the crawled roster into the profile.
 
@@ -175,7 +197,7 @@ def promote(rec: dict, firm: dict) -> list[str]:
             # engine scored as a zero on every firm. Carried through only when the staging record
             # actually holds it, so a profile measured before this existed keeps D3 pending
             # rather than acquiring an empty block that reads as "we looked and found nothing".
-            **({"completeness": places["d3_completeness"]}
+            **({"completeness": normalise_completeness(places["d3_completeness"])}
                if places.get("d3_completeness") else {}),
             "source": "Google Places API (New) places:searchText",
             "measured_at": places.get("measured_at"),

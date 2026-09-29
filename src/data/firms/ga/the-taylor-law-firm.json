@@ -163,10 +163,10 @@
       "checked_at": "2026-09-25"
     },
     "G2": {
-      "pass": true,
-      "source": "Published decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, indexed by CourtListener (Free Law Project)",
-      "checked_at": "2026-09-25",
-      "evidence": "No attorney this firm names appears as the respondent in any of the 662 published discipline decisions of the Supreme Court of Georgia on the discipline of State Bar of Georgia members, 1979 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+      "pass": false,
+      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Georgia publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
+      "source": "no roster published",
+      "checked_at": "2026-09-29"
     },
     "G3": {
       "pass": false,
@@ -220,8 +220,8 @@
   "score": {
     "total": 40,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-26",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -280,7 +280,7 @@
             "pts": 0,
             "max": 4,
             "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
@@ -410,6 +410,7 @@
     "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
+      "G2",
       "G3"
     ],
     "gates_unresolvable": [],

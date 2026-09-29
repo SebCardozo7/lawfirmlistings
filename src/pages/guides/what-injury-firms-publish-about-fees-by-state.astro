@@ -1,0 +1,184 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// Every figure on this page is computed here, from the fee language each firm publishes on its
+// own site. Nothing is typed into the prose. The companion piece at
+// /guides/what-new-york-injury-firms-publish-about-fees/ asks the same question of New York
+// alone; this one asks whether the answer changes when the rules do.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible'
+  && f.data.practices.some(p => p.slug === 'personal-injury'));
+
+const NOT_STATED = /^(not stated|unknown|n\/?a|pending)$/i;
+const PCT = /(\d{2}(?:[.,]\d+)?\s*(?:%|percent)|33\s*1\/3|one[-\s]third)/i;
+const EXPENSES = /(expense|disbursement|court cost|case cost|out[-\s]of[-\s]pocket|costs? are (?:deducted|advanced))/i;
+
+const stated = (f: typeof firms[number]) =>
+  Boolean(f.data.fee_model) && !NOT_STATED.test((f.data.fee_model ?? '').trim());
+
+const freeConsult = firms.filter(f => f.data.free_consultation);
+const statesModel = firms.filter(stated);
+const withStatement = firms.filter(f => f.data.fee_statement);
+const publishPct = withStatement.filter(f => PCT.test(f.data.fee_statement!));
+const publishExpenses = withStatement.filter(f => EXPENSES.test(f.data.fee_statement!));
+
+// The two states whose bar rules set or scale the contingency percentage in injury matters, as
+// against the rest, where the percentage is a matter for the retainer. The split is declared
+// here rather than derived, because it is a fact about law and not about our data.
+const SCALED = new Set(['NY', 'FL']);
+
+type Row = { state: string; n: number; model: number; statement: number };
+const byState: Row[] = [...new Set(firms.map(f => f.data.market.state))]
+  .map(state => {
+    const g = firms.filter(f => f.data.market.state === state);
+    return {
+      state,
+      n: g.length,
+      model: Math.round(100 * g.filter(stated).length / g.length),
+      statement: Math.round(100 * g.filter(f => f.data.fee_statement).length / g.length),
+    };
+  })
+  .sort((a, b) => b.model - a.model);
+
+const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+const scaled = byState.filter(r => SCALED.has(r.state));
+const open = byState.filter(r => !SCALED.has(r.state));
+const betweenGap = Math.round(Math.abs(mean(scaled.map(r => r.model)) - mean(open.map(r => r.model))));
+const withinSpread = Math.round(Math.max(...open.map(r => r.model)) - Math.min(...open.map(r => r.model)));
+
+const markets = new Set(firms.map(f => f.data.market.city)).size;
+const states = byState.length;
+const top = byState[0];
+const bottom = byState[byState.length - 1];
+
+// The headline states the finding, and the finding is the one thing every market has in common.
+// If a firm anywhere publishes its percentage, the page says so instead.
+const title = publishPct.length === 0
+  ? 'New Study: A State’s Fee Rules Do Not Change What Its Firms Publish'
+  : 'New Study: What Injury Firms Publish About Fees, State by State';
+const description =
+  'We read the fee language of every injury firm in this directory, in every state we publish '
+  + 'in. The rules differ by state. What the firms disclose does not.';
+---
+<Base title={title} description={description} nav="guides" image="/og/fees.png"
+      imageAlt="Four state fee pages side by side, each with different lines filled and the same line left blank">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Fees by state</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Costs · Personal injury</span>
+    <h1>{title}</h1>
+    <p class="lede">We read the fee language published by all {firms.length} personal injury firms in this directory, across {states} states and {markets} markets. {freeConsult.length} offer a free consultation. {statesModel.length} name a fee model. {publishPct.length === 0 ? <><b>Not one</b> publishes the percentage it charges</> : <>{publishPct.length} publish the percentage they charge</>}, and that is true in the states whose rules set the percentage and in the states where it is freely negotiable alike.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="statutes" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#question" class="is-active">The question one state could not answer</a></li>
+      <li><a href="#answer">What the states actually do</a></li>
+      <li><a href="#wrong">The comparison that looked like an answer</a></li>
+      <li><a href="#constant">The one thing that is the same everywhere</a></li>
+      <li><a href="#method">How this was measured</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read from the fee language ${firms.length} injury firms publish on their own websites, across ${states} states.`}
+      items={[
+        `<b>${publishPct.length === 0 ? 'Not one firm of ' + firms.length : String(publishPct.length) + ' firms'}</b> publishes the contingency percentage it charges, in any state, under any set of rules.`,
+        `<b>${betweenGap} points</b> separate the states whose bar rules scale the percentage from the states where it is negotiable. <b>${withinSpread} points</b> separate the negotiable states from each other.`,
+        `<b>${freeConsult.length} of ${firms.length}</b> offer a free consultation, which is as close to unanimous in ${states} states as it was in one.`,
+        `<b>${publishExpenses.length === 0 ? 'Not one' : String(publishExpenses.length)}</b> ${publishExpenses.length === 1 ? 'explains' : 'explain'} how case expenses are handled, which is the line that decides what reaches a client.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure here is computed at build time from what each firm publishes on its own website. It is not a statement about what any firm charges, only about what it says in public, and it is not legal advice.</div>
+
+    <h2 id="question">The question one state could not answer</h2>
+    <p>When this directory covered New York alone, <a href="/guides/what-new-york-injury-firms-publish-about-fees/">we found that no firm published its contingency percentage</a>. New York is a state that regulates the number, so one reading of that was obvious: nobody prints what the rules already fix.</p>
+    <p>That reading has a test, and it needs more than one state. If regulation is what keeps the number off the page, then firms in states where the percentage is genuinely negotiable should publish it more often, because there it is a real difference between one firm and another.</p>
+    <p><b>The directory now covers {states} states, so the test can be run.</b> It comes out the other way.</p>
+
+    <h2 id="answer">What the states actually do</h2>
+    <p>Two of the {states} set or scale the contingency percentage for injury work through their bar rules. In the other {open.length} it is a matter for the retainer.</p>
+    <BarChart
+      heading="Firms naming a fee model at all, by state"
+      max={100}
+      rows={byState.map(r => ({
+        label: `${r.state} (${r.n} firms)${SCALED.has(r.state) ? ' · scaled' : ''}`,
+        value: r.model,
+        display: `${r.model}%`,
+      }))}
+      caption="The two states that scale the percentage sit in the middle of the range rather than at the bottom of it."
+    />
+    <p>{top.state} leads at {top.model}% and {bottom.state} trails at {bottom.model}%. Neither is a state that scales the percentage, and the two that do sit between them.</p>
+    <p><b>The average distance between the two groups is {betweenGap} points. The distance across the states inside the larger group is {withinSpread}.</b></p>
+    <p>A difference ten times smaller than the noise it sits in is not a difference. Whatever moves this number, the state's fee rules are not it.</p>
+
+    <h2 id="wrong">The comparison that looked like an answer</h2>
+    <p>There is a pair of states in that chart that tells a very good story, and it is worth showing because it is the mistake this piece nearly made.</p>
+    <p>Texas puts no cap on the percentage, and its firms name a fee model more often than any other state's. New York scales it, and its firms are well below. Two states, opposite rules, opposite behaviour, and a tidy conclusion about disclosure following negotiability.</p>
+    <p><b>They are the two ends of a spread that has {open.length} states in it, and picking the ends of a distribution is not a finding.</b></p>
+    <p>The group averages are what settle it, and they are {betweenGap} points apart. We are showing the wrong version because a reader is owed the reasoning, not only the result.</p>
+
+    <h2 id="constant">The one thing that is the same everywhere</h2>
+    <p>Across {states} states, {markets} markets and {firms.length} firms, one number does not move.</p>
+    <BarChart
+      heading={`What the ${firms.length} firms publish about fees`}
+      max={firms.length}
+      rows={[
+        { label: 'A free initial consultation', value: freeConsult.length, display: `${freeConsult.length} of ${firms.length}` },
+        { label: 'A fee model, named', value: statesModel.length, display: `${statesModel.length} of ${firms.length}` },
+        { label: 'A written statement about fees', value: withStatement.length, display: `${withStatement.length} of ${firms.length}` },
+        { label: 'The percentage they charge', value: publishPct.length, display: `${publishPct.length} of ${firms.length}` },
+        { label: 'How case expenses are handled', value: publishExpenses.length, display: `${publishExpenses.length} of ${firms.length}` },
+      ]}
+      caption="The bars shorten as the question gets useful, and they shorten the same way in every state."
+    />
+    <p>{withStatement.length} firms publish a written statement about fees. Most of them say a version of one sentence: you pay nothing unless we win.</p>
+    <p><b>That sentence describes the shape of the arrangement and never its size.</b> It is the same sentence in Chicago, in Houston and in Miami.</p>
+    <p>{publishExpenses.length === 0
+      ? <>And not one firm in this set says whether the fee is worked out before or after case expenses come out of a settlement.</>
+      : <>And {publishExpenses.length} of the {firms.length} say whether the fee is worked out before or after case expenses come out of a settlement.</>} On a mid-size recovery the order of those two operations is worth five figures to the client, and it is settled in a retainer nobody sees until they are sitting in an office.</p>
+    <div class="callout"><b>This is a question to ask, not an accusation.</b> Both orderings are lawful and both appear in ordinary retainers. What the measurement shows is that you cannot compare two firms on it in advance, anywhere in this directory.</div>
+    <p>If it is useful to have the questions in front of you on that call, <a href="/guides/what-new-york-injury-firms-publish-about-fees/">the four worth asking are set out here</a>, with a worked example of what the expenses answer is worth.</p>
+
+    <h2 id="method">How this was measured</h2>
+    <p>Fee language is collected by crawling each firm's own public pages, honouring robots.txt, and is stored with the source URL and the date it was read. Every profile shows the statement we found and where it came from.</p>
+    <p>A percentage counts as published when the firm's own fee statement contains one: a figure with a percent sign, or a third written out. An expenses explanation counts when the statement names costs, disbursements or expenses and says how they are treated.</p>
+    <p><b>A firm that publishes a fee page we could not reach is counted as publishing nothing, and that is a limit of this method rather than a finding about the firm.</b> If a disclosure exists somewhere we did not read, <a href="/contact/">tell us where</a> and we will read it.</p>
+    <p>The split between scaled and negotiable states is declared in this page's source rather than derived from our data, because it is a fact about bar rules and not something a crawl can measure. It covers the states this directory publishes in and nothing wider.</p>
+    <p class="muted" style="font-size:.86rem">Nothing here is a quote from a retainer agreement, none of which is public. Fee transparency is sub-factor E1 of the <a href="/methodology/">LFL Certification Score</a>, and the New York piece explains why we think that sub-factor currently measures the wrong thing.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>Compare what each firm publishes</h4>
+      <p>Every profile shows the fee model, the fee statement we found and whether the consultation is free, each with its source.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Injury firms by market</a>
+    </div>
+    <div class="panel">
+      <h4>Related</h4>
+      <ul>
+        <li><a href="/guides/what-new-york-injury-firms-publish-about-fees/">The same question, New York only</a></li>
+        <li><a href="/guides/average-lawyer-hourly-rate/">Average lawyer hourly rate</a></li>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

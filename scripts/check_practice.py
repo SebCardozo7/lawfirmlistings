@@ -132,6 +132,45 @@ PRACTICES = {
             r"escrow|purchase\s+(?:and\s+sale\s+)?(?:agreement|contract)|seller|buyer|"
             r"settlement\s+statement|encumbrance", re.I),
     },
+    # The first federal practice in this file, and the first where the corroborating vocabulary is
+    # easier rather than harder. Immigration work runs on agency forms, and a form number is
+    # unmistakable: no injury page, no divorce page and no closing page has ever said "I-485".
+    # So the corroborating pattern leans on the forms and the agencies, which a page merely
+    # listing immigration among its services will not carry.
+    #
+    # Spanish is in the slug and title patterns rather than left out. This practice is the one
+    # where a firm is most likely to publish the page in Spanish first, and our own study of what
+    # firms publish in Spanish found injury firms doing it far more than anyone else. A page at
+    # /es/abogado-de-inmigracion/ is the page, not a translation of it.
+    #
+    # Adoption and guardianship are deliberately absent. Both appear in immigration work and both
+    # belong to family law, and a pattern that claimed them would take family pages from the
+    # practice that already reads them correctly.
+    "immigration": {
+        "slug": re.compile(r"immigration|inmigraci[oó]n|green[-_]?card|visa[s]?\b|"
+                           r"citizenship|naturaliz|ciudadan[ií]a|residencia|"
+                           r"asylum|asilo|deportation|deportaci[oó]n|removal[-_]defense|"
+                           r"adjustment[-_]of[-_]status|consular[-_]process|"
+                           r"daca|tps\b|vawa|u[-_]visa|t[-_]visa|k1[-_]visa|fiance[-_]visa|"
+                           r"work[-_]permit|permiso[-_]de[-_]trabajo|immigration[-_]court", re.I),
+        "title": re.compile(
+            r"immigration|inmigraci[oó]n|green\s+card|naturaliz|citizenship|ciudadan[ií]a|"
+            r"asylum|asilo|deportation|deportaci[oó]n|removal\s+(?:defense|proceedings)|"
+            r"adjustment\s+of\s+status|consular\s+processing|visa[s]?\b|"
+            r"work\s+permit|permiso\s+de\s+trabajo", re.I),
+        # A form number, an agency or a step in a process that exists nowhere else. The forms are
+        # the strongest of the three: they are how the work is actually done and how a firm that
+        # does it writes about it.
+        "corroborating": re.compile(
+            r"\bI-(?:130|131|140|212|360|485|589|601|693|751|765|821|864|918|929)\b|"
+            r"\bN-(?:400|600|565)\b|\bEOIR-(?:28|42[AB])\b|\bDS-(?:160|260)\b|"
+            r"USCIS|EOIR|\bBIA\b|Board\s+of\s+Immigration\s+Appeals|"
+            r"immigration\s+court|notice\s+to\s+appear|removal\s+proceedings|"
+            r"adjustment\s+of\s+status|consular\s+processing|priority\s+date|visa\s+bulletin|"
+            r"lawful\s+permanent\s+resident|employment\s+authorization|advance\s+parole|"
+            r"bond\s+hearing|credible\s+fear|cancellation\s+of\s+removal|"
+            r"ajuste\s+de\s+estatus|residencia\s+permanente|corte\s+de\s+inmigraci[oó]n", re.I),
+    },
     "workers-compensation": {
         "slug": re.compile(r"work(?:ers?|place)?[-_]?(?:comp\b|compensation|injur)|"
                            r"injured[-_]?(?:at[-_])?work|on[-_]the[-_]job", re.I),

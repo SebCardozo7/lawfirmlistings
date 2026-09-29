@@ -126,9 +126,9 @@
     },
     "G2": {
       "pass": false,
-      "evidence": "Florida does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-25"
+      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
+      "source": "no roster published",
+      "checked_at": "2026-09-28"
     },
     "G3": {
       "pass": false,
@@ -183,7 +183,7 @@
     "total": 35,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-26",
+    "computed_at": "2026-09-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -242,7 +242,7 @@
             "pts": 0,
             "max": 4,
             "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page, which the New York advertising rules effectively require"
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },

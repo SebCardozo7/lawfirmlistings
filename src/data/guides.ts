@@ -22,7 +22,7 @@ export interface Guide {
   thumb?: string;
   icon?: string;
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
-  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'ranking' | 'ladder' | 'roster'
+  cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
@@ -80,6 +80,22 @@ export const GUIDES: Guide[] = [
     thumb: 't2',
     icon: 'columns',
     meta: 'A blog comes first, the price comes last',
+  },
+  {
+    slug: 'what-injury-firms-publish-about-fees-by-state',
+    cover: 'statutes',
+    kicker: 'Costs',
+    title: 'New Study: A State’s Fee Rules Do Not Change What Its Firms Publish',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts, and
+    // the page's own headline flips if a firm ever publishes its percentage.
+    summary:
+      'When this directory covered one state, nobody published the contingency percentage and ' +
+      'the obvious reading was that the state already fixed it. There are enough states now to ' +
+      'test that, and the test comes out the other way: the rules differ, and what firms ' +
+      'disclose does not.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'The rules change by state and the silence does not',
   },
   {
     slug: 'are-google-reviews-reliable',

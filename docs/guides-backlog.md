@@ -199,9 +199,9 @@ about half. The old warning about 410 is kept below because the lesson kept repe
 
 **New, and ranked at the top, because they are the engine bugs this run's guide published:**
 
-0a. **D1 gives away two of its seven points and no firm can take them.** `score.py` line 570
+0a. **D1 gives away two of its seven points and no firm can take them.** `score.py` line 583
     awards 1 point for `trust_pages["bar_numbers_on_bios"]`, which **0 of 790 records carry**, and
-    line 569 adds a `D1_a11y` assessment that **0 firms carry**. The enumerated automatic checks
+    line 582 adds a `D1_a11y` assessment that **0 firms carry**. The enumerated automatic checks
     add to 6 of the declared 7, so between them the ceiling is 5, and 5 is exactly the highest D1
     any firm has reached (2 firms, Anderson Injury Lawyers and Law Offices of Suarez & Montero).
     The mean is 1.80 of 7. This was reported as a correction on 2026-09-16 and left for a person,
@@ -1105,7 +1105,7 @@ rescores 217 firms, which is not a guide run's call:
   evidence string reads "no bar numbers on bios". That is the repository's own stated rule broken
   in its own engine: a firm must not lose points to the reach of our crawl. Either wire the
   crawler's finding through to the record, or take the point out of D1.
-  **Still true on 2026-09-28, at line 570 now, and no longer only a footnote.** The field is
+  **Still true on 2026-09-28, at line 583 as of 2026-09-29, and no longer only a footnote.** The field is
   carried by 0 of 790 records, the evidence line is live on 762 public profiles, and the guide
   published this run states it on the record, along with the second unearnable point: the
   `D1_a11y` assessment slot, which 0 firms carry. Between them D1's ceiling is 5 of a declared 7,

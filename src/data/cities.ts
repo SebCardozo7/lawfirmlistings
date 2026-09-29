@@ -1240,4 +1240,227 @@ export const CITY_NOTES: Record<string, CityNotes> = {
       },
     ],
   },
+
+  'san-antonio-tx': {
+    lede:
+      'Texas gives you two years to sue and six months to tell a city you were hurt. San Antonio ' +
+      'adds a third set of rules again, because a large share of the people injured here are ' +
+      'serving in the military or are their families.',
+    areas: ['Downtown', 'Alamo Heights', 'Stone Oak', 'Southtown', 'Medical Center',
+            'Northwest Side', 'Northeast Side', 'Helotes'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in San Antonio: what is different',
+        paragraphs: [
+          'The limitation period is two years from the day the claim accrues, under section ' +
+          '16.003 of the Civil Practice and Remedies Code, and a claim against a governmental ' +
+          'unit needs written notice within <b>six months</b> under section 101.101 of the Tort ' +
+          'Claims Act. That covers the City of San Antonio, Bexar County and VIA Metropolitan ' +
+          'Transit alike.',
+          'What San Antonio has that no other market in this directory does is the military. ' +
+          'Joint Base San Antonio is the largest joint base in the country, and a claim ' +
+          'involving the federal government is not a Texas claim at all. It runs under the ' +
+          'Federal Tort Claims Act, which requires an administrative claim to the agency first ' +
+          'and gives <b>two years</b> to present it, with a separate six-month clock once the ' +
+          'agency answers.',
+          'A separate doctrine bars an active-duty service member from suing the government for ' +
+          'injuries incident to service at all, and that line is genuinely technical: a car ' +
+          'crash on base and a car crash on the way to base can fall on opposite sides of it. ' +
+          'A firm that handles these regularly will say so, and it is worth asking directly.',
+          'Bexar County hears civil cases in its district courts downtown, and federal matters ' +
+          'go to the Western District of Texas, San Antonio Division.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch San Antonians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the day the claim accrues, under Civil ' +
+          'Practice and Remedies Code § 16.003.',
+          '<b>A claim against the City, Bexar County or VIA:</b> written notice within <b>six ' +
+          'months</b>, under Tort Claims Act § 101.101.',
+          '<b>A claim involving the federal government or a military installation:</b> an ' +
+          'administrative claim to the agency within two years under the Federal Tort Claims ' +
+          'Act, and six months to sue once it is denied.',
+          '<b>Medical malpractice:</b> two years, plus sixty days’ notice before filing and an ' +
+          'expert report within <b>120 days</b> of the answer, under Chapter 74.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a Texas lawyer is licensed?',
+        a: 'The State Bar of Texas publishes a Find a Lawyer directory at ' +
+           '<a href="https://www.texasbar.com" rel="nofollow noopener" target="_blank">' +
+           'texasbar.com</a>, free to search. We do not read it: it refuses our requests, so ' +
+           'Texas profiles carry no licence finding rather than one we did not make. The ' +
+           'registration we can show comes from the Comptroller’s open data, which is how a San ' +
+           'Antonio profile proves the entity exists and holds the right to transact business.',
+      },
+      {
+        q: 'Does it matter that my accident happened on base?',
+        a: 'Enormously, and it is the first thing to tell a lawyer. Nothing here is legal ' +
+           'advice, and where a claim falls between state law, the Federal Tort Claims Act and ' +
+           'the bar on service-related suits is a question for somebody who does this work. ' +
+           'What is worth knowing before the call is that the answer changes both the deadline ' +
+           'and who you are suing.',
+      },
+    ],
+  },
+
+  'san-diego-ca': {
+    lede:
+      'California gives you two years to sue almost anybody and <b>six months</b> to file a ' +
+      'claim against a public body. It is also the rare state where being partly at fault ' +
+      'reduces what you recover rather than ending it.',
+    areas: ['Downtown', 'La Jolla', 'Chula Vista', 'Pacific Beach', 'Mission Valley',
+            'North Park', 'El Cajon', 'Oceanside', 'Escondido'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in San Diego: what is different',
+        paragraphs: [
+          'The limitation period for a personal injury is two years, under section 335.1 of the ' +
+          'Code of Civil Procedure. The rule that ends more California claims than any argument ' +
+          'about fault is the other one: a claim against a public entity has to be presented in ' +
+          'writing within <b>six months</b> under section 911.2 of the Government Code, and ' +
+          'once it is rejected there are six months to sue rather than the remaining year.',
+          'California is also unusual in this directory for how it treats fault. Most states ' +
+          'here bar recovery once a claimant is more than half to blame. California does not: ' +
+          'under pure comparative fault a claimant ninety per cent responsible still recovers ' +
+          'the other ten. That changes what a contested case is worth and it changes which ' +
+          'cases a firm will take.',
+          'San Diego hears civil matters in its Superior Court, with the Hall of Justice ' +
+          'downtown and branches in Vista, El Cajon and Chula Vista, and federal cases go to ' +
+          'the Southern District of California.',
+          'Two things shape this market that shape no other we publish. The Navy and Marine ' +
+          'Corps presence means a real share of claims involve federal defendants and run under ' +
+          'the Federal Tort Claims Act rather than California law. And the border means ' +
+          'collisions, insurance and medical treatment that cross it, which raises questions of ' +
+          'which law applies that simply do not arise elsewhere.',
+        ],
+      },
+      {
+        heading: 'What we can and cannot verify about a California firm',
+        paragraphs: [
+          'Less than the state’s size would suggest. The Secretary of State’s business search ' +
+          'sits behind bot protection, so entity registration is recorded as a check without a ' +
+          'source rather than as a finding.',
+          'Discipline is the same, for a different reason. California runs attorney discipline ' +
+          'through the State Bar Court, whose decisions are published on the State Bar’s own ' +
+          'site rather than as Supreme Court opinions, so the opinion index that carries ' +
+          'Pennsylvania and Nevada holds almost none of California’s.',
+          'The State Bar of California does publish a public attorney search of its own, with ' +
+          'status and public discipline, and checking a name there takes a minute. It is worth ' +
+          'doing, and it is the check we cannot do for you.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Californians out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years, under Code of Civil Procedure § 335.1.',
+          '<b>A claim against the City, the County, a transit district or a school district:</b> ' +
+          'a written claim within <b>six months</b> under Government Code § 911.2, then six ' +
+          'months to sue once it is rejected.',
+          '<b>Medical malpractice:</b> one year from discovery with a three-year outer limit, ' +
+          'and ninety days’ notice before suit.',
+          '<b>Wrongful death:</b> two years from the death.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if a California lawyer is licensed?',
+        a: 'The State Bar of California publishes an attorney search at ' +
+           '<a href="https://www.calbar.ca.gov" rel="nofollow noopener" target="_blank">' +
+           'calbar.ca.gov</a>, free, showing status and public discipline. We do not read it, ' +
+           'so San Diego profiles carry no licence finding rather than one we did not make.',
+      },
+      {
+        q: 'Does California cap what I can recover?',
+        a: 'Not in an ordinary injury case. Medical malpractice is the exception: California ' +
+           'limits non-economic damages against health care providers under MICRA, and the ' +
+           'legislature reset that limit in 2022 on a schedule that raises it each year, so the ' +
+           'figure depends on when the claim arose. That is a question for a lawyer rather than ' +
+           'a number to read off a page, and nothing here is legal advice.',
+      },
+    ],
+  },
+
+  'phoenix-az': {
+    lede:
+      'Arizona gives you two years to sue a person and <b>one year</b> to sue a public body, ' +
+      'with a written notice due in half of that. It is also a state with no cap on damages at ' +
+      'all, by constitutional command.',
+    areas: ['Downtown', 'Scottsdale', 'Tempe', 'Mesa', 'Glendale', 'Chandler', 'Gilbert',
+            'Peoria'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Phoenix: what is different',
+        paragraphs: [
+          'The ordinary limitation period is two years from the injury, under section 12-542 of ' +
+          'the Arizona Revised Statutes. A claim against a public entity or a public employee ' +
+          'runs on a far shorter track: a written notice of claim within <b>180 days</b> under ' +
+          'section 12-821.01, and suit within <b>one year</b> under section 12-821.',
+          'That notice is stricter than most. The statute requires it to contain a specific ' +
+          'amount for which the claim can be settled and the facts supporting that amount, and ' +
+          'a notice that leaves the figure out has been held insufficient. It is the kind of ' +
+          'requirement that ends a good claim on a technicality.',
+          'Arizona is at the opposite end of the directory on two other things. Fault is purely ' +
+          'comparative under section 12-2505, so a claimant mostly to blame still recovers the ' +
+          'remainder rather than nothing. And the state constitution forbids the legislature ' +
+          'from abrogating the right to recover damages, which is why Arizona has no cap on ' +
+          'damages in any kind of case, medical malpractice included.',
+          'Maricopa County hears civil matters in its Superior Court, and federal cases go to ' +
+          'the District of Arizona. The Valley is one legal market: a firm in Scottsdale, Tempe ' +
+          'or Mesa appears in the same courthouse as one downtown.',
+        ],
+      },
+      {
+        heading: 'What we can and cannot verify about an Arizona firm',
+        paragraphs: [
+          'Not the registration, and the reason is worth stating plainly. Arizona’s corporate ' +
+          'register redirects to a service whose robots file asks automated readers not to ' +
+          'crawl any of it. That is an instruction rather than a technical obstacle, and we ' +
+          'follow it, so entity registration is recorded here as a check without a source.',
+          'Discipline is a separate gap. Arizona runs attorney discipline before a presiding ' +
+          'disciplinary judge and publishes the outcomes on the courts’ own site rather than as ' +
+          'Supreme Court opinions, so the index that carries Pennsylvania and Nevada holds none ' +
+          'of Arizona’s.',
+          'The State Bar of Arizona publishes a member search with status and public discipline, ' +
+          'which takes a minute to check and is the check we cannot do for you.',
+        ],
+      },
+      {
+        heading: 'Deadlines that catch Arizonans out',
+        paragraphs: [],
+        list: [
+          '<b>Personal injury:</b> two years from the injury, under A.R.S. § 12-542.',
+          '<b>A claim against the City of Phoenix, Maricopa County, Valley Metro or a school ' +
+          'district:</b> written notice within <b>180 days</b> under A.R.S. § 12-821.01, stating ' +
+          'a specific settlement figure, and suit within <b>one year</b> under § 12-821.',
+          '<b>Wrongful death:</b> two years from the death.',
+          '<b>Medical malpractice:</b> two years, with no cap on what can be recovered, which is ' +
+          'unusual and is a matter of the state constitution rather than of policy.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'How do I check if an Arizona lawyer is licensed?',
+        a: 'The State Bar of Arizona publishes a member directory at ' +
+           '<a href="https://www.azbar.org" rel="nofollow noopener" target="_blank">azbar.org</a>, ' +
+           'showing status and public discipline. We do not read it, so Phoenix profiles carry ' +
+           'no licence finding rather than one we did not make.',
+      },
+      {
+        q: 'Why does the 180-day notice matter so much?',
+        a: 'Because it is short, because it applies to a wider set of defendants than people ' +
+           'expect, and because it has content requirements a letter written without advice ' +
+           'usually misses. A bus, a city vehicle, a public hospital, a school and a state ' +
+           'university all sit behind it. Nothing here is legal advice, and a claim involving ' +
+           'any public body is a reason to talk to a lawyer in weeks rather than months.',
+      },
+    ],
+  },
 };

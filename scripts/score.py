@@ -489,12 +489,25 @@ def compute(firm):
                        + (f"; {venues} court or county reference{'' if venues == 1 else 's'}"
                           if venues else "; no court or county named, so no result can be "
                                          "looked up")))
-        # The disclaimer New York's advertising rules effectively require alongside results.
+        # The disclaimer that belongs beside published results.
+        #
+        # This line used to say "which the New York advertising rules effectively require" for
+        # every firm in the directory. That was written when the directory was New York only, and
+        # eleven states later it was telling 491 firms outside New York what New York requires.
+        #
+        # New York is the one whose rule this repo has actually read, so New York is the only one
+        # named. Everywhere else the line says what is missing and why it matters, and makes no
+        # claim about that state's rules, because nobody here has read them. A firm's own bar
+        # association is the place to settle what it must publish.
+        in_ny = (firm.get("market") or {}).get("state") == "NY"
         out.append(sub("B3", 4 if rp.get("disclaimer") else 0, "firm",
-                       "Prior-results disclaimer present, as the advertising rules require"
+                       "Prior-results disclaimer present beside the published results"
                        if rp.get("disclaimer") else
-                       "No prior-results disclaimer on the results page, which the New York "
-                       "advertising rules effectively require"))
+                       ("No prior-results disclaimer on the results page, which New York's "
+                        "advertising rules effectively require" if in_ny else
+                        "No prior-results disclaimer on the results page. A past result is not a "
+                        "prediction of another one, and the disclaimer is the sentence that says "
+                        "so")))
     elif rp:
         for c in ["B1", "B2", "B3"]:
             out.append(sub(c, 0, "pending", rp.get("why") or "Results page could not be read"))
