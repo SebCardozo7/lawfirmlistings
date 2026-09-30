@@ -243,11 +243,10 @@
       "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "151 public client reviews, at or above the ten this gate asks for, and 0.5 years since the entity was filed",
-      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30",
-      "unresolvable": "An entity filing date is when this entity was registered rather than when the practice began, and a firm that reorganises files again. The review count contradicts it, so the age is unestablished rather than disproved."
+      "pass": true,
+      "evidence": "151 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2010-02-05, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -312,7 +311,7 @@
   "score": {
     "total": 38,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G6) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G1) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -394,7 +393,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.85 over 151 reviews → Bayesian 4.84 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.85 over 151 reviews → Bayesian 4.84 (prior 4.83 weighted as 100 reviews, from 1074 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -503,9 +502,7 @@
     "gates_unavailable": [
       "G1"
     ],
-    "gates_unresolvable": [
-      "G6"
-    ],
+    "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
   },

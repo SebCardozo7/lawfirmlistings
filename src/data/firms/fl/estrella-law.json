@@ -5,7 +5,7 @@
   "website": "https://estrellalawgroup.com/",
   "domain": "estrellalawgroup.com",
   "phone": "(305) 444-4495",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "immigration",
@@ -255,8 +255,8 @@
   },
   "score": {
     "total": 28,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -338,7 +338,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 71 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 71 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 1074 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -445,7 +445,8 @@
     "coverage": 0.786,
     "floor_abc_pct": 0.355,
     "gates_unavailable": [
-      "G1"
+      "G1",
+      "G2"
     ],
     "gates_unresolvable": [
       "G3"

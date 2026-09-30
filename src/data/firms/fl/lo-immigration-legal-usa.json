@@ -138,8 +138,8 @@
     },
     "G6": {
       "pass": false,
-      "evidence": "8 public client reviews, below the ten this gate asks for, and 0.6 years since the entity was filed",
-      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "evidence": "8 reviews, below the 10 this gate asks for in this practice",
+      "source": "Google Places API and the domain's registration date over RDAP",
       "checked_at": "2026-09-30"
     }
   },
@@ -210,7 +210,7 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 30,
+    "total": 32,
     "tier": "Not eligible",
     "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
@@ -277,7 +277,7 @@
         ]
       },
       "C": {
-        "score": 11,
+        "score": 12,
         "max": 20,
         "subs": [
           {
@@ -291,10 +291,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 4,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.5 over 8 reviews → Bayesian 4.80 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 8 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1074 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -383,11 +383,11 @@
         ]
       }
     },
-    "floor_abc": 14,
+    "floor_abc": 15,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 40,
+      "gap": 38,
       "floor_met": false,
       "coverage_met": false,
       "path": [
@@ -396,12 +396,13 @@
         "D1 Website trust & experience: not yet measured (7 pts)"
       ]
     },
-    "raw": 16.7,
+    "raw": 17.7,
     "assessed": 55,
     "coverage": 0.696,
-    "floor_abc_pct": 0.368,
+    "floor_abc_pct": 0.395,
     "gates_unavailable": [
-      "G1"
+      "G1",
+      "G2"
     ],
     "gates_unresolvable": [],
     "assessable": 79,

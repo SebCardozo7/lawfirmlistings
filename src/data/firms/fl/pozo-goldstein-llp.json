@@ -5,7 +5,7 @@
   "website": "https://pozogoldstein.com/",
   "domain": "pozogoldstein.com",
   "phone": "(305) 856-0400",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "immigration",
@@ -306,8 +306,8 @@
   },
   "score": {
     "total": 47,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -389,7 +389,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.5 over 233 reviews → Bayesian 4.60 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 233 reviews → Bayesian 4.60 (prior 4.83 weighted as 100 reviews, from 1074 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -496,7 +496,8 @@
     "coverage": 0.671,
     "floor_abc_pct": 0.739,
     "gates_unavailable": [
-      "G1"
+      "G1",
+      "G2"
     ],
     "gates_unresolvable": [
       "G3"

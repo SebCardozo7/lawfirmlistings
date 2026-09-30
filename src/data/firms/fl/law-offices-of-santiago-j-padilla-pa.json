@@ -148,8 +148,8 @@
     },
     "G6": {
       "pass": false,
-      "evidence": "4 public client reviews, below the ten this gate asks for, and 27.0 years since the entity was filed",
-      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "evidence": "4 reviews, below the 10 this gate asks for in this practice",
+      "source": "Google Places API and the domain's registration date over RDAP",
       "checked_at": "2026-09-30"
     }
   },
@@ -297,7 +297,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 4 reviews → Bayesian 4.83 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 4 reviews → Bayesian 4.83 (prior 4.83 weighted as 100 reviews, from 1074 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
