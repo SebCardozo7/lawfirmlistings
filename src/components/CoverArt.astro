@@ -20,7 +20,7 @@ interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-      | 'divorce' | 'language' | 'sample' | 'pages';
+      | 'divorce' | 'language' | 'sample' | 'pages' | 'signal';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -664,5 +664,42 @@ const lens = { col: 4, row: 3, span: 5 };
         </g>
       );
     })}
+  </svg>
+)}
+
+{name === 'signal' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* The study in one shape. Four groups, the directory split into quarters by how much search
+        traffic each firm's site gets, most visible on the left. The columns are what the firms
+        publish about themselves and they fall away to the right. The line above them is what
+        their clients rated them, and it does not fall: it runs flat across all four, which is the
+        finding. Proportions are the measured ones rounded for the drawing; the article beside
+        this carries the figures. */}
+    {[
+      { publish: 1.00, tint: MINT },
+      { publish: 0.79, tint: MINT },
+      { publish: 0.61, tint: BLUE },
+      { publish: 0.43, tint: VIOLET },
+    ].map((col, ci) => {
+      const x = 170 + ci * 240;
+      const h = Math.round(col.publish * 210);
+      return (
+        <g transform={`translate(${x},0)`}>
+          {/* The dashed shaft each column falls short inside, so the drop is legible as a drop. */}
+          <rect y={110} width="128" height="210" rx="10" fill="none"
+            stroke="rgba(255,255,255,.16)" stroke-width="1.6" stroke-dasharray="7 6" />
+          <rect y={110 + (210 - h)} width="128" height={h} rx="10" fill={col.tint} opacity=".68" />
+          {/* The floor rule, as long as the filled part. */}
+          <line x1="0" y1="336" x2={Math.max(12, 128 * col.publish)} y2="336"
+            stroke={col.tint} stroke-width="4" stroke-linecap="round" opacity=".9" />
+        </g>
+      );
+    })}
+    {/* The flat line: the client rating, level across all four groups, with a mark on each. */}
+    <line x1="170" y1="74" x2="1082" y2="74" stroke={VIOLET} stroke-width="3"
+      stroke-linecap="round" opacity=".85" />
+    {[0, 1, 2, 3].map(ci => (
+      <circle cx={170 + ci * 240 + 64} cy="74" r="9" fill={VIOLET} opacity=".95" />
+    ))}
   </svg>
 )}

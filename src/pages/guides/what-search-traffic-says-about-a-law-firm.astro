@@ -1,0 +1,327 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// Every figure on this page is computed from the firms collection at build time. Nothing is typed
+// into the prose, so the article cannot drift away from the data underneath it.
+//
+// Which field each figure reads, written down because two of this section's worst errors came
+// from building a sentence on a field whose definition nobody had checked:
+//   digital.ahrefs.org_traffic   Ahrefs' estimate of monthly US organic search visits to the
+//                                firm's domain, subdomains mode. Written by scripts/apply_ahrefs.py
+//                                from the Site Explorer batch endpoint. It is an estimate of
+//                                organic traffic only. It is NOT ad spend and NOT a paid figure,
+//                                so no sentence here may call it advertising or spending.
+//   digital.ahrefs.paid_keywords Count of keywords the domain bids on. The only paid signal here.
+//   reviews.google.rating        The star rating Google publishes for the firm, via Places.
+//   digital.places.review_count_total  Reviews Google counted, summed across the firm's listings.
+//   score.pillars[].subs[]       The scored sub-factors, each with pts, max and source.
+//
+// A sub-factor whose source is pending, partial or 'no queryable source' is excluded from every
+// average below rather than counted as zero: those are gaps in our own reach, not findings about
+// a firm, and averaging them in would make our crawl look like the firm's behaviour.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const measured = firms.filter(f => f.data.digital.ahrefs && f.data.score && f.data.reviews.google);
+// Tie-broken on slug so the quartile edges, and therefore every figure below, are the same on
+// every build. Collection order is not stable and two firms share a traffic figure often.
+const byTraffic = [...measured].sort((a, b) =>
+  b.data.digital.ahrefs!.org_traffic - a.data.digital.ahrefs!.org_traffic ||
+  a.data.slug.localeCompare(b.data.slug));
+
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const mean = (xs: number[]) => xs.reduce((n, x) => n + x, 0) / (xs.length || 1);
+
+const traffic = (f: typeof measured[number]) => f.data.digital.ahrefs!.org_traffic;
+const totalTraffic = measured.reduce((n, f) => n + traffic(f), 0);
+const medianTraffic = median(measured.map(traffic));
+const medianDr = median(measured.map(f => f.data.digital.ahrefs!.dr));
+const medianKeywords = median(measured.map(f => f.data.digital.ahrefs!.org_keywords));
+const noTraffic = measured.filter(f => traffic(f) === 0);
+const buyingAds = measured.filter(f => f.data.digital.ahrefs!.paid_keywords > 0);
+
+// How many firms, counting down from the most visible, it takes to reach half of all the organic
+// traffic in the directory. Concentration said as a count rather than as a share of a share.
+let running = 0;
+let halfCount = 0;
+for (const f of byTraffic) {
+  running += traffic(f);
+  halfCount += 1;
+  if (running >= totalTraffic / 2) break;
+}
+
+// Quarters of the directory by search traffic, most visible first. Quartiles rather than a
+// correlation coefficient because the question is whether the thing moves at all, and a table of
+// four groups can be checked by eye against the charts.
+const q = Math.floor(byTraffic.length / 4);
+const QUARTILES = [
+  { label: 'Most visible quarter', firms: byTraffic.slice(0, q) },
+  { label: 'Second quarter', firms: byTraffic.slice(q, 2 * q) },
+  { label: 'Third quarter', firms: byTraffic.slice(2 * q, 3 * q) },
+  { label: 'Least visible quarter', firms: byTraffic.slice(3 * q) },
+];
+const quartileRows = QUARTILES.map(g => ({
+  label: g.label,
+  n: g.firms.length,
+  traffic: median(g.firms.map(traffic)),
+  reviews: median(g.firms.map(f => f.data.digital.places!.review_count_total)),
+  rating: mean(g.firms.map(f => f.data.reviews.google!.rating)),
+  poor: g.firms.filter(f => f.data.reviews.google!.rating < 4.5).length,
+}));
+const topQ = quartileRows[0];
+const bottomQ = quartileRows[3];
+const ratingSpread = Math.max(...quartileRows.map(r => r.rating)) -
+  Math.min(...quartileRows.map(r => r.rating));
+
+// Every scored sub-factor, as a share of the maximum actually assessed for each firm, in the most
+// visible quarter against the least. Sub-factors scored on fewer than 100 firms in either group
+// are dropped: A2 and A6 read the New York attorney register, which is the only one we may query,
+// so they exist for too few firms here to carry a comparison.
+const subsOf = (f: typeof measured[number]) =>
+  (['A', 'B', 'C', 'D', 'E'] as const).flatMap(p => f.data.score!.pillars[p].subs);
+const SCORED = ['registry', 'observed', 'ahrefs', 'places', 'psi', 'court', 'firm'];
+const share = (group: typeof measured, code: string) => {
+  const xs = group.flatMap(f => subsOf(f)
+    .filter(s => s.code === code && s.max > 0 && SCORED.includes(s.source))
+    .map(s => (s.pts / s.max) * 100));
+  return { pct: xs.length ? mean(xs) : null, n: xs.length };
+};
+const allCodes = [...new Set(measured.flatMap(f => subsOf(f).map(s => s.code)))];
+const subMeta = new Map(measured.flatMap(f => subsOf(f).map(s => [s.code, s.label] as const)));
+// The assessed maximum for a sub-factor is not the same for every firm: A5 is scored out of 3 for
+// most firms and 6 for a few, and D4 out of 1, 2 or 4. A Map built by flatMap keeps whichever
+// record was written last, which is arbitrary, so take the largest each code is assessed out of.
+const subMax = new Map(allCodes.map(code => [code,
+  Math.max(...measured.flatMap(f => subsOf(f).filter(s => s.code === code).map(s => s.max)))] as const));
+const movement = allCodes
+  .map(code => {
+    const hi = share(QUARTILES[0].firms, code);
+    const lo = share(QUARTILES[3].firms, code);
+    return { code, label: subMeta.get(code)!, max: subMax.get(code)!, hi, lo,
+             delta: hi.pct !== null && lo.pct !== null ? hi.pct - lo.pct : null };
+  })
+  .filter(m => m.delta !== null && m.hi.n >= 100 && m.lo.n >= 100)
+  .sort((a, b) => b.delta! - a.delta! || a.code.localeCompare(b.code));
+const risers = movement.filter(m => m.delta! > 0);
+const flat = movement.filter(m => m.delta! <= 0);
+// Weight by what we actually assessed rather than by the declared scale. The declared weights
+// live in scripts/score.py and not in the collection, and the assessed maximum differs from them
+// for several sub-factors, so the only honest denominator here is the points these firms were
+// really marked out of.
+const assessedPoints = (codes: string[]) =>
+  measured.reduce((n, f) => n + subsOf(f)
+    .filter(s => codes.includes(s.code) && s.max > 0 && SCORED.includes(s.source))
+    .reduce((m, s) => m + s.max, 0), 0);
+const riserPoints = assessedPoints(risers.map(m => m.code));
+const flatPoints = assessedPoints(flat.map(m => m.code));
+const comparedPoints = riserPoints + flatPoints;
+const riserShare = comparedPoints ? (riserPoints / comparedPoints) * 100 : 0;
+const flatShare = comparedPoints ? (flatPoints / comparedPoints) * 100 : 0;
+const dropped = allCodes.length - movement.length;
+
+const listOf = (xs: string[]) =>
+  xs.length <= 1 ? (xs[0] ?? '') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const flatNames = listOf(flat.map(m => m.label.toLowerCase()));
+const flatIntro = flat.length === 1
+  ? 'One sub-factor does not rise'
+  : `${flat.length} sub-factors do not rise`;
+const flatReads = flat.length === 1
+  ? 'It is the one that reads'
+  : 'They are the ones that read';
+
+// D2 reads these very numbers, so it has to rise and proves nothing. Named rather than hidden.
+const d2 = movement.find(m => m.code === 'D2');
+
+const movementRows = movement.map(m => ({
+  label: `${m.code}. ${m.label}`,
+  // A bar draws the rise only. Sub-factors that do not rise draw nothing and print their
+  // change instead, because a negative bar drawn as a positive one would invert the finding.
+  value: Math.max(0, m.delta!),
+  display: `${m.delta! > 0 ? '+' : ''}${m.delta!.toFixed(1)} points`,
+  note: `${m.hi.pct!.toFixed(0)}% of assessed maximum in the most visible quarter, ${m.lo.pct!.toFixed(0)}% in the least`,
+  emphasis: m.delta! <= 0,
+}));
+
+// The bands are decades of traffic, because the distribution spans four orders of magnitude and
+// a linear axis would put 700 firms in one column.
+const BANDS = [
+  { label: 'None', lo: 0, hi: 1, note: 'no measured traffic' },
+  { label: 'Under 100', lo: 1, hi: 100, note: 'a handful of visits' },
+  { label: '100 to 999', lo: 100, hi: 1000, note: 'the median sits here' },
+  { label: '1,000 to 9,999', lo: 1000, hi: 10000, note: 'a working channel' },
+  { label: '10,000 and up', lo: 10000, hi: Infinity, note: 'a national presence' },
+];
+const bandColumns = BANDS.map(b => ({
+  label: b.label,
+  note: b.note,
+  value: measured.filter(f => traffic(f) >= b.lo && traffic(f) < b.hi).length,
+}));
+
+// The two firms the contrast is about. Both picked by rule rather than by hand: the most visible
+// firm in the directory, and the best rated firm in the least visible quarter that has enough
+// reviews for the rating to mean anything. Ties broken on slug so the illustration cannot change
+// between builds.
+const mostVisible = byTraffic[0];
+const quietest = [...QUARTILES[3].firms]
+  .filter(f => f.data.digital.places!.review_count_total >= 50)
+  .sort((a, b) =>
+    b.data.reviews.google!.rating - a.data.reviews.google!.rating ||
+    b.data.digital.places!.review_count_total - a.data.digital.places!.review_count_total ||
+    a.data.slug.localeCompare(b.data.slug))[0];
+
+// The readings were not all taken on one day: they run over a stretch of days, so taking the date
+// off whichever record the collection happens to return first would print an arbitrary one of
+// them. The byline carries the last reading and the method section carries the span.
+const readingDates = [...new Set(measured.map(f => f.data.digital.ahrefs!.measured_at))].sort();
+const day = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const firstRead = readingDates[0] ?? null;
+const lastRead = readingDates[readingDates.length - 1] ?? null;
+const updated = lastRead ? day(lastRead) : null;
+const monthRead = lastRead
+  ? new Date(lastRead).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+const states = [...new Set(measured.map(f => f.data.market.state))].length;
+
+// States the finding. No figure in it: check_meta rejects one, and rightly, because a title is
+// indexed once and every count here moves when a firm is added. Kept under 70 characters so
+// audit_seo does not flag it and Google does not truncate it.
+const title = 'New Study: Search Visibility Brings More Reviews, Not Better Ones';
+const description = 'We measured every law firm in this directory for organic search traffic and client rating. Visibility tracks what a firm publishes, not what clients say.';
+---
+<Base title={title} description={description} nav="guides" image="/og/signal.png" imageAlt="Four falling columns under a flat line, the shape of the study">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">What search traffic says about a law firm</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Study · Digital presence</span>
+    <h1>{title}</h1>
+    <p class="lede">The most visible law firm in a search result is the one that invested most in being found there. We measured how much organic search traffic each of the {measured.length} firms in this directory actually gets, and set it beside what those firms publish and what their clients rated them. Almost everything a firm says about itself rises with visibility. The rating its clients gave it does not move at all.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="signal" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#concentration">How concentrated it is</a></li>
+      <li><a href="#rises">What rises with visibility</a></li>
+      <li><a href="#flat">What does not</a></li>
+      <li><a href="#us">What this says about our own score</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Organic search traffic and client ratings for ${measured.length} law firms in ${states} states${monthRead ? `, measured ${monthRead}` : ''}.`}
+      items={[
+        `The median firm here gets <b>${medianTraffic.toLocaleString('en-US')} organic search visits a month</b>, and <b>${noTraffic.length} firms</b> get none we could measure.`,
+        `Search traffic is concentrated: <b>${halfCount} of ${measured.length} firms</b> hold half of all the organic traffic in the directory.`,
+        `Between the most and least visible quarter, the median review count runs <b>${topQ.reviews.toLocaleString('en-US')} against ${bottomQ.reviews.toLocaleString('en-US')}</b>, while the mean client rating runs <b>${topQ.rating.toFixed(2)} against ${bottomQ.rating.toFixed(2)}</b>. Visibility brings more reviews, not better ones.`,
+        `Of the <b>${movement.length} sub-factors</b> we could compare, <b>${flat.length}</b> fail to rise with visibility, and those are the ones that read what clients said rather than what the firm published.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Search traffic here is an estimate of unpaid visits from Google, not a measure of what a firm spends. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Every firm in this directory has a website, and every website has an audience that can be estimated. We hold that estimate for {measured.length} of the {firms.length} published firms: the number of visits a month the domain gets from unpaid Google results in the United States, along with its referring domains, its ranking keywords and whether it bids on any paid ones. The measurement is Ahrefs' and it is recorded on the firm's own record with the date it was taken. {firstRead && lastRead && firstRead !== lastRead && <>Those readings were not all taken on one day: they run from {day(firstRead)} to {day(lastRead)}, so a firm measured at one end of that stretch is compared with a firm measured at the other.</>}</p>
+    <p><b>One thing this is not, and the distinction decides what the rest of the page may say.</b> This is organic traffic: people who found the firm through an unpaid search result. It is not advertising spend, and nothing here can tell you what a firm pays for television, billboards or Google Ads. The only paid signal we hold is whether the domain bids on search keywords at all, and {buyingAds.length} of the {measured.length} firms do. So when this page says a firm is visible, it means its website ranks, not that it outspent anybody.</p>
+    <p>The median firm gets {medianTraffic.toLocaleString('en-US')} visits a month, ranks for {medianKeywords.toLocaleString('en-US')} keywords, and has a domain rating of {medianDr}. Those are ordinary numbers for a local business, and they are a long way below what the pages selling law firm marketing tend to imply.</p>
+    <ColumnChart
+      heading={`Monthly organic search visits across the ${measured.length} firms we could measure`}
+      columns={bandColumns}
+      caption={`Bands are decades, because the spread runs from nothing to tens of thousands and a linear scale would put most of the directory in one column. ${noTraffic.length} firms have no measured organic traffic at all.`}
+    />
+
+    <h2 id="concentration">How concentrated it is</h2>
+    <p>The first finding is about the shape rather than the level. {halfCount} firms, out of {measured.length}, take half of all the organic search traffic in this directory between them. The other {(measured.length - halfCount).toLocaleString('en-US')} share the rest.</p>
+    <p>That is worth saying plainly to anybody reading a search result and assuming it reflects a market. It does not. A search page is the output of a contest most firms here are not competing in, and {noTraffic.length} of them are not in it at all.</p>
+    <p>{mostVisible && <>The most visible firm we measure is <a href={`/firms/${mostVisible.data.slug}/`}>{mostVisible.data.name}</a>, at {traffic(mostVisible).toLocaleString('en-US')} visits a month.</>} {quietest && <>The best rated firm in the least visible quarter is <a href={`/firms/${quietest.data.slug}/`}>{quietest.data.name}</a>, at {traffic(quietest).toLocaleString('en-US')}.</>}</p>
+
+    <h2 id="rises">What rises with visibility</h2>
+    <p>To ask what visibility goes with, we split the directory into four equal groups by traffic and read every scored sub-factor in each group. A sub-factor is reported as a share of the maximum we actually assessed for each firm, so a check we could not run is left out rather than counted against anybody.</p>
+    <p>Almost everything rises. {risers.length} of the {movement.length} sub-factors we could compare are higher in the most visible quarter than in the least, and the gaps are not small.</p>
+    <BarChart
+      heading="How far each sub-factor moves from the least visible quarter to the most"
+      rows={movementRows}
+      caption={`In percentage points of each sub-factor's assessed maximum. A bar is drawn only where the sub-factor rises with visibility; the ${flat.length} that do not rise draw no bar and print their change instead, because drawing a fall as a bar would invert the finding. ${dropped} sub-factors are left out entirely for being scored on too few firms to compare.`}
+    />
+    <p>Read down that list and it is one kind of thing: publishing. A firm in the most visible quarter is likelier to publish its results, to say what kind of case each one was, to carry a disclaimer beside them, to state its fees, to name the languages it works in and to keep a filled-in Google Business Profile. <a href="/guides/what-law-firm-websites-publish/">We counted those pages directly in an earlier study</a> and found the same asymmetry from the other side.</p>
+    <p><b>One of those bars proves nothing and is left in so it can be seen.</b> {d2 && <>Sub-factor {d2.code}, {d2.label.toLowerCase()}, is worth {d2.max} points and is scored from the very Ahrefs figures this page sorts the firms by. It rises by {d2.delta!.toFixed(1)} points because it cannot do anything else.</>} The other bars are independent of the sort; that one is the sort.</p>
+    <p>The honest reading of the rest is not that being findable makes a firm publish more. Both are what a firm with a marketing budget and somebody to run it looks like. Visibility is a proxy for investment in the website, and so is most of what the website says.</p>
+
+    <h2 id="flat">What does not</h2>
+    <p>{flatIntro}, {flatNames}. {flatReads} what clients said instead of what the firm published.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Group</th><th class="num">Firms</th><th class="num">Median visits</th><th class="num">Median reviews</th><th class="num">Mean rating</th><th class="num">Rated under 4.5</th></tr></thead>
+        <tbody>
+          {quartileRows.map(r => (
+            <tr>
+              <td>{r.label}</td>
+              <td class="num">{r.n}</td>
+              <td class="num">{r.traffic.toLocaleString('en-US')}</td>
+              <td class="num">{r.reviews.toLocaleString('en-US')}</td>
+              <td class="num">{r.rating.toFixed(2)}</td>
+              <td class="num">{r.poor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p>The review count falls by a factor of {(topQ.reviews / Math.max(1, bottomQ.reviews)).toFixed(1)} across those four rows. The rating does not follow it. The mean rating across all four groups spans {ratingSpread.toFixed(2)} of a star, which is a difference no reader could act on and no larger than the measurement noise we have already published on these same ratings.</p>
+    <p><b>So visibility brings a firm more reviews, not better ones.</b> That is the finding, and it is the one thing on this page a reader choosing a lawyer can act on: the number of reviews a firm has is partly a measure of how many people its marketing reached, and the rating is closer to a measure of the firm.</p>
+    <p>Two cautions, because this is the claim most likely to be overread.</p>
+    <p>The first is a ceiling. Law firm ratings are crushed against five stars, which we established when <a href="/guides/are-google-reviews-reliable/">we compared the reviews Google returns to the ratings it publishes</a>: most firms sit above 4.8 and there is very little room for a good firm to look better. A flat line against a ceiling is weaker evidence than a flat line in open space. There is real spread underneath it, though: the rating we hold runs from well under four stars to five, so a difference between these groups could have appeared and did not.</p>
+    <p>The second runs the other way and is the more interesting of the two. The least visible quarter holds {bottomQ.poor} firms rated under 4.5, against {topQ.poor} in the most visible quarter. The quiet end of this directory is not worse on average. It is wider: it holds both the highest rated firms and most of the poorly rated ones. A firm with no search presence is not a warning, and it is not a recommendation either. It is simply unmeasured by the thing people use as a measure.</p>
+    <p>One pair of firms shows why a pair of firms is not evidence. {mostVisible && quietest && <><a href={`/firms/${mostVisible.data.slug}/`}>{mostVisible.data.name}</a> is rated {mostVisible.data.reviews.google!.rating.toFixed(1)} across {mostVisible.data.digital.places!.review_count_total.toLocaleString('en-US')} reviews, and <a href={`/firms/${quietest.data.slug}/`}>{quietest.data.name}</a> is rated {quietest.data.reviews.google!.rating.toFixed(1)} across {quietest.data.digital.places!.review_count_total.toLocaleString('en-US')}, on {traffic(quietest).toLocaleString('en-US')} visits a month against {traffic(mostVisible).toLocaleString('en-US')}.</>} On review count that pair runs against the directory's own average, which is exactly the point: the table above is the evidence and two firms are an illustration. Anybody can find the pair that argues either case.</p>
+
+    <h2 id="us">What this says about our own score</h2>
+    <p>This is uncomfortable for the thing we publish, so here it is in full.</p>
+    <p>The LFL Certification Score is a share of what we could assess, rather than a mark out of a fixed hundred. Of every point we assessed and could compare across these firms, <b>{riserShare.toFixed(0)}%</b> sits in sub-factors that rise with a firm's search visibility and <b>{flatShare.toFixed(0)}%</b> in those that do not. <a href="/methodology/">The methodology</a> describes those points as measuring accountability, published outcomes and client experience. On this evidence a large part of the scale is also tracking something simpler: whether a firm has a marketing operation.</p>
+    <p>Some of that is defensible and we would defend it. A firm that publishes its fees, its results and its attorney roster is genuinely easier for a client to check than one that publishes none of it, and that is worth points whatever the reason the firm did it. Being checkable is the thing we score.</p>
+    <p>What is not defensible is pretending the two are the same. A small firm with no marketing budget can be excellent and will score lower here, because the evidence we need is evidence somebody has to be paid to produce. We have written before about <a href="/guides/what-a-law-firm-score-cannot-compare/">the limits of comparing these totals at all</a>, and this is another one to add to that list: the score rewards firms that publish, and publishing costs money.</p>
+    <p>{d2 && <>The narrowest version of the problem is sub-factor {d2.code}. It is assessed out of {d2.max} points and it is search authority measured directly. A firm earns those points for ranking well, which is a fact about its marketing and about nothing else.</>} It is the one part of the score this page's finding indicts without qualification.</p>
+    <p>The part that comes out well is pillar C. Of everything we measure, what clients said is the part that does not bend to a budget, and it is the reason the score is not simply a marketing audit with a number on the end.</p>
+    <p>A firm that thinks a measurement here is wrong can see every sub-score and the evidence behind it on its own profile, and can <a href="/list-your-firm/">claim its listing</a> and correct us. Firms that want to compare themselves against their own market can start from <a href="/practice-areas/personal-injury/">the personal injury directory</a> or <a href="/cities/new-york-ny/personal-injury/">the New York injury ranking</a>, which rank on the score rather than on any of this.</p>
+    <p class="muted" style="font-size:.86rem">Search metrics come from the Ahrefs Site Explorer batch endpoint, organic figures for the United States, recorded on each firm's record with the date measured. Ratings and review counts come from the Google Places API. A firm we could not measure is left out of these figures rather than counted as zero.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm above has a profile showing its offices, fees, client reviews and measured digital presence.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
+        <li><a href="/guides/are-google-reviews-reliable/">Are Google reviews reliable</a></li>
+        <li><a href="/guides/core-web-vitals-new-york-injury-firms/">Core Web Vitals and injury firms</a></li>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
