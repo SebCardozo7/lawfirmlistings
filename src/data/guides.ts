@@ -67,6 +67,21 @@ export function publishedGuides(
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'what-search-traffic-says-about-a-law-firm',
+    cover: 'signal',
+    kicker: 'Study',
+    title: 'New Study: Search Visibility Brings More Reviews, Not Better Ones',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'The most visible firm in a search result is the one that invested most in being found ' +
+      'there. We measured the organic search traffic of every firm in this directory against ' +
+      'what it publishes and what its clients rated it. Almost everything a firm says about ' +
+      'itself rises with visibility. The rating its clients gave it does not move.',
+    thumb: 't3',
+    icon: 'columns',
+    meta: 'More reviews, not better ones',
+  },
+  {
     slug: 'what-law-firm-websites-publish',
     cover: 'pages',
     kicker: 'Method',
