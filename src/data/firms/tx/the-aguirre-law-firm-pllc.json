@@ -1,0 +1,476 @@
+{
+  "slug": "the-aguirre-law-firm-pllc",
+  "name": "The Aguirre Law Firm, PLLC",
+  "initials": "AG",
+  "website": "https://www.aguirrelawpllc.com/",
+  "domain": "aguirrelawpllc.com",
+  "phone": "(210) 922-0808",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.aguirrelawpllc.com/boerne-car-accident-lawyer/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "san-antonio-tx",
+    "city": "San Antonio",
+    "state": "TX",
+    "state_name": "Texas"
+  },
+  "offices": [
+    {
+      "label": "The Aguirre Law Firm, PLLC",
+      "address": "3015 Napier Pk, San Antonio, TX 78231, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=71039893998048803&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "San Antonio Car",
+      "role": "Accident Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.aguirrelawpllc.com/san-antonio-car-accident-lawyer/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "The Aguirre Law Firm, PLLC is a personal injury firm with a single office in San Antonio.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "212",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-29"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-28T06:19:33.757298967Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-24T17:20:24.269308338Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-30T02:22:24.600198187Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-28T18:22:51.174217115Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-09T15:38:57.766992268Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true,
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 68,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-29",
+      "note": "LCP 4.2 s / CLS 0.004 / TBT 394 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "aguirrelawpllc.com",
+      "name": "The Aguirre Law Firm, PLLC",
+      "review_count_at_discovery": 212
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 212,
+      "rating_weighted": 4.8,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-29"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Texas does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-29"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Texas does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-29"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching entity on the Texas list of active franchise taxpayers. Texas does not require a sole proprietorship or a general partnership to pay franchise tax, and an exempt entity is left off as well, so this is a check this source cannot complete rather than evidence against the firm. The state's own SOSDirect service can settle it for a fee",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts, partial",
+      "unresolvable": "Texas lists only active franchise taxpayers, so a firm that is not obliged to be one cannot be found here however often we look",
+      "checked_at": "2026-09-29"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-29"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "212 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-29"
+    }
+  },
+  "cohort_id": "tx-sanantonio-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "th our San Antonio personal injury lawyers at The Aguirre Law Firm, PLLC. We operate on a contingency fee basis, meaning you owe us nothing unless we win your case. How a San Antonio Personal",
+          "source_url": "https://www.aguirrelawpllc.com/"
+        },
+        "free_consultation": {
+          "quote": "New Braunfels Boerne Case Results Testimonials Contact Español (210) 922-0808 Call for a free consultation free consultation menu Personal Injury & Wrongful Death Lawyers 20+ Years of Experience A",
+          "source_url": "https://www.aguirrelawpllc.com/"
+        },
+        "available_24_7": {
+          "quote": "sultation menu Personal Injury & Wrongful Death Lawyers 20+ Years of Experience Available 24/7 No Fees Unless we win click for free consultation $3.0 Million Premises Liability Wrongfu",
+          "source_url": "https://www.aguirrelawpllc.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "to schedule a consultation with our San Antonio attorneys today. Call (210) 922-0808 now. Se habla español . Our Accolades Request Free Consultation FILL OUT THE FORM BELOW TO SCHEDULE A FREE CASE",
+          "source_url": "https://www.aguirrelawpllc.com/about-the-firm/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Our team of experienced San Antonio personal injury lawyers is here to help you recover the compensation you deserve after an accident."
+      ],
+      "pages": {
+        "home": "https://www.aguirrelawpllc.com/",
+        "privacy": "https://www.aguirrelawpllc.com/privacy-policy/",
+        "disclaimer": "https://www.aguirrelawpllc.com/disclaimer/",
+        "contact": "https://www.aguirrelawpllc.com/contact-us/",
+        "results": "https://www.aguirrelawpllc.com/case-results/",
+        "attorneys": "https://www.aguirrelawpllc.com/our-team/",
+        "blog": "https://www.aguirrelawpllc.com/blog/",
+        "about": "https://www.aguirrelawpllc.com/about-the-firm/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.aguirrelawpllc.com/our-team/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2009-09-08",
+    "years": 17.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-29"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-29"
+  },
+  "results_published": {
+    "count": 21,
+    "counted_from": "stated amounts",
+    "amounts": [
+      3000000,
+      2000000,
+      1500000,
+      1175000,
+      900000,
+      875000,
+      850000,
+      755000,
+      584000,
+      540000,
+      500000,
+      453000,
+      400000,
+      350400,
+      350000,
+      300000,
+      275000,
+      240000,
+      200000,
+      180000,
+      155000
+    ],
+    "largest": 3000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "wrongful death",
+      "workplace"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 3273,
+    "readable": true,
+    "url": "https://www.aguirrelawpllc.com/case-results/",
+    "checked_at": "2026-09-29"
+  },
+  "tx_register": {
+    "matched": false,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "note": "Texas lists only active franchise taxpayers, so a firm with no franchise tax obligation is absent by design",
+    "checked_at": "2026-09-29"
+  },
+  "score": {
+    "total": 59,
+    "tier": "Listed",
+    "verdict": "2 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 8,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 4.5,
+            "max": 6,
+            "source": "firm",
+            "evidence": "21 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "6 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 18,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 4,
+            "max": 5,
+            "source": "observed",
+            "evidence": "212 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.8 over 212 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-08-28) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 7,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 26,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 11,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +5.0 available"
+      ]
+    },
+    "raw": 36.5,
+    "assessed": 62,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.671,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 70,
+    "comparable": true
+  }
+}

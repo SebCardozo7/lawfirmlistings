@@ -47,11 +47,17 @@ DEFAULT_COHORT = "ny-personal-injury"
 # one. Only the display name lives here, and an unknown slug stops the run rather than writing
 # a profile with a slug where its name should be. Keep in step with src/data/practices.ts: a
 # practice missing there gets no hub page, and the profile would link into nothing.
+# The display name for a practice, in one place. scripts/apply_practice.py imports this rather
+# than keeping its own copy: opening immigration meant adding the slug to check_practice, to this
+# map and to a third list in apply_practice, and the only thing that noticed the third was an
+# argparse error two steps into the run. A slug added here and to src/data/practices.ts is now
+# the whole change.
 PRACTICE_NAMES = {
     "personal-injury": "Personal Injury",
     "workers-compensation": "Workers' Compensation",
     "real-estate": "Real Estate",
     "family-law": "Family Law",
+    "immigration": "Immigration",
 }
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury

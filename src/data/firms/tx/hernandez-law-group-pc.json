@@ -173,7 +173,7 @@
       "pass": true,
       "evidence": "HERNANDEZ LAW GROUP, P.C. holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0803411833, chartered 2019-09-04, and 2 Google-verified locations. Identified because the name matches, at an address we verified",
       "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
-      "checked_at": "2026-09-26"
+      "checked_at": "2026-09-29"
     },
     "G5": {
       "pass": false,
@@ -185,7 +185,7 @@
       "pass": true,
       "evidence": "503 public client reviews and 7 years since the entity was chartered in 2019",
       "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
-      "checked_at": "2026-09-26"
+      "checked_at": "2026-09-29"
     }
   },
   "cohort_id": "tx-dallas-personal-injury",
@@ -276,7 +276,7 @@
     "total": 59,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-09-29",
+    "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -357,7 +357,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.71 over 503 reviews → Bayesian 4.73 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.71 over 503 reviews → Bayesian 4.73 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -492,6 +492,6 @@
     "identified_by": "the name matches, at an address we verified",
     "name_similarity": 1.0,
     "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
-    "checked_at": "2026-09-26"
+    "checked_at": "2026-09-29"
   }
 }
