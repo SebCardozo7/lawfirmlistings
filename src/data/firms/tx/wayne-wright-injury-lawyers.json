@@ -5,7 +5,7 @@
   "website": "https://waynewright.com/",
   "domain": "waynewright.com",
   "phone": "(210) 888-0078",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -232,6 +232,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 30,
+      "ahrefs_rank": 4024044,
+      "refdomains": 1098,
+      "refdomains_dofollow": 549,
+      "backlinks": 8649,
+      "org_keywords": 439,
+      "org_traffic": 4303,
+      "paid_keywords": 5,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -254,10 +266,10 @@
       "checked_at": "2026-09-29"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 6 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": true,
@@ -341,9 +353,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 45,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "total": 47,
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -425,7 +437,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.72 over 1,565 reviews → Bayesian 4.73 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.72 over 1,565 reviews → Bayesian 4.73 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -446,7 +458,7 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -460,10 +472,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 30 → 71th pct of 63-firm cohort (median 17.5) 2/3 · 1,098 referring domains, 60th pct 1/2 · 439 organic keywords / 4,303 visits·mo, 86th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -478,7 +490,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -518,7 +530,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 25,
+      "gap": 23,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -527,9 +539,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 24.5,
-    "assessed": 55,
-    "coverage": 0.786,
+    "raw": 29.5,
+    "assessed": 63,
+    "coverage": 0.9,
     "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
@@ -538,5 +550,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/waynewright.com.jpg",
+    "source_url": "https://waynewright.com/wp-content/uploads/2026/07/cropped-081936-192x192.jpg",
+    "width": 192,
+    "height": 192,
+    "bytes": 7089,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

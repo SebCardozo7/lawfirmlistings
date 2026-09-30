@@ -1,0 +1,238 @@
+{
+  "slug": "vrana-law-firm",
+  "name": "Vrana Law Firm",
+  "initials": "VR",
+  "website": "https://www.vranalawfirm.com/",
+  "domain": "vranalawfirm.com",
+  "phone": "(480) 359-6002",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.vranalawfirm.com/your-injury-concerns/bicycle-accident/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Vrana Law Firm",
+      "address": "2147 E Baseline Rd, Tempe, AZ 85283, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=10546570253040165873&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Kel Vrana",
+      "role": "Founder And Managing Attorney",
+      "role_source": "firm roster listing",
+      "bar_state": "NY",
+      "source_url": "https://www.vranalawfirm.com/meet-our-team/"
+    },
+    {
+      "name": "Chandra Lehn",
+      "role": "Partner",
+      "role_source": "firm roster listing",
+      "bar_state": "NY",
+      "source_url": "https://www.vranalawfirm.com/meet-our-team/"
+    },
+    {
+      "name": "Michael Golato",
+      "role": "Partner",
+      "role_source": "firm roster listing",
+      "bar_state": "NY",
+      "source_url": "https://www.vranalawfirm.com/meet-our-team/"
+    },
+    {
+      "name": "Derick Lysene",
+      "role": "Attorney",
+      "role_source": "firm roster listing",
+      "bar_state": "NY",
+      "source_url": "https://www.vranalawfirm.com/meet-our-team/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Vrana Law Firm is a personal injury firm with a single office in Tempe.",
+    "The firm states that the first consultation is free. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "149",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-01-08T19:33:27.435671940Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-24T22:28:20.702120005Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-18T16:30:35.502647751Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-20T20:50:55.790985066Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-04T02:36:38.788556032Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "disclaimer": true,
+      "attorney_bios": true,
+      "privacy_policy": true
+    },
+    "schema_detected": false,
+    "psi": {
+      "value": {
+        "performance": 32,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 5.0 s / CLS 0.968 / TBT 504 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "vranalawfirm.com",
+      "name": "Vrana Law Firm",
+      "review_count_at_discovery": 148
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 149,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "149 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "a Law Firm Personal Injury Attorneys – Personal Attention, Proven Results Skip to content Free Consultation Your Injury Concerns Car Accident Bicycle Accident Cancer and Injury Diminished Value Sli",
+          "source_url": "https://www.vranalawfirm.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.vranalawfirm.com/",
+        "blog": "https://www.vranalawfirm.com/blog/",
+        "disclaimer": "https://www.vranalawfirm.com/disclaimer/",
+        "attorneys": "https://www.vranalawfirm.com/meet-our-team/",
+        "privacy": "https://www.vranalawfirm.com/privacy-policy/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.vranalawfirm.com/meet-our-team/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2015-08-27",
+    "years": 11.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}

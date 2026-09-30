@@ -5,7 +5,7 @@
   "website": "https://padillalawoffice.com/",
   "domain": "padillalawoffice.com",
   "phone": "(305) 824-2400",
-  "status": "listed",
+  "status": "not_eligible",
   "practices": [
     {
       "slug": "immigration",
@@ -21,8 +21,30 @@
     "state": "FL",
     "state_name": "Florida"
   },
-  "offices": [],
-  "attorneys": [],
+  "offices": [
+    {
+      "label": "Law Offices of Santiago J. Padilla, P.A.",
+      "address": "1395 Brickell Ave Suite #800, Miami, FL 33131, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=85282216147531718&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Expertise You Can Rely On",
+      "role": "Legal",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://padillalawoffice.com/about-us"
+    },
+    {
+      "name": "Santiago J. Padilla",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://padillalawoffice.com/about-us"
+    }
+  ],
   "languages": [
     "English",
     "Spanish"
@@ -31,19 +53,72 @@
   "free_consultation": false,
   "availability": [],
   "about": [
-    "Law Offices of Santiago J. Padilla, P.A. is a immigration firm in Miami.",
+    "Law Offices of Santiago J. Padilla, P.A. is a immigration firm with a single office in Miami.",
     "The firm publishes little about cost or availability on the pages we read. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
-    "quotes": []
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "4",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2022-08-13T20:56:30.652162Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-01-12T16:28:13.227201Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-11-01T22:05:15.589158Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-03-15T11:51:37.902246Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
     "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 62,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 3.5 s / CLS 0.000 / TBT 2808 ms"
+    },
     "_ahrefs_partial_from_cohort": {
       "domain": "padillalawoffice.com",
       "name": "Law Offices of Santiago J. Padilla, P.A.",
       "review_count_at_discovery": 4
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 4,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 1,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -51,38 +126,38 @@
       "pass": false,
       "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
       "source": "no queryable source",
-      "checked_at": "2026-09-29"
+      "checked_at": "2026-09-30"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-30",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
-      "pass": false,
-      "evidence": "0 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "SANTIAGO J. PADILLA, P.A. is an active DOMP on the Florida register, document P99000082783, filed 1999-09-20, with 1 Google-verified location",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": false,
-      "evidence": "0 public reviews across 0 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "evidence": "4 public client reviews, below the ten this gate asks for, and 27.0 years since the entity was filed",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "fl-miami-immigration",
   "faq": [],
   "_review": {
     "name_source": "JSON-LD LocalBusiness.name",
-    "phone_source": "https://padillalawoffice.com/",
+    "phone_source": "Google Business Profile",
     "about_material": {
       "claims": {},
       "json_ld_descriptions": [],
@@ -99,15 +174,53 @@
       "fee_statement omitted"
     ]
   },
+  "operating": {
+    "registered": "2002-04-09",
+    "years": 24.5,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Immigration Lawyers Association",
+        "source_url": "https://padillalawoffice.com/about-us",
+        "quote": "member of the National Employment Lawyers Association, the American Immigration Lawyers Association, and the American Bar Association. Find out more The inform"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://padillalawoffice.com/about-us",
+        "quote": "tion, the American Immigration Lawyers Association, and the American Bar Association. Find out more The information on this website is for gener"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Immigration Lawyers Association, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
   "score": {
-    "total": 16,
-    "tier": "Listed",
-    "verdict": "4 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A, B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "total": 28,
+    "tier": "Not eligible",
+    "verdict": "Eligibility gates not passed: G6. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -123,16 +236,16 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Immigration Lawyers Association, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -145,29 +258,29 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
       "C": {
-        "score": 0,
+        "score": 10,
         "max": 20,
         "subs": [
           {
@@ -175,32 +288,32 @@
             "label": "Authentic volume",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "4 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 0,
+            "pts": 5,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 4 reviews → Bayesian 4.83 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 0,
+            "pts": 1,
             "max": 5,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "0 of 4 sampled reviews are from the last 12 months (newest 2024-03-15) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "0 of 4 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
@@ -227,10 +340,10 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "pts": 0.1,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 1 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
@@ -273,28 +386,45 @@
         ]
       }
     },
-    "floor_abc": 0,
+    "floor_abc": 13,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 54,
+      "gap": 42,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 2.5,
-    "assessed": 16,
-    "coverage": 0.186,
-    "floor_abc_pct": 0.0,
+    "raw": 15.6,
+    "assessed": 55,
+    "coverage": 0.786,
+    "floor_abc_pct": 0.342,
     "gates_unavailable": [
       "G1"
     ],
     "gates_unresolvable": [],
-    "assessable": 86,
-    "comparable": false
+    "assessable": 70,
+    "comparable": true
+  },
+  "entity": {
+    "legal_name": "SANTIAGO J. PADILLA, P.A.",
+    "entity_type": "DOMP",
+    "dos_id": "P99000082783",
+    "formed": "1999-09-20",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-30"
+  },
+  "logo": {
+    "file": "/logos/padillalawoffice.com.jpg",
+    "source_url": "https://isteam.wsimg.com/ip/0490d738-58a7-4c95-8260-1728f6f24bc8/Screenshot%20(637).png/:/rs=w:180,h:180,m",
+    "width": 207,
+    "height": 180,
+    "bytes": 10266,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

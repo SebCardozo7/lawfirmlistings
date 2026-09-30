@@ -5,7 +5,7 @@
   "website": "https://harperlawtx.com/",
   "domain": "harperlawtx.com",
   "phone": "(210) 941-4179",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -202,6 +202,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 32,
+      "ahrefs_rank": 3367984,
+      "refdomains": 862,
+      "refdomains_dofollow": 363,
+      "backlinks": 1895,
+      "org_keywords": 120,
+      "org_traffic": 890,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -225,16 +237,16 @@
       "checked_at": "2026-09-29"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 14 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "113 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "113 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2021-09-28, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "tx-sanantonio-personal-injury",
@@ -315,9 +327,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 45,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "total": 46,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -399,7 +411,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 113 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 113 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -420,7 +432,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -434,10 +446,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 32 → 75th pct of 63-firm cohort (median 17.5) 2/3 · 862 referring domains, 25th pct 1/2 · 120 organic keywords / 890 visits·mo, 60th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -452,7 +464,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -492,7 +504,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 25,
+      "gap": 24,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -501,9 +513,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 28.0,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 32.0,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.395,
     "gates_unavailable": [
       "G1",
@@ -514,5 +526,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/harperlawtx.com.png",
+    "source_url": "https://harperlawtx.com/wp-content/uploads/2023/11/cropped-favicon-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 10270,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

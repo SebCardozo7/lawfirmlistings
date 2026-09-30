@@ -5,7 +5,7 @@
   "website": "https://jadavisinjurylawyers.com/",
   "domain": "jadavisinjurylawyers.com",
   "phone": "(210) 732-1062",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -133,6 +133,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 54,
+      "ahrefs_rank": 503327,
+      "refdomains": 1159,
+      "refdomains_dofollow": 693,
+      "backlinks": 4927,
+      "org_keywords": 62,
+      "org_traffic": 364,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -155,10 +167,10 @@
       "checked_at": "2026-09-29"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": true,
@@ -263,9 +275,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 47,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "total": 48,
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -347,7 +359,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 175 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 175 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -368,7 +380,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -382,10 +394,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 5,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 54 → 97th pct of 63-firm cohort (median 17.5) 3/3 · 1,159 referring domains, 68th pct 1/2 · 62 organic keywords / 364 visits·mo, 50th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -400,7 +412,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -440,7 +452,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
+      "gap": 22,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -449,9 +461,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 28.9,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 33.9,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.553,
     "gates_unavailable": [
       "G1",
@@ -460,5 +472,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/jadavisinjurylawyers.com.png",
+    "source_url": "https://jadavisinjurylawyers.com/wp-content/uploads/2024/10/jad_fav-16.png",
+    "width": 301,
+    "height": 301,
+    "bytes": 6267,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

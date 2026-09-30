@@ -21,7 +21,15 @@
     "state": "FL",
     "state_name": "Florida"
   },
-  "offices": [],
+  "offices": [
+    {
+      "label": "The Joli Law Firm",
+      "address": "3191 Coral Wy Ste 1008, Miami, FL 33145, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=2092850976950071368&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
   "attorneys": [],
   "languages": [
     "English",
@@ -31,11 +39,39 @@
   "free_consultation": false,
   "availability": [],
   "about": [
-    "Joli Law Firm Immigration Attorneys is a immigration firm in Miami.",
+    "Joli Law Firm Immigration Attorneys is a immigration firm with a single office in Miami.",
     "The firm publishes little about cost or availability on the pages we read. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
-    "quotes": []
+    "quotes": [],
+    "google": {
+      "rating": 4.4,
+      "count_label": "239",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2020-10-21T14:28:19.787984Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2021-08-12T17:37:20.889976Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2020-10-21T15:16:55.918678Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-05-15T21:08:25.255669Z",
+        "rating": 3
+      },
+      {
+        "published_at": "2020-10-21T16:55:04.815379Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -43,10 +79,39 @@
       "attorney_bios": true
     },
     "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 34,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 5.3 s / CLS 0.838 / TBT 450 ms"
+    },
     "_ahrefs_partial_from_cohort": {
       "domain": "jolilaw.com",
       "name": "The Joli Law Firm",
       "review_count_at_discovery": 239
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 239,
+      "rating_weighted": 4.4,
+      "completeness": {
+        "categories": 4,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -54,31 +119,32 @@
       "pass": false,
       "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
       "source": "no queryable source",
-      "checked_at": "2026-09-29"
+      "checked_at": "2026-09-30"
     },
     "G2": {
       "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
-      "checked_at": "2026-09-29"
+      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
+      "source": "no roster published",
+      "checked_at": "2026-09-30"
     },
     "G3": {
       "pass": false,
-      "evidence": "0 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-30"
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "0 public reviews across 0 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "239 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2012-08-06, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -111,15 +177,53 @@
       "fee_statement omitted"
     ]
   },
+  "operating": {
+    "registered": "2012-08-06",
+    "years": 14.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Immigration Lawyers Association",
+        "source_url": "https://www.jolilaw.com/legal-team/immigration-attorney-mayra-joli",
+        "quote": "e Bar Association Past Memberships American Bar Association American Immigration Lawyers Association Dade County Bar Association Federal Bar Association Educati"
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.jolilaw.com/legal-team/immigration-attorney-mayra-joli",
+        "quote": "emberships Louisiana State Bar Association Past Memberships American Bar Association American Immigration Lawyers Association Dade County Bar As"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Immigration Lawyers Association, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 1,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
   "score": {
-    "total": 11,
+    "total": 30,
     "tier": "Listed",
-    "verdict": "4 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A, B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "verdict": "2 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -141,10 +245,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Immigration Lawyers Association, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -157,67 +261,67 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
       "C": {
-        "score": 0,
+        "score": 12,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 0,
+            "pts": 4,
             "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "239 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 0,
+            "pts": 3,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "Google rating 4.4 over 239 reviews → Bayesian 4.52 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 0,
+            "pts": 1,
             "max": 5,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews are from the last 12 months (newest 2025-05-15) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
       "D": {
-        "score": 1,
+        "score": 2,
         "max": 25,
         "subs": [
           {
@@ -226,7 +330,7 @@
             "pts": 0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · no fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · no fresh content"
           },
           {
             "code": "D2",
@@ -239,10 +343,10 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 4 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
@@ -285,28 +389,30 @@
         ]
       }
     },
-    "floor_abc": 0,
+    "floor_abc": 15,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 59,
+      "gap": 40,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
         "D2 Search authority: not yet measured (8 pts)",
-        "A5 Accountability: not yet measured (6 pts)"
+        "A2 Experience: +10 available"
       ]
     },
-    "raw": 2.5,
-    "assessed": 23,
-    "coverage": 0.267,
-    "floor_abc_pct": 0.0,
+    "raw": 18.5,
+    "assessed": 62,
+    "coverage": 0.785,
+    "floor_abc_pct": 0.395,
     "gates_unavailable": [
       "G1"
     ],
-    "gates_unresolvable": [],
-    "assessable": 86,
-    "comparable": false
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 79,
+    "comparable": true
   }
 }

@@ -1,0 +1,243 @@
+{
+  "slug": "viper-law-group",
+  "name": "Viper Law Group",
+  "initials": "VI",
+  "website": "https://www.viperlaw.com/",
+  "domain": "viperlaw.com",
+  "phone": "(480) 818-4855",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.viperlaw.com/practice-areas/car-accident-attorney",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Viper Law Group",
+      "address": "8603 E Royal Palm Rd Ste 200, Scottsdale, AZ 85258, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=8468138513812491836&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Viper Law Group",
+      "address": "9800 Crosspoint Blvd Ste 200, Indianapolis, IN 46256, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=6829866975956715642&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Viper Law Group is a personal injury firm with two offices across Arizona and IN.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "219",
+      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2025-04-26T13:42:22.580059Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-10T19:21:55.058530380Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-28T22:19:37.366956580Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-06-09T02:27:08.687052Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-21T00:13:56.559862573Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-04T16:54:51.590268281Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-05T16:52:30.796151994Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-25T19:41:57.190423984Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-18T17:33:25.442399027Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-27T15:19:03.183434437Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 51,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 17.5 s / CLS 0.000 / TBT 269 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "viperlaw.com",
+      "name": "Viper Law Group",
+      "review_count_at_discovery": 82
+    },
+    "places": {
+      "listing_count": 2,
+      "review_count_total": 219,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "2 physical locations verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "219 public reviews across 2 Google listings, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LegalService.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "ults Locations Videos About Contact English English Spanish (Mexico) (480) 818-4855 Get a Free Case Review Home Practice Areas About Us Testimonials Articles Careers Contact Us English English Spa",
+          "source_url": "https://www.viperlaw.com/"
+        },
+        "available_24_7": {
+          "quote": "omero September 21, 2025 Speak with an attorney today Start My Free Case Review Available 24 Hours a Day, 7 Days a Week Click to read our 4.9 Star Reviews",
+          "source_url": "https://www.viperlaw.com/"
+        },
+        "contingency": {
+          "quote": "t and must be judged on its own merits. Prior results do not guarantee a similar outcome. Contingent attorney fees are negotiable and not set by law. Costs and fees are charged only upon mon",
+          "source_url": "https://www.viperlaw.com/privacy-policy"
+        }
+      },
+      "json_ld_descriptions": [
+        "Real trial lawyers for serious injury & wrongful death. Free consultation 24/7. Serving Arizona & Indiana."
+      ],
+      "pages": {
+        "home": "https://www.viperlaw.com/",
+        "about": "https://www.viperlaw.com/about",
+        "contact": "https://www.viperlaw.com/contact-us",
+        "blog": "https://www.viperlaw.com/blog",
+        "privacy": "https://www.viperlaw.com/privacy-policy"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2013-09-23",
+    "years": 13.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}

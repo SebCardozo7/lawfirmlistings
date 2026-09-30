@@ -1,0 +1,246 @@
+{
+  "slug": "rowley-chapman-barney-ltd",
+  "name": "Rowley Chapman & Barney, Ltd.",
+  "initials": "RC",
+  "website": "https://azlegal.com/",
+  "domain": "azlegal.com",
+  "phone": "(480) 833-1113",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://azlegal.com/area-of-law/personal-injury/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Rowley Chapman & Barney, Ltd.",
+      "address": "63 E Main St Ste 501, Mesa, AZ 85201, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=9080871123272155254&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Kevin Chapman",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://azlegal.com/attorneys/kevin-chapman/"
+    },
+    {
+      "name": "Amy Miller",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://azlegal.com/attorneys/amy-miller/"
+    },
+    {
+      "name": "Brian Strong",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://azlegal.com/attorneys/brian-strong/"
+    },
+    {
+      "name": "Kenneth Barney",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://azlegal.com/attorneys/kenneth-barney/"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Rowley Chapman & Barney, Ltd. is a personal injury firm with a single office in Mesa.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "110",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2025-04-10T05:01:25.567209Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-06-05T20:33:19.310163Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-05-09T00:00:08.832170Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-09-26T17:06:40.596984Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-09-05T17:48:35.204426Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 58,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 8.9 s / CLS 0.001 / TBT 174 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "azlegal.com",
+      "name": "Rowley Chapman & Barney, Ltd.",
+      "review_count_at_discovery": 110
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 110,
+      "rating_weighted": 4.8,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "110 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LegalService.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "disability insurance, insurance policy, employee retirement income security act of 1974, contingent fee, appeal, policy, employment, medical record, supplemental security income, court, bad",
+          "source_url": "https://azlegal.com/"
+        },
+        "free_consultation": {
+          "quote": "personal injury law, injury law, compensation, fall accidents, injuries, lawyers, legal, free case evaluation, fall injury lawyer, fall injury lawyers near me, attorney for fall injury, fall accident",
+          "source_url": "https://azlegal.com/"
+        },
+        "available_24_7": {
+          "quote": "13 (Office - Call or Text us) (888) 476-8411 (Toll Free) (480) 833-2341 (Criminal Defense 24/7) (480) 833-1114 (Fax) Office Hours Open: Monday to Friday, from 8:00 am to 5:00 pm. Close",
+          "source_url": "https://azlegal.com/contact-us/"
+        }
+      },
+      "json_ld_descriptions": [
+        "AZ Legal (the customer-facing brand for Rowley Chapman & Barney, Ltd.) is a Mesa-based law firm serving clients across Arizona since 1987. Operating online at azlegal.com, the firm pairs nearly four decades of Arizona experience with modern accessibility — call-or-text the firm directly, free initial consultations, and a dedicated 24/7 criminal defense line. The firm's mission is to make life better for clients through honest, dedicated, and compassionate legal help delivered with clear, plain-language communication.\n\nThe firm provides comprehensive representation across key practice areas: personal injury, divorce and family law, criminal defense, estate planning, and probate. In personal injury, attorneys help clients pursue fair compensation for harms caused by accidents or negligence. Family law services address divorce, custody, and support matters with sensitivity to the stress these cases create. The criminal defense team brings practical insight to navigating Arizona's strict penalties, while the estate planning and probate teams guide clients in safeguarding assets, honoring wishes, and administering estates effectively.\n\nClients benefit from personalized attention and experienced counsel—values emphasized throughout the firm's approach. With nearly four decades of service to Mesa, the East Valley, and Arizona, the attorneys focus on transparent communication, keeping clients informed at every step. A defined process—initial consultation, case evaluation, and strategy development—ensures matters are handled methodically.\n\nAZ Legal serves individuals, families, and businesses seeking practical, results-oriented legal solutions. Typical clients include injury victims and their families, people navigating divorce or post-decree issues, those facing criminal charges, and individuals planning or administering estates. The firm's geographic reach includes Mesa, the East Valley, and clients across Arizona who want responsive local counsel with statewide perspective.\n\nThe firm's credibility is underscored by its longevity and affiliations, including BBB Accreditation with an A+ rating, an AV Preeminent recognition for an attorney, and professional memberships such as WealthCounsel. These signals, combined with recognition in community publications, reflect a practice grounded in trusted advocacy, consistent values, and strong client relationships developed over nearly four decades."
+      ],
+      "pages": {
+        "home": "https://azlegal.com/",
+        "contact": "https://azlegal.com/contact-us/",
+        "about": "https://azlegal.com/about-us/",
+        "attorneys": "https://azlegal.com/attorneys/",
+        "blog": "https://azlegal.com/blog/",
+        "privacy": "https://azlegal.com/privacy-policy/",
+        "disclaimer": "https://azlegal.com/legal-disclaimer/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://azlegal.com/attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "1996-03-28",
+    "years": 30.5,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 7,
+    "bios_published": 4,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}

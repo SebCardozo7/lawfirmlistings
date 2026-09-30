@@ -149,25 +149,25 @@
       "pass": false,
       "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
       "source": "no roster published",
-      "checked_at": "2026-09-28"
+      "checked_at": "2026-09-30"
     },
     "G3": {
       "pass": true,
       "evidence": "TIMOTHY J. COTTER P.A. is an active DOMP on the Florida register, document P98000103240, filed 1998-12-10, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-25"
+      "checked_at": "2026-09-30"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-26"
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": true,
       "evidence": "1 Google-verified location and 28 years since the entity was filed in 1998. This practice is transactional, so the gate asks for a verified listing and the year in operation rather than ten reviews, and its 19 reviews are scored in pillar C instead",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-25"
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "fl-naples-real-estate",
@@ -304,7 +304,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.6 over 19 reviews → Bayesian 4.79 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.6 over 19 reviews → Bayesian 4.79 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -424,6 +424,6 @@
     "dos_id": "P98000103240",
     "formed": "1998-12-10",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-25"
+    "checked_at": "2026-09-30"
   }
 }

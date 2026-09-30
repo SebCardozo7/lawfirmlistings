@@ -13,6 +13,13 @@
       "primary": true,
       "source_url": "https://peregonza.com/miami-personal-injury-lawyer/",
       "checked_at": "2026-09-23"
+    },
+    {
+      "slug": "immigration",
+      "name": "Immigration",
+      "primary": false,
+      "source_url": "https://peregonza.com/inmigracion/",
+      "checked_at": "2026-09-29"
     }
   ],
   "market": {
@@ -71,9 +78,9 @@
     "quotes": [],
     "google": {
       "rating": 4.9,
-      "count_label": "471",
+      "count_label": "472",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-23"
+      "fetched_at": "2026-09-30"
     },
     "sample": [
       {
@@ -107,12 +114,12 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 71,
+        "performance": 70,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, lab only)",
-      "measured_at": "2026-09-23",
-      "note": "LCP 6.2 s / CLS 0.012 / TBT 10 ms"
+      "measured_at": "2026-09-30",
+      "note": "LCP 6.3 s / CLS 0.012 / TBT 6 ms"
     },
     "_ahrefs_partial_from_cohort": {
       "domain": "peregonza.com",
@@ -121,7 +128,7 @@
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 471,
+      "review_count_total": 472,
       "rating_weighted": 4.9,
       "completeness": {
         "categories": 5,
@@ -134,10 +141,10 @@
           "questions and answers",
           "recent posts"
         ],
-        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
       },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-23"
+      "measured_at": "2026-09-30"
     },
     "ahrefs": {
       "dr": 6,
@@ -162,26 +169,26 @@
     "G2": {
       "pass": true,
       "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
-      "checked_at": "2026-09-29",
+      "checked_at": "2026-09-30",
       "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": true,
       "evidence": "PEREGONZA THE ATTORNEYS, PLLC is an active FLAL on the Florida register, document L16000032861, filed 2016-02-16, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-25"
+      "checked_at": "2026-09-30"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-26"
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": true,
-      "evidence": "471 public client reviews and 11 years since the entity was filed in 2016",
+      "evidence": "472 public client reviews and 11 years since the entity was filed in 2016",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-25"
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "fl-miami-personal-injury",
@@ -190,7 +197,7 @@
     "registered": "2016-05-03",
     "years": 10.4,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
-    "checked_at": "2026-09-23"
+    "checked_at": "2026-09-30"
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -201,7 +208,7 @@
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-23"
+    "checked_at": "2026-09-30"
   },
   "results_published": {
     "readable": true,
@@ -211,7 +218,7 @@
     "disclaimer": false,
     "venues": [],
     "why": "the site publishes no case-results page",
-    "checked_at": "2026-09-23"
+    "checked_at": "2026-09-30"
   },
   "entity": {
     "legal_name": "PEREGONZA THE ATTORNEYS, PLLC",
@@ -219,7 +226,7 @@
     "dos_id": "L16000032861",
     "formed": "2016-02-16",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-25"
+    "checked_at": "2026-09-30"
   },
   "score": {
     "total": 40,
@@ -298,7 +305,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "471 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "472 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -306,7 +313,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 471 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 472 reviews → Bayesian 4.89 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -426,6 +433,6 @@
     "height": 192,
     "bytes": 5902,
     "source": "The icon the firm's own site declares, copied here rather than hot-linked",
-    "fetched_at": "2026-09-26"
+    "fetched_at": "2026-09-30"
   }
 }

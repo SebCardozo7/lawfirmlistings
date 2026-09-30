@@ -115,6 +115,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 0.1,
+      "ahrefs_rank": 84928318,
+      "refdomains": 442,
+      "refdomains_dofollow": 62,
+      "backlinks": 532,
+      "org_keywords": 3,
+      "org_traffic": 8,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -138,9 +150,9 @@
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": true,
@@ -231,7 +243,7 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 44,
+    "total": 39,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-30",
@@ -315,7 +327,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 123 reviews → Bayesian 4.87 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 123 reviews → Bayesian 4.86 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -352,8 +364,8 @@
             "label": "Search authority",
             "pts": 0,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0.1 → 0th pct of 63-firm cohort (median 17.5) 0/3 · 442 referring domains, 2th pct 0/2 · 3 organic keywords / 8 visits·mo, 15th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -368,7 +380,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -408,18 +420,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 26,
+      "gap": 31,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A2 Experience: +10 available"
+        "A2 Experience: +10 available",
+        "D2 Search authority: +8 available"
       ]
     },
     "raw": 27.0,
-    "assessed": 62,
-    "coverage": 0.785,
+    "assessed": 70,
+    "coverage": 0.886,
     "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
@@ -428,5 +440,14 @@
     "gates_unresolvable": [],
     "assessable": 79,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/jp.law.png",
+    "source_url": "data:image/png;base64,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",
+    "width": 64,
+    "height": 64,
+    "bytes": 4532,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

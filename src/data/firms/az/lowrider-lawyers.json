@@ -1,0 +1,208 @@
+{
+  "slug": "lowrider-lawyers",
+  "name": "Lowrider Lawyers",
+  "initials": "LO",
+  "website": "https://lowriderlawyers.com/",
+  "domain": "lowriderlawyers.com",
+  "phone": "(602) 905-0792",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://lowriderlawyers.com/phoenix-car-accident-lawyer/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "The Lowrider Lawyers - Truck Crash & Injury Attorneys",
+      "address": "801 E Washington St, Phoenix, AZ 85034, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=17352206099665002136&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": false,
+  "availability": [],
+  "about": [
+    "Lowrider Lawyers is a personal injury firm with a single office in Phoenix.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "148",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-05-13T17:12:00.358385997Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-13T17:17:22.288181746Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-04T15:43:20.153227851Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-13T04:31:14.853818375Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-30T19:23:30.138212955Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 47,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 13.0 s / CLS 0.000 / TBT 527 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "lowriderlawyers.com",
+      "name": "The Lowrider Lawyers - Truck Crash & Injury Attorneys",
+      "review_count_at_discovery": 148
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 148,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "148 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "t focus on getting better. Don’t worry about paying us upfront costs either. We work on a contingency fee, which means we don’t get paid for our work unless you get paid on your case. Plain a",
+          "source_url": "https://lowriderlawyers.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://lowriderlawyers.com/",
+        "about": "https://lowriderlawyers.com/about-us/",
+        "contact": "https://lowriderlawyers.com/locations/",
+        "blog": "https://lowriderlawyers.com/blog/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "fee_statement": "Don’t worry about paying us upfront costs either.",
+  "operating": {
+    "registered": "2025-10-07",
+    "years": 1.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Board of Trial Advocates",
+        "source_url": "https://lowriderlawyers.com/about-us/",
+        "quote": "al chapter officer of the American Board of Trial Advocacy (ABOTA) whose membership is limited to those with trial experience"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Board of Trial Advocates · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}

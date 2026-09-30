@@ -21,8 +21,58 @@
     "state": "FL",
     "state_name": "Florida"
   },
-  "offices": [],
-  "attorneys": [],
+  "offices": [
+    {
+      "label": "Serving Immigrants",
+      "address": "2100 W Flagler St, Miami, FL 33135, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=12430943166496549458&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Serving Immigrants",
+      "address": "1415 E Robinson St Unit B, Orlando, FL 32801, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=14755755700227582862&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Serving Immigrants",
+      "address": "500 Av. Munoz Rivera. Condominio El Centro II, Torre 2 Suite 239. San Juan PR 00918, San Juan, 00909, Puerto Rico",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=10803038599799964387&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Serving Immigrants",
+      "address": "518 E Sugarland Hwy, Clewiston, FL 33440, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=11662475338946063579&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Victor Martinez",
+      "role": "Associate Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.servingimmigrants.com/attorney-profile/victor-martinez-esq/"
+    },
+    {
+      "name": "Daniel Ortiz",
+      "role": "Associate Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.servingimmigrants.com/attorney-profile/daniel-ortiz-associate-attorney/"
+    },
+    {
+      "name": "Magdalena Cuprys",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.servingimmigrants.com/attorney-profile/magdalena-cuprys-esq/"
+    }
+  ],
   "languages": [
     "English",
     "Spanish"
@@ -31,11 +81,99 @@
   "free_consultation": false,
   "availability": [],
   "about": [
-    "Serving Immigrants is a immigration firm in Miami.",
+    "Serving Immigrants is a immigration firm with four offices across Florida, including Miami, Orlando and Torre 2 Suite 239. San Juan PR 00918.",
     "The firm publishes little about cost or availability on the pages we read. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
-    "quotes": []
+    "quotes": [],
+    "google": {
+      "rating": 4.67,
+      "count_label": "544",
+      "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-02-20T13:08:11.936836573Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-03-26T22:41:12.072150Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-04-28T15:53:58.617899Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-03-04T20:09:25.794833Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2022-10-20T18:44:39.058140Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-10-12T18:36:47.130489Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-01-23T20:58:00.979178Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-27T11:33:11.026866072Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-30T19:43:18.005473889Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-05-06T16:11:11.784004Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-13T15:51:11.427256091Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-13T15:29:30.661878856Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-08T17:23:33.139365231Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-13T15:57:33.239200477Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-12T14:08:30.464102897Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2019-07-27T18:11:14.832227Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2019-03-21T23:01:30.163766Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2018-08-30T21:35:32.377396Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2019-03-05T03:04:15.983034Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2019-03-11T02:55:22.513440Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -46,10 +184,39 @@
       "disclaimer": true
     },
     "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 55,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 21.8 s / CLS 0.000 / TBT 90 ms"
+    },
     "_ahrefs_partial_from_cohort": {
       "domain": "servingimmigrants.com",
       "name": "Serving Immigrants",
       "review_count_at_discovery": 353
+    },
+    "places": {
+      "listing_count": 4,
+      "review_count_total": 544,
+      "rating_weighted": 4.67,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -57,31 +224,31 @@
       "pass": false,
       "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
       "source": "no queryable source",
-      "checked_at": "2026-09-29"
+      "checked_at": "2026-09-30"
     },
     "G2": {
-      "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-30",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. 1 of them share a surname with a disciplined attorney and were read against the text of those decisions, which name somebody else. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
-      "pass": false,
-      "evidence": "0 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "SERVING IMMIGRANTS FOUNDATION, INC. is an active DOMNP on the Florida register, document N23000012967, filed 2023-10-26, with 4 Google-verified locations",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "0 public reviews across 0 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "544 public client reviews and 3 years since the entity was filed in 2023",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -112,15 +279,44 @@
       "fee_statement omitted"
     ]
   },
+  "operating": {
+    "registered": "2003-09-08",
+    "years": 23.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Immigration Lawyers Association",
+        "source_url": "https://www.servingimmigrants.com/attorney-profile/magdalena-cuprys-esq/",
+        "quote": "dent at the University of Chicago. – She is a Member of the American Immigration Lawyers Association (AILA); the South Florida and the Latin American Chapter of"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Immigration Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 3043 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.servingimmigrants.com/results/",
+    "checked_at": "2026-09-30"
+  },
   "score": {
-    "total": 20,
+    "total": 51,
     "tier": "Listed",
-    "verdict": "4 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A, B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -136,16 +332,16 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Immigration Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -159,7 +355,7 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "evidence": "the results page served 3043 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B2",
@@ -167,7 +363,7 @@
             "pts": 0,
             "max": 5,
             "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "evidence": "the results page served 3043 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B3",
@@ -175,50 +371,50 @@
             "pts": 0,
             "max": 4,
             "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "evidence": "the results page served 3043 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           }
         ]
       },
       "C": {
-        "score": 0,
+        "score": 16,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 0,
+            "pts": 5,
             "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "544 Google reviews · Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 0,
+            "pts": 4,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "Google rating 4.67 over 544 reviews → Bayesian 4.69 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 0,
+            "pts": 2.5,
             "max": 5,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "7 of 20 sampled reviews are from the last 12 months (newest 2026-05-30) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "0 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
       "D": {
-        "score": 3,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -227,7 +423,7 @@
             "pts": 2.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -240,10 +436,10 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "4 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
@@ -286,28 +482,36 @@
         ]
       }
     },
-    "floor_abc": 0,
+    "floor_abc": 18,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 50,
-      "floor_met": false,
+      "gap": 19,
+      "floor_met": true,
       "coverage_met": false,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
         "D2 Search authority: not yet measured (8 pts)",
-        "A5 Accountability: not yet measured (6 pts)"
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)"
       ]
     },
-    "raw": 4.5,
-    "assessed": 23,
-    "coverage": 0.267,
-    "floor_abc_pct": 0.0,
+    "raw": 24.0,
+    "assessed": 47,
+    "coverage": 0.671,
+    "floor_abc_pct": 0.804,
     "gates_unavailable": [
       "G1"
     ],
     "gates_unresolvable": [],
-    "assessable": 86,
-    "comparable": false
+    "assessable": 70,
+    "comparable": true
+  },
+  "entity": {
+    "legal_name": "SERVING IMMIGRANTS FOUNDATION, INC.",
+    "entity_type": "DOMNP",
+    "dos_id": "N23000012967",
+    "formed": "2023-10-26",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-30"
   }
 }

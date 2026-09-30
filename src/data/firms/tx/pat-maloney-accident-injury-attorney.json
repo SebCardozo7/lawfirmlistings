@@ -5,7 +5,7 @@
   "website": "https://patmaloney.com/",
   "domain": "patmaloney.com",
   "phone": "(210) 226-8888",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -143,6 +143,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 19,
+      "ahrefs_rank": 9168734,
+      "refdomains": 708,
+      "refdomains_dofollow": 297,
+      "backlinks": 8503,
+      "org_keywords": 194,
+      "org_traffic": 3417,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -166,16 +178,16 @@
       "checked_at": "2026-09-29"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published, and 1 more person in roles the firm states are not a lawyer's.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "111 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "111 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2002-04-07, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "tx-sanantonio-personal-injury",
@@ -290,9 +302,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 59,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (0/25).",
+    "total": 58,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -374,7 +386,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 111 reviews → Bayesian 4.76 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 111 reviews → Bayesian 4.76 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -395,7 +407,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -409,10 +421,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 19 → 56th pct of 63-firm cohort (median 17.5) 2/3 · 708 referring domains, 8th pct 0/2 · 194 organic keywords / 3,417 visits·mo, 77th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -427,7 +439,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -467,7 +479,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -476,9 +488,9 @@
         "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 36.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 40.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.697,
     "gates_unavailable": [
       "G1",
@@ -489,5 +501,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/patmaloney.com.png",
+    "source_url": "https://patmaloney.com/wp-content/uploads/2023/06/cropped-cropped-favicon-2-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 18694,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

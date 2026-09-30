@@ -114,6 +114,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 2,
+      "ahrefs_rank": 46631082,
+      "refdomains": 788,
+      "refdomains_dofollow": 370,
+      "backlinks": 1755,
+      "org_keywords": 0,
+      "org_traffic": 0,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -138,15 +150,15 @@
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "28 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "28 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2017-02-14, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "tx-sanantonio-personal-injury",
@@ -226,9 +238,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 42,
+    "total": 39,
     "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -310,7 +322,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 28 reviews → Bayesian 4.86 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 28 reviews → Bayesian 4.86 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -345,10 +357,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 2 → 19th pct of 63-firm cohort (median 17.5) 1/3 · 788 referring domains, 16th pct 0/2 · 0 organic keywords / 0 visits·mo, 2th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -363,7 +375,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -403,18 +415,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 28,
+      "gap": 31,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A2 Experience: +10 available"
+        "A2 Experience: +10 available",
+        "D2 Search authority: +7 available"
       ]
     },
-    "raw": 26.0,
-    "assessed": 62,
-    "coverage": 0.785,
+    "raw": 27.0,
+    "assessed": 70,
+    "coverage": 0.886,
     "floor_abc_pct": 0.5,
     "gates_unavailable": [
       "G1",
@@ -425,5 +437,14 @@
     ],
     "assessable": 79,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/juliolawfirm.com.webp",
+    "source_url": "https://juliolawfirm.com/wp-content/uploads/2026/03/cropped-julio-site-icon-192x192.webp",
+    "width": 192,
+    "height": 192,
+    "bytes": 2304,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

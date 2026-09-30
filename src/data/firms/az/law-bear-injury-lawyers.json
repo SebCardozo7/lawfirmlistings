@@ -1,0 +1,241 @@
+{
+  "slug": "law-bear-injury-lawyers",
+  "name": "Law Bear Injury Lawyers",
+  "initials": "BE",
+  "website": "https://lawbear.com/",
+  "domain": "lawbear.com",
+  "phone": "(602) 314-2553",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://lawbear.com/arizona/car-accident-lawyer/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Law Bear Injury Lawyers",
+      "address": "2375 E Camelback Rd Ste 635, Phoenix, AZ 85016, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=17229141435233498794&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Bill Barfield",
+      "role": "Compliance Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://lawbear.com/william-h-bill-barfield/"
+    },
+    {
+      "name": "Jason Ruen",
+      "role": "Managing Attorney",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://lawbear.com/jason-ruen/"
+    },
+    {
+      "name": "Vanessa Soto",
+      "role": "Vice President Of Intake",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://lawbear.com/vanessa-soto/"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Law Bear Injury Lawyers is a personal injury firm with a single office in Phoenix.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "21",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-29T17:14:51.443175807Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-10T22:47:10.893399341Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-01T19:52:58.211472320Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-01T19:33:58.118384996Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-13T21:27:05.452960289Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "_ahrefs_partial_from_cohort": {
+      "domain": "lawbear.com",
+      "name": "Law Bear Injury Lawyers",
+      "review_count_at_discovery": 21
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 21,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 6,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "21 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "d the adjusters, and fights to recover every dollar Arizona law allows for your case. You pay nothing unless we win. Get My Free Case Review Call (602) 314-2553 Free, no-obligation case review. No f",
+          "source_url": "https://lawbear.com/"
+        },
+        "free_consultation": {
+          "quote": "eam Our Blog Contact Us (602) 314-2553 Injured in a Wreck? The Bear Has Your Back. Get My Free Case Review Call (602) 314-2553 Hit by a careless driver in Arizona? You shouldn’t have to fight the",
+          "source_url": "https://lawbear.com/"
+        },
+        "available_24_7": {
+          "quote": "ete our contact form on this page to request your free case review. Our team is available 24/7. Contact Law Bear Today Call or Fill Out Our Contact Form You can reach us in whatever wa",
+          "source_url": "https://lawbear.com/contact-us/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://lawbear.com/",
+        "privacy": "https://lawbear.com/privacy-policy/",
+        "attorneys": "https://lawbear.com/our-team/",
+        "about": "https://lawbear.com/about-us/",
+        "contact": "https://lawbear.com/contact-us/",
+        "blog": "https://lawbear.com/blog/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://lawbear.com/our-team/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2023-03-05",
+    "years": 3.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Association for Justice",
+        "source_url": "https://lawbear.com/jason-ruen",
+        "quote": "ka Professional memberships Maricopa County Bar Association American Association for Justice Texas Trial Lawyers Association Houston Trial Lawyers Assoc"
+      },
+      {
+        "name": "Texas Trial Lawyers Association",
+        "source_url": "https://lawbear.com/jason-ruen",
+        "quote": "opa County Bar Association American Association for Justice Texas Trial Lawyers Association Houston Trial Lawyers Association Texas Bar College Outside"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Association for Justice, Texas Trial Lawyers Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 6,
+    "bios_published": 3,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "slug": "law-offices-of-michael-cordova",
+  "name": "Law Offices of Michael Cordova",
+  "initials": "OM",
+  "website": "https://www.mcordova.com/",
+  "domain": "mcordova.com",
+  "phone": "(602) 265-6700",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.mcordova.com/phoenix-auto-accident-lawyers/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Michael Cordova",
+      "address": "1700 N 7th St, Phoenix, AZ 85006, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=16553193988755652004&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Michael Córdova",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.mcordova.com/michael-cordova/"
+    },
+    {
+      "name": "Jody L. Broaddus",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.mcordova.com/jody-broaddus/"
+    },
+    {
+      "name": "Rayven Garcia",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.mcordova.com/rayven-garcia/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Law Offices of Michael Cordova is a personal injury firm with a single office in Phoenix.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "953",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-09T15:55:11.913377882Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-22T20:05:23.566590396Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-28T19:02:04.084634425Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-01T18:09:09.590070911Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-17T18:35:06.976529998Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 41,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 27.3 s / CLS 0.000 / TBT 570 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "mcordova.com",
+      "name": "Michael Cordova",
+      "review_count_at_discovery": 953
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 953,
+      "rating_weighted": 4.8,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 8,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "953 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "fer all of our clients our “No Fee Guarantee.” Our personal injury cases are handled on a contingent fee basis. This means we do not charge attorneys fees unless we obtain compensation on yo",
+          "source_url": "https://www.mcordova.com/"
+        },
+        "free_consultation": {
+          "quote": "Phoenix Personal Injury Lawyers | Law Offices of Michael Cordova Live Chat GET A FREE CONSULTATION Practice Areas Personal Injury Car Accidents Truck Accidents Motorcycle Accidents Constru",
+          "source_url": "https://www.mcordova.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "At the Law Offices of Michael Cordova, we are experienced attorneys who obtain outstanding results for our clients. We have been in business since 1994 and have since then helped our clients secure the outcomes they deserve, including many millions of dollars in settlements and verdicts. We provide professional and quality legal advice you expect from a great law firm. We are committed to each of our clients and provide personal attention to our clients. Our team of experienced lawyers are accessible and responsive to the needs and concerns of each of our clients."
+      ],
+      "pages": {
+        "home": "https://www.mcordova.com/",
+        "blog": "https://www.mcordova.com/blog/",
+        "contact": "https://www.mcordova.com/contact/",
+        "results": "https://www.mcordova.com/case-results/",
+        "privacy": "https://www.mcordova.com/privacy-policy/",
+        "disclaimer": "https://www.mcordova.com/disclaimer/",
+        "about": "https://www.mcordova.com/about-michael-cordova-law-firm/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2001-08-15",
+    "years": 25.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.mcordova.com/",
+        "quote": "untable to the people who matter—victims. As members of the American Bar Association, we demonstrate our commitment to social responsibility and"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "count": 59,
+    "counted_from": "stated amounts",
+    "amounts": [
+      6155000,
+      4150000,
+      2500000,
+      2400000,
+      2150000,
+      2000000,
+      1910000,
+      1350000,
+      1300000,
+      1250000,
+      1050000,
+      1000000,
+      965000,
+      950000,
+      925000,
+      830000,
+      825000,
+      750000,
+      700000,
+      625000,
+      596000,
+      550000,
+      525000,
+      465000,
+      420000,
+      380000,
+      325000,
+      317000,
+      315000,
+      300000,
+      297842,
+      290000,
+      275000,
+      260000,
+      255000,
+      250000,
+      201000,
+      200000,
+      181500,
+      174000,
+      170000,
+      165948,
+      165000,
+      151000,
+      150000,
+      137500,
+      136500,
+      135000,
+      131000,
+      130000,
+      125000,
+      120000,
+      116000,
+      115000,
+      114369,
+      105000,
+      104481,
+      101000,
+      100000
+    ],
+    "largest": 6155000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [
+      "Supreme Court"
+    ],
+    "text_length": 23268,
+    "readable": true,
+    "url": "https://www.mcordova.com/case-results/",
+    "checked_at": "2026-09-30"
+  }
+}

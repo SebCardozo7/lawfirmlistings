@@ -5,7 +5,7 @@
   "website": "https://truelawfirm.com/",
   "domain": "truelawfirm.com",
   "phone": "(210) 990-1403",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -164,6 +164,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 7,
+      "ahrefs_rank": 24418794,
+      "refdomains": 865,
+      "refdomains_dofollow": 391,
+      "backlinks": 1224,
+      "org_keywords": 46,
+      "org_traffic": 227,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -187,16 +199,16 @@
       "checked_at": "2026-09-29"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "112 public reviews across 2 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "112 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2022-05-01, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "tx-sanantonio-personal-injury",
@@ -307,9 +319,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 61,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "total": 59,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -391,7 +403,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 112 reviews → Bayesian 4.86 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 112 reviews → Bayesian 4.86 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -412,7 +424,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -426,10 +438,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 7 → 33th pct of 63-firm cohort (median 17.5) 1/3 · 865 referring domains, 27th pct 1/2 · 46 organic keywords / 227 visits·mo, 43th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -444,7 +456,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -484,7 +496,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -493,9 +505,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 38.1,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 41.1,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.789,
     "gates_unavailable": [
       "G1",
@@ -506,5 +518,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/truelawfirm.com.png",
+    "source_url": "https://truelawfirm.com/nitropack_static/uLMJcgvKpnOklRJvJPdgZDuSPzOdihtN/assets/images/optimized/rev-94cae32/truelawfirm.com/wp-content/uploads/2024/01/ture-law-favicon.png",
+    "width": 100,
+    "height": 100,
+    "bytes": 658,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

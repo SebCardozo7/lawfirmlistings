@@ -1,0 +1,232 @@
+{
+  "slug": "law-offices-of-samuel-p-moeller-pllc",
+  "name": "Law Offices of Samuel P. Moeller, PLLC",
+  "initials": "OS",
+  "website": "https://spmoellerlaw.com/",
+  "domain": "spmoellerlaw.com",
+  "phone": "(602) 900-9000",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://spmoellerlaw.com/practice-areas/auto-accidents/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Law Offices of Samuel P. Moeller, PLLC",
+      "address": "1419 N 3rd St Suite 100, Phoenix, AZ 85004, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=14873177828745283312&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Samuel P. Moeller",
+      "role": "Attorneys",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://spmoellerlaw.com/about-us/our-attorneys/"
+    },
+    {
+      "name": "Ryan Lamb",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://spmoellerlaw.com/about-us/our-attorneys/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Law Offices of Samuel P. Moeller, PLLC is a personal injury firm with a single office in Phoenix.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.5,
+      "count_label": "111",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-01T17:30:10.861325934Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-28T22:48:23.794197405Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-09T17:22:35.998748820Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-07T18:03:37.637517335Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-31T19:17:50.861521180Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true,
+      "attorney_bios": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 41,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 14.8 s / CLS 0.000 / TBT 950 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "spmoellerlaw.com",
+      "name": "Law Offices of Samuel P. Moeller, PLLC",
+      "review_count_at_discovery": 111
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 111,
+      "rating_weighted": 4.5,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "111 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD business.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "will manage your case from beginning to end. Your legal needs are my number one priority. Pay Nothing Unless We Win Your Case Your initial consultation and case review are free of charge. If we take",
+          "source_url": "https://spmoellerlaw.com/"
+        },
+        "free_consultation": {
+          "quote": "of Technology and Personal Injury: Exploring New Legal Territories Contact Us Today for a Free Consultation We’ll Fight Hard for You Have you lost wages and incurred medical expenses due to a slip-",
+          "source_url": "https://spmoellerlaw.com/"
+        },
+        "available_24_7": {
+          "quote": "pañol (602) 641-5695 Contact Samuel P. Moeller Law Firm – Call Our Office We're available 24/7. Call us at (602) 641-5695 to speak directly with our team and schedule your free consult",
+          "source_url": "https://spmoellerlaw.com/contact-us/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://spmoellerlaw.com/",
+        "contact": "https://spmoellerlaw.com/contact-us/",
+        "about": "https://spmoellerlaw.com/about-us/",
+        "blog": "https://spmoellerlaw.com/es/blog/",
+        "privacy": "https://spmoellerlaw.com/privacy-policy/",
+        "attorneys": "https://spmoellerlaw.com/about-us/our-attorneys/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://spmoellerlaw.com/about-us/our-attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2011-09-02",
+    "years": 15.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}

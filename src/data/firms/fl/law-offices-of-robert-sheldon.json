@@ -21,7 +21,36 @@
     "state": "FL",
     "state_name": "Florida"
   },
-  "offices": [],
+  "offices": [
+    {
+      "label": "Robert Sheldon Immigration Law",
+      "address": "3134 Coral Wy, Coral Gables, FL 33145, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=1120842223433608803&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Immigration Law Offices Of Robert Sheldon Oakland",
+      "address": "4505 NW 31st Ave, Oakland Park, FL 33309, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=795654988037420704&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Immigration Law Offices Of Robert Sheldon Pompano",
+      "address": "2718 W Atlantic Blvd, Pompano Beach, FL 33069, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=14467841869124605759&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "Immigration Law Offices Of Robert Sheldon Miami Gardens",
+      "address": "5901 NW 183rd St, Hialeah, FL 33015, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=13467437743603194494&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
   "attorneys": [],
   "languages": [
     "English",
@@ -31,11 +60,99 @@
   "free_consultation": false,
   "availability": [],
   "about": [
-    "Law Offices of Robert Sheldon is a immigration firm in Miami.",
+    "Law Offices of Robert Sheldon is a immigration firm with four offices across Florida, including Coral Gables, Oakland Park and Pompano Beach.",
     "The firm publishes little about cost or availability on the pages we read. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
   ],
   "reviews": {
-    "quotes": []
+    "quotes": [],
+    "google": {
+      "rating": 4.71,
+      "count_label": "1,812",
+      "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-05-05T20:56:05.236762539Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-21T17:00:20.897140918Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2025-10-06T20:58:33.645195940Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-17T21:10:19.402689039Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-24T05:03:39.765443607Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-27T16:38:58.545963134Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-12-19T17:36:06.229267Z",
+        "rating": 3
+      },
+      {
+        "published_at": "2026-07-22T15:30:48.736428472Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-25T19:23:32.556923728Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-10-31T20:30:07.344405781Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-23T18:43:38.264335616Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-07T18:54:16.727738243Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-04-07T16:40:50.013871225Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-07-20T18:27:39.355037413Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-18T01:17:02.019969024Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2025-08-18T19:42:20.441188354Z",
+        "rating": 2
+      },
+      {
+        "published_at": "2025-09-09T20:38:46.299535735Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-04T21:40:03.144001207Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-05-08T20:59:12.266872Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-05-29T20:29:47.488216Z",
+        "rating": 5
+      }
+    ]
   },
   "results": [],
   "digital": {
@@ -44,10 +161,39 @@
       "disclaimer": true
     },
     "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 51,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 6.8 s / CLS 0.208 / TBT 49 ms"
+    },
     "_ahrefs_partial_from_cohort": {
       "domain": "vidaenamerica.com",
       "name": "Robert Sheldon Immigration Law",
       "review_count_at_discovery": 721
+    },
+    "places": {
+      "listing_count": 4,
+      "review_count_total": 1812,
+      "rating_weighted": 4.71,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -55,38 +201,38 @@
       "pass": false,
       "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
       "source": "no queryable source",
-      "checked_at": "2026-09-29"
+      "checked_at": "2026-09-30"
     },
     "G2": {
       "pass": false,
-      "evidence": "Disciplinary history not yet checked",
-      "source": "pending",
-      "checked_at": "2026-09-29"
+      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
+      "source": "no roster published",
+      "checked_at": "2026-09-30"
     },
     "G3": {
-      "pass": false,
-      "evidence": "0 physical locations verified on Google Business Profile; Secretary of State registration still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "LAW OFFICES OF ROBERT SHELDON, LLC is an active FLAL on the Florida register, document L11000114099, filed 2011-10-05, with 4 Google-verified locations",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "0 public reviews across 0 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "1,812 public client reviews and 15 years since the entity was filed in 2011",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "fl-miami-immigration",
   "faq": [],
   "_review": {
     "name_source": "JSON-LD Organization.name",
-    "phone_source": "https://vidaenamerica.com/",
+    "phone_source": "Google Business Profile",
     "about_material": {
       "claims": {},
       "json_ld_descriptions": [
@@ -109,15 +255,53 @@
       "fee_statement omitted"
     ]
   },
+  "operating": {
+    "registered": "2016-04-14",
+    "years": 10.5,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Immigration Lawyers Association",
+        "source_url": "https://vidaenamerica.com/",
+        "quote": "0 5115 Fax (954) 973 1005 info@immigralaw.com Member of the American Immigration Lawyers Association – Member of District of Columbia and Florida Bar Associatio"
+      },
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://vidaenamerica.com/",
+        "quote": "on Lawyers Association – Member of District of Columbia and Florida Bar Association RENUNCIA DE RESPONSABILIDAD: Toda la información contenida"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Immigration Lawyers Association, The Florida Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
   "score": {
-    "total": 15,
+    "total": 36,
     "tier": "Listed",
-    "verdict": "4 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A, B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "verdict": "2 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -139,10 +323,10 @@
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Immigration Lawyers Association, The Florida Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
@@ -155,67 +339,67 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "The firm's results page has not been read yet"
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
       "C": {
-        "score": 0,
+        "score": 15,
         "max": 20,
         "subs": [
           {
             "code": "C1",
             "label": "Authentic volume",
-            "pts": 0,
+            "pts": 5,
             "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "1,812 Google reviews · Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 0,
+            "pts": 4,
             "max": 6,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "Google rating 4.71 over 1,812 reviews → Bayesian 4.72 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 0,
+            "pts": 5,
             "max": 5,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "14 of 20 sampled reviews are from the last 12 months (newest 2026-07-23) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
             "label": "Complaint share",
-            "pts": 0,
+            "pts": 1,
             "max": 4,
-            "source": "pending",
-            "evidence": "No review sample collected yet"
+            "source": "places",
+            "evidence": "5 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
       "D": {
-        "score": 2,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -224,7 +408,7 @@
             "pts": 1.0,
             "max": 7,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · no fresh content"
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · no fresh content"
           },
           {
             "code": "D2",
@@ -237,10 +421,10 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0,
-            "max": 5,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "4 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
@@ -283,28 +467,45 @@
         ]
       }
     },
-    "floor_abc": 0,
+    "floor_abc": 18,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 55,
+      "gap": 34,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
         "D2 Search authority: not yet measured (8 pts)",
-        "A5 Accountability: not yet measured (6 pts)"
+        "A2 Experience: +10 available"
       ]
     },
-    "raw": 3.5,
-    "assessed": 23,
-    "coverage": 0.267,
-    "floor_abc_pct": 0.0,
+    "raw": 22.5,
+    "assessed": 62,
+    "coverage": 0.785,
+    "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1"
     ],
     "gates_unresolvable": [],
-    "assessable": 86,
-    "comparable": false
+    "assessable": 79,
+    "comparable": true
+  },
+  "entity": {
+    "legal_name": "LAW OFFICES OF ROBERT SHELDON, LLC",
+    "entity_type": "FLAL",
+    "dos_id": "L11000114099",
+    "formed": "2011-10-05",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-30"
+  },
+  "logo": {
+    "file": "/logos/vidaenamerica.com.png",
+    "source_url": "https://vidaenamerica.com/wp-content/uploads/2017/03/2017-Favicon.png",
+    "width": 252,
+    "height": 252,
+    "bytes": 19555,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

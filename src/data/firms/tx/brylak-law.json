@@ -5,7 +5,7 @@
   "website": "https://www.brylaklaw.com/",
   "domain": "brylaklaw.com",
   "phone": "(210) 733-5533",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -189,6 +189,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 13,
+      "ahrefs_rank": 13588517,
+      "refdomains": 1112,
+      "refdomains_dofollow": 572,
+      "backlinks": 3206,
+      "org_keywords": 155,
+      "org_traffic": 2725,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -212,16 +224,16 @@
       "checked_at": "2026-09-29"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "645 public reviews across 2 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "645 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2005-07-19, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "tx-sanantonio-personal-injury",
@@ -331,9 +343,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 60,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "total": 58,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -415,7 +427,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.93 over 645 reviews → Bayesian 4.92 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.93 over 645 reviews → Bayesian 4.92 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -436,7 +448,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 7,
         "max": 25,
         "subs": [
           {
@@ -450,10 +462,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 13 → 43th pct of 63-firm cohort (median 17.5) 1/3 · 1,112 referring domains, 67th pct 1/2 · 155 organic keywords / 2,725 visits·mo, 70th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -468,7 +480,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -508,7 +520,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 10,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -517,9 +529,9 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 37.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 40.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.803,
     "gates_unavailable": [
       "G1",

@@ -1,0 +1,227 @@
+{
+  "slug": "sotelo-law-group",
+  "name": "Sotelo Law Group",
+  "initials": "SO",
+  "website": "https://www.sotelolawgroup.com/",
+  "domain": "sotelolawgroup.com",
+  "phone": "(602) 883-3649",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.sotelolawgroup.com/case-types/car-accidents",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Sotelo Law Group",
+      "address": "2627 N 3rd St #102, Phoenix, AZ 85004, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=16686477681760808025&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Success Stories",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.sotelolawgroup.com/success-stories"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Sotelo Law Group is a personal injury firm with a single office in Phoenix.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "80",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-29T23:11:51.661249540Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-27T18:41:54.327816534Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-30T04:26:59.675514339Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-07T17:20:38.580966452Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-29T22:13:06.300492379Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 65,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 3.8 s / CLS 0.053 / TBT 657 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "sotelolawgroup.com",
+      "name": "Sotelo Law Group",
+      "review_count_at_discovery": 80
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 80,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "80 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LocalBusiness.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "he offer is fair. Do I need to pay anything up front for my case? No. Our firm works on a contingency fee basis, which means you do not pay any legal fees unless we successfully recover compe",
+          "source_url": "https://www.sotelolawgroup.com/"
+        },
+        "free_consultation": {
+          "quote": "s English Español English Español Home Case Types Success Stories About Team Articles FAQ Free Case Evaluation 2627 N. 3rd Street Suite 102 Phoenix, Arizona 85004 Call NOW - 24/7 Hot Line (602) 883-08",
+          "source_url": "https://www.sotelolawgroup.com/"
+        },
+        "available_24_7": {
+          "quote": "s FAQ Free Case Evaluation 2627 N. 3rd Street Suite 102 Phoenix, Arizona 85004 Call NOW - 24/7 Hot Line (602) 883-0845 Contact Free Case Review We Fight in Court - So You Win! Hablamos",
+          "source_url": "https://www.sotelolawgroup.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "W - 24/7 Hot Line (602) 883-0845 Contact Free Case Review We Fight in Court - So You Win! Hablamos Español | Available 24/7 (602) 883-0845 2627 North 3rd St #102, Phoenix, AZ 85004 Office Hours -",
+          "source_url": "https://www.sotelolawgroup.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "At Sotelo Law Group, we believe every client deserves respect, clarity, and genuine care throughout the legal process. We are committed to making sure no one feels overlooked or left in the dark while navigating a personal injury claim. Our team takes the time to listen, understand each client’s situation, and provide clear guidance from start to finish. Communication is a priority, with consistent updates and honest answers so you always know where your case stands."
+      ],
+      "pages": {
+        "home": "https://www.sotelolawgroup.com/",
+        "about": "https://www.sotelolawgroup.com/about-us",
+        "privacy": "https://www.sotelolawgroup.com/privacy-policy",
+        "contact": "https://www.sotelolawgroup.com/contact-us",
+        "blog": "https://www.sotelolawgroup.com/articles"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2020-02-25",
+    "years": 6.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}

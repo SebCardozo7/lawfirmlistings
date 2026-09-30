@@ -112,6 +112,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 1.9,
+      "ahrefs_rank": 47299697,
+      "refdomains": 503,
+      "refdomains_dofollow": 86,
+      "backlinks": 663,
+      "org_keywords": 16,
+      "org_traffic": 28,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -135,9 +147,9 @@
     },
     "G5": {
       "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": true,
@@ -210,7 +222,7 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 34,
+    "total": 33,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-09-30",
@@ -294,7 +306,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 81 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 81 reviews → Bayesian 4.81 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -315,7 +327,7 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -329,10 +341,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 1.9 → 17th pct of 63-firm cohort (median 17.5) 1/3 · 503 referring domains, 3th pct 0/2 · 16 organic keywords / 28 visits·mo, 30th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -347,7 +359,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -387,18 +399,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 36,
+      "gap": 37,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A2 Experience: +10 available"
+        "A2 Experience: +10 available",
+        "D1 Website trust & experience: +6.5 available"
       ]
     },
-    "raw": 21.0,
-    "assessed": 62,
-    "coverage": 0.785,
+    "raw": 23.0,
+    "assessed": 70,
+    "coverage": 0.886,
     "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
@@ -407,5 +419,14 @@
     "gates_unresolvable": [],
     "assessable": 79,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/camlaw.legal.png",
+    "source_url": "https://camlaw.legal/favicon.ico",
+    "width": 80,
+    "height": 80,
+    "bytes": 3241,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

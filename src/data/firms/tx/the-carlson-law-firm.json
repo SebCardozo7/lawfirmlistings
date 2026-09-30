@@ -5,7 +5,7 @@
   "website": "https://www.carlsonattorneys.com/",
   "domain": "carlsonattorneys.com",
   "phone": "(512) 804-7277",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -822,6 +822,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 49,
+      "ahrefs_rank": 757794,
+      "refdomains": 2410,
+      "refdomains_dofollow": 1194,
+      "backlinks": 103677,
+      "org_keywords": 953,
+      "org_traffic": 9590,
+      "paid_keywords": 1,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
@@ -845,16 +857,16 @@
       "checked_at": "2026-09-29"
     },
     "G5": {
-      "pass": false,
-      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
-      "source": "public crawl (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 48 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
     },
     "G6": {
-      "pass": false,
-      "evidence": "2,731 public reviews across 15 Google listings, above the 10 minimum; time in operation still to confirm",
-      "source": "Google Places API (partial)",
-      "checked_at": "2026-09-29"
+      "pass": true,
+      "evidence": "2,731 public client reviews across 15 Google listings, above the 10 minimum, and the firm's domain has been registered since 2005-04-07, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
     }
   },
   "cohort_id": "tx-sanantonio-personal-injury",
@@ -979,9 +991,9 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 52,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "total": 56,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
     "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
@@ -1063,7 +1075,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 2,731 reviews → Bayesian 4.70 (prior 4.82 weighted as 100 reviews, from 852 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 2,731 reviews → Bayesian 4.70 (prior 4.82 weighted as 100 reviews, from 974 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -1084,7 +1096,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -1098,10 +1110,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 7,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 49 → 94th pct of 63-firm cohort (median 17.5) 3/3 · 2,410 referring domains, 94th pct 2/2 · 953 organic keywords / 9,590 visits·mo, 92th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -1116,7 +1128,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -1156,7 +1168,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 14,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -1165,9 +1177,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 32.5,
-    "assessed": 62,
-    "coverage": 0.886,
+    "raw": 39.5,
+    "assessed": 70,
+    "coverage": 1.0,
     "floor_abc_pct": 0.632,
     "gates_unavailable": [
       "G1",
@@ -1178,5 +1190,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/carlsonattorneys.com.png",
+    "source_url": "https://www.carlsonattorneys.com/wp-content/uploads/2024/12/cropped-Monogram-Website-Icon-2-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 2664,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
   }
 }

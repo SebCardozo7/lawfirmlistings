@@ -1,0 +1,227 @@
+{
+  "slug": "law-office-of-erica-s-gelfand",
+  "name": "Law office of Erica S Gelfand",
+  "initials": "OE",
+  "website": "https://ericagelfandlaw.com/",
+  "domain": "ericagelfandlaw.com",
+  "phone": "(480) 454-1005",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://ericagelfandlaw.com/rollover-car-accident/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Gelfand Law",
+      "address": "11225 N 28th Dr Ste C205, Phoenix, AZ 85029, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=8103386164041984296&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Construction Zone Auto",
+      "role": "Accidents",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://ericagelfandlaw.com/construction-auto-accident-lawyer/"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Law office of Erica S Gelfand is a personal injury firm with a single office in Phoenix.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "103",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-31T03:11:33.079383479Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-24T16:14:59.964767329Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-07T18:59:08.436354230Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-03T21:05:31.417386792Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-11-03T18:46:12.802675414Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "blog": true,
+      "attorney_bios": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 23,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 21.2 s / CLS 0.259 / TBT 786 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "ericagelfandlaw.com",
+      "name": "Gelfand Law",
+      "review_count_at_discovery": 103
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 103,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "HTTPS reachable: True; contact method published: True; attorney names not yet extracted from bio pages",
+      "source": "public crawl (partial)",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "103 public reviews across 1 Google listing, above the 10 minimum; time in operation still to confirm",
+      "source": "Google Places API (partial)",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "consultation call: (480) 454-1005 99% Won or Settled 99% Success Rate $0 No Fee Guarantee No fee unless you’re paid Results Are What Matter easy & painless process We strive to give you our cli",
+          "source_url": "https://ericagelfandlaw.com/"
+        },
+        "free_consultation": {
+          "quote": "f purchase. Privacy Policy | Terms Submit NEED HELP? CONTACT US 24/7 (480) 454-1005 Get a Free Consultation Experienced & Responsive Phoenix Personal Injury Attorney It’s critically important to ob",
+          "source_url": "https://ericagelfandlaw.com/"
+        },
+        "available_24_7": {
+          "quote": "case started immediately. If have any questions about the process: NEED HELP? CONTACT US 24/7 (480) 454-1005 Call Now (480) 454-1005 CONTACT FORM Please leave this field empty. I agre",
+          "source_url": "https://ericagelfandlaw.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Gelfand Law, based in Phoenix, AZ, specializes in personal injury cases, including car, truck, motorcycle, bicycle, and pedestrian accidents. With a 99% success rate, they offer aggressive representation, no upfront fees, and free consultations to secure maximum compensation.",
+        "Gelfand Law, based in Phoenix, AZ, specializes in personal injury cases, including car, truck, motorcycle, bicycle, and pedestrian accidents. With a 99% success rate, they offer aggressive representation, no upfront fees, and free consultations to secure maximum compensation."
+      ],
+      "pages": {
+        "home": "https://ericagelfandlaw.com/",
+        "privacy": "https://ericagelfandlaw.com/privacy-policy/",
+        "blog": "https://ericagelfandlaw.com/blog/",
+        "attorneys": "https://ericagelfandlaw.com/attorney/",
+        "contact": "https://ericagelfandlaw.com/contact/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://ericagelfandlaw.com/attorney/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2013-10-03",
+    "years": 13.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  }
+}
