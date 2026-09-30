@@ -1,0 +1,405 @@
+{
+  "slug": "law-office-of-katherine-winn",
+  "name": "Law Office of Katherine Winn",
+  "initials": "OK",
+  "website": "https://www.eastcountylawyer.pro/",
+  "domain": "eastcountylawyer.pro",
+  "phone": "(619) 328-1818",
+  "status": "not_eligible",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.eastcountylawyer.pro/personal-injury",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "san-diego-ca",
+    "city": "San Diego",
+    "state": "CA",
+    "state_name": "California"
+  },
+  "offices": [
+    {
+      "label": "Law Office of Katherine Winn",
+      "address": "1679 E Main St Ste 106, El Cajon, CA 92021, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=4213184879406454232&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": false,
+  "availability": [],
+  "about": [
+    "Law Office of Katherine Winn is a personal injury firm with a single office in El Cajon.",
+    "The firm publishes little about cost or availability on the pages we read. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.4,
+      "count_label": "7",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2024-08-07T00:02:10.529587Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-04-06T22:11:50.899803Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2021-08-07T13:52:49.440421Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2020-07-31T17:15:37.902099Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2020-11-20T01:29:09.099527Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 70,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 6.5 s / CLS 0.027 / TBT 0 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "eastcountylawyer.pro",
+      "name": "Law Office of Katherine Winn",
+      "review_count_at_discovery": 7
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 7,
+      "rating_weighted": 4.4,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 1,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 0.1,
+      "ahrefs_rank": 87175417,
+      "refdomains": 521,
+      "refdomains_dofollow": 71,
+      "backlinks": 921,
+      "org_keywords": 3,
+      "org_traffic": 1,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "California does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. California publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "7 reviews, below the 10 this gate asks for in this practice",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "ca-sandiego-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Attorney.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {},
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.eastcountylawyer.pro/",
+        "contact": "https://www.eastcountylawyer.pro/contact",
+        "about": "https://www.eastcountylawyer.pro/about"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2014-03-10",
+    "years": 12.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 14,
+    "tier": "Not eligible",
+    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 8,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "7 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.4 over 7 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 1,
+            "max": 5,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews are from the last 12 months (newest 2024-08-07) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 2,
+            "max": 4,
+            "source": "places",
+            "evidence": "1 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 1,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 0.1 → 1th pct of 109-firm cohort (median 14) 0/3 · 521 referring domains, 4th pct 0/2 · 3 organic keywords / 1 visits·mo, 14th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.1,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 1 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 0,
+            "max": 6,
+            "source": "observed",
+            "evidence": "fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 8,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 56,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D1 Website trust & experience: not yet measured (7 pts)",
+        "A2 Experience: +10 available"
+      ]
+    },
+    "raw": 9.1,
+    "assessed": 63,
+    "coverage": 0.797,
+    "floor_abc_pct": 0.211,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 79,
+    "comparable": true
+  }
+}

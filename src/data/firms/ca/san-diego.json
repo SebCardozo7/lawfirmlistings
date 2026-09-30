@@ -1,0 +1,465 @@
+{
+  "slug": "san-diego",
+  "name": "San Diego",
+  "initials": "SD",
+  "website": "https://www.blanelaw.com/",
+  "domain": "blanelaw.com",
+  "phone": "(619) 813-7955",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.blanelaw.com/practice_areas/motorcycle-accident-lawyer.cfm",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "san-diego-ca",
+    "city": "San Diego",
+    "state": "CA",
+    "state_name": "California"
+  },
+  "offices": [
+    {
+      "label": "Law Offices of Mark C. Blane, APC",
+      "address": "3111 Camino Del Rio N #400, San Diego, CA 92108, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=7472999710686975467&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Ingrid Kleinert",
+      "role": "Paralegal",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.blanelaw.com/bio/ingrid-k-blane.cfm"
+    },
+    {
+      "name": "Karla Mora",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.blanelaw.com/bio/karla-mora.cfm"
+    },
+    {
+      "name": "Member Edward \"Skip\" Babbitt",
+      "role": "Of Counsel",
+      "role_source": "firm bio heading",
+      "bar_state": "NY",
+      "source_url": "https://www.blanelaw.com/bio/of-counsel.cfm"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "San Diego is a personal injury firm with a single office in San Diego.",
+    "The firm states that the first consultation is free. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "142",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-04-10T19:58:26.807553543Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-29T18:05:14.828581632Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-31T21:05:11.449654379Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-08-17T20:20:47.245214255Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-10-25T15:35:37.042272Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true,
+      "fee_statement": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 96,
+        "cwv_pass": true
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 2.3 s / CLS 0.006 / TBT 151 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "blanelaw.com",
+      "name": "Law Offices of Mark C. Blane, APC",
+      "review_count_at_discovery": 142
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 142,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 29,
+      "ahrefs_rank": 4455671,
+      "refdomains": 986,
+      "refdomains_dofollow": 414,
+      "backlinks": 5072,
+      "org_keywords": 288,
+      "org_traffic": 1163,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "California does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. California publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published, and 1 more person in roles the firm states are not a lawyer's.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "142 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2004-10-04, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "ca-sandiego-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LegalService.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "n't let your injury define you—let us help you rewrite your story. Contact us today for a free consultation and take the first step towards turning your tragedy into triumph. Learn How We Can Help",
+          "source_url": "https://www.blanelaw.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "al Injury Attorney | Law Offices of Mark C. Blane | The Law Offices of Mark C. Blane, APC Se Habla Español 619-813-7955 Home Practice Areas Auto Accidents Truck Accidents Drunk Driving Accidents M",
+          "source_url": "https://www.blanelaw.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Mark's San Diego Personal Injury law firm has free guides for your legal questions on his website to help injured consumers make an informed decision on their injury case. Mark handles auto accidents, slip and fall injuries, dog bites, product defects, workers compensation, wrongful death, chemical and general burns, trip and fall, boating accidents, and other injury cases.",
+        "Mark's San Diego Personal Injury law firm has free guides for your legal questions on his website to help injured consumers make an informed decision on their injury case. Mark handles auto accidents, slip and fall injuries, dog bites, product defects, workers compensation, wrongful death, chemical and general burns, trip and fall, boating accidents, and other injury cases."
+      ],
+      "pages": {
+        "home": "https://www.blanelaw.com/",
+        "attorneys": "https://www.blanelaw.com/bio/mark-blane.cfm",
+        "contact": "https://www.blanelaw.com/offices/san-diego-personal-injury-law-office.cfm",
+        "blog": "https://www.blanelaw.com/blog/",
+        "about": "https://www.blanelaw.com/about/",
+        "results": "https://www.blanelaw.com/results/",
+        "privacy": "https://www.blanelaw.com/privacy-policy/",
+        "disclaimer": "https://www.blanelaw.com/disclaimer/",
+        "fees": "https://www.blanelaw.com/fees/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.blanelaw.com/bio/mark-blane.cfm"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "logo": {
+    "file": "/logos/blanelaw.com.png",
+    "source_url": "https://www.blanelaw.com/includes/default/images/apple-touch-icon.png?v=5.0.078",
+    "width": 600,
+    "height": 600,
+    "bytes": 22166,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  },
+  "operating": {
+    "registered": "2004-10-04",
+    "years": 22.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.blanelaw.com/bio/mark-blane.cfm",
+        "quote": "San Diego Business Journal , National Jurist Magazine , the ABA Journal , The Wall Street Journal , The Miami Herald , Los"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 4633 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.blanelaw.com/results/",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 61,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "the results page served 4633 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "the results page served 4633 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "the results page served 4633 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "142 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 142 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 4,
+            "max": 5,
+            "source": "places",
+            "evidence": "2 of 5 sampled reviews are from the last 12 months (newest 2026-04-10) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 12,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 5.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV pass · no bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 5,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 29 → 74th pct of 109-firm cohort (median 14) 2/3 · 986 referring domains, 48th pct 1/2 · 288 organic keywords / 1,163 visits·mo, 76th pct 2/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 2,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 19,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 9,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
+      ]
+    },
+    "raw": 33.5,
+    "assessed": 55,
+    "coverage": 0.786,
+    "floor_abc_pct": 0.826,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  }
+}

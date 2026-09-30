@@ -78,8 +78,36 @@ def main() -> int:
         return 2
     cohort = json.loads(path.read_text(encoding="utf-8"))
     state = cohort["state"]
-    domains = ",".join(f["domain"] for f in cohort["firms"])
-    print("%s · %s · %d firms" % (args.cohort, state, len(cohort["firms"])))
+
+    # Only the firms that actually have a profile. A cohort names everything the vetting kept,
+    # and a few of those never reach publication: a site that will not answer has nothing to
+    # build a profile from, and one whose Google listing cannot be matched has no verified
+    # office, which G3 asks for.
+    #
+    # promote_measurements exits 1 when it is handed a domain with no profile, which is right of
+    # it and was wrong of this script: the first run stopped the whole close on one unreachable
+    # San Diego firm, reporting a failure where the only thing that happened is that a firm we
+    # never published stayed unpublished.
+    published = set()
+    for p in (ROOT / "src" / "data" / "firms").rglob("*.json"):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        if d.get("domain"):
+            published.add(d["domain"].lower())
+
+    named = [f["domain"] for f in cohort["firms"]]
+    have = [d for d in named if d.lower() in published]
+    absent = [d for d in named if d.lower() not in published]
+    domains = ",".join(have)
+    print("%s · %s · %d in the cohort, %d published" % (args.cohort, state, len(named), len(have)))
+    if absent:
+        print("   %d never published, so nothing here applies to them: %s"
+              % (len(absent), ", ".join(absent[:4]) + (" ..." if len(absent) > 4 else "")))
+    if not have:
+        print("nothing published from this cohort yet: run build_profiles first", file=sys.stderr)
+        return 2
 
     steps: list[tuple[str, list[str]]] = [
         ("logos the firms publish themselves",
