@@ -104,9 +104,9 @@ const searchIndex = {
 <section class="hero">
   <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><span class="glow"></span><span class="noise"></span></div>
   <div class="container">
-    {ratingAvg && <div class="trust-pill"><span class="avs"><i></i><i></i><i></i><i></i></span><span class="stars">{'★'.repeat(Math.round(ratingAvg))}</span><span><b>{ratingAvg.toFixed(2)}</b> · {reviewTotal.toLocaleString()} client reviews from Google Business Profiles</span></div>}
+    {ratingAvg && <div class="trust-pill"><span class="avs"><i></i><i></i><i></i><i></i></span><span class="stars">{'★'.repeat(Math.round(ratingAvg))}</span><span><b>{ratingAvg.toFixed(2)}</b> · {reviewTotal.toLocaleString('en-US')} client reviews from Google Business Profiles</span></div>}
     <h1>The law firm directory built on <span class="grad-text">verification</span>, not advertising.</h1>
-    <p class="lede">Every firm here is checked for active licensure, clean disciplinary records and verified client outcomes, and no firm can pay to rank. {published.length} {published.length === 1 ? 'firm' : 'firms'} published so far, starting with personal injury in New York.</p>
+    <p class="lede">Every firm here is checked for active licensure, clean disciplinary records and verified client outcomes, and no firm can pay to rank. {published.length} {published.length === 1 ? 'firm' : 'firms'} published so far across {cityCounts.length} U.S. {cityCounts.length === 1 ? 'city' : 'cities'}.</p>
     <form class="search-panel" id="firm-search" action="/practice-areas/personal-injury/" method="get">
       <div class="search-field">
         <Icon name="search" />
@@ -258,10 +258,12 @@ const searchIndex = {
 </section>
 
 <!-- MARQUEE -->
+{/* Counts come from the data. This bar read "100 U.S. cities" while the directory held 18,
+    which is the same claim the page description was corrected for and this line kept. */}
 <div class="marquee" aria-hidden="true">
   <div class="track">
-    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>100 U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
-    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>100 U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
+    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>{cityCounts.length} U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
+    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>{cityCounts.length} U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
   </div>
 </div>
 
@@ -273,12 +275,12 @@ const searchIndex = {
       <div>
         <span class="eyebrow">What "certified" means</span>
         <h2 style="margin-top:14px">Most directories sell placement. We verify firms, and publish exactly how.</h2>
-        <p class="lede" style="color:var(--on-night-soft);margin-top:18px">A firm earns the <b style="color:#fff">LFL Certified</b> badge only after four checks pass. It can't be bought, it's re-checked every month, and it's revoked the moment a public disciplinary action appears.</p>
+        <p class="lede" style="color:var(--on-night-soft);margin-top:18px">A firm earns the <b style="color:#fff">LFL Certified</b> badge by clearing every eligibility gate its state lets anyone check and then scoring 70 or higher on measured evidence. It can't be bought, it's re-measured when the market is, and a public disciplinary action removes it.</p>
         <div class="criteria" style="margin-top:28px">
-          <div class="criterion"><Icon name="shield" /><div><b>1 · Licensure &amp; discipline</b><span>Every named attorney active with the state bar and free of public discipline for 10 years.</span></div></div>
-          <div class="criterion"><Icon name="scale" /><div><b>2 · Verified outcomes</b><span>At least three case results confirmed against court records or documentation.</span></div></div>
-          <div class="criterion"><Icon name="star" /><div><b>3 · Client experience</b><span>25+ verified client reviews with a 4.5 average, weighted for recency and detail.</span></div></div>
-          <div class="criterion"><Icon name="users" /><div><b>4 · Peer recognition</b><span>Confidential evaluations from attorneys in the same market and practice area.</span></div></div>
+          <div class="criterion"><Icon name="shield" /><div><b>1 · Licensure &amp; discipline</b><span>Every named attorney matched to the state register and checked for an adverse status. Where a state publishes neither, we say so on the profile instead of scoring it.</span></div></div>
+          <div class="criterion"><Icon name="scale" /><div><b>2 · Published outcomes</b><span>Case results counted from the firm's own pages. The amounts are the firm's and we say on every profile that we have not confirmed them.</span></div></div>
+          <div class="criterion"><Icon name="star" /><div><b>3 · Client experience</b><span>Google review volume and rating, weighted against the firm's own market rather than against five stars, so a high average at low volume earns less.</span></div></div>
+          <div class="criterion"><Icon name="users" /><div><b>4 · Reach &amp; transparency</b><span>Domain authority, verified locations, fee terms, free consultations and the languages the firm publishes in, each read from a public source.</span></div></div>
         </div>
         <a class="btn btn--white" href="/methodology/" style="margin-top:28px">Read the full methodology</a>
       </div>
@@ -288,11 +290,11 @@ const searchIndex = {
           <tbody>
             <tr><td>Bar licensure checked for every attorney</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
             <tr><td>Disciplinary history screened</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
-            <tr><td>Case results verified against records</td><td class="us"><Icon name="check" /></td><td>Self-reported</td><td>No</td></tr>
+            <tr><td>Case results counted, and labelled unconfirmed</td><td class="us"><Icon name="check" /></td><td>Self-reported</td><td>No</td></tr>
             <tr><td>Firms can pay to rank higher</td><td class="us">Never</td><td>Yes</td><td>Ads</td></tr>
             <tr><td>Ranked against local competitors</td><td class="us"><Icon name="check" /></td><td>Partial</td><td>No</td></tr>
             <tr><td>Fee model &amp; free-consult shown up front</td><td class="us"><Icon name="check" /></td><td>Sometimes</td><td>No</td></tr>
-            <tr><td>Re-verified</td><td class="us">Monthly</td><td>Annually</td><td>Never</td></tr>
+            <tr><td>Every score traced to its source</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
           </tbody>
         </table>
       </div>
