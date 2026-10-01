@@ -134,32 +134,32 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
       "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     },
     "G5": {
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-01"
     },
     "G6": {
       "pass": true,
-      "evidence": "407 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2018-08-06, so it has been operating for more than a year",
+      "evidence": "408 public client reviews and 8 years since its web address was registered in 2018",
       "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     }
   },
   "cohort_id": "ny-buffalo-family-law",
@@ -364,7 +364,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.6 over 408 reviews → Bayesian 4.65 (prior 4.83 weighted as 100 reviews, from 1184 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.6 over 408 reviews → Bayesian 4.65 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

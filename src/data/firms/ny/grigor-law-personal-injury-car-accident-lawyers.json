@@ -53,7 +53,7 @@
       "admitted_year": 2014,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-22",
+      "checked_at": "2026-10-01",
       "role_source": "not stated by the firm"
     },
     {
@@ -64,7 +64,7 @@
       "admitted_year": 2018,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-22",
+      "checked_at": "2026-10-01",
       "role_source": "not stated by the firm"
     },
     {
@@ -75,7 +75,7 @@
       "admitted_year": 2019,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-22",
+      "checked_at": "2026-10-01",
       "role_source": "not stated by the firm"
     },
     {
@@ -86,7 +86,7 @@
       "admitted_year": 2001,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-22",
+      "checked_at": "2026-10-01",
       "role_source": "not stated by the firm"
     },
     {
@@ -97,7 +97,7 @@
       "admitted_year": 2005,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-22",
+      "checked_at": "2026-10-01",
       "role_source": "not stated by the firm"
     },
     {
@@ -108,7 +108,7 @@
       "admitted_year": 2022,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-22",
+      "checked_at": "2026-10-01",
       "role_source": "not stated by the firm"
     },
     {
@@ -119,7 +119,7 @@
       "admitted_year": 2013,
       "registry_status": "Currently registered",
       "registry_basis": "sole attorney of this name admitted in New York",
-      "checked_at": "2026-09-22",
+      "checked_at": "2026-10-01",
       "role_source": "not stated by the firm"
     }
   ],
@@ -265,32 +265,32 @@
       "pass": true,
       "evidence": "7 of 7 named attorneys are currently registered and none carries an adverse status",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 7 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     },
     "G3": {
       "pass": false,
       "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
       "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-01"
     },
     "G6": {
       "pass": true,
-      "evidence": "669 public client reviews across 3 Google listings, above the 10 minimum, and the firm's domain has been registered since 2017-05-26, so it has been operating for more than a year",
+      "evidence": "668 public client reviews and 9 years since its web address was registered in 2017",
       "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-14"
+      "checked_at": "2026-10-01"
     }
   },
   "cohort_id": "ny-workers-compensation",
@@ -499,7 +499,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 668 reviews → Bayesian 4.98 (prior 4.83 weighted as 100 reviews, from 1184 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 668 reviews → Bayesian 4.98 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

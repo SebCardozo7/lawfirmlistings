@@ -1,0 +1,438 @@
+{
+  "slug": "james-birch-attorney-at-law",
+  "name": "James Birch Attorney At Law",
+  "initials": "JB",
+  "website": "https://www.jameshbirchesq.com/",
+  "domain": "jameshbirchesq.com",
+  "phone": "(718) 442-1295",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "criminal-defense",
+      "name": "Criminal Defense",
+      "primary": true,
+      "source_url": "https://www.jameshbirchesq.com/legal-services",
+      "checked_at": "2026-10-01"
+    }
+  ],
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "James Birch Attorney At Law",
+      "address": "1189 Forest Ave, Staten Island, NY 10310, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=17265611401710283214&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "James Birch Attorney At Law works from Forest Avenue in Staten Island and names no attorney on the pages we could reach.",
+    "70 reviews at 4.4. A free consultation, published. It publishes nothing about the rate or the retainer and none of the trust pages pillar D looks for."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.4,
+      "count_label": "70",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-01"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-28T02:24:37.387898309Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-02-25T15:08:59.568050144Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-05T15:00:36.042299797Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-02-09T20:36:03.595402486Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-01-10T03:36:58.664301Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "schema_detected": false,
+    "psi": {
+      "value": {
+        "performance": 91,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-10-01",
+      "note": "LCP 2.9 s / CLS 0.080 / TBT 1 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "jameshbirchesq.com",
+      "name": "James Birch Attorney At Law",
+      "review_count_at_discovery": 70
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 70,
+      "rating_weighted": 4.4,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 0,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-10-01"
+    },
+    "ahrefs": {
+      "dr": 0.1,
+      "ahrefs_rank": 86968405,
+      "refdomains": 870,
+      "refdomains_dofollow": 373,
+      "backlinks": 1640,
+      "org_keywords": 5,
+      "org_traffic": 11,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-01"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-10-01"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-10-01"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "70 public client reviews and 13 years since its web address was registered in 2013",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-10-01"
+    }
+  },
+  "cohort_id": "ny-criminal-defense",
+  "faq": [
+    {
+      "q": "How much does James Birch Attorney At Law charge?",
+      "a": "James Birch Attorney At Law publishes no fee terms on the pages we read, so none is recorded on this profile. An absence here is not a claim that the firm has no fee arrangement, only that it does not state one publicly. The rate itself is not published, so ask for it in writing, along with how case expenses are handled and whether they come out of the recovery before or after the fee. The first consultation is free, which is the place to ask."
+    },
+    {
+      "q": "Does James Birch Attorney At Law offer a free consultation?",
+      "a": "Yes. James Birch Attorney At Law publishes a free initial consultation."
+    },
+    {
+      "q": "Where does James Birch Attorney At Law have offices?",
+      "a": "James Birch Attorney At Law publishes one office, in Staten Island. Addresses and the Google listing behind each one are on this profile under Offices."
+    },
+    {
+      "q": "Who are the attorneys at James Birch Attorney At Law?",
+      "a": "James Birch Attorney At Law names no attorney on the public pages we could read. That is a gap in what the firm publishes rather than a statement about who works there, and it is why the licensure and discipline checks on this profile have nothing to run against."
+    },
+    {
+      "q": "What has Law Firm Listings verified about James Birch Attorney At Law?",
+      "a": "James Birch Attorney At Law scores 24 and sits at Listed. Passed: footprint. Did not pass: entity registration and website. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+    }
+  ],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "sociation Staten Island Business Friends Phone Consultation Services Available Call for a Free Consultation Same-Day Appointments Available Established in 1987 Flat Fees Offered Legal Disclaimer Th",
+          "source_url": "https://www.jameshbirchesq.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.jameshbirchesq.com/",
+        "contact": "https://www.jameshbirchesq.com/contact"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2013-11-08",
+    "years": 12.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-10-01"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.jameshbirchesq.com/",
+        "quote": "eas: Manhattan, Bronx, Brooklyn, Queens, and Staten Island. New York State Bar Association Richmond County Bar Association Staten Island Business Frie"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-10-01"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-10-01"
+  },
+  "score": {
+    "total": 24,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-01",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which New York's advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 11,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "70 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.4 over 70 reviews → Bayesian 4.65 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-06-28) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 0,
+            "max": 4,
+            "source": "places",
+            "evidence": "2 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 0.1 → 5th pct of 84-firm cohort (median 7) 0/3 · 870 referring domains, 21th pct 0/2 · 5 organic keywords / 11 visits·mo, 20th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 0 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 0,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 1,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 14,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 46,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D1 Website trust & experience: not yet measured (7 pts)"
+      ]
+    },
+    "raw": 15.0,
+    "assessed": 63,
+    "coverage": 0.708,
+    "floor_abc_pct": 0.368,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 89,
+    "comparable": true
+  }
+}

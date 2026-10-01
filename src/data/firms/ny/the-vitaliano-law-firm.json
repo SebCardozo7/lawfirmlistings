@@ -1,0 +1,486 @@
+{
+  "slug": "the-vitaliano-law-firm",
+  "name": "The Vitaliano Law Firm",
+  "initials": "VI",
+  "website": "https://www.vitalianolaw.com/",
+  "domain": "vitalianolaw.com",
+  "phone": "(718) 273-7800",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "criminal-defense",
+      "name": "Criminal Defense",
+      "primary": true,
+      "source_url": "https://www.vitalianolaw.com/nyc-criminal-lawyer/",
+      "checked_at": "2026-10-01"
+    }
+  ],
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "The Vitaliano Law Firm, PLLC",
+      "address": "1492 Victory Blvd, Staten Island, NY 10301, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=15224416682014947371&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Michael Vitaliano",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.vitalianolaw.com/attorney/michael-vitaliano/",
+      "bar_number": "5390653",
+      "admitted_year": 2016,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-10-01"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "The Vitaliano Law Firm works from Victory Boulevard in Staten Island and names a single attorney.",
+    "51 reviews at 4.8. A free consultation and a 24 hour line, published. It publishes nothing about the rate or the retainer."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "51",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-01"
+    },
+    "sample": [
+      {
+        "published_at": "2026-08-05T00:16:20.286624689Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-28T19:44:32.624173741Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-26T16:07:05.593168459Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2025-07-01T15:50:19.675210584Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-15T22:58:04.226929936Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 66,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-10-01",
+      "note": "LCP 8.4 s / CLS 0.084 / TBT 69 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "vitalianolaw.com",
+      "name": "The Vitaliano Law Firm, PLLC",
+      "review_count_at_discovery": 51
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 51,
+      "rating_weighted": 4.8,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 2,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-10-01"
+    },
+    "ahrefs": {
+      "dr": 19.0,
+      "ahrefs_rank": 9347343,
+      "refdomains": 1096,
+      "refdomains_dofollow": 452,
+      "backlinks": 2028,
+      "org_keywords": 80,
+      "org_traffic": 1171,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-01"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": true,
+      "evidence": "1 of 1 named attorneys are currently registered and none carries an adverse status",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-10-01"
+    },
+    "G2": {
+      "pass": true,
+      "evidence": "None of the 1 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-10-01"
+    },
+    "G3": {
+      "pass": true,
+      "evidence": "THE VITALIANO LAW FIRM, PLLC is an active domestic professional service limited liability company registered since 2021-09-23, with 1 Google-verified location",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-10-01"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-10-01"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "51 public client reviews and 5 years since the entity was formed in 2021",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-10-01"
+    }
+  },
+  "cohort_id": "ny-criminal-defense",
+  "faq": [
+    {
+      "q": "How much does The Vitaliano Law Firm charge?",
+      "a": "The Vitaliano Law Firm publishes no fee terms on the pages we read, so none is recorded on this profile. An absence here is not a claim that the firm has no fee arrangement, only that it does not state one publicly. The rate itself is not published, so ask for it in writing, along with how case expenses are handled and whether they come out of the recovery before or after the fee. The first consultation is free, which is the place to ask."
+    },
+    {
+      "q": "Does The Vitaliano Law Firm offer a free consultation?",
+      "a": "Yes. The Vitaliano Law Firm publishes a free initial consultation. The intake line is published as open around the clock."
+    },
+    {
+      "q": "Where does The Vitaliano Law Firm have offices?",
+      "a": "The Vitaliano Law Firm publishes one office, in Staten Island. Addresses and the Google listing behind each one are on this profile under Offices."
+    },
+    {
+      "q": "Who are the attorneys at The Vitaliano Law Firm?",
+      "a": "The Vitaliano Law Firm names one attorney on its own site, and each is listed on this profile with the page we read them from. 1 of 1 named attorneys are currently registered and none carries an adverse status."
+    },
+    {
+      "q": "What has Law Firm Listings verified about The Vitaliano Law Firm?",
+      "a": "The Vitaliano Law Firm scores 49 and sits at Verified. Passed: licensure, discipline, entity registration, website and footprint. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+    }
+  ],
+  "_review": {
+    "name_source": "JSON-LD business.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "NYC Criminal Lawyer - Staten Island Criminal Defense Law Firm Available 24/7 Free Consultation 718-273-7800 Home About Us Michael Vitaliano Reviews Practice Areas Criminal Defense Crim",
+          "source_url": "https://www.vitalianolaw.com/"
+        },
+        "available_24_7": {
+          "quote": "NYC Criminal Lawyer - Staten Island Criminal Defense Law Firm Available 24/7 Free Consultation 718-273-7800 Home About Us Michael Vitaliano Reviews Practice Areas Cri",
+          "source_url": "https://www.vitalianolaw.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "An accomplished legal advocate, Michael E. Vitaliano is the founder and principal of The Vitaliano Law Firm, based in New York City. Mr. Vitaliano is a leading NYC criminal defense lawyer and experienced advocate in handling all criminal matters in state and federal court. Practice Areas: • White Collar • DWI • Health Care Fraud • Racketeering • Bribery • Tax Fraud • High level Narcotics Cases",
+        "An accomplished legal advocate, Michael E. Vitaliano is the founder and principal of The Vitaliano Law Firm, based in New York City. Mr. Vitaliano is a leading NYC criminal defense lawyer and experienced advocate in handling all criminal matters in state and federal court. Practice Areas: • White Collar • DWI • Health Care Fraud • Racketeering • Bribery • Tax Fraud • High level Narcotics Cases"
+      ],
+      "pages": {
+        "home": "https://www.vitalianolaw.com/",
+        "contact": "https://www.vitalianolaw.com/contact/",
+        "attorneys": "https://www.vitalianolaw.com/attorney/michael-vitaliano/",
+        "about": "https://www.vitalianolaw.com/about-us/",
+        "blog": "https://www.vitalianolaw.com/blog/",
+        "privacy": "https://www.vitalianolaw.com/privacy/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://www.vitalianolaw.com/attorney/michael-vitaliano/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2021-09-25",
+    "years": 5.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-10-01"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "New York State Bar Association",
+        "source_url": "https://www.vitalianolaw.com/about-us/",
+        "quote": "ssociation, the New York City Criminal Bar Association, the New York State Bar Association, and the Richmond County Bar Association. Prosecutorial Exp"
+      },
+      {
+        "name": "National Association of Criminal Defense Lawyers",
+        "source_url": "https://www.vitalianolaw.com/about-us/",
+        "quote": "rn and Eastern Districts of New York. He is a member of the National Association of Criminal Defense Lawyers, the New York State Association of Criminal Defense"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of New York State Bar Association, National Association of Criminal Defense Lawyers · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-10-01"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-10-01"
+  },
+  "entity": {
+    "legal_name": "THE VITALIANO LAW FIRM, PLLC",
+    "entity_type": "DOMESTIC PROFESSIONAL SERVICE LIMITED LIABILITY COMPANY",
+    "dos_id": "6287758",
+    "formed": "2021-09-23",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-10-01"
+  },
+  "score": {
+    "total": 49,
+    "tier": "Verified",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-01",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 19,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 7,
+            "max": 10,
+            "source": "registry",
+            "evidence": "Mean 10.0 years since admission across 1 of 1 named attorneys (longest 10, shortest 10) · NYS Attorney Registration database"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 9,
+            "max": 9,
+            "source": "registry",
+            "evidence": "1 of 1 named attorneys matched to the New York register; bar numbers published on the bios"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of New York State Bar Association, National Association of Criminal Defense Lawyers · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which New York's advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 14,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "51 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.8 over 51 reviews → Bayesian 4.82 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-08-05) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 2,
+            "max": 4,
+            "source": "places",
+            "evidence": "1 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 7,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.5,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 4,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 19.0 → 76th pct of 84-firm cohort (median 7) 2/3 · 1,096 referring domains, 61th pct 1/2 · 80 organic keywords / 1,171 visits·mo, 72th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.2,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 2 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 33,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 21,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "B1 Results published: +6 available",
+        "D1 Website trust & experience: +5.5 available",
+        "B2 Specificity: +5 available"
+      ]
+    },
+    "raw": 43.2,
+    "assessed": 89,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.579,
+    "gates_unavailable": [],
+    "gates_unresolvable": [],
+    "assessable": 89,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/vitalianolaw.com.png",
+    "source_url": "https://www.vitalianolaw.com/wp-content/uploads/2021/10/fav-icon-1.png",
+    "width": 80,
+    "height": 67,
+    "bytes": 794,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-01"
+  }
+}

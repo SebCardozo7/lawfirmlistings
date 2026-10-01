@@ -29,9 +29,19 @@ const { practice } = Astro.params;
 const { firms: matching } = Astro.props;
 const notes = PRACTICES[practice!];
 
-// Certified firms rank by score; listed firms have no score yet and follow, alphabetically.
+// By score, which is what the heading over this list says.
+//
+// It used to rank only firms whose status is 'certified' and send everything else to the bottom
+// in alphabetical order, from a time when a listed firm had no score. Every published firm has
+// one now, and 57 of 1,270 carry that status, so four practice areas had no certified firm at
+// all and printed a straight alphabetical list under "Highest-scoring firms in the practice":
+// immigration, criminal defense, family law and real estate, 268 firms between them. Criminal
+// defense opened with Addabbo, Boris and Brooklyn at the top and the firm scoring 69 nowhere in
+// sight.
+//
+// A firm with no score at all still sorts last, because an absent score is not a zero.
 const weight = (f: typeof matching[number]) =>
-  f.data.status === 'certified' ? -(f.data.score?.total ?? 0) : 1;
+  f.data.score ? -f.data.score.total : 1;
 const firms = [...matching].sort((a, b) =>
   weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
 

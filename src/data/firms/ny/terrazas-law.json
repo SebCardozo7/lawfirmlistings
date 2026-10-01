@@ -1,0 +1,456 @@
+{
+  "slug": "terrazas-law",
+  "name": "Terrazas Law",
+  "initials": "TE",
+  "website": "https://www.rterrazaslaw.com/",
+  "domain": "rterrazaslaw.com",
+  "phone": "(347) 470-3182",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "criminal-defense",
+      "name": "Criminal Defense",
+      "primary": true,
+      "source_url": "https://www.rterrazaslaw.com/practice-area/dui-dwi",
+      "checked_at": "2026-10-01"
+    }
+  ],
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "Terrazas Law",
+      "address": "1110 South Ave, Staten Island, NY 10314, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=4708400050597288744&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Terrazas Law works from South Avenue in Staten Island and names no attorney on the pages we could reach.",
+    "11 reviews at 5.0. A free consultation and pages in Spanish, published. It publishes nothing about the rate or the retainer."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "11",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-01"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-29T17:42:41.401548226Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-25T16:51:18.051307043Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-05T17:38:04.553542825Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-22T20:03:35.913718212Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-29T00:39:39.595167058Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true
+    },
+    "schema_detected": false,
+    "psi": {
+      "value": {
+        "performance": 78,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-10-01",
+      "note": "LCP 3.9 s / CLS 0.000 / TBT 0 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "rterrazaslaw.com",
+      "name": "Terrazas Law",
+      "review_count_at_discovery": 11
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 11,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 4,
+        "hours_published": false,
+        "photos": 0,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-10-01"
+    },
+    "ahrefs": {
+      "dr": 0.0,
+      "ahrefs_rank": 119341905,
+      "refdomains": 947,
+      "refdomains_dofollow": 335,
+      "backlinks": 1758,
+      "org_keywords": 0,
+      "org_traffic": 0,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-01"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G3": {
+      "pass": true,
+      "evidence": "LINDA TERRAZAS LCSW, PLLC is an active domestic professional service limited liability company registered since 2023-11-09, with 1 Google-verified location",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-10-01"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-10-01"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "11 public client reviews and 3 years since the entity was formed in 2023",
+      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+      "checked_at": "2026-10-01"
+    }
+  },
+  "cohort_id": "ny-criminal-defense",
+  "faq": [
+    {
+      "q": "How much does Terrazas Law charge?",
+      "a": "Terrazas Law publishes no fee terms on the pages we read, so none is recorded on this profile. An absence here is not a claim that the firm has no fee arrangement, only that it does not state one publicly. The rate itself is not published, so ask for it in writing, along with how case expenses are handled and whether they come out of the recovery before or after the fee. The first consultation is free, which is the place to ask."
+    },
+    {
+      "q": "Does Terrazas Law offer a free consultation?",
+      "a": "Yes. Terrazas Law publishes a free initial consultation. It publishes material in Spanish."
+    },
+    {
+      "q": "Where does Terrazas Law have offices?",
+      "a": "Terrazas Law publishes one office, in Staten Island. Addresses and the Google listing behind each one are on this profile under Offices."
+    },
+    {
+      "q": "Who are the attorneys at Terrazas Law?",
+      "a": "Terrazas Law names no attorney on the public pages we could read. That is a gap in what the firm publishes rather than a statement about who works there, and it is why the licensure and discipline checks on this profile have nothing to run against."
+    },
+    {
+      "q": "What has Law Firm Listings verified about Terrazas Law?",
+      "a": "Terrazas Law scores 28 and sits at Listed. Passed: entity registration and footprint. Did not pass: website. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+    }
+  ],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "acquittals, and reduced charges Se habla Español Learn more (347) 470-3182 Schedule your free consultation Start building your defense now. (347) 470-3182 Practice areas If you are accused of comm",
+          "source_url": "https://www.rterrazaslaw.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "our Freedom. Years of experience navigating New York’s complex criminal justice system. ‍ Se habla Español. Get in touch Violent Crimes Facing charges for assault, robbery, or other violent offens",
+          "source_url": "https://www.rterrazaslaw.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.rterrazaslaw.com/",
+        "blog": "https://www.rterrazaslaw.com/blog",
+        "about": "https://www.rterrazaslaw.com/about",
+        "contact": "https://www.rterrazaslaw.com/contact"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2024-05-15",
+    "years": 2.4,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-10-01"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-10-01"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-10-01"
+  },
+  "entity": {
+    "legal_name": "LINDA TERRAZAS LCSW, PLLC",
+    "entity_type": "DOMESTIC PROFESSIONAL SERVICE LIMITED LIABILITY COMPANY",
+    "dos_id": "7180051",
+    "formed": "2023-11-09",
+    "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
+    "checked_at": "2026-10-01"
+  },
+  "score": {
+    "total": 28,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-01",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which New York's advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 15,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 1,
+            "max": 5,
+            "source": "observed",
+            "evidence": "11 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 11 reviews → Bayesian 4.85 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-05) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 2,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 1,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 0.0 → 1th pct of 84-firm cohort (median 7) 0/3 · 947 referring domains, 33th pct 1/2 · 0 organic keywords / 0 visits·mo, 4th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 0 photos · 4 categories, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 0,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 2,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 15,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 42,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D2 Search authority: +7 available"
+      ]
+    },
+    "raw": 19.5,
+    "assessed": 70,
+    "coverage": 0.787,
+    "floor_abc_pct": 0.395,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 89,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/rterrazaslaw.com.svg",
+    "source_url": "https://cdn.prod.website-files.com/6807eb1da4489b64a3a8c031/68925971d7f5ef9c36ec730d_webclipRT.svg",
+    "width": null,
+    "height": null,
+    "bytes": 7073,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-01"
+  }
+}

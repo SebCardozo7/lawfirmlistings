@@ -1,0 +1,441 @@
+{
+  "slug": "greenberg-law-firm",
+  "name": "Greenberg Law Firm",
+  "initials": "GR",
+  "website": "https://www.howardgreenberglaw.com/",
+  "domain": "howardgreenberglaw.com",
+  "phone": "(718) 797-1800",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "criminal-defense",
+      "name": "Criminal Defense",
+      "primary": true,
+      "source_url": "https://www.howardgreenberglaw.com/services/",
+      "checked_at": "2026-10-01"
+    }
+  ],
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "Greenberg Law Firm",
+      "address": "139 Court St, Brooklyn, NY 11201, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=2522526562105398736&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Greenberg Law Firm works from Court Street in Brooklyn and names no attorney on the pages we could reach.",
+    "143 reviews at 4.6. A free consultation and a 24 hour line, published. It publishes nothing about the rate or the retainer and none of the trust pages pillar D looks for."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.6,
+      "count_label": "143",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-01"
+    },
+    "sample": [
+      {
+        "published_at": "2026-09-06T14:58:30.153885432Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-20T14:25:01.618374657Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-16T18:55:58.346914711Z",
+        "rating": 4
+      },
+      {
+        "published_at": "2026-04-11T20:00:36.503152092Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-04T15:33:26.925435917Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 49,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-10-01",
+      "note": "LCP 7.5 s / CLS 0.491 / TBT 42 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "howardgreenberglaw.com",
+      "name": "Greenberg Law Firm",
+      "review_count_at_discovery": 143
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 143,
+      "rating_weighted": 4.6,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 3,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-10-01"
+    },
+    "ahrefs": {
+      "dr": 3.3,
+      "ahrefs_rank": 37228126,
+      "refdomains": 947,
+      "refdomains_dofollow": 393,
+      "backlinks": 1283,
+      "org_keywords": 43,
+      "org_traffic": 463,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-01"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-10-01"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-10-01"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "143 public client reviews and 9 years since its web address was registered in 2017",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-10-01"
+    }
+  },
+  "cohort_id": "ny-criminal-defense",
+  "faq": [
+    {
+      "q": "How much does Greenberg Law Firm charge?",
+      "a": "Greenberg Law Firm publishes no fee terms on the pages we read, so none is recorded on this profile. An absence here is not a claim that the firm has no fee arrangement, only that it does not state one publicly. The rate itself is not published, so ask for it in writing, along with how case expenses are handled and whether they come out of the recovery before or after the fee. The first consultation is free, which is the place to ask."
+    },
+    {
+      "q": "Does Greenberg Law Firm offer a free consultation?",
+      "a": "Yes. Greenberg Law Firm publishes a free initial consultation. The intake line is published as open around the clock."
+    },
+    {
+      "q": "Where does Greenberg Law Firm have offices?",
+      "a": "Greenberg Law Firm publishes one office, in Brooklyn. Addresses and the Google listing behind each one are on this profile under Offices."
+    },
+    {
+      "q": "Who are the attorneys at Greenberg Law Firm?",
+      "a": "Greenberg Law Firm names no attorney on the public pages we could read. That is a gap in what the firm publishes rather than a statement about who works there, and it is why the licensure and discipline checks on this profile have nothing to run against."
+    },
+    {
+      "q": "What has Law Firm Listings verified about Greenberg Law Firm?",
+      "a": "Greenberg Law Firm scores 38 and sits at Listed. Passed: footprint. Did not pass: entity registration and website. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+    }
+  ],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "Brooklyn Criminal Defense Lawyers | FREE CONSULTATION Skip to primary navigation Skip to main content Skip to footer On call 7 days a week, 24",
+          "source_url": "https://www.howardgreenberglaw.com/"
+        },
+        "available_24_7": {
+          "quote": "ION Skip to primary navigation Skip to main content Skip to footer On call 7 days a week, 24 hours a day Location: 137-139 Court Street, 2nd Floor Brooklyn, NY 11201 Phone: 917-716-6416 GREENBER",
+          "source_url": "https://www.howardgreenberglaw.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Greenberg Law Firm-Expert Legal Representation",
+        "Greenberg Law Firm-Expert Legal Representation"
+      ],
+      "pages": {
+        "home": "https://www.howardgreenberglaw.com/",
+        "contact": "https://www.howardgreenberglaw.com/contact-us/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2017-07-06",
+    "years": 9.2,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-10-01"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-10-01"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-10-01"
+  },
+  "score": {
+    "total": 38,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-01",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which New York's advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "143 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.6 over 143 reviews → Bayesian 4.70 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-09-06) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 0,
+            "max": 7,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 3,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 3.3 → 35th pct of 84-firm cohort (median 7) 1/3 · 947 referring domains, 33th pct 1/2 · 43 organic keywords / 463 visits·mo, 61th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.3,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 3 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 16,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 32,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D1 Website trust & experience: not yet measured (7 pts)"
+      ]
+    },
+    "raw": 23.8,
+    "assessed": 63,
+    "coverage": 0.708,
+    "floor_abc_pct": 0.421,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 89,
+    "comparable": true
+  }
+}
