@@ -1,103 +1,107 @@
 {
-  "slug": "arolawfirmcom",
-  "name": "arolawfirm.com",
-  "initials": "AC",
-  "website": "https://arolawfirm.com/",
-  "domain": "arolawfirm.com",
-  "phone": "(786) 236-9143",
+  "slug": "pursley-law-firm-apc",
+  "name": "Pursley Law Firm, APC",
+  "initials": "PL",
+  "website": "https://www.pursleylegal.com/",
+  "domain": "pursleylegal.com",
+  "phone": "(760) 678-1884",
   "status": "listed",
   "practices": [
     {
-      "slug": "immigration",
-      "name": "Immigration",
+      "slug": "personal-injury",
+      "name": "Personal Injury",
       "primary": true,
-      "source_url": "https://arolawfirm.com/practice-areas/",
+      "source_url": "https://www.pursleylegal.com/carlsbad-work-injury-lawyer/",
       "checked_at": "2026-09-29"
     }
   ],
   "market": {
-    "city_slug": "miami-fl",
-    "city": "Miami",
-    "state": "FL",
-    "state_name": "Florida"
+    "city_slug": "san-diego-ca",
+    "city": "San Diego",
+    "state": "CA",
+    "state_name": "California"
   },
   "offices": [
     {
-      "label": "Aro Law Firm",
-      "address": "6910 N Kendall Dr #202, Miami, FL 33156, USA",
+      "label": "Pursley Law Firm, APC",
+      "address": "701 Palomar Airport Rd #300, Carlsbad, CA 92011, USA",
       "by_appointment": false,
       "is_hq": true,
-      "source_url": "https://maps.google.com/?cid=13318400158725772242&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+      "source_url": "https://maps.google.com/?cid=7205899270523831022&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
   "attorneys": [],
   "languages": [
-    "English",
-    "Spanish"
+    "English"
   ],
-  "fee_model": "Not stated",
+  "fee_model": "Contingency",
   "free_consultation": true,
   "availability": [],
   "about": [
-    "arolawfirm.com is a immigration firm with a single office in Miami.",
-    "The firm states that the first consultation is free. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+    "Pursley Law Firm, APC works from Palomar Airport Road in Carlsbad and names no attorney on the pages we could reach.",
+    "57 reviews at 5.0. Contingency fees and a free consultation, published. It publishes seven case results with amounts of its own and they are its figures rather than ones we confirmed."
   ],
   "reviews": {
     "quotes": [],
     "google": {
       "rating": 5.0,
-      "count_label": "53",
+      "count_label": "57",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
       "fetched_at": "2026-09-30"
     },
     "sample": [
       {
-        "published_at": "2026-06-03T10:48:59.564484664Z",
+        "published_at": "2026-05-13T18:48:22.219662553Z",
         "rating": 5
       },
       {
-        "published_at": "2026-05-20T00:34:33.151634002Z",
+        "published_at": "2023-10-04T04:30:24.455168Z",
         "rating": 5
       },
       {
-        "published_at": "2025-12-17T16:17:44.625922465Z",
+        "published_at": "2025-01-14T05:38:57.116615Z",
         "rating": 5
       },
       {
-        "published_at": "2025-12-16T01:45:14.370169163Z",
+        "published_at": "2025-06-06T16:10:20.431825Z",
         "rating": 5
       },
       {
-        "published_at": "2025-12-16T01:22:35.434208634Z",
+        "published_at": "2025-11-05T03:32:31.922590684Z",
         "rating": 5
       }
     ]
   },
   "results": [],
   "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true,
+      "blog": true
+    },
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 47,
+        "performance": 66,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, lab only)",
       "measured_at": "2026-09-30",
-      "note": "LCP 9.4 s / CLS 0.267 / TBT 14 ms"
+      "note": "LCP 6.7 s / CLS 0.000 / TBT 4 ms"
     },
     "_ahrefs_partial_from_cohort": {
-      "domain": "arolawfirm.com",
-      "name": "Aro Law Firm",
-      "review_count_at_discovery": 53
+      "domain": "pursleylegal.com",
+      "name": "Pursley Law Firm, APC",
+      "review_count_at_discovery": 57
     },
     "places": {
       "listing_count": 1,
-      "review_count_total": 53,
+      "review_count_total": 57,
       "rating_weighted": 5.0,
       "completeness": {
-        "categories": 4,
+        "categories": 5,
         "hours_published": true,
-        "photos": 1,
+        "photos": 3,
         "google_wrote_a_summary": false,
         "unobtainable": [
           "the owner's own description",
@@ -109,26 +113,37 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 6,
+      "ahrefs_rank": 25809819,
+      "refdomains": 832,
+      "refdomains_dofollow": 403,
+      "backlinks": 1708,
+      "org_keywords": 117,
+      "org_traffic": 1075,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
     }
   },
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
       "source": "no queryable source",
       "checked_at": "2026-09-30"
     },
     "G2": {
       "pass": false,
-      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
-      "source": "no roster published",
+      "evidence": "California does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
       "checked_at": "2026-09-30"
     },
     "G3": {
       "pass": false,
-      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
-      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
-      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "evidence": "1 physical location verified on Google Business Profile. California publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
       "checked_at": "2026-09-30"
     },
     "G5": {
@@ -139,40 +154,58 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "53 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2025-03-08, so it has been operating for more than a year",
+      "evidence": "57 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2020-02-28, so it has been operating for more than a year",
       "source": "Google Places API and the domain's registration date over RDAP",
       "checked_at": "2026-09-30"
     }
   },
-  "cohort_id": "fl-miami-immigration",
+  "cohort_id": "ca-sandiego-personal-injury",
   "faq": [],
   "_review": {
     "name_source": "JSON-LD Organization.name",
-    "phone_source": "Google Business Profile",
+    "phone_source": "JSON-LD telephone",
     "about_material": {
       "claims": {
+        "contingency": {
+          "quote": "sonal injury lawyer get paid? The Pursley Law Firm handles all personal injury cases on a contingency basis. That means your personal injury lawyer gets paid out of the money you collect in a",
+          "source_url": "https://www.pursleylegal.com/"
+        },
         "free_consultation": {
-          "quote": "Home About Us Practice Areas Blog Contact Us Home About Us Practice Areas Blog Contact Us Free Consultation Trusted Immigration Attorney Committed to Securing Your Future in the U.S. Personalized l",
-          "source_url": "https://arolawfirm.com/"
+          "quote": "lp. Find out what to expect from the moment you contact him until your case is closed. 1. Free Consultation With A Personal Injury Attorney Once you’ve taken the first step and contacted Pursley La",
+          "source_url": "https://www.pursleylegal.com/"
         }
       },
-      "json_ld_descriptions": [],
+      "json_ld_descriptions": [
+        "A serious injury can impact you physically and emotionally and can affect your personal and professional lives. I am personal injury attorney Jared Pursley, and I help individuals in Carlsbad, Oceanside, San Marcos and the nearby communities get back on the right path after a serious injury.\r\n\r\nIf you or a family member has suffered a brain injury in a slip-and-fall, was injured in a car accident or experienced any type of personal injury, you have the right under the law to pursue compensation for medical expenses, rehabilitation costs, lost wages and more. Contact an experienced Carlsbad personal injury lawyer who will fight tirelessly to make that happen."
+      ],
       "pages": {
-        "home": "https://arolawfirm.com/",
-        "about": "https://arolawfirm.com/about-us/",
-        "contact": "https://arolawfirm.com/contact-us/"
+        "home": "https://www.pursleylegal.com/",
+        "results": "https://www.pursleylegal.com/results/",
+        "privacy": "https://www.pursleylegal.com/privacy/",
+        "contact": "https://www.pursleylegal.com/contact/",
+        "disclaimer": "https://www.pursleylegal.com/disclaimer/",
+        "blog": "https://www.pursleylegal.com/blog/",
+        "about": "https://www.pursleylegal.com/jared-r-pursley/"
       }
     },
     "attorney_page_urls": [],
     "blocking": [
       "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
-      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
-      "fee_statement omitted"
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
     ]
   },
+  "logo": {
+    "file": "/logos/pursleylegal.com.png",
+    "source_url": "https://www.pursleylegal.com/wp-content/favicon/apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 18472,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  },
   "operating": {
-    "registered": "2025-03-08",
-    "years": 1.6,
+    "registered": "2020-02-28",
+    "years": 6.6,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
     "checked_at": "2026-09-30"
   },
@@ -188,17 +221,39 @@
     "checked_at": "2026-09-30"
   },
   "results_published": {
-    "readable": true,
-    "count": 0,
-    "amounts": [],
-    "case_types": [],
+    "count": 7,
+    "counted_from": "stated amounts",
+    "amounts": [
+      1000000,
+      265000,
+      200000,
+      100000,
+      80000,
+      70000,
+      65000
+    ],
+    "largest": 1000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "medical malpractice",
+      "wrongful death",
+      "workplace",
+      "pedestrian"
+    ],
     "disclaimer": false,
-    "venues": [],
-    "why": "the site publishes no case-results page",
+    "venues": [
+      "Orange County"
+    ],
+    "text_length": 4942,
+    "readable": true,
+    "url": "https://www.pursleylegal.com/results/",
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 36,
+    "total": 45,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-10-01",
@@ -214,7 +269,7 @@
             "pts": 0,
             "max": 10,
             "source": "no queryable source",
-            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
           },
           {
             "code": "A6",
@@ -235,24 +290,24 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 8,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 3,
             "max": 6,
             "source": "firm",
-            "evidence": "The firm publishes no case results we could read"
+            "evidence": "7 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 5,
             "max": 5,
             "source": "firm",
-            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+            "evidence": "7 case types named; 1 court or county reference"
           },
           {
             "code": "B3",
@@ -265,7 +320,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 15,
         "max": 20,
         "subs": [
           {
@@ -274,7 +329,7 @@
             "pts": 2,
             "max": 5,
             "source": "observed",
-            "evidence": "53 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+            "evidence": "57 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -282,15 +337,15 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 53 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1184 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 57 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1184 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 5,
+            "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-06-03) · a sample of five per business listing, not every review"
+            "evidence": "2 of 5 sampled reviews are from the last 12 months (newest 2026-05-13) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -303,62 +358,62 @@
         ]
       },
       "D": {
-        "score": 1,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
+            "pts": 2.0,
             "max": 7,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 6 → 25th pct of 109-firm cohort (median 14) 1/3 · 832 referring domains, 23th pct 0/2 · 117 organic keywords / 1,075 visits·mo, 68th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 0.1,
+            "pts": 0.3,
             "max": 1,
             "source": "places",
-            "evidence": "1 operational Google Business Profile listing · 1 photos · 4 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+            "evidence": "1 operational Google Business Profile listing · 3 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
       "E": {
-        "score": 2,
+        "score": 3,
         "max": 15,
         "subs": [
           {
             "code": "E1",
             "label": "Free consult & fee transparency",
-            "pts": 1,
+            "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 1.5,
+            "pts": 0.0,
             "max": 4,
             "source": "observed",
-            "evidence": "English, Spanish"
+            "evidence": "English"
           },
           {
             "code": "E4",
@@ -371,40 +426,30 @@
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 23,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 34,
+      "gap": 25,
       "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "A2 Experience: +10 available",
+        "D2 Search authority: +6 available"
       ]
     },
-    "raw": 19.6,
-    "assessed": 55,
-    "coverage": 0.696,
-    "floor_abc_pct": 0.421,
+    "raw": 31.3,
+    "assessed": 70,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.605,
     "gates_unavailable": [
       "G1",
-      "G2"
-    ],
-    "gates_unresolvable": [
+      "G2",
       "G3"
     ],
+    "gates_unresolvable": [],
     "assessable": 79,
     "comparable": true
-  },
-  "logo": {
-    "file": "/logos/arolawfirm.com.png",
-    "source_url": "https://arolawfirm.com/wp-content/uploads/2025/05/cropped-Ellipse-68-192x192.png",
-    "width": 192,
-    "height": 192,
-    "bytes": 17367,
-    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
-    "fetched_at": "2026-09-30"
   }
 }
