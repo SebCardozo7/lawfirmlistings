@@ -1,0 +1,431 @@
+{
+  "slug": "croce-associates",
+  "name": "Croce & Associates",
+  "initials": "CR",
+  "website": "https://crocelegal.com/",
+  "domain": "crocelegal.com",
+  "phone": "(786) 200-3088",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "immigration",
+      "name": "Immigration",
+      "primary": true,
+      "source_url": "https://crocelegal.com/common-grounds-for-deportation-and-how-to-challenge-them/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "miami-fl",
+    "city": "Miami",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Croce & Associates Immigration Law Services",
+      "address": "6625 Miami Lakes Dr Suite 378, Miami Lakes, FL 33014, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=6204031991087656597&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Short Bio",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://crocelegal.com/attorney/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Croce & Associates is a immigration firm with a single office in Miami Lakes.",
+    "The firm states that the first consultation is free. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.6,
+      "count_label": "109",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-04-27T22:34:20.259513475Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-16T12:46:41.666037570Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-26T21:22:06.434409718Z",
+        "rating": 4
+      },
+      {
+        "published_at": "2026-02-19T15:47:22.210688293Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-23T20:01:06.695949508Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "_ahrefs_partial_from_cohort": {
+      "domain": "crocelegal.com",
+      "name": "Croce & Associates Immigration Law Services",
+      "review_count_at_discovery": 109
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 109,
+      "rating_weighted": 4.6,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-30",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "109 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2016-03-10, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "fl-miami-immigration",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD business.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "se_habla_espanol": {
+          "quote": "cs is unchallenged. 100 % Recommended Contact Us NOUS PARLONS FRANÇAIS ​FALAMOS PORTUGUÊS HABLAMOS ESPAÑOL SI PARLA ITALIANO Name * E-Mail * Phone * Subject Mensaje * This contact form is deactiva",
+          "source_url": "https://crocelegal.com/"
+        },
+        "free_consultation": {
+          "quote": "et us fight for you with compassionate and skilled representation. Contact us today for a free consultation Legal Recourse and Appeals If your asylum application is denied, there are legal steps yo",
+          "source_url": "https://crocelegal.com/blog/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Miami Immigration Lawyer"
+      ],
+      "pages": {
+        "home": "https://crocelegal.com/",
+        "contact": "https://crocelegal.com/contact/",
+        "attorneys": "https://crocelegal.com/attorney/",
+        "blog": "https://crocelegal.com/blog/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://crocelegal.com/attorney/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2016-03-10",
+    "years": 10.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Immigration Lawyers Association",
+        "source_url": "https://crocelegal.com/attorney/",
+        "quote": "resident status in the U.S. Michelangelo is a member of the American Immigration Lawyers Association (AILA), and a current member of the AILA ICE-ERO Liaison Co"
+      },
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://crocelegal.com/attorney/",
+        "quote": "e Pennsylvania Bar in 2002 (currently inactive) Admitted to the Florida Bar in 2004 Admitted to the U.S. the U.S. District Court, South"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Immigration Lawyers Association, The Florida Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 40,
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Immigration Lawyers Association, The Florida Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "109 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.6 over 109 reviews → Bayesian 4.71 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-05-26) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV pending · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 2,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 19,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 30,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 24.5,
+    "assessed": 62,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.5,
+    "gates_unavailable": [
+      "G1"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 70,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/crocelegal.com.png",
+    "source_url": "https://crocelegal.com/wp-content/uploads/2016/06/favicon-1.png",
+    "width": 591,
+    "height": 595,
+    "bytes": 33046,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  }
+}

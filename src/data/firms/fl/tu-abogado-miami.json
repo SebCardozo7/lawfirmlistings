@@ -1,0 +1,435 @@
+{
+  "slug": "tu-abogado-miami",
+  "name": "Tu Abogado Miami",
+  "initials": "TA",
+  "website": "https://tuabogadomiami.com/",
+  "domain": "tuabogadomiami.com",
+  "phone": "(305) 990-8258",
+  "status": "not_eligible",
+  "practices": [
+    {
+      "slug": "immigration",
+      "name": "Immigration",
+      "primary": true,
+      "source_url": "https://tuabogadomiami.com/services/asylum",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "miami-fl",
+    "city": "Miami",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Gursoy Abogado de Inmigracion",
+      "address": "1395 Brickell Ave Suite #800, Miami, FL 33131, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=4030543171039328894&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Mike Gursoy",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://tuabogadomiami.com/attorneys"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Tu Abogado Miami is a immigration firm with a single office in Miami.",
+    "The firm states that the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "9",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-09-13T10:38:37.984196828Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-13T10:34:42.359856684Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-13T10:30:58.326240815Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-12T10:54:06.878532796Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-10T18:42:41.842261259Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 41,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 17.0 s / CLS 0.002 / TBT 674 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "tuabogadomiami.com",
+      "name": "Gursoy Abogado de Inmigracion",
+      "review_count_at_discovery": 9
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 9,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 1,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-30",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "9 reviews, below the 10 this gate asks for in this practice and the domain has been registered for 0.5 year(s)",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "fl-miami-immigration",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LegalService.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "Locations ▾ Miami Hialeah Doral Kendall Little Havana North Miami / Miami Gardens Contact Free Consultation Services Asylum Deportation Defense Immigration Court SIJS Green Card / Residency Work Pe",
+          "source_url": "https://tuabogadomiami.com/about"
+        },
+        "available_24_7": {
+          "quote": "ve Miami, FL 33131 Mon–Fri · 8:30 AM – 6:00 PM Saturday · By appointment Emergency line · 24/7 📞 305-990-8258 Services Asylum Deportation Defense Immigration Court SIJS Green Card / Re",
+          "source_url": "https://tuabogadomiami.com/about"
+        },
+        "se_habla_espanol": {
+          "quote": "About Gursoy Law Firm | Tu Abogado Miami 305-990-8258 Miami · Hialeah · Doral Hablamos Español Select Your Language Español About ▾ Firm Overview Attorneys Services ▾ Asylum Deportatio",
+          "source_url": "https://tuabogadomiami.com/about"
+        }
+      },
+      "json_ld_descriptions": [
+        "Immigration lawyer serving Miami, Hialeah and South Florida. Asylum, deportation defense, and immigration court. Hablamos Español."
+      ],
+      "pages": {
+        "home": "https://tuabogadomiami.com/",
+        "about": "https://tuabogadomiami.com/about",
+        "contact": "https://tuabogadomiami.com/contact",
+        "results": "https://tuabogadomiami.com/case-results",
+        "privacy": "https://tuabogadomiami.com/privacy",
+        "attorneys": "https://tuabogadomiami.com/attorneys",
+        "blog": "https://tuabogadomiami.com/blog"
+      }
+    },
+    "attorney_page_urls": [
+      "https://tuabogadomiami.com/attorneys"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2026-04-14",
+    "years": 0.5,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 3771 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://tuabogadomiami.com/case-results",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 46,
+    "tier": "Not eligible",
+    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "the results page served 3771 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "the results page served 3771 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "the results page served 3771 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          }
+        ]
+      },
+      "C": {
+        "score": 14,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "9 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 9 reviews → Bayesian 4.84 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-09-13) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.5,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.1,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 1 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 5,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 14,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 24,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "D2 Search authority: not yet measured (8 pts)",
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)"
+      ]
+    },
+    "raw": 21.6,
+    "assessed": 47,
+    "coverage": 0.671,
+    "floor_abc_pct": 0.609,
+    "gates_unavailable": [
+      "G1"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 70,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/tuabogadomiami.com.png",
+    "source_url": "https://tuabogadomiami.com/apple-touch-icon.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 7722,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  }
+}

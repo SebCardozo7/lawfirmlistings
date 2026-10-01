@@ -1,0 +1,422 @@
+{
+  "slug": "yetnikoff-law-offices-pllc",
+  "name": "Yetnikoff Law Offices, PLLC",
+  "initials": "YO",
+  "website": "https://ilylaw.com/",
+  "domain": "ilylaw.com",
+  "phone": "(800) 279-6331",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://ilylaw.com/pedestrian-accidents/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Yetnikoff Law Offices, PLLC",
+      "address": "7702 E Doubletree Ranch Rd #300, Scottsdale, AZ 85258, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=3218586582351285516&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Yetnikoff Law Offices, PLLC is a personal injury firm with a single office in Scottsdale.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "49",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2025-12-19T23:02:45.678541942Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-07-20T16:54:50.054579Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-03-08T04:21:30.258602Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-03-05T16:29:09.141939Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2024-02-28T19:57:25.745780Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "attorney_bios": true,
+      "fee_statement": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 43,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 8.1 s / CLS 0.018 / TBT 537 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "ilylaw.com",
+      "name": "Yetnikoff Law Offices, PLLC",
+      "review_count_at_discovery": 49
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 49,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 1,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 2.8,
+      "ahrefs_rank": 40622099,
+      "refdomains": 813,
+      "refdomains_dofollow": 384,
+      "backlinks": 930,
+      "org_keywords": 3,
+      "org_traffic": 11,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "49 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2011-11-07, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "ce Blog Contact Yetnikoff Law Offices PLLC FIGHTING FOR YOU To Get What You Deserve GET A FREE CONSULTATION GET A FREE CONSULTATION Testimonials I was involved in an accident in a rental car while",
+          "source_url": "https://ilylaw.com/"
+        },
+        "contingency": {
+          "quote": "contingency fee Archives - Yetnikoff Law Offices PLLC Home About Testimonials Practice Areas Client B",
+          "source_url": "https://ilylaw.com/tag/contingency-fee/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://ilylaw.com/",
+        "contact": "https://ilylaw.com/contact/",
+        "blog": "https://ilylaw.com/blog/",
+        "attorneys": "https://ilylaw.com/tag/attorney/",
+        "fees": "https://ilylaw.com/tag/contingency-fee/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://ilylaw.com/tag/attorney/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2011-11-07",
+    "years": 14.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 28,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Arizona publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 14,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "49 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 49 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 2.5,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2025-12-19) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · fee statement · no privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 2.8 → 14th pct of 100-firm cohort (median 16) 0/3 · 813 referring domains, 17th pct 0/2 · 3 organic keywords / 11 visits·mo, 15th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.1,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 1 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 3,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 14,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 42,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A2 Experience: +10 available",
+        "D2 Search authority: +8 available"
+      ]
+    },
+    "raw": 19.6,
+    "assessed": 70,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.355,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 79,
+    "comparable": true
+  }
+}

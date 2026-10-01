@@ -248,19 +248,19 @@
       "pass": true,
       "evidence": "JAY MURRAY LAW GROUP, P.C. holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0805006043, chartered 2023-04-07, and 3 Google-verified locations. Identified because the name is close and the address is one we verified",
       "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
-      "checked_at": "2026-09-26"
+      "checked_at": "2026-09-29"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 12 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-26"
+      "checked_at": "2026-09-30"
     },
     "G6": {
       "pass": true,
       "evidence": "568 public client reviews and 3 years since the entity was chartered in 2023",
       "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
-      "checked_at": "2026-09-26"
+      "checked_at": "2026-09-29"
     }
   },
   "cohort_id": "tx-dallas-personal-injury",
@@ -384,7 +384,7 @@
     "total": 62,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-29",
+    "computed_at": "2026-09-30",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -465,7 +465,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.94 over 568 reviews → Bayesian 4.92 (prior 4.83 weighted as 100 reviews, from 790 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.94 over 568 reviews → Bayesian 4.92 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -600,6 +600,6 @@
     "identified_by": "the name is close and the address is one we verified",
     "name_similarity": 0.744,
     "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
-    "checked_at": "2026-09-26"
+    "checked_at": "2026-09-29"
   }
 }

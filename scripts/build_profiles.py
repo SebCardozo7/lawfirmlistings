@@ -47,11 +47,17 @@ DEFAULT_COHORT = "ny-personal-injury"
 # one. Only the display name lives here, and an unknown slug stops the run rather than writing
 # a profile with a slug where its name should be. Keep in step with src/data/practices.ts: a
 # practice missing there gets no hub page, and the profile would link into nothing.
+# The display name for a practice, in one place. scripts/apply_practice.py imports this rather
+# than keeping its own copy: opening immigration meant adding the slug to check_practice, to this
+# map and to a third list in apply_practice, and the only thing that noticed the third was an
+# argparse error two steps into the run. A slug added here and to src/data/practices.ts is now
+# the whole change.
 PRACTICE_NAMES = {
     "personal-injury": "Personal Injury",
     "workers-compensation": "Workers' Compensation",
     "real-estate": "Real Estate",
     "family-law": "Family Law",
+    "immigration": "Immigration",
 }
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury
@@ -215,8 +221,26 @@ def json_ld_business(rec):
 
 
 def clean(value):
-    """Site markup leaks entities into names: "Stephen Bilkis &amp; Associates"."""
-    return html_entities.unescape((value or "").strip())
+    """Site markup leaks entities into names: "Stephen Bilkis &amp; Associates".
+
+    It also leaks the decoration a firm puts in its Google listing to stand out in a map result.
+    Two San Diego firms are listed as "▷☎️𝗔𝗕𝗢𝗚𝗔𝗗𝗢𝗦 𝗗𝗘 𝗔𝗖𝗖𝗜𝗗𝗘𝗡𝗧𝗘𝗦 Auto y Trabajo Chula Vista❌",
+    where the capitals are mathematical bold letters rather than letters. Published as a name that
+    is unreadable to a screen reader, unsearchable, and lands in a slug that is a permanent URL.
+
+    NFKC turns the mathematical alphabet back into the alphabet, which is exactly what it is for,
+    and the symbol categories cover the arrows, the telephone and the cross. Nothing else is
+    touched: an accent, an ampersand and an apostrophe are all part of real names here.
+    """
+    text = html_entities.unescape((value or "").strip())
+    # Symbols go before the normalisation, not after. NFKC turns the trade mark sign into the
+    # letters TM, so normalising first leaves "Nevada's LEGAL ELITETM", which is worse than the
+    # symbol was. Mn catches the variation selector that makes a telephone into an emoji.
+    text = "".join(c for c in text
+                   if unicodedata.category(c) not in ("So", "Sm", "Sk", "Cf", "Mn")
+                   or unicodedata.combining(c))
+    text = unicodedata.normalize("NFKC", text)
+    return re.sub(r"\s{2,}", " ", text).strip(" -–—|,;:")
 
 
 def pick_name(rec):

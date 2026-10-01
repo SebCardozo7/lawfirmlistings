@@ -1,0 +1,453 @@
+{
+  "slug": "the-law-office-of-jonathan-perez",
+  "name": "The Law Office of Jonathan Perez",
+  "initials": "OJ",
+  "website": "https://jp.law/",
+  "domain": "jp.law",
+  "phone": "(726) 777-1111",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://jp.law/car-accident-attorney/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "san-antonio-tx",
+    "city": "San Antonio",
+    "state": "TX",
+    "state_name": "Texas"
+  },
+  "offices": [
+    {
+      "label": "The Law Office of Jonathan Perez",
+      "address": "10 Dominion Dr BLDG. 2, STE. 2204, San Antonio, TX 78257, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=8323774061835323657&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "The Law Office of Jonathan Perez is a personal injury firm with a single office in San Antonio.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "123",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-29"
+    },
+    "sample": [
+      {
+        "published_at": "2026-05-18T15:08:54.364591080Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-08T20:39:42.841710140Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-18T22:07:07.355215543Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-28T18:29:10.231531724Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-22T03:33:19.726711156Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 55,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-29",
+      "note": "LCP 26.8 s / CLS 0.000 / TBT 41 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "jp.law",
+      "name": "The Law Office of Jonathan Perez",
+      "review_count_at_discovery": 123
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 123,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-29"
+    },
+    "ahrefs": {
+      "dr": 0.1,
+      "ahrefs_rank": 84928318,
+      "refdomains": 442,
+      "refdomains_dofollow": 62,
+      "backlinks": 532,
+      "org_keywords": 3,
+      "org_traffic": 8,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Texas does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-29"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Texas does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-29"
+    },
+    "G3": {
+      "pass": true,
+      "evidence": "LAW OFFICE OF JONATHAN PEREZ, PLLC holds an active franchise tax responsibility in Texas with the right to transact business, Secretary of State file 0803645933, chartered 2020-05-26, and 1 Google-verified location. Identified because the name matches, at an address we verified",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-29"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "123 public client reviews and 6 years since the entity was chartered in 2020",
+      "source": "Google Places API and Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+      "checked_at": "2026-09-29"
+    }
+  },
+  "cohort_id": "tx-sanantonio-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LegalService.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "JP Law Fights for Justice. – No Fee Unless We Win $100M+ Recovered 100+ Years Combined Experience Texas Personal Injury Trial Attorn",
+          "source_url": "https://jp.law/"
+        },
+        "free_consultation": {
+          "quote": "Trial Attorney | The Law Office of Jonathan Perez Texas Personal Injury Representation • Free Case Review Text Us: 726726 Call Us: 726.777.1111 18 Wheeler Accident Truck Accident Jonathan Represe",
+          "source_url": "https://jp.law/"
+        },
+        "available_24_7": {
+          "quote": "ionship. Trial Ready Prepared from day one Personal Attention Your case matters Available 24/7 Start now No Fee Until We Win Personal injury cases Built for Serious Cases Insurance Com",
+          "source_url": "https://jp.law/"
+        },
+        "se_habla_espanol": {
+          "quote": "ch out anytime Trial Focused Prepared to litigate Personal Attention Direct communication Hablamos Español Se habla español After an Accident What Happens Next Can Affect Your Claim The days and w",
+          "source_url": "https://jp.law/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Texas personal injury law firm representing clients in serious motor vehicle accident and injury matters."
+      ],
+      "pages": {
+        "home": "https://jp.law/",
+        "privacy": "https://jp.law/privacy-policy/",
+        "disclaimer": "https://jp.law/terms/",
+        "contact": "https://jp.law/contact-us/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2025-11-18",
+    "years": 0.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-29"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-29"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-29"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "LAW OFFICE OF JONATHAN PEREZ, PLLC",
+    "taxpayer_number": "32074571574",
+    "sos_file_number": "0803645933",
+    "chartered": "2020-05-26",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "SAN ANTONIO",
+    "identified_by": "the name matches, at an address we verified",
+    "name_similarity": 0.862,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-29"
+  },
+  "score": {
+    "total": 39,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 17,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "123 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 123 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-22) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · no fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 0.1 → 0th pct of 63-firm cohort (median 17.5) 0/3 · 442 referring domains, 2th pct 0/2 · 3 organic keywords / 8 visits·mo, 15th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 7,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 17,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 31,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A2 Experience: +10 available",
+        "D2 Search authority: +8 available"
+      ]
+    },
+    "raw": 27.0,
+    "assessed": 70,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.447,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 79,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/jp.law.png",
+    "source_url": "data:image/png;base64,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",
+    "width": 64,
+    "height": 64,
+    "bytes": 4532,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  }
+}

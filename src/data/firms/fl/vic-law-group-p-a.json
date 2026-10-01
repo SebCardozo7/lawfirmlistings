@@ -1,0 +1,441 @@
+{
+  "slug": "vic-law-group-p-a",
+  "name": "Vic Law Group, P. A.",
+  "initials": "VP",
+  "website": "https://viclawgroup.com/",
+  "domain": "viclawgroup.com",
+  "phone": "(754) 736-0224",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "immigration",
+      "name": "Immigration",
+      "primary": true,
+      "source_url": "https://viclawgroup.com/services/deportation/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "miami-fl",
+    "city": "Miami",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Vic Law Group, P. A.",
+      "address": "4005 NW 114th Ave Ste 14, Doral, FL 33178, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=6701829415508291989&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Charles Fonda",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://viclawgroup.com/tc_attorney/charles-fonda/"
+    },
+    {
+      "name": "Margaret Keane",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://viclawgroup.com/tc_attorney/margaret-keane/"
+    },
+    {
+      "name": "Charles Levine",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://viclawgroup.com/tc_attorney/charles-levine/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": false,
+  "availability": [],
+  "about": [
+    "Vic Law Group, P. A. is a immigration firm with a single office in Doral.",
+    "The firm publishes little about cost or availability on the pages we read. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "92",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-16T15:52:16.189526137Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-31T00:12:42.483138437Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-13T18:07:49.177655167Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-12T18:48:40.738952617Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-08-21T15:01:36.033422410Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true,
+      "attorney_bios": true
+    },
+    "schema_detected": false,
+    "psi": {
+      "value": {
+        "performance": 2,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 16.1 s / CLS 1.025 / TBT 3879 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "viclawgroup.com",
+      "name": "Vic Law Group, P. A.",
+      "review_count_at_discovery": 92
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 92,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 1,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Disciplinary history not yet checked",
+      "source": "pending",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "92 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2021-07-26, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "fl-miami-immigration",
+  "faq": [],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {},
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://viclawgroup.com/",
+        "about": "https://viclawgroup.com/about/",
+        "contact": "https://viclawgroup.com/contact/",
+        "blog": "https://viclawgroup.com/blog/",
+        "privacy": "https://viclawgroup.com/privacy-policy/",
+        "disclaimer": "https://viclawgroup.com/disclaimer/",
+        "attorneys": "https://viclawgroup.com/attorneys/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://viclawgroup.com/attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2021-07-26",
+    "years": 5.2,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "The Florida Bar",
+        "source_url": "https://viclawgroup.com/about/",
+        "quote": "m laude, from the University of Florida. He was admitted to the Florida Bar in 2015 and has practice immigration law since then. Throug"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of The Florida Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 40,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of The Florida Bar · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 18,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "92 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 92 reviews → Bayesian 4.91 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-07-31) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 2,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.1,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 1 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 0,
+            "max": 1,
+            "source": "observed",
+            "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 2,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 0,
+            "max": 6,
+            "source": "observed",
+            "evidence": "fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 21,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 30,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 24.6,
+    "assessed": 62,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.553,
+    "gates_unavailable": [
+      "G1"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 70,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/viclawgroup.com.png",
+    "source_url": "https://viclawgroup.com/wp-content/uploads/2021/09/cropped-favicon-2-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 29250,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  }
+}

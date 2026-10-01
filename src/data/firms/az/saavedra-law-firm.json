@@ -1,0 +1,440 @@
+{
+  "slug": "saavedra-law-firm",
+  "name": "Saavedra Law Firm",
+  "initials": "SA",
+  "website": "https://legalbetter.com/",
+  "domain": "legalbetter.com",
+  "phone": "(602) 878-6625",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://legalbetter.com/car-accidents/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Saavedra Law Firm, PLC",
+      "address": "706 E Bell Rd #111, Phoenix, AZ 85022, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=17771146063082509441&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Saavedra Law Firm is a personal injury firm with a single office in Phoenix.",
+    "The firm states that the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "332",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-18T00:03:03.766146142Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-17T21:54:50.856204074Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-30T16:05:13.281469072Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-18T15:10:04.861144290Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-01-08T23:56:11.871273800Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 69,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 6.8 s / CLS 0.007 / TBT 88 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "legalbetter.com",
+      "name": "Saavedra Law Firm, PLC",
+      "review_count_at_discovery": 332
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 332,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 29,
+      "ahrefs_rank": 4332825,
+      "refdomains": 1419,
+      "refdomains_dofollow": 843,
+      "backlinks": 4092,
+      "org_keywords": 28,
+      "org_traffic": 165,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "332 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2016-02-13, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "helping you explore various legal pathways to the compensation you need. contact us for a free consultation Achievements We are here to help you through this. Saavedra Law Firm, a distinguished vet",
+          "source_url": "https://legalbetter.com/"
+        },
+        "available_24_7": {
+          "quote": "Personal Injury Lawyers | Personal Injury Attorney Phoenix Menu English Español Menu Call 24/7: 602-878-6625 English Español Menu FAQ Blog Call Home Attorney Practice Areas Bicycle Acc",
+          "source_url": "https://legalbetter.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "f Arizona Hispanic Youth Underserved Injured People of Arizona Hispanic Youth Underserved Hablamos Español Abogado Freddy Saavedra proporciona confianza, tenaz representación de víctimas de lesion",
+          "source_url": "https://legalbetter.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Phoenix injury attorney Freddy Saavedra provides trustworthy, aggressive representation to motor vehicle collisions, slips and falls, dog bites, and other accidents victims in Phoenix, Peoria and Maricopa County AZ.",
+        "Saavedra Law Firm, PLC is a premier personal injury firm in Phoenix, AZ. Led by Freddy Saavedra, our bilingual team provides expert legal representation for car accidents, wrongful death, and personal injury claims."
+      ],
+      "pages": {
+        "home": "https://legalbetter.com/",
+        "contact": "https://legalbetter.com/contact/",
+        "blog": "https://legalbetter.com/blog/",
+        "privacy": "https://legalbetter.com/privacy-policy/",
+        "disclaimer": "https://legalbetter.com/disclaimer/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2016-02-13",
+    "years": 10.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
+  "logo": {
+    "file": "/logos/legalbetter.com.jpg",
+    "source_url": "https://legalbetter.com/wp-content/uploads/2024/08/cropped-favicon-192x192.jpg",
+    "width": 192,
+    "height": 192,
+    "bytes": 5246,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  },
+  "score": {
+    "total": 49,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Arizona publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 20,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "332 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 332 reviews → Bayesian 4.96 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-30) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 9,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 5,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 29 → 79th pct of 100-firm cohort (median 16) 2/3 · 1,419 referring domains, 80th pct 2/2 · 28 organic keywords / 165 visits·mo, 42th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 5,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 20,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 21,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A2 Experience: +10 available",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 34.0,
+    "assessed": 70,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.526,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 79,
+    "comparable": true
+  }
+}

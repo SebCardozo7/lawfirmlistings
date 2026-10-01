@@ -1,0 +1,451 @@
+{
+  "slug": "law-office-of-ben-ezra-eran-pa",
+  "name": "Law Office of Ben Ezra Eran, P.A",
+  "initials": "OB",
+  "website": "https://cislawoffice.com/",
+  "domain": "cislawoffice.com",
+  "phone": "(305) 912-7777",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "immigration",
+      "name": "Immigration",
+      "primary": true,
+      "source_url": "https://cislawoffice.com/practice-areas/asylum/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "miami-fl",
+    "city": "Miami",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Law Office of Ben Ezra Eran, P.A",
+      "address": "1830 NE 163rd St, North Miami Beach, FL 33162, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=4503422212404374164&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Resource Links",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://cislawoffice.com/resource-links/"
+    },
+    {
+      "name": "Eran Ben Ezra",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://cislawoffice.com/team/eran-ben-ezra-esq/"
+    }
+  ],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Law Office of Ben Ezra Eran, P.A is a immigration firm with a single office in North Miami Beach.",
+    "The firm states that the first consultation is free; its intake line is open around the clock. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.7,
+      "count_label": "454",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-16T16:20:01.312088591Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-29T18:11:41.935250219Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-07-23T17:49:44.460629098Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-05-08T20:50:29.884248486Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-20T19:12:44.116234296Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true,
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 45,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 10.5 s / CLS 0.001 / TBT 454 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "cislawoffice.com",
+      "name": "Law Office of Ben Ezra Eran, P.A",
+      "review_count_at_discovery": 453
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 454,
+      "rating_weighted": 4.7,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-09-30",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
+    },
+    "G3": {
+      "pass": true,
+      "evidence": "LAW OFFICE OF BEN EZRA ERAN P.A is an active DOMP on the Florida register, document P16000049660, filed 2016-06-06, with 1 Google-verified location",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "454 public client reviews and 10 years since the entity was filed in 2016",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "fl-miami-immigration",
+  "faq": [],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "Learn More. --> Why Hire Us? Skip to content +1-305-912-7777 Return home Contact Us For a Free Consultation Call our office +1-305-912-7777 | Providing Immigration Services Nationwide Home Practice",
+          "source_url": "https://cislawoffice.com/"
+        },
+        "available_24_7": {
+          "quote": "vice at every step on the path toward achieving your immigration goals. × Close Available 24/7 and Free Consultation* U.S. immigration law is extremely complex and only a professional",
+          "source_url": "https://cislawoffice.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://cislawoffice.com/",
+        "privacy": "https://cislawoffice.com/privacy-policy/",
+        "disclaimer": "https://cislawoffice.com/disclaimer/",
+        "contact": "https://cislawoffice.com/contact/",
+        "attorneys": "https://cislawoffice.com/team/eran-ben-ezra-esq/",
+        "results": "https://cislawoffice.com/results/",
+        "blog": "https://cislawoffice.com/blog/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://cislawoffice.com/team/eran-ben-ezra-esq/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2004-06-28",
+    "years": 22.3,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Immigration Lawyers Association",
+        "source_url": "https://cislawoffice.com/team/eran-ben-ezra-esq/",
+        "quote": "Ben Ezra is a member of the New York Supreme Court, and the American Immigration Lawyers Association (AILA). Mr. Ben Ezra is fluent in both English and Hebrew."
+      },
+      {
+        "name": "American Bar Association",
+        "source_url": "https://cislawoffice.com/team/eran-ben-ezra-esq/",
+        "quote": "ILA – American Immigration Lawyer Association Member of the American Bar Association Education LLB Manchester University Languages Hebrew Englis"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Immigration Lawyers Association, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 1933 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://cislawoffice.com/results/",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 52,
+    "tier": "Verified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Immigration Lawyers Association, American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "the results page served 1933 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "the results page served 1933 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "the results page served 1933 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          }
+        ]
+      },
+      "C": {
+        "score": 14,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "454 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.7 over 454 reviews → Bayesian 4.72 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-29) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 0,
+            "max": 4,
+            "source": "places",
+            "evidence": "2 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 17,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 18,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "D2 Search authority: not yet measured (8 pts)",
+        "B1 Results published: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)"
+      ]
+    },
+    "raw": 24.5,
+    "assessed": 47,
+    "coverage": 0.671,
+    "floor_abc_pct": 0.739,
+    "gates_unavailable": [
+      "G1"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  },
+  "entity": {
+    "legal_name": "LAW OFFICE OF BEN EZRA ERAN P.A",
+    "entity_type": "DOMP",
+    "dos_id": "P16000049660",
+    "formed": "2016-06-06",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-09-30"
+  },
+  "logo": {
+    "file": "/logos/cislawoffice.com.png",
+    "source_url": "https://cislawoffice.com/wp-content/uploads/2025/04/android-chrome-512x512-1-300x300.png",
+    "width": 300,
+    "height": 300,
+    "bytes": 4330,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  }
+}

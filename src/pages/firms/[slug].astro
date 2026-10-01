@@ -17,7 +17,12 @@ const { firm } = Astro.props;
 const d = firm.data; const s = d.score;
 const cohort = await getEntry('cohorts', d.cohort_id);
 const primary = d.practices.filter(p => p.primary);
-const hq = d.offices.find(o => o.is_hq) ?? d.offices[0];
+// A firm with no office at all should not reach this page: G3 asks for a verified location and
+// the directory is built on them. It reached it once, when 121 immigration profiles were built
+// before the Places pass had run, and one undefined address stopped the whole site building.
+// Guarding here is not the fix for that, it is the difference between one profile being thin
+// and 974 of them not existing.
+const hq = d.offices.find(o => o.is_hq) ?? d.offices[0] ?? null;
 const ah = d.digital.ahrefs;
 const peers = cohort ? cohort.data.firms.filter(f => f.domain !== d.domain) : [];
 const pct = (v: number, arr: number[]) => arr.length ? Math.round(100 * (arr.filter(x => x < v).length + 0.5 * arr.filter(x => x === v).length) / arr.length) : null;
@@ -70,7 +75,7 @@ const description = fitDescription(
   'Each value shows its source and date.');
 const schema = {
   '@context': 'https://schema.org', '@type': 'LegalService', name: d.name, url: d.website, telephone: d.phone,
-  address: { '@type': 'PostalAddress', streetAddress: hq.address },
+  ...(hq ? { address: { '@type': 'PostalAddress', streetAddress: hq.address } } : {}),
   areaServed: `${d.market.city}, ${d.market.state}`, knowsLanguage: d.languages,
   employee: d.attorneys.map(a => ({ '@type': 'Person', name: a.name, jobTitle: a.role })),
 };
@@ -310,11 +315,11 @@ const schema = {
         <div class="rev-grid">{d.reviews.quotes.map(q => <div class="review"><div class="stars">★★★★★</div><q>{q.text}</q><div class="who">{q.author}</div></div>)}</div>
       </div>
 
-      <div class="block" id="offices">
+      {hq && <div class="block" id="offices">
         <h2>Offices <small>{d.offices.length} location{d.offices.length > 1 ? 's' : ''} · main office: {officeLabel(hq.label, hq.address, d.name)}</small></h2>
         <div class="map" aria-hidden="true"><div class="aurora"><i class="b1"></i><i class="b2"></i></div><Icon name="skyline" /></div>
         <div class="offices">{d.offices.map(o => <div class={`office ${o.is_hq ? 'is-hq' : ''}`}><Icon name="pin" /><div><b>{officeLabel(o.label, o.address, d.name)}</b><span>{o.address}</span>{o.by_appointment && <div class="note">By appointment</div>}</div></div>)}</div>
-      </div>
+      </div>}
 
       {/* A firm with no FAQ written yet showed the heading over an empty box. The nav link
           above was already conditional; the block was not. */}
@@ -335,7 +340,7 @@ const schema = {
           <dt>Fee</dt><dd>{d.fee_model}</dd>
           <dt>Consultation</dt><dd>{d.free_consultation ? 'Free' : 'Paid'}</dd>
           <dt>Languages</dt><dd>{d.languages.join(', ')}</dd>
-          <dt>Main office</dt><dd>{hq.address.split(',')[0]}, {hq.address.split(',').slice(-1)[0].trim()}</dd>
+          {hq && <><dt>Main office</dt><dd>{hq.address.split(',')[0]}, {hq.address.split(',').slice(-1)[0].trim()}</dd></>}
           <dt>Profile</dt><dd>{d.claimed ? `Managed by the firm since ${d.claimed.claimed_at}` : 'Unclaimed'}</dd>
         </dl>
         {s && <div class="verified-line"><Icon name="check" /> LFL Score {s.total} · {s.tier} · re-verified {s.computed_at}</div>}

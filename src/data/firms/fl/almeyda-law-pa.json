@@ -1,0 +1,431 @@
+{
+  "slug": "almeyda-law-pa",
+  "name": "Almeyda Law, P.A.",
+  "initials": "AP",
+  "website": "https://almeydalaw.com/",
+  "domain": "almeydalaw.com",
+  "phone": "(305) 914-3714",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "immigration",
+      "name": "Immigration",
+      "primary": true,
+      "source_url": "https://almeydalaw.com/immigration/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "miami-fl",
+    "city": "Miami",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Almeyda Law, P.A.",
+      "address": "770 Ponce de Leon Blvd #102, Coral Gables, FL 33134, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=15307080265068695613&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Jimmy Almeyda",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://almeydalaw.com/attorneys/"
+    },
+    {
+      "name": "Rey Hernandez",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://almeydalaw.com/attorneys/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Almeyda Law, P.A. is a immigration firm with a single office in Coral Gables.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.4,
+      "count_label": "129",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-26T22:24:17.358409493Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-25T14:27:54.779927711Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-28T21:54:25.946775519Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-19T15:02:33.653989861Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-03-11T14:27:13.577043495Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 50,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 9.1 s / CLS 0.009 / TBT 437 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "almeydalaw.com",
+      "name": "Almeyda Law, P.A.",
+      "review_count_at_discovery": 129
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 129,
+      "rating_weighted": 4.4,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "source": "unavailable",
+      "checked_at": "2026-09-30",
+      "evidence": "1 of the firm's attorneys share a surname with a disciplined attorney, and for Rey Hernandez 2 of 2 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "129 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2014-03-12, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "fl-miami-immigration",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "WhatsApp: (305) 914-3714 15+ Years Experience | 95%+ Success Rate | Bilingual EN/ES/PT | No Fee Unless We Win About Almeyda Law, P.A. Dedicated to Protecting Your Rights & Your Future At Almey",
+          "source_url": "https://almeydalaw.com/"
+        },
+        "free_consultation": {
+          "quote": "Practice Areas Immigration Family Law Personal Injury Contact About Us Our Attorneys Blog Free Consultation Free Consultation TRUSTED LEGAL REPRESENTATION IN SOUTH FLORIDA Miami Immigration & Perso",
+          "source_url": "https://almeydalaw.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "4 Languages English · Español · Português © 2026 Almeyda Law, P.A. All rights reserved. · Hablamos Español · Falamos Português Scroll to Top",
+          "source_url": "https://almeydalaw.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "Bilingual immigration, family law and personal injury attorneys serving Miami-Dade, Broward and Palm Beach counties. Free consultations in English, Spanish and Portuguese."
+      ],
+      "pages": {
+        "home": "https://almeydalaw.com/",
+        "contact": "https://almeydalaw.com/contact/",
+        "about": "https://almeydalaw.com/about-us/",
+        "attorneys": "https://almeydalaw.com/attorneys/",
+        "blog": "https://almeydalaw.com/blog/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://almeydalaw.com/attorneys/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2014-03-12",
+    "years": 12.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 36,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 15,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "129 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.4 over 129 reviews → Bayesian 4.59 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-05-28) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 15,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 34,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 22.5,
+    "assessed": 62,
+    "coverage": 0.886,
+    "floor_abc_pct": 0.395,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 70,
+    "comparable": true
+  }
+}

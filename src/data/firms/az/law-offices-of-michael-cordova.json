@@ -1,0 +1,525 @@
+{
+  "slug": "law-offices-of-michael-cordova",
+  "name": "Law Offices of Michael Cordova",
+  "initials": "OM",
+  "website": "https://www.mcordova.com/",
+  "domain": "mcordova.com",
+  "phone": "(602) 265-6700",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.mcordova.com/phoenix-auto-accident-lawyers/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "phoenix-az",
+    "city": "Phoenix",
+    "state": "AZ",
+    "state_name": "Arizona"
+  },
+  "offices": [
+    {
+      "label": "Michael Cordova",
+      "address": "1700 N 7th St, Phoenix, AZ 85006, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=16553193988755652004&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Michael Córdova",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.mcordova.com/michael-cordova/"
+    },
+    {
+      "name": "Jody L. Broaddus",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.mcordova.com/jody-broaddus/"
+    },
+    {
+      "name": "Rayven Garcia",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.mcordova.com/rayven-garcia/"
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Law Offices of Michael Cordova is a personal injury firm with a single office in Phoenix.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.8,
+      "count_label": "953",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-09T15:55:11.913377882Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-22T20:05:23.566590396Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-28T19:02:04.084634425Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-01T18:09:09.590070911Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-17T18:35:06.976529998Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true,
+      "disclaimer": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 41,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 27.3 s / CLS 0.000 / TBT 570 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "mcordova.com",
+      "name": "Michael Cordova",
+      "review_count_at_discovery": 953
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 953,
+      "rating_weighted": 4.8,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 8,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 20,
+      "ahrefs_rank": 8901362,
+      "refdomains": 1063,
+      "refdomains_dofollow": 540,
+      "backlinks": 9044,
+      "org_keywords": 77,
+      "org_traffic": 362,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Arizona does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Arizona does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. Arizona publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "953 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2001-08-15, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "az-phoenix-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Organization.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "contingency": {
+          "quote": "fer all of our clients our “No Fee Guarantee.” Our personal injury cases are handled on a contingent fee basis. This means we do not charge attorneys fees unless we obtain compensation on yo",
+          "source_url": "https://www.mcordova.com/"
+        },
+        "free_consultation": {
+          "quote": "Phoenix Personal Injury Lawyers | Law Offices of Michael Cordova Live Chat GET A FREE CONSULTATION Practice Areas Personal Injury Car Accidents Truck Accidents Motorcycle Accidents Constru",
+          "source_url": "https://www.mcordova.com/"
+        }
+      },
+      "json_ld_descriptions": [
+        "At the Law Offices of Michael Cordova, we are experienced attorneys who obtain outstanding results for our clients. We have been in business since 1994 and have since then helped our clients secure the outcomes they deserve, including many millions of dollars in settlements and verdicts. We provide professional and quality legal advice you expect from a great law firm. We are committed to each of our clients and provide personal attention to our clients. Our team of experienced lawyers are accessible and responsive to the needs and concerns of each of our clients."
+      ],
+      "pages": {
+        "home": "https://www.mcordova.com/",
+        "blog": "https://www.mcordova.com/blog/",
+        "contact": "https://www.mcordova.com/contact/",
+        "results": "https://www.mcordova.com/case-results/",
+        "privacy": "https://www.mcordova.com/privacy-policy/",
+        "disclaimer": "https://www.mcordova.com/disclaimer/",
+        "about": "https://www.mcordova.com/about-michael-cordova-law-firm/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "operating": {
+    "registered": "2001-08-15",
+    "years": 25.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [
+      {
+        "name": "American Bar Association",
+        "source_url": "https://www.mcordova.com/",
+        "quote": "untable to the people who matter—victims. As members of the American Bar Association, we demonstrate our commitment to social responsibility and"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "count": 59,
+    "counted_from": "stated amounts",
+    "amounts": [
+      6155000,
+      4150000,
+      2500000,
+      2400000,
+      2150000,
+      2000000,
+      1910000,
+      1350000,
+      1300000,
+      1250000,
+      1050000,
+      1000000,
+      965000,
+      950000,
+      925000,
+      830000,
+      825000,
+      750000,
+      700000,
+      625000,
+      596000,
+      550000,
+      525000,
+      465000,
+      420000,
+      380000,
+      325000,
+      317000,
+      315000,
+      300000,
+      297842,
+      290000,
+      275000,
+      260000,
+      255000,
+      250000,
+      201000,
+      200000,
+      181500,
+      174000,
+      170000,
+      165948,
+      165000,
+      151000,
+      150000,
+      137500,
+      136500,
+      135000,
+      131000,
+      130000,
+      125000,
+      120000,
+      116000,
+      115000,
+      114369,
+      105000,
+      104481,
+      101000,
+      100000
+    ],
+    "largest": 6155000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "wrongful death",
+      "pedestrian",
+      "product liability"
+    ],
+    "disclaimer": false,
+    "venues": [
+      "Supreme Court"
+    ],
+    "text_length": 23268,
+    "readable": true,
+    "url": "https://www.mcordova.com/case-results/",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 65,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 3,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Arizona publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "Arizona publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 3,
+            "max": 3,
+            "source": "observed",
+            "evidence": "member of American Bar Association · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 11,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 6,
+            "max": 6,
+            "source": "firm",
+            "evidence": "59 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 5,
+            "max": 5,
+            "source": "firm",
+            "evidence": "8 case types named; 1 court or county reference"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 19,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "953 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.8 over 953 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-17) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 8,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 4,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 20 → 56th pct of 100-firm cohort (median 16) 2/3 · 1,063 referring domains, 52th pct 1/2 · 77 organic keywords / 362 visits·mo, 54th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.8,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 8 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 33,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 5,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +5.0 available"
+      ]
+    },
+    "raw": 45.3,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.868,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 70,
+    "comparable": true
+  }
+}

@@ -1,0 +1,398 @@
+{
+  "slug": "the-law-office-of-thomas-c-hall-pc",
+  "name": "The Law Office of Thomas C. Hall, P.C.",
+  "initials": "OT",
+  "website": "https://www.tomhall-lawyer.com/",
+  "domain": "tomhall-lawyer.com",
+  "phone": "(210) 222-2000",
+  "status": "not_eligible",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.tomhall-lawyer.com/practice-areas/auto-accidents/",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "san-antonio-tx",
+    "city": "San Antonio",
+    "state": "TX",
+    "state_name": "Texas"
+  },
+  "offices": [
+    {
+      "label": "The Law Office of Thomas C. Hall, P.C.",
+      "address": "110 Broadway Ste 550, San Antonio, TX 78205, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=10187546150307663767&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line",
+    "Hospital & home visits"
+  ],
+  "about": [
+    "The Law Office of Thomas C. Hall, P.C. is a personal injury firm with a single office in San Antonio.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free; its intake line is open around the clock; it will visit clients in hospital or at home. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": []
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true,
+      "fee_statement": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 68,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-29",
+      "note": "LCP 6.0 s / CLS 0.000 / TBT 204 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "tomhall-lawyer.com",
+      "name": "The Law Office of Thomas C. Hall, P.C.",
+      "review_count_at_discovery": 0
+    },
+    "ahrefs": {
+      "dr": 4.1,
+      "ahrefs_rank": 33082560,
+      "refdomains": 770,
+      "refdomains_dofollow": 340,
+      "backlinks": 1429,
+      "org_keywords": 5,
+      "org_traffic": 13,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Texas does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-29"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "Texas does not publish a disciplinary register we can query.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-29"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "THOMAS C. HALL, P.C. holds an active franchise tax responsibility in Texas, but no physical location has been verified yet",
+      "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts, pending an office check",
+      "checked_at": "2026-09-29"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "0 reviews, below the 10 this gate asks for in this practice",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "tx-sanantonio-personal-injury",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD LegalService.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "s Contact Blog HELPING OTHERS WITH THEIR LEGAL ISSUES IS A FAMILY TRADITION SCHEDULE YOUR FREE CASE EVALUATION A third-generation Texas attorney with over 30 years of experience in helping people. I'm",
+          "source_url": "https://www.tomhall-lawyer.com/"
+        },
+        "available_24_7": {
+          "quote": "RAIGHTFORWARD COUNSEL AND VIGOROUS ADVOCACY. Don’t wait. Hire an attorney who’s available 24 hours a day, 7 days a week. You have questions and I have answers. Simple as that, right? Well, what",
+          "source_url": "https://www.tomhall-lawyer.com/"
+        },
+        "contingency": {
+          "quote": "ffice of Thomas C. Hall, P.C., at 210-981-5224, or contact me by email . Because I charge contingency fees for all personal injury cases, I get paid only if I recover money for you. Hablo esp",
+          "source_url": "https://www.tomhall-lawyer.com/firm-overview/"
+        },
+        "hospital_visits": {
+          "quote": "m available day or night for emergencies. I also provide weekend appointments and home or hospital visits as needed. Hablo español: I offer consultations in both English and Spanish. Contact Me",
+          "source_url": "https://www.tomhall-lawyer.com/firm-overview/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.tomhall-lawyer.com/",
+        "about": "https://www.tomhall-lawyer.com/firm-overview/",
+        "results": "https://www.tomhall-lawyer.com/case-results/",
+        "contact": "https://www.tomhall-lawyer.com/contact/",
+        "blog": "https://www.tomhall-lawyer.com/blog/",
+        "disclaimer": "https://www.tomhall-lawyer.com/disclaimer/",
+        "privacy": "https://www.tomhall-lawyer.com/404/?request_url=privacy-policy/",
+        "fees": "https://www.tomhall-lawyer.com/404/?request_url=fees/"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed"
+    ]
+  },
+  "fee_statement": "Because I charge contingency fees for all personal injury cases, I get paid only if I recover money for you.",
+  "operating": {
+    "registered": "2010-08-18",
+    "years": 16.1,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-29"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-29"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 1663 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.tomhall-lawyer.com/case-results/",
+    "checked_at": "2026-09-29"
+  },
+  "tx_register": {
+    "matched": true,
+    "taxpayer_name": "THOMAS C. HALL, P.C.",
+    "taxpayer_number": "30006701731",
+    "sos_file_number": "0090796702",
+    "chartered": "1982-07-09",
+    "trading_before_2008": false,
+    "right_to_transact": true,
+    "city": "SAN ANTONIO",
+    "identified_by": "the name is close and the address is one we verified",
+    "name_similarity": 0.654,
+    "source": "Active Franchise Taxpayers, published daily as open data by the Texas Comptroller of Public Accounts",
+    "checked_at": "2026-09-29"
+  },
+  "score": {
+    "total": 49,
+    "tier": "Not eligible",
+    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillars A, B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Texas publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "the results page served 1663 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "the results page served 1663 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "the results page served 1663 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          }
+        ]
+      },
+      "C": {
+        "score": 0,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "No review sample collected yet"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "No review sample collected yet"
+          }
+        ]
+      },
+      "D": {
+        "score": 5,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 3.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 1,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 4.1 → 30th pct of 63-firm cohort (median 17.5) 1/3 · 770 referring domains, 13th pct 0/2 · 5 organic keywords / 13 visits·mo, 20th pct 0/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 12,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · “Because I charge contingency fees for all personal injury cases, I get paid only if I recover money for you.” · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 5.0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line · Hospital & home visits"
+          }
+        ]
+      }
+    },
+    "floor_abc": 0,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 21,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "B1 Results published: not yet measured (6 pts)",
+        "C2 Rating quality: not yet measured (6 pts)"
+      ]
+    },
+    "raw": 16.5,
+    "assessed": 34,
+    "coverage": 0.41,
+    "floor_abc_pct": 0.0,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 83,
+    "comparable": false
+  }
+}

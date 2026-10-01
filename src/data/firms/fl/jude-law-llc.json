@@ -1,0 +1,421 @@
+{
+  "slug": "jude-law-llc",
+  "name": "Jude Law LLC",
+  "initials": "JU",
+  "website": "https://www.judelawoffice.com/",
+  "domain": "judelawoffice.com",
+  "phone": "(305) 859-4519",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "immigration",
+      "name": "Immigration",
+      "primary": true,
+      "source_url": "https://www.judelawoffice.com/asylum-law",
+      "checked_at": "2026-09-29"
+    }
+  ],
+  "market": {
+    "city_slug": "miami-fl",
+    "city": "Miami",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "Jude Law LLC",
+      "address": "66 W Flagler St Ste 900 - #4980, Miami, FL 33130, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=6351449964601627888&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": false,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Jude Law LLC is a immigration firm with a single office in Miami.",
+    "The firm states that its intake line is open around the clock. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "90",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-09-30"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-29T18:52:11.261085788Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-14T16:02:42.556570346Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-30T00:00:03.865518268Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-04-01T03:51:40.358400369Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-29T18:59:47.041397167Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true,
+      "blog": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 69,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-09-30",
+      "note": "LCP 4.1 s / CLS 0.000 / TBT 444 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "judelawoffice.com",
+      "name": "Jude Law LLC",
+      "review_count_at_discovery": 90
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 90,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-09-30"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-09-30"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
+      "source": "no roster published",
+      "checked_at": "2026-09-30"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-09-30"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-09-30"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "90 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2021-04-29, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-09-30"
+    }
+  },
+  "cohort_id": "fl-miami-immigration",
+  "faq": [],
+  "_review": {
+    "name_source": "JSON-LD Attorney.name",
+    "phone_source": "JSON-LD telephone",
+    "about_material": {
+      "claims": {
+        "available_24_7": {
+          "quote": "mmigration Bond Reviews Results Payments Blog Contact Us Schedule An Appointment Call Now 24/7 305-859-4519 Schedule A Consultation Jude Law LLC Hire an immigration attorney that works",
+          "source_url": "https://www.judelawoffice.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "an open book. Results Driven A black and white drawing of a circle on a white background. Hablamos Español A person is holding a piece of paper with a ribbon around it. Quick Efficient Service A b",
+          "source_url": "https://www.judelawoffice.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://www.judelawoffice.com/",
+        "privacy": "https://www.judelawoffice.com/privacy-policy",
+        "disclaimer": "https://www.judelawoffice.com/disclaimer",
+        "blog": "https://www.judelawoffice.com/blog",
+        "results": "https://www.judelawoffice.com/results",
+        "contact": "https://www.judelawoffice.com/contact",
+        "about": "https://www.judelawoffice.com/about-us"
+      }
+    },
+    "attorney_page_urls": [],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2021-04-29",
+    "years": 5.4,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-09-30"
+  },
+  "results_published": {
+    "readable": false,
+    "why": "the results page served 2267 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "url": "https://www.judelawoffice.com/results",
+    "checked_at": "2026-09-30"
+  },
+  "score": {
+    "total": 53,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-09-30",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "pending",
+            "evidence": "the results page served 2267 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "pending",
+            "evidence": "the results page served 2267 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "pending",
+            "evidence": "the results page served 2267 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+          }
+        ]
+      },
+      "C": {
+        "score": 17,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "90 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 90 reviews → Bayesian 4.86 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-06-30) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 0,
+            "max": 6,
+            "source": "observed",
+            "evidence": "fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 17,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 17,
+      "floor_met": true,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "B1 Results published: not yet measured (6 pts)"
+      ]
+    },
+    "raw": 25.0,
+    "assessed": 47,
+    "coverage": 0.595,
+    "floor_abc_pct": 0.739,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 79,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/judelawoffice.com.png",
+    "source_url": "https://irp.cdn-website.com/7fa7dfda/dms3rep/multi/jude+law+logo.png",
+    "width": 588,
+    "height": 200,
+    "bytes": 17114,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-09-30"
+  }
+}

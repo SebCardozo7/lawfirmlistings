@@ -36,10 +36,12 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 FIRMS = ROOT / "src" / "data" / "firms"
 
-NAMES = {
-    "workers-compensation": "Workers' Compensation",
-    "personal-injury": "Personal Injury",
-}
+# Imported rather than copied. This was its own list until opening immigration required the slug
+# in three separate places, and the only thing that noticed the third was an argparse error after
+# the first two had already been edited. build_profiles owns the map because it is the script that
+# names a practice when a whole cohort is built.
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from build_profiles import PRACTICE_NAMES as NAMES  # noqa: E402
 
 
 def profile_for(domain: str):
@@ -79,6 +81,12 @@ def main() -> int:
         try:
             rec = json.load(io.open(path, encoding="utf-8"))
         except ValueError:
+            continue
+        # The staging directory holds working lists beside the records: ahrefs-targets.json and
+        # four others are arrays, and reading one as a record raised an AttributeError that named
+        # a type rather than a file. A record is a dict with a domain on it; everything else in
+        # here is somebody's scratch list and is not this script's business.
+        if not isinstance(rec, dict) or not rec.get("domain"):
             continue
         evidence = (rec.get("practice_evidence") or {}).get(args.practice)
         if not evidence or not evidence.get("url"):

@@ -498,8 +498,8 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     icon: 'globe',
     title: 'Immigration Law Firms: Rankings and Hiring Guide',
     description:
-      'How to choose an immigration law firm: why the state on the licence matters less here '
-      + 'than anywhere else, what a notario is not, and which fee the quote leaves out.',
+      'How to choose an immigration law firm: why the state on the licence matters least '
+      + 'here, what a notario is not, and which fee the quote leaves out.',
     lede:
       'Immigration firms handling family and employment petitions, asylum, removal defense, '
       + 'naturalization and waivers. Every firm is checked for a registered entity, a confirmed '
@@ -595,6 +595,39 @@ export const PRACTICES: Record<string, PracticeNotes> = {
         },
       ],
     },
+    faq: [
+      {
+        q: 'Does my immigration lawyer have to be licensed in my state?',
+        a: 'No. Immigration is federal, and a lawyer admitted in any one state and in good ' +
+           'standing there may represent you before the immigration agencies and the ' +
+           'immigration courts anywhere in the country. This is the one area in this directory ' +
+           'where the city a firm sits in matters least. What stays local is the immigration ' +
+           'court itself, so if your case is in removal proceedings, ask how often the firm ' +
+           'appears in the court that will hear it.',
+      },
+      {
+        q: 'Someone offered to do my paperwork for much less. Is that allowed?',
+        a: 'It depends entirely on who they are, and this is the area where that question ' +
+           'matters most. Only a lawyer in good standing with a state bar, or a representative ' +
+           'accredited by the Department of Justice at a recognised organisation, may advise ' +
+           'you on an immigration matter or represent you. In much of Latin America a ' +
+           '<i>notario público</i> is a senior legal professional; in the United States a ' +
+           'notary public is not, and the two roles are unrelated. Ask for a bar number and the ' +
+           'state, then check it yourself on that state bar’s own site.',
+      },
+      {
+        q: 'Why does no firm here publish an approval rate?',
+        a: 'Because we do not publish one, and you should be careful with anyone who does. ' +
+           'Whether a petition is approved turns on the facts, the service centre, the officer ' +
+           'and the year, and a percentage with no denominator behind it is a marketing figure ' +
+           'rather than a measurement. What this directory compares is what each firm publishes ' +
+           'about itself and what a public record can confirm.',
+      },
+    ],
+    plannedGuides: ['What a notario cannot do, and what it costs when they try',
+                    'How long each USCIS form is actually taking',
+                    'What an immigration court backlog means for your case',
+                    'Which firms publish in the language their clients read'],
   },
 
   'real-estate': {
