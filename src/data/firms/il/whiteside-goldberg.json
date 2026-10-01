@@ -362,10 +362,10 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 57,
+    "total": 55,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-09-30",
+    "computed_at": "2026-10-01",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -429,7 +429,7 @@
         ]
       },
       "C": {
-        "score": 15,
+        "score": 14,
         "max": 20,
         "subs": [
           {
@@ -446,15 +446,15 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 61 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1186 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 61 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1184 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 4,
+            "pts": 2.5,
             "max": 5,
             "source": "places",
-            "evidence": "2 of 5 sampled reviews are from the last 12 months (newest 2026-07-30) · a sample of five per business listing, not every review"
+            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2026-07-30) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -535,11 +535,11 @@
         ]
       }
     },
-    "floor_abc": 27,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 13,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -548,10 +548,10 @@
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 40.0,
+    "raw": 38.5,
     "assessed": 70,
     "coverage": 1.0,
-    "floor_abc_pct": 0.711,
+    "floor_abc_pct": 0.671,
     "gates_unavailable": [
       "G1",
       "G2",
