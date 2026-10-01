@@ -27,7 +27,13 @@ import Takeaways from '../../components/Takeaways.astro';
 const firms = await getCollection('firms', f =>
   f.data.status !== 'sample' && f.data.status !== 'not_eligible');
 
-const measured = firms.filter(f => f.data.digital.ahrefs && f.data.score && f.data.reviews.google);
+// digital.places is in this list because the page reads review_count_total out of it, not
+// because it is a nice-to-have. It was absent when this was written and the assertions below
+// were true of all 790 firms at the time. Opening four markets added one whose Places lookup
+// returned nothing while its review figures came from an earlier pass, and a non-null assertion
+// over an absent object took the whole site build down with a TypeError naming a property.
+const measured = firms.filter(f =>
+  f.data.digital.ahrefs && f.data.digital.places && f.data.score && f.data.reviews.google);
 // Tie-broken on slug so the quartile edges, and therefore every figure below, are the same on
 // every build. Collection order is not stable and two firms share a traffic figure often.
 const byTraffic = [...measured].sort((a, b) =>

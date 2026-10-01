@@ -243,6 +243,36 @@ def clean(value):
     return re.sub(r"\s{2,}", " ", text).strip(" -–—|,;:")
 
 
+def unique_slug(slug, domain, market):
+    """The slug, with the city added when another firm already owns it.
+
+    A firm's slug is its URL and its filename, and two firms can honestly have the same name:
+    "Davis Law Firm" is at yourchicagolawyer.com in Chicago and at jeffdavislawfirm.com in San
+    Antonio, and both are real. Built per cohort, neither pass could see the other, so the second
+    one written took the URL and the first one simply stopped having a page. It was still counted
+    in its city's listing and still linked from it, and the link led to a firm in another state.
+
+    The city rather than a number, because davis-law-firm-chicago tells a reader where they are
+    and davis-law-firm-2 tells them nothing. The first firm to hold a slug keeps it: renaming the
+    incumbent would change a URL that is already published.
+    """
+    taken = {}
+    # The published directory, not the staging drafts: a draft that has not been moved yet owns
+    # no URL. Also the drafts, because two cohorts can be built back to back before either is
+    # moved, which is exactly how this pair of firms was created.
+    for path in list((ROOT / "src" / "data" / "firms").rglob("*.json")) + list(OUT_DIR.glob("*.json")):
+        try:
+            other = json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        if other.get("slug"):
+            taken[other["slug"]] = (other.get("domain") or "").lower()
+    owner = taken.get(slug)
+    if owner is None or owner == (domain or "").lower():
+        return slug
+    return "%s-%s" % (slug, slugify(market["city"]))
+
+
 def pick_name(rec):
     """The firm's own name, with its provenance. Falls back down a ranked list of sources."""
     for n in json_ld_business(rec):
@@ -538,7 +568,7 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
     }
 
     firm = {
-        "slug": slugify(name),
+        "slug": unique_slug(slugify(name), rec.get("domain"), market),
         # Carried onto the profile because the engine has to know: every sub-factor read
         # from a firm's own site is unmeasurable for this firm, and scoring those zero
         # would publish our inability to look as a finding about the practice.
