@@ -173,7 +173,20 @@ NOT_A_PERSON = re.compile(
     # because Court is a surname and "family" catches "Family Court" on its own, and "new" is
     # here as the first word of a city rather than of a name: New Britain and New Haven are two
     # of the towns a Connecticut firm links from its about page.
-    r"family|property|division|enforcement|systemic|failure|patient|safety|new)s?\b",
+    r"family|property|division|enforcement|systemic|failure|patient|safety|new|"
+    # Site furniture on the Spanish half of a bilingual site. The list above learned the Spanish
+    # words for a practice area and never the Spanish words for an about page, so nine rosters
+    # across five markets published ten of them as the names of people who work there: "Acerca
+    # de Nosotros", "Nuestro Equipo", "Sobre Nosotros", "Nuestra Historia", "Servicios Legales",
+    # "Conocer Al Equipo". Each is two or three capitalised words with a lowercase particle in
+    # the middle, which is exactly the shape of "Maria de la Cruz", so nothing about the shape
+    # separates them and only the vocabulary can.
+    #
+    # None of these is a Spanish surname. "Nosotros", "quienes" and "somos" cannot be anybody's
+    # name at all, and the rule for the rest is the one this list already follows: a heading on
+    # the page is visible to anyone reading it, a dropped lawyer is not.
+    r"acerca|nosotros|nuestro|nuestra|sobre|historia|equipo|conoce|conozca|quienes|somos|"
+    r"contacto|inicio|bienvenido|servicio)s?\b",
     re.I)
 
 # A two-letter capitalised word at the end is a state, not a surname: "Brooklyn NY" came off a
@@ -317,6 +330,18 @@ def looks_like_a_person(name):
         return 2 <= len(name.replace(" ", "")) <= 12
     if not 2 <= len(words) <= 5:
         return False
+    # Nobody is called The. A firm's own pages are, and thirteen of them were published as people
+    # on twelve rosters across six markets: "The Fine Print", "The Battle Born Difference", "The
+    # RUMBO Approach", "The Cerebral Palsy Toolkit", "The Ed Bernstein Show", "The Woodlands".
+    # Each is two to four capitalised words and the vocabulary above holds none of them, because
+    # what they have in common is not a practice or a place but the article.
+    #
+    # The article only ever arrives at the front of a name by mistake, so this is safe in a way
+    # a vocabulary is not: it needs no guess about whether Difference or Toolkit is somebody's
+    # surname. "Meet the Jane Doe" is handled before this, by HEADING_PREFIX, and "The Honorable
+    # Jane Doe" by HONORIFIC_PREFIX, so neither reaches here still carrying one.
+    if words[0].casefold().strip(".,") == "the":
+        return False
     # A given name and an initial, which is how a page prints somebody it is not naming in
     # full. Gelbstein & Associates publishes its client reviews on its about page as "Isaac H."
     # and "Sara S.", and reading that page as a roster stored five of its clients as the firm's
@@ -354,8 +379,26 @@ def looks_like_a_person(name):
 # bio "About Attorney Mark Getzoni", and six of its attorneys were thrown out because "about" and
 # "attorney" are in the vocabulary that means a heading is not a name. The words are the firm's
 # furniture, and the name is behind them.
+#
+# The article is part of the furniture too. Craig P. Kenny & Associates heads all thirty-three of
+# its bios "MEET THE CRAIG P. KENNY, ESQ.", which is the firm writing "meet the <person>" and
+# forgetting that a person is not a the. Stripping only the introducer left the article welded to
+# the front of the name, and thirty-three people went to the Nevada register as "The Craig P.
+# Kenny" and "The Jimmy Howard", none of which any register can match.
+#
+# Only directly after an introducer, so a heading that opens with "The" on its own account is
+# untouched here and is thrown out by `looks_like_a_person` instead.
 HEADING_PREFIX = re.compile(r"^(?:about|meet|profile of|introducing)\s+"
-                            r"(?:attorney|our attorney|lawyer|partner)?\s*", re.I)
+                            r"(?:(?:the|our)\s+)?(?:attorney|lawyer|partner)?\s*"
+                            r"(?:the\s+)?", re.I)
+
+# A courtesy title a firm puts in front of a former judge's name. The Law Offices of Hilda
+# Sibrian heads one bio "The Honorable William “Bill” McLeod", and the whole phrase was stored as
+# his name, so the Texas register was asked about a person called The Honorable.
+#
+# Kept out of the role: "Honorable" is how the bench is addressed, not a job at this firm, and
+# src/lib/roster.ts would print it as one.
+HONORIFIC_PREFIX = re.compile(r"^(?:the\s+)?(?:hon|honorable|honourable)\.?\s+", re.I)
 
 
 def split_name_and_role(raw):
@@ -366,6 +409,11 @@ def split_name_and_role(raw):
     # replace() chain never will.
     text = re.sub(r"\s+", " ", html_entities.unescape(raw or "")).strip()
     text = HEADING_PREFIX.sub("", text).strip()
+    # Only where a name is left behind it, so a page actually titled "The Honorable" keeps its
+    # whole string and is thrown out as the heading it is.
+    without_honorific = HONORIFIC_PREFIX.sub("", text).strip()
+    if without_honorific and len(without_honorific.split()) >= 2:
+        text = without_honorific
     text = SUFFIXES.sub("", text).strip(" ,-|")
     stripped = LINK_WORD.sub("", text).strip()
     if stripped and len(stripped.split()) >= 2:
