@@ -73,12 +73,24 @@ const description = fitDescription(
   `${d.name}, ${(primary[0]?.name ?? d.practices[0]?.name ?? 'law').toLowerCase()} firm in ${d.market.city}, ${d.market.state}.`,
   'Offices, attorneys, reviews and fee terms.',
   'Each value shows its source and date.');
-const schema = {
+const legalService = {
   '@context': 'https://schema.org', '@type': 'LegalService', name: d.name, url: d.website, telephone: d.phone,
   ...(hq ? { address: { '@type': 'PostalAddress', streetAddress: hq.address } } : {}),
   areaServed: `${d.market.city}, ${d.market.state}`, knowsLanguage: d.languages,
   employee: d.attorneys.map(a => ({ '@type': 'Person', name: a.name, jobTitle: a.role })),
 };
+// Google stopped showing FAQ rich results for most sites in 2023, so this is not here for a
+// snippet. It is here because the questions and their answers are the part of this page a model
+// summarising the firm will reach for, and marking them up says which text answers which
+// question rather than leaving it to be inferred from the HTML.
+const faqPage = d.faq.length > 0 ? {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: d.faq.map(f => ({
+    '@type': 'Question', name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+} : null;
+const schema = faqPage ? [legalService, faqPage] : legalService;
 ---
 <Base title={title} description={description} nav="cities" schema={schema}>
 <section class="page-hero profile-hero on-night">
