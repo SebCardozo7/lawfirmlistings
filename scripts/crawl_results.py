@@ -96,6 +96,27 @@ CASE_TYPES = [
     ("pedestrian", r"pedestrian|crosswalk"),
     ("product liability", r"product liability|defective"),
     ("municipal", r"municipal|city of new york|mta|nycha|transit"),
+    # Criminal defence, where a result is a disposition rather than a figure and the kind of case
+    # is the offence. Without these every criminal firm scored zero case types on B2 and lost
+    # three points for a gap in this list rather than anything about the firm.
+    #
+    # Each one is narrowed past the bare word on purpose. "Drug" alone matches a drug recall on a
+    # product liability page and "federal" matches any mention of S.D.N.Y., so both would invent
+    # a case type on an injury results page that has none.
+    ("dwi", r"\bDWI\b|\bDUI\b|driving while (?:intoxicated|impaired)|drunk driving"),
+    ("assault", r"assault|menacing|strangulation|aggravated harassment"),
+    ("drug offense", r"drug (?:possession|sale|charge|case|crime)|narcotic|"
+                     r"controlled substance|criminal possession of a controlled"),
+    ("weapons", r"criminal possession of a weapon|weapons? (?:charge|possession|case)|"
+                r"gun (?:charge|possession|case)|firearms? (?:charge|offense)"),
+    ("theft", r"grand larceny|petit larceny|burglary|robbery|shoplifting|criminal mischief"),
+    ("homicide", r"homicide|murder|manslaughter|vehicular homicide"),
+    ("sex offense", r"sex (?:crime|offense|abuse)|rape|forcible touching|"
+                    r"criminal sexual act|sexual misconduct"),
+    ("white collar", r"white collar|embezzlement|securities fraud|wire fraud|mail fraud|"
+                     r"money laundering|\bRICO\b|bribery|insider trading"),
+    ("federal charges", r"federal (?:charge|indictment|case|prosecution|crime)|"
+                        r"federal grand jury"),
 ]
 
 # The notice the advertising rules effectively require alongside published results.
@@ -107,13 +128,25 @@ DISCLAIMER = re.compile(
 # What makes a published result checkable rather than a headline: somewhere to look it up.
 VENUE = re.compile(
     r"Supreme Court|County Court|Civil Court|Court of Claims|Index No\.?|Docket No\.?|"
+    # Where a criminal case is actually heard, which none of the civil venues above covers.
+    r"Criminal Court|Family Court|Appellate Division|Indictment No\.?|"
     r"E\.?D\.?N\.?Y|S\.?D\.?N\.?Y|"
     r"(?:Kings|Queens|Bronx|Richmond|Nassau|Suffolk|Westchester|Rockland|Orange|Erie|Monroe)"
     r"\s+County|New York County", re.I)
 
 # A result is usually introduced by one of these, which is how distinct results are counted on a
 # page that states no figures at all.
-RESULT_WORD = re.compile(r"settlement|verdict|recovery|recovered|award(?:ed)?|judgment", re.I)
+#
+# The first six words are civil, and a criminal result is none of them. Nothing is recovered when
+# a charge is dismissed, and a firm whose whole results page reads "charges dropped" and "not
+# guilty" was counted as publishing no results at all. The second line is how a disposition is
+# written, which is the criminal equivalent of a settlement figure and the only form a result in
+# that practice can take.
+RESULT_WORD = re.compile(
+    r"settlement|verdict|recovery|recovered|award(?:ed)?|judgment|"
+    r"dismiss(?:ed|al)|acquitt(?:ed|al)|not guilty|charges? (?:dropped|reduced|dismissed)|"
+    r"no jail|no prison|case closed|sealed|reduced to a (?:violation|misdemeanor)|"
+    r"hung jury|suppress(?:ed|ion granted)|declined to prosecute", re.I)
 
 
 def fetch(url):
@@ -188,9 +221,40 @@ def money_values(text):
     return sorted(results, reverse=True), sorted(aggregates, reverse=True)
 
 
+def result_windows(text, span=220):
+    """The parts of a results page that are results, rather than the furniture around them.
+
+    Case types used to be matched against the whole page, and on a results page the whole page
+    includes the practice-area menu. Tsigler Law publishes one result and the page named ten kinds
+    of case, which is its navigation: DWI, assault, drug, weapons, theft, homicide, sex offenses,
+    white collar, federal. B2 caps at three types, so every firm with a sidebar scored full marks
+    on a sub-factor meant to measure whether a published result says what kind of case it was.
+
+    It was wrong for injury firms first and nobody noticed, because an injury sidebar lists injury
+    types and the page is about injuries, so the answer came out right for the wrong reason.
+    Criminal defence made it visible by putting a different vocabulary in the menu.
+
+    A type counts when it appears near something that marks a result: a figure, or the heading
+    that introduces one. Everything else on the page is the site, not the case.
+    """
+    marks = [m.start() for m in MONEY.finditer(text)]
+    marks += [m.start() for m in RESULT_WORD.finditer(text)]
+    if not marks:
+        return ""
+    spans = []
+    for start in sorted(marks):
+        lo, hi = max(0, start - span), min(len(text), start + span)
+        if spans and lo <= spans[-1][1]:
+            spans[-1] = (spans[-1][0], max(spans[-1][1], hi))
+        else:
+            spans.append((lo, hi))
+    return " ".join(text[lo:hi] for lo, hi in spans)
+
+
 def extract(text):
     amounts, aggregates = money_values(text)
-    types = [name for name, pattern in CASE_TYPES if re.search(pattern, text, re.I)]
+    near = result_windows(text)
+    types = [name for name, pattern in CASE_TYPES if re.search(pattern, near, re.I)]
     # How many results the page describes. Where figures are published that is the figure count;
     # where none are, it is how many times the page introduces a result, which is a weaker
     # count and is recorded as such.

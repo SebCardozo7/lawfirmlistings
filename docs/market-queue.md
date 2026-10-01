@@ -410,3 +410,64 @@ every path, and a domain now serving an Indonesian gambling brand under the name
   this check was built to have, an unanswered question rather than a finding, and it is what the
   firm's profile now says. Withdrawing it was the right precaution on what was known at the time
   and turned out to be unnecessary.
+
+## New York City, criminal defense, opened 2026-10-01
+
+The first practice area in this directory that is not an injury, a family matter, a transaction
+or a federal filing, and the first where the check had to work to *exclude* firms rather than to
+find them. Criminal defense sits on the practice list of general practices that have not seen the
+inside of a criminal court in years, and a Places run for it returns traffic-ticket firms with
+four-figure review counts.
+
+A Places discovery run returned 180 firms across the five boroughs. 95 publish a page about the
+practice on their own site or name it among their practice areas; 85 of those are inside the
+market and are not already published, and three more were already published under another
+practice and gained criminal defense on their existing profile rather than opening a second one.
+
+| Count | |
+| --- | --- |
+| 180 | returned by the discovery run |
+| 95 | prove the practice on their own site |
+| 46 | nothing to read: no sitemap answered and the home page served no links |
+| 39 | reachable, and publish no page about this practice |
+| 3 | already published in another practice, so the practice was added to that profile |
+| 85 | new profiles to build |
+
+### Four excluded by hand, and what each one changed
+
+**freelegalquote.com, Staten Island, 78 reviews.** Its Google listing calls it
+"Freelegalquote.com - attorney referral service", and its criminal defense page passes every
+practice test we have because the page is real: "Exclusive Criminal Defense Leads Staten Island".
+It is a lead broker, not a law firm. A directory whose whole position is verification rather than
+advertising cannot rank one beside the firms it sells the leads to.
+
+The guard is now in `vet_candidates.py` as `NOT_A_LAW_FIRM`, and it reads the name on the
+business's own Google listing rather than the domain. The domain catches nothing useful: four
+firms already published are vanity numbers, and 1800theeagle.com is Goldberg & Osborne with
+fourteen attorneys. A business describing itself as a referral service is telling us directly.
+
+**cammaratalawpc.com, Staten Island.** Its practice evidence came back as
+`/dipi_popup_maker/criminal-defense/`, which is a Divi popup module: real text, served at an
+address no visitor ever reaches, indexed by accident. `NOT_A_PRACTICE_PAGE` now rejects the
+internal routes of Divi, Elementor, Beaver Builder, WPBakery and Brizy. With that in place the
+firm publishes no criminal defense page we can read, which may well be wrong about the firm and
+is right about the evidence.
+
+**pkatzlegal.com** titles its criminal page "Criminal Defense Lawyer NJ", and **brownstonelaw.com**
+titles its post-conviction page "Trusted Post Conviction lawyers In Florida, TX". Each holds one
+New York address carrying zero reviews, which is a mailing presence rather than a practice.
+Ranking either against firms that try cases in these courthouses would say something untrue about
+both. Both are recorded in the cohort's `unresolved` list with the reason.
+
+### Kept, and worth saying why
+
+**nystrafficviolations.com** (2,081 reviews) and **helpfighttickets.com** (1,042) are traffic
+practices by name, and both are in. The criminal pattern deliberately excludes traffic tickets,
+which are their own practice, and both of these passed on their DWI pages instead. A DWI is a
+crime in New York and defending one is criminal defense. They sit high on review count, which is
+one input to pillar C and not the ranking; the score sorts them against what they publish.
+
+Domestic violence and orders of protection are not in the criminal pattern either. Family law
+claims them, on the reasoning that somebody looking for an order of protection is looking for a
+family lawyer, and a criminal pattern that took them would pull family pages out of the practice
+that already reads them correctly.

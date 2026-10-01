@@ -171,6 +171,65 @@ PRACTICES = {
             r"bond\s+hearing|credible\s+fear|cancellation\s+of\s+removal|"
             r"ajuste\s+de\s+estatus|residencia\s+permanente|corte\s+de\s+inmigraci[oó]n", re.I),
     },
+    # The first practice here where the risk runs the other way. Every other check has had to
+    # work to find firms that do the practice; this one has to work to exclude firms that mention
+    # it. "Criminal defense" appears on the practice list of general practices that have not seen
+    # the inside of a criminal court in years, and a discovery run for it returns traffic-ticket
+    # firms with four-figure review counts.
+    #
+    # So the corroborating pattern is procedure rather than subject matter. A page about this work
+    # says what happens to a case: it is arraigned, a grand jury hears it, it is suppressed,
+    # pleaded or tried. A page that lists criminal defense among fourteen services says none of
+    # that. "Trial", "discovery", "appeal" and "settlement" are deliberately absent, because an
+    # injury page says all four.
+    #
+    # Domestic violence and orders of protection are not here, and that is not an oversight. They
+    # are claimed by family-law above, where somebody looking for an order of protection is
+    # looking for a family lawyer. A criminal pattern that took them would pull family pages out
+    # of the practice that already reads them correctly.
+    #
+    # Traffic tickets are also absent. In New York they are quasi-criminal and the firms doing
+    # them are real, but a traffic-ticket practice is its own thing and the two largest listings
+    # this market returned are traffic firms with 1,565 and 778 reviews. A firm that does both
+    # will pass on its criminal pages; one that only does tickets should not rank here.
+    "criminal-defense": {
+        "slug": re.compile(r"criminal[-_](?:defen[sc]e|law|lawyer|attorney|practice)|"
+                           r"defensa[-_]criminal|abogado[-_](?:criminal|penal)|"
+                           r"\bdui\b|\bdwi\b|drunk[-_]driving|drug[-_](?:crime|charge|possession|"
+                           r"traffick)|white[-_]collar|federal[-_](?:crime|charge|defense)|"
+                           r"sex[-_](?:crime|offense)|assault[-_](?:charge|defense)|"
+                           r"(?:gun|weapon)[s]?[-_](?:charge|offense|crime)|"
+                           r"theft|larceny|burglary|robbery|homicide|murder|manslaughter|"
+                           r"expunge|record[-_]sealing|seal[-_]your[-_]record|"
+                           r"probation[-_]violation|juvenile[-_](?:defense|crime)|"
+                           r"appeals[-_]and[-_]post[-_]conviction|post[-_]conviction", re.I),
+        "title": re.compile(
+            r"criminal\s+(?:defen[sc]e|law|lawyer|attorney)|defensa\s+criminal|"
+            r"abogado\s+(?:criminal|penal)|\bDUI\b|\bDWI\b|drunk\s+driving|"
+            r"drug\s+(?:crime|charge|possession|trafficking)|white\s+collar|"
+            r"federal\s+(?:crime|charge|defense)|sex\s+(?:crime|offense)|"
+            r"assault\s+(?:charge|defense)|(?:gun|weapon)s?\s+(?:charge|offense)|"
+            r"theft|larceny|burglary|robbery|homicide|manslaughter|"
+            r"expungement|sealing\s+(?:a|your)\s+record|probation\s+violation|"
+            r"post[-\s]conviction", re.I),
+        # What happens to a criminal case, in the words the courts and the statutes use. Every
+        # one of these is a step, a hearing or a standard that exists nowhere outside this work.
+        # The named hearings are New York's: Mapp for a search, Huntley for a statement, Wade for
+        # an identification, Dunaway for the stop, Sandoval for what the prosecution may ask on
+        # cross.
+        "corroborating": re.compile(
+            r"arraign|grand\s+jury|indict|plea\s+(?:bargain|agreement|deal|offer)|"
+            r"misdemeanor|felony|suppress|Miranda|probable\s+cause|"
+            r"bail|remand|desk\s+appearance\s+ticket|\bDAT\b|"
+            r"adjournment\s+in\s+contemplation\s+of\s+dismissal|\bACD\b|"
+            r"district\s+attorney|prosecutor|criminal\s+court|"
+            r"sentenc(?:e|ing)|probation|parole|acquit|"
+            r"beyond\s+a\s+reasonable\s+doubt|penal\s+law|criminal\s+procedure\s+law|"
+            r"(?:Mapp|Huntley|Wade|Dunaway|Sandoval)\s+hearing|"
+            r"breathalyz|field\s+sobriety|chemical\s+test|refusal\s+hearing|"
+            r"arrest\s+record|criminal\s+record|rap\s+sheet|"
+            r"fianza|antecedentes\s+penales|audiencia", re.I),
+    },
     "workers-compensation": {
         "slug": re.compile(r"work(?:ers?|place)?[-_]?(?:comp\b|compensation|injur)|"
                            r"injured[-_]?(?:at[-_])?work|on[-_]the[-_]job", re.I),
@@ -261,7 +320,14 @@ NOT_A_PRACTICE_PAGE = re.compile(
     r"[-_](?:vs|versus|glossary|faq|guide|checklist)(?:[-_]|$)|"
     # A slug that opens with a question word is the firm answering one, which is the same
     # content-marketing page with a friendlier address: /if-i-was-injured-on-the-job-do-i.
-    r"(?:^|/)(?:if|what|how|can|do|does|should|when|why|who|is|are|will)[-_]", re.I)
+    r"(?:^|/)(?:if|what|how|can|do|does|should|when|why|who|is|are|will)[-_]|"
+    # A page builder's internal route is not a page the firm published. Cammarata Law's criminal
+    # defence evidence came back as /dipi_popup_maker/criminal-defense/, which is a Divi popup
+    # module: real text, served at an address no visitor ever reaches, and indexed by accident.
+    # Elementor, Beaver Builder and WPBakery all do the same thing under their own prefixes.
+    r"(?:^|/)(?:dipi_popup_maker|elementor[-_]library|elementor_library|popup[-_]?maker|"
+    r"fl[-_]builder[-_]template|vc[-_]grid|cornerstone|ct[-_]template|brizy[-_]template)(/|$)",
+    re.I)
 
 # The same judgement applied to what the page calls itself, for the cases the address hides.
 ARTICLE_TITLE = re.compile(

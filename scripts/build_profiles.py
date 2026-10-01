@@ -58,6 +58,7 @@ PRACTICE_NAMES = {
     "real-estate": "Real Estate",
     "family-law": "Family Law",
     "immigration": "Immigration",
+    "criminal-defense": "Criminal Defense",
 }
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury
@@ -110,6 +111,23 @@ GENERIC_NAME_WORD = re.compile(
     r"mesothelioma|asbestos|birth|nursing|abuse|neglect|medical|hotel|casino|premises|"
     r"class|action|actions|liability|dram|shop|roadway|workplace|automotive|"
     r"ny|fl|tx|ga|ma|md|or|in|il|pa|nv|"
+    # Criminal defence titles its pages by offence, and the roster readers pick them up the same
+    # way they picked up injury types. True Law Firm published four attorneys and three of them
+    # were headings: "DWI License Suspension", "Alcohol Offenses", "Multiple DWIs".
+    #
+    # "White" is deliberately absent, and it is the word this list most wants. White collar is how
+    # a whole set of these pages is titled, and Brian White is an attorney in Houston whose own
+    # firm is named after him. The same reasoning keeps Will and Cook out of the county list
+    # above: losing a tidy-up costs nothing and striking out a person costs them their roster.
+    r"criminal|defence|offense|offenses|offence|offences|offender|offenders|"
+    r"alcohol|drunken|dwi|dwis|dui|duis|felony|felonies|misdemeanor|misdemeanors|"
+    r"larceny|burglary|robbery|homicide|manslaughter|assault|battery|arson|forgery|"
+    r"embezzlement|extortion|perjury|stalking|kidnapping|shoplifting|vandalism|"
+    r"trespassing|solicitation|prostitution|drug|drugs|narcotics|possession|"
+    r"trafficking|weapon|weapons|firearm|firearms|gun|guns|"
+    r"arraignment|expungement|expunge|sealing|probation|parole|conviction|convictions|"
+    r"sentencing|sentence|charge|charges|crime|crimes|juvenile|federal|collar|"
+    r"fraud|theft|multiple|suspension|violation|violations|forcible|touching|appeal|appeals|"
     r"llp|llc|pc|pllc|pa|plc|inc)$", re.I)
 
 
@@ -137,6 +155,16 @@ PLACE_PREFIX = re.compile(
     r"miami|houston|atlanta|dallas|boston|baltimore|portland|naples|lakeland|tampa|"
     r"downers\s+grove|summerlin|germantown|fishtown)\b\s+\S+\s+\S", re.I)
 
+# The same heading shape led by an abbreviation rather than a city, where one word after it is
+# enough. New York criminal defence produced "NYC Fraud", "Nyc Rico", "NYC Forcible Touching" and
+# "NYC First-Time Offender", each an offence page heading read off a bio index.
+#
+# One word is safe here and is not safe above, and the difference is the whole point. Dallas Bray
+# is a person and "Dallas" is his given name, so a city plus one word has to survive. Nobody is
+# christened NYC. An abbreviation is never a given name, so the rule can be as short as the
+# evidence is clear.
+ABBREVIATION_PREFIX = re.compile(r"^(nyc|nys|n\.y\.c\.|dmv|dwi|dui)\b\s+\S", re.I)
+
 
 # Site furniture on a Chinese-language page, which a firm serving Chinese-speaking clients
 # publishes alongside its English one. Caesar, Napoli & Spivak had "成功案例" and "联系我们",
@@ -159,6 +187,8 @@ def NOT_A_NAME_match(value):
     if text in CJK_FURNITURE:
         return True
     if PLACE_SUFFIX.search(text) or PLACE_PREFIX.match(text):
+        return True
+    if ABBREVIATION_PREFIX.match(text):
         return True
     words = [w for w in re.split(r"[\s,.]+", text) if w]
     return bool(words) and all(GENERIC_NAME_WORD.match(w) for w in words)

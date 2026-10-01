@@ -37,15 +37,7 @@
       "source_url": "https://maps.google.com/?cid=16846159253196608980&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "Burglary Charge",
-      "role": "Attorneys",
-      "role_source": "firm bio heading",
-      "bar_state": "NY",
-      "source_url": "https://zplawgrouptx.com/criminal-defense-cases/burglary-charge-attorney/"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English",
     "Spanish"
@@ -249,7 +241,7 @@
   "score": {
     "total": 39,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-10-01",
     "methodology": "v2.0",
     "pillars": {
@@ -270,8 +262,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "Texas publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
           },
           {
             "code": "A5",
@@ -426,16 +418,16 @@
       "needed": 70,
       "gap": 31,
       "floor_met": false,
-      "coverage_met": true,
+      "coverage_met": false,
       "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
         "A2 Experience: +10 available",
-        "A6 Roster verifiability: +9 available",
         "D2 Search authority: +8 available"
       ]
     },
     "raw": 27.0,
     "assessed": 70,
-    "coverage": 1.0,
+    "coverage": 0.886,
     "floor_abc_pct": 0.5,
     "gates_unavailable": [
       "G1",
@@ -444,7 +436,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 70,
+    "assessable": 79,
     "comparable": true
   },
   "tx_register": {
