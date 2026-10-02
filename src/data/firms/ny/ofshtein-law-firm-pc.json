@@ -35,7 +35,12 @@
       "name": "Akiva Ofshtein",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://olf.law/attorneys/akiva-ofshtein"
+      "source_url": "https://olf.law/attorneys/akiva-ofshtein",
+      "bar_number": "2824126",
+      "admitted_year": 1997,
+      "registry_status": "Currently registered",
+      "registry_basis": "firm named in the registration",
+      "checked_at": "2026-10-01"
     }
   ],
   "languages": [
@@ -126,34 +131,34 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
-      "source": "no roster published",
-      "checked_at": "2026-09-22"
+      "pass": true,
+      "evidence": "1 of 1 named attorneys are currently registered and none carries an adverse status",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
+      "checked_at": "2026-10-01"
     },
     "G2": {
-      "pass": false,
-      "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
-      "source": "no roster published",
-      "checked_at": "2026-09-22"
+      "pass": true,
+      "evidence": "None of the 1 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
+      "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
+      "checked_at": "2026-10-01"
     },
     "G3": {
       "pass": true,
       "evidence": "OFSHTEIN LAW FIRM, P.C. is an active domestic professional service corporation registered since 2006-11-20, with 1 Google-verified location",
       "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     },
     "G5": {
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-01"
     },
     "G6": {
       "pass": true,
       "evidence": "2,659 public client reviews and 20 years since the entity was formed in 2006",
       "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-      "checked_at": "2026-09-22"
+      "checked_at": "2026-10-01"
     }
   },
   "cohort_id": "ny-personal-injury",
@@ -212,34 +217,34 @@
     "dos_id": "3439749",
     "formed": "2006-11-20",
     "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State",
-    "checked_at": "2026-09-22"
+    "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 40,
+    "total": 56,
     "tier": "Verified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-01",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-02",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 1,
+        "score": 18,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "registry",
+            "evidence": "Mean 29.0 years since admission across 1 of 1 named attorneys (longest 29, shortest 29) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 1,
+            "pts": 9,
             "max": 9,
             "source": "registry",
-            "evidence": "0 of 1 named attorneys matched to the New York register; no bar number published on any bio"
+            "evidence": "1 of 1 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -299,7 +304,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 2,659 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1184 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 2,659 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -388,27 +393,24 @@
         ]
       }
     },
-    "floor_abc": 18,
+    "floor_abc": 35,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 30,
+      "gap": 14,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +8 available",
         "D1 Website trust & experience: +6.5 available",
-        "B1 Results published: +6 available"
+        "B1 Results published: +6 available",
+        "B2 Specificity: +5 available"
       ]
     },
-    "raw": 28.6,
-    "assessed": 71,
-    "coverage": 0.798,
-    "floor_abc_pct": 0.383,
-    "gates_unavailable": [
-      "G1",
-      "G2"
-    ],
+    "raw": 45.6,
+    "assessed": 81,
+    "coverage": 0.91,
+    "floor_abc_pct": 0.614,
+    "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,
     "comparable": true

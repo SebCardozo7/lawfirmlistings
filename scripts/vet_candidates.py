@@ -41,6 +41,21 @@ FIRMS = ROOT / "src" / "data" / "firms"
 NATIONAL_OFFICES = 8
 
 
+# A business that says what it is, in the name it chose for its own Google listing. Staten Island
+# returned freelegalquote.com as "Freelegalquote.com - attorney referral service", with 78 reviews
+# and a criminal-defence page that passes every practice test we have, because the page is real.
+# It is not a law firm. A directory whose whole position is verification rather than advertising
+# cannot rank a lead broker alongside the firms it sells the leads to.
+#
+# The test is the listing name rather than the domain, because the domain catches nothing: four
+# firms already published are vanity numbers (1800theeagle.com is Goldberg & Osborne, fourteen
+# attorneys) and every one of them is a real practice. A business calling itself a referral
+# service is telling us directly.
+NOT_A_LAW_FIRM = re.compile(
+    r"\b(?:attorney|lawyer|legal)\s+(?:referral|lead|marketing|directory)|"
+    r"\b(?:referral|lead\s+generation)\s+(?:service|agency|company)|"
+    r"\blegal\s+(?:marketing|advertising)\b|\blead\s+gen\b", re.I)
+
 def published_domains() -> set[str]:
     out = set()
     for path in FIRMS.rglob("*.json"):
@@ -96,7 +111,7 @@ def main() -> int:
               % (len(pending), len(fresh)), file=sys.stderr)
         return 2
 
-    keep, out_of_market, unverified, national = [], [], [], []
+    keep, out_of_market, unverified, national, not_a_firm = [], [], [], [], []
     for cand in data["candidates"]:
         domain = cand["domain"]
         if domain in already:
@@ -114,6 +129,10 @@ def main() -> int:
             unverified.append((cand, evidence.get("why") or "not checked"))
             continue
 
+        if NOT_A_LAW_FIRM.search(cand.get("name") or ""):
+            not_a_firm.append(cand)
+            continue
+
         local = [o for o in cand["offices"] if in_market.search(o.get("address") or "")]
         if not local:
             out_of_market.append(cand)
@@ -123,8 +142,9 @@ def main() -> int:
         keep.append((cand, evidence, local))
 
     keep.sort(key=lambda k: -(k[0]["review_count_total"] or 0))
-    print("%d to publish, %d in the state but outside the market, %d without a practice page"
-          % (len(keep), len(out_of_market), len(unverified)))
+    print("%d to publish, %d in the state but outside the market, %d without a practice page, "
+          "%d not a law firm"
+          % (len(keep), len(out_of_market), len(unverified), len(not_a_firm)))
     print()
     for cand, evidence, local in keep:
         mark = "  [national, branch here]" if cand in [c for c in national] else ""
@@ -132,6 +152,12 @@ def main() -> int:
               % (cand["domain"][:32], (cand.get("name") or "")[:32],
                  cand["review_count_total"], len(local), mark))
         print("      %s" % evidence["url"][:96])
+
+    if not_a_firm:
+        print()
+        print("Not a law firm, by the name on their own listing:")
+        for cand in not_a_firm:
+            print("  %-32s %s" % (cand["domain"][:32], (cand.get("name") or "")[:62]))
 
     if out_of_market:
         print()

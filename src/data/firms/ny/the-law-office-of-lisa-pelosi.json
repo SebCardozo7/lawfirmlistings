@@ -1,0 +1,462 @@
+{
+  "slug": "the-law-office-of-lisa-pelosi",
+  "name": "The Law Office of Lisa Pelosi",
+  "initials": "OL",
+  "website": "https://mycriminalattorneynyc.com/",
+  "domain": "mycriminalattorneynyc.com",
+  "phone": "(917) 670-7063",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "criminal-defense",
+      "name": "Criminal Defense",
+      "primary": true,
+      "source_url": "https://mycriminalattorneynyc.com/theft-ny/",
+      "checked_at": "2026-10-01"
+    }
+  ],
+  "market": {
+    "city_slug": "new-york-ny",
+    "city": "New York",
+    "state": "NY",
+    "state_name": "New York"
+  },
+  "offices": [
+    {
+      "label": "The Law Office of Lisa Pelosi",
+      "address": "50 Broad St #1609, New York, NY 10004, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=2626843310867337149&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "The Law Office of Lisa Pelosi works from Broad Street in Manhattan and names no attorney on the pages we could reach.",
+    "48 reviews at 4.5. A free consultation, a 24 hour line and pages in Spanish, published. It publishes nothing about the rate or the retainer."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.5,
+      "count_label": "48",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-01"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-11T20:21:04.468170096Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2021-02-22T22:43:33.877876Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2020-10-19T16:52:41.181284Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2019-11-21T23:24:40.705493Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-07-23T17:25:03.504250684Z",
+        "rating": 1
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "disclaimer": true,
+      "privacy_policy": true,
+      "attorney_bios": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 25,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, field + lab)",
+      "measured_at": "2026-10-01",
+      "note": "LCP 11.0 s / CLS 0.204 / TBT 1194 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "mycriminalattorneynyc.com",
+      "name": "The Law Office of Lisa Pelosi",
+      "review_count_at_discovery": 48
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 48,
+      "rating_weighted": 4.5,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-10-01"
+    },
+    "ahrefs": {
+      "dr": 10.0,
+      "ahrefs_rank": 17155192,
+      "refdomains": 1079,
+      "refdomains_dofollow": 374,
+      "backlinks": 15852,
+      "org_keywords": 388,
+      "org_traffic": 3371,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-01"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
+      "source": "no roster published",
+      "checked_at": "2026-10-01"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching entity found in the active corporations register. New York does not require a general partnership to file with the Department of State, so this is not evidence against the firm, only a check we could not complete from this source",
+      "source": "Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
+      "unresolvable": "New York does not require every law firm to file with the Department of State, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-10-01"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-10-01"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "48 public client reviews and 13 years since its web address was registered in 2013",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-10-01"
+    }
+  },
+  "cohort_id": "ny-criminal-defense",
+  "faq": [
+    {
+      "q": "How much does The Law Office of Lisa Pelosi charge?",
+      "a": "The Law Office of Lisa Pelosi publishes no fee terms on the pages we read, so none is recorded on this profile. An absence here is not a claim that the firm has no fee arrangement, only that it does not state one publicly. The rate itself is not published, so ask for it in writing, along with how case expenses are handled and whether they come out of the recovery before or after the fee. The first consultation is free, which is the place to ask."
+    },
+    {
+      "q": "Does The Law Office of Lisa Pelosi offer a free consultation?",
+      "a": "Yes. The Law Office of Lisa Pelosi publishes a free initial consultation. The intake line is published as open around the clock and it publishes material in Spanish."
+    },
+    {
+      "q": "Where does The Law Office of Lisa Pelosi have offices?",
+      "a": "The Law Office of Lisa Pelosi publishes one office, in Manhattan. Addresses and the Google listing behind each one are on this profile under Offices."
+    },
+    {
+      "q": "Who are the attorneys at The Law Office of Lisa Pelosi?",
+      "a": "The Law Office of Lisa Pelosi names no attorney on the public pages we could read. That is a gap in what the firm publishes rather than a statement about who works there, and it is why the licensure and discipline checks on this profile have nothing to run against."
+    },
+    {
+      "q": "What has Law Firm Listings verified about The Law Office of Lisa Pelosi?",
+      "a": "The Law Office of Lisa Pelosi scores 34 and sits at Listed. Passed: footprint. Did not pass: entity registration and website. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+    }
+  ],
+  "_review": {
+    "name_source": "Google Business Profile display name",
+    "phone_source": "Google Business Profile",
+    "about_material": {
+      "claims": {
+        "free_consultation": {
+          "quote": "crimes... Attorney Lisa Pelosi, Criminal Defense Attorney NYC Call 917-670-7063 Now For a Free Consultation! Do you need a criminal defense lawyer who will protect your rights and fight to keep you",
+          "source_url": "https://mycriminalattorneynyc.com/"
+        },
+        "available_24_7": {
+          "quote": "nce. Offices in NYC and the Hudson Valley. Former Prosecutor. Se Habla E spañol AVAILABLE 24/7: 917-670-7063 Read Our Reviews SE HABLA ESPAÑOL Here's What To Do Next Have You Been Accu",
+          "source_url": "https://mycriminalattorneynyc.com/"
+        },
+        "se_habla_espanol": {
+          "quote": "alley. Former Prosecutor. Se Habla E spañol AVAILABLE 24/7: 917-670-7063 Read Our Reviews SE HABLA ESPAÑOL Here's What To Do Next Have You Been Accused of a Crime? Domestic Violence Drug Crimes Se",
+          "source_url": "https://mycriminalattorneynyc.com/"
+        }
+      },
+      "json_ld_descriptions": [],
+      "pages": {
+        "home": "https://mycriminalattorneynyc.com/",
+        "contact": "https://mycriminalattorneynyc.com/contact/",
+        "disclaimer": "https://mycriminalattorneynyc.com/disclaimer/",
+        "privacy": "https://mycriminalattorneynyc.com/privacy-policy/",
+        "attorneys": "https://mycriminalattorneynyc.com/tag/lawyer/"
+      }
+    },
+    "attorney_page_urls": [
+      "https://mycriminalattorneynyc.com/tag/lawyer/"
+    ],
+    "blocking": [
+      "about[] was assembled from the fields above, not written. Read it before publishing: it should say nothing the record does not carry.",
+      "attorneys[] is empty. Names must be read from the bio pages, not guessed",
+      "fee_statement omitted"
+    ]
+  },
+  "operating": {
+    "registered": "2013-11-11",
+    "years": 12.9,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-10-01"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-10-01"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-10-01"
+  },
+  "score": {
+    "total": 34,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-02",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "pending",
+            "evidence": "Not yet assessed"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which New York's advertising rules effectively require"
+          }
+        ]
+      },
+      "C": {
+        "score": 10,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "48 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.5 over 48 reviews → Bayesian 4.72 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 2.5,
+            "max": 5,
+            "source": "places",
+            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2026-03-11) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 2,
+            "max": 4,
+            "source": "places",
+            "evidence": "1 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 8,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · no fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 5,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 10.0 → 58th pct of 84-firm cohort (median 7) 2/3 · 1,079 referring domains, 60th pct 1/2 · 388 organic keywords / 3,371 visits·mo, 92th pct 2/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 5,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 10,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 36,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A2 Experience: not yet measured (10 pts)",
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "B1 Results published: +6 available"
+      ]
+    },
+    "raw": 23.5,
+    "assessed": 70,
+    "coverage": 0.787,
+    "floor_abc_pct": 0.276,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 89,
+    "comparable": true
+  },
+  "logo": {
+    "file": "/logos/mycriminalattorneynyc.com.jpg",
+    "source_url": "https://mycriminalattorneynyc.com/wp-content/uploads/2019/08/cropped-ftd-image-record-sealing-expungement-ii-192x192.jpg",
+    "width": 192,
+    "height": 192,
+    "bytes": 8284,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-01"
+  }
+}

@@ -385,6 +385,11 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--domains", nargs="*", default=[])
+    # A rename changes the name the opening sentence is built from, and the block it
+    # has to replace is one this script wrote rather than the old template, so the
+    # hand-written guard below would skip it. --force is for that, and is why it is
+    # only ever used with --domains.
+    ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
 
     records = load()
@@ -400,7 +405,7 @@ def main() -> int:
         if args.domains and firm.get("domain") not in args.domains:
             continue
         existing = firm.get("about") or []
-        if existing and not TEMPLATE.search(existing[0]):
+        if existing and not TEMPLATE.search(existing[0]) and not args.force:
             skipped += 1
             continue
 

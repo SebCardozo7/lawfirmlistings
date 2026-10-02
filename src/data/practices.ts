@@ -492,6 +492,145 @@ export const PRACTICES: Record<string, PracticeNotes> = {
                     'Mediation, collaborative divorce and litigation compared'],
   },
 
+  'criminal-defense': {
+    name: 'Criminal Defense',
+    abbr: 'criminal defense',
+    icon: 'gavel',
+    title: 'Criminal Defense Law Firms: Rankings and Hiring Guide',
+    description:
+      'How to choose a criminal defense firm: why nobody may charge you a contingency fee, '
+      + 'what to ask about who actually appears, and what a disposition is not.',
+    lede:
+      'Criminal defense firms handling arrests and charges in state and federal court, from '
+      + 'driving offenses and drug charges to white-collar investigations and appeals. Every '
+      + 'firm is checked for a registered entity, a confirmed office and a clean disciplinary '
+      + 'record, and ranked on what it publishes rather than on outcomes nobody can verify.',
+    subtopics: ['DUI and DWI', 'Drug charges', 'Assault', 'Theft and larceny',
+                'Weapons charges', 'White-collar and fraud', 'Federal charges',
+                'Sex offenses', 'Appeals and post-conviction', 'Record sealing'],
+    feeFactLabel: 'Publish a flat fee',
+    feePattern: 'flat fee',
+    guide: {
+      heading: 'How to choose a criminal defense firm',
+      intro:
+        'Every other area in this directory is chosen at leisure. This one is usually chosen '
+        + 'within a day of an arrest, by somebody who has never needed a lawyer before, from a '
+        + 'list of search results. The three things below are the ones most likely to be '
+        + 'misunderstood in that first day, and the first of them changes what every fee page '
+        + 'you are about to read can legally say.',
+      sections: [
+        {
+          heading: 'Nobody may charge you a contingency fee for a criminal case',
+          paragraphs: [
+            'In injury work the fee is a share of what the case recovers, and a firm that '
+            + 'recovers nothing is paid nothing. That arrangement is prohibited in a criminal '
+            + 'matter. Rule 1.5(d) of the rules of professional conduct, adopted in '
+            + 'substantially this form in every state, forbids a lawyer from entering into a '
+            + 'fee contingent on the outcome of a criminal case. There is no "no fee unless we '
+            + 'win" here, and a firm offering one is offering something it is not allowed to.',
+            'So the fee is a flat fee, an hourly rate, or a flat fee per stage: one amount '
+            + 'through arraignment and pretrial, another if the case goes to trial. That second '
+            + 'structure is the one that surprises people, because the number quoted on the '
+            + 'phone is often the first stage only. Ask what the quoted figure covers, what '
+            + 'happens to it if the case resolves early, and what the trial fee would be.',
+            'This is also why the fee column on these rankings reads differently from the '
+            + 'injury ones. We count firms that publish a flat fee, and most publish no figure '
+            + 'at all. An absence is recorded as an absence rather than filled in.',
+          ],
+          list: [
+            'What does the quoted fee cover, and where does it stop?',
+            'Is there a separate trial fee, and how much is it?',
+            'Are investigators, experts and transcripts inside the fee or billed on top?',
+            'What happens to the fee if the case is dismissed at the first appearance?',
+          ],
+        },
+        {
+          heading: 'Ask who will stand up at the arraignment, by name',
+          paragraphs: [
+            'Criminal defense includes some of the highest volume practices in law. A firm '
+            + 'whose name is on the door may send a different lawyer to each appearance, and in '
+            + 'a high volume practice that is not necessarily bad: the lawyer who is in that '
+            + 'courthouse every week knows the judge and the assistant district attorney in a '
+            + 'way the named partner may not. What is bad is not being told.',
+            'The roster on each profile here is the firm’s own published list of attorneys, '
+            + 'read from its site, and where the state publishes a register we check each name '
+            + 'against it and say how many matched. That tells you how many lawyers the firm '
+            + 'has. It cannot tell you which of them is assigned to you, and that is the '
+            + 'question to ask before you pay anything.',
+          ],
+        },
+        {
+          heading: 'A public defender is not a worse lawyer, and a disposition is not an acquittal',
+          paragraphs: [
+            'Two things a directory with an incentive to sell you a private lawyer would not '
+            + 'say. The first: public defenders are specialists who do this work and nothing '
+            + 'else, in the courthouse they appear in daily, and in many places they are the '
+            + 'most experienced trial lawyers in the room. The real difference is caseload, not '
+            + 'ability. If you are assigned one, the question is how much time your case will '
+            + 'get, not whether the lawyer is any good.',
+            'The second: most criminal cases end without a trial, so "results" in this area '
+            + 'mostly means dispositions. A charge reduced, a case adjourned in contemplation of '
+            + 'dismissal, a plea to a violation rather than a crime, a record sealed afterwards. '
+            + 'Those are real outcomes and they are worth asking about, and none of them is an '
+            + 'acquittal. Where a firm publishes case results on its own site we count them and '
+            + 'say on the profile that the figures are the firm’s and that we did not confirm '
+            + 'them. In this practice that caveat does more work than in any other.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'Before the first appearance',
+        text: 'Whoever represents you, the two things to establish on day one are what you are '
+            + 'actually charged with, by statute and degree, and whether anything you say to '
+            + 'anyone other than your lawyer can be used. Everything else can wait a day. That '
+            + 'cannot.',
+      },
+    },
+    faq: [
+      {
+        q: 'Can a criminal defense lawyer take my case on a no win, no fee basis?',
+        a: 'No. Rule 1.5(d) of the rules of professional conduct prohibits a fee contingent on '
+           + 'the outcome of a criminal case, and it is adopted in substantially that form '
+           + 'everywhere in the United States. A firm advertising "no fee unless we win" for a '
+           + 'criminal matter is advertising an arrangement it may not enter into. Expect a '
+           + 'flat fee, an hourly rate, or a flat fee per stage of the case.',
+      },
+      {
+        q: 'Why do so few firms here publish what they charge?',
+        a: 'Because most do not, and we record that rather than estimating it. A criminal fee '
+           + 'depends on the charge, the court and whether the case is likely to be tried, which '
+           + 'is a real reason not to print a number. It is still worth asking for the figure in '
+           + 'writing before you pay, together with what it covers and where it stops. The fee '
+           + 'row on each profile says exactly what we were able to read on that firm’s own '
+           + 'pages, and says so when the answer was nothing.',
+      },
+      {
+        q: 'Does it matter that the firm is in my city?',
+        a: 'More here than almost anywhere else in this directory. Criminal practice is '
+           + 'courthouse practice: the assistant district attorneys, the judges, the local '
+           + 'diversion programmes and what a particular bench will accept on a plea are all '
+           + 'local knowledge, and they change from county to county inside one state. Rankings '
+           + 'on this site are built city by city for that reason. Ask how often the firm '
+           + 'appears in the specific court where your case is listed.',
+      },
+      {
+        q: 'What does Law Firm Listings actually check in this practice area?',
+        a: 'The same things it checks everywhere, and the profile says which of them the state '
+           + 'allowed. Every named attorney is matched against the state attorney register where '
+           + 'one is published and queryable, and checked for an adverse disciplinary status. '
+           + 'The entity is looked up on the state business register where one exists. Reviews '
+           + 'come from Google Business Profiles and are weighted against the firm’s own market. '
+           + 'What we do not check is whether a published case result is accurate, because the '
+           + 'figures are the firm’s. Every row names its source and its date.',
+      },
+    ],
+    plannedGuides: [
+      'What happens at an arraignment, step by step',
+      'DWI in New York: the criminal case and the DMV case are two cases',
+      'Sealing a conviction: who qualifies and what it does not erase',
+      'What a desk appearance ticket is, and why it is not a dismissal',
+    ],
+  },
   immigration: {
     name: 'Immigration',
     abbr: 'immigration',
