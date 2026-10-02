@@ -24,7 +24,7 @@ export interface Guide {
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-    | 'divorce' | 'language' | 'sample' | 'pages';
+    | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -66,6 +66,21 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  {
+    slug: 'do-lawyers-offer-free-consultations',
+    cover: 'consult',
+    kicker: 'Study',
+    title: 'New Study: A Free Consultation Depends on the Practice, Not the Lawyer',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Nearly every page answering this question was written by a firm that offers one. We ' +
+      'read the websites of every firm in this directory instead. Across the whole directory ' +
+      'the answer is usually yes, and that is an artefact of which practice most of these ' +
+      'firms are in: split by the kind of work, it stops being one habit and becomes two.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'A billing convention, not a profession\u2019s habit',
+  },
   {
     slug: 'what-search-traffic-says-about-a-law-firm',
     cover: 'signal',

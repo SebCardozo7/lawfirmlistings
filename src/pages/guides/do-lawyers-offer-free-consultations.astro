@@ -1,0 +1,325 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+/**
+ * Who actually publishes a free consultation, across the whole directory.
+ *
+ * The field this reads is `free_consultation`, a boolean written by scripts/crawl_public.py from
+ * a regular expression run over the firm's own website: "free consultation", "free case review",
+ * "free case evaluation" or "free legal consultation". So it records a phrase a firm publishes,
+ * not an offer we accepted, and the page says so rather than implying otherwise. It is NOT the
+ * same fact as `digital.trust_pages.fee_statement` (a /fees/ page exists) or the top-level
+ * `fee_statement` (the firm's own sentence about price), which the backlog records as two fields
+ * that have been conflated before. Each figure below names the field it comes from.
+ *
+ * Every number is computed from the collection at build time. Nothing is typed into the prose,
+ * and nothing here reads a field without the script that writes it having been read first.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const total = firms.length;
+const publishing = firms.filter(f => f.data.free_consultation);
+
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+
+// The firm's own practice, not every area it will take. A firm lists everything it accepts, so
+// counting mentions would put most of the directory in several buckets at once.
+const primary = (f: typeof firms[number]) =>
+  (f.data.practices.find(p => p.primary) ?? f.data.practices[0]);
+
+// Practice groups, derived from the records and ordered by size, so a new practice appears here
+// by itself and nothing in the prose below names a practice that has left the directory.
+const practiceSlugs = [...new Set(firms.map(f => primary(f)?.slug).filter(Boolean))] as string[];
+const practices = practiceSlugs
+  .map(slug => {
+    const group = firms.filter(f => primary(f)?.slug === slug);
+    const yes = group.filter(f => f.data.free_consultation);
+    return {
+      slug,
+      name: primary(group[0])!.name,
+      n: group.length,
+      yes: yes.length,
+      share: pct(yes.length, group.length),
+      firms: group,
+    };
+  })
+  // Size first, then slug, so two practices of the same size never swap places between builds.
+  .sort((a, b) => b.n - a.n || a.slug.localeCompare(b.slug));
+
+const top = practices[0];
+// The comparison cohort is the largest practice after the biggest one, not the practice with the
+// lowest share. Taking the minimum picked a twenty-firm cohort that shares no market with the
+// injury firms, so neither the crawl-reach control nor the same-city test could be run against
+// it. The smallest share is still reported, in the chart and in the sentence under it.
+const bottom = practices[1];
+const lowest = [...practices].sort((a, b) => a.share - b.share || a.slug.localeCompare(b.slug))[0];
+
+// The crawl-reach control. `digital.trust_pages` is written by the same crawl, so a firm
+// carrying it is a firm whose site we demonstrably read. If the practice gap were an artefact of
+// where our crawler got to, it would shrink inside this subset. It does not.
+const read = firms.filter(f => f.data.digital.trust_pages);
+const readShare = (slug: string) => {
+  const g = read.filter(f => primary(f)?.slug === slug);
+  return { n: g.length, yes: g.filter(f => f.data.free_consultation).length };
+};
+const topRead = readShare(top.slug);
+const bottomRead = readShare(bottom.slug);
+
+// Holding the market still. The two largest practices overlap in exactly one city, and that is
+// where the practice can be tested without the market moving underneath it.
+const citiesOf = (slug: string) =>
+  new Set(firms.filter(f => primary(f)?.slug === slug).map(f => f.data.market.city_slug));
+const sharedCities = [...citiesOf(top.slug)].filter(c => citiesOf(bottom.slug).has(c)).sort();
+const overlapCity = sharedCities[0] ?? null;
+const inCity = (slug: string, city: string) => {
+  const g = firms.filter(f => primary(f)?.slug === slug && f.data.market.city_slug === city);
+  return { n: g.length, yes: g.filter(f => f.data.free_consultation).length };
+};
+const overlapName = overlapCity
+  ? firms.find(f => f.data.market.city_slug === overlapCity)!.data.market.city
+  : null;
+const overlapTop = overlapCity ? inCity(top.slug, overlapCity) : null;
+const overlapBottom = overlapCity ? inCity(bottom.slug, overlapCity) : null;
+
+// The market test, inside the largest practice. If the market decided this, the markets would
+// disagree with each other. The bands are the chart; the extremes are the sentence.
+const topFirms = top.firms;
+const markets = [...new Set(topFirms.map(f => f.data.market.city_slug))]
+  .map(slug => {
+    const g = topFirms.filter(f => f.data.market.city_slug === slug);
+    const yes = g.filter(f => f.data.free_consultation).length;
+    return { slug, city: g[0].data.market.city, state: g[0].data.market.state, n: g.length, yes, share: yes / g.length };
+  })
+  .sort((a, b) => b.share - a.share || a.slug.localeCompare(b.slug));
+const marketHigh = markets[0];
+const marketLow = markets[markets.length - 1];
+const MARKET_BANDS = [
+  { label: '95% and over', lo: 0.95 },
+  { label: '90 to 94%', lo: 0.90 },
+  { label: '85 to 89%', lo: 0.85 },
+  { label: 'Under 85%', lo: 0 },
+];
+const marketColumns = MARKET_BANDS.map((b, i) => ({
+  label: b.label,
+  value: markets.filter(m => {
+    const hi = i === 0 ? Infinity : MARKET_BANDS[i - 1].lo;
+    return m.share >= b.lo && m.share < hi;
+  }).length,
+  note: i === MARKET_BANDS.length - 1 ? 'markets' : undefined,
+}));
+const marketsAt85 = markets.filter(m => m.share >= 0.85).length;
+
+// Inside one practice, does the phrase separate firms on anything a client said? Two measures,
+// each reported as a share of its own maximum so they can sit on one scale: the certification
+// total, which is already out of a hundred, and the Google rating, which is out of five.
+const groupYes = topFirms.filter(f => f.data.free_consultation);
+const groupNo = topFirms.filter(f => !f.data.free_consultation);
+const scoreOf = (xs: typeof firms) => median(xs.map(f => f.data.score?.total).filter((n): n is number => n != null));
+const ratingOf = (xs: typeof firms) =>
+  mean(xs.map(f => f.data.digital.places?.rating_weighted).filter((n): n is number => n != null));
+// Rounded, because a median across an even-sized set lands on a half review, and there is no
+// such thing as half a review.
+const reviewsOf = (xs: typeof firms) => Math.round(median(xs.map(f => f.data.digital.places!.review_count_total)));
+const scoreYes = scoreOf(groupYes);
+const scoreNo = scoreOf(groupNo);
+const ratingYes = ratingOf(groupYes);
+const ratingNo = ratingOf(groupNo);
+const reviewsYes = reviewsOf(groupYes);
+const reviewsNo = reviewsOf(groupNo);
+const ratingGap = Math.abs(ratingYes - ratingNo);
+
+const signalRows = [
+  { label: 'Certification score, firms publishing the phrase', value: scoreYes, display: `${scoreYes} of 100`, emphasis: true },
+  { label: 'Certification score, firms that do not', value: scoreNo, display: `${scoreNo} of 100`, emphasis: true },
+  { label: 'Google rating, firms publishing the phrase', value: (ratingYes / 5) * 100, display: `${ratingYes.toFixed(2)} of 5` },
+  { label: 'Google rating, firms that do not', value: (ratingNo / 5) * 100, display: `${ratingNo.toFixed(2)} of 5` },
+];
+
+// What the engine does with the field. E1 is the fee and access sub-factor and the free
+// consultation is one of its points; the evidence line on every profile prints it.
+const e1Of = (f: typeof firms[number]) =>
+  f.data.score?.pillars.E.subs.find(s => s.code === 'E1');
+const e1Scored = firms.filter(f => e1Of(f)?.source === 'observed');
+const e1Max = [...new Set(e1Scored.map(f => e1Of(f)!.max))];
+const e1Top = mean(topFirms.filter(f => e1Of(f)?.source === 'observed').map(f => e1Of(f)!.pts));
+const e1Bottom = mean(bottom.firms.filter(f => e1Of(f)?.source === 'observed').map(f => e1Of(f)!.pts));
+const e1Pending = firms.length - e1Scored.length;
+// The other half of E1 reads the firm's own sentence about price, which is a different field
+// again and is filled by a different script. Counting it keeps the self-criticism honest: the
+// free consultation point is not the only part of E1 shaped like a contingency practice.
+const stmtTop = topFirms.filter(f => f.data.fee_statement).length;
+const stmtBottom = bottom.firms.filter(f => f.data.fee_statement).length;
+
+// The named examples, picked by the largest review count so the choice is deterministic and the
+// firm is one a reader can go and look at. Both sentences below are about what a website
+// publishes and nothing else.
+const byReviews = (xs: typeof firms) =>
+  [...xs].sort((a, b) =>
+    b.data.digital.places!.review_count_total - a.data.digital.places!.review_count_total ||
+    a.data.slug.localeCompare(b.data.slug));
+const bottomPublisher = byReviews(bottom.firms.filter(f => f.data.free_consultation))[0] ?? null;
+const bottomSilent = bottom.n - bottom.yes;
+const topSilent = byReviews(groupNo)[0] ?? null;
+const topSilentE1 = topSilent ? e1Of(topSilent) : null;
+
+const practiceRows = practices.map(p => ({
+  label: p.name,
+  href: `/practice-areas/${p.slug}/`,
+  value: p.share,
+  display: `${p.share}%`,
+  note: `${p.yes} of ${p.n} firms`,
+  emphasis: p.slug === top.slug,
+}));
+
+// No date is printed on this page, and that is deliberate rather than an omission. The field
+// this study is built on carries no timestamp anywhere on the record, unlike every other
+// measurement family here, so there is no date we could print beside it that would be true.
+// Borrowing the Google Places reading date, which an earlier draft did, would have dated this
+// study from a different measurement entirely. The limits section says so in words.
+
+// States the finding and carries no figure, because check_meta rejects one in either of these
+// and is right to: the shares move every time a market opens.
+const title = 'New Study: A Free Consultation Depends on the Practice, Not the Lawyer';
+const description =
+  'We read every law firm website in this directory for a free consultation offer. Injury firms publish one almost always. Immigration firms almost never do.';
+---
+<Base title={title} description={description} nav="guides" image="/og/consult.png" imageAlt="A grid of dots, most of them filled, with a tail of hollow ones at the end">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Free consultations</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Study · Fees and access</span>
+    <h1>{title}</h1>
+    <p class="lede">Almost every page answering this question was written by a firm that offers one. We counted instead. Of the {total.toLocaleString('en-US')} firms in this directory, <b>{publishing.length.toLocaleString('en-US')}</b> publish a free consultation somewhere on their own website. That looks like a profession-wide habit until you split it by the kind of work the firm does, and then it stops being one.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="consult" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#who">Who publishes one</a></li>
+      <li><a href="#market">The market barely moves it</a></li>
+      <li><a href="#signal">What it tells you about the lawyer</a></li>
+      <li><a href="#score">What our own score does with it</a></li>
+      <li><a href="#limits">What this does not measure</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Measured across ${total.toLocaleString('en-US')} published firms in ${new Set(firms.map(f => f.data.market.city_slug)).size} markets, on the most recent crawl of each firm's website.`}
+      items={[
+        `<b>${publishing.length.toLocaleString('en-US')} of ${total.toLocaleString('en-US')}</b> firms publish a free consultation on their own website, so the answer to the question as asked is usually yes.`,
+        `Split by practice it is not one habit but two: <b>${top.share}%</b> of ${top.name.toLowerCase()} firms publish one against <b>${bottom.share}%</b> of ${bottom.name.toLowerCase()} firms.`,
+        overlapCity
+          ? `The practice moves it and the market does not. In ${overlapName}, where both sit side by side, it is <b>${overlapTop!.yes} of ${overlapTop!.n}</b> ${top.name.toLowerCase()} firms against <b>${overlapBottom!.yes} of ${overlapBottom!.n}</b> ${bottom.name.toLowerCase()} ones.`
+          : `Inside ${top.name.toLowerCase()} alone the share runs from <b>${Math.round(marketLow.share * 100)}%</b> to <b>${Math.round(marketHigh.share * 100)}%</b> across every market we cover.`,
+        `Inside one practice the phrase separates firms on almost everything except the thing a client would want it to: mean Google rating is <b>${ratingYes.toFixed(2)}</b> for firms publishing it and <b>${ratingNo.toFixed(2)}</b> for firms that do not.`,
+        `Our own score folds the phrase into a fee and access sub-factor worth <b>${e1Max.join(' or ')}</b> points, and ${top.name.toLowerCase()} firms average <b>${e1Top.toFixed(2)}</b> of it against <b>${e1Bottom.toFixed(2)}</b> for ${bottom.name.toLowerCase()} firms.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. We record what a firm publishes on its website, which is not a promise it made to you. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>We read each firm's public website and recorded whether it publishes a free consultation offer anywhere we could see it. The pattern we match is narrow and worth stating plainly: <q>free consultation</q>, <q>free case review</q>, <q>free case evaluation</q> and <q>free legal consultation</q>. That is one boolean per firm, written by the crawler, and it is the only field on this page that answers the headline question.</p>
+    <p><b>It records a published phrase, not an offer.</b> Nobody here called {total.toLocaleString('en-US')} firms and asked. A firm that gives every caller an hour for nothing and never says so on its website counts as silent in everything below, and a firm that prints the words in its page footer counts as publishing one whatever happens when you ring.</p>
+    <p>It is also not the same field as the two others on a record that sound like it. One records whether a firm's site has a fees page at all; the other holds the firm's own sentence about what it charges. Those are counted in <a href="/guides/what-law-firm-websites-publish/">the survey of what these websites carry</a> and in <a href="/guides/what-new-york-injury-firms-publish-about-fees/">the fee disclosure study</a>. Running the three together would be the easiest mistake on this page, so none of the figures below mixes them.</p>
+
+    <h2 id="who">Who publishes one</h2>
+    <p>{publishing.length.toLocaleString('en-US')} of {total.toLocaleString('en-US')} firms publish the phrase, which is {pct(publishing.length, total)}% and reads like a settled convention of the profession. It is not. It is a convention of one kind of practice that happens to be most of this directory.</p>
+    <BarChart
+      heading={`Share of firms publishing a free consultation, by the firm's own primary practice`}
+      max={100}
+      rows={practiceRows}
+      caption={`Each firm counted once, under the practice its own profile marks primary. ${top.name} is ${top.n.toLocaleString('en-US')} of the ${total.toLocaleString('en-US')} firms here, which is why the directory-wide figure looks like the injury figure.`}
+    />
+    <p>{top.name} firms publish one {top.share}% of the time. {bottom.name} firms, the next largest group here at {bottom.n} firms, publish one {bottom.share}% of the time. The floor is lower still: {lowest.name.toLowerCase()} firms publish one {lowest.share}% of the time, on a cohort of {lowest.n}, which is too small to carry an argument and is reported because leaving it out would flatter the comparison. The practices in between sit where a reader would guess: the further the work is from being paid out of a recovery, the less often anybody gives the first meeting away.</p>
+    <p><b>The obvious objection is that this measures our crawler rather than the firms.</b> It does not. Restricting the count to firms whose website we demonstrably read, which is the set carrying a page inventory from the same crawl, leaves {top.name.toLowerCase()} at {topRead.yes} of {topRead.n} and {bottom.name.toLowerCase()} at {bottomRead.yes} of {bottomRead.n}. The gap is where it was.</p>
+    {overlapCity && (
+      <p>The second objection is that these practices sit in different cities. In one city they do not. {overlapName} holds {overlapTop!.n} {top.name.toLowerCase()} firms and {overlapBottom!.n} {bottom.name.toLowerCase()} ones, the same market and the same local search results, and there it is {overlapTop!.yes} of {overlapTop!.n} against {overlapBottom!.yes} of {overlapBottom!.n}. <a href={`/cities/${overlapCity}/${top.slug}/`}>The ranking for that market</a> is built from the same records.</p>
+    )}
+
+    <h2 id="market">The market barely moves it</h2>
+    <p>Inside {top.name.toLowerCase()} the share holds steady wherever we look. Across the {markets.length} markets where this directory covers that practice, {marketsAt85} of them sit at 85% or above.</p>
+    <ColumnChart
+      heading={`${top.name} markets, by the share of firms publishing a free consultation`}
+      columns={marketColumns}
+      caption={`${markets.length} markets. The highest is ${marketHigh.city}, ${marketHigh.state}, at ${marketHigh.yes} of ${marketHigh.n}. The lowest is ${marketLow.city}, ${marketLow.state}, at ${marketLow.yes} of ${marketLow.n}, and it is also one of the smallest cohorts here, so read it as a small sample before reading it as a local habit.`}
+    />
+    <p>A convention that holds between {Math.round(marketLow.share * 100)}% and {Math.round(marketHigh.share * 100)}% across {markets.length} separate markets, and then falls to {bottom.share}% when the practice changes, is a fact about how the work is billed. {top.name} is usually paid out of a recovery, so the first meeting costs the firm an hour and risks nothing. Work billed by the hour from the first hour has no such arithmetic behind it.</p>
+
+    <h2 id="signal">What it tells you about the lawyer</h2>
+    <p>That is the question underneath the search, so we tested it inside a single practice, where the billing model is held still. Of the {top.n.toLocaleString('en-US')} {top.name.toLowerCase()} firms here, {groupYes.length.toLocaleString('en-US')} publish the phrase and {groupNo.length} do not.</p>
+    <BarChart
+      heading={`${top.name} firms, by whether they publish a free consultation`}
+      max={100}
+      rows={signalRows}
+      caption={`Each measure drawn as a share of its own maximum so the two sit on one scale, with the real units printed on each bar. The score is ours and the rating is Google's. The highlighted pair is the one that moves.`}
+    />
+    <p><b>The firms publishing the phrase do score higher on our scale, and the reason is not flattering to the phrase.</b> A firm that does not publish a free consultation usually does not publish much else either: no fee terms, thinner case results, less structured data. The flag is standing in for how much of a website a firm has built, which is a real difference and is not the one anybody searching this question is asking about.</p>
+    <p>On what clients actually said, the two groups are not separable. Mean Google rating runs {ratingYes.toFixed(2)} against {ratingNo.toFixed(2)}, a difference of {ratingGap.toFixed(2)} of a star. Median review count runs {reviewsYes.toLocaleString('en-US')} against {reviewsNo.toLocaleString('en-US')}, which is the same shape we found when we <a href="/guides/what-search-traffic-says-about-a-law-firm/">sorted the directory by search visibility</a>: the firms that market harder collect more reviews, not better ones.</p>
+    {topSilent && (
+      <p>The clearest case for ignoring the phrase is <a href={`/firms/${topSilent.data.slug}/`}>{topSilent.data.name}</a> in {topSilent.data.market.city}, which publishes no free consultation offer we could find and holds {topSilent.data.digital.places!.review_count_total.toLocaleString('en-US')} Google reviews at {topSilent.data.digital.places!.rating_weighted} stars, more than any other {top.name.toLowerCase()} firm in the silent group. Its certification score is {topSilent.data.score?.total}, and it takes {topSilentE1?.pts} of the {topSilentE1?.max} points in the fee and access sub-factor this page is about.</p>
+    )}
+    {bottomPublisher && (
+      <p>Going the other way, <a href={`/firms/${bottomPublisher.data.slug}/`}>{bottomPublisher.data.name}</a> does {bottom.name.toLowerCase()} work and does publish one, which is the minority position in its practice and earns it a point the {bottomSilent} silent firms beside it do not get. Its certification score is {bottomPublisher.data.score?.total}.</p>
+    )}
+
+    <h2 id="score">What our own score does with it</h2>
+    <p>This is the part that is about us. The LFL Certification Score has a sub-factor for fees and access, and one of its points is awarded for publishing a free consultation. It is scored from observation on {e1Scored.length.toLocaleString('en-US')} of the {total.toLocaleString('en-US')} firms here{e1Pending > 0 && <> and left pending on {e1Pending}, whose sites refuse our crawler</>}.</p>
+    <p>Out of the {e1Max.join(' or ')} points that sub-factor carries, {top.name.toLowerCase()} firms average {e1Top.toFixed(2)} and {bottom.name.toLowerCase()} firms average {e1Bottom.toFixed(2)}. <b>That gap is not a judgement about those firms. It is our scale measuring a billing convention and calling it access.</b></p>
+    <p>The free consultation point is not the only part of it shaped that way. The same sub-factor reads the firm's own published sentence about price, and that field is filled on {stmtTop} of {top.n.toLocaleString('en-US')} {top.name.toLowerCase()} firms against {stmtBottom} of {bottom.n} {bottom.name.toLowerCase()} ones. A contingency percentage is a single number a firm can print. An immigration matter priced per petition, or a divorce billed by the hour, is not, and a firm declining to invent one loses the same points as a firm hiding its rates.</p>
+    <p>We have published this class of problem before, when the directory covered one state and <a href="/guides/what-a-law-firm-score-cannot-compare/">a score turned out to mean different things on either side of a state line</a>. This is the same problem across a practice line instead, and it arrived with a practice that was not in the directory when the sub-factor was written. <a href="/methodology/">The methodology</a> sets out every sub-factor and the evidence behind it, and the fee and access points are the ones we would change first.</p>
+
+    <h2 id="limits">What this does not measure</h2>
+    <p>Three limits, in the order they would bite.</p>
+    <p><b>The pattern is narrow.</b> A firm writing <q>free initial consultation</q> or <q>complimentary case evaluation</q> is not matched by it, so some share of the silent firms are false negatives. We tested that against the only firm-written text we hold, the quotations our checkers lifted from firm pages while reading them for other things. Every one of those quotations that mentions a free consultation belongs to a firm this field already marks as publishing one. That is a weak test on a small sample and it is the only one available without crawling again, so treat the shares as a floor rather than a count.</p>
+    <p><b>Nothing here dates the reading.</b> The site crawl behind this field carries no timestamp on the record, unlike the reviews, the speed test and the register checks, so the honest statement is that it is the most recent crawl and not that it was taken on a given day. That is a gap in our own pipeline and it is noted in the backlog rather than papered over here.</p>
+    <p><b>A free consultation is not a free case.</b> Nothing in this directory measures what happens in that meeting, how long it lasts, or whether a fee agreement is explained in it. <a href="/guides/what-a-case-results-page-proves/">What a firm publishes about its outcomes</a> and <a href="/guides/are-google-reviews-reliable/">what its clients said afterwards</a> are both closer to that question than the words in a page footer.</p>
+    <p class="muted" style="font-size:.86rem">Practice groupings are each firm's own primary practice as published on its profile. Review counts and ratings come from Google Business Profile listings verified to the firm. A firm whose site refuses our crawler keeps the sub-factor pending rather than scoring zero.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted above has a profile showing its fees, offices, client reviews and measured digital presence, with the evidence behind each sub-score.</p>
+      <a class="btn btn--white" href={`/practice-areas/${bottom.slug}/`}>{bottom.name} firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/guides/what-injury-firms-publish-about-fees-by-state/">What injury firms publish about fees</a></li>
+        <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
+        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>Is this your firm?</h4>
+      <p>If we have your consultation policy wrong, the profile links to the page we read.</p>
+      <a class="btn" href="/list-your-firm/">List or correct a firm</a>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
