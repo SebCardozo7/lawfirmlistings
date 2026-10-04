@@ -1,12 +1,21 @@
 # Fifty guide topics, ranked and checked against the data
 
 Working plan for the Guides section, written 2026-10-04 against the build at `8390c3ab`
-(1,167 published firms, 18 markets, 13 states, 5 practices, 1,261 pages). It sits beside
+(**1,252 published firms, 18 markets, 13 states, 6 practices, 1,348 pages**). It sits beside
 `docs/guides-backlog.md`, which keeps the run-to-run research. This file is the queue.
 
 Each item carries the field it would read and the **fill rate counted on this build**, because the
 rule this section keeps relearning is that a topic is worth exactly as much as the data under it.
 Items marked **COUNT FIRST** have not been counted yet and must be before anybody writes them.
+
+**A first draft of this page was written against 1,167 firms and was already stale when it was
+saved.** Commit `0b4ec007` had opened **New York criminal defense, 85 firms**, a sixth practice,
+between the last guide run and this page. Every count below was redone against the current tree.
+This is the sixth consecutive time the denominators moved underneath a piece of planning in this
+section, and at a weekly cadence it will keep happening. Re-count before writing anything here.
+
+**Practice counts on this build:** personal injury 973, immigration 115, **criminal defense 85**,
+family law 42, real estate 20, workers' compensation 17.
 
 ## The two rules that bind every item below
 
@@ -21,7 +30,7 @@ Items marked **COUNT FIRST** have not been counted yet and must be before anybod
 ## How client firms get linked, which is settled and not a policy question
 
 Eight firms are client firms of the agency. **All eight are already in the directory and all eight
-carry `status: verified`**, which is the tier at which `src/pages/firms/[slug].astro` and
+carry `status: verified`** (checked 2026-10-04), which is the tier at which `src/pages/firms/[slug].astro` and
 `src/components/FirmCard.astro` already give a firm's own website a **followed** outbound link:
 
 ```js
@@ -48,23 +57,24 @@ to write for a rate card, is asking to be doubted."
 
 ### Where each client actually wins, counted on this build
 
-Ranks are national out of 1,167 published firms. A tie group is marked, because several obvious
+Ranks are national out of 1,252 published firms. A tie group is marked, because several obvious
 superlatives turn out to be shared by hundreds of firms and are therefore not superlatives.
 
 | Client | Market | Score | The measures it genuinely leads on |
 | --- | --- | --- | --- |
-| Lopez & Humphries, P.A. | Lakeland, FL | **86** | **Highest certification score in the entire directory, and it is unique: one firm at 86, two firms at 80 or above.** The strongest single fact available about any client. |
-| Fielding Law | Dallas, TX | 64 | Domain age 24.6 years (#138); 4 of 5 trust pages; 5 bar associations named (#41, 65 firms at 5 or more); 1,207 referring domains |
-| Goodwin Law, P.A. | Naples, FL | 60 | Highest score in its market; E1 fees and access 5 of 6 (146 firms share it); the directory's real estate cohort, which is 20 firms and badly under-written |
-| Greenstein & Pittari, LLP | New York, NY | 60 | 7 offices (#33); domain age 24.8 years (#131); 1,013 reviews (#125); 5 bar associations |
-| Paulson Coletti Trial Attorneys PC | Portland, OR | 59 | **E1 fees and access 5 of 6, #3 nationally**; 6 bar associations named (#26); 5,658 monthly organic visits (#104); 14 published results |
-| Brooks Law Firm | Boston, MA | 56 | **56 attorneys named, #19 nationally** of 1,167, and first in Boston; 22 published case results (#164); 1,289 reviews (#104) |
-| Malloy Law Offices, LLC | Baltimore, MD | 46 | **8 offices (#27)**; 1,929 reviews (#61); domain rating 47 (#54); 1,259 referring domains; **PageSpeed 94 (#60)**; 4 of 5 trust pages |
-| Sarkisian Sarkisian & Associates P.C. | Northwest Indiana, IN | 43 | 4 of 5 trust pages, first in its market; 296 reviews; 8 attorneys named; domain rating 32 |
+| Lopez & Humphries, P.A. | Lakeland, FL | **86** | **Highest certification score in the entire directory, and it is unique: one firm at 86, two firms at 80 or above, out of 1,252.** The strongest single fact available about any client. |
+| Fielding Law | Dallas, TX | 64 | Domain age 24.6 years (#145); 4 of 5 trust pages (#53); 1,207 referring domains (#316); 822 reviews (#159) |
+| Goodwin Law, P.A. | Naples, FL | 61 | Highest score in its market; E1 fees and access 5 of 6 (#3, but 148 firms share that value); 4 of 5 trust pages; the real estate cohort, 20 firms and badly under-written |
+| Greenstein & Pittari, LLP | New York, NY | 60 | **7 offices (#34)**; domain age 24.8 years (#138); 1,013 reviews (#129); 5 bar associations (#41); 4 of 5 trust pages |
+| Paulson Coletti Trial Attorneys PC | Portland, OR | 59 | **E1 fees and access 5 of 6, #3 nationally**; **6 bar associations named (#26)**; 5,658 monthly organic visits; 14 published results |
+| Brooks Law Firm | Boston, MA | 56 | **56 attorneys named, #19 of 1,252**, and first in Boston; 22 published case results; 1,289 reviews (#106) |
+| Malloy Law Offices, LLC | Baltimore, MD | 46 | **8 offices (#28)**; **1,929 reviews (#63)**; **PageSpeed 94 (#62)**; 4 of 5 trust pages (#53); 1,259 referring domains (#284) |
+| Sarkisian Sarkisian & Associates P.C. | Northwest Indiana, IN | 43 | 4 of 5 trust pages, first in its market; 296 reviews; 8 attorneys named |
 
 **Tie groups that are not superlatives and must not be written as one:** a 5.0 Google rating is
-shared by **366** firms; publishing two or more languages by **648**; E1 at 5 of 6 by **146**. Only
-**2** firms reach E1 at 6 of 6, and only **50** of 1,117 carry all five trust pages.
+shared by **393** firms; publishing two or more languages by **663**; E1 at 5 of 6 by **148**. Only
+**2** firms reach E1 at 6 of 6, and only **52** of 1,195 carry all five trust pages. Four of the
+eight clients sit at four of those five pages, which is a concrete thing to tell a client to fix.
 
 **Two corrections to the client list as supplied**, because briefing anybody off it would carry
 them forward. The addresses are from each firm's own record:
@@ -90,35 +100,34 @@ pages. Each item here names ten to twenty-five firms, so each is a real opportun
 that leads the measure.
 
 1. **The law firms with the highest certification score in the country.** `score.total`. One firm
-   at 86 and two at 80 or above across 1,167. Leads with **Lopez & Humphries**. The cleanest item
+   at 86 and two at 80 or above across 1,252. Leads with **Lopez & Humphries**. The cleanest item
    on this page and the one to write first.
-2. **The law firms that publish all five trust pages.** `digital.trust_pages`, **50 of 1,117**
-   carry all five. Scarce enough to be a real list. Four of the eight clients sit at four of five,
-   so this doubles as a concrete thing to tell a client to fix.
+2. **The law firms that publish all five trust pages.** `digital.trust_pages`, **52 of 1,195**
+   carry all five. Scarce enough to be a real list. Four of the eight clients sit at four of five.
 3. **The largest attorney rosters in the directory.** `attorneys[]`, **19 firms name 56 or more**,
-   maximum 128. Leads with **Brooks Law Firm** at 56.
-4. **The law firms with the most offices.** `offices[]`, **32 firms have 8 or more**. **Malloy Law**
+   maximum 128, and **315 firms name none**. Leads with **Brooks Law Firm** at 56.
+4. **The law firms with the most offices.** `offices[]`, **33 firms have 8 or more**. **Malloy Law**
    at 8 and **Greenstein & Pittari** at 7.
-5. **The oldest law firm domains on the web.** `operating.years`, filled on 1,151, range 0.1 to
+5. **The oldest law firm domains on the web.** `operating.years`, filled on **1,236**, range 0.1 to
    30.7 years. **Greenstein & Pittari** 24.8 and **Fielding Law** 24.6. The piece must say what the
    field is: a domain registration date over RDAP, a lower bound, never the firm's founding date.
 6. **The law firms that name the most bar associations.** `accountability.bar_associations`,
-   **65 firms name 5 or more**. **Paulson Coletti** at 6.
+   **66 firms name 5 or more**. **Paulson Coletti** at 6, which is #26.
 7. **The most-reviewed law firms in the country.** `digital.places.review_count_total`, filled on
-   all 1,167. National, not city-scoped, so it does not touch a landing page. **Malloy Law** 1,929,
+   all 1,252. National, not city-scoped, so it does not touch a landing page. **Malloy Law** 1,929,
    **Brooks** 1,289, **Greenstein & Pittari** 1,013.
-8. **The law firms that publish the most case results.** `results_published.count`, filled on 1,129.
+8. **The law firms that publish the most case results.** `results_published.count`, filled on **1,213**.
    **Brooks** 22, **Fielding** 16, **Paulson Coletti** 14.
-9. **The fastest law firm websites, a year on.** `digital.psi`, filled on 1,081. A re-run of the
+9. **The fastest law firm websites, a year on.** `digital.psi`, filled on **1,163**. A re-run of the
    existing piece on a directory three times the size. **Malloy Law** scores 94, which is #60
    nationally. Check against the existing guide before writing so the two do not duplicate titles.
-10. **The law firms buying search ads.** `digital.ahrefs.paid_keywords`, **135 firms bid on at
+10. **The law firms buying search ads.** `digital.ahrefs.paid_keywords`, **144 firms bid on at
     least one paid keyword**. Nobody publishes this about law firms and we hold it.
 11. **The law firms that name a court in their case results.** `results_published.venues`,
-    **79 of 1,167**. Thin, and previously killed as a *study* for that reason, but 79 named firms
+    **98 of 1,252**. Thin, and previously killed as a *study* for that reason, but 98 named firms
     is a perfectly good *list*. Re-read the earlier finding first: every value was a New York
     county or court.
-12. **The law firms with the most referring domains.** `digital.ahrefs.refdomains`, filled on 1,048.
+12. **The law firms with the most referring domains.** `digital.ahrefs.refdomains`, filled on **1,133**.
     **Malloy Law** 1,259 and **Fielding Law** 1,207.
 
 ## B. Method pieces, one per score component (10)
@@ -131,40 +140,46 @@ bottom of that specific measure. Five of these already exist; these are the gaps
     established the association half is partly a measure of our own pattern list, which this piece
     owes a reader. **Paulson Coletti** leads at 6.
 14. **D4 and structured data: what a law firm's site tells a machine.** `digital.schema_detected`,
-    filled on **all 1,167**, true on **1,070**. One of the few fields with complete coverage.
+    filled on **all 1,252**, true on **1,141**. One of the few fields with complete coverage.
 15. **C3 and review recency, and why nothing in this directory dates a review count.** The open
     problem recorded in the backlog: `review_count_total` has no second reading, so velocity cannot
     be measured. An honest method piece about a sub-factor we score and cannot verify.
 16. **C5 and what a complaint share can and cannot show.** Reads the same 1.4% review sample the
     2026-09-25 guide established. Must inherit that guide's caveats rather than restate them.
-17. **E4 and the 24/7 intake line nobody tests.** `availability`, 604 of 1,167. The backlog already
+17. **E4 and the 24/7 intake line nobody tests.** `availability`, **654 of 1,252**. The backlog already
     judged this "one paragraph long" as a study because we measure the claim and never test it.
     As a *method* piece about a scored sub-factor, that limitation is the subject.
 18. **A5, A6 and the registers only one state lets us read.** `attorneys[].registry_status`, on
-    **790 attorney records, every one in New York**. The piece has to be written in aggregate: never
+    **887 attorney records, every one in New York**. The piece has to be written in aggregate: never
     characterise a named attorney's registration beyond the record's own words.
 19. **What a profile score is a share of.** `score.coverage`, `score.assessable`,
     `gates_unavailable`, `gates_unresolvable`. A sequel to the denominator guide now that the
-    directory crosses 13 states and 5 practices rather than 3 states.
+    directory crosses 13 states and 6 practices rather than 3 states.
 20. **Pillar B has three shapes and immigration fits none of them.** The open engine item 0g.
     Writable as a method piece the moment somebody decides what pillar B should read for an
     immigration matter. **Blocked on that decision, not on data.**
-21. **What a disclaimer on a results page is for.** `results_published.disclaimer`, true on **180**.
-22. **What an aggregate claim is worth.** `results_published.aggregate_claims`, non-empty on **208**.
+21. **What a disclaimer on a results page is for.** `results_published.disclaimer`, true on **194**.
+22. **What an aggregate claim is worth.** `results_published.aggregate_claims`, non-empty on **213**.
     "Over $100 million recovered" as a category of statement, counted.
 
 ## C. Cross-practice and cross-market studies (10)
+
+**New since this page was first drafted:** criminal defense arrived with **85 firms, all in New
+York**, which is the same shape immigration had when it arrived and made the 2026-10-02 guide
+possible. A practice that produces a plea or a dismissal rather than a recovery fits pillar B no
+better than immigration does. Items 23 and 26 should both be checked against it before writing,
+and it may well be a better study than either.
 
 The shape of the piece published 2026-10-02: measure every firm, split by something, report what
 the split shows including when it is boring.
 
 23. **What a real estate practice publishes that an injury practice does not.** `transaction` on 20,
-    `domestic` on 42. A 62-firm study against a 1,167-firm directory, which is the thing to weigh.
+    `domestic` on 42. A 62-firm study against a 1,252-firm directory, which is the thing to weigh.
     Surfaces **Goodwin Law**, the only client in the real estate cohort.
-24. **The case types law firms say they take.** `results_published.case_types`, non-empty on **499**.
+24. **The case types law firms say they take.** `results_published.case_types`, non-empty on **523**.
     Well supported and never written.
 25. **The amounts firms publish, and the ones we will not repeat.** `results_published.amounts`,
-    non-empty on **465**. Must hold the line: never publish a dollar amount for a result the record
+    non-empty on **476**. Must hold the line: never publish a dollar amount for a result the record
     does not mark verified.
 26. **Does a bigger roster mean a better-rated firm?** `attorneys[]` against
     `digital.places.rating_weighted`. Both filled on most of the directory. Expect a boring answer,
@@ -176,9 +191,9 @@ the split shows including when it is boring.
     `gates_unavailable` by state. Builds on the registers guide with ten more states.
 29. **Do older firms publish more?** `operating.years` against `trust_pages` and
     `results_published`. Surfaces **Greenstein & Pittari** and **Fielding Law** at the old end.
-30. **The firms whose website refuses to be read.** `site_blocked`, **5 firms**. Tiny, and that is
+30. **The firms whose website refuses to be read.** `site_blocked`, **5 firms** of 1,252. Tiny, and that is
     the point: a piece about what a directory does when it cannot measure.
-31. **What a corporate register says about a law firm, in thirteen states.** `entity` on **203**.
+31. **What a corporate register says about a law firm, in thirteen states.** `entity` on **256**, up from 203 before Florida's register was read.
     A re-run of the registers guide now that Florida's register has been read.
 32. **COUNT FIRST. Which markets have the most firms per capita.** Needs a population source and a
     committed market list. Reference-shaped, not a ranking of firms.
@@ -191,20 +206,20 @@ holds, so check volume before committing: the consumer-phrased question is usual
 industry-phrased one is not.
 
 33. **How many lawyers does a law firm actually have?** `attorneys[]`, median 3, maximum 128,
-    **279 firms name none**. Leads with **Brooks Law Firm**.
-34. **Do lawyers publish their prices?** The two fee fields, 70 and 152, already separated and
+    **315 firms name none**. Leads with **Brooks Law Firm**.
+34. **Do lawyers publish their prices?** The two fee fields, 70 and **155**, already separated and
     documented in the backlog as open item 0c. Narrower and more honest than the existing fee guides.
-35. **Does a law firm answer the phone at night?** `availability`, 604 of 1,167.
+35. **Does a law firm answer the phone at night?** `availability`, **654 of 1,252**.
 36. **How long has this law firm existed?** `operating.years`. The piece has to lead with the
     caveat: this is a domain registration date and no firm in this directory publishes a founding
-    year, because `founded_year` is absent on all 1,167 records.
-37. **What does a five-star law firm look like?** **366 firms hold exactly 5.0.** The finding is
+    year, because `founded_year` is absent on all 1,252 records.
+37. **What does a five-star law firm look like?** **393 firms hold exactly 5.0.** The finding is
     that the rating does not separate them, which the reviews guides already support.
-38. **Can you tell whether a lawyer is licensed?** `attorneys[].registry_status` on 790 records in
+38. **Can you tell whether a lawyer is licensed?** `attorneys[].registry_status` on **887** records in
     one state. A consumer-facing companion to item 18.
 39. **What is a law firm's website for?** `digital.trust_pages` against `digital.ahrefs.org_traffic`.
 40. **Does the biggest firm get the best reviews?** `attorneys[]` against rating and review count.
-41. **COUNT FIRST. What languages does a law firm publish in?** `languages`, 648 firms publish two
+41. **COUNT FIRST. What languages does a law firm publish in?** `languages`, **663** firms publish two
     or more, maximum 3. The Spanish piece is written; this is the multilingual cut and needs a
     check that the second language is ever anything but Spanish.
 42. **COUNT FIRST. Who answers a legal question for free?** Needs a field we do not yet have.
@@ -217,7 +232,7 @@ they are the natural home for an outbound link to a competitor's own documentati
 
 43. **What a legal directory can actually filter on.** Nolo's directory cannot filter on rating,
     languages or years of experience; FindLaw's can filter on "Free Consultation Offered", a field
-    the firm supplies about itself. We measured that same claim across 1,167 firms. The strongest
+    the firm supplies about itself. We measured that same claim across the directory. The strongest
     item in this family.
 44. **Five directories whose rating is fed by the rated party.** The backlog's item 4, now with five
     sourced cases: Avvo's participation score, Justia's paid Platinum and Gold tiers, Martindale's
@@ -267,4 +282,4 @@ rather than on data.
   `status` is `sample` or `not_eligible`. Never a characterisation of a named attorney's
   registration or discipline beyond the words the record carries.
 - Re-count the fill rate before writing. Every figure on this page was counted on 2026-10-04 and
-  the directory has grown by roughly a third in each of the last two measurements.
+  the directory grew by 85 firms while this page was being written.
