@@ -1,0 +1,53 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-ny.json';
+
+/**
+ * New York deadlines, a state statute page from docs/guides-50.md (family B).
+ *
+ * Title and description figures come from the research file and are declared through
+ * figuresFrom. The 90-day hook is the notice of claim row, read rather than typed.
+ */
+const head = data.headline;
+const gov = data.rows.find(r => r.group === 'government')!;
+const med = data.rows.find(r => r.statute === 'CPLR § 214-a')!;
+const death = data.rows.find(r => r.statute === 'EPTL § 5-4.1')!;
+const notice = gov.period.match(/^\d+ days/)![0];
+const title = `New York Statute of Limitations 2026: ${head.years} Years, or Just ${notice.replace(' days', ' Days')}`;
+const description = `New York gives injury claims ${head.years} years, but a claim against New York City needs a notice within ${notice}. Every deadline by claim type, with the CPLR section.`;
+const lede = `A New York injury claim has <b>${head.years} years</b>. That is true until the other side is the City, the MTA, a public hospital or a school district, and then the first deadline is <b>${notice}</b>. Between those two numbers sit most of the deadlines that matter in New York: ${med.period.toLowerCase()} for malpractice, ${death.period.toLowerCase()} for a wrongful death, and a single year for assault. Here is every one, read from the Civil Practice Law and Rules and the statutes beside it.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="New York statute of limitations"
+  reading={[
+    {
+      firm: 'greenstein-pittari-llp',
+      url: 'https://www.nyclawfirm.com/how-long-do-i-have-to-file-a-personal-injury-claim-in-new-york-city/',
+      title: 'How Long Do I Have to File a Personal Injury Claim in New York City?',
+      why: 'A New York City injury firm on the three-year rule, the notice of claim against city agencies, and the malpractice and wrongful death periods, in the order a client usually meets them.',
+    },
+    {
+      firm: 'greenstein-pittari-llp',
+      url: 'https://www.nyclawfirm.com/wrongful-death-claims-against-new-york-city-notice-of-claim-deadlines/',
+      title: 'Wrongful Death Claims Against New York City: Notice of Claim Deadlines',
+      why: 'The same firm on the narrowest corner of this table, where a death claim against the City runs on both the notice of claim and the two-year wrongful death rule.',
+    },
+  ]}>
+  <Fragment slot="toc">
+    <li><a href="#ninety">The 90 days that matter most</a></li>
+    <li><a href="#malpractice">Malpractice and Lavern’s Law</a></li>
+  </Fragment>
+
+  <h2 id="ninety">In New York City, the deadline that ends cases is 90 days</h2>
+  <p>Three years is the figure on every New York injury page. For a large share of city cases it is not the one that decides anything.</p>
+  <p>A claim against New York City, a county, the MTA, NYCHA, a public hospital or a school district needs a <b>notice of claim within {notice}</b> of the incident, under <a href="https://www.nysenate.gov/legislation/laws/GMU/50-E" rel="noopener" target="_blank">General Municipal Law § 50-e</a>. The lawsuit then has to begin within one year and 90 days, under <a href={gov.url} rel="noopener" target="_blank">§ 50-i</a>.</p>
+  <p>Think about how many ordinary injuries in New York City involve a public body. A trip on a broken sidewalk the City was responsible for, a fall on subway stairs, a crash with a sanitation truck, an injury in a public school. Each one starts a 90-day clock, and someone who spends the first three months recovering can find it has already run.</p>
+  <p>A judge can allow a late notice of claim but does not have to, and the request has to be made within the one year and 90 days. It is a remedy, not a plan.</p>
+
+  <h2 id="malpractice">Malpractice in New York: two and a half years, and three exceptions</h2>
+  <p>A New York medical malpractice claim has <b>{med.period}</b> under <a href={med.url} rel="noopener" target="_blank">{med.statute}</a>. That is shorter than an ordinary injury claim, and it bends in three ways.</p>
+  <p><b>Continuous treatment.</b> If the same doctor kept treating the same condition, the clock starts at the last treatment, not the first mistake.</p>
+  <p><b>A foreign object.</b> A sponge or an instrument left in the body gives one year from when it was found, or should have been.</p>
+  <p><b>A missed cancer.</b> Since Lavern's Law in 2018, a failure to diagnose cancer or a malignant tumor runs from when the patient knew or should have known, but never more than seven years after the error.</p>
+  <p>Wrongful death is separate, and shorter than people assume: <b>{death.period}</b> from the date of death under <a href={death.url} rel="noopener" target="_blank">{death.statute}</a>. The legislature has passed a longer period more than once and it has been vetoed each time, so two years is still the law.</p>
+</StatuteGuide>

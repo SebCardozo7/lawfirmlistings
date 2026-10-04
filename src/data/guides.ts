@@ -24,7 +24,7 @@ export interface Guide {
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-    | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult';
+    | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -66,6 +66,48 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  // The state statute pages from docs/guides-50.md, family B. Reference pieces: the periods
+  // live in src/data/research/statute-of-limitations-<code>.json and the pages compute their
+  // headlines from it, so nothing here may carry a figure.
+  {
+    slug: 'florida-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Florida Statute of Limitations: The Deadline That Was Cut in Half',
+    summary:
+      'Florida moved negligence claims onto a much shorter clock in 2023, and plenty of what is ' +
+      'published about the state still gives the old figure. Every Florida deadline by type of ' +
+      'claim, read from the statute, with the transition rule and the narrow ways the clock stops.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'Half the time it used to be',
+  },
+  {
+    slug: 'texas-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Texas Statute of Limitations: The Rule and the Exceptions That Bite',
+    summary:
+      'Everybody knows the Texas injury deadline. The ones that end cases early are the short ' +
+      'periods beside it: the notice against a city, the year for defamation, and a malpractice ' +
+      'rule that ignores the usual protection for children. Every one, with its statute.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'The short deadlines are the dangerous ones',
+  },
+  {
+    slug: 'new-york-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'New York Statute of Limitations: The Years, and the Days That Matter More',
+    summary:
+      'A New York injury claim has years. A claim against the City, the MTA or a public hospital ' +
+      'has days before the first deadline, and that notice ends more cases than the statute ' +
+      'everyone quotes. Every New York deadline by type of claim, read from the CPLR.',
+    thumb: '',
+    icon: 'doc',
+    meta: 'The notice of claim comes first',
+  },
   {
     slug: 'do-lawyers-offer-free-consultations',
     cover: 'consult',

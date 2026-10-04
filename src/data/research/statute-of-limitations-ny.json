@@ -1,0 +1,197 @@
+{
+  "state": "New York",
+  "code": "NY",
+  "slug": "new-york-statute-of-limitations",
+  "measured_at": "2026-10-04",
+  "source": {
+    "who": "The New York State Legislature",
+    "what": "New York Civil Practice Law and Rules, Article 2",
+    "url": "https://www.nysenate.gov/legislation/laws/CVP"
+  },
+  "headline": {
+    "years": 3,
+    "claim": "a personal injury claim",
+    "statute": "N.Y. CPLR § 214(5)",
+    "url": "https://www.nysenate.gov/legislation/laws/CVP/214"
+  },
+  "rows": [
+    {
+      "claim": "Personal injury from negligence",
+      "group": "injury",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CPLR § 214(5)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/214",
+      "clock": "From the day the claim accrues, usually the day of the injury.",
+      "note": "Car crashes, falls and construction injuries sit here, unless the defendant is a city or public authority."
+    },
+    {
+      "claim": "Wrongful death",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "EPTL § 5-4.1",
+      "url": "https://www.nysenate.gov/legislation/laws/EPT/5-4.1",
+      "clock": "From the date of death.",
+      "note": "If the defendant is prosecuted over the same death, the family gets at least one year from the end of the criminal case. The Grieving Families Act would have made this three years and has been vetoed; the statute still says two."
+    },
+    {
+      "claim": "Medical malpractice",
+      "group": "injury",
+      "period": "2 years and 6 months",
+      "years": 2.5,
+      "statute": "CPLR § 214-a",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/214-A",
+      "clock": "From the act or omission, or from the last treatment if treatment for the same condition continued.",
+      "note": "A foreign object left in the body allows one year from discovery. A missed cancer diagnosis runs from when the patient knew or should have known, never more than seven years after the error."
+    },
+    {
+      "claim": "Toxic exposure with a latent injury",
+      "group": "injury",
+      "period": "3 years from discovery",
+      "years": 3,
+      "statute": "CPLR § 214-c",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/214-C",
+      "clock": "From when the injury was discovered or should have been, whichever is earlier.",
+      "note": "Mold, lead, asbestos and chemical exposure claims usually run on this clock rather than the ordinary three years."
+    },
+    {
+      "claim": "Assault, battery, false imprisonment, libel and slander",
+      "group": "injury",
+      "period": "1 year",
+      "years": 1,
+      "statute": "CPLR § 215(3)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/215",
+      "clock": "From the day the claim accrues.",
+      "note": "Malicious prosecution and privacy claims under Civil Rights Law § 51 have the same single year."
+    },
+    {
+      "claim": "Rape and certain sexual offenses against an adult",
+      "group": "injury",
+      "period": "20 years",
+      "years": 20,
+      "statute": "CPLR § 213-c",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/213-C",
+      "clock": "From the day the claim accrues.",
+      "note": "No criminal charge or conviction is needed."
+    },
+    {
+      "claim": "Child sexual abuse",
+      "group": "injury",
+      "period": "Until age 55",
+      "years": null,
+      "statute": "CPLR § 208(b)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/208",
+      "clock": "Up to the survivor's 55th birthday.",
+      "note": "The Child Victims Act revival window ran from August 14, 2019 to August 14, 2021, and the Adult Survivors Act window from November 24, 2022 to November 24, 2023. Both are closed."
+    },
+    {
+      "claim": "Professional malpractice (lawyers, architects, accountants)",
+      "group": "injury",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CPLR § 214(6)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/214",
+      "clock": "From the day the claim accrues.",
+      "note": "Three years whether the claim is framed as a contract or a tort."
+    },
+    {
+      "claim": "Property damage",
+      "group": "property",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CPLR § 214(4)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/214",
+      "clock": "From the day of the damage.",
+      "note": "Damage from the latent effects of a substance follows the discovery rule in § 214-c."
+    },
+    {
+      "claim": "Contract, written or oral",
+      "group": "contract",
+      "period": "6 years",
+      "years": 6,
+      "statute": "CPLR § 213(2)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/213",
+      "clock": "From the breach.",
+      "note": "Contracts for the sale of goods follow the four-year UCC rule instead."
+    },
+    {
+      "claim": "Fraud",
+      "group": "contract",
+      "period": "6 years, or 2 from discovery",
+      "years": 6,
+      "statute": "CPLR § 213(8)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/213",
+      "clock": "Whichever is later: six years from the fraud, or two years from when it was or could have been discovered.",
+      "note": ""
+    },
+    {
+      "claim": "Sale of goods and warranties",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "UCC § 2-725",
+      "url": "https://www.nysenate.gov/legislation/laws/UCC/2-725",
+      "clock": "From the breach, which for a warranty is usually delivery.",
+      "note": "A contract can shorten this to one year but never lengthen it."
+    },
+    {
+      "claim": "Injury claim against a city, county or public authority",
+      "group": "government",
+      "period": "90 days for notice, 1 year and 90 days to sue",
+      "years": 1.25,
+      "statute": "Gen. Mun. Law §§ 50-e, 50-i",
+      "url": "https://www.nysenate.gov/legislation/laws/GMU/50-I",
+      "clock": "A notice of claim within 90 days of the event, then the lawsuit within one year and 90 days.",
+      "note": "For a death, the 90 days run from the appointment of the estate's representative and the lawsuit has two years. A court can allow a late notice, but it does not have to."
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "Infancy and insanity",
+      "statute": "CPLR § 208(a)",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/208",
+      "text": "If the injured person is a minor or insane when the claim accrues and the normal period is three years or more, the deadline becomes three years after the disability ends. A shorter period is extended by the length of the disability. The extension is capped at ten years after accrual, though the cap does not apply to a child's claims other than medical, dental or podiatric malpractice."
+    },
+    {
+      "name": "Continuous treatment",
+      "statute": "CPLR § 214-a",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/214-A",
+      "text": "In a malpractice case the 2 years and 6 months run from the last treatment when treatment for the same condition continued. Check-ups the patient asked for only to monitor the condition do not count."
+    },
+    {
+      "name": "A defendant who leaves the state",
+      "statute": "CPLR § 207",
+      "url": "https://www.nysenate.gov/legislation/laws/CVP/207",
+      "text": "If the defendant is out of New York when the claim accrues, or later leaves for four months or more at a stretch, that time does not count. It does not apply when the defendant can be served some other way, which today is most of the time."
+    },
+    {
+      "name": "A deadline that lands on a weekend",
+      "statute": "Gen. Constr. Law § 25-a",
+      "url": "https://www.nysenate.gov/legislation/laws/GCN/25-A",
+      "text": "If the last day is a Saturday, Sunday or public holiday, the filing can be made on the next business day."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the statute of limitations for personal injury in New York?",
+      "a": "Three years from the day of the injury, under CPLR § 214(5). The exception that catches people is a claim against New York City or another public body, where a notice of claim is due within 90 days."
+    },
+    {
+      "q": "How long do you have to sue New York City?",
+      "a": "File a notice of claim within 90 days of the incident under General Municipal Law § 50-e, then start the lawsuit within one year and 90 days under § 50-i. A late notice needs a judge's permission."
+    },
+    {
+      "q": "What is the statute of limitations for medical malpractice in New York?",
+      "a": "Two years and six months from the malpractice, or from the last treatment if treatment for the same condition continued, under CPLR § 214-a. A missed cancer diagnosis runs from discovery, capped at seven years."
+    },
+    {
+      "q": "How long do you have to file a wrongful death claim in New York?",
+      "a": "Two years from the date of death, under EPTL § 5-4.1. Proposals to extend it to three years have been vetoed, so two years is still the law."
+    },
+    {
+      "q": "Is there a statute of limitations for child sexual abuse in New York?",
+      "a": "Yes. Under CPLR § 208(b) a survivor can sue until their 55th birthday. The Child Victims Act and Adult Survivors Act revival windows have both closed."
+    }
+  ]
+}
