@@ -18,9 +18,12 @@ guessed at.
    this page is one. The head terms that are (`car accident lawyer`, 401,000 a month at KD 0;
    `car accident attorney`, 137,000 at KD 4; `workers comp lawyer`, 27,000 at KD 0) are recorded
    at the bottom as **landing-page work**, because that is where they belong.
-2. **House style holds.** No em dashes. Plain declarative sentences. No marketing adjectives.
-   American English. A headline states the finding, carries no figure, and stays at or under 70
-   characters so `check_meta.mjs` and `audit_seo.mjs` raise nothing.
+2. **House style holds, and titles are written for the search result.** No em dashes. Plain
+   declarative sentences. No marketing adjectives. American English. Since 2026-10-04 the title
+   leads with the head term exactly as people type it, then gives a reason to click: the year, the
+   number that answers the query, or the question itself. At or under 70 characters. A figure in a
+   title is computed from the research file, never typed, and the page declares `figuresFrom`, which
+   is what lets `check_meta.mjs` pass it.
 3. **Reference pieces cite their source and date it.** These guides are not computed from the
    firms collection, so the rule that every figure comes from `getCollection` does not apply to
    them. The rule that does apply is the one the existing reference guides already follow
@@ -108,46 +111,46 @@ refresh.** The hub comes first so the others have a parent.
 1. **How a class action settlement works, and the ones open right now.** The hub. Targets the
    explainer intent under `kroll settlement administration` (25,000/mo, KD 7, TP 6,800), which is
    people asking why an administrator's name is on their check. Links to every piece below.
-   *Working title:* "What a Class Action Settlement Is, and Which Ones Are Open Now"
+   *SEO title:* "Class Action Settlements Open Now: How to Claim and Get Paid (2026)"
 2. **The AT&T data breach settlement.** `at&t data breach settlement` **77,000/mo, KD 3, TP 60,000**;
    `att settlement` 42,000 KD 4; `at&t settlement payout date` 18,000 KD 7 TP 55,000;
    `at&t data breach settlement claim` 15,000 KD 3; `att settlement claim` 11,000 KD 2. The
    largest cluster on this page, roughly 190,000 searches a month between KD 0 and 7.
-   *Working title:* "The AT&T Data Breach Settlement: What Happened and How to Claim"
+   *SEO title:* "AT&T Data Breach Settlement: Who Qualifies, How Much, When It Pays"
 3. **The Facebook user privacy settlement.** `facebook settlement` 61,000 KD 11 TP 37,000;
    `facebook user privacy settlement` 42,000 **KD 0**; `facebook privacy settlement` 17,000 KD 11;
    `facebook settlement payments` 10,000 KD 0; `facebook settlement payout` 9,300 KD 11.
-   *Working title:* "The Facebook Privacy Settlement: The Case, the Fund and the Payout"
+   *SEO title:* "Facebook Privacy Settlement: Payout Amounts and Payment Dates"
 4. **The Cash App settlement.** `cash app class action lawsuit settlement` 67,000 KD 15;
    `cash app settlement` 27,000 **KD 0** TP 35,000; `cash app settlement eligibility` 20,000 KD 4.
-   *Working title:* "The Cash App Settlement: What Block Did and Who Gets Paid"
+   *SEO title:* "Cash App Settlement: Who Is Eligible and How Much You Get"
 5. **The Amazon Prime settlement.** `amazon prime settlement` 50,000 **KD 0**; `amazon settlement`
    30,000 KD 10 TP 37,000; `amazon prime refunds settlement` 12,000 KD 3 TP 43,000.
-   *Working title:* "The Amazon Prime Settlement: The FTC Case and the Refunds"
+   *SEO title:* "Amazon Prime Settlement: Who Gets a Refund and How Much"
 6. **The Capital One settlement.** `capital one class action settlement` 26,000 **KD 0** TP 40,000;
    `capital one $425 million settlement` 23,000 KD 12; `capital one settlement` 17,000 KD 7.
-   *Working title:* "The Capital One Settlement: From Data Breach to Payout"
+   *SEO title:* "Capital One Settlement: Who Gets Paid From the $425 Million"
 7. **The Blue Cross Blue Shield settlement.** `bcbs settlement` 26,000 **KD 0**;
    `blue cross blue shield settlement` 13,000 KD 0 TP 23,000.
-   *Working title:* "The Blue Cross Blue Shield Settlement: The Antitrust Case Explained"
+   *SEO title:* "Blue Cross Blue Shield Settlement: Who Gets Paid and How Much"
 8. **The Wells Fargo settlement.** `wells fargo $56.85 m settlement` 39,000 **KD 0**.
-   *Working title:* "The Wells Fargo Settlement: What the Bank Did and Who It Owes"
+   *SEO title:* "Wells Fargo $56.85M Settlement: Who Qualifies and How to Claim"
 9. **The Krispy Kreme data breach settlement.** 14,000 KD 6 TP 5,100.
-   *Working title:* "The Krispy Kreme Data Breach Settlement, Start to Finish"
+   *SEO title:* "Krispy Kreme Data Breach Settlement: Eligibility and Payouts"
 10. **The Comcast data breach settlement.** 11,000 **KD 0**.
-    *Working title:* "The Comcast Data Breach Settlement: The Case and the Claim"
+    *SEO title:* "Comcast Data Breach Settlement: How to Claim and What You Get"
 11. **The Lakeview data breach settlement.** 10,000 KD 2 TP 3,900.
-    *Working title:* "The Lakeview Loan Servicing Breach Settlement, Explained"
+    *SEO title:* "Lakeview Data Breach Settlement: Who Qualifies and How to File"
 12. **The Apple settlement.** `apple settlement` 9,800 **KD 0**, parent `apple pay settlement`.
-    *Working title:* "The Apple Settlement: Which Case, Which Devices, Which Payout"
+    *SEO title:* "Apple Settlement 2026: Which Case, Which Devices, How Much"
 13. **The Nelnet settlement.** 9,100 KD 1, parent `nelnet` with TP 542,000, which is the brand
     term and not ours; the settlement intent is the slice we take.
-    *Working title:* "The Nelnet Data Breach Settlement: What Borrowers Can Claim"
+    *SEO title:* "Nelnet Data Breach Settlement: What Borrowers Can Claim"
 14. **The Credit One robocalls settlement.** 9,100 KD 2 TP 4,500.
-    *Working title:* "The Credit One Robocall Settlement: The TCPA Case and the Payout"
+    *SEO title:* "Credit One Robocall Settlement: Who Qualifies and the Payout"
 15. **Settlement checks, and how to tell a real one from a scam.** The consumer-protection
     companion the hub needs, under the `kroll settlement` intent (10,000 KD 15 TP 30,000).
-    *Working title:* "Is This Settlement Check Real? How to Tell"
+    *SEO title:* "Is My Settlement Check Real? How to Spot a Class Action Scam"
 
 ## B. Statute of limitations, one hub and one page per state we cover (14)
 
@@ -161,38 +164,38 @@ the verified injury firms in that state and names the highest-scoring one by rul
 
 16. **The hub.** 58,000 KD 0, plus the two sub-questions above. Explains the concept, the
     discovery rule, tolling, and links to every state.
-    *Working title:* "Statute of Limitations by State: Every Deadline, One Table"
+    *SEO title:* "Statute of Limitations by State: Every Deadline in One Table"
 17. **California.** 3,500 KD 13 TP 5,100; `statute of limitations in california` 1,700 KD 7;
     `california statute of limitations` 1,000 KD 13. 105 San Diego firms.
-    *Working title:* "California Statute of Limitations: Deadlines by Type of Claim"
+    *SEO title:* "California Statute of Limitations 2026: Every Deadline by Claim"
 18. **Texas.** 3,300 KD 12; `texas statute of limitations` 900 KD 19; `what is the statute of
     limitations in texas` 600 KD 12. 156 firms. **Fielding Law.**
-    *Working title:* "Texas Statute of Limitations: The Deadlines That Decide a Case"
+    *SEO title:* "Texas Statute of Limitations 2026: The 2-Year Rule and Its Exceptions"
 19. **Florida.** 2,200 KD 14 TP 1,400; `florida statute of limitations` 1,000 **KD 0**. 222 firms.
     **Lopez & Humphries** (the directory's highest score) and **Goodwin Law** for the property and
     contract rows.
-    *Working title:* "Florida Statute of Limitations: What Changed and What Still Applies"
+    *SEO title:* "Florida Statute of Limitations 2026: Why You Now Have 2 Years, Not 4"
 20. **New York.** `statute of limitations ny` 1,300 KD 7 TP 7,400. 192 firms. **Greenstein &
     Pittari.**
-    *Working title:* "New York Statute of Limitations: Deadlines by Claim"
+    *SEO title:* "New York Statute of Limitations 2026: 3 Years, or Just 90 Days"
 21. **Georgia.** 1,300 **KD 0**. 80 Atlanta firms.
-    *Working title:* "Georgia Statute of Limitations: How Long You Have to File"
+    *SEO title:* "Georgia Statute of Limitations 2026: How Long You Have to Sue"
 22. **Pennsylvania.** `statute of limitations pa` 1,000 KD 7. 71 Philadelphia firms.
-    *Working title:* "Pennsylvania Statute of Limitations: The Deadlines, Explained"
+    *SEO title:* "Statute of Limitations PA: Pennsylvania Deadlines by Claim (2026)"
 23. **Illinois.** 1,000 **KD 0**. 103 Chicago firms.
-    *Working title:* "Illinois Statute of Limitations: Deadlines by Type of Case"
+    *SEO title:* "Illinois Statute of Limitations 2026: Deadlines by Type of Case"
 24. **Arizona.** 700 KD 15. 100 Phoenix firms.
-    *Working title:* "Arizona Statute of Limitations: How Long You Have to Sue"
+    *SEO title:* "Arizona Statute of Limitations 2026: How Long You Have to Sue"
 25. **Oregon.** 600 KD 1. 20 Portland firms. **Paulson Coletti.**
-    *Working title:* "Oregon Statute of Limitations: Deadlines by Claim"
+    *SEO title:* "Oregon Statute of Limitations 2026: Deadlines, Notice and Exceptions"
 26. **Maryland.** **VERIFY**: not returned at 400/mo. 31 Baltimore firms. **Malloy Law.**
-    *Working title:* "Maryland Statute of Limitations: Deadlines by Claim"
+    *SEO title:* "Maryland Statute of Limitations 2026: The 3-Year Rule, Explained"
 27. **Massachusetts.** **VERIFY**: not returned at 400/mo. 28 Boston firms. **Brooks Law Firm.**
-    *Working title:* "Massachusetts Statute of Limitations: Deadlines by Claim"
+    *SEO title:* "Massachusetts Statute of Limitations 2026: Deadlines by Claim"
 28. **Nevada.** **VERIFY**: not returned at 400/mo. 84 Las Vegas firms.
-    *Working title:* "Nevada Statute of Limitations: Deadlines by Claim"
+    *SEO title:* "Nevada Statute of Limitations 2026: How Long You Have to File"
 29. **Indiana.** **VERIFY**: not returned at 400/mo. 13 Northwest Indiana firms. **Sarkisian.**
-    *Working title:* "Indiana Statute of Limitations: Deadlines by Claim"
+    *SEO title:* "Indiana Statute of Limitations 2026: The 2-Year Rule and Exceptions"
 
 Two variants that returned real volume and belong inside this family rather than as separate
 pages: **medical malpractice** (`medical malpractice statute of limitations` 1,400 KD 0, plus 700
@@ -209,31 +212,31 @@ firms in Miami are the internal link. **No client firm does this work, so no cli
 
 30. **Renewing a green card.** `green card renewal` 25,000 KD 7 TP 52,000; `renew green card`
     7,100 **KD 0 TP 99,000**; `renew green card online` 3,600 KD 7. Parent topic `i-90`.
-    *Working title:* "How to Renew a Green Card: Form I-90, Step by Step"
+    *SEO title:* "Green Card Renewal 2026: How to Renew With Form I-90, Step by Step"
 31. **The Diversity Visa lottery.** `green card lottery` 19,000 **KD 0**; `green card lottery 2027`
     8,200 **KD 0 TP 82,000**; `green card lottery 2026` 3,300 KD 0.
-    *Working title:* "The Green Card Lottery: How the Diversity Visa Actually Works"
+    *SEO title:* "Green Card Lottery 2027: Dates, Eligibility and How to Apply"
 32. **Checking lottery results.** `green card lottery results` 3,300 **KD 0 TP 17,000**.
-    *Working title:* "Green Card Lottery Results: Where to Check and What Comes Next"
+    *SEO title:* "Green Card Lottery Results: How to Check and What Happens Next"
 33. **Green card holders and ICE detention.** `green card holder ice detention` 14,000 KD 1
     TP 6,800; `ice green card detention` 3,800 KD 0; `ice detains green card holder` 3,200 KD 0.
     Parent `can you get deported with a green card`. Written from the statute and the case law,
     with care.
-    *Working title:* "Can a Green Card Holder Be Detained or Deported? What the Law Says"
+    *SEO title:* "Can a Green Card Holder Be Detained by ICE? Your Rights in 2026"
 34. **How long a green card takes.** `green card processing time` 3,300 **KD 0**; `how long does it
     take to get a green card` 3,300 KD 15 TP 3,500.
-    *Working title:* "How Long Does a Green Card Take? Processing Times by Category"
+    *SEO title:* "Green Card Processing Time 2026: How Long Each Category Takes"
 35. **The green card backlog.** 4,300 KD 15 TP 1,400.
-    *Working title:* "The Green Card Backlog: Why the Wait Is Years, and for Whom"
+    *SEO title:* "Green Card Backlog 2026: Why the Wait Is Years, and for Whom"
 36. **The National Interest Waiver.** `niw green card` 3,300 **KD 0 TP 23,000**.
-    *Working title:* "The NIW Green Card: Who Qualifies for a National Interest Waiver"
+    *SEO title:* "NIW Green Card: Who Qualifies for the National Interest Waiver"
 37. **Self-deportation.** `self deportation` 5,400 **KD 0**; `self-deportation` 4,800 KD 12.
-    *Working title:* "What Self-Deportation Means, and What It Does to a Future Case"
+    *SEO title:* "Self-Deportation: What It Means and How It Affects Your Future"
 38. **Travel on a green card.** `green card holder travel restrictions` 4,200 KD 18 TP 2,700.
-    *Working title:* "Traveling With a Green Card: The Rules, the Risks and the Limits"
+    *SEO title:* "Green Card Holder Travel Restrictions: The Rules Before You Fly"
 39. **Reading a green card.** `green card number` 3,500 **KD 0** TP 4,400; `what does a green card
     look like` 3,200 KD 0.
-    *Working title:* "How to Read a Green Card: Every Number and What It Means"
+    *SEO title:* "Green Card Number: Where to Find It and What Each Field Means"
 
 ## D. What a case is worth: settlement values by injury (6)
 
@@ -245,21 +248,21 @@ from a firm's own unverified results page.
 
 40. **The hub.** The "how much is my case worth" question, by injury type and by state.
     **VERIFY** the head term's volume; the sub-queries below are what returned.
-    *Working title:* "How Much Is a Personal Injury Case Worth? Settlement Values by Injury"
+    *SEO title:* "How Much Is My Personal Injury Case Worth? Settlement Values"
 41. **Back and neck injuries after a car accident.** `average settlement for car accident back and
     neck injury` **7,200 KD 0**, parent `lower back pain after car accident compensation`.
-    *Working title:* "Back and Neck Injury Settlements After a Car Accident: What Decides Them"
+    *SEO title:* "Average Settlement for Back and Neck Injury After a Car Accident"
 42. **Workers' compensation settlements for surgery.** `average workers' comp settlement for
     surgery` 600 **KD 0**, parent `typical settlement for rotator cuff injury at work`.
-    *Working title:* "Workers' Comp Settlements for Surgery: What the Numbers Depend On"
+    *SEO title:* "Average Workers' Comp Settlement for Surgery: What Decides It"
 43. **Talcum powder lawsuits.** `average settlement for talcum powder lawsuit` 900 KD 4 TP 1,000.
-    *Working title:* "Talcum Powder Lawsuit Settlements: What Has Been Paid, and to Whom"
+    *SEO title:* "Talcum Powder Lawsuit Settlements: Average Payouts So Far"
 44. **Asbestos claims.** `what is the average settlement for asbestos claim` 700 **KD 0**.
-    *Working title:* "Asbestos Claim Settlements: What the Averages Hide"
+    *SEO title:* "Average Asbestos Settlement: What Claims Are Worth in 2026"
 45. **Wrongful termination in California.** 600 **KD 0**, CPC $6.00. Not a practice the directory
     covers, so no internal link beyond the hub; listed because it returned and because the
     cluster is worth a sweep.
-    *Working title:* "Wrongful Termination Settlements in California: What Cases Are Worth"
+    *SEO title:* "Wrongful Termination Settlements in California: Average Payouts"
 
 ## E. The other practices: workers' compensation, divorce, expungement (5)
 
@@ -267,19 +270,19 @@ Smaller, clean clusters, one or two pieces each. **No client firm does this work
 link**; the internal links are the practice hubs and the city rankings.
 
 46. **How workers' compensation works.** `how does workers comp work` 4,600 **KD 0** TP 2,000.
-    *Working title:* "How Workers' Comp Works: The Claim, the Benefits and the Deadlines"
+    *SEO title:* "How Does Workers' Comp Work? Claims, Benefits and Deadlines"
 47. **What workers' compensation covers.** Parent `what does workers comp cover` under
     `workers comp policy` 5,900 KD 8.
-    *Working title:* "What Workers' Comp Covers, and What It Does Not"
+    *SEO title:* "What Does Workers' Comp Cover? Medical Bills, Wages and Limits"
 48. **What a divorce costs, nationally.** `how much does a divorce cost` 4,400 **KD 0** TP 2,500.
     The New York version is already published; this is the national one it links from.
-    *Working title:* "How Much Does a Divorce Cost? Court Fees and Lawyer Hours by State"
+    *SEO title:* "How Much Does a Divorce Cost? Fees and Lawyer Costs by State"
 49. **Expungement.** `expungement` 10,000 KD 14 TP 1,400. Criminal defense has just entered the
     directory with 85 New York firms.
-    *Working title:* "Expungement: What It Erases, Who Qualifies and How It Works"
+    *SEO title:* "Expungement: What It Erases, Who Qualifies and How Long It Takes"
 50. **Finding an expungement lawyer.** `expungement lawyer` 6,000 **KD 0**. Informational framing,
     not a ranking: what the lawyer does, what it costs, what to ask.
-    *Working title:* "What an Expungement Lawyer Does, and When You Need One"
+    *SEO title:* "Expungement Lawyer: What They Do, What It Costs, When You Need One"
 
 ---
 
@@ -302,13 +305,47 @@ A caution on the KD 0 figures: Ahrefs difficulty is a backlink measure, and loca
 read as KD 0 while being dominated by map packs and firms with decades of links. Read these as
 "the page should exist and target the term", not as "this is easy".
 
-## Writing order, if nobody says otherwise
+## Publishing schedule: three a week
 
-**First:** item 2 (AT&T, the largest cluster), item 16 (the statute hub), item 19 (Florida, where
-the client with the directory's highest score sits), item 30 (green card renewal, the largest
-immigration term), item 41 (back and neck injuries, the largest money term).
+Set 2026-10-04: **three guides a week, Monday, Wednesday and Friday**, one per run of the scheduled
+content task. Each run writes the first item below whose date has arrived and is not yet written,
+opens it as a PR against `main` (a person reads every guide before it merges), and logs it in the
+client's Basecamp project when the piece places a client. Pieces that place a client go first.
 
-**Then** the rest of family A in volume order, then the verified states in family B, then family C.
+| Date | Item | Client placed |
+| --- | --- | --- |
+| written 2026-10-04 | 18 Texas, 19 Florida, 20 New York (PR #96) | Fielding; Lopez & Humphries, Goodwin; Greenstein & Pittari |
+| 2026-10-12 | 25 Oregon | Paulson Coletti |
+| 2026-10-14 | 26 Maryland | Malloy Law |
+| 2026-10-16 | 27 Massachusetts | Brooks Law Firm |
+| 2026-10-19 | 29 Indiana | Sarkisian |
+| 2026-10-21 | 16 Statute of limitations hub | all seven state pages |
+| 2026-10-23 | 41 Back and neck injury settlements | verified injury firms by state |
+| 2026-10-26 | 2 AT&T data breach settlement | none |
+| 2026-10-28 | 30 Green card renewal | none |
+| 2026-10-30 | 17 California | none |
+| 2026-11-02 | 31 Green card lottery 2027 | none |
+| 2026-11-04 | 21 Georgia | none |
+| 2026-11-06 | 3 Facebook privacy settlement | none |
+| 2026-11-09 | 4 Cash App settlement | none |
+| 2026-11-11 | 22 Pennsylvania | none |
+| 2026-11-13 | 5 Amazon Prime settlement | none |
+| 2026-11-16 | 23 Illinois | none |
+| 2026-11-18 | 6 Capital One settlement | none |
+| 2026-11-20 | 33 Green card holders and ICE | none |
+| 2026-11-23 | 7 Blue Cross Blue Shield settlement | none |
+| 2026-11-25 | 24 Arizona | none |
+| 2026-11-27 | 8 Wells Fargo settlement | none |
+| 2026-11-30 | 28 Nevada | none |
+| 2026-12-02 | 40 Personal injury case value hub | verified injury firms by state |
+| 2026-12-04 | 1 Class action settlements hub | none |
+
+After that, the rest of family A in volume order, then C, D and E.
+
+**How a client is placed** (as built in PR #96): the highest-scoring verified firm per state and
+practice is computed and named, and a client's own page on the same deadline is listed under
+"Further reading" only after it has been read and checked against the statute. Both links are
+followed because every client is Verified, which is the profile rule.
 
 **Research still owed before writing:** the family D long tail (one matching-terms sweep on
 `settlement for` and `compensation for`), the four **VERIFY** states in family B at a lower volume
