@@ -24,6 +24,7 @@ family law 42, real estate 20, workers' compensation 17.
    generated, already rank by score, and will outrank a guide aimed at the same query. Every item
    below is either a national cut on one published attribute, a method piece, or a study. None is
    a city-and-practice list.
+
 2. **Every figure is computed from the firms collection at build time** with `getCollection`. A
    figure that cannot be computed from committed data does not go in a guide.
 
@@ -91,6 +92,17 @@ them forward. The addresses are from each firm's own record:
 
 Ordered by family. Within a family, the better-supported topics come first.
 
+**Every item carries a working title.** They are written to the house rules that already govern
+the manifest: the headline states the finding rather than the subject, it carries no figure
+because `check_meta.mjs` rejects one in a title and a count moves every month, and it stays at or
+under 70 characters so `audit_seo.mjs` raises no note. **A working title on an unwritten study is
+provisional by definition**: where the study's result is not yet known, the title is written the
+conditional way the house rules require, and the finished page's title is whatever the measurement
+actually supports. Item 29 is the clearest case of that and is deliberately left open.
+
+The five **COUNT FIRST** items carry no title, because a title for a study whose data has not been
+counted would be a guess dressed as a plan.
+
 ## A. Measured superlatives, the `best-law-firm-websites` mold (12)
 
 The existing proof that this shape works: **`/guides/best-law-firm-websites/`**, "20 Best Law Firm
@@ -102,33 +114,57 @@ that leads the measure.
 1. **The law firms with the highest certification score in the country.** `score.total`. One firm
    at 86 and two at 80 or above across 1,252. Leads with **Lopez & Humphries**. The cleanest item
    on this page and the one to write first.
+      **Working title:** "The Law Firms That Score Highest When Everything Is Checked"
+
 2. **The law firms that publish all five trust pages.** `digital.trust_pages`, **52 of 1,195**
    carry all five. Scarce enough to be a real list. Four of the eight clients sit at four of five.
+      **Working title:** "The Law Firms That Publish Every Page We Look For"
+
 3. **The largest attorney rosters in the directory.** `attorneys[]`, **19 firms name 56 or more**,
    maximum 128, and **315 firms name none**. Leads with **Brooks Law Firm** at 56.
+      **Working title:** "The Law Firms With the Most Lawyers, Counted"
+
 4. **The law firms with the most offices.** `offices[]`, **33 firms have 8 or more**. **Malloy Law**
    at 8 and **Greenstein & Pittari** at 7.
+      **Working title:** "The Law Firms With the Most Offices, Measured"
+
 5. **The oldest law firm domains on the web.** `operating.years`, filled on **1,236**, range 0.1 to
    30.7 years. **Greenstein & Pittari** 24.8 and **Fielding Law** 24.6. The piece must say what the
    field is: a domain registration date over RDAP, a lower bound, never the firm's founding date.
+      **Working title:** "The Oldest Law Firm Websites Still Online"
+
 6. **The law firms that name the most bar associations.** `accountability.bar_associations`,
    **66 firms name 5 or more**. **Paulson Coletti** at 6, which is #26.
+      **Working title:** "The Law Firms That Name the Most Bar Associations"
+
 7. **The most-reviewed law firms in the country.** `digital.places.review_count_total`, filled on
    all 1,252. National, not city-scoped, so it does not touch a landing page. **Malloy Law** 1,929,
    **Brooks** 1,289, **Greenstein & Pittari** 1,013.
+      **Working title:** "The Most-Reviewed Law Firms in the Country, Counted"
+
 8. **The law firms that publish the most case results.** `results_published.count`, filled on **1,213**.
    **Brooks** 22, **Fielding** 16, **Paulson Coletti** 14.
+      **Working title:** "The Law Firms That Publish the Most Case Results"
+
 9. **The fastest law firm websites, a year on.** `digital.psi`, filled on **1,163**. A re-run of the
    existing piece on a directory three times the size. **Malloy Law** scores 94, which is #60
    nationally. Check against the existing guide before writing so the two do not duplicate titles.
+      **Working title:** "The Fastest Law Firm Websites, Measured Again"
+
 10. **The law firms buying search ads.** `digital.ahrefs.paid_keywords`, **144 firms bid on at
     least one paid keyword**. Nobody publishes this about law firms and we hold it.
+      **Working title:** "The Law Firms That Buy Their Way to the Top of Search"
+
 11. **The law firms that name a court in their case results.** `results_published.venues`,
     **98 of 1,252**. Thin, and previously killed as a *study* for that reason, but 98 named firms
     is a perfectly good *list*. Re-read the earlier finding first: every value was a New York
     county or court.
+      **Working title:** "The Law Firms That Name the Court, Not Just the Number"
+
 12. **The law firms with the most referring domains.** `digital.ahrefs.refdomains`, filled on **1,133**.
     **Malloy Law** 1,259 and **Fielding Law** 1,207.
+
+      **Working title:** "The Law Firm Websites Other Sites Actually Link To"
 
 ## B. Method pieces, one per score component (10)
 
@@ -139,28 +175,48 @@ bottom of that specific measure. Five of these already exist; these are the gaps
     `accountability.bar_associations`, non-empty on a counted subset. The existing malpractice guide
     established the association half is partly a measure of our own pattern list, which this piece
     owes a reader. **Paulson Coletti** leads at 6.
+      **Working title:** "What a Bar Association Membership Proves, and What It Does Not"
+
 14. **D4 and structured data: what a law firm's site tells a machine.** `digital.schema_detected`,
     filled on **all 1,252**, true on **1,141**. One of the few fields with complete coverage.
+      **Working title:** "New Study: Most Law Firm Sites Do Tell a Machine Who They Are"
+
 15. **C3 and review recency, and why nothing in this directory dates a review count.** The open
     problem recorded in the backlog: `review_count_total` has no second reading, so velocity cannot
     be measured. An honest method piece about a sub-factor we score and cannot verify.
+      **Working title:** "Nothing in This Directory Knows How Old a Review Count Is"
+
 16. **C5 and what a complaint share can and cannot show.** Reads the same 1.4% review sample the
     2026-09-25 guide established. Must inherit that guide's caveats rather than restate them.
+      **Working title:** "What a One-Star Share Can Show, and What It Cannot"
+
 17. **E4 and the 24/7 intake line nobody tests.** `availability`, **654 of 1,252**. The backlog already
     judged this "one paragraph long" as a study because we measure the claim and never test it.
     As a *method* piece about a scored sub-factor, that limitation is the subject.
+      **Working title:** "Every Firm Says It Answers at Night. Nobody Tests It."
+
 18. **A5, A6 and the registers only one state lets us read.** `attorneys[].registry_status`, on
     **887 attorney records, every one in New York**. The piece has to be written in aggregate: never
     characterise a named attorney's registration beyond the record's own words.
+      **Working title:** "Only One State Lets Anyone Check a Lawyer's Registration"
+
 19. **What a profile score is a share of.** `score.coverage`, `score.assessable`,
     `gates_unavailable`, `gates_unresolvable`. A sequel to the denominator guide now that the
     directory crosses 13 states and 6 practices rather than 3 states.
+      **Working title:** "New Study: A Score Out of a Hundred That Is Not Out of a Hundred"
+
 20. **Pillar B has three shapes and immigration fits none of them.** The open engine item 0g.
     Writable as a method piece the moment somebody decides what pillar B should read for an
     immigration matter. **Blocked on that decision, not on data.**
+      **Working title:** "The Scoring Rule That Was Written for One Kind of Law Firm"
+
 21. **What a disclaimer on a results page is for.** `results_published.disclaimer`, true on **194**.
+      **Working title:** "What a Disclaimer on a Case Results Page Is Actually For"
+
 22. **What an aggregate claim is worth.** `results_published.aggregate_claims`, non-empty on **213**.
     "Over $100 million recovered" as a category of statement, counted.
+
+      **Working title:** "New Study: Millions Recovered Is a Sentence, Not a Record"
 
 ## C. Cross-practice and cross-market studies (10)
 
@@ -176,25 +232,43 @@ the split shows including when it is boring.
 23. **What a real estate practice publishes that an injury practice does not.** `transaction` on 20,
     `domestic` on 42. A 62-firm study against a 1,252-firm directory, which is the thing to weigh.
     Surfaces **Goodwin Law**, the only client in the real estate cohort.
+      **Working title:** "New Study: A Closing Leaves No Verdict, So We Read the Price"
+
 24. **The case types law firms say they take.** `results_published.case_types`, non-empty on **523**.
     Well supported and never written.
+      **Working title:** "New Study: The Cases Law Firms Say They Take, Counted"
+
 25. **The amounts firms publish, and the ones we will not repeat.** `results_published.amounts`,
     non-empty on **476**. Must hold the line: never publish a dollar amount for a result the record
     does not mark verified.
+      **Working title:** "New Study: Law Firms Publish the Number and Not the Proof"
+
 26. **Does a bigger roster mean a better-rated firm?** `attorneys[]` against
     `digital.places.rating_weighted`. Both filled on most of the directory. Expect a boring answer,
     which is publishable.
+      **Working title:** "New Study: A Bigger Law Firm Is Not a Better-Rated One"
+
 27. **What changes when a firm opens a second office.** `offices[]` against the C pillar. Note the
     trap recorded in the backlog: `offices[]` and `places.listing_count` come from the same Places
     response, so compare offices against *reviews and score*, never against listing count.
+      **Working title:** "New Study: What Changes When a Law Firm Opens a Second Office"
+
 28. **The thirteen states, and what a firm's address changes about what we can check.**
     `gates_unavailable` by state. Builds on the registers guide with ten more states.
+      **Working title:** "New Study: What You Can Check Depends on Where the Firm Is"
+
 29. **Do older firms publish more?** `operating.years` against `trust_pages` and
     `results_published`. Surfaces **Greenstein & Pittari** and **Fielding Law** at the old end.
+      **Working title:** "New Study: Whether an Older Law Firm Publishes More"
+
 30. **The firms whose website refuses to be read.** `site_blocked`, **5 firms** of 1,252. Tiny, and that is
     the point: a piece about what a directory does when it cannot measure.
+      **Working title:** "The Law Firms Whose Websites Refuse to Be Read"
+
 31. **What a corporate register says about a law firm, in thirteen states.** `entity` on **256**, up from 203 before Florida's register was read.
     A re-run of the registers guide now that Florida's register has been read.
+      **Working title:** "New Study: What a Corporate Register Proves, in Thirteen States"
+
 32. **COUNT FIRST. Which markets have the most firms per capita.** Needs a population source and a
     committed market list. Reference-shaped, not a ranking of firms.
 
@@ -207,18 +281,34 @@ industry-phrased one is not.
 
 33. **How many lawyers does a law firm actually have?** `attorneys[]`, median 3, maximum 128,
     **315 firms name none**. Leads with **Brooks Law Firm**.
+      **Working title:** "How Many Lawyers Does a Law Firm Actually Have?"
+
 34. **Do lawyers publish their prices?** The two fee fields, 70 and **155**, already separated and
     documented in the backlog as open item 0c. Narrower and more honest than the existing fee guides.
+      **Working title:** "Do Lawyers Publish What They Charge?"
+
 35. **Does a law firm answer the phone at night?** `availability`, **654 of 1,252**.
+      **Working title:** "Does a Law Firm Answer the Phone at Night?"
+
 36. **How long has this law firm existed?** `operating.years`. The piece has to lead with the
     caveat: this is a domain registration date and no firm in this directory publishes a founding
     year, because `founded_year` is absent on all 1,252 records.
+      **Working title:** "How Old Is This Law Firm? Nobody Publishes the Answer"
+
 37. **What does a five-star law firm look like?** **393 firms hold exactly 5.0.** The finding is
     that the rating does not separate them, which the reviews guides already support.
+      **Working title:** "What Does a Five-Star Law Firm Look Like? Like the Rest"
+
 38. **Can you tell whether a lawyer is licensed?** `attorneys[].registry_status` on **887** records in
     one state. A consumer-facing companion to item 18.
+      **Working title:** "Can You Check Whether a Lawyer Is Licensed? Usually Not"
+
 39. **What is a law firm's website for?** `digital.trust_pages` against `digital.ahrefs.org_traffic`.
+      **Working title:** "What Is a Law Firm Website Actually For?"
+
 40. **Does the biggest firm get the best reviews?** `attorneys[]` against rating and review count.
+      **Working title:** "Does the Biggest Law Firm Get the Best Reviews?"
+
 41. **COUNT FIRST. What languages does a law firm publish in?** `languages`, **663** firms publish two
     or more, maximum 3. The Spanish piece is written; this is the multilingual cut and needs a
     check that the second language is ever anything but Spanish.
@@ -234,14 +324,22 @@ they are the natural home for an outbound link to a competitor's own documentati
     languages or years of experience; FindLaw's can filter on "Free Consultation Offered", a field
     the firm supplies about itself. We measured that same claim across the directory. The strongest
     item in this family.
+      **Working title:** "New Study: The Facets a Legal Directory Cannot Filter On"
+
 44. **Five directories whose rating is fed by the rated party.** The backlog's item 4, now with five
     sourced cases: Avvo's participation score, Justia's paid Platinum and Gold tiers, Martindale's
     self-submitted peer references, Nolo's paid lead network, FindLaw's paid profiles. Every claim
     cites their own published documentation and we measure none of it.
+      **Working title:** "Five Lawyer Directories Whose Rating the Lawyer Helps Set"
+
 45. **What a "free consultation" filter is worth.** A sequel to the piece published 2026-10-02,
     aimed squarely at the FindLaw facet.
+      **Working title:** "What a Free Consultation Filter Is Worth, Measured"
+
 46. **What this directory gets wrong.** The open engine items, published. The section has done this
     in halves inside other guides; a standing page would be the most credible thing on the site.
+      **Working title:** "What This Directory Gets Wrong, and What We Do About It"
+
 47. **COUNT FIRST. What a law firm review site owes a reader.** Needs a framing that is not an
     opinion piece. Only write it if a measurement carries it.
 
@@ -254,8 +352,12 @@ claim about our firms, so they take the `Reference` kicker rather than `Study`.
 48. **How many lawyers are in Texas, Florida and California.** The same exercise as the New York
     piece, in the three states where the directory is now largest. Needs each state's register or
     the ABA table, and a `lfl:figures-from` declaration so `check_meta` accepts a dated figure.
+      **Working title:** "How Many Lawyers Are in Texas, Florida and California?"
+
 49. **What a paralegal costs, and what that changes about a legal bill.** Companion to the hourly
     rate piece, from the same published rate tables.
+      **Working title:** "What a Paralegal Costs, and What That Changes About a Bill"
+
 50. **COUNT FIRST. Law firm employment by state, over ten years.** The New York statistics guide
     reads payroll data; check whether the same series exists for the other twelve states before
     committing a run.
