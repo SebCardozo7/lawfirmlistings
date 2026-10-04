@@ -1,0 +1,236 @@
+{
+  "state": "Florida",
+  "code": "FL",
+  "slug": "florida-statute-of-limitations",
+  "measured_at": "2026-10-04",
+  "source": {
+    "who": "The Florida Legislature",
+    "what": "Florida Statutes, Chapter 95",
+    "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11"
+  },
+  "headline": {
+    "years": 2,
+    "claim": "a negligence claim",
+    "statute": "Fla. Stat. § 95.11(5)(a)",
+    "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11"
+  },
+  "change": {
+    "law": "HB 837, Chapter 2023-15, Laws of Florida",
+    "url": "https://laws.flrules.org/2023/15",
+    "date": "March 24, 2023",
+    "from_years": 4,
+    "to_years": 2,
+    "rule": "Section 28 of the act applies the shorter period only to causes of action accruing after the effective date. An injury on or before March 24, 2023 kept the old four years, which means the last of those windows does not close until March 24, 2027.",
+    "old_window_closes": "March 24, 2027"
+  },
+  "rows": [
+    {
+      "claim": "Personal injury from negligence",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 95.11(5)(a)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the day the last element of the claim occurs, which for a crash or a fall is almost always the day it happened.",
+      "note": "Car crashes, slip and falls, dog bites and most premises cases sit here. It was four years until March 24, 2023."
+    },
+    {
+      "claim": "Wrongful death",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 95.11(5)(e)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the date of death, not the date of the accident that caused it.",
+      "note": "A death caused by murder or manslaughter, sued against the person who did it, has no deadline at all under § 95.11(11)."
+    },
+    {
+      "claim": "Medical malpractice",
+      "group": "injury",
+      "period": "2 years, 4 at the outside",
+      "years": 2,
+      "statute": "§ 95.11(5)(c)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the incident, or from when it was discovered or should have been. Never more than four years after the incident.",
+      "note": "Proven fraud or concealment moves the outer limit to seven years. A child's claim survives until the eighth birthday."
+    },
+    {
+      "claim": "Injury from a defective product",
+      "group": "injury",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 95.11(3)(d)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From when the defect and the injury were discovered or should have been, under § 95.031(2)(b).",
+      "note": "There is a 12-year repose period counted from delivery to the first buyer, with exceptions for latent injuries and long-life products like aircraft."
+    },
+    {
+      "claim": "Assault, battery and other intentional torts",
+      "group": "injury",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 95.11(3)(n)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the date of the act.",
+      "note": "Abuse and incest claims run on their own clock under § 95.11(8), and sexual battery of a child under 16 can be sued at any time under § 95.11(10)."
+    },
+    {
+      "claim": "Professional malpractice (lawyers, accountants and others)",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 95.11(5)(b)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From when the mistake was discovered or should have been.",
+      "note": "Only a person in privity with the professional, usually the client, gets this period."
+    },
+    {
+      "claim": "Libel and slander",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 95.11(5)(h)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From publication.",
+      "note": ""
+    },
+    {
+      "claim": "Trespass on real property",
+      "group": "property",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 95.11(3)(f)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the trespass.",
+      "note": "Damage caused by someone's carelessness, such as a car hitting a fence, is usually pleaded as negligence, and the two-year period is the safer one to plan around."
+    },
+    {
+      "claim": "Taking or damaging personal property",
+      "group": "property",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 95.11(3)(g)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the taking or the damage.",
+      "note": "The same caution applies: a property claim founded on negligence falls under the two-year rule."
+    },
+    {
+      "claim": "Construction defects",
+      "group": "property",
+      "period": "4 years, 7 at the outside",
+      "years": 4,
+      "statute": "§ 95.11(3)(b)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the certificate of occupancy or completion, or from discovery for a latent defect.",
+      "note": "Nothing can be filed more than seven years after the certificate, whatever was discovered later."
+    },
+    {
+      "claim": "Breach of a property insurance policy",
+      "group": "property",
+      "period": "5 years",
+      "years": 5,
+      "statute": "§ 95.11(2)(e)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the date of loss.",
+      "note": "This is the deadline to sue the insurer. Notice of the claim itself is due much sooner under the policy and the insurance code."
+    },
+    {
+      "claim": "Written contract",
+      "group": "contract",
+      "period": "5 years",
+      "years": 5,
+      "statute": "§ 95.11(2)(b)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the breach.",
+      "note": "Mortgage foreclosure also has five years, under § 95.11(2)(c)."
+    },
+    {
+      "claim": "Oral contract, and the sale of goods on account",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 95.11(3)(j)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the breach.",
+      "note": "Specific performance of a contract has only one year, under § 95.11(6)(a)."
+    },
+    {
+      "claim": "Fraud",
+      "group": "contract",
+      "period": "4 years, 12 at the outside",
+      "years": 4,
+      "statute": "§ 95.11(3)(i)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From when the fraud was discovered or should have been, under § 95.031(2)(a).",
+      "note": "Never more than 12 years after the fraud was committed."
+    },
+    {
+      "claim": "Negligence claim against the state, a county or a city",
+      "group": "government",
+      "period": "4 years to sue, 3 to give notice",
+      "years": 4,
+      "statute": "§ 768.28(6), (14)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/768.28",
+      "clock": "Written notice to the agency within 3 years, and the lawsuit within 4 years of the claim accruing.",
+      "note": "Wrongful death and medical malpractice claims against the government keep their two-year periods."
+    },
+    {
+      "claim": "Enforcing a Florida court judgment",
+      "group": "other",
+      "period": "20 years",
+      "years": 20,
+      "statute": "§ 95.11(1)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "clock": "From the judgment.",
+      "note": ""
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "The closed list of reasons the clock stops",
+      "statute": "§ 95.051",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.051",
+      "text": "Florida is unusually strict here. The statute lists the only circumstances that pause a deadline, among them the defendant being out of state, using a false name, or hiding to avoid being served. It then says that nothing else tolls a limitations period, so a court cannot add a reason of its own."
+    },
+    {
+      "name": "Minors",
+      "statute": "§ 95.051(1)(i)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.051",
+      "text": "Being a child does not stop the clock by itself in Florida. It pauses only while the child has no parent, guardian or guardian ad litem, or while that person has an interest adverse to the child, and even then the case must be filed within seven years of the event. The practical reading is that a parent should treat a child's injury claim as running on the same two years as an adult's."
+    },
+    {
+      "name": "Delayed discovery",
+      "statute": "§ 95.031",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.031",
+      "text": "A claim accrues when its last element occurs. Florida applies a discovery rule only where a statute says so: medical malpractice, professional malpractice, fraud, product liability and latent construction defects. An ordinary negligence claim gets no extra time because the injury showed up late."
+    },
+    {
+      "name": "Abuse",
+      "statute": "§ 95.11(8), (10)",
+      "url": "https://www.flsenate.gov/Laws/Statutes/2025/95.11",
+      "text": "A claim founded on abuse or incest may be filed up to seven years after the victim turns 18, four years after leaving the abuser's dependency, or four years after discovering the injury and its cause, whichever is latest. Sexual battery of a child under 16 has no deadline."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the statute of limitations for personal injury in Florida?",
+      "a": "Two years for a claim founded on negligence, under § 95.11(5)(a) of the Florida Statutes. That covers most car crashes, falls and premises injuries. It applies to any injury that happened after March 24, 2023."
+    },
+    {
+      "q": "Did Florida change its statute of limitations?",
+      "a": "Yes. HB 837, signed and effective on March 24, 2023, cut the period for negligence claims from four years to two. Injuries that happened on or before that date kept four years, so an accident from early 2023 can still be inside its window until March 24, 2027."
+    },
+    {
+      "q": "How long do you have to sue for medical malpractice in Florida?",
+      "a": "Two years from the incident or from when it was discovered, but never more than four years after the incident. Fraud or concealment can stretch the outer limit to seven years, and a child's claim survives until the eighth birthday."
+    },
+    {
+      "q": "Does the statute of limitations stop for a minor in Florida?",
+      "a": "Usually not. Under § 95.051(1)(i) a child's claim is paused only while the child has no parent, guardian or guardian ad litem, or that person's interests are adverse to the child's, and never past seven years from the event."
+    },
+    {
+      "q": "What is the deadline to sue a Florida city or county?",
+      "a": "Written notice to the agency within three years and a lawsuit within four, under § 768.28. Wrongful death and medical malpractice claims against the government keep the two-year periods."
+    }
+  ]
+}

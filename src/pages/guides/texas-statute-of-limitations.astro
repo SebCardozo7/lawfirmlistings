@@ -1,0 +1,44 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-tx.json';
+
+/**
+ * Texas deadlines, a state statute page from docs/guides-50.md (family B).
+ *
+ * Title and description figures are read from the research file and declared through
+ * figuresFrom, so a corrected period rewrites the headline instead of leaving it stale.
+ */
+const head = data.headline;
+const defamation = data.rows.find(r => r.statute === '§ 16.002(a)')!;
+const gov = data.rows.find(r => r.group === 'government')!;
+const med = data.rows.find(r => r.statute === '§ 74.251')!;
+const title = `Texas Statute of Limitations 2026: The ${head.years}-Year Rule and Its Exceptions`;
+const description = `Most Texas injury claims must be filed within ${head.years} years. Every deadline, from the 6-month government notice to the 15-year repose.`;
+const lede = `Texas gives most injury claims <b>${head.years} years</b>. That is the number everybody knows, and it is the one least likely to be the problem. The deadlines that end Texas cases early are the short ones beside it: a <b>${gov.period.toLowerCase()}</b> against a city or the state, ${defamation.period.toLowerCase()} for defamation, and a medical malpractice rule that ignores the usual protection for children. Here is every Texas deadline by type of claim, read from the Civil Practice and Remedies Code.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="Texas statute of limitations"
+  reading={[
+    {
+      firm: 'fielding-law',
+      url: 'https://www.fieldinglaw.com/legal-guidance/the-statute-of-limitations-in-texas-personal-injury-cases/',
+      title: 'The Statute of Limitations in Texas Personal Injury Cases',
+      why: 'A Dallas injury firm on how the two-year rule meets real claims, including the notice requirements for government defendants and the limits of the discovery rule.',
+    },
+  ]}>
+  <Fragment slot="toc">
+    <li><a href="#short">The deadlines shorter than two years</a></li>
+    <li><a href="#malpractice">The malpractice rule for children</a></li>
+  </Fragment>
+
+  <h2 id="short">The deadlines that end Texas cases early are the short ones</h2>
+  <p>Two years is long enough that most people do not miss it. The periods that catch people are the ones nobody expects to be shorter.</p>
+  <p><b>Six months against the government.</b> A claim under the Texas Tort Claims Act needs written notice within six months of the incident, under <a href={gov.url} rel="noopener" target="_blank">{gov.statute}</a>. A city charter can require it sooner, and the notice has to describe the injury, the time, the place and what happened. A crash with a city vehicle or a fall on public property puts the claim on this clock from the first day.</p>
+  <p><b>One year for defamation.</b> Libel, slander and malicious prosecution have a single year under <a href={defamation.url} rel="noopener" target="_blank">{defamation.statute}</a>. It is the shortest civil deadline in the chapter.</p>
+  <p><b>Two years that may already have started.</b> Texas has no general discovery rule in its statutes. The Texas Supreme Court allows one only when an injury was inherently undiscoverable and the evidence is objectively verifiable. A back injury that gets worse a month after a crash does not qualify: the clock started on the day of the crash.</p>
+
+  <h2 id="malpractice">In malpractice, a Texas child does not get the usual extra time</h2>
+  <p>For most claims, the years before a Texas child turns 18 do not count, under § 16.001. A child hurt in a crash at 10 generally has until 20.</p>
+  <p>Medical malpractice is different. Under <a href={med.url} rel="noopener" target="_blank">{med.statute}</a>, a child injured by medical care before age 12 has until the 14th birthday, and the ordinary tolling for minors does not apply. Every malpractice claim, for adults and children alike, is barred ten years after the act, whatever was discovered later.</p>
+  <p>The same section starts the two years from the treatment complained of, or from the end of a course of treatment. Before suit, Texas also requires written notice to the provider, which is one more reason a malpractice case needs a lawyer well before the deadline.</p>
+</StatuteGuide>

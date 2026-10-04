@@ -1,0 +1,207 @@
+{
+  "state": "Texas",
+  "code": "TX",
+  "slug": "texas-statute-of-limitations",
+  "measured_at": "2026-10-04",
+  "source": {
+    "who": "The Texas Legislature",
+    "what": "Texas Civil Practice and Remedies Code, Chapter 16",
+    "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm"
+  },
+  "headline": {
+    "years": 2,
+    "claim": "a personal injury claim",
+    "statute": "Tex. Civ. Prac. & Rem. Code § 16.003(a)",
+    "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.003"
+  },
+  "rows": [
+    {
+      "claim": "Personal injury",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 16.003(a)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.003",
+      "clock": "From the day the claim accrues, which for a crash or a fall is the day it happened.",
+      "note": "Asbestos and silica injuries, trade secrets and sexual offenses have their own rules elsewhere in the chapter."
+    },
+    {
+      "claim": "Wrongful death",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 16.003(b)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.003",
+      "clock": "From the date of death, not the date of the injury that caused it.",
+      "note": "The statute says it in one line: the claim accrues on the death of the injured person."
+    },
+    {
+      "claim": "Medical malpractice (health care liability)",
+      "group": "injury",
+      "period": "2 years, 10 at the outside",
+      "years": 2,
+      "statute": "§ 74.251",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.74.htm#74.251",
+      "clock": "From the treatment complained of, or from the end of the course of treatment or hospitalization.",
+      "note": "Ten years after the act, every claim is barred. A child hurt before age 12 has until the 14th birthday, and the usual tolling for minors does not apply."
+    },
+    {
+      "claim": "Injury from a defective product",
+      "group": "injury",
+      "period": "2 years, 15 at the outside",
+      "years": 2,
+      "statute": "§ 16.003(a), § 16.012(b)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.012",
+      "clock": "Two years from the injury, inside a 15-year repose period counted from the sale.",
+      "note": "A written warranty promising a longer safe life replaces the 15 years, and a latent disease from exposure inside the 15 years is excepted."
+    },
+    {
+      "claim": "Libel, slander and malicious prosecution",
+      "group": "injury",
+      "period": "1 year",
+      "years": 1,
+      "statute": "§ 16.002(a)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.002",
+      "clock": "From the day the claim accrues.",
+      "note": "The shortest civil deadline in the chapter, and the one most often missed."
+    },
+    {
+      "claim": "Sexual assault of an adult",
+      "group": "injury",
+      "period": "5 years",
+      "years": 5,
+      "statute": "§ 16.0045(b)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.0045",
+      "clock": "From the day the claim accrues.",
+      "note": "Also covers human trafficking and compelled prostitution."
+    },
+    {
+      "claim": "Sexual abuse of a child",
+      "group": "injury",
+      "period": "30 years",
+      "years": 30,
+      "statute": "§ 16.0045(a)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.0045",
+      "clock": "From the day the claim accrues. Under § 16.001 the years before a survivor turns 18 generally do not count.",
+      "note": ""
+    },
+    {
+      "claim": "Property damage",
+      "group": "property",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 16.003(a)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.003",
+      "clock": "From the day of the damage.",
+      "note": "The statute words it as trespass for injury to the estate or property of another."
+    },
+    {
+      "claim": "Conversion of personal property",
+      "group": "property",
+      "period": "2 years",
+      "years": 2,
+      "statute": "§ 16.003(a)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.003",
+      "clock": "From the taking.",
+      "note": "Covers taking or keeping someone else's property."
+    },
+    {
+      "claim": "Contract, written or oral, and debt",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 16.004(a)(3), § 16.051",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.004",
+      "clock": "From the breach.",
+      "note": "Texas has no separate period for oral agreements. Open accounts run four years from the day the dealings stop."
+    },
+    {
+      "claim": "Fraud",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 16.004(a)(4)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.004",
+      "clock": "From the day the claim accrues.",
+      "note": ""
+    },
+    {
+      "claim": "Breach of fiduciary duty",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "§ 16.004(a)(5)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.004",
+      "clock": "From the day the claim accrues.",
+      "note": ""
+    },
+    {
+      "claim": "Sale of goods and warranties",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "Bus. & Com. Code § 2.725",
+      "url": "https://statutes.capitol.texas.gov/Docs/BC/htm/BC.2.htm#2.725",
+      "clock": "From the breach, which for a warranty is delivery, whether or not the buyer knew.",
+      "note": "A contract can shorten this to one year but never lengthen it."
+    },
+    {
+      "claim": "Notice of a claim against a governmental unit",
+      "group": "government",
+      "period": "6 months to give notice",
+      "years": 0.5,
+      "statute": "§ 101.101(a)",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.101.htm#101.101",
+      "clock": "Written notice within six months of the incident, describing the injury, the time, the place and what happened.",
+      "note": "This is a notice deadline, not the deadline to sue. A city charter can set a shorter one, and the rule does not apply if the government already had actual notice."
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "Minors and people of unsound mind",
+      "statute": "§ 16.001",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.001",
+      "text": "If the injured person is under 18 or of unsound mind when the claim accrues, that time does not count, so a child's two years usually start on the 18th birthday. A disability that begins after the clock is already running does not pause it, and one disability cannot be stacked on another."
+    },
+    {
+      "name": "The discovery rule, which a court made",
+      "statute": "Computer Associates Int'l v. Altai, 918 S.W.2d 453 (Tex. 1996)",
+      "url": "https://www.courtlistener.com/opinion/2417385/computer-associates-intern-v-altai/",
+      "text": "No Texas statute sets a general discovery rule. The Texas Supreme Court created one, and it delays the clock only when the injury was inherently undiscoverable and the evidence of it is objectively verifiable. A late-appearing car accident injury almost never qualifies."
+    },
+    {
+      "name": "Fraudulent concealment",
+      "statute": "Court-made doctrine",
+      "url": "",
+      "text": "A defendant who hid the wrongdoing can be barred from relying on the deadline until the plaintiff discovered it or should have. Chapter 16 has no general provision for it, so it is argued case by case."
+    },
+    {
+      "name": "A deadline that lands on a weekend",
+      "statute": "§ 16.072",
+      "url": "https://statutes.capitol.texas.gov/Docs/CP/htm/CP.16.htm#16.072",
+      "text": "If the last day falls on a Saturday, Sunday or holiday, the deadline moves to the next day county offices are open. It applies to every statute of limitations in Texas, not only the ones in Chapter 16."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the statute of limitations for personal injury in Texas?",
+      "a": "Two years from the day the claim accrues, under § 16.003 of the Texas Civil Practice and Remedies Code. That covers car accidents, falls and most other injuries caused by someone's negligence."
+    },
+    {
+      "q": "How long do you have to file a wrongful death lawsuit in Texas?",
+      "a": "Two years from the date of death, under § 16.003(b). The clock starts at the death, not at the accident that caused it."
+    },
+    {
+      "q": "What is the deadline for medical malpractice in Texas?",
+      "a": "Two years from the treatment or the end of the course of treatment, under § 74.251, with an absolute limit of ten years. A child injured before 12 has until the 14th birthday."
+    },
+    {
+      "q": "Does the statute of limitations stop for a minor in Texas?",
+      "a": "Yes, for most claims. Under § 16.001 the time a person is under 18 does not count, so the two years generally start on the 18th birthday. Medical malpractice is the main exception."
+    },
+    {
+      "q": "How long do you have to sue a Texas city or the state?",
+      "a": "The Tort Claims Act requires written notice within six months of the incident under § 101.101, and some city charters require it sooner. Missing the notice can end the claim before the two-year lawsuit deadline matters."
+    }
+  ]
+}
