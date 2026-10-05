@@ -226,7 +226,7 @@ const schema = [
     {readingRows.length > 0 && (
       <>
         <h3>Further reading from firms in this directory</h3>
-        <p>We read these while writing this guide and checked what they say against the statute. Each is written by a {data.state} firm about its own state's deadline, and each adds something the table above cannot, which is a practitioner's view of how the rule plays out in a real case.</p>
+        <p>We read these while writing this guide and checked what they say against the statute. Each is written by {/^[AEIOU]/.test(data.state) ? 'an' : 'a'} {data.state} firm about its own state's deadline, and each adds something the table above cannot, which is a practitioner's view of how the rule plays out in a real case.</p>
         <ul class="reading">
           {readingRows.map(r => (
             <li><a href={r.url} rel={r.rel} target="_blank">{r.title}</a>, from <a href={`/firms/${r.f!.data.slug}/`}>{r.f!.data.name}</a> in {r.f!.data.market.city}. {r.why}</li>
@@ -244,7 +244,7 @@ const schema = [
     ))}
 
     <h2 id="method">Where this comes from</h2>
-    <p>Every period on this page was read from the official text published by <a href={src.url} rel="noopener" target="_blank">{src.who}</a> on {read}, and each row links to the section it comes from. Where the rule is made by courts rather than written in a statute, the page says so and names the case. Nothing here is drawn from a secondary summary.</p>
+    <p>Every period on this page was read from the official text published by <a href={src.url} rel="noopener" target="_blank">{src.who}</a> on {read}, and each row links to the section it comes from.{src.via && <> The Legislature's own server could not be reached while this guide was written, so the sections were read through {src.via}, and every row links to the official chapter.</>} Where the rule is made by courts rather than written in a statute, the page says so and names the case. Nothing here is drawn from a secondary summary.</p>
     <p>Statutes change. When a legislature amends one of these periods, this page changes with the research file it is built from, and the date at the top moves. Firm counts and scores are computed from this directory each time the page is built.</p>
     <p>This is not legal advice and no lawyer-client relationship comes from reading it. Whether a particular claim is still inside its deadline depends on facts this page cannot see.</p>
   </div>
