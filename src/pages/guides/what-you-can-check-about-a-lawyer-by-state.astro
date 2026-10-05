@@ -4,6 +4,8 @@ import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+import StackBar from '../../components/StackBar.astro';
 
 // Every figure here is computed from the gate records this directory already publishes on each
 // profile. Nothing is typed into the prose.
@@ -73,9 +75,19 @@ const nyMatched = ny ? ny.matched : 0;
 const gatesPerState = states.map(r => [r.G1, r.G2, r.G3].filter(Boolean).length);
 const noneAtAll = states.filter((_r, i) => gatesPerState[i] === 0);
 
-const title = licensure.length === 1
-  ? 'New Study: One State in Thirteen Lets Anyone Check a Lawyer’s Licence at Scale'
-  : `New Study: ${licensure.length} States in ${states.length} Let Anyone Check a Lawyer’s Licence at Scale`;
+// The figure leads and the scale closes, which is the shape every guide here now uses. Both
+// numbers are computed, so the headline cannot drift away from the page under it.
+const title = `Only ${licensure.length} of ${states.length} States `
+  + `${licensure.length === 1 ? 'Lets' : 'Let'} You Check a Lawyer’s Licence `
+  + `(${attorneys.toLocaleString('en-US')} Attorneys Studied)`;
+
+// The date the eligibility records were last recomputed. A study is a snapshot, and saying which
+// one is what lets the title carry a figure at all.
+const measured = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
 // No figure in here: a description is static metadata and a count in it goes stale the week
 // after a new market opens. check_meta.mjs refuses one.
 const description =
@@ -83,6 +95,7 @@ const description =
   + 'We tried to verify every attorney we name. Here is what each state allowed.';
 ---
 <Base title={title} description={description} nav="guides" image="/og/register.png"
+      figuresFrom={`this directory’s own eligibility records, ${firms.length} firms, recomputed ${measured}`}
       imageAlt="Thirteen state registers side by side, one of them open and the rest shut">
 <article>
 <header class="article-head">
@@ -123,6 +136,19 @@ const description =
         `<b>${noneAtAll.length} ${noneAtAll.length === 1 ? 'state answers' : 'states answer'} none of the three</b>${noneAtAll.length ? `: ${noneAtAll.map(r => r.state).join(', ')}.` : '.'}`,
       ]}
     />
+    <StatRow
+      stats={[
+        { value: `${licensure.length} of ${states.length}`, label: 'states publish an attorney register a program can read',
+          note: `${firmsIn(licensure)} firms sit in ${licensure.length === 1 ? 'it' : 'them'}`, emphasis: true },
+        { value: `${uncheckedPct}%`, label: 'of this directory cannot be licence-checked by anyone',
+          note: `${unchecked.toLocaleString('en-US')} firms` },
+        { value: `${discipline.length} of ${states.length}`, label: 'publish disciplinary decisions that can be searched',
+          note: 'mostly because the courts publish, not the bars' },
+        { value: `${entity.length} of ${states.length}`, label: 'publish a business register that can be queried',
+          note: `${noneAtAll.length} ${noneAtAll.length === 1 ? 'state answers' : 'states answer'} none of the three` },
+      ]}
+      source={`Computed from the eligibility records of ${firms.length.toLocaleString('en-US')} published firms, recomputed ${measured}.`}
+    />
     <div class="callout"><b>How to read this.</b> Every figure here is computed at build time from this directory's own eligibility records. It is a statement about what each state publishes, not about any firm or any attorney, and it is not legal advice.</div>
 
     <h2 id="public">Public is not the same as checkable</h2>
@@ -148,6 +174,18 @@ const description =
     <p>Licensure is the one that matters most and the one almost nobody publishes. {licensure.map(r => r.state).join(', ')} {licensure.length === 1 ? 'is the only state' : 'are the only states'} where a named attorney can be matched to a register without a person doing it by hand. In {ny ? ny.state : 'that state'}, {nyMatched} of {ny ? ny.n : 0} firms have every attorney they name confirmed as currently registered.</p>
     <p>Discipline is the next most useful and is better served: {discipline.length} of {states.length} states publish decisions in a form that can be searched, usually because the state's supreme court publishes its opinions rather than because the bar publishes its register. That is a side effect of court transparency, not of professional regulation.</p>
     <p>The business register, which answers whether the firm is a real registered entity rather than whether its lawyers are real, is available in {entity.length}.</p>
+
+    <StackBar
+      heading="Where the 1,252 firms sit, by what their state can answer"
+      unit="firms"
+      segments={[
+        { label: 'All three checks answerable', value: firmsIn(states.filter(r => r.G1 && r.G2 && r.G3)) },
+        { label: 'Two of three', value: firmsIn(states.filter(r => [r.G1, r.G2, r.G3].filter(Boolean).length === 2)) },
+        { label: 'One of three', value: firmsIn(states.filter(r => [r.G1, r.G2, r.G3].filter(Boolean).length === 1)) },
+        { label: 'None of the three', value: firmsIn(noneAtAll) },
+      ]}
+      caption="A firm's state decides how much of it anyone can verify, and the firm has no say in it."
+    />
 
     <h2 id="consequence">What this costs a person looking for a lawyer</h2>
     <p>It costs them nothing, individually, and that is exactly why it persists. Anyone with one lawyer in mind and five minutes can check that lawyer. The search box is sufficient for the person it was built for.</p>
