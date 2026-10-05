@@ -101,6 +101,30 @@ PHRASE_SIGNALS = [
     ("se_habla_espanol", r"se habla espa\w+|hablamos espa\w+"),
 ]
 
+# A word that means two things, and only one of them is a fee.
+#
+# In a property transaction a contingency is a condition in the contract, and a firm writing about
+# closings uses the word constantly without saying anything about what it charges.
+# criminaldefenselawnyc.com published "Contingency" as its fee model on the strength of "we review
+# every document, resolve title and contingency issues, and guide you from a contract to a closing
+# that holds up", which is not an offer to be paid out of a recovery.
+#
+# One firm of 668 today. It is here because the risk grows with the real estate practice rather
+# than with the injury one, and a fee model is printed on the profile as a fact about the firm.
+# The rejection is deliberately narrow: it fires only where the word sits against the parts of a
+# transaction, and never where the sentence also says who pays whom.
+CLAIM_REJECT = {
+    "contingency": (
+        re.compile(r"contingenc\w*\s+(?:issues?|clauses?|periods?|removal|deadlines?)|"
+                   r"(?:title|inspection|financing|mortgage|appraisal|loan)\s+and\s+contingenc|"
+                   r"contingenc\w*\s+and\s+(?:title|inspection|financing|closing)", re.I),
+        re.compile(r"contingenc\w{0,3}\s*(?:fee|basis|arrangement|representation|lawyers?|"
+                   r"based|cases?)|(?:on|work|handles?|handling|represent\w*)\s+"
+                   r"(?:a |an |strictly )?contingenc|de contingencia|base de contingencia|"
+                   r"no fee unless|no recovery|pay nothing unless", re.I),
+    ),
+}
+
 
 # What a UTF-8 page looks like after being read as Windows-1252: the two bytes of an accented
 # character become "Ã" or "â" followed by another high character. Used below to tell that mistake
@@ -354,6 +378,10 @@ def crawl(domain, fetched_at):
                 continue
             # Keep the surrounding sentence, trimmed, as the evidence for this claim.
             start, end = max(0, m.start() - 90), min(len(text), m.end() + 90)
+            quote = text[start:end].strip()
+            reject = CLAIM_REJECT.get(label)
+            if reject and reject[0].search(quote) and not reject[1].search(quote):
+                continue
             record["claims"][label] = {
                 "quote": text[start:end].strip(),
                 "source_url": final,

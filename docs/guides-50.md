@@ -307,7 +307,7 @@ read as KD 0 while being dominated by map packs and firms with decades of links.
 
 ## Publishing schedule: three a week
 
-Set 2026-10-04: **three guides a week, Monday, Wednesday and Friday**, one per run of the scheduled
+Set 2026-10-04, moved one week earlier on 2026-10-05 so the first week is not empty: **three guides a week, Monday, Wednesday and Friday**, one per run of the scheduled
 content task. Each run writes the first item below whose date has arrived and is not yet written,
 opens it as a PR against `main` (a person reads every guide before it merges), and logs it in the
 client's Basecamp project when the piece places a client. Pieces that place a client go first.
@@ -315,30 +315,30 @@ client's Basecamp project when the piece places a client. Pieces that place a cl
 | Date | Item | Client placed |
 | --- | --- | --- |
 | written 2026-10-04 | 18 Texas, 19 Florida, 20 New York (PR #96) | Fielding; Lopez & Humphries, Goodwin; Greenstein & Pittari |
-| 2026-10-12 | 25 Oregon | Paulson Coletti |
-| 2026-10-14 | 26 Maryland | Malloy Law |
-| 2026-10-16 | 27 Massachusetts | Brooks Law Firm |
-| 2026-10-19 | 29 Indiana | Sarkisian |
-| 2026-10-21 | 16 Statute of limitations hub | all seven state pages |
-| 2026-10-23 | 41 Back and neck injury settlements | verified injury firms by state |
-| 2026-10-26 | 2 AT&T data breach settlement | none |
-| 2026-10-28 | 30 Green card renewal | none |
-| 2026-10-30 | 17 California | none |
-| 2026-11-02 | 31 Green card lottery 2027 | none |
-| 2026-11-04 | 21 Georgia | none |
-| 2026-11-06 | 3 Facebook privacy settlement | none |
-| 2026-11-09 | 4 Cash App settlement | none |
-| 2026-11-11 | 22 Pennsylvania | none |
-| 2026-11-13 | 5 Amazon Prime settlement | none |
-| 2026-11-16 | 23 Illinois | none |
-| 2026-11-18 | 6 Capital One settlement | none |
-| 2026-11-20 | 33 Green card holders and ICE | none |
-| 2026-11-23 | 7 Blue Cross Blue Shield settlement | none |
-| 2026-11-25 | 24 Arizona | none |
-| 2026-11-27 | 8 Wells Fargo settlement | none |
-| 2026-11-30 | 28 Nevada | none |
-| 2026-12-02 | 40 Personal injury case value hub | verified injury firms by state |
-| 2026-12-04 | 1 Class action settlements hub | none |
+| written 2026-10-05 | 25 Oregon (PR #105) | Paulson Coletti |
+| 2026-10-07 | 26 Maryland | Malloy Law |
+| 2026-10-09 | 27 Massachusetts | Brooks Law Firm |
+| 2026-10-12 | 29 Indiana | Sarkisian |
+| 2026-10-14 | 16 Statute of limitations hub | all seven state pages |
+| 2026-10-16 | 41 Back and neck injury settlements | verified injury firms by state |
+| 2026-10-19 | 2 AT&T data breach settlement | none |
+| 2026-10-21 | 30 Green card renewal | none |
+| 2026-10-23 | 17 California | none |
+| 2026-10-26 | 31 Green card lottery 2027 | none |
+| 2026-10-28 | 21 Georgia | none |
+| 2026-10-30 | 3 Facebook privacy settlement | none |
+| 2026-11-02 | 4 Cash App settlement | none |
+| 2026-11-04 | 22 Pennsylvania | none |
+| 2026-11-06 | 5 Amazon Prime settlement | none |
+| 2026-11-09 | 23 Illinois | none |
+| 2026-11-11 | 6 Capital One settlement | none |
+| 2026-11-13 | 33 Green card holders and ICE | none |
+| 2026-11-16 | 7 Blue Cross Blue Shield settlement | none |
+| 2026-11-18 | 24 Arizona | none |
+| 2026-11-20 | 8 Wells Fargo settlement | none |
+| 2026-11-23 | 28 Nevada | none |
+| 2026-11-25 | 40 Personal injury case value hub | verified injury firms by state |
+| 2026-11-27 | 1 Class action settlements hub | none |
 
 After that, the rest of family A in volume order, then C, D and E.
 
