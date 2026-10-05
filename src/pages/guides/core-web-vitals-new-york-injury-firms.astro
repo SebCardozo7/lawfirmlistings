@@ -84,8 +84,18 @@ const updated = measuredOn
 const title = `Only ${passing.length} of ${withPsi.length} New York Injury Firms Pass `
   + `Google's Core Web Vitals`;
 const description = 'We ran PageSpeed Insights against every New York injury firm in this directory. Almost all fail Core Web Vitals. What it costs them, and what fixes it.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`New York injury firms measured on PageSpeed Insights, read ${snapshot}`} image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">
 <article>
 <header class="article-head">
   <div class="narrow">

@@ -216,8 +216,18 @@ const scored = scoredAt
 const title = `${share(spanish.length, measured.length)}% of Law Firms Publish in Spanish, `
   + `and Almost All of Them Do Injury Work`;
 const description = 'We read every firm in this directory for a page published in Spanish. Whether one exists tracks the practice area more than the city the firm works in.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/language.png" imageAlt="Two columns of law firm pages, the left column mostly carrying a second language and the right column mostly not">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published firm's own website, read ${snapshot}`} image="/og/language.png" imageAlt="Two columns of law firm pages, the left column mostly carrying a second language and the right column mostly not">
 <article>
 <header class="article-head">
   <div class="narrow">

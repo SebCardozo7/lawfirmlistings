@@ -199,8 +199,18 @@ const title = `${top.share}% of ${shortPractice(top.name)} Firms Offer a Free Co
   + `${lowest.share}% of ${shortPractice(lowest.name)}`;
 const description =
   'We read every law firm website in this directory for a free consultation offer. Injury firms publish one almost always. Immigration firms almost never do.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/consult.png" imageAlt="A grid of dots, most of them filled, with a tail of hollow ones at the end">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published firm's own website, read ${snapshot}`} image="/og/consult.png" imageAlt="A grid of dots, most of them filled, with a tail of hollow ones at the end">
 <article>
 <header class="article-head">
   <div class="narrow">

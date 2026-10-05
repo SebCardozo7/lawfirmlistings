@@ -46,8 +46,18 @@ const title = publishPct.length === 0
   ? `0 of ${firms.length} New York Injury Firms Print the Fee They Charge`
   : `${publishPct.length} of ${firms.length} New York Injury Firms Print the Fee They Charge`;
 const description = 'Every New York injury firm offers a free consultation, so it tells you nothing. What none publishes is the contingency fee, or who pays case expenses.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/fees.png" imageAlt="A published fee page with one line filled in and the line beside it left blank">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published New York injury firm's fee pages, read ${snapshot}`} image="/og/fees.png" imageAlt="A published fee page with one line filled in and the line beside it left blank">
 <article>
 <header class="article-head">
   <div class="narrow">

@@ -67,8 +67,18 @@ const title = publishPct.length === 0
 const description =
   'We read the fee language of every injury firm in this directory, in every state we publish '
   + 'in. The rules differ by state. What the firms disclose does not.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/fees.png"
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published injury firm's own fee pages, read ${snapshot}`} image="/og/fees.png"
       imageAlt="Four state fee pages side by side, each with different lines filled and the same line left blank">
 <article>
 <header class="article-head">
