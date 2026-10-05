@@ -1,0 +1,47 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-or.json';
+
+/**
+ * Oregon deadlines, a state statute page from docs/guides-50.md (family B).
+ *
+ * Title and description figures are read from the research file and declared through
+ * figuresFrom, so a corrected period rewrites the headline instead of leaving it stale.
+ */
+const head = data.headline;
+const notice = data.rows.find(r => r.statute === 'ORS 30.275(2)(b)')!;
+const car = data.rows.find(r => r.statute === 'ORS 12.080(4)')!;
+const death = data.rows.find(r => r.statute === 'ORS 30.020(1)')!;
+const govSuit = data.rows.find(r => r.statute === 'ORS 30.275(9)')!;
+const med = data.rows.find(r => r.statute === 'ORS 12.110(4)')!;
+const minors = data.exceptions.find(e => e.statute.startsWith('ORS 12.160(1)'))!;
+const title = 'Oregon Statute of Limitations 2026: Deadlines, Notice and Exceptions';
+const description = `Most Oregon injury claims have ${head.years} years, a claim against a public body needs notice in ${notice.period.split(' ')[0]} days, and a child's extra time is capped.`;
+const lede = `Oregon gives most injury claims <b>${head.years} years</b>. The two rules that surprise people sit beside it. A claim against a city, a county, TriMet or the state needs written notice within <b>${notice.period.replace(' to give notice', '')}</b>. And a child does not get until adulthood: the pause for minors is capped. Here is every Oregon deadline by type of claim, read from the Oregon Revised Statutes.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="Oregon statute of limitations"
+  reading={[
+    {
+      firm: 'paulson-coletti-trial-attorneys-pc',
+      url: 'https://www.paulsoncoletti.com/oregon-personal-injury-statute-of-limitations/',
+      title: 'Oregon Personal Injury Statute of Limitations',
+      why: 'A Portland trial firm on how the two-year rule meets real cases, with the malpractice and product repose limits, the Tort Claims Act notice, and why insurers watch the calendar as closely as the lawyers do.',
+    },
+  ]}>
+  <Fragment slot="toc">
+    <li><a href="#children">The cap on a child's extra time</a></li>
+    <li><a href="#crash">One crash, three clocks</a></li>
+  </Fragment>
+
+  <h2 id="children">In Oregon, a child's extra time runs out before adulthood</h2>
+  <p>Most states stop the clock until an injured child turns 18 and then start the ordinary period. Oregon stops it too, but only for so long. Under <a href={minors.url} rel="noopener" target="_blank">{minors.statute}</a>, the pause can add no more than five years, and can never run more than one year past the 18th birthday.</p>
+  <p>The arithmetic is unforgiving for young children. A child hurt at five gets five years of pause and then the ordinary two years, so the claim ends at about twelve. A family that waits for the child to grow up and decide has, in most cases, already lost the claim.</p>
+  <p>Medical malpractice is stricter still. The five-year limit in <a href={med.url} rel="noopener" target="_blank">{med.statute}</a> applies "notwithstanding" the rule for minors, so a birth injury discovered at age six is usually already past it.</p>
+
+  <h2 id="crash">One Oregon crash can run on three clocks</h2>
+  <p>A collision with a city vehicle shows how far apart the deadlines in one event can be.</p>
+  <p><b>{notice.period.replace(' to give notice', '')} for the notice.</b> Under <a href={notice.url} rel="noopener" target="_blank">{notice.statute}</a>, the public body has to receive written notice of the claim, or actual notice of it, within that time. The lawsuit itself then has {govSuit.period}, under {govSuit.statute}, and that two years applies even to a death, which against a private driver would have {death.period}.</p>
+  <p><b>{head.years} years for the people hurt.</b> The injury claims run on {head.statute}, whoever the other driver was.</p>
+  <p><b>{car.period} for the car.</b> Damage to personal property runs on <a href={car.url} rel="noopener" target="_blank">{car.statute}</a>, three times as long as the injury claim. That gap is why a settled property damage claim tells a person nothing about whether the injury claim is still open.</p>
+</StatuteGuide>

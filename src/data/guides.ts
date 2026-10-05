@@ -71,6 +71,19 @@ export const GUIDES: Guide[] = [
   // live in src/data/research/statute-of-limitations-<code>.json and the pages compute their
   // headlines from it, so nothing here may carry a figure.
   {
+    slug: 'oregon-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Oregon Statute of Limitations: The Notice, and the Cap on a Child\'s Time',
+    summary:
+      'Oregon\'s injury deadline is the familiar one. What catches people is beside it: a short ' +
+      'notice period against any public body, and a pause for minors that is capped, so a young ' +
+      'child\'s claim can end long before adulthood. Every Oregon deadline, read from the ORS.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'A child does not get until 18',
+  },
+  {
     slug: 'florida-statute-of-limitations',
     cover: 'deadline',
     kicker: 'Reference',

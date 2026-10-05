@@ -1,0 +1,228 @@
+{
+  "state": "Oregon",
+  "code": "OR",
+  "slug": "oregon-statute-of-limitations",
+  "measured_at": "2026-10-05",
+  "source": {
+    "who": "The Oregon Legislature",
+    "what": "Oregon Revised Statutes, Chapter 12",
+    "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+    "via": "oregon.public.law, which reproduces the Legislature's text section by section, with a second copy on FindLaw as a check"
+  },
+  "headline": {
+    "years": 2,
+    "claim": "a personal injury claim",
+    "statute": "ORS 12.110(1)",
+    "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html"
+  },
+  "rows": [
+    {
+      "claim": "Personal injury",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "ORS 12.110(1)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the injury, or from when the person knew or should have known of it. Oregon courts read a discovery rule into this section.",
+      "note": "The same section covers assault, battery and false imprisonment."
+    },
+    {
+      "claim": "Wrongful death",
+      "group": "injury",
+      "period": "3 years",
+      "years": 3,
+      "statute": "ORS 30.020(1)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors030.html",
+      "clock": "From when the injury that caused the death was discovered or should have been, but never later than three years after the death.",
+      "note": "Any repose period that applies to the underlying act, such as five years for malpractice, cuts it shorter."
+    },
+    {
+      "claim": "Medical malpractice",
+      "group": "injury",
+      "period": "2 years, 5 at the outside",
+      "years": 2,
+      "statute": "ORS 12.110(4)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From when the injury was first discovered or should have been.",
+      "note": "Five years after the treatment, every claim is barred, children included. Fraud or misleading statements that kept the claim from being filed reopen two years from their discovery."
+    },
+    {
+      "claim": "Injury from a defective product",
+      "group": "injury",
+      "period": "2 years, 10 at the outside",
+      "years": 2,
+      "statute": "ORS 30.905(1), (2)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors030.html",
+      "clock": "From when the person discovered, or should have, both the injury and its connection to the product.",
+      "note": "The outer limit is ten years from the first purchase, or the repose period of the state where the product was made if that is longer. A death caused by a product has three years under § 30.905(3)."
+    },
+    {
+      "claim": "Negligence, the outer limit",
+      "group": "injury",
+      "period": "10 years at the outside",
+      "years": 10,
+      "statute": "ORS 12.115(1)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the act or omission complained of, whenever the harm was found.",
+      "note": "A ceiling, not a filing period: it never lengthens the two years."
+    },
+    {
+      "claim": "Libel and slander",
+      "group": "injury",
+      "period": "1 year",
+      "years": 1,
+      "statute": "ORS 12.120(2)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the day the claim accrues, which for defamation is generally the publication.",
+      "note": "The shortest civil filing period in the chapter."
+    },
+    {
+      "claim": "Child abuse, including sexual abuse",
+      "group": "injury",
+      "period": "Until age 40, or 5 years from discovery",
+      "years": null,
+      "statute": "ORS 12.117(1)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "Before the survivor turns 40, or within five years of discovering the link between the abuse and the injury, whichever is later.",
+      "note": "Also reaches anyone who knowingly allowed the abuse."
+    },
+    {
+      "claim": "Damage to real property",
+      "group": "property",
+      "period": "6 years",
+      "years": 6,
+      "statute": "ORS 12.080(3)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the damage.",
+      "note": "Waste, trespass and interference with land. Construction defects run on their own section."
+    },
+    {
+      "claim": "Damage to or taking of personal property",
+      "group": "property",
+      "period": "6 years",
+      "years": 6,
+      "statute": "ORS 12.080(4)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the damage or the taking.",
+      "note": "This is the clock for the car in a crash, three times as long as the clock for the people in it."
+    },
+    {
+      "claim": "Contract, written or oral",
+      "group": "contract",
+      "period": "6 years",
+      "years": 6,
+      "statute": "ORS 12.080(1)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the breach.",
+      "note": "The statute says express or implied, so Oregon has no separate period for oral agreements."
+    },
+    {
+      "claim": "Fraud",
+      "group": "contract",
+      "period": "2 years",
+      "years": 2,
+      "statute": "ORS 12.110(1)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the discovery of the fraud, which the statute says in so many words.",
+      "note": ""
+    },
+    {
+      "claim": "Sale of goods and warranties",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "ORS 72.7250",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors072.html",
+      "clock": "From the breach, which for a warranty is delivery, whether or not the buyer knew.",
+      "note": "A contract can shorten this to one year but never lengthen it."
+    },
+    {
+      "claim": "Notice of a claim against a public body",
+      "group": "government",
+      "period": "180 days to give notice",
+      "years": 0.49,
+      "statute": "ORS 30.275(2)(b)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors030.html",
+      "clock": "Within 180 days of the loss or injury, in writing to the right office, or by actual notice the public body received.",
+      "note": "This is a notice deadline, not the deadline to sue. Up to 90 days do not count while the injured person cannot give notice because of the injury, age or incapacity."
+    },
+    {
+      "claim": "Notice of a wrongful death claim against a public body",
+      "group": "government",
+      "period": "1 year to give notice",
+      "years": 1,
+      "statute": "ORS 30.275(2)(a)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors030.html",
+      "clock": "Within one year of the loss or injury.",
+      "note": ""
+    },
+    {
+      "claim": "Lawsuit against a public body",
+      "group": "government",
+      "period": "2 years",
+      "years": 2,
+      "statute": "ORS 30.275(9)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors030.html",
+      "clock": "From the loss or injury, notwithstanding the rest of Chapter 12.",
+      "note": "Two years even for wrongful death, which against a private defendant would have three."
+    },
+    {
+      "claim": "Any claim not otherwise provided for",
+      "group": "other",
+      "period": "10 years",
+      "years": 10,
+      "statute": "ORS 12.140",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "clock": "From the day the claim accrues.",
+      "note": "The catch-all at the end of the chapter."
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "Children, and the five-year cap",
+      "statute": "ORS 12.160(1), (2)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "text": "The clock is paused while the injured person is under 18, but the pause can add no more than five years, and no more than one year after the 18th birthday, whichever comes first. A child hurt at five does not have until adulthood: five years of pause and two years of running time end the claim at about twelve. A parent's claim for the child's medical bills is paused for the same time."
+    },
+    {
+      "name": "A disabling mental condition",
+      "statute": "ORS 12.160(3), (4)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "text": "If the person cannot understand their rights when the claim accrues, the clock is paused for as long as that lasts, under the same cap: no more than five years, and no more than one year after the condition ends."
+    },
+    {
+      "name": "The discovery rule, which the courts read into the statute",
+      "statute": "Doe v. American Red Cross, 322 Or 502 (1996)",
+      "url": "https://www.courtlistener.com/opinion/1441258/doe-v-american-red-cross/",
+      "text": "Oregon applies a discovery rule to the general two-year period, so the clock starts when a reasonable person would have known of the harm, its cause and that someone was at fault. It does not protect someone who knew enough to ask and did not. The malpractice and product sections write the same idea into the statute."
+    },
+    {
+      "name": "Fraud and concealment in malpractice",
+      "statute": "ORS 12.110(4)",
+      "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors012.html",
+      "text": "The five-year limit on malpractice gives way only when fraud, deceit or a misleading statement is the reason nothing was filed. Then the claim has two years from when that was discovered or should have been."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the statute of limitations for personal injury in Oregon?",
+      "a": "Two years, under ORS 12.110(1). Oregon courts start the clock when the injured person knew or should have known of the injury and its cause, which for a crash or a fall is almost always the day it happened."
+    },
+    {
+      "q": "How long do you have to file a wrongful death lawsuit in Oregon?",
+      "a": "Three years from when the injury that caused the death was discovered, and never later than three years after the death, under ORS 30.020. Against a public body it is two years, with notice due within one year."
+    },
+    {
+      "q": "What is the deadline for medical malpractice in Oregon?",
+      "a": "Two years from when the injury was discovered or should have been, under ORS 12.110(4), and no later than five years after the treatment. The five years apply to children too."
+    },
+    {
+      "q": "Does the statute of limitations stop for a minor in Oregon?",
+      "a": "Only partly. ORS 12.160 pauses the clock while a person is under 18, but the pause cannot add more than five years, or run more than one year past the 18th birthday."
+    },
+    {
+      "q": "How long do you have to sue a city or the state of Oregon?",
+      "a": "Notice of the claim is due within 180 days of the injury, or one year for a death, under ORS 30.275, and the lawsuit itself within two years. Missing the notice can end the claim before the lawsuit deadline matters."
+    }
+  ]
+}
