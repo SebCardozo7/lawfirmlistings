@@ -202,10 +202,20 @@ const states = [...new Set(measured.map(f => f.data.market.state))].length;
 // States the finding. No figure in it: check_meta rejects one, and rightly, because a title is
 // indexed once and every count here moves when a firm is added. Kept under 70 characters so
 // audit_seo does not flag it and Google does not truncate it.
-const title = 'New Study: Search Visibility Brings More Reviews, Not Better Ones';
+const title = `${ratingSpread.toFixed(2)} Stars Separate the Most and Least Visible Law Firms`;
 const description = 'We measured every law firm in this directory for organic search traffic and client rating. Visibility tracks what a firm publishes, not what clients say.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/signal.png" imageAlt="Four falling columns under a flat line, the shape of the study">
+<Base title={title}
+      figuresFrom={`Ahrefs and Google Business Profile, every measured firm, read ${snapshot}`} description={description} nav="guides" image="/og/signal.png" imageAlt="Four falling columns under a flat line, the shape of the study">
 <article>
 <header class="article-head">
   <div class="narrow">

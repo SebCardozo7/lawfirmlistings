@@ -300,11 +300,21 @@ const windowStart = asDate(firstRead);
 
 // States the finding and carries no figure, because check_meta rejects one in a title or a
 // description and is right to: every count here moves when a market opens.
-const title = 'New Study: Most Criminal Defense Firms Publish No Case Results';
+const title = `${subject.length - sPublishing.length} of ${subject.length} ${homeCity} Criminal Defense Firms Publish No Case Results`;
 const description =
   'Every guide to hiring a criminal lawyer says check the track record. We counted whether there is one to check, against injury firms on the same streets.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/defense.png" imageAlt="Two stacks of result cards, one tall and one nearly empty, under two identical rows of stars">
+<Base title={title}
+      figuresFrom={`every published criminal defense firm's own website, read ${snapshot}`} description={description} nav="guides" image="/og/defense.png" imageAlt="Two stacks of result cards, one tall and one nearly empty, under two identical rows of stars">
 <article>
 <header class="article-head">
   <div class="narrow">

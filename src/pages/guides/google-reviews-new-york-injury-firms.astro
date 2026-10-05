@@ -78,10 +78,20 @@ const fmt = (n: number) => n.toLocaleString('en-US');
 
 // The comparison the data actually supports: the ratings sit within a fraction of a star of each
 // other, while the review counts track how many offices a firm runs. No figure in the title.
-const title = 'New Study: Office Count Matters More Than Star Rating for Injury Firms';
+const title = `${totalReviews.toLocaleString('en-US')} Reviews Across New York's Injury Firms, ${ratingSpread} Stars Apart`;
 const description = 'We summed every Google review for the New York injury firms in this directory. The star ratings barely differ, and the counts mostly measure office count.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/reviews.png" imageAlt="Five near-identical star ratings above review-count bars of wildly different lengths">
+<Base title={title}
+      figuresFrom={`Google Business Profile listings for New York injury firms, read ${snapshot}`} description={description} nav="guides" image="/og/reviews.png" imageAlt="Five near-identical star ratings above review-count bars of wildly different lengths">
 <article>
 <header class="article-head">
   <div class="narrow">

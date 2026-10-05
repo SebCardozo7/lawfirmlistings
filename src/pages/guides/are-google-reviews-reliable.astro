@@ -204,10 +204,20 @@ const scoreRows = [
 
 // States the finding, not the topic. No figure in either line: check_meta rejects one, and a
 // share that moves every month should not be the thing Google has indexed.
-const title = 'New Study: The Reviews Google Shows Are Not the Reviews It Counted';
+const title = `Google Shows You ${returnedShare}% of the Law Firm Reviews It Counted`;
 const description = 'We compared the reviews Google returns for a law firm against the rating on its profile. Across the directory they agree. About any one firm they do not.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/sample.png"
+<Base title={title}
+      figuresFrom={`Google Business Profile listings read through the Places API, read ${snapshot}`} description={description} nav="guides" image="/og/sample.png"
   imageAlt="A field of review marks with five of them lifted out into a bright window, beside two gauges of unequal height">
 <article>
 <header class="article-head">

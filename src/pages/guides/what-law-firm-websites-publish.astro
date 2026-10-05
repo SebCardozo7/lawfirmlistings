@@ -157,10 +157,20 @@ const updated = scoredOn
 
 // States the finding, not the subject, and carries no figure: check_meta rejects a count in a
 // title or a description, and the ranking of these five page types is what is being claimed.
-const title = 'New Study: The Last Thing a Law Firm Website Publishes Is Its Price';
+const title = `${feeSilent} of ${readable.length} Law Firm Websites Publish No Price at All`;
 const description = 'We read every law firm website in this directory and counted which pages are really there. A blog is the commonest. A page about fees is the rarest.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/pages.png" imageAlt="Five stacks of page tiles falling away from left to right, the last one almost entirely empty outlines">
+<Base title={title}
+      figuresFrom={`every published firm's own website, read ${snapshot}`} description={description} nav="guides" image="/og/pages.png" imageAlt="Five stacks of page tiles falling away from left to right, the last one almost entirely empty outlines">
 <article>
 <header class="article-head">
   <div class="narrow">
