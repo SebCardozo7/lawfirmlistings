@@ -1,9 +1,5 @@
 {
   "slug": "lopez-humphries-pa",
-  "site_blocked": {
-    "reason": "The firm's site answers our crawler with HTTP 403, which is bot protection. We do not work around it.",
-    "seen_at": "2026-09-13"
-  },
   "name": "Lopez & Humphries, P.A.",
   "initials": "LH",
   "website": "https://lopezandhumphries.com",
@@ -93,15 +89,15 @@
   "availability": [],
   "about": [
     "Lopez & Humphries works from four offices across Florida and names four attorneys.",
-    "542 reviews at 4.81 across four listings. It publishes nothing we could record about fees, consultations or the hours it answers. It publishes none of the trust pages pillar D looks for."
+    "525 reviews at 4.81 across three listings. It publishes nothing we could record about fees, consultations or the hours it answers. It publishes ten case results with amounts of its own and they are its figures rather than ones we confirmed."
   ],
   "reviews": {
     "quotes": [],
     "google": {
       "rating": 4.81,
-      "count_label": "542",
-      "source": "Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-23"
+      "count_label": "525",
+      "source": "Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-05"
     },
     "sample": [
       {
@@ -122,26 +118,6 @@
       },
       {
         "published_at": "2026-04-29T16:44:38.011397663Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-10-07T15:14:29.507400209Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-11-03T17:36:26.799753076Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-11-05T19:11:00.100826277Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-10-08T13:03:27.498149755Z",
-        "rating": 5
-      },
-      {
-        "published_at": "2025-11-05T15:00:54.277617541Z",
         "rating": 5
       },
       {
@@ -191,12 +167,12 @@
     "schema_detected": false,
     "psi": {
       "value": {
-        "performance": 47,
+        "performance": 56,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-13",
-      "note": "LCP 15.0 s / CLS 0.000 / TBT 642 ms"
+      "measured_at": "2026-10-05",
+      "note": "LCP 14.8 s / CLS 0.000 / TBT 466 ms"
     },
     "_ahrefs_partial_from_cohort": {
       "domain": "lopezandhumphries.com",
@@ -207,8 +183,8 @@
       "org_traffic": 0
     },
     "places": {
-      "listing_count": 4,
-      "review_count_total": 542,
+      "listing_count": 3,
+      "review_count_total": 525,
       "rating_weighted": 4.81,
       "completeness": {
         "categories": 5,
@@ -221,10 +197,10 @@
           "questions and answers",
           "recent posts"
         ],
-        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
       },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-23"
+      "measured_at": "2026-10-05"
     },
     "ahrefs": {
       "dr": 17,
@@ -268,7 +244,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -281,7 +257,7 @@
   "faq": [
     {
       "q": "How much does Lopez & Humphries charge?",
-      "a": "Lopez & Humphries answers our crawler with a 403, so nothing published on its own site could be read for this profile, fee terms included. Ask for the fee agreement in writing, along with how case expenses are handled and whether they come out of the recovery before or after the fee."
+      "a": "Lopez & Humphries publishes no fee terms on the pages we read, so none is recorded on this profile. An absence here is not a claim that the firm has no fee arrangement, only that it does not state one publicly. The rate itself is not published, so ask for it in writing, along with how case expenses are handled and whether they come out of the recovery before or after the fee."
     },
     {
       "q": "Does Lopez & Humphries offer a free consultation?",
@@ -296,31 +272,57 @@
       "a": "Lopez & Humphries names four attorneys on its own site, and each is listed on this profile with the page we read them from. They have not been checked against a state register: Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it."
     },
     {
+      "q": "Are the case results Lopez & Humphries publishes verified?",
+      "a": "No. Lopez & Humphries publishes ten case results with amounts on its own site. We counted them and we did not confirm them: the figures are the firm's. Pillar B scores whether a firm publishes outcomes and discloses them properly, including whether a prior-results disclaimer appears beside them, not whether the amounts are right. Past results do not predict another case."
+    },
+    {
       "q": "What has Law Firm Listings verified about Lopez & Humphries?",
-      "a": "Lopez & Humphries scores 86 and sits at Verified. Passed: entity registration, website and footprint. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+      "a": "Lopez & Humphries scores 49 and sits at Verified. Passed: entity registration, website and footprint. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
     }
   ],
   "operating": {
     "registered": "2012-11-02",
     "years": 13.9,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
-    "checked_at": "2026-09-13"
+    "checked_at": "2026-10-05"
   },
   "results_published": {
-    "readable": true,
-    "count": 0,
-    "amounts": [],
-    "case_types": [],
+    "count": 10,
+    "counted_from": "stated amounts",
+    "amounts": [
+      25000000,
+      4900000,
+      2500000,
+      2200000,
+      1300000,
+      1000000,
+      900000,
+      700000,
+      635000,
+      235000
+    ],
+    "largest": 25000000,
+    "aggregate_claims": [],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "wrongful death",
+      "pedestrian"
+    ],
     "disclaimer": false,
     "venues": [],
-    "why": "the site publishes no case-results page",
-    "checked_at": "2026-09-13"
+    "text_length": 3412,
+    "readable": true,
+    "url": "https://www.lopezandhumphries.com/results/",
+    "checked_at": "2026-10-05"
   },
   "score": {
-    "total": 86,
+    "total": 49,
     "tier": "Verified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-02",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-05",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -347,39 +349,39 @@
             "code": "A5",
             "label": "Accountability",
             "pts": 0,
-            "max": 6,
-            "source": "pending",
-            "evidence": "Nothing published about insurance or bar memberships"
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
       "B": {
-        "score": 0,
+        "score": 8,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 4.5,
             "max": 6,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "firm",
+            "evidence": "10 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 3,
             "max": 5,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "firm",
+            "evidence": "6 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
@@ -393,7 +395,7 @@
             "pts": 5,
             "max": 5,
             "source": "observed",
-            "evidence": "542 Google reviews · Google Business Profile via Places API. 4 listings, counts summed and rating weighted by count"
+            "evidence": "525 Google reviews · Google Business Profile via Places API. 3 listings, counts summed and rating weighted by count"
           },
           {
             "code": "C2",
@@ -401,7 +403,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.81 over 542 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.81 over 525 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -409,7 +411,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "19 of 20 sampled reviews are from the last 12 months (newest 2026-09-02) · a sample of five per business listing, not every review"
+            "evidence": "14 of 15 sampled reviews are from the last 12 months (newest 2026-09-02) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -417,21 +419,21 @@
             "pts": 4,
             "max": 4,
             "source": "places",
-            "evidence": "0 of 20 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+            "evidence": "0 of 15 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
           }
         ]
       },
       "D": {
-        "score": 6,
+        "score": 8,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
+            "pts": 2.0,
             "max": 7,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -447,15 +449,15 @@
             "pts": 1.0,
             "max": 1,
             "source": "places",
-            "evidence": "4 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+            "evidence": "3 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
           },
           {
             "code": "D4",
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "ahrefs",
+            "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -468,52 +470,52 @@
             "label": "Free consult & fee transparency",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "fee model not published · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 0,
+            "pts": 0.0,
             "max": 4,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "English"
           },
           {
             "code": "E4",
             "label": "Availability",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "no availability published"
           }
         ]
       }
     },
-    "floor_abc": 19,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 0,
+      "gap": 21,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "D1 Website trust & experience: not yet measured (7 pts)",
-        "A5 Accountability: not yet measured (6 pts)",
-        "B1 Results published: not yet measured (6 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "E1 Free consult & fee transparency: +6 available"
       ]
     },
-    "raw": 25.0,
-    "assessed": 29,
-    "coverage": 0.397,
-    "floor_abc_pct": 0.95,
+    "raw": 34.5,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.697,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 73,
-    "comparable": false
+    "assessable": 70,
+    "comparable": true
   },
   "screens": {
     "court_dockets": {
@@ -529,5 +531,16 @@
     "formed": "2009-06-03",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
     "checked_at": "2026-09-30"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-10-05"
   }
 }

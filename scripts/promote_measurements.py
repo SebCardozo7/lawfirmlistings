@@ -175,6 +175,23 @@ def promote_attorneys(rec: dict, firm: dict) -> list[str]:
 def promote(rec: dict, firm: dict) -> list[str]:
     """Mutate `firm` in place; return a line per field changed."""
     changed: list[str] = []
+
+    # A block is a state of the site, not a property of the firm, and sites stop blocking.
+    #
+    # site_blocked is set once when a crawl is refused, and until now nothing ever cleared it.
+    # Lopez & Humphries lifted its 403, a fresh crawl read seven page kinds and ten published
+    # results off it, and the profile still said "the firm's site answers our crawler with a 403"
+    # while scoring 86 out of a 29 point scale, which made it the highest number in Florida.
+    # An inflated score is the worse half: everything a site answers was pending, so the firm was
+    # being marked out of what little was left.
+    #
+    # Clearing it needs a crawl that actually read the site rather than one that merely connected,
+    # so it wants the home page and at least two other kinds.
+    if firm.get("site_blocked") and rec.get("https_ok") and len(rec.get("pages_found") or {}) >= 3:
+        firm.pop("site_blocked", None)
+        changed.append("site_blocked   cleared: the site answered this crawl, %d page kind(s) read"
+                       % len(rec.get("pages_found") or {}))
+
     places = rec.get("places") or {}
     agg = places.get("aggregate") or {}
     digital = firm.setdefault("digital", {})

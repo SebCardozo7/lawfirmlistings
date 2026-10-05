@@ -521,7 +521,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 30 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-01"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -558,10 +558,10 @@
     }
   ],
   "score": {
-    "total": 63,
+    "total": 64,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (5/15).",
-    "computed_at": "2026-10-02",
+    "computed_at": "2026-10-05",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -663,7 +663,7 @@
         ]
       },
       "D": {
-        "score": 11,
+        "score": 12,
         "max": 25,
         "subs": [
           {
@@ -677,10 +677,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 6,
+            "pts": 7,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 53 → 96th pct of 76-firm cohort (median 28) 3/3 · 1,596 referring domains, 92th pct 2/2 · 693 organic keywords / 4,525 visits·mo, 74th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 53 → 96th pct of 79-firm cohort (median 27.5) 3/3 · 1,596 referring domains, 92th pct 2/2 · 693 organic keywords / 4,525 visits·mo, 76th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -735,7 +735,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 7,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -744,7 +744,7 @@
         "A6 Roster verifiability: +3 available"
       ]
     },
-    "raw": 57.0,
+    "raw": 58.0,
     "assessed": 90,
     "coverage": 1.0,
     "floor_abc_pct": 0.719,

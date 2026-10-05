@@ -563,7 +563,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 50 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -730,10 +730,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 74,
+    "total": 72,
     "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-02",
+    "computed_at": "2026-10-05",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -797,7 +797,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 14,
         "max": 20,
         "subs": [
           {
@@ -819,10 +819,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 4,
+            "pts": 2.5,
             "max": 5,
             "source": "places",
-            "evidence": "10 of 25 sampled reviews are from the last 12 months (newest 2026-09-04) · a sample of five per business listing, not every review"
+            "evidence": "9 of 25 sampled reviews are from the last 12 months (newest 2026-09-04) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -903,12 +903,12 @@
         ]
       }
     },
-    "floor_abc": 30,
+    "floor_abc": 29,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 11,
-      "floor_met": true,
+      "gap": 13,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
@@ -916,10 +916,10 @@
         "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 52.0,
+    "raw": 50.5,
     "assessed": 70,
     "coverage": 1.0,
-    "floor_abc_pct": 0.803,
+    "floor_abc_pct": 0.763,
     "gates_unavailable": [
       "G1",
       "G2",

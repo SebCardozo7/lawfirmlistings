@@ -132,7 +132,7 @@
       "rating": 4.5,
       "count_label": "233",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-30"
+      "fetched_at": "2026-10-05"
     },
     "sample": [
       {
@@ -167,12 +167,12 @@
     "schema_detected": true,
     "psi": {
       "value": {
-        "performance": 39,
+        "performance": 43,
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, field + lab)",
-      "measured_at": "2026-09-30",
-      "note": "LCP 20.4 s / CLS 0.062 / TBT 611 ms"
+      "measured_at": "2026-10-05",
+      "note": "LCP 23.6 s / CLS 0.062 / TBT 474 ms"
     },
     "_ahrefs_partial_from_cohort": {
       "domain": "pozogoldstein.com",
@@ -197,7 +197,19 @@
         "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
       },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-30"
+      "measured_at": "2026-10-05"
+    },
+    "ahrefs": {
+      "dr": 25.0,
+      "ahrefs_rank": 6573693,
+      "refdomains": 1029,
+      "refdomains_dofollow": 451,
+      "backlinks": 4017,
+      "org_keywords": 155,
+      "org_traffic": 666,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-05"
     }
   },
   "gates": {
@@ -224,7 +236,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 13 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -253,7 +265,7 @@
     },
     {
       "q": "What has Law Firm Listings verified about Pozo Goldstein?",
-      "a": "Pozo Goldstein scores 47 and sits at Verified. Passed: website and footprint. Did not pass: entity registration. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+      "a": "Pozo Goldstein scores 51 and sits at Verified. Passed: website and footprint. Did not pass: entity registration. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure and discipline. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
     }
   ],
   "_review": {
@@ -285,7 +297,7 @@
     "registered": "2009-02-17",
     "years": 17.6,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -317,19 +329,19 @@
     "pages_read": 53,
     "bios_published": 50,
     "source": "observed",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "results_published": {
     "readable": false,
     "why": "the results page served 6769 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
     "url": "https://pozogoldstein.com/results/",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "score": {
-    "total": 47,
+    "total": 51,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-02",
+    "computed_at": "2026-10-05",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -431,7 +443,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 9,
         "max": 25,
         "subs": [
           {
@@ -445,10 +457,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 6,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 25.0 → 94th pct of 114-firm cohort (median 2.9) 3/3 · 1,029 referring domains, 54th pct 1/2 · 155 organic keywords / 666 visits·mo, 90th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -463,7 +475,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -503,18 +515,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 23,
+      "gap": 19,
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "D2 Search authority: not yet measured (8 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 21.9,
-    "assessed": 47,
-    "coverage": 0.671,
+    "raw": 27.9,
+    "assessed": 55,
+    "coverage": 0.786,
     "floor_abc_pct": 0.739,
     "gates_unavailable": [
       "G1",

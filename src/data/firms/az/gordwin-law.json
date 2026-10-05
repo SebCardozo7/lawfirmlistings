@@ -41,7 +41,7 @@
   ],
   "about": [
     "Gordwin Law works from East Queen Creek Road in Chandler and names no attorney on the pages we could reach.",
-    "170 reviews at 4.5. A free consultation and a 24 hour line, published. It publishes nothing about the rate or the retainer and none of the trust pages pillar D looks for."
+    "170 reviews at 4.5. A free consultation and a 24 hour line, published. It publishes seven case results with amounts of its own and they are its figures rather than ones we confirmed. It publishes nothing about the rate or the retainer and none of the trust pages pillar D looks for."
   ],
   "reviews": {
     "quotes": [],
@@ -49,7 +49,7 @@
       "rating": 4.5,
       "count_label": "170",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-30"
+      "fetched_at": "2026-10-05"
     },
     "sample": [
       {
@@ -109,7 +109,7 @@
         "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
       },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-30"
+      "measured_at": "2026-10-05"
     },
     "ahrefs": {
       "dr": 1.4,
@@ -147,7 +147,7 @@
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -175,8 +175,12 @@
       "a": "Gordwin Law names no attorney on the public pages we could read. That is a gap in what the firm publishes rather than a statement about who works there, and it is why the licensure and discipline checks on this profile have nothing to run against."
     },
     {
+      "q": "Are the case results Gordwin Law publishes verified?",
+      "a": "No. Gordwin Law publishes seven case results with amounts on its own site. We counted them and we did not confirm them: the figures are the firm's. Pillar B scores whether a firm publishes outcomes and discloses them properly, including whether a prior-results disclaimer appears beside them, not whether the amounts are right. Past results do not predict another case."
+    },
+    {
       "q": "What has Law Firm Listings verified about Gordwin Law?",
-      "a": "Gordwin Law scores 44 and sits at Listed. Passed: footprint. Did not pass: website. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure, discipline and entity registration. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
+      "a": "Gordwin Law scores 43 and sits at Listed. Passed: footprint. Did not pass: website. Could not be answered from any public source and therefore counts neither for nor against the firm: licensure, discipline and entity registration. Every row of the scorecard above names where the value came from and when it was read. Nothing on this profile was supplied by the firm for payment, and no placement here can be bought."
     }
   ],
   "_review": {
@@ -212,7 +216,7 @@
     "registered": "2006-04-24",
     "years": 20.4,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -223,13 +227,28 @@
     "pages_read": 2,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "results_published": {
-    "readable": false,
-    "why": "the results page served 1927 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "count": 7,
+    "counted_from": "result headings",
+    "amounts": [],
+    "largest": null,
+    "aggregate_claims": [],
+    "case_types": [
+      "dwi",
+      "assault",
+      "drug offense",
+      "weapons",
+      "theft",
+      "homicide"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 1927,
+    "readable": true,
     "url": "https://gordwinlaw.com/case-results/",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "logo": {
     "file": "/logos/gordwinlaw.com.png",
@@ -241,10 +260,10 @@
     "fetched_at": "2026-09-30"
   },
   "score": {
-    "total": 44,
+    "total": 43,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-02",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-05",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -278,32 +297,32 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 6,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 3,
             "max": 6,
-            "source": "pending",
-            "evidence": "the results page served 1927 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "7 results published on the firm's own site, counted from result headings"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 3,
             "max": 5,
-            "source": "pending",
-            "evidence": "the results page served 1927 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "6 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "the results page served 1927 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
@@ -414,23 +433,23 @@
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 23,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 26,
-      "floor_met": true,
+      "gap": 27,
+      "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
         "D1 Website trust & experience: not yet measured (7 pts)",
-        "B1 Results published: not yet measured (6 pts)"
+        "A2 Experience: +10 available"
       ]
     },
-    "raw": 20.9,
-    "assessed": 48,
-    "coverage": 0.608,
-    "floor_abc_pct": 0.739,
+    "raw": 26.9,
+    "assessed": 63,
+    "coverage": 0.797,
+    "floor_abc_pct": 0.605,
     "gates_unavailable": [
       "G1",
       "G2",
