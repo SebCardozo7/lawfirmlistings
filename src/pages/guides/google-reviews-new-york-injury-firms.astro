@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure here is computed from the firms collection at build time, so the article cannot
 // drift away from the data it describes. Firms whose rating we hold only because the firm
@@ -78,10 +79,20 @@ const fmt = (n: number) => n.toLocaleString('en-US');
 
 // The comparison the data actually supports: the ratings sit within a fraction of a star of each
 // other, while the review counts track how many offices a firm runs. No figure in the title.
-const title = 'New Study: Office Count Matters More Than Star Rating for Injury Firms';
+const title = `${totalReviews.toLocaleString('en-US')} Reviews Across New York's Injury Firms, ${ratingSpread} Stars Apart`;
 const description = 'We summed every Google review for the New York injury firms in this directory. The star ratings barely differ, and the counts mostly measure office count.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/reviews.png" imageAlt="Five near-identical star ratings above review-count bars of wildly different lengths">
+<Base title={title}
+      figuresFrom={`Google Business Profile listings for New York injury firms, read ${snapshot}`} description={description} nav="guides" image="/og/reviews.png" imageAlt="Five near-identical star ratings above review-count bars of wildly different lengths">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -121,6 +132,15 @@ const description = 'We summed every Google review for the New York injury firms
         `<b>${clustered} of ${measured.length}</b> firms sit at 4.8 or above once rounded, which is where a star rating stops carrying information.`,
         `<b>${totalReviews.toLocaleString('en-US')} reviews</b> were counted in total, none of them collected by us and none solicited through us.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: totalReviews.toLocaleString('en-US'), label: 'Google reviews across New York injury firms', note: `${totalListings} verified listings`, emphasis: true },
+        { value: String(ratingSpread), label: 'stars between the best and worst rated', note: `${loRating} to ${hiRating}` },
+        { value: `${countRatio}x`, label: 'more reviews at the top than at the bottom', note: `${hiCount.toLocaleString('en-US')} against ${loCount}` },
+        { value: String(measured.length), label: 'firms with a verified Google listing', note: 'self-reported counts are excluded' },
+      ]}
+      source={`Summed from Google Business Profile listings, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 
@@ -187,7 +207,7 @@ const description = 'We summed every Google review for the New York injury firms
       <p>The figures above cover the {measured.length} firms whose ratings we measured directly. Where we hold a rating only because a firm publishes it, the profile labels it as firm-reported and it stays out of these averages. An unmeasured number may well be accurate, but mixing it in would make the average impossible to cite.</p>
     )}
     <p>And reviews are not outcomes. <b>A five-star rating records how clients felt about being treated, which is not the same as whether the firm won.</b></p>
-    <p>Outcomes sit in pillar B, which scores what a firm publishes about its own results rather than what anyone has checked: {publishesResults.length} of the {firms.length} firms here publish a results page we could read, and {verifiedResults.length === 0 ? 'none of those results has' : `${verifiedResults.length} of those results have`} been matched to a court record, so no amount from them appears on this site. <a href="/guides/what-a-case-results-page-proves/">We counted what those pages carry</a>, and that is the harder half of the work: it is where the directory is still thin.</p>
+    <p>Outcomes sit in pillar B, which scores what a firm publishes about its own results rather than what anyone has checked: {publishesResults.length} of the {firms.length} firms here publish a results page we could read, and {verifiedResults.length === 0 ? 'none of those results has' : `${verifiedResults.length} of those results have`} been matched to a court record, so no amount from them appears on this site. We counted what those pages carry, and that is the harder half of the work: it is where the directory is still thin.</p>
     <p class="muted" style="font-size:.86rem">Review counts and ratings come from the Google Places API (New), summed across every business listing we can attribute to the firm's own domain. A firm we cannot match to a listing keeps these sub-factors pending rather than receiving an estimate.</p>
   </div>
 

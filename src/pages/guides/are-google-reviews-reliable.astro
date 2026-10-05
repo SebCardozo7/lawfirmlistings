@@ -6,6 +6,7 @@ import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import StackBar from '../../components/StackBar.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure on this page is computed from the firms collection at build time, so the article
 // cannot drift away from the data it describes.
@@ -204,10 +205,20 @@ const scoreRows = [
 
 // States the finding, not the topic. No figure in either line: check_meta rejects one, and a
 // share that moves every month should not be the thing Google has indexed.
-const title = 'New Study: The Reviews Google Shows Are Not the Reviews It Counted';
+const title = `Google Shows You ${returnedShare}% of the Law Firm Reviews It Counted`;
 const description = 'We compared the reviews Google returns for a law firm against the rating on its profile. Across the directory they agree. About any one firm they do not.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/sample.png"
+<Base title={title}
+      figuresFrom={`Google Business Profile listings read through the Places API, read ${snapshot}`} description={description} nav="guides" image="/og/sample.png"
   imageAlt="A field of review marks with five of them lifted out into a bright window, beside two gauges of unequal height">
 <article>
 <header class="article-head">
@@ -250,6 +261,15 @@ const description = 'We compared the reviews Google returns for a law firm again
         `Firm by firm it is a different story: the returned reviews rate higher for <b>${fmt(higher.length)}</b> and lower for <b>${fmt(lower.length)}</b>, and <b>${fmt(tailLower)}</b> firms are undersold by half a star or more.`,
         `Two sub-factors of our own score, worth <b>${sampleWeight} points</b> of the hundred, are read off this sample, and <b>${fmt(c3Full)}</b> firms take full marks on recency largely because of how Google chose.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${returnedShare}%`, label: 'of the reviews Google counted are the ones it hands back', note: `${returned.toLocaleString('en-US')} of ${census.toLocaleString('en-US')}`, emphasis: true },
+        { value: census.toLocaleString('en-US'), label: 'reviews counted across every listing', note: `${listings} Google Business Profile listings` },
+        { value: returned.toLocaleString('en-US'), label: 'reviews actually returned', note: 'five per listing, which is where the API stops' },
+        { value: String(overCap.length), label: 'firms returned more than five per listing', note: 'the cap is a cap, not an estimate' },
+      ]}
+      source={`Read through the Google Places API, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 
@@ -326,7 +346,7 @@ const description = 'We compared the reviews Google returns for a law firm again
     <p>{fmt(c3Full)} of {fmt(measured.length)} firms take full marks on recency. That looks like an industry keeping its reviews fresh until you set it beside the {thisYearPct}% figure above, which says the returned set is recent across the board. If that skew is Google's rather than the profession's, and we think it is, then <b>C3 is measuring the selection at least as much as it is measuring the firm.</b></p>
     <p>C5 has the same weakness, and it is the per-firm one rather than a claim about the industry. {fmt(c5Full)} firms take full marks because not one returned review rated one or two stars. For a single-office firm that verdict rests on five reviews, so a practice with hundreds of reviews and a real pattern of complaints inside them can return five clean ones and score exactly what a practice with no complaints scores.</p>
     <p>We are not removing either sub-factor on the strength of one study, and we are not going to pretend the reading is stronger than it is. The evidence line on every firm's profile already says this measurement comes from a sample of five per listing rather than from every review, and it says so because the engine was written that way from the start. <a href="/methodology/">The full methodology</a> sets out each sub-factor and the evidence behind it. This is a live limitation and it is now on a page a reader can find.</p>
-    <p>It is the same species of problem as the one we published about the denominator: <a href="/guides/what-a-law-firm-score-cannot-compare/">two firms can share a score without sharing the evidence under it</a>, and a sub-factor read from somebody else's selection is a thinner kind of evidence than one read from a register.</p>
+    <p>It is the same species of problem as the one we published about the denominator: two firms can share a score without sharing the evidence under it, and a sub-factor read from somebody else's selection is a thinner kind of evidence than one read from a register.</p>
 
     <h2 id="limits">What this does not show</h2>
     <p>This is a study of a selection, not of honesty. Nothing here says a returned review is fake, bought or solicited. Every one of them may be a real client writing what they thought. The finding is about which real reviews get handed to whoever asks, and that is a different question from whether the reviews are true.</p>
@@ -348,7 +368,7 @@ const description = 'We compared the reviews Google returns for a law firm again
       <h4>How scoring works</h4>
       <ul>
         <li><a href="/methodology/">LFL Certified Methodology</a></li>
-        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li>What a score cannot compare</li>
         <li><a href="/guides/google-reviews-new-york-injury-firms/">Ratings, counts and office count</a></li>
       </ul>
     </div>

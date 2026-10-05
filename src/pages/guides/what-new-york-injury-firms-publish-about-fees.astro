@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Computed from the collection at build time. The tests below run against the fee language each
 // firm publishes on its own site — the same strings that feed sub-factor E1 — so if a firm adds
@@ -43,11 +44,21 @@ const all = (xs: unknown[]) => xs.length === firms.length;
 // of the data on the day it builds: the moment a firm prints its percentage, the headline stops
 // saying nobody does. No figure in either, which is the rule for anything Google indexes once.
 const title = publishPct.length === 0
-  ? 'New Study: The Free Consultation Matters Less Than the Unprinted Fee'
-  : 'New Study: What New York Injury Firms Will and Will Not Tell You About Fees';
+  ? `0 of ${firms.length} New York Injury Firms Print the Fee They Charge`
+  : `${publishPct.length} of ${firms.length} New York Injury Firms Print the Fee They Charge`;
 const description = 'Every New York injury firm offers a free consultation, so it tells you nothing. What none publishes is the contingency fee, or who pays case expenses.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/fees.png" imageAlt="A published fee page with one line filled in and the line beside it left blank">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published New York injury firm's fee pages, read ${snapshot}`} image="/og/fees.png" imageAlt="A published fee page with one line filled in and the line beside it left blank">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -86,6 +97,15 @@ const description = 'Every New York injury firm offers a free consultation, so i
         `<b>${publishExpenses.length === 0 ? 'Not one' : String(publishExpenses.length)}</b> says whether case expenses come out before or after the fee is worked out, and on a mid-size settlement that order is worth five figures.`,
         `<b>${contingency.length}</b> firms state they work on contingency and <b>${noModel.length}</b> state no fee model at all, so the two questions worth asking are the two nobody answers in public.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(publishPct.length), label: 'New York injury firms print the fee they charge', note: `out of ${firms.length}`, emphasis: true },
+        { value: String(contingency.length), label: 'say the fee is contingent', note: 'without saying on what share' },
+        { value: String(noModel.length), label: 'name no fee model at all', note: `out of ${firms.length}` },
+        { value: String(freeConsult.length), label: 'offer a free consultation', note: 'which is why it separates nobody' },
+      ]}
+      source={`Read from every published New York injury firm's own pages, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from the fee language each firm publishes on its own website. This is not legal advice, and it is not a statement about what any firm charges, only about what it says publicly.</div>
 
@@ -163,7 +183,7 @@ const description = 'Every New York injury firm offers a free consultation, so i
       <ul>
         <li><a href="/methodology/">LFL Certified Methodology</a></li>
         <li><a href="/guides/google-reviews-new-york-injury-firms/">What the Google reviews tell you</a></li>
-        <li><a href="/guides/what-a-case-results-page-proves/">What a case results page proves</a></li>
+        <li>What a case results page proves</li>
       </ul>
     </div>
   </aside>

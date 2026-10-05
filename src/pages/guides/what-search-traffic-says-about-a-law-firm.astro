@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure on this page is computed from the firms collection at build time. Nothing is typed
 // into the prose, so the article cannot drift away from the data underneath it.
@@ -202,10 +203,20 @@ const states = [...new Set(measured.map(f => f.data.market.state))].length;
 // States the finding. No figure in it: check_meta rejects one, and rightly, because a title is
 // indexed once and every count here moves when a firm is added. Kept under 70 characters so
 // audit_seo does not flag it and Google does not truncate it.
-const title = 'New Study: Search Visibility Brings More Reviews, Not Better Ones';
+const title = `${ratingSpread.toFixed(2)} Stars Separate the Most and Least Visible Law Firms`;
 const description = 'We measured every law firm in this directory for organic search traffic and client rating. Visibility tracks what a firm publishes, not what clients say.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/signal.png" imageAlt="Four falling columns under a flat line, the shape of the study">
+<Base title={title}
+      figuresFrom={`Ahrefs and Google Business Profile, every measured firm, read ${snapshot}`} description={description} nav="guides" image="/og/signal.png" imageAlt="Four falling columns under a flat line, the shape of the study">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -245,6 +256,15 @@ const description = 'We measured every law firm in this directory for organic se
         `Between the most and least visible quarter, the median review count runs <b>${topQ.reviews.toLocaleString('en-US')} against ${bottomQ.reviews.toLocaleString('en-US')}</b>, while the mean client rating runs <b>${topQ.rating.toFixed(2)} against ${bottomQ.rating.toFixed(2)}</b>. Visibility brings more reviews, not better ones.`,
         `Of the <b>${movement.length} sub-factors</b> we could compare, <b>${flat.length}</b> fail to rise with visibility, and those are the ones that read what clients said rather than what the firm published.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: ratingSpread.toFixed(2), label: 'stars separate the most and least visible firms', note: 'across four quartiles of search traffic', emphasis: true },
+        { value: String(measured.length), label: 'firms with both search and review data', note: 'the only ones this question can be asked of' },
+        { value: String(noTraffic.length), label: 'have no measurable organic traffic at all', note: 'and are kept in rather than dropped' },
+        { value: medianTraffic.toLocaleString('en-US'), label: 'median monthly organic visits', note: 'Ahrefs, United States' },
+      ]}
+      source={`Measured with Ahrefs and the Google Places API, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Search traffic here is an estimate of unpaid visits from Google, not a measure of what a firm spends. Nothing here is legal information or advice.</div>
 
@@ -305,7 +325,7 @@ const description = 'We measured every law firm in this directory for organic se
     <p>This is uncomfortable for the thing we publish, so here it is in full.</p>
     <p>The LFL Certification Score is a share of what we could assess, rather than a mark out of a fixed hundred. Of every point we assessed and could compare across these firms, <b>{riserShare.toFixed(0)}%</b> sits in sub-factors that rise with a firm's search visibility and <b>{flatShare.toFixed(0)}%</b> in those that do not. <a href="/methodology/">The methodology</a> describes those points as measuring accountability, published outcomes and client experience. On this evidence a large part of the scale is also tracking something simpler: whether a firm has a marketing operation.</p>
     <p>Some of that is defensible and we would defend it. A firm that publishes its fees, its results and its attorney roster is genuinely easier for a client to check than one that publishes none of it, and that is worth points whatever the reason the firm did it. Being checkable is the thing we score.</p>
-    <p>What is not defensible is pretending the two are the same. A small firm with no marketing budget can be excellent and will score lower here, because the evidence we need is evidence somebody has to be paid to produce. We have written before about <a href="/guides/what-a-law-firm-score-cannot-compare/">the limits of comparing these totals at all</a>, and this is another one to add to that list: the score rewards firms that publish, and publishing costs money.</p>
+    <p>What is not defensible is pretending the two are the same. A small firm with no marketing budget can be excellent and will score lower here, because the evidence we need is evidence somebody has to be paid to produce. We have written before about the limits of comparing these totals at all, and this is another one to add to that list: the score rewards firms that publish, and publishing costs money.</p>
     <p>{d2 && <>The narrowest version of the problem is sub-factor {d2.code}. It is assessed out of {d2.max} points and it is search authority measured directly. A firm earns those points for ranking well, which is a fact about its marketing and about nothing else.</>} It is the one part of the score this page's finding indicts without qualification.</p>
     <p>The part that comes out well is pillar C. Of everything we measure, what clients said is the part that does not bend to a budget, and it is the reason the score is not simply a marketing audit with a number on the end.</p>
     <p>A firm that thinks a measurement here is wrong can see every sub-score and the evidence behind it on its own profile, and can <a href="/list-your-firm/">claim its listing</a> and correct us. Firms that want to compare themselves against their own market can start from <a href="/practice-areas/personal-injury/">the personal injury directory</a> or <a href="/cities/new-york-ny/personal-injury/">the New York injury ranking</a>, which rank on the score rather than on any of this.</p>

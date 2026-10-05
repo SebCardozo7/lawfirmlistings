@@ -6,6 +6,7 @@ import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import StackBar from '../../components/StackBar.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 /**
  * What a criminal defense firm publishes about its own work, measured against the injury firms
@@ -300,11 +301,21 @@ const windowStart = asDate(firstRead);
 
 // States the finding and carries no figure, because check_meta rejects one in a title or a
 // description and is right to: every count here moves when a market opens.
-const title = 'New Study: Most Criminal Defense Firms Publish No Case Results';
+const title = `${subject.length - sPublishing.length} of ${subject.length} ${homeCity} Criminal Defense Firms Publish No Case Results`;
 const description =
   'Every guide to hiring a criminal lawyer says check the track record. We counted whether there is one to check, against injury firms on the same streets.';
+
+// The date these figures are a snapshot of, which is what lets the title carry a computed figure
+// past check_meta: a stale snippet about a stated date is still a true statement.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/defense.png" imageAlt="Two stacks of result cards, one tall and one nearly empty, under two identical rows of stars">
+<Base title={title}
+      figuresFrom={`every published criminal defense firm's own website, read ${snapshot}`} description={description} nav="guides" image="/og/defense.png" imageAlt="Two stacks of result cards, one tall and one nearly empty, under two identical rows of stars">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -348,6 +359,15 @@ const description =
         `What does move with it is reach, and that is marketing rather than lawyering: median organic search traffic runs <b>${fmt(sTraffic.med)}</b> visits a month against <b>${fmt(cTraffic.med)}</b>.`,
       ]}
     />
+    <StatRow
+      stats={[
+        { value: String(subject.length - sPublishing.length), label: `${homeCity} criminal defense firms publish no case results`, note: `out of ${subject.length}`, emphasis: true },
+        { value: String(sPublishing.length), label: 'publish at least one', note: 'counted from their own pages, amounts unconfirmed' },
+        { value: String(sSilent.length), label: 'have a results page that states nothing', note: 'which is a finding about the firm, not a gap in our data' },
+        { value: String(sUnreadable.length), label: 'have a results page we could not read', note: 'and keep pillar B pending rather than scoring zero' },
+      ]}
+      source={`Read from every published criminal defense firm's own website, ${snapshot}.`}
+    />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. We record what a firm publishes on its own website, which is not a claim about how it does its work. Nothing here is legal information or advice.</div>
 
     <h2 id="what">What we measured</h2>
@@ -379,9 +399,9 @@ const description =
       rows={checkRows}
       caption={`The bar is the share and the printed figure is the count, because the cohorts are different sizes. A court reference is any county, court or district named on the results page. An attorney is anybody the firm names on a page we could read.`}
     />
-    <p>Naming the court is the one that matters most and is counted least. <a href="/guides/what-a-case-results-page-proves/">We have published before</a> that a named venue is worth more than the figure beside it, because a county and a case type are what let a reader go and look the matter up. {withVenue(subject).length} of the {subject.length} {subjectLower} firms name one. <b>Hold the publishing constant and that difference disappears.</b> Among only the firms publishing anything at all it is {withVenue(sPublishing).length} of {sPublishing.length} {subjectLower} firms against {withVenue(cPublishing).length} of {cPublishing.length} {controlLower} ones, which is {Math.round(share(withVenue(sPublishing).length, sPublishing.length))}% against {Math.round(share(withVenue(cPublishing).length, cPublishing.length))}%. The cohort-level gap is a gap in how many firms publish at all, not in how carefully they do it.</p>
+    <p>Naming the court is the one that matters most and is counted least. We have published before that a named venue is worth more than the figure beside it, because a county and a case type are what let a reader go and look the matter up. {withVenue(subject).length} of the {subject.length} {subjectLower} firms name one. <b>Hold the publishing constant and that difference disappears.</b> Among only the firms publishing anything at all it is {withVenue(sPublishing).length} of {sPublishing.length} {subjectLower} firms against {withVenue(cPublishing).length} of {cPublishing.length} {controlLower} ones, which is {Math.round(share(withVenue(sPublishing).length, sPublishing.length))}% against {Math.round(share(withVenue(cPublishing).length, cPublishing.length))}%. The cohort-level gap is a gap in how many firms publish at all, not in how carefully they do it.</p>
     <p>The disclaimer tells the same story. {withDisclaimer(subject).length} of the {subject.length} {subjectLower} firms carry a prior-results line, and {withDisclaimer(cPublishing).length} of the {cPublishing.length} publishing {controlLower} firms do. New York's advertising rules effectively require it beside published results, and the firms with nothing published have nothing to disclaim.</p>
-    <p>The roster is the sharpest difference and it has nothing to do with results at all. {subject.length - named(subject).length} of the {subject.length} {subjectLower} firms name no attorney on any page we could read, against {control.length - named(control).length} of {control.length}. These are smaller practices: the median {subjectLower} firm here names {median(subject.map(f => f.data.attorneys.length))} {median(subject.map(f => f.data.attorneys.length)) === 1 ? 'person' : 'people'} and the median {controlLower} firm names {median(control.map(f => f.data.attorneys.length))}. <a href="/guides/what-it-takes-to-check-a-law-firm/">A roster is the input every other check needs</a>, so a one-name firm is not hiding anything; it is simply smaller than the checks assume.</p>
+    <p>The roster is the sharpest difference and it has nothing to do with results at all. {subject.length - named(subject).length} of the {subject.length} {subjectLower} firms name no attorney on any page we could read, against {control.length - named(control).length} of {control.length}. These are smaller practices: the median {subjectLower} firm here names {median(subject.map(f => f.data.attorneys.length))} {median(subject.map(f => f.data.attorneys.length)) === 1 ? 'person' : 'people'} and the median {controlLower} firm names {median(control.map(f => f.data.attorneys.length))}. A roster is the input every other check needs, so a one-name firm is not hiding anything; it is simply smaller than the checks assume.</p>
 
     <h2 id="score">What our own score does with it</h2>
     <p>This is the part that is about us. Pillar B of the LFL Certification Score is worth {bMaxLabel} points and it reads a case results page. {subjectName} firms average {sB.toFixed(2)} of it and {controlName} firms average {cB.toFixed(2)}.</p>
@@ -394,7 +414,7 @@ const description =
     />
     <p><b>The pillar has three shapes and this practice fits none of them.</b> Where a firm's primary work is a real estate transaction or a divorce, pillar B reads a different block entirely: the price of the transaction, or the hourly rate and the stages of a matrimonial case. Those shapes were written when each practice arrived. Criminal defense arrived without one, so it is scored against a results page, and a criminal matter produces no settlement to list.</p>
     <p>Pillar B is not the whole gap, and saying it is would be the easy version of this page. The two cohorts differ by {rawGap.toFixed(1)} raw points on average, and the three sub-factors that read published outcomes account for {bGapShare}% of that. The rest sits in roster verifiability, review volume, fee transparency and the availability line: every one of them a count of how much a firm publishes.</p>
-    <p>We have published this class of problem twice before, when <a href="/guides/what-a-law-firm-score-cannot-compare/">a score turned out to mean different things on either side of a state line</a> and when <a href="/guides/do-lawyers-offer-free-consultations/">a fee and access sub-factor turned out to be measuring a billing convention</a>. This is the third instance and the largest. <a href="/methodology/">The methodology</a> sets out every sub-factor and the evidence behind it.</p>
+    <p>We have published this class of problem twice before, when a score turned out to mean different things on either side of a state line and when <a href="/guides/do-lawyers-offer-free-consultations/">a fee and access sub-factor turned out to be measuring a billing convention</a>. This is the third instance and the largest. <a href="/methodology/">The methodology</a> sets out every sub-factor and the evidence behind it.</p>
 
     <h2 id="clients">What the clients said</h2>
     <p>If the gap were about the firms rather than about what they publish, it ought to show up somewhere a client was asked. It does not.</p>
@@ -413,7 +433,7 @@ const description =
     <h2 id="instead">What is left to check</h2>
     <p>The advice on this search is not wrong so much as unavailable. Three things on it can still be done, and two of them are not on anybody's list.</p>
     <p><b>How long the lawyers have practised, where a state will say.</b> New York publishes an attorney register we may query, and it is the only state in this directory that does. Across the {subjectLower} firms we matched {fmt(sAdmitted.matched)} of the {fmt(sAdmitted.people)} people they name to a registration, and those lawyers have been admitted {sAdmitted.meanYears.toFixed(1)} years on average. The {controlLower} side matched {fmt(cAdmitted.matched)} of {fmt(cAdmitted.people)} at {cAdmitted.meanYears.toFixed(1)} years. The sub-factor built on it scores {a2Mean(subject).toFixed(2)} of {a2Max} for the {a2Scored(subject).length} {subjectLower} firms where it runs and {a2Mean(control).toFixed(2)} for the {a2Scored(control).length} {controlLower} ones. <b>On the one measure here that is about the lawyers rather than the website, the two cohorts are the same.</b></p>
-    <p><b>Whether the firm is a company the state has a record of.</b> That is a separate check, it is open to anybody, and <a href="/guides/what-a-business-register-proves-about-a-law-firm/">we have written down exactly what it does and does not prove</a>.</p>
+    <p><b>Whether the firm is a company the state has a record of.</b> That is a separate check, it is open to anybody, and we have written down exactly what it does and does not prove.</p>
     <p><b>What the firm says about price.</b> Criminal work is not paid out of a recovery, so there is no percentage to publish and most of these firms publish nothing. <a href="/guides/what-law-firm-websites-publish/">The page a law firm website reaches for last is the one about fees</a>, in every practice we have counted.</p>
     <p>The ranked list for this market is built from the same records, firm by firm: <a href={`/cities/${homeSlug}/${SUBJECT}/`}>{subjectName} firms in {homeCity}</a>, with <a href={`/cities/${homeSlug}/${controlSlug}/`}>the {controlLower} ranking</a> beside it for the comparison this page draws. <a href={`/practice-areas/${SUBJECT}/`}>The practice hub</a> carries every market we cover.</p>
 
@@ -435,10 +455,10 @@ const description =
     <div class="panel">
       <h4>Related studies</h4>
       <ul>
-        <li><a href="/guides/what-a-case-results-page-proves/">What a case results page proves</a></li>
+        <li>What a case results page proves</li>
         <li><a href="/guides/do-lawyers-offer-free-consultations/">Free consultations, by practice</a></li>
-        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a firm</a></li>
-        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li>What it takes to check a firm</li>
+        <li>What a score cannot compare</li>
       </ul>
     </div>
     <div class="panel">

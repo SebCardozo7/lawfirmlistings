@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // The study behind sub-factor E3, and the first piece here about who a firm is written for.
 //
@@ -213,10 +214,21 @@ const scored = scoredAt
 // States the finding and carries no figure, because check_meta rejects one in a title and is
 // right to: a share that moves whenever a firm is added should not be the sentence Google has
 // indexed.
-const title = 'New Study: Law Firms Publish in Spanish for Injury Work, Not Divorce';
+const title = `${share(spanish.length, measured.length)}% of Law Firms Publish in Spanish, `
+  + `and Almost All of Them Do Injury Work`;
 const description = 'We read every firm in this directory for a page published in Spanish. Whether one exists tracks the practice area more than the city the firm works in.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/language.png" imageAlt="Two columns of law firm pages, the left column mostly carrying a second language and the right column mostly not">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published firm's own website, read ${snapshot}`} image="/og/language.png" imageAlt="Two columns of law firm pages, the left column mostly carrying a second language and the right column mostly not">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -258,6 +270,15 @@ const description = 'We read every firm in this directory for a page published i
         `Across markets the range is <b>${share(topMarket.es, topMarket.n)}%</b> in ${topMarket.label} down to <b>${share(bottomMarket.es, bottomMarket.n)}%</b> in ${bottomMarket.label}.`,
         `Spanish is the only language this directory detects on its own, so the <b>${otherLang.length} firms</b> recorded as publishing ${otherNames} are a measure of our reading rather than of the market.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${share(spanish.length, measured.length)}%`, label: 'of firms publish in Spanish', note: `${spanish.length} of ${measured.length} we could read`, emphasis: true },
+        { value: `${share(topPractice.es, topPractice.n)}%`, label: `in ${topPractice.label.toLowerCase()}, the practice that does it most`, note: `${topPractice.es} of ${topPractice.n}` },
+        { value: `${share(bottomPractice.es, bottomPractice.n)}%`, label: `in ${bottomPractice.label.toLowerCase()}, the practice that does it least`, note: `${bottomPractice.es} of ${bottomPractice.n}` },
+        { value: String(blocked.length), label: 'sites refused our crawler', note: 'and are left out rather than counted as silent' },
+      ]}
+      source={`Read from every published firm's own website, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 
@@ -326,7 +347,7 @@ const description = 'We read every firm in this directory for a page published i
     <h2 id="size">Is it just the bigger firms?</h2>
     <p>It looks like it at first. Across the whole directory, a firm publishing in Spanish has a median of {rawEsReviews.toLocaleString('en-US')} Google reviews against {rawNoEsReviews.toLocaleString('en-US')} for a firm that does not, which is a gap of the kind that usually means we have measured firm size by accident.</p>
     <p><b>Most of that gap is the map, not the language.</b> Holding the market and the practice constant, among injury firms in {nycLabel} the medians are {nycEsReviews.toLocaleString('en-US')} reviews against {nycNoEsReviews.toLocaleString('en-US')}: still a difference, and a much smaller one.</p>
-    <p>What does not shrink is the roster. The same injury firms publishing in Spanish name a median of {nycEsRoster} attorneys against {nycNoEsRoster} for those that do not. A second language on the site travels with a firm large enough to staff one, which is worth knowing before anyone reads it as a promise. <a href="/guides/what-it-takes-to-check-a-law-firm/">We counted the rosters across the whole directory here</a>.</p>
+    <p>What does not shrink is the roster. The same injury firms publishing in Spanish name a median of {nycEsRoster} attorneys against {nycNoEsRoster} for those that do not. A second language on the site travels with a firm large enough to staff one, which is worth knowing before anyone reads it as a promise. We counted the rosters across the whole directory here.</p>
 
     <h2 id="blind">What we cannot see</h2>
     <p>Spanish is the only language this directory detects. There is a pattern for it in the crawler and there is a pattern for nothing else, so a firm publishing in Korean, Polish or Haitian Creole reads to us exactly like a firm publishing in English only.</p>
@@ -345,7 +366,7 @@ const description = 'We read every firm in this directory for a page published i
     />
     <p>E3 gives nothing at all to {e3Zero} of the {e3subs.length} firms, which is exactly the set publishing in English only, all {englishOnly.length} of them. A second language is very nearly the only way to score on this sub-factor, for the reason below.</p>
     <p><b>The accessibility point is the part of our own scale that is not working.</b> It is earned by {accessible.length === 1 ? 'one firm' : `${accessible.length} firms`} in the directory, because the only evidence that can earn it is a published claim about video consultations or an accessible office, and almost nobody publishes one.{accessExample && <> <a href={`/firms/${accessExample.data.slug}/`}>{accessExample.data.name}</a> is the firm that does.</>} A point that one firm can earn is not measuring a difference between firms, it is measuring a phrase.</p>
-    <p>A guide here has found this shape before. <a href="/guides/what-a-law-firm-score-cannot-compare/">The denominator piece</a> is the general version of the problem, and <a href="/guides/what-new-york-injury-firms-publish-about-fees/">the fee study</a> is the same thing inside pillar E: a question worth asking, scored against whichever answer a firm happened to publish.</p>
+    <p>A guide here has found this shape before. <a href="/guides/what-new-york-injury-firms-publish-about-fees/">The fee study</a> is the same thing inside pillar E: a question worth asking, scored against whichever answer a firm happened to publish.</p>
     <p>If you are a client, the useful reading is narrow and real. A Spanish page tells you the firm wants Spanish-speaking clients and has spent money saying so. It does not tell you who will answer the phone, and the place to find that out is the free consultation, which is <a href="/guides/what-new-york-injury-firms-publish-about-fees/">the other thing we counted across this directory</a>.</p>
     <p><a href="/methodology/">The full methodology</a> sets out every sub-factor and the evidence behind it. A firm that thinks we have read its site wrong can <a href="/list-your-firm/">tell us so here</a>, and every profile links the source behind each measurement.</p>
     <p class="muted" style="font-size:.86rem">Language signals come from our own crawl of each firm's website. Review counts and listing data come from the Google Places API. A site we cannot open keeps its site-derived sub-factors pending rather than receiving a zero.</p>
@@ -361,8 +382,8 @@ const description = 'We read every firm in this directory for a page published i
       <h4>Related studies</h4>
       <ul>
         <li><a href="/guides/what-new-york-injury-firms-publish-about-fees/">What firms publish about fees</a></li>
-        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a firm</a></li>
-        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li>What it takes to check a firm</li>
+        <li>What a score cannot compare</li>
         <li><a href="/methodology/">LFL Certified Methodology</a></li>
       </ul>
     </div>

@@ -126,7 +126,7 @@ export const GUIDES: Guide[] = [
     slug: 'how-to-choose-a-criminal-defense-lawyer',
     cover: 'defense',
     kicker: 'Study',
-    title: 'New Study: Most Criminal Defense Firms Publish No Case Results',
+    title: "Most Criminal Defense Firms Publish No Case Results at All",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
     summary:
       'Every guide to hiring a criminal lawyer tells you to check the track record. We counted ' +
@@ -141,7 +141,7 @@ export const GUIDES: Guide[] = [
     slug: 'do-lawyers-offer-free-consultations',
     cover: 'consult',
     kicker: 'Study',
-    title: 'New Study: A Free Consultation Depends on the Practice, Not the Lawyer',
+    title: "Injury Firms Almost Always Offer a Free Consultation, Real Estate Almost Never",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
     summary:
       'Nearly every page answering this question was written by a firm that offers one. We ' +
@@ -156,7 +156,7 @@ export const GUIDES: Guide[] = [
     slug: 'what-search-traffic-says-about-a-law-firm',
     cover: 'signal',
     kicker: 'Study',
-    title: 'New Study: Search Visibility Brings More Reviews, Not Better Ones',
+    title: "Search Visibility Brings a Law Firm More Reviews, Not Better Ones",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
     summary:
       'The most visible firm in a search result is the one that invested most in being found ' +
@@ -171,7 +171,7 @@ export const GUIDES: Guide[] = [
     slug: 'what-law-firm-websites-publish',
     cover: 'pages',
     kicker: 'Method',
-    title: 'New Study: The Last Thing a Law Firm Website Publishes Is Its Price',
+    title: "Law Firm Websites Publish a Blog First and a Price Last",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
     summary:
       'Every page telling a law firm what belongs on its website is written by somebody who ' +
@@ -186,7 +186,7 @@ export const GUIDES: Guide[] = [
     slug: 'what-you-can-check-about-a-lawyer-by-state',
     cover: 'register',
     kicker: 'Verification',
-    title: 'New Study: One State in Thirteen Lets Anyone Check a Lawyer’s Licence at Scale',
+    title: "One State in Thirteen Publishes a Lawyer Register Anyone Can Read",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts, and
     // its own headline changes the moment a second state publishes a readable register.
     summary:
@@ -202,7 +202,7 @@ export const GUIDES: Guide[] = [
     slug: 'what-injury-firms-publish-about-fees-by-state',
     cover: 'statutes',
     kicker: 'Costs',
-    title: 'New Study: A State’s Fee Rules Do Not Change What Its Firms Publish',
+    title: "Injury Firms Do Not Print What They Charge, in Any State",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts, and
     // the page's own headline flips if a firm ever publishes its percentage.
     summary:
@@ -218,7 +218,7 @@ export const GUIDES: Guide[] = [
     slug: 'are-google-reviews-reliable',
     cover: 'sample',
     kicker: 'Method',
-    title: 'New Study: The Reviews Google Shows Are Not the Reviews It Counted',
+    title: "The Reviews Google Shows Are a Fraction of the Reviews It Counted",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
     summary:
       'Google counts every review on a law firm’s profile and hands back five per listing. ' +
@@ -233,7 +233,7 @@ export const GUIDES: Guide[] = [
     slug: 'what-law-firms-publish-in-spanish',
     cover: 'language',
     kicker: 'Data',
-    title: 'New Study: Law Firms Publish in Spanish for Injury Work, Not Divorce',
+    title: "Law Firms Publish in Spanish for Injury Work, Not for Divorce",
     // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
     summary:
       'We read every firm\u2019s website looking for a page published in Spanish. Two things ' +
@@ -322,52 +322,10 @@ export const GUIDES: Guide[] = [
     meta: 'One question, five different numbers',
   },
   {
-    slug: 'what-a-business-register-proves-about-a-law-firm',
-    cover: 'register',
-    kicker: 'Method',
-    title: "New Study: A Law Firm's Website Age Is Not How Old the Firm Is",
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Every guide to hiring a lawyer says to confirm the firm is a registered company. We ' +
-      'tried it in every state we publish in, then compared the date the register gives with ' +
-      'the age of the firm’s own web address. The two disagree in both directions.',
-    thumb: '',
-    icon: 'columns',
-    meta: 'Two public dates, and neither is the firm’s age',
-  },
-  {
-    slug: 'what-law-firms-publish-about-malpractice-insurance',
-    cover: 'shield',
-    kicker: 'Method',
-    title: 'New Study: Law Firms List Their Bar Memberships, Not Their Insurance',
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Professional liability cover is what pays a client back when their own lawyer is ' +
-      'negligent. We read every page these firms publish about themselves looking for one that ' +
-      'says they carry it, including in the one state where carrying it is mandatory.',
-    thumb: 't3',
-    icon: 'scale',
-    meta: 'The credential nobody prints',
-  },
-  {
-    slug: 'what-it-takes-to-check-a-law-firm',
-    cover: 'roster',
-    kicker: 'Method',
-    title: 'New Study: A Law Firm Can Be Highly Rated and Name No Lawyer at All',
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Every guide to hiring a lawyer says to look the attorney up in the state register. We ' +
-      'tried it on every firm in this directory. Two things have to be true before that check ' +
-      'runs, and one of them is usually missing.',
-    thumb: 't2',
-    icon: 'doc',
-    meta: 'The check needs a name, and a register',
-  },
-  {
     slug: 'what-new-york-injury-firms-publish-about-fees',
     cover: 'fees',
     kicker: 'Costs',
-    title: 'New Study: The Free Consultation Matters Less Than the Unprinted Fee',
+    title: "New York Injury Firms Do Not Print the Fee They Charge",
     summary:
       'Nearly every New York firm in the directory offers a free consultation, so it differentiates nothing. What none of them publishes is the percentage, or how case expenses are handled, which is where a five-figure difference hides.',
     thumb: 't2',
@@ -378,7 +336,7 @@ export const GUIDES: Guide[] = [
     slug: 'google-reviews-new-york-injury-firms',
     cover: 'reviews',
     kicker: 'Data',
-    title: 'New Study: Office Count Matters More Than Star Rating for Injury Firms',
+    title: "Office Count Separates New York Injury Firms, Star Rating Does Not",
     summary:
       'We summed every Google review across every business listing these New York firms operate. The ratings span well under a star; the review counts differ by orders of magnitude, mostly because of office count. Why a star rating ranks almost nothing.',
     thumb: 't3',
@@ -389,7 +347,7 @@ export const GUIDES: Guide[] = [
     slug: 'core-web-vitals-new-york-injury-firms',
     cover: 'speed',
     kicker: 'Technical',
-    title: "New Study: Almost Every New York Injury Firm Fails Google's Speed Test",
+    title: "Almost No New York Injury Firm Passes Google Core Web Vitals",
     // Both lines are hand-typed here rather than computed, so neither may carry a figure: this
     // said "One firm out of thirteen passes" for as long as the cohort has been larger than
     // thirteen. The page itself counts, and the manifest describes.
@@ -398,29 +356,6 @@ export const GUIDES: Guide[] = [
     thumb: '',
     icon: 'skyline',
     meta: 'Almost nobody passes, and it is cheap to fix',
-  },
-  {
-    slug: 'what-a-case-results-page-proves',
-    cover: 'results',
-    kicker: 'Method',
-    title: 'New Study: The Court a Firm Names Matters More Than Its Number',
-    summary:
-      'We read the case results page of every firm in the directory and counted what is on it: how many results, which case types, whether any court is named, whether a disclaimer is there. We publish none of the amounts, and this is why.',
-    thumb: 't2',
-    icon: 'scale',
-    meta: 'What we counted, and what we will not repeat',
-  },
-  {
-    slug: 'what-a-law-firm-score-cannot-compare',
-    cover: 'ladder',
-    kicker: 'Method',
-    title: 'New Study: Two Firms Can Share a Score and Not Share the Evidence',
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Our score is earned points over measured points, not over a hundred, so the same number can rest on very different evidence. Which comparisons the data supports, which we refuse to publish, and why the largest gap in the score turns out to be ours rather than any state\'s.',
-    thumb: '',
-    icon: 'columns',
-    meta: 'Read the denominator before the number',
   },
   {
     slug: 'best-personal-injury-law-firms-nyc',

@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 /**
  * Who actually publishes a free consultation, across the whole directory.
@@ -191,11 +192,26 @@ const practiceRows = practices.map(p => ({
 
 // States the finding and carries no figure, because check_meta rejects one in either of these
 // and is right to: the shares move every time a market opens.
-const title = 'New Study: A Free Consultation Depends on the Practice, Not the Lawyer';
+// The two ends of the range, computed, so the headline cannot say something the page does not.
+// "Personal Injury" becomes "Injury" here and nowhere else: the house rule is 70 characters and
+// the full name costs eight of them to say what the shorter one already says in a headline.
+const shortPractice = (name: string) => name.replace(/^Personal /, '');
+const title = `${top.share}% of ${shortPractice(top.name)} Firms Offer a Free Consultation, `
+  + `${lowest.share}% of ${shortPractice(lowest.name)}`;
 const description =
   'We read every law firm website in this directory for a free consultation offer. Injury firms publish one almost always. Immigration firms almost never do.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/consult.png" imageAlt="A grid of dots, most of them filled, with a tail of hollow ones at the end">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published firm's own website, read ${snapshot}`} image="/og/consult.png" imageAlt="A grid of dots, most of them filled, with a tail of hollow ones at the end">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -238,6 +254,15 @@ const description =
         `Inside one practice the phrase separates firms on almost everything except the thing a client would want it to: mean Google rating is <b>${ratingYes.toFixed(2)}</b> for firms publishing it and <b>${ratingNo.toFixed(2)}</b> for firms that do not.`,
         `Our own score folds the phrase into a fee and access sub-factor worth <b>${e1Max.join(' or ')}</b> points, and ${top.name.toLowerCase()} firms average <b>${e1Top.toFixed(2)}</b> of it against <b>${e1Bottom.toFixed(2)}</b> for ${bottom.name.toLowerCase()} firms.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${top.share}%`, label: `of ${shortPractice(top.name).toLowerCase()} firms publish a free consultation`, note: `${top.yes} of ${top.n}`, emphasis: true },
+        { value: `${lowest.share}%`, label: `of ${shortPractice(lowest.name).toLowerCase()} firms do`, note: `${lowest.yes} of ${lowest.n}` },
+        { value: `${pct(publishing.length, total)}%`, label: 'of the whole directory publishes one', note: `${publishing.length} of ${total}` },
+        { value: String(practices.length), label: 'practice areas compared', note: 'each firm counted under its own primary practice' },
+      ]}
+      source={`Read from every published firm's own website, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. We record what a firm publishes on its website, which is not a promise it made to you. Nothing here is legal information or advice.</div>
 
@@ -290,14 +315,14 @@ const description =
     <p>This is the part that is about us. The LFL Certification Score has a sub-factor for fees and access, and one of its points is awarded for publishing a free consultation. It is scored from observation on {e1Scored.length.toLocaleString('en-US')} of the {total.toLocaleString('en-US')} firms here{e1Pending > 0 && <> and left pending on {e1Pending}, whose sites refuse our crawler</>}.</p>
     <p>Out of the {e1Max.join(' or ')} points that sub-factor carries, {top.name.toLowerCase()} firms average {e1Top.toFixed(2)} and {bottom.name.toLowerCase()} firms average {e1Bottom.toFixed(2)}. <b>That gap is not a judgement about those firms. It is our scale measuring a billing convention and calling it access.</b></p>
     <p>The free consultation point is not the only part of it shaped that way. The same sub-factor reads the firm's own published sentence about price, and that field is filled on {stmtTop} of {top.n.toLocaleString('en-US')} {top.name.toLowerCase()} firms against {stmtBottom} of {bottom.n} {bottom.name.toLowerCase()} ones. A contingency percentage is a single number a firm can print. An immigration matter priced per petition, or a divorce billed by the hour, is not, and a firm declining to invent one loses the same points as a firm hiding its rates.</p>
-    <p>We have published this class of problem before, when the directory covered one state and <a href="/guides/what-a-law-firm-score-cannot-compare/">a score turned out to mean different things on either side of a state line</a>. This is the same problem across a practice line instead, and it arrived with a practice that was not in the directory when the sub-factor was written. <a href="/methodology/">The methodology</a> sets out every sub-factor and the evidence behind it, and the fee and access points are the ones we would change first.</p>
+    <p>We have published this class of problem before, when the directory covered one state and a score turned out to mean different things on either side of a state line. This is the same problem across a practice line instead, and it arrived with a practice that was not in the directory when the sub-factor was written. <a href="/methodology/">The methodology</a> sets out every sub-factor and the evidence behind it, and the fee and access points are the ones we would change first.</p>
     <p>It has since happened again, with a practice that produces no settlement for the outcomes sub-factor to read. <a href="/guides/how-to-choose-a-criminal-defense-lawyer/">What that does to a criminal defense firm’s score</a> is the larger version of the same fault.</p>
 
     <h2 id="limits">What this does not measure</h2>
     <p>Three limits, in the order they would bite.</p>
     <p><b>The pattern is narrow.</b> A firm writing <q>free initial consultation</q> or <q>complimentary case evaluation</q> is not matched by it, so some share of the silent firms are false negatives. We tested that against the only firm-written text we hold, the quotations our checkers lifted from firm pages while reading them for other things. Every one of those quotations that mentions a free consultation belongs to a firm this field already marks as publishing one. That is a weak test on a small sample and it is the only one available without crawling again, so treat the shares as a floor rather than a count.</p>
     <p><b>Nothing here dates the reading.</b> The site crawl behind this field carries no timestamp on the record, unlike the reviews, the speed test and the register checks, so the honest statement is that it is the most recent crawl and not that it was taken on a given day. That is a gap in our own pipeline and it is noted in the backlog rather than papered over here.</p>
-    <p><b>A free consultation is not a free case.</b> Nothing in this directory measures what happens in that meeting, how long it lasts, or whether a fee agreement is explained in it. <a href="/guides/what-a-case-results-page-proves/">What a firm publishes about its outcomes</a> and <a href="/guides/are-google-reviews-reliable/">what its clients said afterwards</a> are both closer to that question than the words in a page footer.</p>
+    <p><b>A free consultation is not a free case.</b> Nothing in this directory measures what happens in that meeting, how long it lasts, or whether a fee agreement is explained in it. What a firm publishes about its outcomes and <a href="/guides/are-google-reviews-reliable/">what its clients said afterwards</a> are both closer to that question than the words in a page footer.</p>
     <p class="muted" style="font-size:.86rem">Practice groupings are each firm's own primary practice as published on its profile. Review counts and ratings come from Google Business Profile listings verified to the firm. A firm whose site refuses our crawler keeps the sub-factor pending rather than scoring zero.</p>
   </div>
 
@@ -312,7 +337,7 @@ const description =
       <ul>
         <li><a href="/guides/what-injury-firms-publish-about-fees-by-state/">What injury firms publish about fees</a></li>
         <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
-        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li>What a score cannot compare</li>
         <li><a href="/guides/how-to-choose-a-criminal-defense-lawyer/">Choosing a criminal defense lawyer</a></li>
       </ul>
     </div>

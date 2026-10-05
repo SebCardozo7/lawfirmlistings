@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // A short technical piece, written so the article template is in production and so pillar D has
 // something public explaining it. Every figure below is computed from the firms collection at
@@ -79,10 +80,23 @@ const updated = measuredOn
 
 // Says the finding, not the topic. No count in it: check_meta rejects a figure in a title, and a
 // pass rate that moves every month should not be the thing Google has indexed.
-const title = "New Study: Almost Every New York Injury Firm Fails Google's Speed Test";
+// The count leads and the scale closes. Both are computed, so a firm fixing its site moves
+// the headline rather than contradicting it.
+const title = `Only ${passing.length} of ${withPsi.length} New York Injury Firms Pass `
+  + `Google's Core Web Vitals`;
 const description = 'We ran PageSpeed Insights against every New York injury firm in this directory. Almost all fail Core Web Vitals. What it costs them, and what fixes it.';
+
+// The date these figures are a snapshot of. A study is a snapshot, which is what lets its title
+// carry a computed figure past check_meta: a stale snippet about a stated date is still true.
+const snapshot = [...firms]
+  .map(f => f.data.score?.computed_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+
 ---
-<Base title={title} description={description} nav="guides" image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`New York injury firms measured on PageSpeed Insights, read ${snapshot}`} image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">
 <article>
 <header class="article-head">
   <div class="narrow">
@@ -122,6 +136,15 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
         `<b>${noRoster.length} of ${firms.length}</b> firms name no attorney on a page we could read, so the roster a licence check needs is not there to be checked.`,
       ]}
     />
+    <StatRow
+      stats={[
+        { value: String(passing.length), label: "pass Google's Core Web Vitals", note: `out of ${withPsi.length} measured`, emphasis: true },
+        { value: String(medianPerf ?? 0), label: 'median performance score, out of 100', note: 'PageSpeed Insights, mobile' },
+        { value: String(withPsi.length), label: 'New York injury firms measured', note: 'a site we could not measure keeps its sub-factor pending' },
+        { value: String(noSchema.length), label: 'publish no structured data at all', note: 'nothing for a crawler to read as a firm' },
+      ]}
+      source={`Measured with PageSpeed Insights on mobile, ${snapshot}.`}
+    />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 
     <h2 id="what">What we measured</h2>
@@ -146,14 +169,14 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
     {noSchema.length > 0 && (
       <p>{noSchema.length === 1 ? 'One firm publishes' : `${noSchema.length} firms publish`} no structured data at all, not a line of JSON-LD. That costs a point, and it makes the site harder for search engines and AI assistants to read.</p>
     )}
-    <p>And {noRoster.length} of these {firms.length} firms name no attorney at all on a page we could read. <b>A roster is the input every other check needs</b>, which is why we match the {attorneyTotal.toLocaleString('en-US')} names the rest of them do publish against the state register ourselves: {registryMatched} of those resolve to a registration. <a href="/guides/what-it-takes-to-check-a-law-firm/">We ran that exercise across the whole directory</a>, and New York is the only market here where the register answers us at all.</p>
+    <p>And {noRoster.length} of these {firms.length} firms name no attorney at all on a page we could read. <b>A roster is the input every other check needs</b>, which is why we match the {attorneyTotal.toLocaleString('en-US')} names the rest of them do publish against the state register ourselves: {registryMatched} of those resolve to a registration. We ran that exercise across the whole directory, and New York is the only market here where the register answers us at all.</p>
 
     <h2 id="why">Why the score counts it</h2>
     <p>Website performance sits in pillar D of the LFL Certification Score, worth 25 of 100, and Core Web Vitals is the first thing in it.</p>
     <p><b>The reasoning is not that a fast site makes a better lawyer.</b> It is that a firm which maintains its own site is a firm that is reachable, current and accountable. It is the same reason the pillar rewards published fee terms, attorney credentials and a working contact method.</p>
     <p>Pillar D is also deliberately capped. It can lift a firm's tier but it cannot create one: certification requires professional standing, verified outcomes and client experience to reach 40 of their combined 65.</p>
     <p>A firm with an excellent website and thin verified results plateaus, by design. <a href="/methodology/">The full methodology</a> sets out every sub-factor and the evidence behind it.</p>
-    <p>One caveat applies to every figure above. A site we could not measure keeps its sub-factor pending rather than scoring zero, which takes those points out of the denominator, so a firm's total is a share of what we read rather than of a hundred. <a href="/guides/what-a-law-firm-score-cannot-compare/">We measured how far that moves a score</a>, and it moves it further than any state line does.</p>
+    <p>One caveat applies to every figure above. A site we could not measure keeps its sub-factor pending rather than scoring zero, which takes those points out of the denominator, so a firm's total is a share of what we read rather than of a hundred. We measured how far that moves a score, and it moves it further than any state line does.</p>
 
     <h2 id="fix">What a firm can do</h2>
     <p><b>Of everything the score measures, this is the part a firm controls outright</b>, and it changes in weeks rather than years.</p>
@@ -173,7 +196,7 @@ const description = 'We ran PageSpeed Insights against every New York injury fir
       <h4>How scoring works</h4>
       <ul>
         <li><a href="/methodology/">LFL Certified Methodology</a></li>
-        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+        <li>What a score cannot compare</li>
       </ul>
     </div>
   </aside>
