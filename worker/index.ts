@@ -138,9 +138,36 @@ async function submit(request: Request, env: Env): Promise<Response> {
   return json(200, { ok: true });
 }
 
+/**
+ * One site, one hostname.
+ *
+ * Both lawfirmlistings.com and www.lawfirmlistings.com were routed here and both answered 200
+ * with the whole site, so every page existed at two addresses. Cloudflare counted 17.01k requests
+ * on the apex and 6.51k on the www over thirty days, which is a quarter of the crawling spent on
+ * copies.
+ *
+ * Every page already declares the apex as its canonical, so a crawler reaching the www copy is
+ * handed a page telling it to go somewhere else. Search Console files that as "alternate page
+ * with proper canonical tag", which is not indexed, and a property verified on the www prefix
+ * reports the whole site as one page.
+ *
+ * A canonical tag is a hint. A 301 is not.
+ */
+const CANONICAL_HOST = 'lawfirmlistings.com';
+
+function canonicalRedirect(url: URL): Response | null {
+  if (url.hostname !== `www.${CANONICAL_HOST}`) return null;
+  const to = new URL(url.toString());
+  to.hostname = CANONICAL_HOST;
+  // 301 rather than 302: a crawler only drops the old address from its index for a permanent one.
+  return Response.redirect(to.toString(), 301);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+    const redirect = canonicalRedirect(url);
+    if (redirect) return redirect;
     if (url.pathname === '/api/list-your-firm') {
       if (request.method !== 'POST') {
         return json(405, { error: 'POST only.' });

@@ -103,16 +103,16 @@ PHRASE_SIGNALS = [
 
 # A word that means two things, and only one of them is a fee.
 #
-# In a property transaction a contingency is a condition in the contract, and a firm writing about
+# In a property transaction a contingency is a condition in the contract, so a firm writing about
 # closings uses the word constantly without saying anything about what it charges.
 # criminaldefenselawnyc.com published "Contingency" as its fee model on the strength of "we review
 # every document, resolve title and contingency issues, and guide you from a contract to a closing
 # that holds up", which is not an offer to be paid out of a recovery.
 #
 # One firm of 668 today. It is here because the risk grows with the real estate practice rather
-# than with the injury one, and a fee model is printed on the profile as a fact about the firm.
+# than the injury one, and because a fee model is printed on the profile as a fact about the firm.
 # The rejection is deliberately narrow: it fires only where the word sits against the parts of a
-# transaction, and never where the sentence also says who pays whom.
+# transaction, and never where the same sentence also says who pays whom.
 CLAIM_REJECT = {
     "contingency": (
         re.compile(r"contingenc\w*\s+(?:issues?|clauses?|periods?|removal|deadlines?)|"
@@ -383,7 +383,7 @@ def crawl(domain, fetched_at):
             if reject and reject[0].search(quote) and not reject[1].search(quote):
                 continue
             record["claims"][label] = {
-                "quote": text[start:end].strip(),
+                "quote": quote,
                 "source_url": final,
             }
 

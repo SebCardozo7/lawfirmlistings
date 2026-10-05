@@ -1,0 +1,269 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import GuideCover from './GuideCover.astro';
+import BarChart from './BarChart.astro';
+import Takeaways from './Takeaways.astro';
+
+/**
+ * One state's statute of limitations, as a reference article.
+ *
+ * A reference piece, not a study: every deadline here is the legislature's, read from the
+ * official statute text and cited row by row from src/data/research/statute-of-limitations-<code>.json.
+ * The file is the only place a deadline is written down, so correcting a period after an
+ * amendment is one edit and the table, the chart, the takeaways and the FAQ markup all follow.
+ *
+ * Our own data appears once, at the end, and only to answer the question a reader has after the
+ * table: who in this state does this work. That section is computed from the firms collection
+ * and links a firm's own site only at the tier where the profile already does, so a guide never
+ * hands out a followed link the scorecard would not.
+ *
+ * `reading` is the one editorial input. Each entry is a page on a firm's own site that explains
+ * this state's deadline, read while this guide was written and checked against the statute. It is
+ * listed because it was read, not because of who wrote it, and the page says so.
+ */
+interface Reading { firm: string; url: string; title: string; why: string }
+interface Props {
+  data: any;
+  title: string;
+  description: string;
+  lede: string;
+  crumb: string;
+  reading?: Reading[];
+  /** A second practice whose top verified firm the property and contract rows point to. */
+  alsoPractice?: { slug: string; label: string };
+}
+const { data, title, description, lede, crumb, reading = [], alsoPractice } = Astro.props;
+
+const read = new Date(data.measured_at).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const src = data.source;
+const head = data.headline;
+const rows = data.rows as any[];
+const yearsWord = (y: number) => (y === 1 ? '1 year' : `${y} years`);
+
+const GROUPS: Record<string, string> = {
+  injury: 'Injury and death',
+  property: 'Property',
+  contract: 'Contracts and money',
+  government: 'Claims against the government',
+  other: 'Other',
+};
+const grouped = Object.entries(GROUPS)
+  .map(([key, label]) => ({ key, label, rows: rows.filter(r => r.group === key) }))
+  .filter(g => g.rows.length);
+
+// The chart is the table's numeric column, sorted, so the shortest deadlines are the first thing
+// a reader sees. Rows without a period in years (an age limit, for example) stay in the table only.
+const charted = rows.filter(r => typeof r.years === 'number' && r.group !== 'other')
+  .sort((a, b) => a.years - b.years || a.claim.localeCompare(b.claim));
+const shortest = charted[0];
+const longest = charted[charted.length - 1];
+const gov = rows.find(r => r.group === 'government');
+const injuryRow = rows[0];
+
+// Our own data, and only here.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const GATED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
+const primary = (f: typeof firms[number]) => f.data.practices.find(p => p.primary) ?? f.data.practices[0];
+const inState = firms.filter(f => f.data.market.state === data.code);
+const verifiedIn = (practice: string) => inState
+  .filter(f => primary(f)?.slug === practice && GATED.includes(f.data.score?.tier ?? ''))
+  .sort((a, b) => (b.data.score?.total ?? 0) - (a.data.score?.total ?? 0) || a.data.name.localeCompare(b.data.name));
+const injuryFirms = verifiedIn('personal-injury');
+const topInjury = injuryFirms[0];
+const alsoFirms = alsoPractice ? verifiedIn(alsoPractice.slug) : [];
+const topAlso = alsoFirms[0];
+// The markets in this state, each with its own ranked page.
+const markets = [...new Set(inState.map(f => f.data.market.city_slug))].sort().map(slug => {
+  const g = inState.filter(f => f.data.market.city_slug === slug);
+  return { slug, city: g[0].data.market.city, injury: g.filter(f => primary(f)?.slug === 'personal-injury').length };
+}).filter(m => m.injury > 0);
+
+const relFor = (f: typeof firms[number] | undefined) =>
+  f && GATED.includes(f.data.score?.tier ?? '') ? 'noopener' : 'nofollow noopener';
+const readingRows = reading.map(r => {
+  const f = firms.find(x => x.data.slug === r.firm);
+  return { ...r, f, rel: relFor(f) };
+}).filter(r => r.f);
+
+const url = new URL(`/guides/${data.slug}/`, Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: data.measured_at,
+    dateModified: data.measured_at,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Law Firm Listings Editorial Team' },
+    citation: src.url,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: data.faq.map((f: any) => ({
+      '@type': 'Question', name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+<Base title={title} description={description} nav="guides" schema={schema}
+  figuresFrom={`${src.who}, ${src.what}, read ${read}`}>
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">{crumb}</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Deadlines</span>
+    <h1>{title}</h1>
+    <p class="lede" set:html={lede} />
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Read from the statute, no legal advice</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Statutes read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>9 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="deadline" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#table" class="is-active">Every deadline in one table</a></li>
+      <slot name="toc" />
+      <li><a href="#clock">When the clock stops</a></li>
+      {gov && <li><a href="#government">Claims against the government</a></li>}
+      <li><a href="#firms">Who handles these cases</a></li>
+      <li><a href="#faq">Questions people ask</a></li>
+      <li><a href="#method">Where this comes from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Every period below is read from ${src.what} and the related statutes, on ${read}.`}
+      items={[
+        `${head.claim[0].toUpperCase() + head.claim.slice(1)} in ${data.state} has to be filed within <b>${yearsWord(head.years)}</b>, under ${head.statute}.`,
+        `The shortest deadline in the table is <b>${shortest.period}</b>, for ${shortest.claim.toLowerCase()}. The longest is <b>${longest.period}</b>, for ${longest.claim.toLowerCase()}.`,
+        ...(gov ? [`Against the government the rule changes: <b>${gov.period}</b>, under ${gov.statute}.`] : []),
+        `Missing the deadline usually ends the case, however strong it is. The exceptions are narrow, and each one is listed below with its statute.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every deadline here is quoted from the statute, with a link to the official text on the legislature's own site. It is a map of the law, not advice about a case: when a clock starts can turn on facts only a lawyer who has seen the file can weigh. If a deadline is close, that conversation should happen this week.</div>
+
+    <h2 id="table">Every {data.state} deadline, by type of claim</h2>
+    <p>The period that applies depends on what the claim is, not on how the person was hurt. One crash can produce an injury claim, a claim for the damaged car and, if the other vehicle was a city bus, a claim against the government, and each of them can run on its own clock.</p>
+    <div class="table-wrap">
+      <table class="sol">
+        <thead><tr><th>Claim</th><th>Deadline</th><th>When the clock starts</th><th>Statute</th></tr></thead>
+        {grouped.map(g => (
+          <tbody>
+            <tr class="group"><th colspan="4" scope="colgroup">{g.label}</th></tr>
+            {g.rows.map(r => (
+              <tr>
+                <td><b>{r.claim}</b>{r.note && <span class="sub">{r.note}</span>}</td>
+                <td class="period">{r.period}</td>
+                <td>{r.clock}</td>
+                <td class="cite"><a href={r.url} rel="noopener" target="_blank">{r.statute}</a></td>
+              </tr>
+            ))}
+          </tbody>
+        ))}
+      </table>
+    </div>
+    <p class="note">{src.who}, {src.what} and the other statutes cited in each row, read on {read}. Each citation links to the official text.</p>
+
+    <BarChart
+      heading={`${data.state} filing deadlines, shortest first, in years`}
+      rows={charted.map(r => ({
+        label: r.claim,
+        value: r.years,
+        display: r.period,
+        note: r.statute,
+        emphasis: r === injuryRow,
+      }))}
+      caption={`The highlighted bar is ${injuryRow.claim.toLowerCase()}, the deadline most injury cases in ${data.state} run on. Outer limits such as repose periods are named in the label, not drawn.`}
+    />
+
+    <slot />
+
+    <h2 id="clock">When the clock stops, and when it does not</h2>
+    <p>A limitations period can be paused, which lawyers call tolling, or can start late. Both are exceptions, and a reader should assume neither applies until someone has checked.</p>
+    {data.exceptions.map((e: any) => (
+      <>
+        <h3>{e.name}</h3>
+        <p>{e.text} {e.url ? <a href={e.url} rel="noopener" target="_blank">{e.statute}</a> : <span class="muted">{e.statute}</span>}.</p>
+      </>
+    ))}
+
+    {gov && (
+      <>
+        <h2 id="government">Against the government, the deadline is a different one</h2>
+        <p>Suing a public body runs on its own statute. In {data.state} that means <b>{gov.period.toLowerCase()}</b>, under <a href={gov.url} rel="noopener" target="_blank">{gov.statute}</a>. {gov.clock}</p>
+        <p>{gov.note}</p>
+        <p>It matters more often than people expect. A pothole, a city bus, a fall on public property, a crash with a police car or a sanitation truck all put the claim on this clock, and the first deadline in it is a notice, not a lawsuit, so it can pass before anyone thinks to call a lawyer.</p>
+      </>
+    )}
+
+    <h2 id="firms">Who handles these cases in {data.state}</h2>
+    <p>Most injury cases are taken on contingency, so the first conversation costs nothing, and it is the place to ask which deadline applies to the facts.</p>
+    {topInjury && (
+      <p>This directory holds <b>{injuryFirms.length}</b> verified injury firms in {data.state}, each scored on what it publishes and what can be checked about it. The highest-scoring today is <a href={`/firms/${topInjury.data.slug}/`}>{topInjury.data.name}</a> in {topInjury.data.market.city}, at <b>{topInjury.data.score?.total}</b>. That is a computed position, not an endorsement, and <a href="/methodology/">the method is published</a>.</p>
+    )}
+    {markets.length > 0 && (
+      <p>Ranked lists by market: {markets.map((m, i) => (
+        <>{i > 0 && (i === markets.length - 1 ? ' and ' : ', ')}<a href={`/cities/${m.slug}/personal-injury/`}>{m.city} injury firms</a></>
+      ))}.</p>
+    )}
+    {topAlso && alsoPractice && (
+      <p>For the property and contract rows, the highest-scoring verified {alsoPractice.label} firm in {data.state} is <a href={`/firms/${topAlso.data.slug}/`}>{topAlso.data.name}</a> in {topAlso.data.market.city}, at <b>{topAlso.data.score?.total}</b>, and its own site is <a href={topAlso.data.website} rel={relFor(topAlso)} target="_blank">{topAlso.data.domain}</a>.</p>
+    )}
+    {readingRows.length > 0 && (
+      <>
+        <h3>Further reading from firms in this directory</h3>
+        <p>We read these while writing this guide and checked what they say against the statute. Each is written by {/^[AEIOU]/.test(data.state) ? 'an' : 'a'} {data.state} firm about its own state's deadline, and each adds something the table above cannot, which is a practitioner's view of how the rule plays out in a real case.</p>
+        <ul class="reading">
+          {readingRows.map(r => (
+            <li><a href={r.url} rel={r.rel} target="_blank">{r.title}</a>, from <a href={`/firms/${r.f!.data.slug}/`}>{r.f!.data.name}</a> in {r.f!.data.market.city}. {r.why}</li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    <h2 id="faq">Questions people ask about the {data.state} statute of limitations</h2>
+    {data.faq.map((f: any) => (
+      <>
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </>
+    ))}
+
+    <h2 id="method">Where this comes from</h2>
+    <p>Every period on this page was read from the official text published by <a href={src.url} rel="noopener" target="_blank">{src.who}</a> on {read}, and each row links to the section it comes from.{src.via && <> The Legislature's own server could not be reached while this guide was written, so the sections were read through {src.via}, and every row links to the official chapter.</>} Where the rule is made by courts rather than written in a statute, the page says so and names the case. Nothing here is drawn from a secondary summary.</p>
+    <p>Statutes change. When a legislature amends one of these periods, this page changes with the research file it is built from, and the date at the top moves. Firm counts and scores are computed from this directory each time the page is built.</p>
+    <p>This is not legal advice and no lawyer-client relationship comes from reading it. Whether a particular claim is still inside its deadline depends on facts this page cannot see.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  .prose p.note { font-size: .86rem; color: var(--muted); line-height: 1.6; margin: 0 0 24px; padding-left: 2px; }
+  .prose .table-wrap + p.note { margin-top: -12px; }
+  .prose .table-wrap { margin: 22px 0; overflow-x: auto; }
+  .prose table.sol td { vertical-align: top; font-size: .94rem; }
+  .prose table.sol .sub { display: block; color: var(--muted); font-size: .84rem; line-height: 1.5; margin-top: 4px; }
+  .prose table.sol .period { white-space: nowrap; font-weight: 600; color: var(--ink); }
+  .prose table.sol .cite { white-space: nowrap; font-size: .86rem; }
+  .prose table.sol tr.group th { text-align: left; background: var(--paper); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 14px; }
+  .prose .muted { color: var(--muted); }
+  .prose ul.reading li { margin-bottom: 10px; }
+  @media (max-width: 640px) {
+    .prose table.sol .period, .prose table.sol .cite { white-space: normal; }
+  }
+</style>

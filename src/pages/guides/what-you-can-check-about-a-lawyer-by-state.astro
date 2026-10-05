@@ -1,0 +1,169 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+// Every figure here is computed from the gate records this directory already publishes on each
+// profile. Nothing is typed into the prose.
+//
+// The subject is unusual for this site: it is not a finding about law firms, it is a finding
+// about the states. Each profile says, in its own words, which checks the firm's state allowed
+// and which it did not, and we have been printing those sentences one firm at a time for weeks.
+// Read across 1,270 of them at once they stop being a caveat and start being the story.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// What a gate record says when nobody could answer it. These are the directory's own words,
+// written when a source does not exist rather than when a firm fails a check.
+const NO_SOURCE = new Set(['no queryable source', 'unavailable', 'no roster published']);
+
+type Gate = 'G1' | 'G2' | 'G3';
+const GATE_NAME: Record<Gate, string> = {
+  G1: 'licensure',
+  G2: 'discipline',
+  G3: 'entity registration',
+};
+
+/** A state can answer a gate when at least one firm in it got an answer either way. */
+function answerable(state: string, gate: Gate): boolean {
+  return firms.some(f => f.data.market.state === state
+    && f.data.gates?.[gate]?.pass === true);
+}
+
+type Row = {
+  state: string; n: number;
+  G1: boolean; G2: boolean; G3: boolean;
+  matched: number;
+};
+
+const states: Row[] = [...new Set(firms.map(f => f.data.market.state))]
+  .map(state => {
+    const g = firms.filter(f => f.data.market.state === state);
+    return {
+      state,
+      n: g.length,
+      G1: answerable(state, 'G1'),
+      G2: answerable(state, 'G2'),
+      G3: answerable(state, 'G3'),
+      matched: g.filter(f => f.data.gates?.G1?.pass === true).length,
+    };
+  })
+  .sort((a, b) => b.n - a.n);
+
+const canCheck = (gate: Gate) => states.filter(r => r[gate]);
+const licensure = canCheck('G1');
+const discipline = canCheck('G2');
+const entity = canCheck('G3');
+
+const firmsIn = (rows: Row[]) => rows.reduce((n, r) => n + r.n, 0);
+const unchecked = firms.length - firmsIn(licensure);
+const uncheckedPct = Math.round(100 * unchecked / firms.length);
+
+const markets = new Set(firms.map(f => f.data.market.city)).size;
+const attorneys = firms.reduce((n, f) => n + f.data.attorneys.length, 0);
+
+// The one state that answers, and what it answered. A number that exists only because the data
+// is readable by something other than a person with a form in front of them.
+const ny = states.find(r => r.G1);
+const nyMatched = ny ? ny.matched : 0;
+
+// Counted so the prose never claims more than three gates were examined.
+const gatesPerState = states.map(r => [r.G1, r.G2, r.G3].filter(Boolean).length);
+const noneAtAll = states.filter((_r, i) => gatesPerState[i] === 0);
+
+const title = licensure.length === 1
+  ? 'New Study: One State in Thirteen Lets Anyone Check a Lawyer’s Licence at Scale'
+  : `New Study: ${licensure.length} States in ${states.length} Let Anyone Check a Lawyer’s Licence at Scale`;
+// No figure in here: a description is static metadata and a count in it goes stale the week
+// after a new market opens. check_meta.mjs refuses one.
+const description =
+  'Every state publishes an attorney search. Almost none publishes attorney data. '
+  + 'We tried to verify every attorney we name. Here is what each state allowed.';
+---
+<Base title={title} description={description} nav="guides" image="/og/register.png"
+      imageAlt="Thirteen state registers side by side, one of them open and the rest shut">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">What you can check, by state</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Verification · Every practice</span>
+    <h1>{title}</h1>
+    <p class="lede">This directory tries to verify every attorney it names against the register of the state that admitted them. Across {firms.length.toLocaleString('en-US')} firms, {attorneys.toLocaleString('en-US')} named attorneys and {states.length} states, exactly {licensure.length === 1 ? 'one state' : `${licensure.length} states`} publishes that register in a form anything other than a human being can read. {unchecked.toLocaleString('en-US')} firms, {uncheckedPct}% of this directory, sit in states where the answer is public and unusable.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="register" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#public" class="is-active">Public is not the same as checkable</a></li>
+      <li><a href="#states">What each state allowed</a></li>
+      <li><a href="#consequence">What this costs a person looking for a lawyer</a></li>
+      <li><a href="#notfault">Whose problem this is not</a></li>
+      <li><a href="#method">How this was measured</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read from the eligibility records of ${firms.length.toLocaleString('en-US')} law firms across ${states.length} states and ${markets} markets, each of which states on its own profile which checks its state allowed.`}
+      items={[
+        `<b>${licensure.length} of ${states.length} states</b> ${licensure.length === 1 ? 'publishes' : 'publish'} an attorney register that can be queried by anything other than a person typing one name at a time.`,
+        `<b>${unchecked.toLocaleString('en-US')} firms</b>, ${uncheckedPct}% of this directory, are in states where licensure cannot be verified at scale by anyone, including us.`,
+        `<b>${discipline.length} of ${states.length}</b> publish disciplinary decisions that can be searched, and <b>${entity.length} of ${states.length}</b> publish a business register that can be queried.`,
+        `<b>${noneAtAll.length} ${noneAtAll.length === 1 ? 'state answers' : 'states answer'} none of the three</b>${noneAtAll.length ? `: ${noneAtAll.map(r => r.state).join(', ')}.` : '.'}`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure here is computed at build time from this directory's own eligibility records. It is a statement about what each state publishes, not about any firm or any attorney, and it is not legal advice.</div>
+
+    <h2 id="public">Public is not the same as checkable</h2>
+    <p>Every state bar in the United States lets you check a lawyer. Type a name into the bar's own search, and it will tell you whether that person is admitted, in good standing, and whether anything has been filed against them. That facility exists everywhere, it is free, and it works.</p>
+    <p>It answers one question about one name. That is the whole of it.</p>
+    <p>This directory needed to ask the same question {attorneys.toLocaleString('en-US')} times. Not because {attorneys.toLocaleString('en-US')} lawyers are under suspicion, but because the only way to say that a firm's roster is verified is to have checked all of it, and the only way to say that about a market is to have checked every firm in it. A search box answers the first question. Nothing answers the second unless the data behind the box is published as data.</p>
+    <p><b>{licensure.length === 1 ? 'One state publishes it as data.' : `${licensure.length} states publish it as data.`}</b> The rest publish a form.</p>
+    <p>We do not work around that. Where a register sits behind a search a program is not invited to use, the profile says licensure was not verified and points the reader at the state's own search, which is the right place to check it. An unanswered question is printed as an unanswered question. That policy is why this page can exist: the directory has been recording, firm by firm, exactly which door was shut.</p>
+
+    <h2 id="states">What each state allowed</h2>
+    <p>Three checks, asked of every firm. Whether the named attorneys appear on the state's attorney register. Whether any of them carries a disciplinary status. Whether the firm itself is a registered entity in the state it practises in.</p>
+    <BarChart
+      heading="Checks a state could answer, out of three"
+      max={3}
+      rows={states.map((r, i) => ({
+        label: `${r.state} (${r.n} firms)`,
+        value: gatesPerState[i],
+        display: [r.G1 ? 'licensure' : null, r.G2 ? 'discipline' : null, r.G3 ? 'entity' : null]
+          .filter(Boolean).join(' · ') || 'none',
+      }))}
+      caption="Each state was asked the same three questions about every firm we publish in it."
+    />
+    <p>Licensure is the one that matters most and the one almost nobody publishes. {licensure.map(r => r.state).join(', ')} {licensure.length === 1 ? 'is the only state' : 'are the only states'} where a named attorney can be matched to a register without a person doing it by hand. In {ny ? ny.state : 'that state'}, {nyMatched} of {ny ? ny.n : 0} firms have every attorney they name confirmed as currently registered.</p>
+    <p>Discipline is the next most useful and is better served: {discipline.length} of {states.length} states publish decisions in a form that can be searched, usually because the state's supreme court publishes its opinions rather than because the bar publishes its register. That is a side effect of court transparency, not of professional regulation.</p>
+    <p>The business register, which answers whether the firm is a real registered entity rather than whether its lawyers are real, is available in {entity.length}.</p>
+
+    <h2 id="consequence">What this costs a person looking for a lawyer</h2>
+    <p>It costs them nothing, individually, and that is exactly why it persists. Anyone with one lawyer in mind and five minutes can check that lawyer. The search box is sufficient for the person it was built for.</p>
+    <p>What it makes impossible is everything above that. Nobody can ask how many firms in a city name an attorney who is not registered. Nobody can ask whether the firms advertising most heavily are the ones with the most complaints. Nobody can compare two markets, or watch one over time, or notice that a name has appeared on forty websites and one register. Those are not exotic questions. They are the questions a regulator asks, and in {unchecked.toLocaleString('en-US')} firms' worth of this country they cannot be asked from outside.</p>
+    <p>The gap is not between what is secret and what is public. Everything here is public. The gap is between public and legible, and it is wide enough that the only people who can see the whole picture are the ones already inside it.</p>
+
+    <h2 id="notfault">Whose problem this is not</h2>
+    <p>Not the firms'. A firm cannot publish its state's register. The {uncheckedPct}% of this directory whose licensure is unverified did nothing to earn that, and the profile of every one of them says so in those words rather than treating it as a mark against the firm. A check nobody can run is not a failure by the subject of it.</p>
+    <p>Nor is it a claim that these bars are hiding anything. A search form is a reasonable thing to build for a consumer, and most of these registers were designed before anybody expected a register to be read by a program. The cost is real all the same, and it falls on the only people who would ever want to look at more than one lawyer at a time.</p>
+    <p><b>The fix is small and it is not ours to make.</b> A state that already answers one name at a time has the data. Publishing it as an open dataset, the way {ny ? ny.state : 'New York'} does, is a decision about a format rather than about disclosure.</p>
+
+    <h2 id="method">How this was measured</h2>
+    <p>Every firm in this directory carries three eligibility records: licensure, discipline and entity registration. Each one is either passed, failed, or marked as having no source, with a sentence naming what was read and when. This page reads all {firms.length.toLocaleString('en-US')} of them and asks, per state, whether any firm in it ever got an answer at all.</p>
+    <p>A state counts as able to answer a check when at least one firm in it has that check settled either way. That is deliberately generous. It means a state is credited for a register that exists even if most of its firms could not be matched against it, so the count of states that cannot answer is the smallest honest count rather than the largest.</p>
+    <p>Three things this does not measure. It does not measure whether a state's own search works, because it does, everywhere. It does not measure whether a lawyer is licensed, because for {uncheckedPct}% of this directory nobody outside the state can establish that at scale, which is the finding. And it is not a ranking of states: a state with one readable register and a state with none are not better and worse at regulating lawyers, they are better and worse at publishing what they already know.</p>
+  </div>
+</div>
+</article>
+</Base>

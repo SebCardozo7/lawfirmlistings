@@ -24,7 +24,8 @@ export interface Guide {
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-    | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult';
+    | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
+    | 'defense';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -66,6 +67,76 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  // The state statute pages from docs/guides-50.md, family B. Reference pieces: the periods
+  // live in src/data/research/statute-of-limitations-<code>.json and the pages compute their
+  // headlines from it, so nothing here may carry a figure.
+  {
+    slug: 'oregon-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Oregon Statute of Limitations: The Notice, and the Cap on a Child\'s Time',
+    summary:
+      'Oregon\'s injury deadline is the familiar one. What catches people is beside it: a short ' +
+      'notice period against any public body, and a pause for minors that is capped, so a young ' +
+      'child\'s claim can end long before adulthood. Every Oregon deadline, read from the ORS.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'A child does not get until 18',
+  },
+  {
+    slug: 'florida-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Florida Statute of Limitations: The Deadline That Was Cut in Half',
+    summary:
+      'Florida moved negligence claims onto a much shorter clock in 2023, and plenty of what is ' +
+      'published about the state still gives the old figure. Every Florida deadline by type of ' +
+      'claim, read from the statute, with the transition rule and the narrow ways the clock stops.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'Half the time it used to be',
+  },
+  {
+    slug: 'texas-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Texas Statute of Limitations: The Rule and the Exceptions That Bite',
+    summary:
+      'Everybody knows the Texas injury deadline. The ones that end cases early are the short ' +
+      'periods beside it: the notice against a city, the year for defamation, and a malpractice ' +
+      'rule that ignores the usual protection for children. Every one, with its statute.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'The short deadlines are the dangerous ones',
+  },
+  {
+    slug: 'new-york-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'New York Statute of Limitations: The Years, and the Days That Matter More',
+    summary:
+      'A New York injury claim has years. A claim against the City, the MTA or a public hospital ' +
+      'has days before the first deadline, and that notice ends more cases than the statute ' +
+      'everyone quotes. Every New York deadline by type of claim, read from the CPLR.',
+    thumb: '',
+    icon: 'doc',
+    meta: 'The notice of claim comes first',
+  },
+  {
+    slug: 'how-to-choose-a-criminal-defense-lawyer',
+    cover: 'defense',
+    kicker: 'Study',
+    title: 'New Study: Most Criminal Defense Firms Publish No Case Results',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every guide to hiring a criminal lawyer tells you to check the track record. We counted ' +
+      'whether there is one to check, against the injury firms on the same streets. Most of ' +
+      'these firms publish no outcome at all, our own score marks them down for it, and their ' +
+      'clients rate them the same.',
+    thumb: 't3',
+    icon: 'scale',
+    meta: 'Nothing to check, and nothing wrong with them',
+  },
   {
     slug: 'do-lawyers-offer-free-consultations',
     cover: 'consult',
@@ -110,6 +181,22 @@ export const GUIDES: Guide[] = [
     thumb: 't2',
     icon: 'columns',
     meta: 'A blog comes first, the price comes last',
+  },
+  {
+    slug: 'what-you-can-check-about-a-lawyer-by-state',
+    cover: 'register',
+    kicker: 'Verification',
+    title: 'New Study: One State in Thirteen Lets Anyone Check a Lawyer’s Licence at Scale',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts, and
+    // its own headline changes the moment a second state publishes a readable register.
+    summary:
+      'Every state bar lets you check one lawyer by typing a name into a form, and that works ' +
+      'everywhere. Almost none publishes the same information as data, so nobody outside a ' +
+      'state can ask how many firms in a city name an attorney who is not registered. The gap ' +
+      'is not between secret and public. It is between public and legible.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'Public is not the same as checkable',
   },
   {
     slug: 'what-injury-firms-publish-about-fees-by-state',

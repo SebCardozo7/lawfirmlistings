@@ -1,0 +1,48 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-fl.json';
+
+/**
+ * Florida's deadlines, the first of the state statute pages in docs/guides-50.md (family B).
+ *
+ * The figures in the title and description are read from the research file, never typed, and
+ * the page declares where they came from, which is what lets check_meta pass a dated figure.
+ */
+const c = data.change;
+const negligence = data.rows[0];
+const gov = data.rows.find(r => r.group === 'government')!;
+const title = `Florida Statute of Limitations 2026: Why You Now Have ${c.to_years} Years, Not ${c.from_years}`;
+const description = `Florida cut the deadline for negligence claims from ${c.from_years} years to ${c.to_years} in 2023. Every deadline by claim type, with the statute and the exceptions.`;
+const lede = `In Florida, a person hurt by someone's carelessness has <b>${c.to_years} years</b> to file suit. Until ${c.date} it was ${c.from_years}, and a great deal of what is still published about Florida says so. The change sits in one line of the statutes and moved nearly every car crash, fall and premises claim in the state onto a clock half as long. Here is every Florida deadline by type of claim, read from the statute, with what changed and the narrow ways the clock can stop.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="Florida statute of limitations"
+  alsoPractice={{ slug: 'real-estate', label: 'real estate' }}
+  reading={[
+    {
+      firm: 'lopez-humphries-pa',
+      url: 'https://www.lopezandhumphries.com/how-will-floridas-new-2-year-deadline-affect-your-injury-case/',
+      title: 'How Will Florida’s New 2 Year Deadline Affect Your Injury Case?',
+      why: 'A Lakeland injury firm on what the shorter window means in practice for car accident, slip and fall and premises cases, which is where most of the change lands.',
+    },
+  ]}>
+  <Fragment slot="toc">
+    <li><a href="#change">What changed in 2023</a></li>
+    <li><a href="#minors">Why children get less time here</a></li>
+  </Fragment>
+
+  <h2 id="change">Florida halved its injury deadline in 2023</h2>
+  <p>On {c.date} the Governor signed <a href={c.url} rel="noopener" target="_blank">{c.law}</a>, a tort reform bill that took effect the same day. Among a long list of changes, it moved "an action founded on negligence" out of the {c.from_years}-year list in § 95.11 and into the {c.to_years}-year list.</p>
+  <p>That one move covers most of what people mean by a personal injury case. Car and truck crashes, falls in stores, dog bites, injuries on someone else's property: if the claim is that someone was careless, it now runs on <b>{negligence.period}</b>.</p>
+  <p>The transition rule is the part worth reading twice. {c.rule}</p>
+  <p>So two people hurt in the same intersection a week apart can have deadlines two years apart. Somebody injured in February 2023 who has been told "you have plenty of time" may still be right, until {c.old_window_closes}. Somebody injured in April 2023 ran out of time in April 2025.</p>
+  <p>Several things did <b>not</b> change. Medical malpractice was already two years. Wrongful death was already two years. Intentional torts such as assault and battery still have four. Contract claims still have four or five.</p>
+
+  <h2 id="paradox">Suing the government can give you more time than suing a neighbor</h2>
+  <p>Florida's sovereign immunity statute was not touched by the 2023 bill, and it now gives a negligence claim against the state, a county or a city <b>{gov.period.toLowerCase()}</b>, under <a href={gov.url} rel="noopener" target="_blank">{gov.statute}</a>. A crash with a private driver has two.</p>
+  <p>That is the reverse of most states, where the public-body deadline is the short one. It comes with conditions: written notice to the agency, and to the Department of Financial Services for a state agency, is a requirement that has to be met before suit, and the agency gets time to deny the claim. Wrongful death and medical malpractice claims against the government keep their two years.</p>
+
+  <h2 id="minors">Why a Florida child gets less time than a child in Texas</h2>
+  <p>In most states, a minor's deadline does not start running until the 18th birthday. Florida does not work that way. Under § 95.051 a child's claim is paused only while there is no parent or guardian able to act, or that person's interests are adverse to the child's, and even then it must be filed within seven years of the event.</p>
+  <p>Because nearly every injured child has a parent, the practical rule is that a child's negligence claim runs on the same two years as an adult's. Medical malpractice is handled separately, and a child's malpractice claim survives until the eighth birthday even when the four-year outer limit has passed.</p>
+</StatuteGuide>

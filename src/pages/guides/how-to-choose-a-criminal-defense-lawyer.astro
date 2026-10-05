@@ -1,0 +1,452 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+
+/**
+ * What a criminal defense firm publishes about its own work, measured against the injury firms
+ * in the same city.
+ *
+ * Every page that ranks for "how to choose a criminal defense lawyer" gives the same advice:
+ * check the attorney's track record and past case outcomes. Nobody has counted whether that is
+ * possible. This does, across the whole criminal defense cohort in this directory.
+ *
+ * The fields, and which script writes each, because two fields that sound alike have put a false
+ * sentence on a live page here before:
+ *
+ *   - `results_published` is written by scripts/crawl_results.py from the firm's own results
+ *     page. `readable` separates "publishes nothing", which is a finding, from "we could not read
+ *     the page", which is our failure and keeps pillar B pending. `count` is results counted from
+ *     the page, `amounts` the dollar figures printed beside them, `venues` the courts or counties
+ *     named, `case_types` the kinds of matter named, `disclaimer` the prior-results line.
+ *     It carries `checked_at`, so this page can state when it was read.
+ *   - `attorneys[].admitted_year` is written by scripts/check_ny_registry.py from the New York
+ *     attorney register. It is OUR match against the state's record, not something the firm
+ *     publishes. It is not `digital.trust_pages.bar_numbers_on_bios`, which no record carries,
+ *     and it is not `operating.years`, which is a domain registration date over RDAP.
+ *   - `digital.places.rating_weighted` and `review_count_total` are Google Business Profile
+ *     aggregates summed across the firm's verified listings.
+ *   - `digital.ahrefs.org_traffic` is Ahrefs' estimate of monthly organic search visits.
+ *
+ * The cohorts are derived rather than named: the subject is the criminal defense practice, the
+ * control is the largest other practice in whatever market holds most of the subject. Today both
+ * sit in one city, which is what makes the comparison worth running at all.
+ *
+ * No dollar amount any firm publishes is repeated here. `results[]`, the block that would carry a
+ * verified one, is empty on every record in the directory.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+type Firm = typeof firms[number];
+
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : 0;
+};
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+const fmt = (n: number) => n.toLocaleString('en-US');
+
+// Never join a list by hand. Deduplicates, keeps the order it was given, and reads correctly at
+// one, two and twenty, which a join(' and ') does not.
+const list = (xs: string[]) => {
+  const u = [...new Set(xs)];
+  if (u.length <= 1) return u[0] ?? '';
+  return u.slice(0, -1).join(', ') + ' and ' + u[u.length - 1];
+};
+
+// The firm's own practice, not every area it will take.
+const primary = (f: Firm) => f.data.practices.find(p => p.primary) ?? f.data.practices[0];
+
+const SUBJECT = 'criminal-defense';
+const subjectAll = firms.filter(f => primary(f)?.slug === SUBJECT);
+const subjectName = primary(subjectAll[0])?.name ?? 'Criminal defense';
+
+// Which market holds most of the subject, so the control can be drawn from the same one. Size
+// first, then slug, so two equal markets never swap places between builds.
+const marketsOf = (xs: Firm[]) =>
+  [...new Set(xs.map(f => f.data.market.city_slug))]
+    .map(slug => ({ slug, n: xs.filter(f => f.data.market.city_slug === slug).length }))
+    .sort((a, b) => b.n - a.n || a.slug.localeCompare(b.slug));
+
+const subjectMarkets = marketsOf(subjectAll);
+const homeSlug = subjectMarkets[0]?.slug ?? '';
+const inHome = (f: Firm) => f.data.market.city_slug === homeSlug;
+const subject = subjectAll.filter(inHome);
+const homeCity = subject[0]?.data.market.city ?? '';
+// The two-letter code, not state_name: this market's city and state share a name, and the scope
+// line read "New York, New York" until it did not.
+const homeState = subject[0]?.data.market.state ?? '';
+const subjectIsOneMarket = subject.length === subjectAll.length;
+const subjectMarketNames = list(subjectAll.map(f => f.data.market.city));
+
+// The control is the largest other practice sitting in the same market. Taking the practice with
+// the most published results instead would pick the cohort that flatters the comparison, and
+// taking the smallest would pick one too thin to run a test on.
+const homeFirms = firms.filter(inHome);
+const controlSlug = [...new Set(homeFirms.map(f => primary(f)?.slug))]
+  .filter((s): s is string => !!s && s !== SUBJECT)
+  .map(slug => ({ slug, n: homeFirms.filter(f => primary(f)?.slug === slug).length }))
+  .sort((a, b) => b.n - a.n || a.slug.localeCompare(b.slug))[0]?.slug ?? '';
+const control = homeFirms.filter(f => primary(f)?.slug === controlSlug);
+const controlName = primary(control[0])?.name ?? '';
+const controlLower = controlName.toLowerCase();
+const subjectLower = subjectName.toLowerCase();
+
+// ---- What each cohort publishes about its own outcomes ----
+const rp = (f: Firm) => f.data.results_published;
+const readable = (xs: Firm[]) => xs.filter(f => rp(f)?.readable);
+const unreadable = (xs: Firm[]) => xs.filter(f => rp(f) && !rp(f)!.readable);
+const publishing = (xs: Firm[]) => xs.filter(f => (rp(f)?.count ?? 0) > 0);
+const silent = (xs: Firm[]) => xs.filter(f => rp(f)?.readable && !(rp(f)!.count ?? 0));
+const withAmounts = (xs: Firm[]) => xs.filter(f => (rp(f)?.amounts ?? []).length > 0);
+const withVenue = (xs: Firm[]) => xs.filter(f => (rp(f)?.venues ?? []).length > 0);
+const withDisclaimer = (xs: Firm[]) => xs.filter(f => rp(f)?.disclaimer);
+const named = (xs: Firm[]) => xs.filter(f => f.data.attorneys.length > 0);
+
+const sPublishing = publishing(subject);
+const cPublishing = publishing(control);
+const sSilent = silent(subject);
+const cSilent = silent(control);
+const sNoAmount = sPublishing.filter(f => !(rp(f)!.amounts ?? []).length);
+const cNoAmount = cPublishing.filter(f => !(rp(f)!.amounts ?? []).length);
+const sUnreadable = unreadable(subject);
+const cUnreadable = unreadable(control);
+
+// The population split, ordered by how much evidence we got, so our own failure sits beside the
+// firms' silence rather than being folded into it. Four segments, because StackBar caps its hue
+// steps at four and a fifth would draw identical to the fourth.
+const evidenceSegments = [
+  { label: 'Results page we could not read', value: sUnreadable.length },
+  { label: 'No case result published', value: sSilent.length },
+  { label: 'Results published, no amount beside any of them', value: sNoAmount.length },
+  { label: 'Results published with amounts', value: withAmounts(sPublishing).length },
+];
+
+const meanTypes = (xs: Firm[]) => mean(xs.map(f => (rp(f)?.case_types ?? []).length));
+
+// The four checks the advice on this search tells a reader to run, each as a share of its own
+// cohort so two differently sized groups sit on one scale, with the counts printed on the bars.
+const share = (a: number, b: number) => (b ? (a / b) * 100 : 0);
+const checkRows = [
+  {
+    label: `Publishes any case result, ${subjectLower}`,
+    value: share(sPublishing.length, subject.length),
+    display: `${sPublishing.length} of ${subject.length}`,
+    emphasis: true,
+  },
+  {
+    label: `Publishes any case result, ${controlLower}`,
+    value: share(cPublishing.length, control.length),
+    display: `${cPublishing.length} of ${control.length}`,
+  },
+  {
+    label: `Names a court or county, ${subjectLower}`,
+    value: share(withVenue(subject).length, subject.length),
+    display: `${withVenue(subject).length} of ${subject.length}`,
+    emphasis: true,
+  },
+  {
+    label: `Names a court or county, ${controlLower}`,
+    value: share(withVenue(control).length, control.length),
+    display: `${withVenue(control).length} of ${control.length}`,
+  },
+  {
+    label: `Names at least one attorney, ${subjectLower}`,
+    value: share(named(subject).length, subject.length),
+    display: `${named(subject).length} of ${subject.length}`,
+    emphasis: true,
+  },
+  {
+    label: `Names at least one attorney, ${controlLower}`,
+    value: share(named(control).length, control.length),
+    display: `${named(control).length} of ${control.length}`,
+  },
+];
+
+// ---- What our own scale does with it ----
+const pillarB = (f: Firm) => f.data.score?.pillars.B;
+const bScore = (f: Firm) => pillarB(f)?.score ?? 0;
+const bMax = [...new Set(subject.concat(control).map(f => pillarB(f)?.max).filter(n => n != null))] as number[];
+const bMaxLabel = bMax.sort((a, b) => a - b).join(' or ');
+const sB = mean(subject.map(bScore));
+const cB = mean(control.map(bScore));
+const sBzero = subject.filter(f => bScore(f) === 0).length;
+const cBzero = control.filter(f => bScore(f) === 0).length;
+
+// How much of the gap pillar B actually explains. Both sides of this fraction have to be in the
+// same units, and a first draft divided a difference in raw points by a difference in median
+// percentage totals, which is two different quantities wearing one ratio. `score.raw` is the
+// points a firm earned before the coverage division, so the pillar gap and the overall gap are
+// both read from it.
+const rawOf = (xs: Firm[]) => mean(xs.map(f => f.data.score?.raw ?? 0));
+const rawGap = rawOf(control) - rawOf(subject);
+const bGapShare = rawGap > 0 ? Math.round(((cB - sB) / rawGap) * 100) : 0;
+
+const B_BANDS = [
+  { label: 'Zero', note: 'no result read', lo: 0, hi: 0 },
+  { label: 'Over 0 to 4', note: 'a handful', lo: 0.0001, hi: 4 },
+  { label: 'Over 4 to 9', note: 'a real page', lo: 4.0001, hi: 9 },
+  { label: 'Over 9', note: 'everything asked', lo: 9.0001, hi: Infinity },
+];
+const bColumns = B_BANDS.map(b => ({
+  label: b.label,
+  note: b.note,
+  value: subject.filter(f => bScore(f) >= b.lo && bScore(f) <= b.hi).length,
+  emphasis: b.lo === 0 && b.hi === 0,
+}));
+
+// ---- The falsification. If the gap is about the firms rather than about what they publish, it
+// should show up in something a client said. Two measures with full coverage on both cohorts.
+const rating = (xs: Firm[]) =>
+  mean(xs.map(f => f.data.digital.places?.rating_weighted).filter((n): n is number => n != null));
+const reviews = (xs: Firm[]) =>
+  Math.round(median(xs.map(f => f.data.digital.places?.review_count_total ?? 0)));
+const totalOf = (xs: Firm[]) =>
+  median(xs.map(f => f.data.score?.total).filter((n): n is number => n != null));
+
+const sTotal = totalOf(subject);
+const cTotal = totalOf(control);
+const sRating = rating(subject);
+const cRating = rating(control);
+const sReviews = reviews(subject);
+const cReviews = reviews(control);
+const ratingGap = Math.abs(sRating - cRating);
+
+const signalRows = [
+  {
+    label: `Certification score, ${subjectLower}`,
+    value: sTotal, display: `${sTotal} of 100`, emphasis: true,
+  },
+  {
+    label: `Certification score, ${controlLower}`,
+    value: cTotal, display: `${cTotal} of 100`, emphasis: true,
+  },
+  {
+    label: `Google rating, ${subjectLower}`,
+    value: (sRating / 5) * 100, display: `${sRating.toFixed(2)} of 5`,
+  },
+  {
+    label: `Google rating, ${controlLower}`,
+    value: (cRating / 5) * 100, display: `${cRating.toFixed(2)} of 5`,
+  },
+];
+
+// Reach, which is the thing the score is actually tracking. Ahrefs is pending on a handful of
+// firms, so each median carries its own denominator.
+const traffic = (xs: Firm[]) => {
+  const g = xs.filter(f => f.data.digital.ahrefs);
+  return { n: g.length, med: Math.round(median(g.map(f => f.data.digital.ahrefs!.org_traffic))) };
+};
+const sTraffic = traffic(subject);
+const cTraffic = traffic(control);
+
+// The one sub-factor that reads how long the lawyers have practised, and the only comparison here
+// that is about people rather than about pages. It rests on our own register matching, and the
+// match rate differs between the cohorts, which the limits section says out loud.
+const admitted = (xs: Firm[]) => {
+  const rows = xs.flatMap(f => f.data.attorneys);
+  const years = rows
+    .map(a => a.admitted_year)
+    .filter((y): y is number => y != null && y <= new Date().getUTCFullYear())
+    .map(y => new Date().getUTCFullYear() - y);
+  return {
+    people: rows.length,
+    matched: years.length,
+    firms: xs.filter(f => f.data.attorneys.some(a => a.admitted_year != null)).length,
+    meanYears: mean(years),
+  };
+};
+const sAdmitted = admitted(subject);
+const cAdmitted = admitted(control);
+
+const a2 = (f: Firm) => f.data.score?.pillars.A.subs.find(s => s.code === 'A2');
+const a2Scored = (xs: Firm[]) => xs.filter(f => a2(f)?.source === 'registry');
+const a2Mean = (xs: Firm[]) => mean(a2Scored(xs).map(f => a2(f)!.pts));
+const a2Max = [...new Set(a2Scored(subject.concat(control)).map(f => a2(f)!.max))].join(' or ');
+
+const c5 = (f: Firm) => f.data.score?.pillars.C.subs.find(s => s.code === 'C5');
+const c5Mean = (xs: Firm[]) => mean(xs.filter(f => c5(f)).map(f => c5(f)!.pts));
+const c5Max = [...new Set(subject.concat(control).map(f => c5(f)?.max).filter(n => n != null))].join(' or ');
+
+// ---- The two named examples, both picked by a measured quantity with a slug tie-break, so the
+// page re-picks its own illustrations as the data moves and never names a firm by hand.
+const byResults = [...sPublishing].sort((a, b) =>
+  (rp(b)!.count ?? 0) - (rp(a)!.count ?? 0) || a.data.slug.localeCompare(b.data.slug));
+const exemplar = byResults[0] ?? null;
+const exemplarAmounts = exemplar ? (rp(exemplar)!.amounts ?? []).length : 0;
+
+const bySilentReviews = [...sSilent].sort((a, b) =>
+  (b.data.digital.places?.review_count_total ?? 0) - (a.data.digital.places?.review_count_total ?? 0) ||
+  a.data.slug.localeCompare(b.data.slug));
+const loudestSilent = bySilentReviews[0] ?? null;
+
+// The reading date. Unlike the site crawl, this measurement family carries one on every record,
+// so the page can state it instead of borrowing a date from a different study.
+const readDates = subject.concat(control)
+  .map(f => rp(f)?.checked_at).filter((s): s is string => !!s).sort();
+const lastRead = readDates[readDates.length - 1] ?? null;
+const firstRead = readDates[0] ?? null;
+const asDate = (s: string | null) => s
+  ? new Date(s).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+const updated = asDate(lastRead);
+const windowStart = asDate(firstRead);
+
+// States the finding and carries no figure, because check_meta rejects one in a title or a
+// description and is right to: every count here moves when a market opens.
+const title = 'New Study: Most Criminal Defense Firms Publish No Case Results';
+const description =
+  'Every guide to hiring a criminal lawyer says check the track record. We counted whether there is one to check, against injury firms on the same streets.';
+---
+<Base title={title} description={description} nav="guides" image="/og/defense.png" imageAlt="Two stacks of result cards, one tall and one nearly empty, under two identical rows of stars">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Choosing a criminal defense lawyer</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Study · Criminal defense</span>
+    <h1>{title}</h1>
+    <p class="lede">Every page answering this question tells you to check the lawyer's track record and past outcomes. We counted whether there is one to check. Of the {subject.length} {subjectLower} firms in this directory, <b>{sSilent.length}</b> publish no case result we could read, against <b>{cSilent.length}</b> of the {control.length} {controlLower} firms in the same city.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="defense" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#track">The track record is mostly not there</a></li>
+      <li><a href="#checks">The rest of the checklist</a></li>
+      <li><a href="#score">What our own score does with it</a></li>
+      <li><a href="#clients">What the clients said</a></li>
+      <li><a href="#instead">What is left to check</a></li>
+      <li><a href="#limits">What this does not measure</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Measured across ${subject.length} ${subjectLower} firms and the ${control.length} ${controlLower} firms in the same market, ${homeCity}, ${homeState}${updated ? `, read on or before ${updated}` : ''}.`}
+      items={[
+        `<b>${sSilent.length} of ${subject.length}</b> ${subjectLower} firms publish no case result on a page we could read, against <b>${cSilent.length} of ${control.length}</b> ${controlLower} firms on the same streets.`,
+        `Of the <b>${sPublishing.length}</b> that do publish outcomes, <b>${sNoAmount.length}</b> attach no figure to any of them, while <b>${withAmounts(cPublishing).length} of ${cPublishing.length}</b> publishing ${controlLower} firms print amounts.`,
+        `Our own certification score reads the gap as a <b>${Math.abs(cTotal - sTotal)}-point</b> difference in the median: <b>${sTotal} of 100</b> against <b>${cTotal} of 100</b>.`,
+        `What clients said does not move with it: mean Google rating is <b>${sRating.toFixed(2)}</b> against <b>${cRating.toFixed(2)}</b>, a difference of <b>${ratingGap.toFixed(2)}</b> of a star.`,
+        `What does move with it is reach, and that is marketing rather than lawyering: median organic search traffic runs <b>${fmt(sTraffic.med)}</b> visits a month against <b>${fmt(cTraffic.med)}</b>.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. We record what a firm publishes on its own website, which is not a claim about how it does its work. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>We read the results pages of every {subjectLower} firm in this directory and recorded four things: how many outcomes the firm lists, whether a figure is printed beside any of them, whether any court or county is named, and whether a prior-results disclaimer sits with them.</p>
+    <p>{subjectIsOneMarket
+      ? `All ${subjectAll.length} of those firms are in ${subjectMarketNames}, which is what makes the comparison below worth running.`
+      : `Those firms sit in ${subjectMarketNames}, and ${subject.length} of the ${subjectAll.length} are in ${homeCity}.`} The comparison cohort is the {control.length} {controlLower} firms in {homeCity}: the largest other practice in the same market, so the city, the local search results and the state's advertising rules are all held still while the kind of work changes.</p>
+    <p><b>One distinction carries the whole page.</b> A firm that publishes nothing is a finding. A page our crawler could not reach is our failure, and it is counted separately rather than folded in: {sUnreadable.length === 0 ? `every one of the ${subject.length} results pages answered us` : `${sUnreadable.length} of the ${subject.length} ${subjectLower} pages did not answer us`}{cUnreadable.length > 0 && <>, as did {cUnreadable.length} on the {controlLower} side</>}. Those firms keep the sub-factor pending instead of scoring zero.</p>
+
+    <h2 id="track">The track record is mostly not there</h2>
+    <StackBar
+      heading={`What we found when we went looking for a published case result at ${subject.length} ${subjectLower} firms`}
+      segments={evidenceSegments}
+      unit="firms"
+      caption={`Ordered by how much evidence we got. The first segment is our own crawl failing rather than a firm publishing nothing, which is why it is counted apart. Results are counted from ${list(subject.map(f => rp(f)?.counted_from).filter((s): s is string => !!s))}.`}
+    />
+    <p>{sPublishing.length} of the {subject.length} {subjectLower} firms publish at least one outcome. {cPublishing.length} of the {control.length} {controlLower} firms do. Same city, same bar, and the share goes from {Math.round(share(sPublishing.length, subject.length))}% to {Math.round(share(cPublishing.length, control.length))}% when the kind of work changes.</p>
+    <p><b>Where they do publish, the two practices publish different things.</b> {sNoAmount.length} of the {sPublishing.length} publishing {subjectLower} firms print no figure beside any outcome. On the {controlLower} side {cNoAmount.length === 0 ? `every one of the ${cPublishing.length} prints at least one` : `${cPublishing.length - cNoAmount.length} of the ${cPublishing.length} do`}. A dismissal has no dollar value, so there is nothing to print, and that is a fact about criminal law rather than about the firm.</p>
+    <p>The same shows in how specific the pages are. A publishing {subjectLower} firm names {meanTypes(sPublishing).toFixed(1)} kinds of matter on average, against {meanTypes(cPublishing).toFixed(1)} for a publishing {controlLower} firm.</p>
+    {exemplar && (
+      <p>The ceiling is worth looking at, because it shows the shape rather than the shortfall. <a href={`/firms/${exemplar.data.slug}/`}>{exemplar.data.name}</a> lists {fmt(rp(exemplar)!.count ?? 0)} outcomes with {fmt((rp(exemplar)!.venues ?? []).length)} court references and {exemplarAmounts === 0 ? 'not one dollar figure among them' : `${fmt(exemplarAmounts)} figures among them`}. It takes {bScore(exemplar)} of the {bMaxLabel} points our scale awards for published outcomes, which is {bScore(exemplar) === (pillarB(exemplar)?.max ?? 0) ? 'all of them' : 'most of them'}, and it does it without naming a sum.</p>
+    )}
+
+    <h2 id="checks">The rest of the checklist</h2>
+    <p>Three of the checks this search is told to run can be counted the same way: find the outcomes, find the courts the firm works in, find the lawyers by name. Here is how far each one gets in each cohort.</p>
+    <BarChart
+      heading="How far three of the usual checks get, in each cohort"
+      max={100}
+      rows={checkRows}
+      caption={`The bar is the share and the printed figure is the count, because the cohorts are different sizes. A court reference is any county, court or district named on the results page. An attorney is anybody the firm names on a page we could read.`}
+    />
+    <p>Naming the court is the one that matters most and is counted least. <a href="/guides/what-a-case-results-page-proves/">We have published before</a> that a named venue is worth more than the figure beside it, because a county and a case type are what let a reader go and look the matter up. {withVenue(subject).length} of the {subject.length} {subjectLower} firms name one. <b>Hold the publishing constant and that difference disappears.</b> Among only the firms publishing anything at all it is {withVenue(sPublishing).length} of {sPublishing.length} {subjectLower} firms against {withVenue(cPublishing).length} of {cPublishing.length} {controlLower} ones, which is {Math.round(share(withVenue(sPublishing).length, sPublishing.length))}% against {Math.round(share(withVenue(cPublishing).length, cPublishing.length))}%. The cohort-level gap is a gap in how many firms publish at all, not in how carefully they do it.</p>
+    <p>The disclaimer tells the same story. {withDisclaimer(subject).length} of the {subject.length} {subjectLower} firms carry a prior-results line, and {withDisclaimer(cPublishing).length} of the {cPublishing.length} publishing {controlLower} firms do. New York's advertising rules effectively require it beside published results, and the firms with nothing published have nothing to disclaim.</p>
+    <p>The roster is the sharpest difference and it has nothing to do with results at all. {subject.length - named(subject).length} of the {subject.length} {subjectLower} firms name no attorney on any page we could read, against {control.length - named(control).length} of {control.length}. These are smaller practices: the median {subjectLower} firm here names {median(subject.map(f => f.data.attorneys.length))} {median(subject.map(f => f.data.attorneys.length)) === 1 ? 'person' : 'people'} and the median {controlLower} firm names {median(control.map(f => f.data.attorneys.length))}. <a href="/guides/what-it-takes-to-check-a-law-firm/">A roster is the input every other check needs</a>, so a one-name firm is not hiding anything; it is simply smaller than the checks assume.</p>
+
+    <h2 id="score">What our own score does with it</h2>
+    <p>This is the part that is about us. Pillar B of the LFL Certification Score is worth {bMaxLabel} points and it reads a case results page. {subjectName} firms average {sB.toFixed(2)} of it and {controlName} firms average {cB.toFixed(2)}.</p>
+    <ColumnChart
+      heading={`Points earned for published outcomes, across ${subject.length} ${subjectLower} firms`}
+      columns={bColumns}
+      caption={`Out of ${bMaxLabel}. The highlighted band is firms earning nothing, which is ${sBzero} of ${subject.length} here against ${cBzero} of ${control.length} ${controlLower} firms in the same city. The band above 9 is firms doing everything the sub-factor asks, which is what makes the zero band a measurement of the practice rather than of effort.`}
+      emphasisLabel="Earns nothing for published outcomes"
+      quietLabel="Earns something"
+    />
+    <p><b>The pillar has three shapes and this practice fits none of them.</b> Where a firm's primary work is a real estate transaction or a divorce, pillar B reads a different block entirely: the price of the transaction, or the hourly rate and the stages of a matrimonial case. Those shapes were written when each practice arrived. Criminal defense arrived without one, so it is scored against a results page, and a criminal matter produces no settlement to list.</p>
+    <p>Pillar B is not the whole gap, and saying it is would be the easy version of this page. The two cohorts differ by {rawGap.toFixed(1)} raw points on average, and the three sub-factors that read published outcomes account for {bGapShare}% of that. The rest sits in roster verifiability, review volume, fee transparency and the availability line: every one of them a count of how much a firm publishes.</p>
+    <p>We have published this class of problem twice before, when <a href="/guides/what-a-law-firm-score-cannot-compare/">a score turned out to mean different things on either side of a state line</a> and when <a href="/guides/do-lawyers-offer-free-consultations/">a fee and access sub-factor turned out to be measuring a billing convention</a>. This is the third instance and the largest. <a href="/methodology/">The methodology</a> sets out every sub-factor and the evidence behind it.</p>
+
+    <h2 id="clients">What the clients said</h2>
+    <p>If the gap were about the firms rather than about what they publish, it ought to show up somewhere a client was asked. It does not.</p>
+    <BarChart
+      heading={`${subjectName} against ${controlName}, on our scale and on Google’s`}
+      max={100}
+      rows={signalRows}
+      caption={`Each measure drawn as a share of its own maximum so the two sit on one scale, with the real units printed on each bar. The score is ours and the rating is Google's. The highlighted pair is the one that moves.`}
+    />
+    <p>Median certification score runs {sTotal} against {cTotal}. Mean Google rating runs {sRating.toFixed(2)} against {cRating.toFixed(2)}, a difference of {ratingGap.toFixed(2)} of a star across {subject.length} and {control.length} firms. The complaint-share sub-factor, which reads the low-star reviews in the sample Google returns, averages {c5Mean(subject).toFixed(2)} and {c5Mean(control).toFixed(2)} of {c5Max}.</p>
+    <p><b>What does separate the two cohorts is reach.</b> Median monthly organic search traffic is {fmt(sTraffic.med)} visits for the {sTraffic.n} {subjectLower} firms we hold search data for, against {fmt(cTraffic.med)} for the {cTraffic.n} {controlLower} firms. Median Google review count runs {fmt(sReviews)} against {fmt(cReviews)}. That is the same finding we reached from the other direction when we <a href="/guides/what-search-traffic-says-about-a-law-firm/">sorted the whole directory by search visibility</a>: visibility brings more reviews, not better ones.</p>
+    {loudestSilent && (
+      <p>One firm makes the point on its own. <a href={`/firms/${loudestSilent.data.slug}/`}>{loudestSilent.data.name}</a> publishes no case results we could find and holds {fmt(loudestSilent.data.digital.places?.review_count_total ?? 0)} Google reviews at {(loudestSilent.data.digital.places?.rating_weighted ?? 0).toFixed(1)} stars, more than any other silent {subjectLower} firm here. It earns {bScore(loudestSilent)} of {bMaxLabel} for published outcomes and its certification score is {loudestSilent.data.score?.total}.</p>
+    )}
+
+    <h2 id="instead">What is left to check</h2>
+    <p>The advice on this search is not wrong so much as unavailable. Three things on it can still be done, and two of them are not on anybody's list.</p>
+    <p><b>How long the lawyers have practised, where a state will say.</b> New York publishes an attorney register we may query, and it is the only state in this directory that does. Across the {subjectLower} firms we matched {fmt(sAdmitted.matched)} of the {fmt(sAdmitted.people)} people they name to a registration, and those lawyers have been admitted {sAdmitted.meanYears.toFixed(1)} years on average. The {controlLower} side matched {fmt(cAdmitted.matched)} of {fmt(cAdmitted.people)} at {cAdmitted.meanYears.toFixed(1)} years. The sub-factor built on it scores {a2Mean(subject).toFixed(2)} of {a2Max} for the {a2Scored(subject).length} {subjectLower} firms where it runs and {a2Mean(control).toFixed(2)} for the {a2Scored(control).length} {controlLower} ones. <b>On the one measure here that is about the lawyers rather than the website, the two cohorts are the same.</b></p>
+    <p><b>Whether the firm is a company the state has a record of.</b> That is a separate check, it is open to anybody, and <a href="/guides/what-a-business-register-proves-about-a-law-firm/">we have written down exactly what it does and does not prove</a>.</p>
+    <p><b>What the firm says about price.</b> Criminal work is not paid out of a recovery, so there is no percentage to publish and most of these firms publish nothing. <a href="/guides/what-law-firm-websites-publish/">The page a law firm website reaches for last is the one about fees</a>, in every practice we have counted.</p>
+    <p>The ranked list for this market is built from the same records, firm by firm: <a href={`/cities/${homeSlug}/${SUBJECT}/`}>{subjectName} firms in {homeCity}</a>, with <a href={`/cities/${homeSlug}/${controlSlug}/`}>the {controlLower} ranking</a> beside it for the comparison this page draws. <a href={`/practice-areas/${SUBJECT}/`}>The practice hub</a> carries every market we cover.</p>
+
+    <h2 id="limits">What this does not measure</h2>
+    <p>Four limits, in the order they would bite.</p>
+    <p><b>Nothing here measures how a case went.</b> We count what a firm chose to publish about its own outcomes. A firm that wins constantly and says nothing is indistinguishable here from a firm that does not. No court record in this directory is tied to a firm, and the block that would carry a verified result is empty on every record we hold, which is why no amount any firm publishes is repeated on this page.</p>
+    <p><b>One cohort, one city.</b> Every {subjectLower} firm here is in {homeCity}, so this is a study of {subject.length} firms in one market and not a statement about the practice nationally. The cohort was assembled by us, which means our own selection sits inside every figure above.</p>
+    <p><b>The admission figures rest on our matching, not on the firms.</b> We matched {Math.round(share(sAdmitted.matched, sAdmitted.people))}% of the people named at {subjectLower} firms to the register against {Math.round(share(cAdmitted.matched, cAdmitted.people))}% on the {controlLower} side. Those are different denominators, so the comparison of years admitted is the weakest figure on this page and is reported with its coverage attached rather than as a headline.</p>
+    <p><b>The reading is dated and the sites are not frozen.</b> {windowStart && updated && windowStart !== updated ? `These results pages were read between ${windowStart} and ${updated}` : updated ? `These results pages were read on ${updated}` : 'These results pages carry a reading date on every record'}, one firm at a time. A page added after we looked is a page we do not have.</p>
+    <p class="muted" style="font-size:.86rem">Practice groupings are each firm's own primary practice as published on its profile. Outcome counts, court references and disclaimers come from the firm's own results page. Review counts and ratings come from Google Business Profile listings verified to the firm. Years since admission come from the New York attorney register. A firm whose page we could not read keeps the sub-factor pending rather than scoring zero.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted above has a profile showing its published outcomes, offices, client reviews and the evidence behind each sub-score.</p>
+      <a class="btn btn--white" href={`/cities/${homeSlug}/${SUBJECT}/`}>{subjectName} firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/guides/what-a-case-results-page-proves/">What a case results page proves</a></li>
+        <li><a href="/guides/do-lawyers-offer-free-consultations/">Free consultations, by practice</a></li>
+        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a firm</a></li>
+        <li><a href="/guides/what-a-law-firm-score-cannot-compare/">What a score cannot compare</a></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>Is this your firm?</h4>
+      <p>If we missed a results page, or read the wrong one, the profile links to the page we read.</p>
+      <a class="btn" href="/list-your-firm/">List or correct a firm</a>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

@@ -20,7 +20,8 @@ interface Props {
   /** Which scene to draw. An unknown name falls back to the plain aurora panel. */
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-      | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult';
+      | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
+      | 'defense';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -206,6 +207,35 @@ const lens = { col: 4, row: 3, span: 5 };
     ))}
     <line x1="168" y1="290" x2="1032" y2="290" stroke={VIOLET} stroke-width="3"
           stroke-linecap="round" opacity=".75" />
+  </svg>
+)}
+
+{name === 'deadline' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* A claim's life drawn as a calendar line. The solid stretch is the time the law allows,
+        the flag is the deadline, and everything after it is dashed: the same days keep coming,
+        and none of them counts any more. */}
+    <line x1="140" y1="232" x2="1060" y2="232" stroke="rgba(255,255,255,.18)" stroke-width="3"
+          stroke-dasharray="10 10" stroke-linecap="round" />
+    <line x1="140" y1="232" x2="700" y2="232" stroke={MINT} stroke-width="6" stroke-linecap="round" />
+    {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+      <rect x={140 + i * 115 - 1.5} y={i % 4 === 0 ? 206 : 216} width="3"
+            height={i % 4 === 0 ? 52 : 32} rx="1.5"
+            fill={i * 115 <= 560 ? 'rgba(255,255,255,.55)' : 'rgba(255,255,255,.2)'} />
+    ))}
+    {/* The day it happened. */}
+    <circle cx="140" cy="232" r="13" fill={MINT} />
+    {/* The deadline. */}
+    <line x1="700" y1="232" x2="700" y2="108" stroke={VIOLET} stroke-width="3" />
+    <path d="M700 108 L792 128 L700 148 Z" fill={VIOLET} opacity=".9" />
+    <rect x="606" y="300" width="188" height="44" rx="12" fill="rgba(255,255,255,.07)"
+          stroke="rgba(255,255,255,.22)" stroke-width="1.5" />
+    <rect x="630" y="317" width="140" height="10" rx="5" fill="rgba(255,255,255,.34)" />
+    {/* After it: the cards that still arrive, unopened. */}
+    {[0, 1, 2].map(i => (
+      <rect x={812 + i * 82} y={170 - i * 6} width="56" height="40" rx="8"
+            fill="none" stroke={BLUE} stroke-width="1.5" stroke-dasharray="5 5" opacity={0.7 - i * 0.18} />
+    ))}
   </svg>
 )}
 
@@ -751,6 +781,78 @@ const lens = { col: 4, row: 3, span: 5 };
             stroke={MINT} stroke-width="4" stroke-linecap="round" opacity=".9" />
           <line x1={splitX + 10} y1="416" x2={endX + 12} y2="416"
             stroke={VIOLET} stroke-width="4" stroke-linecap="round" opacity=".9" />
+        </g>
+      );
+    })()}
+  </svg>
+)}
+
+{name === 'defense' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* Two practices in one city, as two stacks of result cards under two identical rows of
+        stars. A filled card is a firm publishing an outcome anybody can read; a hollow one is a
+        firm publishing none. The left stack is criminal defense and is mostly outline, the right
+        stack is personal injury and is mostly solid, and the star rows above them are drawn
+        identically because the measured ratings agree to within a twentieth of a star. That
+        disagreement between the two halves of the picture is the whole finding.
+
+        The proportions are the measurement rounded to whole cards, since a drawing cannot
+        recompute itself and the article beside it carries the counts. Everything meaningful sits
+        inside the middle of the viewBox: GuideCover draws these with preserveAspectRatio 'slice',
+        so at phone width the frame crops the sides. */}
+    {(() => {
+      const COLS = 5, ROWS = 4, TOTAL = COLS * ROWS;
+      const CW = 58, CH = 42, GX = 14, GY = 18;
+      // 24 of 85 against 46 of 77, rounded to twentieths.
+      const blocks = [
+        { x: 200, tint: VIOLET, filled: Math.round(TOTAL * (24 / 85)) },
+        { x: 660, tint: MINT, filled: Math.round(TOTAL * (46 / 77)) },
+      ];
+      const starAt = (cx: number, cy: number, r: number) => {
+        const pts = Array.from({ length: 10 }).map((_, i) => {
+          const rad = i % 2 ? r * 0.44 : r;
+          const a = (Math.PI / 5) * i - Math.PI / 2;
+          return `${(cx + rad * Math.cos(a)).toFixed(1)},${(cy + rad * Math.sin(a)).toFixed(1)}`;
+        });
+        return pts.join(' ');
+      };
+      return (
+        <g>
+          {blocks.map(b => (
+            <g>
+              {/* The identical rating, five marks, drawn the same in both columns. */}
+              {Array.from({ length: 5 }).map((_, i) => (
+                <polygon points={starAt(b.x + 65 + i * 54, 70, 17)} fill={BLUE} opacity=".88" />
+              ))}
+              <line x1={b.x - 4} y1="110" x2={b.x + COLS * (CW + GX) - GX + 4} y2="110"
+                stroke="rgba(255,255,255,.18)" stroke-width="1.6" />
+              {Array.from({ length: TOTAL }).map((_, i) => {
+                const x = b.x + (i % COLS) * (CW + GX);
+                const y = 144 + Math.floor(i / COLS) * (CH + GY);
+                // Filled cards lead the stack, so each population reads as a solid part and an
+                // outlined part rather than as noise.
+                if (i < b.filled) {
+                  return (
+                    <g>
+                      <rect x={x} y={y} width={CW} height={CH} rx="7" fill={b.tint} opacity=".58" />
+                      <line x1={x + 11} y1={y + 16} x2={x + CW - 11} y2={y + 16}
+                        stroke="rgba(10,10,18,.5)" stroke-width="3" stroke-linecap="round" />
+                      <line x1={x + 11} y1={y + 27} x2={x + CW - 22} y2={y + 27}
+                        stroke="rgba(10,10,18,.35)" stroke-width="3" stroke-linecap="round" />
+                    </g>
+                  );
+                }
+                return (
+                  <rect x={x} y={y} width={CW} height={CH} rx="7" fill="none"
+                    stroke="rgba(255,255,255,.2)" stroke-width="1.6" stroke-dasharray="5 5" />
+                );
+              })}
+              {/* A rule under each stack, so the two blocks are told apart without relying on
+                  the hues being distinguished. */}
+              <line x1={b.x - 4} y1="412" x2={b.x + COLS * (CW + GX) - GX + 4} y2="412"
+                stroke={b.tint} stroke-width="4" stroke-linecap="round" opacity=".9" />
+            </g>
+          ))}
         </g>
       );
     })()}

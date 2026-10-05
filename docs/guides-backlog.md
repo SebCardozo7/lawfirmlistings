@@ -157,39 +157,73 @@ says in the limits section that the field carries none, and the backlog keeps 0b
 same family as `bar_numbers_on_bios` and `operating.years`: a plausible value, from the wrong
 field, sitting where a reader has no way to check it.
 
+## Three traps this run walked into, added 2026-10-05
+
+All three were caught before publishing and all three would have passed every check in the
+repository.
+
+**A ratio whose two halves were different quantities.** A draft said pillar B "accounts for about
+19% of the difference in the median total", computed as `(controlMeanB - subjectMeanB) /
+(controlMedianTotal - subjectMedianTotal)`. The numerator is a difference in **raw points** and the
+denominator is a difference in **medians of a coverage-adjusted percentage**. The number was
+arithmetically computed, recomputes itself every build, and meant nothing. The published version
+divides the mean pillar gap by the mean `score.raw` gap, both in raw points, and gets 24%. This is
+the same family as 0f, where summing one arbitrary `max` per sub-factor produced a share of the
+scale that was not a share of anything. **Before dividing two computed figures, say out loud what
+unit each one is in.** `check_meta` and `audit_seo` cannot see this and neither can a reader.
+
+**An adjective standing in for a comparison.** A sentence read "the share roughly triples when the
+kind of work changes", chosen by a ternary testing `controlShare > 2 * subjectShare`. The shares
+are 28% and 60%, so the condition was true and the word was wrong: it doubles. A hardcoded word
+describing a computed relationship is the same bug as "neither" and "both" from 2026-09-14, and it
+is worse here because a ternary makes it look computed. The published version prints both shares
+and uses no adjective, which reads better anyway.
+
+**The Written table above is not the list of published guides.** The topic for this run was very
+nearly a directory-wide study of `digital.psi`, which the fill-rate survey correctly flagged as a
+well-filled field no entry in this file had proposed. It is published twice, as
+`best-law-firm-websites` and `core-web-vitals-new-york-injury-firms`, and **only one of those is in
+the Written table**. The table has carried ten guides while the manifest carried twenty-three for
+several runs now. **Read `src/data/guides.ts` and `ls src/pages/guides/` before scoping anything**,
+and treat the Written table as notes on recent runs rather than as an index.
+
 ## Generated pages, so a topic is not aimed at one of them
 
-Re-counted against the build on **2026-10-02**, and the directory has grown by half again since
-the last entry. The build produces **1,261 pages, from 1,167 published firms in 18 markets and 13
-states**, with 18 published guides plus the gated ranking. **Three markets and a whole practice
-area are new since 2026-09-30**, which no entry below 2026-10-02 knows about. Every denominator
-written before today is stale by roughly a third. This is now the fifth consecutive run that has
-found the denominators moved underneath it. Check this section against a build before scoping
-anything at all.
+Re-counted against the build on **2026-10-05**. The build produces **1,334 pages, from 1,252
+published firms in 18 markets and 13 states**, with 23 published guides plus the gated ranking.
+**No new market opened since 2026-10-02, and a whole practice did:** criminal defense, 85 firms,
+all of them in New York. That is the second practice in a row to arrive between runs, after
+immigration on 2026-10-02, and it is the sixth consecutive run to find the denominators moved
+underneath it. Check this section against a build before scoping anything at all.
 
 - `/`, `/cities/`, `/practice-areas/`, `/guides/`
-- Eighteen city hubs: `atlanta-ga`, `baltimore-md`, `boston-ma`, `buffalo-ny`, `chicago-il`,
-  `dallas-tx`, `houston-tx`, `lakeland-fl`, `las-vegas-nv`, `miami-fl`, `naples-fl`,
-  `new-york-ny`, `northwest-indiana`, `philadelphia-pa`, `phoenix-az`, `portland-or`,
-  `san-antonio-tx`, `san-diego-ca`
-- City x practice rankings: `personal-injury` in all of the above except `naples-fl`,
+- Eighteen city hubs, unchanged from 2026-10-02: `atlanta-ga`, `baltimore-md`, `boston-ma`,
+  `buffalo-ny`, `chicago-il`, `dallas-tx`, `houston-tx`, `lakeland-fl`, `las-vegas-nv`,
+  `miami-fl`, `naples-fl`, `new-york-ny`, `northwest-indiana`, `philadelphia-pa`, `phoenix-az`,
+  `portland-or`, `san-antonio-tx`, `san-diego-ca`
+- City x practice rankings, 23 of them: `personal-injury` in every city hub except `naples-fl`,
   `immigration` in `miami-fl`, `workers-compensation` in `baltimore-md` and `new-york-ny`,
-  `real-estate` in `naples-fl`, `family-law` in `new-york-ny` and `buffalo-ny`
-- Five practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/immigration/`,
-  `/practice-areas/real-estate/`, `/practice-areas/workers-compensation/`,
-  `/practice-areas/family-law/`
-- 1,167 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
+  `real-estate` in `naples-fl`, `family-law` in `new-york-ny` and `buffalo-ny`, and **new this
+  run, `criminal-defense` in `new-york-ny`**
+- Six practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/immigration/`,
+  **`/practice-areas/criminal-defense/`**, `/practice-areas/real-estate/`,
+  `/practice-areas/workers-compensation/`, `/practice-areas/family-law/`
+- 1,252 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
   `/contact/`, `/privacy/`, `/terms/`)
 
-Firm counts by state: FL 222, TX 156, NY 154, CA 105, IL 103, AZ 100, NV 84, GA 80, PA 71, MD 31,
-MA 28, OR 20, IN 13. **Primary practice: personal injury 973, immigration 115, family law 42, real
-estate 20, workers' compensation 17.** By status: 802 verified, 308 listed, 57 certified, and 18
-records `not_eligible` which nothing published may count.
+Firm counts by state: FL 222, **NY 239**, TX 156, CA 105, IL 103, AZ 100, NV 84, GA 80, PA 71,
+MD 31, MA 28, OR 20, IN 13. **Primary practice: personal injury 973, immigration 115, criminal
+defense 85, family law 42, real estate 20, workers' compensation 17.** By status: 840 verified,
+355 listed, 57 certified, and 18 records `not_eligible` which nothing published may count. New
+York is now the largest state and `new-york-ny` holds four practices: criminal defense 85,
+personal injury 77, family law 18, workers' compensation 12.
 
-**Immigration is the thing to notice.** It is the first practice added to this directory that is
-not billed out of a recovery and not billed by the hour either, it arrived with 115 firms at once,
-and all 115 of them sit in Miami. Several sub-factors were written before it existed and read
-badly against it: see item 0g below, and the guide published this run.
+**Criminal defense is the thing to notice, and it is the same class of arrival as immigration.**
+It is the second practice here whose work produces no settlement for pillar B to read, it came in
+at 85 firms at once, and every one of them is in New York, which for once is useful: the injury
+cohort sits in the same city, so a practice comparison can be run with the market, the local
+search results and the state's advertising rules all held still. The guide published this run does
+exactly that. See item 0g below, which predicted this and is now half written.
 
 Every city and practice combination in that list is off limits as a guide topic.
 
@@ -197,6 +231,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-10-05 | `/guides/how-to-choose-a-criminal-defense-lawyer/` | **"how to choose a criminal lawyer" (450/mo US, KD 0, CPC $3.00, traffic potential 250)**, with `how to choose a criminal defense lawyer` (150/mo, **KD 0**, its own parent topic), `how to choose a criminal defense attorney` (90/mo, KD 0, CPC $3.00) and the general `how to choose a lawyer` (200/mo, KD 11, TP 800) and `how to pick an attorney` (90/mo, KD 7, TP 800) above it. Roughly **700/mo at KD 0 inside criminal defense alone**, inside a per-practice cluster (`how to choose a divorce lawyer` 250, `personal injury` 250, `medical malpractice` 450, `workers comp` 100) that is the FindLaw fork pattern and is worth a run each. Deliberately **not** `criminal defense lawyer new york`, which is `/cities/new-york-ny/criminal-defense/`. The `success rate` cluster was checked first and is **dead at 0/mo**: `criminal defense attorney success rate`, `immigration lawyer success rate` and `attorney win rate` all return zero volume | Not from the ranked list, sixth run running. The topic came from the fill-rate survey finding a new **practice**, criminal defense, 85 firms, none of which existed here on 2026-10-02, and from the SERP: every one of the ten results is a firm's own blog, Reddit, Quora, Avvo legal answers or StackExchange, **nobody on that page has measured anything**, and all of them give the same advice, which is to check the track record. We counted whether there is one. **60 of 85 publish no case result on a page we could read, against 28 of 77 injury firms in the same city.** Of the 24 that publish, 13 attach no figure to any outcome, while all 46 publishing injury firms print amounts: a dismissal has no dollar value. Controls: hold the publishing constant and the court-naming gap disappears (19 of 24 against 33 of 46, 79% against 72%), so the cohort gap is in **how many publish at all**, not in how carefully. Falsification, and it held: mean Google rating 4.80 against 4.85, C5 complaint share 3.60 against 3.60 of 4, and A2 experience 8.45 against 8.35 of 10, so nothing a client said moves with the 21-point median score gap. What does move is reach, median organic traffic 137 against 1,737. Self-critical half: pillar B has three shapes and criminal defense fits none, so **61 of 85 score zero in it**; the honest arithmetic is that B is only **24% of the 16.7 raw-point gap** and the rest is roster, review volume, fee transparency and the 24/7 line, every one a count of how much a firm publishes. |
 | 2026-10-02 | `/guides/do-lawyers-offer-free-consultations/` | **"are lawyer consultations free" (200/mo US, KD 7, CPC $2.00, its own parent topic)**, with `free consultation attorney` (250/mo, **KD 0**, CPC $0.80), `do lawyers offer free consultations` (150/mo, KD 2, CPC $5.00) and `lawyer consultation fee` (350/mo, KD 1). Roughly **950/mo at KD 0 to 7**, all informational. Deliberately **not** `free consultation lawyer` (3,000/mo) or `immigration lawyer free consultation` (2,100/mo), which are transactional "find me one" queries whose parent topics are `free lawyers for low-income families` and `free consultation immigration attorney`: those belong to the generated city and practice pages, not to a guide | Not from the ranked list. Fifth run running where the fill-rate survey beat the ranking, and this time the survey turned up a whole new **practice**: immigration, 115 firms, which did not exist in this directory on 2026-09-30. `free_consultation` is on every record and **no guide had ever counted it across practices**; three had counted it inside injury, where it is unanimous and therefore says nothing. Across the directory it is **971 of 1,167**, which looks like a profession-wide habit and is not: **912 of 973 injury firms against 24 of 115 immigration firms**, 17 of 42 family law, 2 of 20 real estate, 16 of 17 workers' compensation. **The practice moves it and the market does not:** inside injury it runs 64% to 100% across 17 markets with 15 of them at 85% or above, and in Miami, where both cohorts sit, it is 70 of 73 against 24 of 115. Crawl-reach control (restrict to firms carrying `trust_pages`): 894 of 947 against 23 of 94, gap unchanged. Falsification: inside injury the publishers do score higher (median 52 against 39), but on **what clients said** the groups are inseparable, mean rating 4.87 against 4.83, which is the same shape the 2026-09-30 piece found for search visibility. Self-critical half: **E1 is worth 6 points, injury averages 2.59 of it and immigration 0.24**, and the other half of E1 reads `fee_statement`, filled on 149 of 973 injury firms and **0 of 115 immigration firms**. Our scale measures a billing convention and calls it access. |
 | 2026-09-30 | `/guides/what-search-traffic-says-about-a-law-firm/` | **"law firm advertising" (1,200/mo US, KD 4, CPC $8.00, traffic potential 900)**, with `lawyer advertising` (1,100/mo, KD 12, CPC $20.00), `injury lawyer advertising` (900/mo, **KD 0**, CPC $40.00, TP 1,900) and `personal injury lawyer advertising` (400/mo, KD 1, TP 1,100) beside it. Roughly **3,600/mo at KD 0 to 12**, which is more than twice the cluster the 2026-09-28 run called the best this section had found | Not from the ranked list, and the fourth run running where the fill-rate survey beat the ranking. `digital.ahrefs` is on **782 of 786** firms, is read by the scoring engine at D2, and **no guide had ever counted it**. Splits the directory into quarters by organic traffic and reads every sub-factor against it. **13 of the 15 comparable sub-factors rise with visibility and 2 do not, and the 2 are exactly the ones that read what clients said**: C2 rating quality and C5 complaint share. Median review count runs 539 in the most visible quarter against 114 in the least; mean rating runs 4.82 against 4.81. **Visibility brings more reviews, not better ones.** Concentration: **44 of 782 firms hold half of all the organic traffic**, and 32 have none. Median firm: 496 visits/mo, DR 19, 86 keywords. Self-critical half: **86% of every point we assessed and could compare sits in sub-factors that rise with search visibility, against 14% in the two that do not**, so a large part of the scale tracks whether a firm has a marketing operation. D2 is named on the page as the bar that proves nothing, since it is scored from the very figures the page sorts by. |
 | 2026-09-28 | `/guides/what-law-firm-websites-publish/` | **"law firm website content" (450/mo US, 600 global, KD 0, CPC $3.00, traffic potential 1,200)**, inside the cluster `attorney website content` (600/mo, KD 0, CPC $17.00), `content for law firm website` (300/mo, KD 0, CPC $18.00) and `law firm website content writing` (250/mo, KD 3). Roughly 1,600/mo at KD 0 to 3. **The best cluster this section has found**, ahead of the 200/mo KD 0 the last run called the best combination yet | Not from the ranked list. Found by re-counting fill rates across the schema, as the rule above says to: `digital.trust_pages` is on **764 of 786** firms and no entry here had ever proposed it. Counts which of five page types a firm's site carries: blog **693**, privacy policy **626**, attorney index **525**, disclaimer or terms **434**, fees **70**. **The asymmetry is the piece: 625 firms publish a blog and no fees page, and 2 go the other way.** Being generous and counting the separate top-level `fee_statement` sentence as well still leaves 594 of 764 saying nothing about price. The self-critical half is the strongest yet and is about the engine rather than the guides: **D1 is marked out of 7 and no firm in the directory has ever scored above 5**, because its first page check reads `bar_numbers_on_bios`, which **0 of 790 records carry**, and its accessibility slot needs a `D1_a11y` assessment that **0 firms carry**. All 762 scored firms publish an evidence line reading "no bar numbers on bios" on their own profiles, asserting an absence nobody measured. Also found: **the site crawl behind this entire page is the one measurement family with no date and no freshness check**. |
@@ -214,34 +249,74 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 ## Next, ranked
 
-**Read this first, 2026-10-02. The fill-rate survey has now beaten this ranking five runs
-running, and this run is the strongest case yet: it did not turn up a new field, it turned up a
-new _practice_.** Immigration appeared with 115 firms between 2026-09-30 and today, and almost
-every sub-factor in the engine was written when every firm in the directory was billed out of a
-recovery. Counting it took one script. The survey that found it re-counted the whole schema in ten
-minutes and is reproduced below, because the denominators in everything under it are stale again.
+**Read this first, 2026-10-05. The fill-rate survey has now beaten this ranking six runs running,
+and twice in a row it has turned up a new _practice_ rather than a new field.** Criminal defense
+appeared with 85 firms between 2026-10-02 and today, all of them in New York, and pillar B has no
+shape for it, exactly as item 0g predicted for immigration. Counting it took one script. The survey
+that found it re-counted the whole schema in ten minutes and is reproduced below, because the
+denominators in everything under it are stale again, by about 7% this time rather than by half.
 
-**Fill rates across 1,167 published firms, counted 2026-10-02.** Only the ones that change a
+**Fill rates across 1,252 published firms, counted 2026-10-05.** Only the ones that change a
 decision are listed.
 
-- Filled on effectively everything, so a study can be directory-wide: `reviews.google` 1,167,
-  `digital.places` 1,167, `results_published` 1,167, `score` 1,167, `faq` 1,167, `offices` 1,167,
-  `about` 1,167, `digital.schema_detected` 1,167 (true on 1,070), `reviews.sample` 1,165,
-  `digital.places.completeness` 1,165, `accountability` 1,160, `operating` 1,151,
-  `digital.trust_pages` 1,117, `digital.psi` 1,081, `digital.ahrefs` 1,048, `free_consultation`
-  971 true, `logo` 957, `attorneys` non-empty 888, `availability` non-empty 604.
-- Too thin to carry a study: `entity` 203, `fee_statement` 152, `domestic` 42, `transaction` 20,
-  `digital.ahrefs.ai_citations` 13 (**unchanged from 2026-09-28, the batch job still has not
-  run**), `site_blocked` 5.
+- Filled on effectively everything, so a study can be directory-wide: `reviews.google` 1,252,
+  `digital.places` 1,252, `results_published` 1,252, `score` 1,252, `faq` 1,252, `offices` 1,252,
+  `about` 1,252, `languages` 1,252, `gates` 1,252, `digital.schema_detected` 1,252 (true on
+  1,141), `reviews.sample` 1,250, `digital.places.completeness` 1,250, `accountability` 1,245,
+  `operating` 1,236, `results_published.readable` true on 1,213, `digital.trust_pages` 1,195,
+  `digital.psi` 1,163, `digital.ahrefs` 1,133, `free_consultation` 1,036 true, `logo` 1,026,
+  `attorneys` non-empty 937, `availability` non-empty 654.
+- Too thin to carry a study: `entity` 256, `fee_statement` 155,
+  `attorneys[].admitted_year` on 161 firms, `results_published.venues` 98, `domestic` 42,
+  `transaction` 20, `digital.ahrefs.ai_citations` 13 (**unchanged across four runs now, the batch
+  job still has not run**), `site_blocked` 5.
 - **Zero or one, so dead until something writes them:** `founded_year` **0**, `claimed` **0**,
   `results[]` non-empty **0**, and `legal_name`, `entity_type`, `tagline`, `phone_vanity`,
   `quote`, `highlights`, `reviews.quotes`, `similar`, `assessments` at **1 record each**. Nine
-  fields in the schema are furniture. Do not propose any of them again without re-counting.
+  fields in the schema are furniture, unchanged since 2026-10-02. Do not propose any of them
+  again without re-counting.
+
+**Three things in that list are new or newly checked, and one of them killed this run's second
+choice:**
+
+- **`digital.psi` is on 1,163 of 1,252 and is spent.** It was the obvious directory-wide topic
+  until two published pages turned up: `core-web-vitals-new-york-injury-firms` scopes it to New
+  York injury, and **`best-law-firm-websites` already ranks the whole directory on it**. What is
+  left that nobody has written is the field-data split: `source` reads `field + lab` on 431 firms
+  and `lab only` on 732, which is a fact about whether Google's Chrome UX Report has enough
+  real-user traffic for the origin, not about speed. **Read `scripts/enrich_psi.py` before
+  touching it:** `cwv_pass` is computed from the **lab** metrics for all 1,163 regardless of what
+  `source` says, and TBT stands in for INP. So `source` and `cwv_pass` are the same family of trap
+  as `bar_numbers_on_bios`, and the honest piece in it is technical-SEO audience rather than ours.
+- **`availability` is still a claim nobody tested.** `24/7 intake line` is on 624 of 1,252 and
+  `Hospital & home visits` on 120; the other three values are on 1 record each. Unchanged
+  conclusion from 2026-09-28, now with a practice split that is new: 548 of 973 injury firms
+  against 50 of 85 criminal defense and 14 of 115 immigration.
+- **`gates.G6` exists and nothing in this file has ever mentioned it.** It passes on 1,223 of
+  1,252, which is too little variance to carry a study, but somebody should write down what it
+  checks. G1 passes on 151, G2 on 481, G3 on 347, G5 on 937.
 
 **New, ranked at the top, and it is the same class of bug as 0f: the engine meeting a practice it
 was not written for.**
 
-0g. **Three sub-factors read a contingency practice and score every other practice against it.**
+0g. **Half written on 2026-10-05, and the half that is left is the scoring engine's.** The E1 half
+    was published on 2026-10-02 and the pillar B half on 2026-10-05, measured on criminal defense
+    rather than immigration because criminal defense shares a city with the injury cohort and
+    immigration does not. What the guide established and what is still open:
+    **pillar B has exactly three shapes** (`results_published` for anything billed out of a
+    recovery, `domestic` for family law, `transaction` for real estate, per `TRANSACTIONAL` and
+    `DOMESTIC` in `scripts/score.py`), and **two practices now fall through to the results-page
+    shape without producing a result**: immigration, mean B 0.13 of 15, and criminal defense, mean
+    B 2.80 of 15 against 6.78 for injury firms in the same city. 61 of 85 criminal defense firms
+    and 113 of 115 immigration firms score zero in a pillar worth 15 points. The guide also did the
+    arithmetic nobody had: **B is only 24% of the 16.7 raw-point gap**, so fixing pillar B alone
+    would move about a quarter of it and anyone proposing a fix should know that first. Whoever
+    picks this up needs a fourth shape, and the honest question is what a criminal matter publishes
+    that is checkable at all: `venues` is the candidate, since 19 of 24 publishing criminal defense
+    firms name a court against 33 of 46 injury ones. **Still not a guide run's call**, because a
+    fourth shape rescores two practices and moves tiers.
+
+0g-old. **Three sub-factors read a contingency practice and score every other practice against it.**
     Found by decomposing the score across practices, which nothing here had done. Median total is
     51 for injury and **35 for immigration**, and the gap is not coverage: mean coverage is 0.96
     against 0.81 and `D2` is correctly `pending` on all 115 immigration firms ("Ahrefs data not
@@ -257,7 +332,7 @@ was not written for.**
     immigration fits none of them. Whoever picks this up should read `scripts/score.py` around the
     `TRANSACTIONAL` and domestic branches first.
 
-0h. **No immigration firm has Ahrefs data.** `digital.ahrefs` is on 1,048 of 1,167 and the 115
+0h. **No immigration firm has Ahrefs data.** Re-checked 2026-10-05: `digital.ahrefs` is now on 1,133 of 1,252, and criminal defense came in **with** it on all 85, so the 119 missing are still the whole immigration cohort plus four injury firms. The data job is unchanged and is now the only market-shaped hole left in that field. The original note follows. `digital.ahrefs` was on 1,048 of 1,167 and the 115
     missing are the whole immigration cohort plus four injury firms. The engine handles it
     correctly, which is why this is a data job and not a bug, but it means **no study can cut the
     directory by search visibility and say anything about immigration**, including a re-run of the
@@ -449,6 +524,26 @@ The entries below were re-checked against the collection on 2026-09-21.
 
 **Dead, so they are not proposed again:**
 
+- *What a criminal defense firm publishes about its outcomes.* Written 2026-10-05. Do not
+  re-propose the criminal defense results count: it is a published page that recomputes itself.
+  What it did **not** answer, and both are real: whether the 60 silent firms are silent or just
+  publish outcomes in prose our results crawler does not recognise as a results page, which is a
+  data job on `scripts/crawl_results.py`; and whether the same split holds for immigration, which
+  it cannot be tested on, because all 115 immigration firms are in Miami and the criminal defense
+  cohort is in New York, so there is no market to hold still.
+- *Lawyer success rates, from any field.* **Dead on the keyword, checked 2026-10-05**, which is a
+  different kind of dead from the rest of this list and worth the line.
+  `criminal defense attorney success rate`, `immigration lawyer success rate`, `attorney win rate`
+  and `law firm case results` are all **0/mo**. The question is real and nobody searches it. We
+  also hold nothing that would answer it: `results[]`, the only block that would carry a verified
+  outcome, is empty on all 1,252 records.
+- *Website speed across the directory.* Dead because it is written twice, checked 2026-10-05.
+  `digital.psi` is on 1,163 of 1,252 and looked like the best uncounted field in the schema until
+  `best-law-firm-websites` turned up, which already ranks the whole directory on it, beside
+  `core-web-vitals-new-york-injury-firms` which scopes it to one market. **Read `src/data/guides.ts`
+  before trusting the Written table above: it has been shorter than the manifest for several runs,
+  and this is the second time a topic has been scoped against a stale list of published pages.**
+
 - *What a firm leaves blank on its Google Business Profile*, the old item 8. **Dead on the data,
   measured 2026-10-02**, and this closes an item that has been carried for four runs. The warning
   in the old entry was right and understated: `completeness` is on 1,165 firms and **has almost no
@@ -514,6 +609,58 @@ The entries below were re-checked against the collection on 2026-09-21.
   `24/7 intake line` is on 401 of 786 and `Hospital & home visits` on 80, and the other three
   values are on 1 record each. The problem is that we measure the *claim* and never test it, so
   the honest piece is one paragraph long. Checked 2026-09-28.
+
+## Keyword research, 2026-10-05
+
+`subscription-info-limits-and-usage` is free and was the first call again: **419,109 of 800,000
+units used**, resetting **2026-10-19**. Four Ahrefs calls in total this run, one of them free, so
+two of the six-call budget are unspent.
+
+**The dead end first, because it cost a call and is worth not repeating.** The topic was picked
+before the keywords were checked, on the theory that "what is a good success rate for a criminal
+defense attorney" is a real consumer question. It is not a searched one.
+`criminal defense attorney success rate`, `immigration lawyer success rate`, `attorney win rate`
+and `law firm case results` all return **0/mo** in the US. `lawyer success rate` returns 20/mo at
+KD 11. There is no cluster there at all. **Check the volume before committing a run to a framing,
+even when the framing is obviously the right question.** The data survived the check and the
+headline moved to the query that does have demand.
+
+**The cluster the guide was built on, and it is a per-practice fork pattern worth several runs:**
+
+| Keyword | Vol/mo US | KD | CPC | TP | Parent |
+| --- | --- | --- | --- | --- | --- |
+| how to choose a criminal lawyer | 450 | **0** | $3.00 | 250 | criminal law |
+| how to choose a criminal defense lawyer | 150 | **0** | $0.25 | 100 | itself |
+| how to choose a criminal defense attorney | 90 | **0** | $3.00 | 80 | how to choose a criminal defense lawyer |
+| how to choose a lawyer | 200 | 11 | $0.60 | 800 | how to find a good lawyer |
+| how to pick an attorney | 90 | 7 | $1.20 | 800 | how to find a good lawyer |
+| how to choose a good lawyer | 70 | 6 | $0.45 | **2,400** | how to find a lawyer |
+| how to tell if a lawyer is good | 20 | 5 | $0.90 | 600 | how do i find a good lawyer |
+
+Roughly **700/mo at KD 0** inside criminal defense alone, which is what this run took.
+
+**The same question forks per practice, and every fork is open.** `how to choose a medical
+malpractice lawyer` 450/mo, `how to choose a divorce lawyer` 250 (KD 1, parent `how to find a good
+divorce lawyer`), `how to choose a personal injury lawyer` 250 (**KD 0, CPC $12.00**), `how to
+choose a workers comp lawyer` 100 (KD 0, CPC $2.50), `how to choose a dwi lawyer in texas` 200.
+Beside it sits a `questions to ask` family with higher traffic potential than volume:
+`questions to ask a divorce lawyer` 350/mo with **TP 1,400**, `questions to ask a lawyer` 200 with
+TP 350, `questions to ask a personal injury lawyer` 200 with TP 400. **This is the FindLaw fork
+structure described in the 2026-10-02 competitor pass, and we can fill it with measurement where
+they fill it with advice.** One fork per run is a plan for the next four runs, and each one needs a
+cohort big enough to measure: injury and family law both qualify today, workers' compensation at 17
+firms does not.
+
+**The SERP, read with `serp-overview` and with WebSearch.** For `how to choose a criminal defense
+lawyer` the ten results are: a DR 0 firm blog at #1, Reddit `r/Ask_Lawyers`, a DR 40 firm blog,
+Quora, a DR 17 firm blog, **Avvo legal answers at #7**, two more firm blogs, law.stackexchange and
+bestlawyers.com. **Not one result on that page has measured anything.** Every firm blog gives the
+same five-point checklist, and the first point on nearly all of them is to check the attorney's
+past case outcomes and success rate, which for most of these firms does not exist to check. That
+is the information gain, and it is the cleanest one this section has had: the advice that ranks is
+untestable, and we hold the test. People Also Ask on that SERP: "What are red flags when hiring a
+lawyer?", "What is the 80/20 rule for lawyers?", "Should I use JD or ESQ?". The first of those is
+a real future topic and we hold nothing that answers it yet.
 
 ## Keyword research, 2026-10-02
 
@@ -926,7 +1073,57 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: avvo.com**, third in the rotation. findlaw.com was re-read on 2026-10-02 and the set is on its second pass.
+**Next run: justia.com**, fourth in the rotation. avvo.com was re-read on 2026-10-05 and the set is
+on its second pass.
+
+### avvo.com, read 2026-10-05 (second pass)
+
+Read through search results and its own pages as they surface there, which is the permanent method
+for all eight. **avvo.com is blocked by this environment's egress proxy**, so nothing was fetched
+directly this run and everything below comes from the SERP, from Avvo's own support article as it
+surfaces there, and from third-party documentation of the rating. Noted so the next pass knows the
+direct fetch is not available and does not spend a run rediscovering it.
+
+**The shape. Avvo runs two user-generated assets off one DR 89 domain and both of them rank.**
+
+- **Legal Guides, at `/legal-guides/ugc/<slug>`.** The `ugc` in the path is the tell: attorneys
+  write these, Avvo hosts them, and **it keeps every duplicate**. One search returns
+  `how-to-choose-a-criminal-defense-attorney-2`, `how-to-pick-the-right-criminal-defense-attorney`,
+  `choosing-a-criminal-defense-attorney-1`, `how-to-choose-the-right-texas-criminal-defense-lawyer-3`
+  and `10-factors-to-consider-when-choosing-an-attorney`. Five URLs, one question, numeric suffixes
+  where an editor would have merged them.
+- **Legal Answers, at `/legal-answers/<slug>-<id>.html`.** Attorney-answered Q&A threads, one URL
+  per question asked. **This is what ranks seventh on the SERP this run's guide targets**, above
+  three firm blogs, on a thread with three answers.
+
+**What earns them the traffic.** Volume supplied by the people being rated, at a domain strong
+enough to rank it. They do not commission any of it and they do not have to.
+
+**What we must not chase.** Both assets. We have no attorneys to write guides and no Q&A audience,
+and writing a sixth version of "how to choose a criminal defense attorney" as advice is exactly the
+page our own guide this run was written to beat.
+
+**Where the shape converts into something only we can do.**
+
+- **Their Q&A outranks every firm blog on a hiring question, and none of it is measured.** Our
+  advantage on that SERP is not better advice, it is a count. This run's guide is the proof: the
+  advice all ten results give, check the track record, is untestable for 60 of 85 firms, and we
+  are the only ones who can say so.
+- **Sixth sourced case for item 4, and it is the sharpest.** Avvo's own support article describes
+  the Avvo Rating as a model over profile information, years licensed, peer endorsements,
+  publications and speaking, and **third-party documentation of it says adding profile information
+  raises the score while client reviews do not affect it at all**. That is a directory rating that
+  explicitly excludes what clients said. Our own guide this run measured the same failure mode **in
+  our own engine**: a 21-point median score gap between two cohorts whose Google ratings are 4.80
+  and 4.85. Item 4 now has six sourced cases (Avvo's participation and endorsements, Justia's paid
+  Platinum and Gold, Martindale's self-submitted peer references, Nolo's paid lead network,
+  FindLaw's paid profiles and self-reported facets, and Avvo's badge requirement for a 100% rating)
+  **and one measured case of our own**. It should be written, and it is better now than it was,
+  because the measured case keeps it from being a piece that only criticises other people.
+- **The duplicate-URL pattern is a thing to check on ourselves.** Avvo keeps five near-identical
+  URLs for one question. `audit_seo.mjs` already fails on a duplicate title or canonical, which is
+  why we do not, and that is worth remembering the next time somebody proposes a per-city fork of
+  a guide.
 
 ### findlaw.com, read 2026-10-02 (second pass)
 
@@ -1319,6 +1516,11 @@ chart's job lost the table:
 | Google's review sample | Columns: how far apart the two averages sit | The same comparison banded, which is the only chart that shows the tails, and the tails run against the firms. Labels are one line each with the direction in the note: `.chart-col` is bottom-aligned, so a label wrapping to two lines while its neighbours wrap to one knocks that column's value out of the row. Caught in the rendered chart, not the build |
 | Google's review sample | Bars: the widest gap in each direction | Two named firms, both picked by the size of the gap and tie-broken on the slug, so the page re-picks its own illustration as the data moves. `display` carries "mean vs published" because one bar cannot show two numbers |
 | Google's review sample | Bars: firms taking full marks on the two sub-factors read from this sample | Magnitude out of one denominator, and the chart is the page auditing its own scoring engine rather than the firms |
+
+| Criminal defense | Split bar: what we found when we looked for a published case result | Part-to-whole of one population in four states ordered by how much evidence we got, so the one page our crawler could not read sits beside the sixty firms publishing nothing rather than being folded into them. Four segments and not five, because `StackBar` caps its hue steps at four |
+| Criminal defense | Bars: how far three of the usual checks get, in each cohort | Six rows, three checks paired across two cohorts, with the subject cohort emphasised. The bar is the share and the printed figure is the count, because the cohorts are 85 and 77 and a bar drawn from the raw count would make the larger one look better at everything |
+| Criminal defense | Columns: pillar B points earned across the subject cohort | A distribution, with the zero band highlighted. The shape is the argument: 61 of 85 at zero and 13 at the top band, so the zero is the practice and not the effort |
+| Criminal defense | Bars: the two cohorts on our scale and on Google's | The falsification, as a chart rather than a sentence. Each measure as a share of its own maximum with the real units printed, and the emphasis on the pair that moves, which is ours. Copied from the free consultation guide's signal chart because the job is identical |
 
 Rules for the next one: pick the form from the data's job before touching colour, keep every
 figure computed, and look at the rendered chart at 390px before shipping it. The three components
