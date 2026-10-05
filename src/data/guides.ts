@@ -170,6 +170,22 @@ export const GUIDES: Guide[] = [
     meta: 'A blog comes first, the price comes last',
   },
   {
+    slug: 'what-you-can-check-about-a-lawyer-by-state',
+    cover: 'register',
+    kicker: 'Verification',
+    title: 'New Study: One State in Thirteen Lets Anyone Check a Lawyer’s Licence at Scale',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts, and
+    // its own headline changes the moment a second state publishes a readable register.
+    summary:
+      'Every state bar lets you check one lawyer by typing a name into a form, and that works ' +
+      'everywhere. Almost none publishes the same information as data, so nobody outside a ' +
+      'state can ask how many firms in a city name an attorney who is not registered. The gap ' +
+      'is not between secret and public. It is between public and legible.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'Public is not the same as checkable',
+  },
+  {
     slug: 'what-injury-firms-publish-about-fees-by-state',
     cover: 'statutes',
     kicker: 'Costs',
