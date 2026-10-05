@@ -24,7 +24,8 @@ export interface Guide {
   /** Which CoverArt scene this guide owns, drawn on its cover and on its card. */
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
-    | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline';
+    | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
+    | 'defense';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -107,6 +108,21 @@ export const GUIDES: Guide[] = [
     thumb: '',
     icon: 'doc',
     meta: 'The notice of claim comes first',
+  },
+  {
+    slug: 'how-to-choose-a-criminal-defense-lawyer',
+    cover: 'defense',
+    kicker: 'Study',
+    title: 'New Study: Most Criminal Defense Firms Publish No Case Results',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every guide to hiring a criminal lawyer tells you to check the track record. We counted ' +
+      'whether there is one to check, against the injury firms on the same streets. Most of ' +
+      'these firms publish no outcome at all, our own score marks them down for it, and their ' +
+      'clients rate them the same.',
+    thumb: 't3',
+    icon: 'scale',
+    meta: 'Nothing to check, and nothing wrong with them',
   },
   {
     slug: 'do-lawyers-offer-free-consultations',
