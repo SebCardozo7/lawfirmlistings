@@ -79,7 +79,10 @@ const updated = measuredOn
 
 // Says the finding, not the topic. No count in it: check_meta rejects a figure in a title, and a
 // pass rate that moves every month should not be the thing Google has indexed.
-const title = "New Study: Almost Every New York Injury Firm Fails Google's Speed Test";
+// The count leads and the scale closes. Both are computed, so a firm fixing its site moves
+// the headline rather than contradicting it.
+const title = `Only ${passing.length} of ${withPsi.length} New York Injury Firms Pass `
+  + `Google's Core Web Vitals`;
 const description = 'We ran PageSpeed Insights against every New York injury firm in this directory. Almost all fail Core Web Vitals. What it costs them, and what fixes it.';
 ---
 <Base title={title} description={description} nav="guides" image="/og/speed.png" imageAlt="A speed gauge with its needle in the slowest zone, over a city skyline">

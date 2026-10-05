@@ -57,9 +57,13 @@ const bottom = byState[byState.length - 1];
 
 // The headline states the finding, and the finding is the one thing every market has in common.
 // If a firm anywhere publishes its percentage, the page says so instead.
+// A zero is the strongest number a study can have and it belongs in front. If a firm ever
+// publishes its percentage the headline stops being a zero and says so instead.
 const title = publishPct.length === 0
-  ? 'New Study: A State’s Fee Rules Do Not Change What Its Firms Publish'
-  : 'New Study: What Injury Firms Publish About Fees, State by State';
+  ? `0 of ${firms.length.toLocaleString('en-US')} Injury Firms Publish What They Charge `
+    + `(${states} States)`
+  : `${publishPct.length} of ${firms.length.toLocaleString('en-US')} Injury Firms Publish `
+    + `What They Charge (${states} States)`;
 const description =
   'We read the fee language of every injury firm in this directory, in every state we publish '
   + 'in. The rules differ by state. What the firms disclose does not.';

@@ -213,7 +213,8 @@ const scored = scoredAt
 // States the finding and carries no figure, because check_meta rejects one in a title and is
 // right to: a share that moves whenever a firm is added should not be the sentence Google has
 // indexed.
-const title = 'New Study: Law Firms Publish in Spanish for Injury Work, Not Divorce';
+const title = `${share(spanish.length, measured.length)}% of Law Firms Publish in Spanish, `
+  + `and Almost All of Them Do Injury Work`;
 const description = 'We read every firm in this directory for a page published in Spanish. Whether one exists tracks the practice area more than the city the firm works in.';
 ---
 <Base title={title} description={description} nav="guides" image="/og/language.png" imageAlt="Two columns of law firm pages, the left column mostly carrying a second language and the right column mostly not">

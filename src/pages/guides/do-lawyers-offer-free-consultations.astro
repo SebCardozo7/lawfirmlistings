@@ -191,7 +191,12 @@ const practiceRows = practices.map(p => ({
 
 // States the finding and carries no figure, because check_meta rejects one in either of these
 // and is right to: the shares move every time a market opens.
-const title = 'New Study: A Free Consultation Depends on the Practice, Not the Lawyer';
+// The two ends of the range, computed, so the headline cannot say something the page does not.
+// "Personal Injury" becomes "Injury" here and nowhere else: the house rule is 70 characters and
+// the full name costs eight of them to say what the shorter one already says in a headline.
+const shortPractice = (name: string) => name.replace(/^Personal /, '');
+const title = `${top.share}% of ${shortPractice(top.name)} Firms Offer a Free Consultation, `
+  + `${lowest.share}% of ${shortPractice(lowest.name)}`;
 const description =
   'We read every law firm website in this directory for a free consultation offer. Injury firms publish one almost always. Immigration firms almost never do.';
 ---
