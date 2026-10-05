@@ -10,7 +10,15 @@ import Scorecard from '../../components/Scorecard.astro';
 import { PRACTICE_SLUGS } from '../../data/practices';
 
 export async function getStaticPaths() {
-  const firms = await getCollection('firms', f => f.data.status !== 'sample' || import.meta.env.LFL_ENV !== 'production');
+  // not_eligible is excluded here for the same reason it is excluded from the city pages, the
+  // practice pages and every guide: the firm is not in this directory. It was only ever excluded
+  // from the lists, so eighteen firms kept a page that nothing on the site links to and that the
+  // sitemap submits anyway. Asking Google to crawl a page we decline to link to is the clearest
+  // way to spend crawl budget on nothing, and on a site this new there is little of it: Googlebot
+  // came 208 times in thirty days.
+  const firms = await getCollection('firms', f =>
+    f.data.status !== 'not_eligible'
+    && (f.data.status !== 'sample' || import.meta.env.LFL_ENV !== 'production'));
   return firms.map(f => ({ params: { slug: f.data.slug }, props: { firm: f } }));
 }
 const { firm } = Astro.props;
