@@ -111,7 +111,7 @@
       "rating": 4.9,
       "count_label": "147",
       "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
-      "fetched_at": "2026-09-30"
+      "fetched_at": "2026-10-05"
     },
     "sample": [
       {
@@ -150,8 +150,8 @@
         "cwv_pass": false
       },
       "source": "PageSpeed Insights API (mobile, lab only)",
-      "measured_at": "2026-09-30",
-      "note": "LCP 21.9 s / CLS 0.000 / TBT 10 ms"
+      "measured_at": "2026-10-05",
+      "note": "LCP 21.8 s / CLS 0.000 / TBT 58 ms"
     },
     "_ahrefs_partial_from_cohort": {
       "domain": "azadilaw.com",
@@ -176,7 +176,19 @@
         "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
       },
       "source": "Google Places API (New) places:searchText",
-      "measured_at": "2026-09-30"
+      "measured_at": "2026-10-05"
+    },
+    "ahrefs": {
+      "dr": 3.5,
+      "ahrefs_rank": 36297990,
+      "refdomains": 1023,
+      "refdomains_dofollow": 453,
+      "backlinks": 1681,
+      "org_keywords": 13,
+      "org_traffic": 24,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-05"
     }
   },
   "gates": {
@@ -203,7 +215,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published, and 7 more people in roles the firm states are not a lawyer's.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -264,7 +276,7 @@
     "registered": "2017-07-06",
     "years": 9.2,
     "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "accountability": {
     "malpractice_insurance": false,
@@ -291,13 +303,13 @@
     "pages_read": 3,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "results_published": {
     "readable": false,
     "why": "the results page served 1230 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
     "url": "https://azadilaw.com/case-studies/",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-10-05"
   },
   "score": {
     "total": 51,
@@ -405,7 +417,7 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -419,10 +431,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 3.5 → 54th pct of 114-firm cohort (median 2.9) 2/3 · 1,023 referring domains, 53th pct 1/2 · 13 organic keywords / 24 visits·mo, 62th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -437,7 +449,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -481,14 +493,14 @@
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "D2 Search authority: not yet measured (8 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 24.0,
-    "assessed": 47,
-    "coverage": 0.671,
+    "raw": 28.0,
+    "assessed": 55,
+    "coverage": 0.786,
     "floor_abc_pct": 0.87,
     "gates_unavailable": [
       "G1",

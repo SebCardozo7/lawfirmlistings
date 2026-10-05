@@ -139,6 +139,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 0.2,
+      "ahrefs_rank": 79669944,
+      "refdomains": 1059,
+      "refdomains_dofollow": 371,
+      "backlinks": 2555,
+      "org_keywords": 2,
+      "org_traffic": 4,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-05"
     }
   },
   "gates": {
@@ -164,7 +176,7 @@
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -354,7 +366,7 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -368,10 +380,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0.2 → 16th pct of 114-firm cohort (median 2.9) 0/3 · 1,059 referring domains, 65th pct 1/2 · 2 organic keywords / 4 visits·mo, 40th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -386,7 +398,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -431,13 +443,13 @@
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A2 Experience: +10 available"
+        "A2 Experience: +10 available",
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 14.0,
-    "assessed": 62,
-    "coverage": 0.785,
+    "raw": 16.0,
+    "assessed": 70,
+    "coverage": 0.886,
     "floor_abc_pct": 0.237,
     "gates_unavailable": [
       "G1",

@@ -5,7 +5,7 @@
   "website": "https://www.covinolaw.com/",
   "domain": "covinolaw.com",
   "phone": "(917) 818-4806",
-  "status": "listed",
+  "status": "not_eligible",
   "practices": [
     {
       "slug": "criminal-defense",
@@ -148,13 +148,13 @@
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-10-01"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": false,
-      "evidence": "6 public reviews against a minimum of 10",
-      "source": "Google Places API and Active Corporations register (data.ny.gov n9v6-gdp6), published by the New York State Department of State, partial",
-      "checked_at": "2026-10-01"
+      "evidence": "6 reviews, below the 10 this gate asks for in this practice",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-10-05"
     }
   },
   "cohort_id": "ny-criminal-defense",
@@ -237,8 +237,8 @@
   },
   "score": {
     "total": 18,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "tier": "Not eligible",
+    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
     "computed_at": "2026-10-05",
     "methodology": "v2.0",
     "pillars": {

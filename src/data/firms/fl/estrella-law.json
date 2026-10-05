@@ -165,6 +165,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 0.8,
+      "ahrefs_rank": 62763971,
+      "refdomains": 881,
+      "refdomains_dofollow": 343,
+      "backlinks": 992,
+      "org_keywords": 23,
+      "org_traffic": 84,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-05"
     }
   },
   "gates": {
@@ -191,7 +203,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 9 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -380,7 +392,7 @@
         ]
       },
       "D": {
-        "score": 0,
+        "score": 2,
         "max": 25,
         "subs": [
           {
@@ -394,10 +406,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 2,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0.8 → 30th pct of 114-firm cohort (median 2.9) 1/3 · 881 referring domains, 18th pct 0/2 · 23 organic keywords / 84 visits·mo, 74th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -412,7 +424,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -461,9 +473,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 15.4,
-    "assessed": 55,
-    "coverage": 0.786,
+    "raw": 17.4,
+    "assessed": 63,
+    "coverage": 0.9,
     "floor_abc_pct": 0.355,
     "gates_unavailable": [
       "G1",

@@ -194,6 +194,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 4.3,
+      "ahrefs_rank": 32266441,
+      "refdomains": 738,
+      "refdomains_dofollow": 336,
+      "backlinks": 1239,
+      "org_keywords": 1,
+      "org_traffic": 13,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-05"
     }
   },
   "gates": {
@@ -220,7 +232,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 14 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-05"
     },
     "G6": {
       "pass": true,
@@ -305,7 +317,7 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 30,
+    "total": 31,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
     "computed_at": "2026-10-05",
@@ -410,7 +422,7 @@
         ]
       },
       "D": {
-        "score": 1,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -424,10 +436,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 4.3 → 57th pct of 114-firm cohort (median 2.9) 2/3 · 738 referring domains, 5th pct 0/2 · 1 organic keywords / 13 visits·mo, 40th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -442,7 +454,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -482,7 +494,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 40,
+      "gap": 39,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -491,9 +503,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 16.5,
-    "assessed": 55,
-    "coverage": 0.786,
+    "raw": 19.5,
+    "assessed": 63,
+    "coverage": 0.9,
     "floor_abc_pct": 0.368,
     "gates_unavailable": [
       "G1"
