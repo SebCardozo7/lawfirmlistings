@@ -222,7 +222,7 @@ const description = 'We read every law firm website in this directory and counte
     />
     <p><b>The ranking is the finding.</b> The thing a law firm website is likeliest to have is the section that brings in search traffic, and the thing it is least likely to have is the one a client would open first.</p>
     <p>One thing does predict how much a firm publishes, and it is not the state it sits in. <a href="/guides/what-search-traffic-says-about-a-law-firm/">We sorted the directory by how much organic search traffic each firm gets</a> and read every sub-factor against it: the publishing measures all rise with visibility, which is the same finding as this page from the other end. Publishing is what a firm with a marketing budget does.</p>
-    <p>An attorney index sits in the middle at {kinds.find(k => k.key === 'attorney_bios')!.value}. That page is the input every credential check needs, and <a href="/guides/what-it-takes-to-check-a-law-firm/">we have measured separately what happens when it is missing</a>: the check people assume is routine cannot start.</p>
+    <p>An attorney index sits in the middle at {kinds.find(k => k.key === 'attorney_bios')!.value}. That page is the input every credential check needs, and we have measured separately what happens when it is missing: the check people assume is routine cannot start.</p>
     <p>Very few firms publish the full set.</p>
     <ColumnChart
       heading={`How many of the five each firm publishes, of ${readable.length}`}
@@ -283,7 +283,7 @@ const description = 'We read every law firm website in this directory and counte
     {barKeyPresent > 0 && (
       <p>D1's first page check reads whether a firm publishes bar registration numbers on its attorney bios, a field that was empty on every record when this page was first written. {barKeyPresent} records carry it now, so the point is live and the paragraph that used to sit here no longer describes the data.</p>
     )}
-    <p>Fixing it is a decision about the scoring engine rather than about any guide, because rescoring the directory moves tiers. <a href="/guides/what-a-law-firm-score-cannot-compare/">The denominator behind every score on this site</a> is the wider version of the same argument: the number is earned points over measured points, and what we failed to measure belongs in that sentence too.</p>
+    <p>Fixing it is a decision about the scoring engine rather than about any guide, because rescoring the directory moves tiers. The denominator behind every score on this site is the wider version of the same argument: the number is earned points over measured points, and what we failed to measure belongs in that sentence too.</p>
 
     <h2 id="limits">What this cannot tell you</h2>
     <p>Three things, and the first is the largest.</p>
@@ -304,7 +304,7 @@ const description = 'We read every law firm website in this directory and counte
       <h4>Related studies</h4>
       <ul>
         <li><a href="/methodology/">LFL Certified Methodology</a></li>
-        <li><a href="/guides/what-it-takes-to-check-a-law-firm/">What it takes to check a law firm</a></li>
+        <li>What it takes to check a law firm</li>
         <li><a href="/guides/what-new-york-injury-firms-publish-about-fees/">What firms publish about fees</a></li>
         <li><a href="/guides/best-law-firm-websites/">The best law firm websites, measured</a></li>
       </ul>

@@ -165,7 +165,7 @@ const description = `New York publishes its attorney register as open data. We a
     <p><b>{n(deceased?.count ?? 0)}</b> of these records belong to people who have died. That is not an oversight. A register of admissions is a historical record and the state keeps it rather than editing people out of it.</p>
     <p>It is also the easiest way in the world to get a lawyer count wrong, because the total looks like a population and is not one.</p>
     <p>Then the rows that matter most: <b>{n(suspendedTotal)}</b> registrations carrying a suspension across {suspended.length} statuses, <b>{n(disbarred?.count ?? 0)}</b> disbarments, and {n(register.status.find(s => /disciplinary/i.test(s.status))?.count ?? 0)} resignations for a disciplinary reason.</p>
-    <p><b>The register carries the status and never the reason.</b> In New York a suspension issues from the Appellate Division whatever prompted it, and several missed biennial registration filings are themselves grounds for one. So a single status covers both a sanction for misconduct and a long paperwork lapse, and nothing in the dataset separates them. That is why this directory has never published a conclusion about a named attorney from this field: <a href="/guides/what-it-takes-to-check-a-law-firm/">we use it to confirm a licence exists</a>, and a person reads the Appellate Division's own decisions for anything else.</p>
+    <p><b>The register carries the status and never the reason.</b> In New York a suspension issues from the Appellate Division whatever prompted it, and several missed biennial registration filings are themselves grounds for one. So a single status covers both a sanction for misconduct and a long paperwork lapse, and nothing in the dataset separates them. That is why this directory has never published a conclusion about a named attorney from this field: we use it to confirm a licence exists, and a person reads the Appellate Division's own decisions for anything else.</p>
 
     <h2 id="where">{countyShare}% of them are in one county</h2>
     <p>Of the {n(c.current_in_state.value)} in-force registrations with a New York address, the concentration is extreme.</p>
@@ -198,7 +198,7 @@ const description = `New York publishes its attorney register as open data. We a
       rows={schools}
       caption="Highlighted rows are the same university under two spellings, which is why this is a count of strings and not a ranking of schools."
     />
-    <p>That is not a criticism of the state. It is what happens to any field a human types, and it is the same problem this directory hits from the other side: matching a firm's name to its entry in a public register is the hardest part of checking a firm, and <a href="/guides/what-a-business-register-proves-about-a-law-firm/">we have written about where that goes wrong</a>. A dataset is only as precise as the question you can ask it.</p>
+    <p>That is not a criticism of the state. It is what happens to any field a human types, and it is the same problem this directory hits from the other side: matching a firm's name to its entry in a public register is the hardest part of checking a firm, and we have written about where that goes wrong. A dataset is only as precise as the question you can ask it.</p>
   </div>
 </div>
 </article>

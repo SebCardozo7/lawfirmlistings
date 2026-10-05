@@ -322,48 +322,6 @@ export const GUIDES: Guide[] = [
     meta: 'One question, five different numbers',
   },
   {
-    slug: 'what-a-business-register-proves-about-a-law-firm',
-    cover: 'register',
-    kicker: 'Method',
-    title: "New Study: A Law Firm's Website Age Is Not How Old the Firm Is",
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Every guide to hiring a lawyer says to confirm the firm is a registered company. We ' +
-      'tried it in every state we publish in, then compared the date the register gives with ' +
-      'the age of the firm’s own web address. The two disagree in both directions.',
-    thumb: '',
-    icon: 'columns',
-    meta: 'Two public dates, and neither is the firm’s age',
-  },
-  {
-    slug: 'what-law-firms-publish-about-malpractice-insurance',
-    cover: 'shield',
-    kicker: 'Method',
-    title: 'New Study: Law Firms List Their Bar Memberships, Not Their Insurance',
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Professional liability cover is what pays a client back when their own lawyer is ' +
-      'negligent. We read every page these firms publish about themselves looking for one that ' +
-      'says they carry it, including in the one state where carrying it is mandatory.',
-    thumb: 't3',
-    icon: 'scale',
-    meta: 'The credential nobody prints',
-  },
-  {
-    slug: 'what-it-takes-to-check-a-law-firm',
-    cover: 'roster',
-    kicker: 'Method',
-    title: 'New Study: A Law Firm Can Be Highly Rated and Name No Lawyer at All',
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Every guide to hiring a lawyer says to look the attorney up in the state register. We ' +
-      'tried it on every firm in this directory. Two things have to be true before that check ' +
-      'runs, and one of them is usually missing.',
-    thumb: 't2',
-    icon: 'doc',
-    meta: 'The check needs a name, and a register',
-  },
-  {
     slug: 'what-new-york-injury-firms-publish-about-fees',
     cover: 'fees',
     kicker: 'Costs',
@@ -398,29 +356,6 @@ export const GUIDES: Guide[] = [
     thumb: '',
     icon: 'skyline',
     meta: 'Almost nobody passes, and it is cheap to fix',
-  },
-  {
-    slug: 'what-a-case-results-page-proves',
-    cover: 'results',
-    kicker: 'Method',
-    title: 'New Study: The Court a Firm Names Matters More Than Its Number',
-    summary:
-      'We read the case results page of every firm in the directory and counted what is on it: how many results, which case types, whether any court is named, whether a disclaimer is there. We publish none of the amounts, and this is why.',
-    thumb: 't2',
-    icon: 'scale',
-    meta: 'What we counted, and what we will not repeat',
-  },
-  {
-    slug: 'what-a-law-firm-score-cannot-compare',
-    cover: 'ladder',
-    kicker: 'Method',
-    title: 'New Study: Two Firms Can Share a Score and Not Share the Evidence',
-    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
-    summary:
-      'Our score is earned points over measured points, not over a hundred, so the same number can rest on very different evidence. Which comparisons the data supports, which we refuse to publish, and why the largest gap in the score turns out to be ours rather than any state\'s.',
-    thumb: '',
-    icon: 'columns',
-    meta: 'Read the denominator before the number',
   },
   {
     slug: 'best-personal-injury-law-firms-nyc',
