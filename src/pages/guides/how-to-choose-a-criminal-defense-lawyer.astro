@@ -6,6 +6,7 @@ import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import StackBar from '../../components/StackBar.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 /**
  * What a criminal defense firm publishes about its own work, measured against the injury firms
@@ -357,6 +358,15 @@ const snapshot = [...firms]
         `What clients said does not move with it: mean Google rating is <b>${sRating.toFixed(2)}</b> against <b>${cRating.toFixed(2)}</b>, a difference of <b>${ratingGap.toFixed(2)}</b> of a star.`,
         `What does move with it is reach, and that is marketing rather than lawyering: median organic search traffic runs <b>${fmt(sTraffic.med)}</b> visits a month against <b>${fmt(cTraffic.med)}</b>.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(subject.length - sPublishing.length), label: `${homeCity} criminal defense firms publish no case results`, note: `out of ${subject.length}`, emphasis: true },
+        { value: String(sPublishing.length), label: 'publish at least one', note: 'counted from their own pages, amounts unconfirmed' },
+        { value: String(sSilent.length), label: 'have a results page that states nothing', note: 'which is a finding about the firm, not a gap in our data' },
+        { value: String(sUnreadable.length), label: 'have a results page we could not read', note: 'and keep pillar B pending rather than scoring zero' },
+      ]}
+      source={`Read from every published criminal defense firm's own website, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. We record what a firm publishes on its own website, which is not a claim about how it does its work. Nothing here is legal information or advice.</div>
 

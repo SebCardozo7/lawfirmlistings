@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure on this page is computed from the firms collection at build time. Nothing is typed
 // into the prose, so the article cannot drift away from the data underneath it.
@@ -255,6 +256,15 @@ const snapshot = [...firms]
         `Between the most and least visible quarter, the median review count runs <b>${topQ.reviews.toLocaleString('en-US')} against ${bottomQ.reviews.toLocaleString('en-US')}</b>, while the mean client rating runs <b>${topQ.rating.toFixed(2)} against ${bottomQ.rating.toFixed(2)}</b>. Visibility brings more reviews, not better ones.`,
         `Of the <b>${movement.length} sub-factors</b> we could compare, <b>${flat.length}</b> fail to rise with visibility, and those are the ones that read what clients said rather than what the firm published.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: ratingSpread.toFixed(2), label: 'stars separate the most and least visible firms', note: 'across four quartiles of search traffic', emphasis: true },
+        { value: String(measured.length), label: 'firms with both search and review data', note: 'the only ones this question can be asked of' },
+        { value: String(noTraffic.length), label: 'have no measurable organic traffic at all', note: 'and are kept in rather than dropped' },
+        { value: medianTraffic.toLocaleString('en-US'), label: 'median monthly organic visits', note: 'Ahrefs, United States' },
+      ]}
+      source={`Measured with Ahrefs and the Google Places API, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Search traffic here is an estimate of unpaid visits from Google, not a measure of what a firm spends. Nothing here is legal information or advice.</div>
 

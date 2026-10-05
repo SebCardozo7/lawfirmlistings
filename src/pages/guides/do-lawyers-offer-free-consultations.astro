@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 /**
  * Who actually publishes a free consultation, across the whole directory.
@@ -253,6 +254,15 @@ const snapshot = [...firms]
         `Inside one practice the phrase separates firms on almost everything except the thing a client would want it to: mean Google rating is <b>${ratingYes.toFixed(2)}</b> for firms publishing it and <b>${ratingNo.toFixed(2)}</b> for firms that do not.`,
         `Our own score folds the phrase into a fee and access sub-factor worth <b>${e1Max.join(' or ')}</b> points, and ${top.name.toLowerCase()} firms average <b>${e1Top.toFixed(2)}</b> of it against <b>${e1Bottom.toFixed(2)}</b> for ${bottom.name.toLowerCase()} firms.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${top.share}%`, label: `of ${shortPractice(top.name).toLowerCase()} firms publish a free consultation`, note: `${top.yes} of ${top.n}`, emphasis: true },
+        { value: `${lowest.share}%`, label: `of ${shortPractice(lowest.name).toLowerCase()} firms do`, note: `${lowest.yes} of ${lowest.n}` },
+        { value: `${pct(publishing.length, total)}%`, label: 'of the whole directory publishes one', note: `${publishing.length} of ${total}` },
+        { value: String(practices.length), label: 'practice areas compared', note: 'each firm counted under its own primary practice' },
+      ]}
+      source={`Read from every published firm's own website, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. We record what a firm publishes on its website, which is not a promise it made to you. Nothing here is legal information or advice.</div>
 

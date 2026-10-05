@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Computed from the collection at build time. The tests below run against the fee language each
 // firm publishes on its own site — the same strings that feed sub-factor E1 — so if a firm adds
@@ -96,6 +97,15 @@ const snapshot = [...firms]
         `<b>${publishExpenses.length === 0 ? 'Not one' : String(publishExpenses.length)}</b> says whether case expenses come out before or after the fee is worked out, and on a mid-size settlement that order is worth five figures.`,
         `<b>${contingency.length}</b> firms state they work on contingency and <b>${noModel.length}</b> state no fee model at all, so the two questions worth asking are the two nobody answers in public.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(publishPct.length), label: 'New York injury firms print the fee they charge', note: `out of ${firms.length}`, emphasis: true },
+        { value: String(contingency.length), label: 'say the fee is contingent', note: 'without saying on what share' },
+        { value: String(noModel.length), label: 'name no fee model at all', note: `out of ${firms.length}` },
+        { value: String(freeConsult.length), label: 'offer a free consultation', note: 'which is why it separates nobody' },
+      ]}
+      source={`Read from every published New York injury firm's own pages, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed at build time from the fee language each firm publishes on its own website. This is not legal advice, and it is not a statement about what any firm charges, only about what it says publicly.</div>
 

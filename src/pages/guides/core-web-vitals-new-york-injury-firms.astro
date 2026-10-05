@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // A short technical piece, written so the article template is in production and so pillar D has
 // something public explaining it. Every figure below is computed from the firms collection at
@@ -134,6 +135,15 @@ const snapshot = [...firms]
         `<b>${noSchema.length} firms</b> publish no structured data at all, so a search engine has to guess what their pages are about.`,
         `<b>${noRoster.length} of ${firms.length}</b> firms name no attorney on a page we could read, so the roster a licence check needs is not there to be checked.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(passing.length), label: "pass Google's Core Web Vitals", note: `out of ${withPsi.length} measured`, emphasis: true },
+        { value: String(medianPerf ?? 0), label: 'median performance score, out of 100', note: 'PageSpeed Insights, mobile' },
+        { value: String(withPsi.length), label: 'New York injury firms measured', note: 'a site we could not measure keeps its sub-factor pending' },
+        { value: String(noSchema.length), label: 'publish no structured data at all', note: 'nothing for a crawler to read as a firm' },
+      ]}
+      source={`Measured with PageSpeed Insights on mobile, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 

@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure here is computed from the firms collection at build time, so the article cannot
 // drift away from the data it describes. Firms whose rating we hold only because the firm
@@ -131,6 +132,15 @@ const snapshot = [...firms]
         `<b>${clustered} of ${measured.length}</b> firms sit at 4.8 or above once rounded, which is where a star rating stops carrying information.`,
         `<b>${totalReviews.toLocaleString('en-US')} reviews</b> were counted in total, none of them collected by us and none solicited through us.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: totalReviews.toLocaleString('en-US'), label: 'Google reviews across New York injury firms', note: `${totalListings} verified listings`, emphasis: true },
+        { value: String(ratingSpread), label: 'stars between the best and worst rated', note: `${loRating} to ${hiRating}` },
+        { value: `${countRatio}x`, label: 'more reviews at the top than at the bottom', note: `${hiCount.toLocaleString('en-US')} against ${loCount}` },
+        { value: String(measured.length), label: 'firms with a verified Google listing', note: 'self-reported counts are excluded' },
+      ]}
+      source={`Summed from Google Business Profile listings, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 

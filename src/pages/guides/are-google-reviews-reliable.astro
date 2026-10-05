@@ -6,6 +6,7 @@ import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import StackBar from '../../components/StackBar.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure on this page is computed from the firms collection at build time, so the article
 // cannot drift away from the data it describes.
@@ -260,6 +261,15 @@ const snapshot = [...firms]
         `Firm by firm it is a different story: the returned reviews rate higher for <b>${fmt(higher.length)}</b> and lower for <b>${fmt(lower.length)}</b>, and <b>${fmt(tailLower)}</b> firms are undersold by half a star or more.`,
         `Two sub-factors of our own score, worth <b>${sampleWeight} points</b> of the hundred, are read off this sample, and <b>${fmt(c3Full)}</b> firms take full marks on recency largely because of how Google chose.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${returnedShare}%`, label: 'of the reviews Google counted are the ones it hands back', note: `${returned.toLocaleString('en-US')} of ${census.toLocaleString('en-US')}`, emphasis: true },
+        { value: census.toLocaleString('en-US'), label: 'reviews counted across every listing', note: `${listings} Google Business Profile listings` },
+        { value: returned.toLocaleString('en-US'), label: 'reviews actually returned', note: 'five per listing, which is where the API stops' },
+        { value: String(overCap.length), label: 'firms returned more than five per listing', note: 'the cap is a cap, not an estimate' },
+      ]}
+      source={`Read through the Google Places API, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 

@@ -5,6 +5,7 @@ import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // The study behind sub-factor E3, and the first piece here about who a firm is written for.
 //
@@ -269,6 +270,15 @@ const snapshot = [...firms]
         `Across markets the range is <b>${share(topMarket.es, topMarket.n)}%</b> in ${topMarket.label} down to <b>${share(bottomMarket.es, bottomMarket.n)}%</b> in ${bottomMarket.label}.`,
         `Spanish is the only language this directory detects on its own, so the <b>${otherLang.length} firms</b> recorded as publishing ${otherNames} are a measure of our reading rather than of the market.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${share(spanish.length, measured.length)}%`, label: 'of firms publish in Spanish', note: `${spanish.length} of ${measured.length} we could read`, emphasis: true },
+        { value: `${share(topPractice.es, topPractice.n)}%`, label: `in ${topPractice.label.toLowerCase()}, the practice that does it most`, note: `${topPractice.es} of ${topPractice.n}` },
+        { value: `${share(bottomPractice.es, bottomPractice.n)}%`, label: `in ${bottomPractice.label.toLowerCase()}, the practice that does it least`, note: `${bottomPractice.es} of ${bottomPractice.n}` },
+        { value: String(blocked.length), label: 'sites refused our crawler', note: 'and are left out rather than counted as silent' },
+      ]}
+      source={`Read from every published firm's own website, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 

@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import GuideCover from '../../components/GuideCover.astro';
 import BarChart from '../../components/BarChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure on this page is computed here, from the fee language each firm publishes on its
 // own site. Nothing is typed into the prose. The companion piece at
@@ -118,6 +119,15 @@ const snapshot = [...firms]
         `<b>${freeConsult.length} of ${firms.length}</b> offer a free consultation, which is as close to unanimous in ${states} states as it was in one.`,
         `<b>${publishExpenses.length === 0 ? 'Not one' : String(publishExpenses.length)}</b> ${publishExpenses.length === 1 ? 'explains' : 'explain'} how case expenses are handled, which is the line that decides what reaches a client.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(publishPct.length), label: 'injury firms publish the percentage they charge', note: `out of ${firms.length}`, emphasis: true },
+        { value: String(states), label: 'states, with different fee rules in each', note: 'two of them scale the percentage by statute' },
+        { value: String(statesModel.length), label: 'name a fee model at all', note: 'contingency, flat or hourly' },
+        { value: String(publishExpenses.length), label: 'explain how case expenses are handled', note: 'the line that decides what reaches a client' },
+      ]}
+      source={`Read from every published injury firm's own fee pages, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure here is computed at build time from what each firm publishes on its own website. It is not a statement about what any firm charges, only about what it says in public, and it is not legal advice.</div>
 

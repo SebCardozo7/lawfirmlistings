@@ -7,6 +7,7 @@ import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import StackBar from '../../components/StackBar.astro';
 import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
 
 // Every figure on this page is computed from the firms collection at build time. Nothing is
 // typed into the prose, so the article cannot drift away from the data underneath it.
@@ -213,6 +214,15 @@ const snapshot = [...firms]
           ? `Our own website sub-score is marked out of <b>${d1Max}</b>, and the best any firm in the directory reaches is <b>${d1Best}</b>, because one of its checks reads a field that <b>no record here carries</b>.`
           : `Our own website sub-score is marked out of <b>${d1Max}</b> and the best any firm reaches is <b>${d1Best}</b>. <b>${barKeyPresent} records</b> now carry the field that used to be unreadable.`,
       ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(feeSilent), label: 'websites publish no price at all', note: `out of ${readable.length} we could read`, emphasis: true },
+        { value: String(blogNotFee), label: 'publish a blog and no fee page', note: 'the blog is the first thing, the price the last' },
+        { value: String(readable.length), label: 'sites read in full', note: `${blocked.length} refused our crawler and are left out` },
+        { value: String(kinds.length), label: 'kinds of page counted on each site', note: `commonest is ${commonest.label.toLowerCase()}` },
+      ]}
+      source={`Read from every published firm's own website, ${snapshot}.`}
     />
     <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
 
