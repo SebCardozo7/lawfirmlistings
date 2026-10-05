@@ -1,0 +1,95 @@
+---
+/**
+ * The measured numbers of a study, set large, directly under its opening.
+ *
+ * Our guides had one generic cover and then several screens of unbroken prose before the first
+ * chart. A reader scrolling past that has no reason to believe anything was counted. This is the
+ * cheapest answer to that: the three or four figures the piece turns on, in digits, at the size
+ * the finding deserves, before any argument is made.
+ *
+ * Every number here is a value computed on the page, never a literal. The `note` is what the
+ * figure is of, which is the part a bare percentage always leaves out.
+ */
+export interface Stat {
+  /** The figure, already formatted: "1 of 13", "81%", "9,478". */
+  value: string;
+  /** What it counts, in a few words. */
+  label: string;
+  /** The denominator or the caveat, smaller, under the label. */
+  note?: string;
+  /** Draws this one in the accent, for the figure the headline carries. */
+  emphasis?: boolean;
+}
+
+interface Props {
+  stats: Stat[];
+  /** Where the numbers come from, printed under the row so the scale travels with them. */
+  source?: string;
+  class?: string;
+}
+
+const { stats, source, class: cls } = Astro.props;
+---
+<figure class={cls ? `statrow ${cls}` : 'statrow'}>
+  <div class="statrow-grid" style={`--n:${stats.length}`}>
+    {stats.map(s => (
+      <div class={s.emphasis ? 'stat is-key' : 'stat'}>
+        <b class="stat-value">{s.value}</b>
+        <span class="stat-label">{s.label}</span>
+        {s.note && <span class="stat-note">{s.note}</span>}
+      </div>
+    ))}
+  </div>
+  {source && <figcaption>{source}</figcaption>}
+</figure>
+
+<style>
+  .statrow { margin: 34px 0; }
+  .statrow-grid {
+    display: grid;
+    /* Two columns inside the article, which is where these live. auto-fit gave four stats a
+       3 + 1 row and the orphan read as an afterthought. */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--paper);
+    padding: 22px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-value {
+    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.9rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .is-key .stat-value { color: #6D28D9; }
+  .stat-label {
+    font-size: 0.92rem;
+    line-height: 1.35;
+    color: var(--ink-soft);
+  }
+  .stat-note {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .statrow figcaption {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+  /* Two columns at every width above a phone, and the reason is that a viewport query is the
+     wrong instrument here: these sit in the article column, which is far narrower than the
+     window, so widening the window to four columns broke "9 of 13" across two lines. */
+  @media (max-width: 420px) {
+    .statrow-grid { grid-template-columns: 1fr; }
+  }
+</style>
