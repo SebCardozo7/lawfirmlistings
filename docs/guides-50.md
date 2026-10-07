@@ -188,7 +188,7 @@ the verified injury firms in that state and names the highest-scoring one by rul
     *SEO title:* "Arizona Statute of Limitations 2026: How Long You Have to Sue"
 25. **Oregon.** 600 KD 1. 20 Portland firms. **Paulson Coletti.**
     *SEO title:* "Oregon Statute of Limitations 2026: Deadlines, Notice and Exceptions"
-26. **Maryland.** **VERIFY**: not returned at 400/mo. 31 Baltimore firms. **Malloy Law.**
+26. **Maryland.** Verified 2026-10-07: `statute of limitations maryland` 450/mo, KD 6. 31 Baltimore firms. **Malloy Law.**
     *SEO title:* "Maryland Statute of Limitations 2026: The 3-Year Rule, Explained"
 27. **Massachusetts.** **VERIFY**: not returned at 400/mo. 28 Boston firms. **Brooks Law Firm.**
     *SEO title:* "Massachusetts Statute of Limitations 2026: Deadlines by Claim"
@@ -316,7 +316,7 @@ client's Basecamp project when the piece places a client. Pieces that place a cl
 | --- | --- | --- |
 | written 2026-10-04 | 18 Texas, 19 Florida, 20 New York (PR #96) | Fielding; Lopez & Humphries, Goodwin; Greenstein & Pittari |
 | written 2026-10-05 | 25 Oregon (PR #105) | Paulson Coletti |
-| 2026-10-07 | 26 Maryland | Malloy Law |
+| written 2026-10-07 | 26 Maryland (PR #110) | Malloy Law |
 | 2026-10-09 | 27 Massachusetts | Brooks Law Firm |
 | 2026-10-12 | 29 Indiana | Sarkisian |
 | 2026-10-14 | 16 Statute of limitations hub | all seven state pages |
