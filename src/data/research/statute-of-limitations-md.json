@@ -1,0 +1,239 @@
+{
+  "state": "Maryland",
+  "code": "MD",
+  "slug": "maryland-statute-of-limitations",
+  "measured_at": "2026-10-07",
+  "source": {
+    "who": "The Maryland General Assembly",
+    "what": "the Annotated Code of Maryland, Courts and Judicial Proceedings Article, Title 5",
+    "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-101&enactments=false"
+  },
+  "headline": {
+    "years": 3,
+    "claim": "a personal injury claim",
+    "statute": "CJ § 5-101",
+    "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-101&enactments=false"
+  },
+  "rows": [
+    {
+      "claim": "Personal injury",
+      "group": "injury",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CJ § 5-101",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-101&enactments=false",
+      "clock": "From the day the claim accrues, which Maryland courts read as the day the person knew or should have known of the injury.",
+      "note": "The general rule for every civil action at law that no other section covers. Battery runs on it too."
+    },
+    {
+      "claim": "Wrongful death",
+      "group": "injury",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CJ § 3-904(g)(1)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=3-904&enactments=false",
+      "clock": "From the death, not from the injury that caused it.",
+      "note": "A death caused by an occupational disease has 10 years from the death or 3 from discovery of the cause, whichever is shorter. A concealed homicide runs from discovery of the killing and of who took part in it."
+    },
+    {
+      "claim": "Medical malpractice",
+      "group": "injury",
+      "period": "5 years, or 3 from discovery",
+      "years": 3,
+      "statute": "CJ § 5-109(a)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-109&enactments=false",
+      "clock": "Whichever comes first: five years from the injury, or three years from when it was discovered.",
+      "note": "Filing a claim with the Health Care Alternative Dispute Resolution Office counts as filing the action."
+    },
+    {
+      "claim": "Assault",
+      "group": "injury",
+      "period": "1 year",
+      "years": 1,
+      "statute": "CJ § 5-105",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-105&enactments=false",
+      "clock": "From the day the claim accrues.",
+      "note": "The section names assault and not battery, so a claim for the physical contact itself falls under the general three years."
+    },
+    {
+      "claim": "Libel and slander",
+      "group": "injury",
+      "period": "1 year",
+      "years": 1,
+      "statute": "CJ § 5-105",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-105&enactments=false",
+      "clock": "From the day the claim accrues, which for defamation is generally the publication.",
+      "note": ""
+    },
+    {
+      "claim": "Child sexual abuse",
+      "group": "injury",
+      "period": "No deadline",
+      "years": null,
+      "statute": "CJ § 5-117(b)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-117&enactments=false",
+      "clock": "May be filed at any time, whatever any statute of limitations, statute of repose or tort claims act says.",
+      "note": "In force since October 1, 2023. Claims that were already time-barred before then carry a damages cap and cannot be brought if the survivor has died."
+    },
+    {
+      "claim": "Workers' compensation",
+      "group": "injury",
+      "period": "60 days",
+      "years": 0.16,
+      "statute": "LE § 9-709(a)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gle&section=9-709&enactments=false",
+      "clock": "From the accidental injury, filed with the Workers' Compensation Commission.",
+      "note": "The Commission can excuse a late filing, but after two years the claim is barred completely under § 9-709(b)(3)."
+    },
+    {
+      "claim": "Injury from a defective building or structure",
+      "group": "injury",
+      "period": "3 years, 20 at the outside",
+      "years": 3,
+      "statute": "CJ § 5-108",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-108&enactments=false",
+      "clock": "From the injury, which is when the claim accrues under § 5-108(e).",
+      "note": "No claim accrues at all once the improvement to real property has been in use for 20 years, or 10 against the architect, engineer or contractor."
+    },
+    {
+      "claim": "Damage to property",
+      "group": "property",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CJ § 5-101",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-101&enactments=false",
+      "clock": "From the damage.",
+      "note": "The car in a crash runs on the same three years as the people in it."
+    },
+    {
+      "claim": "Contract, written or oral",
+      "group": "contract",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CJ § 5-101",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-101&enactments=false",
+      "clock": "From the breach.",
+      "note": "Maryland draws no line between written and oral contracts. It draws one around contracts under seal."
+    },
+    {
+      "claim": "Contracts under seal",
+      "group": "contract",
+      "period": "12 years",
+      "years": 12,
+      "statute": "CJ § 5-102(a)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-102&enactments=false",
+      "clock": "From accrual, or from the death of the last principal debtor or creditor, whichever is sooner.",
+      "note": "Covers sealed contracts and notes, bonds and judgments. Sealed mortgages on an owner-occupied home and some hospital debts are left out."
+    },
+    {
+      "claim": "Sale of goods and warranties",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "CL § 2-725",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcl&section=2-725&enactments=false",
+      "clock": "From the breach, which for a warranty is delivery, whether or not the buyer knew.",
+      "note": "A contract can shorten this to one year but never lengthen it."
+    },
+    {
+      "claim": "Fraud",
+      "group": "contract",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CJ §§ 5-101, 5-203",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-203&enactments=false",
+      "clock": "From when the fraud was discovered, or should have been with ordinary diligence.",
+      "note": ""
+    },
+    {
+      "claim": "Notice of a claim against a local government",
+      "group": "government",
+      "period": "1 year to give notice",
+      "years": 1,
+      "statute": "CJ § 5-304(b)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-304&enactments=false",
+      "clock": "Within one year of the injury, in writing, stating the time, place and cause, delivered in person or by certified mail to the office the statute names.",
+      "note": "For Baltimore City that office is the City Solicitor. No notice is needed if the local government already had actual or constructive notice within the year, and a court can excuse a missing notice for good cause unless the defense was prejudiced."
+    },
+    {
+      "claim": "Written claim to the State Treasurer",
+      "group": "government",
+      "period": "1 year",
+      "years": 1,
+      "statute": "SG § 12-106(b)(1)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gsg&section=12-106&enactments=false",
+      "clock": "Within one year of the injury to person or property, before any lawsuit against the State.",
+      "note": "The Treasurer has to deny the claim finally before suit."
+    },
+    {
+      "claim": "Lawsuit against the State",
+      "group": "government",
+      "period": "3 years",
+      "years": 3,
+      "statute": "SG § 12-106(b)(3)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gsg&section=12-106&enactments=false",
+      "clock": "From when the cause of action arises.",
+      "note": "The State's liability is capped at $400,000 per claimant under SG § 12-104."
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "Children get the lesser of three years or the normal period after turning 18",
+      "statute": "CJ § 5-201(a), (b)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-201&enactments=false",
+      "text": "The clock does not run while the injured person is a minor. Once they turn 18 they have the lesser of three years or the ordinary period, so an injury claim from childhood can be filed until the 21st birthday. The pause does nothing if the period still has more than three years to run at 18."
+    },
+    {
+      "name": "Medical malpractice on a child starts at 11, or at 16",
+      "statute": "CJ § 5-109(b), (c), (e)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-109&enactments=false",
+      "text": "When a health care provider injures a child under 11, the malpractice periods start at 11, not at 18. For an injury to the reproductive system, or a foreign object left in the body, they start at 16. The general rule for minors cannot be used to stretch either one."
+    },
+    {
+      "name": "A mental incompetence",
+      "statute": "CJ § 5-201(a)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-201&enactments=false",
+      "text": "A person who is mentally incompetent when the claim accrues gets the same lesser of three years or the ordinary period, counted from when the incompetence ends. The malpractice section keeps this rule in force."
+    },
+    {
+      "name": "What does not stop the clock",
+      "statute": "CJ § 5-201(c)",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-201&enactments=false",
+      "text": "The statute names three things that are not disabilities: imprisonment, absence from the State and marriage. A person in jail, or one who has moved away, is still on the ordinary clock."
+    },
+    {
+      "name": "Fraud that hid the claim",
+      "statute": "CJ § 5-203",
+      "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gcj&section=5-203&enactments=false",
+      "text": "When the other side's fraud kept the person from knowing about the claim, it accrues when the fraud was discovered, or should have been with ordinary diligence."
+    },
+    {
+      "name": "The discovery rule, which the courts read into the statute",
+      "statute": "Poffenberger v. Risser, 290 Md. 631 (1981)",
+      "url": "",
+      "text": "Maryland's highest court applied the discovery rule to civil actions generally, so a claim accrues when the person knew or reasonably should have known of the wrong. For a crash or a fall that is almost always the day it happened."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the statute of limitations for personal injury in Maryland?",
+      "a": "Three years from the day the claim accrues, under CJ § 5-101. For a crash or a fall that is the day it happened. Assault is the exception: one year, under CJ § 5-105."
+    },
+    {
+      "q": "How long do you have to file a wrongful death lawsuit in Maryland?",
+      "a": "Three years from the death, under CJ § 3-904(g). If an occupational disease caused the death, it is 10 years from the death or 3 years from discovering the cause, whichever is shorter."
+    },
+    {
+      "q": "What is the deadline for medical malpractice in Maryland?",
+      "a": "Five years from the injury or three years from its discovery, whichever comes first, under CJ § 5-109. For a child hurt before 11, both periods start at 11."
+    },
+    {
+      "q": "Does the statute of limitations stop for a minor in Maryland?",
+      "a": "Yes. Under CJ § 5-201 the clock waits until 18, and the person then has three years, so most injury claims from childhood can be filed until 21. Malpractice runs on its own rule, and child sexual abuse claims have had no deadline since October 1, 2023."
+    },
+    {
+      "q": "How long do you have to sue Baltimore City, a county or the State of Maryland?",
+      "a": "Notice to a local government is due within one year of the injury under CJ § 5-304, and a written claim to the State Treasurer within one year under SG § 12-106. A lawsuit against the State then has three years."
+    }
+  ]
+}
