@@ -1,0 +1,52 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-md.json';
+
+/**
+ * Maryland deadlines, a state statute page from docs/guides-50.md (family B).
+ *
+ * Title and description figures are read from the research file and declared through
+ * figuresFrom, so a corrected period rewrites the headline instead of leaving it stale.
+ */
+const head = data.headline;
+const assault = data.rows.find(r => r.claim === 'Assault')!;
+const local = data.rows.find(r => r.statute === 'CJ § 5-304(b)')!;
+const treasurer = data.rows.find(r => r.statute === 'SG § 12-106(b)(1)')!;
+const stateSuit = data.rows.find(r => r.statute === 'SG § 12-106(b)(3)')!;
+const comp = data.rows.find(r => r.statute === 'LE § 9-709(a)')!;
+const abuse = data.rows.find(r => r.statute === 'CJ § 5-117(b)')!;
+const minors = data.exceptions.find(e => e.statute.startsWith('CJ § 5-201(a), (b)'))!;
+const childMed = data.exceptions.find(e => e.statute.startsWith('CJ § 5-109(b)'))!;
+const notice = local.period.replace(' to give notice', '');
+const title = `Maryland Statute of Limitations 2026: The ${head.years}-Year Rule, Explained`;
+const description = `Most Maryland injury claims have ${head.years} years. An assault has ${assault.period}, and a claim against Baltimore City or a county needs written notice within ${notice}.`;
+const lede = `Maryland gives most injury claims <b>${head.years} years</b>, and that number is the one people remember. The deadlines that end cases are shorter and sit beside it: <b>${assault.period}</b> for an assault, <b>${notice}</b> to give notice to a city or county, and <b>${comp.period}</b> to file for workers' compensation. Here is every Maryland deadline by type of claim, read from the Annotated Code.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="Maryland statute of limitations"
+  reading={[
+    {
+      firm: 'malloy-law-offices-llc',
+      url: 'https://www.malloy-law.com/what-is-statute-of-limitations/',
+      title: 'What is "Statute of Limitations"?',
+      why: 'A Baltimore injury firm quotes the three-year rule in § 5-101 word for word, sets it beside Virginia and D.C. for anyone hurt across a state line in the region, and flags the separate 60-day filing for a workers\' compensation claim.',
+    },
+  ]}>
+  <Fragment slot="toc">
+    <li><a href="#short">The short deadlines inside the three years</a></li>
+    <li><a href="#children">A child's claim: 21, 11 or never</a></li>
+  </Fragment>
+
+  <h2 id="short">In Maryland, the short deadlines are the ones that end cases</h2>
+  <p>Three years is long enough that people stop watching the calendar. Maryland has several deadlines that run out well before it.</p>
+  <p><b>{assault.period} for an assault.</b> Under <a href={assault.url} rel="noopener" target="_blank">{assault.statute}</a>, an action for assault, libel or slander has {assault.period}. The section does not mention battery, so the physical contact in the same attack falls under the general {head.years} years. A person who was threatened and then hit can have two claims from one minute, on two different clocks.</p>
+  <p><b>{notice} for the notice to a local government.</b> A fall on a city sidewalk or a crash with a county vehicle needs written notice within {notice} of the injury, under <a href={local.url} rel="noopener" target="_blank">{local.statute}</a>. In Baltimore City it goes to the City Solicitor. A claim against the State itself works the same way: a written claim to the State Treasurer within {treasurer.period}, under <a href={treasurer.url} rel="noopener" target="_blank">{treasurer.statute}</a>, and then a lawsuit within {stateSuit.period}.</p>
+  <p><b>{comp.period} for a work injury.</b> An employee hurt on the job files with the Workers' Compensation Commission within {comp.period}, under <a href={comp.url} rel="noopener" target="_blank">{comp.statute}</a>. The Commission can excuse a late claim, but not one filed two years after the accident.</p>
+  <p>There is one more Maryland rule a reader should know, even though it is not a deadline. Maryland is one of the few states that still applies contributory negligence: if the injured person was even slightly at fault, the claim can fail entirely. The state's highest court kept that rule in Coleman v. Soccer Ass'n of Columbia (2013). It is one more reason to talk to a lawyer while the evidence is fresh, not near the end of the three years.</p>
+
+  <h2 id="children">A child's claim in Maryland: 21, 11 or never</h2>
+  <p>Maryland has three different answers to the question of how long a child has, depending on the claim.</p>
+  <p><b>Most injuries: until 21.</b> Under <a href={minors.url} rel="noopener" target="_blank">{minors.statute}</a>, the clock waits until the 18th birthday and then gives the lesser of three years or the ordinary period. For an ordinary injury that means the claim can be filed until the child turns 21.</p>
+  <p><b>Medical malpractice: the clock starts at 11.</b> Under <a href={childMed.url} rel="noopener" target="_blank">{childMed.statute}</a>, a child hurt by a doctor or hospital before age 11 has the malpractice periods start at 11, not at 18. For a reproductive injury or an object left in the body, they start at 16. For a child whose injury was found at eight, three years from 11 means the claim can end at about 14.</p>
+  <p><b>Sexual abuse of a child: no deadline.</b> Since October 1, 2023, <a href={abuse.url} rel="noopener" target="_blank">{abuse.statute}</a> lets these claims be filed at any time, against private defendants and public ones alike. Claims that had already expired before that date can be brought too, with a cap on damages, but not if the survivor has died.</p>
+</StatuteGuide>

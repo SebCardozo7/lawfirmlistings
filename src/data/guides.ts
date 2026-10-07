@@ -71,6 +71,19 @@ export const GUIDES: Guide[] = [
   // live in src/data/research/statute-of-limitations-<code>.json and the pages compute their
   // headlines from it, so nothing here may carry a figure.
   {
+    slug: 'maryland-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Maryland Statute of Limitations: The Rule, and the Shorter Clocks Beside It',
+    summary:
+      'Maryland\'s injury deadline is generous, and that is the trap. An assault, a notice to ' +
+      'Baltimore City or a county, and a work injury all run on far shorter clocks, and a child\'s ' +
+      'malpractice claim starts long before adulthood. Every Maryland deadline, read from the Code.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'Assault is not on the long clock',
+  },
+  {
     slug: 'oregon-statute-of-limitations',
     cover: 'deadline',
     kicker: 'Reference',
