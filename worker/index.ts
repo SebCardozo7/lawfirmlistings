@@ -130,16 +130,22 @@ async function submit(request: Request, env: Env): Promise<Response> {
     firm: values.firm, contact: values.contact, email: values.email,
     website: values.website, city: values.city, practice: values.practice,
   };
+  // Each of these says what it did, because an automation nobody can watch is one nobody
+  // trusts. The firm's name goes in the line and its email address does not: the log answers
+  // "did the second email get scheduled, and for when", which needs neither.
   try {
     const ack = ackBody(enquiry);
     await sendTo(env, values.email, ack.subject, ack.text);
+    console.log(`ack sent to ${values.firm}`);
   } catch (err) {
     // Sending to an address we have not onboarded a domain for fails here, which is exactly the
     // state of this Worker until lawfirmlistings.com is onboarded as a sending domain.
     console.error('ack failed', err);
   }
   try {
-    await queueFollowUp(env, enquiry);
+    const key = await queueFollowUp(env, enquiry);
+    if (key) console.log(`follow-up for ${values.firm} due ${key.split(':').slice(1, -1).join(':')}`);
+    else console.warn('follow-up not queued: no FOLLOWUPS namespace bound');
   } catch (err) {
     console.error('follow-up queue failed', err);
   }
