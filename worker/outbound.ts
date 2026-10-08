@@ -54,6 +54,32 @@ const hours = (env: OutboundEnv) => {
 };
 
 /** The sender's own name, so a reply does not go to a no-reply nobody reads. */
+/**
+ * The payment link, with the amount already in it.
+ *
+ * A bare PayPal.me profile opens a box and asks the payer to type a figure, which on an invoice
+ * for a stranger reads like a tip jar and invites a typo in the one number that matters.
+ * PayPal.me takes the amount as the last path segment with the currency code after it, so
+ * /sebastiancardozo/350USD opens showing 350.00 USD.
+ *
+ * The figure comes from LISTING_PRICE_USD, the same variable the email prints, so the price in
+ * the sentence and the price in the link cannot disagree. Changing the var changes both.
+ *
+ * Only a bare profile is touched. A PayPal payment link or an invoice already carries its own
+ * fixed amount and appending to it would break the URL, so anything with a path, a query or a
+ * different host is passed through exactly as configured. That is also the upgrade path: the
+ * amount here is pre-filled rather than locked, and a payer can still edit it, where a payment
+ * link created in PayPal cannot be edited. Set PAYPAL_LINK to one of those and this leaves it
+ * alone.
+ */
+export function payLink(env: OutboundEnv): string {
+  const link = (env.PAYPAL_LINK || '').trim().replace(/\/+$/, '');
+  const price = (env.LISTING_PRICE_USD || '').trim();
+  if (!link || !/^\d+(\.\d{1,2})?$/.test(price)) return link;
+  const bare = /^https?:\/\/(www\.)?(paypal\.com\/paypalme|paypal\.me)\/[A-Za-z0-9._-]+$/i;
+  return bare.test(link) ? `${link}/${price}USD` : link;
+}
+
 function from(env: OutboundEnv): string {
   return env.SUBMISSIONS_FROM || 'hello@lawfirmlistings.com';
 }
@@ -107,7 +133,7 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
  */
 export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text: string } {
   const price = (env.LISTING_PRICE_USD || '').trim();
-  const link = (env.PAYPAL_LINK || '').trim();
+  const link = payLink(env);
   const first = (e.contact || '').trim().split(/\s+/)[0] || 'there';
   return {
     // What a firm gets, before what it pays, with its own name in front of both. The old one
