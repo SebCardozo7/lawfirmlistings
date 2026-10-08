@@ -108,58 +108,72 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
 export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text: string } {
   const price = (env.LISTING_PRICE_USD || '').trim();
   const link = (env.PAYPAL_LINK || '').trim();
-  const money = price
-    ? `A listing on lawfirmlistings.com is ${price} USD a year (payment through PayPal)`
-      + ' and a firm has to meet these:'
-    : 'A listing on lawfirmlistings.com runs on a yearly fee, which we will confirm in our reply,'
-      + ' and a firm has to meet these:';
   const first = (e.contact || '').trim().split(/\s+/)[0] || 'there';
   return {
-    subject: `${e.firm}: what a listing needs, and what it includes`,
+    // What a firm gets, before what it pays, with its own name in front of both. The old one
+    // was "what a listing needs, and what it includes", which describes the email rather than
+    // offering anything, and nothing in it would make a managing partner open it.
+    subject: price
+      ? `${e.firm}: a dofollow link, your own panel, and ${price} USD a year`
+      : `${e.firm}: a dofollow link, your own panel, and what a listing needs`,
     text: [
-      `Hey ${first}! How are you?`,
+      `Dear ${first},`,
       '',
-      `Thanks for writing about ${e.firm}. Here is the whole of it so you can decide without a`,
-      'call.',
+      `Thank you for your enquiry about ${e.firm}. Everything required to make a decision is`,
+      'set out below.',
       '',
-      money,
-      '',
-      '1. A site that names its lawyers, over HTTPS, with a working phone number. This is the',
-      '   one most firms fail and the only one entirely in your hands.',
-      '2. Every attorney you name holds a current licence, which we read from the state register',
-      '   where the state publishes one we are allowed to query.',
-      '3. No attorney carrying a disbarment, a suspension or a disciplinary resignation.',
-      '4. A registered entity and at least one office somebody can walk into.',
+      // The price is the first thing a reader looks for, so it is the first thing they get, in
+      // the one block built to be looked at rather than read. Where no figure is configured the
+      // card says a figure is coming instead of inventing one.
+      price ? `| ${price} USD a year` : '| A yearly fee',
+      price
+        ? '| Renewed annually. We notify you before each renewal.'
+        : '| We will confirm the figure in our reply. It renews annually.',
       '',
       'What the year includes:',
       '',
-      '  Your own panel, where you correct your offices, phone, practice areas, languages and',
-      '  fee terms, upload your logo, offer the client reviews you want quoted and submit case',
-      '  results with a docket number. We review anything you send before it appears.',
+      '  **A dofollow link to your site**, from your profile and from every card your firm',
+      '  appears in across the directory.',
       '',
-      '  A do-follow link to your site from your profile and from every card you appear in.',
+      '  **Your own panel**, where you maintain your offices, phone, practice areas, languages,',
+      '  fee terms and logo, submit the client reviews you want quoted, and file case results',
+      '  with a docket number. We review every submission before it is published.',
       '',
-      '  Every sub-score and the evidence behind it, and the right to appeal any of it.',
+      '  **Every sub-score, the evidence behind it, and the right to appeal any of it.**',
       '',
-      'What it does not include, and I would rather say it now than later: points, a gate, a tier',
-      'or a place in any ranking. Those are measured and they are the same for a firm that pays',
-      'and a firm that does not. The full method is at https://lawfirmlistings.com/methodology/',
+      'The fee does not include points, a gate, a tier, or a position in any ranking. Those are',
+      'measured from public records and are identical for a firm that pays and a firm that does',
+      'not.',
       '',
-      'We are reading your site now and will tell you exactly where you stand against the four',
-      'above. If something is missing it is usually a text edit on your end rather than a problem.',
+      'What your firm has to meet:',
+      '',
+      '1. **A site that names its lawyers**, served over HTTPS, with a working telephone number.',
+      '2. **A current licence** for every attorney named on it.',
+      '3. **No outstanding public discipline** against anyone named on it.',
+      '4. **A registered entity and a physical office.**',
+      '5. **A year in practice and ten client reviews.**',
+      '',
+      'All five are read from public sources, so there is nothing to send us, and only the first',
+      'is within your control. Each one is published in full, with every sub-factor and every',
+      'weight, at https://lawfirmlistings.com/methodology/#gates',
+      '',
+      'What happens next:',
+      '',
+      `1. We read your site and report where ${e.firm} stands against the five, within 12`,
+      '   working hours of your enquiry.',
+      '2. You settle the year, and we issue the receipt.',
+      '3. We provide your sign-in the same day, and your profile goes live with your link.',
       '',
       // A label on its own line and the URL under it. In the text part that reads the way
       // anybody writes a link in an email; in the HTML part emailhtml.ts turns exactly that
-      // shape into a button, which is the one thing in this message somebody has to click.
-      link ? 'Payment, when you are ready:' : null,
+      // shape into the one button in this message, set in caps.
+      link ? 'Secure your profile:' : null,
       link || null,
-      link ? '' : null,
-      'It renews once a year and we remind you before it does.',
       '',
-      'Let me know if you are interested.',
+      'We are glad to answer any question before you decide.',
       '',
-      'Have a great day,',
-      'Sebastián',
+      'Kind regards,',
+      'Sebastián Cardozo',
       'Law Firm Listings',
     ].filter(present).join('\n'),
   };

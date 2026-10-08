@@ -13,6 +13,23 @@
  * Open the .html files in a browser. That is not the same as a client's renderer, but it catches
  * the things worth catching: a block that lost its paragraph break, a list that did not become a
  * list, a link that did not become a link.
+ *
+ * To put one in a real inbox, the .body.txt and .subject.txt files beside it exist so the send
+ * can be assembled from files rather than from a shell argument the quoting would mangle:
+ *
+ *   node <npx-cache>/node_modules/wrangler/bin/wrangler.js email sending send \
+ *     --from hello@lawfirmlistings.com --from-name "Law Firm Listings" \
+ *     --reply-to hello@lawfirmlistings.com --to you@example.com \
+ *     --subject "$(cat .mail-preview/pitch.subject.txt)" \
+ *     --text "$(cat .mail-preview/pitch.body.txt)" \
+ *     --html "$(cat .mail-preview/pitch.html)"
+ *
+ * Call node on wrangler.js directly rather than through npx. npx is a .cmd, so the command goes
+ * through cmd.exe and its limit is 8191 characters: a 9KB HTML body dies there with "the command
+ * line is too long", where CreateProcess allows 32767 and it goes through.
+ *
+ * That send is the CLI assembling its own MIME around our HTML, which is close enough to check a
+ * render in a real client but is not the Worker's own message. The Worker's is the .eml.
  */
 import { build } from 'esbuild';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -56,6 +73,32 @@ const env = {
   LISTING_PRICE_USD: '350',
   PAYPAL_LINK: 'https://www.paypal.com/paypalme/sebastiancardozo',
 };
+
+/**
+ * Every row of a table has to hold the same number of cells as its siblings.
+ *
+ * This is here because of a bug that was invisible in a browser and obvious in Gmail. The three
+ * gradient cells were a row of the outer table, which made that table three columns wide, and
+ * every other row held one cell with no colspan. Chrome renders the single cell full width;
+ * Gmail honours the column count and gave each one the first column, so a 560px message laid
+ * its whole body out in 185px. Three characters of markup, and the only way to see it was to
+ * send it to a real inbox.
+ */
+function unevenTables(html) {
+  const bad = [];
+  const tables = html.match(/<table[\s\S]*?<\/table>/g) || [];
+  tables.forEach((table, i) => {
+    // Drop nested tables before counting, so an inner table's rows are not read as this one's.
+    const inner = table.slice(table.indexOf('>') + 1).replace(/<table[\s\S]*?<\/table>/g, '');
+    const rows = (inner.match(/<tr>[\s\S]*?<\/tr>/g) || [])
+      .map((r) => (r.match(/<td/g) || []).length)
+      .filter((n) => n > 0);
+    if (rows.length > 1 && new Set(rows).size > 1) {
+      bad.push(`table ${i + 1}: ${rows.join(', ')} cells per row`);
+    }
+  });
+  return bad;
+}
 
 /** Pulls a part back out of the finished message, which is the only honest way to check it. */
 function parts(raw) {
@@ -110,6 +153,8 @@ const messages = [
   ['ack-accented', ackBody(accented)],
 ];
 
+let failures = 0;
+
 for (const [name, msg] of messages) {
   const raw = mime(env.SUBMISSIONS_FROM, enquiry.email, msg.subject, msg.text, {
     replyTo: env.REPLY_TO,
@@ -120,13 +165,27 @@ for (const [name, msg] of messages) {
   writeFileSync(path.join(out, `${name}.eml`), raw, 'utf8');
   writeFileSync(path.join(out, `${name}.txt`), `Subject: ${msg.subject}\n\n${text}\n`, 'utf8');
   writeFileSync(path.join(out, `${name}.html`), html, 'utf8');
+  // The body and the subject on their own, so a real test send can be assembled from files
+  // instead of from a shell argument the quoting would mangle.
+  writeFileSync(path.join(out, `${name}.body.txt`), msg.text, 'utf8');
+  writeFileSync(path.join(out, `${name}.subject.txt`), msg.subject, 'utf8');
 
   const blocks = msg.text.split(/\n\s*\n/).length;
   const longest = Math.max(...raw.split('\r\n').map((l) => l.length));
-  console.log(`${name.padEnd(6)} ${msg.text.split('\n').length} lines, ${blocks} blocks, `
+  const words = msg.text.split(/\s+/).filter(Boolean).length;
+  console.log(`${name.padEnd(13)} ${words} words, ${blocks} blocks, `
     + `${html.length} bytes of html, longest message line ${longest}`);
-  if (blocks < 2) console.log('       ^ one block: every paragraph break was lost');
-  if (longest > 998) console.log('       ^ over the 998-character SMTP line limit');
+  if (blocks < 2) console.log('              ^ one block: every paragraph break was lost');
+  if (longest > 998) console.log('              ^ over the 998-character SMTP line limit');
+  for (const row of unevenTables(html)) {
+    console.log(`              ^ uneven ${row}: Gmail will squeeze this into one column`);
+    failures += 1;
+  }
+}
+
+if (failures) {
+  console.error(`\n${failures} layout problem(s). Fix before sending.`);
+  process.exitCode = 1;
 }
 
 console.log(`\nwritten to ${out}`);

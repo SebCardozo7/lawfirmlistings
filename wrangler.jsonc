@@ -43,5 +43,10 @@
   },
   "send_email": [
     { "name": "EMAIL" }
-  ]
+  ],
+  // Without this the Worker's own console lines are thrown away the moment they are written, and
+  // the only way to see whether a follow-up was scheduled or sent is to have `wrangler tail`
+  // running at that exact moment. With it the dashboard keeps them and they can be searched after
+  // the fact, which is the difference between an automation you trust and one you hope about.
+  "observability": { "enabled": true, "head_sampling_rate": 1 }
 }
