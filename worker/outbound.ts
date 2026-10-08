@@ -85,6 +85,28 @@ function from(env: OutboundEnv): string {
 }
 
 /**
+ * Who to greet, without inventing a person.
+ *
+ * The form's contact field is filled in by hand, and the hand often types the firm's name into
+ * it. The first enquiry this site ever received did exactly that: contact "Arash Law", firm
+ * "Arash Law", and an office address rather than anybody's own. Greeting that as "Dear Arash"
+ * guesses a first name out of a company name and addresses somebody who may not exist, and the
+ * person who opens an office mailbox is usually not the founder whose name is on the door.
+ *
+ * Where the contact is the firm, or absent, the email greets the firm. Only a contact that is
+ * actually a different name gets a first name.
+ */
+function greeting(e: Enquiry): string {
+  const contact = (e.contact || '').trim();
+  const firm = (e.firm || '').trim();
+  const squash = (v: string) => v.toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (!contact || (firm && squash(contact) === squash(firm))) {
+    return firm ? `Dear ${firm} team,` : 'Hello,';
+  }
+  return `Dear ${contact.split(/\s+/)[0]},`;
+}
+
+/**
  * The instant acknowledgement.
  *
  * It exists so a firm knows the form worked, and it is the one email that must never say anything
@@ -95,7 +117,7 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
   return {
     subject: `We have your enquiry, ${e.firm}`,
     text: [
-      `Hello ${e.contact},`,
+      greeting(e),
       '',
       `Thank you for asking about a listing for ${e.firm}. This is an automatic note to confirm`,
       'it reached us, with the details you sent:',
@@ -131,10 +153,10 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
  * The price and the link are read from the environment. Where either is missing the sentence
  * changes rather than the number being guessed at.
  */
+
 export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text: string } {
   const price = (env.LISTING_PRICE_USD || '').trim();
   const link = payLink(env);
-  const first = (e.contact || '').trim().split(/\s+/)[0] || 'there';
   return {
     // What a firm gets, before what it pays, with its own name in front of both. The old one
     // was "what a listing needs, and what it includes", which describes the email rather than
@@ -143,7 +165,7 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       ? `${e.firm}: a dofollow link, your own panel, and ${price} USD a year`
       : `${e.firm}: a dofollow link, your own panel, and what a listing needs`,
     text: [
-      `Dear ${first},`,
+      greeting(e),
       '',
       `Thank you for your enquiry about ${e.firm}. Everything required to make a decision is`,
       'set out below.',
