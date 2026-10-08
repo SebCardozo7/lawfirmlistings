@@ -117,6 +117,24 @@ export const PRODUCTS: Product[] = [
       'Claiming changes nothing about the score, the eligibility gates or the tier. Those are ' +
       'measured, and a claimed profile is measured exactly the same way an unclaimed one is.',
   },
+  {
+    name: 'Annual listing',
+    price: '350 USD',
+    cadence: 'a year',
+    summary:
+      'For a firm that wants to run its own profile and have its own site linked from it. ' +
+      'Renewed once a year, and we write to you before it renews.',
+    includes: [
+      'Everything a claimed profile includes',
+      'A dofollow link to your site, from your profile and from every card you appear in',
+      'Your own logo on your profile',
+      'The client reviews you want quoted, reviewed by us before they appear',
+    ],
+    excluded:
+      'It buys no points, no gate, no tier and no position in any ranked list. Those are ' +
+      'measured from public records and are identical for a firm that pays and a firm that ' +
+      'does not.',
+  },
 ];
 
 /**

@@ -10,9 +10,10 @@ import { REQUIREMENTS, PRODUCTS, STEPS } from '../data/listing';
  *
  * Three things it has to do at once, and they pull against each other.
  *
- * It has to say plainly that being listed is not for sale. A firm arrives here expecting a rate
- * card, because that is what every other legal directory has taught it to expect, and the
- * sentence that corrects it belongs above the fold rather than in the small print.
+ * It has to be straight about what is and is not on sale. A firm arrives here expecting a rate
+ * card, because that is what every other legal directory has taught it to expect. Being found
+ * and being scored are not for sale and never will be; running your own profile is, and both
+ * belong above the fold rather than in the small print.
  *
  * It has to be useful to a firm that does not qualify yet, which is most of them. So the
  * requirements are not a checklist of things to send us: each one says what the firm should go
@@ -29,8 +30,8 @@ import { REQUIREMENTS, PRODUCTS, STEPS } from '../data/listing';
 
 const title = 'List your firm on Law Firm Listings';
 const description =
-  'What a firm has to meet to be listed, what claiming a profile costs, and how to reach us. ' +
-  'Listing is not sold and the score cannot be bought.';
+  'What a firm has to meet to be listed, what a claimed profile and an annual listing ' +
+  'include, and how to reach us. No payment moves a score.';
 
 const priced = PRODUCTS.filter(p => p.price);
 const subject = 'List your firm';
@@ -42,12 +43,12 @@ const subject = 'List your firm';
     <div>
       <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">List your firm</li></ol>
       <span class="eyebrow">For law firms</span>
-      <h1>A listing is not for sale.</h1>
+      <h1>What we check, and what it costs.</h1>
       <p class="lede">
         Firms appear here because we found them and read their public record, not because they
         bought a place. What a firm can do is claim its profile, keep it accurate, and fix the
-        things that are holding its score down. All three are free, and the page below says
-        exactly what they involve.
+        things that are holding its score down. Those three are free. The page below says what
+        each one involves, and what the optional annual listing adds.
       </p>
     </div>
     <div class="hero-facts">
@@ -106,14 +107,14 @@ const subject = 'List your firm';
     </div>
     <div class="narrow prose" style="margin-top:36px">
       <p>
-        Prices are on this page rather than behind an email because a directory that says a score
-        cannot be bought, and then asks you to write for a rate card, is asking to be doubted.
-        Anything we sell is named here or it is not sold.
+        Prices are on this page rather than behind an email, because a directory that asks you to
+        write in for a rate card is asking to be doubted. Everything on sale is named here with
+        its price.
       </p>
       <p>
-        There is nothing else on sale today. When there is, it will be an optional tool or a
-        clearly labelled sponsored placement, it will appear on this page with its price, and
-        neither will ever enter a ranked list or move a single point of a score. That is a
+        There is nothing else on sale today. When there is, it will appear on this page with its
+        price, and nothing we sell will ever enter a ranked list or move a single point of a
+        score. That is a
         commitment in our <a href="/terms/">terms</a>, not a marketing line.
       </p>
     </div>
