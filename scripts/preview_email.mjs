@@ -71,7 +71,9 @@ const env = {
   SUBMISSIONS_FROM: 'hello@lawfirmlistings.com',
   REPLY_TO: 'hello@lawfirmlistings.com',
   LISTING_PRICE_USD: '350',
-  PAYPAL_LINK: 'https://www.paypal.com/paypalme/sebastiancardozo',
+  // The same values wrangler.jsonc sets, so a preview is not a nicer email than the real
+  // one. payLink() puts the amount on the end of this.
+  PAYPAL_LINK: 'https://paypal.me/lawfirmlistings',
 };
 
 /**

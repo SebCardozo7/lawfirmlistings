@@ -35,7 +35,11 @@
     "SUBMISSIONS_FROM": "hello@lawfirmlistings.com",
     // Where a firm's reply lands, so the autoresponder is not a no-reply nobody reads.
     "REPLY_TO": "hello@lawfirmlistings.com",
-    "PAYPAL_LINK": "https://www.paypal.com/paypalme/sebastiancardozo",
+    // The firm's own PayPal profile rather than a personal one: it opens as "Law Firm Listings"
+    // under the site's own mark, which is what somebody paying an invoice needs to see. Kept in
+    // the short paypal.me form because the plain-text half of the email prints the URL, and
+    // payLink() in worker/outbound.ts appends the amount to it from LISTING_PRICE_USD.
+    "PAYPAL_LINK": "https://paypal.me/lawfirmlistings",
     // Set 2026-10-08. The follow-up prints it; it is never typed into the template, so changing
     // it here changes every email from the next deploy.
     "LISTING_PRICE_USD": "350",
