@@ -108,55 +108,67 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
 export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text: string } {
   const price = (env.LISTING_PRICE_USD || '').trim();
   const link = (env.PAYPAL_LINK || '').trim();
-  const money = price
-    ? `A listing on lawfirmlistings.com is ${price} USD a year (payment through PayPal)`
-      + ' and a firm has to meet these:'
-    : 'A listing on lawfirmlistings.com runs on a yearly fee, which we will confirm in our reply,'
-      + ' and a firm has to meet these:';
   const first = (e.contact || '').trim().split(/\s+/)[0] || 'there';
   return {
     subject: `${e.firm}: what a listing needs, and what it includes`,
     text: [
       `Hey ${first}! How are you?`,
       '',
-      `Thanks for writing about ${e.firm}. Here is the whole of it so you can decide without a`,
+      `Thanks for writing about ${e.firm}. Here is the whole of it, so you can decide without a`,
       'call.',
       '',
-      money,
+      // The price is the first thing a reader looks for, so it is the first thing they get, in
+      // the one block built to be looked at rather than read. Where no figure is configured the
+      // card says a figure is coming instead of inventing one.
+      price ? `| ${price} USD a year` : '| A yearly fee',
+      price
+        ? '| One firm, one profile. It renews once a year and we remind you before it does.'
+        : '| We will confirm the figure in our reply. It renews once a year.',
       '',
-      '1. A site that names its lawyers, over HTTPS, with a working phone number. This is the',
-      '   one most firms fail and the only one entirely in your hands.',
-      '2. Every attorney you name holds a current licence, which we read from the state register',
-      '   where the state publishes one we are allowed to query.',
-      '3. No attorney carrying a disbarment, a suspension or a disciplinary resignation.',
-      '4. A registered entity and at least one office somebody can walk into.',
+      'What your firm has to meet:',
+      '',
+      'Four requirements. Three of them we verify ourselves against public records. The first one',
+      'is the only one in your hands, and it is the one most firms fail.',
+      '',
+      '1. **A site that names its lawyers**, served over HTTPS, with a phone number that works.',
+      '2. **A current licence for every attorney you name**, which we read from the state',
+      '   register wherever the state publishes one we are allowed to query.',
+      '3. **No disbarment, suspension or disciplinary resignation** against anyone you name.',
+      '4. **A registered entity and at least one office** somebody can walk into.',
       '',
       'What the year includes:',
       '',
-      '  Your own panel, where you correct your offices, phone, practice areas, languages and',
-      '  fee terms, upload your logo, offer the client reviews you want quoted and submit case',
-      '  results with a docket number. We review anything you send before it appears.',
+      '  **Your own panel.** You sign in and correct your offices, phone, practice areas,',
+      '  languages and fee terms, upload your logo, offer the client reviews you want quoted and',
+      '  submit case results with a docket number. We review anything you send before it appears.',
       '',
-      '  A do-follow link to your site from your profile and from every card you appear in.',
+      '  **A do-follow link to your site**, from your profile and from every card your firm',
+      '  appears in across the directory.',
       '',
-      '  Every sub-score and the evidence behind it, and the right to appeal any of it.',
+      '  **Every sub-score and the evidence behind it**, and the right to appeal any of it.',
       '',
-      'What it does not include, and I would rather say it now than later: points, a gate, a tier',
-      'or a place in any ranking. Those are measured and they are the same for a firm that pays',
-      'and a firm that does not. The full method is at https://lawfirmlistings.com/methodology/',
+      'What it does not include:',
       '',
-      'We are reading your site now and will tell you exactly where you stand against the four',
-      'above. If something is missing it is usually a text edit on your end rather than a problem.',
+      'Points, a gate, a tier, or a place in any ranking. Those are measured, and they are the',
+      'same for a firm that pays and a firm that does not. I would rather say that now than after',
+      'you have paid. The whole method is published, every sub-factor and every weight, at',
+      'https://lawfirmlistings.com/methodology/',
+      '',
+      'What happens next:',
+      '',
+      '1. **I read your site** and tell you exactly where your firm stands against the four',
+      '   above, within 12 working hours of your enquiry. Where something is missing it is',
+      '   almost always a text edit on your end rather than a real problem.',
+      '2. **You pay the year** through the link below, and I send you the receipt.',
+      '3. **You get your sign-in** the same day, and your profile goes live with your link.',
       '',
       // A label on its own line and the URL under it. In the text part that reads the way
       // anybody writes a link in an email; in the HTML part emailhtml.ts turns exactly that
       // shape into a button, which is the one thing in this message somebody has to click.
-      link ? 'Payment, when you are ready:' : null,
+      link ? 'Pay for the year:' : null,
       link || null,
-      link ? '' : null,
-      'It renews once a year and we remind you before it does.',
       '',
-      'Let me know if you are interested.',
+      'Reply with any question, or with a no. Either is a useful answer.',
       '',
       'Have a great day,',
       'Sebastián',

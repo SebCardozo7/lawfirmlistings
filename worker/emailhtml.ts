@@ -47,6 +47,20 @@ function autolink(escaped: string): string {
   });
 }
 
+/**
+ * **like this** becomes bold.
+ *
+ * Asterisks are what people have used for emphasis in plain-text email since before HTML mail
+ * existed, so the text part loses nothing by carrying them and the HTML part gets somewhere for
+ * a reader's eye to land. Nothing else from Markdown is supported: one convention that survives
+ * both halves of the message beats five that only work in one.
+ */
+const bold = (escaped: string) =>
+  escaped.replace(/\*\*(\S(?:[^*]*\S)?)\*\*/g, `<strong style="color:${INK};font-weight:600">$1</strong>`);
+
+/** Everything that happens inside a line, in the order it has to happen. */
+const inline = (s: string) => autolink(bold(esc(s)));
+
 /** True for a line that continues the sentence on the line above it. */
 const continues = (line: string) =>
   /^[a-z]/.test(line.trim()) && !/^https?:\/\/\S+$/.test(line.trim());
@@ -64,7 +78,7 @@ function unwrap(lines: string[]): string[] {
 const P = `margin:0 0 16px;font:400 15px/1.62 ${FONT};color:${BODY}`;
 
 function paragraph(lines: string[]): string {
-  const units = unwrap(lines).map((u) => autolink(esc(u)));
+  const units = unwrap(lines).map(inline);
   return `<p style="${P}">${units.join('<br>')}</p>`;
 }
 
@@ -76,7 +90,7 @@ function orderedList(lines: string[]): string {
     else if (items.length) items[items.length - 1] += ' ' + line.trim();
   }
   const li = items
-    .map((t) => `<li style="margin:0 0 10px;padding:0">${autolink(esc(t))}</li>`)
+    .map((t) => `<li style="margin:0 0 10px;padding:0">${inline(t)}</li>`)
     .join('');
   return `<ol style="margin:0 0 16px;padding:0 0 0 22px;font:400 15px/1.6 ${FONT};`
     + `color:${BODY}">${li}</ol>`;
@@ -88,8 +102,8 @@ function definitions(lines: string[]): string {
     .map((line) => /^\s*([A-Za-z][A-Za-z ]{0,24}):\s+(.*)$/.exec(line))
     .filter(Boolean)
     .map((m) => {
-      const label = autolink(esc(m![1]));
-      const value = autolink(esc(m![2].trim()));
+      const label = inline(m![1]);
+      const value = inline(m![2].trim());
       return `<tr><td style="padding:4px 14px 4px 0;font:400 13px/1.5 ${FONT};color:${MUTED};`
         + `white-space:nowrap;vertical-align:top">${label}</td>`
         + `<td style="padding:4px 0;font:600 14px/1.5 ${FONT};color:${INK}">${value}</td></tr>`;
@@ -101,7 +115,7 @@ function definitions(lines: string[]): string {
 
 /** An indented paragraph: what the year includes, one claim at a time. */
 function callout(lines: string[]): string {
-  const units = unwrap(lines).map((u) => autolink(esc(u)));
+  const units = unwrap(lines).map(inline);
   return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"`
     + ` style="margin:0 0 14px;border-collapse:collapse"><tbody><tr>`
     + `<td style="padding:0 0 0 15px;border-left:3px solid ${AURORA[1]};`
@@ -127,6 +141,42 @@ function button(label: string, url: string): string {
     + `</tr></tbody></table>`;
 }
 
+/**
+ * A line on its own ending in a colon is a section heading.
+ *
+ * "What the year includes:" was already written that way before any of this existed, which is
+ * the test of the convention: it reads as a heading in the text part without a marker, so the
+ * HTML part can set it as one without the text part paying for it. The colon is dropped here
+ * because a styled heading does not need it; the text part keeps it.
+ */
+function heading(line: string): string {
+  const label = line.trim().replace(/:\s*$/, '');
+  return `<p style="margin:26px 0 12px;font:600 12px/1.4 ${FONT};color:${AURORA[0]};`
+    + `letter-spacing:.09em;text-transform:uppercase">${inline(label)}</p>`;
+}
+
+/**
+ * Lines starting with "| " are a card: the first is its headline, the rest its small print.
+ *
+ * This is for the one fact a reader is looking for before anything else, which in the pitch is
+ * the price. In the text part the pipes read as a boxed aside, which is what it is.
+ */
+function card(lines: string[]): string {
+  const [first, ...rest] = unwrap(lines.map((l) => l.replace(/^\s*\|\s?/, '')));
+  const small = rest.length
+    ? `<div style="font:400 13px/1.55 ${FONT};color:${MUTED};padding-top:6px">`
+      + `${rest.map(inline).join('<br>')}</div>`
+    : '';
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"`
+    + ` style="margin:2px 0 20px;border-collapse:collapse"><tbody><tr>`
+    + `<td style="background:#F5F3FF;border:1px solid #E4DEFF;border-radius:10px;`
+    + `padding:16px 18px">`
+    + `<div style="font:700 22px/1.2 ${FONT};color:${INK};letter-spacing:-.015em">`
+    + `${inline(first)}</div>${small}</td>`
+    + `</tr></tbody></table>`;
+}
+
+const isCard = (l: string) => /^\s*\|\s/.test(l);
 const isIndented = (l: string) => /^ {2,}\S/.test(l);
 const isNumbered = (l: string) => /^\d+\.\s/.test(l.trim());
 // One space after the colon, not two. The ack aligns its values with padding and the longest
@@ -136,9 +186,15 @@ const isDefinition = (l: string) => /^\s*[A-Za-z][A-Za-z ]{0,24}:\s+\S/.test(l);
 const isBareUrl = (l: string) => /^https?:\/\/\S+$/.test(l.trim());
 
 function blockHtml(lines: string[]): string {
+  if (lines.every(isCard)) return card(lines);
   if (lines.some(isNumbered)) return orderedList(lines);
   if (lines.length === 2 && /:$/.test(lines[0].trim()) && isBareUrl(lines[1])) {
     return button(lines[0].trim(), lines[1]);
+  }
+  // Checked after the button, so a label with a URL under it stays a button rather than
+  // becoming a heading with an orphaned link.
+  if (lines.length === 1 && /:$/.test(lines[0].trim()) && !isIndented(lines[0])) {
+    return heading(lines[0]);
   }
   if (lines.every(isIndented)) {
     return lines.every(isDefinition) ? definitions(lines) : callout(lines);
@@ -166,7 +222,7 @@ export function htmlFromText(text: string, opts: HtmlOptions = {}): string {
   const body = blocks.map(blockHtml).join('');
   const footer = opts.footer
     ? `<p style="margin:0;font:400 12px/1.6 ${FONT};color:${MUTED}">`
-      + `${autolink(esc(opts.footer))}</p>`
+      + `${inline(opts.footer)}</p>`
     : '';
 
   return `<!doctype html>

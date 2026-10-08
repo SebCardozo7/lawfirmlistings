@@ -13,6 +13,23 @@
  * Open the .html files in a browser. That is not the same as a client's renderer, but it catches
  * the things worth catching: a block that lost its paragraph break, a list that did not become a
  * list, a link that did not become a link.
+ *
+ * To put one in a real inbox, the .body.txt and .subject.txt files beside it exist so the send
+ * can be assembled from files rather than from a shell argument the quoting would mangle:
+ *
+ *   node <npx-cache>/node_modules/wrangler/bin/wrangler.js email sending send \
+ *     --from hello@lawfirmlistings.com --from-name "Law Firm Listings" \
+ *     --reply-to hello@lawfirmlistings.com --to you@example.com \
+ *     --subject "$(cat .mail-preview/pitch.subject.txt)" \
+ *     --text "$(cat .mail-preview/pitch.body.txt)" \
+ *     --html "$(cat .mail-preview/pitch.html)"
+ *
+ * Call node on wrangler.js directly rather than through npx. npx is a .cmd, so the command goes
+ * through cmd.exe and its limit is 8191 characters: a 9KB HTML body dies there with "the command
+ * line is too long", where CreateProcess allows 32767 and it goes through.
+ *
+ * That send is the CLI assembling its own MIME around our HTML, which is close enough to check a
+ * render in a real client but is not the Worker's own message. The Worker's is the .eml.
  */
 import { build } from 'esbuild';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -120,6 +137,10 @@ for (const [name, msg] of messages) {
   writeFileSync(path.join(out, `${name}.eml`), raw, 'utf8');
   writeFileSync(path.join(out, `${name}.txt`), `Subject: ${msg.subject}\n\n${text}\n`, 'utf8');
   writeFileSync(path.join(out, `${name}.html`), html, 'utf8');
+  // The body and the subject on their own, so a real test send can be assembled from files
+  // instead of from a shell argument the quoting would mangle.
+  writeFileSync(path.join(out, `${name}.body.txt`), msg.text, 'utf8');
+  writeFileSync(path.join(out, `${name}.subject.txt`), msg.subject, 'utf8');
 
   const blocks = msg.text.split(/\n\s*\n/).length;
   const longest = Math.max(...raw.split('\r\n').map((l) => l.length));
