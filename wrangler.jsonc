@@ -27,15 +27,20 @@
   // time and costs nothing. A Worker cannot wait, so something has to come back and look.
   "triggers": { "crons": ["*/15 * * * *"] },
   "kv_namespaces": [
-    // The firm panel's accounts and pending change-sets. Created once with:
-    //   npx wrangler kv namespace create PANEL
-    // and the id it prints goes here.
-    { "binding": "PANEL", "id": "REPLACE_WITH_THE_ID_WRANGLER_PRINTS" },
-    // npx wrangler kv namespace create FOLLOWUPS
-    { "binding": "FOLLOWUPS", "id": "REPLACE_WITH_THE_FOLLOWUPS_ID" }
+    // The firm panel's accounts and pending change-sets.
+    { "binding": "PANEL", "id": "dd093bff3a8d42b68f626fed75108273" },
+    { "binding": "FOLLOWUPS", "id": "c0bc05d87dc0483ea3324ed01342fa5b" }
   ],
   "vars": {
-    "SUBMISSIONS_FROM": "hello@lawfirmlistings.com"
+    "SUBMISSIONS_FROM": "hello@lawfirmlistings.com",
+    // Where a firm's reply lands, so the autoresponder is not a no-reply nobody reads.
+    "REPLY_TO": "hello@lawfirmlistings.com",
+    "PAYPAL_LINK": "https://www.paypal.com/paypalme/sebastiancardozo",
+    // Unset on purpose until Sebastián names the figure. The follow-up says the price is coming
+    // in our reply rather than inventing one, because a made-up number in an outbound commercial
+    // email is worse than no email.
+    // "LISTING_PRICE_USD": "",
+    "FOLLOWUP_HOURS": "6"
   },
   "send_email": [
     { "name": "EMAIL" }

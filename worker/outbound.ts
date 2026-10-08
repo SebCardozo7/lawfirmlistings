@@ -93,7 +93,14 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
 }
 
 /**
- * The follow-up, hours later: what is required, what the fee buys, and how to pay.
+ * The follow-up, hours later, in the register Sebastián already sells in: short, first name,
+ * numbered requirements, the price, the sign-off.
+ *
+ * One line of his own template is deliberately absent. His reads "In this case, BESAP applies
+ * perfectly", and he wrote that to a company he had already looked at. This goes to everyone who
+ * fills the form, including firms that fail the first requirement, so it says we are reading the
+ * site and will tell them where they stand. Telling a firm it qualifies before anybody has looked
+ * is the one sentence here that would have to be taken back.
  *
  * The price and the link are read from the environment. Where either is missing the sentence
  * changes rather than the number being guessed at.
@@ -102,61 +109,54 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
   const price = (env.LISTING_PRICE_USD || '').trim();
   const link = (env.PAYPAL_LINK || '').trim();
   const money = price
-    ? `The annual listing is USD ${price} a year.`
-    : 'We will send you the annual figure in our reply.';
-  const pay = link
-    ? `Pay here: ${link}`
-    : 'We will send a PayPal link once you tell us you want to go ahead.';
+    ? `A listing on lawfirmlistings.com is ${price} USD a year (payment through PayPal)`
+      + ' and a firm has to meet these:'
+    : 'A listing on lawfirmlistings.com runs on a yearly fee, which we will confirm in our reply,'
+      + ' and a firm has to meet these:';
+  const first = (e.contact || '').trim().split(/\s+/)[0] || 'there';
   return {
-    subject: `${e.firm}: what a listing requires, and what it includes`,
+    subject: `${e.firm}: what a listing needs, and what it includes`,
     text: [
-      `Hello ${e.contact},`,
+      `Hey ${first}! How are you?`,
       '',
-      `Following up on your enquiry about ${e.firm}. Here is the whole of it, so you can decide`,
-      'without a call.',
-      '',
-      'WHAT WE CHECK, AND IT IS NOT FOR SALE',
-      '',
-      'Five eligibility gates, every one from a public record or from your own site:',
-      '',
-      '  1. A site that names its lawyers, served over HTTPS, with a working phone number.',
-      '     This is the one firms fail most often, and it is entirely in your hands.',
-      '  2. Every attorney you name holds a current licence, read from the state register',
-      '     where the state publishes one we are allowed to query.',
-      '  3. No attorney carries a disbarment, a suspension or a disciplinary resignation.',
-      '  4. A registered legal entity and at least one office somebody can walk into.',
-      '  5. Enough public client reviews and enough time in operation to measure anything.',
-      '',
-      'Your score comes out of those measurements and nothing else. It cannot be bought, it is',
-      'recomputed every time we re-measure your market, and a paid listing is measured exactly',
-      'the way an unpaid one is. If that is not what you were expecting from a directory, the',
-      'methodology is published in full: https://lawfirmlistings.com/methodology/',
-      '',
-      'WHAT THE ANNUAL LISTING INCLUDES',
-      '',
-      '  Your own panel, where you correct your offices, phone, practice areas, languages and',
-      '  fee terms, upload your logo, offer the client reviews you want quoted, and submit case',
-      '  results with a docket number for verification. Everything you send is reviewed by us',
-      '  before it appears, which is the reason a reader believes what is already there.',
-      '',
-      '  A followed outbound link to your own site from your profile and from every card you',
-      '  appear in.',
-      '',
-      '  Every sub-score and the evidence behind it, visible to you, with the right to appeal',
-      '  any of it. An appeal is answered within 30 days.',
-      '',
-      '  What it does not include, stated plainly: points, a gate, a tier, or a position in any',
-      '  ranking. Those are measured.',
+      `Thanks for writing about ${e.firm}. Here is the whole of it so you can decide without a`,
+      'call.',
       '',
       money,
-      pay,
-      'It renews once a year and we will remind you before it does.',
       '',
-      'Reply to this email with anything at all and a person answers.',
+      '1. A site that names its lawyers, over HTTPS, with a working phone number. This is the',
+      '   one most firms fail and the only one entirely in your hands.',
+      '2. Every attorney you name holds a current licence, which we read from the state register',
+      '   where the state publishes one we are allowed to query.',
+      '3. No attorney carrying a disbarment, a suspension or a disciplinary resignation.',
+      '4. A registered entity and at least one office somebody can walk into.',
       '',
+      'What the year includes:',
+      '',
+      '  Your own panel, where you correct your offices, phone, practice areas, languages and',
+      '  fee terms, upload your logo, offer the client reviews you want quoted and submit case',
+      '  results with a docket number. We review anything you send before it appears.',
+      '',
+      '  A do-follow link to your site from your profile and from every card you appear in.',
+      '',
+      '  Every sub-score and the evidence behind it, and the right to appeal any of it.',
+      '',
+      'What it does not include, and I would rather say it now than later: points, a gate, a tier',
+      'or a place in any ranking. Those are measured and they are the same for a firm that pays',
+      'and a firm that does not. The full method is at https://lawfirmlistings.com/methodology/',
+      '',
+      'We are reading your site now and will tell you exactly where you stand against the four',
+      'above. If something is missing it is usually a text edit on your end rather than a problem.',
+      '',
+      link ? `Payment, when you are ready: ${link}` : '',
+      'It renews once a year and we remind you before it does.',
+      '',
+      'Let me know if you are interested.',
+      '',
+      'Have a great day,',
+      'Sebastián',
       'Law Firm Listings',
-      'https://lawfirmlistings.com/list-your-firm/',
-    ].join('\n'),
+    ].filter(Boolean).join('\n'),
   };
 }
 
