@@ -16,7 +16,7 @@
  * this repository is public and a working address in a public repo is a gift to a scraper.
  */
 import { EmailMessage } from 'cloudflare:email';
-import { mime, json } from './mail';
+import { mime, json, present } from './mail';
 import { handlePanel } from './panel';
 import { ackBody, drainFollowUps, queueFollowUp, sendTo } from './outbound';
 
@@ -108,8 +108,8 @@ async function submit(request: Request, env: Env): Promise<Response> {
     '',
     `Sent from ${new URL(request.url).origin}/list-your-firm/`,
     `Received ${new Date().toISOString()}`,
-    request.headers.get('cf-connecting-ip') ? `From IP ${request.headers.get('cf-connecting-ip')}` : '',
-  ].filter(Boolean).join('\n');
+    request.headers.get('cf-connecting-ip') ? `From IP ${request.headers.get('cf-connecting-ip')}` : null,
+  ].filter(present).join('\n');
 
   try {
     await env.EMAIL.send(new EmailMessage(

@@ -12,3 +12,6 @@ __pycache__/
 
 # Wrangler build and dev scratch
 .wrangler/
+
+# scripts/preview_email.mjs writes the rendered outbound emails here.
+.mail-preview/
