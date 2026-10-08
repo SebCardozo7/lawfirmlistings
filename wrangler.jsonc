@@ -23,8 +23,23 @@
   // There is nothing to hide here anyway: it is an address on a domain we own, and it needs no
   // mailbox behind it, though hello@ has one: it is the address this site already
   // publishes, so a firm that replies to the notification reaches somebody.
+  // Every fifteen minutes, which drains a six hour follow-up within fifteen minutes of its due
+  // time and costs nothing. A Worker cannot wait, so something has to come back and look.
+  "triggers": { "crons": ["*/15 * * * *"] },
+  "kv_namespaces": [
+    // The firm panel's accounts and pending change-sets.
+    { "binding": "PANEL", "id": "dd093bff3a8d42b68f626fed75108273" },
+    { "binding": "FOLLOWUPS", "id": "c0bc05d87dc0483ea3324ed01342fa5b" }
+  ],
   "vars": {
-    "SUBMISSIONS_FROM": "hello@lawfirmlistings.com"
+    "SUBMISSIONS_FROM": "hello@lawfirmlistings.com",
+    // Where a firm's reply lands, so the autoresponder is not a no-reply nobody reads.
+    "REPLY_TO": "hello@lawfirmlistings.com",
+    "PAYPAL_LINK": "https://www.paypal.com/paypalme/sebastiancardozo",
+    // Set 2026-10-08. The follow-up prints it; it is never typed into the template, so changing
+    // it here changes every email from the next deploy.
+    "LISTING_PRICE_USD": "350",
+    "FOLLOWUP_HOURS": "6"
   },
   "send_email": [
     { "name": "EMAIL" }

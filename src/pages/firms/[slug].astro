@@ -42,15 +42,23 @@ const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overview
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
 // Practice areas that have a page of their own. Everything else is named, not linked.
 const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
-// The link attribute is editorial, not commercial: clearing every eligibility gate earns a
-// followed link. Claiming the profile does not change it, and neither does paying for anything —
-// selling followed links is a link scheme and the penalty would land on this site.
-// Six was the count before G4 was retired, so this was never true and every outbound link
-// on every profile carried nofollow, including firms that clear every gate. The engine
-// already says it: tier reaches "Verified" exactly when all gates were checked and held.
+// Whether an outbound link is followed, and this is the one place money changes an answer.
+//
+// Two ways to earn it, and they are different kinds of thing. Clearing every eligibility gate
+// earns it, which is what reaching Verified means, and that half is editorial: it is measured and
+// it cannot be bought. A current paid annual listing also earns it, which is commercial, and
+// Sebastian's decision on 2026-10-08 after being told the risk: a link given in exchange for
+// payment is a link scheme under Google's policy and the penalty lands on this site rather than
+// on the firm that paid. He has taken that risk knowingly and it is his to take.
+//
+// What it does not touch, and the copy on this site still says so truthfully: the score, the
+// gates, the tier, and the order of any ranking. Money buys a link attribute and the panel at
+// /claim/. It buys no points.
+const subscribed = Boolean(d.subscription?.until && d.subscription.until >= new Date()
+  .toISOString().slice(0, 10));
 const gatesPassed = ['Verified', 'Certified', 'Distinguished', 'Elite']
   .includes(d.score?.tier ?? '');
-const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
+const linkRel = gatesPassed || subscribed ? 'noopener' : 'nofollow noopener';
 const roster = rosterFor(d);
 // Two letters from a name, first and last, for the avatar tile.
 const initialsOf = (name: string) => {

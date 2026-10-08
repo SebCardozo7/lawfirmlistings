@@ -16,6 +16,9 @@
  * this repository is public and a working address in a public repo is a gift to a scraper.
  */
 import { EmailMessage } from 'cloudflare:email';
+import { mime, json } from './mail';
+import { handlePanel } from './panel';
+import { ackBody, drainFollowUps, queueFollowUp, sendTo } from './outbound';
 
 interface Env {
   ASSETS: Fetcher;
@@ -24,6 +27,17 @@ interface Env {
   SUBMISSIONS_TO?: string;
   /** The address the message is sent from. Must be on a domain this account holds. */
   SUBMISSIONS_FROM?: string;
+  /** Firm panel: accounts and pending change-sets. One namespace, two key prefixes. */
+  PANEL?: KVNamespace;
+  /** Firm panel: signs the session cookie and the one-click approval link. */
+  PANEL_SECRET?: string;
+  /** Delayed follow-up emails, keyed by the minute they are due. */
+  FOLLOWUPS?: KVNamespace;
+  /** Where a firm's reply should land, if not the sending address. */
+  REPLY_TO?: string;
+  LISTING_PRICE_USD?: string;
+  PAYPAL_LINK?: string;
+  FOLLOWUP_HOURS?: string;
 }
 
 /** What the form may send, and the longest each field may be. Anything else is dropped. */
@@ -40,33 +54,7 @@ const LABELS: Record<string, string> = {
   notes: 'Anything else', understood: 'Confirmed the score is not for sale',
 };
 
-const json = (status: number, body: unknown) =>
-  new Response(JSON.stringify(body), {
-    status, headers: { 'content-type': 'application/json; charset=utf-8' },
-  });
 
-/**
- * A plain-text RFC 5322 message, hand-written rather than pulled from a library.
- *
- * The alternative is a MIME builder dependency for a message that is a subject, two addresses
- * and a body of short lines. Every value is escaped into a header only after the line breaks are
- * stripped out of it, because a newline inside a header is how somebody injects a second header.
- */
-function mime(from: string, to: string, subject: string, body: string): string {
-  const header = (v: string) => v.replace(/[\r\n]+/g, ' ').trim();
-  const lines = [
-    `From: Law Firm Listings <${header(from)}>`,
-    `To: <${header(to)}>`,
-    `Subject: ${header(subject)}`,
-    `Message-ID: <${crypto.randomUUID()}@lawfirmlistings.com>`,
-    `Date: ${new Date().toUTCString()}`,
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=utf-8',
-    '',
-    body.replace(/\r?\n/g, '\r\n'),
-  ];
-  return lines.join('\r\n');
-}
 
 async function submit(request: Request, env: Env): Promise<Response> {
   // Say which half is missing rather than "not connected". The first version said only that,
@@ -135,6 +123,27 @@ async function submit(request: Request, env: Env): Promise<Response> {
     return json(502, { error: 'We could not deliver that. Please email us directly.' });
   }
 
+  // Everything from here is for the firm rather than for us, and none of it may turn a
+  // successful submission into a failed one. A form that worked has worked, whatever happens to
+  // the autoresponder, so each piece catches its own error and the response is still 200.
+  const enquiry = {
+    firm: values.firm, contact: values.contact, email: values.email,
+    website: values.website, city: values.city, practice: values.practice,
+  };
+  try {
+    const ack = ackBody(enquiry);
+    await sendTo(env, values.email, ack.subject, ack.text);
+  } catch (err) {
+    // Sending to an address we have not onboarded a domain for fails here, which is exactly the
+    // state of this Worker until lawfirmlistings.com is onboarded as a sending domain.
+    console.error('ack failed', err);
+  }
+  try {
+    await queueFollowUp(env, enquiry);
+  } catch (err) {
+    console.error('follow-up queue failed', err);
+  }
+
   return json(200, { ok: true });
 }
 
@@ -168,6 +177,10 @@ export default {
     const url = new URL(request.url);
     const redirect = canonicalRedirect(url);
     if (redirect) return redirect;
+    // The firm panel, which is the only part of this site that is not a file.
+    if (url.pathname === '/claim' || url.pathname.startsWith('/claim/')) {
+      return handlePanel(request, env);
+    }
     if (url.pathname === '/api/list-your-firm') {
       if (request.method !== 'POST') {
         return json(405, { error: 'POST only.' });
@@ -177,5 +190,18 @@ export default {
     // Everything else is a file. The assets binding keeps the 404 page and the trailing-slash
     // handling the site was already configured for.
     return env.ASSETS.fetch(request);
+  },
+
+  /**
+   * The cron trigger, which exists because a Worker cannot wait six hours.
+   *
+   * Follow-ups are stored under a key that sorts by the minute they are due, so "everything due"
+   * is every key at or before now and no record has to be read to know whether it is time. A send
+   * that throws leaves its key in place and the next run retries it, because a lost follow-up is
+   * a lost lead.
+   */
+  async scheduled(_event: ScheduledController, env: Env, _ctx: ExecutionContext): Promise<void> {
+    const { sent, failed } = await drainFollowUps(env);
+    if (sent || failed) console.log(`follow-ups sent ${sent}, failed ${failed}`);
   },
 };

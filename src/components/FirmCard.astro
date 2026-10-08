@@ -45,7 +45,14 @@ const selfReported = g ? /as reported by the firm/i.test(g.source) : false;
 // of a firm's gates were checked and held, and the tiers above it are that plus a score.
 const EARNED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
 const gatesPassed = EARNED.includes(s?.tier ?? '');
-const linkRel = gatesPassed ? 'noopener' : 'nofollow noopener';
+// The second way to earn it, and the one place money changes an answer on this site. A current
+// paid annual listing carries a followed link, which is Sebastián's decision of 2026-10-08 taken
+// after being told that a link given for payment is a link scheme and that the penalty lands here
+// rather than on the firm. It touches nothing else: not the score, not a gate, not the tier, not
+// the order of this card in any list. See the fuller note on the profile template.
+const subscribed = Boolean(d.subscription?.until
+  && d.subscription.until >= new Date().toISOString().slice(0, 10));
+const linkRel = gatesPassed || subscribed ? 'noopener' : 'nofollow noopener';
 
 const officeLabel = `${d.offices.length} office${d.offices.length === 1 ? '' : 's'}`;
 // An empty attorneys array means we have not verified any names yet, not that the firm has no
