@@ -214,6 +214,22 @@ const firms = defineCollection({
       floor_abc: z.number(),
       next_tier: z.object({ name: z.string(), needed: z.number(), gap: z.number(), floor_met: z.boolean(), coverage_met: z.boolean().optional(), path: z.array(z.string()) }).nullable(),
     }).optional(),
+    /**
+     * A paid annual listing, and the only thing on this record that money touches.
+     *
+     * It buys two things and neither is a measurement: the panel at /claim/, and a followed
+     * outbound link. It buys no points, no gate, no tier and no position in any ranking, and the
+     * engine never reads this field.
+     *
+     * `until` is the date the subscription lapses. A lapsed subscription is left in place rather
+     * than deleted, so the record says what happened instead of looking like it never did, and
+     * the link falls back to whatever the firm's gates earn it on their own.
+     */
+    subscription: z.object({
+      plan: z.string(),
+      since: z.string(),
+      until: z.string(),
+    }).optional(),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     similar: z.array(z.object({ name: z.string(), slug: z.string().nullable(), rating: z.string() })).default([]),
   }),

@@ -23,6 +23,12 @@
   // There is nothing to hide here anyway: it is an address on a domain we own, and it needs no
   // mailbox behind it, though hello@ has one: it is the address this site already
   // publishes, so a firm that replies to the notification reaches somebody.
+  "kv_namespaces": [
+    // The firm panel's accounts and pending change-sets. Created once with:
+    //   npx wrangler kv namespace create PANEL
+    // and the id it prints goes here.
+    { "binding": "PANEL", "id": "REPLACE_WITH_THE_ID_WRANGLER_PRINTS" }
+  ],
   "vars": {
     "SUBMISSIONS_FROM": "hello@lawfirmlistings.com"
   },

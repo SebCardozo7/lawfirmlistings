@@ -16,6 +16,8 @@
  * this repository is public and a working address in a public repo is a gift to a scraper.
  */
 import { EmailMessage } from 'cloudflare:email';
+import { mime, json } from './mail';
+import { handlePanel } from './panel';
 
 interface Env {
   ASSETS: Fetcher;
@@ -24,6 +26,10 @@ interface Env {
   SUBMISSIONS_TO?: string;
   /** The address the message is sent from. Must be on a domain this account holds. */
   SUBMISSIONS_FROM?: string;
+  /** Firm panel: accounts and pending change-sets. One namespace, two key prefixes. */
+  PANEL?: KVNamespace;
+  /** Firm panel: signs the session cookie and the one-click approval link. */
+  PANEL_SECRET?: string;
 }
 
 /** What the form may send, and the longest each field may be. Anything else is dropped. */
@@ -40,33 +46,7 @@ const LABELS: Record<string, string> = {
   notes: 'Anything else', understood: 'Confirmed the score is not for sale',
 };
 
-const json = (status: number, body: unknown) =>
-  new Response(JSON.stringify(body), {
-    status, headers: { 'content-type': 'application/json; charset=utf-8' },
-  });
 
-/**
- * A plain-text RFC 5322 message, hand-written rather than pulled from a library.
- *
- * The alternative is a MIME builder dependency for a message that is a subject, two addresses
- * and a body of short lines. Every value is escaped into a header only after the line breaks are
- * stripped out of it, because a newline inside a header is how somebody injects a second header.
- */
-function mime(from: string, to: string, subject: string, body: string): string {
-  const header = (v: string) => v.replace(/[\r\n]+/g, ' ').trim();
-  const lines = [
-    `From: Law Firm Listings <${header(from)}>`,
-    `To: <${header(to)}>`,
-    `Subject: ${header(subject)}`,
-    `Message-ID: <${crypto.randomUUID()}@lawfirmlistings.com>`,
-    `Date: ${new Date().toUTCString()}`,
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=utf-8',
-    '',
-    body.replace(/\r?\n/g, '\r\n'),
-  ];
-  return lines.join('\r\n');
-}
 
 async function submit(request: Request, env: Env): Promise<Response> {
   // Say which half is missing rather than "not connected". The first version said only that,
@@ -168,6 +148,10 @@ export default {
     const url = new URL(request.url);
     const redirect = canonicalRedirect(url);
     if (redirect) return redirect;
+    // The firm panel, which is the only part of this site that is not a file.
+    if (url.pathname === '/claim' || url.pathname.startsWith('/claim/')) {
+      return handlePanel(request, env);
+    }
     if (url.pathname === '/api/list-your-firm') {
       if (request.method !== 'POST') {
         return json(405, { error: 'POST only.' });
