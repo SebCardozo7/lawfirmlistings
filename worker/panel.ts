@@ -66,90 +66,172 @@ const NAV: { href: string; label: string; group: string }[] = [
 ];
 
 const CSS = `
-:root{--ink:#14121a;--soft:#4a4654;--muted:#7a7686;--line:#e6e3ec;--paper:#fff;--bg:#faf9fc;
---accent:#6D28D9;--night:#14121a}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
-aside{background:var(--night);color:#fff;padding:22px 0 40px}
-aside .brand{padding:0 22px 22px;font-weight:650;letter-spacing:-.01em}
-aside .brand small{display:block;color:#b9b4c6;font-weight:400;font-size:.8rem;margin-top:3px}
-aside .firm{padding:14px 22px;margin:0 0 10px;border-top:1px solid #2a2733;border-bottom:1px solid #2a2733}
-aside .firm b{display:block;font-size:.95rem;line-height:1.3}
-aside .firm span{color:#b9b4c6;font-size:.8rem}
-aside h4{color:#8b8699;font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;
-margin:20px 22px 7px;font-weight:600}
-aside a{display:block;padding:9px 22px;color:#ddd9e6;text-decoration:none;font-size:.93rem;
-border-left:3px solid transparent}
-aside a:hover{background:#1d1a26;color:#fff}
-aside a.on{background:#1d1a26;color:#fff;border-left-color:var(--accent)}
-aside .out{margin-top:26px;padding:0 22px}
-aside .out a{padding:0;color:#8b8699;font-size:.84rem;border:0}
-main{padding:34px 36px 80px;max-width:860px}
-h1{font-size:1.55rem;letter-spacing:-.02em;margin:0 0 6px}
-h2{font-size:1.04rem;margin:30px 0 10px}
+/* The site's own tokens, copied rather than imported: the panel is served by the Worker and never
+   goes through Astro, so it cannot reach src/styles/global.css. Keeping the values identical is
+   what makes a firm feel it stayed on the same site when it signed in. */
+:root{
+  --ink:#0A0A0C;--ink-soft:#3B3C43;--muted:#6F7079;
+  --line:#E7E7E2;--line-2:#D6D6D0;--ground:#F6F6F3;--paper:#fff;--tint:#EFEFEB;
+  --night:#07080C;--night-2:#0E0F16;--night-line:rgba(255,255,255,.09);
+  --on-night:#F4F4F1;--on-night-soft:#A7A9B4;
+  --a1:#8B5CF6;--a2:#3B82F6;--a3:#5EEAD4;
+  --aurora:linear-gradient(90deg,var(--a1),var(--a2) 55%,var(--a3));
+  --link:#4F46E5;--success:#15A36B;
+  --r:20px;--r-sm:12px;--pill:999px;
+  --shadow-sm:0 1px 2px rgba(10,10,12,.05),0 2px 8px rgba(10,10,12,.04);
+  --shadow:0 12px 32px -12px rgba(10,10,12,.18),0 2px 8px rgba(10,10,12,.05);
+  --font:"Sofia Pro","Sofia Pro W01","Urbanist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:var(--font);font-size:16px;line-height:1.6;color:var(--ink-soft);
+background:var(--ground);-webkit-font-smoothing:antialiased}
+.shell{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+
+/* The rail. A single aurora hairline down its right edge is the whole brand signature: it is the
+   same gradient the site puts under its headings, and it costs one pixel. */
+aside{background:linear-gradient(170deg,var(--night-2),var(--night));color:var(--on-night-soft);
+padding:22px 0 40px;position:relative}
+aside::after{content:"";position:absolute;top:0;right:0;width:1px;height:100%;background:var(--aurora);opacity:.55}
+.rail-brand{display:flex;align-items:center;gap:9px;padding:0 22px 20px;color:var(--on-night);
+font-weight:700;font-size:.97rem;letter-spacing:-.02em;text-decoration:none}
+.rail-brand i{width:22px;height:22px;border-radius:7px;background:var(--aurora);display:block;flex:0 0 auto}
+.rail-firm{margin:0 14px 6px;padding:14px;border-radius:var(--r-sm);
+background:rgba(255,255,255,.045);border:1px solid var(--night-line)}
+.rail-firm .top{display:flex;align-items:center;gap:11px}
+.rail-firm img{width:42px;height:42px;object-fit:contain;border-radius:9px;background:#fff;padding:4px;flex:0 0 auto}
+.rail-firm .mono{width:42px;height:42px;border-radius:9px;background:var(--aurora);color:#0A0A0C;
+display:grid;place-items:center;font-weight:700;font-size:.95rem;flex:0 0 auto}
+.rail-firm b{display:block;color:var(--on-night);font-size:.9rem;line-height:1.25;font-weight:600}
+.rail-firm small{display:block;color:var(--on-night-soft);font-size:.76rem;margin-top:2px}
+.rail-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.tierpill{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+padding:3px 9px;border-radius:var(--pill);background:var(--aurora);color:#0A0A0C}
+.tierpill.flat{background:rgba(255,255,255,.1);color:var(--on-night-soft)}
+.rail-site{display:block;margin-top:9px;color:var(--a3);font-size:.78rem;text-decoration:none;
+overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rail-site:hover{text-decoration:underline}
+aside h4{color:#6E6F7B;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;
+margin:22px 22px 6px;font-weight:700}
+aside nav a{display:flex;align-items:center;gap:9px;padding:9px 22px;color:var(--on-night-soft);
+text-decoration:none;font-size:.92rem;border-left:2px solid transparent}
+aside nav a:hover{background:rgba(255,255,255,.05);color:var(--on-night)}
+aside nav a.on{background:rgba(255,255,255,.07);color:var(--on-night);border-left-color:var(--a1);font-weight:600}
+aside nav a em{margin-left:auto;font-style:normal;font-size:.7rem;font-weight:700;
+background:var(--a1);color:#fff;border-radius:var(--pill);padding:1px 7px}
+.rail-out{margin:26px 22px 0;padding-top:16px;border-top:1px solid var(--night-line)}
+.rail-out a{display:block;color:#6E6F7B;font-size:.8rem;text-decoration:none;padding:3px 0}
+.rail-out a:hover{color:var(--on-night)}
+
+main{padding:38px 40px 90px;max-width:900px}
+h1{font-size:1.75rem;letter-spacing:-.025em;margin:0 0 7px;color:var(--ink);font-weight:650}
+h2{font-size:1.06rem;margin:34px 0 10px;color:var(--ink);font-weight:650;letter-spacing:-.01em}
 p{margin:0 0 14px}
-.lede{color:var(--soft)}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}
-label{display:block;font-size:.84rem;font-weight:600;margin:16px 0 5px}
+.lede{color:var(--muted)}
+.eyebrow{display:block;font-size:.72rem;font-weight:700;letter-spacing:.14em;
+text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px;
+margin:18px 0;box-shadow:var(--shadow-sm)}
+label{display:block;font-size:.82rem;font-weight:650;margin:18px 0 6px;color:var(--ink)}
 .card label:first-of-type{margin-top:0}
-input[type=text],input[type=password],input[type=file],textarea,select{width:100%;padding:10px 12px;
-border:1px solid var(--line);border-radius:9px;font:inherit;background:#fff;color:var(--ink)}
-textarea{min-height:96px;resize:vertical}
-.help{font-size:.8rem;color:var(--muted);margin:5px 0 0}
-button{background:var(--accent);color:#fff;border:0;border-radius:9px;padding:11px 20px;
+input[type=text],input[type=password],input[type=file],textarea,select{width:100%;padding:11px 13px;
+border:1px solid var(--line-2);border-radius:var(--r-sm);font:inherit;background:#fff;color:var(--ink)}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--a1);outline-offset:1px;border-color:transparent}
+textarea{min-height:100px;resize:vertical}
+.help{font-size:.79rem;color:var(--muted);margin:6px 0 0;line-height:1.5}
+button{background:var(--ink);color:#fff;border:0;border-radius:var(--pill);padding:12px 24px;
 font:inherit;font-weight:600;cursor:pointer}
-button.ghost{background:transparent;color:var(--soft);border:1px solid var(--line)}
-.row{display:flex;gap:10px;align-items:center;margin-top:22px;flex-wrap:wrap}
-.note{background:#f4f1fd;border:1px solid #e0d7fb;border-radius:11px;padding:14px 16px;
-font-size:.9rem;margin:16px 0}
-.bad{background:#fdf2f2;border-color:#f6d5d5;color:#8c2b2b}
-.ok{background:#f0f9f3;border-color:#cfe9d8;color:#1f6b3b}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
-background:var(--line);border:1px solid var(--line);border-radius:13px;overflow:hidden;margin:18px 0}
-.stat{background:var(--paper);padding:18px 18px 16px}
-.stat b{display:block;font-size:1.9rem;line-height:1;letter-spacing:-.02em;
-font-variant-numeric:tabular-nums}
-.stat span{display:block;font-size:.84rem;color:var(--muted);margin-top:6px;line-height:1.35}
-.stat.key b{color:var(--accent)}
-.sub{font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padding:9px 0}
+button:hover{background:#26272E}
+.row{display:flex;gap:10px;align-items:center;margin-top:24px;flex-wrap:wrap}
+
+/* The number blocks, which are the same shape the guides use. */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;
+background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+margin:20px 0;box-shadow:var(--shadow-sm)}
+.stat{background:var(--paper);padding:20px}
+.stat b{display:block;font-size:2rem;line-height:1;letter-spacing:-.025em;color:var(--ink);
+font-variant-numeric:tabular-nums;font-weight:650}
+.stat span{display:block;font-size:.81rem;color:var(--muted);margin-top:8px;line-height:1.4}
+.stat.key b{background:var(--aurora);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.note{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--a1);
+border-radius:var(--r-sm);padding:15px 17px;font-size:.9rem;margin:18px 0;color:var(--ink-soft)}
+.note b{color:var(--ink)}
+.bad{border-left-color:#EF4444;background:#FEF6F6}
+.ok{border-left-color:var(--success);background:#F3FBF6}
+.sub{font-size:.83rem;color:var(--muted);border-top:1px solid var(--line);padding:10px 0;line-height:1.5}
+.sub:first-child{border-top:0;padding-top:0}
 .sub b{font-variant-numeric:tabular-nums;color:var(--ink)}
-.item{border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:10px 0;
-background:var(--paper);font-size:.92rem}
-.item .when{color:var(--muted);font-size:.8rem}
-.pill{display:inline-block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
-font-weight:650;padding:3px 9px;border-radius:999px;background:#f4f1fd;color:var(--accent)}
-.pill.done{background:#f0f9f3;color:#1f6b3b}
-a{color:var(--accent)}
-img.logo{max-width:150px;max-height:80px;border:1px solid var(--line);border-radius:10px;
-padding:10px;background:#fff}
-@media(max-width:760px){.shell{grid-template-columns:1fr}aside{padding-bottom:14px}main{padding:24px 20px 60px}}
+.item{border:1px solid var(--line);border-radius:var(--r-sm);padding:15px 17px;margin:10px 0;
+background:var(--paper);font-size:.91rem;box-shadow:var(--shadow-sm)}
+.item .when{color:var(--muted);font-size:.78rem}
+.pill{display:inline-block;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;
+font-weight:700;padding:3px 10px;border-radius:var(--pill);background:#EEF0FF;color:var(--link)}
+.pill.done{background:#E8F7EF;color:var(--success)}
+a{color:var(--link)}
+img.logo{max-width:160px;max-height:84px;border:1px solid var(--line);border-radius:var(--r-sm);
+padding:12px;background:#fff}
+@media(max-width:820px){.shell{grid-template-columns:1fr}main{padding:26px 20px 60px}
+aside::after{display:none}}
 `;
 
 function html(title: string, body: string, status = 200, headers: Record<string, string> = {}) {
   return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>${esc(title)} | Law Firm Listings</title><style>${CSS}</style></head><body>${body}</body></html>`,
+<title>${esc(title)} | Law Firm Listings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap">
+<style>${CSS}</style></head><body>${body}</body></html>`,
     { status, headers: { 'content-type': 'text/html; charset=utf-8', ...headers } });
 }
 
-function shell(active: string, firm: { name: string; slug: string; city: string; state: string },
-                title: string, body: string, status = 200) {
+/** Two letters, the way the public profile draws a firm with no logo. */
+function initialsOf(name: string): string {
+  const words = String(name).replace(/[^A-Za-z\s]/g, ' ').split(/\s+/).filter(Boolean);
+  return ((words[0]?.[0] ?? '') + (words[1]?.[0] ?? '')).toUpperCase() || 'LF';
+}
+
+function shell(active: string, d: any, title: string, body: string, status = 200,
+               counts: Record<string, number> = {}) {
   let nav = '';
   let group = '';
   for (const item of NAV) {
     if (item.group !== group) { group = item.group; nav += `<h4>${esc(group)}</h4>`; }
-    nav += `<a href="${item.href}"${item.href === active ? ' class="on"' : ''}>${esc(item.label)}</a>`;
+    const n = counts[item.href] ?? 0;
+    nav += `<a href="${item.href}"${item.href === active ? ' class="on"' : ''}>`
+      + `${esc(item.label)}${n ? `<em>${n}</em>` : ''}</a>`;
   }
+  // The firm's own mark, because a panel that shows a firm its own logo reads as its own place
+  // rather than as a form somebody built. Where there is none we draw the initials on the aurora,
+  // which is exactly what the public profile does, so the two never disagree.
+  const mark = d.logo_file
+    ? `<img src="/logos/${esc(d.logo_file)}" alt="${esc(d.name)}">`
+    : `<span class="mono">${esc(initialsOf(d.name))}</span>`;
+  const tier = d.score?.tier
+    ? `<span class="tierpill${['Verified', 'Certified', 'Distinguished', 'Elite']
+        .includes(d.score.tier) ? '' : ' flat'}">${esc(d.score.tier)}</span>`
+    : '';
+  const site = d.website
+    ? `<a class="rail-site" href="${esc(d.website)}" target="_blank" rel="noopener">`
+      + `${esc(String(d.website).replace(/^https?:\/\//, '').replace(/\/$/, ''))}</a>`
+    : '';
   return html(title, `<div class="shell">
 <aside>
-  <div class="brand">Law Firm Listings<small>Firm panel</small></div>
-  <div class="firm"><b>${esc(firm.name)}</b><span>${esc(firm.city)}, ${esc(firm.state)}</span></div>
-  ${nav}
-  <div class="out"><a href="/firms/${esc(firm.slug)}/">View public profile</a><br>
-    <a href="/claim/logout">Sign out</a></div>
+  <a class="rail-brand" href="/"><i></i>Law Firm Listings</a>
+  <div class="rail-firm">
+    <div class="top">${mark}<div><b>${esc(d.name)}</b>
+      <small>${esc(d.market.city)}, ${esc(d.market.state)}</small></div></div>
+    <div class="rail-meta">${tier}
+      <span class="tierpill flat">${d.outbound_link?.followed ? 'Followed link' : 'Nofollow'}</span>
+    </div>
+    ${site}
+  </div>
+  <nav>${nav}</nav>
+  <div class="rail-out">
+    <a href="/firms/${esc(d.slug)}/">View public profile</a>
+    <a href="/claim/logout">Sign out</a>
+  </div>
 </aside>
 <main>${body}</main></div>`, status);
 }
@@ -523,8 +605,15 @@ export async function handlePanel(request: Request, env: PanelEnv): Promise<Resp
       + '<h1>We cannot find that profile</h1><p class="lede">The account exists and the published '
       + 'profile does not, which should not happen. Please write to us.</p></main>', 404);
   }
-  const who = { name: d.name, slug: d.slug, city: d.market.city, state: d.market.state };
-  const at = (p: string, t: string, b: string, s = 200) => shell(p, who, t, b, s);
+  // Every section gets the firm itself, so the rail can draw its logo, its tier and its site.
+  const open = (await submissions(env, d.slug)).filter((x: any) => x.status !== 'approved');
+  const counts: Record<string, number> = {
+    '/claim/dashboard': open.length,
+    '/claim/reviews': open.filter((x: any) => x.kind === 'review').length,
+    '/claim/results': open.filter((x: any) => x.kind === 'result').length,
+    '/claim/logo': open.filter((x: any) => x.kind === 'logo').length,
+  };
+  const at = (p: string, t: string, b: string, st = 200) => shell(p, d, t, b, st, counts);
 
   if (path === '/claim/dashboard') {
     return at(path, 'Dashboard', dashboard(d, await submissions(env, d.slug)));
