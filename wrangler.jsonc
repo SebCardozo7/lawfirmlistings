@@ -36,10 +36,9 @@
     // Where a firm's reply lands, so the autoresponder is not a no-reply nobody reads.
     "REPLY_TO": "hello@lawfirmlistings.com",
     "PAYPAL_LINK": "https://www.paypal.com/paypalme/sebastiancardozo",
-    // Unset on purpose until Sebastián names the figure. The follow-up says the price is coming
-    // in our reply rather than inventing one, because a made-up number in an outbound commercial
-    // email is worse than no email.
-    // "LISTING_PRICE_USD": "",
+    // Set 2026-10-08. The follow-up prints it; it is never typed into the template, so changing
+    // it here changes every email from the next deploy.
+    "LISTING_PRICE_USD": "350",
     "FOLLOWUP_HOURS": "6"
   },
   "send_email": [
