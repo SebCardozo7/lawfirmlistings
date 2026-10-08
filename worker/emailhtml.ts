@@ -135,8 +135,9 @@ function button(label: string, url: string): string {
   return `<table role="presentation" cellpadding="0" cellspacing="0" border="0"`
     + ` style="margin:4px 0 20px;border-collapse:collapse"><tbody><tr>`
     + `<td style="background:${INK};border-radius:8px">`
-    + `<a href="${esc(href)}" style="display:inline-block;padding:12px 22px;`
-    + `font:600 14px/1 ${FONT};color:#FFFFFF;text-decoration:none">`
+    + `<a href="${esc(href)}" style="display:inline-block;padding:14px 26px;`
+    + `font:700 13px/1 ${FONT};color:#FFFFFF;text-decoration:none;`
+    + `letter-spacing:.07em;text-transform:uppercase">`
     + `${esc(label.replace(/:\s*$/, ''))}</a></td>`
     + `</tr></tbody></table>`;
 }
