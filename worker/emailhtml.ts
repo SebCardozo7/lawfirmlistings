@@ -203,10 +203,20 @@ function blockHtml(lines: string[]): string {
 }
 
 /** The gradient, as three cells, because no email client renders a CSS one reliably. */
-const rule = AURORA.map(
-  (c) => `<td height="3" width="33%" style="background:${c};height:3px;line-height:3px;`
-    + `font-size:0">&nbsp;</td>`,
-).join('');
+/**
+ * The gradient, as three cells, because no email client renders a CSS one reliably.
+ *
+ * It sits in a table of its own inside a single cell, and that nesting is the whole point. The
+ * three cells used to be a row of the outer table, which made that table three columns wide,
+ * and every other row held one cell with no colspan. A browser forgives that and renders the
+ * single cell full width. Gmail does not: it gave each one the first column, so a 560px message
+ * laid its entire body out in 185px and arrived looking like a receipt.
+ */
+const rule = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+ style="width:100%;border-collapse:collapse"><tbody><tr>${AURORA.map(
+    (c) => `<td height="3" width="33.33%" style="background:${c};height:3px;line-height:3px;`
+      + `font-size:0">&nbsp;</td>`,
+  ).join('')}</tr></tbody></table>`;
 
 export interface HtmlOptions {
   /** Shown under the footer rule, where a recipient looks for who this is. */
@@ -237,10 +247,10 @@ export function htmlFromText(text: string, opts: HtmlOptions = {}): string {
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="560"
  style="width:560px;max-width:100%;background:#FFFFFF;border:1px solid ${LINE};
  border-collapse:collapse"><tbody>
-<tr>${rule}</tr>
+<tr><td style="padding:0">${rule}</td></tr>
 <tr><td style="padding:24px 28px 18px">
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0"
-   style="border-collapse:collapse"><tbody><tr>
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+   style="width:100%;border-collapse:collapse"><tbody><tr>
   <td width="40" style="padding:0 12px 0 0">
     <img src="${MARK}" width="40" height="40" alt=""
      style="display:block;width:40px;height:40px;border:0;border-radius:9px"></td>

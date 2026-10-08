@@ -110,11 +110,16 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
   const link = (env.PAYPAL_LINK || '').trim();
   const first = (e.contact || '').trim().split(/\s+/)[0] || 'there';
   return {
-    subject: `${e.firm}: what a listing needs, and what it includes`,
+    // What a firm gets, before what it pays, with its own name in front of both. The old one
+    // was "what a listing needs, and what it includes", which describes the email rather than
+    // offering anything, and nothing in it would make a managing partner open it.
+    subject: price
+      ? `${e.firm}: a followed link, your own panel, and ${price} USD a year`
+      : `${e.firm}: a followed link, your own panel, and what a listing needs`,
     text: [
-      `Hey ${first}! How are you?`,
+      `Hi ${first},`,
       '',
-      `Thanks for writing about ${e.firm}. Here is the whole of it, so you can decide without a`,
+      `Thanks for writing about ${e.firm}. Everything is below, so you can decide without a`,
       'call.',
       '',
       // The price is the first thing a reader looks for, so it is the first thing they get, in
@@ -122,45 +127,41 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       // card says a figure is coming instead of inventing one.
       price ? `| ${price} USD a year` : '| A yearly fee',
       price
-        ? '| One firm, one profile. It renews once a year and we remind you before it does.'
+        ? '| Renewed once a year, and we remind you before it renews.'
         : '| We will confirm the figure in our reply. It renews once a year.',
-      '',
-      'What your firm has to meet:',
-      '',
-      'Four requirements. Three of them we verify ourselves against public records. The first one',
-      'is the only one in your hands, and it is the one most firms fail.',
-      '',
-      '1. **A site that names its lawyers**, served over HTTPS, with a phone number that works.',
-      '2. **A current licence for every attorney you name**, which we read from the state',
-      '   register wherever the state publishes one we are allowed to query.',
-      '3. **No disbarment, suspension or disciplinary resignation** against anyone you name.',
-      '4. **A registered entity and at least one office** somebody can walk into.',
       '',
       'What the year includes:',
       '',
-      '  **Your own panel.** You sign in and correct your offices, phone, practice areas,',
-      '  languages and fee terms, upload your logo, offer the client reviews you want quoted and',
-      '  submit case results with a docket number. We review anything you send before it appears.',
-      '',
-      '  **A do-follow link to your site**, from your profile and from every card your firm',
+      '  **A followed link to your site**, from your profile and from every card your firm',
       '  appears in across the directory.',
       '',
-      '  **Every sub-score and the evidence behind it**, and the right to appeal any of it.',
+      '  **Your own panel**: your offices, phone, practice areas, languages, fee terms, logo,',
+      '  the client reviews you want quoted, and case results with a docket number. We review',
+      '  what you send before it appears.',
       '',
-      'What it does not include:',
+      '  **Every sub-score, the evidence behind it, and the right to appeal any of it.**',
       '',
-      'Points, a gate, a tier, or a place in any ranking. Those are measured, and they are the',
-      'same for a firm that pays and a firm that does not. I would rather say that now than after',
-      'you have paid. The whole method is published, every sub-factor and every weight, at',
-      'https://lawfirmlistings.com/methodology/',
+      'It does not include points, a gate, a tier, or a place in any ranking. Those are measured',
+      'from public records and are identical for a firm that pays and a firm that does not.',
+      '',
+      'What your firm has to meet:',
+      '',
+      '1. **A site that names its lawyers**, over HTTPS, with a working phone number.',
+      '2. **A current licence** for every attorney you name.',
+      '3. **No outstanding public discipline** against anyone you name.',
+      '4. **A registered entity and a real office.**',
+      '5. **A year in practice and ten client reviews.**',
+      '',
+      'All five are read from public sources, so there is nothing to send us, and only the first',
+      'is in your hands. Each one in full, with every sub-factor and every weight, is published',
+      'at https://lawfirmlistings.com/methodology/#gates',
       '',
       'What happens next:',
       '',
-      '1. **I read your site** and tell you exactly where your firm stands against the four',
-      '   above, within 12 working hours of your enquiry. Where something is missing it is',
-      '   almost always a text edit on your end rather than a real problem.',
-      '2. **You pay the year** through the link below, and I send you the receipt.',
-      '3. **You get your sign-in** the same day, and your profile goes live with your link.',
+      `1. I read your site and tell you where ${e.firm} stands against the five, within 12`,
+      '   working hours.',
+      '2. You pay for the year, and I send the receipt.',
+      '3. You get your sign-in the same day, and your profile goes live with your link.',
       '',
       // A label on its own line and the URL under it. In the text part that reads the way
       // anybody writes a link in an email; in the HTML part emailhtml.ts turns exactly that
@@ -170,7 +171,7 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       '',
       'Reply with any question, or with a no. Either is a useful answer.',
       '',
-      'Have a great day,',
+      'Regards,',
       'Sebastián',
       'Law Firm Listings',
     ].filter(present).join('\n'),
