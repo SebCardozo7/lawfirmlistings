@@ -23,7 +23,7 @@
  *   not sold, so the follow-up states the requirements and what the fee does buy, which is the
  *   panel and a followed link, and says plainly that the score is not part of it.
  */
-import { mime } from './mail';
+import { mime, present } from './mail';
 
 export interface OutboundEnv {
   EMAIL: { send(message: any): Promise<unknown> };
@@ -75,9 +75,9 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
       'it reached us, with the details you sent:',
       '',
       `  Firm:     ${e.firm}`,
-      e.website ? `  Website:  ${e.website}` : '',
-      e.city ? `  Market:   ${e.city}` : '',
-      e.practice ? `  Practice: ${e.practice}` : '',
+      e.website ? `  Website:  ${e.website}` : null,
+      e.city ? `  Market:   ${e.city}` : null,
+      e.practice ? `  Practice: ${e.practice}` : null,
       '',
       'A person will read it and reply within 12 working hours.',
       '',
@@ -88,7 +88,7 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
       '',
       'Law Firm Listings',
       'https://lawfirmlistings.com/methodology/',
-    ].filter(Boolean).join('\n'),
+    ].filter(present).join('\n'),
   };
 }
 
@@ -148,7 +148,12 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       'We are reading your site now and will tell you exactly where you stand against the four',
       'above. If something is missing it is usually a text edit on your end rather than a problem.',
       '',
-      link ? `Payment, when you are ready: ${link}` : '',
+      // A label on its own line and the URL under it. In the text part that reads the way
+      // anybody writes a link in an email; in the HTML part emailhtml.ts turns exactly that
+      // shape into a button, which is the one thing in this message somebody has to click.
+      link ? 'Payment, when you are ready:' : null,
+      link || null,
+      link ? '' : null,
       'It renews once a year and we remind you before it does.',
       '',
       'Let me know if you are interested.',
@@ -156,7 +161,7 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       'Have a great day,',
       'Sebastián',
       'Law Firm Listings',
-    ].filter(Boolean).join('\n'),
+    ].filter(present).join('\n'),
   };
 }
 
@@ -170,14 +175,15 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
  */
 export async function sendTo(env: OutboundEnv, to: string, subject: string, text: string) {
   const sender = from(env);
-  let raw = mime(sender, to, subject, text);
-  if (env.REPLY_TO) {
-    // So a firm's reply reaches a person rather than the address the Worker sends as. It goes in
-    // before MIME-Version, which keeps it inside the header block.
-    raw = raw.replace('\r\nMIME-Version: 1.0',
-                      `\r\nReply-To: <${env.REPLY_TO.replace(/[\r\n]+/g, ' ').trim()}>`
-                      + '\r\nMIME-Version: 1.0');
-  }
+  // Reply-To used to be spliced into the finished message with a string replace on the
+  // MIME-Version line. That worked only as long as mime() emitted exactly that line in exactly
+  // that place, which stopped being true the moment the message grew a second part. It is a
+  // parameter now.
+  const raw = mime(sender, to, subject, text, {
+    replyTo: env.REPLY_TO,
+    footer: 'Law Firm Listings measures what US law firms publish about themselves and'
+      + ' scores it against public records.',
+  });
   const { EmailMessage } = await import('cloudflare:email');
   await env.EMAIL.send(new EmailMessage(sender, to, raw));
 }
