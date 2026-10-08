@@ -35,6 +35,7 @@ import json
 import pathlib
 import re
 import sys
+import threading
 import time
 import urllib.parse
 
@@ -591,6 +592,60 @@ def examine_combined(domain, spec, practice_name):
     return None, last
 
 
+def read_record(path):
+    if path.exists():
+        try:
+            return json.load(io.open(path, encoding="utf-8"))
+        except (ValueError, OSError):
+            return {}
+    return {}
+
+
+def ask(domain, spec, practice):
+    """Both questions about one domain, in order. Raises nothing urllib can raise."""
+    try:
+        found, why = examine(domain, spec)
+        # Where the firm publishes no page about this practice, ask whether it publishes a
+        # page listing its practices and names this one on it. Weaker, cited as such, and
+        # the difference between ranking the two best known injury practices in Queens and
+        # omitting them over a site structure and a typo in somebody's own URL.
+        if not found:
+            combined, why_combined = examine_combined(
+                domain, spec, practice.replace("-", " "))
+            if combined:
+                found, why = combined, None
+            else:
+                why = "%s; %s" % (why, why_combined)
+        return found, why
+    except Exception as err:                          # a site can fail in ways urllib does not
+        return None, "error: %s" % err
+
+
+def probe(domain, spec, practice, budget):
+    """ask(), under a wall-clock budget.
+
+    TIMEOUT caps a single socket operation, which is not the same as capping a request: a host
+    that dribbles one byte every twenty seconds never trips it, and a run over 237 candidates
+    stopped dead on its 25th for three hours. The budget is per domain and the work runs in a
+    daemon thread, so an abandoned probe cannot hold the interpreter open at exit.
+
+    A probe that runs out of budget says the site did not finish answering. It must never read
+    as a finding about the firm: nothing was read, so nothing was established, and the caller
+    treats the domain as unanswered rather than as a firm without this practice.
+    """
+    box = {}
+
+    def run():
+        box["out"] = ask(domain, spec, practice)
+
+    t = threading.Thread(target=run, daemon=True)
+    t.start()
+    t.join(budget)
+    if "out" not in box:
+        return None, "unreadable: the site did not finish answering within %ds" % budget
+    return box["out"]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--practice", required=True, choices=sorted(PRACTICES))
@@ -598,6 +653,10 @@ def main() -> int:
     ap.add_argument("--domains", help="comma-separated domains instead")
     ap.add_argument("--top", type=int, default=40, help="how many candidates to examine")
     ap.add_argument("--staging", default=".crawl")
+    ap.add_argument("--recheck", action="store_true",
+                    help="ask again about domains already answered")
+    ap.add_argument("--budget", type=int, default=180,
+                    help="seconds to spend on one domain before giving up on it")
     args = ap.parse_args()
 
     for stream in (sys.stdout, sys.stderr):
@@ -622,33 +681,34 @@ def main() -> int:
     holds, misses = [], []
 
     for i, domain in enumerate(domains, 1):
-        try:
-            found, why = examine(domain, spec)
-            # Where the firm publishes no page about this practice, ask whether it publishes a
-            # page listing its practices and names this one on it. Weaker, cited as such, and
-            # the difference between ranking the two best known injury practices in Queens and
-            # omitting them over a site structure and a typo in somebody's own URL.
-            if not found:
-                combined, why_combined = examine_combined(
-                    domain, spec, args.practice.replace("-", " "))
-                if combined:
-                    found, why = combined, None
-                else:
-                    why = "%s; %s" % (why, why_combined)
-        except Exception as err:                      # a site can fail in ways urllib does not
-            found, why = None, "error: %s" % err
+        path = staging / (domain + ".json")
+        rec = read_record(path)
         label = (names.get(domain) or "")[:34]
+
+        # A run over a few hundred candidates gets interrupted: a host hangs, the machine
+        # reboots, somebody stops the job. Re-asking a question already answered costs the
+        # answered firm another crawl for nothing, so the default is to resume. --recheck asks
+        # again from scratch.
+        prior = (rec.get("practice_evidence") or {}).get(args.practice)
+        if prior is not None and not args.recheck:
+            (holds if prior.get("url") else misses).append(domain)
+            print("%3d/%d %-34s %-34s %s"
+                  % (i, len(domains), domain[:34], label,
+                     prior["url"][:60] if prior.get("url") else "no  (checked earlier)"))
+            continue
+
+        found, why = probe(domain, spec, args.practice, args.budget)
         print("%3d/%d %-34s %-34s %s"
               % (i, len(domains), domain[:34], label,
                  found["url"][:60] if found else "no  (%s)" % why))
 
-        path = staging / (domain + ".json")
-        rec = {}
-        if path.exists():
-            try:
-                rec = json.load(io.open(path, encoding="utf-8"))
-            except (ValueError, OSError):
-                rec = {}
+        # A probe that ran out of budget read nothing, so it answered nothing. Writing it down
+        # would record "held: False" against a firm we never reached and would make the next run
+        # skip it as answered. Leave the record alone and let a later run ask again.
+        if not found and why and why.startswith("unreadable:"):
+            misses.append(domain)
+            continue
+
         rec.setdefault("domain", domain)
         evidence = rec.setdefault("practice_evidence", {})
         evidence[args.practice] = found or {"held": False, "why": why, "checked_at": TODAY}
