@@ -18,6 +18,7 @@
 import { EmailMessage } from 'cloudflare:email';
 import { mime, json } from './mail';
 import { handlePanel } from './panel';
+import { ackBody, drainFollowUps, queueFollowUp, sendTo } from './outbound';
 
 interface Env {
   ASSETS: Fetcher;
@@ -30,6 +31,13 @@ interface Env {
   PANEL?: KVNamespace;
   /** Firm panel: signs the session cookie and the one-click approval link. */
   PANEL_SECRET?: string;
+  /** Delayed follow-up emails, keyed by the minute they are due. */
+  FOLLOWUPS?: KVNamespace;
+  /** Where a firm's reply should land, if not the sending address. */
+  REPLY_TO?: string;
+  LISTING_PRICE_USD?: string;
+  PAYPAL_LINK?: string;
+  FOLLOWUP_HOURS?: string;
 }
 
 /** What the form may send, and the longest each field may be. Anything else is dropped. */
@@ -115,6 +123,27 @@ async function submit(request: Request, env: Env): Promise<Response> {
     return json(502, { error: 'We could not deliver that. Please email us directly.' });
   }
 
+  // Everything from here is for the firm rather than for us, and none of it may turn a
+  // successful submission into a failed one. A form that worked has worked, whatever happens to
+  // the autoresponder, so each piece catches its own error and the response is still 200.
+  const enquiry = {
+    firm: values.firm, contact: values.contact, email: values.email,
+    website: values.website, city: values.city, practice: values.practice,
+  };
+  try {
+    const ack = ackBody(enquiry);
+    await sendTo(env, values.email, ack.subject, ack.text);
+  } catch (err) {
+    // Sending to an address we have not onboarded a domain for fails here, which is exactly the
+    // state of this Worker until lawfirmlistings.com is onboarded as a sending domain.
+    console.error('ack failed', err);
+  }
+  try {
+    await queueFollowUp(env, enquiry);
+  } catch (err) {
+    console.error('follow-up queue failed', err);
+  }
+
   return json(200, { ok: true });
 }
 
@@ -161,5 +190,18 @@ export default {
     // Everything else is a file. The assets binding keeps the 404 page and the trailing-slash
     // handling the site was already configured for.
     return env.ASSETS.fetch(request);
+  },
+
+  /**
+   * The cron trigger, which exists because a Worker cannot wait six hours.
+   *
+   * Follow-ups are stored under a key that sorts by the minute they are due, so "everything due"
+   * is every key at or before now and no record has to be read to know whether it is time. A send
+   * that throws leaves its key in place and the next run retries it, because a lost follow-up is
+   * a lost lead.
+   */
+  async scheduled(_event: ScheduledController, env: Env, _ctx: ExecutionContext): Promise<void> {
+    const { sent, failed } = await drainFollowUps(env);
+    if (sent || failed) console.log(`follow-ups sent ${sent}, failed ${failed}`);
   },
 };

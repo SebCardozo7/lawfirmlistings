@@ -23,11 +23,16 @@
   // There is nothing to hide here anyway: it is an address on a domain we own, and it needs no
   // mailbox behind it, though hello@ has one: it is the address this site already
   // publishes, so a firm that replies to the notification reaches somebody.
+  // Every fifteen minutes, which drains a six hour follow-up within fifteen minutes of its due
+  // time and costs nothing. A Worker cannot wait, so something has to come back and look.
+  "triggers": { "crons": ["*/15 * * * *"] },
   "kv_namespaces": [
     // The firm panel's accounts and pending change-sets. Created once with:
     //   npx wrangler kv namespace create PANEL
     // and the id it prints goes here.
-    { "binding": "PANEL", "id": "REPLACE_WITH_THE_ID_WRANGLER_PRINTS" }
+    { "binding": "PANEL", "id": "REPLACE_WITH_THE_ID_WRANGLER_PRINTS" },
+    // npx wrangler kv namespace create FOLLOWUPS
+    { "binding": "FOLLOWUPS", "id": "REPLACE_WITH_THE_FOLLOWUPS_ID" }
   ],
   "vars": {
     "SUBMISSIONS_FROM": "hello@lawfirmlistings.com"
