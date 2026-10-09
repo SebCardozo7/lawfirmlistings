@@ -317,7 +317,7 @@ client's Basecamp project when the piece places a client. Pieces that place a cl
 | written 2026-10-04 | 18 Texas, 19 Florida, 20 New York (PR #96) | Fielding; Lopez & Humphries, Goodwin; Greenstein & Pittari |
 | written 2026-10-05 | 25 Oregon (PR #105) | Paulson Coletti |
 | written 2026-10-07 | 26 Maryland (PR #110) | Malloy Law |
-| 2026-10-09 | 27 Massachusetts | Brooks Law Firm |
+| written 2026-10-09 | 27 Massachusetts (PR #118) | Brooks Law Firm |
 | 2026-10-12 | 29 Indiana | Sarkisian |
 | 2026-10-14 | 16 Statute of limitations hub | all seven state pages |
 | 2026-10-16 | 41 Back and neck injury settlements | verified injury firms by state |
