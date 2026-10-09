@@ -71,6 +71,19 @@ export const GUIDES: Guide[] = [
   // live in src/data/research/statute-of-limitations-<code>.json and the pages compute their
   // headlines from it, so nothing here may carry a figure.
   {
+    slug: 'massachusetts-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Massachusetts Statute of Limitations: Deadlines by Claim, and the Notices That Come First',
+    summary:
+      'The Massachusetts injury deadline is the easy part. A pothole, a hit-and-run and a claim ' +
+      'against a city or town each need written notice long before it, and a child\'s malpractice ' +
+      'claim runs on its own rule. Every Massachusetts deadline, read from the General Laws.',
+    thumb: 't3',
+    icon: 'doc',
+    meta: 'The notice comes due before the deadline',
+  },
+  {
     slug: 'maryland-statute-of-limitations',
     cover: 'deadline',
     kicker: 'Reference',

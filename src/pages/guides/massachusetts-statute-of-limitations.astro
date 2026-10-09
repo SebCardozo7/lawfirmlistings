@@ -1,0 +1,53 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-ma.json';
+
+/**
+ * Massachusetts deadlines, a state statute page from docs/guides-50.md (family B).
+ *
+ * Title and description figures are read from the research file and declared through
+ * figuresFrom, so a corrected period rewrites the headline instead of leaving it stale.
+ */
+const head = data.headline;
+const way = data.rows.find(r => r.statute === 'M.G.L. c. 84, § 18')!;
+const hitRun = data.rows.find(r => r.statute === 'M.G.L. c. 260, § 4B')!;
+const presentment = data.rows.find(r => r.claim === 'Written claim to a public employer')!;
+const publicSuit = data.rows.find(r => r.claim === 'Lawsuit against a public employer')!;
+const comp = data.rows.find(r => r.statute === 'M.G.L. c. 152, § 41')!;
+const abuse = data.rows.find(r => r.statute === 'M.G.L. c. 260, § 4C')!;
+const minors = data.exceptions.find(e => e.name.startsWith('A child'))!;
+const childMed = data.exceptions.find(e => e.statute === 'M.G.L. c. 231, § 60D')!;
+const days = way.period.replace(' to give notice', '');
+const title = 'Massachusetts Statute of Limitations 2026: Deadlines by Claim';
+const description = `Most Massachusetts injury claims have ${head.years} years. A road defect or hit-and-run needs notice in ${days}, and a claim against a town a letter in ${presentment.period}.`;
+const lede = `Massachusetts gives most injury claims <b>${head.years} years</b>, and that is the number people remember. The deadlines that end cases are much shorter and sit in other chapters: <b>${days}</b> to give notice of a pothole or a broken sidewalk, <b>${days}</b> to report a hit-and-run to the police and the RMV, and <b>${presentment.period}</b> to put a claim against a city or town in writing. Here is every Massachusetts deadline by type of claim, read from the General Laws.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="Massachusetts statute of limitations"
+  reading={[
+    {
+      firm: 'brooks-law-firm',
+      url: 'https://brookslawfirm.com/blog/statute-of-limitations-for-a-car-accident-in-massachusetts/',
+      title: 'Statute of Limitations for a Car Accident in Massachusetts',
+      why: 'A Boston injury firm walks a crash claim through the same sections cited here: three years under § 2A, the two-year presentment to a public employer, the 30-day notice for a defective road, and the pauses for a minor, a defendant living out of state and fraud. It adds the five-day crash report the RMV requires, which is not a limitations period but trips people up just as often.',
+    },
+  ]}>
+  <Fragment slot="toc">
+    <li><a href="#short">The 30-day notices inside the three years</a></li>
+    <li><a href="#children">A child's claim: 21, 9 or 35 years</a></li>
+  </Fragment>
+
+  <h2 id="short">In Massachusetts, the 30-day notices are the ones that end cases</h2>
+  <p>Three years is long enough that people stop watching the calendar. Massachusetts has deadlines that run out in weeks, and most of them are notice rules rather than filing rules, which is why they get missed.</p>
+  <p><b>{days} for a defect in a road or sidewalk.</b> Someone hurt by a pothole, a heaved sidewalk or a broken curb on a public way has to send written notice within {days} to the city, town, county or whoever must keep that way in repair, under <a href={way.url} rel="noopener" target="_blank">{way.statute}</a>. The notice has to give the name and address of the injured person and the time, place and cause of the injury. The lawsuit can follow within three years, but without the notice there may be nothing to file. The one softening: when the injury came from snow or ice, a missing notice only defeats the claim if the town shows it was prejudiced.</p>
+  <p><b>{days} after a hit-and-run.</b> When the driver who caused a crash did not stop, <a href={hitRun.url} rel="noopener" target="_blank">{hitRun.statute}</a> lets the lawsuit wait until six months after the driver is identified. That extra time depends on written notice to the police and to the Registrar of Motor Vehicles within {days} of the crash, and it still ends three years after the crash.</p>
+  <p><b>{presentment.period} for a claim against a city, town or the Commonwealth.</b> Under the Massachusetts Tort Claims Act, <a href={presentment.url} rel="noopener" target="_blank">{presentment.statute}</a>, no lawsuit can be filed against a public employer until the claim has been presented in writing to its executive officer within {presentment.period}. For a city or town that can be the mayor, the manager, the city solicitor, town counsel or the clerk. For the Commonwealth it is the Attorney General. If there is no answer in six months, the claim counts as denied, and the lawsuit then has {publicSuit.period} from when the claim arose.</p>
+  <p><b>{comp.period} for a work injury.</b> A workers' compensation claim has {comp.period} under <a href={comp.url} rel="noopener" target="_blank">{comp.statute}</a>, counted from when the employee first knew the disability came from the job. The notice to the employer or insurer is a separate step and is due as soon as practicable.</p>
+  <p>One more Massachusetts rule a reader should know, even though it is not a deadline. Under <a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleII/Chapter231/Section85" rel="noopener" target="_blank">M.G.L. c. 231, § 85</a>, an injured person who was partly at fault can still recover as long as their share of the negligence is not greater than the defendants' combined share, with the award cut by their percentage. At 51 percent or more, they recover nothing.</p>
+
+  <h2 id="children">A child's claim in Massachusetts: 21, 9 or 35 years</h2>
+  <p>Massachusetts has three different answers to the question of how long a child has, depending on the claim.</p>
+  <p><b>Most injuries: until 21.</b> Under <a href={minors.url} rel="noopener" target="_blank">{minors.statute}</a>, the ordinary three years start when the child turns 18, so the claim can be filed until the 21st birthday. A claim against a city or town is the trap here: the two-year written claim under the Tort Claims Act has no exception for minors.</p>
+  <p><b>Medical malpractice: three years, or until nine.</b> Under <a href={childMed.url} rel="noopener" target="_blank">{childMed.statute}</a>, the rule for minors does not apply to claims against a doctor or hospital. A child's malpractice claim has three years from when it accrues, except that a child hurt before age six has until the ninth birthday. Seven years after the act, the claim ends no matter what, unless something was left in the body.</p>
+  <p><b>Sexual abuse of a child: {abuse.period}.</b> Under <a href={abuse.url} rel="noopener" target="_blank">{abuse.statute}</a>, a survivor has whichever ends later: 35 years from the abuse, or 7 years from when they discovered, or should have discovered, that it caused an emotional or psychological injury. Neither clock starts before the child turns 18.</p>
+</StatuteGuide>
