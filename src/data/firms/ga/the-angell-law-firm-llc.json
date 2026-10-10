@@ -30,14 +30,7 @@
       "source_url": "https://maps.google.com/?cid=2227262062851234123&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "Get Started Today",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://georgiainjurylawyer.com/areas-served/greenville/lawyer/"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English",
     "Spanish"
@@ -229,8 +222,8 @@
   "score": {
     "total": 57,
     "tier": "Verified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-05",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -250,8 +243,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "Georgia publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
           },
           {
             "code": "A5",
@@ -406,23 +399,23 @@
       "needed": 70,
       "gap": 13,
       "floor_met": false,
-      "coverage_met": true,
+      "coverage_met": false,
       "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
         "A2 Experience: +10 available",
-        "A6 Roster verifiability: +9 available",
         "B1 Results published: +6 available"
       ]
     },
     "raw": 40.0,
     "assessed": 70,
-    "coverage": 1.0,
+    "coverage": 0.886,
     "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 79,
     "comparable": true
   },
   "logo": {
