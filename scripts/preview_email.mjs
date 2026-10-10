@@ -42,7 +42,7 @@ mkdirSync(out, { recursive: true });
 const bundle = path.join(out, '_bundle.mjs');
 await build({
   stdin: {
-    contents: `export { ackBody, pitchBody } from './worker/outbound.ts';
+    contents: `export { ackBody, pitchBody, ownerNoticeBody } from './worker/outbound.ts';
                export { mime } from './worker/mail.ts';`,
     resolveDir: process.cwd(),
     loader: 'ts',
@@ -55,7 +55,7 @@ await build({
   logLevel: 'warning',
 });
 
-const { ackBody, pitchBody, mime } = await import(pathToFileURL(bundle).href);
+const { ackBody, pitchBody, ownerNoticeBody, mime } = await import(pathToFileURL(bundle).href);
 
 // One enquiry, filled in the way the form fills it, with the accented name that proves the
 // encoding and a long firm name that proves the header folding.
@@ -153,6 +153,9 @@ const messages = [
   ['pitch', pitchBody(enquiry, env)],
   ['notification', notification],
   ['ack-accented', ackBody(accented)],
+  // What Sebastian gets when the cron sends a quote, hours later, with nobody
+  // watching: the moment to expect a reply.
+  ['quote-sent', ownerNoticeBody(enquiry, env)],
 ];
 
 let failures = 0;

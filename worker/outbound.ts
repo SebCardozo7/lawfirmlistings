@@ -28,6 +28,8 @@ import { mime, present } from './mail';
 export interface OutboundEnv {
   EMAIL: { send(message: any): Promise<unknown> };
   FOLLOWUPS?: KVNamespace;
+  /** Where the owner's own copy goes. Unset means the follow-up goes out unannounced. */
+  SUBMISSIONS_TO?: string;
   SUBMISSIONS_FROM?: string;
   /** Where a firm's reply should land. Falls back to the sender. */
   REPLY_TO?: string;
@@ -263,6 +265,43 @@ export async function queueFollowUp(env: OutboundEnv, e: Enquiry): Promise<strin
 }
 
 /**
+ * Tells the owner that the quote went out.
+ *
+ * The acknowledgement and the quote are both sent to the firm with nobody watching, and the
+ * second one goes hours later, from a cron, naming a price. Knowing it happened is what turns
+ * "an automation runs somewhere" into a pipeline somebody can work: the moment this arrives is
+ * the moment to expect a reply, and if no reply comes it is the moment to follow up by hand.
+ *
+ * It repeats the firm's own details rather than only its name, because the useful version of
+ * this notice is one that can be acted on without opening anything else.
+ */
+export function ownerNoticeBody(e: Enquiry, env: OutboundEnv): { subject: string; text: string } {
+  const price = (env.LISTING_PRICE_USD || '').trim();
+  const text = [
+    `The quote went out to ${e.firm}.`,
+    '',
+    `  Firm:     ${e.firm}`,
+    `  Sent to:  ${e.email}`,
+    e.website ? `  Website:  ${e.website}` : null,
+    e.city ? `  Market:   ${e.city}` : null,
+    e.practice ? `  Practice: ${e.practice}` : null,
+    price ? `  Quoted:   ${price} USD a year` : null,
+    '',
+    'They have the requirements, what the year includes, and the payment link. Nothing else',
+    'goes out automatically, so the next move is theirs or yours.',
+    '',
+    `Their enquiry came in ${hours(env)} hours ago.`,
+  ].filter(present).join('\n');
+  return { subject: `Quote sent: ${e.firm}`, text };
+}
+
+async function notifyOwner(env: OutboundEnv, e: Enquiry): Promise<void> {
+  if (!env.SUBMISSIONS_TO) return;
+  const { subject, text } = ownerNoticeBody(e, env);
+  await sendTo(env, env.SUBMISSIONS_TO, subject, text);
+}
+
+/**
  * Drains what has come due. Called by the cron trigger.
  *
  * The key sorts by ISO date, so "everything due" is every key that sorts at or before now, and no
@@ -292,6 +331,15 @@ export async function drainFollowUps(env: OutboundEnv): Promise<{ sent: number; 
       await sendTo(env, e.email, subject, text);
       await env.FOLLOWUPS.delete(k.name);
       sent += 1;
+      // The quote went out hours after the enquiry did, with nobody watching. Say so, so the
+      // next thing that happens is somebody waiting for a reply rather than somebody finding
+      // out a week later that one was promised. This cannot fail the send: the firm has its
+      // quote either way, and a notification that did not arrive is ours to notice.
+      try {
+        await notifyOwner(env, e);
+      } catch (err) {
+        console.error('follow-up notice failed', k.name, err);
+      }
     } catch (err) {
       // Left in place on purpose: the next run retries. A lost follow-up is a lost lead.
       console.error('follow-up failed', k.name, err);
