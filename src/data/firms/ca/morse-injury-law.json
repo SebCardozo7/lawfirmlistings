@@ -5,7 +5,7 @@
   "website": "https://morseinjurylaw.com/",
   "domain": "morseinjurylaw.com",
   "phone": "(619) 684-3092",
-  "status": "verified",
+  "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
@@ -146,15 +146,16 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-09",
+      "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
+      "evidence": "None of the 2 attorneys this firm names could be told apart from namesakes in the register. Richard Morse shares a name with one of 5 licensees, one of them not eligible to practise, and the register's published addresses do not separate them. Held open rather than decided.",
+      "unresolvable": "The register cannot separate this firm's attorney from a namesake who carries an adverse status, and carries no field that would"
     },
     "G2": {
       "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-09",
+      "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
+      "evidence": "No disciplinary record is held against any of the 0 attorneys we identified. Richard Morse could not be told apart from 5 namesakes, one of whom is not eligible to practise. Held open."
     },
     "G3": {
       "pass": false,
@@ -270,9 +271,9 @@
   },
   "score": {
     "total": 37,
-    "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -460,11 +461,11 @@
     "coverage": 1.0,
     "floor_abc_pct": 0.355,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G1"
+    ],
     "assessable": 70,
     "comparable": true
   }

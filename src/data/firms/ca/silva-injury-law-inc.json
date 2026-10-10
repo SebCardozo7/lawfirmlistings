@@ -63,25 +63,41 @@
       "name": "Matt Kracht",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/matt-kracht"
+      "source_url": "https://silvainjurylaw.com/attorneys/matt-kracht",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/249076",
+      "bar_number": "249076",
+      "admitted_year": 2007
     },
     {
       "name": "Lina Yoo",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/lina-yoo"
+      "source_url": "https://silvainjurylaw.com/attorneys/lina-yoo",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/359867",
+      "bar_number": "359867",
+      "admitted_year": 2024
     },
     {
       "name": "Alec Barcelos",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/alec-barcelos"
+      "source_url": "https://silvainjurylaw.com/attorneys/alec-barcelos",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/359592",
+      "bar_number": "359592",
+      "admitted_year": 2024
     },
     {
       "name": "Tanner Combs",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/tanner-combs"
+      "source_url": "https://silvainjurylaw.com/attorneys/tanner-combs",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/330151",
+      "bar_number": "330151",
+      "admitted_year": 2019
     },
     {
       "name": "Brian Gomes",
@@ -93,25 +109,41 @@
       "name": "Cassidy Jensen",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/cassidy-jensen"
+      "source_url": "https://silvainjurylaw.com/attorneys/cassidy-jensen",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/328702",
+      "bar_number": "328702",
+      "admitted_year": 2019
     },
     {
       "name": "Michael Joe Silva",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/michael-joe-silva"
+      "source_url": "https://silvainjurylaw.com/attorneys/michael-joe-silva",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/300325",
+      "bar_number": "300325",
+      "admitted_year": 2014
     },
     {
       "name": "Nathalia Aguirre",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/nathalia-aguirre"
+      "source_url": "https://silvainjurylaw.com/attorneys/nathalia-aguirre",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/337628",
+      "bar_number": "337628",
+      "admitted_year": 2021
     },
     {
       "name": "Lindy Munoz",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/attorneys/lindy-munoz"
+      "source_url": "https://silvainjurylaw.com/attorneys/lindy-munoz",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/364897",
+      "bar_number": "364897",
+      "admitted_year": 2025
     },
     {
       "name": "Stephanie Cuzzo",
@@ -141,7 +173,11 @@
       "name": "Sarah Boyd",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/team/sarah-boyd"
+      "source_url": "https://silvainjurylaw.com/team/sarah-boyd",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/315454",
+      "bar_number": "315454",
+      "admitted_year": 2017
     },
     {
       "name": "Katelin Arrellin",
@@ -207,7 +243,11 @@
       "name": "Sonia Salinas",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://silvainjurylaw.com/team/sonia-salinas"
+      "source_url": "https://silvainjurylaw.com/team/sonia-salinas",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/250197",
+      "bar_number": "250197",
+      "admitted_year": 2007
     },
     {
       "name": "Alexis Centeno",
@@ -464,16 +504,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "10 of 37 named attorneys hold an active California licence and none carries an adverse status. 27 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
-      "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "No named attorney carries a disbarment, a suspension or a disciplinary resignation on the State Bar of California's record, across the 10 we identified. Administrative suspensions, which the State Bar states are non-disciplinary, are not counted here"
     },
     "G3": {
       "pass": false,
@@ -663,23 +703,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 68,
+    "total": 65,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (5/25).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 5,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 8.3 years since admission across 10 of 37 named attorneys (longest 19, shortest 1) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -836,30 +876,28 @@
         ]
       }
     },
-    "floor_abc": 33,
+    "floor_abc": 38,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 2,
+      "gap": 5,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
+        "A2 Experience: +5 available",
         "D1 Website trust & experience: +5.0 available"
       ]
     },
-    "raw": 47.3,
-    "assessed": 70,
+    "raw": 52.3,
+    "assessed": 80,
     "coverage": 1.0,
-    "floor_abc_pct": 0.868,
+    "floor_abc_pct": 0.792,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

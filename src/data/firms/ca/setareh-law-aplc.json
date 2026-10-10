@@ -5,7 +5,7 @@
   "website": "https://www.setarehfirm.com/",
   "domain": "setarehfirm.com",
   "phone": "(310) 659-1826",
-  "status": "certified",
+  "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
@@ -50,31 +50,51 @@
       "role": "Attorney",
       "role_source": "firm bio heading",
       "bar_state": "NY",
-      "source_url": "https://www.setarehfirm.com/attorneys/daniel-setareh/"
+      "source_url": "https://www.setarehfirm.com/attorneys/daniel-setareh/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/251448",
+      "bar_number": "251448",
+      "admitted_year": 2007
     },
     {
       "name": "LaShon Harris",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://www.setarehfirm.com/attorneys/lashon-harris/"
+      "source_url": "https://www.setarehfirm.com/attorneys/lashon-harris/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/257578",
+      "bar_number": "257578",
+      "admitted_year": 2008
     },
     {
       "name": "Lawdan K. Dayani",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://www.setarehfirm.com/attorneys/lawdan-k-dayani/"
+      "source_url": "https://www.setarehfirm.com/attorneys/lawdan-k-dayani/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/337803",
+      "bar_number": "337803",
+      "admitted_year": 2021
     },
     {
       "name": "Chanel Katiraie",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://www.setarehfirm.com/attorneys/chanel-katiraie/"
+      "source_url": "https://www.setarehfirm.com/attorneys/chanel-katiraie/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/315825",
+      "bar_number": "315825",
+      "admitted_year": 2017
     },
     {
       "name": "Randall Baker",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://www.setarehfirm.com/attorneys/randall-baker/"
+      "source_url": "https://www.setarehfirm.com/attorneys/randall-baker/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/231721",
+      "bar_number": "231721",
+      "admitted_year": 2004
     },
     {
       "name": "Eli S. Cohen",
@@ -87,7 +107,11 @@
       "role": "Personal Injury Attorney",
       "role_source": "firm bio heading",
       "bar_state": "NY",
-      "source_url": "https://www.setarehfirm.com/santa-rosa/"
+      "source_url": "https://www.setarehfirm.com/santa-rosa/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/282742",
+      "bar_number": "282742",
+      "admitted_year": 2012
     },
     {
       "name": "San Diego",
@@ -240,16 +264,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-10",
+      "evidence": "6 of 7 named attorneys hold an active California licence and none carries an adverse status. 1 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
       "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-10",
+      "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
+      "evidence": "No disciplinary record is held against any of the 6 attorneys we identified. Eli S. Cohen could not be told apart from 6 namesakes, one of whom is not eligible to practise. Held open."
     },
     "G3": {
       "pass": false,
@@ -430,23 +454,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 74,
-    "tier": "Certified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "total": 73,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (7/25).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 7,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 7,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 14.5 years since admission across 6 of 8 named attorneys (longest 22, shortest 5) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -603,30 +627,28 @@
         ]
       }
     },
-    "floor_abc": 33,
+    "floor_abc": 40,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 11,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +5.0 available"
+        "D1 Website trust & experience: +5.0 available",
+        "A2 Experience: +3 available"
       ]
     },
-    "raw": 51.5,
-    "assessed": 70,
+    "raw": 58.5,
+    "assessed": 80,
     "coverage": 1.0,
-    "floor_abc_pct": 0.868,
+    "floor_abc_pct": 0.833,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }
