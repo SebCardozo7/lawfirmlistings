@@ -37,15 +37,7 @@
       "source_url": "https://maps.google.com/?cid=3568287222519110580&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "Why Choose Morano International",
-      "role": "P.A.?",
-      "role_source": "firm roster listing",
-      "bar_state": "NY",
-      "source_url": "https://www.moranolaw.com/firm-profile/"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English"
   ],
@@ -253,8 +245,8 @@
   "score": {
     "total": 17,
     "tier": "Verified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -274,8 +266,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
           },
           {
             "code": "A5",
@@ -430,16 +422,16 @@
       "needed": 70,
       "gap": 53,
       "floor_met": false,
-      "coverage_met": true,
+      "coverage_met": false,
       "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
         "A2 Experience: +10 available",
-        "A6 Roster verifiability: +9 available",
         "D2 Search authority: +8 available"
       ]
     },
     "raw": 12.1,
     "assessed": 70,
-    "coverage": 1.0,
+    "coverage": 0.886,
     "floor_abc_pct": 0.289,
     "gates_unavailable": [
       "G1"
@@ -447,7 +439,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 70,
+    "assessable": 79,
     "comparable": true
   }
 }
