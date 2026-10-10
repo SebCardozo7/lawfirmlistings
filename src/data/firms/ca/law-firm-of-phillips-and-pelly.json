@@ -42,14 +42,22 @@
       "name": "John Phillips",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://sdinjury.com/team/john-phillips/"
+      "source_url": "https://sdinjury.com/team/john-phillips/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/241508",
+      "bar_number": "241508",
+      "admitted_year": 2006
     },
     {
       "name": "Oliver Pelly",
       "role": "Managing Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://sdinjury.com/team/oliver-pelly/"
+      "source_url": "https://sdinjury.com/team/oliver-pelly/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/190116",
+      "bar_number": "190116",
+      "admitted_year": 1997
     },
     {
       "name": "Chula Vista",
@@ -61,7 +69,11 @@
       "name": "Del Mar",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://sdinjury.com/del-mar/"
+      "source_url": "https://sdinjury.com/del-mar/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/236818",
+      "bar_number": "236818",
+      "admitted_year": 2005
     },
     {
       "name": "El Cajon",
@@ -267,16 +279,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "3 of 15 named attorneys hold an active California licence and none carries an adverse status. 12 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
-      "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "No named attorney carries a disbarment, a suspension or a disciplinary resignation on the State Bar of California's record, across the 3 we identified. Administrative suspensions, which the State Bar states are non-disciplinary, are not counted here"
     },
     "G3": {
       "pass": false,
@@ -394,23 +406,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 59,
+    "total": 64,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 9,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 23.3 years since admission across 3 of 13 named attorneys (longest 29, shortest 20) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -567,11 +579,11 @@
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -580,17 +592,15 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 32.5,
-    "assessed": 55,
-    "coverage": 0.786,
-    "floor_abc_pct": 0.739,
+    "raw": 41.5,
+    "assessed": 65,
+    "coverage": 0.812,
+    "floor_abc_pct": 0.788,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

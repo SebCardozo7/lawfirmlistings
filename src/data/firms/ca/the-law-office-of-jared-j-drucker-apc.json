@@ -5,7 +5,7 @@
   "website": "https://www.jaredjdruckerlaw.com/",
   "domain": "jaredjdruckerlaw.com",
   "phone": "(888) 588-0578",
-  "status": "verified",
+  "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
@@ -141,15 +141,15 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-09",
+      "source": "the State Bar of California's licensee search, partial",
+      "evidence": "None of the 1 attorneys this firm names could be found in the State Bar of California's register, so there is nothing here to clear or to fault."
     },
     "G2": {
       "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-09",
+      "source": "the State Bar of California's licensee search, partial",
+      "evidence": "No attorney this firm names could be identified in the register, so no disciplinary record could be looked up either."
     },
     "G3": {
       "pass": false,
@@ -301,9 +301,9 @@
   },
   "score": {
     "total": 42,
-    "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "tier": "Listed",
+    "verdict": "2 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -491,8 +491,6 @@
     "coverage": 1.0,
     "floor_abc_pct": 0.526,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],

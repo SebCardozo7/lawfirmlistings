@@ -5,7 +5,7 @@
   "website": "https://barrypgoldberg.com/",
   "domain": "barrypgoldberg.com",
   "phone": "(818) 222-6994",
-  "status": "verified",
+  "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
@@ -43,21 +43,33 @@
       "role": "Trial Associate",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://barrypgoldberg.com/our-team/matthew-stearns/"
+      "source_url": "https://barrypgoldberg.com/our-team/matthew-stearns/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/311525",
+      "bar_number": "311525",
+      "admitted_year": 2016
     },
     {
       "name": "Barry P. Goldberg",
       "role": "Attorney",
       "role_source": "firm bio heading",
       "bar_state": "NY",
-      "source_url": "https://barrypgoldberg.com/our-team/barry-p-goldberg/"
+      "source_url": "https://barrypgoldberg.com/our-team/barry-p-goldberg/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/115667",
+      "bar_number": "115667",
+      "admitted_year": 1984
     },
     {
       "name": "Christina Boyadzhyan",
       "role": "Associate Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://barrypgoldberg.com/our-team/christina-boyadzhyan/"
+      "source_url": "https://barrypgoldberg.com/our-team/christina-boyadzhyan/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/351618",
+      "bar_number": "351618",
+      "admitted_year": 2023
     },
     {
       "name": "Biscuit Goldberg",
@@ -201,16 +213,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "3 of 6 named attorneys hold an active California licence and none carries an adverse status. 3 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
       "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-09",
+      "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
+      "evidence": "No disciplinary record is held against any of the 3 attorneys we identified. Andrew Goodman could not be told apart from 5 namesakes, one of whom is not eligible to practise. Held open."
     },
     "G3": {
       "pass": false,
@@ -341,23 +353,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 59,
-    "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-05",
+    "total": 63,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 3,
+        "score": 12,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 18.3 years since admission across 3 of 6 named attorneys (longest 42, shortest 3) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -514,30 +526,28 @@
         ]
       }
     },
-    "floor_abc": 23,
+    "floor_abc": 32,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
-      "floor_met": false,
+      "gap": 7,
+      "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "B1 Results published: +6 available",
+        "B2 Specificity: +5 available"
       ]
     },
-    "raw": 41.5,
-    "assessed": 70,
+    "raw": 50.5,
+    "assessed": 80,
     "coverage": 1.0,
-    "floor_abc_pct": 0.605,
+    "floor_abc_pct": 0.667,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

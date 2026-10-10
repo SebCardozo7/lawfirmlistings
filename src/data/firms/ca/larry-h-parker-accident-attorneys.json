@@ -92,61 +92,97 @@
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/marissa-hauck/"
+      "source_url": "https://www.larryhparker.com/attorney/marissa-hauck/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/356799",
+      "bar_number": "356799",
+      "admitted_year": 2024
     },
     {
       "name": "Mitchell Beck",
       "role": "Senior Trial Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/mitchell-beck/"
+      "source_url": "https://www.larryhparker.com/attorney/mitchell-beck/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/292349",
+      "bar_number": "292349",
+      "admitted_year": 2013
     },
     {
       "name": "Paul Philips",
       "role": "Senior Trial Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/paul-philips/"
+      "source_url": "https://www.larryhparker.com/attorney/paul-philips/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/187928",
+      "bar_number": "187928",
+      "admitted_year": 1997
     },
     {
       "name": "Vy Nguyen",
       "role": "Supervising Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/vy-nguyen/"
+      "source_url": "https://www.larryhparker.com/attorney/vy-nguyen/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/260950",
+      "bar_number": "260950",
+      "admitted_year": 2008
     },
     {
       "name": "Ashley Ruiz",
       "role": "Associate Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/ashley-ruiz/"
+      "source_url": "https://www.larryhparker.com/attorney/ashley-ruiz/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/265415",
+      "bar_number": "265415",
+      "admitted_year": 2009
     },
     {
       "name": "Harold Caylao",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/harold-caylao/"
+      "source_url": "https://www.larryhparker.com/attorney/harold-caylao/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/356552",
+      "bar_number": "356552",
+      "admitted_year": 2024
     },
     {
       "name": "Barry Zlotowicz",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/barry-zlotowicz/"
+      "source_url": "https://www.larryhparker.com/attorney/barry-zlotowicz/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/171516",
+      "bar_number": "171516",
+      "admitted_year": 1994
     },
     {
       "name": "Brandon Shiener",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/brandon-shiener/"
+      "source_url": "https://www.larryhparker.com/attorney/brandon-shiener/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/327303",
+      "bar_number": "327303",
+      "admitted_year": 2019
     },
     {
       "name": "Jeff Billings",
       "role": "Managing Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/jeff-billings/"
+      "source_url": "https://www.larryhparker.com/attorney/jeff-billings/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/165229",
+      "bar_number": "165229",
+      "admitted_year": 1993
     },
     {
       "name": "Wesley Guzman",
@@ -160,7 +196,11 @@
       "role": "Associate Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.larryhparker.com/attorney/jonathan-arm/"
+      "source_url": "https://www.larryhparker.com/attorney/jonathan-arm/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/354585",
+      "bar_number": "354585",
+      "admitted_year": 2024
     }
   ],
   "languages": [
@@ -423,16 +463,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "10 of 11 named attorneys hold an active California licence and none carries an adverse status. 1 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
-      "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "No named attorney carries a disbarment, a suspension or a disciplinary resignation on the State Bar of California's record, across the 10 we identified. Administrative suspensions, which the State Bar states are non-disciplinary, are not counted here"
     },
     "G3": {
       "pass": false,
@@ -556,23 +596,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 49,
+    "total": 54,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-05",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 3,
+        "score": 12,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 15.5 years since admission across 10 of 11 named attorneys (longest 33, shortest 2) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -729,30 +769,28 @@
         ]
       }
     },
-    "floor_abc": 19,
+    "floor_abc": 28,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 21,
+      "gap": 16,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "B1 Results published: +6 available",
+        "B2 Specificity: +5 available"
       ]
     },
-    "raw": 34.5,
-    "assessed": 70,
+    "raw": 43.5,
+    "assessed": 80,
     "coverage": 1.0,
-    "floor_abc_pct": 0.5,
+    "floor_abc_pct": 0.583,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

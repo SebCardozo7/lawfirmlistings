@@ -84,20 +84,32 @@
       "role": "Managing Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://sargentlawfirm.com/attorney/nicole-slattery/"
+      "source_url": "https://sargentlawfirm.com/attorney/nicole-slattery/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/222344",
+      "bar_number": "222344",
+      "admitted_year": 2002
     },
     {
       "name": "Ryan Pickett",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://sargentlawfirm.com/attorney/ryan-pickett/"
+      "source_url": "https://sargentlawfirm.com/attorney/ryan-pickett/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/333678",
+      "bar_number": "333678",
+      "admitted_year": 2021
     },
     {
       "name": "Ryan Sargent",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://sargentlawfirm.com/attorney/ryan-sargent/"
+      "source_url": "https://sargentlawfirm.com/attorney/ryan-sargent/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/255841",
+      "bar_number": "255841",
+      "admitted_year": 2008
     },
     {
       "name": "Spinal Cord",
@@ -268,16 +280,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "3 of 7 named attorneys hold an active California licence and none carries an adverse status. 4 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
-      "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "No named attorney carries a disbarment, a suspension or a disciplinary resignation on the State Bar of California's record, across the 3 we identified. Administrative suspensions, which the State Bar states are non-disciplinary, are not counted here"
     },
     "G3": {
       "pass": false,
@@ -456,23 +468,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 74,
+    "total": 76,
     "tier": "Certified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar A (9/25).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 9,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 15.7 years since admission across 3 of 6 named attorneys (longest 24, shortest 5) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -629,30 +641,28 @@
         ]
       }
     },
-    "floor_abc": 35,
+    "floor_abc": 44,
     "next_tier": {
       "name": "Distinguished",
       "needed": 85,
-      "gap": 11,
+      "gap": 9,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +5.0 available"
+        "D1 Website trust & experience: +5.0 available",
+        "A5 Accountability: +3 available"
       ]
     },
-    "raw": 52.0,
-    "assessed": 70,
+    "raw": 61.0,
+    "assessed": 80,
     "coverage": 1.0,
-    "floor_abc_pct": 0.921,
+    "floor_abc_pct": 0.917,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

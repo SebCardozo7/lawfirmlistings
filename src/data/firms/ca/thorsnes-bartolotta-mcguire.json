@@ -5,7 +5,7 @@
   "website": "https://www.tbmlawyers.com/",
   "domain": "tbmlawyers.com",
   "phone": "(619) 236-9363",
-  "status": "verified",
+  "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
@@ -35,70 +35,110 @@
       "name": "Christian Hulburt",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/christian-hulburt"
+      "source_url": "https://www.tbmlawyers.com/attorneys/christian-hulburt",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/138089",
+      "bar_number": "138089",
+      "admitted_year": 1988
     },
     {
       "name": "Vincent J. Bartolotta Jr.",
       "role": "Founding Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/vincent-j-bartolotta-jr"
+      "source_url": "https://www.tbmlawyers.com/attorneys/vincent-j-bartolotta-jr",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/55139",
+      "bar_number": "55139",
+      "admitted_year": 1973
     },
     {
       "name": "Kevin F. Quinn",
       "role": "Senior Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/kevin-f-quinn"
+      "source_url": "https://www.tbmlawyers.com/attorneys/kevin-f-quinn",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/106224",
+      "bar_number": "106224",
+      "admitted_year": 1982
     },
     {
       "name": "Karen R. Frostrom",
       "role": "Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/karen-r-frostrom"
+      "source_url": "https://www.tbmlawyers.com/attorneys/karen-r-frostrom",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/207044",
+      "bar_number": "207044",
+      "admitted_year": 2000
     },
     {
       "name": "Steve Vosseller",
       "role": "Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/steve-vosseller"
+      "source_url": "https://www.tbmlawyers.com/attorneys/steve-vosseller",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/211265",
+      "bar_number": "211265",
+      "admitted_year": 2000
     },
     {
       "name": "John J. O'Brien",
       "role": "Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/john-j-obrien"
+      "source_url": "https://www.tbmlawyers.com/attorneys/john-j-obrien",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/253392",
+      "bar_number": "253392",
+      "admitted_year": 2007
     },
     {
       "name": "Karla Lopez",
       "role": "Associate Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/karla-lopez"
+      "source_url": "https://www.tbmlawyers.com/attorneys/karla-lopez",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/340231",
+      "bar_number": "340231",
+      "admitted_year": 2021
     },
     {
       "name": "Andrew G. Nagurney",
       "role": "Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/drew-nagurney"
+      "source_url": "https://www.tbmlawyers.com/attorneys/drew-nagurney",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/301894",
+      "bar_number": "301894",
+      "admitted_year": 2014
     },
     {
       "name": "Michael T. Thorsnes",
       "role": "Of Counsel",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/michael-t-thorsnes"
+      "source_url": "https://www.tbmlawyers.com/attorneys/michael-t-thorsnes",
+      "registry_status": "Inactive",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/42670",
+      "bar_number": "42670",
+      "admitted_year": 1969
     },
     {
       "name": "John F. McGuire Jr.",
       "role": "Senior Partner",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://www.tbmlawyers.com/attorneys/john-f-mcguire-jr"
+      "source_url": "https://www.tbmlawyers.com/attorneys/john-f-mcguire-jr",
+      "registry_status": "Inactive",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/69176",
+      "bar_number": "69176",
+      "admitted_year": 1976
     }
   ],
   "languages": [
@@ -202,15 +242,15 @@
   "gates": {
     "G1": {
       "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-09",
+      "source": "the State Bar of California's licensee search, pending review of a licence status",
+      "evidence": "8 of 10 named attorneys hold an active California licence. 2 do not (Michael T. Thorsnes: Inactive; John F. McGuire Jr.: Inactive). No discipline is recorded against any of them, so this is a licence status rather than a finding of misconduct, and either record may be out of date."
     },
     "G2": {
-      "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "No named attorney carries a disbarment, a suspension or a disciplinary resignation on the State Bar of California's record, across the 10 we identified. Administrative suspensions, which the State Bar states are non-disciplinary, are not counted here"
     },
     "G3": {
       "pass": false,
@@ -394,23 +434,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 52,
-    "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-05",
+    "total": 55,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar E (4/15).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 3,
+        "score": 12,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 33.0 years since admission across 10 of 10 named attorneys (longest 57, shortest 5) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -461,7 +501,7 @@
         ]
       },
       "C": {
-        "score": 12,
+        "score": 10,
         "max": 20,
         "subs": [
           {
@@ -483,10 +523,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2025-10-08) · a sample of five per business listing, not every review"
+            "evidence": "0 of 5 sampled reviews are from the last 12 months (newest 2025-10-08) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -567,30 +607,28 @@
         ]
       }
     },
-    "floor_abc": 24,
+    "floor_abc": 31,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 18,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +5.0 available"
+        "D1 Website trust & experience: +5.0 available",
+        "E4 Availability: +5 available"
       ]
     },
-    "raw": 36.4,
-    "assessed": 70,
+    "raw": 43.9,
+    "assessed": 80,
     "coverage": 1.0,
-    "floor_abc_pct": 0.618,
+    "floor_abc_pct": 0.646,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

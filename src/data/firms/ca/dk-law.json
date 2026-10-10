@@ -5,7 +5,7 @@
   "website": "https://dklaw.com/",
   "domain": "dklaw.com",
   "phone": "(909) 265-7444",
-  "status": "verified",
+  "status": "listed",
   "practices": [
     {
       "slug": "personal-injury",
@@ -113,14 +113,22 @@
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/normandy-kidd/"
+      "source_url": "https://dklaw.com/attorneys/normandy-kidd/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/303921",
+      "bar_number": "303921",
+      "admitted_year": 2015
     },
     {
       "name": "Lauren Hoffman",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/lauren-hoffman/"
+      "source_url": "https://dklaw.com/attorneys/lauren-hoffman/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/355333",
+      "bar_number": "355333",
+      "admitted_year": 2024
     },
     {
       "name": "Daniel Kim",
@@ -134,14 +142,22 @@
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/ben-mcfadden/"
+      "source_url": "https://dklaw.com/attorneys/ben-mcfadden/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/257451",
+      "bar_number": "257451",
+      "admitted_year": 2008
     },
     {
       "name": "Craig Dunkin",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/craig-dunkin/"
+      "source_url": "https://dklaw.com/attorneys/craig-dunkin/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/149422",
+      "bar_number": "149422",
+      "admitted_year": 1990
     },
     {
       "name": "Matt Taylor",
@@ -155,21 +171,33 @@
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/anthony-burrola/"
+      "source_url": "https://dklaw.com/attorneys/anthony-burrola/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/326965",
+      "bar_number": "326965",
+      "admitted_year": 2019
     },
     {
       "name": "Samar Hellar",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/samar-hellar/"
+      "source_url": "https://dklaw.com/attorneys/samar-hellar/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/355688",
+      "bar_number": "355688",
+      "admitted_year": 2024
     },
     {
       "name": "Caryn Sanders",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/caryn-sanders/"
+      "source_url": "https://dklaw.com/attorneys/caryn-sanders/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/175378",
+      "bar_number": "175378",
+      "admitted_year": 1994
     },
     {
       "name": "Nick D’Agostino",
@@ -183,28 +211,44 @@
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/issa-mikel/"
+      "source_url": "https://dklaw.com/attorneys/issa-mikel/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/289097",
+      "bar_number": "289097",
+      "admitted_year": 2013
     },
     {
       "name": "Greta Katz",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/greta-katz/"
+      "source_url": "https://dklaw.com/attorneys/greta-katz/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/249400",
+      "bar_number": "249400",
+      "admitted_year": 2007
     },
     {
       "name": "Kara Nunez",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/kara-nunez/"
+      "source_url": "https://dklaw.com/attorneys/kara-nunez/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/279059",
+      "bar_number": "279059",
+      "admitted_year": 2011
     },
     {
       "name": "Jehrid Mosley",
       "role": "Attorney",
       "role_source": "firm bio page",
       "bar_state": "NY",
-      "source_url": "https://dklaw.com/attorneys/jehrid-mosley/"
+      "source_url": "https://dklaw.com/attorneys/jehrid-mosley/",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/327851",
+      "bar_number": "327851",
+      "admitted_year": 2019
     },
     {
       "name": "All The Way Promise",
@@ -520,16 +564,16 @@
   },
   "gates": {
     "G1": {
-      "pass": false,
-      "evidence": "California does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-09",
+      "evidence": "11 of 16 named attorneys hold an active California licence and none carries an adverse status. 5 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
       "pass": false,
-      "evidence": "California does not publish a disciplinary register we can query.",
-      "source": "no queryable source",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-10-09",
+      "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
+      "evidence": "No disciplinary record is held against any of the 11 attorneys we identified. Daniel Kim could not be told apart from 8 namesakes, one of whom is not eligible to practise. Held open."
     },
     "G3": {
       "pass": false,
@@ -656,23 +700,23 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 51,
-    "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-05",
+    "total": 53,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 3,
+        "score": 10,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 7,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 14.7 years since admission across 11 of 16 named attorneys (longest 36, shortest 2) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -829,30 +873,28 @@
         ]
       }
     },
-    "floor_abc": 21,
+    "floor_abc": 28,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 19,
+      "gap": 17,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "B1 Results published: +6 available",
+        "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 35.5,
-    "assessed": 70,
+    "raw": 42.5,
+    "assessed": 80,
     "coverage": 1.0,
-    "floor_abc_pct": 0.553,
+    "floor_abc_pct": 0.583,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }
