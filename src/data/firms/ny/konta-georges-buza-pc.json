@@ -5,7 +5,7 @@
   "website": "https://kontageorges.com/",
   "domain": "kontageorges.com",
   "phone": "(212) 710-5166",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "criminal-defense",
@@ -73,14 +73,6 @@
       "admitted_year": 2005,
       "registry_status": "Currently registered",
       "registry_basis": "firm named in the registration",
-      "checked_at": "2026-10-01"
-    },
-    {
-      "name": "School Disciplinary Hearings/Title",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://kontageorges.com/student-disciplinary-hearings/",
-      "registry_note": "not found",
       "checked_at": "2026-10-01"
     }
   ],
@@ -352,14 +344,14 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (8/25).",
-    "computed_at": "2026-10-05",
+    "computed_at": "2026-10-10",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 20,
+        "score": 21,
         "max": 25,
         "subs": [
           {
@@ -368,15 +360,15 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 17.0 years since admission across 4 of 5 named attorneys (longest 21, shortest 12) · NYS Attorney Registration database"
+            "evidence": "Mean 17.0 years since admission across 4 of 4 named attorneys (longest 21, shortest 12) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 7.5,
+            "pts": 9,
             "max": 9,
             "source": "registry",
-            "evidence": "4 of 5 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "4 of 4 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -525,11 +517,11 @@
         ]
       }
     },
-    "floor_abc": 48,
+    "floor_abc": 50,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 85,
+      "gap": 15,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -538,10 +530,10 @@
         "D2 Search authority: +4 available"
       ]
     },
-    "raw": 61.1,
+    "raw": 62.6,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.851,
+    "floor_abc_pct": 0.877,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,
