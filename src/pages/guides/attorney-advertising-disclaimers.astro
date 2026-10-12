@@ -1,0 +1,337 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+
+/**
+ * The notice that belongs beside a published case result, counted across the directory.
+ *
+ * Every page ranking for "attorney advertising rules" restates the rules. None of them counts
+ * what firms do, and the field that would answer it has been sitting in the collection unread by
+ * any guide: `results_published.disclaimer`.
+ *
+ * The fields, and the script that writes each, because two fields that sound alike have put a
+ * false sentence on a live page here before:
+ *
+ *   results_published.disclaimer  scripts/crawl_results.py, DISCLAIMER regex over the text of
+ *                                 the firm's own results page. It is TRUE when that page carries
+ *                                 "prior results", "results may vary", "every case is different"
+ *                                 or a near relative. It says nothing about the rest of the site.
+ *   digital.trust_pages.disclaimer  scripts/crawl_public.py, and a different fact entirely: a
+ *                                 /disclaimer/, /legal-notice/ or /terms/ URL exists somewhere on
+ *                                 the site. A firm can be true on one and false on the other, and
+ *                                 214 of them are. Never read one as the other.
+ *   results_published.url         the results page we found. Absent means we found no such page,
+ *                                 which is why `readable` is true for 671 firms that publish
+ *                                 nothing: there was nothing to fail to read.
+ *   results_published.readable    false only where a page was found and told us nothing, which
+ *                                 leaves pillar B pending rather than scoring the firm zero.
+ *   score.pillars.B.subs[B3]      4 points, all or nothing, awarded off the first field above.
+ *                                 B3 is NOT the same sub-factor for every firm: score.py reads
+ *                                 escrow for a transactional practice and billing for a domestic
+ *                                 one under the same code, so every B3 figure here is restricted
+ *                                 to the firms scored through the results branch, meaning those
+ *                                 carrying neither a `transaction` nor a `domestic` block.
+ *
+ * No dollar figure appears on this page. The amounts in `results_published.amounts` are what a
+ * firm says it recovered, nothing in the record marks any of them verified, and `results[]`, the
+ * block that would, is empty on every record in the directory. We count the pages, not the money.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+type Firm = (typeof firms)[number];
+const rp = (f: Firm) => f.data.results_published;
+
+// What happened when we went looking for a results page, in four non-overlapping states that
+// add back to the directory.
+const withPage = firms.filter(f => rp(f)?.url);
+const noPage = firms.filter(f => !rp(f)?.url);
+const read = withPage.filter(f => rp(f)!.readable);
+const unread = withPage.filter(f => !rp(f)!.readable);
+const publishers = read.filter(f => (rp(f)!.count ?? 0) > 0);
+const readNothing = read.filter(f => (rp(f)!.count ?? 0) === 0);
+const uncounted = unread.length + readNothing.length;
+
+const withNotice = publishers.filter(f => rp(f)!.disclaimer === true);
+const noNotice = publishers.filter(f => rp(f)!.disclaimer !== true);
+
+// The firms printing money, which is the subset the rules are written about.
+const money = publishers.filter(f => (rp(f)!.amounts ?? []).length > 0);
+const moneyNoNotice = money.filter(f => rp(f)!.disclaimer !== true);
+
+// The falsification. The obvious claim is that the firms making the largest claims are the ones
+// skipping the notice. It is computed here rather than asserted, and it comes out the other way.
+const agg = publishers.filter(f => (rp(f)!.aggregate_claims ?? []).length > 0);
+const aggNotice = agg.filter(f => rp(f)!.disclaimer === true);
+const plain = publishers.filter(f => (rp(f)!.aggregate_claims ?? []).length === 0);
+const plainNotice = plain.filter(f => rp(f)!.disclaimer === true);
+const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+
+// Where the sentence actually lives. Restricted to firms whose site crawl we hold, because a
+// firm we never crawled is not a firm without a disclaimer page.
+const crawled = publishers.filter(f => f.data.digital.trust_pages);
+const silentCrawled = crawled.filter(f => rp(f)!.disclaimer !== true);
+const silentButPage = silentCrawled.filter(f => f.data.digital.trust_pages!.disclaimer === true);
+const silentNowhere = silentCrawled.filter(f => !f.data.digital.trust_pages!.disclaimer);
+
+// B3, restricted to the branch that reads the disclaimer. See the note above.
+const resultsBranch = firms.filter(f => !f.data.transaction && !f.data.domestic);
+const b3 = (f: Firm) => f.data.score?.pillars.B.subs.find(s => s.code === 'B3');
+const b3Scored = resultsBranch.filter(f => b3(f) && b3(f)!.source !== 'pending');
+const b3Zero = b3Scored.filter(f => b3(f)!.pts === 0);
+const b3ZeroSilent = b3Zero.filter(f => (rp(f)?.count ?? 0) === 0);
+
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : 0;
+};
+const num = (xs: (number | null | undefined)[]) => xs.filter((x): x is number => x != null);
+const rawOf = (f: Firm) => f.data.score?.raw;
+const totalOf = (f: Firm) => f.data.score?.total;
+const ratingOf = (f: Firm) => f.data.reviews.google?.rating;
+
+const rawNotice = mean(num(withNotice.map(rawOf)));
+const rawSilent = mean(num(noNotice.map(rawOf)));
+const totalNotice = mean(num(withNotice.map(totalOf)));
+const totalSilent = mean(num(noNotice.map(totalOf)));
+const ratingNotice = mean(num(withNotice.map(ratingOf)));
+const ratingSilent = mean(num(noNotice.map(ratingOf)));
+// Both halves in raw points, which is the only way this division means anything. A mean gap
+// divided by a median gap is two different quantities and was published here once.
+const b3Notice = mean(num(withNotice.map(f => b3(f)?.pts)));
+const b3Silent = mean(num(noNotice.map(f => b3(f)?.pts)));
+const rawGap = rawNotice - rawSilent;
+const b3Gap = b3Notice - b3Silent;
+const b3ShareOfGap = rawGap > 0 ? Math.round((b3Gap / rawGap) * 100) : 0;
+
+// By state, the eight markets holding the most publishing firms. Eight rather than a cutoff on
+// the count, so a fourteenth state opening does not turn the chart into a table.
+const stateRows = [...new Map(firms.map(f => [f.data.market.state, f.data.market.state_name]))]
+  .map(([code, name]) => {
+    const inState = publishers.filter(f => f.data.market.state === code);
+    const notice = inState.filter(f => rp(f)!.disclaimer === true);
+    return { code, name, n: inState.length, notice: notice.length };
+  })
+  .filter(r => r.n > 0)
+  .sort((a, b) => b.n - a.n || a.code.localeCompare(b.code));
+const topStates = stateRows.slice(0, 8);
+const restStates = stateRows.slice(8);
+const restFirms = restStates.reduce((n, r) => n + r.n, 0);
+const restNotice = restStates.reduce((n, r) => n + r.notice, 0);
+
+// The named examples, and only in the flattering direction. A firm that publishes figures with
+// no notice may keep that sentence in a footer our crawl does not read, and naming it here would
+// make an assertion about a named business that this record cannot support. These two are picked
+// by what they do publish: the most results carrying both a named court and the notice, tie-broken
+// on the slug so the page re-picks its own illustration as the data moves rather than on build order.
+const exemplars = withNotice
+  .filter(f => (rp(f)!.venues ?? []).length > 0)
+  .sort((a, b) => (rp(b)!.count ?? 0) - (rp(a)!.count ?? 0) || a.data.slug.localeCompare(b.data.slug))
+  .slice(0, 2);
+
+// New York is the one state whose rule this repo has actually read, so it is the only one the
+// page names. Its own figures and the leading share are both computed: "the highest of the large
+// markets" is a comparison in words, and a comparison in words is a hardcoded count.
+const nyRow = stateRows.find(r => r.code === 'NY');
+const topShare = [...topStates].sort((a, b) =>
+  b.notice / b.n - a.notice / a.n || a.code.localeCompare(b.code))[0];
+
+const markets = new Set(firms.map(f => f.data.market.city_slug)).size;
+const states = stateRows.length;
+// Derived rather than typed: both of these are New York firms today and a sentence saying so is
+// wrong the day the venue pattern learns a second state.
+const exemplarMarkets = [...new Set(exemplars.map(f => f.data.market.city))];
+const exemplarCityPath = exemplars.length
+  ? `/cities/${exemplars[0].data.market.city_slug}/${(exemplars[0].data.practices.find(pr => pr.primary) ?? exemplars[0].data.practices[0]).slug}/`
+  : '/practice-areas/personal-injury/';
+const dates = firms.map(f => rp(f)?.checked_at).filter(Boolean).sort() as string[];
+const asDate = (s: string) =>
+  new Date(s).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const firstRead = dates.length ? asDate(dates[0]) : null;
+const lastRead = dates.length ? asDate(dates[dates.length - 1]) : null;
+const snapshot = dates.length ? `${dates[0]} to ${dates[dates.length - 1]}` : '';
+
+// Computed, so a firm adding the sentence moves the headline instead of contradicting it. The
+// count leads and the scale sits beside it, and figuresFrom declares what date it is a snapshot of.
+const title = `${noNotice.length} of ${publishers.length} Law Firms Publishing Case Results `
+  + `Carry No Disclaimer`;
+const description = "We read the case results page of every firm in this directory and counted the "
+  + "prior-results notice that New York's advertising rules require.";
+---
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published firm's own case results page, read ${snapshot}`}
+      image="/og/results.png"
+      imageAlt="A row of bars standing for published case results, beside a check mark that is mostly faded out">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Prior-results disclaimers</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Study · Advertising and disclosure</span>
+    <h1>{title}</h1>
+    <p class="lede">A law firm that advertises what it won for somebody else is expected to say that the figure predicts nothing about anyone else's case. We went looking for a case results page on all {firms.length.toLocaleString('en-US')} firms in this directory and found one on {withPage.length}. Of the {publishers.length} that publish at least one outcome, <b>{withNotice.length}</b> carry that notice on the page and <b>{noNotice.length}</b> do not.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {firstRead && lastRead && <><span class="sep" aria-hidden="true"></span><span>Read {firstRead} to {lastRead}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="results" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#pages">What the pages carry</a></li>
+      <li><a href="#elsewhere">Where the sentence actually lives</a></li>
+      <li><a href="#rules">What the rules say, and about whom</a></li>
+      <li><a href="#score">What our own score does with it</a></li>
+      <li><a href="#clients">What it does not predict</a></li>
+      <li><a href="#limits">What this does not measure</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Case results pages across ${firms.length.toLocaleString('en-US')} published firms in ${markets} markets and ${states} states, read ${firstRead} to ${lastRead}.`}
+      items={[
+        `We found a case results page on <b>${withPage.length} of ${firms.length.toLocaleString('en-US')}</b> firms. The other <b>${noPage.length}</b> publish no such page at all, so there is no track record on their own site to check.`,
+        `Of the <b>${publishers.length}</b> firms publishing at least one outcome, <b>${noNotice.length}</b> carry no notice that a past result predicts nothing about another case. Among the <b>${money.length}</b> that print dollar figures, <b>${moneyNoNotice.length}</b> carry none.`,
+        `The sentence usually exists somewhere on the site: of the <b>${silentCrawled.length}</b> firms with no notice beside their figures, <b>${silentButPage.length}</b> keep a disclaimer or terms page elsewhere and <b>${silentNowhere.length}</b> have neither.`,
+        `The firms making the largest claims are not the ones skipping it. A firm-wide recovery total comes with the notice <b>${pct(aggNotice.length, agg.length)}%</b> of the time against <b>${pct(plainNotice.length, plain.length)}%</b> for firms publishing only individual outcomes.`,
+        `Our own scale is <b>4 of 100 points</b> on this one sentence, and <b>${b3ZeroSilent.length}</b> firms score zero on it for results they never published.`,
+      ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(noNotice.length), label: 'firms publish case results with no prior-results notice on the page', note: `out of ${publishers.length} publishing firms`, emphasis: true },
+        { value: String(noPage.length), label: 'publish no case results page at all', note: `out of ${firms.length.toLocaleString('en-US')} firms in the directory` },
+        { value: String(moneyNoNotice.length), label: 'print dollar figures with no notice beside them', note: `out of ${money.length} printing figures` },
+        { value: String(silentButPage.length), label: 'keep the sentence on another page instead', note: `out of ${silentCrawled.length} whose sites we crawled` },
+      ]}
+      source={`Read from every published firm's own case results page, ${snapshot}.`}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. We record what a firm publishes on one page of its own website. That is not a finding about whether a firm complies with its state's advertising rules, which is its bar association's question and not ours. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>A case results page is the one piece of a law firm's website that every hiring guide tells you to read. It is also the one page where a firm puts a number next to its own name.</p>
+    <p>We looked for that page on every firm in this directory and recorded four things about the ones we found: how many distinct outcomes it lists, whether a dollar figure is attached to any of them, whether a court or county is named, and whether the page carries a notice saying that a past result does not predict another one.</p>
+    <p><b>The fourth is the only one of the four that is anybody's rule.</b> A firm chooses how many results to publish and how much detail to give. The notice is the part a regulator has an opinion about, which makes it the one measurement here where the absence means something specific.</p>
+    <p>We count the page, not the money. The amounts these pages carry are what a firm says it recovered, nothing in our records marks any of them verified, and we repeat none of them anywhere on this site.</p>
+
+    <h2 id="pages">What the pages carry</h2>
+    <p>The first finding is about the denominator rather than the notice. <b>{noPage.length} of the {firms.length.toLocaleString('en-US')} firms here publish no case results page we could find.</b></p>
+    <StackBar
+      heading="What we found when we went looking for a case results page"
+      unit="firms"
+      segments={[
+        { label: 'Results published, with the notice on the page', value: withNotice.length },
+        { label: 'Results published, no notice on the page', value: noNotice.length },
+        { label: 'A results page that told us nothing countable', value: uncounted },
+        { label: 'No case results page at all', value: noPage.length },
+      ]}
+      caption={`Every published firm in the directory, in four states that do not overlap. The third band is mostly ours rather than the firms': ${unread.length} pages either refused us or carried nothing our check could count, and those keep pillar B pending rather than scoring the firm zero. The other ${readNothing.length} were read, listed no outcome, and are scored on it.`}
+    />
+    <p>Of the {read.length} pages we could read, {publishers.length} publish at least one outcome. <b>{withNotice.length} of those put the notice on the same page and {noNotice.length} do not.</b></p>
+    <p>Narrowing to the firms the question is sharpest about changes almost nothing. {money.length} firms print a dollar figure beside an outcome, and {moneyNoNotice.length} of them print no notice with it.</p>
+    <p>The notice is not a function of how much a firm publishes. The median publishing firm lists {median(withNotice.map(f => rp(f)!.count ?? 0))} distinct figures where the notice is there and {median(noNotice.map(f => rp(f)!.count ?? 0))} where it is not.</p>
+    <BarChart
+      heading="Firms carrying the notice beside their results, by state"
+      max={100}
+      rows={topStates.map(r => ({
+        label: r.name,
+        value: pct(r.notice, r.n),
+        display: `${r.notice} of ${r.n}`,
+        note: `${r.n} publishing firms`,
+        emphasis: r.code === 'NY',
+      }))}
+      caption={`The bar is the share and the printed figure is the count, because these states hold ${Math.min(...topStates.map(r => r.n))} to ${Math.max(...topStates.map(r => r.n))} publishing firms each. New York is highlighted because it is the one state whose advertising rule this directory has read. The other ${restStates.length} states hold ${restFirms} publishing firms between them, ${restNotice} of which carry the notice.`}
+    />
+    {nyRow && (
+      <p><b>New York is the one state here whose rule names an exact sentence, and {nyRow.n - nyRow.notice} of its {nyRow.n} publishing firms carry nothing like it on that page.</b> {topShare.code === 'NY'
+        ? 'It is also the highest share of the eight, which is the more useful way to read it: the best-covered large market in this directory is not close to unanimous.'
+        : `The highest share of the eight is ${topShare.name}, at ${topShare.notice} of ${topShare.n}, so the state with the most specific rule is not the state where the sentence turns up most.`}</p>
+    )}
+
+    <h2 id="elsewhere">Where the sentence actually lives</h2>
+    <p>This is the part that keeps the finding honest, and it needed a second field to establish. Our site crawl records separately whether a firm keeps a disclaimer, legal notice or terms page anywhere on its website, which is a different fact from what is printed beside the figures.</p>
+    <p>Of the {silentCrawled.length} publishing firms with no notice on the results page whose sites we crawled, <b>{silentButPage.length} keep such a page elsewhere</b> and {silentNowhere.length} have neither.</p>
+    <p>So this is mostly a question of placement rather than of candour. The sentence exists; it is one click away from the number it is about, in a footer link most readers will never open.</p>
+    <p>Two fields that sound like one fact are not one fact, and conflating them is how a page here once published a sentence that was false. We counted both and report both. <a href="/guides/what-law-firm-websites-publish/">We counted the rest of what these sites publish</a> in a separate study, where the same disclaimer page turns up as one of five page types.</p>
+
+    <h2 id="rules">What the rules say, and about whom</h2>
+    <p>Lawyer advertising is governed by each state's own rules of professional conduct, and they are not the same rules. We have read one of them closely enough to quote it, so one is all this page will name.</p>
+    <p>New York's Rule 7.1(e)(3) requires a specific disclaimer where an advertisement is reasonably likely to create an expectation about results. The state bar's ethics committee has held that <a href="https://nysba.org/ethics-opinion-848/" rel="noopener" target="_blank">paraphrasing the required wording does not satisfy the rule</a>, which matters for our count: our pattern accepts "results may vary" and "every case is different" alongside the exact phrase, so the figures above are generous.</p>
+    <p>Elsewhere the picture is a patchwork, and we do not report it as anything else. The Florida Bar's board has adopted guidance treating some past-results advertising as <a href="https://www.floridabar.org/the-florida-bar-news/board-clarifies-lawyer-ad-rules-enforcement/" rel="noopener" target="_blank">presumptively misleading in short-form media</a>. Nothing on this page asserts what any state outside New York requires, because nobody here has read those rules.</p>
+    <p><b>The reader-facing point does not depend on any of that.</b> A number on a marketing page is one firm's account of one case, and whether a state compels the sentence or not, the sentence is true.</p>
+
+    <h2 id="score">What our own score does with it</h2>
+    <p>Sub-factor B3 of the LFL Certification Score is this measurement, worth 4 of 100 points, and it is all or nothing: a firm either has the notice on that page or it does not. <a href="/methodology/">The methodology</a> sets out every sub-factor.</p>
+    <p>Three things about that are worth saying against ourselves.</p>
+    <p><b>It marks firms down for results they never published.</b> Of the {b3Scored.length.toLocaleString('en-US')} firms scored through this branch of pillar B, {b3Zero.length} score zero on B3, and {b3ZeroSilent.length} of those publish no case results at all. A firm that advertises nothing cannot fail to disclaim it, and our engine charges it 4 points anyway.</p>
+    <p><b>The same sentence is paid for in one pillar and not in another.</b> Sub-factor D1 awards half a point for a disclaimer or terms page existing on the site. So the {silentButPage.length} firms that keep the sentence one click away collect the D1 half point and lose the B3 four, for a difference that is about where a link sits.</p>
+    <p><b>Most of the score gap between the two groups is the sub-factor itself.</b> Firms carrying the notice average {rawNotice.toFixed(1)} raw points against {rawSilent.toFixed(1)}, a gap of {rawGap.toFixed(1)}. B3 alone accounts for {b3Gap.toFixed(1)} of it, which is {b3ShareOfGap}%. Our score says these firms are better and is mostly saying that they carry the sentence we award points for carrying.</p>
+
+    <h2 id="clients">What it does not predict</h2>
+    <p>The obvious story would be that the firms making the biggest claims are the ones leaving the caveat off. We computed it before writing it, and it is the other way round.</p>
+    <p>{agg.length} firms publish a firm-wide recovery total of the "more than X recovered for our clients" kind alongside their individual outcomes. <b>{pct(aggNotice.length, agg.length)}% of them carry the notice, against {pct(plainNotice.length, plain.length)}% of the {plain.length} firms publishing individual outcomes only.</b> The firms advertising hardest are more careful about the disclaimer, not less.</p>
+    <BarChart
+      heading="The two groups, on our scale and on Google's"
+      max={100}
+      rows={[
+        { label: 'Mean certification score, firms with the notice', value: totalNotice, display: `${totalNotice.toFixed(1)} of 100`, note: `${withNotice.length} firms`, emphasis: true },
+        { label: 'Mean certification score, firms without', value: totalSilent, display: `${totalSilent.toFixed(1)} of 100`, note: `${noNotice.length} firms`, emphasis: true },
+        { label: 'Mean Google rating, firms with the notice', value: (ratingNotice / 5) * 100, display: `${ratingNotice.toFixed(2)} of 5`, note: `${withNotice.length} firms` },
+        { label: 'Mean Google rating, firms without', value: (ratingSilent / 5) * 100, display: `${ratingSilent.toFixed(2)} of 5`, note: `${noNotice.length} firms` },
+      ]}
+      caption={`Each measure drawn as a share of its own maximum, with the real units printed. The emphasised pair is ours, and it is the pair that moves: ${Math.abs(ratingNotice - ratingSilent).toFixed(2)} of a star separates the two groups on what their clients said.`}
+    />
+    <p>Clients do not appear to notice at all. Mean Google rating is {ratingNotice.toFixed(2)} for firms carrying the notice and {ratingSilent.toFixed(2)} for firms without it, a difference of {Math.abs(ratingNotice - ratingSilent).toFixed(2)} of a star across {withNotice.length + noNotice.length} firms.</p>
+    <p>That is the shape earlier studies here keep finding. <a href="/guides/what-search-traffic-says-about-a-law-firm/">Almost everything a firm publishes about itself rises with its search visibility</a>, and the rating its clients gave it does not move with any of it.</p>
+    {exemplars.length === 2 && (
+      <p>The firms that do the whole thing are worth naming, and they are named in one direction only: a firm with no notice beside its figures may keep one in a footer our crawl does not read, and this record cannot tell those apart. <a href={`/firms/${exemplars[0].data.slug}/`}>{exemplars[0].data.name}</a> publishes {rp(exemplars[0])!.count} distinct figures with both a court named and the notice on the page, and <a href={`/firms/${exemplars[1].data.slug}/`}>{exemplars[1].data.name}</a> publishes {rp(exemplars[1])!.count}. Both sit in <a href={exemplarCityPath}>{exemplarMarkets.join(' and ')}</a>, which is an artefact of the court pattern described below rather than a fact about either market.</p>
+    )}
+
+    <h2 id="limits">What this does not measure</h2>
+    <p><b>One page, not a website.</b> The notice is counted on the results page and nowhere else. A firm carrying it in a global footer that our crawl reads as navigation rather than as page text is recorded as not carrying it, which is the single largest source of error here and is the reason the section above counts the separate disclaimer page.</p>
+    <p><b>A pattern, not a rule.</b> Our check accepts several wordings. New York requires one exact sentence, so the share of firms meeting New York's rule is lower than the share counted here, by an amount we have not measured.</p>
+    <p><b>A court named is a New York court.</b> The venue pattern behind the "court named" figure is written around New York's courts and counties, which is why {publishers.filter(f => (rp(f)!.venues ?? []).length > 0).length} of {publishers.length} publishing firms register one. That figure measures our pattern, and no national claim is built on it anywhere above.</p>
+    <p><b>Nothing here verifies an outcome.</b> We do not check any published figure against a docket. A firm publishing results carefully, with the notice and a court, is a firm publishing carefully, which is a real thing to know and is not the same as a confirmed record.</p>
+    <p>If we read the wrong page for a firm, or missed one, every profile links to the page we read. <a href="/list-your-firm/">Firms can correct that here</a>, and <a href="/guides/how-to-choose-a-criminal-defense-lawyer/">the companion study on criminal defense firms</a> covers the other half of this question, which is how many firms publish any outcome at all.</p>
+    <p class="muted" style="font-size:.86rem">Results pages read between {firstRead} and {lastRead}. Disclaimer and terms pages come from a separate site crawl that carries no date, which is a known gap in our own records.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted above has a profile showing the results page we read, its offices, client reviews and the evidence behind each sub-score.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/guides/how-to-choose-a-criminal-defense-lawyer/">Who publishes a case result at all</a></li>
+        <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
+        <li><a href="/guides/what-search-traffic-says-about-a-law-firm/">What search traffic says about a firm</a></li>
+        <li><a href="/methodology/">How the score is built</a></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>Is this your firm?</h4>
+      <p>If we read the wrong page, or missed a disclaimer that is on it, the profile links to the page we read.</p>
+      <a class="btn" href="/list-your-firm/">List or correct a firm</a>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
