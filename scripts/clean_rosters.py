@@ -44,47 +44,12 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# A place, not a person. These are the ones the crawler actually picked up, from location pages
-# and office lists, and nothing is removed for being a place in general: a surname can be a
-# city, so the list is explicit and reviewed rather than inferred.
-PLACES = {
-    "san diego", "los angeles", "chula vista", "long beach", "san francisco", "san bernardino",
-    "san jose", "college park", "huntington beach", "santa monica", "costa mesa",
-    "newport beach", "santa ana", "santa barbara",
-}
-
-# A section heading the crawler read as a name.
-HEADINGS = {
-    "recent posts", "bar admissions", "court admissions", "post-conviction relief",
-    "professional association memberships", "our attorneys", "practice areas", "case results",
-}
-
-# An institution: a university, a hospital, a bar association, a foundation, an institute.
-INSTITUTION = re.compile(
-    r"\b(university|college|school|hospital|medical\s+cent(er|re)|health|clinic|"
-    # "council" is deliberately absent. The firm Council & Associates publishes Lashonda
-    # Council Rogers, who is one of its attorneys, and a surname is not an institution.
-    r"bar\s+association|association|foundation|institute|society)\b", re.I)
-
-# A line of marketing, which always reads as a sentence rather than a name.
-SLOGAN = re.compile(r"^(why\s|don'?t\s|your\s|we\s|our\s|get\s|call\s|free\s|experienced\s|"
-                    r"no\s+fee|biography\s+of\s)", re.I)
-
-# A statute or a topic, which the crawler takes off a practice page.
-TOPIC = re.compile(r"\b(act|contamination|litigation|lawsuit|settlements?|claims?)$", re.I)
-
-# Headings in another script, listed one by one and translated, because the rule that looked
-# obvious is wrong. "A name with no Latin letters is a heading" would have deleted thirty seven
-# real attorneys from one immigration firm: its Russian pages carry the whole team transliterated
-# into Cyrillic, Кармен Арсе is Carmen Arce and the practice is named after her. A script is not
-# evidence of anything. These five are headings, read and checked:
-#
-#   我们的律师 our attorneys · 律师 attorney · 우리 변호사들 our attorneys
-#   한국인 교통사고 안내센터 Korean traffic accident information centre
-#   休斯顿事故和意外伤害律师 Houston accident and injury attorneys
-FOREIGN_HEADINGS = {
-    "我们的律师", "律师", "우리 변호사들", "한국인 교통사고 안내센터", "休斯顿事故和意外伤害律师",
-}
+# The criterion lives in crawl_attorneys.py, which is the script that decides what a name is in
+# the first place. Keeping a second copy here is how the two drift: this file was written first,
+# the crawler learned about location pages afterwards, and for a few hours the cleanup knew
+# about 114 names and the crawler about 173.
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from crawl_attorneys import is_a_thing_not_a_person  # noqa: E402
 
 # Words the crawler glues to the front of a real name. The name stays; the word goes.
 PREFIX = re.compile(r"^(biography|about|meet|attorney|profile)\s+(?=[A-Z])", re.I)
@@ -93,22 +58,9 @@ PREFIX = re.compile(r"^(biography|about|meet|attorney|profile)\s+(?=[A-Z])", re.
 def is_not_a_person(name: str) -> str | None:
     """The category this name falls in, or None when it is left alone."""
     n = " ".join((name or "").split())
-    low = n.lower()
     if not n:
         return "empty"
-    if low in PLACES:
-        return "a place"
-    if low in HEADINGS:
-        return "a section heading"
-    if n in FOREIGN_HEADINGS:
-        return "a heading in another script"
-    if SLOGAN.match(n) and len(n.split()) > 2:
-        return "a line of marketing"
-    if INSTITUTION.search(n):
-        return "an institution"
-    if TOPIC.search(n) and len(n.split()) > 2:
-        return "a topic or a statute"
-    return None
+    return is_a_thing_not_a_person(n)
 
 
 def main() -> int:

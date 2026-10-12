@@ -40,13 +40,6 @@
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/249247",
       "bar_number": "249247",
       "admitted_year": 2007
-    },
-    {
-      "name": "San Diego Brain",
-      "role": "Injury Attorney",
-      "role_source": "firm bio heading",
-      "bar_state": "NY",
-      "source_url": "https://www.finntrialattorneys.com/traumatic-brain-injury/"
     }
   ],
   "languages": [
@@ -270,7 +263,7 @@
     "total": 40,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-10",
+    "computed_at": "2026-10-12",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -283,7 +276,7 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 19.0 years since admission across 1 of 2 named attorneys (longest 19, shortest 19) · NYS Attorney Registration database"
+            "evidence": "Mean 19.0 years since admission across 1 of 1 named attorneys (longest 19, shortest 19) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
