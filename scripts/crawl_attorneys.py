@@ -193,6 +193,72 @@ NOT_A_PERSON = re.compile(
 # roster page as a person because a borough and a state code are two capitalised words.
 STATE_TAIL = re.compile(r"^[A-Z]{2}$")
 
+# The four shapes that got through everything above and were published as people, found by
+# reading all 136 names the directory carried that are not persons. 114 of them were removed
+# from live profiles; this is the half that stops the next market arriving with more.
+#
+# Each is a category rather than a guess about one word, because the guesses are what went
+# wrong: "a name with no Latin letters is a heading" would have deleted thirty seven attorneys
+# whose Russian-language bios spell them in Cyrillic, and "council" in an institution pattern
+# deleted Lashonda Council Rogers, who is an attorney at Council & Associates.
+
+# A city on its own. Location pages are the single biggest source: eight Californian cities were
+# published as the attorneys of an Arizona firm, because that is what its /locations/ pages are.
+# Named rather than matched, since a surname can be a city and these are the ones that appeared.
+PLACE_ALONE = {
+    "san diego", "los angeles", "chula vista", "long beach", "san francisco", "san bernardino",
+    "san jose", "college park", "huntington beach", "santa monica", "costa mesa",
+    "newport beach", "santa ana", "santa barbara", "the woodlands",
+}
+
+# A university, a hospital, a bar association, a foundation. These arrive from the education and
+# admissions lines of a bio: "UC San Diego", "St. John's University", "Mount Sinai Medical
+# Center", "San Diego County Bar Association". "council" is deliberately absent.
+AN_INSTITUTION = re.compile(
+    r"\b(universit(y|ies)|college|hospital|medical\s+cent(er|re)|clinic|"
+    r"bar\s+association|association|foundation|institute|academy)\b", re.I)
+
+# A section heading the crawler read as the name of a person.
+# A campus by its initials, which carries no word the pattern above knows. "UC San Diego" is
+# published as an attorney of a San Diego firm today and reads as three ordinary words.
+CAMPUS_INITIALS = re.compile(r"^(uc|ucla|usc|csu|suny|cuny)\s+\S", re.I)
+
+A_SECTION = {
+    "recent posts", "recent post", "bar admissions", "court admissions", "admissions",
+    "professional association memberships", "post-conviction relief", "practice areas",
+    "case results", "our attorneys", "our team", "testimonials", "awards", "publications",
+}
+
+# A line of marketing. It always reads as a sentence, and a sentence opens with a verb or a
+# possessive where a name opens with a given name.
+A_SLOGAN = re.compile(r"^(why\s|don'?t\s|your\s|we\s|our\s|get\s|call\s|free\s|"
+                      r"experienced\s|no\s+fee|hire\s|choose\s)", re.I)
+
+# A statute or a practice topic, off a practice page: "National Electronic Fund Transfer Act",
+# "Camp Lejeune Water Contamination".
+A_TOPIC = re.compile(r"\b(act|contamination|litigation|lawsuits?|settlements?|claims?|"
+                     r"hazing|fraud|error)$", re.I)
+
+
+def is_a_thing_not_a_person(name):
+    """The category this name falls in, or None. Conservative: ambiguous names stay."""
+    n = " ".join((name or "").split())
+    low = n.lower()
+    if low in PLACE_ALONE:
+        return "a place"
+    if low in A_SECTION:
+        return "a section heading"
+    if AN_INSTITUTION.search(n) or CAMPUS_INITIALS.match(n):
+        return "an institution"
+    words = n.split()
+    if len(words) > 2 and A_SLOGAN.match(n):
+        return "a line of marketing"
+    if len(words) > 2 and A_TOPIC.search(n):
+        return "a topic or a statute"
+    return None
+
+
+
 # Words a roster puts in front of a name rather than after it. Kept apart from ROLE_WORDS
 # because that set is wide enough to include "of" and "and", which must never lead a peel.
 LEADING_TITLES = {"attorney", "attorneys", "atty", "lawyer", "abogado", "abogada"}
@@ -351,6 +417,11 @@ def looks_like_a_person(name):
     if len(words) == 2 and len(words[1].strip(".")) == 1:
         return False
     if STATE_TAIL.match(words[-1]):
+        return False
+    # A place, an institution, a section heading, a slogan or a statute. Rejected rather than
+    # dropped: the caller files it under `rejected` with its URL, so a heading we misjudged is
+    # recoverable by a person reading that list.
+    if is_a_thing_not_a_person(name):
         return False
     # A title word past the given name and surname means the peel stopped early.
     if len(words) > 2 and TITLE_RESIDUE.search(" ".join(words[2:])):
