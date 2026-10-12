@@ -161,7 +161,9 @@ const messages = [
 let failures = 0;
 
 for (const [name, msg] of messages) {
+  // The quote renders restrained, the way the Worker sends it.
   const raw = mime(env.SUBMISSIONS_FROM, enquiry.email, msg.subject, msg.text, {
+    restrained: name === 'pitch',
     replyTo: env.REPLY_TO,
     footer: 'Law Firm Listings measures what US law firms publish about themselves and'
       + ' scores it against public records.',
