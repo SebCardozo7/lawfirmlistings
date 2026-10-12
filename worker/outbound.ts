@@ -163,9 +163,11 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
     // What a firm gets, before what it pays, with its own name in front of both. The old one
     // was "what a listing needs, and what it includes", which describes the email rather than
     // offering anything, and nothing in it would make a managing partner open it.
-    subject: price
-      ? `${e.firm}: a dofollow link, your own panel, and ${price} USD a year`
-      : `${e.firm}: a dofollow link, your own panel, and what a listing needs`,
+    // No figure, no list of benefits, no colon-and-pitch. Gmail read the old one, "a dofollow
+    // link, your own panel, and 350 USD a year", as an advertisement and filed the message in
+    // Promotions, which is where a subject line built like a banner belongs. This one says what
+    // the message is about, which is also what somebody answering an enquiry would write.
+    subject: `Your enquiry about listing ${e.firm}`,
     text: [
       greeting(e),
       '',
@@ -237,7 +239,8 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
  * a commercial email to a stranger is worth more than using the newer one, and switching later is
  * one function.
  */
-export async function sendTo(env: OutboundEnv, to: string, subject: string, text: string) {
+export async function sendTo(env: OutboundEnv, to: string, subject: string, text: string,
+                             restrained = false) {
   const sender = from(env);
   // Reply-To used to be spliced into the finished message with a string replace on the
   // MIME-Version line. That worked only as long as mime() emitted exactly that line in exactly
@@ -247,6 +250,7 @@ export async function sendTo(env: OutboundEnv, to: string, subject: string, text
     replyTo: env.REPLY_TO,
     footer: 'Law Firm Listings measures what US law firms publish about themselves and'
       + ' scores it against public records.',
+    restrained,
   });
   const { EmailMessage } = await import('cloudflare:email');
   await env.EMAIL.send(new EmailMessage(sender, to, raw));
@@ -328,7 +332,7 @@ export async function drainFollowUps(env: OutboundEnv): Promise<{ sent: number; 
     }
     const { subject, text } = pitchBody(e, env);
     try {
-      await sendTo(env, e.email, subject, text);
+      await sendTo(env, e.email, subject, text, true);
       await env.FOLLOWUPS.delete(k.name);
       sent += 1;
       // The quote went out hours after the enquiry did, with nobody watching. Say so, so the

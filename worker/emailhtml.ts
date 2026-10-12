@@ -130,8 +130,14 @@ function callout(lines: string[]): string {
  * reads correctly without a convention and the HTML part gets the button. The URL still appears
  * as the button's href only: a reader who cannot see HTML has it in the text part verbatim.
  */
-function button(label: string, url: string): string {
+function button(label: string, url: string, restrained = false): string {
   const href = url.trim();
+  if (restrained) {
+    // A link in a sentence rather than a call-to-action block.
+    return `<p style="${P}">${esc(label.replace(/:\s*$/, ""))}: `
+      + `<a href="${esc(href)}" style="color:${LINK};text-decoration:underline">`
+      + `${esc(href)}</a></p>`;
+  }
   return `<table role="presentation" cellpadding="0" cellspacing="0" border="0"`
     + ` style="margin:4px 0 20px;border-collapse:collapse"><tbody><tr>`
     + `<td style="background:${INK};border-radius:8px">`
@@ -150,7 +156,11 @@ function button(label: string, url: string): string {
  * HTML part can set it as one without the text part paying for it. The colon is dropped here
  * because a styled heading does not need it; the text part keeps it.
  */
-function heading(line: string): string {
+function heading(line: string, restrained = false): string {
+  if (restrained) {
+    return `<p style="margin:22px 0 10px;font:700 15px/1.4 ${FONT};color:${INK}">`
+      + `${inline(line.trim().replace(/:\s*$/, ""))}</p>`;
+  }
   const label = line.trim().replace(/:\s*$/, '');
   return `<p style="margin:26px 0 12px;font:600 12px/1.4 ${FONT};color:${AURORA[0]};`
     + `letter-spacing:.09em;text-transform:uppercase">${inline(label)}</p>`;
@@ -162,8 +172,13 @@ function heading(line: string): string {
  * This is for the one fact a reader is looking for before anything else, which in the pitch is
  * the price. In the text part the pipes read as a boxed aside, which is what it is.
  */
-function card(lines: string[]): string {
+function card(lines: string[], restrained = false): string {
   const [first, ...rest] = unwrap(lines.map((l) => l.replace(/^\s*\|\s?/, '')));
+  if (restrained) {
+    // The price as a sentence, which is how somebody writing a letter would put it.
+    return `<p style="${P}"><strong style="color:${INK};font-weight:700">`
+      + `${inline(first)}</strong>${rest.length ? ". " + rest.map(inline).join(" ") : ""}</p>`;
+  }
   const small = rest.length
     ? `<div style="font:400 13px/1.55 ${FONT};color:${MUTED};padding-top:6px">`
       + `${rest.map(inline).join('<br>')}</div>`
@@ -186,16 +201,16 @@ const isNumbered = (l: string) => /^\d+\.\s/.test(l.trim());
 const isDefinition = (l: string) => /^\s*[A-Za-z][A-Za-z ]{0,24}:\s+\S/.test(l);
 const isBareUrl = (l: string) => /^https?:\/\/\S+$/.test(l.trim());
 
-function blockHtml(lines: string[]): string {
-  if (lines.every(isCard)) return card(lines);
+function blockHtml(lines: string[], restrained = false): string {
+  if (lines.every(isCard)) return card(lines, restrained);
   if (lines.some(isNumbered)) return orderedList(lines);
   if (lines.length === 2 && /:$/.test(lines[0].trim()) && isBareUrl(lines[1])) {
-    return button(lines[0].trim(), lines[1]);
+    return button(lines[0].trim(), lines[1], restrained);
   }
   // Checked after the button, so a label with a URL under it stays a button rather than
   // becoming a heading with an orphaned link.
   if (lines.length === 1 && /:$/.test(lines[0].trim()) && !isIndented(lines[0])) {
-    return heading(lines[0]);
+    return heading(lines[0], restrained);
   }
   if (lines.every(isIndented)) {
     return lines.every(isDefinition) ? definitions(lines) : callout(lines);
@@ -222,6 +237,22 @@ const rule = `<table role="presentation" cellpadding="0" cellspacing="0" border=
 export interface HtmlOptions {
   /** Shown under the footer rule, where a recipient looks for who this is. */
   footer?: string;
+  /**
+   * Drops the gradient, the card, the section colour and the button.
+   *
+   * Gmail put the quote in Promotions and the notifications in Primary and Updates, which is
+   * the classifier working correctly: the quote was the only one of the three that looked like
+   * an advertisement, because it was the only one built to. Vendor guidance on what pushes a
+   * message to Promotions is consistent on the content side (image-heavy templates, prominent
+   * CTA buttons, marketing language) and on what points the other way (text-dominant HTML, a
+   * conversational tone, no marketing CTA). The sender's own history with the recipient matters
+   * more than any of it, and on a first contact there is none.
+   *
+   * So the one message that has to be read gets the restrained version, and the two that
+   * already land where they should keep the mark. A message that looks like a letter is not a
+   * worse email than one that looks like a campaign; it is the same words without the costume.
+   */
+  restrained?: boolean;
 }
 
 export function htmlFromText(text: string, opts: HtmlOptions = {}): string {
@@ -230,11 +261,30 @@ export function htmlFromText(text: string, opts: HtmlOptions = {}): string {
     .map((b) => b.split('\n').filter((l) => l.trim() !== ''))
     .filter((b) => b.length > 0);
 
-  const body = blocks.map(blockHtml).join('');
+  const body = blocks.map((b) => blockHtml(b, !!opts.restrained)).join('');
   const footer = opts.footer
     ? `<p style="margin:0;font:400 12px/1.6 ${FONT};color:${MUTED}">`
       + `${inline(opts.footer)}</p>`
     : '';
+
+  // A letter, not a campaign: no gradient bar, no logo, no panel on a tinted ground, and the
+  // sender's name where a letterhead would be. The signature already says who sent it.
+  if (opts.restrained) {
+    return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light">
+</head>
+<body style="margin:0;padding:0;background:#FFFFFF;-webkit-text-size-adjust:100%">
+<div style="max-width:560px;margin:0;padding:18px 16px;font:400 15px/1.62 ${FONT};color:${BODY}">
+${body}
+<div style="margin-top:22px;padding-top:14px;border-top:1px solid ${LINE}">${footer}
+<p style="margin:6px 0 0;font:400 12px/1.6 ${FONT};color:${MUTED}">
+<a href="https://lawfirmlistings.com/" style="color:${LINK};text-decoration:underline">lawfirmlistings.com</a>
+</p></div>
+</div>
+</body></html>`;
+  }
 
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">

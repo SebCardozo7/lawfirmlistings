@@ -30,6 +30,8 @@ export interface MessageOptions {
   html?: boolean | string;
   /** A line above the footer links, naming who sent this. */
   footer?: string;
+  /** Renders the plain, letter-like page instead of the branded one. See emailhtml.ts. */
+  restrained?: boolean;
 }
 
 /**
@@ -120,7 +122,7 @@ export function mime(
 
   const html = typeof opts.html === 'string'
     ? opts.html
-    : htmlFromText(body, { footer: opts.footer });
+    : htmlFromText(body, { footer: opts.footer, restrained: opts.restrained });
   const boundary = `lfl-${crypto.randomUUID()}`;
   head.push(`Content-Type: multipart/alternative; boundary="${boundary}"`, '');
   return head.concat([
