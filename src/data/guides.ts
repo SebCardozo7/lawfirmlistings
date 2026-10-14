@@ -71,6 +71,19 @@ export const GUIDES: Guide[] = [
   // live in src/data/research/statute-of-limitations-<code>.json and the pages compute their
   // headlines from it, so nothing here may carry a figure.
   {
+    slug: 'statute-of-limitations-by-state',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Statute of Limitations by State: Every Deadline in One Table',
+    summary:
+      'The deadline to sue for an injury, a death, medical malpractice and a damaged car, in all ' +
+      'fifty states and DC, each read from the state\'s own code and linked to the section. What the ' +
+      'statute of limitations is, when the clock starts, and the narrow ways it stops.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'Every state, four deadlines, one table',
+  },
+  {
     slug: 'massachusetts-statute-of-limitations',
     cover: 'deadline',
     kicker: 'Reference',

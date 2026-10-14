@@ -20,15 +20,7 @@ const description = `Most Oregon injury claims have ${head.years} years, a claim
 const lede = `Oregon gives most injury claims <b>${head.years} years</b>. The two rules that surprise people sit beside it. A claim against a city, a county, TriMet or the state needs written notice within <b>${notice.period.replace(' to give notice', '')}</b>. And a child does not get until adulthood: the pause for minors is capped. Here is every Oregon deadline by type of claim, read from the Oregon Revised Statutes.`;
 ---
 <StatuteGuide data={data} title={title} description={description} lede={lede}
-  crumb="Oregon statute of limitations"
-  reading={[
-    {
-      firm: 'paulson-coletti-trial-attorneys-pc',
-      url: 'https://www.paulsoncoletti.com/oregon-personal-injury-statute-of-limitations/',
-      title: 'Oregon Personal Injury Statute of Limitations',
-      why: 'A Portland trial firm on how the two-year rule meets real cases, with the malpractice and product repose limits, the Tort Claims Act notice, and why insurers watch the calendar as closely as the lawyers do.',
-    },
-  ]}>
+  crumb="Oregon statute of limitations">
   <Fragment slot="toc">
     <li><a href="#children">The cap on a child's extra time</a></li>
     <li><a href="#crash">One crash, three clocks</a></li>

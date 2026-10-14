@@ -1,0 +1,331 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import hub from '../../data/research/statute-of-limitations-by-state.json';
+
+/**
+ * The statute of limitations hub, item 16 in docs/guides-50.md (family B).
+ *
+ * Four deadlines for every state and DC, each read from the state's own code. Where a state has
+ * its own guide, the row is not copied here: the entry names which rows of that state's research
+ * file to read, so a correction made on the state page reaches this table in the same build. A
+ * state with its own figures here and a research file as well (a state page merged after this
+ * table was written) has to agree on the injury period, or the build stops.
+ *
+ * Client links follow the state pages' rule and no other: a firm's own page on its state's
+ * deadline, read and checked against the statute, listed under that state, followed only at the
+ * tier where the profile already is.
+ */
+type Cell = { years: number | null; period: string; statute: string; url: string; detail?: string };
+const KEYS = ['personal_injury', 'wrongful_death', 'medical_malpractice', 'property_damage'] as const;
+type Key = typeof KEYS[number];
+const LABEL: Record<Key, string> = {
+  personal_injury: 'Personal injury',
+  wrongful_death: 'Wrongful death',
+  medical_malpractice: 'Medical malpractice',
+  property_damage: 'Property damage',
+};
+
+const files = import.meta.glob('../../data/research/statute-of-limitations-*.json', { eager: true, import: 'default' }) as Record<string, any>;
+const byCode = new Map<string, any>(Object.values(files).filter(d => d.code).map(d => [d.code, d]));
+
+const states = (hub.states as any[]).map(e => {
+  const own = byCode.get(e.code);
+  const cells = {} as Record<Key, Cell>;
+  for (const k of KEYS) {
+    if (e.from && own) {
+      const row = own.rows.find((r: any) => r.claim === e.from[k]);
+      if (!row) throw new Error(`${e.code}: no row "${e.from[k]}" in its research file`);
+      cells[k] = { years: row.years, period: row.period, statute: row.statute, url: row.url };
+    } else {
+      if (!e[k]) throw new Error(`${e.code}: no ${k}`);
+      cells[k] = e[k];
+    }
+  }
+  if (own && !e.from && own.headline.years !== cells.personal_injury.years)
+    throw new Error(`${e.code}: the hub says ${cells.personal_injury.years} years, the state page says ${own.headline.years}`);
+  return { state: e.state as string, code: e.code as string, via: e.via as string | undefined, copy: !own && !!e.copy, cells, own, reading: (own?.reading ?? e.reading ?? []) as any[] };
+}).sort((a, b) => a.state.localeCompare(b.state));
+
+const read = new Date(hub.measured_at).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const yearsWord = (y: number) => (y === 1 ? '1 year' : `${y} years`);
+const NUM = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+const word = (n: number) => NUM[n] ?? String(n);
+const list = (xs: string[]) => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const total = states.length;
+const copies = states.filter(s => s.copy);
+
+// The injury period, which is the one most people come here for.
+const pi = (s: typeof states[number]) => s.cells.personal_injury.years!;
+const buckets = [...new Set(states.map(pi))].sort((a, b) => a - b).map(y => ({
+  years: y, states: states.filter(s => pi(s) === y),
+}));
+const mode = [...buckets].sort((a, b) => b.states.length - a.states.length)[0];
+const shortest = buckets[0];
+const longest = buckets[buckets.length - 1];
+const atMost = (y: number) => states.filter(s => pi(s) <= y).length;
+
+// Where the other three claims part company with the injury period.
+const malShorter = states.filter(s => (s.cells.medical_malpractice.years ?? Infinity) < pi(s));
+const deathDiffers = states.filter(s => s.cells.wrongful_death.years !== pi(s));
+const propLonger = states.filter(s => (s.cells.property_damage.years ?? 0) > pi(s));
+
+// From the state guides: the notice a claim against the government needs, and the outer limits.
+const withPage = states.filter(s => s.own);
+const govNotices = withPage.map(s => ({ s, row: s.own.rows.find((r: any) => r.group === 'government') }))
+  .filter(x => x.row);
+// The shortest notice period any state guide carries, for the takeaway.
+const firstNotice = withPage.flatMap(s => s.own.rows
+  .filter((r: any) => r.group === 'government' && r.period.endsWith(' to give notice'))
+  .map((r: any) => ({ s, r })))
+  .sort((a, b) => a.r.years - b.r.years)[0];
+const repose = withPage.flatMap(s => s.own.rows
+  .filter((r: any) => /at the outside/.test(r.period) && r.group === 'injury')
+  .map((r: any) => ({ s, r }))).slice(0, 6);
+
+// Our own data, and only in the state section.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const GATED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
+const primary = (f: typeof firms[number]) => f.data.practices.find(p => p.primary) ?? f.data.practices[0];
+const topInjury = (code: string) => firms
+  .filter(f => f.data.market.state === code && primary(f)?.slug === 'personal-injury' && GATED.includes(f.data.score?.tier ?? ''))
+  .sort((a, b) => (b.data.score?.total ?? 0) - (a.data.score?.total ?? 0) || a.data.name.localeCompare(b.data.name))[0];
+const relFor = (f: typeof firms[number] | undefined) =>
+  f && GATED.includes(f.data.score?.tier ?? '') ? 'noopener' : 'nofollow noopener';
+const covered = states.filter(s => s.own || s.reading.length).map(s => ({
+  ...s,
+  top: topInjury(s.code),
+  reading: s.reading.map(r => {
+    const f = firms.find(x => x.data.slug === r.firm);
+    return { ...r, f, rel: relFor(f) };
+  }).filter(r => r.f),
+}));
+
+const title = 'Statute of Limitations by State: Every Deadline in One Table';
+const description = `Most states give an injury claim ${yearsWord(mode.years)}. ${list(shortest.states.map(s => s.state))} give ${yearsWord(shortest.years)}. Four deadlines for all ${total} jurisdictions, from each state's code.`;
+const lede = `A statute of limitations is the deadline to file a lawsuit, and every state writes its own. For an injury claim, <b>${mode.states.length} of ${total}</b> jurisdictions allow <b>${yearsWord(mode.years)}</b>. The rest run from <b>${yearsWord(shortest.years)}</b> in ${list(shortest.states.map(s => s.state))} to <b>${yearsWord(longest.years)}</b> in ${list(longest.states.map(s => s.state))}. Here are four deadlines for every state and DC, each read from the state's own code and linked to it.`;
+
+const faq = [
+  {
+    q: 'What is a statute of limitations?',
+    a: 'It is a law that sets how long someone has to file a lawsuit after a claim arises. Once the period runs out, the person being sued can ask the court to dismiss the case, and the court almost always has to, however strong the claim is. Each state sets its own periods, and they differ by type of claim.',
+  },
+  {
+    q: 'Which state has the shortest statute of limitations for personal injury?',
+    a: `${list(shortest.states.map(s => s.state))}, at ${yearsWord(shortest.years)} from the injury. ${atMost(2)} of the ${total} jurisdictions in the table allow ${yearsWord(2)} or less.`,
+  },
+  {
+    q: 'Which state has the longest?',
+    a: `${list(longest.states.map(s => s.state))}, at ${yearsWord(longest.years)} for a personal injury claim. A long general period does not stretch the others: medical malpractice and claims against the government usually run on their own, shorter clocks in those states too.`,
+  },
+  {
+    q: 'Does the statute of limitations start on the day of the accident?',
+    a: 'Usually, yes. Many states apply a discovery rule to some claims, most often medical malpractice and injuries that could not have been noticed, so the clock starts when the injury was found or should have been. For an ordinary crash or fall, courts treat the injury as known the day it happened.',
+  },
+  {
+    q: 'Can the statute of limitations be extended?',
+    a: 'Only in the ways the statute itself allows, which lawyers call tolling. The common ones are a claimant who is a minor or legally incapacitated, a defendant who leaves the state or hides, and fraud that concealed the claim. An insurance company that is still negotiating does not stop the clock.',
+  },
+  {
+    q: 'Is this the same as the criminal statute of limitations?',
+    a: 'No. This page covers civil lawsuits, the claims a person brings for compensation. Criminal limitation periods decide how long the state has to charge someone with a crime, are set by separate statutes, and for the most serious crimes there is often no limit at all.',
+  },
+];
+
+const url = new URL(`/guides/${hub.slug}/`, Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: hub.measured_at,
+    dateModified: hub.measured_at,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Law Firm Listings Editorial Team' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+<Base title={title} description={description} nav="guides" schema={schema}
+  figuresFrom={`The codes of the ${total} jurisdictions, read ${read}`}>
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Statute of limitations by state</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Deadlines</span>
+    <h1>{title}</h1>
+    <p class="lede" set:html={lede} />
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Read from the statute, no legal advice</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Statutes read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>12 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="deadline" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What a statute of limitations is</a></li>
+      <li><a href="#table">Every state in one table</a></li>
+      <li><a href="#pattern">How the states compare</a></li>
+      <li><a href="#start">When the clock starts</a></li>
+      <li><a href="#tolling">When the clock stops</a></li>
+      <li><a href="#repose">The outer limit: repose</a></li>
+      <li><a href="#government">Claims against the government</a></li>
+      <li><a href="#states">State guides</a></li>
+      <li><a href="#faq">Questions people ask</a></li>
+      <li><a href="#method">Where this comes from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Every period below is read from the code of the state it belongs to, on ${read}.`}
+      items={[
+        `<b>${mode.states.length} of ${total}</b> jurisdictions give a personal injury claim ${yearsWord(mode.years)}, which makes it the most common answer by a wide margin.`,
+        `The shortest is <b>${yearsWord(shortest.years)}</b>, in ${list(shortest.states.map(s => s.state))}. The longest is <b>${yearsWord(longest.years)}</b>, in ${list(longest.states.map(s => s.state))}.`,
+        `In <b>${malShorter.length}</b> jurisdictions a medical malpractice claim has less time than an ordinary injury claim, and in <b>${deathDiffers.length}</b> a wrongful death claim runs on a different period from the injury that caused it.`,
+        ...(firstNotice ? [`A claim against a city or a state agency usually needs a written notice first. In the states with their own guides here, it can come due in as little as <b>${firstNotice.r.period.replace(' to give notice', '')}</b>, for ${firstNotice.r.claim.toLowerCase().replace(/^notice of /, '')} in ${firstNotice.s.state}.`] : []),
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every period here is taken from the statute, with a link to the section it comes from. It is a map of the law, not advice about a case: when a clock starts and whether anything paused it can turn on facts only a lawyer who has seen the file can weigh. If a deadline is close, that conversation should happen this week.</div>
+
+    <h2 id="what">What a statute of limitations is, and why every state has one</h2>
+    <p>A statute of limitations is a deadline written into law for starting a lawsuit. The person with the claim has a fixed period, counted from the day the claim arises, to file it in court. After that, the person being sued can ask the judge to throw the case out, and the judge almost always must. It does not matter how strong the evidence is or how badly someone was hurt.</p>
+    <p>The reasons are old and practical. Witnesses forget and move away, records get thrown out, and a defendant should not have to answer for something decades later with no way to reconstruct what happened. The law trades a few late but valid claims for the certainty that old ones end.</p>
+    <p>Two things follow from that. The deadline is for <b>filing the lawsuit</b>, not for calling an insurer or sending a demand letter, so a claim still being negotiated can expire in the middle of the talks. And the period depends on <b>what the claim is</b>, not on how the harm happened: one crash can produce an injury claim, a claim for the car and a wrongful death claim, each on its own clock.</p>
+    <p>This page covers civil claims, the ones a person brings for compensation. Criminal limitation periods are separate statutes and are not in the table.</p>
+
+    <h2 id="table">Statute of limitations by state: four deadlines for every state</h2>
+    <p>The four claims people ask about most, for all 50 states and the District of Columbia. Each period links to the section of the state's code it comes from. A state with its own guide on this site is linked by name, and that guide carries every other deadline the state sets.</p>
+    <div class="table-wrap">
+      <table class="sol hub">
+        <thead><tr><th>State</th>{KEYS.map(k => <th>{LABEL[k]}</th>)}</tr></thead>
+        <tbody>
+          {states.map(s => (
+            <tr>
+              <th scope="row">{s.own ? <a href={`/guides/${s.own.slug}/`}>{s.state}</a> : s.state}</th>
+              {KEYS.map(k => (
+                <td>
+                  <span class="period">{s.cells[k].period}</span>
+                  <a class="cite" href={s.cells[k].url} rel="noopener" target="_blank">{s.cells[k].statute}</a>
+                  {s.cells[k].detail && <span class="sub">{s.cells[k].detail}</span>}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">The code of each state, read on {read}. Where a row was read from a copy of the code rather than the legislature's own site, the method section names it. Personal injury is the general negligence period; property damage is damage to personal property such as a car.</p>
+
+    <h2 id="pattern">How the states compare: {yearsWord(mode.years)} is the common answer</h2>
+    <p>For an injury claim, {mode.states.length} of the {total} jurisdictions settle on {yearsWord(mode.years)}. Most of the rest are within a year of it. The outliers sit at both ends: {list(shortest.states.map(s => s.state))} at {yearsWord(shortest.years)}, and {list(longest.states.map(s => s.state))} at {yearsWord(longest.years)}.</p>
+    <BarChart
+      heading={`Jurisdictions by personal injury deadline, of ${total}`}
+      rows={buckets.map(b => ({
+        label: yearsWord(b.years),
+        value: b.states.length,
+        display: `${b.states.length}`,
+        note: b.states.length <= 8 ? b.states.map(s => s.code).join(', ') : `${b.states.length} jurisdictions`,
+        emphasis: b === mode,
+      }))}
+      caption={`The highlighted bar is the most common period. States with fewer than nine jurisdictions in a bar are named by postal code.`}
+    />
+    <p>The other columns are where people get caught. Medical malpractice has less time than an ordinary injury claim in {malShorter.length} jurisdictions, including {list(malShorter.slice(0, 4).map(s => s.state))}. Wrongful death runs on a different period from the injury in {deathDiffers.length}, and the clock for it usually starts at the death rather than at the accident. Property damage gets longer than personal injury in {propLonger.length}, so the claim for a car can outlive the claim for the person who was driving it.</p>
+
+    <h2 id="start">When the clock starts: the accident, or the discovery</h2>
+    <p>Most periods run from the day the claim <b>accrues</b>, and for an ordinary injury that is the day of the accident. A sore back that turns out a month later to be a herniated disc does not usually get a new start date: the injury happened in the crash, so the clock did too.</p>
+    <p>The exception is the <b>discovery rule</b>. For injuries a person could not reasonably have known about, many states start the clock when the injury was discovered, or should have been. It shows up most in medical malpractice, toxic exposure and hidden defects. Some states write it into the statute; in others the courts made it, and in some it barely exists. Texas, for one, allows it only where the injury was inherently undiscoverable and the evidence is objectively verifiable.</p>
+    <p>Where a state does use discovery, it usually adds a cap so the claim cannot stay open forever. That is why so many malpractice cells in the table read as two numbers.</p>
+
+    <h2 id="tolling">When the clock stops: tolling</h2>
+    <p>A period can be paused, which lawyers call <b>tolling</b>. Every state has its own list, and the common entries are these:</p>
+    <ul>
+      <li><b>The claimant is a minor.</b> Most states wait until the 18th birthday to start the clock. Several cap it for medical malpractice, so a young child's claim can end long before adulthood.</li>
+      <li><b>The claimant is legally incapacitated.</b> A person who cannot manage their own affairs usually gets the clock paused until that ends, often with an outer limit.</li>
+      <li><b>The defendant is out of reach.</b> In many states, time does not run while the defendant is out of the state or hiding.</li>
+      <li><b>The claim was concealed.</b> Fraud that hid the claim generally starts the clock only when it is uncovered.</li>
+    </ul>
+    <p>Each of these is narrow and has to be proved by the person relying on it. Negotiating with an insurer is not on the list anywhere, and neither is not knowing the deadline existed. The state guides below give each state's tolling rules with the statute.</p>
+
+    <h2 id="repose">The outer limit: statutes of repose</h2>
+    <p>A <b>statute of repose</b> is a hard stop counted from an event, such as the surgery or the day a building was finished, whatever anyone discovered later. A discovery rule can delay the start of a limitations period, but it cannot reach past the repose date. In the states with their own guides here, the injury claims with an outer limit include:</p>
+    <ul>
+      {repose.map(({ s, r }) => (
+        <li>{r.claim} in <a href={`/guides/${s.own.slug}/`}>{s.state}</a>: {r.period}, under <a href={r.url} rel="noopener" target="_blank">{r.statute}</a>.</li>
+      ))}
+    </ul>
+
+    <h2 id="government">Against the government, a notice comes due first</h2>
+    <p>Suing a city, a county or a state agency runs on a separate statute, and in most states it starts with a written <b>notice of claim</b> that is due long before the lawsuit. A crash with a city bus, a fall on a public sidewalk or a pothole all put a claim on this clock. Missing the notice can end the claim even when the ordinary deadline is years away. In the states with their own guides:</p>
+    <ul>
+      {govNotices.map(({ s, row }) => (
+        <li><a href={`/guides/${s.own.slug}/`}>{s.state}</a>: {row.claim.toLowerCase()}, <b>{row.period}</b>, under <a href={row.url} rel="noopener" target="_blank">{row.statute}</a>.</li>
+      ))}
+    </ul>
+
+    <h2 id="states">State guides, and what firms there have written</h2>
+    <p>Each state below has a full guide on this site with every deadline the state sets, its tolling rules and its notice requirements, or a page from a firm in that state that we read and checked against the statute. The highest-scoring verified injury firm in each is computed from this directory, not chosen, and <a href="/methodology/">the method is published</a>.</p>
+    {covered.map(s => (
+      <>
+        <h3>{s.own ? <a href={`/guides/${s.own.slug}/`}>{s.state} statute of limitations</a> : s.state}</h3>
+        <p>
+          Personal injury: <b>{s.cells.personal_injury.period}</b>.
+          {s.top && <> Highest-scoring verified injury firm: <a href={`/firms/${s.top.data.slug}/`}>{s.top.data.name}</a> in {s.top.data.market.city}, at <b>{s.top.data.score?.total}</b>.</>}
+        </p>
+        {s.reading.length > 0 && (
+          <ul class="reading">
+            {s.reading.map(r => (
+              <li><a href={r.url} rel={r.rel} target="_blank">{r.title}</a>, from <a href={`/firms/${r.f!.data.slug}/`}>{r.f!.data.name}</a> in {r.f!.data.market.city}. {r.why}</li>
+            ))}
+          </ul>
+        )}
+      </>
+    ))}
+
+    <h2 id="faq">Questions people ask about the statute of limitations</h2>
+    {faq.map(f => (
+      <>
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </>
+    ))}
+
+    <h2 id="method">Where this comes from</h2>
+    <p>Every period in the table was read on {read} from the code of the state it belongs to, on the legislature's own site wherever it could be read. Where a legislature's server refused the connection, an archived copy of the same official page from 2025 or 2026 was read instead. Each cell links to the section it comes from. The rows for {list(withPage.map(s => s.state))} are read from the research behind those states' own guides, so a correction there changes this table too. Nothing here is drawn from a secondary summary.</p>
+    {copies.length > 0 && (
+      <p>For {copies.length} states the text was read from a verbatim copy of the code instead, either because the state publishes its code only through a commercial host or because its site turned the reader away that day: {copies.map((s, i) => (<>{i > 0 && (i === copies.length - 1 ? ' and ' : ', ')}{s.state} ({s.via!.replace(/ \(.*$/, '').replace(/,.*$/, '')})</>))}. Those rows are the first we recheck against the official text.</p>
+    )}
+    <p>Four claims are a small part of what each state sets. Professional malpractice, defamation, contracts, product claims and claims by children all run on their own periods, and the state guides list them. Firm counts and scores are computed from this directory each time the page is built.</p>
+    <p>This is not legal advice and no lawyer-client relationship comes from reading it. Whether a particular claim is still inside its deadline depends on facts this page cannot see.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  .prose p.note { font-size: .86rem; color: var(--muted); line-height: 1.6; margin: -12px 0 24px; padding-left: 2px; }
+  .prose .table-wrap { margin: 22px 0; overflow-x: auto; }
+  .prose table.hub { font-size: .88rem; }
+  .prose table.hub th[scope="row"] { text-align: left; white-space: nowrap; font-weight: 600; }
+  .prose table.hub td { vertical-align: top; min-width: 120px; }
+  .prose table.hub .period { display: block; font-weight: 600; color: var(--ink); }
+  .prose table.hub .cite { display: block; font-size: .8rem; }
+  .prose table.hub .sub { display: block; color: var(--muted); font-size: .78rem; line-height: 1.45; margin-top: 3px; }
+  .prose ul.reading li { margin-bottom: 10px; }
+</style>
