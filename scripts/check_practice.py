@@ -294,6 +294,78 @@ PRACTICES = {
                                     # Chinese: compensation, to claim compensation, damages,
                                     # liability, negligence, statute of limitations.
                                     r"赔偿|索赔|损害赔偿|责任|过失|诉讼时效", re.I),
+    },    # The five sub-practices of personal injury, which is where the searches actually are.
+    # "car accident lawyer los angeles" is 1,900 a month at difficulty 0 and "truck accident
+    # lawyer los angeles" 1,800 at difficulty 0, against 2,200 for "personal injury lawyer los
+    # angeles". Six of fifteen Los Angeles firms sampled publish a second practice we never
+    # asked them about, and 1,376 of 1,412 published firms carry exactly one.
+    #
+    # These deliberately overlap personal-injury rather than replacing it. A firm with a car
+    # accident page practises personal injury and car accidents both, and the personal-injury
+    # pattern already accepts the sub-topic for exactly that reason. What is new is recording
+    # which ones, so a page can be built for each.
+    #
+    # Every `corroborating` below is vocabulary a page written about the work uses and a page
+    # that lists the practice in a footer menu does not. That is the whole test: the slug and
+    # the title say what a page is called, and this says whether anybody wrote it.
+    "car-accidents": {
+        "slug": re.compile(r"car[-_]?accident|auto[-_]?accident|automobile[-_]?accident|"
+                           r"rear[-_]?end|vehicle[-_]?collision|accidente[-_]?de[-_]?(?:auto|"
+                           r"carro|coche)", re.I),
+        "title": re.compile(r"\bcar\s+accident|\bauto\s+accident|automobile\s+accident|"
+                            r"vehicle\s+collision|accidente\s+de\s+(?:auto|carro|coche)", re.I),
+        "corroborating": re.compile(
+            r"police\s+report|traffic\s+collision\s+report|uninsured\s+motorist|"
+            r"underinsured|comparative\s+(?:negligence|fault)|property\s+damage|"
+            r"total(?:ed|\s+loss)|rear[-\s]end(?:ed)?|at[-\s]fault\s+driver|"
+            r"reporte\s+policial|conductor\s+culpable", re.I),
+    },
+    "truck-accidents": {
+        "slug": re.compile(r"truck[-_]?accident|18[-_]?wheeler|semi[-_]?truck|"
+                           r"tractor[-_]?trailer|big[-_]?rig|commercial[-_]?vehicle|"
+                           r"accidente[-_]?de[-_]?cami", re.I),
+        "title": re.compile(r"\btruck\s+accident|18[-\s]?wheeler|semi[-\s]?truck|"
+                            r"tractor[-\s]trailer|big\s+rig|accidente\s+de\s+cami", re.I),
+        # The federal rules a truck case turns on, which no other practice page cites.
+        "corroborating": re.compile(
+            r"\bFMCSA\b|federal\s+motor\s+carrier|hours[-\s]of[-\s]service|\bCDL\b|"
+            r"commercial\s+driver|log\s*book|electronic\s+logging|black\s+box|"
+            r"jackknif|cargo\s+(?:shift|securement)|trucking\s+company", re.I),
+    },
+    "medical-malpractice": {
+        "slug": re.compile(r"medical[-_]?malpractice|med[-_]?mal\b|birth[-_]?injur|"
+                           r"surgical[-_]?error|misdiagnos|negligencia[-_]?m", re.I),
+        "title": re.compile(r"medical\s+malpractice|birth\s+injur|surgical\s+error|"
+                            r"misdiagnos|negligencia\s+m[eé]dica", re.I),
+        "corroborating": re.compile(
+            r"standard\s+of\s+care|informed\s+consent|certificate\s+of\s+merit|"
+            r"expert\s+(?:affidavit|witness|testimony)|medical\s+records?\s+review|"
+            r"misdiagnos|failure\s+to\s+diagnose|surgical\s+error|hospital\s+negligence|"
+            r"mala\s+praxis|consentimiento\s+informado", re.I),
+    },
+    "wrongful-death": {
+        "slug": re.compile(r"wrongful[-_]?death|fatal[-_]?(?:accident|injur|crash)|"
+                           r"muerte[-_]?por[-_]?negligencia|muerte[-_]?injusta", re.I),
+        "title": re.compile(r"wrongful\s+death|fatal\s+(?:accident|injur|crash)|"
+                            r"muerte\s+(?:por\s+negligencia|injusta)", re.I),
+        # A wrongful death claim is brought by an estate, and the page says so. "Grief" and
+        # "loss" are deliberately absent: every injury page in the country carries both.
+        "corroborating": re.compile(
+            r"survival\s+action|personal\s+representative|administrator\s+of\s+the\s+estate|"
+            r"loss\s+of\s+consortium|funeral\s+(?:and\s+burial\s+)?expenses|"
+            r"next\s+of\s+kin|beneficiar(?:y|ies)|probate|"
+            r"representante\s+personal|gastos\s+funerarios", re.I),
+    },
+    "slip-and-fall": {
+        "slug": re.compile(r"slip[-_]?(?:and[-_]?)?fall|trip[-_]?(?:and[-_]?)?fall|"
+                           r"premises[-_]?liability|resbal|ca[ií]da", re.I),
+        "title": re.compile(r"slip\s+(?:and\s+)?fall|trip\s+(?:and\s+)?fall|"
+                            r"premises\s+liability|resbal(?:[oó]n|ones)|ca[ií]das?", re.I),
+        "corroborating": re.compile(
+            r"premises\s+liability|constructive\s+notice|actual\s+notice|"
+            r"open\s+and\s+obvious|dangerous\s+condition|invitee|licensee|trespasser|"
+            r"duty\s+of\s+care\s+owed|hazard(?:ous)?\s+condition|wet\s+floor|"
+            r"responsabilidad\s+del\s+(?:due[nñ]o|propietario)", re.I),
     },
 }
 
@@ -490,10 +562,33 @@ def confirm(url, spec, rp):
     }, None
 
 
-def examine(domain, spec):
+def site_urls(domain):
+    """Everything a check needs to fetch about a site, fetched once.
+
+    robots, the sitemap and the home page's links do not depend on which practice is being
+    asked about, and asking five practices used to fetch all three five times. This is the
+    whole of the saving: the per-practice work below is filtering a list and confirming the
+    handful of pages that survive it.
+
+    home_links is fetched here unconditionally, where examine() used to fetch it only when the
+    sitemap produced nothing. That is one extra request for a single-practice run and four
+    fewer for a five-practice one.
+    """
     origin = https_origin(domain)
     rp = robots_for(origin)
     robots = robots_body(origin)
+    return {
+        "origin": origin,
+        "rp": rp,
+        "robots": robots,
+        "sitemap": list(sitemap_urls(origin, robots, rp)),
+        "home": list(home_links(origin, rp)),
+    }
+
+
+def examine(domain, spec, site=None):
+    site = site or site_urls(domain)
+    origin, rp, robots = site["origin"], site["rp"], site["robots"]
 
     def matching(urls, seen):
         out = []
@@ -511,7 +606,7 @@ def examine(domain, spec):
 
     seen = set()
     where = "sitemap"
-    from_sitemap = list(sitemap_urls(origin, robots, rp))
+    from_sitemap = site["sitemap"]
     from_home = []
     candidates = matching(from_sitemap, seen)
     if not candidates:
@@ -519,7 +614,7 @@ def examine(domain, spec):
         # because the home page was only consulted when the sitemap produced nothing at all.
         # Iannella & Mummolo publishes /personal_injury and its sitemap does not mention it, so
         # a Boston firm with 688 reviews read as publishing no injury practice.
-        from_home = list(home_links(origin, rp))
+        from_home = site["home"]
         candidates = matching(from_home, seen)
         where = "sitemap, then the home page's links"
 
@@ -560,14 +655,13 @@ def examine(domain, spec):
     return None, last
 
 
-def examine_combined(domain, spec, practice_name):
+def examine_combined(domain, spec, practice_name, site=None):
     """The second question, asked only when the first one found nothing."""
-    origin = https_origin(domain)
-    rp = robots_for(origin)
-    robots = robots_body(origin)
+    site = site or site_urls(domain)
+    origin, rp = site["origin"], site["rp"]
 
     urls, seen = [], set()
-    everything = list(sitemap_urls(origin, robots, rp)) + list(home_links(origin, rp))
+    everything = site["sitemap"] + site["home"]
     for url in everything:
         if urllib.parse.urlparse(url).netloc.split(":")[0].removeprefix("www.") != domain:
             continue
@@ -601,17 +695,18 @@ def read_record(path):
     return {}
 
 
-def ask(domain, spec, practice):
+def ask(domain, spec, practice, site=None):
     """Both questions about one domain, in order. Raises nothing urllib can raise."""
     try:
-        found, why = examine(domain, spec)
+        site = site or site_urls(domain)
+        found, why = examine(domain, spec, site)
         # Where the firm publishes no page about this practice, ask whether it publishes a
         # page listing its practices and names this one on it. Weaker, cited as such, and
         # the difference between ranking the two best known injury practices in Queens and
         # omitting them over a site structure and a typo in somebody's own URL.
         if not found:
             combined, why_combined = examine_combined(
-                domain, spec, practice.replace("-", " "))
+                domain, spec, practice.replace("-", " "), site)
             if combined:
                 found, why = combined, None
             else:
@@ -621,7 +716,7 @@ def ask(domain, spec, practice):
         return None, "error: %s" % err
 
 
-def probe(domain, spec, practice, budget):
+def probe(domain, spec, practice, budget, site=None):
     """ask(), under a wall-clock budget.
 
     TIMEOUT caps a single socket operation, which is not the same as capping a request: a host
@@ -636,7 +731,7 @@ def probe(domain, spec, practice, budget):
     box = {}
 
     def run():
-        box["out"] = ask(domain, spec, practice)
+        box["out"] = ask(domain, spec, practice, site)
 
     t = threading.Thread(target=run, daemon=True)
     t.start()
@@ -648,7 +743,9 @@ def probe(domain, spec, practice, budget):
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--practice", required=True, choices=sorted(PRACTICES))
+    ap.add_argument("--practice", choices=sorted(PRACTICES))
+    ap.add_argument("--practices",
+                    help="comma-separated, asked of one visit each: the sitemap and\n                          the home page are fetched once rather than once per practice")
     ap.add_argument("--candidates", help="a file written by scripts/discover_places.py")
     ap.add_argument("--domains", help="comma-separated domains instead")
     ap.add_argument("--top", type=int, default=40, help="how many candidates to examine")
@@ -675,7 +772,20 @@ def main() -> int:
         print("give --candidates or --domains", file=sys.stderr)
         return 2
 
-    spec = PRACTICES[args.practice]
+    # One practice or several. Everything below walks a list of (name, spec) so the two paths
+    # are the same path, and a single --practice is a list of one.
+    if args.practices:
+        wanted = [p.strip() for p in args.practices.split(",") if p.strip()]
+        unknown = [p for p in wanted if p not in PRACTICES]
+        if unknown:
+            print("not a practice this check knows: %s" % ", ".join(unknown), file=sys.stderr)
+            return 2
+    elif args.practice:
+        wanted = [args.practice]
+    else:
+        print("give --practice or --practices", file=sys.stderr)
+        return 2
+    specs = [(p, PRACTICES[p]) for p in wanted]
     staging = ROOT / args.staging
     staging.mkdir(parents=True, exist_ok=True)
     holds, misses = [], []
@@ -689,40 +799,51 @@ def main() -> int:
         # reboots, somebody stops the job. Re-asking a question already answered costs the
         # answered firm another crawl for nothing, so the default is to resume. --recheck asks
         # again from scratch.
-        prior = (rec.get("practice_evidence") or {}).get(args.practice)
-        if prior is not None and not args.recheck:
-            (holds if prior.get("url") else misses).append(domain)
+        evidence = rec.get("practice_evidence") or {}
+        todo = [(name, spec) for name, spec in specs
+                if args.recheck or evidence.get(name) is None]
+        for name, _ in specs:
+            prior = evidence.get(name)
+            if prior is not None and not args.recheck:
+                (holds if prior.get("url") else misses).append((name, domain))
+
+        if not todo:
             print("%3d/%d %-34s %-34s %s"
-                  % (i, len(domains), domain[:34], label,
-                     prior["url"][:60] if prior.get("url") else "no  (checked earlier)"))
+                  % (i, len(domains), domain[:34], label, "all checked earlier"))
             continue
 
-        found, why = probe(domain, spec, args.practice, args.budget)
+        # One visit, then every unanswered practice against it. This is the whole saving: the
+        # sitemap of a firm with 6,000 URLs is fetched once instead of once per practice.
+        visit = site_urls(domain)
+        answers = {}
+        for name, spec in todo:
+            found, why = probe(domain, spec, name, args.budget, visit)
+            answers[name] = (found, why)
+            (holds if found else misses).append((name, domain))
+        shown = ", ".join("%s%s" % (n, "" if f else " no") for n, (f, _) in answers.items())
         print("%3d/%d %-34s %-34s %s"
-              % (i, len(domains), domain[:34], label,
-                 found["url"][:60] if found else "no  (%s)" % why))
-
-        # A probe that ran out of budget read nothing, so it answered nothing. Writing it down
-        # would record "held: False" against a firm we never reached and would make the next run
-        # skip it as answered. Leave the record alone and let a later run ask again.
-        if not found and why and why.startswith("unreadable:"):
-            misses.append(domain)
-            continue
+              % (i, len(domains), domain[:34], label, shown[:60]))
 
         rec.setdefault("domain", domain)
-        evidence = rec.setdefault("practice_evidence", {})
-        evidence[args.practice] = found or {"held": False, "why": why, "checked_at": TODAY}
-        io.open(path, "w", encoding="utf-8", newline="\n").write(
-            json.dumps(rec, ensure_ascii=False, indent=2) + "\n")
-
-        (holds if found else misses).append(domain)
+        store = rec.setdefault("practice_evidence", {})
+        wrote = False
+        for name, (found, why) in answers.items():
+            # A probe that ran out of budget read nothing, so it answered nothing. Writing it
+            # down would record "held: False" against a firm we never reached and would make the
+            # next run skip it as answered. Leave that one out and let a later run ask again.
+            if not found and why and why.startswith("unreadable:"):
+                continue
+            store[name] = found or {"held": False, "why": why, "checked_at": TODAY}
+            wrote = True
+        if wrote:
+            io.open(path, "w", encoding="utf-8", newline="\n").write(
+                json.dumps(rec, ensure_ascii=False, indent=2) + "\n")
 
     print()
-    print("%d of %d publish a %s practice page, or name it among their practice areas"
-          % (len(holds), len(domains), args.practice))
-    print()
-    for d in holds:
-        print("   %s" % d)
+    for name, _ in specs:
+        n = sum(1 for p, _ in holds if p == name)
+        print("%d of %d publish a %s practice page, or name it among their practice areas"
+              % (n, len(domains), name))
     return 0
 
 
