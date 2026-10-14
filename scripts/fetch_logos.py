@@ -210,6 +210,11 @@ def main():
         if not path.exists():
             continue
         record = json.loads(path.read_text(encoding="utf-8"))
+        # The staging directory holds more than firm records: discover_places writes its
+        # candidate lists there too, and those are lists. Skip anything that is not a
+        # firm record rather than stopping the whole run on it.
+        if not isinstance(record, dict) or "domain" not in record:
+            continue
         domain = record.get("domain")
         if not domain or not record.get("https_ok"):
             continue
