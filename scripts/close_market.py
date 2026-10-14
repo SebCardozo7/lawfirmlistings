@@ -49,6 +49,18 @@ REGISTER_SCRIPT = {
     "NY": "check_ny_dos.py",
 }
 
+# The state's register of attorneys, which is a different thing from its register of companies
+# above: that one settles G3, these settle G1 and the licence half of G2. Two states so far, and
+# the gap between them is the whole backlog: 699 firms with a roster are waiting on a state whose
+# register either cannot be read or has not been written yet.
+# The command, not just the name: the two scripts grew separately and do not take the same
+# flags. New York annotates the published tree by default and needs --gates to touch them;
+# California takes the tree and the state explicitly.
+ATTORNEY_REGISTER_SCRIPT = {
+    "NY": ["check_ny_registry.py", "--write", "--gates"],
+    "CA": ["check_ca_register.py", "--firms-dir", "--state", "CA", "--write"],
+}
+
 
 def run(label: str, cmd: list[str], dry: bool) -> int:
     print()
@@ -122,6 +134,22 @@ def main() -> int:
     else:
         print("   %s publishes no business register this repo can read, so G3 stays excused "
               "rather than owed" % state)
+
+    # The attorney register, which settles G1 and the licence half of G2. It runs after the
+    # rosters are filled and before the score, for the same reason the comment at the top gives
+    # about G5: a gate decided against an empty roster is decided wrong.
+    #
+    # This is here rather than remembered because remembering is what the top of this file is
+    # about. Los Angeles was closed without it on the first pass, and its 142 firms would have
+    # published "California does not publish an attorney register we can query" on the day the
+    # script that reads that register landed.
+    if state in ATTORNEY_REGISTER_SCRIPT:
+        steps.append(("%s attorney register, which settles G1 and G2" % state,
+                      [sys.executable, "scripts/" + ATTORNEY_REGISTER_SCRIPT[state][0]]
+                      + ATTORNEY_REGISTER_SCRIPT[state][1:]))
+    else:
+        print("   %s publishes no attorney register this repo can read, so G1 stays excused"
+              % state)
 
     if state in DISCIPLINE_STATES:
         steps.append(("%s attorney discipline, which settles G2" % state,

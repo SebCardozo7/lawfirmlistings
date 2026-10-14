@@ -357,7 +357,12 @@ def assess(attorneys, firm_name, city, verbose=False):
             when = got["gate_discipline"][-1][0]
             discipline.append((name, "%s, %s" % (got["gate_discipline"][-1][1], when), got["url"]))
         elif got["gate_discipline"] or got["other_discipline"]:
-            when, what = got["other_discipline"][-1][0], got["other_discipline"][-1][1]
+            # A served sanction lands here, and it is the gate_discipline list that holds it,
+            # not the other one. Reading other_discipline unconditionally crashed on the first
+            # attorney who had a suspension behind them and nothing else on the record: Morgan
+            # & Morgan, 197 names in, which stopped the run at firm 153 of 252.
+            rows = got["other_discipline"] or got["gate_discipline"]
+            when, what = rows[-1][0], rows[-1][1]
             other_discipline.append((name, "%s, %s" % (what, when), got["url"]))
 
         note = {"registry_status": status, "registry_url": got["url"]}
@@ -503,6 +508,8 @@ def main() -> int:
     ap.add_argument("--write", action="store_true", help="write the gates back")
     ap.add_argument("--staging", default=".crawl")
     ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--resume", action="store_true",
+                    help="skip firms whose gates already cite this register")
     args = ap.parse_args()
 
     for stream in (sys.stdout, sys.stderr):
@@ -539,10 +546,37 @@ def main() -> int:
 
     passed = held = 0
     for i, (path, record, label, city) in enumerate(targets, 1):
+        # A run over 252 firms and 1,052 names takes hours, and the last one died with
+        # the session at firm 153. Re-asking the register about a firm it already
+        # answered costs that firm another few dozen queries for nothing.
+        if args.resume and "State Bar of California" in (
+                ((record.get("gates") or {}).get("G1") or {}).get("source") or ""):
+            continue
         attorneys = attorneys_of(record)
         if not attorneys:
             print("%3d/%d %-34s no named attorneys, nothing to look up"
                   % (i, len(targets), str(label)[:34]))
+            # Skipping the lookup is right; leaving the old sentence behind is not. 82 Californian
+            # profiles still read "California does not publish an attorney register we can query",
+            # which stopped being true the day this script landed. The reason this firm's licences
+            # are unverified is that it names nobody, and that is a fact about the firm, which G5
+            # already measures. Say that instead of a false fact about the state.
+            if args.write and "State Bar of California" not in (
+                    ((record.get("gates") or {}).get("G1") or {}).get("source") or ""):
+                reason = ("This firm names no attorney on its own site, so there is no licence to "
+                          "look up. The State Bar of California does publish a register we can "
+                          "query; it was not the obstacle.")
+                gates = {
+                    "G1": {"pass": False, "evidence": reason,
+                           "source": "%s, nothing to query" % DATASET, "checked_at": TODAY},
+                    "G2": {"pass": False, "checked_at": TODAY,
+                           "source": "%s, nothing to query" % DATASET,
+                           "evidence": ("With no attorney named, there is no disciplinary record "
+                                        "to look up either.")},
+                }
+                record.setdefault("gates", {}).update(gates)
+                io.open(path, "w", encoding="utf-8", newline="\n").write(
+                    json.dumps(record, ensure_ascii=False, indent=2) + "\n")
             continue
         print("%3d/%d %-34s %d attorney(s)" % (i, len(targets), str(label)[:34], len(attorneys)))
         result = assess(attorneys, record.get("name") or str(label), city, args.verbose)

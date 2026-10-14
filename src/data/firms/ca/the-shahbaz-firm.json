@@ -1,0 +1,392 @@
+{
+  "slug": "the-shahbaz-firm",
+  "name": "The Shahbaz Firm",
+  "initials": "SH",
+  "website": "https://danishthelawyer.com/",
+  "domain": "danishthelawyer.com",
+  "phone": "(213) 832-7268",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://danishthelawyer.com/personal-injury/",
+      "checked_at": "2026-10-08"
+    }
+  ],
+  "market": {
+    "city_slug": "los-angeles-ca",
+    "city": "Los Angeles",
+    "state": "CA",
+    "state_name": "California"
+  },
+  "offices": [
+    {
+      "label": "The Shahbaz Firm",
+      "address": "425 E Colorado St Ste 610, Glendale, CA 91205, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=11897880224921061702&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": false,
+  "availability": [],
+  "about": [
+    "The Shahbaz Firm is a personal injury firm with a single office in Glendale.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "173",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-12"
+    },
+    "sample": [
+      {
+        "published_at": "2026-03-05T17:26:59.207140496Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-01T22:14:26.552622204Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-12-08T22:24:22.556260006Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-10T01:21:18.110735316Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2025-09-23T00:33:07.930976890Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 45,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-10-12",
+      "note": "LCP 16.1 s / CLS 0.007 / TBT 564 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "danishthelawyer.com",
+      "name": "The Shahbaz Firm",
+      "review_count_at_discovery": 172
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 173,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-10-12"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "This firm names no attorney on its own site, so there is no licence to look up. The State Bar of California does publish a register we can query; it was not the obstacle.",
+      "source": "the State Bar of California's licensee search, nothing to query",
+      "checked_at": "2026-10-13"
+    },
+    "G2": {
+      "pass": false,
+      "checked_at": "2026-10-13",
+      "source": "the State Bar of California's licensee search, nothing to query",
+      "evidence": "With no attorney named, there is no disciplinary record to look up either."
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. California publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-10-12"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-10-12"
+    },
+    "G6": {
+      "pass": false,
+      "evidence": "the domain has been registered for 0.6 year(s)",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-10-12",
+      "unresolvable": "A domain registration date is a lower bound on a firm's age, so one below the threshold fails to establish the age rather than establishing that the firm is new. This state publishes no entity filing date we can read against it."
+    }
+  },
+  "cohort_id": "ca-losangeles-personal-injury",
+  "faq": [],
+  "fee_statement": "For personal injury cases, we work on contingency, meaning you don't pay us unless we win.",
+  "logo": {
+    "file": "/logos/danishthelawyer.com.png",
+    "source_url": "https://danishthelawyer.com/wp-content/uploads/2021/01/favicon.png",
+    "width": 64,
+    "height": 64,
+    "bytes": 7218,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-12"
+  },
+  "operating": {
+    "registered": "2026-03-05",
+    "years": 0.6,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-10-12"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-10-12"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-10-12"
+  },
+  "score": {
+    "total": 45,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 4 could not be answered from the available records (G1, G2, G3, G6) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-12",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 19,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 4,
+            "max": 5,
+            "source": "observed",
+            "evidence": "173 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 6,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 173 reviews → Bayesian 4.94 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-09-01) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.5,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 6,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "“For personal injury cases, we work on contingency, meaning you don't pay us unless we win.” · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 19,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 25,
+      "floor_met": false,
+      "coverage_met": false,
+      "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
+        "D2 Search authority: not yet measured (8 pts)",
+        "A2 Experience: +10 available"
+      ]
+    },
+    "raw": 28.0,
+    "assessed": 62,
+    "coverage": 0.785,
+    "floor_abc_pct": 0.5,
+    "gates_unavailable": [
+      "G1",
+      "G2",
+      "G3"
+    ],
+    "gates_unresolvable": [
+      "G6"
+    ],
+    "assessable": 79,
+    "comparable": true
+  }
+}
