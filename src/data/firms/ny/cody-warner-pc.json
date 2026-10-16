@@ -302,10 +302,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 55,
+    "total": 54,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -369,7 +369,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 15,
         "max": 20,
         "subs": [
           {
@@ -391,10 +391,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 5,
+            "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "3 of 5 sampled reviews are from the last 12 months (newest 2026-01-13) · a sample of five per business listing, not every review"
+            "evidence": "2 of 5 sampled reviews are from the last 12 months (newest 2026-01-13) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -475,11 +475,11 @@
         ]
       }
     },
-    "floor_abc": 34,
+    "floor_abc": 33,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 15,
+      "gap": 16,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -488,10 +488,10 @@
         "D1 Website trust & experience: +4.5 available"
       ]
     },
-    "raw": 49.2,
+    "raw": 48.2,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.596,
+    "floor_abc_pct": 0.579,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

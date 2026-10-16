@@ -289,23 +289,23 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 56,
+    "total": 60,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-12",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (3/25).",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 9,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 9,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 38.0 years since admission across 2 of 3 named attorneys (longest 55, shortest 21) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -462,30 +462,28 @@
         ]
       }
     },
-    "floor_abc": 26,
+    "floor_abc": 35,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 14,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "D1 Website trust & experience: +5.0 available"
+        "D1 Website trust & experience: +5.0 available",
+        "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 34.5,
-    "assessed": 62,
-    "coverage": 0.886,
-    "floor_abc_pct": 0.684,
+    "raw": 43.5,
+    "assessed": 72,
+    "coverage": 0.9,
+    "floor_abc_pct": 0.729,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

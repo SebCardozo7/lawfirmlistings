@@ -175,7 +175,8 @@
       "pass": false,
       "checked_at": "2026-10-12",
       "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
-      "evidence": "No disciplinary record is held against any of the 1 attorneys we identified. Victor Ho could not be told apart from 8 namesakes, one of whom is not eligible to practise. Held open."
+      "evidence": "No disciplinary record is held against any of the 1 attorneys we identified. Victor Ho could not be told apart from 8 namesakes, one of whom is not eligible to practise. Held open.",
+      "unresolvable": "A namesake carries an adverse status and the register holds no field that would tell the two people apart"
     },
     "G3": {
       "pass": false,
@@ -220,23 +221,23 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 33,
+    "total": 35,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-12",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 5,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 5.0 years since admission across 1 of 4 named attorneys (longest 5, shortest 5) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -393,30 +394,30 @@
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 21,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 37,
+      "gap": 35,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
         "A6 Roster verifiability: +9 available",
-        "B1 Results published: +6 available"
+        "B1 Results published: +6 available",
+        "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 20.2,
-    "assessed": 62,
-    "coverage": 0.886,
-    "floor_abc_pct": 0.421,
+    "raw": 25.2,
+    "assessed": 72,
+    "coverage": 0.9,
+    "floor_abc_pct": 0.438,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
-    "gates_unresolvable": [],
-    "assessable": 70,
+    "gates_unresolvable": [
+      "G2"
+    ],
+    "assessable": 80,
     "comparable": true
   },
   "logo": {

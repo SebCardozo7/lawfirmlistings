@@ -282,23 +282,23 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 59,
+    "total": 52,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-12",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 3,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 0,
+            "pts": 2,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "registry",
+            "evidence": "Mean 3.0 years since admission across 4 of 6 named attorneys (longest 5, shortest 0) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -455,12 +455,12 @@
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 19,
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 11,
-      "floor_met": true,
+      "gap": 18,
+      "floor_met": false,
       "coverage_met": false,
       "path": [
         "D2 Search authority: not yet measured (8 pts)",
@@ -468,17 +468,15 @@
         "B2 Specificity: not yet measured (5 pts)"
       ]
     },
-    "raw": 27.9,
-    "assessed": 47,
-    "coverage": 0.671,
-    "floor_abc_pct": 0.739,
+    "raw": 29.9,
+    "assessed": 57,
+    "coverage": 0.713,
+    "floor_abc_pct": 0.576,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 80,
     "comparable": true
   }
 }

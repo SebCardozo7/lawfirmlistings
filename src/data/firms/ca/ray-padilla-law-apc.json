@@ -151,13 +151,15 @@
       "pass": false,
       "evidence": "This firm names no attorney on its own site, so there is no licence to look up. The State Bar of California does publish a register we can query; it was not the obstacle.",
       "source": "the State Bar of California's licensee search, nothing to query",
-      "checked_at": "2026-10-13"
+      "checked_at": "2026-10-13",
+      "unresolvable": "The firm names no attorney, so the register has no name to look up and no answer to give"
     },
     "G2": {
       "pass": false,
       "checked_at": "2026-10-13",
       "source": "the State Bar of California's licensee search, nothing to query",
-      "evidence": "With no attorney named, there is no disciplinary record to look up either."
+      "evidence": "With no attorney named, there is no disciplinary record to look up either.",
+      "unresolvable": "With no attorney named, there is no licence whose disciplinary record could be read"
     },
     "G3": {
       "pass": false,
@@ -279,7 +281,7 @@
     "total": 42,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -368,7 +370,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "6 of 8 sampled reviews are from the last 12 months (newest 2026-07-06) · a sample of five per business listing, not every review"
+            "evidence": "5 of 8 sampled reviews are from the last 12 months (newest 2026-07-06) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -467,11 +469,12 @@
     "coverage": 0.886,
     "floor_abc_pct": 0.447,
     "gates_unavailable": [
-      "G1",
-      "G2",
       "G3"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G1",
+      "G2"
+    ],
     "assessable": 79,
     "comparable": true
   }

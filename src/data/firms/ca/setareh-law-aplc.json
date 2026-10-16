@@ -5,7 +5,7 @@
   "website": "https://www.setarehfirm.com/",
   "domain": "setarehfirm.com",
   "phone": "(310) 659-1826",
-  "status": "listed",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -266,7 +266,8 @@
       "pass": false,
       "checked_at": "2026-10-12",
       "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
-      "evidence": "No disciplinary record is held against any of the 6 attorneys we identified. Eli S. Cohen could not be told apart from 6 namesakes, one of whom is not eligible to practise. Held open."
+      "evidence": "No disciplinary record is held against any of the 6 attorneys we identified. Eli S. Cohen could not be told apart from 6 namesakes, one of whom is not eligible to practise. Held open.",
+      "unresolvable": "A namesake carries an adverse status and the register holds no field that would tell the two people apart"
     },
     "G3": {
       "pass": false,
@@ -448,9 +449,9 @@
   },
   "score": {
     "total": 73,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (7/25).",
-    "computed_at": "2026-10-12",
+    "tier": "Certified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (7/25).",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -640,7 +641,9 @@
     "gates_unavailable": [
       "G3"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G2"
+    ],
     "assessable": 80,
     "comparable": true
   }
