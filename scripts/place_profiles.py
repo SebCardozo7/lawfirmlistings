@@ -55,7 +55,12 @@ def roster_for(domain: str, staging: pathlib.Path) -> tuple[list, list]:
     for a in found:
         why = is_a_thing_not_a_person(a.get("name") or "")
         (turned_away if why else keep).append((a.get("name"), why))
-    return [a for a in found if not is_a_thing_not_a_person(a.get("name") or "")], turned_away
+    # Drop the keys the staging record carries as null. The profile schema makes role and
+    # bar_number optional, and optional in zod means the key may be absent, not that it may be
+    # null: a null arrives as "expected string, received object" and fails the whole build.
+    clean = [{k: v for k, v in a.items() if v is not None}
+             for a in found if not is_a_thing_not_a_person(a.get("name") or "")]
+    return clean, turned_away
 
 
 def main() -> int:

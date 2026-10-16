@@ -13,6 +13,27 @@
       "primary": true,
       "source_url": "https://www.lordp.net/practice-areas/personal-injury/",
       "checked_at": "2026-10-08"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.lordp.net/practice-areas/personal-injury/car-accidents/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.lordp.net/practice-areas/personal-injury/truck-accidents/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.lordp.net/practice-areas/personal-injury/wrongful-death/",
+      "checked_at": "2026-10-14"
     }
   ],
   "market": {
@@ -34,16 +55,12 @@
     {
       "name": "Speaking Engagements",
       "source_url": "https://www.lordp.net/speaking-engagements/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "San Pedro",
       "source_url": "https://www.lordp.net/san-pedro-lawyers/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
@@ -51,7 +68,6 @@
       "name": "Robin D. Perry",
       "source_url": "https://www.lordp.net/our-team/",
       "bar_number": "181686",
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "the roster page's own headings",
       "registry_status": "Active",

@@ -13,6 +13,34 @@
       "primary": true,
       "source_url": "https://www.scottglovsky.com/personal-injury/",
       "checked_at": "2026-10-08"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.scottglovsky.com/personal-injury/car-accidents/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.scottglovsky.com/personal-injury/truck-accidents/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.scottglovsky.com/personal-injury/wrongful-death/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://www.scottglovsky.com/personal-injury/premises-liability/",
+      "checked_at": "2026-10-14"
     }
   ],
   "market": {
@@ -42,7 +70,6 @@
       "name": "Scott Glovsky",
       "source_url": "https://www.scottglovsky.com/team/scott-glovsky/",
       "bar_number": "170477",
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
@@ -53,7 +80,6 @@
       "name": "Karl Evangelista",
       "source_url": "https://www.scottglovsky.com/team/karl-evangelista/",
       "bar_number": "250685",
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
@@ -63,71 +89,54 @@
     {
       "name": "Orange County Healthcare Denials",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/orange-county/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Medical Necessity Denials",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/medical-necessity-denials/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Experimental/Investigational Denials",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/experimental-treatments/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Out-of-Network Denials",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/out-of-network/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Anthem Blue Cross Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/insurance-providers-we-fight/anthem-blue-cross/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Kaiser Permanente Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/insurance-providers-we-fight/kaiser-permanente/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "L.A. Care Health Plan Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/l-a-care-health-plan/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Magellan Healthcare",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/magellan-healthcare/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "LA Molina Healthcare Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/molina/",
-      "bar_number": null,
       "role": "Attorney",
       "role_source": "firm bio heading",
       "name_source": "bio heading"
@@ -135,431 +144,324 @@
     {
       "name": "Molina Medi-Cal Managed Care Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/medi-cal-managed-care-plans/molina/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "OSCAR Health Plan Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/insurance-providers-we-fight/oscar-health-plan/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Regal Medical Group",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/regal-medical-group/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "UnitedHealthcare Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/united-healthcare/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "CT Scan",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/ct-scan/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "PET Scan",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/pet-scan/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Genetic Testing",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/genetic-testing/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "High-Intensity Focused Ultrasound",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/high-intensity-focused-ultrasound/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Leukemia Treatment",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/leukemia-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Lymphoma Treatment",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/lymphoma-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Malignant Neoplasm Treatment",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/malignant-neoplasm-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Other Radiation Treatments",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/radiation-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Proton Beam Radiation Therapy Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/proton-radiation-therapy-denial/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Acthar® Gel",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/acthar-gel/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Botox Injections",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/botox-injections/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "CAR T-Cell Therapy Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/car-t-cell-therapy/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Weight Loss Medication",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/obesity-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Inpatient Treatment",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/inpatient-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Intracept Procedure",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/intracept-procedure/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Multiple Sclerosis Treatment",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/multiple-sclerosis/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Occupational Therapy Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/occupational-therapy/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Physical Therapy",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/physical-therapy/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Speech Therapy",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/speech-therapy/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Steroid Injections",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/steroid-injections/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Supartz Injection",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/supartz-injection/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "TMS Therapy",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/tms-therapy/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Bone Marrow Transplant",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/bone-marrow-transplant/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Ablation Surgery",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/ablation-surgery-denied/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Prosthetic Limb",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/prosthetic-limb/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Respite Care",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/long-term-care/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Transcatheter Procedure",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/transcatheter-procedure/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Nerve Block Injection",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/nerve-block-injection/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Autoimmune Disorders",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/autoimmune-disorders/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Ankylosing Spondylitis",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/ankylosing-spondylitis/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Blood Disorder",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/blood-disorders/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Breast Cancer",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/breast-cancer/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Colon Cancer",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/colon-cancer/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Lung Cancer Treatment Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/lung-cancer/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Prostate Cancer",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/prostate-cancer/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Skin Cancer",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/skin-cancer/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Gastrointestinal Disorders",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/gastrointestinal-disorders/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Ulcerative Colitis",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/ulcerative-colitis/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Heart Condition",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/heart-condition/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Mental Health",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/mental-health/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Alcohol Use Disorder",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/alcohol-use-disorder/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Bipolar Disorder",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/bipolar-disorder/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Eating Disorder",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/eating-disorders/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Musculoskeletal Disorders",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/musculoskeletal-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Back Pain",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/back-pain-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Knee Pain",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/knee-pain-treatment/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Peripheral Neuropathy Treatment Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/peripheral-neuropathy-treatment-denial/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Plaque Psoriasis",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/plaque-psoriasis/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Postural Orthostatic Tachycardia Syndrome",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/insurance-bad-faith-postural-orthostatic-tachycardia-syndrome-pots-attorney/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Retinal Disorder Treatment Denial",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/retinal-disorder/",
-      "bar_number": null,
       "role": "Attorney",
       "role_source": "firm bio heading",
       "name_source": "bio heading"
@@ -567,24 +469,18 @@
     {
       "name": "Spinal Muscular Atrophy",
       "source_url": "https://www.scottglovsky.com/insurance-bad-faith/health-insurance-claim-denials/spinal-muscular-atrophy/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Frequently Asked Questions",
       "source_url": "https://www.scottglovsky.com/faqs/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     },
     {
       "name": "Helpful Resources",
       "source_url": "https://www.scottglovsky.com/helpful-resources/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     }

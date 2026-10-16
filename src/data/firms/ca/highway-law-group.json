@@ -13,6 +13,27 @@
       "primary": true,
       "source_url": "https://highwaylawgroup.com/car-accidents/",
       "checked_at": "2026-10-08"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://highwaylawgroup.com/car-accidents/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://highwaylawgroup.com/truck-accidents/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://highwaylawgroup.com/slip-and-fall-accidents/",
+      "checked_at": "2026-10-14"
     }
   ],
   "market": {
@@ -45,8 +66,6 @@
     {
       "name": "Test Testing",
       "source_url": "https://highwaylawgroup.com/test/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "bio heading"
     }

@@ -13,6 +13,27 @@
       "primary": true,
       "source_url": "https://gaylordnantais.com/personal-injury/",
       "checked_at": "2026-10-08"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://gaylordnantais.com/practice-area/car-accident/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://gaylordnantais.com/practice-area/truck-accident/",
+      "checked_at": "2026-10-14"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://gaylordnantais.com/practice-area/premises-liability/",
+      "checked_at": "2026-10-14"
     }
   ],
   "market": {
@@ -41,16 +62,12 @@
     {
       "name": "West Covina",
       "source_url": "https://gaylordnantais.com/west-covina/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     },
     {
       "name": "Santa Paula",
       "source_url": "https://gaylordnantais.com/santa-paula/",
-      "bar_number": null,
-      "role": null,
       "role_source": "not stated by the firm",
       "name_source": "roster link text"
     }
