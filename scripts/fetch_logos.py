@@ -189,6 +189,106 @@ def declared_logo(html: str, origin: str, stored=None):
     return [urllib.parse.urljoin(origin + "/", u) for u in found if u]
 
 
+IMG_TAG = re.compile(r"<img[^>]+>", re.I)
+LOGO_WORD = re.compile(r"logo|brand", re.I)
+# The badges a law firm puts in its header beside its own mark, which are somebody else's logo.
+# Publishing one of these as the firm's logo would be worse than the monogram, and the word
+# "logo" is in half their filenames.
+NOT_OURS = re.compile(
+    r"avvo|superlawyer|super-lawyer|martindale|justia|lawyers?-of-distinction|bbb|better-business"
+    r"|yelp|google|facebook|twitter|linkedin|instagram|youtube|tiktok|trustpilot|findlaw"
+    r"|million-dollar|multi-million|top-?100|top-?40|rising-?star|best-?law|nadc|natda|aaj"
+    # Four that got through and only an eye caught, which is why review_logos.py exists.
+    # thelalawfirm.com published MMDAF_Logo_PMS_3_color_EPS.webp, the Multi-Million Dollar
+    # Advocates Forum seal; michaelwaks.com published V7_Logo_MDR_Dark.svg, a "Verdict: Million
+    # Dollar Results" lockup; arattalegal.com published experience-logo1.png, a laurel wreath
+    # around a banner; and frlawfirmpllc.com published its marketing agency's logo, SMB Team.
+    # Only the last two are nameable here. No filename rule finds a wreath.
+    r"|mmdaf|_mdr|-mdr|mdr_|mdr-|smbteam|smb-?logo|experience-logo"
+    r"|scorpion|fosterwebmarketing|lawrank|rankings\.io|postali|hennessey"
+    r"|as-seen|seen-on|featured|press|news|media|award|badge|seal|member|association|certified"
+    r"|partner|client|sponsor|payment|visa|mastercard|amex|paypal",
+    re.I)
+
+
+def invisible_on_paper(blob: bytes, ext: str):
+    """Whether this logo would show as an empty box where the site draws it.
+
+    Both surfaces that render a logo are light: the firm card and the profile use --paper, and
+    the panel draws on #fff. A header logo is often the reversed-out version, white artwork on a
+    transparent background made for a dark navigation bar, and six of the first fifty-five read
+    this way arrived like that. On a white card they are a blank rectangle with a border, which
+    is worse than the monogram, and nothing downstream would ever have said so.
+
+    Returns a reason, or None when the logo has ink a reader can see.
+    """
+    if ext == ".svg":
+        # No pixels to count. A fill is named or it is inherited, and artwork that names only
+        # white and nothing else is the reversed version.
+        text = blob.decode("utf-8", "replace")
+        fills = set(m.lower() for m in re.findall(r'fill[:=]["\s]*(#[0-9a-fA-F]{3,8}|white)', text))
+        fills.discard("none")
+        light = {"#fff", "#ffffff", "#fffffff", "#ffffffff", "white"}
+        if fills and fills <= light:
+            return "white artwork, invisible on the card it would sit on"
+        return None
+    try:
+        from PIL import Image
+        import io as _io
+        im = Image.open(_io.BytesIO(blob)).convert("RGBA")
+    except Exception:
+        return None  # If it cannot be opened here, the dimension reader already had its say.
+    im.thumbnail((160, 160))
+    px = list(im.get_flattened_data() if hasattr(im, "get_flattened_data") else im.getdata())
+    ink = [p for p in px if p[3] > 32]
+    if len(ink) < len(px) * 0.01:
+        return "almost nothing but transparency"
+    pale = sum(1 for r, g, b, _ in ink if (0.299 * r + 0.587 * g + 0.114 * b) > 212)
+    # Whether a white pixel disappears depends on what is behind it, and the alpha channel is
+    # what says so. On a transparent background the pale pixels are artwork that will vanish into
+    # the card. On an opaque one they are the artwork's own white background, which is the same
+    # colour as the card and is meant to be: eight of these are a logo flattened onto white, and
+    # judging them by the same number would have thrown away perfectly good marks.
+    opaque = len(ink) > len(px) * 0.9
+    if not opaque and pale > len(ink) * 0.8:
+        return "white artwork, invisible on the card it would sit on"
+    if opaque and pale > len(ink) * 0.995:
+        return "a blank white rectangle"
+    return None
+
+
+def header_logo(html: str, origin: str):
+    """The firm's own mark, from the top of its own page.
+
+    154 firms still show a monogram and most of them do have a logo: it is an <img> in the header
+    with a class the theme author wrote, and this script was only ever looking at declared icons,
+    JSON-LD and favicon.ico. lopezandhumphries.com, a client, serves a 32-pixel icon and an empty
+    favicon.ico, and carries atf-and-scroll-nav-logo-1.svg under class="logo-main".
+
+    A class that says logo is trusted over a filename that says logo, because the class was
+    written by whoever built the site to mean this image is the site's mark, while the filename is
+    also what every award badge in the industry is called. Only the first images in the document
+    are considered, which is the header without having to parse the page's structure.
+    """
+    out = []
+    for position, tag in enumerate(IMG_TAG.findall(html or "")[:25]):
+        src = attr(tag, "src") or attr(tag, "data-src")
+        if not src or src.startswith("data:"):
+            continue
+        cls = attr(tag, "class") or ""
+        alt = attr(tag, "alt") or ""
+        if NOT_OURS.search(cls) or NOT_OURS.search(src) or NOT_OURS.search(alt):
+            continue
+        by_class = bool(LOGO_WORD.search(cls))
+        if not by_class and not LOGO_WORD.search(src):
+            continue
+        # Earlier in the document wins among equals: a header mark is above a footer one, and the
+        # footer copy is often the single-colour version.
+        out.append((600 if by_class else 200, position, urllib.parse.urljoin(origin + "/", src)))
+    out.sort(key=lambda t: (-t[0], t[1]))
+    return [url for _, _, url in out]
+
+
 def candidates(html: str, origin: str, stored=None):
     """Declared icons, best first."""
     out = []
@@ -212,6 +312,10 @@ def candidates(html: str, origin: str, stored=None):
     # Scored between the declared icons and the .ico: see declared_logo for why.
     for url in declared_logo(html, origin, stored):
         out.append((-500, url))
+    # Below what the firm declares in structured data, because that is an explicit statement about
+    # which image is its logo, and above favicon.ico, because a 16-pixel .ico is not a logo.
+    for rank, url in enumerate(header_logo(html, origin)):
+        out.append((-600 - rank, url))
     out.append((-1000, origin + "/favicon.ico"))
     seen, ranked = set(), []
     for score, url in sorted(out, key=lambda p: -p[0]):
@@ -325,6 +429,11 @@ def main():
                               % (url[:60], w, h))
                     continue
                 blob, ext = inner, ".png"
+            pale = invisible_on_paper(blob, ext)
+            if pale:
+                if args.verbose:
+                    print("      %s: %s" % (url[:60], pale))
+                continue
             chosen = (url, blob, ext, w, h)
             break
 
@@ -337,6 +446,20 @@ def main():
         out = LOGOS / (domain + ext)
         out.write_bytes(blob)
 
+        # Say which of the three it was. This field is published on the profile, and once the
+        # header became a source "the icon the firm's own site declares" was no longer true of
+        # every logo here: an <img class="logo"> is not a declaration, it is the picture at the
+        # top of the page.
+        if url in set(header_logo(html, origin)):
+            provenance = ("The logo in the header of the firm's own site, copied here rather "
+                          "than hot-linked")
+        elif url in set(declared_logo(html, origin, stored)):
+            provenance = ("The logo the firm names in its own structured data, copied here "
+                          "rather than hot-linked")
+        else:
+            provenance = ("The icon the firm's own site declares, copied here rather than "
+                          "hot-linked")
+
         fresh = json.loads(path.read_text(encoding="utf-8"))   # four scripts share this file
         fresh["logo"] = {
             "file": "/logos/" + out.name,
@@ -344,7 +467,7 @@ def main():
             "width": None if w == "svg" else w,
             "height": None if h == "svg" else h,
             "bytes": len(blob),
-            "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+            "source": provenance,
             "fetched_at": TODAY,
         }
         io.open(path, "w", encoding="utf-8", newline="\n").write(
