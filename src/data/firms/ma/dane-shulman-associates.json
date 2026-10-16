@@ -129,14 +129,14 @@
         "categories": 5,
         "hours_published": true,
         "photos": 3,
-        "google_wrote_a_summary": false,
         "unobtainable": [
           "the owner's own description",
           "services list",
           "questions and answers",
           "recent posts"
         ],
-        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way.",
+        "google_wrote_a_summary": false
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
@@ -492,5 +492,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/daneshulmanlaw.com.png",
+    "source_url": "https://zeta.creativecirclecdn.com/dsa/original/dsa-nameplate.png",
+    "width": 869,
+    "height": 115,
+    "bytes": 15871,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-16"
   }
 }

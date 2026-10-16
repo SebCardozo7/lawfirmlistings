@@ -66,6 +66,11 @@ EXT = {"image/png": ".png", "image/jpeg": ".jpg", "image/gif": ".gif",
        "image/x-icon": ".ico", "image/vnd.microsoft.icon": ".ico"}
 
 
+JSON_LD = re.compile(
+    r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+    re.I | re.S)
+
+
 def attr(tag: str, name: str):
     m = re.search(r"%s=[\"']([^\"']+)[\"']" % name, tag, re.I)
     return m.group(1) if m else None
@@ -146,7 +151,45 @@ def dimensions(blob: bytes):
     return None
 
 
-def candidates(html: str, origin: str):
+def declared_logo(html: str, origin: str, stored=None):
+    """The logo a firm declares in its own structured data, if it declares one.
+
+    264 published firms have no logo, and for most of them the reason is the same: their site
+    serves a 32-pixel icon and an empty favicon.ico, which this script rightly refuses. 154 of
+    those 264 do declare a real logo in the JSON-LD on their own home page, and the filenames say
+    so: logo-square-color2.svg, mdk-logo-09-22-23.png, logo-white.png.
+
+    It sits below the declared icons and above favicon.ico. Below, because an apple-touch-icon is
+    square by construction and a brand lockup may be four times as wide as it is tall. Above,
+    because a 16-pixel .ico is not a logo at all.
+    """
+    found = []
+
+    def dig(node):
+        if isinstance(node, dict):
+            for key, value in node.items():
+                if key.lower() == "logo":
+                    if isinstance(value, str):
+                        found.append(value)
+                    elif isinstance(value, dict) and value.get("url"):
+                        found.append(value["url"])
+                dig(value)
+        elif isinstance(node, list):
+            for value in node:
+                dig(value)
+
+    # Either the page we just fetched or the structured data crawl_public stored for us.
+    if stored is not None:
+        dig(stored)
+    for block in JSON_LD.findall(html or ""):
+        try:
+            dig(json.loads(block))
+        except ValueError:
+            continue
+    return [urllib.parse.urljoin(origin + "/", u) for u in found if u]
+
+
+def candidates(html: str, origin: str, stored=None):
     """Declared icons, best first."""
     out = []
     for tag in ICON_LINK.findall(html or ""):
@@ -166,6 +209,9 @@ def candidates(html: str, origin: str):
             biggest = 180
         score = biggest - (500 if "icon" in typ and "x-icon" in typ else 0)
         out.append((score, urllib.parse.urljoin(origin + "/", href)))
+    # Scored between the declared icons and the .ico: see declared_logo for why.
+    for url in declared_logo(html, origin, stored):
+        out.append((-500, url))
     out.append((-1000, origin + "/favicon.ico"))
     seen, ranked = set(), []
     for score, url in sorted(out, key=lambda p: -p[0]):
@@ -223,12 +269,22 @@ def main():
         rp = robots_for(origin)
         status, html, final = fetch(origin + "/")
         time.sleep(DELAY)
+        # A home page that will not serve us today is not the end of the search. crawl_public
+        # already stored this firm's structured data, and for 154 of the 264 firms without a logo
+        # that is where the logo is declared. gadclaw.com and sargonlawgroup.com both refuse the
+        # home page now and both declare a logo in the record we already hold.
+        stored = record.get("json_ld")
         if status != 200 or not html:
-            print("%-30s home returned %s" % (domain, status))
-            continue
+            if not stored:
+                print("%-30s home returned %s" % (domain, status))
+                continue
+            if args.verbose:
+                print("%-30s home returned %s; reading the stored structured data"
+                      % (domain, status))
+            html = ""
 
         chosen = None
-        for url in candidates(html, origin):
+        for url in candidates(html, origin, stored):
             if not rp.can_fetch(UA, url):
                 continue
             blob, meta = download(url)
