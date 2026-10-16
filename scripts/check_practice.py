@@ -624,7 +624,13 @@ def examine(domain, spec, site=None):
         # publishes no such page: its host answered 429 to three requests in a row, so there was
         # nothing to read and the reason given described the site instead of the refusal.
         if not from_sitemap and not from_home:
-            return None, ("nothing to read: no sitemap answered and the home page served no "
+            # "unreadable", not a sentence of its own, because the prefix is the only part the
+            # caller reads. This said "nothing to read" and explained itself perfectly well to a
+            # person, and the write-out skips the prefix "unreadable:" alone, so 129 firms whose
+            # hosts never answered were recorded as publishing none of the five sub-practices and
+            # the next run would have skipped them as answered. The comment above was already
+            # right about what this means. It just was not saying it to the code.
+            return None, ("unreadable: no sitemap answered and the home page served no "
                           "links, so this is a site we could not fetch rather than a page the "
                           "firm does not publish")
         return None, "no page whose address names the practice (%s)" % where
@@ -673,7 +679,7 @@ def examine_combined(domain, spec, practice_name, site=None):
     urls.sort(key=lambda u: len(urllib.parse.urlparse(u).path))
 
     if not everything:
-        return None, ("nothing to read: no sitemap answered and the home page served no links, "
+        return None, ("unreadable: no sitemap answered and the home page served no links, "
                       "so this is a site we could not fetch rather than a firm with no "
                       "practice-areas page")
     last = "the firm publishes no page listing its practice areas either"
@@ -831,7 +837,11 @@ def main() -> int:
             # A probe that ran out of budget read nothing, so it answered nothing. Writing it
             # down would record "held: False" against a firm we never reached and would make the
             # next run skip it as answered. Leave that one out and let a later run ask again.
-            if not found and why and why.startswith("unreadable:"):
+            # Either half, not just the first. The two probes' reasons are joined with "; ", so a
+            # practice-page probe that answered and a practice-areas probe that could not be read
+            # produce a string beginning with the answer, and startswith() waved it through.
+            if not found and why and any(part.strip().startswith("unreadable:")
+                                         for part in why.split(";")):
                 continue
             store[name] = found or {"held": False, "why": why, "checked_at": TODAY}
             wrote = True
