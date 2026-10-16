@@ -328,6 +328,41 @@ def promote(rec: dict, firm: dict) -> list[str]:
     return changed
 
 
+# Where each line promote() prints actually lives in the profile. The printed name and the key
+# are not always the same thing: trust_pages and schema_detected sit under digital.
+FIELD_PATHS = {
+    "attorneys": ("attorneys",),
+    "site_blocked": ("site_blocked",),
+    "reviews.google": ("reviews", "google"),
+    "reviews.sample": ("reviews", "sample"),
+    "transaction": ("transaction",),
+    "domestic": ("domestic",),
+    "logo": ("logo",),
+    "operating": ("operating",),
+    "accountability": ("accountability",),
+    "results_published": ("results_published",),
+    "digital.psi": ("digital", "psi"),
+    "trust_pages": ("digital", "trust_pages"),
+    "schema_detected": ("digital", "schema_detected"),
+}
+
+
+def undo(firm: dict, was: dict, name: str) -> None:
+    """Put one field back the way the published profile had it."""
+    path = FIELD_PATHS.get(name)
+    if not path:
+        raise SystemExit("--only cannot hold back %r: it is not in FIELD_PATHS" % name)
+    target, source = firm, was
+    for key in path[:-1]:
+        target = target.setdefault(key, {})
+        source = (source or {}).get(key) or {}
+    last = path[-1]
+    if isinstance(source, dict) and last in source:
+        target[last] = source[last]
+    else:
+        target.pop(last, None)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--domains", required=True, help="comma-separated staging domains")
@@ -335,7 +370,13 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--attorneys", action="store_true",
                     help="also merge the crawled roster into the profile")
+    # Promoting everything measured is right when a re-crawl is the reason you are here. It is
+    # wrong when one field is: a logo run would have carried a PageSpeed re-measure and a review
+    # count onto 46 profiles in the same commit, and a diff that mixes three facts hides all
+    # three. The fields are named exactly as the lines above print them.
+    ap.add_argument("--only", help="comma-separated field names; promote nothing else")
     args = ap.parse_args()
+    only = {f.strip() for f in (args.only or "").split(",") if f.strip()}
 
     rc = 0
     for domain in [d.strip() for d in args.domains.split(",") if d.strip()]:
@@ -353,9 +394,19 @@ def main() -> int:
 
         firm = json.loads(path.read_text(encoding="utf-8"))
         rec = json.loads(staging.read_text(encoding="utf-8"))
+        was = json.loads(json.dumps(firm))      # what the profile said before any of this
         changed = promote(rec, firm)
         if args.attorneys:
             changed += promote_attorneys(rec, firm)
+        if only:
+            kept = []
+            for line in changed:
+                name = line.split()[0]
+                if name in only:
+                    kept.append(line)
+                else:
+                    undo(firm, was, name)
+            changed = kept
         print(f"\n{firm['name']}  ({path.name})")
         if not changed:
             print("  nothing measured to promote")
