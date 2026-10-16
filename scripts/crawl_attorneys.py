@@ -208,8 +208,32 @@ STATE_TAIL = re.compile(r"^[A-Z]{2}$")
 PLACE_ALONE = {
     "san diego", "los angeles", "chula vista", "long beach", "san francisco", "san bernardino",
     "san jose", "college park", "huntington beach", "santa monica", "costa mesa",
-    "newport beach", "santa ana", "santa barbara", "the woodlands",
+    "newport beach", "santa ana", "santa barbara", "the woodlands", "san luis obispo",
+    "santa maria", "bakersfield", "fresno", "sacramento", "oakland", "riverside", "modesto",
+    "stockton", "anaheim", "irvine", "glendale", "pasadena", "torrance", "inglewood",
 }
+
+# A place at the front of a longer heading, which is a location or practice page rather than a
+# person. The May Firm publishes eight of them as its attorneys, each the start of a page title
+# the crawler truncated: "Long Beach Car" is "Long Beach Car Accident Lawyer", "California Bus"
+# is "California Bus Accident Lawyer". They are the reason that firm reads "5 of 13 attorneys
+# verified" and loses points for it.
+#
+# The city has to be the whole of the opening, and something has to follow it, so a person whose
+# surname is also a city keeps their name: "Fresno" alone is not matched here, and neither is
+# anybody called Diego or Monica, because the match is on the full place name.
+STATE_NAMES = {
+    "california", "texas", "florida", "arizona", "nevada", "georgia", "illinois", "maryland",
+    "pennsylvania", "massachusetts", "oregon", "new york", "new jersey",
+}
+
+
+def _opens_with_a_place(name):
+    low = " ".join((name or "").split()).lower()
+    for place in PLACE_ALONE | STATE_NAMES:
+        if low.startswith(place + " "):
+            return True
+    return False
 
 # A university, a hospital, a bar association, a foundation. These arrive from the education and
 # admissions lines of a bio: "UC San Diego", "St. John's University", "Mount Sinai Medical
@@ -246,6 +270,8 @@ def is_a_thing_not_a_person(name):
     low = n.lower()
     if low in PLACE_ALONE:
         return "a place"
+    if _opens_with_a_place(n):
+        return "a location or practice page"
     if low in A_SECTION:
         return "a section heading"
     if AN_INSTITUTION.search(n) or CAMPUS_INITIALS.match(n):
