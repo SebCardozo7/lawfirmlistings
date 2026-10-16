@@ -162,6 +162,21 @@ export const GUIDES: Guide[] = [
     meta: 'The notice of claim comes first',
   },
   {
+    slug: 'attorney-advertising-disclaimers',
+    cover: 'results',
+    kicker: 'Study',
+    title: "Law Firms Publish the Settlement Figure and Not the Notice Beside It",
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'A firm that advertises what it won for somebody else is expected to say the figure ' +
+      'predicts nothing about anyone else. We read the case results page of every firm in this ' +
+      'directory and counted the ones that say it. Most of the sentences exist, one click away ' +
+      'from the number they are about.',
+    thumb: '',
+    icon: 'doc',
+    meta: 'The number is there, the caveat is a click away',
+  },
+  {
     slug: 'how-to-choose-a-criminal-defense-lawyer',
     cover: 'defense',
     kicker: 'Study',
