@@ -172,6 +172,52 @@ img.logo{max-width:160px;max-height:84px;border:1px solid var(--line);border-rad
 padding:12px;background:#fff}
 @media(max-width:820px){.shell{grid-template-columns:1fr}main{padding:26px 20px 60px}
 aside::after{display:none}}
+
+.gates{display:grid;gap:10px;margin:14px 0 6px}
+.gate{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:14px 16px}
+.gate-main{flex:1;min-width:0}
+.gate-main b{display:block;font-weight:600;letter-spacing:-.01em}
+.pill{flex:none;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:#E8F7EE;color:#116B3A}
+.pill.unknown{background:#F1F1EE;color:#6F7079}
+.pill.bad{background:#FDECEC;color:#9B1C1C}
+.pillar{margin:18px 0 6px}
+.pillar h3{font-size:1rem;margin:0 0 10px;display:flex;justify-content:space-between;
+  align-items:baseline;gap:12px}
+.pillar .sub{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;
+  margin-bottom:8px}
+.sub-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  margin-bottom:8px}
+.sub-head b{font-weight:600}
+.bar{height:6px;border-radius:999px;background:#EFEFEC;overflow:hidden}
+.bar i{display:block;height:6px;border-radius:999px;background:linear-gradient(90deg,#8B5CF6,#3B82F6)}
+.bar i.full{background:linear-gradient(90deg,#3B82F6,#5EEAD4)}
+.bar i.empty{background:#E2E2DE}
+.sub details,.gate details{margin-top:8px}
+.sub summary,.gate summary{cursor:pointer;font-size:.86rem;color:var(--muted);
+  list-style:none;user-select:none}
+.sub summary::-webkit-details-marker,.gate summary::-webkit-details-marker{display:none}
+.sub summary::before,.gate summary::before{content:"+ ";font-weight:700}
+.sub details[open] summary::before,.gate details[open] summary::before{content:"− "}
+.sub details p,.gate details p{margin:8px 0 0;font-size:.9rem;color:var(--ink-soft)}
+
+.wins{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+  margin:22px 0 10px}
+.wins h2{margin:0 0 6px}
+.wins .lede{margin:0 0 14px}
+.wins ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.wins li{display:flex;gap:12px;align-items:flex-start}
+.wins li b{display:block;font-weight:600;letter-spacing:-.01em}
+.wins li .when{display:block;margin-top:2px}
+.gain{flex:none;min-width:46px;text-align:center;font-weight:700;font-size:.82rem;
+  padding:4px 8px;border-radius:999px;background:#F0ECFF;color:#5B3FD1}
+.todo{display:flex;gap:10px;align-items:flex-start;margin-top:10px;padding-top:10px;
+  border-top:1px dashed var(--line)}
+.todo b{display:block;font-weight:600;font-size:.94rem}
+.todo p{margin:4px 0 0;font-size:.88rem;color:var(--muted)}
+.fixed{margin:8px 0 0;font-size:.86rem;color:var(--muted);font-style:italic}
 `;
 
 function html(title: string, body: string, status = 200, headers: Record<string, string> = {}) {
@@ -179,6 +225,8 @@ function html(title: string, body: string, status = 200, headers: Record<string,
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>${esc(title)} | Law Firm Listings</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap">
@@ -478,24 +526,270 @@ function resultsPage(d: any, pending: any[], flash?: string, bad = false): strin
     <span class="when">${esc(i.result_docket)}</span>`)}`;
 }
 
+/**
+ * What a firm can do about each sub-factor, and where the honest answer is nothing.
+ *
+ * The score page told a firm where it stood and left it there. A panel that shows a number and
+ * no way to move it is a scoreboard, and the point of this one is that the next crawl can find
+ * something different. /list-your-firm/ already does this for the gates, in a `todo` beside each
+ * one; this is the same idea one level down.
+ *
+ * Two rules for what goes in here. Each line is something the firm does on its own property, not
+ * something it asks us for: we read public pages, so publishing the thing is the whole of it.
+ * And where a factor genuinely cannot be moved, it says so rather than inventing an action,
+ * because filler here would be the one thing that makes the whole page not worth reading.
+ */
+const IMPROVE: Record<string, { do: string; why?: string } | { fixed: string }> = {
+  A2: {
+    do: 'Publish each attorney\u2019s bar admission number and year on their own bio page.',
+    why: 'This factor is the mean years since admission across your attorneys. We can only count '
+      + 'the ones we can find in the state register, and a published bar number is what ties a '
+      + 'name on your site to a record in it.',
+  },
+  A5: {
+    do: 'State on your site that the firm carries professional liability cover, and list the bar '
+      + 'and trial lawyer associations it belongs to.',
+    why: 'Only the firm can say this about itself, so it is scored from what you publish and '
+      + 'nowhere else. Paid "Top 100" style memberships are excluded on purpose.',
+  },
+  A6: {
+    do: 'Give every person on your team page a role, and a bar number for the ones who practise '
+      + 'law.',
+    why: 'This is the share of your named roster we could match to the state register. A page '
+      + 'that lists attorneys, paralegals and intake staff without saying which is which costs '
+      + 'points here, because we have to count everybody.',
+  },
+  B1: {
+    do: 'Publish a case results page, and send each result through this panel with its docket or '
+      + 'index number.',
+    why: 'A result with a docket number can be checked against the court record, which is what '
+      + 'separates this directory from one that reprints whatever a firm claims.',
+  },
+  B2: {
+    do: 'For each result, name the type of case, the year, the court and what was at issue.',
+    why: 'A list of figures with no case behind them scores nothing here. The detail is what '
+      + 'makes a result readable by somebody deciding whether it resembles their own situation.',
+  },
+  B3: {
+    do: 'Put a prior-results disclaimer on the results page itself.',
+    why: 'Most state advertising rules effectively require one, and it is a single sentence. Of '
+      + 'the 532 firms here that publish results, 340 carry no disclaimer at all.',
+  },
+  C1: { fixed: 'This counts the public reviews your verified Google listings already carry. It '
+      + 'moves as they accumulate, and nothing on your own site changes it.' },
+  C2: { fixed: 'Your rating, weighted so that a 5.0 from nine reviews does not outrank a 4.8 '
+      + 'from four hundred. It is not something to act on here.' },
+  C3: {
+    do: 'Ask clients to review you as a matter of routine at the end of a matter.',
+    why: 'This is the share of your reviews from the last twelve months. A firm with hundreds of '
+      + 'old reviews and none this year scores low, because the question it answers is whether '
+      + 'the practice is active now.',
+  },
+  C5: {
+    do: 'Reply to the negative reviews you have, on the record.',
+    why: 'Complaints are counted as a share rather than as a count, and a reply is the only part '
+      + 'of this a firm controls.',
+  },
+  D1: {
+    do: 'Fix Core Web Vitals, put a photo and a bar number on every bio, publish a fee page, and '
+      + 'carry a privacy policy and the attorney-advertising notice your state requires.',
+    why: 'Six separate things are counted here and each is worth a point or two, which makes this '
+      + 'the factor with the most to gain from an afternoon of work.',
+  },
+  D2: {
+    do: 'Earn links from bar associations, local press, universities and civic organisations.',
+    why: 'This is the slowest factor on the page and the one no edit will move this month. It is '
+      + 'measured from third-party data, not from your site.',
+  },
+  D3: {
+    do: 'Complete your Google Business Profile: categories, hours, services, twenty or more '
+      + 'photos, and a post in the last sixty days.',
+    why: 'Cheap and immediate. Most of what this asks for takes a single sitting in the Business '
+      + 'Profile manager.',
+  },
+  D4: {
+    do: 'Add LegalService or Attorney schema to your pages, with your address, phone and practice '
+      + 'areas in it.',
+    why: 'It is one point, and it also helps every other check on this page read your site '
+      + 'correctly.',
+  },
+  E1: {
+    do: 'Publish how you charge: the contingency share, the hourly rate, or the retainer, and '
+      + 'whether the first consultation is free.',
+    why: 'This is the single most common thing a visitor looks for and does not find. We record '
+      + '"Not stated" rather than assuming a fee model, and "Not stated" scores nothing.',
+  },
+  E3: {
+    do: 'Say which languages your firm actually works in, on a page rather than in a translate '
+      + 'widget.',
+    why: 'A machine-translated site is not the same claim as a lawyer who takes the call in that '
+      + 'language, and only the second one counts here.',
+  },
+  E4: {
+    do: 'Publish your intake hours, and say plainly if you answer after hours, visit hospitals or '
+      + 'take home appointments.',
+    why: 'Availability is scored from what the site states, so a firm that does all three and '
+      + 'mentions none of them scores the same as one that does nothing.',
+  },
+};
+
+// The five pillars by the names the methodology page gives them. A firm reading its own
+// scorecard should not have to learn that "D" is its website.
+const PILLAR_NAMES: Record<string, string> = {
+  A: 'Professional standing',
+  B: 'Published outcomes',
+  C: 'Client experience',
+  D: 'Website and authority',
+  E: 'Access and responsiveness',
+};
+
+// The five gates, in the words /list-your-firm/ uses, because "G2" means nothing to a firm.
+const GATE_TITLES: Record<string, string> = {
+  G1: 'Attorneys licensed where they practise',
+  G2: 'No public discipline outstanding',
+  G3: 'A real entity and a real office',
+  G5: 'A site that names its lawyers',
+  G6: 'A year in practice and ten client reviews',
+};
+
+/**
+ * Three states, not two, and the third is the one the old page hid.
+ *
+ * A gate reads "not passed" whether we found something against the firm or whether we could not
+ * look. Lopez & Humphries has two open gates and neither is a finding: Florida publishes no
+ * attorney register we may query, and three of the discipline decisions naming a surname are
+ * scans without searchable text. Painting those the same colour as a real failure tells a firm
+ * it did something wrong.
+ */
+function gateState(g: any): { label: string; cls: string } {
+  if (g?.pass) return { label: 'Passed', cls: 'ok' };
+  const source = String(g?.source ?? '');
+  const unreadable = /no queryable source|nothing to query|unavailable|incomplete|partial|pending/i;
+  if (unreadable.test(source)) return { label: 'We could not check', cls: 'unknown' };
+  return { label: 'Not passed', cls: 'bad' };
+}
+
+/** The line under a sub-factor that still has points in it. */
+function improveBlock(code: string, missing: number): string {
+  if (missing <= 0) return '';
+  const entry = IMPROVE[code];
+  if (!entry) return '';
+  if ('fixed' in entry) {
+    return `<p class="fixed">${esc(entry.fixed)}</p>`;
+  }
+  return `<div class="todo">
+    <span class="gain">+${esc(String(round1(missing)))}</span>
+    <div>
+      <b>${esc(entry.do)}</b>
+      ${entry.why ? `<p>${esc(entry.why)}</p>` : ''}
+    </div>
+  </div>`;
+}
+
+const round1 = (n: number) => Math.round(n * 10) / 10;
+
+/**
+ * The three actions worth doing first, by how many points each would return.
+ *
+ * A firm reading seventeen sub-factors has no way to tell which afternoon of work pays. This
+ * sorts by what is actually recoverable and shows the top of that list, which is the only part
+ * most people will read.
+ */
+function biggestWins(d: any): string {
+  const rows: { code: string; label: string; missing: number; action: string }[] = [];
+  for (const p of Object.values(d.score?.pillars ?? {}) as any[]) {
+    for (const sub of (p.subs ?? [])) {
+      const missing = Number(sub.max ?? 0) - Number(sub.pts ?? 0);
+      const entry = IMPROVE[String(sub.code ?? '')];
+      if (missing > 0 && entry && 'do' in entry) {
+        rows.push({ code: sub.code, label: sub.label ?? sub.code, missing, action: entry.do });
+      }
+    }
+  }
+  if (!rows.length) return '';
+  rows.sort((a, b) => b.missing - a.missing);
+  const top = rows.slice(0, 3);
+  const total = round1(rows.reduce((sum, r) => sum + r.missing, 0));
+  return `<div class="wins">
+    <h2>What would move your score most</h2>
+    <p class="lede">There are ${esc(String(total))} points still available to you across
+      ${esc(String(rows.length))} factors. These three carry the most of them, and every one is
+      something you publish on your own site.</p>
+    <ol>${top.map(r => `<li>
+      <span class="gain">+${esc(String(round1(r.missing)))}</span>
+      <div><b>${esc(r.action)}</b><span class="when">${esc(r.label)}</span></div>
+    </li>`).join('')}</ol>
+    <p class="when">The next crawl reads your site again and the score follows what it finds.</p>
+  </div>`;
+}
+
 function scorePage(d: any): string {
   if (!d.score) return '<h1>Your score</h1><p class="lede">This profile has no score yet.</p>';
-  const rows = Object.entries(d.score.pillars ?? {}).flatMap(([, p]: [string, any]) =>
-    (p.subs ?? []).map((s: any) => `<div class="sub"><b>${esc(s.code)}</b> ${esc(s.label ?? '')}
-      &middot; ${esc(s.pts)}/${esc(s.max)} &middot; ${esc(s.source ?? '')}<br>${esc(s.evidence ?? '')}</div>`));
-  const gates = Object.entries(d.gates ?? {}).map(([k, g]: [string, any]) =>
-    `<div class="sub"><b>${esc(k)}</b> ${g.pass ? 'passed' : esc(g.source ?? 'not passed')}<br>${esc(g.evidence ?? '')}</div>`);
+
+  const gates = Object.entries(d.gates ?? {}).map(([k, g]: [string, any]) => {
+    const st = gateState(g);
+    const evidence = String(g?.evidence ?? '');
+    return `<div class="gate">
+      <span class="pill ${st.cls}">${esc(st.label)}</span>
+      <div class="gate-main">
+        <b>${esc(GATE_TITLES[k] ?? k)}</b>
+        ${evidence ? `<details><summary>Why</summary><p>${esc(evidence)}</p></details>` : ''}
+      </div>
+    </div>`;
+  });
+
+  // Sub-factors by pillar, as a bar each. The evidence is the sentence that explains the bar,
+  // so it sits behind a disclosure rather than beside it: a firm wants to know where the points
+  // went before it wants to know why.
+  const pillars = Object.entries(d.score.pillars ?? {}).map(([key, p]: [string, any]) => {
+    const subs = (p.subs ?? []).map((s: any) => {
+      const pts = Number(s.pts ?? 0);
+      const max = Number(s.max ?? 0) || 1;
+      const share = Math.max(2, Math.round((pts / max) * 100));
+      const full = pts >= max;
+      const empty = pts <= 0;
+      return `<div class="sub">
+        <div class="sub-head">
+          <b>${esc(s.label ?? s.code)}</b>
+          <span class="num">${esc(String(pts))}/${esc(String(s.max ?? 0))}</span>
+        </div>
+        <div class="bar"><i class="${full ? 'full' : empty ? 'empty' : ''}"
+          style="width:${share}%"></i></div>
+        ${s.evidence ? `<details><summary>How this was measured</summary>
+          <p>${esc(s.evidence)}</p></details>` : ''}
+        ${improveBlock(String(s.code ?? ''), max - pts)}
+      </div>`;
+    }).join('');
+    const got = Number(p.score ?? 0);
+    const of = Number(p.max ?? 0);
+    return `<section class="pillar">
+      <h3>${esc(PILLAR_NAMES[key] ?? p.name ?? key)} <span class="num">${esc(String(got))}/${esc(String(of))}</span></h3>
+      ${subs}
+    </section>`;
+  });
+
+  const open = Object.values(d.gates ?? {}).filter((g: any) => !g?.pass).length;
+  const unknown = Object.values(d.gates ?? {})
+    .filter((g: any) => gateState(g).cls === 'unknown').length;
+
   return `<h1>Your score</h1>
-  <p class="lede">Every sub-factor, what it scored and the evidence behind it. Nothing on this page
-    is editable, by you or by us: it is written by the scoring engine from measured values.</p>
+  <p class="lede">What scored, out of what, and the evidence behind each line. Nothing here is
+    editable, by you or by us: it is written by the scoring engine from measured values.</p>
   <div class="stats">
     <div class="stat key"><b>${esc(d.score.total)}</b><span>out of 100 &middot; ${esc(d.score.tier)}</span></div>
-    <div class="stat"><b>${esc(d.score.methodology)}</b><span>methodology version</span></div>
+    <div class="stat"><b>${esc(String(5 - open))}/5</b><span>eligibility gates passed</span></div>
     <div class="stat"><b>${esc(d.score.computed_at)}</b><span>last computed</span></div>
   </div>
-  <p class="lede">${esc(d.score.verdict ?? '')}</p>
-  <h2>Eligibility gates</h2><div class="card">${gates.join('')}</div>
-  <h2>Sub-factors</h2><div class="card">${rows.join('')}</div>`;
+  ${unknown ? `<div class="note"><b>${esc(String(unknown))} of your open gates
+    ${unknown === 1 ? 'is' : 'are'} not a finding about your firm.</b> ${unknown === 1
+      ? 'It is marked'
+      : 'They are marked'} <i>we could not check</i>: the record we would read is not published
+    in a form we are allowed to query, so it is counted neither for you nor against you.</div>` : ''}
+  <h2>Eligibility gates</h2>
+  <div class="gates">${gates.join('')}</div>
+  ${biggestWins(d)}
+  <h2>Where the points are</h2>
+  ${pillars.join('')}`;
 }
 
 function faqPage(d: any): string {

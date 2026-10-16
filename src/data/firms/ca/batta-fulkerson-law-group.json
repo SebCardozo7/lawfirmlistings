@@ -196,13 +196,13 @@
     "G1": {
       "pass": true,
       "source": "the State Bar of California's licensee search",
-      "checked_at": "2026-10-09",
+      "checked_at": "2026-10-12",
       "evidence": "2 of 8 named attorneys hold an active California licence and none carries an adverse status. 6 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
       "pass": true,
       "source": "the State Bar of California's licensee search",
-      "checked_at": "2026-10-09",
+      "checked_at": "2026-10-12",
       "evidence": "No named attorney carries a disbarment, a suspension or a disciplinary resignation on the State Bar of California's record, across the 2 we identified. Administrative suspensions, which the State Bar states are non-disciplinary, are not counted here"
     },
     "G3": {
@@ -215,7 +215,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-05"
+      "checked_at": "2026-10-12"
     },
     "G6": {
       "pass": true,
@@ -312,7 +312,7 @@
     "total": 51,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-10",
+    "computed_at": "2026-10-12",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -393,7 +393,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 210 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 210 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -505,5 +505,14 @@
     "gates_unresolvable": [],
     "assessable": 80,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/battafulkerson.com.png",
+    "source_url": "https://battafulkerson.com/wp-content/uploads/2016/05/batta-fulkerson-web-logo.png",
+    "width": 344,
+    "height": 140,
+    "bytes": 9246,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-16"
   }
 }

@@ -230,7 +230,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-05"
+      "checked_at": "2026-10-12"
     },
     "G6": {
       "pass": true,
@@ -338,7 +338,7 @@
     "total": 50,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-05",
+    "computed_at": "2026-10-12",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -419,7 +419,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 281 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 281 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -529,5 +529,14 @@
     "gates_unresolvable": [],
     "assessable": 89,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/graumanlaw.com.png",
+    "source_url": "https://www.graumanlaw.com/static/dealer-32406/logo.png",
+    "width": 685,
+    "height": 125,
+    "bytes": 7823,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-16"
   }
 }

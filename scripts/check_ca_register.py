@@ -357,7 +357,12 @@ def assess(attorneys, firm_name, city, verbose=False):
             when = got["gate_discipline"][-1][0]
             discipline.append((name, "%s, %s" % (got["gate_discipline"][-1][1], when), got["url"]))
         elif got["gate_discipline"] or got["other_discipline"]:
-            when, what = got["other_discipline"][-1][0], got["other_discipline"][-1][1]
+            # A served sanction lands here, and it is the gate_discipline list that holds it,
+            # not the other one. Reading other_discipline unconditionally crashed on the first
+            # attorney who had a suspension behind them and nothing else on the record: Morgan
+            # & Morgan, 197 names in, which stopped the run at firm 153 of 252.
+            rows = got["other_discipline"] or got["gate_discipline"]
+            when, what = rows[-1][0], rows[-1][1]
             other_discipline.append((name, "%s, %s" % (what, when), got["url"]))
 
         note = {"registry_status": status, "registry_url": got["url"]}
@@ -409,9 +414,12 @@ def gates_from(result: dict) -> dict:
         name, count = result["adverse_namesake"][0]
         gates["G1"] = {
             "pass": False, "checked_at": TODAY,
-            # "incomplete" is load-bearing: score.py reads that word and keeps the gate out of the
-            # finding column, so a firm does not read "Not eligible" because a stranger shares a
-            # name with one of its lawyers.
+            # "incomplete" keeps the gate out of the finding column, so a firm does not read "Not
+            # eligible" because a stranger shares a name with one of its lawyers. It does not do
+            # the rest of the job: an unfinished gate still blocks a tier, and the word on its own
+            # cost 27 Californian firms a badge they had earned. Only `unresolvable` says the
+            # thing that is true here, which is that the register has an answer for nobody and
+            # never will, and only the script that did the reading knows that.
             "source": "%s, incomplete: an adverse namesake we cannot resolve" % DATASET,
             "evidence": ("None of the %d attorneys this firm names could be told apart from "
                          "namesakes in the register. %s shares a name with one of %d licensees, "
@@ -435,7 +443,15 @@ def gates_from(result: dict) -> dict:
             "source": "%s, partial" % DATASET,
             "evidence": ("None of the %d attorneys this firm names could be found in the State "
                          "Bar of California's register, so there is nothing here to clear or to "
-                         "fault." % total)}
+                         "fault." % total),
+            # "Could not be found" is not "found and not licensed", and we cannot tell those two
+            # apart from a search that returns nothing. A name spelt differently on the site than
+            # on the licence, a lawyer admitted elsewhere, a middle name in one place and not the
+            # other: each returns the same empty result. Our own rule is that a check which cannot
+            # complete must never read as a verdict about a firm, so this one does not.
+            "unresolvable": ("The register returns nothing for any name this firm publishes, and "
+                             "an empty search does not say whether the licence is missing or the "
+                             "name is")}
 
     if result["adverse_namesake"]:
         name, count = result["adverse_namesake"][0]
@@ -445,7 +461,12 @@ def gates_from(result: dict) -> dict:
             "evidence": ("No disciplinary record is held against any of the %d attorneys we "
                          "identified. %s could not be told apart from %d namesakes, one of whom "
                          "is not eligible to practise. Held open."
-                         % (matched, name, count))}
+                         % (matched, name, count)),
+            # The G1 branch above sets this and G2 did not, which is how Arash Law lost Certified
+            # over a stranger in the register who shares a surname with one of its sixteen
+            # lawyers, every one of whom is clean.
+            "unresolvable": ("A namesake carries an adverse status and the register holds no "
+                             "field that would tell the two people apart")}
     elif matched:
         # A reproval or a probation without suspension is real and is on the public record, and
         # this gate does not name it. Saying so is the only honest way to pass a firm that has
@@ -477,7 +498,9 @@ def gates_from(result: dict) -> dict:
             "pass": False, "checked_at": TODAY,
             "source": "%s, partial" % DATASET,
             "evidence": ("No attorney this firm names could be identified in the register, so "
-                         "no disciplinary record could be looked up either.")}
+                         "no disciplinary record could be looked up either."),
+            "unresolvable": ("With no attorney identified in the register, there is no "
+                             "disciplinary record to find or to fail to find")}
     return gates
 
 
@@ -503,6 +526,8 @@ def main() -> int:
     ap.add_argument("--write", action="store_true", help="write the gates back")
     ap.add_argument("--staging", default=".crawl")
     ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--resume", action="store_true",
+                    help="skip firms whose gates already cite this register")
     args = ap.parse_args()
 
     for stream in (sys.stdout, sys.stderr):
@@ -539,10 +564,49 @@ def main() -> int:
 
     passed = held = 0
     for i, (path, record, label, city) in enumerate(targets, 1):
+        # A run over 252 firms and 1,052 names takes hours, and the last one died with
+        # the session at firm 153. Re-asking the register about a firm it already
+        # answered costs that firm another few dozen queries for nothing.
+        if args.resume and "State Bar of California" in (
+                ((record.get("gates") or {}).get("G1") or {}).get("source") or ""):
+            continue
         attorneys = attorneys_of(record)
         if not attorneys:
             print("%3d/%d %-34s no named attorneys, nothing to look up"
                   % (i, len(targets), str(label)[:34]))
+            # Skipping the lookup is right; leaving the old sentence behind is not. 82 Californian
+            # profiles still read "California does not publish an attorney register we can query",
+            # which stopped being true the day this script landed. The reason this firm's licences
+            # are unverified is that it names nobody, and that is a fact about the firm, which G5
+            # already measures. Say that instead of a false fact about the state.
+            if args.write and "State Bar of California" not in (
+                    ((record.get("gates") or {}).get("G1") or {}).get("source") or ""):
+                reason = ("This firm names no attorney on its own site, so there is no licence to "
+                          "look up. The State Bar of California does publish a register we can "
+                          "query; it was not the obstacle.")
+                # unresolvable, and the flag matters more than the sentence. The engine reads a
+                # gate that did not pass as a finding against the firm unless something on the
+                # record says otherwise, and prose does not say otherwise to a machine: the
+                # evidence here reads "it was not the obstacle" and 75 Californian firms would
+                # still have been published as Not eligible, for naming no attorney, which G5
+                # already measures. This is the New York general-partnership case in different
+                # words. The source exists, we could have queried it, and this firm gave us
+                # nothing to query it with.
+                gates = {
+                    "G1": {"pass": False, "evidence": reason,
+                           "unresolvable": ("The firm names no attorney, so the register has no "
+                                            "name to look up and no answer to give"),
+                           "source": "%s, nothing to query" % DATASET, "checked_at": TODAY},
+                    "G2": {"pass": False, "checked_at": TODAY,
+                           "unresolvable": ("With no attorney named, there is no licence whose "
+                                            "disciplinary record could be read"),
+                           "source": "%s, nothing to query" % DATASET,
+                           "evidence": ("With no attorney named, there is no disciplinary record "
+                                        "to look up either.")},
+                }
+                record.setdefault("gates", {}).update(gates)
+                io.open(path, "w", encoding="utf-8", newline="\n").write(
+                    json.dumps(record, ensure_ascii=False, indent=2) + "\n")
             continue
         print("%3d/%d %-34s %d attorney(s)" % (i, len(targets), str(label)[:34], len(attorneys)))
         result = assess(attorneys, record.get("name") or str(label), city, args.verbose)

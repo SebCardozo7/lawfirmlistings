@@ -84,6 +84,19 @@ export const GUIDES: Guide[] = [
     meta: 'Every state, four deadlines, one table',
   },
   {
+    slug: 'indiana-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'Indiana Statute of Limitations: The Rule, and the Notices That Come First',
+    summary:
+      'Indiana\'s injury deadline is short, and the notices inside it are shorter. A claim against ' +
+      'a city, a county or the state, and a work injury, each need written notice within months, ' +
+      'and a child\'s malpractice claim does not wait for 18. Every Indiana deadline, read from the Code.',
+    thumb: 't1',
+    icon: 'doc',
+    meta: 'The notice comes due before the lawsuit',
+  },
+  {
     slug: 'massachusetts-statute-of-limitations',
     cover: 'deadline',
     kicker: 'Reference',
