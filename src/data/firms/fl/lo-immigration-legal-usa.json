@@ -134,13 +134,13 @@
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-10-05"
+      "checked_at": "2026-10-12"
     },
     "G6": {
       "pass": false,
       "evidence": "8 reviews, below the 10 this gate asks for in this practice",
       "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-10-05"
+      "checked_at": "2026-10-12"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -213,7 +213,7 @@
     "total": 32,
     "tier": "Not eligible",
     "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-05",
+    "computed_at": "2026-10-12",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -294,7 +294,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.5 over 8 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.5 over 8 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -415,5 +415,14 @@
     "formed": "2026-02-19",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
     "checked_at": "2026-09-30"
+  },
+  "logo": {
+    "file": "/logos/immigrationlegalusa.com.jpg",
+    "source_url": "https://a.mktgcdn.com/p/pZl1e6Bumx0Htyyo1Uhut0c7N-84hGCFP6Gqk6zsBNg/400x400.jpg",
+    "width": 400,
+    "height": 400,
+    "bytes": 9388,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-16"
   }
 }

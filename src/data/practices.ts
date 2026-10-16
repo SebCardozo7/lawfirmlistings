@@ -900,6 +900,587 @@ export const PRACTICES: Record<string, PracticeNotes> = {
                     'The milestone inspection deadline and what it did to condo sales',
                     'Reading a title commitment'],
   },
+  'car-accidents': {
+    name: 'Car Accidents',
+    abbr: 'car',
+    icon: 'car',
+    title: 'Car Accident Lawyers: Rankings and Hiring Guide',
+    description:
+      'How to choose a car accident lawyer: what your own insurer owes you, why the first ' +
+      'offer comes too early, and which deadline actually applies.',
+    lede:
+      'Car accident lawyers handling rear-end and intersection collisions, uninsured and ' +
+      'underinsured motorist claims, hit and run, and crashes involving a rideshare or a ' +
+      'company vehicle. Every firm is checked for active licensure, clean disciplinary history ' +
+      'and verified case results. Rankings are published per city, because a firm is worth ' +
+      'comparing against the firms someone could actually hire instead of it.',
+    subtopics: ['Rear-end collisions', 'Intersection and left-turn crashes',
+                'Uninsured and underinsured motorist', 'Hit and run',
+                'Rideshare and delivery drivers', 'Multi-vehicle pileups',
+                'Passenger claims', 'Comparative fault disputes'],
+    feeFactLabel: 'No fee unless they win',
+    guide: {
+      heading: 'How to choose a car accident lawyer',
+      intro:
+        'Almost every firm in this practice area says the same four things on its home page, ' +
+        'and none of the four separates a good car accident lawyer from a bad one. What ' +
+        'separates them is how they handle three specific moments, and all three happen in the ' +
+        'first month, usually before anybody has decided whether to hire a lawyer at all.',
+      sections: [
+        {
+          heading: 'The first offer arrives before anybody knows what is wrong with you',
+          paragraphs: [
+            'An adjuster can offer to settle within days, and the offer is real money at a ' +
+            'moment when the medical picture is not finished. A soft tissue injury that turns ' +
+            'into a herniated disc, a concussion that is diagnosed weeks later, a shoulder that ' +
+            'needs surgery after physiotherapy fails: none of that is known yet. A settlement ' +
+            'signs away the claim for all of it.',
+            'What to listen for is not whether a firm will "fight for you". It is whether it ' +
+            'will say, in plain terms, that it does not value a case until treatment has ' +
+            'plateaued, and what it does for a client who cannot pay rent while waiting.',
+          ],
+        },
+        {
+          heading: 'The claim against your own insurer is the one that gets forgotten',
+          paragraphs: [
+            'When the other driver has no insurance, or has the state minimum against an injury ' +
+            'worth many times that, the money comes from the uninsured and underinsured ' +
+            'motorist coverage on your own policy. It is a claim against your own insurer, it ' +
+            'is governed by the policy rather than by the crash, and it usually has its own ' +
+            'notice deadline written into that policy, shorter than the one for suing the ' +
+            'driver.',
+            'This is the single most common thing a client never hears about, and it is worth ' +
+            'asking about by name at the first call. A firm that handles it routinely will tell ' +
+            'you what your own declarations page needs to say; one that does not will change ' +
+            'the subject back to the other driver.',
+          ],
+        },
+        {
+          heading: 'Fault is apportioned, and the share is argued over',
+          paragraphs: [
+            'Most states reduce what you recover by the share of fault assigned to you, and in ' +
+            'several a large enough share bars recovery entirely. That share is not decided by ' +
+            'the police report, which is an officer\'s opinion and is often not admissible at ' +
+            'trial. It is argued from the physical evidence, the vehicle data recorder, the ' +
+            'scene photographs and the witnesses, and most of that evidence degrades or ' +
+            'disappears within weeks.',
+            'Ask what the firm does in the first fortnight. A specific answer names things: a ' +
+            'spoliation letter so the other vehicle is not repaired or scrapped, a request for ' +
+            'the event data recorder download, canvassing for cameras on the businesses facing ' +
+            'the intersection.',
+          ],
+          list: [
+            'What is your view on settling before treatment has plateaued?',
+            'Have you made a claim on a client\'s own underinsured motorist coverage this year?',
+            'What do you do in the first two weeks to preserve evidence?',
+            'Who handles my file day to day, and will I have their direct line?',
+            'If this does not settle, do you try cases yourselves or refer them out?',
+          ],
+        },
+      ],
+      callout: {
+        title: 'The deadline people quote is usually the wrong one',
+        text:
+          'The limitation period for suing the driver is the number everybody knows. It is not ' +
+          'the only clock. A claim against a city or a transit authority can require formal ' +
+          'notice within months rather than years, and an underinsured motorist claim runs on ' +
+          'the policy\'s own terms. Each city page here states the deadline that applies where ' +
+          'the firms practise.',
+      },
+    },
+    faq: [
+      {
+        q: 'Do I need a lawyer for a car accident?',
+        a: 'Not for every one. Where the damage is to the vehicle alone and nobody was hurt, a ' +
+           'firm has little to add and will usually say so. The question changes once there is ' +
+           'an injury with ongoing treatment, a dispute about who was at fault, or a driver who ' +
+           'is uninsured or underinsured, because each of those turns the claim into an ' +
+           'argument rather than a calculation.',
+      },
+      {
+        q: 'What does a car accident lawyer cost?',
+        a: 'This work is almost always taken on contingency: the fee is a share of what is ' +
+           'recovered and there is nothing to pay if nothing is. What varies, and what is worth ' +
+           'asking about in writing, is whether the share rises if the case is filed or tried, ' +
+           'and whether case costs are deducted before or after the fee is calculated. The ' +
+           'second question changes the number you take home and is rarely volunteered.',
+      },
+      {
+        q: 'How long does a car accident claim take?',
+        a: 'The honest answer is that it is paced by the medicine rather than by the lawyer. A ' +
+           'claim is not ready to value until treatment has plateaued and the long-term picture ' +
+           'is known, which can be months. A firm that promises a figure or a date at the first ' +
+           'call is promising something it cannot know.',
+      },
+      {
+        q: 'What if the other driver had no insurance?',
+        a: 'Then the claim is usually against your own uninsured or underinsured motorist ' +
+           'coverage, which is a different claim with its own notice requirements under your ' +
+           'policy rather than under the crash. Ask the firm about it by name on the first call.',
+      },
+    ],
+    plannedGuides: ['What the first offer is worth, by state',
+                    'Underinsured motorist claims: the coverage nobody checks',
+                    'What a police report can and cannot be used for',
+                    'Event data recorders and who owns the download'],
+  },
+  'truck-accidents': {
+    name: 'Truck Accidents',
+    abbr: 'truck',
+    icon: 'shield',
+    title: 'Truck Accident Lawyers: Rankings and Hiring Guide',
+    description:
+      'How to choose a truck accident lawyer: the federal rules that bind the driver, and ' +
+      'the evidence a carrier may destroy on a schedule.',
+    lede:
+      'Truck accident lawyers handling collisions with tractor-trailers, delivery vehicles and ' +
+      'commercial fleets, including cases against the carrier, the broker and the shipper. ' +
+      'Every firm is checked for active licensure, clean disciplinary history and verified case ' +
+      'results. Rankings are published per city, because a firm is worth comparing against the ' +
+      'firms someone could actually hire instead of it.',
+    subtopics: ['Tractor-trailer collisions', 'Delivery and box trucks', 'Driver fatigue',
+                'Improperly secured cargo', 'Negligent hiring and retention',
+                'Broker and shipper liability', 'Underride collisions',
+                'Fleet and employer claims'],
+    feeFactLabel: 'No fee unless they win',
+    guide: {
+      heading: 'How to choose a truck accident lawyer',
+      intro:
+        'A truck case is not a bigger car case. It runs on a federal rulebook that does not ' +
+        'apply to ordinary drivers, the evidence that decides it is held by the company being ' +
+        'sued, and that company is allowed to destroy most of it on a schedule. Those three ' +
+        'facts set what to ask about, and none of them is how much the firm has recovered.',
+      sections: [
+        {
+          heading: 'The rulebook is federal, and breaking it is the case',
+          paragraphs: [
+            'Interstate carriers and their drivers are governed by the Federal Motor Carrier ' +
+            'Safety Regulations, which set how long a driver may be at the wheel, what rest is ' +
+            'required, how a vehicle must be inspected and maintained, and what the company ' +
+            'must do before putting somebody in the cab. A violation of those rules is often ' +
+            'the whole liability argument, and it is an argument about the company rather than ' +
+            'about the moment of impact.',
+            'A firm that does this work talks about hours of service, the driver qualification ' +
+            'file and the maintenance records without being prompted. One that does not will ' +
+            'describe the crash and stop there.',
+          ],
+        },
+        {
+          heading: 'The evidence is on a deletion schedule',
+          paragraphs: [
+            'Electronic logging records, the engine control module download, dash and lot ' +
+            'camera footage, dispatch messages and driver qualification files all sit with the ' +
+            'carrier, and the retention periods for several of them are measured in months. ' +
+            'Nothing stops the clock except a letter telling the company, in writing, that ' +
+            'litigation is anticipated and the material must be preserved.',
+            'That letter is the single most time-sensitive thing in this practice area. Ask ' +
+            'when the firm sends one, what it lists, and whether it has ever moved for ' +
+            'sanctions when a carrier destroyed something anyway.',
+          ],
+          list: [
+            'When do you send a spoliation letter, and what does it ask to be preserved?',
+            'Have you deposed a safety director or a dispatcher?',
+            'Do you work with a reconstruction engineer, and at what point?',
+            'Do you look past the driver to the carrier, the broker and the shipper?',
+            'If the carrier is out of state, where would this case be filed and why?',
+          ],
+        },
+        {
+          heading: 'The defendant is a company with a legal department',
+          paragraphs: [
+            'Large carriers run rapid response teams that are at the scene within hours, ' +
+            'sometimes before the vehicles are moved, taking measurements and statements. The ' +
+            'insurance behind them is layered and the policy limits are large enough that the ' +
+            'company will litigate rather than pay to be rid of a case.',
+            'This is the practical difference for a client. Firms that settle volume will take ' +
+            'the first reasonable number; the question worth asking is which trucking cases the ' +
+            'firm has actually tried, and against which carriers.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'The company can be liable for the hiring, not just the crash',
+        text:
+          'Negligent hiring, training, supervision and retention are claims against the ' +
+          'carrier in its own right. They turn on what the company knew when it put that ' +
+          'driver on the road, which is why the driver qualification file matters as much as ' +
+          'the skid marks.',
+      },
+    },
+    faq: [
+      {
+        q: 'Is a truck accident case different from a car accident case?',
+        a: 'Materially, yes. The driver and the carrier are bound by federal safety rules that ' +
+           'do not apply to ordinary motorists, several defendants can be liable at once, and ' +
+           'most of the decisive evidence is held by the company and kept only for a set ' +
+           'period. The practical consequence is that the first fortnight matters more than it ' +
+           'does in a car case.',
+      },
+      {
+        q: 'Who can be sued besides the driver?',
+        a: 'Depending on the facts: the motor carrier that employed or contracted the driver, ' +
+           'the broker that arranged the load, the shipper that loaded it, a maintenance ' +
+           'contractor, and in some cases a parts manufacturer. Each has its own insurance, ' +
+           'which is why identifying them early changes what a claim is worth.',
+      },
+      {
+        q: 'What is a spoliation letter?',
+        a: 'A written notice telling a company that litigation is anticipated and that specific ' +
+           'records must be preserved rather than deleted on their usual schedule. Without one, ' +
+           'logs and camera footage can be destroyed lawfully before anybody asks for them.',
+      },
+      {
+        q: 'How long do these cases take?',
+        a: 'Longer than car cases, as a rule, because carriers defend them and because the ' +
+           'evidence has to be prised out through discovery rather than handed over. A firm ' +
+           'that quotes a timeline at the first call is guessing.',
+      },
+    ],
+    plannedGuides: ['Hours of service, and what the logs actually show',
+                    'Who is liable when the driver is an owner-operator',
+                    'What a rapid response team does in the first six hours',
+                    'Underride guards and the standard that did not change'],
+  },
+  'medical-malpractice': {
+    name: 'Medical Malpractice',
+    abbr: 'med mal',
+    icon: 'scale',
+    title: 'Medical Malpractice Lawyers: Rankings and Hiring Guide',
+    description:
+      'How to choose a medical malpractice lawyer: why most firms decline, what an expert ' +
+      'must sign before filing, and when the clock starts.',
+    lede:
+      'Medical malpractice lawyers handling surgical error, misdiagnosis and delayed diagnosis, ' +
+      'birth injury, medication error and hospital negligence. Every firm is checked for active ' +
+      'licensure, clean disciplinary history and verified case results. Rankings are published ' +
+      'per city, because a firm is worth comparing against the firms someone could actually ' +
+      'hire instead of it.',
+    subtopics: ['Surgical error', 'Misdiagnosis and delayed diagnosis', 'Birth injury',
+                'Medication and anaesthesia error', 'Hospital-acquired infection',
+                'Failure to obtain informed consent', 'Emergency room negligence',
+                'Nursing home neglect'],
+    feeFactLabel: 'No fee unless they win',
+    guide: {
+      heading: 'How to choose a medical malpractice lawyer',
+      intro:
+        'This is the practice area where the most firms advertise and the fewest take cases. A ' +
+        'bad outcome is not negligence, proving the difference requires a doctor willing to say ' +
+        'so under oath, and the case has to be funded for years before anybody is paid. Knowing ' +
+        'why firms say no is the best preparation for choosing one that says yes.',
+      sections: [
+        {
+          heading: 'The question is the standard of care, not the outcome',
+          paragraphs: [
+            'Medicine carries risk that nobody caused. The legal question is not whether the ' +
+            'result was terrible but whether the care fell below what a reasonably competent ' +
+            'practitioner in that specialty would have done, and whether that failure caused ' +
+            'the harm. Both halves have to hold: care below the standard that changed nothing, ' +
+            'and a devastating outcome from competent care, are each a case that loses.',
+            'A firm worth hiring will explain which half it doubts, specifically, rather than ' +
+            'telling you the case is "hard".',
+          ],
+        },
+        {
+          heading: 'A doctor has to sign before the case exists',
+          paragraphs: [
+            'Most states require a certificate of merit or an expert affidavit filed with or ' +
+            'before the complaint: a qualified practitioner, usually in the same specialty, ' +
+            'stating that the care breached the standard. That review is paid work and happens ' +
+            'before a firm knows whether it has a case, which is why the screening is slow and ' +
+            'why so many enquiries end in a decline.',
+            'Ask who reviews the records, in what specialty, and whether the firm pays for that ' +
+            'review itself. The answer tells you whether you are talking to a firm that files ' +
+            'these cases or one that refers them to somebody who does.',
+          ],
+          list: [
+            'How many of these cases did you file last year, and in what specialties?',
+            'Who reviews my records before you decide, and do you pay for that review?',
+            'Do you try these cases, or do you refer them out once they are filed?',
+            'What are the case costs likely to be, and what happens to them if we lose?',
+            'Is there a damages cap in this state, and does it apply to my claim?',
+          ],
+        },
+        {
+          heading: 'The clock may have started before you knew',
+          paragraphs: [
+            'These deadlines are their own subject. Many states run the period from when the ' +
+            'injury was discovered or reasonably should have been, which helps a patient who ' +
+            'learns years later; several then cap that with an outer limit measured from the ' +
+            'treatment itself, which does not. Claims involving children, and claims against ' +
+            'public hospitals, often run on different clocks again.',
+            'Every city page here states the deadline that applies where the firms practise, ' +
+            'read from the statute rather than summarised from another directory.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'Several states cap what these cases can pay',
+        text:
+          'Where a cap on non-economic damages applies, it sets a ceiling on compensation for ' +
+          'pain and loss of function regardless of what a jury decides, and it shapes which ' +
+          'cases a firm can afford to bring at all. Ask whether one applies to your claim ' +
+          'before you ask what the claim is worth.',
+      },
+    },
+    faq: [
+      {
+        q: 'Why did several firms turn down my case?',
+        a: 'Usually one of three reasons: the care was within the standard even though the ' +
+           'outcome was bad, the breach did not cause the harm, or the likely recovery does not ' +
+           'cover what the case costs to bring. A firm should tell you which of the three, and ' +
+           'it is worth asking directly.',
+      },
+      {
+        q: 'What does a medical malpractice case cost to bring?',
+        a: 'The fee is contingent, but the case costs are not trivial: expert review and ' +
+           'testimony are the largest item and are incurred before any recovery. Ask whether ' +
+           'the firm advances those costs, and what happens to them if the case is lost, in ' +
+           'writing and before you sign.',
+      },
+      {
+        q: 'How long do I have to file?',
+        a: 'It depends on the state and on when the injury was discovered, and several states ' +
+           'add an outer limit that runs from the treatment itself. Children and claims against ' +
+           'public hospitals are often on different timetables. The deadline for each city is ' +
+           'stated on that city\'s page.',
+      },
+      {
+        q: 'Is a bad result the same as malpractice?',
+        a: 'No, and this is the distinction the whole area turns on. The question is whether ' +
+           'the care met the standard a reasonably competent practitioner would have provided, ' +
+           'not whether the outcome was what anybody hoped for.',
+      },
+    ],
+    plannedGuides: ['Certificates of merit, state by state',
+                    'What a damages cap does to a case nobody will take',
+                    'Discovery rules and repose: the two clocks',
+                    'Reading your own medical records before you call anybody'],
+  },
+  'wrongful-death': {
+    name: 'Wrongful Death',
+    abbr: 'wrongful death',
+    icon: 'columns',
+    title: 'Wrongful Death Lawyers: Rankings and Hiring Guide',
+    description:
+      'How to choose a wrongful death lawyer: who may bring it, the second claim that ' +
+      'belongs to the estate, and why probate comes first.',
+    lede:
+      'Wrongful death lawyers handling fatal collisions, workplace deaths, fatal medical ' +
+      'negligence and deaths caused by a defective product. Every firm is checked for active ' +
+      'licensure, clean disciplinary history and verified case results. Rankings are published ' +
+      'per city, because a firm is worth comparing against the firms someone could actually ' +
+      'hire instead of it.',
+    subtopics: ['Fatal collisions', 'Workplace fatalities', 'Fatal medical negligence',
+                'Defective products', 'Survival actions', 'Loss of consortium',
+                'Claims on behalf of children', 'Estate and probate coordination'],
+    feeFactLabel: 'No fee unless they win',
+    guide: {
+      heading: 'How to choose a wrongful death lawyer',
+      intro:
+        'This claim is unlike the others on this site in a way that is easy to miss: it does ' +
+        'not belong to the family in the ordinary sense. Statutes decide who may bring it, who ' +
+        'the money is for, and what may be claimed, and those answers differ by state. ' +
+        'Understanding that first makes the rest of the choice straightforward.',
+      sections: [
+        {
+          heading: 'Who is allowed to sue is set by statute',
+          paragraphs: [
+            'In many states the action is brought by the personal representative of the estate ' +
+            'rather than by relatives directly, and the recovery is distributed to statutory ' +
+            'beneficiaries in an order the law sets. Where no representative has been ' +
+            'appointed, that appointment has to happen in probate before the civil claim can be ' +
+            'filed properly, which is a step families rarely expect.',
+            'A firm that does this work will raise probate on the first call. If nobody ' +
+            'mentions it, that is worth noticing.',
+          ],
+        },
+        {
+          heading: 'There are usually two claims, not one',
+          paragraphs: [
+            'The wrongful death claim compensates the family for what they lost: support, ' +
+            'services, guidance, companionship, and funeral and burial expenses. A separate ' +
+            'survival action belongs to the estate and covers what the person themselves ' +
+            'suffered between the injury and death, including conscious pain and lost earnings ' +
+            'in that interval.',
+            'They are governed by different rules and sometimes different deadlines. Both are ' +
+            'routinely available and one is routinely forgotten, so ask whether the firm is ' +
+            'bringing both and why if not.',
+          ],
+          list: [
+            'Does a personal representative need to be appointed, and will you handle that?',
+            'Are you bringing a survival action alongside the wrongful death claim?',
+            'Who are the statutory beneficiaries here, and how is a recovery divided?',
+            'Does a settlement need court approval, and how long does that add?',
+            'Have you tried a case like this, and when?',
+          ],
+        },
+        {
+          heading: 'Approval and division are part of the work',
+          paragraphs: [
+            'Where minors are beneficiaries, or where the estate is involved, a settlement ' +
+            'commonly requires court approval and the division among beneficiaries can itself ' +
+            'be contested. That is work a firm does after the number is agreed, and it is work ' +
+            'that keeps families out of a second dispute with each other.',
+            'It is a fair question to ask how the firm handles a family that does not agree, ' +
+            'because the answer says more about the next year than any recovery figure does.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'Funeral expenses are usually recoverable, and usually overlooked',
+        text:
+          'Most wrongful death statutes allow funeral and burial costs as an item of damages. ' +
+          'Keep the invoices. It is a small part of a claim and the part most often left out ' +
+          'because nobody thought to ask for the receipts.',
+      },
+    },
+    faq: [
+      {
+        q: 'Who can file a wrongful death claim?',
+        a: 'That is set by state statute. In many states it is the personal representative of ' +
+           'the estate acting for statutory beneficiaries, rather than any relative who wishes ' +
+           'to sue. Which relatives count, and in what order, also comes from the statute.',
+      },
+      {
+        q: 'What is a survival action?',
+        a: 'A separate claim belonging to the estate for what the person suffered between the ' +
+           'injury and their death, including conscious pain and earnings lost in that period. ' +
+           'It is usually brought alongside the wrongful death claim and is the one most often ' +
+           'left out.',
+      },
+      {
+        q: 'Does a criminal case have to finish first?',
+        a: 'No. A civil claim can proceed in parallel, and the standard of proof is lower, so a ' +
+           'civil claim can succeed where a prosecution does not. Timing is often coordinated ' +
+           'in practice, and a firm should explain how it intends to handle that.',
+      },
+      {
+        q: 'How is the money divided?',
+        a: 'By the statute and, where minors or an estate are involved, with court approval. ' +
+           'Ask early how division works in your state, because it is a frequent source of ' +
+           'conflict within families and it is better understood before a recovery than after.',
+      },
+    ],
+    plannedGuides: ['Who the statute names, state by state',
+                    'Survival actions and the claim that dies with the person',
+                    'Court approval of a settlement when a child is a beneficiary',
+                    'What funeral expenses are recoverable'],
+  },
+  'slip-and-fall': {
+    name: 'Slip and Fall',
+    abbr: 'premises',
+    icon: 'pin',
+    title: 'Slip and Fall Lawyers: Rankings and Hiring Guide',
+    description:
+      'How to choose a slip and fall lawyer: why notice decides these cases, and the ' +
+      'footage that is overwritten within days.',
+    lede:
+      'Slip and fall lawyers handling premises liability claims against shops, restaurants, ' +
+      'landlords, supermarkets and public authorities. Every firm is checked for active ' +
+      'licensure, clean disciplinary history and verified case results. Rankings are published ' +
+      'per city, because a firm is worth comparing against the firms someone could actually ' +
+      'hire instead of it.',
+    subtopics: ['Wet floors and spills', 'Snow and ice', 'Broken stairs and handrails',
+                'Inadequate lighting', 'Supermarket and retail falls',
+                'Landlord and common area claims', 'Construction site falls',
+                'Claims against a public authority'],
+    feeFactLabel: 'No fee unless they win',
+    guide: {
+      heading: 'How to choose a slip and fall lawyer',
+      intro:
+        'These cases have a reputation for being easy and they are the opposite. Falling on ' +
+        'somebody\'s property proves nothing on its own: the owner has to have known about the ' +
+        'hazard, or to have had it there long enough that they should have, and proving that ' +
+        'depends on records the owner holds and footage that erases itself. Everything below ' +
+        'follows from that.',
+      sections: [
+        {
+          heading: 'Notice is the case',
+          paragraphs: [
+            'Actual notice means somebody told them, or they created the hazard. Constructive ' +
+            'notice means it was there long enough that a reasonable inspection would have ' +
+            'found it, which turns on inspection logs, cleaning schedules and how often staff ' +
+            'walked that aisle. A spill that happened ninety seconds before the fall is usually ' +
+            'not a case; the same spill two hours old usually is.',
+            'Which means the first thing worth asking a firm is how it establishes how long the ' +
+            'hazard had been there, because that is the entire argument.',
+          ],
+        },
+        {
+          heading: 'The footage is overwritten on a loop',
+          paragraphs: [
+            'Most retail and commercial camera systems overwrite on a cycle measured in days ' +
+            'or a few weeks. Incident reports, inspection sheets and staffing records are ' +
+            'equally routine to discard. A preservation letter sent in the first week is often ' +
+            'the difference between a provable case and one that rests on the client\'s word.',
+            'Ask what the firm sends, when, and whether it has had to move against a defendant ' +
+            'who let footage be erased after being asked to keep it.',
+          ],
+          list: [
+            'How soon do you send a preservation letter, and what does it cover?',
+            'How will you show how long the hazard had been there?',
+            'Do you get the inspection and cleaning logs, and how?',
+            'How do you handle an argument that the danger was open and obvious?',
+            'Is this property owned by a public authority, and does that change the deadline?',
+          ],
+        },
+        {
+          heading: 'The defence is about you, and about why you were there',
+          paragraphs: [
+            'Expect two arguments. The first is comparative fault: that you were distracted, ' +
+            'wearing the wrong shoes, or ignoring a sign, which in most states reduces recovery ' +
+            'by your share and in some bars it. The second is that the hazard was open and ' +
+            'obvious, so no warning was owed.',
+            'Why you were on the property matters too. Many states still owe a different duty ' +
+            'to an invited customer than to a social guest or a trespasser, and that category ' +
+            'can decide the claim before anybody discusses the floor.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'A fall on public property can have a deadline measured in months',
+        text:
+          'Where the owner is a city, a transit authority or a school district, a formal notice ' +
+          'of claim is often required long before any lawsuit, sometimes within ninety days. ' +
+          'Missing it ends the claim regardless of its merits. Each city page here states the ' +
+          'rule that applies where the firms practise.',
+      },
+    },
+    faq: [
+      {
+        q: 'Do I have a case just because I fell?',
+        a: 'No. The property owner has to have known about the hazard or to have had it there ' +
+           'long enough that a reasonable inspection would have found it. How long the ' +
+           'condition existed is usually the decisive question, and it is proved from the ' +
+           'owner\'s own records rather than from the fall itself.',
+      },
+      {
+        q: 'What should I do in the first week?',
+        a: 'Report it to the business and ask for a copy of the incident report, photograph the ' +
+           'condition and the footwear you were wearing, get names of anybody who saw it, and ' +
+           'get medical attention on record. Then contact a firm quickly, because camera ' +
+           'footage is commonly overwritten within days.',
+      },
+      {
+        q: 'What if I was partly at fault?',
+        a: 'In most states that reduces your recovery by your share rather than ending the ' +
+           'claim, though a few bar recovery once your share passes a threshold. It is one of ' +
+           'the first things a firm should price into its assessment, and one of the first a ' +
+           'defence will raise.',
+      },
+      {
+        q: 'Is a fall in a shop different from a fall on a public pavement?',
+        a: 'Often very different. A claim against a city or transit authority can require ' +
+           'formal notice within months rather than years, and the immunities available are ' +
+           'not the ones a private shop has. Ask about this on the first call if the property ' +
+           'is public.',
+      },
+    ],
+    plannedGuides: ['Constructive notice: how long is long enough',
+                    'What a notice of claim deadline does to a public-property fall',
+                    'Open and obvious, and where it still wins',
+                    'Camera retention periods by type of business'],
+  },
 };
 
 /** Slugs with a hub page, in the order the site lists them. */

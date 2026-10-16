@@ -15,3 +15,10 @@ __pycache__/
 
 # scripts/preview_email.mjs writes the rendered outbound emails here.
 .mail-preview/
+
+# Scratch lists of domains, written by hand to feed --domains on a long run.
+.sample.txt
+.la-domains.txt
+.pi-domains.txt
+.nologo.txt
+.churn.txt

@@ -1,0 +1,477 @@
+{
+  "slug": "asatryan-law",
+  "name": "Asatryan Law",
+  "initials": "AS",
+  "website": "https://asatryanlaw.com/",
+  "domain": "asatryanlaw.com",
+  "phone": "(818) 208-0000",
+  "status": "verified",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://asatryanlaw.com/practice-areas/personal-injury-overview",
+      "checked_at": "2026-10-08"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://asatryanlaw.com/practice-areas/premises-liability",
+      "checked_at": "2026-10-14"
+    }
+  ],
+  "market": {
+    "city_slug": "los-angeles-ca",
+    "city": "Los Angeles",
+    "state": "CA",
+    "state_name": "California"
+  },
+  "offices": [
+    {
+      "label": "Asatryan Law",
+      "address": "14120 Victory Blvd, Van Nuys, CA 91401, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=16773855980907509108&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [
+    {
+      "name": "Mher Asatryan",
+      "source_url": "https://asatryanlaw.com/attorneys/mher-asatryan",
+      "bar_number": "279125",
+      "role": "Founding Partner",
+      "role_source": "firm bio page",
+      "name_source": "bio heading",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/279125",
+      "admitted_year": 2011
+    },
+    {
+      "name": "Liya Arushanyan",
+      "source_url": "https://asatryanlaw.com/attorneys/liya-arushanyan",
+      "bar_number": "293540",
+      "role_source": "not stated by the firm",
+      "name_source": "bio heading",
+      "registry_status": "Active",
+      "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/293540",
+      "admitted_year": 2013
+    }
+  ],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "Asatryan Law is a personal injury firm with a single office in Van Nuys.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free. It publishes material in English and Spanish."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.9,
+      "count_label": "119",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-10-12"
+    },
+    "sample": [
+      {
+        "published_at": "2026-06-11T02:01:37.261108794Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-02-10T02:58:00.039780623Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-28T02:49:15.178285751Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-05-01T19:45:51.762595322Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-06-11T21:16:17.287553940Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "attorney_bios": true,
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "psi": {
+      "value": {
+        "performance": 63,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-10-12",
+      "note": "LCP 10.3 s / CLS 0.000 / TBT 430 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "asatryanlaw.com",
+      "name": "Asatryan Law",
+      "review_count_at_discovery": 119
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 119,
+      "rating_weighted": 4.9,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 10,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-10-12"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-12",
+      "evidence": "2 of 2 named attorneys hold an active California licence and none carries an adverse status"
+    },
+    "G2": {
+      "pass": true,
+      "source": "the State Bar of California's licensee search",
+      "checked_at": "2026-10-12",
+      "evidence": "No named attorney carries a disbarment, a suspension or a disciplinary resignation on the State Bar of California's record, across the 2 we identified. Administrative suspensions, which the State Bar states are non-disciplinary, are not counted here"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "1 physical location verified on Google Business Profile. California publishes no business register we are able to query, so the registration itself is not verified here. The state's own business search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-10-12"
+    },
+    "G5": {
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-10-12"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "119 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2012-02-12, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-10-12"
+    }
+  },
+  "cohort_id": "ca-losangeles-personal-injury",
+  "faq": [],
+  "logo": {
+    "file": "/logos/asatryanlaw.com.png",
+    "source_url": "https://asatryanlaw.com/apple-icon.png?apple-icon.3aqcq7918of0-.png",
+    "width": 180,
+    "height": 180,
+    "bytes": 6976,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-12"
+  },
+  "operating": {
+    "registered": "2012-02-12",
+    "years": 14.7,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-10-12"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 5,
+    "bios_published": 2,
+    "source": "observed",
+    "checked_at": "2026-10-12"
+  },
+  "results_published": {
+    "count": 45,
+    "counted_from": "stated amounts",
+    "amounts": [
+      3000000,
+      1125000,
+      1000000,
+      950000,
+      700000,
+      650000,
+      622000,
+      500000,
+      450000,
+      425000,
+      400000,
+      350000,
+      337500,
+      330000,
+      325000,
+      300000,
+      275000,
+      250000,
+      239000,
+      220000,
+      216600,
+      200000,
+      185000,
+      180000,
+      175000,
+      171666,
+      165000,
+      157500,
+      155000,
+      150000,
+      140000,
+      125000,
+      115000,
+      107000,
+      105000,
+      102000,
+      100000,
+      83500,
+      75000,
+      60000,
+      50000,
+      34000,
+      20000,
+      14000,
+      10000
+    ],
+    "largest": 3000000,
+    "aggregate_claims": [
+      50000000
+    ],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "wrongful death",
+      "pedestrian",
+      "assault"
+    ],
+    "disclaimer": true,
+    "venues": [],
+    "text_length": 28124,
+    "readable": true,
+    "url": "https://asatryanlaw.com/case-results",
+    "checked_at": "2026-10-12"
+  },
+  "score": {
+    "total": 63,
+    "tier": "Verified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar D (4/25).",
+    "computed_at": "2026-10-16",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 7,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 7,
+            "max": 10,
+            "source": "registry",
+            "evidence": "Mean 14.0 years since admission across 2 of 2 named attorneys (longest 15, shortest 13) · NYS Attorney Registration database"
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no queryable source",
+            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 13,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 6,
+            "max": 6,
+            "source": "firm",
+            "evidence": "45 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 3,
+            "max": 5,
+            "source": "firm",
+            "evidence": "7 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 4,
+            "max": 4,
+            "source": "firm",
+            "evidence": "Prior-results disclaimer present beside the published results"
+          }
+        ]
+      },
+      "C": {
+        "score": 17,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 3,
+            "max": 5,
+            "source": "observed",
+            "evidence": "119 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.9 over 119 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-06-11) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 7,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 0,
+            "max": 8,
+            "source": "pending",
+            "evidence": "Ahrefs data not yet collected for this market"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 1.0,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "observed",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 4,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 3,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · Contingency · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 37,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 70,
+      "gap": 7,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +5.0 available",
+        "E4 Availability: +5 available"
+      ]
+    },
+    "raw": 45.5,
+    "assessed": 72,
+    "coverage": 0.9,
+    "floor_abc_pct": 0.771,
+    "gates_unavailable": [
+      "G3"
+    ],
+    "gates_unresolvable": [],
+    "assessable": 80,
+    "comparable": true
+  }
+}

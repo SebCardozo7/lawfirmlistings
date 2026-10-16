@@ -1,9 +1,5 @@
 {
   "slug": "lilly-brown-llp",
-  "site_blocked": {
-    "reason": "The firm's site answers our crawler with HTTP 403, which is bot protection. We do not work around it.",
-    "seen_at": "2026-09-14"
-  },
   "name": "Lilly & Brown, LLP",
   "initials": "LB",
   "website": "https://lillybrownlaw.com",
@@ -119,14 +115,14 @@
         "categories": 5,
         "hours_published": true,
         "photos": 6,
-        "google_wrote_a_summary": false,
         "unobtainable": [
           "the owner's own description",
           "services list",
           "questions and answers",
           "recent posts"
         ],
-        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way.",
+        "google_wrote_a_summary": false
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
@@ -181,7 +177,7 @@
       "pass": false,
       "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
       "source": "Public crawl, partial",
-      "checked_at": "2026-10-05"
+      "checked_at": "2026-10-12"
     },
     "G6": {
       "pass": true,
@@ -245,10 +241,10 @@
     "checked_at": "2026-09-14"
   },
   "score": {
-    "total": 61,
+    "total": 28,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -290,24 +286,24 @@
             "label": "Results published",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
           },
           {
             "code": "B2",
             "label": "Specificity",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
@@ -329,7 +325,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.79 over 38 reviews → Bayesian 4.82 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.79 over 38 reviews → Bayesian 4.82 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -350,16 +346,16 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
+            "pts": 1,
             "max": 7,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · fresh content"
           },
           {
             "code": "D2",
@@ -382,8 +378,8 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "ahrefs",
+            "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
       },
@@ -396,24 +392,24 @@
             "label": "Free consult & fee transparency",
             "pts": 0,
             "max": 6,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "fee model not published · the fee percentage itself is not published"
           },
           {
             "code": "E3",
             "label": "Languages & accessibility",
-            "pts": 0,
+            "pts": 0.0,
             "max": 4,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "English"
           },
           {
             "code": "E4",
             "label": "Availability",
             "pts": 0,
             "max": 5,
-            "source": "pending",
-            "evidence": "The firm's site answers our crawler with a 403, so nothing that lives on a site could be read for this firm. Not a finding about the firm."
+            "source": "observed",
+            "evidence": "no availability published"
           }
         ]
       }
@@ -422,19 +418,19 @@
     "next_tier": {
       "name": "Certified",
       "needed": 70,
-      "gap": 9,
-      "floor_met": true,
+      "gap": 42,
+      "floor_met": false,
       "coverage_met": false,
       "path": [
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)",
-        "A5 Accountability: not yet measured (6 pts)"
+        "A5 Accountability: not yet measured (6 pts)",
+        "A2 Experience: +10 available"
       ]
     },
-    "raw": 17.6,
-    "assessed": 29,
-    "coverage": 0.354,
-    "floor_abc_pct": 0.7,
+    "raw": 18.6,
+    "assessed": 67,
+    "coverage": 0.817,
+    "floor_abc_pct": 0.4,
     "gates_unavailable": [
       "G1",
       "G2"
@@ -443,6 +439,6 @@
       "G3"
     ],
     "assessable": 82,
-    "comparable": false
+    "comparable": true
   }
 }

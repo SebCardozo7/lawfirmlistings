@@ -5,7 +5,7 @@
   "website": "https://sandiegoaccidentlawcenter.com/",
   "domain": "sandiegoaccidentlawcenter.com",
   "phone": "(619) 325-7555",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -30,15 +30,7 @@
       "source_url": "https://maps.google.com/?cid=1614745046230379014&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "California Wildfire",
-      "role": "Injuries",
-      "role_source": "firm bio heading",
-      "bar_state": "NY",
-      "source_url": "https://sandiegoaccidentlawcenter.com/california-wildfire-injuries/"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English",
     "Spanish"
@@ -140,13 +132,15 @@
       "pass": false,
       "checked_at": "2026-10-09",
       "source": "the State Bar of California's licensee search, partial",
-      "evidence": "None of the 1 attorneys this firm names could be found in the State Bar of California's register, so there is nothing here to clear or to fault."
+      "evidence": "None of the 1 attorneys this firm names could be found in the State Bar of California's register, so there is nothing here to clear or to fault.",
+      "unresolvable": "The register returns nothing for any name this firm publishes, and an empty search does not say whether the licence is missing or the name is"
     },
     "G2": {
       "pass": false,
       "checked_at": "2026-10-09",
       "source": "the State Bar of California's licensee search, partial",
-      "evidence": "No attorney this firm names could be identified in the register, so no disciplinary record could be looked up either."
+      "evidence": "No attorney this firm names could be identified in the register, so no disciplinary record could be looked up either.",
+      "unresolvable": "With no attorney identified in the register, there is no disciplinary record to find or to fail to find"
     },
     "G3": {
       "pass": false,
@@ -249,9 +243,9 @@
   },
   "score": {
     "total": 28,
-    "tier": "Listed",
-    "verdict": "2 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-10",
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -271,8 +265,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "pending",
+            "evidence": "No attorney is named on the site we could read"
           },
           {
             "code": "A5",
@@ -332,7 +326,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 61 reviews → Bayesian 4.86 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 61 reviews → Bayesian 4.85 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -427,22 +421,25 @@
       "needed": 70,
       "gap": 42,
       "floor_met": false,
-      "coverage_met": true,
+      "coverage_met": false,
       "path": [
+        "A6 Roster verifiability: not yet measured (9 pts)",
         "A2 Experience: +10 available",
-        "A6 Roster verifiability: +9 available",
         "D2 Search authority: +8 available"
       ]
     },
     "raw": 19.3,
     "assessed": 70,
-    "coverage": 1.0,
+    "coverage": 0.886,
     "floor_abc_pct": 0.421,
     "gates_unavailable": [
       "G3"
     ],
-    "gates_unresolvable": [],
-    "assessable": 70,
+    "gates_unresolvable": [
+      "G1",
+      "G2"
+    ],
+    "assessable": 79,
     "comparable": true
   }
 }

@@ -1,0 +1,60 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-in.json';
+
+/**
+ * Indiana deadlines, a state statute page from docs/guides-50.md (family B).
+ *
+ * Title and description figures are read from the research file and declared through
+ * figuresFrom, so a corrected period rewrites the headline instead of leaving it stale.
+ */
+const head = data.headline;
+const local = data.rows.find(r => r.statute === 'IC 34-13-3-8')!;
+const state = data.rows.find(r => r.statute === 'IC 34-13-3-6')!;
+const employer = data.rows.find(r => r.statute === 'IC 22-3-3-1')!;
+const comp = data.rows.find(r => r.statute === 'IC 22-3-3-3')!;
+const med = data.rows.find(r => r.statute === 'IC 34-18-7-1')!;
+const product = data.rows.find(r => r.statute === 'IC 34-20-3-1')!;
+const minors = data.exceptions.find(e => e.name.startsWith('A child'))!;
+const childMed = data.exceptions.find(e => e.name.startsWith('Medical malpractice on'))!;
+const panel = data.exceptions.find(e => e.statute === 'IC 34-18-7-3')!;
+const days = (r: { period: string }) => r.period.replace(' to give notice', '');
+const year = data.measured_at.slice(0, 4);
+const title = `Indiana Statute of Limitations ${year}: The ${head.years}-Year Rule and Exceptions`;
+const description = `Most Indiana injury claims have ${head.years} years. A claim against a city or county needs written notice in ${days(local)}, and against the state in ${days(state)}.`;
+const lede = `Indiana gives most injury claims <b>${head.years} years</b>, which is short already. The deadlines that end cases come sooner still: <b>${days(local)}</b> to give written notice to a city, county or school, <b>${days(state)}</b> to notify the state, and <b>${days(employer)}</b> to tell an employer about a work injury. Here is every Indiana deadline by type of claim, read from the Indiana Code.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="Indiana statute of limitations"
+  reading={[
+    {
+      firm: 'sarkisian-sarkisian-associates-pc',
+      url: 'https://www.sarklawfirm.com/motor-vehicle-accidents/car-accidents/',
+      title: 'Car Accidents',
+      why: 'A Northwest Indiana injury firm answers how long a crash victim has, and gets the three numbers this page leads with right: two years for the injury claim, 180 days for a claim against a city, county or other municipality, and two years from the 18th birthday for a minor. It also explains the contingency fee, which is the practical answer to whether calling early costs anything.',
+    },
+    {
+      firm: 'sarkisian-sarkisian-associates-pc',
+      url: 'https://www.sarklawfirm.com/workers-compensation/workers-compensation-faq/',
+      title: "Workers' Compensation FAQ",
+      why: 'The same firm on the two clocks a work injury runs on in Indiana: two years to file with the Worker\'s Compensation Board, and 30 days to report the injury to the employer. It adds what the statute leaves out, such as how to report and the rule against firing someone for filing.',
+    },
+  ]}>
+  <Fragment slot="toc">
+    <li><a href="#short">The notices that come before the two years</a></li>
+    <li><a href="#children">Children, malpractice and products</a></li>
+  </Fragment>
+
+  <h2 id="short">In Indiana, the notices come due long before the two years</h2>
+  <p>Two years is already among the shorter injury deadlines in the country. Indiana adds notice rules that run out in months or weeks, and because they are notices rather than lawsuits, people miss them while they are still waiting to see how an injury heals.</p>
+  <p><b>{days(local)} for a claim against a city, county, town or school.</b> Under the Indiana Tort Claims Act, <a href={local.url} rel="noopener" target="_blank">{local.statute}</a>, a claim against a political subdivision is barred unless written notice is filed with its governing body within {days(local)} after the loss. A crash with a city truck, a fall on a broken sidewalk outside the courthouse, an injury on a school bus: all of them start on this clock. The government then has 90 days to approve or deny the claim, silence counts as a denial, and the lawsuit can only be filed after a denial.</p>
+  <p><b>{days(state)} for a claim against the State of Indiana.</b> A claim against the state or one of its agencies needs notice to the Attorney General or the agency involved within {days(state)}, under <a href={state.url} rel="noopener" target="_blank">{state.statute}</a>. Sending it to the wrong agency is forgiven if the person made a reasonable attempt to find the right one.</p>
+  <p><b>{days(employer)} to tell the employer about a work injury.</b> Under <a href={employer.url} rel="noopener" target="_blank">{employer.statute}</a>, an injured worker gives written notice as soon as practicable. If neither the notice nor the employer's own knowledge comes within {days(employer)}, compensation is not paid until notice is given. The claim itself goes to the Worker's Compensation Board within {comp.period} of the accident, under <a href={comp.url} rel="noopener" target="_blank">{comp.statute}</a>, and that clock restarts from the last day temporary disability benefits were paid.</p>
+  <p>One more Indiana rule changes the math against the government. Against a private party, an injured person who was partly at fault can still recover as long as their share is not greater than everyone else's combined, under <a href="https://iga.in.gov/laws/2026/ic/titles/34#34-51-2-6" rel="noopener" target="_blank">IC 34-51-2-6</a>. But <a href="https://iga.in.gov/laws/2026/ic/titles/34#34-51-2-2" rel="noopener" target="_blank">IC 34-51-2-2</a> says that comparative fault statute does not apply at all to tort claims against government entities or public employees, so a claim against a city can fail on facts that would only reduce a claim against a driver.</p>
+
+  <h2 id="children">Children, malpractice and products: where Indiana does not wait</h2>
+  <p>In most states, the question of how long a child has comes with one answer. In Indiana the answer depends on what kind of claim it is, and for two kinds the usual pause does not apply.</p>
+  <p><b>Most injuries: until 20.</b> Under <a href={minors.url} rel="noopener" target="_blank">{minors.statute}</a>, a person under a legal disability when a claim accrues has two years after the disability ends, and the Code counts anyone under 18. A child hurt in a crash at 12 can therefore file until the 20th birthday. The notice to a city or county is the trap. The 180 days are counted from the loss, and the only pause the statute offers, in IC 34-13-3-9, is for a person who is incapacitated and cannot give notice. It does not mention age, so the safe course is to give the notice within 180 days whatever the child's age.</p>
+  <p><b>Medical malpractice: {med.period}, or until eight.</b> Under <a href={childMed.url} rel="noopener" target="_blank">{childMed.statute}</a>, the malpractice deadline applies to minors and adults alike, counted from the date of the act rather than from when anyone noticed. The one exception is a child hurt before age six, who has until the eighth birthday. Before any lawsuit, the claim goes to a medical review panel, and filing the proposed complaint pauses the clock until 90 days after the panel's opinion, under <a href={panel.url} rel="noopener" target="_blank">{panel.statute}</a>.</p>
+  <p><b>Product liability: {product.period}.</b> Under <a href={product.url} rel="noopener" target="_blank">{product.statute}</a>, a claim over a defective product has two years from accrual and must come within ten years of the product's delivery to its first user, and the statute says it applies regardless of minority. A child hurt by a defective car seat does not get the extra years a child hurt by a careless driver would.</p>
+</StatuteGuide>

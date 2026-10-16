@@ -205,7 +205,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 6 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-05"
+      "checked_at": "2026-10-12"
     },
     "G6": {
       "pass": true,
@@ -353,7 +353,7 @@
     "total": 73,
     "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-05",
+    "computed_at": "2026-10-12",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -434,7 +434,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 446 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 446 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -548,5 +548,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/sargonlawgroup.com.svg",
+    "source_url": "https://irp.cdn-website.com/b53cc055/dms3rep/multi/mdk-logo-09-22-23-light.svg",
+    "width": null,
+    "height": null,
+    "bytes": 9663,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-10-16"
   }
 }

@@ -5,7 +5,7 @@
   "website": "https://dklaw.com/",
   "domain": "dklaw.com",
   "phone": "(909) 265-7444",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -566,14 +566,15 @@
     "G1": {
       "pass": true,
       "source": "the State Bar of California's licensee search",
-      "checked_at": "2026-10-09",
+      "checked_at": "2026-10-12",
       "evidence": "11 of 16 named attorneys hold an active California licence and none carries an adverse status. 5 name(s) could not be told apart from namesakes and are counted neither way"
     },
     "G2": {
       "pass": false,
-      "checked_at": "2026-10-09",
+      "checked_at": "2026-10-12",
       "source": "the State Bar of California's licensee search, incomplete: an adverse namesake we cannot resolve",
-      "evidence": "No disciplinary record is held against any of the 11 attorneys we identified. Daniel Kim could not be told apart from 8 namesakes, one of whom is not eligible to practise. Held open."
+      "evidence": "No disciplinary record is held against any of the 11 attorneys we identified. Daniel Kim could not be told apart from 8 namesakes, one of whom is not eligible to practise. Held open.",
+      "unresolvable": "A namesake carries an adverse status and the register holds no field that would tell the two people apart"
     },
     "G3": {
       "pass": false,
@@ -585,7 +586,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 16 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-05"
+      "checked_at": "2026-10-12"
     },
     "G6": {
       "pass": true,
@@ -701,9 +702,9 @@
   },
   "score": {
     "total": 53,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-10",
+    "tier": "Verified",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-16",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -784,7 +785,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.85 over 3,241 reviews → Bayesian 4.85 (prior 4.83 weighted as 100 reviews, from 1269 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.85 over 3,241 reviews → Bayesian 4.85 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -893,7 +894,9 @@
     "gates_unavailable": [
       "G3"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G2"
+    ],
     "assessable": 80,
     "comparable": true
   }

@@ -306,6 +306,11 @@ def main():
             continue
         with io.open(path, encoding="utf-8") as fh:
             record = json.load(fh)
+        # The staging directory holds more than firm records: discover_places writes its
+        # candidate lists there too, and those are lists. Skip anything that is not a
+        # firm record rather than stopping the whole run on it.
+        if not isinstance(record, dict) or "domain" not in record:
+            continue
         if not record.get("https_ok"):
             print("%-24s skipped, site was never reachable" % record["domain"])
             continue
