@@ -17,15 +17,7 @@ const description = `Most Texas injury claims must be filed within ${head.years}
 const lede = `Texas gives most injury claims <b>${head.years} years</b>. That is the number everybody knows, and it is the one least likely to be the problem. The deadlines that end Texas cases early are the short ones beside it: a <b>${gov.period.toLowerCase()}</b> against a city or the state, ${defamation.period.toLowerCase()} for defamation, and a medical malpractice rule that ignores the usual protection for children. Here is every Texas deadline by type of claim, read from the Civil Practice and Remedies Code.`;
 ---
 <StatuteGuide data={data} title={title} description={description} lede={lede}
-  crumb="Texas statute of limitations"
-  reading={[
-    {
-      firm: 'fielding-law',
-      url: 'https://www.fieldinglaw.com/legal-guidance/the-statute-of-limitations-in-texas-personal-injury-cases/',
-      title: 'The Statute of Limitations in Texas Personal Injury Cases',
-      why: 'A Dallas injury firm on how the two-year rule meets real claims, including the notice requirements for government defendants and the limits of the discovery rule.',
-    },
-  ]}>
+  crumb="Texas statute of limitations">
   <Fragment slot="toc">
     <li><a href="#short">The deadlines shorter than two years</a></li>
     <li><a href="#malpractice">The malpractice rule for children</a></li>

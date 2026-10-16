@@ -1,0 +1,1762 @@
+{
+  "slug": "statute-of-limitations-by-state",
+  "measured_at": "2026-10-14",
+  "states": [
+    {
+      "state": "Alabama",
+      "code": "AL",
+      "via": "alison.legislature.state.al.us (Code of Alabama, read through the ALISON GraphQL feed behind the site)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Ala. Code § 6-2-38(l)",
+        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=6-2-38",
+        "quote": "All actions for any injury to the person or rights of another not arising from contract and not specifically enumerated in this section must be brought within two years."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from the death",
+        "statute": "Ala. Code § 6-5-410(d); § 6-2-38(a)",
+        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=6-5-410",
+        "quote": "The action must be commenced within two years from and after the death of the testator or intestate.",
+        "detail": "Runs from the date of death, not the injury."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 4 at the outside",
+        "statute": "Ala. Code § 6-5-482(a)",
+        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=6-5-482",
+        "quote": "must be commenced within two years next after the act, or omission, or failure giving rise to the claim, and not afterwards",
+        "detail": "Six months from discovery if undiscoverable; never more than four years after the act."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years (negligence); 6 years for direct trespass",
+        "statute": "Ala. Code § 6-2-38(l); § 6-2-34(2)",
+        "url": "https://alison.legislature.state.al.us/code-of-alabama?section=6-2-38",
+        "quote": "All actions for any injury to the person or rights of another not arising from contract and not specifically enumerated in this section must be brought within two years.",
+        "detail": "§ 6-2-34(2) gives six years for 'any trespass to real or personal property'."
+      },
+      "notes": "PI, WD and med mal are high confidence. Property damage: Alabama splits negligent injury to property (trespass on the case, 2 years under 6-2-38(l)) from direct trespass to personal property (6 years under 6-2-34(2)); which applies to a car-crash claim depends on how it is pleaded, so 2 years is the safe figure. Justia returned 403, so text was read from the Legislature's own ALISON data feed."
+    },
+    {
+      "state": "Alaska",
+      "code": "AK",
+      "via": "akleg.gov (Alaska Statutes, BASIS)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "AS 09.10.070(a)(2)",
+        "url": "https://www.akleg.gov/basis/statutes.asp#09.10.070",
+        "quote": "a person may not bring an action ... (2) for personal injury or death ... unless the action is commenced within two years of the accrual of the cause of action."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from the death",
+        "statute": "AS 09.55.580(a)",
+        "url": "https://www.akleg.gov/basis/statutes.asp#09.55.580",
+        "quote": "The action shall be commenced within two years after the death"
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 10 at the outside",
+        "statute": "AS 09.10.070(a)(2); AS 09.10.055(a)",
+        "url": "https://www.akleg.gov/basis/statutes.asp#09.10.070",
+        "quote": "a person may not bring an action ... (2) for personal injury or death ... unless the action is commenced within two years of the accrual of the cause of action.",
+        "detail": "No separate malpractice period; courts apply discovery rule. 10-year repose under 09.10.055, foreign bodies tolled."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "AS 09.10.070(a)(3)",
+        "url": "https://www.akleg.gov/basis/statutes.asp#09.10.070",
+        "quote": "(3) for taking, detaining, or injuring personal property, including an action for its specific recovery",
+        "detail": "Same two-year clock as the injury claim."
+      },
+      "notes": "Alaska has no malpractice-specific limitation section; malpractice runs under the general two-year tort period in 09.10.070, with accrual on discovery set by case law, and the 10-year repose of 09.10.055 (which has exceptions, including gross negligence and concealment). Quotes in PI/MM elide the intervening clause with '...'."
+    },
+    {
+      "state": "Arizona",
+      "code": "AZ",
+      "via": "azleg.gov (Arizona Revised Statutes)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "A.R.S. § 12-542(1)",
+        "url": "https://www.azleg.gov/ars/12/00542.htm",
+        "quote": "there shall be commenced and prosecuted within two years after the cause of action accrues, and not afterward ... 1. For injuries done to the person of another"
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from the death",
+        "statute": "A.R.S. § 12-542(2)",
+        "url": "https://www.azleg.gov/ars/12/00542.htm",
+        "quote": "For injuries done to the person of another when death ensues from such injuries, which action shall be considered as accruing at the death of the party injured.",
+        "detail": "Accrues at the date of death."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "A.R.S. § 12-542(1)",
+        "url": "https://www.azleg.gov/ars/12/00542.htm",
+        "quote": "For injuries done to the person of another including causes of action for medical malpractice as defined in section 12-561.",
+        "detail": "Accrues on discovery under case law; no statutory repose period."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "A.R.S. § 12-542(3)",
+        "url": "https://www.azleg.gov/ars/12/00542.htm",
+        "quote": "For trespass for injury done to the estate or the property of another."
+      },
+      "notes": "All four claims sit in the same section. Arizona has no malpractice repose period (the Arizona Constitution's anti-abrogation clause has been read to bar one); discovery-based accrual comes from case law. Claims against public entities or employees have a separate one-year period under A.R.S. § 12-821."
+    },
+    {
+      "state": "Arkansas",
+      "code": "AR",
+      "via": "codes.findlaw.com (verbatim Arkansas Code copy, last updated March 28, 2024)",
+      "copy": true,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Ark. Code Ann. § 16-56-105",
+        "url": "https://codes.findlaw.com/ar/title-16-practice-procedure-and-courts/ar-code-sect-16-56-105/",
+        "quote": "The following actions shall be commenced within three (3) years after the cause of action accrues: ... (3) All actions founded on any contract or liability, expressed or implied",
+        "detail": "Courts apply § 16-56-105 to negligence claims for bodily injury."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from the death",
+        "statute": "Ark. Code Ann. § 16-62-102(c)(1)",
+        "url": "https://codes.findlaw.com/ar/title-16-practice-procedure-and-courts/ar-code-sect-16-62-102/",
+        "quote": "Every action authorized by this section shall be commenced within three (3) years after the death of the person alleged to have been wrongfully killed",
+        "detail": "Longer if defendant convicted of capital, first or second degree murder."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from the act",
+        "statute": "Ark. Code Ann. § 16-114-203(a)",
+        "url": "https://codes.findlaw.com/ar/title-16-practice-procedure-and-courts/ar-code-sect-16-114-203/",
+        "quote": "all actions for medical injury shall be commenced within two (2) years after the cause of action accrues.",
+        "detail": "Accrues at the wrongful act, no general discovery rule; foreign objects get one year from discovery."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Ark. Code Ann. § 16-56-105(6)",
+        "url": "https://codes.findlaw.com/ar/title-16-practice-procedure-and-courts/ar-code-sect-16-56-105/",
+        "quote": "(6) All actions for taking or injuring any goods or chattels."
+      },
+      "notes": "Arkansas publishes its code only through LexisNexis public access (advance.lexis.com), which required accepting terms of use before reading, so I did not enter it; Justia returned a Cloudflare bot check. Text was read from FindLaw's verbatim copy, dated March 28, 2024, so any 2025 or 2026 amendment would not show. The periods match long-standing Arkansas law. § 16-56-105 does not name 'personal injury'; Arkansas courts read negligence claims into it."
+    },
+    {
+      "state": "California",
+      "code": "CA",
+      "via": "leginfo.legislature.ca.gov (California Code of Civil Procedure)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Cal. Code Civ. Proc. § 335.1",
+        "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=335.1",
+        "quote": "Within two years: An action for assault, battery, or injury to, or for the death of, an individual caused by the wrongful act or neglect of another."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Cal. Code Civ. Proc. § 335.1",
+        "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=335.1",
+        "quote": "Within two years: An action for assault, battery, or injury to, or for the death of, an individual caused by the wrongful act or neglect of another.",
+        "detail": "Same section as personal injury; runs from the death."
+      },
+      "medical_malpractice": {
+        "years": 1,
+        "period": "1 year from discovery, 3 at the outside",
+        "statute": "Cal. Code Civ. Proc. § 340.5",
+        "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340.5",
+        "quote": "three years after the date of injury or one year after the plaintiff discovers, or through the use of reasonable diligence should have discovered, the injury, whichever occurs first.",
+        "detail": "Whichever comes first; 3-year cap tolled only for fraud, concealment or a foreign body."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Cal. Code Civ. Proc. § 338(c)(1)",
+        "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338",
+        "quote": "Within three years: ... (c) (1) An action for taking, detaining, or injuring goods or chattels, including an action for the specific recovery of personal property."
+      },
+      "notes": "Medical malpractice 'years' is set to 1 because the operative deadline is one year from discovery or three years from injury, whichever is earlier; use 3 if a single outer figure is wanted. § 340.5 was last amended in 1975; the 2022 MICRA reform (AB 35) changed damages caps, not this period. Claims against public entities need a government claim within six months (Gov. Code § 911.2). WebFetch got 403 from leginfo, so the text was read in a browser."
+    },
+    {
+      "state": "Colorado",
+      "code": "CO",
+      "via": "colorado.public.law (verbatim copy of the official C.R.S. 2024 Title 13 PDF from leg.colorado.gov)",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years (3 for motor vehicle crashes)",
+        "statute": "C.R.S. § 13-80-102(1)(a); § 13-80-101(1)(n)(I)",
+        "url": "https://colorado.public.law/statutes/crs_13-80-102",
+        "quote": "must be commenced within two years after the cause of action accrues, and not thereafter: (a) Tort actions, including but not limited to actions for negligence",
+        "detail": "Car-crash bodily injury claims get three years under § 13-80-101(1)(n)(I)."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "C.R.S. § 13-80-102(1)(d); § 13-21-204",
+        "url": "https://colorado.public.law/statutes/crs_13-80-102",
+        "quote": "(d) All actions for wrongful death, except as described in subsection (2) of this section;",
+        "detail": "Four years against a vehicular-homicide driver who left the scene, § 13-80-102(2)."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 3 at the outside",
+        "statute": "C.R.S. § 13-80-102.5(1)",
+        "url": "https://colorado.public.law/statutes/crs_13-80-102.5",
+        "quote": "shall be maintained unless such action is instituted within two years after the date that such action accrues pursuant to section 13-80-108 (1), but in no event shall an action be brought more than three years after the act or omission",
+        "detail": "Accrues on discovery; 3-year repose except concealment or a foreign object."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years (3 for motor vehicle damage)",
+        "statute": "C.R.S. § 13-80-102(1)(a); § 13-80-101(1)(n)(I)",
+        "url": "https://colorado.public.law/statutes/crs_13-80-101",
+        "quote": "(I) All tort actions for bodily injury or property damage arising out of the use or operation of a motor vehicle",
+        "detail": "A damaged car from a crash: 3 years. Other negligent property damage: 2 years."
+      },
+      "notes": "leg.colorado.gov and content.leg.colorado.gov returned 403 to both fetch and browser, and Justia showed a bot check, so text was read from colorado.public.law, which reproduces the official CRS 2024 Title 13 PDF. The 2025 Red Book tabulation marks Title 13 as not amended in 2025. Quote for property_damage is from § 13-80-101(1)(n)(I) (three-year list); quote for PI is the two-year general rule. If one number per claim is needed and the page is about car accidents, use 3 for PI and PD."
+    },
+    {
+      "state": "Connecticut",
+      "code": "CT",
+      "via": "cga.ct.gov (General Statutes of Connecticut, current edition)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years, 3 at the outside",
+        "statute": "Conn. Gen. Stat. § 52-584",
+        "url": "https://www.cga.ct.gov/current/pub/chap_926.htm#sec_52-584",
+        "quote": "shall be brought but within two years from the date when the injury is first sustained or discovered or in the exercise of reasonable care should have been discovered",
+        "detail": "Never more than three years from the act or omission."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death, 5 at the outside",
+        "statute": "Conn. Gen. Stat. § 52-555(a)",
+        "url": "https://www.cga.ct.gov/current/pub/chap_925.htm#sec_52-555",
+        "quote": "within two years from the date of death, and except that no such action may be brought more than five years from the date of the act or omission complained of.",
+        "detail": "No limit after a murder or manslaughter conviction, § 52-555(b)."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 3 at the outside",
+        "statute": "Conn. Gen. Stat. § 52-584",
+        "url": "https://www.cga.ct.gov/current/pub/chap_926.htm#sec_52-584",
+        "quote": "or by malpractice of a physician, surgeon, dentist, podiatrist, chiropractor, advanced practice registered nurse, hospital or sanatorium, shall be brought but within two years",
+        "detail": "Two years from discovery, three-year repose; § 52-190a allows an automatic 90-day extension."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years, 3 at the outside",
+        "statute": "Conn. Gen. Stat. § 52-584",
+        "url": "https://www.cga.ct.gov/current/pub/chap_926.htm#sec_52-584",
+        "quote": "No action to recover damages for injury to the person, or to real or personal property, caused by negligence",
+        "detail": "Negligent damage; intentional torts fall under § 52-577's three years."
+      },
+      "notes": "One section, § 52-584, covers negligent personal injury, negligent property damage and medical malpractice. § 52-577 (three years from the act) is the catch-all for torts not covered by § 52-584. P.A. 19-98 added APRNs to § 52-584; no change to the periods."
+    },
+    {
+      "state": "Delaware",
+      "code": "DE",
+      "via": "delcode.delaware.gov (Delaware Code Online)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "10 Del. C. § 8119",
+        "url": "https://delcode.delaware.gov/title10/c081/index.html",
+        "quote": "No action for the recovery of damages upon a claim for alleged personal injuries shall be brought after the expiration of 2 years from the date upon which it is claimed that such alleged injuries were sustained"
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "10 Del. C. § 8107",
+        "url": "https://delcode.delaware.gov/title10/c081/index.html",
+        "quote": "No action to recover damages for wrongful death or for injury to personal property shall be brought after the expiration of 2 years from the accruing of the cause of such action."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 3 if undiscoverable",
+        "statute": "18 Del. C. § 6856",
+        "url": "https://delcode.delaware.gov/title18/c068/sc06/index.html",
+        "quote": "shall be brought after the expiration of 2 years from the date upon which such injury occurred",
+        "detail": "Three years if the injury could not reasonably be discovered within two; covers death too."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "10 Del. C. § 8107",
+        "url": "https://delcode.delaware.gov/title10/c081/index.html",
+        "quote": "No action to recover damages for wrongful death or for injury to personal property shall be brought after the expiration of 2 years from the accruing of the cause of such action.",
+        "detail": "Trespass and indirect injury claims run three years under § 8106."
+      },
+      "notes": "Wrongful death and personal property damage share § 8107. Medical negligence causing death falls under § 6856, not § 8107."
+    },
+    {
+      "state": "District of Columbia",
+      "code": "DC",
+      "via": "code.dccouncil.gov (D.C. Code, Council of the District of Columbia)",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "D.C. Code § 12-301(a)(8)",
+        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/12-301",
+        "quote": "(8) for which a limitation is not otherwise specially prescribed— 3 years;",
+        "detail": "Negligence falls under the residual clause; assault and battery claims get 1 year."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from the death",
+        "statute": "D.C. Code § 16-2702",
+        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/16-2702",
+        "quote": "An action pursuant to this chapter shall be brought by and in the name of the personal representative of the deceased person, and within 2 years after the death",
+        "detail": "Raised from one year to two in 2012 (D.C. Law 19-177)."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "D.C. Code § 12-301(a)(8)",
+        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/12-301",
+        "quote": "(8) for which a limitation is not otherwise specially prescribed— 3 years;",
+        "detail": "Discovery rule by case law; 90-day notice of intent required (§ 16-2802), can extend deadline."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "D.C. Code § 12-301(a)(3)",
+        "url": "https://code.dccouncil.gov/us/dc/council/code/sections/12-301",
+        "quote": "(3) for the recovery of damages for an injury to real or personal property— 3 years;"
+      },
+      "notes": "D.C. has no named personal injury or malpractice period; both run under the three-year residual clause § 12-301(a)(8), with the discovery rule supplied by D.C. case law. For malpractice, notice served within 90 days of the deadline extends it 90 days (§ 16-2803). Claims against the District itself need written notice within six months (§ 12-309)."
+    },
+    {
+      "state": "Florida",
+      "code": "FL",
+      "from": {
+        "personal_injury": "Personal injury from negligence",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice",
+        "property_damage": "Taking or damaging personal property"
+      }
+    },
+    {
+      "state": "Georgia",
+      "code": "GA",
+      "via": "codes.findlaw.com (verbatim O.C.G.A. copy, last updated March 28, 2024)",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "O.C.G.A. § 9-3-33",
+        "url": "https://codes.findlaw.com/ga/title-9-civil-practice/ga-code-sect-9-3-33/",
+        "quote": "Except as otherwise provided in this article, actions for injuries to the person shall be brought within two years after the right of action accrues",
+        "detail": "Loss of consortium claims get four years."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from the death",
+        "statute": "O.C.G.A. § 9-3-33",
+        "url": "https://codes.findlaw.com/ga/title-9-civil-practice/ga-code-sect-9-3-33/",
+        "quote": "actions for injuries to the person shall be brought within two years after the right of action accrues",
+        "detail": "Georgia courts apply § 9-3-33 to wrongful death, accruing at death."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 5 at the outside",
+        "statute": "O.C.G.A. § 9-3-71",
+        "url": "https://codes.findlaw.com/ga/title-9-civil-practice/ga-code-sect-9-3-71/",
+        "quote": "an action for medical malpractice shall be brought within two years after the date on which an injury or death arising from a negligent or wrongful act or omission occurred.",
+        "detail": "Five-year repose under § 9-3-71(b); foreign objects get one year from discovery (§ 9-3-72)."
+      },
+      "property_damage": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "O.C.G.A. § 9-3-31",
+        "url": "https://codes.findlaw.com/ga/title-9-civil-practice/ga-code-sect-9-3-31/",
+        "quote": "Actions for injuries to personalty shall be brought within four years after the right of action accrues."
+      },
+      "notes": "Georgia publishes the O.C.G.A. only through LexisNexis public access, which requires accepting terms before reading, and Justia showed a Cloudflare bot check, so text was read from FindLaw's verbatim copy dated March 28, 2024. The 2025 tort reform (SB 68, signed April 21, 2025) changed anchoring, phantom damages, seatbelt evidence, bifurcation and negligent security; secondary coverage does not mention any change to these limitation periods, but I did not read the enrolled bill. Wrongful death has no separate limitation section; § 9-3-33 applies by case law. Medical malpractice 'death' language in § 9-3-71 covers malpractice deaths."
+    },
+    {
+      "state": "Hawaii",
+      "code": "HI",
+      "via": "codes.findlaw.com (verbatim HRS copy; capitol.hawaii.gov blocked by Cloudflare)",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Haw. Rev. Stat. § 657-7",
+        "url": "https://www.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0657/HRS_0657-0007.htm",
+        "quote": "Actions for the recovery of compensation for damage or injury to persons or property shall be instituted within two years after the cause of action accrued, and not after"
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from the death",
+        "statute": "Haw. Rev. Stat. § 663-3",
+        "url": "https://www.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0663/HRS_0663-0003.htm",
+        "quote": "Any action brought under this section shall be commenced within two years from the date of death of the injured person, except as otherwise provided."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from discovery, 6 at the outside",
+        "statute": "Haw. Rev. Stat. § 657-7.3",
+        "url": "https://www.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0657/HRS_0657-0007_0003.htm",
+        "quote": "shall be brought more than two years after the plaintiff discovers, or through the use of reasonable diligence should have discovered, the injury",
+        "detail": "Six-year repose from the act, tolled while the provider conceals a known error."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Haw. Rev. Stat. § 657-7",
+        "url": "https://www.capitol.hawaii.gov/hrscurrent/Vol13_Ch0601-0676/HRS0657/HRS_0657-0007.htm",
+        "quote": "Actions for the recovery of compensation for damage or injury to persons or property shall be instituted within two years after the cause of action accrued",
+        "detail": "Same section as personal injury."
+      },
+      "notes": "capitol.hawaii.gov returned a Cloudflare block to curl, WebFetch and the browser, and Justia showed a bot check, so text was read from FindLaw's verbatim HRS copy; URLs point to the official capitol.hawaii.gov sections. The periods match long-standing Hawaii law, but I could not confirm against the 2025 or 2026 official text. Hawaii's § 657-7 is commonly read with a discovery rule from case law."
+    },
+    {
+      "state": "Idaho",
+      "code": "ID",
+      "via": "codes.findlaw.com",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Idaho Code § 5-219(4)",
+        "url": "https://codes.findlaw.com/id/title-5-proceedings-in-civil-actions-in-courts-of-record/id-st-sect-5-219/",
+        "quote": "Within two (2) years: ... An action to recover damages for professional malpractice, or for an injury to the person",
+        "detail": "Accrues at the occurrence; continuing consequences do not extend it."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Idaho Code § 5-219(4)",
+        "url": "https://codes.findlaw.com/id/title-5-proceedings-in-civil-actions-in-courts-of-record/id-st-sect-5-219/",
+        "quote": "or for the death of one caused by the wrongful act or neglect of another",
+        "detail": "Cause of action itself is created by Idaho Code § 5-311."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Idaho Code § 5-219(4)",
+        "url": "https://codes.findlaw.com/id/title-5-proceedings-in-civil-actions-in-courts-of-record/id-st-sect-5-219/",
+        "quote": "within one (1) year following the date of accrual as aforesaid or two (2) years following the occurrence, act or omission complained of",
+        "detail": "Runs from the act; discovery only for foreign objects or fraudulent concealment (1 year from discovery)."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Idaho Code § 5-218(3)",
+        "url": "https://codes.findlaw.com/id/title-5-proceedings-in-civil-actions-in-courts-of-record/id-st-sect-5-218/",
+        "quote": "Within three (3) years: ... An action for taking, detaining or injuring any goods or chattels"
+      },
+      "notes": "legislature.idaho.gov refused connections from this network, so the text was read from FindLaw's copy of the Idaho Code (marked current as of Jan 1, 2024). Periods match long-standing law; no known recent amendment, but not verified against the official site."
+    },
+    {
+      "state": "Illinois",
+      "code": "IL",
+      "via": "codes.findlaw.com",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "735 ILCS 5/13-202",
+        "url": "https://codes.findlaw.com/il/chapter-735-civil-procedure/il-st-sect-735-5-13-202/",
+        "quote": "Actions for damages for an injury to the person ... shall be commenced within 2 years next after the cause of action accrued"
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "740 ILCS 180/2(d)",
+        "url": "https://codes.findlaw.com/il/chapter-740-civil-liabilities/il-st-sect-740-180-2/",
+        "quote": "every such action shall be commenced within 2 years after the death of such person",
+        "detail": "Longer periods for deaths from certain crimes (subsection (e) and escrow-account rule)."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from discovery, 4 at the outside",
+        "statute": "735 ILCS 5/13-212(a)",
+        "url": "https://codes.findlaw.com/il/chapter-735-civil-procedure/il-st-sect-735-5-13-212/",
+        "quote": "be brought more than 2 years after the date on which the claimant knew, or through the use of reasonable diligence should have known",
+        "detail": "Discovery rule; 4-year repose from the act. Minors: 8 years, never after age 22."
+      },
+      "property_damage": {
+        "years": 5,
+        "period": "5 years",
+        "statute": "735 ILCS 5/13-205",
+        "url": "https://codes.findlaw.com/il/chapter-735-civil-procedure/il-st-sect-735-5-13-205/",
+        "quote": "to recover damages for an injury done to property, real or personal ... shall be commenced within 5 years"
+      },
+      "notes": "ilga.gov refused connections from this network (also via the browser), so the text was read from FindLaw's copy of the ILCS (marked current as of Jan 1, 2025). Periods match long-standing Illinois law."
+    },
+    {
+      "state": "Indiana",
+      "code": "IN",
+      "via": "iga.in.gov (2026 Indiana Code)",
+      "copy": false,
+      "from": {
+        "personal_injury": "Personal injury",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice",
+        "property_damage": "Damage to personal property"
+      },
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "IC 34-11-2-4",
+        "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4"
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "IC 34-23-1-1",
+        "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-23-1-1"
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from the act",
+        "statute": "IC 34-18-7-1",
+        "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-18-7-1"
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "IC 34-11-2-4",
+        "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4"
+      },
+      "reading": [
+        {
+          "firm": "sarkisian-sarkisian-associates-pc",
+          "url": "https://www.sarklawfirm.com/motor-vehicle-accidents/car-accidents/",
+          "title": "Car Accidents",
+          "why": "A Northwest Indiana injury firm answers how long a crash victim has, and gets the three numbers that matter right: two years for the injury claim, 180 days for a claim against a city, county or other municipality, and two years from the 18th birthday for a minor."
+        }
+      ]
+    },
+    {
+      "state": "Iowa",
+      "code": "IA",
+      "via": "legis.iowa.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Iowa Code § 614.1(2)",
+        "url": "https://www.legis.iowa.gov/docs/code/614.1.pdf",
+        "quote": "Those founded on injuries to the person or reputation, including injuries to relative rights, whether based on contract or tort ... within two years."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Iowa Code § 614.1(2)",
+        "url": "https://www.legis.iowa.gov/docs/code/614.1.pdf",
+        "quote": "Those founded on injuries to the person or reputation, including injuries to relative rights, whether based on contract or tort ... within two years.",
+        "detail": "No separate death statute of limitations; Iowa courts apply § 614.1(2) to death claims."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from discovery, 6 at the outside",
+        "statute": "Iowa Code § 614.1(9)(a)",
+        "url": "https://www.legis.iowa.gov/docs/code/614.1.pdf",
+        "quote": "within two years after the date on which the claimant knew, or through the use of reasonable diligence should have known",
+        "detail": "Discovery rule; 6-year repose unless a foreign object was left in the body."
+      },
+      "property_damage": {
+        "years": 5,
+        "period": "5 years",
+        "statute": "Iowa Code § 614.1(4)",
+        "url": "https://www.legis.iowa.gov/docs/code/614.1.pdf",
+        "quote": "those brought for injuries to property ... and all other actions not otherwise provided for in this respect, within five years"
+      },
+      "notes": "Read from the official Iowa Code 2026 PDF of § 614.1. The wrongful death period rests on case law applying § 614.1(2), not an express death provision; § 614.1(9) expressly covers malpractice wrongful death."
+    },
+    {
+      "state": "Kansas",
+      "code": "KS",
+      "via": "ksrevisor.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "K.S.A. 60-513(a)(4)",
+        "url": "https://ksrevisor.gov/statutes/chapters/ch60/060_005_0013.html",
+        "quote": "shall be brought within two years: ... An action for injury to the rights of another, not arising on contract, and not herein enumerated.",
+        "detail": "Runs from substantial injury; 10-year outside limit under (b)."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "K.S.A. 60-513(a)(5)",
+        "url": "https://ksrevisor.gov/statutes/chapters/ch60/060_005_0013.html",
+        "quote": "The following actions shall be brought within two years: ... An action for wrongful death."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 4 at the outside",
+        "statute": "K.S.A. 60-513(a)(7), (c)",
+        "url": "https://ksrevisor.gov/statutes/chapters/ch60/060_005_0013.html",
+        "quote": "in no event shall such an action be commenced more than four years beyond the time of the act giving rise",
+        "detail": "Runs from the act unless injury not reasonably ascertainable; 4-year repose."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "K.S.A. 60-513(a)(2)",
+        "url": "https://ksrevisor.gov/statutes/chapters/ch60/060_005_0013.html",
+        "quote": "An action for taking, detaining or injuring personal property, including actions for the specific recovery thereof."
+      },
+      "notes": "Read from the Kansas Revisor of Statutes page for K.S.A. 60-513 (last amended 1996)."
+    },
+    {
+      "state": "Kentucky",
+      "code": "KY",
+      "via": "codes.findlaw.com",
+      "copy": true,
+      "personal_injury": {
+        "years": 1,
+        "period": "1 year (2 years for motor vehicle accidents)",
+        "statute": "KRS 413.140(1)(a)",
+        "url": "https://codes.findlaw.com/ky/title-xxxvi-statutory-actions-and-limitations/ky-rev-st-sect-413-140/",
+        "quote": "shall be commenced within one (1) year after the cause of action accrued: (a) An action for an injury to the person of the plaintiff",
+        "detail": "Car crashes: 2 years after injury or last no-fault payment, KRS 304.39-230(6)."
+      },
+      "wrongful_death": {
+        "years": 1,
+        "period": "1 year from the personal representative's appointment",
+        "statute": "KRS 413.180(1); KRS 413.140(1)(a)",
+        "url": "https://codes.findlaw.com/ky/title-xxxvi-statutory-actions-and-limitations/ky-rev-st-sect-413-180/",
+        "quote": "may be brought by his personal representative after the expiration of that time, if commenced within one (1) year after the qualification of the representative",
+        "detail": "Representative deemed qualified no later than one year after death; car-crash deaths get 2 years."
+      },
+      "medical_malpractice": {
+        "years": 1,
+        "period": "1 year from discovery, 5 at the outside",
+        "statute": "KRS 413.140(1)(e), (2)",
+        "url": "https://codes.findlaw.com/ky/title-xxxvi-statutory-actions-and-limitations/ky-rev-st-sect-413-140/",
+        "quote": "An action against a physician, surgeon, dentist, or hospital licensed pursuant to KRS Chapter 216, for negligence or malpractice",
+        "detail": "Accrues on discovery; must be filed within 5 years of the act."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "KRS 413.125",
+        "url": "https://codes.findlaw.com/ky/title-xxxvi-statutory-actions-and-limitations/ky-rev-st-sect-413-125/",
+        "quote": "An action for the taking, detaining or injuring of personal property, including an action for specific recovery shall be commenced within two (2) years"
+      },
+      "notes": "apps.legislature.ky.gov refused connections from this network, so the KRS text was read from FindLaw's copy (marked current as of Jan 1, 2025). Wrongful death timing combines KRS 413.140(1)(a) with the 413.180 personal-representative rule, as Kentucky courts read it; motor vehicle claims fall under KRS 304.39-230(6) (2 years)."
+    },
+    {
+      "state": "Louisiana",
+      "code": "LA",
+      "via": "codes.findlaw.com",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "La. Civ. Code art. 3493.1",
+        "url": "https://codes.findlaw.com/la/civil-code/la-civ-code-tit-xxiv-art-3493-1/",
+        "quote": "Delictual actions are subject to a liberative prescription of two years. This prescription commences to run from the day that injury or damage is sustained.",
+        "detail": "Act 423 (2024): was 1 year (art. 3492, repealed); 2 years for injuries on or after July 1, 2024."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "1 year from death or 2 years from injury, whichever is longer",
+        "statute": "La. Civ. Code art. 2315.2(B)",
+        "url": "https://codes.findlaw.com/la/civil-code/la-civ-code-tit-v-art-2315-2/",
+        "quote": "prescribes one year from the death of the deceased or two years from the day that injury or damage is sustained, whichever is longer",
+        "detail": "Amended 2025 (Act 176, HB 291); was 1 year from death. Malpractice deaths: 1 year from death."
+      },
+      "medical_malpractice": {
+        "years": 1,
+        "period": "1 year, 3 at the outside",
+        "statute": "La. R.S. 9:5628(A)",
+        "url": "https://codes.findlaw.com/la/revised-statutes/la-rev-stat-tit-9-sect-5628/",
+        "quote": "within one year from the date of the alleged act, omission, or neglect, or within one year from the date of discovery",
+        "detail": "1 year from act or discovery; absolute 3 years from the act, including minors."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "La. Civ. Code art. 3493.1",
+        "url": "https://codes.findlaw.com/la/civil-code/la-civ-code-tit-xxiv-art-3493-1/",
+        "quote": "Delictual actions are subject to a liberative prescription of two years. This prescription commences to run from the day that injury or damage is sustained.",
+        "detail": "Same Act 423 (2024) change; damage before July 1, 2024 kept the old 1-year rule."
+      },
+      "notes": "legis.la.gov refused connections from this network, so the text was read from FindLaw's copy (pages labeled current as of Jan 1, 2023 but showing post-2024 text). The 2315.2(B) wording matches the enrolled 2025 HB 291 (Act 176) seen in search results; the act number and effective date were not confirmed on legis.la.gov. Wrongful death 'years' set to 2 for the usual case where injury and death fall on the same day."
+    },
+    {
+      "state": "Maine",
+      "code": "ME",
+      "via": "legislature.maine.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "14 M.R.S. § 752",
+        "url": "https://legislature.maine.gov/statutes/14/title14sec752.html",
+        "quote": "All civil actions shall be commenced within 6 years after the cause of action accrues and not afterwards"
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from death",
+        "statute": "18-C M.R.S. § 2-807(2)",
+        "url": "https://legislature.maine.gov/statutes/18-C/title18-Csec2-807.html",
+        "quote": "An action under this section must be commenced within 3 years after the decedent's death",
+        "detail": "Raised from 2 years by PL 2023, c. 390; homicide: 6 years from discovery."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "24 M.R.S. § 2902",
+        "url": "https://legislature.maine.gov/statutes/24/title24sec2902-2.html",
+        "quote": "Actions for professional negligence must be commenced within 3 years after the cause of action accrues.",
+        "detail": "Accrues on the act, not discovery; foreign objects run from discovery."
+      },
+      "property_damage": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "14 M.R.S. § 752",
+        "url": "https://legislature.maine.gov/statutes/14/title14sec752.html",
+        "quote": "All civil actions shall be commenced within 6 years after the cause of action accrues and not afterwards"
+      },
+      "notes": "All read from the Maine Revisor's statute pages. The 3-year wrongful death period reflects the PL 2023, c. 390 amendment shown in the section history; confirm whether it applies only to deaths after its effective date."
+    },
+    {
+      "state": "Maryland",
+      "code": "MD",
+      "from": {
+        "personal_injury": "Personal injury",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice",
+        "property_damage": "Damage to property"
+      }
+    },
+    {
+      "state": "Massachusetts",
+      "code": "MA",
+      "from": {
+        "personal_injury": "Personal injury",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice",
+        "property_damage": "Damage to property"
+      }
+    },
+    {
+      "state": "Michigan",
+      "code": "MI",
+      "via": "codes.findlaw.com",
+      "copy": true,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "MCL 600.5805(2)",
+        "url": "https://codes.findlaw.com/mi/chapter-600-revised-judicature-act-of-1961/mi-comp-laws-600-5805/",
+        "quote": "the period of limitations is 3 years after the time of the death or injury ... for injury to a person"
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years (plus 2 years after letters of authority, capped)",
+        "statute": "MCL 600.5805(2); MCL 600.5852",
+        "url": "https://codes.findlaw.com/mi/chapter-600-revised-judicature-act-of-1961/mi-comp-laws-600-5852/",
+        "quote": "3 years after the time of the death or injury for all actions to recover damages for the death of a person",
+        "detail": "Saving rule: 2 years after letters issue, never more than 3 years past the limit."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, or 6 months from discovery; 6 at the outside",
+        "statute": "MCL 600.5805(8); MCL 600.5838a(2)",
+        "url": "https://codes.findlaw.com/mi/chapter-600-revised-judicature-act-of-1961/mi-comp-laws-600-5838a/",
+        "quote": "Except as otherwise provided in this chapter, the period of limitations is 2 years for an action charging malpractice.",
+        "detail": "Or 6 months after discovery if later; 6-year repose from the act."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "MCL 600.5805(2)",
+        "url": "https://codes.findlaw.com/mi/chapter-600-revised-judicature-act-of-1961/mi-comp-laws-600-5805/",
+        "quote": "the period of limitations is 3 years after the time of the death or injury ... for injury to a person or property"
+      },
+      "notes": "legislature.mi.gov blocked automated requests (Check Point CloudGuard WAF 403), so MCL text was read from FindLaw's copy (marked current as of Jan 1, 2025). Wrongful death actions in Michigan borrow the underlying claim's period (e.g. 2 years for malpractice deaths)."
+    },
+    {
+      "state": "Minnesota",
+      "code": "MN",
+      "via": "revisor.mn.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "Minn. Stat. § 541.05, subd. 1(5)",
+        "url": "https://www.revisor.mn.gov/statutes/cite/541.05",
+        "quote": "shall be commenced within six years: ... (5) for criminal conversation, or for any other injury to the person or rights of another",
+        "detail": "Intentional torts like assault and battery: 2 years under § 541.07. Product strict liability: 4 years."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from death, 6 at the outside",
+        "statute": "Minn. Stat. § 573.02, subd. 1",
+        "url": "https://www.revisor.mn.gov/statutes/cite/573.02",
+        "quote": "Any other action under this section may be commenced within three years after the date of death",
+        "detail": "Murder: no limit. Malpractice deaths: 3 years from death, within § 541.076."
+      },
+      "medical_malpractice": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "Minn. Stat. § 541.076(b)",
+        "url": "https://www.revisor.mn.gov/statutes/cite/541.076",
+        "quote": "must be commenced within four years from the date the cause of action accrued",
+        "detail": "Accrual generally at end of treatment; no statutory discovery rule."
+      },
+      "property_damage": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "Minn. Stat. § 541.05, subd. 1(4)",
+        "url": "https://www.revisor.mn.gov/statutes/cite/541.05",
+        "quote": "for taking, detaining, or injuring personal property, including actions for the specific recovery thereof"
+      },
+      "notes": "Read from the 2025 Minnesota Statutes on revisor.mn.gov. The malpractice accrual point (end of treatment) comes from case law, not the statute text."
+    },
+    {
+      "state": "Mississippi",
+      "code": "MS",
+      "via": "codes.findlaw.com",
+      "copy": true,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Miss. Code Ann. § 15-1-49(1)",
+        "url": "https://codes.findlaw.com/ms/title-15-limitations-of-actions-and-prevention-of-frauds/ms-code-sect-15-1-49/",
+        "quote": "All actions for which no other period of limitation is prescribed shall be commenced within three (3) years next after the cause",
+        "detail": "Latent injuries accrue on discovery; intentional torts 1 year (§ 15-1-35)."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Miss. Code Ann. § 15-1-49(1)",
+        "url": "https://codes.findlaw.com/ms/title-15-limitations-of-actions-and-prevention-of-frauds/ms-code-sect-15-1-49/",
+        "quote": "All actions for which no other period of limitation is prescribed shall be commenced within three (3) years next after the cause",
+        "detail": "Wrongful death statute (§ 11-7-13) sets no period; the underlying claim's period applies."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from discovery, 7 at the outside",
+        "statute": "Miss. Code Ann. § 15-1-36(2)",
+        "url": "https://codes.findlaw.com/ms/title-15-limitations-of-actions-and-prevention-of-frauds/ms-code-sect-15-1-36/",
+        "quote": "filed within two (2) years from the date the alleged act, omission or neglect shall or with reasonable diligence might have been first known",
+        "detail": "Discovery rule; 7-year repose except foreign objects and fraudulent concealment."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Miss. Code Ann. § 15-1-49(1)",
+        "url": "https://codes.findlaw.com/ms/title-15-limitations-of-actions-and-prevention-of-frauds/ms-code-sect-15-1-49/",
+        "quote": "All actions for which no other period of limitation is prescribed shall be commenced within three (3) years next after the cause"
+      },
+      "notes": "Mississippi publishes its code through LexisNexis; Justia returned 403 to this network, so the text was read from FindLaw's copy (marked current as of Jan 1, 2025). Wrongful death borrowing the 3-year catch-all is settled case law, not express statute text."
+    },
+    {
+      "state": "Missouri",
+      "code": "MO",
+      "via": "revisor.mo.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 5,
+        "period": "5 years",
+        "statute": "RSMo § 516.120(4)",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=516.120",
+        "quote": "Within five years: ... or for any other injury to the person or rights of another, not arising on contract and not herein otherwise enumerated"
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "RSMo § 537.100",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=537.100",
+        "quote": "Every action instituted under section 537.080 shall be commenced within three years after the cause of action shall accrue",
+        "detail": "Tolled while a defendant is absent from the state."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 10 at the outside",
+        "statute": "RSMo § 516.105.1",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=516.105",
+        "quote": "shall be brought within two years from the date of occurrence of the act of neglect complained of",
+        "detail": "Runs from the act; discovery only for foreign objects and test results. 10-year repose."
+      },
+      "property_damage": {
+        "years": 5,
+        "period": "5 years",
+        "statute": "RSMo § 516.120(4)",
+        "url": "https://revisor.mo.gov/main/OneSection.aspx?section=516.120",
+        "quote": "An action for taking, detaining or injuring any goods or chattels, including actions for the recovery of specific personal property"
+      },
+      "notes": "Read from the Missouri Revisor of Statutes."
+    },
+    {
+      "state": "Montana",
+      "code": "MT",
+      "via": "mca.legmt.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "MCA 27-2-204(1)",
+        "url": "https://mca.legmt.gov/bills/mca/title_0270/chapter_0020/part_0020/section_0040/0270-0020-0020-0040.html",
+        "quote": "not founded on an instrument in writing is within 3 years",
+        "detail": "General tort liability. A version effective Oct. 1, 2026 adds a cross-reference to 27-2-219."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "MCA 27-2-204(2)",
+        "url": "https://mca.legmt.gov/bills/mca/title_0270/chapter_0020/part_0020/section_0040/0270-0020-0020-0040.html",
+        "quote": "to recover damages for the death of one caused by the wrongful act or neglect of another is within 3 years",
+        "detail": "10 years if the death resulted from a homicide."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 5 at the outside",
+        "statute": "MCA 27-2-205(1)",
+        "url": "https://mca.legmt.gov/bills/mca/title_0270/chapter_0020/part_0020/section_0050/0270-0020-0020-0050.html",
+        "quote": "be commenced within 2 years after the date of injury",
+        "detail": "Or 2 years from discovery; never more than 5 years from injury. Amended 2025 (Ch. 560, 709)."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "MCA 27-2-207(1)",
+        "url": "https://mca.legmt.gov/bills/mca/title_0270/chapter_0020/part_0020/section_0070/0270-0020-0020-0070.html",
+        "quote": "Within 2 years ... an action for: (1) injury to or waste or trespass on real or personal property"
+      },
+      "notes": "Section text read on mca.legmt.gov (2025 MCA, temporary and Oct. 1, 2026 versions; period language identical). Medical malpractice reads 2 years in the current text; history shows 2025 amendments (Ch. 560 and Ch. 709, L. 2025), and the pre-2025 text is widely reported as 3 years, so the change from 3 to 2 is likely recent but was not verified against the session law."
+    },
+    {
+      "state": "Nebraska",
+      "code": "NE",
+      "via": "nebraskalegislature.gov (read via Wayback Machine snapshots, Sept. 2026 and Nov. 2025)",
+      "copy": false,
+      "personal_injury": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "Neb. Rev. Stat. § 25-207(3)",
+        "url": "https://nebraskalegislature.gov/laws/statutes.php?statute=25-207",
+        "quote": "can only be brought within four years: ... (3) an action for an injury to the rights of the plaintiff, not arising on contract",
+        "detail": "Negligence causing bodily injury falls under this catch-all."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "Neb. Rev. Stat. § 30-810",
+        "url": "https://nebraskalegislature.gov/laws/statutes.php?statute=30-810",
+        "quote": "Every such action, as described in section 30-809, shall be commenced within two years after the death of such person."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 10 at the outside",
+        "statute": "Neb. Rev. Stat. § 44-2828",
+        "url": "https://nebraskalegislature.gov/laws/statutes.php?statute=44-2828",
+        "quote": "shall be commenced within two years next after the alleged act or omission in rendering or failing to render professional services",
+        "detail": "If undiscoverable, 1 year from discovery; 10-year repose. Same rule in § 25-222."
+      },
+      "property_damage": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "Neb. Rev. Stat. § 25-207(2)",
+        "url": "https://nebraskalegislature.gov/laws/statutes.php?statute=25-207",
+        "quote": "The following actions can only be brought within four years: ... (2) an action for taking, detaining or injuring personal property"
+      },
+      "notes": "nebraskalegislature.gov refused direct connections, so the official pages were read through web.archive.org snapshots (25-207 and 30-810 from Sept. 23, 2026; 44-2828 from Nov. 18, 2025). 44-2828 is the Hospital-Medical Liability Act provision; § 25-222 (professional negligence) carries the same 2-year / 1-year discovery / 10-year repose rule but was not re-read."
+    },
+    {
+      "state": "Nevada",
+      "code": "NV",
+      "via": "leg.state.nv.us (NRS chapters 11 and 41A, read via Wayback Machine snapshots of Oct. 11, 2026)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "NRS 11.190(4)(e)",
+        "url": "https://www.leg.state.nv.us/NRS/NRS-011.html#NRS011Sec190",
+        "quote": "an action to recover damages for injuries to a person or for the death of a person caused by the wrongful act",
+        "detail": "Listed under \"Within 2 years\"; subject to NRS 11.215 and 11.217."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "NRS 11.190(4)(e)",
+        "url": "https://www.leg.state.nv.us/NRS/NRS-011.html#NRS011Sec190",
+        "quote": "an action to recover damages for injuries to a person or for the death of a person caused by the wrongful act",
+        "detail": "Same paragraph as personal injury."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from discovery, 3 at the outside",
+        "statute": "NRS 41A.097(3)",
+        "url": "https://www.leg.state.nv.us/NRS/NRS-041A.html#NRS041ASec097",
+        "quote": "may not be commenced more than 3 years after the date of injury or 2 years after the plaintiff discovers",
+        "detail": "For injuries on or after Oct. 1, 2023; discovery period was 1 year for 2002-2023 injuries."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "NRS 11.190(3)(c)",
+        "url": "https://www.leg.state.nv.us/NRS/NRS-011.html#NRS011Sec190",
+        "quote": "Within 3 years: ... An action for taking, detaining or injuring personal property, including actions for specific recovery thereof"
+      },
+      "notes": "leg.state.nv.us blocks automated access with a Cloudflare challenge, so the official pages were read through web.archive.org snapshots taken Oct. 11, 2026. Medical malpractice discovery window changed from 1 to 2 years for injuries on or after Oct. 1, 2023 (2023 legislation); 3-year outer limit unchanged."
+    },
+    {
+      "state": "New Hampshire",
+      "code": "NH",
+      "via": "gc.nh.gov / gencourt.state.nh.us (RSA, read via Wayback Machine snapshots)",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "RSA 508:4, I",
+        "url": "https://gc.nh.gov/rsa/html/LII/508/508-4.htm",
+        "quote": "all personal actions, except actions for slander or libel, may be brought only within 3 years of the act or omission complained of",
+        "detail": "Discovery rule: 3 years from when injury and cause were or should have been discovered."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "RSA 508:4, I; RSA 556:11",
+        "url": "https://gc.nh.gov/rsa/html/LII/508/508-4.htm",
+        "quote": "may be brought ... within 6 years after the death of the deceased party, subject to the provisions of RSA 508.",
+        "detail": "556:11's 6-year window is subject to RSA 508's 3-year personal-action limit."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "RSA 508:4, I",
+        "url": "https://gc.nh.gov/rsa/html/LII/508/508-4.htm",
+        "quote": "may be brought only within 3 years of the act or omission complained of",
+        "detail": "General personal-action rule with its discovery clause; no separate repose in RSA 507-E."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "RSA 508:4, I",
+        "url": "https://gc.nh.gov/rsa/html/LII/508/508-4.htm",
+        "quote": "all personal actions, except actions for slander or libel, may be brought only within 3 years of the act or omission complained of"
+      },
+      "notes": "Official site failed TLS / returned 403 to direct fetches; RSA 508:4 read from a Feb. 4, 2026 snapshot of gc.nh.gov (last amended 1986), RSA 556:11 from a 2022 snapshot (last amended 1983). Wrongful death: the statute text says 6 years after death 'subject to the provisions of RSA 508', and New Hampshire courts read that as the 3-year limit of 508:4; that reading is interpretive, hence medium confidence. Medical injury actions (RSA 507-E) carry no separate limitation section; 508:4 governs."
+    },
+    {
+      "state": "New Jersey",
+      "code": "NJ",
+      "via": "law.justia.com (Justia copy of N.J. Revised Statutes, read via Wayback Machine snapshots)",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "N.J.S.A. 2A:14-2(a)",
+        "url": "https://law.justia.com/codes/new-jersey/title-2a/section-2a-14-2/",
+        "quote": "every action at law for an injury to the person caused by the wrongful act, neglect or default of any person ... within two years"
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "N.J.S.A. 2A:31-3",
+        "url": "https://law.justia.com/codes/new-jersey/title-2a/section-2a-31-3/",
+        "quote": "Every action brought under this chapter shall be commenced within 2 years after the death of the decedent, and not thereafter",
+        "detail": "No limit if death resulted from murder or manslaughter with a conviction."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "N.J.S.A. 2A:14-2(a)",
+        "url": "https://law.justia.com/codes/new-jersey/title-2a/section-2a-14-2/",
+        "quote": "shall be commenced within two years next after the cause of any such action shall have accrued",
+        "detail": "Same as personal injury; court-made discovery rule; birth injuries by the 13th birthday."
+      },
+      "property_damage": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "N.J.S.A. 2A:14-1(a)",
+        "url": "https://law.justia.com/codes/new-jersey/title-2a/section-2a-14-1/",
+        "quote": "Every action at law ... for any tortious injury to real or personal property ... shall be commenced within six years"
+      },
+      "notes": "New Jersey's own statutes database (lis.njleg.state.nj.us) refused connections and Justia blocks direct fetches, so Justia's copy was read through web.archive.org: 2A:14-2 and 2A:14-1 from the 2025 edition (snapshots Sept. and April 2026); 2A:31-3 only from the 2014 edition (history shows last amended 2000, c.157). The wrongful death text was not confirmed against a 2025 edition."
+    },
+    {
+      "state": "New Mexico",
+      "code": "NM",
+      "via": "law.justia.com (Justia copy of NMSA 1978, read via Wayback Machine snapshots)",
+      "copy": true,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "NMSA 1978, § 37-1-8",
+        "url": "https://law.justia.com/codes/new-mexico/chapter-37/article-1/section-37-1-8/",
+        "quote": "and for an injury to the person or reputation of any person, within three years."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from death",
+        "statute": "NMSA 1978, § 41-2-2",
+        "url": "https://law.justia.com/codes/new-mexico/chapter-41/article-2/section-41-2-2/",
+        "quote": "must be brought within three years after the cause of action accrues. The cause of action accrues as of the date of death.",
+        "detail": "Malpractice-caused deaths follow § 41-5-13 instead."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years from the act",
+        "statute": "NMSA 1978, § 41-5-13",
+        "url": "https://law.justia.com/codes/new-mexico/chapter-41/article-5/section-41-5-13/",
+        "quote": "No claim for malpractice may be brought against a health care provider unless filed within three years after the date that the act",
+        "detail": "Occurrence-based, no discovery rule; minors get one year past majority (2021 amendment)."
+      },
+      "property_damage": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "NMSA 1978, § 37-1-4",
+        "url": "https://law.justia.com/codes/new-mexico/chapter-37/article-1/section-37-1-4/",
+        "quote": "those brought for injuries to property or for the conversion of personal property ... within four years."
+      },
+      "notes": "The official NMOneSource site failed TLS verification and Justia blocks direct fetches, so Justia's copy was read through web.archive.org: 37-1-8 and 37-1-4 from the 2025 edition (2026 snapshots); 41-2-2 and 41-5-13 from the 2023 edition (2024 snapshots). 41-5-13 applies to qualified providers under the Medical Malpractice Act; no 2024-2026 amendment was checked."
+    },
+    {
+      "state": "New York",
+      "code": "NY",
+      "from": {
+        "personal_injury": "Personal injury from negligence",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice",
+        "property_damage": "Property damage"
+      }
+    },
+    {
+      "state": "North Carolina",
+      "code": "NC",
+      "via": "ncleg.gov (General Statutes Chapter 1, read via Wayback Machine snapshot of July 9, 2026)",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "G.S. 1-52(16); G.S. 1-52(5)",
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_1/GS_1-52.html",
+        "quote": "Within three years an action - ... (16) Unless otherwise provided by law, for personal injury or physical damage to claimant's property",
+        "detail": "Accrues when harm becomes apparent; 10-year repose from last act."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "G.S. 1-53(4)",
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_1/GS_1-53.html",
+        "quote": "Actions for damages on account of the death of a person caused by the wrongful act, neglect or fault of another under G.S. 28A-18-2",
+        "detail": "Listed under \"Within two years\"; accrues at death. Barred if decedent's own claim was barred."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years, 4 at the outside",
+        "statute": "G.S. 1-15(c); G.S. 1-52(5)",
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_1/GS_1-15.html",
+        "quote": "in no event shall an action be commenced more than four years from the last act of the defendant",
+        "detail": "Accrues at last act; 1 year from late discovery; 4-year repose, 10 for foreign objects."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "G.S. 1-52(4)",
+        "url": "https://www.ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_1/GS_1-52.html",
+        "quote": "Within three years an action - ... (4) For taking, detaining, converting or injuring any goods or chattels"
+      },
+      "notes": "ncleg.gov returns a 403 bot block to direct fetches; the full Chapter 1 HTML was read from a web.archive.org snapshot dated July 9, 2026. Malpractice uses the 3-year period of 1-52(5) with accrual and repose set by 1-15(c)."
+    },
+    {
+      "state": "North Dakota",
+      "code": "ND",
+      "via": "ndlegis.gov (N.D. Cent. Code chapter 28-01 PDF)",
+      "copy": false,
+      "personal_injury": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "N.D.C.C. § 28-01-16(5)",
+        "url": "https://ndlegis.gov/cencode/t28c01.pdf",
+        "quote": "any other injury to the person or rights of another not arising upon contract, when not otherwise expressly provided.",
+        "detail": "Six-year catch-all for injury to the person; assault and battery are 2 years under 28-01-18(1)."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "N.D.C.C. § 28-01-18(4)",
+        "url": "https://ndlegis.gov/cencode/t28c01.pdf",
+        "quote": "An action for injuries done to the person of another, when death ensues from such injuries",
+        "detail": "Accrues at death; if death from malpractice, at discovery, capped at six years."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 6 at the outside",
+        "statute": "N.D.C.C. § 28-01-18(3)",
+        "url": "https://ndlegis.gov/cencode/t28c01.pdf",
+        "quote": "An action for the recovery of damages resulting from malpractice; ... will not be extended beyond six years of the act or omission",
+        "detail": "Discovery rule applies, but not beyond six years from the act unless fraud prevented discovery."
+      },
+      "property_damage": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "N.D.C.C. § 28-01-16(4)",
+        "url": "https://ndlegis.gov/cencode/t28c01.pdf",
+        "quote": "An action for taking, detaining, or injuring any goods or chattels, including actions for the specific recovery of personal property."
+      },
+      "notes": "Read from the official chapter 28-01 PDF on ndlegis.gov. Section 28-01-18 is subject to 28-01-25.2 (exceptions)."
+    },
+    {
+      "state": "Ohio",
+      "code": "OH",
+      "via": "codes.ohio.gov (read via Wayback Machine snapshots, Dec. 2025 to July 2026)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "R.C. 2305.10(A)",
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-2305.10",
+        "quote": "an action for bodily injury or injuring personal property shall be brought within two years after the cause of action accrues."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "R.C. 2125.02(F)(1)",
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-2125.02",
+        "quote": "a civil action for wrongful death shall be commenced within two years after the decedent's death.",
+        "detail": "Now division (F)(1) after H.B. 279 (eff. April 4, 2023); formerly (D)(1)."
+      },
+      "medical_malpractice": {
+        "years": 1,
+        "period": "1 year, 4 at the outside",
+        "statute": "R.C. 2305.113(A)",
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-2305.113",
+        "quote": "an action upon a medical, dental, optometric, or chiropractic claim shall be commenced within one year after the cause of action accrued.",
+        "detail": "180-day extension by notice letter; 4-year repose, limited discovery and foreign-object exceptions."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "R.C. 2305.10(A)",
+        "url": "https://codes.ohio.gov/ohio-revised-code/section-2305.10",
+        "quote": "an action for bodily injury or injuring personal property shall be brought within two years after the cause of action accrues."
+      },
+      "notes": "codes.ohio.gov refused direct connections; sections read through web.archive.org snapshots (2305.10 July 7, 2026, eff. Aug. 3, 2006; 2125.02 May 11, 2026, eff. April 4, 2023; 2305.113 Dec. 8, 2025, eff. Oct. 3, 2023)."
+    },
+    {
+      "state": "Oklahoma",
+      "code": "OK",
+      "via": "oklegislature.gov (Oklahoma Statutes complete titles 12 and 76, RTF)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "12 O.S. § 95(A)(3)",
+        "url": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os12.rtf",
+        "quote": "Within two (2) years: ... an action for injury to the rights of another, not arising on contract, and not hereinafter enumerated",
+        "detail": "Assault and battery are 1 year under § 95(A)(4)."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "12 O.S. § 1053(A)",
+        "url": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os12.rtf",
+        "quote": "The action must be commenced within two (2) years."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from discovery",
+        "statute": "76 O.S. § 18",
+        "url": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os76.rtf",
+        "quote": "shall be brought within two (2) years of the date the plaintiff knew or should have known, through the exercise of reasonable diligence",
+        "detail": "Discovery rule built in; minority or incompetency extends the period. No statutory repose."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "12 O.S. § 95(A)(3)",
+        "url": "https://www.oklegislature.gov/OK_Statutes/CompleteTitles/os12.rtf",
+        "quote": "Within two (2) years: ... an action for taking, detaining, or injuring personal property"
+      },
+      "notes": "oscn.net refused connections, so the text was read from the Legislature's complete-title RTF files. 76 O.S. § 18 last amended 2002."
+    },
+    {
+      "state": "Oregon",
+      "code": "OR",
+      "from": {
+        "personal_injury": "Personal injury",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice",
+        "property_damage": "Damage to or taking of personal property"
+      }
+    },
+    {
+      "state": "Pennsylvania",
+      "code": "PA",
+      "via": "law.justia.com (Justia copy of 42 Pa.C.S., 2023 edition, read via Wayback Machine snapshot)",
+      "copy": true,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "42 Pa.C.S. § 5524(2)",
+        "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=55&section=24&subsctn=0",
+        "quote": "An action to recover damages for injuries to the person or for the death of an individual caused by the wrongful act or neglect",
+        "detail": "Listed under actions that \"must be commenced within two years\"."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "42 Pa.C.S. § 5524(2)",
+        "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=55&section=24&subsctn=0",
+        "quote": "An action to recover damages for injuries to the person or for the death of an individual caused by the wrongful act or neglect",
+        "detail": "Same paragraph as personal injury; runs from death."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "42 Pa.C.S. § 5524(2)",
+        "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=55&section=24&subsctn=0",
+        "quote": "Any other action or proceeding to recover damages for injury to person or property which is founded on negligent, intentional, or otherwise tortious conduct",
+        "detail": "Courts apply a discovery rule to malpractice claims."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "42 Pa.C.S. § 5524(3)",
+        "url": "https://www.palegis.us/statutes/consolidated/view-statute?txtType=HTM&ttl=42&div=0&chapter=55&section=24&subsctn=0",
+        "quote": "An action for taking, detaining or injuring personal property, including actions for specific recovery thereof."
+      },
+      "notes": "palegis.us and legis.state.pa.us refused connections, and archived copies of palegis.us load the text in an iframe that was not captured. Section 5524 was read from Justia's 2023 edition via a Oct. 2, 2024 web.archive.org snapshot. The 7-year medical-malpractice statute of repose in MCARE section 513 (40 P.S. § 1303.513) could not be read from any official or Justia copy and is stated from general knowledge; treat it as unverified."
+    },
+    {
+      "state": "Rhode Island",
+      "code": "RI",
+      "via": "webserver.rilegislature.gov (Wayback Machine snapshot, 2026)",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "R.I. Gen. Laws § 9-1-14(b)",
+        "url": "https://webserver.rilegislature.gov/Statutes/TITLE9/9-1/9-1-14.htm",
+        "quote": "Actions for injuries to the person shall be commenced and sued within three (3) years next after the cause of action shall accrue"
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from death",
+        "statute": "R.I. Gen. Laws § 10-7-2(c)",
+        "url": "https://webserver.rilegislature.gov/Statutes/TITLE10/10-7/10-7-2.htm",
+        "quote": "every action brought pursuant to this chapter shall be commenced within three (3) years after the death of the person",
+        "detail": "If the wrongful act is unknown at death, three years from discovery."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "R.I. Gen. Laws § 9-1-14.1",
+        "url": "https://webserver.rilegislature.gov/Statutes/TITLE9/9-1/9-1-14.1.htm",
+        "quote": "shall be commenced within three (3) years from the time of the occurrence of the incident that gave rise to the action",
+        "detail": "Three years from discovery if not discoverable; no repose. Minors until age 21."
+      },
+      "property_damage": {
+        "years": 10,
+        "period": "10 years",
+        "statute": "R.I. Gen. Laws § 9-1-13(a)",
+        "url": "https://webserver.rilegislature.gov/Statutes/TITLE9/9-1/9-1-13.htm",
+        "quote": "Except as otherwise specially provided, all civil actions shall be commenced within ten (10) years next after the cause of action shall accrue",
+        "detail": "No specific personal-property period, so the ten-year catch-all applies."
+      },
+      "notes": "The legislature's server refused connections from here, so the official pages were read through 2026 Wayback Machine snapshots of webserver.rilegislature.gov (9-1-14 snapshot dated 2026-09-23). Property damage relies on the general catch-all, which is the standard reading."
+    },
+    {
+      "state": "South Carolina",
+      "code": "SC",
+      "via": "scstatehouse.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "S.C. Code Ann. § 15-3-530(5)",
+        "url": "https://www.scstatehouse.gov/code/t15c003.php",
+        "quote": "an action for assault, battery, or any injury to the person or rights of another, not arising on contract and not enumerated by law",
+        "detail": "Runs from when the person knew or should have known (§ 15-3-535)."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from death",
+        "statute": "S.C. Code Ann. § 15-3-530(6)",
+        "url": "https://www.scstatehouse.gov/code/t15c003.php",
+        "quote": "an action under Sections 15-51-10 to 15-51-60 for death by wrongful act, the period to begin to run upon the death of the person"
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years, 6 at the outside",
+        "statute": "S.C. Code Ann. § 15-3-545(A)",
+        "url": "https://www.scstatehouse.gov/code/t15c003.php",
+        "quote": "must be commenced within three years from the date of the treatment ... not to exceed six years from date of occurrence",
+        "detail": "Three years from treatment or discovery; six-year repose. Foreign objects: two years from discovery."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "S.C. Code Ann. § 15-3-530(4)",
+        "url": "https://www.scstatehouse.gov/code/t15c003.php",
+        "quote": "an action for taking, detaining, or injuring any goods or chattels including an action for the specific recovery of personal property"
+      },
+      "notes": "Read from the official chapter page for Title 15, Chapter 3."
+    },
+    {
+      "state": "South Dakota",
+      "code": "SD",
+      "via": "sdlegislature.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "SDCL § 15-2-14(3)",
+        "url": "https://sdlegislature.gov/Statutes/15-2-14",
+        "quote": "can be commenced only within three years after the cause of action shall have accrued: ... (3) An action for personal injury."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from death",
+        "statute": "SDCL § 21-5-3",
+        "url": "https://sdlegislature.gov/Statutes/21-5-3",
+        "quote": "Every action for wrongful death shall be commenced within three years after the death of such deceased person."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "SDCL § 15-2-14.1",
+        "url": "https://sdlegislature.gov/Statutes/15-2-14.1",
+        "quote": "can be commenced only within two years after the alleged malpractice, error, mistake, or failure to cure shall have occurred",
+        "detail": "Runs from the act, not discovery; no general discovery rule in the text."
+      },
+      "property_damage": {
+        "years": 6,
+        "period": "6 years",
+        "statute": "SDCL § 15-2-13(4)",
+        "url": "https://sdlegislature.gov/Statutes/15-2-13",
+        "quote": "An action for taking, detaining, or injuring any goods or chattels, including actions for specific recovery of personal property"
+      },
+      "notes": "Read from the official SDLRC codified law pages."
+    },
+    {
+      "state": "Tennessee",
+      "code": "TN",
+      "via": "LexisNexis search excerpts (the free public access to the Tennessee Code put the full text behind a CAPTCHA)",
+      "copy": true,
+      "personal_injury": {
+        "years": 1,
+        "period": "1 year (2 if criminal charges)",
+        "statute": "Tenn. Code Ann. § 28-3-104(a)(1)(A)",
+        "url": "https://advance.lexis.com/container?config=014CJAA5ZGVhZjA3NS02MmMzLTRlZWQtOGJjNC00YzQ1MmZlNzc2YWYKAFBvZENhdGFsb2e9zYpNUjTRaIWVfyrur9ud&crid=2",
+        "quote": "the following actions shall be commenced within one (1) year after the cause of action accrued: (A) Actions for libel, injuries to the person",
+        "detail": "Two years under (a)(2) if criminal charges are brought against the person who caused it."
+      },
+      "wrongful_death": {
+        "years": 1,
+        "period": "1 year",
+        "statute": "Tenn. Code Ann. § 28-3-104(a)(1)(A)",
+        "url": "https://advance.lexis.com/container?config=014CJAA5ZGVhZjA3NS02MmMzLTRlZWQtOGJjNC00YzQ1MmZlNzc2YWYKAFBvZENhdGFsb2e9zYpNUjTRaIWVfyrur9ud&crid=2",
+        "quote": "the following actions shall be commenced within one (1) year after the cause of action accrued: (A) Actions for libel, injuries to the person",
+        "detail": "Death claim continues the decedent's injury claim, so the one-year personal injury period governs."
+      },
+      "medical_malpractice": {
+        "years": 1,
+        "period": "1 year, 3 at the outside",
+        "statute": "Tenn. Code Ann. § 29-26-116(a)",
+        "url": "https://advance.lexis.com/container?config=014CJAA5ZGVhZjA3NS02MmMzLTRlZWQtOGJjNC00YzQ1MmZlNzc2YWYKAFBvZENhdGFsb2e9zYpNUjTRaIWVfyrur9ud&crid=2",
+        "quote": "The statute of limitations in health care liability actions shall be one (1) year as set forth in § 28-3-104 .",
+        "detail": "One year from discovery; three-year repose except fraudulent concealment."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Tenn. Code Ann. § 28-3-105(1)",
+        "url": "https://advance.lexis.com/container?config=014CJAA5ZGVhZjA3NS02MmMzLTRlZWQtOGJjNC00YzQ1MmZlNzc2YWYKAFBvZENhdGFsb2e9zYpNUjTRaIWVfyrur9ud&crid=2",
+        "quote": "The following actions shall be commenced within three (3) years from the accruing of the cause of action: (1) Actions for injuries to personal or real property"
+      },
+      "notes": "Text read from search-result excerpts in the state's LexisNexis public-access code (opening a full document hits a CAPTCHA, which was not attempted); the operative opening language of each section was visible. Lexis public access has no stable per-section URL, so the url is the code's landing page. Wrongful death has no separate limitation in title 20, ch. 5; the one-year period rests on § 28-3-104 as applied by Tennessee courts, not on text naming wrongful death. Justia was behind a bot check."
+    },
+    {
+      "state": "Texas",
+      "code": "TX",
+      "from": {
+        "personal_injury": "Personal injury",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice (health care liability)",
+        "property_damage": "Property damage"
+      }
+    },
+    {
+      "state": "Utah",
+      "code": "UT",
+      "via": "le.utah.gov (Wayback Machine snapshots of the xcode pages and enrolled 2026 H.B. 260)",
+      "copy": false,
+      "personal_injury": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "Utah Code § 78B-2-307(4)",
+        "url": "https://le.utah.gov/xcode/Title78B/Chapter2/78B-2-S307.html",
+        "quote": "An action may be brought within four years: ... (4) for relief not otherwise provided for by law.",
+        "detail": "Negligence injury falls under the four-year catch-all; no section names personal injury."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Utah Code § 78B-2-304(2)",
+        "url": "https://le.utah.gov/xcode/Title78B/Chapter2/78B-2-S304.html",
+        "quote": "An action may be brought within two years: ... (2) for recovery of damages for a death caused by the wrongful act or neglect of another"
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years from discovery, 4 at the outside",
+        "statute": "Utah Code § 78B-3-404(1)",
+        "url": "https://le.utah.gov/xcode/Title78B/Chapter3/78B-3-S404.html",
+        "quote": "shall be commenced within two years after the plaintiff or patient discovers, or through the use of reasonable diligence should have discovered the injury",
+        "detail": "Never more than four years after the act; one year for foreign objects or concealment."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years (4 for a car crash)",
+        "statute": "Utah Code § 78B-2-305(1)(a)(ii), (1)(c)(ii); § 78B-2-307(3)",
+        "url": "https://le.utah.gov/xcode/Title78B/Chapter2/78B-2-S305.html",
+        "quote": "for taking, detaining, or injuring personal property, including actions for specific recovery",
+        "detail": "Motor-vehicle property damage: four years (2023 amendment). § 305 re-enacted by 2026 H.B. 260."
+      },
+      "notes": "le.utah.gov refused connections from here. 78B-2-304, -307 and 78B-3-404 were read from 2026 Wayback snapshots of the official xcode pages (307 shown effective 5/3/2023). The current 78B-2-305 (effective 3/23/2026) was read from the enrolled 2026 H.B. 260, which repealed and reenacted only 305 (and amended 78A-9-103), so 304/307/404 are unaffected. Personal injury at 4 years rests on the 307(4) catch-all, which is the settled reading but not express text. For a damaged car, the 4-year rule in 307(3) is the one that applies."
+    },
+    {
+      "state": "Vermont",
+      "code": "VT",
+      "via": "legislature.vermont.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "12 V.S.A. § 512(4)",
+        "url": "https://legislature.vermont.gov/statutes/section/12/023/00512",
+        "quote": "injuries to the person suffered by the act or default of another person, provided that the cause of action shall be deemed to accrue as of the date of the discovery of the injury",
+        "detail": "Runs from discovery of the injury."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from discovery of death",
+        "statute": "14 V.S.A. § 1492(a)",
+        "url": "https://legislature.vermont.gov/statutes/section/14/071/01492",
+        "quote": "commenced within two years from the discovery of the death of the person",
+        "detail": "Seven years where probable cause for homicide is found."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years, 7 at the outside",
+        "statute": "12 V.S.A. § 521",
+        "url": "https://legislature.vermont.gov/statutes/section/12/023/00521",
+        "quote": "within three years of the date of the incident or two years from the date the injury is or reasonably should have been discovered, whichever occurs later",
+        "detail": "Seven-year repose from incident; no limit with fraudulent concealment."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "12 V.S.A. § 512(5)",
+        "url": "https://legislature.vermont.gov/statutes/section/12/023/00512",
+        "quote": "damage to personal property suffered by the act or default of another."
+      },
+      "notes": "Vermont Statutes Online (includes 2025 session actions) calls itself an unofficial copy of the V.S.A., but it is the legislature's own site."
+    },
+    {
+      "state": "Virginia",
+      "code": "VA",
+      "via": "law.lis.virginia.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Va. Code § 8.01-243(A)",
+        "url": "https://law.lis.virginia.gov/vacode/title8.01/chapter4/section8.01-243/",
+        "quote": "every action for personal injuries, whatever the theory of recovery, and every action for damages resulting from fraud, shall be brought within two years after the cause of action accrues",
+        "detail": "Runs from the date of injury (§ 8.01-230)."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "Va. Code § 8.01-244(B)",
+        "url": "https://law.lis.virginia.gov/vacode/title8.01/chapter4/section8.01-244/",
+        "quote": "Every action under § 8.01-50 shall be brought by the personal representative of the decedent within two years after the death of the injured person.",
+        "detail": "Section last amended 2025, c. 37."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 10 at the outside",
+        "statute": "Va. Code § 8.01-243(A), (C)",
+        "url": "https://law.lis.virginia.gov/vacode/title8.01/chapter4/section8.01-243/",
+        "quote": "The two-year limitations period specified in subsection A shall be extended in actions for malpractice against a health care provider as follows",
+        "detail": "One-year extensions for foreign objects, concealment, missed cancer; never beyond 10 years from accrual."
+      },
+      "property_damage": {
+        "years": 5,
+        "period": "5 years",
+        "statute": "Va. Code § 8.01-243(B)",
+        "url": "https://law.lis.virginia.gov/vacode/title8.01/chapter4/section8.01-243/",
+        "quote": "Every action for injury to property ... shall be brought within five years after the cause of action accrues."
+      },
+      "notes": "All four read from the official Code of Virginia page dated 10/14/2026."
+    },
+    {
+      "state": "Washington",
+      "code": "WA",
+      "via": "app.leg.wa.gov",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "RCW 4.16.080(2)",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=4.16.080",
+        "quote": "An action for taking, detaining, or injuring personal property ... or for any other injury to the person or rights of another not hereinafter enumerated"
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years from death",
+        "statute": "RCW 4.16.080(2); RCW 4.20.010",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=4.16.080",
+        "quote": "or for any other injury to the person or rights of another not hereinafter enumerated",
+        "detail": "Wrongful death chapter sets no own deadline; courts apply the three-year catch-all."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years, or 1 from discovery",
+        "statute": "RCW 4.16.350",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=4.16.350",
+        "quote": "shall be commenced within three years of the act or omission alleged to have caused the injury or condition, or one year of the time the patient",
+        "detail": "Whichever is later. Text's eight-year repose was held unconstitutional (DeYoung, 1998)."
+      },
+      "property_damage": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "RCW 4.16.080(2)",
+        "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=4.16.080",
+        "quote": "An action for taking, detaining, or injuring personal property, including an action for the specific recovery thereof"
+      },
+      "notes": "PI, PD and med mal read directly from the RCW. Wrongful death has no express limitation in ch. 4.20 RCW; the three-year period comes from RCW 4.16.080(2) as applied by case law, not from statute text naming wrongful death. RCW 4.16.350 still prints the eight-year repose, but the Washington Supreme Court struck it in DeYoung v. Providence Medical Center (1998); that is from case law, not the text read."
+    },
+    {
+      "state": "West Virginia",
+      "code": "WV",
+      "via": "code.wvlegislature.gov (Wayback Machine snapshots, 2025)",
+      "copy": false,
+      "personal_injury": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "W. Va. Code § 55-2-12(b)",
+        "url": "https://code.wvlegislature.gov/55-2-12/",
+        "quote": "within two years next after the right to bring the same shall have accrued if it be for damages for personal injuries"
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "W. Va. Code § 55-7-6(d)",
+        "url": "https://code.wvlegislature.gov/55-7-6/",
+        "quote": "Every such action shall be commenced within two years after the death of such deceased person"
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years, 10 at the outside",
+        "statute": "W. Va. Code § 55-7B-4(a)",
+        "url": "https://code.wvlegislature.gov/55-7B-4/",
+        "quote": "must be commenced within two years of the date of such injury or death, or within two years of the date when such person discovers",
+        "detail": "Whichever is later; 10-year repose. Nursing homes: one year (2022 amendment)."
+      },
+      "property_damage": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "W. Va. Code § 55-2-12(a)",
+        "url": "https://code.wvlegislature.gov/55-2-12/",
+        "quote": "Within two years next after the right to bring the same shall have accrued, if it be for damage to property"
+      },
+      "notes": "code.wvlegislature.gov blocks automated fetches (bot challenge / redirect), so the official pages were read from Wayback snapshots (55-7B-4 dated 2025-12-15). A search summary of the official 55-7B-4 PDF dated July 15, 2026 shows the same two-year/ten-year rule; 2026 bills SB 507 and HB 4873 proposed narrow changes, enactment not confirmed."
+    },
+    {
+      "state": "Wisconsin",
+      "code": "WI",
+      "via": "docs.legis.wisconsin.gov (ch. 893 PDF, published 9-4-26, via Wayback Machine snapshot)",
+      "copy": false,
+      "personal_injury": {
+        "years": 3,
+        "period": "3 years",
+        "statute": "Wis. Stat. § 893.54(1m)(a)",
+        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/893/iii/54",
+        "quote": "An action to recover damages for injuries to the person, including an action to recover damages for injuries to the person caused or sustained by or arising from an accident involving a motor vehicle."
+      },
+      "wrongful_death": {
+        "years": 3,
+        "period": "3 years (2 if from a motor vehicle crash)",
+        "statute": "Wis. Stat. § 893.54(1m)(b), (2m)",
+        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/893/iii/54",
+        "quote": "An action brought to recover damages for death caused by the wrongful act, neglect or default of another.",
+        "detail": "Motor-vehicle wrongful death: 2 years after accrual (2015 Act 133)."
+      },
+      "medical_malpractice": {
+        "years": 3,
+        "period": "3 years, 5 at the outside",
+        "statute": "Wis. Stat. § 893.55(1m)",
+        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/893/iii/55",
+        "quote": "shall be commenced within the later of: (a) Three years from the date of the injury, or (b) One year from the date the injury was discovered",
+        "detail": "Discovery route capped at 5 years from the act or omission."
+      },
+      "property_damage": {
+        "years": 6,
+        "period": "6 years (3 if from a motor vehicle crash)",
+        "statute": "Wis. Stat. § 893.52(1), (2)",
+        "url": "https://docs.legis.wisconsin.gov/statutes/statutes/893/iii/52",
+        "quote": "an action, not arising on contract, to recover damages for an injury to real or personal property shall be commenced within 6 years",
+        "detail": "Car-crash property damage: 3 years under sub. (2), added by 2015 Act 133."
+      },
+      "notes": "docs.legis.wisconsin.gov refused connections from here; read the official certified chapter 893 PDF (updated through 2025 Wis. Act 247, published 9-4-26) from a 2026-09-17 Wayback snapshot. For a damaged car the 3-year motor-vehicle period in 893.52(2) is the one that applies; 6 years is the general personal-property rule."
+    },
+    {
+      "state": "Wyoming",
+      "code": "WY",
+      "via": "wyoleg.gov (Title 1 compressed PDF)",
+      "copy": false,
+      "personal_injury": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "Wyo. Stat. § 1-3-105(a)(iv)(C)",
+        "url": "https://wyoleg.gov/statutes/compress/title01.pdf",
+        "quote": "Within four (4) years, an action for: ... (C) An injury to the rights of the plaintiff, not arising on contract and not herein enumerated",
+        "detail": "Assault or battery is one year under (a)(v)."
+      },
+      "wrongful_death": {
+        "years": 2,
+        "period": "2 years from death",
+        "statute": "Wyo. Stat. § 1-38-102(d)",
+        "url": "https://wyoleg.gov/statutes/compress/title01.pdf",
+        "quote": "An action for wrongful death shall be commenced within two (2) years after the death of the decedent."
+      },
+      "medical_malpractice": {
+        "years": 2,
+        "period": "2 years",
+        "statute": "Wyo. Stat. § 1-3-107(a)(i)",
+        "url": "https://wyoleg.gov/statutes/compress/title01.pdf",
+        "quote": "Within two (2) years of the date of the alleged act, error or omission",
+        "detail": "Or two years from discovery if not reasonably discoverable; six-month extension if found in year two."
+      },
+      "property_damage": {
+        "years": 4,
+        "period": "4 years",
+        "statute": "Wyo. Stat. § 1-3-105(a)(iv)(B)",
+        "url": "https://wyoleg.gov/statutes/compress/title01.pdf",
+        "quote": "The recovery of personal property or for taking, detaining or injuring personal property"
+      },
+      "notes": "Read from the legislature's compiled Title 1 PDF; the PDF carries no explicit currency date."
+    }
+  ]
+}

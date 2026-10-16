@@ -20,7 +20,9 @@ import Takeaways from './Takeaways.astro';
  *
  * `reading` is the one editorial input. Each entry is a page on a firm's own site that explains
  * this state's deadline, read while this guide was written and checked against the statute. It is
- * listed because it was read, not because of who wrote it, and the page says so.
+ * listed because it was read, not because of who wrote it, and the page says so. It lives in the
+ * research file beside the periods it was checked against, so the by-state hub can list the same
+ * pages without a second copy; the prop still overrides it.
  */
 interface Reading { firm: string; url: string; title: string; why: string }
 interface Props {
@@ -33,7 +35,7 @@ interface Props {
   /** A second practice whose top verified firm the property and contract rows point to. */
   alsoPractice?: { slug: string; label: string };
 }
-const { data, title, description, lede, crumb, reading = [], alsoPractice } = Astro.props;
+const { data, title, description, lede, crumb, reading = data.reading ?? [], alsoPractice } = Astro.props;
 
 const read = new Date(data.measured_at).toLocaleDateString('en-US',
   { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
