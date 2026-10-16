@@ -147,10 +147,14 @@ const markets = new Set(firms.map(f => f.data.market.city_slug)).size;
 const states = stateRows.length;
 // Derived rather than typed: both of these are New York firms today and a sentence saying so is
 // wrong the day the venue pattern learns a second state.
-const exemplarMarkets = [...new Set(exemplars.map(f => f.data.market.city))];
-const exemplarCityPath = exemplars.length
-  ? `/cities/${exemplars[0].data.market.city_slug}/${(exemplars[0].data.practices.find(pr => pr.primary) ?? exemplars[0].data.practices[0]).slug}/`
-  : '/practice-areas/personal-injury/';
+// One link per market rather than one link for both: the two exemplars sat in the same city
+// when this was written and a fortnight later they did not, which left a link reading
+// "New York and Los Angeles" and pointing at New York. Deduplicated on the path, so a pair in
+// one market still renders a single link.
+const exemplarPlaces = [...new Map(exemplars.map(f => {
+  const practice = (f.data.practices.find(pr => pr.primary) ?? f.data.practices[0]).slug;
+  return [`/cities/${f.data.market.city_slug}/${practice}/`, f.data.market.city];
+})).entries()].map(([path, city]) => ({ path, city }));
 const dates = firms.map(f => rp(f)?.checked_at).filter(Boolean).sort() as string[];
 const asDate = (s: string) =>
   new Date(s).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
@@ -278,7 +282,7 @@ const description = "We read the case results page of every firm in this directo
     <h2 id="score">What our own score does with it</h2>
     <p>Sub-factor B3 of the LFL Certification Score is this measurement, worth 4 of 100 points, and it is all or nothing: a firm either has the notice on that page or it does not. <a href="/methodology/">The methodology</a> sets out every sub-factor.</p>
     <p>Three things about that are worth saying against ourselves.</p>
-    <p><b>It marks firms down for results they never published.</b> Of the {b3Scored.length.toLocaleString('en-US')} firms scored through this branch of pillar B, {b3Zero.length} score zero on B3, and {b3ZeroSilent.length} of those publish no case results at all. A firm that advertises nothing cannot fail to disclaim it, and our engine charges it 4 points anyway.</p>
+    <p><b>It marks firms down for results they never published.</b> Of the {b3Scored.length.toLocaleString('en-US')} firms scored through this branch of pillar B, {b3Zero.length.toLocaleString('en-US')} score zero on B3, and {b3ZeroSilent.length} of those publish no case results at all. A firm that advertises nothing cannot fail to disclaim it, and our engine charges it 4 points anyway.</p>
     <p><b>The same sentence is paid for in one pillar and not in another.</b> Sub-factor D1 awards half a point for a disclaimer or terms page existing on the site. So the {silentButPage.length} firms that keep the sentence one click away collect the D1 half point and lose the B3 four, for a difference that is about where a link sits.</p>
     <p><b>Most of the score gap between the two groups is the sub-factor itself.</b> Firms carrying the notice average {rawNotice.toFixed(1)} raw points against {rawSilent.toFixed(1)}, a gap of {rawGap.toFixed(1)}. B3 alone accounts for {b3Gap.toFixed(1)} of it, which is {b3ShareOfGap}%. Our score says these firms are better and is mostly saying that they carry the sentence we award points for carrying.</p>
 
@@ -299,7 +303,7 @@ const description = "We read the case results page of every firm in this directo
     <p>Clients do not appear to notice at all. Mean Google rating is {ratingNotice.toFixed(2)} for firms carrying the notice and {ratingSilent.toFixed(2)} for firms without it, a difference of {Math.abs(ratingNotice - ratingSilent).toFixed(2)} of a star across {withNotice.length + noNotice.length} firms.</p>
     <p>That is the shape earlier studies here keep finding. <a href="/guides/what-search-traffic-says-about-a-law-firm/">Almost everything a firm publishes about itself rises with its search visibility</a>, and the rating its clients gave it does not move with any of it.</p>
     {exemplars.length === 2 && (
-      <p>The firms that do the whole thing are worth naming, and they are named in one direction only: a firm with no notice beside its figures may keep one in a footer our crawl does not read, and this record cannot tell those apart. <a href={`/firms/${exemplars[0].data.slug}/`}>{exemplars[0].data.name}</a> publishes {rp(exemplars[0])!.count} distinct figures with both a court named and the notice on the page, and <a href={`/firms/${exemplars[1].data.slug}/`}>{exemplars[1].data.name}</a> publishes {rp(exemplars[1])!.count}. Both sit in <a href={exemplarCityPath}>{exemplarMarkets.join(' and ')}</a>, which is an artefact of the court pattern described below rather than a fact about either market.</p>
+      <p>The firms that do the whole thing are worth naming, and they are named in one direction only: a firm with no notice beside its figures may keep one in a footer our crawl does not read, and this record cannot tell those apart. <a href={`/firms/${exemplars[0].data.slug}/`}>{exemplars[0].data.name}</a> publishes {rp(exemplars[0])!.count} distinct figures with both a court named and the notice on the page, and <a href={`/firms/${exemplars[1].data.slug}/`}>{exemplars[1].data.name}</a> publishes {rp(exemplars[1])!.count}. Both sit in {exemplarPlaces.map((place, i) => <>{i > 0 && ' and '}<a href={place.path}>{place.city}</a></>)}, and the court half of that is a fact about our own pattern before it is a fact about any market: it is written around New York's courts, as the limits below say.</p>
     )}
 
     <h2 id="limits">What this does not measure</h2>

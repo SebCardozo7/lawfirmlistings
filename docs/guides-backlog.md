@@ -226,7 +226,39 @@ Same family as `bar_numbers_on_bios`, with the twist that the field is correctly
 *definition* is the trap. Do not propose it again without reading Ahrefs' own documentation of
 what `paid_keywords` covers.
 
+## One trap found after the pull request was open, added 2026-10-16
+
+**A derived list is not the same as a derived link.** The 2026-10-12 guide names the two firms
+publishing the most results with both a court named and the notice present, picked by computation
+and tie-broken on the slug, exactly as the rules here say. The markets those firms sit in were
+derived too. The **link** was not: it pointed at the first exemplar's city page while the anchor
+text joined every market in the list. Both firms were in New York the day it was written, so the
+sentence read "Both sit in New York" and the link was right. Four days later Los Angeles opened,
+one exemplar changed, and the page rendered **"Both sit in New York and Los Angeles" linking only
+to New York**. Every figure on the page recomputed correctly through the same change.
+
+So: deriving the text of a link and hardcoding its target is the same bug as hardcoding the text,
+and it hides better, because the sentence stays true while the link quietly stops matching it.
+The fix renders one link per market, deduplicated on the path, so a pair in one market still
+renders a single link. **When a sentence can name N things, the markup has to be able to link N
+things.**
+
 ## Generated pages, so a topic is not aimed at one of them
+
+**Moved again on 2026-10-16, while this run's pull request was still open, and that is the
+useful part of the entry.** `main` took Los Angeles and five sub-practices (#128) and the Indiana
+statute page (#125), the base was merged into the open branch, and the build now produces
+**1,488 pages from 1,388 published firms in 19 markets and 13 states**, with 25 published guides
+plus the gated ranking. Primary practice is now personal injury 1,113, immigration 115, criminal
+defense 81, family law 42, real estate 20, workers' compensation 17: the five sub-practices did
+not become new primary practices, and `transaction` (20) and `domestic` (42) are unchanged, so
+the pillar B branches are the same three.
+
+**Every figure in the open guide recomputed correctly and one sentence around them did not**, for
+the fourth time this file has recorded that pattern. See the trap added below. **A guide whose
+pull request sits open across a data change has to be reread at the new n before it merges**, not
+only before it is opened. The title went from "340 of 532" to "374 of 599" on its own, which is
+the design working; what did not work was a sentence naming the markets two example firms sit in.
 
 Re-counted against the build on **2026-10-12**. The build produces **1,330 pages, from 1,248
 published firms in 18 markets and 13 states**, with 24 published guides plus the gated ranking.
