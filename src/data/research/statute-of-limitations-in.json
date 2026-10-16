@@ -1,0 +1,278 @@
+{
+  "state": "Indiana",
+  "code": "IN",
+  "slug": "indiana-statute-of-limitations",
+  "measured_at": "2026-10-12",
+  "source": {
+    "who": "The Indiana General Assembly",
+    "what": "the 2026 Indiana Code, Title 34, Article 11 (Limitation of Actions)",
+    "url": "https://iga.in.gov/laws/2026/ic/titles/34"
+  },
+  "headline": {
+    "years": 2,
+    "claim": "a personal injury claim",
+    "statute": "IC 34-11-2-4",
+    "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4"
+  },
+  "rows": [
+    {
+      "claim": "Personal injury",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "IC 34-11-2-4",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4",
+      "clock": "From the day the cause of action accrues. For a crash or a fall that is the day it happened.",
+      "note": "The same section covers injury to character and damage to personal property, so all three share the two years."
+    },
+    {
+      "claim": "Wrongful death",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "IC 34-23-1-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-23-1-1",
+      "clock": "From the death.",
+      "note": "Only the personal representative of the estate can bring it, so someone has to be appointed by a court first, and that takes time out of the two years."
+    },
+    {
+      "claim": "Medical malpractice",
+      "group": "injury",
+      "period": "2 years from the act",
+      "years": 2,
+      "statute": "IC 34-18-7-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-18-7-1",
+      "clock": "From the date of the act, omission or neglect, not from when the patient found out.",
+      "note": "Applies to minors and to people under a legal disability too, with one exception for young children. The claim goes to a medical review panel before any lawsuit, under IC 34-18-8-4."
+    },
+    {
+      "claim": "Assault and battery",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "IC 34-11-2-4",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4",
+      "clock": "From the day the cause of action accrues.",
+      "note": "Indiana has no separate section for intentional torts. A civil claim for an assault is an injury to the person, so it runs on the same two years."
+    },
+    {
+      "claim": "Libel and slander",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "IC 34-11-2-4",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4",
+      "clock": "From the day the cause of action accrues.",
+      "note": "The statute calls it injury to character and puts it in the same sentence as injury to the person."
+    },
+    {
+      "claim": "Product liability",
+      "group": "injury",
+      "period": "2 years, 10 at the outside",
+      "years": 2,
+      "statute": "IC 34-20-3-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-20-3-1",
+      "clock": "Two years from accrual, and within ten years of the product's delivery to its first user. A claim that accrues in years eight to ten still gets its full two years.",
+      "note": "Applies regardless of minority or legal disability, so a child's product claim does not wait for the 18th birthday."
+    },
+    {
+      "claim": "Child sexual abuse",
+      "group": "injury",
+      "period": "7 years, or 4 after dependence ends",
+      "years": 7,
+      "statute": "IC 34-11-2-4",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4",
+      "clock": "Whichever is later: seven years from accrual, or four years after the survivor stops being a dependent of the person accused.",
+      "note": "Subsection (b) of the general injury section. A narrower window in subsections (c) and (d) for one bankruptcy closed on July 1, 2025."
+    },
+    {
+      "claim": "Workers' compensation claim",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "IC 22-3-3-3",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/22#22-3-3-3",
+      "clock": "From the accident, or from the death. If temporary disability benefits were paid, the two years start over from the last day paid.",
+      "note": "Filed with the Worker's Compensation Board, not a court. Radiation injuries run from when the worker knew, or should have known, the injury and its link to the job."
+    },
+    {
+      "claim": "Work injury: notice to the employer",
+      "group": "injury",
+      "period": "30 days to give notice",
+      "years": 0.08,
+      "statute": "IC 22-3-3-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/22#22-3-3-1",
+      "clock": "Written notice as soon as practicable, and within 30 days of the injury unless the employer already knew.",
+      "note": "Late notice does not end the claim outright: no compensation is paid until notice is given, and the employer can only use the delay to the extent it was prejudiced."
+    },
+    {
+      "claim": "Damage to personal property",
+      "group": "property",
+      "period": "2 years",
+      "years": 2,
+      "statute": "IC 34-11-2-4",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-4",
+      "clock": "From the day the cause of action accrues.",
+      "note": "A damaged car is personal property, so the property claim from a crash has the same two years as the injury claim."
+    },
+    {
+      "claim": "Damage to real property",
+      "group": "property",
+      "period": "6 years",
+      "years": 6,
+      "statute": "IC 34-11-2-7",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-7",
+      "clock": "From the day the cause of action accrues.",
+      "note": "Injuries to property other than personal property. The same section covers holding on to someone else's personal property and suing to get it back."
+    },
+    {
+      "claim": "Contract not in writing",
+      "group": "contract",
+      "period": "6 years",
+      "years": 6,
+      "statute": "IC 34-11-2-7",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-7",
+      "clock": "From the breach.",
+      "note": "Also covers actions on accounts."
+    },
+    {
+      "claim": "Written contract to pay money",
+      "group": "contract",
+      "period": "6 years",
+      "years": 6,
+      "statute": "IC 34-11-2-9",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-9",
+      "clock": "From the day the cause of action accrues.",
+      "note": "Promissory notes, bills of exchange and other written promises to pay, signed after August 31, 1982. A claim on a bank deposit account has only two years."
+    },
+    {
+      "claim": "Other written contracts",
+      "group": "contract",
+      "period": "10 years",
+      "years": 10,
+      "statute": "IC 34-11-2-11",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-11",
+      "clock": "From the day the cause of action accrues.",
+      "note": "Written contracts that are not promises to pay money, including mortgages other than chattel mortgages."
+    },
+    {
+      "claim": "Sale of goods",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "IC 26-1-2-725",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/26#26-1-2-725",
+      "clock": "From the breach, whether or not the buyer knew. A warranty breach happens on delivery.",
+      "note": "The contract can shorten this to one year, but cannot lengthen it."
+    },
+    {
+      "claim": "Fraud",
+      "group": "contract",
+      "period": "6 years",
+      "years": 6,
+      "statute": "IC 34-11-2-7",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-7",
+      "clock": "From the day the cause of action accrues.",
+      "note": "Actions for relief against frauds sit in the six-year section with unwritten contracts."
+    },
+    {
+      "claim": "Notice to a city, county or school",
+      "group": "government",
+      "period": "180 days to give notice",
+      "years": 0.49,
+      "statute": "IC 34-13-3-8",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-13-3-8",
+      "clock": "Within 180 days after the loss, filed with the governing body of the political subdivision and, where it still exists, the political subdivision risk management commission.",
+      "note": "Without the notice, the claim is barred. The government then has 90 days to answer, silence counts as a denial, and no lawsuit can be filed until the claim is denied in whole or in part, under IC 34-13-3-11 and 34-13-3-13."
+    },
+    {
+      "claim": "Notice to the State of Indiana",
+      "group": "government",
+      "period": "270 days to give notice",
+      "years": 0.74,
+      "statute": "IC 34-13-3-6",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-13-3-6",
+      "clock": "Within 270 days after the loss, filed with the Attorney General or the state agency involved.",
+      "note": "Filing with the wrong state agency does not bar the claim if the person reasonably tried to find the right one. The Attorney General publishes the claim form."
+    },
+    {
+      "claim": "Employment claims",
+      "group": "other",
+      "period": "2 years",
+      "years": 2,
+      "statute": "IC 34-11-2-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-2-1",
+      "clock": "From the act or omission complained of.",
+      "note": "Hiring, firing, discipline, wages and salary, unless the claim rests on a written contract. The same two years apply against the state as employer, under IC 34-11-2-2."
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "A child's clock starts at 18",
+      "statute": "IC 34-11-6-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-6-1",
+      "text": "A person under a legal disability when the claim accrues has two years after the disability ends. The Code's general definitions count anyone under 18 as under a legal disability (IC 1-1-4-5), so most injury claims from childhood can be filed until the 20th birthday. Medical malpractice and product liability are the exceptions: both statutes say they apply regardless of minority."
+    },
+    {
+      "name": "Medical malpractice on a young child",
+      "statute": "IC 34-18-7-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-18-7-1",
+      "text": "A child hurt before age six has until the eighth birthday to file. Every other minor runs on the ordinary two years from the act, with no pause until 18."
+    },
+    {
+      "name": "Mental incompetence and absence from the country",
+      "statute": "IC 34-11-6-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-6-1",
+      "text": "The same definition counts a person who is mentally incompetent, or out of the United States, as under a legal disability, so the clock waits until that ends and then gives two years. For a claim against the government, an incapacitated person has 180 days after the incapacity ends to give the notice, under IC 34-13-3-9."
+    },
+    {
+      "name": "A defendant who lives outside Indiana",
+      "statute": "IC 34-11-4-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-4-1",
+      "text": "Time when the defendant is a nonresident does not count, unless the defendant keeps an agent in Indiana who can be served with process. Most companies and insured drivers can be served through an agent, so this pause applies less often than it reads."
+    },
+    {
+      "name": "Concealment that hid the claim",
+      "statute": "IC 34-11-5-1",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-11-5-1",
+      "text": "If the person responsible hid the claim from the person who could bring it, the full period starts over from discovery."
+    },
+    {
+      "name": "The discovery rule, which the courts read into the statute",
+      "statute": "Wehling v. Citizens National Bank, 586 N.E.2d 840 (Ind. 1992)",
+      "text": "Indiana's Supreme Court held that a tort claim for injury to a person or property accrues when the injured person knew, or with ordinary diligence could have learned, that an injury was caused by someone else's act. Medical malpractice runs on its own occurrence rule instead, which the same court has said cannot be applied to bar a patient who had no reasonable way to discover the malpractice in time, in Martin v. Richey, 711 N.E.2d 1273 (Ind. 1999)."
+    },
+    {
+      "name": "The medical review panel pauses the clock",
+      "statute": "IC 34-18-7-3",
+      "url": "https://iga.in.gov/laws/2026/ic/titles/34#34-18-7-3",
+      "text": "Filing a proposed complaint with the Department of Insurance stops the two years until 90 days after the claimant receives the panel's opinion. The complaint counts as filed when it is delivered, or mailed by registered or certified mail, to the commissioner."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the statute of limitations for personal injury in Indiana?",
+      "a": "Two years from the day the claim accrues, under IC 34-11-2-4. For a crash or a fall that is the day it happened. The same two years cover damage to personal property such as a car, and injury to character."
+    },
+    {
+      "q": "How long do you have to file a wrongful death lawsuit in Indiana?",
+      "a": "Two years, under IC 34-23-1-1, and the action has to be brought by the personal representative of the estate. If no one has been appointed yet, that step comes first."
+    },
+    {
+      "q": "What is the deadline for medical malpractice in Indiana?",
+      "a": "Two years from the date of the act, omission or neglect, under IC 34-18-7-1, for adults and minors alike. A child hurt before age six has until the eighth birthday. The claim goes to a medical review panel first, and filing the proposed complaint pauses the clock until 90 days after the panel's opinion, under IC 34-18-7-3."
+    },
+    {
+      "q": "Does the statute of limitations stop for a minor in Indiana?",
+      "a": "For most claims, yes. Under IC 34-11-6-1, a person under a legal disability has two years after it ends, and anyone under 18 counts, so most injury claims from childhood can be filed until 20. Medical malpractice and product liability claims do not wait for the 18th birthday."
+    },
+    {
+      "q": "How long do you have to sue a city, county or the State of Indiana?",
+      "a": "The first deadline is a written notice, not a lawsuit: 180 days after the loss for a city, county, town or school under IC 34-13-3-8, and 270 days for the state under IC 34-13-3-6. Without it the claim is barred. The lawsuit can only be filed once the claim is denied, and a claim not approved within 90 days counts as denied."
+    },
+    {
+      "q": "Can I still recover in Indiana if I was partly at fault?",
+      "a": "Against a private party, yes, as long as your share of the fault is not greater than everyone else's combined, under IC 34-51-2-6, and the award is cut by your percentage. That statute does not apply to claims against a government entity, under IC 34-51-2-2."
+    }
+  ]
+}
