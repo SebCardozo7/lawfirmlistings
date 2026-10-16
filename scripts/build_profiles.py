@@ -59,6 +59,15 @@ PRACTICE_NAMES = {
     "family-law": "Family Law",
     "immigration": "Immigration",
     "criminal-defense": "Criminal Defense",
+    # The sub-practices of personal injury. A firm holds these alongside the parent rather than
+    # instead of it: a Los Angeles firm with a car accident page practises both, and 119 of the
+    # 144 firms in that market publish one. They exist because the searches are here rather than
+    # in the parent, and src/data/practices.ts carries their editorial notes.
+    "car-accidents": "Car Accidents",
+    "truck-accidents": "Truck Accidents",
+    "medical-malpractice": "Medical Malpractice",
+    "wrongful-death": "Wrongful Death",
+    "slip-and-fall": "Slip and Fall",
 }
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury

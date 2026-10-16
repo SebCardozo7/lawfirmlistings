@@ -1170,6 +1170,12 @@ def main():
         if not path.exists():
             continue
         rec = json.loads(io.open(path, encoding="utf-8").read())
+        # The staging directory holds more than firm records: discover_places writes its
+        # candidate lists there too, and those are lists. Reading one of them as a record stops
+        # the whole run with an AttributeError on whichever market was crawled most recently,
+        # which is how Los Angeles got no rosters at all on its first pass.
+        if not isinstance(rec, dict) or "domain" not in rec:
+            continue
         if not rec.get("https_ok"):
             continue
 

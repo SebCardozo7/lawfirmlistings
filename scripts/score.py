@@ -990,10 +990,21 @@ def main():
     errors = []
     for path in FIRMS:
         firm = read_json(path)
+        with open(path, encoding="utf-8") as fh:
+            ends_in_newline = fh.read().endswith("\n")
         if firm.get("status") == "sample":
             if PROD: errors.append(f"{path}: status=sample is not allowed in production")
             continue
         score = compute(firm)
+        # A score that came out the same was not computed again, it was confirmed. Stamping
+        # today's date on it anyway rewrote all 1,412 profiles on every run and buried the
+        # handful that actually moved: the last run changed 23 tiers and produced a diff of
+        # 1,412 files, which is a diff nobody can review and a date nobody can trust. The date
+        # now means what a reader would assume it means, which is when this score last changed.
+        before = firm.get("score") or {}
+        if {k: v for k, v in before.items() if k != "computed_at"} == \
+           {k: v for k, v in score.items() if k != "computed_at"} and before.get("computed_at"):
+            score["computed_at"] = before["computed_at"]
         firm["score"] = score
 
         # status follows the computed tier. It used to be hand-set, and the two drifted apart the
@@ -1012,8 +1023,12 @@ def main():
         ill = [s["code"] for p in score["pillars"].values() for s in p["subs"] if s["source"] == "illustrative"]
         if PROD and firm["status"] == "certified" and ill:
             errors.append(f"{path}: certified firm still has illustrative sub-factors {ill}")
-        with open(path, "w", encoding="utf-8") as fh:
+        # Keep the file ending the file already had. Every other script in the pipeline writes a
+        # closing newline and this one did not, so the two took turns adding and removing it on
+        # 451 profiles and each run reported them as changed. Neither convention is worth a diff.
+        with open(path, "w", encoding="utf-8", newline="\n") as fh:
             json.dump(firm, fh, indent=2, ensure_ascii=False)
+            if ends_in_newline: fh.write("\n")
         print(f"{firm['name']}: {score['total']} → {score['tier']} (A+B+C={score['floor_abc']}) illustrative={ill}")
     if errors:
         print("\n".join(errors), file=sys.stderr); sys.exit(1)

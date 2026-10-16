@@ -1308,6 +1308,51 @@ export const CITY_NOTES: Record<string, CityNotes> = {
     ],
   },
 
+  'los-angeles-ca': {
+    lede:
+      'California gives you two years to sue almost anybody. What ends claims in Los Angeles is ' +
+      'the other deadline: <b>six months</b> to present a claim against a public body, in a ' +
+      'county where an enormous share of what can hurt you belongs to one.',
+    areas: ['Downtown', 'Century City', 'Van Nuys', 'Long Beach', 'Pasadena', 'Glendale',
+            'Santa Monica', 'Inglewood', 'East LA', 'South LA', 'Encino', 'Torrance'],
+    sections: [
+      {
+        heading: 'Hiring a lawyer in Los Angeles: what is different',
+        paragraphs: [
+          'The limitation period for a personal injury is two years, under section 335.1 of the ' +
+          'Code of Civil Procedure, and that part is the same everywhere in the state. The rule ' +
+          'that decides more Los Angeles cases is section 911.2 of the Government Code: a claim ' +
+          'against a public entity has to be presented in writing within <b>six months</b>, and ' +
+          'once it is rejected the clock to sue is six months rather than whatever was left of ' +
+          'the two years.',
+          'Six months is a short time anywhere. It is shorter here because of how much of this ' +
+          'county is a public entity. Metro runs the buses and the rail. The City owns the ' +
+          'sidewalks and most of the streets. The County runs the hospitals and the beaches. The ' +
+          'school district is its own entity again, and so is each of the eighty-odd other ' +
+          'cities inside the county. A fall on a pavement, a bus that stopped short, a pothole ' +
+          'on a boulevard: each of those is a six month claim rather than a two year one, and ' +
+          'which entity it is against is not always obvious from the street you were standing ' +
+          'on.',
+          'That is the one thing worth establishing in a first call, before anything about who ' +
+          'was at fault. If a public body is involved, the deadline is already running and it is ' +
+          'not the one most people have read about.',
+        ],
+      },
+      {
+        heading: 'Being partly at fault does not end a California claim',
+        paragraphs: [
+          'California reduces what you recover by your share of the fault rather than barring ' +
+          'the claim, which is not how every state works and is worth knowing before somebody ' +
+          'talks themselves out of calling. A driver who was speeding and was hit by a driver ' +
+          'who ran a light still has a claim; it is worth less.',
+          'It also means the argument in most cases is about percentages rather than about ' +
+          'whether there is a case at all, and that is the argument a firm is actually being ' +
+          'hired to have.',
+        ],
+      },
+    ],
+  },
+
   'san-diego-ca': {
     lede:
       'California gives you two years to sue almost anybody and <b>six months</b> to file a ' +
