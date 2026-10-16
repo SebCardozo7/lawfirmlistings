@@ -907,8 +907,7 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     title: 'Car Accident Lawyers: Rankings and Hiring Guide',
     description:
       'How to choose a car accident lawyer: what your own insurer owes you, why the first ' +
-      'offer arrives before the injury is understood, and the deadline that is not the one ' +
-      'everybody quotes.',
+      'offer comes too early, and which deadline actually applies.',
     lede:
       'Car accident lawyers handling rear-end and intersection collisions, uninsured and ' +
       'underinsured motorist claims, hit and run, and crashes involving a rideshare or a ' +
@@ -1031,9 +1030,8 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     icon: 'shield',
     title: 'Truck Accident Lawyers: Rankings and Hiring Guide',
     description:
-      'How to choose a truck accident lawyer: the federal rules that govern the driver, the ' +
-      'evidence that is destroyed on a schedule, and why the defendant is usually a company ' +
-      'rather than a person.',
+      'How to choose a truck accident lawyer: the federal rules that bind the driver, and ' +
+      'the evidence a carrier may destroy on a schedule.',
     lede:
       'Truck accident lawyers handling collisions with tractor-trailers, delivery vehicles and ' +
       'commercial fleets, including cases against the carrier, the broker and the shipper. ' +
@@ -1149,9 +1147,8 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     icon: 'scale',
     title: 'Medical Malpractice Lawyers: Rankings and Hiring Guide',
     description:
-      'How to choose a medical malpractice lawyer: why most firms decline these cases, what ' +
-      'an expert has to say before one can be filed, and the deadline that starts when you ' +
-      'found out rather than when it happened.',
+      'How to choose a medical malpractice lawyer: why most firms decline, what an expert ' +
+      'must sign before filing, and when the clock starts.',
     lede:
       'Medical malpractice lawyers handling surgical error, misdiagnosis and delayed diagnosis, ' +
       'birth injury, medication error and hospital negligence. Every firm is checked for active ' +
@@ -1265,9 +1262,8 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     icon: 'columns',
     title: 'Wrongful Death Lawyers: Rankings and Hiring Guide',
     description:
-      'How to choose a wrongful death lawyer: who is allowed to bring the claim, the second ' +
-      'claim that belongs to the estate, and why the probate court is involved before the ' +
-      'civil one.',
+      'How to choose a wrongful death lawyer: who may bring it, the second claim that ' +
+      'belongs to the estate, and why probate comes first.',
     lede:
       'Wrongful death lawyers handling fatal collisions, workplace deaths, fatal medical ' +
       'negligence and deaths caused by a defective product. Every firm is checked for active ' +
@@ -1376,9 +1372,8 @@ export const PRACTICES: Record<string, PracticeNotes> = {
     icon: 'pin',
     title: 'Slip and Fall Lawyers: Rankings and Hiring Guide',
     description:
-      'How to choose a slip and fall lawyer: why notice decides these cases, what the ' +
-      'defence will argue about why you were there, and the footage that is overwritten in ' +
-      'days.',
+      'How to choose a slip and fall lawyer: why notice decides these cases, and the ' +
+      'footage that is overwritten within days.',
     lede:
       'Slip and fall lawyers handling premises liability claims against shops, restaurants, ' +
       'landlords, supermarkets and public authorities. Every firm is checked for active ' +
