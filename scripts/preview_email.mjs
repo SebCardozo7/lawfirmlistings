@@ -42,7 +42,7 @@ mkdirSync(out, { recursive: true });
 const bundle = path.join(out, '_bundle.mjs');
 await build({
   stdin: {
-    contents: `export { ackBody, pitchBody, ownerNoticeBody } from './worker/outbound.ts';
+    contents: `export { ackBody, pitchBody, ownerNoticeBody, listedNoticeBody } from './worker/outbound.ts';
                export { mime } from './worker/mail.ts';`,
     resolveDir: process.cwd(),
     loader: 'ts',
@@ -55,7 +55,7 @@ await build({
   logLevel: 'warning',
 });
 
-const { ackBody, pitchBody, ownerNoticeBody, mime } = await import(pathToFileURL(bundle).href);
+const { ackBody, pitchBody, ownerNoticeBody, listedNoticeBody, mime } = await import(pathToFileURL(bundle).href);
 
 // One enquiry, filled in the way the form fills it, with the accented name that proves the
 // encoding and a long firm name that proves the header folding.
@@ -156,6 +156,17 @@ const messages = [
   // What Sebastian gets when the cron sends a quote, hours later, with nobody
   // watching: the moment to expect a reply.
   ['quote-sent', ownerNoticeBody(enquiry, env)],
+  // The only one here that goes to a firm which never wrote to us, rendered from a real row
+  // of the directory so the figures in it are the figures that firm's profile carries.
+  ['listed-notice', listedNoticeBody({
+    firm: 'Gorayeb & Associates, P.C.',
+    slug: 'gorayeb-associates-pc',
+    tier: 'Distinguished',
+    total: 79,
+    city: 'New York',
+    state: 'NY',
+    openGates: 1,
+  }, env)],
 ];
 
 let failures = 0;
