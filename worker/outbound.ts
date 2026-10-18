@@ -439,10 +439,20 @@ export function listedNoticeBody(f: Listed, env: OutboundEnv): { subject: string
       '',
       'What taking the listing changes:',
       '',
-      '  **You maintain the entry instead of writing to us.** Offices, phone, practice areas,',
-      '  languages, fee terms and logo, from your own panel. You can submit the client reviews',
-      '  you want quoted and file case results with a docket number, and we check each one',
-      '  before it is published.',
+      // Named field by field, because "manage your profile" is what every directory says and
+      // it tells a partner nothing. These are the inputs on /claim/profile, in the order the
+      // page puts them, plus the three pages beside it. Practice areas used to be in this
+      // sentence and are not in the panel, so they are out of it.
+      '  **You edit the entry instead of writing to us.** Your phone number, up to four office',
+      '  addresses, the languages your firm works in, how you charge, whether the first',
+      '  consultation is free, and your availability: a 24/7 intake line, hospital visits, home',
+      '  visits. A box for anything else, including a sub-factor you want to appeal.',
+      '',
+      '  **Three pages beside it.** Your logo, which you can replace whenever you rebrand. The',
+      '  client reviews you want quoted. Case results, filed with the docket or index number',
+      '  that lets anybody check them against the court record.',
+      '',
+      '  **Every change is read by a person before it goes live**, usually the same day.',
       '',
       '  **Your link becomes a followed one**, from your profile and from every card your firm',
       '  appears in across the directory.',
