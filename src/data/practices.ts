@@ -1481,6 +1481,254 @@ export const PRACTICES: Record<string, PracticeNotes> = {
                     'Open and obvious, and where it still wins',
                     'Camera retention periods by type of business'],
   },
+  'motorcycle-accidents': {
+    name: 'Motorcycle Accidents',
+    abbr: 'motorcycle',
+    icon: 'car',
+    title: 'Motorcycle Accident Lawyers: Rankings and Hiring Guide',
+    description:
+      'How to choose a motorcycle accident lawyer: the bias a rider starts with, and why ' +
+      'the injury is usually larger than the policy behind it.',
+    lede:
+      'Motorcycle accident lawyers handling left-turn collisions, lane-change crashes, road ' +
+      'hazard claims and cases where the injury is worth more than the driver\'s policy. Every ' +
+      'firm is checked for active licensure, clean disciplinary history and verified case ' +
+      'results. Rankings are published per city, because a firm is worth comparing against the ' +
+      'firms someone could actually hire instead of it.',
+    subtopics: ['Left-turn collisions', 'Lane changes and blind spots', 'Road and surface hazards',
+                'Car doors and parked vehicles', 'Helmet and head injury claims',
+                'Underinsured motorist claims', 'Catastrophic and amputation injuries',
+                'Passenger and group ride claims'],
+    feeFactLabel: 'No fee unless they win',
+    guide: {
+      heading: 'How to choose a motorcycle accident lawyer',
+      intro:
+        'Two things make this different from a car case, and neither is the vehicle. A rider ' +
+        'walks into a room where a number of the people deciding the case already have a view ' +
+        'about motorcycles, and the injuries are routinely larger than the insurance standing ' +
+        'behind them. A firm that does this work talks about both without being asked.',
+      sections: [
+        {
+          heading: 'The rider starts behind, and the firm has to know it',
+          paragraphs: [
+            'Adjusters and jurors arrive with a picture of who rides and how, and the defence ' +
+            'builds on it: speed, lane position, the decision to be on a motorcycle at all. ' +
+            'None of that is evidence, and all of it shapes the first offer. The counter is ' +
+            'ordinary and specific, which is the licensing, the training course, the years ' +
+            'riding, the gear that was worn and what the other driver actually did.',
+            'Ask how the firm handles that assumption, and whether it has picked a jury in a ' +
+            'motorcycle case. A firm that has will describe the questions it asks in selection. ' +
+            'A firm that has not will tell you the crash was not your fault, which everybody ' +
+            'already agrees on.',
+          ],
+        },
+        {
+          heading: 'The injury is usually bigger than the policy',
+          paragraphs: [
+            'A rider has no cage, no airbag and no crumple zone, so the same collision that ' +
+            'dents a bumper produces an orthopaedic injury, a head injury or an amputation. ' +
+            'State minimum liability coverage was not written with that in mind, and in a ' +
+            'serious case the at-fault driver\'s policy is exhausted long before the medical ' +
+            'bills are.',
+            'So the real work is finding the rest of the coverage: the rider\'s own ' +
+            'underinsured motorist cover, an umbrella policy, a commercial policy if the driver ' +
+            'was working, a dram shop claim, or a municipality where the road surface caused ' +
+            'the crash. That search happens in the first weeks or it does not happen.',
+          ],
+          list: [
+            'How do you find coverage beyond the driver\'s liability policy?',
+            'Have you tried a motorcycle case, and how did you handle jury selection?',
+            'What do you do with my bike and my gear, and when can they be released?',
+            'Who inspects the motorcycle, and at whose cost?',
+            'If I was not wearing a helmet, what does that change in this state?',
+          ],
+        },
+        {
+          heading: 'The bike and the gear are evidence before they are property',
+          paragraphs: [
+            'Damage patterns on the motorcycle, the scuffing on a helmet and the tear in a ' +
+            'jacket establish speed, angle and impact in a way no witness can. All of it is ' +
+            'commonly repaired, scrapped or quietly released by a tow yard while the claim is ' +
+            'still being set up.',
+            'A firm doing this properly asks where the bike is on the first call, puts a hold ' +
+            'on it, and arranges an inspection before anybody authorises repairs. Ask that ' +
+            'question back, and notice whether the answer is specific.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'The helmet question is about damages, not about fault',
+        text:
+          'Helmet rules differ by state, and where going without one matters it generally ' +
+          'reduces what is recoverable for a head injury rather than excusing the driver who ' +
+          'caused the crash. It is also an argument the defence raises early and loudly, so it ' +
+          'is worth asking a firm how it is handled where you live.',
+      },
+    },
+    faq: [
+      {
+        q: 'Is a motorcycle case really different from a car accident case?',
+        a: 'In the two ways that decide what it is worth. The injuries are more severe for the ' +
+           'same impact, so available insurance runs out sooner and the search for other ' +
+           'coverage matters more. And the rider faces an assumption about motorcycles that a ' +
+           'driver never faces, which affects the first offer and the jury.',
+      },
+      {
+        q: 'I was not wearing a helmet. Do I still have a claim?',
+        a: 'Yes, and in most places the question affects damages rather than liability. The ' +
+           'rules vary by state: some require a helmet, some require one only below a certain ' +
+           'age, and the effect on a head injury claim differs accordingly. It does not hand ' +
+           'the driver who turned across your path a defence to causing the collision.',
+      },
+      {
+        q: 'What if the driver who hit me has almost no insurance?',
+        a: 'That is the common case rather than the unusual one, and it is why underinsured ' +
+           'motorist coverage on your own policy matters so much. Other sources can include an ' +
+           'umbrella policy, an employer\'s commercial policy if the driver was working, a bar ' +
+           'that overserved, or a road authority. Ask a firm how it goes looking.',
+      },
+      {
+        q: 'What should happen to my motorcycle?',
+        a: 'Nothing, until it has been photographed and inspected. The damage is evidence of ' +
+           'speed and angle, and tow yards release or dispose of bikes on their own schedule. ' +
+           'Tell the firm where it is on the first call, and keep the helmet and the gear.',
+      },
+    ],
+    plannedGuides: ['Helmet laws by state, and what they do to a claim',
+                    'Finding coverage when the driver has the state minimum',
+                    'Left-turn collisions and the right of way',
+                    'What the damage to the bike proves'],
+  },
+  'nursing-home-abuse': {
+    name: 'Nursing Home Abuse',
+    abbr: 'nursing home',
+    icon: 'users',
+    title: 'Nursing Home Abuse Lawyers: Rankings and Hiring Guide',
+    description:
+      'How to choose a nursing home abuse lawyer: the inspection record that exists before ' +
+      'discovery does, and the clause in the admission paperwork.',
+    lede:
+      'Nursing home abuse lawyers handling pressure ulcers, falls, malnutrition, medication ' +
+      'errors, elopement and deaths in nursing homes and assisted living facilities. Every ' +
+      'firm is checked for active licensure, clean disciplinary history and verified case ' +
+      'results. Rankings are published per city, because a firm is worth comparing against the ' +
+      'firms someone could actually hire instead of it.',
+    subtopics: ['Pressure ulcers and bedsores', 'Falls and fractures',
+                'Malnutrition and dehydration', 'Medication errors',
+                'Elopement and wandering', 'Understaffing claims',
+                'Physical and financial abuse', 'Assisted living and memory care'],
+    feeFactLabel: 'No fee unless they win',
+    guide: {
+      heading: 'How to choose a nursing home abuse lawyer',
+      intro:
+        'This is a regulated industry, which changes where a case starts. Before anybody files ' +
+        'anything there is an inspection history, a staffing record and a set of federal ' +
+        'standards the facility agreed to meet, all of it public. A firm that works in this ' +
+        'area reads that first. One that does not will treat a bedsore as a slip and fall with ' +
+        'a longer medical record.',
+      sections: [
+        {
+          heading: 'The record exists before the case does',
+          paragraphs: [
+            'Facilities that take Medicare or Medicaid are surveyed, cited and rated, and the ' +
+            'surveys say what inspectors found and when. Staffing is reported against the ' +
+            'hours a facility actually paid for. A pattern of citations for the same failure ' +
+            'that injured your relative is the strongest material in the case and it is ' +
+            'available on the first day.',
+            'Ask a firm what it already knows about the facility. The answer separates one ' +
+            'that has sued this operator before from one that is about to learn on your case.',
+          ],
+        },
+        {
+          heading: 'The admission paperwork may decide where this is heard',
+          paragraphs: [
+            'Admission agreements commonly contain an arbitration clause, signed during the ' +
+            'worst week a family has had, often by a relative who was never given authority to ' +
+            'sign away anybody\'s right to a jury. Whether that clause binds the resident is ' +
+            'frequently the first fight in the case, and it is fought before any of the facts ' +
+            'about care are reached.',
+            'A firm that does this work will ask for the admission packet early and tell you ' +
+            'plainly whether it intends to challenge the clause and on what basis. Find the ' +
+            'paperwork before the first meeting if you can.',
+          ],
+          list: [
+            'Have you sued this facility or its operator before?',
+            'What do the inspection surveys and staffing data show about it?',
+            'Is there an arbitration clause, and who signed it?',
+            'Which experts do you use for wound care and geriatric nursing?',
+            'Who actually owns this home, and is the operator worth suing?',
+          ],
+        },
+        {
+          heading: 'The chart is the evidence, and the facility wrote it',
+          paragraphs: [
+            'Wound staging, turning schedules, weight logs, fall risk assessments and ' +
+            'medication administration records are where neglect shows up, and the gaps matter ' +
+            'as much as the entries. A wound that appears in the chart already at stage three ' +
+            'was not being watched. Weight recorded once a month in a resident losing it is ' +
+            'the same point.',
+            'This is expert work, usually a wound care nurse and a geriatric nursing expert ' +
+            'rather than a treating doctor, and it costs money before anything is recovered. ' +
+            'Ask who the firm uses and who funds it while the case runs.',
+          ],
+        },
+        {
+          heading: 'Find out who you are actually suing',
+          paragraphs: [
+            'The home on the sign is often one company, the building another, the management ' +
+            'another, and the owner above all of them somewhere else. The entity on the ' +
+            'admission agreement can hold almost nothing, so a firm that stops at the facility ' +
+            'name can win and collect very little.',
+            'A firm that knows the industry traces the ownership early and says what insurance ' +
+            'and what assets sit behind the claim. That conversation should happen before the ' +
+            'case is filed, not after a judgment.',
+          ],
+        },
+      ],
+      callout: {
+        title: 'A pressure ulcer is rarely an accident',
+        text:
+          'Most of them are preventable with repositioning, nutrition and skin checks, which is ' +
+          'why they are treated as a quality indicator by regulators rather than as an ' +
+          'unfortunate outcome. A facility that cannot show the turning schedule it says it ' +
+          'kept is in a difficult position on exactly the point it has to prove.',
+      },
+    },
+    faq: [
+      {
+        q: 'Is a bedsore automatically neglect?',
+        a: 'Not automatically, but it is close to the centre of what these cases are about. ' +
+           'Pressure ulcers are largely preventable with repositioning, nutrition and skin ' +
+           'checks, and regulators treat them as a measure of care quality. The question a case ' +
+           'turns on is what the facility did and recorded, not whether a wound can ever occur.',
+      },
+      {
+        q: 'What records can a family get, and when?',
+        a: 'The resident, or the person holding their authority, is generally entitled to the ' +
+           'medical and care records, and the facility\'s inspection history is public before ' +
+           'anybody asks it for anything. Request the complete chart in writing and keep the ' +
+           'admission packet, including anything signed on the day of admission.',
+      },
+      {
+        q: 'My relative has died. Is it too late?',
+        a: 'No. These claims commonly continue as a wrongful death claim, a survival claim for ' +
+           'what the resident suffered before death, or both, brought by the estate rather than ' +
+           'by the family directly. Who may bring it and how long they have are matters of ' +
+           'state law, so ask early rather than late.',
+      },
+      {
+        q: 'We signed an arbitration agreement on admission. Does that end it?',
+        a: 'Not on its own. Whether such a clause binds the resident depends on who signed, ' +
+           'what authority they held and how the agreement was presented, and challenging it is ' +
+           'routine work in this practice. Bring the admission paperwork to the first meeting ' +
+           'and ask the firm directly what it intends to do about the clause.',
+      },
+    ],
+    plannedGuides: ['Reading a facility\'s inspection survey',
+                    'Staffing data, and what the numbers have to clear',
+                    'Arbitration clauses in admission agreements',
+                    'Who owns the home, and who is worth suing'],
+  },
 };
 
 /** Slugs with a hub page, in the order the site lists them. */

@@ -367,6 +367,73 @@ PRACTICES = {
             r"duty\s+of\s+care\s+owed|hazard(?:ous)?\s+condition|wet\s+floor|"
             r"responsabilidad\s+del\s+(?:due[nñ]o|propietario)", re.I),
     },
+    # Two candidate areas, added to be counted before they are opened.
+    #
+    # Nothing in the pipeline has ever asked a firm about either, so the only firms the site
+    # has ever recorded as practising them were two New York profiles typed in by hand, and
+    # both claims were removed in October for being a ranking page with one firm on it. The
+    # question is not whether a motorcycle practice exists; it is how many of the 1,412
+    # published firms publish a page about one, which no number here has ever answered.
+    #
+    # The patterns are written to the same standard as the five above so the count they produce
+    # is the count the site would get on the day the area opens. If the count comes back in
+    # single digits these two entries are the whole cost of having asked.
+    "motorcycle-accidents": {
+        "slug": re.compile(r"motorcycle[-_]?(?:accident|crash|injur|wreck|collision)|"
+                           r"motorbike|motorcyclist|biker[-_]?(?:accident|injur|crash)|"
+                           r"accidente[-_]?de[-_]?moto", re.I),
+        "title": re.compile(r"motorcycle\s+(?:accident|crash|injur|wreck|collision)|"
+                            r"\bmotorcycle\s+lawyer|motorbike\s+(?:accident|crash)|"
+                            r"biker\s+(?:accident|injur)|"
+                            r"accidente\s+de\s+motocicleta|accidente\s+de\s+moto", re.I),
+        # What a page written about a motorcycle case argues, and a car accident page does not.
+        # The helmet statute and the defence built on it, the injuries a rider gets and a
+        # driver does not, and the two manoeuvres every one of these pages describes. "Helmet"
+        # alone would also sit on a bicycle page, which is why the title has to match first:
+        # this is asking whether anybody wrote the page, not what it is about.
+        "corroborating": re.compile(
+            r"helmet|road\s+rash|lane[-\s]splitting|laying\s+(?:the|it|his|her)\s+bike\s+down|"
+            r"left[-\s]turn(?:ing)?\s+(?:driver|vehicle|car)|failed\s+to\s+yield|"
+            r"right[-\s]of[-\s]way|motorcyclist|\brider\b|blind\s+spot|"
+            r"motorcycle\s+endorsement|high[-\s]side|low[-\s]side|"
+            r"casco|motociclista", re.I),
+    },
+    # Elder abuse sits here rather than beside it, the way title work sits inside real estate: a
+    # family moving a parent out of a facility is looking for an injury lawyer. "Elder law" on
+    # its own is deliberately absent from all three patterns. It is a different practice, the
+    # estate planning and Medicaid one, and a firm that publishes an elder law page has not told
+    # anybody it sues nursing homes.
+    "nursing-home-abuse": {
+        "slug": re.compile(r"nursing[-_]?home[-_]?(?:abuse|neglect|negligence|injur|"
+                           r"lawyer|attorney|claim)|nursing[-_]?home\b|"
+                           r"elder(?:ly)?[-_]?(?:abuse|neglect)|"
+                           r"(?:assisted[-_]?living|long[-_]?term[-_]?care|residential[-_]?care)"
+                           r"[-_]?(?:abuse|neglect|negligence|injur)|"
+                           r"bed[-_]?sore|pressure[-_]?(?:ulcer|sore)|"
+                           r"abuso[-_]?(?:de[-_]?)?(?:ancianos|adultos[-_]?mayores)|"
+                           r"negligencia[-_]?en[-_]?(?:asilos|hogares)", re.I),
+        "title": re.compile(r"nursing\s+home\s+(?:abuse|neglect|negligence|injur|lawyer|"
+                            r"attorney|claim)|elder(?:ly)?\s+(?:abuse|neglect)|"
+                            r"(?:assisted\s+living|long[-\s]term\s+care|residential\s+care)"
+                            r"\s+(?:abuse|neglect|negligence)|"
+                            r"bed\s*sores?|pressure\s+(?:ulcer|sore)s?|"
+                            r"abuso\s+(?:de\s+)?(?:ancianos|adultos\s+mayores)|"
+                            r"negligencia\s+en\s+(?:asilos|hogares\s+de\s+ancianos)", re.I),
+        # A nursing home case is a regulatory case before it is a negligence case, and the page
+        # says so. Residents' rights, the staffing the facility owed and did not provide, the
+        # ombudsman a family is told to call, and the four injuries that are the whole of this
+        # docket: pressure ulcers, falls, dehydration and wandering out of an unlocked door.
+        "corroborating": re.compile(
+            r"bed\s*sore|pressure\s+(?:ulcer|sore)|decubitus|"
+            r"resident[s']{0,2}\s+(?:rights|bill\s+of\s+rights)|ombudsman|"
+            r"understaff|staffing\s+(?:level|ratio|shortage)|"
+            r"(?:department|dept\.?)\s+of\s+(?:health|public\s+health)|"
+            r"elopement|wander(?:ing|ed)\s+off|unattended|"
+            r"malnutrition|dehydration|failure\s+to\s+thrive|"
+            r"medication\s+error|fall\s+risk|restraint|"
+            r"assisted\s+living|long[-\s]term\s+care\s+facilit|"
+            r"llagas|[úu]lceras\s+por\s+presi[óo]n|asilo\s+de\s+ancianos", re.I),
+    },
 }
 
 # A link in a page-wide list of every area of law the firm might take. Those lists are the reason
