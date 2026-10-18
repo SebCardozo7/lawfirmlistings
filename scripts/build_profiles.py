@@ -695,7 +695,7 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
 # business search sets Disallow: / , so the gate is not pending, it is unavailable from any source
 # we have. Telling a reader "not yet checked" about a check that has no source is the same shape
 # of claim as a score we never measured.
-OPEN_REGISTER_STATES = {"NY"}
+OPEN_REGISTER_STATES = {"NY", "CA"}
 
 # The states where a script in this repo reads a business register and can settle G3. Everywhere
 # else the gate has no source, and saying so is the whole point of this set.

@@ -5,7 +5,7 @@
   "website": "https://perrypi.com/",
   "domain": "perrypi.com",
   "phone": "(760) 633-2233",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -508,13 +508,13 @@
   },
   "score": {
     "total": 67,
-    "tier": "Verified",
-    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (7/25).",
-    "computed_at": "2026-10-12",
+    "tier": "Certified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (8/25).",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 7,
+        "score": 13,
         "max": 25,
         "subs": [
           {
@@ -528,10 +528,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 6,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "2 of 2 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -680,28 +680,28 @@
         ]
       }
     },
-    "floor_abc": 38,
+    "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 3,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.0 available",
-        "D2 Search authority: +4 available"
+        "D2 Search authority: +4 available",
+        "A2 Experience: +3 available"
       ]
     },
-    "raw": 53.4,
-    "assessed": 80,
+    "raw": 59.4,
+    "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.802,
+    "floor_abc_pct": 0.781,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

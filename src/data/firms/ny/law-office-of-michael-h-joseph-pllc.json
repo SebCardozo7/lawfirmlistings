@@ -5,7 +5,7 @@
   "website": "https://www.newyorktriallawyers.org/",
   "domain": "newyorktriallawyers.org",
   "phone": "(212) 858-0503",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "criminal-defense",
@@ -392,20 +392,20 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (10/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 21,
+        "score": 22,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 30.5 years since admission across 2 of 2 named attorneys (longest 35, shortest 26) · NYS Attorney Registration database"
@@ -565,11 +565,11 @@
         ]
       }
     },
-    "floor_abc": 44,
+    "floor_abc": 46,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -578,10 +578,10 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 61.0,
+    "raw": 62.0,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.781,
+    "floor_abc_pct": 0.798,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

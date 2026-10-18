@@ -5,7 +5,7 @@
   "website": "https://munley.com/",
   "domain": "munley.com",
   "phone": "(570) 865-4699",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -702,9 +702,9 @@
   },
   "score": {
     "total": 66,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -793,7 +793,7 @@
             "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "30 of 55 sampled reviews are from the last 12 months (newest 2026-07-02) · a sample of five per business listing, not every review"
+            "evidence": "29 of 55 sampled reviews are from the last 12 months (newest 2026-07-02) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -876,10 +876,10 @@
     },
     "floor_abc": 27,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 4,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",

@@ -5,7 +5,7 @@
   "website": "https://seitelman.com/",
   "domain": "seitelman.com",
   "phone": "(212) 962-2626",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -525,20 +525,20 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 65,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (8/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 13,
+        "score": 14,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 29.4 years since admission across 5 of 16 named attorneys (longest 46, shortest 6) · NYS Attorney Registration database"
@@ -698,12 +698,12 @@
         ]
       }
     },
-    "floor_abc": 42,
+    "floor_abc": 43,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 6,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 13,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "D2 Search authority: +6 available",
@@ -711,10 +711,10 @@
         "E1 Free consult & fee transparency: +5 available"
       ]
     },
-    "raw": 57.0,
+    "raw": 58.0,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.737,
+    "floor_abc_pct": 0.754,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

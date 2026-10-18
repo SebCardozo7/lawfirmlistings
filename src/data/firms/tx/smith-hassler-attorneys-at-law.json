@@ -5,7 +5,7 @@
   "website": "https://www.smithandhassler.com/",
   "domain": "smithandhassler.com",
   "phone": "(877) 777-1529",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -453,9 +453,9 @@
   },
   "score": {
     "total": 67,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -627,9 +627,9 @@
     },
     "floor_abc": 32,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 3,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [

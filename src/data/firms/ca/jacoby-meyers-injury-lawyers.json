@@ -5,7 +5,7 @@
   "website": "https://www.jacobyandmeyers.com/",
   "domain": "jacobyandmeyers.com",
   "phone": "(619) 789-5497",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -688,14 +688,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 66,
-    "tier": "Verified",
+    "total": 65,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar E (5/15).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 10,
+        "score": 14,
         "max": 25,
         "subs": [
           {
@@ -709,10 +709,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 4.5,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "33 of 38 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -861,28 +861,28 @@
         ]
       }
     },
-    "floor_abc": 37,
+    "floor_abc": 42,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 4,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 13,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.0 available",
-        "E1 Free consult & fee transparency: +5 available"
+        "E1 Free consult & fee transparency: +5 available",
+        "A6 Roster verifiability: +4.5 available"
       ]
     },
-    "raw": 53.0,
-    "assessed": 80,
+    "raw": 57.5,
+    "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.771,
+    "floor_abc_pct": 0.728,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

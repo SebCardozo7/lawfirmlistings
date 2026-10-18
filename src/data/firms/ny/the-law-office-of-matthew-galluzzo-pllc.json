@@ -5,7 +5,7 @@
   "website": "https://www.gjllp.com/",
   "domain": "criminal-defense.nyc",
   "phone": "(212) 344-5180",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "criminal-defense",
@@ -306,9 +306,9 @@
   },
   "score": {
     "total": 65,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar E (2/15).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -480,9 +480,9 @@
     },
     "floor_abc": 51,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 5,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 13,
       "floor_met": true,
       "coverage_met": true,
       "path": [

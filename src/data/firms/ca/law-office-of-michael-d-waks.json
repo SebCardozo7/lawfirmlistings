@@ -5,7 +5,7 @@
   "website": "https://www.michaelwaks.com/",
   "domain": "michaelwaks.com",
   "phone": "(562) 206-1939",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -255,20 +255,20 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 66,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-10-16",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 9,
+        "score": 16,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 44.0 years since admission across 1 of 1 named attorneys (longest 44, shortest 44) · NYS Attorney Registration database"
@@ -276,10 +276,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 6,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "1 of 1 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -428,28 +428,28 @@
         ]
       }
     },
-    "floor_abc": 34,
+    "floor_abc": 42,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 6,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.0 available",
-        "B3 Results disclosure: +4 available"
+        "B3 Results disclosure: +4 available",
+        "E3 Languages & accessibility: +4.0 available"
       ]
     },
-    "raw": 46.3,
-    "assessed": 72,
-    "coverage": 0.9,
-    "floor_abc_pct": 0.719,
+    "raw": 53.3,
+    "assessed": 81,
+    "coverage": 0.91,
+    "floor_abc_pct": 0.728,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

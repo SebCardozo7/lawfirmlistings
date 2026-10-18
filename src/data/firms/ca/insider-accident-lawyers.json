@@ -399,14 +399,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 60,
+    "total": 55,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-10-16",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 9,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -420,10 +420,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 1,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "8 of 21 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -572,30 +572,30 @@
         ]
       }
     },
-    "floor_abc": 36,
+    "floor_abc": 37,
     "next_tier": {
       "name": "Certified",
-      "needed": 70,
+      "needed": 65,
       "gap": 10,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
+        "A6 Roster verifiability: +8 available",
         "D1 Website trust & experience: +5.0 available",
         "E1 Free consult & fee transparency: +5 available"
       ]
     },
-    "raw": 43.5,
-    "assessed": 72,
-    "coverage": 0.9,
-    "floor_abc_pct": 0.75,
+    "raw": 44.5,
+    "assessed": 81,
+    "coverage": 0.91,
+    "floor_abc_pct": 0.649,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [
       "G2"
     ],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

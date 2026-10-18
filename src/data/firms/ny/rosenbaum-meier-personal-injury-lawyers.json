@@ -5,7 +5,7 @@
   "website": "https://www.rosenbaumnylaw.com/",
   "domain": "rosenbaumnylaw.com",
   "phone": "(212) 514-5007",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -412,9 +412,9 @@
   ],
   "score": {
     "total": 69,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar E (7/15).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -586,10 +586,10 @@
     },
     "floor_abc": 42,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 9,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +5 available",

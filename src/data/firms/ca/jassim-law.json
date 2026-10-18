@@ -5,7 +5,7 @@
   "website": "https://jassimlaw.com/",
   "domain": "jassimlaw.com",
   "phone": "(858) 524-6140",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -373,14 +373,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 65,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (6/15).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 12,
+        "score": 15,
         "max": 25,
         "subs": [
           {
@@ -394,10 +394,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 3,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "3 of 6 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -546,28 +546,28 @@
         ]
       }
     },
-    "floor_abc": 36,
+    "floor_abc": 39,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 13,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
+        "A6 Roster verifiability: +6 available",
         "B3 Results disclosure: +4 available",
         "D2 Search authority: +4 available"
       ]
     },
-    "raw": 55.0,
-    "assessed": 80,
+    "raw": 58.0,
+    "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.75,
+    "floor_abc_pct": 0.684,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

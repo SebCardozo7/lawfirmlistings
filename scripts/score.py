@@ -71,7 +71,14 @@ PILLAR_MAX = {"A": 25, "B": 15, "C": 20, "D": 25, "E": 15}
 # The states whose attorney register we are permitted to query. Sub-factors and gates
 # derived from a register mean nothing outside this set, and must not be scored there.
 # scripts/build_profiles.py holds the same set for the wording it writes.
-OPEN_REGISTER_STATES = {"NY"}
+#
+# California joined this set thirteen days late. scripts/check_ca_register.py landed in #119 and
+# read the State Bar for 170 firms, and the constant was never told: 908 Californian attorneys
+# carry a bar number we read and A6 threw all of it away, while 109 profiles published the
+# sentence "California publishes no attorney register we can query", which stopped being true
+# the day that script ran. The cost of saying it correctly is that A2 goes from excused to owed
+# for the firms we could not match, and ten of them lose Certified over it.
+OPEN_REGISTER_STATES = {"NY", "CA"}
 
 # The eligibility gates, all five checkable by machine from a public source. G4, "no
 # consumer-protection actions", was removed at v2.0: it asked for a negative across every
@@ -111,7 +118,16 @@ SITE_DERIVED = {"A5", "A6", "B1", "B2", "B3", "D1", "D4", "E1", "E3", "E4"}
 # Thresholds are percentages now, of what we could actually assess. The absolute floors the
 # methodology set, 40, 50 and 55 out of the 65 points in pillars A, B and C, carry across as
 # the same proportions.
-TIERS = [("Elite", 93, 55 / 65), ("Distinguished", 85, 50 / 65), ("Certified", 70, 40 / 65)]
+#
+# Recalibrated against the scale as it behaves. At 93 and 85 the top two rungs had nobody on
+# them and could not have: the best any of 1,412 firms had ever scored was 84, so Distinguished
+# sat one point above the best in the directory and Elite seven above the sum of the best anyone
+# had managed on each factor separately. A podium nobody can stand on is not a strict standard,
+# it is a broken one. 85 and 78 are where the top of the distribution actually thins, at two
+# firms and eight. Certified moving to 65 is the one change here that lowers a bar rather than
+# repairing one: the cliff sits at 65-69, where 124 firms were stacked one band below a line
+# with no realistic path over it.
+TIERS = [("Elite", 85, 55 / 65), ("Distinguished", 78, 50 / 65), ("Certified", 65, 40 / 65)]
 
 # A normalised score is only meaningful over enough of the scale, and is trivially gamed
 # otherwise: a firm with nothing assessed but pillar E could score 90% of it. Certification
@@ -266,7 +282,10 @@ def compute(firm):
              if a.get("admitted_year") and a["admitted_year"] <= TODAY_YEAR]
     if years and "A2" not in A:
         avg = sum(years) / len(years)
-        pts = 9 if avg >= 15 else 7 if avg >= 10 else 5 if avg >= 5 else 2
+        # A2 is declared out of 10 and this ladder stopped at 9, so one point of the hundred
+        # could not be earned by anybody and the top band was reached by 64% of the firms that
+        # have the data, which is not much of a top. A roster averaging 25 years is 28% of them.
+        pts = 10 if avg >= 25 else 9 if avg >= 15 else 7 if avg >= 10 else 5 if avg >= 5 else 2
         out.append(sub("A2", pts, "registry",
                        f"Mean {avg:.1f} years since admission across {len(years)} of {len(attys)} "
                        f"named attorneys (longest {max(years)}, shortest {min(years)}) · "

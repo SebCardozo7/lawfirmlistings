@@ -256,14 +256,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 51,
+    "total": 53,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (3/25).",
-    "computed_at": "2026-10-16",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 7,
+        "score": 13,
         "max": 25,
         "subs": [
           {
@@ -277,10 +277,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 6,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "1 of 1 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -429,28 +429,28 @@
         ]
       }
     },
-    "floor_abc": 30,
+    "floor_abc": 36,
     "next_tier": {
       "name": "Certified",
-      "needed": 70,
-      "gap": 19,
+      "needed": 65,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.5 available",
-        "E1 Free consult & fee transparency: +5 available"
+        "E1 Free consult & fee transparency: +5 available",
+        "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 36.7,
-    "assessed": 72,
-    "coverage": 0.9,
-    "floor_abc_pct": 0.635,
+    "raw": 42.7,
+    "assessed": 81,
+    "coverage": 0.91,
+    "floor_abc_pct": 0.64,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

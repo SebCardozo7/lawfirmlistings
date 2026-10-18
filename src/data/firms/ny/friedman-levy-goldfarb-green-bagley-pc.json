@@ -5,7 +5,7 @@
   "website": "https://friedmanlevy.com/",
   "domain": "friedmanlevy.com",
   "phone": "(212) 307-5800",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -297,10 +297,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 69,
-    "tier": "Verified",
+    "total": 70,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar D (7/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -310,7 +310,7 @@
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 30.0 years since admission across 5 of 6 named attorneys (longest 47, shortest 5) · NYS Attorney Registration database"
@@ -472,9 +472,9 @@
     },
     "floor_abc": 48,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -483,10 +483,10 @@
         "B1 Results published: +3 available"
       ]
     },
-    "raw": 61.3,
+    "raw": 62.3,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.833,
+    "floor_abc_pct": 0.851,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

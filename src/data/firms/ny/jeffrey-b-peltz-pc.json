@@ -5,7 +5,7 @@
   "website": "https://www.aaalawyer.com/",
   "domain": "aaalawyer.com",
   "phone": "(718) 625-0800",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "family-law",
@@ -365,20 +365,20 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 67,
-    "tier": "Verified",
+    "total": 68,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar D (6/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 19,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 42.0 years since admission across 1 of 1 named attorneys (longest 42, shortest 42) · NYS Attorney Registration database"
@@ -538,11 +538,11 @@
         ]
       }
     },
-    "floor_abc": 43,
+    "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 3,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -551,10 +551,10 @@
         "B3 Billing and the retainer disclosed: +4 available"
       ]
     },
-    "raw": 59.5,
+    "raw": 60.5,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.754,
+    "floor_abc_pct": 0.772,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

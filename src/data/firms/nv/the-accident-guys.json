@@ -709,7 +709,7 @@
     "total": 51,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -798,7 +798,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "62 of 85 sampled reviews are from the last 12 months (newest 2026-08-26) · a sample of five per business listing, not every review"
+            "evidence": "61 of 85 sampled reviews are from the last 12 months (newest 2026-08-26) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -882,8 +882,8 @@
     "floor_abc": 19,
     "next_tier": {
       "name": "Certified",
-      "needed": 70,
-      "gap": 19,
+      "needed": 65,
+      "gap": 14,
       "floor_met": false,
       "coverage_met": true,
       "path": [

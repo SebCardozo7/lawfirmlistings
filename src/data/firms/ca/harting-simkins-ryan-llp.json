@@ -268,20 +268,20 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 61,
+    "total": 63,
     "tier": "Verified",
-    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (3/25).",
-    "computed_at": "2026-10-16",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: A; most headroom in pillar D (3/25).",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 12,
+        "score": 19,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 33.0 years since admission across 2 of 2 named attorneys (longest 36, shortest 30) · NYS Attorney Registration database"
@@ -289,10 +289,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 6,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "2 of 2 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -441,28 +441,28 @@
         ]
       }
     },
-    "floor_abc": 34,
+    "floor_abc": 40,
     "next_tier": {
       "name": "Certified",
-      "needed": 70,
-      "gap": 9,
+      "needed": 65,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.5 available",
-        "B3 Results disclosure: +4 available"
+        "B3 Results disclosure: +4 available",
+        "C1 Authentic volume: +4 available"
       ]
     },
-    "raw": 43.7,
-    "assessed": 72,
-    "coverage": 0.9,
-    "floor_abc_pct": 0.698,
+    "raw": 50.7,
+    "assessed": 81,
+    "coverage": 0.91,
+    "floor_abc_pct": 0.711,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

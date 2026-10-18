@@ -5,7 +5,7 @@
   "website": "https://www.bdj.com/",
   "domain": "bdj.com",
   "phone": "(800) 820-1111",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -901,14 +901,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 67,
-    "tier": "Verified",
+    "total": 65,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (4/25).",
-    "computed_at": "2026-10-16",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 10,
+        "score": 14,
         "max": 25,
         "subs": [
           {
@@ -922,10 +922,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 4.5,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "53 of 57 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -1074,28 +1074,28 @@
         ]
       }
     },
-    "floor_abc": 38,
+    "floor_abc": 42,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 3,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 13,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.5 available",
+        "A6 Roster verifiability: +4.5 available",
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 48.5,
-    "assessed": 72,
-    "coverage": 0.9,
-    "floor_abc_pct": 0.792,
+    "raw": 53.0,
+    "assessed": 81,
+    "coverage": 0.91,
+    "floor_abc_pct": 0.746,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   },
   "logo": {

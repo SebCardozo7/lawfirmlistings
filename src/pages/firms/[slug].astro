@@ -371,7 +371,14 @@ const schema = faqPage ? [legalService, faqPage] : legalService;
           {hq && <><dt>Main office</dt><dd>{hq.address.split(',')[0]}, {hq.address.split(',').slice(-1)[0].trim()}</dd></>}
           <dt>Profile</dt><dd>{d.claimed ? `Managed by the firm since ${d.claimed.claimed_at}` : 'Unclaimed'}</dd>
         </dl>
-        {s && <div class="verified-line"><Icon name="check" /> LFL Score {s.total} · {s.tier} · re-verified {s.computed_at}</div>}
+        {/* The card has refused to print a total built from too little of the scale since it was
+            written, and this line printed one anyway. The number is a percentage of what we could
+            assess, so the less we assessed the easier it is to score high on it: one firm here
+            reads 58 from a fifth of the scale, and the same firm reads 100 from a twentieth once
+            another factor leaves its denominator. Same rule in both places now. */}
+        {s && (s.comparable !== false
+          ? <div class="verified-line"><Icon name="check" /> LFL Score {s.total} · {s.tier} · re-verified {s.computed_at}</div>
+          : <div class="verified-line"><Icon name="check" /> Not scored · {Math.round((s.coverage ?? 0) * 100)}% of the scale could be measured · {s.tier}</div>)}
       </div>
       <div class="panel panel--ink">
         <h4>Compare with similar firms</h4>
