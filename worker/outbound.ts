@@ -437,36 +437,41 @@ export function listedNoticeBody(f: Listed, env: OutboundEnv): { subject: string
       '  your own site names. If your attorneys are listed somewhere we did not find, point us',
       '  at the page.',
       '',
-      'What taking the listing changes:',
+      'What a claimed profile gives you, at no charge:',
       '',
-      // Named field by field, because "manage your profile" is what every directory says and
-      // it tells a partner nothing. These are the inputs on /claim/profile, in the order the
-      // page puts them, plus the three pages beside it. Practice areas used to be in this
-      // sentence and are not in the panel, so they are out of it.
-      '  **You edit the entry instead of writing to us.** Your phone number, up to four office',
-      '  addresses, the languages your firm works in, how you charge, whether the first',
-      '  consultation is free, and your availability: a 24/7 intake line, hospital visits, home',
-      '  visits. A box for anything else, including a sub-factor you want to appeal.',
+      // Taken from PRODUCTS in src/data/listing.ts, which is the authority on what is free and
+      // what is not. An earlier draft of this message put the whole panel behind the fee, which
+      // was both wrong and the worse way round: the free half is the half that makes the
+      // directory accurate, and charging for it would be charging a firm to correct us.
+      '  **You edit your own details.** Your phone number, up to four office addresses, the',
+      '  languages your firm works in, how you charge, whether the first consultation is free,',
+      '  and your availability: a 24/7 intake line, hospital visits, home visits.',
       '',
-      '  **Three pages beside it.** Your logo, which you can replace whenever you rebrand. The',
-      '  client reviews you want quoted. Case results, filed with the docket or index number',
-      '  that lets anybody check them against the court record.',
+      '  **You file case results with their docket or index number**, which is the only kind',
+      '  this directory marks verified, and we look each one up.',
       '',
-      '  **Every change is read by a person before it goes live**, usually the same day.',
+      '  **You see every sub-score with the evidence under it**, and you can appeal any of them.',
       '',
-      '  **Your link becomes a followed one**, from your profile and from every card your firm',
+      'The annual listing adds three things to that:',
+      '',
+      '  **A followed link to your site**, from your profile and from every card your firm',
       '  appears in across the directory.',
       '',
-      '  **Nothing about the score changes.** The points, the gates and the tier are measured',
-      '  the same way for a firm that pays and a firm that does not, and no part of them is for',
-      '  sale. This buys control of the entry, not a better place in it.',
+      '  **Your own logo**, in place of your initials.',
       '',
-      'It is an annual fee. Ask and we will send the figure the same day, together with where',
-      `${f.firm} stands against each of the five eligibility checks.`,
+      '  **The client reviews you want quoted**, read by us before they appear.',
       '',
-      // Label on its own line, URL under it: emailhtml.ts turns exactly that shape into the
-      // one button in the message. It points at the form the Worker already answers, so the
-      // price arrives through the path that was built for it instead of in a cold email.
+      'Neither one moves the score. The points, the gates and the tier are measured the same way',
+      'for a firm that pays and a firm that does not, and no part of them is for sale.',
+      '',
+      'Every change is read by a person before it goes live, usually the same day.',
+      '',
+      // Claiming is the free thing, so the ask is to claim; the figure only matters to a firm
+      // that wants the three paid additions, and it is offered rather than pushed.
+      'Claiming costs nothing and takes one message. We reply the same day with your sign-in,',
+      'with where your firm stands against each of the five eligibility checks, and with the',
+      'annual figure if you want the link, the logo and the reviews as well.',
+      '',
       'Claim your profile:',
       'https://lawfirmlistings.com/list-your-firm/#form',
       '',
