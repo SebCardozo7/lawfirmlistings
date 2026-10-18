@@ -226,3 +226,28 @@ export const STEPS: Step[] = [
     ],
   },
 ];
+
+/**
+ * What the annual listing adds to a claimed profile, derived rather than retyped.
+ *
+ * The free half and the paid half were restated by hand in four places, and every one of them
+ * got it backwards: the panel, the corrections and the scorecard were described as the thing
+ * money buys, when they come with a claimed profile and the fee adds a link, a logo and the
+ * quoted reviews. Prose cannot be type-checked, so anything that needs this split now reads it
+ * from here and there is one copy of it.
+ */
+export const ANNUAL_ADDS = (PRODUCTS.find(p => p.name === 'Annual listing')?.includes ?? [])
+  .filter(line => !/^Everything a claimed profile/i.test(line));
+
+/** The same, as a sentence: "a followed link, your logo and the reviews you want quoted". */
+export const annualAddsSentence = (): string => {
+  // Each line is written to stand alone in a bullet, so it starts with a capital. Dropped into
+  // the middle of a sentence they read "adds a dofollow link, Your own logo and The client
+  // reviews", so the first letter comes down. None of them begins with a proper noun.
+  const short = ANNUAL_ADDS.map((line) => {
+    const head = line.split(',')[0].trim();
+    return head.charAt(0).toLowerCase() + head.slice(1);
+  });
+  return short.length < 2 ? short.join('')
+    : `${short.slice(0, -1).join(', ')} and ${short[short.length - 1]}`;
+};

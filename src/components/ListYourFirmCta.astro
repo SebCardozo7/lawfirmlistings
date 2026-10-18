@@ -1,0 +1,68 @@
+---
+import { annualAddsSentence } from '../data/listing';
+
+/**
+ * The invitation to a firm reading a page about its own market.
+ *
+ * Outside the header and the footer this site asked nobody for anything. A city page ranking
+ * 142 Los Angeles firms is read by those firms, and it carried no way for one of them to act;
+ * the same was true of every practice page and every city-and-practice ranking, which is 146
+ * pages where the most interested reader had nowhere to go.
+ *
+ * One component rather than four copies, because the sentence it makes has to stay true in all
+ * of them and four copies is four chances for it to stop being true in one. Only the heading
+ * changes, from a place and a practice, and never from a number: a count would go stale the
+ * first time a market grows and nothing here would notice.
+ */
+interface Props {
+  /** A city, as a reader would say it: "Los Angeles". */
+  place?: string;
+  /** A practice, lower case and plural the way the data holds it: "car accidents". */
+  practice?: string;
+  tint?: boolean;
+}
+const { place, practice, tint = true } = Astro.props;
+
+// Two nouns glued with "in" made "a law firm in car accidents in Los Angeles" on all 115
+// city-and-practice pages. A practice is something a firm handles, not somewhere it is.
+const heading = practice && place ? `Do you handle ${practice} in ${place}?`
+  : practice ? `Do you handle ${practice}?`
+  : place ? `Do you run a law firm in ${place}?`
+  : 'Do you run a law firm?';
+---
+<section class={`section cta-band${tint ? ' section--tint' : ''}`}>
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>{heading}</h2>
+        <p>
+          We list firms whether they ask us to or not, and everything on a profile is read from
+          the outside: the firm's own site, its Google listings, its state's attorney register.
+          That means we get things wrong, and the person who can see it is the firm.
+          <b> Claiming your profile is free</b>, and so is every correction. The annual listing
+          adds {annualAddsSentence()}. Neither moves a single point of the score.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn--primary" href="/list-your-firm/#form">List your firm</a>
+        <a class="btn btn--ghost" href="/methodology/">How we measure</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band .cta-inner { display: grid; gap: 24px; }
+  .cta-band h2 { margin: 0 0 12px; font-size: clamp(1.3rem, 2.4vw, 1.75rem); }
+  .cta-band p { margin: 0; max-width: 64ch; color: var(--muted); line-height: 1.62; }
+  .cta-band p b { color: var(--ink); font-weight: 600; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  @media (min-width: 900px) {
+    .cta-band .cta-inner {
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+    .cta-actions { flex-direction: column; }
+  }
+</style>

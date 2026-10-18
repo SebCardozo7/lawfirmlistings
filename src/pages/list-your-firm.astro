@@ -121,6 +121,125 @@ const subject = 'List your firm';
   </div>
 </section>
 
+{/* The product, shown rather than described. This page sold an annual listing for weeks with
+    no picture of the thing being sold and no sentence naming a single field of it, which is
+    the one failure a page like this cannot afford: a firm arriving here could read the price
+    and still not know what it would be buying. The screenshots are a real panel on a real
+    profile, not a mock-up, and the captions name the actual inputs. */}
+<section class="section" id="panel">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">What you get</span>
+        <h2 style="margin-top:12px">Your panel</h2>
+      </div>
+    </div>
+    <div class="narrow prose">
+      <p>
+        Everything on your profile today is what we could read from the outside: your website,
+        your Google listings, your state's attorney register, the court record where a result
+        carries a docket number. We get things wrong, and the ones we get wrong are the ones
+        only you can see. <b>The panel is where a guess of ours becomes a fact of yours.</b>
+      </p>
+      <p>
+        <b>Claiming it is free</b>, and most of what follows comes with a claimed profile: the
+        corrections, the case results, every sub-score and the evidence under it. The annual
+        listing adds three things on top, and they are named where they appear below.
+      </p>
+      <p>
+        What neither one buys is the score. It, the eligibility gates and the tier are measured
+        the same way whether you pay or not, and a claimed profile is read by the same crawler
+        as an unclaimed one.
+      </p>
+    </div>
+
+    <div class="tour">
+      <figure>
+        <img src="/panel/dashboard.jpg" alt="The panel dashboard, showing the score, the link status and what is under review"
+             width="910" height="332" loading="lazy" decoding="async" />
+        <figcaption>
+          <b>Where you stand, on one screen.</b> Your score and tier, whether your outbound link
+          is followed, how many submissions are with us, and how many offices are published.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="/panel/edit-profile.jpg" alt="The edit profile form, with phone, offices, languages, fee model and availability"
+             width="910" height="685" loading="lazy" decoding="async" />
+        <figcaption>
+          <b>The facts about your firm, in your hands.</b> Your phone number, up to four office
+          addresses, the languages you actually work in, how you charge, whether the first
+          consultation is free, and your availability: a 24/7 intake line, hospital visits, home
+          visits. Plus a box for anything else, including a sub-factor you want to appeal.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="/panel/your-score.jpg" alt="The score page, showing each eligibility gate and the three actions worth the most points"
+             width="910" height="685" loading="lazy" decoding="async" />
+        <figcaption>
+          <b>Every point, and what would move it.</b> Each eligibility gate with its evidence,
+          including the ones we could not check and which count neither way. Underneath, the
+          three actions worth the most points to your firm specifically. Every one of them is
+          something you publish on your own site, and none of them is something you buy.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="/panel/case-results.jpg" alt="The case results form, asking for the docket or index number"
+             width="910" height="571" loading="lazy" decoding="async" />
+        <figcaption>
+          <b>Results that can be checked.</b> A figure on your own site is counted and never
+          confirmed. Send one with its docket or index number and we look it up, and your profile
+          says verified instead of claimed.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="/panel/logo.jpg" alt="The logo page, showing the current mark and an upload field"
+             width="910" height="403" loading="lazy" decoding="async" />
+        <figcaption>
+          <b>Your mark, not your initials.</b> We read your logo off your own site where we can
+          find one. Where we cannot, or where you rebrand, you replace it here.
+          <em>Part of the annual listing.</em>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="narrow prose" style="margin-top:36px">
+      <p>
+        A person reads every change before it goes live, usually the same day. That is slower
+        than a form that publishes itself, and it is the reason a reader can trust what a claimed
+        profile says.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tour { display: grid; gap: 44px; margin-top: 40px; }
+  .tour figure { margin: 0; }
+  .tour img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--line); border-radius: var(--r);
+    box-shadow: 0 28px 60px -40px #0a0a0c66;
+  }
+  .tour figcaption {
+    margin: 16px auto 0; max-width: 62ch;
+    font-size: .98rem; line-height: 1.62; color: var(--muted);
+  }
+  .tour figcaption b { color: var(--ink); font-weight: 600; }
+  @media (min-width: 900px) {
+    .tour { gap: 56px; }
+    .tour figure {
+      display: grid; grid-template-columns: 1.35fr 1fr;
+      gap: 32px; align-items: center;
+    }
+    .tour figure:nth-child(even) img { order: 2; }
+    .tour figcaption { margin: 0; }
+  }
+</style>
+
 <section class="section" id="form">
   <div class="narrow">
     <span class="eyebrow">Get in touch</span>

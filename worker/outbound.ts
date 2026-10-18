@@ -352,3 +352,136 @@ export async function drainFollowUps(env: OutboundEnv): Promise<{ sent: number; 
   }
   return { sent, failed };
 }
+
+/** A listed firm, as the notice needs it. Nothing here is asked of the firm; it is all measured. */
+export interface Listed {
+  firm: string;
+  slug: string;
+  tier: string;
+  total: number;
+  city?: string;
+  state?: string;
+  openGates?: number;
+}
+
+/**
+ * The one email we would send to a firm that never wrote to us.
+ *
+ * Everything else here answers an enquiry. This does not, and that difference is the whole
+ * design. We published a page about somebody's business without asking them, which is ordinary
+ * for a directory and is still a thing they are entitled to be told. So the message is the
+ * telling: your profile exists, here is what it says, here is where you correct it.
+ *
+ * What it deliberately does not do is sell. There is no price in it, no payment link and no
+ * list of benefits, because the first message to a stranger that opens with a figure is an
+ * advertisement wearing a notice's clothes, and this directory's whole argument is that it is
+ * not for sale. The paid listing is one plain sentence near the end with a link to the page
+ * that explains it, which is disclosure rather than a pitch.
+ *
+ * Two things it carries that the enquiry emails do not need, because this one is unsolicited:
+ * the postal address of the company, and a way to be left alone that works. Both are required
+ * of a commercial email in the United States and both are cheap, so they are here whether or
+ * not a regulator would call this message commercial.
+ */
+export function listedNoticeBody(f: Listed, env: OutboundEnv): { subject: string; text: string } {
+  const profile = `https://lawfirmlistings.com/firms/${f.slug}/`;
+  const where = [f.city, f.state].filter(Boolean).join(', ');
+  const certified = ['Certified', 'Distinguished', 'Elite'].includes(f.tier);
+  return {
+    // Says what the message is about and nothing else. Not "congratulations", which this is
+    // not, and not the score, which belongs in the message rather than in a subject line that
+    // would read as a banner and land in Promotions the way the old pitch did.
+    subject: `Your firm's profile on Law Firm Listings`,
+    text: [
+      `Dear ${f.firm} team,`,
+      '',
+      'We publish a directory of US law firms and we have a profile for your firm. You did not',
+      'ask us to, and we did not ask you: everything on it is read from your own website and',
+      'from public records, the way a directory entry is written. We are writing because a',
+      'public page about your practice exists and you should be able to see it and correct it.',
+      '',
+      'Your profile:',
+      profile,
+      '',
+      certified
+        ? `| ${f.firm} is LFL ${f.tier}`
+        : `| ${f.firm} is listed${where ? ` in ${where}` : ''}`,
+      certified
+        ? `| ${f.total} of 100${where ? `, ${where}` : ''}, read from public records`
+        : `| Scored ${f.total} of 100, read from public records`,
+      '',
+      certified
+        ? 'That tier is not something you bought or applied for, and it is not something we can'
+        : 'The score is not something you bought or applied for, and it is not something we can',
+      'sell you. Every gate and every weight behind it is published in full at',
+      'https://lawfirmlistings.com/methodology/',
+      '',
+      // Wrapped by hand like every other block here, because the text half is read in a
+      // monospaced window by somebody's mail client and a 123-character line is a scroll bar.
+      f.openGates === 1
+        ? 'There is one check we could not complete for your firm. The profile says which,'
+        : f.openGates ? `There are ${f.openGates} checks we could not complete for your firm.`
+        : null,
+      f.openGates === 1
+        ? 'and why, and it is not counted against you.'
+        : f.openGates ? 'The profile says which, and why, and none of them is counted against you.'
+        : null,
+      f.openGates ? '' : null,
+      'If anything on it is wrong:',
+      '',
+      '  **Write back and tell us.** We read every correction and we publish them. There is no',
+      '  charge for a correction and never will be, including a correction that raises your',
+      '  score.',
+      '',
+      '  **We are most often wrong about your roster**, because we can only count the lawyers',
+      '  your own site names. If your attorneys are listed somewhere we did not find, point us',
+      '  at the page.',
+      '',
+      'What a claimed profile gives you, at no charge:',
+      '',
+      // Taken from PRODUCTS in src/data/listing.ts, which is the authority on what is free and
+      // what is not. An earlier draft of this message put the whole panel behind the fee, which
+      // was both wrong and the worse way round: the free half is the half that makes the
+      // directory accurate, and charging for it would be charging a firm to correct us.
+      '  **You edit your own details.** Your phone number, up to four office addresses, the',
+      '  languages your firm works in, how you charge, whether the first consultation is free,',
+      '  and your availability: a 24/7 intake line, hospital visits, home visits.',
+      '',
+      '  **You file case results with their docket or index number**, which is the only kind',
+      '  this directory marks verified, and we look each one up.',
+      '',
+      '  **You see every sub-score with the evidence under it**, and you can appeal any of them.',
+      '',
+      'The annual listing adds three things to that:',
+      '',
+      '  **A followed link to your site**, from your profile and from every card your firm',
+      '  appears in across the directory.',
+      '',
+      '  **Your own logo**, in place of your initials.',
+      '',
+      '  **The client reviews you want quoted**, read by us before they appear.',
+      '',
+      'Neither one moves the score. The points, the gates and the tier are measured the same way',
+      'for a firm that pays and a firm that does not, and no part of them is for sale.',
+      '',
+      'Every change is read by a person before it goes live, usually the same day.',
+      '',
+      // Claiming is the free thing, so the ask is to claim; the figure only matters to a firm
+      // that wants the three paid additions, and it is offered rather than pushed.
+      'Claiming costs nothing and takes one message. We reply the same day with your sign-in,',
+      'with where your firm stands against each of the five eligibility checks, and with the',
+      'annual figure if you want the link, the logo and the reviews as well.',
+      '',
+      'Claim your profile:',
+      'https://lawfirmlistings.com/list-your-firm/#form',
+      '',
+      'Kind regards,',
+      'Sebastián Cardozo',
+      'Law Firm Listings',
+      '',
+      'CASICIEN SRL, Víctor Soliño 349, 11300 Montevideo, Uruguay.',
+      'We wrote to you once because we publish a profile about your firm. Reply with the word',
+      'REMOVE and we will not write to you again.',
+    ].filter(present).join('\n'),
+  };
+}

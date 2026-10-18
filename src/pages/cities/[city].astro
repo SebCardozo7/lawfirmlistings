@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import ListYourFirmCta from '../../components/ListYourFirmCta.astro';
 import Icon from '../../components/Icon.astro';
 import FirmCard from '../../components/FirmCard.astro';
 import { CITY_NOTES } from '../../data/cities';
@@ -190,4 +191,5 @@ const lede = notes.lede
   </div>
 </section>
 )}
+<ListYourFirmCta place={market.city} />
 </Base>

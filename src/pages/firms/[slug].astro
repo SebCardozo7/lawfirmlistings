@@ -6,6 +6,7 @@ import { officeLabel } from '../../lib/labels';
 import { achievementsFor, marksFor } from '../../lib/achievements';
 import { rosterFor } from '../../lib/roster';
 import Icon from '../../components/Icon.astro';
+import { mailto } from '../../data/site';
 import Scorecard from '../../components/Scorecard.astro';
 import { PRACTICE_SLUGS } from '../../data/practices';
 
@@ -31,6 +32,9 @@ const primary = d.practices.filter(p => p.primary);
 // Guarding here is not the fix for that, it is the difference between one profile being thin
 // and 974 of them not existing.
 const hq = d.offices.find(o => o.is_hq) ?? d.offices[0] ?? null;
+// Pre-addressed, because a correction that arrives saying only "this is wrong" costs a
+// round trip to find out whose profile it is about.
+const mailtoCorrection = mailto(`Correction: ${d.name}`);
 const ah = d.digital.ahrefs;
 const peers = cohort ? cohort.data.firms.filter(f => f.domain !== d.domain) : [];
 const pct = (v: number, arr: number[]) => arr.length ? Math.round(100 * (arr.filter(x => x < v).length + 0.5 * arr.filter(x => x === v).length) / arr.length) : null;
@@ -391,17 +395,28 @@ const schema = faqPage ? [legalService, faqPage] : legalService;
         <ul>{[...cohort.data.firms].sort((a, b) => b.dr - a.dr).slice(0, 5).map(f => <li><span style={f.domain === d.domain ? 'color:var(--ink);font-weight:600' : ''}>{f.name ?? f.domain}</span><span class="num">DR {f.dr}</span></li>)}</ul>
       </div>
       )}
+      {/* The only call to action on 1,388 profiles, and until now it was a grey span with
+          class="soon" that went nowhere, under a paragraph promising that claiming is free and
+          that practice areas are editable. Neither is true: the panel is the one thing on
+          /list-your-firm/ that goes anywhere. A dead button is worse than no button.
+
+          The split below comes from PRODUCTS in src/data/listing.ts, which is the authority on
+          it and which I first wrote this panel without reading: claiming is free and covers the
+          corrections, the case results and the scorecard, and the annual listing adds the
+          followed link, the logo and the quoted reviews. */}
       <div class="panel">
         {d.claimed ? (
           <>
             <h4>Managed by the firm</h4>
-            <p class="muted" style="font-size:.92rem">{d.name} confirmed it owns this page on {d.claimed.claimed_at} and keeps its own details up to date. Claiming is free and does not affect the Certification Score, the eligibility gates or the tier. Those stay ours to measure.</p>
+            <p class="muted" style="font-size:.92rem">{d.name} confirmed it owns this page on {d.claimed.claimed_at} and maintains its own details. A claimed profile is measured by the same crawler as an unclaimed one: the Certification Score, the eligibility gates and the tier stay ours to measure and are not for sale.</p>
           </>
         ) : (
           <>
             <h4>Is this your firm?</h4>
-            <p class="muted" style="font-size:.92rem">Claiming is free. Keep your offices, fees and practice areas current, and submit case results with a docket for verification. It does not affect your Certification Score, gates or tier.</p>
-            <span class="link soon" style="margin-top:12px">Claim this profile</span>
+            <p class="muted" style="font-size:.92rem">Anything here wrong? Tell us and we will fix it. Corrections are free and always will be, including the ones that raise your score.</p>
+            <p class="muted" style="font-size:.92rem">Claiming is free: correct your own details, file case results with a docket number, and see every sub-score with the evidence under it. The annual listing adds a followed link to your site, your logo, and the reviews you want quoted. Neither moves a point of your score.</p>
+            <a class="btn btn--primary btn--sm" href="/list-your-firm/#form" style="margin-top:14px">Claim this profile</a>
+            <a class="link" href={mailtoCorrection} style="display:inline-block;margin-top:12px">Send a correction instead</a>
           </>
         )}
       </div>
