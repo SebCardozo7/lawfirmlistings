@@ -68,6 +68,13 @@ PRACTICE_NAMES = {
     "medical-malpractice": "Medical Malpractice",
     "wrongful-death": "Wrongful Death",
     "slip-and-fall": "Slip and Fall",
+    # Opened on a count rather than on a hunch. Nothing had ever asked a firm about either, so
+    # the only claims the site held were two typed in by hand, and both were removed in October
+    # for being a ranking page with one firm on it. Asked properly of all 1,412 published firms,
+    # 778 publish a motorcycle page and 350 a nursing home page, which puts the first between
+    # car accidents and slip and fall and the second just under medical malpractice.
+    "motorcycle-accidents": "Motorcycle Accidents",
+    "nursing-home-abuse": "Nursing Home Abuse",
 }
 
 # Words that are titles, not firm names. A GBP display name like "New York personal injury

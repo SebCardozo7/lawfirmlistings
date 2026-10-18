@@ -44,15 +44,37 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from build_profiles import PRACTICE_NAMES as NAMES  # noqa: E402
 
 
+# Where each published domain's profile is, read once.
+#
+# This used to walk src/data/firms for every domain asked about, which is fine for the fourteen
+# comp firms it was written for and quadratic for the 778 that publish a motorcycle page: 1.1
+# million JSON loads to add one line each. The index is built on first use and the profiles are
+# re-read from disk when they are needed, so nothing here holds a stale copy of a file another
+# practice's run has already written to.
+_INDEX: dict[str, pathlib.Path] = {}
+
+
+def _index() -> dict[str, pathlib.Path]:
+    if not _INDEX:
+        for path in FIRMS.rglob("*.json"):
+            try:
+                data = json.load(io.open(path, encoding="utf-8"))
+            except ValueError:
+                continue
+            domain = data.get("domain")
+            if domain:
+                _INDEX[domain] = path
+    return _INDEX
+
+
 def profile_for(domain: str):
-    for path in FIRMS.rglob("*.json"):
-        try:
-            data = json.load(io.open(path, encoding="utf-8"))
-        except ValueError:
-            continue
-        if data.get("domain") == domain:
-            return path, data
-    return None, None
+    path = _index().get(domain)
+    if not path:
+        return None, None
+    try:
+        return path, json.load(io.open(path, encoding="utf-8"))
+    except ValueError:
+        return None, None
 
 
 def main() -> int:
