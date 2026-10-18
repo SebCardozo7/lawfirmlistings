@@ -234,6 +234,18 @@ function html(title: string, body: string, status = 200, headers: Record<string,
     { status, headers: { 'content-type': 'text/html; charset=utf-8', ...headers } });
 }
 
+/**
+ * The logo's URL, from a field that already carries one.
+ *
+ * /api/firm/<slug>.json serves logo_file as "/logos/name.svg", because that is what
+ * fetch_logos writes into the profile, and both readers here prefixed it again. Every firm
+ * with a logo saw src="/logos//logos/name.svg" and a broken image in its own panel, in the
+ * sidebar and on the page whose whole job is the logo. It took a client asking why their mark
+ * was missing to find it, which is the second time this week a logo was there and we were
+ * looking in the wrong place.
+ */
+const logoSrc = (file: string) => (file.startsWith('/') ? file : `/logos/${file}`);
+
 /** Two letters, the way the public profile draws a firm with no logo. */
 function initialsOf(name: string): string {
   const words = String(name).replace(/[^A-Za-z\s]/g, ' ').split(/\s+/).filter(Boolean);
@@ -254,7 +266,7 @@ function shell(active: string, d: any, title: string, body: string, status = 200
   // rather than as a form somebody built. Where there is none we draw the initials on the aurora,
   // which is exactly what the public profile does, so the two never disagree.
   const mark = d.logo_file
-    ? `<img src="/logos/${esc(d.logo_file)}" alt="${esc(d.name)}">`
+    ? `<img src="${esc(logoSrc(d.logo_file))}" alt="${esc(d.name)}">`
     : `<span class="mono">${esc(initialsOf(d.name))}</span>`;
   const tier = d.score?.tier
     ? `<span class="tierpill${['Verified', 'Certified', 'Distinguished', 'Elite']
@@ -450,7 +462,7 @@ function logoPage(d: any, pending: any[], flash?: string, bad = false): string {
   <div class="card">
     <p><b>On your profile now</b></p>
     ${d.logo_file
-      ? `<img class="logo" src="/logos/${esc(d.logo_file)}" alt="${esc(d.name)}">`
+      ? `<img class="logo" src="${esc(logoSrc(d.logo_file))}" alt="${esc(d.name)}">`
       : '<p class="help">No logo yet, so your profile shows your initials.</p>'}
   </div>
   <form method="post" action="/claim/logo" enctype="multipart/form-data" class="card">
