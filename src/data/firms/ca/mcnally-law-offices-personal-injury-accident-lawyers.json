@@ -260,7 +260,7 @@
     "total": 40,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-16",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -272,8 +272,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "A6",
@@ -433,19 +433,19 @@
     "floor_abc": 15,
     "next_tier": {
       "name": "Certified",
-      "needed": 70,
-      "gap": 30,
+      "needed": 65,
+      "gap": 25,
       "floor_met": false,
       "coverage_met": false,
       "path": [
+        "A2 Experience: not yet measured (10 pts)",
         "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "A2 Experience: +10 available"
+        "D2 Search authority: not yet measured (8 pts)"
       ]
     },
     "raw": 24.5,
     "assessed": 62,
-    "coverage": 0.785,
+    "coverage": 0.697,
     "floor_abc_pct": 0.395,
     "gates_unavailable": [
       "G3"
@@ -454,7 +454,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 79,
+    "assessable": 89,
     "comparable": true
   }
 }

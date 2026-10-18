@@ -5,7 +5,7 @@
   "website": "https://www.zdfirm.com/",
   "domain": "zdfirm.com",
   "phone": "(512) 601-4349",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -589,9 +589,9 @@
   },
   "score": {
     "total": 66,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -763,10 +763,10 @@
     },
     "floor_abc": 27,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 4,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",

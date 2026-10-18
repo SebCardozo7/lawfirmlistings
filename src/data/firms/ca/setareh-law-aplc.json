@@ -476,14 +476,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 73,
+    "total": 71,
     "tier": "Certified",
-    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (7/25).",
-    "computed_at": "2026-10-16",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar D (9/25).",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 7,
+        "score": 12,
         "max": 25,
         "subs": [
           {
@@ -497,10 +497,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 4.5,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "6 of 7 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -649,30 +649,30 @@
         ]
       }
     },
-    "floor_abc": 40,
+    "floor_abc": 44,
     "next_tier": {
       "name": "Distinguished",
-      "needed": 85,
-      "gap": 12,
+      "needed": 78,
+      "gap": 7,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.0 available",
+        "A6 Roster verifiability: +4.5 available",
         "A2 Experience: +3 available"
       ]
     },
-    "raw": 58.5,
-    "assessed": 80,
+    "raw": 63.0,
+    "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.833,
+    "floor_abc_pct": 0.781,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [
       "G2"
     ],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

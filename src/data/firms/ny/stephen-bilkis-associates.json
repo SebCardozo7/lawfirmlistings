@@ -5,7 +5,7 @@
   "website": "https://www.1800nynylaw.com/",
   "domain": "1800nynylaw.com",
   "phone": "(212) 254-6800",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -346,20 +346,20 @@
     }
   ],
   "score": {
-    "total": 66,
-    "tier": "Verified",
+    "total": 67,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (6/15).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 21,
+        "score": 22,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 29.0 years since admission across 1 of 1 named attorneys (longest 29, shortest 29) · NYS Attorney Registration database"
@@ -519,12 +519,12 @@
         ]
       }
     },
-    "floor_abc": 42,
+    "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 4,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 11,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "D1 Website trust & experience: +6.0 available",
@@ -532,10 +532,10 @@
         "E3 Languages & accessibility: +4.0 available"
       ]
     },
-    "raw": 59.0,
+    "raw": 60.0,
     "assessed": 90,
     "coverage": 1.0,
-    "floor_abc_pct": 0.746,
+    "floor_abc_pct": 0.763,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 90,

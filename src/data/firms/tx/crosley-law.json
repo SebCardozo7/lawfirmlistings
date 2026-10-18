@@ -5,7 +5,7 @@
   "website": "https://crosleylaw.com/",
   "domain": "crosleylaw.com",
   "phone": "(210) 529-3000",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -443,9 +443,9 @@
   },
   "score": {
     "total": 68,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -617,10 +617,10 @@
     },
     "floor_abc": 29,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 2,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 10,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",

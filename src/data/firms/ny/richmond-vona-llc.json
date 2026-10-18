@@ -5,7 +5,7 @@
   "website": "https://www.richmondvona.com/",
   "domain": "richmondvona.com",
   "phone": "(716) 354-3336",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -769,9 +769,9 @@
   },
   "score": {
     "total": 67,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (4/15).",
-    "computed_at": "2026-10-16",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -860,7 +860,7 @@
             "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "10 of 20 sampled reviews are from the last 12 months (newest 2026-07-27) · a sample of five per business listing, not every review"
+            "evidence": "9 of 20 sampled reviews are from the last 12 months (newest 2026-07-27) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -943,9 +943,9 @@
     },
     "floor_abc": 46,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 3,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": true,
       "path": [

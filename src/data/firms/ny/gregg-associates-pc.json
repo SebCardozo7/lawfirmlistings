@@ -267,20 +267,20 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 40,
+    "total": 42,
     "tier": "Not eligible",
     "verdict": "Eligibility gates not passed: G6. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 18,
+        "score": 19,
         "max": 25,
         "subs": [
           {
             "code": "A2",
             "label": "Experience",
-            "pts": 9,
+            "pts": 10,
             "max": 10,
             "source": "registry",
             "evidence": "Mean 30.5 years since admission across 2 of 2 named attorneys (longest 44, shortest 17) · NYS Attorney Registration database"
@@ -440,11 +440,11 @@
         ]
       }
     },
-    "floor_abc": 31,
+    "floor_abc": 32,
     "next_tier": {
       "name": "Certified",
-      "needed": 70,
-      "gap": 30,
+      "needed": 65,
+      "gap": 23,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -453,10 +453,10 @@
         "B2 Specificity: +5 available"
       ]
     },
-    "raw": 36.0,
+    "raw": 37.0,
     "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.544,
+    "floor_abc_pct": 0.561,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,

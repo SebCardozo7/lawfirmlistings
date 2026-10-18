@@ -5,7 +5,7 @@
   "website": "https://www.rmdlaw.com/",
   "domain": "rmdlaw.com",
   "phone": "(949) 326-5000",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -551,14 +551,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 69,
-    "tier": "Verified",
-    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (7/25).",
-    "computed_at": "2026-10-16",
+    "total": 66,
+    "tier": "Certified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (10/25).",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 7,
+        "score": 12,
         "max": 25,
         "subs": [
           {
@@ -572,10 +572,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 4.5,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "6 of 7 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -618,7 +618,7 @@
         ]
       },
       "C": {
-        "score": 20,
+        "score": 19,
         "max": 20,
         "subs": [
           {
@@ -640,10 +640,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 5,
+            "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "21 of 35 sampled reviews are from the last 12 months (newest 2026-08-03) · a sample of five per business listing, not every review"
+            "evidence": "20 of 35 sampled reviews are from the last 12 months (newest 2026-08-03) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -724,28 +724,28 @@
         ]
       }
     },
-    "floor_abc": 36,
+    "floor_abc": 40,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 1,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.5 available",
+        "A6 Roster verifiability: +4.5 available",
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 55.0,
-    "assessed": 80,
+    "raw": 58.5,
+    "assessed": 89,
     "coverage": 1.0,
-    "floor_abc_pct": 0.76,
+    "floor_abc_pct": 0.702,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 80,
+    "assessable": 89,
     "comparable": true
   }
 }

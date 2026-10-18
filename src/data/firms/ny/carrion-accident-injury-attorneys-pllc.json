@@ -5,7 +5,7 @@
   "website": "https://carrionesq.com/",
   "domain": "carrionesq.com",
   "phone": "(212) 433-3100",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -681,9 +681,9 @@
   },
   "score": {
     "total": 66,
-    "tier": "Verified",
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (10/25).",
-    "computed_at": "2026-10-12",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -855,10 +855,10 @@
     },
     "floor_abc": 42,
     "next_tier": {
-      "name": "Certified",
-      "needed": 70,
-      "gap": 4,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +5 available",

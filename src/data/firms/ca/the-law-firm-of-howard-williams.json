@@ -267,14 +267,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 38,
+    "total": 35,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-16",
+    "computed_at": "2026-10-18",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 3,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -282,16 +282,16 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+            "source": "pending",
+            "evidence": "Not yet assessed"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 1,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "California publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "registry",
+            "evidence": "0 of 1 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -440,23 +440,23 @@
         ]
       }
     },
-    "floor_abc": 15,
+    "floor_abc": 16,
     "next_tier": {
       "name": "Certified",
-      "needed": 70,
-      "gap": 32,
+      "needed": 65,
+      "gap": 30,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A2 Experience: +10 available",
-        "A6 Roster verifiability: +9 available",
-        "D2 Search authority: +7 available"
+        "A6 Roster verifiability: +8 available",
+        "D2 Search authority: +7 available",
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 26.5,
-    "assessed": 70,
-    "coverage": 1.0,
-    "floor_abc_pct": 0.395,
+    "raw": 27.5,
+    "assessed": 79,
+    "coverage": 0.888,
+    "floor_abc_pct": 0.34,
     "gates_unavailable": [
       "G3"
     ],
@@ -464,7 +464,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 70,
+    "assessable": 89,
     "comparable": true
   },
   "logo": {
