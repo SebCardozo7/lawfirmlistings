@@ -2085,6 +2085,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-10-12"
+    },
+    "ahrefs": {
+      "dr": 72.0,
+      "ahrefs_rank": 84211,
+      "refdomains": 11301,
+      "refdomains_dofollow": 8311,
+      "backlinks": 796541,
+      "org_keywords": 13545,
+      "org_traffic": 301697,
+      "paid_keywords": 1099,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-19"
     }
   },
   "gates": {
@@ -2263,10 +2275,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 66,
+    "total": 68,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar D (4/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G2, G3) and do not count against the firm. Strongest pillar: B; most headroom in pillar D (10/25).",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -2368,7 +2380,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -2382,10 +2394,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 7,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 72.0 → 100th pct of 141-firm cohort (median 13) 3/3 · 11,301 referring domains, 100th pct 2/2 · 13,545 organic keywords / 301,697 visits·mo, 100th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -2400,7 +2412,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -2440,7 +2452,7 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 78,
-      "gap": 12,
+      "gap": 10,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -2449,9 +2461,9 @@
         "C5 Complaint share: +3 available"
       ]
     },
-    "raw": 53.5,
-    "assessed": 81,
-    "coverage": 0.91,
+    "raw": 60.5,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.754,
     "gates_unavailable": [
       "G3"

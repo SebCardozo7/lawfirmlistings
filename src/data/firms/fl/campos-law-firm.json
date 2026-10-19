@@ -321,10 +321,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 41,
+    "total": 42,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -426,7 +426,7 @@
         ]
       },
       "D": {
-        "score": 9,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -440,10 +440,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 5,
+            "pts": 6,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 14.0 → 83th pct of 114-firm cohort (median 2.9) 2/3 · 1,267 referring domains, 82th pct 2/2 · 16 organic keywords / 148 visits·mo, 74th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 14.0 → 84th pct of 121-firm cohort (median 2.65) 3/3 · 1,267 referring domains, 83th pct 2/2 · 16 organic keywords / 148 visits·mo, 74th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -498,7 +498,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 24,
+      "gap": 23,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -507,7 +507,7 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 28.5,
+    "raw": 29.5,
     "assessed": 70,
     "coverage": 1.0,
     "floor_abc_pct": 0.382,

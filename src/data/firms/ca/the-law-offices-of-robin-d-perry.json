@@ -165,6 +165,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-10-12"
+    },
+    "ahrefs": {
+      "dr": 12.0,
+      "ahrefs_rank": 15290562,
+      "refdomains": 835,
+      "refdomains_dofollow": 214,
+      "backlinks": 1981,
+      "org_keywords": 176,
+      "org_traffic": 1921,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-19"
     }
   },
   "gates": {
@@ -241,7 +253,7 @@
     "total": 38,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -343,7 +355,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -357,10 +369,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 12.0 → 48th pct of 141-firm cohort (median 13) 1/3 · 835 referring domains, 6th pct 0/2 · 176 organic keywords / 1,921 visits·mo, 80th pct 2/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -375,7 +387,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -424,9 +436,9 @@
         "E1 Free consult & fee transparency: +6 available"
       ]
     },
-    "raw": 31.0,
-    "assessed": 81,
-    "coverage": 0.91,
+    "raw": 34.0,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.456,
     "gates_unavailable": [
       "G3"
