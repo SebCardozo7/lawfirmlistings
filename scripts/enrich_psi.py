@@ -35,6 +35,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 ENDPOINT = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
