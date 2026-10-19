@@ -252,7 +252,7 @@
     "total": 42,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -272,8 +272,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "This firm names no attorney on its own site, so there is no roster to verify. Publishing one is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -431,20 +431,20 @@
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "D1 Website trust & experience: not yet measured (7 pts)",
+        "A6 Roster verifiability: +9 available"
       ]
     },
     "raw": 26.5,
     "assessed": 63,
-    "coverage": 0.708,
+    "coverage": 0.787,
     "floor_abc_pct": 0.579,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 80,
     "comparable": true
   },
   "logo": {

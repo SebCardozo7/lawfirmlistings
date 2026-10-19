@@ -165,8 +165,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "This firm names no attorney on its own site, so there is no roster to verify. Publishing one is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -324,13 +324,13 @@
       "coverage_met": false,
       "path": [
         "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "D1 Website trust & experience: not yet measured (7 pts)",
+        "C2 Rating quality: not yet measured (6 pts)"
       ]
     },
     "raw": 6.0,
     "assessed": 42,
-    "coverage": 0.452,
+    "coverage": 0.5,
     "floor_abc_pct": 0.0,
     "gates_unavailable": [
       "G3"
@@ -339,7 +339,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 93,
-    "comparable": false
+    "assessable": 84,
+    "comparable": true
   }
 }

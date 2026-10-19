@@ -199,8 +199,8 @@
   "score": {
     "total": 49,
     "tier": "Not eligible",
-    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillars A, B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillars B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -220,8 +220,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "This firm names no attorney on its own site, so there is no roster to verify. Publishing one is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -378,21 +378,21 @@
       "floor_met": false,
       "coverage_met": false,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "C2 Rating quality: not yet measured (6 pts)"
+        "C2 Rating quality: not yet measured (6 pts)",
+        "B2 Specificity: not yet measured (5 pts)"
       ]
     },
     "raw": 16.5,
     "assessed": 34,
-    "coverage": 0.41,
+    "coverage": 0.459,
     "floor_abc_pct": 0.0,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 83,
+    "assessable": 74,
     "comparable": false
   },
   "logo": {

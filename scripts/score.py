@@ -337,7 +337,19 @@ def compute(firm):
                        + ("; bar numbers published on the bios" if on_bios else
                           "; no bar number published on any bio")))
     else:
-        out.append(sub("A6", 0, "pending", "No attorney is named on the site we could read"))
+        # "pending" is a claim about us: it says we owe this measurement and have not made it.
+        # We do not owe it. A6 is the share of a published roster that a register can match, and
+        # a firm that publishes no roster has no share; it is 0 of 0, and there is nothing for
+        # anybody to go and read. 375 firms carried that false claim, and it dragged their
+        # coverage down for work that was never ours.
+        #
+        # "no roster published" is already in NOT_A_FINDING and NO_SOURCE_IN_MARKET, written for
+        # exactly this and never used, so the factor leaves the scale the way it does for a state
+        # with no register. The firm is not let off: naming no attorney is what G5 measures, and
+        # G5 holds every one of these at Listed until the names are published.
+        out.append(sub("A6", 0, "no roster published",
+                       "This firm names no attorney on its own site, so there is no roster to "
+                       "verify. Publishing one is what gate G5 asks for."))
 
     # ---- A5: only what the firm publishes about itself ----
     # ---- A5 accountability: read off the firm's own pages, not entered by hand ----
