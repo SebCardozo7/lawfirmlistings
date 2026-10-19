@@ -471,3 +471,40 @@ Domestic violence and orders of protection are not in the criminal pattern eithe
 claims them, on the reasoning that somebody looking for an order of protection is looking for a
 family lawyer, and a criminal pattern that took them would pull family pages out of the practice
 that already reads them correctly.
+
+## Two practice areas opened 2026-10-18: motorcycle accidents and nursing home abuse
+
+Both were removed from a hand-seeded profile earlier in October for being a ranking page with one
+firm on it, and the question left open was whether either is a real area. It was answered in the
+order that matters here: supply first, because that is what a directory can run out of.
+
+Asked of all 1,412 published firms, 778 publish a motorcycle accident page and 350 a nursing home
+page. The floor was real estate at 20. 227 sites answered neither pass and are counted against
+neither area.
+
+The demand half was measured the next day, once the Ahrefs window reset, and is recorded here
+because the decision was taken before it arrived.
+
+| keyword | volume | difficulty | CPC |
+| --- | ---: | ---: | ---: |
+| medical malpractice lawyer | 458,000 | 0 | $3.50 |
+| truck accident lawyer | 110,000 | 40 | $0.35 |
+| **motorcycle accident lawyer** | **89,000** | **0** | **$0.25** |
+| motorcycle accident attorney | 43,000 | 0 | $0.25 |
+| **nursing home abuse lawyer** | **23,000** | **3** | **$8.00** |
+| nursing home neglect attorney | 2,200 | 0 | $10.00 |
+| nursing home abuse attorney near me | 400 | 1 | $16.00 |
+| nyc motorcycle accident lawyer | 200 | 4 | $12.00 |
+
+United States, Ahrefs keywords-explorer-overview, pulled 2026-10-19. CPC is returned in cents and
+is converted here. The two baselines are areas the site had already decided were worth opening,
+at 721 and 412 firms.
+
+Motorcycle at 89,000 sits in the same band as truck accidents, which the site opened without
+hesitating. Nursing home at 23,000 is the smaller of the two and is not close to marginal, and it
+is the one where the money is: $8.00 a click against $0.35 for truck accidents, and $16.00 on the
+"near me" variant, which is what intent looks like priced.
+
+The difficulty column is the part worth keeping. Both new areas score 0 and 3 against 40 for
+truck accidents, so these are easier terms than one the site already competes on, with supply
+behind them. Nothing here argues for holding either back.
