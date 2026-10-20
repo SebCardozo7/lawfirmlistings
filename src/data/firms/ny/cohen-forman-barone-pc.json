@@ -405,10 +405,25 @@
     "checked_at": "2026-10-01"
   },
   "results_published": {
-    "readable": false,
-    "why": "robots.txt disallows the results page",
+    "count": 11,
+    "counted_from": "result headings",
+    "amounts": [],
+    "largest": null,
+    "aggregate_claims": [],
+    "case_types": [
+      "assault"
+    ],
+    "disclaimer": false,
+    "venues": [
+      "Family Court",
+      "New York County",
+      "Queens County",
+      "Supreme Court"
+    ],
+    "text_length": 11154,
+    "readable": true,
     "url": "https://www.cfblaw.com/case-results/",
-    "checked_at": "2026-10-01"
+    "checked_at": "2026-10-20"
   },
   "entity": {
     "legal_name": "COHEN FORMAN BARONE, LLP",
@@ -419,10 +434,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 61,
+    "total": 60,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (2/15).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -456,32 +471,32 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 8,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 4.5,
             "max": 6,
-            "source": "pending",
-            "evidence": "robots.txt disallows the results page"
+            "source": "firm",
+            "evidence": "11 results published on the firm's own site, counted from result headings"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 3,
             "max": 5,
-            "source": "pending",
-            "evidence": "robots.txt disallows the results page"
+            "source": "firm",
+            "evidence": "1 case type named; 4 court or county references"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "robots.txt disallows the results page"
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page, which New York's advertising rules effectively require"
           }
         ]
       },
@@ -592,23 +607,23 @@
         ]
       }
     },
-    "floor_abc": 33,
+    "floor_abc": 40,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 4,
+      "gap": 5,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)",
-        "B3 Results disclosure: not yet measured (4 pts)"
+        "A6 Roster verifiability: +5 available",
+        "E1 Free consult & fee transparency: +5 available",
+        "E4 Availability: +5 available"
       ]
     },
-    "raw": 45.5,
-    "assessed": 74,
-    "coverage": 0.831,
-    "floor_abc_pct": 0.786,
+    "raw": 53.0,
+    "assessed": 89,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.711,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 89,
