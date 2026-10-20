@@ -5,7 +5,7 @@
   "website": "https://redondolawfirm.com/",
   "domain": "redondolawfirm.com",
   "phone": "(305) 908-6778",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -79,7 +79,14 @@
       "source_url": "https://maps.google.com/?cid=6405540403654848754&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Mike Redondo",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://redondolawfirm.com/about/mike-redondo/"
+    }
+  ],
   "languages": [
     "English"
   ],
@@ -198,10 +205,10 @@
       "checked_at": "2026-09-30"
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-10-12"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-10-20"
     },
     "G6": {
       "pass": true,
@@ -271,9 +278,9 @@
   },
   "score": {
     "total": 47,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-19",
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -293,8 +300,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no roster published",
-            "evidence": "This firm names no attorney on its own site, so there is no roster to verify. Publishing one is what gate G5 asks for."
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",

@@ -13,6 +13,41 @@
       "primary": true,
       "source_url": "https://brainlaw.com/personal-injury/",
       "checked_at": "2026-09-16"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://brainlaw.com/vehicle-accident-lawyers/car-accident/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://brainlaw.com/vehicle-accident-lawyers/truck-accidents/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "medical-malpractice",
+      "name": "Medical Malpractice",
+      "primary": false,
+      "source_url": "https://brainlaw.com/medical-malpractice/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://brainlaw.com/personal-injury/wrongful-death/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://brainlaw.com/personal-injury/slip-fall/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -34,7 +69,7 @@
     {
       "name": "Michael V. Kaplen",
       "source_url": "https://brainlaw.com/about/michael-kaplen",
-      "checked_at": "2026-10-01",
+      "checked_at": "2026-10-20",
       "bar_state": "NY",
       "bar_number": "1662634",
       "admitted_year": 1980,
@@ -44,7 +79,7 @@
     {
       "name": "Shana De Caro",
       "source_url": "https://brainlaw.com/about/shana-de-caro",
-      "checked_at": "2026-10-01",
+      "checked_at": "2026-10-20",
       "registry_note": "not found"
     }
   ],
@@ -153,13 +188,13 @@
       "pass": true,
       "evidence": "1 of 2 named attorneys are currently registered and none carries an adverse status. 1 could not be told apart from namesakes in the register and are counted neither way",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System",
-      "checked_at": "2026-10-01"
+      "checked_at": "2026-10-20"
     },
     "G2": {
       "pass": true,
       "evidence": "None of the 1 named attorneys carries a disciplinary status on the public register: no disbarment, suspension or disciplinary resignation. Those statuses persist, so the check reaches back years, but it would not show a censure or a suspension since lifted.",
       "source": "NYS Attorney Registrations (data.ny.gov eqw2-r5nb), published by the NYS Unified Court System. Current status, which is what this register carries",
-      "checked_at": "2026-10-01"
+      "checked_at": "2026-10-20"
     },
     "G3": {
       "pass": true,

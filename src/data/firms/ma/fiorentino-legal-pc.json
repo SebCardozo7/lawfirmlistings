@@ -5,7 +5,7 @@
   "website": "https://www.fiorentinolegal.com/",
   "domain": "fiorentinolegal.com",
   "phone": "(617) 990-2568",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -13,6 +13,41 @@
       "primary": true,
       "source_url": "https://www.fiorentinolegal.com/personal-injury-lawyer-quincy/",
       "checked_at": "2026-09-15"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.fiorentinolegal.com/car-accident-lawyer-quincy/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.fiorentinolegal.com/truck-accident-lawyer-quincy/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "medical-malpractice",
+      "name": "Medical Malpractice",
+      "primary": false,
+      "source_url": "https://www.fiorentinolegal.com/medical-malpractice-attorney-boston-ma/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.fiorentinolegal.com/wrongful-death-lawyer-quincy/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://www.fiorentinolegal.com/premises-liability-lawyer-quincy/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -30,7 +65,14 @@
       "source_url": "https://maps.google.com/?cid=9844821279911339597&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Christopher Fiorentino",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://www.fiorentinolegal.com/about-us/"
+    }
+  ],
   "languages": [
     "English"
   ],
@@ -148,10 +190,10 @@
       "evidence": "1 physical location verified on Google Business Profile. Massachusetts publishes no business register we can query. The Secretary of the Commonwealth's corporate search answers a request for its robots file with a 403 and its search page with a redirect loop, and the state runs no open data portal carrying the register. This is a limit of the published record and not something the firm can change."
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-10-12"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-10-20"
     },
     "G6": {
       "pass": true,
@@ -256,9 +298,9 @@
   },
   "score": {
     "total": 43,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-19",
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -278,8 +320,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no roster published",
-            "evidence": "This firm names no attorney on its own site, so there is no roster to verify. Publishing one is what gate G5 asks for."
+            "source": "no queryable source",
+            "evidence": "Massachusetts publishes no attorney register we can query, so the roster is not verified here and this is not scored."
           },
           {
             "code": "A5",

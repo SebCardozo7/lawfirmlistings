@@ -20,6 +20,41 @@
       "primary": false,
       "source_url": "https://www.cohanlegal.com/new-york-city-workers-compensation-third-party-claim-lawyer/",
       "checked_at": "2026-09-13"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.cohanlegal.com/new-york-car-accident-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.cohanlegal.com/truck-accident-lawyer-nyc/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "medical-malpractice",
+      "name": "Medical Malpractice",
+      "primary": false,
+      "source_url": "https://www.cohanlegal.com/new-york-city-misdiagnosis-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.cohanlegal.com/new-york-wrongful-death-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://www.cohanlegal.com/abogado-resbalones-caidas/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -150,13 +185,13 @@
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose licensure can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-10-01"
+      "checked_at": "2026-10-20"
     },
     "G2": {
       "pass": false,
       "evidence": "This firm names no attorney on its public pages, so there is no roster whose disciplinary history can be checked. The register is open and free to search; the names are what is missing.",
       "source": "no roster published",
-      "checked_at": "2026-10-01"
+      "checked_at": "2026-10-20"
     },
     "G3": {
       "pass": false,
@@ -261,7 +296,7 @@
     "total": 64,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-19",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -282,7 +317,7 @@
             "pts": 0,
             "max": 9,
             "source": "no roster published",
-            "evidence": "This firm names no attorney on its own site, so there is no roster to verify. Publishing one is what gate G5 asks for."
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",

@@ -13,6 +13,34 @@
       "primary": true,
       "source_url": "https://www.tomhall-lawyer.com/practice-areas/auto-accidents/",
       "checked_at": "2026-09-29"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.tomhall-lawyer.com/practice-areas/auto-accidents/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.tomhall-lawyer.com/practice-areas/auto-accidents/truck-accidents/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.tomhall-lawyer.com/practice-areas/personal-injury/wrongful-death/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://www.tomhall-lawyer.com/practice-areas/personal-injury/premises-liability/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -200,7 +228,7 @@
     "total": 49,
     "tier": "Not eligible",
     "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillars B and C in particular. Strongest pillar: E; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-19",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -221,7 +249,7 @@
             "pts": 0,
             "max": 9,
             "source": "no roster published",
-            "evidence": "This firm names no attorney on its own site, so there is no roster to verify. Publishing one is what gate G5 asks for."
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",

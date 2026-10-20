@@ -211,6 +211,10 @@ PLACE_ALONE = {
     "newport beach", "santa ana", "santa barbara", "the woodlands", "san luis obispo",
     "santa maria", "bakersfield", "fresno", "sacramento", "oakland", "riverside", "modesto",
     "stockton", "anaheim", "irvine", "glendale", "pasadena", "torrance", "inglewood",
+    # Offered as attorneys of Florida firms by their own location pages.
+    "coral gables", "coconut grove", "west palm beach", "palm beach", "boca raton",
+    "fort lauderdale", "key west", "north carolina", "south carolina", "new jersey",
+    "staten island", "san antonio", "fort worth", "las vegas", "north las vegas",
 }
 
 # A place at the front of a longer heading, which is a location or practice page rather than a
@@ -247,8 +251,42 @@ AN_INSTITUTION = re.compile(
 # published as an attorney of a San Diego firm today and reads as three ordinary words.
 CAMPUS_INITIALS = re.compile(r"^(uc|ucla|usc|csu|suny|cuny)\s+\S", re.I)
 
+# An accessibility overlay's own menu, which several firms embed and which puts a dozen
+# capitalised two-word labels into the page where a roster's headings go. accessiBe and UserWay
+# ship the same vocabulary, so this is a fixed list rather than a pattern: sandiegoaccidentlawcenter.com
+# handed us "Readable Experience", "Visually Pleasing Experience", "Easy Orientation" and
+# "Accessibility Statement" as attorneys, and grlawfirm.net handed us nothing but the last one.
+#
+# Exact phrases, because the words in them are ordinary and a rule made of the words would reach
+# a real name. There is no attorney called "Accessibility Statement" and there is one called
+# Lashonda Council Rogers, which is the mistake this file has already made once.
+AN_ACCESSIBILITY_WIDGET = {
+    "accessibility statement", "accessibility menu", "accessibility adjustments",
+    "readable experience", "visually pleasing experience", "easy orientation",
+    "content scaling", "readable font", "highlight titles", "highlight links",
+    "text magnifier", "adjust font sizing", "align center", "adjust line height",
+    "align left", "adjust letter spacing", "align right", "dark contrast",
+    "light contrast", "monochrome", "high saturation", "adjust text colors",
+    "low saturation", "adjust title colors", "mute sounds", "hide images",
+    "virtual keyboard", "reading guide", "stop animations", "reading mask",
+    "highlight hover", "highlight focus", "big black cursor", "big white cursor",
+    "cognitive reading", "online dictionary", "screen reader", "keyboard navigation",
+    "useful links", "choose the right accessibility profile for you",
+    "epilepsy safe mode", "visually impaired mode", "adhd friendly mode", "blindness mode",
+    "seizure safe profile", "vision impaired profile", "cognitive disability profile",
+    "keyboard navigation (motor)", "blind users (screen reader)",
+}
+
+
 A_SECTION = {
     "recent posts", "recent post", "bar admissions", "court admissions", "admissions",
+    # Revealed once a trailing colon stops hiding them. Each one was published as an attorney.
+    "medical treatment", "working hours", "after hours", "posts tagged", "office hours",
+    "free consultation", "contact us", "follow us", "quick links", "opening hours",
+    # Page-builder placeholders a firm never filled in. shultzlegal.com published the Elementor
+    # one as an attorney, which is the clearest possible sign that nobody has read that page.
+    "add your heading text here", "your heading text here", "lorem ipsum",
+    "insert your content here", "click here to edit", "edit this text",
     "professional association memberships", "post-conviction relief", "practice areas",
     "case results", "our attorneys", "our team", "testimonials", "awards", "publications",
 }
@@ -266,7 +304,7 @@ A_TOPIC = re.compile(r"\b(act|contamination|litigation|lawsuits?|settlements?|cl
 
 def is_a_thing_not_a_person(name):
     """The category this name falls in, or None. Conservative: ambiguous names stay."""
-    n = " ".join((name or "").split())
+    n = " ".join((name or "").split()).rstrip(":.")
     low = n.lower()
     if low in PLACE_ALONE:
         return "a place"
@@ -274,6 +312,8 @@ def is_a_thing_not_a_person(name):
         return "a location or practice page"
     if low in A_SECTION:
         return "a section heading"
+    if low in AN_ACCESSIBILITY_WIDGET:
+        return "an accessibility widget's menu"
     if AN_INSTITUTION.search(n) or CAMPUS_INITIALS.match(n):
         return "an institution"
     words = n.split()
@@ -402,7 +442,10 @@ def normalise_case(name):
 def looks_like_a_person(name):
     if not name or len(name) > 60:
         return False
-    name = name.strip()
+    # The same trailing punctuation is_a_thing_not_a_person ignores comes off the stored name
+    # too. Without this, checkmatelawgroup.com published "Shayan Kohanteb" and
+    # "Shayan Kohanteb." as two attorneys, and the firm has one.
+    name = name.strip().rstrip(":.")
     if any(ch.isdigit() for ch in name):
         return False
     # Tested with the full stops taken out as well as with them in. An acronym a site writes as
