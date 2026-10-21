@@ -39,6 +39,7 @@ import urllib.parse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from crawl_public import (LINK_KINDS, UA, fetch, https_origin, robots_for, strip_tags,  # noqa: E402
                           meta, unescape, json_ld_blocks)
+from _survive import Survive  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DELAY = 1.5
@@ -1209,56 +1210,58 @@ def main():
         files = sorted(pathlib.Path(p) for p in glob.glob(str(staging / "*.json")))
 
     total_names = with_bar = 0
+    run = Survive('crawl_attorneys')
     for path in files:
-        if not path.exists():
-            continue
-        rec = json.loads(io.open(path, encoding="utf-8").read())
-        # The staging directory holds more than firm records: discover_places writes its
-        # candidate lists there too, and those are lists. Reading one of them as a record stops
-        # the whole run with an AttributeError on whichever market was crawled most recently,
-        # which is how Los Angeles got no rosters at all on its first pass.
-        if not isinstance(rec, dict) or "domain" not in rec:
-            continue
-        if not rec.get("https_ok"):
-            continue
+        with run.firm(path.stem):
+            if not path.exists():
+                continue
+            rec = json.loads(io.open(path, encoding="utf-8").read())
+            # The staging directory holds more than firm records: discover_places writes its
+            # candidate lists there too, and those are lists. Reading one of them as a record stops
+            # the whole run with an AttributeError on whichever market was crawled most recently,
+            # which is how Los Angeles got no rosters at all on its first pass.
+            if not isinstance(rec, dict) or "domain" not in rec:
+                continue
+            if not rec.get("https_ok"):
+                continue
 
-        found = collect(rec["domain"], args.verbose, rec)
-        # Re-read before writing: another enricher may have written in the meantime.
-        fresh = json.loads(io.open(path, encoding="utf-8").read())
+            found = collect(rec["domain"], args.verbose, rec)
+            # Re-read before writing: another enricher may have written in the meantime.
+            fresh = json.loads(io.open(path, encoding="utf-8").read())
 
-        # A failed run must not delete a good one. godoskygentile.com serves an intermittent 403
-        # to crawlers, and one re-run that happened to hit it replaced four collected attorneys
-        # with an error and a count of zero, which then reads as "this firm names nobody" all the
-        # way through to the gates. An error is news about the fetch, not about the roster.
-        had = ((fresh.get("attorneys_found") or {}).get("attorneys")) or []
-        if found.get("error") and had:
-            found = dict(found, attorneys=had,
-                         kept_from=(fresh["attorneys_found"] or {}).get("checked_at"),
-                         note=("this run failed (%s) and the %d name(s) already collected were "
-                               "kept rather than overwritten with nothing"
-                               % (found["error"], len(had))))
-        fresh["attorneys_found"] = found
-        io.open(path, "w", encoding="utf-8", newline="\n").write(
-            json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
+            # A failed run must not delete a good one. godoskygentile.com serves an intermittent 403
+            # to crawlers, and one re-run that happened to hit it replaced four collected attorneys
+            # with an error and a count of zero, which then reads as "this firm names nobody" all the
+            # way through to the gates. An error is news about the fetch, not about the roster.
+            had = ((fresh.get("attorneys_found") or {}).get("attorneys")) or []
+            if found.get("error") and had:
+                found = dict(found, attorneys=had,
+                             kept_from=(fresh["attorneys_found"] or {}).get("checked_at"),
+                             note=("this run failed (%s) and the %d name(s) already collected were "
+                                   "kept rather than overwritten with nothing"
+                                   % (found["error"], len(had))))
+            fresh["attorneys_found"] = found
+            io.open(path, "w", encoding="utf-8", newline="\n").write(
+                json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
 
-        if found.get("error"):
-            print("%-24s %s" % (rec["domain"], found["error"]))
-            continue
-        names = found["attorneys"]
-        bars = [a for a in names if a["bar_number"]]
-        total_names += len(names)
-        with_bar += len(bars)
-        print("%-24s %2d attorney(s), %d with a bar number%s"
-              % (rec["domain"], len(names), len(bars),
-                 ", %d heading(s) rejected" % len(found["rejected"]) if found["rejected"] else ""))
-        if args.verbose:
-            for a in names[:6]:
-                print("      %-32s %s" % (a["name"], a["bar_number"] or ""))
+            if found.get("error"):
+                print("%-24s %s" % (rec["domain"], found["error"]))
+                continue
+            names = found["attorneys"]
+            bars = [a for a in names if a["bar_number"]]
+            total_names += len(names)
+            with_bar += len(bars)
+            print("%-24s %2d attorney(s), %d with a bar number%s"
+                  % (rec["domain"], len(names), len(bars),
+                     ", %d heading(s) rejected" % len(found["rejected"]) if found["rejected"] else ""))
+            if args.verbose:
+                for a in names[:6]:
+                    print("      %-32s %s" % (a["name"], a["bar_number"] or ""))
 
     print("\n%d name(s) collected, %d carrying a bar number" % (total_names, with_bar))
     print("Names are evidence, not yet profile data: they drive G1/G2 against the registry, so\n"
           "each one keeps the bio URL it came from for a human to confirm.")
-    return 0
+    return run.report()
 
 
 if __name__ == "__main__":

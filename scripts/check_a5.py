@@ -48,6 +48,7 @@ import urllib.parse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from crawl_public import UA, fetch, robots_for, strip_tags  # noqa: E402
+from _survive import Survive  # noqa: E402
 
 DELAY = 1.5
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -300,40 +301,44 @@ def main():
         files = sorted(pathlib.Path(p) for p in glob.glob(str(staging / "*.json")))
 
     scored = insured = affiliated = 0
+    run = Survive('check_a5')
     for path in files:
-        if not path.exists():
-            print("%-24s no staging record" % path.stem)
-            continue
-        with io.open(path, encoding="utf-8") as fh:
-            record = json.load(fh)
-        # The staging directory holds more than firm records: discover_places writes its
-        # candidate lists there too, and those are lists. Skip anything that is not a
-        # firm record rather than stopping the whole run on it.
-        if not isinstance(record, dict) or "domain" not in record:
-            continue
-        if not record.get("https_ok"):
-            print("%-24s skipped, site was never reachable" % record["domain"])
-            continue
+        with run.firm(path.stem):
+            if not path.exists():
+                print("%-24s no staging record" % path.stem)
+                continue
+            with io.open(path, encoding="utf-8") as fh:
+                record = json.load(fh)
+            # The staging directory holds more than firm records: discover_places writes its
+            # candidate lists there too, and those are lists. Skip anything that is not a
+            # firm record rather than stopping the whole run on it.
+            if not isinstance(record, dict) or "domain" not in record:
+                continue
+            if not record.get("https_ok"):
+                print("%-24s skipped, site was never reachable" % record["domain"])
+                continue
 
-        found = examine(record, args.verbose)
+            found = examine(record, args.verbose)
 
-        # Re-read before writing: four scripts share this file.
-        with io.open(path, encoding="utf-8") as fh:
-            fresh = json.load(fh)
-        fresh["accountability"] = found
-        io.open(path, "w", encoding="utf-8", newline="\n").write(
-            json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
+            # Re-read before writing: four scripts share this file.
+            with io.open(path, encoding="utf-8") as fh:
+                fresh = json.load(fh)
+            fresh["accountability"] = found
+            io.open(path, "w", encoding="utf-8", newline="\n").write(
+                json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
 
-        scored += 1
-        insured += bool(found["malpractice_insurance"])
-        affiliated += bool(found["bar_associations"])
-        print("%-24s %d/6  %s" % (record["domain"], found["pts"], found["evidence"][:96]))
+            scored += 1
+            insured += bool(found["malpractice_insurance"])
+            affiliated += bool(found["bar_associations"])
+            print("%-24s %d/6  %s" % (record["domain"], found["pts"], found["evidence"][:96]))
 
     print("\n%d firm(s) examined · %d disclose cover · %d name an association"
           % (scored, insured, affiliated))
     print("A5 is what a firm says about itself, so a firm that publishes neither scores nothing")
     print("here rather than being asked for it.")
+    return run.report()
 
 
 if __name__ == "__main__":
-    main()
+    # The exit code carries the firms this run could not do.
+    sys.exit(main())
