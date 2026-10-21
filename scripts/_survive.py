@@ -37,6 +37,10 @@ import sys
 import traceback
 
 
+#: The step did its work; some firms in it did not. Distinct from 1, which a traceback uses.
+STEP_RAN_SOME_FIRMS_FAILED = 3
+
+
 class Survive:
     def __init__(self, label: str, verbose: bool = False):
         self.label = label
@@ -60,7 +64,11 @@ class Survive:
         print("", file=out)
         print("Every other firm was done. Re-run this step for the ones above once the reason "
               "is understood; nothing was written for them.", file=out)
-        return 1
+        # 3 rather than 1, because an orchestrator has to tell these two apart. A Python
+        # traceback also exits 1, and that means the step itself broke and the next step would
+        # be running on top of a mess. This means the step finished and some firms did not,
+        # which is a reason to carry on and say so at the end.
+        return STEP_RAN_SOME_FIRMS_FAILED
 
 
 class _Firm:

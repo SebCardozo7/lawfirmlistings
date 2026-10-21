@@ -59,9 +59,10 @@ if (!/KeyboardInterrupt|SystemExit/.test(survive)) {
   problems.push('_survive.py no longer lets KeyboardInterrupt through, so a long run can no '
     + 'longer be stopped by hand.');
 }
-if (!/return 1/.test(survive)) {
-  problems.push('_survive.py no longer returns a non-zero code when firms failed, so a run '
-    + 'that limped exits as though it had not.');
+if (!/STEP_RAN_SOME_FIRMS_FAILED/.test(survive)) {
+  problems.push('_survive.py no longer returns its own exit code when firms failed. It has to '
+    + 'differ from 1, which a traceback uses, or an orchestrator cannot tell "the step broke" '
+    + 'from "the step finished and four firms did not".');
 }
 
 if (problems.length) {
