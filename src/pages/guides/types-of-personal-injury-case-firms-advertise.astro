@@ -1,0 +1,457 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+import { PRACTICES } from '../../data/practices';
+
+/**
+ * How many kinds of injury case a firm holds itself out for, counted across the directory.
+ *
+ * Every page ranking for "types of personal injury cases" is a firm's own blog post listing the
+ * categories, and the lists disagree with each other: four, six, seven, thirty-five. None of them
+ * counts what firms actually publish. The directory can, for the first time, because
+ * `practices[]` stopped being the cohort a firm was discovered by and became a reading of the
+ * firm's own site.
+ *
+ * The fields, and the script behind each, because two fields that sound alike have put a false
+ * sentence on a live page here before:
+ *
+ *   practices[].slug / .source_url  scripts/check_practice.py, applied by apply_practice.py. The
+ *                                   row exists only where the firm publishes its OWN page about
+ *                                   that area, with the practice in the page's title or first
+ *                                   heading. A footer link list does not qualify and neither does
+ *                                   a blog post. source_url is that page.
+ *   practices[].primary             the area the firm leads with, which is what puts it in a
+ *                                   cohort. False on every row the sub-practice sweeps added:
+ *                                   a page in a menu is evidence a firm does the work, not that
+ *                                   the work is what the firm is for.
+ *   results_published.case_types    scripts/crawl_results.py, and NOT the same vocabulary. It is
+ *                                   a regex list run over the text near a figure on the firm's
+ *                                   results page. It has no motorcycle entry and no nursing home
+ *                                   entry, so it can never name two of the areas counted here.
+ *                                   Read one as the other and the page would claim firms show
+ *                                   results in an area our own reader cannot see.
+ *
+ * The reach limit, stated on the page and worth repeating here. A firm whose site did not answer
+ * the sweep has no rows written for it, and nothing in a committed record separates "answered and
+ * publishes none of them" from "did not answer". So the study runs on injury firms carrying at
+ * least one area page and the rest are out of the denominator rather than counted as zero. That
+ * biases the measured breadth upward, which is the direction that makes the finding below
+ * harder rather than easier to state.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// The sub-practices of injury work the pipeline asks every injury firm about, as a set. Written
+// out rather than derived from the records, because an injury firm may also carry an immigration
+// or a workers' compensation page and those are different practices, not kinds of injury case.
+// The display names come from the practice catalogue so this page and the hub it links to can
+// never disagree about what an area is called.
+const AREA_SLUGS = [
+  'car-accidents', 'motorcycle-accidents', 'truck-accidents', 'slip-and-fall',
+  'wrongful-death', 'medical-malpractice', 'nursing-home-abuse',
+];
+
+const injury = firms.filter(f => f.data.practices.some(p => p.primary && p.slug === 'personal-injury'));
+const has = (f: typeof firms[number], slug: string) => f.data.practices.some(p => p.slug === slug);
+const breadth = (f: typeof firms[number]) => AREA_SLUGS.filter(s => has(f, s)).length;
+
+// The denominator. See the note above: a firm with no area row at all is not a firm that
+// publishes none, it is a firm we cannot speak for.
+const measured = injury.filter(f => breadth(f) > 0);
+const unreached = injury.length - measured.length;
+
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  if (!s.length) return 0;
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+const num = (n: number) => n.toLocaleString('en-US');
+// A count spelled into a sentence is still a count, so the noun beside one is computed too.
+const plural = (n: number, one: string, many: string) => (n === 1 ? one : many);
+
+// How many firms publish a page on each area, ordered by the count rather than by the list above,
+// so the chart reports the shape instead of our own ordering.
+const areaRows = AREA_SLUGS
+  .map(slug => ({ slug, name: PRACTICES[slug].name, n: measured.filter(f => has(f, slug)).length }))
+  .sort((a, b) => b.n - a.n || (a.slug < b.slug ? -1 : 1));
+
+const breadthCounts = AREA_SLUGS.map((_, i) => measured.filter(f => breadth(f) === i + 1).length);
+const medianBreadth = median(measured.map(breadth));
+const allAreas = measured.filter(f => breadth(f) === AREA_SLUGS.length).length;
+const oneArea = measured.filter(f => breadth(f) === 1).length;
+
+// How many different lists exist, and how few of them hold half the firms. Sorted by size and
+// then by the list itself, so a tie between two combinations of the same size cannot change
+// which one the page counts first between builds.
+const comboCounts = new Map<string, number>();
+for (const f of measured) {
+  const key = AREA_SLUGS.filter(s => has(f, s)).join(',');
+  comboCounts.set(key, (comboCounts.get(key) ?? 0) + 1);
+}
+const combos = [...comboCounts.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1));
+const possibleCombos = Math.pow(2, AREA_SLUGS.length) - 1;
+let cumulative = 0;
+let combosToHalf = 0;
+for (const [, n] of combos) {
+  cumulative += n;
+  combosToHalf += 1;
+  if (cumulative * 2 >= measured.length) break;
+}
+const firmsInThoseCombos = cumulative;
+
+// The two groups. The median firm publishes five, so the bands are set either side of it and the
+// median band belongs to neither: comparing the ends of a distribution against each other is the
+// comparison, and sweeping the middle into one side would flatter whichever side took it.
+const NARROW_MAX = 3;
+const WIDE_MIN = 6;
+const narrow = measured.filter(f => breadth(f) <= NARROW_MAX);
+const wide = measured.filter(f => breadth(f) >= WIDE_MIN);
+
+const ratings = (g: typeof firms) => g.map(f => f.data.reviews.google?.rating).filter((n): n is number => typeof n === 'number');
+const traffic = (g: typeof firms) => g.map(f => f.data.digital.ahrefs?.org_traffic).filter((n): n is number => typeof n === 'number');
+const reviewCounts = (g: typeof firms) => g.map(f => f.data.digital.places?.review_count_total).filter((n): n is number => typeof n === 'number');
+const totals = (g: typeof firms) => g.map(f => f.data.score?.total).filter((n): n is number => typeof n === 'number');
+
+const narrowScore = median(totals(narrow));
+const wideScore = median(totals(wide));
+const narrowAttorneys = median(narrow.map(f => f.data.attorneys.length));
+const wideAttorneys = median(wide.map(f => f.data.attorneys.length));
+const narrowTraffic = median(traffic(narrow));
+const wideTraffic = median(traffic(wide));
+const narrowReviews = median(reviewCounts(narrow));
+const wideReviews = median(reviewCounts(wide));
+const narrowRating = mean(ratings(narrow));
+const wideRating = mean(ratings(wide));
+const ratingGap = Math.abs(wideRating - narrowRating);
+
+// Control one: hold the size of the firm still. If the whole effect were that bigger firms have
+// more pages, the gap would close inside a band and it does not.
+const SIZE_BANDS = [
+  { label: 'Firms naming 1 attorney or none', lo: 0, hi: 1 },
+  { label: 'Firms naming 2 to 4 attorneys', lo: 2, hi: 4 },
+  { label: 'Firms naming 5 or more', lo: 5, hi: Infinity },
+];
+const sizeControl = SIZE_BANDS.map(b => {
+  const inBand = (g: typeof firms) =>
+    g.filter(f => f.data.attorneys.length >= b.lo && f.data.attorneys.length <= b.hi);
+  const n = inBand(narrow);
+  const w = inBand(wide);
+  return {
+    label: b.label,
+    narrowN: n.length, wideN: w.length,
+    narrowScore: median(totals(n)), wideScore: median(totals(w)),
+  };
+});
+
+// Control two, which is the falsification. A rating moves with how many reviews are behind it,
+// so the comparison is run inside bands of review volume as well as across the whole group.
+const REVIEW_BANDS = [
+  { label: 'Under 100 reviews', lo: 0, hi: 99 },
+  { label: '100 to 499 reviews', lo: 100, hi: 499 },
+  { label: '500 or more reviews', lo: 500, hi: Infinity },
+];
+const ratingControl = REVIEW_BANDS.map(b => {
+  const inBand = (g: typeof firms) => g.filter(f => {
+    const c = f.data.digital.places?.review_count_total;
+    return typeof c === 'number' && c >= b.lo && c <= b.hi;
+  });
+  const n = inBand(narrow);
+  const w = inBand(wide);
+  return {
+    label: b.label,
+    narrowN: n.length, wideN: w.length,
+    narrowRating: mean(ratings(n)), wideRating: mean(ratings(w)),
+  };
+});
+// Said as a count rather than as an adjective, because "the long lists rate lower everywhere" is
+// a hardcoded claim about a computed relationship and would go false without the page noticing.
+const bandsWhereWideRatesHigher = ratingControl.filter(b => b.wideRating > b.narrowRating).length;
+
+// Control three: hold the market still. The score gap has to survive inside a single city or it
+// is a fact about which cities we opened, not about the firms.
+const marketControl = [...new Set(measured.map(f => f.data.market.city_slug))]
+  .map(slug => {
+    const inCity = (g: typeof firms) => g.filter(f => f.data.market.city_slug === slug);
+    const n = inCity(narrow);
+    const w = inCity(wide);
+    const sample = measured.find(f => f.data.market.city_slug === slug)!;
+    return {
+      slug, city: sample.data.market.city, state: sample.data.market.state,
+      n: n.length, w: w.length,
+      narrowScore: median(totals(n)), wideScore: median(totals(w)),
+    };
+  })
+  .filter(m => m.n >= 8 && m.w >= 8)
+  .sort((a, b) => (b.n + b.w) - (a.n + a.w) || (a.slug < b.slug ? -1 : 1));
+const marketsWhereGapHolds = marketControl.filter(m => m.wideScore > m.narrowScore).length;
+
+// Where the score gap comes from, in raw pillar points on both sides of the division, so the
+// numerator and the denominator are the same unit. Pillar scores, not the coverage-adjusted
+// total: dividing a pillar gap by a gap in percentages would produce a figure that computes and
+// means nothing.
+const PILLARS = [
+  { key: 'A' as const, label: 'A. Professional standing' },
+  { key: 'B' as const, label: 'B. Published outcomes' },
+  { key: 'C' as const, label: 'C. What clients said' },
+  { key: 'D' as const, label: 'D. Digital presence' },
+  { key: 'E' as const, label: 'E. Access and fees' },
+];
+const narrowScored = narrow.filter(f => f.data.score);
+const wideScored = wide.filter(f => f.data.score);
+const pillarGaps = PILLARS.map(p => ({
+  key: p.key,
+  label: p.label,
+  gap: mean(wideScored.map(f => f.data.score!.pillars[p.key].score))
+     - mean(narrowScored.map(f => f.data.score!.pillars[p.key].score)),
+}));
+const gapTotal = pillarGaps.reduce((n, p) => n + p.gap, 0);
+const clientGap = pillarGaps.find(p => p.key === 'C')!.gap;
+const outcomeGap = pillarGaps.find(p => p.key === 'B')!.gap;
+const clientShare = Math.round((clientGap / gapTotal) * 100);
+
+// What our own case type reader cannot see.
+//
+// The areas above are one vocabulary. The kinds of case our results crawler can recognise are a
+// different one, written as CASE_TYPES in scripts/crawl_results.py, and the two do not share
+// their words: a car accident page is read as "motor vehicle" and a slip and fall page as
+// "premises". So the mapping is written out rather than guessed from the slugs, and a null is
+// that list having no word for the area at all. The counts underneath it are computed, and so is
+// the check that each named type occurs in a record somewhere, which is what stops this map
+// going quietly stale if the crawler's list is rewritten.
+const CASE_TYPE_FOR: Record<string, string | null> = {
+  'car-accidents': 'motor vehicle',
+  'motorcycle-accidents': null,
+  'truck-accidents': 'truck',
+  'slip-and-fall': 'premises',
+  'wrongful-death': 'wrongful death',
+  'medical-malpractice': 'medical malpractice',
+  'nursing-home-abuse': null,
+};
+const typesInUse = new Set(firms.flatMap(f => f.data.results_published?.case_types ?? []));
+const BLIND_SLUGS = AREA_SLUGS.filter(slug => {
+  const t = CASE_TYPE_FOR[slug];
+  return t === null || !typesInUse.has(t);
+});
+const blindAreas = BLIND_SLUGS
+  .map(slug => ({ slug, name: PRACTICES[slug].name, n: measured.filter(f => has(f, slug)).length }))
+  .sort((a, b) => b.n - a.n || (a.slug < b.slug ? -1 : 1));
+const blindFirms = measured.filter(f => BLIND_SLUGS.some(s => has(f, s))).length;
+// And what the missing words actually cost, rather than an assertion that they cost little.
+// B2's case type component is `min(3, types)`, so a firm already naming three kinds of case
+// loses nothing when a fourth has no word. This is the count of firms sitting at that cap.
+const B2_TYPE_CAP = 3;
+const withResultsPage = measured.filter(f => f.data.results_published?.readable && f.data.results_published?.url);
+const atTypeCap = withResultsPage.filter(f =>
+  (f.data.results_published?.case_types ?? []).length >= B2_TYPE_CAP).length;
+
+// The two examples, picked by computation and tie-broken on the slug so the page cannot change
+// its own illustration between builds. Each link is rendered from the firm it names, and each
+// market link from that firm's own market and its own area, because deriving the text of a link
+// and hardcoding its target is the same bug as hardcoding the text.
+const bySlug = (a: typeof firms[number], b: typeof firms[number]) => (a.data.slug < b.data.slug ? -1 : 1);
+const byScore = (a: typeof firms[number], b: typeof firms[number]) =>
+  (b.data.score?.total ?? 0) - (a.data.score?.total ?? 0) || bySlug(a, b);
+const widestBest = [...measured.filter(f => breadth(f) === AREA_SLUGS.length)].sort(byScore)[0];
+const narrowestBest = [...measured.filter(f => breadth(f) === 1)].sort(byScore)[0];
+const narrowestArea = narrowestBest ? AREA_SLUGS.filter(s => has(narrowestBest, s))[0] : null;
+// The firm's own leading practice, so the ranking this links to is the one the firm is in rather
+// than one typed in beside its name.
+const widestPractice = widestBest?.data.practices.find(p => p.primary)?.slug ?? 'personal-injury';
+
+const snapshot = [...measured]
+  .flatMap(f => f.data.practices.map(p => p.checked_at))
+  .filter((d): d is string => Boolean(d))
+  .sort()
+  .at(-1) ?? '';
+const readOn = snapshot
+  ? new Date(snapshot).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// The finding, with the count leading and the scale beside it. figuresFrom declares the date the
+// figures are a snapshot of, which is what lets a computed count sit in a title: a stale snippet
+// about a stated date is still a true statement.
+const title = `${allAreas} of ${measured.length} Injury Firms Advertise All `
+  + `${AREA_SLUGS.length} Types of Personal Injury Case`;
+const description = "We read every injury firm's own practice pages to count which kinds of case "
+  + 'it says it takes. The lists run long, and they repeat. What that predicts.';
+---
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published injury firm's own practice pages, read ${snapshot}`}
+      image="/og/menu.png"
+      imageAlt="Five law firm practice menus side by side, three of them carrying the same full list of case types and one carrying a single entry">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Types of case firms advertise</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Study · What firms hold themselves out for</span>
+    <h1>{title}</h1>
+    <p class="lede">Every page answering this question publishes a list of case types, and the lists disagree with each other. We did it the other way around: we read the practice pages of {num(injury.length)} personal injury firms and counted the kinds of case each firm publishes its own page about. Of the {num(measured.length)} whose sites answered, the median firm advertises <b>{medianBreadth}</b> of {AREA_SLUGS.length}, and <b>{num(allAreas)}</b> advertise all of them.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {readOn && <><span class="sep" aria-hidden="true"></span><span>Pages read {readOn}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>7 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="menu" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we counted</a></li>
+      <li><a href="#lists">What the lists look like</a></li>
+      <li><a href="#predicts">What a long list predicts</a></li>
+      <li><a href="#not">What it does not predict</a></li>
+      <li><a href="#ourselves">What our own score does with it</a></li>
+      <li><a href="#use">How to use the list instead</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Measured across ${num(measured.length)} personal injury firms, from each firm's own practice pages${readOn ? `, read ${readOn}` : ''}.`}
+      items={[
+        `<b>${num(allAreas)} of ${num(measured.length)}</b> injury firms publish their own page on all ${AREA_SLUGS.length} kinds of case we check for, and the median firm publishes <b>${medianBreadth}</b>.`,
+        `Only <b>${combos.length}</b> different lists exist across those firms, out of ${possibleCombos} possible, and <b>${combosToHalf}</b> of them cover <b>${num(firmsInThoseCombos)} of ${num(measured.length)}</b> firms.`,
+        `A firm advertising ${WIDE_MIN} or ${AREA_SLUGS.length} kinds of case has a median of <b>${wideAttorneys} attorneys</b> and <b>${num(wideTraffic)}</b> monthly search visits, against <b>${narrowAttorneys}</b> and <b>${num(narrowTraffic)}</b> for a firm advertising ${NARROW_MAX} or fewer.`,
+        `Mean Google rating runs <b>${narrowRating.toFixed(2)}</b> for the short lists and <b>${wideRating.toFixed(2)}</b> for the long ones, a gap of <b>${ratingGap.toFixed(2)}</b> of a star, so the length of the list says nothing about what clients said.`,
+      ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${num(allAreas)} of ${num(measured.length)}`, label: `publish a page on all ${AREA_SLUGS.length} kinds of case`, note: 'their own page, with the practice in its title or first heading', emphasis: true },
+        { value: String(medianBreadth), label: 'kinds of case the median firm advertises', note: `out of the ${AREA_SLUGS.length} we check for` },
+        { value: String(combos.length), label: 'different lists in the whole directory', note: `out of ${possibleCombos} that could exist` },
+        { value: `${narrowRating.toFixed(2)} to ${wideRating.toFixed(2)}`, label: 'mean Google rating, shortest lists to longest', note: 'the one thing the list does not move' },
+      ]}
+      source={`Read from each firm's own practice pages${snapshot ? `, ${snapshot}` : ''}.`}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we counted</h2>
+    <p>A firm's practice area list is the first thing a client reads and the easiest thing on a law firm website to write. It is also the unit the legal directories are built out of: a taxonomy of areas of law, filled in from what lawyers say about themselves and checked by nobody.</p>
+    <p>We count something narrower and checkable. A kind of case is recorded against a firm only where the firm publishes <b>its own page</b> about it, with the practice in the page's title or first heading. A link in a footer does not count, because a footer link list tends to carry every area of law that exists. A blog post does not count either. The page we read is stored with the record, so every one of these claims is a URL somebody can open.</p>
+    <p>The {AREA_SLUGS.length} kinds of case are the ones the directory asks every injury firm about:</p>
+    <BarChart
+      heading={`How many of the ${num(measured.length)} injury firms publish their own page on each kind of case`}
+      max={measured.length}
+      rows={areaRows.map(a => ({
+        label: a.name,
+        href: `/practice-areas/${a.slug}/`,
+        value: a.n,
+        display: `${num(a.n)} of ${num(measured.length)}`,
+      }))}
+      caption={`Counted from the firm's own practice page, not from a menu or a footer. Each name links to the firms we have measured in that area.`}
+    />
+    <p><b>The limit of this, stated before anything is built on it.</b> {num(unreached)} of the {num(injury.length)} injury firms in the directory carry no area page at all, and that is not a finding about those firms. A site that did not answer our crawler has nothing written against it, and a committed record cannot tell "publishes none of them" apart from "did not answer". So those {num(unreached)} are out of the denominator rather than counted as zero. Everything below runs on the {num(measured.length)} firms that answered and publish at least one, which pushes the measured breadth up rather than down.</p>
+
+    <h2 id="lists">What the lists look like</h2>
+    <p>They are long. {num(allAreas)} firms publish a page on every one of the {AREA_SLUGS.length}, and {num(oneArea)} publish exactly one.</p>
+    <ColumnChart
+      heading={`How many kinds of case a firm publishes a page on, across ${num(measured.length)} firms`}
+      columns={breadthCounts.map((n, i) => ({
+        label: String(i + 1),
+        value: n,
+        note: i + 1 === medianBreadth ? 'median' : undefined,
+        emphasis: i + 1 >= WIDE_MIN,
+      }))}
+      emphasisLabel={`${WIDE_MIN} or more`}
+      quietLabel={`fewer than ${WIDE_MIN}`}
+      caption={`Each column is the number of firms publishing that many of the ${AREA_SLUGS.length} kinds of case. The median firm publishes ${medianBreadth}.`}
+    />
+    <p><b>And they repeat.</b> With {AREA_SLUGS.length} areas there are {possibleCombos} lists a firm could publish. Only {combos.length} of them occur here at all, and {combosToHalf} of those {combosToHalf === 1 ? 'covers' : 'cover'} {num(firmsInThoseCombos)} of the {num(measured.length)} firms. A client comparing two injury firms in the same city is, more often than not, comparing two copies of the same menu.</p>
+    <p>That is worth saying plainly, because the practice area list is doing a job it cannot do. It is written to signal range, and in a market where almost everybody signals the same range it carries no information at all.</p>
+
+    <h2 id="predicts">What a long list predicts</h2>
+    <p>Something, as it turns out, and not the thing it is written to suggest. We split the firms at either end of the distribution: {num(narrow.length)} publishing {NARROW_MAX} kinds of case or fewer, {num(wide.length)} publishing {WIDE_MIN} or more. The median firm publishes {medianBreadth}, so the middle band belongs to neither group.</p>
+    <StatRow
+      stats={[
+        { value: `${narrowAttorneys} to ${wideAttorneys}`, label: 'median attorneys named, short lists to long', note: 'names on a page we could read' },
+        { value: `${num(narrowReviews)} to ${num(wideReviews)}`, label: 'median Google reviews', note: 'summed across the firm’s verified listings' },
+        { value: `${num(narrowTraffic)} to ${num(wideTraffic)}`, label: 'median monthly organic search visits', note: 'Ahrefs, for the firm’s own domain' },
+        { value: `${narrowScore} to ${wideScore}`, label: 'median certification score', note: 'out of what we could assess for each firm', emphasis: true },
+      ]}
+      source={`${num(narrow.length)} firms publishing ${NARROW_MAX} kinds of case or fewer against ${num(wide.length)} publishing ${WIDE_MIN} or more.`}
+    />
+    <p>A firm publishing the long list is a larger firm with a larger marketing operation. The median jumps from {narrowAttorneys} {plural(narrowAttorneys, 'attorney', 'attorneys')} to {wideAttorneys}, and from {num(narrowTraffic)} monthly search visits to {num(wideTraffic)}. That is not a surprise: a page per practice area is how an injury firm wins the searches that matter, and we have <a href="/guides/what-search-traffic-says-about-a-law-firm/">measured before what search visibility tracks and what it does not</a>.</p>
+    <p><b>The obvious objection is that this is just firm size</b>, so we held size still. Inside every band of attorney count the gap survives:</p>
+    <BarChart
+      heading="Median certification score inside bands of firm size"
+      max={100}
+      rows={sizeControl.flatMap(b => [
+        { label: `${b.label}: ${NARROW_MAX} kinds of case or fewer`, value: b.narrowScore, display: `${b.narrowScore}`, note: `${num(b.narrowN)} firms` },
+        { label: `${b.label}: ${WIDE_MIN} or more`, value: b.wideScore, display: `${b.wideScore}`, note: `${num(b.wideN)} firms`, emphasis: true },
+      ])}
+      caption={`Out of 100. The highlighted bar in each pair is the long-list group. If the whole effect were that bigger firms publish more pages, these pairs would close. They do not.`}
+    />
+    <p>We held the market still too. In the {marketControl.length} markets holding at least eight firms on each side, the long lists carry the higher median score in {marketsWhereGapHolds} of them, so this is not a fact about which cities we happen to have opened.</p>
+
+    <h2 id="not">What it does not predict</h2>
+    <p>This is the test the headline rests on, so it is the one we tried hardest to fail. If a longer list meant a firm that handles more kinds of case competently, the people who hired it should say so.</p>
+    <p>They do not. Mean Google rating is {narrowRating.toFixed(2)} for the short lists and {wideRating.toFixed(2)} for the long ones, a difference of {ratingGap.toFixed(2)} of a star across {num(ratings(narrow).length + ratings(wide).length)} firms. A rating also moves with how many reviews sit behind it, so we ran the comparison inside bands of review volume as well:</p>
+    <BarChart
+      heading="Mean Google rating inside bands of review volume"
+      max={5}
+      rows={ratingControl.flatMap(b => [
+        { label: `${b.label}: ${NARROW_MAX} kinds of case or fewer`, value: b.narrowRating, display: b.narrowRating.toFixed(2), note: `${num(b.narrowN)} firms` },
+        { label: `${b.label}: ${WIDE_MIN} or more`, value: b.wideRating, display: b.wideRating.toFixed(2), note: `${num(b.wideN)} firms`, emphasis: true },
+      ])}
+      caption={`Out of 5. The highlighted bar in each pair is the long-list group. The bars are nearly the same length on purpose: that is the finding.`}
+    />
+    <p>Count the bands where the long lists carry the higher mean rating: {bandsWhereWideRatesHigher} of {ratingControl.length}. Whatever a longer practice area list is evidence of, it is not evidence that clients came away happier, and it is the same shape this directory has found before: the things a firm publishes about itself move together, and the things its clients said sit apart from all of them.</p>
+    <p>The individual firms make the point faster than the averages do. {widestBest && <>The highest-scoring firm here publishing all {AREA_SLUGS.length} kinds of case is <a href={`/firms/${widestBest.data.slug}/`}>{widestBest.data.name}</a>, at {widestBest.data.score?.total}, in <a href={`/cities/${widestBest.data.market.city_slug}/${widestPractice}/`}>{widestBest.data.market.city}</a>.</>}{narrowestBest && narrowestArea && <> The highest-scoring firm publishing exactly one is <a href={`/firms/${narrowestBest.data.slug}/`}>{narrowestBest.data.name}</a>, at {narrowestBest.data.score?.total}, which publishes <a href={`/cities/${narrowestBest.data.market.city_slug}/${narrowestArea}/`}>{PRACTICES[narrowestArea].name.toLowerCase()} in {narrowestBest.data.market.city}</a> and nothing else. That is above the median of {wideScore} for the whole long-list group.</>}</p>
+
+    <h2 id="ourselves">What our own score does with it</h2>
+    <p><b>The certification score awards no points for the length of a practice area list.</b> There is no sub-factor for it, and adding one would be a mistake. Yet the long-list firms score {wideScore - narrowScore} median points higher, which means the list is tracking things the score does measure.</p>
+    <p>Here is where that gap sits, in raw pillar points on both sides, which is the same unit on each:</p>
+    <BarChart
+      heading={`Where the ${gapTotal.toFixed(1)} raw-point gap between the two groups sits`}
+      rows={pillarGaps.map(p => ({
+        label: p.label,
+        value: Math.max(0, p.gap),
+        display: `${p.gap >= 0 ? '+' : ''}${p.gap.toFixed(2)}`,
+        emphasis: p.key === 'C',
+      }))}
+      caption={`Mean pillar score for the long lists minus the mean for the short ones, in raw points out of each pillar's own maximum. The highlighted bar is pillar C, which is what clients said.`}
+    />
+    <p>Pillar B, what a firm publishes about its own outcomes, is {outcomeGap.toFixed(2)} of those points. Pillar C, which reads Google ratings, review volume and complaints, is {clientGap.toFixed(2)}, or {clientShare}% of the gap. <b>Almost everything separating the two groups is a count of how much a firm publishes</b>, and the practice area list is one more count of the same thing. That is a real limit of this scale and we would rather say it here than have somebody else find it.</p>
+    <p>There is a second fault, and this one is ours alone. Pillar B pays up to three points for how many kinds of case a firm names beside a published result, read with a fixed vocabulary in our own crawler. {blindAreas.length > 0 && <>That vocabulary has no entry for {blindAreas.map((a, i) => <>{i > 0 ? ' or ' : ''}<a href={`/practice-areas/${a.slug}/`}>{a.name.toLowerCase()}</a></>)}. {num(blindFirms)} firms here publish a page on at least one of those, and not one of them can ever have a result recorded as that kind of case, because our reader has no word for it.</>} It costs almost nothing in points, and we checked rather than assuming: that sub-factor pays for the first {B2_TYPE_CAP} kinds of case and no more, and {num(atTypeCap)} of the {num(withResultsPage.length)} firms here with a results page we could read are already at that cap on other categories. It still means the evidence line on those profiles describes a firm's work less well than the firm's own site does. The fix is in the crawler, not in the firms.</p>
+    <p><a href="/methodology/">The full methodology</a> sets out every sub-factor, the evidence behind it, and the coverage arithmetic that sits under every total on this page: a firm's score is a share of what we could assess about it, not of a flat hundred.</p>
+
+    <h2 id="use">How to use the list instead</h2>
+    <p>The practice area list is not useless. It is a filter, not a ranking: it tells you whether a firm will take your call about this kind of case, and that is all it was ever able to tell you. Read it that way and then stop.</p>
+    <p>What separates two firms that both advertise your kind of case is what each one publishes that can be checked. Whether there is a case results page at all, and whether the notice that belongs beside a published figure is on it, is <a href="/guides/attorney-advertising-disclaimers/">a count we have run across the whole directory</a>. What else a firm's website does and does not publish is in <a href="/guides/what-law-firm-websites-publish/">the survey of five page types</a>. What a state lets anybody verify about a lawyer at all, which is a shorter list than most people expect, is <a href="/guides/what-you-can-check-about-a-lawyer-by-state/">counted state by state</a>.</p>
+    <p>Every one of those is on the firm's profile, with the page we read it from. The city rankings put them in order: <a href="/practice-areas/personal-injury/">the personal injury hub</a> carries the highest-scoring firms across every market we have measured, and each market's own page ranks the firms there by the same evidence.</p>
+    <p>If you run one of these firms and the list we read is wrong, the page we used is on your profile and <a href="/list-your-firm/">the firm panel</a> is where to correct it. A practice page we could not reach is a measurement of our crawler, and we would rather fix it than publish it.</p>
+    <p class="muted" style="font-size:.86rem">Practice areas are read from each firm's own pages by scripts/check_practice.py, which honours robots.txt and records a refusal as a refusal. Google ratings and review counts come from the Places API, search figures from Ahrefs. A firm whose site did not answer is left out of a count rather than scored zero in it.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted here has a profile showing the practice pages we read, its offices, fees, client reviews and measured digital presence.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related studies</h4>
+      <ul>
+        <li><a href="/guides/what-search-traffic-says-about-a-law-firm/">What search traffic says about a firm</a></li>
+        <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
+        <li><a href="/guides/attorney-advertising-disclaimers/">The notice beside a case result</a></li>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

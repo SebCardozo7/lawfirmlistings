@@ -243,7 +243,67 @@ The fix renders one link per market, deduplicated on the path, so a pair in one 
 renders a single link. **When a sentence can name N things, the markup has to be able to link N
 things.**
 
+## Three traps this run walked into, added 2026-10-19
+
+All three were caught before publishing. Two would have passed every check in the repository and
+the third would have put a false denominator in a headline.
+
+**The sweep that fills a field is not the same as the field being filled.** This run's topic is
+`practices[]`, which stopped being the cohort a firm was discovered by and became a reading of the
+firm's own site in #133 and #137. The obvious first sentence was that **205 of 1,113 injury firms
+advertise one kind of case and nothing else**. Every one of those 205 was last checked **before
+2026-10-14**, which is to say before the sub-practice sweeps ran at all: their records say one
+practice because nobody asked them about the other six. The sweep's own commit message says it,
+and the committed data does not: a firm that answered and matched nothing writes no row, exactly
+like a firm whose site never answered. So absence in `practices[]` is **not** a finding, the
+denominator is the 901 injury firms carrying at least one sub-practice row, and the page says so
+in the section above the first chart. Same family as `readable` on 2026-10-12, with the twist that
+here the trap is in the *recency* of a row rather than in what the row means.
+
+**Two vocabularies that name the same things with different words.** `practices[].slug` and
+`results_published.case_types` both describe kinds of injury case and they share almost no
+vocabulary: a car accidents page is read as `motor vehicle`, a slip and fall page as `premises`,
+and **`motorcycle` and `nursing home` are not in CASE_TYPES at all**. A draft that inferred the
+mapping from the slugs would have reported `car-accidents` as an area our own crawler cannot see,
+which is false, and missed the two that it genuinely cannot. The published page writes the mapping
+out with a comment pointing at `scripts/crawl_results.py` and computes everything else, including
+the check that each named type occurs in a record somewhere, so the map cannot go quietly stale.
+
+**The sentence that explains away a fault is the one to compute.** The self-critical paragraph
+first read that the missing vocabulary "costs almost nothing in points, since the component is
+capped and most firms reach the cap on other categories." True, and uncomputed, sitting between
+two computed figures. B2's case type component is `min(3, types)`, and **461 of the 475 firms here
+with a results page we could read already name three or more**, so the sentence now carries that
+count. An excuse for a fault is still a claim about the data.
+
 ## Generated pages, so a topic is not aimed at one of them
+
+**Re-counted on 2026-10-19, and this is the largest move this section has ever recorded.**
+`main` took the sub-practice sweeps (#133 and #137), which asked every published injury firm
+whether it publishes its own page on car accidents, slip and fall, truck accidents, wrongful
+death and medical malpractice, and then asked all 1,412 records about motorcycle accidents and
+nursing home abuse. Practice rows went from about 1,450 to **5,919**. The build now produces
+**1,609 pages from 1,388 published firms in 19 markets and 13 states**, with 26 published guides
+plus the gated ranking.
+
+**The number that changes what a guide may be about is the city x practice count: 152, against 23
+on 2026-10-05.** Every one of those is off limits as a guide topic, and the set now covers seven
+injury sub-practices in nearly every market rather than `personal-injury` plus a handful of
+oddities. Practice hubs went from 6 to **13**: the six that existed plus `car-accidents`,
+`motorcycle-accidents`, `truck-accidents`, `slip-and-fall`, `wrongful-death`,
+`medical-malpractice` and `nursing-home-abuse`. **Read the rendered hub before claiming a query
+is unowned**, as the 2026-10-12 entry says: each new hub carries "How to choose a <practice>
+lawyer" in its H2 and the same phrase in its meta description, so the whole `how to choose a
+<injury sub-practice> lawyer` family is now owned by generated pages.
+
+By status, 2026-10-19: **173 certified**, 412 listed, 803 verified, and 24 records `not_eligible`
+which nothing published may count. Certified went 57 to 173 over three runs. Firm counts by
+state: **CA 245**, NY 235, FL 222, TX 156, IL 103, AZ 100, NV 84, GA 80, PA 71, MD 31, MA 28,
+OR 20, IN 13. Primary practice: personal injury 1,113, immigration 115, criminal defense 81,
+family law 42, real estate 20, workers' compensation 17. `transaction` (20) and `domestic` (42)
+are unchanged, so pillar B still has the same three branches.
+
+The 2026-10-16 text follows.
 
 **Moved again on 2026-10-16, while this run's pull request was still open, and that is the
 useful part of the entry.** `main` took Los Angeles and five sub-practices (#128) and the Indiana
@@ -314,6 +374,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-10-19 | `/guides/types-of-personal-injury-case-firms-advertise/` | **"types of personal injury cases" (600/mo US, 800 global, KD 0, CPC $4.50, traffic potential 150, informational, parent topic `personal injury case`)**, with `law firm practice areas` (100/mo, KD 17, TP 150, parent `practice areas`) and `lawyer practice areas` (30/mo, **KD 0**) beside it. The specialization cluster was checked first and is **dead**: `do lawyers specialize` 10/mo, `what is a practice area in law` 0/mo, and every `specialized lawyer` term above 40/mo is local intent for a named practice. `general practice attorney` (800/mo, KD 0) and `general practice lawyer` (700/mo, KD 0) are real volume and were **rejected**: both carry local intent, and a study of injury sub-practices is not what somebody typing them wants. The SERP for the target is **ten law firm blog posts and one legal-software vendor, DR 12 to 41, every one of them a list** whose counts contradict each other: 4, 6, 7, 35. Nobody on that page has counted a firm | Not from the ranked list, eighth run running. The topic came from the data moving: #133 and #137 took practice rows from ~1,450 to 5,919, and `practices[].source_url` is now on **5,914 of 5,919** rows, meaning the firm's own page with the practice in its title or first heading. Denominator is the **901 of 1,113 injury firms carrying at least one sub-practice row**, because absence is our sweep rather than their silence (see the trap above). **217 publish a page on all seven, 46 publish exactly one, the median publishes five.** The concentration is the sharper half: only **84 of 127 possible lists occur at all, and 3 of them cover 474 of 901 firms**. What a long list predicts: median 7 attorneys against 1, 1,295 monthly organic visits against 110, 331 reviews against 162, median score 58 against 41. Controls, all three held: inside every band of attorney count the score gap survives (39 v 50, 38.5 v 54, 51 v 60), and in the 11 markets with 8+ firms on each side the long lists carry the higher median in 11. Falsification, and it held: mean Google rating **4.88 against 4.85**, 0.03 of a star, and the long lists carry the higher mean in **0 of 3** bands of review volume. Self-critical half: the score awards **no points at all** for the length of the list, yet the groups are 17 median points apart, and of the 10.9 raw-point pillar gap **pillar C, what clients said, is 0.45, or 4%**. Second fault, ours alone: CASE_TYPES in `crawl_results.py` has **no motorcycle and no nursing home entry**, so 782 firms publishing a page on one of those can never have a result recorded as that kind. |
 | 2026-10-12 | `/guides/attorney-advertising-disclaimers/` | **"attorney advertising rules" (200/mo US, KD 14, CPC $4.50, traffic potential 200)**, with `legal advertising rules` (150/mo, **KD 0**, CPC $8.00), `lawyer advertising rules` (100/mo, KD 9, TP 250) and `attorney advertising disclaimer` (40/mo, **KD 0**, CPC $9.00, its own parent topic). Roughly **490/mo at KD 0 to 14**. Deliberately **not** `how to choose a personal injury lawyer`, which `/practice-areas/personal-injury/` already targets in its own H2 and meta description, and deliberately not `law firm advertising` or `lawyer advertising`, which the 2026-09-30 guide holds. The SERP is rankings.io, growlawfirm, clio, onthemap and ignitedigital restating the rules, plus NYSBA: **every result is a legal marketing agency and not one of them has counted anything** | Not from the ranked list, seventh run running. Found by the fill-rate survey: `results_published.disclaimer` is on **1,210 of 1,248** records, is read by the scoring engine at B3, and no entry in this file had ever mentioned it. **676 firms publish no case results page at all**; of the 532 that publish an outcome, **340 carry no prior-results notice on that page**, and of the 477 printing dollar figures, **304** carry none. The finding that keeps it fair is the second field: of the 335 silent firms whose sites we crawled, **214 keep a disclaimer or terms page elsewhere** and 121 have neither, so it is placement rather than candour. Falsification, and it went the other way: firms publishing a firm-wide recovery total carry the notice **42%** of the time against **32%** for firms publishing individual outcomes only, so the loudest advertisers are the more careful ones. Clients are inseparable, mean Google rating 4.85 against 4.86. Self-critical half, three parts: B3 is **4 points, all or nothing**, **616 firms score zero on it for results they never published**, D1 pays half a point for the same sentence on a different page so the 214 collect one and lose the other, and **60% of the mean 6.5-raw-point gap between the two groups is B3 itself**, both halves in raw points. No dollar amount appears anywhere on the page. |
 | 2026-10-05 | `/guides/how-to-choose-a-criminal-defense-lawyer/` | **"how to choose a criminal lawyer" (450/mo US, KD 0, CPC $3.00, traffic potential 250)**, with `how to choose a criminal defense lawyer` (150/mo, **KD 0**, its own parent topic), `how to choose a criminal defense attorney` (90/mo, KD 0, CPC $3.00) and the general `how to choose a lawyer` (200/mo, KD 11, TP 800) and `how to pick an attorney` (90/mo, KD 7, TP 800) above it. Roughly **700/mo at KD 0 inside criminal defense alone**, inside a per-practice cluster (`how to choose a divorce lawyer` 250, `personal injury` 250, `medical malpractice` 450, `workers comp` 100) that is the FindLaw fork pattern and is worth a run each. Deliberately **not** `criminal defense lawyer new york`, which is `/cities/new-york-ny/criminal-defense/`. The `success rate` cluster was checked first and is **dead at 0/mo**: `criminal defense attorney success rate`, `immigration lawyer success rate` and `attorney win rate` all return zero volume | Not from the ranked list, sixth run running. The topic came from the fill-rate survey finding a new **practice**, criminal defense, 85 firms, none of which existed here on 2026-10-02, and from the SERP: every one of the ten results is a firm's own blog, Reddit, Quora, Avvo legal answers or StackExchange, **nobody on that page has measured anything**, and all of them give the same advice, which is to check the track record. We counted whether there is one. **60 of 85 publish no case result on a page we could read, against 28 of 77 injury firms in the same city.** Of the 24 that publish, 13 attach no figure to any outcome, while all 46 publishing injury firms print amounts: a dismissal has no dollar value. Controls: hold the publishing constant and the court-naming gap disappears (19 of 24 against 33 of 46, 79% against 72%), so the cohort gap is in **how many publish at all**, not in how carefully. Falsification, and it held: mean Google rating 4.80 against 4.85, C5 complaint share 3.60 against 3.60 of 4, and A2 experience 8.45 against 8.35 of 10, so nothing a client said moves with the 21-point median score gap. What does move is reach, median organic traffic 137 against 1,737. Self-critical half: pillar B has three shapes and criminal defense fits none, so **61 of 85 score zero in it**; the honest arithmetic is that B is only **24% of the 16.7 raw-point gap** and the rest is roster, review volume, fee transparency and the 24/7 line, every one a count of how much a firm publishes. |
 | 2026-10-02 | `/guides/do-lawyers-offer-free-consultations/` | **"are lawyer consultations free" (200/mo US, KD 7, CPC $2.00, its own parent topic)**, with `free consultation attorney` (250/mo, **KD 0**, CPC $0.80), `do lawyers offer free consultations` (150/mo, KD 2, CPC $5.00) and `lawyer consultation fee` (350/mo, KD 1). Roughly **950/mo at KD 0 to 7**, all informational. Deliberately **not** `free consultation lawyer` (3,000/mo) or `immigration lawyer free consultation` (2,100/mo), which are transactional "find me one" queries whose parent topics are `free lawyers for low-income families` and `free consultation immigration attorney`: those belong to the generated city and practice pages, not to a guide | Not from the ranked list. Fifth run running where the fill-rate survey beat the ranking, and this time the survey turned up a whole new **practice**: immigration, 115 firms, which did not exist in this directory on 2026-09-30. `free_consultation` is on every record and **no guide had ever counted it across practices**; three had counted it inside injury, where it is unanimous and therefore says nothing. Across the directory it is **971 of 1,167**, which looks like a profession-wide habit and is not: **912 of 973 injury firms against 24 of 115 immigration firms**, 17 of 42 family law, 2 of 20 real estate, 16 of 17 workers' compensation. **The practice moves it and the market does not:** inside injury it runs 64% to 100% across 17 markets with 15 of them at 85% or above, and in Miami, where both cohorts sit, it is 70 of 73 against 24 of 115. Crawl-reach control (restrict to firms carrying `trust_pages`): 894 of 947 against 23 of 94, gap unchanged. Falsification: inside injury the publishers do score higher (median 52 against 39), but on **what clients said** the groups are inseparable, mean rating 4.87 against 4.83, which is the same shape the 2026-09-30 piece found for search visibility. Self-critical half: **E1 is worth 6 points, injury averages 2.59 of it and immigration 0.24**, and the other half of E1 reads `fee_statement`, filled on 149 of 973 injury firms and **0 of 115 immigration firms**. Our scale measures a billing convention and calls it access. |
@@ -332,6 +393,45 @@ Every city and practice combination in that list is off limits as a guide topic.
 | gated | `/guides/best-personal-injury-law-firms-nyc/` | ranking | Publishes at 8 certified firms in New York. Currently 3. |
 
 ## Next, ranked
+
+**Read this first, 2026-10-19. Eighth run running, and for the first time the survey found the
+topic in a field that had been rewritten rather than ignored.** `practices[]` has existed since
+the directory did. It used to hold the cohort a firm was discovered by, which is why 1,376 records
+said "Personal Injury" and nothing else, and it now holds a reading of the firm's own site: 5,919
+rows, 5,914 of them carrying the URL of the page the claim came from. **A field can become a new
+field without being added.** Re-read the ones a sweep has touched since the last run before
+re-reading the ones nobody has.
+
+**Fill rates across 1,388 published firms, counted 2026-10-19.** Only what changes a decision:
+
+- Directory-wide and safe to build on: `reviews.google`, `digital.places`, `results_published`,
+  `score`, `offices`, `languages`, `digital.schema_detected` all **1,388**; `reviews.sample`
+  1,386, `accountability` 1,382, `operating` 1,366, `digital.trust_pages` 1,323, `digital.psi`
+  1,294, `logo` 1,281, `digital.ahrefs` 1,248, `free_consultation` true 1,155, `attorneys`
+  non-empty 1,026, `practices` with more than one row **926**, `availability` non-empty 752.
+- **Item 0h has reopened and nobody noticed.** `digital.ahrefs` was 1,248 of 1,248 on 2026-10-12
+  and is 1,248 of 1,388 today: the 140 firms that arrived with Los Angeles have no figures, so a
+  directory-wide study by search visibility is again missing a market. One batch run fixes it.
+- Too thin for a study, unchanged in shape: `entity` 253, `fee_statement` 177,
+  `results_published.venues` 109, `screens` 57, `domestic` 42, `transaction` 20,
+  `digital.ahrefs.ai_citations` **13, unchanged across six runs**, `site_blocked` 3.
+- Still dead: `founded_year`, `claimed`, `results[]` non-empty, `subscription` at **0**, and
+  `tagline`, `quote`, `highlights`, `assessments` at **1 record each**. Do not propose any of
+  them again without re-counting.
+- Gates, recounted 2026-10-19: G1 284, G2 600, G3 344, G5 1,026, G6 1,356. **G1 and G2 nearly
+  doubled** since 2026-10-12 (204 and 528), which is the California register work landing.
+
+**What this run leaves on the table, ranked:**
+
+1. **The sub-practice sweep has a second study in it and this run did not write it.** The
+   measurement published today is breadth per firm. The other cut is **per area**: medical
+   malpractice is on 410 of 901 and nursing home abuse on 341, against car accidents on 812, and
+   those two are the ones with a longer tail and a different insurer. Does a firm publishing the
+   rarer pages differ from one publishing only the common ones? The data is already committed.
+2. **`availability` is still a claim nobody tested**, and the practice split is now stale: recount
+   it against 1,388 before using the 2026-10-05 figures.
+3. **The 140 Los Angeles firms with no Ahrefs figures** are a blocker for anything visibility-led,
+   not a topic.
 
 **Read this first, 2026-10-12. Seven runs running.** The survey found the topic again, and this
 time it found it in a field the schema has carried since pillar B was rewritten:
@@ -731,6 +831,49 @@ The entries below were re-checked against the collection on 2026-09-21.
   `24/7 intake line` is on 401 of 786 and `Hospital & home visits` on 80, and the other three
   values are on 1 record each. The problem is that we measure the *claim* and never test it, so
   the honest piece is one paragraph long. Checked 2026-09-28.
+
+## Keyword research, 2026-10-19
+
+Five Ahrefs calls, one of them wasted and worth recording so the next run does not repeat it.
+**`keywords-explorer-overview` takes `keywords` as a COMMA-separated string.** A newline-separated
+list returns `{"keywords": []}` and still charges for the request, which cost 50 units for nothing.
+Call `doc` first, it is free. Units reset on the 19th and the workspace was at 799,996 of 800,000
+the day before, so this run had a fresh budget; the five real calls spent roughly 1,100 units.
+
+Taken, this run: **`types of personal injury cases`**, 600/mo US, 800 global, **KD 0**, CPC $4.50,
+traffic potential 150, informational, parent topic `personal injury case`.
+
+Checked and rejected, with the reason, because each of these will look attractive again:
+
+- **`general practice attorney` 800/mo KD 0 CPC $4.00** and **`general practice lawyer` 700/mo KD
+  0**, roughly 1,500/mo at KD 0, which is real volume and the best raw numbers this run found.
+  Both carry **local intent** and both mean "find me one near me". No generated page targets them,
+  because general practice is not in the catalogue and should not be, so this is not the usual
+  disqualification. It is the other one: the query wants a lawyer and the study is about injury
+  sub-practices. Traffic potential 0 and 50 says the pages that rank get nothing anyway.
+- **The specialization cluster is dead.** `do lawyers specialize` 10/mo, `what is a practice area
+  in law` 0/mo, `lawyer practice areas` 30/mo KD 0. Matching terms over `specialized lawyer`,
+  `lawyer specializes`, `attorney specialize`, `specialist attorney` and `law firm specialize`
+  above 40/mo and KD 25 returns **three keywords in total**, all of them local intent for a named
+  practice. Do not re-run this cluster.
+- **`law firm practice areas` 100/mo KD 17 TP 150**, parent `practice areas`. Kept as a secondary
+  target rather than the primary, because KD 17 against KD 0 for ten times the volume is not a
+  trade worth making.
+- **`types of damages in personal injury cases` 150/mo KD 0** is the nearest neighbour and is a
+  legal-content query. We hold no corpus. Leave it.
+
+**The SERP is the argument for the piece.** `serp-overview` for the target returns, below the AI
+block, **ten law firm blog posts and one legal-software vendor**, DR 12 to 41, traffic 13 to 167.
+Every single one publishes a list of categories and **the lists contradict each other**: one says
+4 types, one 6, one 7, one 35. Not one of them has counted a firm. People Also Ask on that SERP:
+"What constitutes personal injury?", "How much are most personal injury settlements?", "How many
+types of injuries are there?", "What is a trauma injury?". The first and third are law. The second
+is the one we are forbidden to answer with a figure and should never try.
+
+**The new hubs have swallowed a whole keyword family.** With 13 practice hubs live, every
+`how to choose a <injury sub-practice> lawyer` and every `<sub-practice> lawyers` query is owned
+by a generated page carrying that exact phrase in its H2 and its meta description. That family was
+on the shortlist for two runs. It is closed.
 
 ## Keyword research, 2026-10-12
 
@@ -1245,8 +1388,55 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: lawyers.com**, fifth in the rotation. justia.com was re-read on 2026-10-12 and the set
-is on its second pass.
+**Next run: superlawyers.com**, sixth in the rotation. lawyers.com was re-read on 2026-10-19 and
+the set is on its second pass.
+
+### lawyers.com, read 2026-10-19 (second pass)
+
+Read through search results and the pages the site and its partners publish about itself, which is
+the permanent method for all eight. **lawyers.com does not resolve from this environment at all**
+(`getaddrinfo ENOTFOUND`), so nothing below is quoted as a figure and nothing from it went onto
+the published page. That is the right call rather than a limitation: a competitor's own marketing
+claim is not a measurement, and this site does not print numbers it cannot trace.
+
+**The shape. lawyers.com is the consumer-facing front of the Martindale-Hubbell network, and its
+inventory is a taxonomy of practice areas.**
+
+- A directory organised first by **area of law and then by location**, with a browse page that
+  publishes the taxonomy twice over: a short "top legal issues" set and a long A to Z list with
+  sub-areas nested under broad headings. The practice area is the page, the lawyer is the row.
+- Its own description of its reach is stated in areas of law and in share of the profession
+  covered. Both are self-reported and neither is checkable by us, which is the point below.
+- Sister inventory under the same owner at martindale.com, carrying the Peer Review Ratings, which
+  the 2026-09-25 entry covered.
+
+**What earns them the traffic.** Taxonomy times geography, at a size nobody can match by hand, on
+a domain old enough that the practice area page outranks most firms' own. It is the same engine
+our `/cities/<city>/<practice>/` route runs, which went from 23 pages to 152 in this directory
+this month, and that similarity is the useful part of this read: **we are now running their
+strategy at 1% of their scale, so the question is what we put on the page that they cannot.**
+
+**What we must not chase.** The taxonomy itself, by depth. Hundreds of areas of law, each with a
+page, is a content inventory assembled from what lawyers say about themselves. Adding areas to our
+catalogue to get more routes would be exactly that, and this run's own guide is the argument
+against it.
+
+**Where the shape converts into something only we can do.**
+
+- **The question their whole inventory assumes is the one nobody has tested, and this run tested
+  it.** Every directory in this rotation sorts lawyers by self-declared practice area and none of
+  them checks whether the firm publishes anything about it. We require the firm's own page, with
+  the practice in its title or first heading, and store the URL. Having required it, the finding
+  is that **the list barely separates two firms**: 84 lists across 901 firms, 3 of them covering
+  474. That is a direct measurement of the unit their business is built on.
+- **Eighth sourced case for item 4, and it is the quietest one.** Nothing here is sold by the
+  rated party and nothing is pay for placement in the way Justia's Premium Placements are. The
+  failure is softer and more common: a category assigned from a self-declaration, published as
+  though it were a fact about the lawyer. Item 4 now has eight sourced cases and three measured
+  ones of our own.
+- **Worth watching: the taxonomy as the differentiator we do not have.** Their A to Z covers areas
+  this directory will never hold. The honest version of that advantage for us is depth per firm,
+  not breadth per taxonomy, and the pieces that work here have all been depth.
 
 ### justia.com, read 2026-10-12 (second pass)
 

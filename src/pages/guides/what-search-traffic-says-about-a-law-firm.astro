@@ -291,7 +291,7 @@ const snapshot = [...firms]
       rows={movementRows}
       caption={`In percentage points of each sub-factor's assessed maximum. A bar is drawn only where the sub-factor rises with visibility; the ${flat.length} that do not rise draw no bar and print their change instead, because drawing a fall as a bar would invert the finding. ${dropped} sub-factors are left out entirely for being scored on too few firms to compare.`}
     />
-    <p>Read down that list and it is one kind of thing: publishing. A firm in the most visible quarter is likelier to publish its results, to say what kind of case each one was, to carry a disclaimer beside them, to state its fees, to name the languages it works in and to keep a filled-in Google Business Profile. <a href="/guides/what-law-firm-websites-publish/">We counted those pages directly in an earlier study</a> and found the same asymmetry from the other side.</p>
+    <p>Read down that list and it is one kind of thing: publishing. A firm in the most visible quarter is likelier to publish its results, to say what kind of case each one was, to carry a disclaimer beside them, to state its fees, to name the languages it works in and to keep a filled-in Google Business Profile. <a href="/guides/what-law-firm-websites-publish/">We counted those pages directly in an earlier study</a> and found the same asymmetry from the other side. The practice area list turns out to be one more entry on it: <a href="/guides/types-of-personal-injury-case-firms-advertise/">a firm advertising more kinds of case is a firm with more search traffic and the same client rating</a>, which is this page's finding arriving by a different road.</p>
     <p><b>One of those bars proves nothing and is left in so it can be seen.</b> {d2 && <>Sub-factor {d2.code}, {d2.label.toLowerCase()}, is worth {d2.max} points and is scored from the very Ahrefs figures this page sorts the firms by. It rises by {d2.delta!.toFixed(1)} points because it cannot do anything else.</>} The other bars are independent of the sort; that one is the sort.</p>
     <p>The honest reading of the rest is not that being findable makes a firm publish more. Both are what a firm with a marketing budget and somebody to run it looks like. Visibility is a proxy for investment in the website, and so is most of what the website says.</p>
 
@@ -342,6 +342,7 @@ const snapshot = [...firms]
       <h4>Related studies</h4>
       <ul>
         <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
+        <li><a href="/guides/types-of-personal-injury-case-firms-advertise/">The practice area list, counted</a></li>
         <li><a href="/guides/are-google-reviews-reliable/">Are Google reviews reliable</a></li>
         <li><a href="/guides/core-web-vitals-new-york-injury-firms/">Core Web Vitals and injury firms</a></li>
         <li><a href="/methodology/">LFL Certified Methodology</a></li>

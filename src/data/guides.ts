@@ -25,7 +25,7 @@ export interface Guide {
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-    | 'defense';
+    | 'defense' | 'menu';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -173,6 +173,21 @@ export const GUIDES: Guide[] = [
     thumb: '',
     icon: 'doc',
     meta: 'The notice of claim comes first',
+  },
+  {
+    slug: 'types-of-personal-injury-case-firms-advertise',
+    cover: 'menu',
+    kicker: 'Study',
+    title: 'The Practice Area List Is the Same List at Almost Every Injury Firm',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'A law firm website opens with the kinds of case it takes, and that list is the easiest ' +
+      'thing on the site to write. We read the practice pages of every injury firm in this ' +
+      'directory and counted which kinds of case each one actually publishes a page about. The ' +
+      'lists run long, they repeat, and what they predict is the size of the firm.',
+    thumb: '',
+    icon: 'list',
+    meta: 'Long lists, and almost all of them the same',
   },
   {
     slug: 'attorney-advertising-disclaimers',
