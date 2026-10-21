@@ -302,7 +302,23 @@ def compute(firm):
                        "%s publishes no attorney register we can query, so years since admission "
                        "cannot be established here for any firm and this is not scored."
                        % firm.get("market", {}).get("state_name", "This state")))
+    elif not attys:
+        # The same hole A6 had, one factor over, and found the same way. The comment above says
+        # "we do not owe what the state does not publish", and this branch was still saying we
+        # owed it where the firm publishes nobody to look up. A2 is the mean years since
+        # admission across a firm's attorneys: with no attorneys there is no mean, and 146 firms
+        # in New York and California were promised a measurement that never could arrive.
+        #
+        # "no queryable source" would be false here, because both states publish a register we
+        # read. What is true is that there is no roster to take years from, which is what A6
+        # says in the same situation, and G5 is where a firm is actually asked to publish one.
+        out.append(sub("A2", 0, "no roster published",
+                       "Our crawl found no roster on this firm's site, so there is no admission "
+                       "year to establish for anybody. Publishing one, or telling us where it "
+                       "is, is what gate G5 asks for."))
     else:
+        # Names we hold that the register did not match. This one we do owe: the state publishes
+        # a register, the firm publishes names, and the two have not been put together yet.
         out.append(assessed("A2"))
 
     # ---- A6 roster verifiability: computed from the registry check ----

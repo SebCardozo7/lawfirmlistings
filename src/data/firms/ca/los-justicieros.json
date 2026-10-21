@@ -235,8 +235,8 @@
   "score": {
     "total": 61,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-20",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -248,8 +248,8 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is no admission year to establish for anybody. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A6",
@@ -414,14 +414,14 @@
       "floor_met": true,
       "coverage_met": false,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
         "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "B2 Specificity: not yet measured (5 pts)",
+        "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
     "raw": 33.5,
     "assessed": 55,
-    "coverage": 0.688,
+    "coverage": 0.786,
     "floor_abc_pct": 0.783,
     "gates_unavailable": [
       "G3"
@@ -430,7 +430,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 80,
+    "assessable": 70,
     "comparable": true
   }
 }
