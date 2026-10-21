@@ -474,6 +474,43 @@ button,input,select{font:inherit;color:inherit}
 .ranked-links li{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
 .ranked-links li a{color:var(--ink);font-weight:500}
 .ranked-links li span{color:var(--muted);font-size:.86rem;white-space:nowrap}
+
+/* The full ranking, below the cards, on the city and practice hubs.
+   The cards are a recommendation and five of them is a recommendation; a hundred and eighty-eight
+   of them is a scroll. One row per firm after that, same order, so the page about a city links to
+   every firm in it. */
+.full-rank{margin-top:44px}
+.full-rank .results-head{margin-bottom:16px}
+.full-rank h3{font-size:1.3rem}
+.rank-rows{list-style:none;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);overflow:hidden}
+.rank-rows li{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,auto) 72px;gap:16px;align-items:baseline;padding:12px 18px;border-top:1px solid var(--line);font-size:.95rem}
+.rank-rows li:first-child{border-top:0}
+.rank-rows li:nth-child(even){background:var(--ground)}
+.rr-rank{color:var(--muted);font-size:.84rem;text-align:right}
+.rr-name a{color:var(--ink);font-weight:500}
+.rr-name a:hover{color:var(--link)}
+.rr-chip{display:inline-block;margin-left:9px;font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--line-2);color:var(--muted);white-space:nowrap;vertical-align:1px}
+.rr-chip--certified,.rr-chip--tier{background:var(--tint);border-color:transparent;color:var(--ink)}
+.rr-meta{color:var(--muted);font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rr-score{text-align:right;white-space:nowrap;color:var(--ink)}
+.rr-score i{color:var(--muted);font-style:normal;font-size:.78rem}
+.rr-nil{color:var(--muted);font-style:normal;font-size:.78rem}
+/* The national hub groups by city, because the ranking is scoped to one and a single list of
+   1,113 firms would claim a comparison the methodology does not make. */
+.rank-group{margin-top:28px}
+.rank-group h4{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:1.02rem;margin-bottom:10px}
+.rank-group h4 a{color:var(--ink)}
+.rank-group h4 span{color:var(--muted);font-size:.82rem;font-weight:400;white-space:nowrap}
+@media (max-width:720px){
+  .rank-rows li{grid-template-columns:26px minmax(0,1fr) auto;gap:4px 10px;padding:12px 14px}
+  /* The meta line takes a row of its own here, and auto-placement then put the score in the
+     next free cell, which is column one of row three: the number read as if it belonged to the
+     rank rather than to the firm. Both are placed explicitly instead. */
+  .rr-rank{grid-column:1;grid-row:1}
+  .rr-name{grid-column:2;grid-row:1}
+  .rr-score{grid-column:3;grid-row:1}
+  .rr-meta{grid-column:2 / -1;grid-row:2;white-space:normal}
+}
 .pager{display:flex;gap:8px;justify-content:center;margin-top:32px}
 .pager a{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line-2);border-radius:50%;color:var(--ink);font-weight:500;background:var(--paper)}
 .pager a.is-active{background:var(--ink);color:#fff;border-color:var(--ink)}

@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import ListYourFirmCta from '../../components/ListYourFirmCta.astro';
 import Icon from '../../components/Icon.astro';
 import FirmCard from '../../components/FirmCard.astro';
+import RankedRows from '../../components/RankedRows.astro';
 import { CITY_NOTES } from '../../data/cities';
 import { PRACTICES, PRACTICE_SLUGS } from '../../data/practices';
 
@@ -124,13 +125,26 @@ const lede = notes.lede
     <div>
       <div class="results-head">
         <h2>Highest-ranked firms in {market.city}</h2>
-        <span>Top {Math.min(3, ranked.length)} of {ranked.length} across all practice areas</span>
+        <span>Top {Math.min(5, ranked.length)} of {ranked.length} across all practice areas</span>
       </div>
       <div class="firm-list">
-        {ranked.slice(0, 3).map((firm, i) => (
+        {ranked.slice(0, 5).map((firm, i) => (
           <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
         ))}
       </div>
+      {/* And then the rest of them. A page titled "Law Firms in Lakeland, FL" that linked to
+          three of the fourteen was a teaser wearing a city's name: 1,355 of the 1,412 published
+          firms had no link from the page about their own city. The cards stay a recommendation,
+          five of them, and the ranking below is the whole city in the same order. */}
+      {ranked.length > 5 && (
+        <div class="full-rank">
+          <div class="results-head">
+            <h3>Every firm we have published in {market.city}</h3>
+            <span class="num">All {ranked.length}, ranked by the Certification Score</span>
+          </div>
+          <RankedRows firms={ranked} />
+        </div>
+      )}
       {practices.length > 0 && (
         <div class="ranked-links">
           <h3>Ranked lists in {market.city}</h3>

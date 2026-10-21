@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ListYourFirmCta from '../../components/ListYourFirmCta.astro';
 import FirmCard from '../../components/FirmCard.astro';
+import RankedRows from '../../components/RankedRows.astro';
 import { PRACTICES, SHARED_FAQ } from '../../data/practices';
 
 /**
@@ -40,9 +41,12 @@ const notes = PRACTICES[practice!];
 // defense opened with Addabbo, Boris and Brooklyn at the top and the firm scoring 69 nowhere in
 // sight.
 //
-// A firm with no score at all still sorts last, because an absent score is not a zero.
+// A firm with no score at all still sorts last, because an absent score is not a zero. So does
+// one the engine marks not comparable: a 72 built from 40% of the scale is not the same number
+// as a 72 built from all of it, and this was the last page that let it outrank one. The city
+// pages have always sorted it last, so the two disagreed about the same firm.
 const weight = (f: typeof matching[number]) =>
-  f.data.score ? -f.data.score.total : 1;
+  f.data.score && f.data.score.comparable !== false ? -f.data.score.total : 1;
 const firms = [...matching].sort((a, b) =>
   weight(a) - weight(b) || a.data.name.localeCompare(b.data.name));
 
@@ -150,13 +154,34 @@ const heading = notes.name.endsWith('Law')
           of indexes. */}
       <div class="results-head">
         <h2>Highest-scoring firms in the practice</h2>
-        <span class="num">{`Top ${Math.min(3, firms.length)} of ${firms.length}${lastUpdated ? ` · updated ${lastUpdated}` : ''}`}</span>
+        <span class="num">{`Top ${Math.min(5, firms.length)} of ${firms.length}${lastUpdated ? ` · updated ${lastUpdated}` : ''}`}</span>
       </div>
       <div class="firm-list">
-        {firms.slice(0, 3).map((firm, i) => (
+        {firms.slice(0, 5).map((firm, i) => (
           <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
         ))}
       </div>
+      {/* The rest of the practice, by city. A single national list of 1,113 firms would print a
+          comparison the methodology does not make: a firm is ranked against the firms somebody
+          could hire instead of it, which is a city. Grouped, each heading is the ranked page for
+          that city and every firm in the practice has a link from the hub that names it. */}
+      {firms.length > 5 && (
+        <div class="full-rank">
+          <div class="results-head">
+            <h3>Every {notes.name.toLowerCase()} firm we have published</h3>
+            <span class="num">All {firms.length}, grouped by city because the ranking is local</span>
+          </div>
+          {cityCounts.map(c => (
+            <div class="rank-group">
+              <h4>
+                <a href={`/cities/${c.slug}/${practice}/`}>{notes.name} firms in {c.label}</a>
+                <span>{c.count} ranked</span>
+              </h4>
+              <RankedRows firms={firms.filter(f => f.data.market.city_slug === c.slug)} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
 
     <aside class="sidebar">
