@@ -38,6 +38,7 @@ import urllib.parse
 import urllib.request
 from datetime import date
 from pathlib import Path
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):

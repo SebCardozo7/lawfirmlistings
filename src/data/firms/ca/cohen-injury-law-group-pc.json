@@ -164,6 +164,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-10-12"
+    },
+    "ahrefs": {
+      "dr": 24.0,
+      "ahrefs_rank": 7214043,
+      "refdomains": 1441,
+      "refdomains_dofollow": 656,
+      "backlinks": 5430,
+      "org_keywords": 0,
+      "org_traffic": 0,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-19"
     }
   },
   "gates": {
@@ -243,10 +255,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 35,
+    "total": 36,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -348,7 +360,7 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 6,
         "max": 25,
         "subs": [
           {
@@ -362,10 +374,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 24.0 → 66th pct of 141-firm cohort (median 13) 2/3 · 1,441 referring domains, 77th pct 2/2 · 0 organic keywords / 0 visits·mo, 6th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -380,7 +392,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -420,7 +432,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 30,
+      "gap": 29,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -429,9 +441,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 28.0,
-    "assessed": 81,
-    "coverage": 0.91,
+    "raw": 32.0,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.351,
     "gates_unavailable": [
       "G3"

@@ -46,6 +46,7 @@ import urllib.request
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from crawl_public import UA, fetch, robots_for  # noqa: E402
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 LOGOS = ROOT / "public" / "logos"
@@ -206,6 +207,11 @@ NOT_OURS = re.compile(
     # Only the last two are nameable here. No filename rule finds a wreath.
     r"|mmdaf|_mdr|-mdr|mdr_|mdr-|smbteam|smb-?logo|experience-logo"
     r"|scorpion|fosterwebmarketing|lawrank|rankings\.io|postali|hennessey"
+    # A bar association the firm belongs to is not the firm. miamiworkcomplawyer.com offered
+    # caba_logo.png, which is the Cuban American Bar Association, and a reader seeing it on that
+    # profile would reasonably think it was reading the firm's own mark.
+    r"|caba[_-]|[_-]caba|bar-?association|barassociation|nysba|njsba|flabar|calbar|texasbar"
+    r"|abota|trial-?lawyers-?association|academy-?of-?trial"
     r"|as-seen|seen-on|featured|press|news|media|award|badge|seal|member|association|certified"
     r"|partner|client|sponsor|payment|visa|mastercard|amex|paypal",
     re.I)

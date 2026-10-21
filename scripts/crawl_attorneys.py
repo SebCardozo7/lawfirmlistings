@@ -39,6 +39,7 @@ import urllib.parse
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from crawl_public import (LINK_KINDS, UA, fetch, https_origin, robots_for, strip_tags,  # noqa: E402
                           meta, unescape, json_ld_blocks)
+from _survive import Survive  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DELAY = 1.5
@@ -211,6 +212,10 @@ PLACE_ALONE = {
     "newport beach", "santa ana", "santa barbara", "the woodlands", "san luis obispo",
     "santa maria", "bakersfield", "fresno", "sacramento", "oakland", "riverside", "modesto",
     "stockton", "anaheim", "irvine", "glendale", "pasadena", "torrance", "inglewood",
+    # Offered as attorneys of Florida firms by their own location pages.
+    "coral gables", "coconut grove", "west palm beach", "palm beach", "boca raton",
+    "fort lauderdale", "key west", "north carolina", "south carolina", "new jersey",
+    "staten island", "san antonio", "fort worth", "las vegas", "north las vegas",
 }
 
 # A place at the front of a longer heading, which is a location or practice page rather than a
@@ -247,8 +252,42 @@ AN_INSTITUTION = re.compile(
 # published as an attorney of a San Diego firm today and reads as three ordinary words.
 CAMPUS_INITIALS = re.compile(r"^(uc|ucla|usc|csu|suny|cuny)\s+\S", re.I)
 
+# An accessibility overlay's own menu, which several firms embed and which puts a dozen
+# capitalised two-word labels into the page where a roster's headings go. accessiBe and UserWay
+# ship the same vocabulary, so this is a fixed list rather than a pattern: sandiegoaccidentlawcenter.com
+# handed us "Readable Experience", "Visually Pleasing Experience", "Easy Orientation" and
+# "Accessibility Statement" as attorneys, and grlawfirm.net handed us nothing but the last one.
+#
+# Exact phrases, because the words in them are ordinary and a rule made of the words would reach
+# a real name. There is no attorney called "Accessibility Statement" and there is one called
+# Lashonda Council Rogers, which is the mistake this file has already made once.
+AN_ACCESSIBILITY_WIDGET = {
+    "accessibility statement", "accessibility menu", "accessibility adjustments",
+    "readable experience", "visually pleasing experience", "easy orientation",
+    "content scaling", "readable font", "highlight titles", "highlight links",
+    "text magnifier", "adjust font sizing", "align center", "adjust line height",
+    "align left", "adjust letter spacing", "align right", "dark contrast",
+    "light contrast", "monochrome", "high saturation", "adjust text colors",
+    "low saturation", "adjust title colors", "mute sounds", "hide images",
+    "virtual keyboard", "reading guide", "stop animations", "reading mask",
+    "highlight hover", "highlight focus", "big black cursor", "big white cursor",
+    "cognitive reading", "online dictionary", "screen reader", "keyboard navigation",
+    "useful links", "choose the right accessibility profile for you",
+    "epilepsy safe mode", "visually impaired mode", "adhd friendly mode", "blindness mode",
+    "seizure safe profile", "vision impaired profile", "cognitive disability profile",
+    "keyboard navigation (motor)", "blind users (screen reader)",
+}
+
+
 A_SECTION = {
     "recent posts", "recent post", "bar admissions", "court admissions", "admissions",
+    # Revealed once a trailing colon stops hiding them. Each one was published as an attorney.
+    "medical treatment", "working hours", "after hours", "posts tagged", "office hours",
+    "free consultation", "contact us", "follow us", "quick links", "opening hours",
+    # Page-builder placeholders a firm never filled in. shultzlegal.com published the Elementor
+    # one as an attorney, which is the clearest possible sign that nobody has read that page.
+    "add your heading text here", "your heading text here", "lorem ipsum",
+    "insert your content here", "click here to edit", "edit this text",
     "professional association memberships", "post-conviction relief", "practice areas",
     "case results", "our attorneys", "our team", "testimonials", "awards", "publications",
 }
@@ -266,7 +305,7 @@ A_TOPIC = re.compile(r"\b(act|contamination|litigation|lawsuits?|settlements?|cl
 
 def is_a_thing_not_a_person(name):
     """The category this name falls in, or None. Conservative: ambiguous names stay."""
-    n = " ".join((name or "").split())
+    n = " ".join((name or "").split()).rstrip(":.")
     low = n.lower()
     if low in PLACE_ALONE:
         return "a place"
@@ -274,6 +313,8 @@ def is_a_thing_not_a_person(name):
         return "a location or practice page"
     if low in A_SECTION:
         return "a section heading"
+    if low in AN_ACCESSIBILITY_WIDGET:
+        return "an accessibility widget's menu"
     if AN_INSTITUTION.search(n) or CAMPUS_INITIALS.match(n):
         return "an institution"
     words = n.split()
@@ -402,7 +443,10 @@ def normalise_case(name):
 def looks_like_a_person(name):
     if not name or len(name) > 60:
         return False
-    name = name.strip()
+    # The same trailing punctuation is_a_thing_not_a_person ignores comes off the stored name
+    # too. Without this, checkmatelawgroup.com published "Shayan Kohanteb" and
+    # "Shayan Kohanteb." as two attorneys, and the firm has one.
+    name = name.strip().rstrip(":.")
     if any(ch.isdigit() for ch in name):
         return False
     # Tested with the full stops taken out as well as with them in. An acronym a site writes as
@@ -1166,56 +1210,58 @@ def main():
         files = sorted(pathlib.Path(p) for p in glob.glob(str(staging / "*.json")))
 
     total_names = with_bar = 0
+    run = Survive('crawl_attorneys')
     for path in files:
-        if not path.exists():
-            continue
-        rec = json.loads(io.open(path, encoding="utf-8").read())
-        # The staging directory holds more than firm records: discover_places writes its
-        # candidate lists there too, and those are lists. Reading one of them as a record stops
-        # the whole run with an AttributeError on whichever market was crawled most recently,
-        # which is how Los Angeles got no rosters at all on its first pass.
-        if not isinstance(rec, dict) or "domain" not in rec:
-            continue
-        if not rec.get("https_ok"):
-            continue
+        with run.firm(path.stem):
+            if not path.exists():
+                continue
+            rec = json.loads(io.open(path, encoding="utf-8").read())
+            # The staging directory holds more than firm records: discover_places writes its
+            # candidate lists there too, and those are lists. Reading one of them as a record stops
+            # the whole run with an AttributeError on whichever market was crawled most recently,
+            # which is how Los Angeles got no rosters at all on its first pass.
+            if not isinstance(rec, dict) or "domain" not in rec:
+                continue
+            if not rec.get("https_ok"):
+                continue
 
-        found = collect(rec["domain"], args.verbose, rec)
-        # Re-read before writing: another enricher may have written in the meantime.
-        fresh = json.loads(io.open(path, encoding="utf-8").read())
+            found = collect(rec["domain"], args.verbose, rec)
+            # Re-read before writing: another enricher may have written in the meantime.
+            fresh = json.loads(io.open(path, encoding="utf-8").read())
 
-        # A failed run must not delete a good one. godoskygentile.com serves an intermittent 403
-        # to crawlers, and one re-run that happened to hit it replaced four collected attorneys
-        # with an error and a count of zero, which then reads as "this firm names nobody" all the
-        # way through to the gates. An error is news about the fetch, not about the roster.
-        had = ((fresh.get("attorneys_found") or {}).get("attorneys")) or []
-        if found.get("error") and had:
-            found = dict(found, attorneys=had,
-                         kept_from=(fresh["attorneys_found"] or {}).get("checked_at"),
-                         note=("this run failed (%s) and the %d name(s) already collected were "
-                               "kept rather than overwritten with nothing"
-                               % (found["error"], len(had))))
-        fresh["attorneys_found"] = found
-        io.open(path, "w", encoding="utf-8", newline="\n").write(
-            json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
+            # A failed run must not delete a good one. godoskygentile.com serves an intermittent 403
+            # to crawlers, and one re-run that happened to hit it replaced four collected attorneys
+            # with an error and a count of zero, which then reads as "this firm names nobody" all the
+            # way through to the gates. An error is news about the fetch, not about the roster.
+            had = ((fresh.get("attorneys_found") or {}).get("attorneys")) or []
+            if found.get("error") and had:
+                found = dict(found, attorneys=had,
+                             kept_from=(fresh["attorneys_found"] or {}).get("checked_at"),
+                             note=("this run failed (%s) and the %d name(s) already collected were "
+                                   "kept rather than overwritten with nothing"
+                                   % (found["error"], len(had))))
+            fresh["attorneys_found"] = found
+            io.open(path, "w", encoding="utf-8", newline="\n").write(
+                json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
 
-        if found.get("error"):
-            print("%-24s %s" % (rec["domain"], found["error"]))
-            continue
-        names = found["attorneys"]
-        bars = [a for a in names if a["bar_number"]]
-        total_names += len(names)
-        with_bar += len(bars)
-        print("%-24s %2d attorney(s), %d with a bar number%s"
-              % (rec["domain"], len(names), len(bars),
-                 ", %d heading(s) rejected" % len(found["rejected"]) if found["rejected"] else ""))
-        if args.verbose:
-            for a in names[:6]:
-                print("      %-32s %s" % (a["name"], a["bar_number"] or ""))
+            if found.get("error"):
+                print("%-24s %s" % (rec["domain"], found["error"]))
+                continue
+            names = found["attorneys"]
+            bars = [a for a in names if a["bar_number"]]
+            total_names += len(names)
+            with_bar += len(bars)
+            print("%-24s %2d attorney(s), %d with a bar number%s"
+                  % (rec["domain"], len(names), len(bars),
+                     ", %d heading(s) rejected" % len(found["rejected"]) if found["rejected"] else ""))
+            if args.verbose:
+                for a in names[:6]:
+                    print("      %-32s %s" % (a["name"], a["bar_number"] or ""))
 
     print("\n%d name(s) collected, %d carrying a bar number" % (total_names, with_bar))
     print("Names are evidence, not yet profile data: they drive G1/G2 against the registry, so\n"
           "each one keeps the bio URL it came from for a human to confirm.")
-    return 0
+    return run.report()
 
 
 if __name__ == "__main__":

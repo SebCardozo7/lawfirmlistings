@@ -248,10 +248,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 34,
+    "total": 35,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -271,8 +271,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -367,10 +367,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 4,
+            "pts": 5,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 14.0 → 83th pct of 114-firm cohort (median 2.9) 2/3 · 1,081 referring domains, 68th pct 1/2 · 7 organic keywords / 31 visits·mo, 60th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 14.0 → 84th pct of 121-firm cohort (median 2.65) 3/3 · 1,081 referring domains, 69th pct 1/2 · 7 organic keywords / 31 visits·mo, 60th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -425,18 +425,18 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 31,
+      "gap": 30,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
         "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 23.5,
+    "raw": 24.5,
     "assessed": 70,
-    "coverage": 0.886,
+    "coverage": 1.0,
     "floor_abc_pct": 0.368,
     "gates_unavailable": [
       "G1",
@@ -445,7 +445,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 79,
+    "assessable": 70,
     "comparable": true
   },
   "logo": {

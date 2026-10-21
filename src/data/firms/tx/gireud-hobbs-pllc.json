@@ -236,10 +236,23 @@
     "checked_at": "2026-09-29"
   },
   "results_published": {
-    "readable": false,
-    "why": "the results page served 6083 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "count": 11,
+    "counted_from": "result headings",
+    "amounts": [],
+    "largest": null,
+    "aggregate_claims": [],
+    "case_types": [
+      "dwi",
+      "assault",
+      "drug offense",
+      "theft"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 6083,
+    "readable": true,
     "url": "https://alamolawgroup.com/case-results/",
-    "checked_at": "2026-09-29"
+    "checked_at": "2026-10-20"
   },
   "tx_register": {
     "matched": true,
@@ -256,10 +269,10 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 40,
+    "total": 42,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillars A and B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -279,8 +292,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -293,32 +306,32 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 8,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 4.5,
             "max": 6,
-            "source": "pending",
-            "evidence": "the results page served 6083 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "11 results published on the firm's own site, counted from result headings"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 3,
             "max": 5,
-            "source": "pending",
-            "evidence": "the results page served 6083 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "4 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "the results page served 6083 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
@@ -429,29 +442,29 @@
         ]
       }
     },
-    "floor_abc": 14,
+    "floor_abc": 22,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 25,
+      "gap": 23,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +6 available"
       ]
     },
-    "raw": 22.1,
-    "assessed": 55,
-    "coverage": 0.696,
-    "floor_abc_pct": 0.609,
+    "raw": 29.6,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.566,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 79,
+    "assessable": 70,
     "comparable": true
   },
   "logo": {

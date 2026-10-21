@@ -51,6 +51,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from roster_roles import is_support_role  # noqa: E402
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):

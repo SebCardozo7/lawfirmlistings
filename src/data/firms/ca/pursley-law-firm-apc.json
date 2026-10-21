@@ -13,6 +13,34 @@
       "primary": true,
       "source_url": "https://www.pursleylegal.com/carlsbad-work-injury-lawyer/",
       "checked_at": "2026-09-29"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.pursleylegal.com/carlsbad-car-accident-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.pursleylegal.com/carlsbad-truck-accident-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "medical-malpractice",
+      "name": "Medical Malpractice",
+      "primary": false,
+      "source_url": "https://www.pursleylegal.com/carlsbad-birth-injury-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.pursleylegal.com/carlsbad-wrongful-death-lawyer/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -282,8 +310,8 @@
   "score": {
     "total": 45,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -295,16 +323,16 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is no admission year to establish for anybody. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -459,16 +487,16 @@
       "needed": 65,
       "gap": 20,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
         "D2 Search authority: +6 available"
       ]
     },
     "raw": 31.3,
     "assessed": 70,
-    "coverage": 0.787,
+    "coverage": 1.0,
     "floor_abc_pct": 0.605,
     "gates_unavailable": [
       "G3"
@@ -477,7 +505,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 89,
+    "assessable": 70,
     "comparable": true
   }
 }

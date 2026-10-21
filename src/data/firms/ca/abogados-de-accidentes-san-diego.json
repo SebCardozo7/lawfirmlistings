@@ -215,8 +215,8 @@
   "score": {
     "total": 29,
     "tier": "Not eligible",
-    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "Eligibility gates not passed: G6. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -228,16 +228,16 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is no admission year to establish for anybody. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -392,16 +392,16 @@
       "needed": 65,
       "gap": 36,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
         "D2 Search authority: +8 available"
       ]
     },
     "raw": 20.0,
     "assessed": 70,
-    "coverage": 0.787,
+    "coverage": 1.0,
     "floor_abc_pct": 0.368,
     "gates_unavailable": [
       "G3"
@@ -410,7 +410,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 89,
+    "assessable": 70,
     "comparable": true
   },
   "logo": {

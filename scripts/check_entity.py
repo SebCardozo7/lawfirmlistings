@@ -50,6 +50,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 UA = "LFL-research/1.0 (+https://lawfirmlistings.com; public-records verification)"
 DELAY = 1.0

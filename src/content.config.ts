@@ -10,10 +10,16 @@ const subScore = z.object({
   // 'partial' means the check ran but could not cover everything it needed to, so an absence
   // is not yet a finding. score.py keeps those out of the denominator, the same way it
   // treats 'pending', because a firm must not lose points to the reach of our own crawl.
-  source: z.enum(['registry', 'observed', 'ahrefs', 'places', 'psi', 'court', 'firm', 'illustrative', 'partial', 'no queryable source', 'pending']),
+  source: z.enum(['registry', 'observed', 'ahrefs', 'places', 'psi', 'court', 'firm', 'illustrative', 'partial', 'no queryable source', 'no roster published', 'pending']),
   // 'no queryable source' is the gates' wording and now a sub-factor's too: A6 is a share
   // of a register, and where the state publishes none we may query there is nothing to
   // take a share of. Kept out of the denominator, like the rest of this vocabulary.
+  //
+  // 'no roster published' is the other half of that, and it is the firm's side rather than
+  // ours: a firm that names no attorney has no roster to take a share of either. 375 profiles
+  // called that 'pending', which says we owe a measurement we do not owe. The word was already
+  // in score.py's NOT_A_FINDING and NO_SOURCE_IN_MARKET, written for this and never used, and
+  // this enum is what noticed it had never been allowed through.
   evidence: z.string(),
 });
 const pillar = z.object({ score: z.number(), max: z.number(), subs: z.array(subScore) });

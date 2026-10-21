@@ -13,6 +13,41 @@
       "primary": true,
       "source_url": "https://www.malmanlaw.com/car-accident-lawyer/",
       "checked_at": "2026-09-26"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.malmanlaw.com/car-accident-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.malmanlaw.com/truck-accidents-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "medical-malpractice",
+      "name": "Medical Malpractice",
+      "primary": false,
+      "source_url": "https://www.malmanlaw.com/medical-misdiagnosis-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.malmanlaw.com/chicago-wrongful-death-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://www.malmanlaw.com/slip-fall-lawyer/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -248,16 +283,76 @@
     "checked_at": "2026-09-26"
   },
   "results_published": {
-    "readable": false,
-    "why": "results page returned 403",
+    "count": 40,
+    "counted_from": "stated amounts",
+    "amounts": [
+      11800000,
+      10000000,
+      8500000,
+      6000000,
+      5700000,
+      5500000,
+      5000000,
+      4750000,
+      4300000,
+      4075000,
+      3400000,
+      3000000,
+      2600000,
+      2250000,
+      2200000,
+      2000000,
+      1900000,
+      1800000,
+      1750000,
+      1700000,
+      1400000,
+      1250000,
+      1150000,
+      1100000,
+      1020000,
+      1000000,
+      992884,
+      986699,
+      976070,
+      900000,
+      500000,
+      390000,
+      300000,
+      297650,
+      250000,
+      208794,
+      207450,
+      204380,
+      81000,
+      46487
+    ],
+    "largest": 11800000,
+    "aggregate_claims": [
+      600000
+    ],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck",
+      "premises",
+      "medical malpractice",
+      "workplace",
+      "pedestrian",
+      "theft"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 57162,
+    "readable": true,
     "url": "https://www.malmanlaw.com/results/",
-    "checked_at": "2026-09-26"
+    "checked_at": "2026-10-20"
   },
   "score": {
-    "total": 54,
+    "total": 55,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -291,32 +386,32 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 9,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 6,
             "max": 6,
-            "source": "pending",
-            "evidence": "results page returned 403"
+            "source": "firm",
+            "evidence": "40 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 3,
             "max": 5,
-            "source": "pending",
-            "evidence": "results page returned 403"
+            "source": "firm",
+            "evidence": "8 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "results page returned 403"
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
@@ -427,23 +522,23 @@
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 26,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 11,
+      "gap": 10,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)",
-        "B3 Results disclosure: not yet measured (4 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D1 Website trust & experience: +6.5 available"
       ]
     },
-    "raw": 29.5,
-    "assessed": 55,
-    "coverage": 0.786,
-    "floor_abc_pct": 0.739,
+    "raw": 38.5,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.684,
     "gates_unavailable": [
       "G1",
       "G2",

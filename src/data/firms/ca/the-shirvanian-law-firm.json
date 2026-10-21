@@ -74,12 +74,6 @@
       "name_source": "bio heading"
     },
     {
-      "name": "Accessibility Statement",
-      "source_url": "https://www.shirvanianlawfirm.com/accessibility-statement",
-      "role_source": "not stated by the firm",
-      "name_source": "roster link text"
-    },
-    {
       "name": "Narbeh Shirvanian",
       "source_url": "https://www.shirvanianlawfirm.com/about-us/",
       "bar_number": "263169",
@@ -184,6 +178,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-10-12"
+    },
+    "ahrefs": {
+      "dr": 26.0,
+      "ahrefs_rank": 6238742,
+      "refdomains": 1263,
+      "refdomains_dofollow": 547,
+      "backlinks": 12011,
+      "org_keywords": 101,
+      "org_traffic": 598,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-19"
     }
   },
   "gates": {
@@ -207,9 +213,9 @@
     },
     "G5": {
       "pass": true,
-      "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
+      "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-12"
+      "checked_at": "2026-10-20"
     },
     "G6": {
       "pass": true,
@@ -257,10 +263,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 40,
+    "total": 41,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -273,7 +279,7 @@
             "pts": 5,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 9.0 years since admission across 2 of 4 named attorneys (longest 17, shortest 1) · NYS Attorney Registration database"
+            "evidence": "Mean 9.0 years since admission across 2 of 3 named attorneys (longest 17, shortest 1) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -281,7 +287,7 @@
             "pts": 3,
             "max": 9,
             "source": "registry",
-            "evidence": "2 of 4 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "2 of 3 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -362,7 +368,7 @@
         ]
       },
       "D": {
-        "score": 4,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -376,10 +382,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 4,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 26.0 → 69th pct of 141-firm cohort (median 13) 2/3 · 1,263 referring domains, 63th pct 1/2 · 101 organic keywords / 598 visits·mo, 67th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -394,7 +400,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -434,7 +440,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 25,
+      "gap": 24,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -443,9 +449,9 @@
         "D1 Website trust & experience: +5.5 available"
       ]
     },
-    "raw": 32.5,
-    "assessed": 81,
-    "coverage": 0.91,
+    "raw": 36.5,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.386,
     "gates_unavailable": [
       "G3"

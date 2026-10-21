@@ -302,7 +302,23 @@ def compute(firm):
                        "%s publishes no attorney register we can query, so years since admission "
                        "cannot be established here for any firm and this is not scored."
                        % firm.get("market", {}).get("state_name", "This state")))
+    elif not attys:
+        # The same hole A6 had, one factor over, and found the same way. The comment above says
+        # "we do not owe what the state does not publish", and this branch was still saying we
+        # owed it where the firm publishes nobody to look up. A2 is the mean years since
+        # admission across a firm's attorneys: with no attorneys there is no mean, and 146 firms
+        # in New York and California were promised a measurement that never could arrive.
+        #
+        # "no queryable source" would be false here, because both states publish a register we
+        # read. What is true is that there is no roster to take years from, which is what A6
+        # says in the same situation, and G5 is where a firm is actually asked to publish one.
+        out.append(sub("A2", 0, "no roster published",
+                       "Our crawl found no roster on this firm's site, so there is no admission "
+                       "year to establish for anybody. Publishing one, or telling us where it "
+                       "is, is what gate G5 asks for."))
     else:
+        # Names we hold that the register did not match. This one we do owe: the state publishes
+        # a register, the firm publishes names, and the two have not been put together yet.
         out.append(assessed("A2"))
 
     # ---- A6 roster verifiability: computed from the registry check ----
@@ -337,7 +353,24 @@ def compute(firm):
                        + ("; bar numbers published on the bios" if on_bios else
                           "; no bar number published on any bio")))
     else:
-        out.append(sub("A6", 0, "pending", "No attorney is named on the site we could read"))
+        # "pending" is a claim about us: it says we owe this measurement and have not made it.
+        # Where there is no roster there is no share to compute, so the factor leaves the scale.
+        #
+        # The wording below says what we found rather than what the firm did, and that
+        # distinction cost something to learn. The first draft said "this firm names no attorney
+        # on its own site", which was not ours to assert: a certificate failure had been making
+        # whole sites unreadable, and one firm in six sampled from this group turned out to have
+        # a roster we had simply never fetched. What we can stand behind is that our crawl found
+        # none, and the firm can tell us otherwise.
+        #
+        # "no roster published" is already in NOT_A_FINDING and NO_SOURCE_IN_MARKET, written for
+        # exactly this and never used, so the factor leaves the scale the way it does for a state
+        # with no register. The firm is not let off: naming no attorney is what G5 measures, and
+        # G5 holds every one of these at Listed until the names are published.
+        out.append(sub("A6", 0, "no roster published",
+                       "Our crawl found no roster on this firm's site, so there is nothing here "
+                       "to verify against a register. Publishing one, or telling us where it "
+                       "is, is what gate G5 asks for."))
 
     # ---- A5: only what the firm publishes about itself ----
     # ---- A5 accountability: read off the firm's own pages, not entered by hand ----

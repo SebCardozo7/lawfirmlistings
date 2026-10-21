@@ -39,6 +39,8 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
+from _survive import Survive  # noqa: E402
 
 UA = "LFL-research/1.0 (+https://lawfirmlistings.com; public-records verification)"
 RDAP = "https://rdap.org/domain/"
@@ -228,45 +230,47 @@ def main():
         files = sorted(pathlib.Path(p) for p in glob.glob(str(staging / "*.json")))
 
     found = failed = 0
+    run = Survive('check_operating')
     for path in files:
-        if not path.exists():
-            print("%-38s no staging record" % path.stem)
-            continue
-        record = json.loads(path.read_text(encoding="utf-8"))
-        # The staging directory holds more than firm records: discover_places writes its
-        # candidate lists there too, and those are lists. Skip anything that is not a
-        # firm record rather than stopping the whole run on it.
-        if not isinstance(record, dict) or "domain" not in record:
-            continue
-        domain = record["domain"]
+        with run.firm(path.stem):
+            if not path.exists():
+                print("%-38s no staging record" % path.stem)
+                continue
+            record = json.loads(path.read_text(encoding="utf-8"))
+            # The staging directory holds more than firm records: discover_places writes its
+            # candidate lists there too, and those are lists. Skip anything that is not a
+            # firm record rather than stopping the whole run on it.
+            if not isinstance(record, dict) or "domain" not in record:
+                continue
+            domain = record["domain"]
 
-        iso, note = registration_date(domain)
-        time.sleep(DELAY)
-        if iso:
-            block = {
-                "registered": iso,
-                "years": round(years_since(iso), 1),
-                "source": "Domain registration date over RDAP, which is a lower bound on how "
-                          "long the firm has been operating rather than its founding date",
-                "checked_at": TODAY,
-            }
-            found += 1
-            print("%-38s registered %s  (%.1f years)" % (domain, iso, block["years"]))
-        else:
-            block = {"registered": None, "years": None, "source": "unavailable",
-                     "note": note, "checked_at": TODAY}
-            failed += 1
-            print("%-38s %s" % (domain, note))
+            iso, note = registration_date(domain)
+            time.sleep(DELAY)
+            if iso:
+                block = {
+                    "registered": iso,
+                    "years": round(years_since(iso), 1),
+                    "source": "Domain registration date over RDAP, which is a lower bound on how "
+                              "long the firm has been operating rather than its founding date",
+                    "checked_at": TODAY,
+                }
+                found += 1
+                print("%-38s registered %s  (%.1f years)" % (domain, iso, block["years"]))
+            else:
+                block = {"registered": None, "years": None, "source": "unavailable",
+                         "note": note, "checked_at": TODAY}
+                failed += 1
+                print("%-38s %s" % (domain, note))
 
-        fresh = json.loads(path.read_text(encoding="utf-8"))   # four scripts share this file
-        fresh["operating"] = block
-        io.open(path, "w", encoding="utf-8", newline="\n").write(
-            json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
+            fresh = json.loads(path.read_text(encoding="utf-8"))   # four scripts share this file
+            fresh["operating"] = block
+            io.open(path, "w", encoding="utf-8", newline="\n").write(
+                json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
 
     print("\n%d dated · %d without a registration record" % (found, failed))
     print("A lower bound settles a one-year threshold. It is not the firm's age and is never")
     print("published as one.")
-    return 0
+    return run.report()
 
 
 if __name__ == "__main__":

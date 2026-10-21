@@ -264,7 +264,7 @@
     "total": 36,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -383,7 +383,7 @@
             "pts": 3,
             "max": 8,
             "source": "ahrefs",
-            "evidence": "DR 1.3 → 37th pct of 114-firm cohort (median 2.9) 1/3 · 1,050 referring domains, 63th pct 1/2 · 6 organic keywords / 9 visits·mo, 50th pct 1/2 · brand demand 0/1 (pending)"
+            "evidence": "DR 1.3 → 37th pct of 121-firm cohort (median 2.65) 1/3 · 1,050 referring domains, 64th pct 1/2 · 6 organic keywords / 9 visits·mo, 52th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -460,5 +460,14 @@
     ],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/almeydalaw.com.svg",
+    "source_url": "https://almeydalaw.com/wp-content/uploads/2026/03/almeyda-law-logo-v2.svg",
+    "width": null,
+    "height": null,
+    "bytes": 513,
+    "source": "The logo the firm names in its own structured data, copied here rather than hot-linked",
+    "fetched_at": "2026-10-20"
   }
 }

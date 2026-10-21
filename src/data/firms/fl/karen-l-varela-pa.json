@@ -104,6 +104,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-30"
+    },
+    "ahrefs": {
+      "dr": 0.1,
+      "ahrefs_rank": 91325984,
+      "refdomains": 923,
+      "refdomains_dofollow": 358,
+      "backlinks": 1040,
+      "org_keywords": 0,
+      "org_traffic": 0,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-19"
     }
   },
   "gates": {
@@ -192,10 +204,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 24,
+    "total": 22,
     "tier": "Not eligible",
-    "verdict": "Eligibility gates not passed: G6. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "verdict": "Eligibility gates not passed: G6. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -215,8 +227,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -297,7 +309,7 @@
         ]
       },
       "D": {
-        "score": 0,
+        "score": 1,
         "max": 25,
         "subs": [
           {
@@ -311,10 +323,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 0.1 → 13th pct of 121-firm cohort (median 2.65) 0/3 · 923 referring domains, 29th pct 1/2 · 0 organic keywords / 0 visits·mo, 14th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -329,7 +341,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 0,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -369,25 +381,25 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 41,
+      "gap": 43,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)",
-        "D1 Website trust & experience: not yet measured (7 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D2 Search authority: +7 available"
       ]
     },
-    "raw": 13.0,
-    "assessed": 55,
-    "coverage": 0.696,
+    "raw": 14.0,
+    "assessed": 63,
+    "coverage": 0.9,
     "floor_abc_pct": 0.342,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 79,
+    "assessable": 70,
     "comparable": true
   },
   "entity": {

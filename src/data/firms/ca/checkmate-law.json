@@ -5,7 +5,7 @@
   "website": "https://checkmatelawgroup.com/",
   "domain": "checkmatelawgroup.com",
   "phone": "(213) 751-5555",
-  "status": "listed",
+  "status": "verified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -51,7 +51,14 @@
       "source_url": "https://maps.google.com/?cid=13674821491402492454&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [],
+  "attorneys": [
+    {
+      "name": "Shayan Kohanteb",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://checkmatelawgroup.com/about/"
+    }
+  ],
   "languages": [
     "English"
   ],
@@ -135,6 +142,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-10-12"
+    },
+    "ahrefs": {
+      "dr": 1.1,
+      "ahrefs_rank": 57394465,
+      "refdomains": 1118,
+      "refdomains_dofollow": 412,
+      "backlinks": 1200,
+      "org_keywords": 1,
+      "org_traffic": 0,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-19"
     }
   },
   "gates": {
@@ -159,10 +178,10 @@
       "checked_at": "2026-10-12"
     },
     "G5": {
-      "pass": false,
-      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
-      "source": "Public crawl, partial",
-      "checked_at": "2026-10-12"
+      "pass": true,
+      "evidence": "Site has served over HTTPS, a working phone number published, 1 named attorney published.",
+      "source": "Public crawl of the firm's own site",
+      "checked_at": "2026-10-20"
     },
     "G6": {
       "pass": true,
@@ -210,14 +229,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 36,
-    "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "total": 31,
+    "tier": "Verified",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 0,
+        "score": 1,
         "max": 25,
         "subs": [
           {
@@ -231,10 +250,10 @@
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 0,
+            "pts": 1,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "registry",
+            "evidence": "0 of 1 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -315,7 +334,7 @@
         ]
       },
       "D": {
-        "score": 3,
+        "score": 4,
         "max": 25,
         "subs": [
           {
@@ -329,10 +348,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 1,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 1.1 → 14th pct of 141-firm cohort (median 13) 0/3 · 1,118 referring domains, 46th pct 1/2 · 1 organic keywords / 0 visits·mo, 10th pct 0/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -347,7 +366,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -383,23 +402,23 @@
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 17,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 29,
+      "gap": 34,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A2 Experience: not yet measured (10 pts)",
-        "A6 Roster verifiability: not yet measured (9 pts)",
-        "D2 Search authority: not yet measured (8 pts)"
+        "A6 Roster verifiability: +8 available",
+        "D2 Search authority: +7 available",
+        "B1 Results published: +6 available"
       ]
     },
-    "raw": 22.1,
-    "assessed": 62,
-    "coverage": 0.697,
-    "floor_abc_pct": 0.421,
+    "raw": 24.1,
+    "assessed": 79,
+    "coverage": 0.888,
+    "floor_abc_pct": 0.362,
     "gates_unavailable": [
       "G3"
     ],

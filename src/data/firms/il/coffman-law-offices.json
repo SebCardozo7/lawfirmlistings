@@ -254,16 +254,26 @@
     "checked_at": "2026-09-26"
   },
   "results_published": {
-    "readable": false,
-    "why": "the results page served 16737 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "count": 1,
+    "counted_from": "result headings",
+    "amounts": [],
+    "largest": null,
+    "aggregate_claims": [],
+    "case_types": [
+      "motor vehicle"
+    ],
+    "disclaimer": false,
+    "venues": [],
+    "text_length": 3919,
+    "readable": true,
     "url": "https://coffmaninjurylaw.com/case-results/",
-    "checked_at": "2026-09-26"
+    "checked_at": "2026-10-20"
   },
   "score": {
-    "total": 39,
+    "total": 33,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -297,32 +307,32 @@
         ]
       },
       "B": {
-        "score": 0,
+        "score": 2,
         "max": 15,
         "subs": [
           {
             "code": "B1",
             "label": "Results published",
-            "pts": 0,
+            "pts": 1,
             "max": 6,
-            "source": "pending",
-            "evidence": "the results page served 16737 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "1 result published on the firm's own site, counted from result headings"
           },
           {
             "code": "B2",
             "label": "Specificity",
-            "pts": 0,
+            "pts": 1,
             "max": 5,
-            "source": "pending",
-            "evidence": "the results page served 16737 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "1 case type named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
             "pts": 0,
             "max": 4,
-            "source": "pending",
-            "evidence": "the results page served 16737 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
           }
         ]
       },
@@ -433,23 +443,23 @@
         ]
       }
     },
-    "floor_abc": 16,
+    "floor_abc": 18,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 26,
-      "floor_met": true,
-      "coverage_met": false,
+      "gap": 32,
+      "floor_met": false,
+      "coverage_met": true,
       "path": [
-        "B1 Results published: not yet measured (6 pts)",
-        "B2 Specificity: not yet measured (5 pts)",
-        "B3 Results disclosure: not yet measured (4 pts)"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D2 Search authority: +7 available"
       ]
     },
-    "raw": 21.4,
-    "assessed": 55,
-    "coverage": 0.786,
-    "floor_abc_pct": 0.696,
+    "raw": 23.4,
+    "assessed": 70,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",
       "G2",

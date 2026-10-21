@@ -13,6 +13,20 @@
       "primary": true,
       "source_url": "https://philadelphia-medical-malpractice-lawyers.com/personal-injury/",
       "checked_at": "2026-09-26"
+    },
+    {
+      "slug": "medical-malpractice",
+      "name": "Medical Malpractice",
+      "primary": false,
+      "source_url": "https://philadelphia-medical-malpractice-lawyers.com/med-mal/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://philadelphia-medical-malpractice-lawyers.com/wrongful-death/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -244,8 +258,8 @@
   "score": {
     "total": 37,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 4 could not be answered from the available records (G1, G2, G3, G6) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "1 eligibility gate(s) still to be checked. 4 could not be answered from the available records (G1, G2, G3, G6) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -265,8 +279,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -421,16 +435,16 @@
       "needed": 65,
       "gap": 28,
       "floor_met": false,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
         "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
         "B1 Results published: +6 available"
       ]
     },
     "raw": 25.8,
     "assessed": 70,
-    "coverage": 0.886,
+    "coverage": 1.0,
     "floor_abc_pct": 0.395,
     "gates_unavailable": [
       "G1",
@@ -440,7 +454,7 @@
     "gates_unresolvable": [
       "G6"
     ],
-    "assessable": 79,
+    "assessable": 70,
     "comparable": true
   },
   "logo": {

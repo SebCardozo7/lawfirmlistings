@@ -13,6 +13,27 @@
       "primary": true,
       "source_url": "https://marshallinjurylaw.com/car-accidents/truck-accident-attorney/",
       "checked_at": "2026-09-26"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://marshallinjurylaw.com/las-vegas-practice-areas/car-accidents/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://marshallinjurylaw.com/las-vegas-practice-areas/wrongful-death/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://marshallinjurylaw.com/las-vegas-practice-areas/slip-and-fall/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -242,15 +263,15 @@
   },
   "results_published": {
     "readable": false,
-    "why": "the results page served 2681 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
+    "why": "the results page served 2692 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell.",
     "url": "https://marshallinjurylaw.com/results/",
-    "checked_at": "2026-09-26"
+    "checked_at": "2026-10-20"
   },
   "score": {
     "total": 47,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -293,7 +314,7 @@
             "pts": 0,
             "max": 6,
             "source": "pending",
-            "evidence": "the results page served 2681 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "evidence": "the results page served 2692 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B2",
@@ -301,7 +322,7 @@
             "pts": 0,
             "max": 5,
             "source": "pending",
-            "evidence": "the results page served 2681 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "evidence": "the results page served 2692 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           },
           {
             "code": "B3",
@@ -309,7 +330,7 @@
             "pts": 0,
             "max": 4,
             "source": "pending",
-            "evidence": "the results page served 2681 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
+            "evidence": "the results page served 2692 characters of text and no figure or mention of a settlement, verdict or recovery, so there was nothing on it to count. Whether the results are held back from the served HTML or the page carries none is not something this check can tell."
           }
         ]
       },
@@ -444,5 +465,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/marshallinjurylaw.com.png",
+    "source_url": "https://marshallinjurylaw.com/images/marshallinjurylaw-logo-white1.png",
+    "width": 728,
+    "height": 200,
+    "bytes": 17771,
+    "source": "The logo in the header of the firm's own site, copied here rather than hot-linked",
+    "fetched_at": "2026-10-20"
   }
 }

@@ -13,6 +13,34 @@
       "primary": true,
       "source_url": "https://atlantapiattorney.com/car-accidents/",
       "checked_at": "2026-09-25"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://atlantapiattorney.com/car-accidents/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://atlantapiattorney.com/truck-accidents/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://atlantapiattorney.com/wrongful-death/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://atlantapiattorney.com/premises-liability/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -433,5 +461,14 @@
     "gates_unresolvable": [],
     "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/atlantapiattorney.com.png",
+    "source_url": "https://atlantapiattorney.com/wp-content/uploads/2021/10/image-3-2.png",
+    "width": 345,
+    "height": 100,
+    "bytes": 4937,
+    "source": "The logo the firm names in its own structured data, copied here rather than hot-linked",
+    "fetched_at": "2026-10-20"
   }
 }

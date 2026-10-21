@@ -13,6 +13,41 @@
       "primary": true,
       "source_url": "https://www.patinolawoffice.com/personal-injury-calculator/",
       "checked_at": "2026-09-29"
+    },
+    {
+      "slug": "car-accidents",
+      "name": "Car Accidents",
+      "primary": false,
+      "source_url": "https://www.patinolawoffice.com/mcallen-car-accident-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "truck-accidents",
+      "name": "Truck Accidents",
+      "primary": false,
+      "source_url": "https://www.patinolawoffice.com/mcallen-truck-accident-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "medical-malpractice",
+      "name": "Medical Malpractice",
+      "primary": false,
+      "source_url": "https://www.patinolawoffice.com/medical-malpractice-lawyer-mcallen/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "wrongful-death",
+      "name": "Wrongful Death",
+      "primary": false,
+      "source_url": "https://www.patinolawoffice.com/mcallen-wrongful-death-lawyer/",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "slug": "slip-and-fall",
+      "name": "Slip and Fall",
+      "primary": false,
+      "source_url": "https://www.patinolawoffice.com/mcallen-slip-and-fall-lawyer/",
+      "checked_at": "2026-10-19"
     }
   ],
   "market": {
@@ -306,8 +341,8 @@
   "score": {
     "total": 63,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Certification needs more of the scale measured than we have managed here, pillar A in particular. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-10-20",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -327,8 +362,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "pending",
-            "evidence": "No attorney is named on the site we could read"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -483,16 +518,16 @@
       "needed": 65,
       "gap": 2,
       "floor_met": true,
-      "coverage_met": false,
+      "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: not yet measured (9 pts)",
         "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
         "D1 Website trust & experience: +5.5 available"
       ]
     },
     "raw": 44.0,
     "assessed": 70,
-    "coverage": 0.886,
+    "coverage": 1.0,
     "floor_abc_pct": 0.684,
     "gates_unavailable": [
       "G1",
@@ -501,7 +536,16 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 79,
+    "assessable": 70,
     "comparable": true
+  },
+  "logo": {
+    "file": "/logos/patinolawoffice.com.png",
+    "source_url": "https://www.patinolawoffice.com/wp-content/uploads/2022/03/patino-colour-logo.png",
+    "width": 800,
+    "height": 224,
+    "bytes": 44131,
+    "source": "The logo the firm names in its own structured data, copied here rather than hot-linked",
+    "fetched_at": "2026-10-20"
   }
 }

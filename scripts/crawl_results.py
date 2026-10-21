@@ -49,6 +49,7 @@ import urllib.parse
 import urllib.request
 import urllib.robotparser
 from datetime import date
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):

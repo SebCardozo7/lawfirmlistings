@@ -191,6 +191,18 @@
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-10-12"
+    },
+    "ahrefs": {
+      "dr": 8.0,
+      "ahrefs_rank": 22466124,
+      "refdomains": 1057,
+      "refdomains_dofollow": 510,
+      "backlinks": 1654,
+      "org_keywords": 51,
+      "org_traffic": 804,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-10-19"
     }
   },
   "gates": {
@@ -281,10 +293,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 75,
+    "total": 72,
     "tier": "Certified",
-    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (5/25).",
-    "computed_at": "2026-10-18",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (8/25).",
+    "computed_at": "2026-10-19",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -386,7 +398,7 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 8,
         "max": 25,
         "subs": [
           {
@@ -400,10 +412,10 @@
           {
             "code": "D2",
             "label": "Search authority",
-            "pts": 0,
+            "pts": 3,
             "max": 8,
-            "source": "pending",
-            "evidence": "Ahrefs data not yet collected for this market"
+            "source": "ahrefs",
+            "evidence": "DR 8.0 → 40th pct of 141-firm cohort (median 13) 1/3 · 1,057 referring domains, 38th pct 1/2 · 51 organic keywords / 804 visits·mo, 66th pct 1/2 · brand demand 0/1 (pending)"
           },
           {
             "code": "D3",
@@ -418,7 +430,7 @@
             "label": "Content, E-E-A-T & schema",
             "pts": 1,
             "max": 1,
-            "source": "observed",
+            "source": "ahrefs",
             "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
           }
         ]
@@ -458,18 +470,18 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 78,
-      "gap": 3,
+      "gap": 6,
       "floor_met": true,
       "coverage_met": true,
       "path": [
+        "D2 Search authority: +5 available",
         "D1 Website trust & experience: +4.0 available",
-        "A6 Roster verifiability: +3 available",
-        "B1 Results published: +3 available"
+        "A6 Roster verifiability: +3 available"
       ]
     },
-    "raw": 61.0,
-    "assessed": 81,
-    "coverage": 0.91,
+    "raw": 64.0,
+    "assessed": 89,
+    "coverage": 1.0,
     "floor_abc_pct": 0.825,
     "gates_unavailable": [
       "G3"

@@ -38,6 +38,7 @@ import sys
 import urllib.error
 import urllib.request
 from pathlib import Path
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "src" / "data" / "research"

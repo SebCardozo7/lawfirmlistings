@@ -42,6 +42,7 @@ import urllib.request
 
 import lib_discover
 import urllib.robotparser
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 UA = "LFL-research/1.0 (+https://lawfirmlistings.com; public-data collection for firm profiles)"

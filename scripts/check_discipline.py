@@ -68,6 +68,7 @@ import re
 import sys
 import time
 import urllib.error
+import _tls  # noqa: F401  (certificate authorities; see scripts/_tls.py)
 import urllib.parse
 import urllib.request
 
