@@ -62,10 +62,21 @@ if (value('suppress')) {
   process.exit(0);
 }
 
-/** An address is suppressed by itself or by its domain, so one reply can cover a whole firm. */
-const isSuppressed = (email) => {
-  const e = email.toLowerCase();
-  return suppressed.has(e) || suppressed.has(e.split('@')[1] ?? '');
+/*
+ * An address is suppressed by itself or by its domain, so one reply can cover a whole firm,
+ * and a firm is suppressed by its own domain however it publishes its address.
+ *
+ * That last clause is the one that was missing. The list holds the eight firms we work for,
+ * because this message tells a firm it never asked us to publish its profile and that is not
+ * true of a firm that engaged us. Goodwin Law was on the list by its own domain, glpa.law, and
+ * was still in the batch: the address its site publishes is matt@flestatelaw.com, so neither
+ * half of the old test matched and a client was one send away from being told we had never
+ * spoken.
+ */
+const isSuppressed = ({ email, domain }) => {
+  const e = (email ?? '').toLowerCase();
+  const own = (domain ?? '').toLowerCase().replace(/^www\./, '');
+  return suppressed.has(e) || suppressed.has(e.split('@')[1] ?? '') || (!!own && suppressed.has(own));
 };
 
 // --- which address, of the ones the crawl holds ----------------------------------------
@@ -121,11 +132,19 @@ const pickAddress = (entries, domain) => {
     if (host.startsWith('www.')) { rejected = true; continue; }
     const mine = onOwnDomain(host);
     if (!mine && POLICY_PAGE.test(source)) { rejected = true; continue; }
-    ranked.push({ value, rank: mine ? 0 : 1 });
+    ranked.push({ value, rank: mine ? 0 : 1, source, mine });
   }
 
   ranked.sort((a, b) => a.rank - b.rank);
-  return { email: ranked[0]?.value ?? null, rejected: rejected && !ranked.length };
+  const best = ranked[0];
+  // The page it was read from travels with it. An address is checkable only against where the
+  // firm published it, and --where prints exactly that for a whole batch before it is sent.
+  return {
+    email: best?.value ?? null,
+    source: best?.source ?? null,
+    ownDomain: best ? best.mine : null,
+    rejected: rejected && !ranked.length,
+  };
 };
 
 /*
@@ -184,7 +203,7 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
 
   const domain = firm.domain || firm.digital?.domain;
   const staging = domain ? readJson(path.join(ROOT, '.crawl', `${domain}.json`), null) : null;
-  const { email, rejected } = pickAddress(staging?.emails, domain);
+  const { email, source, ownDomain, rejected } = pickAddress(staging?.emails, domain);
   const score = firm.score ?? {};
 
   // Only what is true of this firm, read now rather than remembered.
@@ -195,7 +214,10 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
   candidates.push({
     slug: firm.slug,
     firm: firm.name,
+    domain,
     email,
+    source,
+    ownDomain,
     rejected,
     tier: score.tier,
     total: score.total,
@@ -211,7 +233,7 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
 const why = (c) =>
   !c.email && c.rejected ? 'the only address we found is not one to write to'
     : !c.email ? 'no public address of theirs that we hold'
-    : isSuppressed(c.email) ? 'asked not to be written to'
+    : isSuppressed(c) ? 'on the list of firms not to write to'
     : sent[c.slug] ? `already written to on ${sent[c.slug].at}`
     : c.claimed ? 'already manages this profile'
     : !c.comparable ? 'too little of the scale measured to quote a score'
@@ -239,6 +261,26 @@ console.log('');
 for (const c of batch) {
   console.log(`   ${String(c.total).padStart(3)}  ${String(c.tier).padEnd(14)} `
     + `${c.firm.slice(0, 38).padEnd(38)} ${c.email}`);
+}
+
+/*
+ * node scripts/send_notice.mjs --limit 25 --where
+ *
+ * The page each address was read from, which is the only thing an address can be checked
+ * against. The batch list above says who would be written to; this says why we believe that
+ * mailbox is theirs, and flags the ones that sit on a second domain, where the answer is a
+ * judgement rather than a match.
+ */
+if (flag('where')) {
+  console.log('\nwhere each address was published:\n');
+  for (const c of batch) {
+    console.log(`   ${c.firm.slice(0, 32).padEnd(32)} ${c.email.padEnd(34)}`
+      + `${c.ownDomain ? '' : 'second domain · '}${c.source || 'source not recorded'}`);
+  }
+  const second = batch.filter(c => !c.ownDomain).length;
+  console.log(`\n${batch.length - second} of ${batch.length} on the firm's own domain`
+    + `${second ? `, ${second} on a second domain worth a look` : ''}.`);
+  process.exit(0);
 }
 
 // --- the message -----------------------------------------------------------------------
