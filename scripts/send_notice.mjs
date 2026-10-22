@@ -132,11 +132,19 @@ const pickAddress = (entries, domain) => {
     if (host.startsWith('www.')) { rejected = true; continue; }
     const mine = onOwnDomain(host);
     if (!mine && POLICY_PAGE.test(source)) { rejected = true; continue; }
-    ranked.push({ value, rank: mine ? 0 : 1 });
+    ranked.push({ value, rank: mine ? 0 : 1, source, mine });
   }
 
   ranked.sort((a, b) => a.rank - b.rank);
-  return { email: ranked[0]?.value ?? null, rejected: rejected && !ranked.length };
+  const best = ranked[0];
+  // The page it was read from travels with it. An address is checkable only against where the
+  // firm published it, and --where prints exactly that for a whole batch before it is sent.
+  return {
+    email: best?.value ?? null,
+    source: best?.source ?? null,
+    ownDomain: best ? best.mine : null,
+    rejected: rejected && !ranked.length,
+  };
 };
 
 /*
@@ -195,7 +203,7 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
 
   const domain = firm.domain || firm.digital?.domain;
   const staging = domain ? readJson(path.join(ROOT, '.crawl', `${domain}.json`), null) : null;
-  const { email, rejected } = pickAddress(staging?.emails, domain);
+  const { email, source, ownDomain, rejected } = pickAddress(staging?.emails, domain);
   const score = firm.score ?? {};
 
   // Only what is true of this firm, read now rather than remembered.
@@ -208,6 +216,8 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
     firm: firm.name,
     domain,
     email,
+    source,
+    ownDomain,
     rejected,
     tier: score.tier,
     total: score.total,
@@ -251,6 +261,26 @@ console.log('');
 for (const c of batch) {
   console.log(`   ${String(c.total).padStart(3)}  ${String(c.tier).padEnd(14)} `
     + `${c.firm.slice(0, 38).padEnd(38)} ${c.email}`);
+}
+
+/*
+ * node scripts/send_notice.mjs --limit 25 --where
+ *
+ * The page each address was read from, which is the only thing an address can be checked
+ * against. The batch list above says who would be written to; this says why we believe that
+ * mailbox is theirs, and flags the ones that sit on a second domain, where the answer is a
+ * judgement rather than a match.
+ */
+if (flag('where')) {
+  console.log('\nwhere each address was published:\n');
+  for (const c of batch) {
+    console.log(`   ${c.firm.slice(0, 32).padEnd(32)} ${c.email.padEnd(34)}`
+      + `${c.ownDomain ? '' : 'second domain · '}${c.source || 'source not recorded'}`);
+  }
+  const second = batch.filter(c => !c.ownDomain).length;
+  console.log(`\n${batch.length - second} of ${batch.length} on the firm's own domain`
+    + `${second ? `, ${second} on a second domain worth a look` : ''}.`);
+  process.exit(0);
 }
 
 // --- the message -----------------------------------------------------------------------
