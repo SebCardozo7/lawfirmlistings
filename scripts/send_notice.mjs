@@ -62,10 +62,21 @@ if (value('suppress')) {
   process.exit(0);
 }
 
-/** An address is suppressed by itself or by its domain, so one reply can cover a whole firm. */
-const isSuppressed = (email) => {
-  const e = email.toLowerCase();
-  return suppressed.has(e) || suppressed.has(e.split('@')[1] ?? '');
+/*
+ * An address is suppressed by itself or by its domain, so one reply can cover a whole firm,
+ * and a firm is suppressed by its own domain however it publishes its address.
+ *
+ * That last clause is the one that was missing. The list holds the eight firms we work for,
+ * because this message tells a firm it never asked us to publish its profile and that is not
+ * true of a firm that engaged us. Goodwin Law was on the list by its own domain, glpa.law, and
+ * was still in the batch: the address its site publishes is matt@flestatelaw.com, so neither
+ * half of the old test matched and a client was one send away from being told we had never
+ * spoken.
+ */
+const isSuppressed = ({ email, domain }) => {
+  const e = (email ?? '').toLowerCase();
+  const own = (domain ?? '').toLowerCase().replace(/^www\./, '');
+  return suppressed.has(e) || suppressed.has(e.split('@')[1] ?? '') || (!!own && suppressed.has(own));
 };
 
 // --- which address, of the ones the crawl holds ----------------------------------------
@@ -195,6 +206,7 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
   candidates.push({
     slug: firm.slug,
     firm: firm.name,
+    domain,
     email,
     rejected,
     tier: score.tier,
@@ -211,7 +223,7 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
 const why = (c) =>
   !c.email && c.rejected ? 'the only address we found is not one to write to'
     : !c.email ? 'no public address of theirs that we hold'
-    : isSuppressed(c.email) ? 'asked not to be written to'
+    : isSuppressed(c) ? 'on the list of firms not to write to'
     : sent[c.slug] ? `already written to on ${sent[c.slug].at}`
     : c.claimed ? 'already manages this profile'
     : !c.comparable ? 'too little of the scale measured to quote a score'
