@@ -362,8 +362,24 @@ def crawl(domain, fetched_at):
         for m in re.finditer(r"(?<![\d.])(\(?[2-9]\d{2}\)?[.\-–\s]\s?\d{3}[.\-–\s]\d{4})"
                              r"(?![\d.])", strip_tags(html)):
             keep_phone(re.sub(r"[^\d]", "", m.group(1)), final, "printed on the page")
-        for m in re.finditer(r'href=["\']mailto:([^"\'?]+)["\']', html, re.I):
-            e = m.group(1).strip().lower()
+        # A mailto: is HTML like everything else, and twenty-two firms publish theirs one entity
+        # at a time to keep scrapers off it: &#099;&#111;&#110;&#111;&#114;&#064; is conor@, and
+        # we stored it character for character. Nine firms came out of the crawl with no usable
+        # address at all for that reason, Mulvaney Law and Boyack Law Group among them. The same
+        # goes for whitespace, which an addr-spec cannot contain, so "contact@ example.com" is
+        # one address written badly rather than a reason to have none.
+        #
+        # Nothing is rejected here on purpose. An address masked against scrapers is still a
+        # published contact method, which is all G5 asks, and whether an address is one a
+        # stranger should write to is a question for whoever writes: see scripts/send_notice.mjs.
+        # The (?:\?...)? is a mailto: carrying a subject or a body, which the pattern used to
+        # refuse outright: it stopped the capture at the question mark and then demanded the
+        # closing quote, so mailto:info@firm.com?subject=Website%20Inquiry matched nothing at
+        # all. Forty of the 863 firms we hold no address for were re-read to see what that had
+        # cost, and the answer is nothing: none of them publishes a mailto: of either shape, and
+        # they take enquiries through a form. Fixed because it is wrong, not because it pays.
+        for m in re.finditer(r'href=["\']mailto:([^"\'?]+)(?:\?[^"\']*)?["\']', html, re.I):
+            e = re.sub(r"\s+", "", html_entities.unescape(m.group(1))).lower()
             if e and e not in [x["value"] for x in record["emails"]]:
                 record["emails"].append({"value": e, "source_url": final})
 

@@ -68,6 +68,107 @@ const isSuppressed = (email) => {
   return suppressed.has(e) || suppressed.has(e.split('@')[1] ?? '');
 };
 
+// --- which address, of the ones the crawl holds ----------------------------------------
+/*
+ * This used to be `emails[0]`, and the next batch of five was going to open with
+ * unsubscribe@stoneinjury.com and privacyprogram@www.shookandstone.com. Of the 549 firms whose
+ * crawl holds an address, 35 held one that should never receive this message: 14 that are not
+ * addresses at all (${email}, email@domain.com, and the masks sites print to defeat scrapers),
+ * 9 role or compliance mailboxes, and 12 on another firm's domain, every one of them read off a
+ * privacy policy, which is where a template's example address survives a rebrand.
+ *
+ * So the address is chosen rather than taken. An address on the firm's own domain is preferred,
+ * an unreadable one is not an address, a compliance mailbox is not a person, and an address on
+ * somebody else's domain found on a policy page is somebody else's address. Where that leaves
+ * nothing, the firm is simply not written to and the batch says so.
+ */
+const SHAPE = /^[a-z0-9._%+-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+$/;
+// Mailboxes that exist for a machine or a lawyer, not for the person who maintains the site.
+const ROLE = /^(?:unsubscribe|no-?reply|donotreply|privacy[a-z]*|dpo|abuse|postmaster|webmaster|dmca|opt-?out|compliance|security|removal|remove)@/;
+const PLACEHOLDER = /@(?:example|domain|yourdomain|yourorg|email|sentry|wixpress)\./;
+const POLICY_PAGE = /privacy|terms|legal-notice|disclaimer|cookie/i;
+
+/** Decode and tidy one value the way crawl_public.py now stores it. */
+const normalise = (raw) => {
+  if (typeof raw !== 'string') return '';
+  // The crawler decodes entities and strips whitespace since this was written, but the 2,510
+  // records in .crawl/ were read before that and a re-crawl of every domain takes two hours.
+  return raw
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replace(/\s+/g, '')
+    .replace(/[.,;:]+$/, '')
+    .toLowerCase();
+};
+
+/**
+ * The best address the crawl holds for this firm, or null.
+ * `rejected` says whether something was there and we declined to use it, which is a different
+ * sentence to a reader of the batch than holding nothing at all.
+ */
+const pickAddress = (entries, domain) => {
+  const own = (domain || '').toLowerCase().replace(/^www\./, '');
+  const onOwnDomain = (host) => host === own || host.endsWith(`.${own}`) || own.endsWith(`.${host}`);
+  let rejected = false;
+  const ranked = [];
+
+  for (const entry of Array.isArray(entries) ? entries : []) {
+    const value = normalise(typeof entry === 'string' ? entry : entry?.value);
+    const source = (typeof entry === 'string' ? '' : entry?.source_url) || '';
+    if (!value) continue;
+    if (!SHAPE.test(value) || PLACEHOLDER.test(value) || ROLE.test(value)) { rejected = true; continue; }
+    const host = value.split('@')[1];
+    if (host.startsWith('www.')) { rejected = true; continue; }
+    const mine = onOwnDomain(host);
+    if (!mine && POLICY_PAGE.test(source)) { rejected = true; continue; }
+    ranked.push({ value, rank: mine ? 0 : 1 });
+  }
+
+  ranked.sort((a, b) => a.rank - b.rank);
+  return { email: ranked[0]?.value ?? null, rejected: rejected && !ranked.length };
+};
+
+/*
+ * node scripts/send_notice.mjs --self-test
+ *
+ * Every case here is a real record from .crawl/, because the rule was written from what the
+ * crawl actually holds rather than from what an address usually looks like.
+ */
+if (flag('self-test')) {
+  const cases = [
+    // [what the crawl holds, the firm's domain, what should come out]
+    [[{ value: 'unsubscribe@stoneinjury.com', source_url: 'https://stoneinjury.com/' }], 'stoneinjury.com', null],
+    [[{ value: 'privacyprogram@www.shookandstone.com', source_url: 'https://www.shookandstone.com/privacy-policy/' }], 'shookandstone.com', null],
+    [[{ value: '${email}', source_url: 'https://accidentjustice.com/' }], 'accidentjustice.com', null],
+    [[{ value: 'in**@sh**************.com', source_url: 'https://x.com/' }], 'shirazilaw.com', null],
+    [[{ value: 'email@domain.com', source_url: 'https://uvallelawfirm.com/' }], 'uvallelawfirm.com', null],
+    [[{ value: 'info@petersenjohnson.com', source_url: 'https://bradjohnsoninjurylaw.com/privacy-policy/' }], 'bradjohnsoninjurylaw.com', null],
+    // Entity by entity, and the only thing wrong with it was that nobody decoded it.
+    [[{ value: '&#099;&#111;&#110;&#111;&#114;&#064;mu&#108;va&#110;&#101;y&#108;&#097;w.com', source_url: 'https://mulvaneylaw.com/' }], 'mulvaneylaw.com', 'conor@mulvaneylaw.com'],
+    [[{ value: 'here 4 u @ cohens law firm . com', source_url: 'https://cohenslawfirm.com/' }], 'cohenslawfirm.com', 'here4u@cohenslawfirm.com'],
+    // The firm's own domain wins over a second one, whatever order the crawl found them in.
+    [[{ value: 'info@petersenjohnson.com', source_url: 'https://bradjohnsoninjurylaw.com/contact/' },
+      { value: 'info@bradjohnsoninjurylaw.com', source_url: 'https://bradjohnsoninjurylaw.com/contact/' }],
+      'bradjohnsoninjurylaw.com', 'info@bradjohnsoninjurylaw.com'],
+    // A second brand on a contact page is the firm, and is written to.
+    [[{ value: 'shane@getgomez.com', source_url: 'https://www.thegomezfirm.com/news/' }], 'thegomezfirm.com', 'shane@getgomez.com'],
+    // A compliance mailbox beside a real one costs the firm nothing.
+    [[{ value: 'webmaster@baileylawfirmaz.com', source_url: 'https://baileylawfirmaz.com/privacy-policy/' },
+      { value: 'info@baileylawfirmaz.com', source_url: 'https://baileylawfirmaz.com/' }],
+      'baileylawfirmaz.com', 'info@baileylawfirmaz.com'],
+  ];
+  let failed = 0;
+  for (const [entries, domain, expected] of cases) {
+    const got = pickAddress(entries, domain).email;
+    if (got !== expected) {
+      failed += 1;
+      console.log(`  FAIL  ${domain}\n        expected ${expected ?? 'nothing'}\n        got      ${got ?? 'nothing'}`);
+    }
+  }
+  console.log(failed ? `${failed} of ${cases.length} failed.` : `all ${cases.length} cases pass.`);
+  process.exit(failed ? 1 : 0);
+}
+
 // --- the firms -------------------------------------------------------------------------
 const walk = (dir) => readdirSync(dir).flatMap((name) => {
   const p = path.join(dir, name);
@@ -83,8 +184,7 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
 
   const domain = firm.domain || firm.digital?.domain;
   const staging = domain ? readJson(path.join(ROOT, '.crawl', `${domain}.json`), null) : null;
-  const first = Array.isArray(staging?.emails) ? staging.emails[0] : null;
-  const email = typeof first === 'string' ? first : first?.value;
+  const { email, rejected } = pickAddress(staging?.emails, domain);
   const score = firm.score ?? {};
 
   // Only what is true of this firm, read now rather than remembered.
@@ -96,6 +196,7 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
     slug: firm.slug,
     firm: firm.name,
     email,
+    rejected,
     tier: score.tier,
     total: score.total,
     city: firm.market?.city,
@@ -108,7 +209,8 @@ for (const file of walk(path.join(ROOT, 'src', 'data', 'firms'))) {
 }
 
 const why = (c) =>
-  !c.email ? 'no public address of theirs that we hold'
+  !c.email && c.rejected ? 'the only address we found is not one to write to'
+    : !c.email ? 'no public address of theirs that we hold'
     : isSuppressed(c.email) ? 'asked not to be written to'
     : sent[c.slug] ? `already written to on ${sent[c.slug].at}`
     : c.claimed ? 'already manages this profile'
