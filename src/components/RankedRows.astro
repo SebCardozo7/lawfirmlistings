@@ -1,0 +1,57 @@
+---
+/**
+ * The rest of the ranking, under the cards.
+ *
+ * The city hub and the practice hub both showed three firms and stopped. That is a teaser on a
+ * page whose heading promises a city: 1,355 of the 1,412 published firms had no link from the
+ * page about their own city, and six of the eight firms we work for appeared on neither their
+ * city page nor their practice page. The cards stay, because a top five is a real recommendation
+ * and a hundred cards is not, and everything below them is this: one line per firm, in the same
+ * order, linking to the profile.
+ *
+ * The order is the caller's. This component never re-sorts, so a row's position always means
+ * what the heading above it says it means.
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  firms: CollectionEntry<'firms'>[];
+  /** National lists need the city; a city list already said it in the heading. */
+  showCity?: boolean;
+}
+const { firms, showCity = false } = Astro.props;
+
+// Only the tiers that are a claim about the firm get a chip. 'Listed' is the absence of one.
+const TIER_CHIP: Record<string, string> = {
+  Elite: 'tier', Distinguished: 'tier', Certified: 'certified', Verified: 'verified',
+};
+---
+<ol class="rank-rows">
+  {firms.map((f, i) => {
+    const d = f.data;
+    const s = d.score;
+    const chip = s ? TIER_CHIP[s.tier] : undefined;
+    return (
+      <li>
+        <span class="rr-rank num">{i + 1}</span>
+        <span class="rr-name">
+          <a href={`/firms/${d.slug}/`}>{d.name}</a>
+          {chip && <span class={`rr-chip rr-chip--${chip}`}>{s!.tier}</span>}
+        </span>
+        <span class="rr-meta">
+          {showCity && <>{d.market.city}, {d.market.state} · </>}
+          {d.offices.length} {d.offices.length === 1 ? 'office' : 'offices'}
+          {d.attorneys.length > 0 && <> · {d.attorneys.length} {d.attorneys.length === 1 ? 'attorney' : 'attorneys'}</>}
+        </span>
+        {/* A score built from a sixth of the scale is not the same number as one built from nine
+            tenths of it, so a firm the engine marks not comparable prints no figure here either.
+            The profile says how much of the scale could be measured. */}
+        <span class="rr-score num">
+          {s && s.comparable !== false
+            ? <><b>{s.total}</b><i>/100</i></>
+            : <i class="rr-nil">not scored</i>}
+        </span>
+      </li>
+    );
+  })}
+</ol>
