@@ -19,5 +19,8 @@
     "astro": "^7.3.1"
   },
   "type": "module",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "wrangler": "^4.151.3"
+  }
 }
