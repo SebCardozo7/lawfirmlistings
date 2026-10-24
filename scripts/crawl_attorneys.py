@@ -1197,6 +1197,9 @@ def main():
     ap.add_argument("--domains", help="comma-separated; default is every reachable staging record")
     ap.add_argument("--staging", default=".crawl")
     ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--derive-only", action="store_true",
+                    help="no fetching: work out trust_pages.bar_numbers_on_bios from the bios "
+                         "already read into each staging record")
     args = ap.parse_args()
 
     for stream in (sys.stdout, sys.stderr):
@@ -1225,6 +1228,27 @@ def main():
             if not rec.get("https_ok"):
                 continue
 
+            # The key this run would set is derivable from bios this script already read, and
+            # re-reading ten thousand of them to write one boolean we can work out would be a
+            # crawl we are not owed. --derive-only does the last step and nothing else, which is
+            # how the existing records got the key without anybody's site being touched again.
+            if args.derive_only:
+                found = rec.get("attorneys_found") or {}
+                if found.get("error") and not found.get("attorneys"):
+                    continue
+                index_url = found.get("index_url") or None
+                bios_read = [a for a in (found.get("attorneys") or [])
+                             if a.get("source_url") and a.get("source_url") != index_url]
+                if not bios_read:
+                    continue
+                value = any(a.get("bar_number") for a in bios_read)
+                rec.setdefault("trust_pages", {})["bar_numbers_on_bios"] = value
+                io.open(path, "w", encoding="utf-8", newline="\n").write(
+                    json.dumps(rec, ensure_ascii=False, indent=2) + "\n")
+                total_names += len(bios_read)
+                with_bar += 1 if value else 0
+                continue
+
             found = collect(rec["domain"], args.verbose, rec)
             # Re-read before writing: another enricher may have written in the meantime.
             fresh = json.loads(io.open(path, encoding="utf-8").read())
@@ -1241,6 +1265,29 @@ def main():
                                    "kept rather than overwritten with nothing"
                                    % (found["error"], len(had))))
             fresh["attorneys_found"] = found
+
+            # The last hop, which was never built. This script has recorded a bar number off a
+            # bio page since it was written, and its own docstring says the number feeds D1's
+            # "attorney bios with bar admission numbers" point. It never reached the point:
+            # score.py reads that from digital.trust_pages.bar_numbers_on_bios, nothing wrote
+            # the key, and 1,323 profiles published "no bar numbers on bios" about a real law
+            # firm on the strength of a check whose result was sitting in this file.
+            #
+            # Written only where an individual bio was actually read, because the three answers
+            # are different: the firm publishes them, the firm does not, and we never opened a
+            # bio. The third is not a finding and leaves the point out of the denominator.
+            #
+            # The false is as much a measurement as the true. Before it was allowed through,
+            # 24 bios from firms recorded as publishing none were re-read with a much wider
+            # pattern (SBN, Reg. No., License No., a bare "Bar: 123456"): it found nothing the
+            # narrow one had missed, so the absence is the firm's and not the regex's.
+            index_url = (found.get("index_url") or None)
+            bios_read = [a for a in (found.get("attorneys") or [])
+                         if a.get("source_url") and a.get("source_url") != index_url]
+            if bios_read and not found.get("error"):
+                fresh.setdefault("trust_pages", {})["bar_numbers_on_bios"] = any(
+                    a.get("bar_number") for a in bios_read)
+
             io.open(path, "w", encoding="utf-8", newline="\n").write(
                 json.dumps(fresh, ensure_ascii=False, indent=2) + "\n")
 

@@ -81,9 +81,24 @@ LINK_KINDS = [
     ("contact", r"/(contact|contact-us|locations|offices)(/|\.html?|$)"),
     ("results", r"/(results|case-results|verdicts|settlements|verdicts-settlements|recoveries|"
                 r"case-studies)(/|\.html?|$)"),
-    ("privacy", r"/(privacy|privacy-policy)(/|\.html?|$)"),
-    ("disclaimer", r"/(disclaimer|legal-disclaimer|legal-notice|terms|terms-of-use)(/|\.html?|$)"),
-    ("fees", r"/(fees|our-fees|contingency-fees|contingency-fee|no-fee|pricing)(/|\.html?|$)"),
+    # The three trust pages take a looser tail than the rest, because a firm names them after
+    # itself and its CMS names the file. /privacy-policy-grun-law-corporation/ and
+    # /privacypolicy.html and /aviso-legal were all read as "this firm publishes no privacy
+    # policy", which is a statement about a firm that we had no business making: the segment
+    # had to end exactly after the word and the extension had to be .htm or .html.
+    #
+    # Measured before it was widened, on the home pages as they stand today: 4 of 22 firms whose
+    # crawl recorded no trust page at all do link to one of their own, and 1 of 30 we publish
+    # "no privacy policy" or "no disclaimer" about. The tail is [a-z0-9-]* rather than anything,
+    # so /privacy-policy-updates-2019.html still counts and /privacyville/ does not exist.
+    ("privacy", r"/(privacy|privacidad)[a-z0-9_-]*(/|\.[a-z]{2,4}|$)"),
+    # "terms" keeps the exact tail the others give up. A slug is free to read
+    # /terms-of-your-settlement/ and that is a blog post, where /disclaimer-anything is not.
+    # Crediting a firm with a page it does not publish is the same error in the other direction.
+    ("disclaimer", r"/((disclaimer|legal-disclaimer|legal-notice|legal-notices|aviso-legal)"
+                   r"[a-z0-9_-]*|terms|terms-of-use|terms-and-conditions)(/|\.[a-z]{2,4}|$)"),
+    ("fees", r"/(fees|our-fees|contingency-fees?|no-fee|pricing|honorarios)"
+             r"[a-z0-9_-]*(/|\.[a-z]{2,4}|$)"),
     ("blog", r"/(blog|news|articles|insights)(/|\.html?|$)"),
 ]
 TRUST_PAGE_KEYS = {
@@ -580,11 +595,22 @@ def main():
         #
         # So the record is merged rather than replaced: what this crawler measured wins, and the
         # blocks it knows nothing about stay where their owner put them.
+        #
+        # The merge is one level deep, and trust_pages is the block where that is not enough.
+        # crawl_attorneys writes bar_numbers_on_bios into it, this crawler writes the five page
+        # kinds, and a whole-key overwrite threw the first away every time the second ran. Each
+        # script owns its own keys inside the block: ours are refreshed, including down to
+        # absent, because a firm that deletes its privacy policy has deleted it, and the keys we
+        # know nothing about are left where their owner put them.
         path = outdir / (domain + ".json")
         if path.exists():
             try:
                 with io.open(path, encoding="utf-8") as fh:
-                    rec = {**json.load(fh), **rec}
+                    old = json.load(fh)
+                not_ours = {k: v for k, v in (old.get("trust_pages") or {}).items()
+                            if k not in set(TRUST_PAGE_KEYS.values())}
+                rec = {**old, **rec}
+                rec["trust_pages"] = {**not_ours, **(rec.get("trust_pages") or {})}
             except (ValueError, OSError):
                 pass  # An unreadable record is one we are about to replace anyway.
         with io.open(path, "w", encoding="utf-8") as fh:

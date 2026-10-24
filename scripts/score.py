@@ -114,6 +114,12 @@ NO_SOURCE_IN_MARKET = ("no queryable source", "unavailable", "no roster publishe
 # Sub-factors read from the firm's own website. Every one of them is unmeasurable for a firm whose
 # site refuses us, and none of them may be scored zero on that basis. D1 is here for its trust
 # pages and D3 is not, because D3 is counted from Google listings rather than from the site.
+# The accessibility share of D1, which is what is left of its seven once the six named
+# components are counted: CWV 2, bar numbers 1, fee statement 1, privacy 0.5, disclaimer 0.5,
+# fresh content 1. Nothing in the engine stated it before, which is part of how a point nobody
+# could earn went unnoticed for so long.
+D1_A11Y_MAX = 1
+
 SITE_DERIVED = {"A5", "A6", "B1", "B2", "B3", "D1", "D4", "E1", "E3", "E4"}
 # Thresholds are percentages now, of what we could actually assess. The absolute floors the
 # methodology set, 40, 50 and 55 out of the 65 points in pillars A, B and C, carry across as
@@ -628,15 +634,46 @@ def compute(firm):
     tp = firm.get("digital", {}).get("trust_pages")
     psi = firm.get("digital", {}).get("psi")
     if tp:
-        pts = 0; ev = []
+        # Two of these seven points had never been measured for anybody, and the engine charged
+        # every firm for both.
+        #
+        # D1_a11y is read from firm["assessments"] and nothing writes it: one profile out of
+        # 1,412 carries an assessments block at all, and it is D4_content. Accessibility was a
+        # silent zero on every firm in the directory, without even a word in the evidence to say
+        # the point was there.
+        #
+        # bar_numbers_on_bios is read from the trust pages and no crawl collects it, so 1,323
+        # profiles published the sentence "no bar numbers on bios" about a real law firm, on the
+        # strength of a check that has never run. That is the thing this engine is not allowed to
+        # do, and it was doing it more often than any other line it prints.
+        #
+        # Both now leave the denominator, which is what sub()'s max_override is for and the same
+        # treatment A5 gives professional liability cover: a scale a firm cannot reach makes the
+        # published thresholds stricter than the methodology says they are. Each comes back the
+        # moment something measures it, and the signal is the measurement existing rather than a
+        # flag: a key in trust_pages, an entry in assessments. Both are worth having. Publishing
+        # your bar number on your own bio is a real statement about a firm.
+        pts = 0; ev = []; unmeasured = 0.0; nobody_looked = []
         if psi: pts += 2 if psi["value"]["cwv_pass"] else 0; ev.append("CWV " + ("pass" if psi["value"]["cwv_pass"] else "fail"))
         else: a = A.get("D1_cwv"); pts += a["pts"] if a else 0; ev.append("CWV " + (a["evidence"] if a else "pending"))
-        a11 = A.get("D1_a11y"); pts += a11["pts"] if a11 else 0
+        a11 = A.get("D1_a11y")
+        if a11: pts += a11["pts"]
+        else: unmeasured += D1_A11Y_MAX; nobody_looked.append("accessibility")
         for key, p, label in [("bar_numbers_on_bios", 1, "bar numbers on bios"), ("fee_statement", 1, "fee statement"), ("privacy_policy", 0.5, "privacy policy"), ("disclaimer", 0.5, "disclaimer"), ("blog", 1, "fresh content")]:
             if tp.get(key): pts += p; ev.append(label)
+            elif key not in tp and key == "bar_numbers_on_bios":
+                unmeasured += p; nobody_looked.append(label)
             else: ev.append("no " + label)
+        # Named one by one rather than as a fixed sentence: a firm whose bios we have read and
+        # whose numbers we found is told it earned that point two phrases earlier, and a line
+        # claiming in the same breath that nobody measured it would be false about that firm.
+        if unmeasured:
+            ev.append(f"scored out of {SUBS['D1'][2] - unmeasured:g} of the {SUBS['D1'][2]}: "
+                      f"nothing has measured {' or '.join(nobody_looked)} here yet, so it is "
+                      "not counted against this firm")
         src = "observed" if psi else ("illustrative" if A.get("D1_cwv") else "observed")
-        out.append(sub("D1", pts, src, " · ".join(ev)))
+        out.append(sub("D1", pts, src, " · ".join(ev),
+                       max_override=SUBS["D1"][2] - unmeasured))
     else: out.append(assessed("D1"))
 
     # ---- D2: Ahrefs vs cohort ----

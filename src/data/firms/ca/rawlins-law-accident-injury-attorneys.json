@@ -437,10 +437,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 70,
+    "total": 72,
     "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (8/25).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -549,9 +549,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 1.5,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV pending · no fee statement · privacy policy · no disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -614,24 +614,24 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 78,
-      "gap": 8,
+      "gap": 6,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "A6 Roster verifiability: +6 available",
-        "D1 Website trust & experience: +5.5 available",
+        "D1 Website trust & experience: +3.5 available",
         "A2 Experience: +3 available"
       ]
     },
     "raw": 62.5,
-    "assessed": 89,
+    "assessed": 87,
     "coverage": 1.0,
     "floor_abc_pct": 0.746,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 87,
     "comparable": true
   }
 }

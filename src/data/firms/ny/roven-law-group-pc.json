@@ -344,10 +344,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 54,
+    "total": 55,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -436,7 +436,7 @@
             "pts": 5,
             "max": 5,
             "source": "places",
-            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-07-30) · a sample of five per business listing, not every review"
+            "evidence": "4 of 5 sampled reviews are from the last 12 months (newest 2026-07-30) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -456,9 +456,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 1.5,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · no disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -521,22 +521,22 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 11,
+      "gap": 10,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "B1 Fee terms published: +6 available",
         "E1 Free consult & fee transparency: +6 available",
-        "D1 Website trust & experience: +5.5 available"
+        "E4 Availability: +5 available"
       ]
     },
     "raw": 47.9,
-    "assessed": 89,
+    "assessed": 87,
     "coverage": 1.0,
     "floor_abc_pct": 0.702,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 87,
     "comparable": true
   },
   "results_published": {
