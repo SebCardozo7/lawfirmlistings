@@ -307,10 +307,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 29,
+    "total": 30,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -419,9 +419,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 1.5,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · no disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -484,7 +484,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 36,
+      "gap": 35,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -494,12 +494,12 @@
       ]
     },
     "raw": 25.8,
-    "assessed": 89,
+    "assessed": 87,
     "coverage": 1.0,
     "floor_abc_pct": 0.421,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 87,
     "comparable": true
   },
   "logo": {

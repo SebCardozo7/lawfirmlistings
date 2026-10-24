@@ -326,7 +326,8 @@
       "attorney_bios": true,
       "blog": true,
       "disclaimer": true,
-      "fee_statement": true
+      "fee_statement": true,
+      "bar_numbers_on_bios": true
     },
     "schema_detected": true,
     "psi": {
@@ -354,14 +355,14 @@
         "categories": 5,
         "hours_published": true,
         "photos": 10,
-        "google_wrote_a_summary": false,
         "unobtainable": [
           "the owner's own description",
           "services list",
           "questions and answers",
           "recent posts"
         ],
-        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way.",
+        "google_wrote_a_summary": false
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
@@ -499,10 +500,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 73,
+    "total": 75,
     "tier": "Certified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (9/25).",
-    "computed_at": "2026-10-21",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: B; most headroom in pillar D (10/25).",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -591,7 +592,7 @@
             "pts": 2.5,
             "max": 5,
             "source": "places",
-            "evidence": "10 of 30 sampled reviews are from the last 12 months (newest 2026-07-09) · a sample of five per business listing, not every review"
+            "evidence": "8 of 30 sampled reviews are from the last 12 months (newest 2026-07-09) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -604,16 +605,16 @@
         ]
       },
       "D": {
-        "score": 9,
+        "score": 10,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 3.0,
-            "max": 7,
+            "pts": 4.0,
+            "max": 6.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content · scored out of 6 of the 7: nothing has measured accessibility here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -676,22 +677,22 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 78,
-      "gap": 5,
+      "gap": 3,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "D1 Website trust & experience: +4.0 available",
         "D2 Search authority: +4 available",
-        "E3 Languages & accessibility: +4.0 available"
+        "E3 Languages & accessibility: +4.0 available",
+        "E1 Free consult & fee transparency: +3 available"
       ]
     },
-    "raw": 65.0,
-    "assessed": 89,
+    "raw": 66.0,
+    "assessed": 88,
     "coverage": 1.0,
     "floor_abc_pct": 0.842,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 88,
     "comparable": true
   },
   "accountability": {
