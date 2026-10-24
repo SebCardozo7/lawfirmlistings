@@ -27,3 +27,6 @@ __pycache__/
 # Who the outreach has written to, and who asked it not to. Real addresses, not ours.
 .outreach-sent.json
 .outreach-suppressed.txt
+
+# Who was handed a panel, on whose say-so. Real addresses at real firms, so not in a public repo.
+.panel-activations.json
