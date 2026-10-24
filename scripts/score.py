@@ -653,20 +653,24 @@ def compute(firm):
         # moment something measures it, and the signal is the measurement existing rather than a
         # flag: a key in trust_pages, an entry in assessments. Both are worth having. Publishing
         # your bar number on your own bio is a real statement about a firm.
-        pts = 0; ev = []; unmeasured = 0.0
+        pts = 0; ev = []; unmeasured = 0.0; nobody_looked = []
         if psi: pts += 2 if psi["value"]["cwv_pass"] else 0; ev.append("CWV " + ("pass" if psi["value"]["cwv_pass"] else "fail"))
         else: a = A.get("D1_cwv"); pts += a["pts"] if a else 0; ev.append("CWV " + (a["evidence"] if a else "pending"))
         a11 = A.get("D1_a11y")
         if a11: pts += a11["pts"]
-        else: unmeasured += D1_A11Y_MAX
+        else: unmeasured += D1_A11Y_MAX; nobody_looked.append("accessibility")
         for key, p, label in [("bar_numbers_on_bios", 1, "bar numbers on bios"), ("fee_statement", 1, "fee statement"), ("privacy_policy", 0.5, "privacy policy"), ("disclaimer", 0.5, "disclaimer"), ("blog", 1, "fresh content")]:
             if tp.get(key): pts += p; ev.append(label)
-            elif key not in tp and key == "bar_numbers_on_bios": unmeasured += p
+            elif key not in tp and key == "bar_numbers_on_bios":
+                unmeasured += p; nobody_looked.append(label)
             else: ev.append("no " + label)
+        # Named one by one rather than as a fixed sentence: a firm whose bios we have read and
+        # whose numbers we found is told it earned that point two phrases earlier, and a line
+        # claiming in the same breath that nobody measured it would be false about that firm.
         if unmeasured:
             ev.append(f"scored out of {SUBS['D1'][2] - unmeasured:g} of the {SUBS['D1'][2]}: "
-                      "nothing has measured accessibility or bar numbers on bios for any firm "
-                      "yet, and neither is counted against this one")
+                      f"nothing has measured {' or '.join(nobody_looked)} here yet, so it is "
+                      "not counted against this firm")
         src = "observed" if psi else ("illustrative" if A.get("D1_cwv") else "observed")
         out.append(sub("D1", pts, src, " · ".join(ev),
                        max_override=SUBS["D1"][2] - unmeasured))
