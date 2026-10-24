@@ -359,10 +359,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 43,
+    "total": 42,
     "tier": "Verified",
-    "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-10-18",
+    "verdict": "All 5 eligibility gates passed. Strongest pillar: A; most headroom in pillar E (0/15).",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -426,7 +426,7 @@
         ]
       },
       "C": {
-        "score": 12,
+        "score": 11,
         "max": 20,
         "subs": [
           {
@@ -448,10 +448,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2025-10-21) · a sample of five per business listing, not every review"
+            "evidence": "0 of 5 sampled reviews are from the last 12 months (newest 2025-10-21) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -471,9 +471,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 2.0,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -532,11 +532,11 @@
         ]
       }
     },
-    "floor_abc": 30,
+    "floor_abc": 29,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 22,
+      "gap": 23,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -545,13 +545,13 @@
         "A6 Roster verifiability: +5 available"
       ]
     },
-    "raw": 38.1,
-    "assessed": 89,
+    "raw": 36.6,
+    "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.535,
+    "floor_abc_pct": 0.509,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 87,
     "comparable": true
   },
   "results_published": {

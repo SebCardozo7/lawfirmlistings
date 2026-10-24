@@ -243,7 +243,7 @@
     "total": 39,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-20",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -307,7 +307,7 @@
         ]
       },
       "C": {
-        "score": 17,
+        "score": 16,
         "max": 20,
         "subs": [
           {
@@ -329,10 +329,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 5,
+            "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "3 of 5 sampled reviews are from the last 12 months (newest 2025-11-14) · a sample of five per business listing, not every review"
+            "evidence": "2 of 5 sampled reviews are from the last 12 months (newest 2025-11-14) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -352,9 +352,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 2.0,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -413,7 +413,7 @@
         ]
       }
     },
-    "floor_abc": 17,
+    "floor_abc": 16,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
@@ -426,10 +426,10 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 27.5,
-    "assessed": 70,
+    "raw": 26.5,
+    "assessed": 68,
     "coverage": 1.0,
-    "floor_abc_pct": 0.447,
+    "floor_abc_pct": 0.421,
     "gates_unavailable": [
       "G1",
       "G2"
@@ -437,7 +437,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 70,
+    "assessable": 68,
     "comparable": true
   },
   "logo": {

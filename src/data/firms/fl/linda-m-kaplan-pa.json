@@ -220,7 +220,7 @@
     "total": 25,
     "tier": "Not eligible",
     "verdict": "Eligibility gates not passed: G6. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-19",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -329,9 +329,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 2.0,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -404,14 +404,14 @@
       ]
     },
     "raw": 17.3,
-    "assessed": 70,
+    "assessed": 68,
     "coverage": 1.0,
     "floor_abc_pct": 0.263,
     "gates_unavailable": [
       "G1"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 68,
     "comparable": true
   },
   "entity": {

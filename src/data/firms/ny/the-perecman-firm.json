@@ -5,7 +5,7 @@
   "website": "https://www.perecman.com/",
   "domain": "perecman.com",
   "phone": "(212) 977-7033",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -339,10 +339,10 @@
     }
   ],
   "score": {
-    "total": 63,
-    "tier": "Verified",
+    "total": 65,
+    "tier": "Certified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -451,9 +451,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 2.0,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -514,24 +514,24 @@
     },
     "floor_abc": 38,
     "next_tier": {
-      "name": "Certified",
-      "needed": 65,
-      "gap": 2,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 13,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "B1 Results published: +6 available",
         "B2 Specificity: +5 available",
-        "D1 Website trust & experience: +5.0 available"
+        "B3 Results disclosure: +4 available"
       ]
     },
     "raw": 57.0,
-    "assessed": 90,
+    "assessed": 88,
     "coverage": 1.0,
     "floor_abc_pct": 0.667,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 90,
+    "assessable": 88,
     "comparable": true
   },
   "entity": {

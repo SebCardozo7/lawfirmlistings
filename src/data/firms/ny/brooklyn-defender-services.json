@@ -260,7 +260,7 @@
     "total": 25,
     "tier": "Listed",
     "verdict": "2 eligibility gate(s) still to be checked. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -369,9 +369,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 0.5,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · no fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · no disclaimer · no fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -439,17 +439,17 @@
       "coverage_met": true,
       "path": [
         "A6 Roster verifiability: +8 available",
-        "D1 Website trust & experience: +6.5 available",
-        "B1 Results published: +6 available"
+        "B1 Results published: +6 available",
+        "E1 Free consult & fee transparency: +6 available"
       ]
     },
     "raw": 19.6,
-    "assessed": 79,
-    "coverage": 0.888,
+    "assessed": 77,
+    "coverage": 0.885,
     "floor_abc_pct": 0.234,
     "gates_unavailable": [],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 87,
     "comparable": true
   },
   "logo": {

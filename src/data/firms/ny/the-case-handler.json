@@ -5,7 +5,7 @@
   "website": "https://www.thecasehandler.com/",
   "domain": "thecasehandler.com",
   "phone": "(212) 608-3734",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -393,10 +393,10 @@
     "checked_at": "2026-09-16"
   },
   "score": {
-    "total": 63,
-    "tier": "Verified",
+    "total": 65,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar E (1/15).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -505,9 +505,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 1.5,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · no disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · no disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -568,26 +568,26 @@
     },
     "floor_abc": 52,
     "next_tier": {
-      "name": "Certified",
-      "needed": 65,
-      "gap": 2,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 13,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "D2 Search authority: +8 available",
-        "D1 Website trust & experience: +5.5 available",
-        "E1 Free consult & fee transparency: +5 available"
+        "E1 Free consult & fee transparency: +5 available",
+        "E4 Availability: +5 available"
       ]
     },
     "raw": 56.5,
-    "assessed": 89,
+    "assessed": 87,
     "coverage": 1.0,
     "floor_abc_pct": 0.912,
     "gates_unavailable": [],
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 89,
+    "assessable": 87,
     "comparable": true
   }
 }

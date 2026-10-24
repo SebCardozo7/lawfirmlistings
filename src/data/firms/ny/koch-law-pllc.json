@@ -250,10 +250,10 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 41,
+    "total": 40,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-21",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -317,7 +317,7 @@
         ]
       },
       "C": {
-        "score": 14,
+        "score": 13,
         "max": 20,
         "subs": [
           {
@@ -339,10 +339,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2025-10-22) · a sample of five per business listing, not every review"
+            "evidence": "0 of 5 sampled reviews are from the last 12 months (newest 2025-10-22) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -362,9 +362,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 2.0,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -423,11 +423,11 @@
         ]
       }
     },
-    "floor_abc": 14,
+    "floor_abc": 13,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 24,
+      "gap": 25,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -436,16 +436,16 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 28.5,
-    "assessed": 70,
+    "raw": 27.0,
+    "assessed": 68,
     "coverage": 1.0,
-    "floor_abc_pct": 0.382,
+    "floor_abc_pct": 0.342,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 68,
     "comparable": true
   },
   "logo": {

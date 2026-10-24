@@ -5,7 +5,7 @@
   "website": "https://richardharrislaw.com/",
   "domain": "richardharrislaw.com",
   "phone": "(702) 374-0436",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -699,10 +699,10 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 66,
+    "tier": "Certified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -811,9 +811,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 2.0,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -874,10 +874,10 @@
     },
     "floor_abc": 27,
     "next_tier": {
-      "name": "Certified",
-      "needed": 65,
-      "gap": 1,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A2 Experience: +10 available",
@@ -886,7 +886,7 @@
       ]
     },
     "raw": 45.0,
-    "assessed": 70,
+    "assessed": 68,
     "coverage": 1.0,
     "floor_abc_pct": 0.711,
     "gates_unavailable": [
@@ -894,7 +894,7 @@
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 68,
     "comparable": true
   },
   "logo": {

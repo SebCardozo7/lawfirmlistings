@@ -5,7 +5,7 @@
   "website": "https://paulmankin.com/",
   "domain": "paulmankin.com",
   "phone": "(800) 219-3577",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -369,10 +369,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 66,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (8/25).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-24",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -481,9 +481,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 2.0,
-            "max": 7,
+            "max": 5.0,
             "source": "observed",
-            "evidence": "CWV pending · no bar numbers on bios · no fee statement · privacy policy · disclaimer · fresh content"
+            "evidence": "CWV pending · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios for any firm yet, and neither is counted against this one"
           },
           {
             "code": "D2",
@@ -544,26 +544,26 @@
     },
     "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 65,
-      "gap": 1,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
         "A6 Roster verifiability: +6 available",
-        "D1 Website trust & experience: +5.0 available",
-        "E3 Languages & accessibility: +4.0 available"
+        "E3 Languages & accessibility: +4.0 available",
+        "A2 Experience: +3 available"
       ]
     },
     "raw": 57.3,
-    "assessed": 89,
+    "assessed": 87,
     "coverage": 1.0,
     "floor_abc_pct": 0.763,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 89,
+    "assessable": 87,
     "comparable": true
   }
 }
