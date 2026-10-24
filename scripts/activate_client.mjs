@@ -19,6 +19,22 @@
  *
  * What it deliberately does not do is take a payment or check that one arrived. PayPal is read
  * by a person, and this is the step after that: the date you pass is the date you saw the money.
+ *
+ * It does check one thing, and refuses without it: who the firm says you are talking to.
+ *
+ *   node scripts/activate_client.mjs --slug glk-law --confirmed-by partner@lawyertime.com
+ *
+ * The address has to sit on the firm's own domain, which is the rule the listing form already
+ * states: "a claim is only granted to an address at the firm's own domain". It is not
+ * bureaucracy. On 23 October an enquiry arrived for Gersowitz Libo & Korek, a real firm in
+ * Manhattan, naming the firm itself as the contact, from a Gmail address, from a residential
+ * connection in Chandigarh. The quote that went back carries a payment link, and what it buys
+ * is control of a published page about somebody else's law firm. Money establishes that
+ * somebody paid. It establishes nothing about who they are.
+ *
+ * Where identity was established some other way, --identity says how, in a sentence, and that
+ * sentence is written to the activation ledger instead of the address. The ledger is
+ * .panel-activations.json, kept out of git with the rest of the real addresses.
  */
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
@@ -81,6 +97,37 @@ if (already && already >= paid && !args.includes('--renew')) {
   process.exit(2);
 }
 
+/*
+ * Who the firm says you are talking to, before anybody is handed the keys to its page.
+ *
+ * The test is the one the form already promises: an address on the firm's own domain. A second
+ * domain the firm publishes on its own site counts, because plenty of firms run two, and that
+ * is why the comparison is against every domain this profile carries rather than one.
+ */
+const firmDomains = [...new Set([firm.domain, firm.digital?.domain, (() => {
+  try { return new URL(firm.website).hostname; } catch { return null; }
+})()].filter(Boolean).map(d => d.toLowerCase().replace(/^www\./, '')))];
+
+const confirmedBy = (arg('confirmed-by') || '').trim().toLowerCase();
+const identity = (arg('identity') || '').trim();
+
+if (!confirmedBy && !identity) {
+  console.error('necesita --confirmed-by <direccion en el dominio de la firma>.');
+  console.error(`para ${firm.name} eso es una direccion en ${firmDomains.join(' o ') || 'su dominio'}.`);
+  console.error('si la identidad se establecio de otra forma, --identity "como fue" lo deja asentado.');
+  process.exit(2);
+}
+if (confirmedBy) {
+  const host = confirmedBy.split('@')[1] || '';
+  const onFirmDomain = firmDomains.some(d => host === d || host.endsWith(`.${d}`) || d.endsWith(`.${host}`));
+  if (!onFirmDomain && !identity) {
+    console.error(`${confirmedBy} no esta en el dominio de ${firm.name}.`);
+    console.error(`el perfil publica ${firmDomains.join(', ')}.`);
+    console.error('pedile que escriba desde ahi, o explica con --identity "como fue" si ya lo verificaste de otra forma.');
+    process.exit(2);
+  }
+}
+
 const EARNED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
 const earnsItAnyway = EARNED.includes(firm.score?.tier ?? '');
 
@@ -92,6 +139,7 @@ console.log(`  Vigente a    ${untilISO}  (${months} meses)`);
 console.log(`  Enlace       ${earnsItAnyway
   ? `ya seguido por tier ${firm.score.tier}; la suscripcion lo sostiene si el tier baja`
   : 'pasa de nofollow a seguido con esta suscripcion'}`);
+console.log(`  Identidad    ${confirmedBy || '(sin direccion)'}${identity ? ` · ${identity}` : ''}`);
 console.log('');
 
 if (dryRun) {
@@ -104,6 +152,25 @@ if (dryRun) {
 firm.subscription = { plan: 'annual-listing', since: paid, until: untilISO };
 writeFileSync(path, `${JSON.stringify(firm, null, 2)}\n`, 'utf8');
 console.log(`  suscripcion escrita en ${path.replace(ROOT, '')}`);
+
+/*
+ * The ledger. Who was handed this page, on whose say-so, and when.
+ *
+ * It lives beside the outreach files and out of git for the same reason they do: this
+ * repository is public and the address belongs to a person at a law firm. The profile JSON
+ * gets none of it, so nothing here is ever published.
+ */
+const LEDGER = join(ROOT, '.panel-activations.json');
+let ledger = {};
+try { ledger = JSON.parse(readFileSync(LEDGER, 'utf8')); } catch { /* first one */ }
+ledger[slug] = {
+  at: new Date().toISOString().slice(0, 10),
+  paid,
+  until: untilISO,
+  confirmed_by: confirmedBy || null,
+  identity: identity || null,
+};
+writeFileSync(LEDGER, `${JSON.stringify(ledger, null, 2)}\n`, 'utf8');
 
 const account = [join(ROOT, 'scripts', 'panel_account.mjs'), '--slug', slug];
 if (local) account.push('--local');
