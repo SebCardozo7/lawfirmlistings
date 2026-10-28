@@ -151,22 +151,6 @@
       "checked_at": "2026-10-20"
     },
     {
-      "name": "Legal Process",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://www.cfblaw.com/legal-process/",
-      "registry_note": "not found",
-      "checked_at": "2026-10-20"
-    },
-    {
-      "name": "Frequently Asked Questions",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://www.cfblaw.com/about/faqs/",
-      "registry_note": "not found",
-      "checked_at": "2026-10-20"
-    },
-    {
       "name": "Statutory Rape",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
@@ -434,14 +418,14 @@
     "checked_at": "2026-10-01"
   },
   "score": {
-    "total": 61,
+    "total": 63,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (2/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 14,
+        "score": 16,
         "max": 25,
         "subs": [
           {
@@ -450,15 +434,15 @@
             "pts": 10,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 29.9 years since admission across 7 of 16 named attorneys (longest 67, shortest 1) · NYS Attorney Registration database"
+            "evidence": "Mean 29.9 years since admission across 7 of 14 named attorneys (longest 67, shortest 1) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 4,
+            "pts": 6,
             "max": 9,
             "source": "registry",
-            "evidence": "7 of 16 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "7 of 14 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",
@@ -607,23 +591,23 @@
         ]
       }
     },
-    "floor_abc": 40,
+    "floor_abc": 42,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 4,
+      "gap": 2,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +5 available",
         "E1 Free consult & fee transparency: +5 available",
-        "E4 Availability: +5 available"
+        "E4 Availability: +5 available",
+        "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 53.0,
+    "raw": 55.0,
     "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.711,
+    "floor_abc_pct": 0.746,
     "gates_unavailable": [],
     "gates_unresolvable": [],
     "assessable": 87,

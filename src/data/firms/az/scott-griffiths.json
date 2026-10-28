@@ -44,15 +44,7 @@
       "source_url": "https://maps.google.com/?cid=8674593673761927702&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "Civil Litigation",
-      "role": "Services",
-      "role_source": "firm bio heading",
-      "bar_state": "NY",
-      "source_url": "https://griffithslawaz.com/civil-litigation-services/"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English"
   ],
@@ -291,7 +283,7 @@
     "total": 37,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar E (1/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -311,8 +303,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "Arizona publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",

@@ -74,13 +74,6 @@
   ],
   "attorneys": [
     {
-      "name": "Traumatic Brain",
-      "source_url": "https://wintriallawyers.com/traumatic-brain-injuries-tbi/",
-      "role": "Injuries (Tbi)",
-      "role_source": "firm bio heading",
-      "name_source": "bio heading"
-    },
-    {
       "name": "Rony Barsoum",
       "source_url": "https://wintriallawyers.com/meet-our-team/",
       "bar_number": "231843",
@@ -304,14 +297,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 52,
+    "total": 54,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 12,
+        "score": 13,
         "max": 25,
         "subs": [
           {
@@ -320,15 +313,15 @@
             "pts": 7,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 10.0 years since admission across 4 of 5 named attorneys (longest 22, shortest 2) · NYS Attorney Registration database"
+            "evidence": "Mean 10.0 years since admission across 4 of 4 named attorneys (longest 22, shortest 2) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 4.5,
+            "pts": 6,
             "max": 9,
             "source": "registry",
-            "evidence": "4 of 5 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "4 of 4 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -477,11 +470,11 @@
         ]
       }
     },
-    "floor_abc": 28,
+    "floor_abc": 30,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 13,
+      "gap": 11,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -490,10 +483,10 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 37.5,
+    "raw": 39.0,
     "assessed": 72,
     "coverage": 0.828,
-    "floor_abc_pct": 0.667,
+    "floor_abc_pct": 0.702,
     "gates_unavailable": [
       "G3"
     ],

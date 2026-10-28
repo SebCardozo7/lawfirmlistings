@@ -104,12 +104,6 @@
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/251600",
       "admitted_year": 2007
-    },
-    {
-      "name": "Frequently Asked Questions",
-      "source_url": "https://gilbertstern.com/faqs/",
-      "role_source": "not stated by the firm",
-      "name_source": "bio heading"
     }
   ],
   "languages": [
@@ -277,14 +271,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 37,
+    "total": 39,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 14,
+        "score": 15,
         "max": 25,
         "subs": [
           {
@@ -293,15 +287,15 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 20.5 years since admission across 6 of 7 named attorneys (longest 28, shortest 16) · NYS Attorney Registration database"
+            "evidence": "Mean 20.5 years since admission across 6 of 6 named attorneys (longest 28, shortest 16) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 4.5,
+            "pts": 6,
             "max": 9,
             "source": "registry",
-            "evidence": "6 of 7 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "6 of 6 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -450,11 +444,11 @@
         ]
       }
     },
-    "floor_abc": 30,
+    "floor_abc": 31,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 28,
+      "gap": 26,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -463,10 +457,10 @@
         "B2 Specificity: +5 available"
       ]
     },
-    "raw": 32.5,
+    "raw": 34.0,
     "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.518,
+    "floor_abc_pct": 0.544,
     "gates_unavailable": [
       "G3"
     ],

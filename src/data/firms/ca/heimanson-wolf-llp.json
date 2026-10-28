@@ -67,12 +67,6 @@
   ],
   "attorneys": [
     {
-      "name": "Mission Statement",
-      "source_url": "https://www.hwllplaw.com/mission-statement/",
-      "role_source": "not stated by the firm",
-      "name_source": "bio heading"
-    },
-    {
       "name": "Bone Fracture",
       "source_url": "https://www.hwllplaw.com/beverly-hills-bone-fracture-lawyer/",
       "role_source": "not stated by the firm",
@@ -337,14 +331,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 48,
+    "total": 50,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar E (2/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 8,
+        "score": 10,
         "max": 25,
         "subs": [
           {
@@ -353,15 +347,15 @@
             "pts": 7,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 13.7 years since admission across 3 of 7 named attorneys (longest 28, shortest 3) · NYS Attorney Registration database"
+            "evidence": "Mean 13.7 years since admission across 3 of 6 named attorneys (longest 28, shortest 3) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 1,
+            "pts": 3,
             "max": 9,
             "source": "registry",
-            "evidence": "3 of 7 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "3 of 6 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -510,23 +504,23 @@
         ]
       }
     },
-    "floor_abc": 33,
+    "floor_abc": 35,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 17,
+      "gap": 15,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +8 available",
+        "A6 Roster verifiability: +6 available",
         "E1 Free consult & fee transparency: +6 available",
         "E4 Availability: +5 available"
       ]
     },
-    "raw": 41.5,
+    "raw": 43.5,
     "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.579,
+    "floor_abc_pct": 0.614,
     "gates_unavailable": [
       "G3"
     ],
