@@ -223,14 +223,6 @@
       "checked_at": "2026-10-01"
     },
     {
-      "name": "Money Laundering",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://www.tsiglerlaw.com/nyc-white-collar-crime-lawyer/money-laundering/",
-      "registry_note": "not found",
-      "checked_at": "2026-10-01"
-    },
-    {
       "name": "Tax Evasion",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
@@ -547,7 +539,7 @@
     "total": 57,
     "tier": "Verified",
     "verdict": "All 5 eligibility gates passed. Strongest pillar: C; most headroom in pillar E (2/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -560,7 +552,7 @@
             "pts": 5,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 8.6 years since admission across 10 of 25 named attorneys (longest 17, shortest 0) · NYS Attorney Registration database"
+            "evidence": "Mean 8.6 years since admission across 10 of 24 named attorneys (longest 17, shortest 0) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -568,7 +560,7 @@
             "pts": 4,
             "max": 9,
             "source": "registry",
-            "evidence": "10 of 25 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "10 of 24 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",

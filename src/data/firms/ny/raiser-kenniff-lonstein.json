@@ -146,14 +146,6 @@
       "checked_at": "2026-10-01"
     },
     {
-      "name": "Money Laundering",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "http://rkl.law/criminal-defense/federal-crimes/money-laundering/",
-      "registry_note": "not found",
-      "checked_at": "2026-10-01"
-    },
-    {
       "name": "Federal Pardons",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
@@ -491,7 +483,7 @@
     "total": 59,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar E (4/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -504,7 +496,7 @@
             "pts": 10,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 25.2 years since admission across 4 of 22 named attorneys (longest 45, shortest 7) · NYS Attorney Registration database"
+            "evidence": "Mean 25.2 years since admission across 4 of 21 named attorneys (longest 45, shortest 7) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
@@ -512,7 +504,7 @@
             "pts": 4,
             "max": 9,
             "source": "registry",
-            "evidence": "4 of 22 named attorneys matched to the New York register; bar numbers published on the bios"
+            "evidence": "4 of 21 named attorneys matched to the New York register; bar numbers published on the bios"
           },
           {
             "code": "A5",

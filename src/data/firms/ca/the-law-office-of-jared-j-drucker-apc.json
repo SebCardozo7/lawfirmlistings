@@ -65,15 +65,7 @@
       "source_url": "https://maps.google.com/?cid=4479243763214439756&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "San Marcos",
-      "role": "Personal Injury Attorney",
-      "role_source": "firm bio heading",
-      "bar_state": "NY",
-      "source_url": "https://www.jaredjdruckerlaw.com/san-marcos-personal-injury-attorney/"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English"
   ],
@@ -337,14 +329,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 40,
+    "total": 43,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (1/25).",
-    "computed_at": "2026-10-24",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 1,
+        "score": 0,
         "max": 25,
         "subs": [
           {
@@ -352,16 +344,16 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is no admission year to establish for anybody. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 1,
+            "pts": 0,
             "max": 9,
-            "source": "registry",
-            "evidence": "0 of 1 named attorneys matched to the California register; no bar number published on any bio"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -510,23 +502,23 @@
         ]
       }
     },
-    "floor_abc": 21,
+    "floor_abc": 20,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 25,
+      "gap": 22,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +8 available",
-        "D2 Search authority: +7 available",
-        "B3 Results disclosure: +4 available"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D2 Search authority: +7 available"
       ]
     },
-    "raw": 30.5,
-    "assessed": 77,
-    "coverage": 0.885,
-    "floor_abc_pct": 0.447,
+    "raw": 29.5,
+    "assessed": 68,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.526,
     "gates_unavailable": [
       "G3"
     ],
@@ -534,7 +526,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 87,
+    "assessable": 68,
     "comparable": true
   }
 }

@@ -75,12 +75,6 @@
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/227558",
       "admitted_year": 2003
-    },
-    {
-      "name": "Class Action",
-      "source_url": "https://www.bedfordlawgroup.com/dtla-class-action/",
-      "role_source": "not stated by the firm",
-      "name_source": "roster link text"
     }
   ],
   "languages": [
@@ -255,14 +249,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 54,
+    "total": 57,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 15,
+        "score": 18,
         "max": 25,
         "subs": [
           {
@@ -271,15 +265,15 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 23.0 years since admission across 1 of 2 named attorneys (longest 23, shortest 23) · NYS Attorney Registration database"
+            "evidence": "Mean 23.0 years since admission across 1 of 1 named attorneys (longest 23, shortest 23) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 3,
+            "pts": 6,
             "max": 9,
             "source": "registry",
-            "evidence": "1 of 2 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "1 of 1 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -428,23 +422,23 @@
         ]
       }
     },
-    "floor_abc": 34,
+    "floor_abc": 37,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 11,
-      "floor_met": false,
+      "gap": 8,
+      "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +6 available",
         "B1 Results published: +6 available",
-        "B2 Specificity: +5 available"
+        "B2 Specificity: +5 available",
+        "D2 Search authority: +5 available"
       ]
     },
-    "raw": 46.6,
+    "raw": 49.6,
     "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.596,
+    "floor_abc_pct": 0.649,
     "gates_unavailable": [
       "G3"
     ],

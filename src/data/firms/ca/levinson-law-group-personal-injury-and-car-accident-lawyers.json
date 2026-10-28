@@ -124,12 +124,6 @@
       "role_source": "not stated by the firm",
       "bar_state": "NY",
       "source_url": "https://levinsonlawgroup.com/people/devra-r-levinson/"
-    },
-    {
-      "name": "Giving Back",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://levinsonlawgroup.com/community/"
     }
   ],
   "languages": [
@@ -412,14 +406,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 61,
+    "total": 64,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (10/25).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 11,
+        "score": 13,
         "max": 25,
         "subs": [
           {
@@ -428,15 +422,15 @@
             "pts": 10,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 30.0 years since admission across 1 of 3 named attorneys (longest 30, shortest 30) · NYS Attorney Registration database"
+            "evidence": "Mean 30.0 years since admission across 1 of 2 named attorneys (longest 30, shortest 30) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 1,
+            "pts": 3,
             "max": 9,
             "source": "registry",
-            "evidence": "1 of 3 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "1 of 2 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -585,23 +579,23 @@
         ]
       }
     },
-    "floor_abc": 36,
+    "floor_abc": 38,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 4,
+      "gap": 1,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +8 available",
+        "A6 Roster verifiability: +6 available",
         "B3 Results disclosure: +4 available",
         "E3 Languages & accessibility: +4.0 available"
       ]
     },
-    "raw": 53.5,
+    "raw": 55.5,
     "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.623,
+    "floor_abc_pct": 0.658,
     "gates_unavailable": [
       "G3"
     ],

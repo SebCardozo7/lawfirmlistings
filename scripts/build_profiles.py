@@ -198,9 +198,41 @@ CJK_FURNITURE = {
 }
 
 
+# Headings this directory has published as attorneys, found by asking which names appear at
+# three or more unrelated firms. A person's name does not do that here: across 10,363 published
+# names, 58 strings appear at three firms or more, and 56 of them are a page title.
+#
+# The evidence is the repetition, not a judgement about the words. "Spinal Cord" is published by
+# twenty-one firms, "Frequently Asked Questions" by seventeen, "Giving Back" by thirteen. Each
+# one is a heading the crawler read off a page about an injury, a town or a section of a site,
+# in the exact shape a two-word name takes, which is why GENERIC_NAME_WORD and PLACE_PREFIX let
+# them through: "Del Mar" and "Dallas Bray" cannot be told apart by their letters.
+#
+# Two of the fifty-eight are people and are deliberately absent from this list: David Altman and
+# Steven Altman, published by Altman & Altman, Altman Nussbaum Shunnarah and Alexander Shunnarah
+# Trial Attorneys, three firms of one family, each at a /attorney/ or /lawyers/ bio page of its
+# own. That is what the review of a list like this is for, and it is why the repetition is not
+# applied as a rule: scripts/check_rosters.mjs fails the build when a new name reaches three
+# firms, so the next one is read by a person rather than deleted by a pattern.
+RECURRING_HEADINGS = {
+    "ai info", "anesthesia error", "arlington heights", "atlantic city", "boulder city",
+    "brachial plexus", "broken bones", "cancer misdiagnosis", "carbon monoxide poisoning",
+    "career opportunities", "cerebral palsy", "chemical exposure", "civil litigation",
+    "colorado springs", "construction site", "cruise ship", "del mar", "editorial guidelines",
+    "el cajon", "el paso", "emergency room", "frequently asked questions", "giving back",
+    "hearing loss", "helpful links", "hernia mesh", "huntingdon valley", "johns creek",
+    "jones act", "la mesa", "legal glossary", "legal process", "lemon grove", "lost wages",
+    "medication errors", "mission statement", "money laundering", "national city",
+    "press releases", "queen creek", "san marcos", "sandy springs", "santa fe",
+    "shoulder dystocia", "south jersey", "spinal cord", "spring valley", "stroke misdiagnosis",
+    "success stories", "sun city", "surgical error", "surgical errors", "talcum powder",
+    "van nuys", "view bio", "west hollywood",
+}
+
+
 def NOT_A_NAME_match(value):
     text = (value or "").strip()
-    if text in CJK_FURNITURE:
+    if text in CJK_FURNITURE or text.lower() in RECURRING_HEADINGS:
         return True
     if PLACE_SUFFIX.search(text) or PLACE_PREFIX.match(text):
         return True

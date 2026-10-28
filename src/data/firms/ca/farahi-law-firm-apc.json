@@ -121,20 +121,7 @@
       "source_url": "https://maps.google.com/?cid=14855798379504238878&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "Mission Statement",
-      "source_url": "https://justinforjustice.com/mission-statement",
-      "role_source": "not stated by the firm",
-      "name_source": "roster link text"
-    },
-    {
-      "name": "Frequently Asked Questions",
-      "source_url": "https://justinforjustice.com/frequently-asked-questions",
-      "role_source": "not stated by the firm",
-      "name_source": "bio heading"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English",
     "Spanish"
@@ -482,14 +469,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 69,
+    "total": 76,
     "tier": "Certified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (1/25).",
-    "computed_at": "2026-10-24",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 1,
+        "score": 0,
         "max": 25,
         "subs": [
           {
@@ -497,16 +484,16 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is no admission year to establish for anybody. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 1,
+            "pts": 0,
             "max": 9,
-            "source": "registry",
-            "evidence": "0 of 2 named attorneys matched to the California register; no bar number published on any bio"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -659,19 +646,19 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 78,
-      "gap": 9,
-      "floor_met": false,
+      "gap": 2,
+      "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +8 available",
-        "A5 Accountability: +3 available",
-        "E1 Free consult & fee transparency: +3 available"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "A5 Accountability: +3 available"
       ]
     },
-    "raw": 53.0,
-    "assessed": 77,
-    "coverage": 0.885,
-    "floor_abc_pct": 0.649,
+    "raw": 52.0,
+    "assessed": 68,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.776,
     "gates_unavailable": [
       "G3"
     ],
@@ -679,7 +666,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 87,
+    "assessable": 68,
     "comparable": true
   }
 }

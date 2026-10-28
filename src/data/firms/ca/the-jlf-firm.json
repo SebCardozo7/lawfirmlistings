@@ -5,7 +5,7 @@
   "website": "https://jlffirm.com/",
   "domain": "jlffirm.com",
   "phone": "(562) 667-3104",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -159,13 +159,6 @@
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/260197",
       "admitted_year": 2008
-    },
-    {
-      "name": "Van Nuys",
-      "source_url": "https://jlffirm.com/van-nuys/",
-      "role": "Personal Injury Attorneys",
-      "role_source": "firm bio heading",
-      "name_source": "bio heading"
     }
   ],
   "languages": [
@@ -415,14 +408,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 66,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (9/25).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-28",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 10,
+        "score": 12,
         "max": 25,
         "subs": [
           {
@@ -431,15 +424,15 @@
             "pts": 7,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 11.5 years since admission across 6 of 8 named attorneys (longest 18, shortest 7) · NYS Attorney Registration database"
+            "evidence": "Mean 11.5 years since admission across 6 of 7 named attorneys (longest 18, shortest 7) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 3,
+            "pts": 4.5,
             "max": 9,
             "source": "registry",
-            "evidence": "6 of 8 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "6 of 7 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -588,23 +581,23 @@
         ]
       }
     },
-    "floor_abc": 39,
+    "floor_abc": 40,
     "next_tier": {
-      "name": "Certified",
-      "needed": 65,
-      "gap": 1,
-      "floor_met": true,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
+      "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +6 available",
+        "A6 Roster verifiability: +4.5 available",
         "E3 Languages & accessibility: +4.0 available",
         "A2 Experience: +3 available"
       ]
     },
-    "raw": 55.5,
+    "raw": 57.0,
     "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.684,
+    "floor_abc_pct": 0.711,
     "gates_unavailable": [
       "G3"
     ],
