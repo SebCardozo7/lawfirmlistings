@@ -61,8 +61,25 @@ function newestDate(node, best = '') {
   return best;
 }
 
-function firmDates() {
+// A ranked page's own date is the newest measurement among the firms it ranks, and nothing else.
+//
+// Search Console on 28 October: 883 pages indexed, 717 discovered and never crawled, 25 of them
+// city-and-practice rankings. Those are the pages somebody searching "car accident lawyer
+// houston" would land on, and the only thing in the sitemap that tells a crawler one of them
+// moved is a lastmod they did not have. The profiles had one; these did not.
+//
+// It is derivable here and honest because the set is bounded: /cities/houston-tx/car-accidents/
+// lists the Houston firms that practise car accidents, so the newest measurement among exactly
+// those firms is the newest thing on the page. That is the test a practice hub fails, which is
+// why it is left out: /practice-areas/personal-injury/ carries 1,113 of the 1,388 firms, so its
+// "newest measurement" is the directory's clock rather than the page's, and a lastmod that moves
+// when nothing on the page moved is how a crawler learns to ignore the field. Guides are left
+// out for the reason already written above them.
+function pageDates() {
   const out = new Map();
+  const newer = (key, date) => {
+    if (date && (!out.has(key) || date > out.get(key))) out.set(key, date);
+  };
   const root = 'src/data/firms';
   if (!existsSync(root)) return out;
   for (const state of readdirSync(root)) {
@@ -70,13 +87,23 @@ function firmDates() {
       if (!file.endsWith('.json')) continue;
       const firm = JSON.parse(readFileSync(`${root}/${state}/${file}`, 'utf8'));
       const date = newestDate(firm);
-      if (firm.slug && date) out.set(`/firms/${firm.slug}/`, date);
+      if (!firm.slug || !date) continue;
+      out.set(`/firms/${firm.slug}/`, date);
+      // The pages that rank this firm carry the same rule the ranking does: a firm that is not
+      // published is not on them, so its measurements are not theirs either.
+      if (firm.status === 'sample' || firm.status === 'not_eligible') continue;
+      const city = firm.market?.city_slug;
+      if (!city) continue;
+      newer(`/cities/${city}/`, date);
+      for (const practice of firm.practices ?? []) {
+        if (practice.slug) newer(`/cities/${city}/${practice.slug}/`, date);
+      }
     }
   }
   return out;
 }
 
-const LASTMOD = firmDates();
+const LASTMOD = pageDates();
 
 function withLastmod(item) {
   const lastmod = LASTMOD.get(new URL(item.url).pathname);
