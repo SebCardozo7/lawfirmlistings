@@ -631,9 +631,18 @@ def compute(firm):
             out.append(assessed(c, "No review sample collected yet"))
 
     # ---- D1: trust pages (+ psi) ----
+    #
+    # Present and empty is a measurement: the crawl read the firm's pages and found no privacy
+    # policy, no disclaimer, no fee statement and no blog. Absent is not: nobody has looked, or
+    # the site refused us, and firm["site_blocked"] above already takes care of the second.
+    #
+    # The test used to be truthiness, which read an empty block as nothing at all. The effect
+    # was that 42 firms with thin websites had the seven points of D1 lifted out of their
+    # denominator, while a firm that published one trust page was scored on all seven. Same
+    # situation, two answers, and the kinder one went to the firm that published less.
     tp = firm.get("digital", {}).get("trust_pages")
     psi = firm.get("digital", {}).get("psi")
-    if tp:
+    if tp is not None:
         # Two of these seven points had never been measured for anybody, and the engine charged
         # every firm for both.
         #
