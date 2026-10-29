@@ -51,15 +51,7 @@
       "source_url": "https://maps.google.com/?cid=5629023454093434717&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "Ride Share",
-      "role": "Accidents",
-      "role_source": "firm bio heading",
-      "bar_state": "NY",
-      "source_url": "https://hilley-solis.com/ride-share-accidents/"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English",
     "Spanish"
@@ -279,7 +271,7 @@
     "total": 40,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -299,8 +291,8 @@
             "label": "Roster verifiability",
             "pts": 0,
             "max": 9,
-            "source": "no queryable source",
-            "evidence": "Texas publishes no attorney register we can query, so the roster is not verified here and this is not scored."
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",

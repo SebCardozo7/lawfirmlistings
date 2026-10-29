@@ -108,12 +108,6 @@
       "source_url": "https://sdinjury.com/imperial-beach/"
     },
     {
-      "name": "La Jolla",
-      "role_source": "not stated by the firm",
-      "bar_state": "NY",
-      "source_url": "https://sdinjury.com/la-jolla/"
-    },
-    {
       "name": "Solana Beach",
       "role_source": "not stated by the firm",
       "bar_state": "NY",
@@ -396,14 +390,14 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 59,
+    "total": 62,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-28",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 10,
+        "score": 12,
         "max": 25,
         "subs": [
           {
@@ -412,15 +406,15 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 24.5 years since admission across 2 of 5 named attorneys (longest 29, shortest 20) · NYS Attorney Registration database"
+            "evidence": "Mean 24.5 years since admission across 2 of 4 named attorneys (longest 29, shortest 20) · NYS Attorney Registration database"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 1,
+            "pts": 3,
             "max": 9,
             "source": "registry",
-            "evidence": "2 of 5 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "2 of 4 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
@@ -569,11 +563,11 @@
         ]
       }
     },
-    "floor_abc": 27,
+    "floor_abc": 29,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 6,
+      "gap": 3,
       "floor_met": true,
       "coverage_met": false,
       "path": [
@@ -582,10 +576,10 @@
         "B3 Results disclosure: not yet measured (4 pts)"
       ]
     },
-    "raw": 42.5,
+    "raw": 44.5,
     "assessed": 72,
     "coverage": 0.828,
-    "floor_abc_pct": 0.643,
+    "floor_abc_pct": 0.69,
     "gates_unavailable": [
       "G3"
     ],

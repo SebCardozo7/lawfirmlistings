@@ -81,13 +81,6 @@
   ],
   "attorneys": [
     {
-      "name": "BBB Accredited",
-      "source_url": "https://chrisandfrank.com/bbb-accredited-attorneys/",
-      "role": "Attorneys",
-      "role_source": "firm bio heading",
-      "name_source": "bio heading"
-    },
-    {
       "name": "Guldjian Fasel",
       "source_url": "https://chrisandfrank.com/guldjian-fasel-accident-attorneys/",
       "role": "Accident Attorneys",
@@ -258,14 +251,14 @@
   "gates": {
     "G1": {
       "pass": false,
-      "checked_at": "2026-10-12",
+      "checked_at": "2026-10-29",
       "source": "the State Bar of California's licensee search, partial",
-      "evidence": "None of the 4 attorneys this firm names could be found in the State Bar of California's register, so there is nothing here to clear or to fault.",
+      "evidence": "None of the 2 attorneys this firm names could be found in the State Bar of California's register, so there is nothing here to clear or to fault.",
       "unresolvable": "The register returns nothing for any name this firm publishes, and an empty search does not say whether the licence is missing or the name is"
     },
     "G2": {
       "pass": false,
-      "checked_at": "2026-10-12",
+      "checked_at": "2026-10-29",
       "source": "the State Bar of California's licensee search, partial",
       "evidence": "No attorney this firm names could be identified in the register, so no disciplinary record could be looked up either.",
       "unresolvable": "With no attorney identified in the register, there is no disciplinary record to find or to fail to find"
@@ -335,7 +328,7 @@
     "total": 55,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (1/25).",
-    "computed_at": "2026-10-28",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -356,7 +349,7 @@
             "pts": 1,
             "max": 9,
             "source": "registry",
-            "evidence": "0 of 2 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "0 of 1 named attorneys matched to the California register; no bar number published on any bio"
           },
           {
             "code": "A5",
