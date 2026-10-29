@@ -315,7 +315,17 @@ def promote(rec: dict, firm: dict) -> list[str]:
         digital["psi"] = rec["psi"]
         changed.append(f"digital.psi     measured: {json.dumps(rec['psi'])[:80]}")
 
-    if rec.get("trust_pages"):
+    # An empty block is carried too, and it is the whole point of this condition being `is not
+    # None` rather than truthy. A crawl that read the firm's pages and found no privacy policy,
+    # no disclaimer, no fee statement and no blog wrote {} here, the truthy test dropped it, and
+    # the profile ended up with no trust_pages key at all, which is also what a firm nobody has
+    # crawled looks like. score.py could not tell the two apart and called both "not yet
+    # assessed", so 42 firms had the seven points of D1 taken out of their denominator for
+    # having a thin website, while a firm with one trust page was scored on all seven.
+    #
+    # Only where the crawl actually read something: a record with no pages_found is a crawl that
+    # never got in, and that one stays unassessed.
+    if rec.get("trust_pages") is not None and (rec.get("pages_found") or rec.get("trust_pages")):
         if digital.get("trust_pages") != rec["trust_pages"]:
             changed.append(f"trust_pages     {digital.get('trust_pages')} -> {rec['trust_pages']}")
         digital["trust_pages"] = rec["trust_pages"]
