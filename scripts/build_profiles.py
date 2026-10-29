@@ -214,6 +214,25 @@ CJK_FURNITURE = {
 # own. That is what the review of a list like this is for, and it is why the repetition is not
 # applied as a rule: scripts/check_rosters.mjs fails the build when a new name reaches three
 # firms, so the next one is read by a person rather than deleted by a pattern.
+# A second batch was found a different way, and the note above is worth reading first because
+# the method is the same in spirit: find corroboration, then have a person read the list.
+#
+# The California State Bar publishes a licensee register. Run against the 24 Californian firms
+# whose A2 was unmeasured, it confirmed three attorneys as Active and could not find 61 of the
+# names those firms publish. "Not found" is not proof of anything on its own, and the register
+# check itself says so: an attorney it cannot identify is counted neither for the firm nor
+# against it. But a name the register has never licensed, which also reads as a page title, is
+# two independent reasons to look, and reading these took one screen.
+#
+# Twenty of them are one firm's city pages: "Auburn Brain", "Yakima Brain", "Spokane Valley
+# Brain", a brain-injury practice page per town across three states, each published as a member
+# of staff. The rest are damage types, neighbourhoods and buttons.
+#
+# Fifteen names the register could not find are deliberately absent from this list, because they
+# could be people: Alexia Gonzalez, Alma Figueroa, Alva Dickinson, Derek Barnhouse, Destinee
+# Erdman, Giovani Romaguera, Guldjian Fasel, Mark Holman, Shemar Nikki, Steven Griffith, Willy
+# McHugh, Alen Hispro, and the three Oktanyans at a firm called Oktanyan Law. The register's
+# silence about a person is not evidence against them.
 RECURRING_HEADINGS = {
     "ai info", "anesthesia error", "arlington heights", "atlantic city", "boulder city",
     "brachial plexus", "broken bones", "cancer misdiagnosis", "carbon monoxide poisoning",
@@ -227,6 +246,16 @@ RECURRING_HEADINGS = {
     "shoulder dystocia", "south jersey", "spinal cord", "spring valley", "stroke misdiagnosis",
     "success stories", "sun city", "surgical error", "surgical errors", "talcum powder",
     "van nuys", "view bio", "west hollywood",
+    "auburn brain", "bbb accredited", "bellevue brain", "bellingham brain", "better result.",
+    "broken bone", "buckeye brain", "call lem", "call now", "carpal tunnel",
+    "demanda monsanto roundup cancer", "east los angeles", "federal way brain", "fire damage",
+    "florence brain", "for san diego.", "general civil", "hand crush", "kent brain", "la jolla",
+    "legal framework", "mesa brain", "north hollywood", "obtener consulta gratuita",
+    "phoenix brain", "redmond brain", "ride share", "san diego's", "santa paula",
+    "seattle brain", "serious brain", "sherman oaks", "spokane brain", "spokane valley brain",
+    "survival actions", "tempe brain", "text lem", "tucson brain", "vancouver brain",
+    "washington state", "washington state brain", "water damage", "west covina",
+    "wind/earthquake damage", "yakima brain", "your expert", "yuma brain",
 }
 
 

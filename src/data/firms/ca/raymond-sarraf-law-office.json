@@ -58,15 +58,7 @@
       "source_url": "https://maps.google.com/?cid=7839516079807764286&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
     }
   ],
-  "attorneys": [
-    {
-      "name": "Serious Brain",
-      "source_url": "https://sarraflawfirm.com/serious-brain-injury/",
-      "role": "Injury",
-      "role_source": "firm bio heading",
-      "name_source": "bio heading"
-    }
-  ],
+  "attorneys": [],
   "languages": [
     "English",
     "Spanish"
@@ -168,14 +160,14 @@
   "gates": {
     "G1": {
       "pass": false,
-      "checked_at": "2026-10-12",
+      "checked_at": "2026-10-29",
       "source": "the State Bar of California's licensee search, partial",
       "evidence": "None of the 1 attorneys this firm names could be found in the State Bar of California's register, so there is nothing here to clear or to fault.",
       "unresolvable": "The register returns nothing for any name this firm publishes, and an empty search does not say whether the licence is missing or the name is"
     },
     "G2": {
       "pass": false,
-      "checked_at": "2026-10-12",
+      "checked_at": "2026-10-29",
       "source": "the State Bar of California's licensee search, partial",
       "evidence": "No attorney this firm names could be identified in the register, so no disciplinary record could be looked up either.",
       "unresolvable": "With no attorney identified in the register, there is no disciplinary record to find or to fail to find"
@@ -264,14 +256,14 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 54,
+    "total": 60,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (4/25).",
-    "computed_at": "2026-10-24",
+    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 4,
+        "score": 3,
         "max": 25,
         "subs": [
           {
@@ -279,16 +271,16 @@
             "label": "Experience",
             "pts": 0,
             "max": 10,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is no admission year to establish for anybody. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 1,
+            "pts": 0,
             "max": 9,
-            "source": "registry",
-            "evidence": "0 of 1 named attorneys matched to the California register; no bar number published on any bio"
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
           },
           {
             "code": "A5",
@@ -441,19 +433,19 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 11,
+      "gap": 5,
       "floor_met": true,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +8 available",
-        "D2 Search authority: +6 available",
-        "B3 Results disclosure: +4 available"
+        "A2 Experience: +10 available",
+        "A6 Roster verifiability: +9 available",
+        "D2 Search authority: +6 available"
       ]
     },
-    "raw": 41.8,
-    "assessed": 77,
-    "coverage": 0.885,
-    "floor_abc_pct": 0.649,
+    "raw": 40.8,
+    "assessed": 68,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.776,
     "gates_unavailable": [
       "G3"
     ],
@@ -461,7 +453,7 @@
       "G1",
       "G2"
     ],
-    "assessable": 87,
+    "assessable": 68,
     "comparable": true
   }
 }

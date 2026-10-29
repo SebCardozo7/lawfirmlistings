@@ -374,10 +374,10 @@
     "checked_at": "2026-09-15"
   },
   "score": {
-    "total": 34,
+    "total": 32,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar E (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -441,7 +441,7 @@
         ]
       },
       "C": {
-        "score": 10,
+        "score": 8,
         "max": 20,
         "subs": [
           {
@@ -463,10 +463,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 4,
+            "pts": 2.5,
             "max": 5,
             "source": "places",
-            "evidence": "2 of 5 sampled reviews are from the last 12 months (newest 2026-04-11) · a sample of five per business listing, not every review"
+            "evidence": "1 of 5 sampled reviews are from the last 12 months (newest 2026-04-11) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -547,11 +547,11 @@
         ]
       }
     },
-    "floor_abc": 15,
+    "floor_abc": 14,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 31,
+      "gap": 33,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -560,10 +560,10 @@
         "B1 Fee terms published: +6 available"
       ]
     },
-    "raw": 23.2,
+    "raw": 21.7,
     "assessed": 68,
     "coverage": 1.0,
-    "floor_abc_pct": 0.395,
+    "floor_abc_pct": 0.355,
     "gates_unavailable": [
       "G1",
       "G2"
