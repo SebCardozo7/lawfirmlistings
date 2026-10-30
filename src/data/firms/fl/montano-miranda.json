@@ -121,6 +121,9 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-10-05"
+    },
+    "trust_pages": {
+      "blog": true
     }
   },
   "gates": {
@@ -230,10 +233,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 44,
+    "total": 42,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -335,16 +338,16 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 6,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
-            "max": 7,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "pts": 1,
+            "max": 5.0,
+            "source": "observed",
+            "evidence": "CWV fail · no fee statement · no privacy policy · no disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -407,7 +410,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 21,
+      "gap": 23,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -416,16 +419,16 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 27.5,
-    "assessed": 63,
-    "coverage": 0.9,
+    "raw": 28.5,
+    "assessed": 68,
+    "coverage": 1.0,
     "floor_abc_pct": 0.553,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 68,
     "comparable": true
   },
   "entity": {
