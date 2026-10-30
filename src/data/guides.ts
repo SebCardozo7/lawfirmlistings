@@ -439,17 +439,4 @@ export const GUIDES: Guide[] = [
     icon: 'skyline',
     meta: 'Almost nobody passes, and it is cheap to fix',
   },
-  {
-    slug: 'best-personal-injury-law-firms-nyc',
-    cover: 'ranking',
-    kicker: 'Ranking · New York',
-    title: 'Best Personal Injury Law Firms in NYC',
-    summary:
-      'The highest-scoring personal injury firms in New York City, with the evidence behind each score.',
-    thumb: 't3',
-    icon: 'sky_sm',
-    // Content plan section 5: a ranked post waits until the order can reflect verified
-    // evidence rather than whichever firms were measured first.
-    gate: { minCertified: 8, citySlug: 'new-york-ny', practice: 'personal-injury' },
-  },
 ];
