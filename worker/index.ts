@@ -178,11 +178,36 @@ function canonicalRedirect(url: URL): Response | null {
   return Response.redirect(to.toString(), 301);
 }
 
+/**
+ * Pages that were published and then retired, and where a reader should land instead.
+ *
+ * /guides/best-personal-injury-law-firms-nyc/ ranked the 38 certified personal injury firms in
+ * New York. /cities/new-york-ny/personal-injury/ ranks all 77 we have measured, which is a
+ * superset of the same firms in the same order, so the two competed for one query and Search
+ * Console had the guide winning it: 71 impressions against 45 over 28 days. The guide is the
+ * version that leaves 39 firms out, among them one we work for.
+ *
+ * A 404 would throw away what the address has earned, so it is a permanent redirect to the
+ * ranking that includes everybody.
+ */
+const RETIRED: Record<string, string> = {
+  '/guides/best-personal-injury-law-firms-nyc': '/cities/new-york-ny/personal-injury/',
+};
+
+function retiredRedirect(url: URL): Response | null {
+  const path = url.pathname.replace(/\/+$/, '') || '/';
+  const to = RETIRED[path];
+  if (!to) return null;
+  return Response.redirect(new URL(to, url.origin).toString(), 301);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const redirect = canonicalRedirect(url);
     if (redirect) return redirect;
+    const retired = retiredRedirect(url);
+    if (retired) return retired;
     // The firm panel, which is the only part of this site that is not a file.
     if (url.pathname === '/claim' || url.pathname.startsWith('/claim/')) {
       return handlePanel(request, env);

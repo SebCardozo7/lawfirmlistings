@@ -46,6 +46,29 @@ const platformNames: Record<string,string> = { google_ai_overviews: 'AI Overview
 const isCertified = s && ['Certified','Distinguished','Elite'].includes(s.tier);
 // Practice areas that have a page of their own. Everything else is named, not linked.
 const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
+
+/*
+ * The ranking this firm is actually in.
+ *
+ * This button said "View Miami ranking" on a Miami firm's profile and linked to
+ * /guides/best-personal-injury-law-firms-nyc/, a list of New York firms. It said the same on
+ * every profile in the directory, so 1,388 pages promised a reader their own city's ranking and
+ * sent them to another state's.
+ *
+ * It also made that guide the most linked page on the site by a distance, which is why Search
+ * Console has it outranking /cities/new-york-ny/personal-injury/ on the same queries, 71
+ * impressions against 45. The guide lists only the 38 certified firms; the ranking lists all 77
+ * measured, including Greenstein & Pittari. We were pushing every link we have at the version
+ * that leaves firms out.
+ *
+ * The right target is the page that ranks this firm: its own city and one of its own practices,
+ * preferring a primary one, and only where that page exists.
+ */
+const rankingPractice = d.practices.find(p => p.primary && PRACTICE_PAGES.has(p.slug))
+  ?? d.practices.find(p => PRACTICE_PAGES.has(p.slug));
+const rankingHref = rankingPractice
+  ? `/cities/${d.market.city_slug}/${rankingPractice.slug}/`
+  : null;
 // Whether an outbound link is followed, and this is the one place money changes an answer.
 //
 // Two ways to earn it, and they are different kinds of thing. Clearing every eligibility gate
@@ -384,11 +407,13 @@ const schema = faqPage ? [legalService, faqPage] : legalService;
           ? <div class="verified-line"><Icon name="check" /> LFL Score {s.total} · {s.tier} · re-verified {s.computed_at}</div>
           : <div class="verified-line"><Icon name="check" /> Not scored · {Math.round((s.coverage ?? 0) * 100)}% of the scale could be measured · {s.tier}</div>)}
       </div>
+      {rankingHref && (
       <div class="panel panel--ink">
         <h4>Compare with similar firms</h4>
-        <p>See how {d.name} stacks up against other {primary[0]?.name.toLowerCase() ?? ''} firms in {d.market.city}.</p>
-        <a class="btn btn--white" href="/guides/best-personal-injury-law-firms-nyc/">View {d.market.city} ranking</a>
+        <p>See how {d.name} stacks up against other {rankingPractice!.name.toLowerCase()} firms in {d.market.city}.</p>
+        <a class="btn btn--white" href={rankingHref}>View {d.market.city} ranking</a>
       </div>
+      )}
       {cohort && (
       <div class="panel">
         <h4>Same cohort · by domain authority</h4>
