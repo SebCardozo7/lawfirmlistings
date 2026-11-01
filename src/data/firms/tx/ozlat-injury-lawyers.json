@@ -104,14 +104,14 @@
         "categories": 5,
         "hours_published": true,
         "photos": 6,
-        "google_wrote_a_summary": false,
         "unobtainable": [
           "the owner's own description",
           "services list",
           "questions and answers",
           "recent posts"
         ],
-        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way."
+        "note": "Categories, opening hours, photo count and description come from the Places API. The services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way.",
+        "google_wrote_a_summary": false
       },
       "source": "Google Places API (New) places:searchText",
       "measured_at": "2026-09-23"
@@ -127,6 +127,13 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-26"
+    },
+    "trust_pages": {
+      "privacy_policy": true,
+      "disclaimer": true,
+      "attorney_bios": true,
+      "fee_statement": true,
+      "blog": true
     }
   },
   "gates": {
@@ -213,10 +220,10 @@
     "checked_at": "2026-09-23"
   },
   "score": {
-    "total": 33,
+    "total": 35,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-18",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -318,16 +325,16 @@
         ]
       },
       "D": {
-        "score": 2,
+        "score": 5,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
-            "max": 7,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "pts": 3.0,
+            "max": 5.0,
+            "source": "observed",
+            "evidence": "CWV fail · fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -390,7 +397,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 32,
+      "gap": 30,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -399,9 +406,9 @@
         "D2 Search authority: +8 available"
       ]
     },
-    "raw": 20.6,
-    "assessed": 63,
-    "coverage": 0.9,
+    "raw": 23.6,
+    "assessed": 68,
+    "coverage": 1.0,
     "floor_abc_pct": 0.5,
     "gates_unavailable": [
       "G1",
@@ -410,7 +417,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 70,
+    "assessable": 68,
     "comparable": true
   },
   "logo": {

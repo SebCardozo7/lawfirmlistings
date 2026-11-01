@@ -265,6 +265,9 @@
       "paid_keywords": 5,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-09-30"
+    },
+    "trust_pages": {
+      "bar_numbers_on_bios": false
     }
   },
   "gates": {
@@ -395,10 +398,10 @@
     "checked_at": "2026-09-29"
   },
   "score": {
-    "total": 47,
+    "total": 43,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-28",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -507,9 +510,9 @@
             "code": "D1",
             "label": "Website trust & experience",
             "pts": 0,
-            "max": 7,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "max": 6.0,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · no privacy policy · no disclaimer · no fresh content · scored out of 6 of the 7: nothing has measured accessibility here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -572,7 +575,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 18,
+      "gap": 22,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -582,15 +585,15 @@
       ]
     },
     "raw": 29.5,
-    "assessed": 63,
-    "coverage": 0.9,
+    "assessed": 69,
+    "coverage": 1.0,
     "floor_abc_pct": 0.447,
     "gates_unavailable": [
       "G1",
       "G2"
     ],
     "gates_unresolvable": [],
-    "assessable": 70,
+    "assessable": 69,
     "comparable": true
   },
   "logo": {

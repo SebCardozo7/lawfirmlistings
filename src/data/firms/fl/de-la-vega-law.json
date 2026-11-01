@@ -121,6 +121,12 @@
       "paid_keywords": 0,
       "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
       "measured_at": "2026-10-05"
+    },
+    "trust_pages": {
+      "disclaimer": true,
+      "privacy_policy": true,
+      "attorney_bios": true,
+      "bar_numbers_on_bios": false
     }
   },
   "gates": {
@@ -226,10 +232,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 26,
+    "total": 25,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-10-20",
+    "computed_at": "2026-10-29",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -331,16 +337,16 @@
         ]
       },
       "D": {
-        "score": 5,
+        "score": 6,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 0,
-            "max": 7,
-            "source": "pending",
-            "evidence": "Not yet assessed"
+            "pts": 1.0,
+            "max": 6.0,
+            "source": "observed",
+            "evidence": "CWV fail · no bar numbers on bios · no fee statement · privacy policy · disclaimer · no fresh content · scored out of 6 of the 7: nothing has measured accessibility here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -403,7 +409,7 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 39,
+      "gap": 40,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -412,9 +418,9 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 16.1,
-    "assessed": 63,
-    "coverage": 0.9,
+    "raw": 17.1,
+    "assessed": 69,
+    "coverage": 1.0,
     "floor_abc_pct": 0.263,
     "gates_unavailable": [
       "G1",
@@ -423,7 +429,7 @@
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 70,
+    "assessable": 69,
     "comparable": true
   },
   "logo": {
