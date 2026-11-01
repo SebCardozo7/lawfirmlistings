@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { BADGE_YEAR, EARNED_TIERS, RANK_CUTOFF, badgesFor } from '../../lib/badge';
+
+/**
+ * What the badge means, and the two rules that come with it.
+ *
+ * Every other directory in this business sells its badge, or sells the placement the badge
+ * announces. The page has to say plainly that this one is free, because a reader's first
+ * assumption will be the opposite, and it has to say what we keep: the link back, and the right
+ * to stop serving a badge the firm no longer qualifies for.
+ *
+ * The counts are read from the directory rather than typed, for the same reason every other
+ * number on this site is.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const tiers = new Map<string, number>();
+let ranked = 0;
+let firmsWithAny = 0;
+for (const f of firms) {
+  const badges = badgesFor(f, firms);
+  if (badges.length) firmsWithAny += 1;
+  ranked += badges.filter(b => !b.kind.startsWith('tier')).length;
+  const tier = f.data.score?.tier;
+  if (tier && EARNED_TIERS.includes(tier)) tiers.set(tier, (tiers.get(tier) ?? 0) + 1);
+}
+const order = ['Elite', 'Distinguished', 'Certified', 'Verified'];
+const tierRows = order.filter(t => tiers.get(t)).map(t => ({ tier: t, n: tiers.get(t)! }));
+const earned = tierRows.reduce((n, r) => n + r.n, 0);
+
+const example = firms.find(f => f.data.slug === 'goodwin-law-pa') ?? firms[0];
+const exampleBadges = badgesFor(example, firms);
+---
+<Base title="The LFL badge"
+      description="What the Law Firm Listings badge means, who has earned one, and the two rules that come with it. Free, never for sale, rebuilt every time we re-measure."
+      nav="methodology">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">The badge</li></ol>
+      <span class="eyebrow">Yours to display</span>
+      <h1>The badge is free, and it is not for sale.</h1>
+      <p class="lede">{earned.toLocaleString('en-US')} firms have earned a tier and
+        {' '}{firmsWithAny.toLocaleString('en-US')} have at least one badge to show for it. Nobody
+        paid for one, nobody can, and the fastest way to get one is to publish more about your
+        own firm.</p>
+    </div>
+    <div class="hero-facts">
+      {tierRows.map(r => (
+        <div class="fact"><b class="num">{r.n}</b><span>{r.tier}</span></div>
+      ))}
+      <div class="fact"><b class="num">{ranked}</b><span>Ranking badges</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="narrow prose">
+    <span class="eyebrow">Two kinds</span>
+    <h2 style="margin-top:14px">One says what we measured. The other says where you placed.</h2>
+    <p>The Certification Score is computed for a firm, not for one of its practice areas, so the
+      tier badge names no practice. It reads <b>LFL {example.data.score?.tier ?? 'Verified'} {BADGE_YEAR}</b>
+      and it means the gates were checked and the score computed from public records.</p>
+    <p>Position is a different measurement and a narrower one. A ranking is scoped to a city and
+      a practice, so a ranking badge can name both, and it says the whole thing: not "top ten"
+      but <b>ranked {' '}{exampleBadges[1]?.headline.replace('Ranked ', '').split(' ·')[0] ?? '1st of 20'}</b>,
+      with the size of the field in it. A firm in the first {RANK_CUTOFF} of a ranking earns one,
+      every year, for every ranking it is in.</p>
+    <p>{example.data.name} is why the two are separate. It is first of twenty for real estate in
+      Naples and its tier is Verified rather than Certified. Both are true. A single badge saying
+      "Certified in Real Estate" would be neither, and we would have made it up.</p>
+
+    <h2>The two rules</h2>
+    <p><b>Link it back.</b> The badge has to link to your profile on this site, because the point
+      of it is that somebody can check. An award nobody can verify is decoration.</p>
+    <p><b>Do not edit the file.</b> Hotlink it from this domain rather than saving a copy. That
+      is not about bandwidth. The file is rebuilt every time we re-measure, so the badge on your
+      site keeps telling the truth on its own: if your tier changes, it changes, and if you stop
+      qualifying it stops being served. Everyone else in this industry hands out a picture that
+      says the same thing for ever. That is exactly the difference we are selling.</p>
+
+    <h2>What it costs</h2>
+    <p>Nothing, and there is no version that costs something. The annual listing on
+      {' '}<a href="/list-your-firm/">/list-your-firm/</a> buys a followed link, your logo and the
+      reviews you want quoted. It does not buy a badge, a point, a gate, a tier or a position,
+      and the firms above paid for none of this.</p>
+
+    <h2>How to get yours</h2>
+    <p>Open your own profile and look for <b>Show this on your site</b>. The badge, both colour
+      versions and the code to paste are all there. If your firm is listed and you cannot find
+      the section, you have not earned one yet, and the profile says which gate is open.</p>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="narrow">
+    <span class="eyebrow">An example</span>
+    <h2 style="margin:14px 0 22px">{example.data.name}</h2>
+    <div class="badge-grid">
+      {exampleBadges.slice(0, 2).map(b => (
+        <div class="badge-offer">
+          <img src={`/badge/${example.data.slug}/${b.kind}.svg`} alt={b.alt}
+               width="310" height="96" loading="lazy" />
+          <div>
+            <b>{b.headline}</b>
+            <p class="muted" style="font-size:.88rem;margin-top:6px">Also in a
+              {' '}<a class="link" href={`/badge/${example.data.slug}/${b.kind}-light.svg`}>light version</a>
+              {' '}for a pale background.</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="muted" style="font-size:.9rem;margin-top:20px">
+      <a class="link" href={`/firms/${example.data.slug}/`}>See the profile these link to</a>
+    </p>
+  </div>
+</section>
+</Base>

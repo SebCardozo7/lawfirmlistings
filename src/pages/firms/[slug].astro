@@ -9,6 +9,8 @@ import Icon from '../../components/Icon.astro';
 import { mailto } from '../../data/site';
 import Scorecard from '../../components/Scorecard.astro';
 import { PRACTICE_SLUGS } from '../../data/practices';
+import { badgesFor, heroBadge, rosetteMark } from '../../lib/badge';
+import { ordinal } from '../../lib/ranking';
 
 export async function getStaticPaths() {
   // not_eligible is excluded here for the same reason it is excluded from the city pages, the
@@ -25,6 +27,51 @@ export async function getStaticPaths() {
 const { firm } = Astro.props;
 const d = firm.data; const s = d.score;
 const cohort = await getEntry('cohorts', d.cohort_id);
+
+/*
+ * What this firm has earned and can put on its own website.
+ *
+ * The badge only works if the firm finds it, and this is where a firm looking itself up lands.
+ * It is also the only part of this site that travels: everything else waits to be read.
+ */
+const everyFirm = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const lead = heroBadge(firm, everyFirm);
+
+/*
+ * Five cards, and which five.
+ *
+ * The strip holds anything from three to eight of these depending on what a firm publishes, and
+ * a sixth wraps onto a line of its own and stretches across the page. So the row is capped and
+ * the order is a priority list rather than the order the markup happens to be in: the medal and
+ * the score first because they are the two things neither the chips nor the meta line can say,
+ * then how far the firm is from its next tier, then its own terms.
+ *
+ * Practice areas lost its place on purpose. The chip under the firm's name already names the
+ * practice and the medal names it again.
+ */
+const scorable = Boolean(s && s.comparable !== false);
+const gapToNext = s?.next_tier && s.next_tier.gap > 0 ? s.next_tier : null;
+const availability = d.availability.slice(0, 2);
+const strip = [
+  lead ? 'medal' : null,
+  scorable ? 'score' : null,
+  gapToNext ? 'gap' : null,
+  'fee',
+  'consult',
+  ...availability.map((_, i) => `avail${i}`),
+  'practices',
+].filter(Boolean).slice(0, 5);
+const inStrip = (name: string) => strip.includes(name);
+const badges = badgesFor(firm, everyFirm).map(b => ({
+  ...b,
+  dark: `/badge/${d.slug}/${b.kind}.svg`,
+  light: `/badge/${d.slug}/${b.kind}-light.svg`,
+  snippet: `<a href="https://lawfirmlistings.com/firms/${d.slug}/">\n`
+    + `  <img src="https://lawfirmlistings.com/badge/${d.slug}/${b.kind}.svg"\n`
+    + `       alt="${b.alt}" width="310" height="96">\n`
+    + '</a>',
+}));
 const primary = d.practices.filter(p => p.primary);
 // A firm with no office at all should not reach this page: G3 asks for a verified location and
 // the directory is built on them. It reached it once, when 121 immigration profiles were built
@@ -175,14 +222,39 @@ const schema = faqPage ? [legalService, faqPage] : legalService;
       </div>
     </div>
     <div class="hero-facts profile-facts">
+      {/* The three cards that were not here, and the reason the strip looked thin: a firm with
+          no published availability filled three of six columns. The medal and the score are the
+          two facts a reader and the firm itself care about most, and neither was in the hero.
+          The strip is flex now rather than a six column grid, because a profile carries
+          anywhere from three of these to seven. */}
+      {inStrip('medal') && lead && (
+        <a class="fact fact--medal" href="#badge">
+          <span class="fact-mark" set:html={rosetteMark(lead.place ? ordinal(lead.place) : null)} />
+          <span class="fact-lines">
+            <b>{lead.line1}</b>
+            <span>{lead.line2}</span>
+            <span class="fact-cta">Yours to display →</span>
+          </span>
+        </a>
+      )}
+      {inStrip('score') && (
+        <div class="fact fact--score">
+          <b class="num"><span class="fact-score-num">{s.total}</span><i>/100</i></b>
+          <span>LFL Score{s.coverage === 1 ? ', every factor measured' : ''}</span>
+          <div class="score-bar score-bar--wide" aria-hidden="true"><i style={`width:${Math.max(s.total, 2)}%`}></i></div>
+        </div>
+      )}
+      {inStrip('gap') && gapToNext && (
+        <div class="fact"><b class="num">{gapToNext.gap}</b><span>Points from {gapToNext.name}</span></div>
+      )}
       {/* The fee statement is the firm's own sentence, so it is set as a quotation. It reads
           as one to anybody looking at the page, and it keeps the house rule about punctuation
           honest: "NO FEE UNLESS WE WIN — GUARANTEED!" carries an em dash this directory does
           not use, and altering the punctuation of a firm's own words is not ours to do. */}
-      <div class="fact"><b>{d.fee_model}</b><span>{d.fee_statement ? <q>{d.fee_statement}</q> : 'Fee model'}</span></div>
-      <div class="fact"><b>{d.free_consultation ? 'Free' : 'Paid'}</b><span>Initial consultation</span></div>
-      {d.availability.slice(0, 3).map(a => { const [h, ...r] = a.split(' '); return <div class="fact"><b>{h}</b><span>{r.join(' ')}</span></div>; })}
-      <div class="fact"><b class="num">{d.practices.length}</b><span>Practice areas</span></div>
+      {inStrip('fee') && <div class="fact"><b>{d.fee_model}</b><span>{d.fee_statement ? <q>{d.fee_statement}</q> : 'Fee model'}</span></div>}
+      {inStrip('consult') && <div class="fact"><b>{d.free_consultation ? 'Free' : 'Paid'}</b><span>Initial consultation</span></div>}
+      {availability.map((a, i) => inStrip(`avail${i}`) && (() => { const [h, ...r] = a.split(' '); return <div class="fact"><b>{h}</b><span>{r.join(' ')}</span></div>; })())}
+      {inStrip('practices') && <div class="fact"><b class="num">{d.practices.length}</b><span>Practice areas</span></div>}
     </div>
   </div>
 </section>
@@ -448,4 +520,37 @@ const schema = faqPage ? [legalService, faqPage] : legalService;
     </aside>
   </div>
 </section>
+
+{badges.length > 0 && (
+<section class="section section--tint" id="badge">
+  <div class="narrow">
+    <span class="eyebrow">Yours to display</span>
+    <h2 style="margin:14px 0 10px">Show this on your site</h2>
+    <p style="font-size:1.05rem;color:var(--ink-soft);max-width:70ch;line-height:1.65">
+      {d.name} has earned {badges.length === 1 ? 'this badge' : `these ${badges.length} badges`}.
+      They are free, they are not for sale, and each one links back to this page so anybody can
+      read the evidence behind it. They are also live: the file is rebuilt every time we
+      re-measure, so a badge on your site says what is true today rather than what was true the
+      day you copied it.
+    </p>
+    <div class="badge-grid">
+      {badges.map(b => (
+        <div class="badge-offer">
+          <img src={b.dark} alt={b.alt} width="310" height="96" loading="lazy" />
+          <div>
+            <b>{b.headline}</b>
+            <p class="muted" style="font-size:.88rem;margin:6px 0 10px">
+              On a pale background use <a class="link" href={b.light}>the light version</a>.
+            </p>
+            <pre class="snippet"><code>{b.snippet}</code></pre>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="muted" style="font-size:.9rem;margin-top:18px">
+      <a class="link" href="/badge/">What the badge means, and the two rules that come with it</a>
+    </p>
+  </div>
+</section>
+)}
 </Base>
