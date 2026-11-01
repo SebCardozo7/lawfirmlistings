@@ -511,6 +511,24 @@ button,input,select{font:inherit;color:inherit}
   .rr-score{grid-column:3;grid-row:1}
   .rr-meta{grid-column:2 / -1;grid-row:2;white-space:normal}
 }
+/* The badge a firm can take away, on its own profile. The code block is the product here, so it
+   is the thing that gets the room: a firm that cannot copy it will not display it. */
+.badge-grid{display:grid;gap:22px;margin-top:26px}
+.badge-offer{display:grid;grid-template-columns:310px minmax(0,1fr);gap:22px;align-items:start;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+/* A <pre> in a grid cell is as wide as its longest line unless the cell is told it may be
+   narrower, and the snippet's longest line is an absolute URL. Without this the firm profile
+   scrolled sideways on a phone: 688px of page inside a 375px screen. */
+.badge-offer>*{min-width:0}
+.badge-offer img{display:block;width:310px;height:96px}
+.badge-offer b{font-size:1rem}
+.snippet{background:var(--night);color:#9FD2C8;border-radius:10px;padding:14px 16px;
+  font-size:.78rem;line-height:1.6;overflow:auto;margin:0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (max-width:720px){
+  .badge-offer{grid-template-columns:minmax(0,1fr)}
+  .badge-offer img{width:100%;height:auto}
+}
 .pager{display:flex;gap:8px;justify-content:center;margin-top:32px}
 .pager a{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line-2);border-radius:50%;color:var(--ink);font-weight:500;background:var(--paper)}
 .pager a.is-active{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -692,6 +710,35 @@ button,input,select{font:inherit;color:inherit}
 
 /* ---------- Firm profile ---------- */
 .profile-hero .container{grid-template-columns:1fr;align-items:start;padding:40px 0 40px}
+/* The profile's fact strip, which carries the medal and the score as well as the firm's own
+   terms. Flex rather than the six column grid it inherited: a profile has anywhere from three
+   of these cards to seven, and a fixed six left Goodwin Law with three stretched across the
+   width and then squeezed the medal in beside them. The two that matter get more of the row by
+   asking for it, and everything still wraps on a narrow screen. */
+.profile-facts{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.profile-facts>.fact{flex:1 1 158px;min-width:0}
+.profile-facts>.fact--medal{flex:1.9 1 282px;display:flex;gap:15px;align-items:center;text-decoration:none;
+  background:linear-gradient(135deg,rgba(139,92,246,.20),rgba(94,234,212,.06));
+  border-color:rgba(139,92,246,.42);transition:border-color .15s ease,transform .15s ease}
+.profile-facts>.fact--medal:hover{border-color:rgba(139,92,246,.75);transform:translateY(-2px)}
+.fact-mark{flex:none;display:block;line-height:0}
+.fact-lines{min-width:0}
+.fact-lines b{display:block;font-size:1.22rem;color:#fff;font-weight:600;letter-spacing:-.02em;
+  line-height:1.15}
+.fact-lines>span{display:block;font-size:.83rem;color:var(--on-night-soft);margin-top:3px}
+.fact-cta{color:#9FD2C8;text-decoration:underline;text-underline-offset:3px;font-size:.78rem}
+.profile-facts>.fact--score{flex:1.5 1 226px;
+  background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(94,234,212,.07));
+  border-color:rgba(59,130,246,.40)}
+/* .grad-text cannot be used in here: .fact span wins on specificity and paints the number grey
+   again. The card states it itself. */
+.fact-score-num{background:var(--aurora);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent}
+.fact--score b i{font-size:.9rem;color:var(--on-night-soft);font-weight:400;font-style:normal}
+/* The shared bar sits at the right of a firm card and is capped at 160px, which is right there
+   and wrong here: in a fact card it is the width of the card. */
+.score-bar--wide{margin-left:0;max-width:none;margin-top:12px}
+@media (max-width:640px){.profile-facts>.fact--medal,.profile-facts>.fact--score{flex-basis:100%}}
 .profile-id{display:flex;gap:24px;align-items:flex-start;margin-top:22px;flex-wrap:wrap}
 .profile-logo{width:96px;height:96px;border-radius:24px;background:#fff;color:var(--ink);display:grid;place-items:center;font-weight:700;font-size:1.9rem;letter-spacing:-.04em;flex:none;box-shadow:var(--shadow-lg)}
 .profile-id h1{font-size:clamp(2rem,4vw,3.2rem);margin:0 0 10px}
