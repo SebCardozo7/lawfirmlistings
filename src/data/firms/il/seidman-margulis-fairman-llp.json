@@ -62,6 +62,13 @@
       "primary": false,
       "source_url": "https://www.seidmanlaw.net/bedsore.html",
       "checked_at": "2026-10-18"
+    },
+    {
+      "slug": "workers-compensation",
+      "name": "Workers' Compensation",
+      "primary": false,
+      "source_url": "https://www.seidmanlaw.net/workers-compensation.html",
+      "checked_at": "2026-11-02"
     }
   ],
   "market": {
@@ -421,10 +428,10 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 44,
+    "total": 42,
     "tier": "Verified",
     "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-11-02",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -488,7 +495,7 @@
         ]
       },
       "C": {
-        "score": 12,
+        "score": 10,
         "max": 20,
         "subs": [
           {
@@ -510,10 +517,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 2.5,
+            "pts": 1,
             "max": 5,
             "source": "places",
-            "evidence": "4 of 18 sampled reviews are from the last 12 months (newest 2026-01-29) · a sample of five per business listing, not every review"
+            "evidence": "3 of 18 sampled reviews are from the last 12 months (newest 2026-01-29) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -594,11 +601,11 @@
         ]
       }
     },
-    "floor_abc": 14,
+    "floor_abc": 13,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 21,
+      "gap": 23,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -607,10 +614,10 @@
         "B1 Results published: +6 available"
       ]
     },
-    "raw": 29.9,
+    "raw": 28.4,
     "assessed": 68,
     "coverage": 1.0,
-    "floor_abc_pct": 0.382,
+    "floor_abc_pct": 0.342,
     "gates_unavailable": [
       "G1",
       "G2",
