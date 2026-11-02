@@ -21,7 +21,7 @@ interface Props {
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
       | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-      | 'defense' | 'menu';
+      | 'defense' | 'menu' | 'titles';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -41,6 +41,13 @@ const results = { bars: [120, 186, 96, 232, 150, 268, 110, 198, 140], checked: [
 // results scene uses. A card with a face and two lines is a name somebody can look up; an empty
 // outline is a firm that published no name, and the lookup beside it never completes.
 const roster = { cols: [110, 258, 406, 554], rows: [70, 242], blank: [3, 6] };
+
+// Job titles: the same bio cards as the roster scene, with the second line under each name
+// standing for the rank the firm prints beside it. Three cards carry a solid rank bar and five
+// carry a dashed outline, because that is the measured shape: a firm names its people and most
+// of those names arrive with no title we can read. The empty outline is the same device the
+// results and roster scenes use for a thing nobody wrote, rather than a thing that failed.
+const titles = { cols: [96, 244, 392, 540, 688], rows: [66, 238], ranked: [0, 3, 6] };
 
 // Accountability: the membership badges a firm does print, stacked up as a wall of filled pills,
 // beside the one shape none of them prints. The shield is drawn in the same dashed mint the
@@ -882,5 +889,47 @@ const lens = { col: 4, row: 3, span: 5 };
         </g>
       );
     })()}
+  </svg>
+)}
+
+{name === 'titles' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {titles.rows.map((y, r) => titles.cols.map((x, c) => {
+      const i = r * titles.cols.length + c;
+      const ranked = titles.ranked.includes(i);
+      return (
+        <g>
+          <rect x={x} y={y} width="128" height="156" rx="16" fill="rgba(255,255,255,.08)"
+            stroke="rgba(255,255,255,.20)" stroke-width="1.5" />
+          <circle cx={x + 64} cy={y + 48} r="23" fill={i === 0 ? VIOLET : 'rgba(255,255,255,.30)'} />
+          {/* The name, which every card carries: a firm publishes who its people are. */}
+          <rect x={x + 22} y={y + 90} width="84" height="11" rx="5.5" fill="rgba(255,255,255,.30)" />
+          {/* The rank under it, which most do not. */}
+          {ranked ? (
+            <rect x={x + 34} y={y + 114} width="60" height="11" rx="5.5" fill={MINT} opacity=".75" />
+          ) : (
+            <rect x={x + 34} y={y + 113} width="60" height="13" rx="6.5" fill="none" stroke={MINT}
+              stroke-width="2" stroke-dasharray="7 6" opacity=".7" />
+          )}
+        </g>
+      );
+    }))}
+    {/* The ladder the explainers draw, on the right. Only the bottom rung is filled in, because
+        the bare word "Attorney" is the rung these sites actually print and the ranks above it
+        are the ones almost none of them do. Rails and rungs sit inside x=1190 so nothing is
+        clipped: the viewBox is 1200 wide and this scene is also rendered into a share card. */}
+    <g transform="translate(1012,86)">
+      <line x1="6" y1="0" x2="6" y2="268" stroke={BLUE} stroke-width="3"
+        stroke-linecap="round" opacity=".4" />
+      <line x1="150" y1="0" x2="150" y2="268" stroke={BLUE} stroke-width="3"
+        stroke-linecap="round" opacity=".4" />
+      {[0, 1, 2].map(k => (
+        <rect x="6" y={238 - k * 104} width="144" height="20" rx="10"
+          fill={k === 0 ? 'rgba(255,255,255,.26)' : 'none'}
+          stroke={k === 0 ? 'none' : BLUE} stroke-width="2.5"
+          stroke-dasharray={k === 0 ? undefined : '10 9'}
+          opacity={k === 0 ? 1 : .6} />
+      ))}
+    </g>
   </svg>
 )}

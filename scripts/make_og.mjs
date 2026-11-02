@@ -97,7 +97,11 @@ const dir = mkdtempSync(join(tmpdir(), 'lfl-og-'));
 const src = join(dir, 'card.html');
 writeFileSync(src, card);
 
-const chrome = globSync('/opt/pw-browsers/chromium-*/chrome-linux/chrome')[0];
+// Both layouts, because the bundled browser moved from chrome-linux/ to chrome-linux64/ between
+// Playwright builds and this script failed with "no chromium" on an image that had one installed.
+// The plain /opt/pw-browsers/chromium launcher is the last resort the environment documents.
+const chrome = globSync('/opt/pw-browsers/chromium-*/chrome-linux{,64}/chrome')[0]
+  ?? ['/opt/pw-browsers/chromium', '/usr/bin/google-chrome'].find(p => existsSync(p));
 if (!chrome) {
   console.error('no chromium under /opt/pw-browsers/');
   process.exit(2);
