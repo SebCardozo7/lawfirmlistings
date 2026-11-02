@@ -476,7 +476,13 @@ ARTICLE_TITLE = re.compile(
     # Multi-Vehicle Collisions" is a real page on a real firm's site and is not that firm
     # telling anybody what it does.
     r"^\s*(?:what|how|why|when|can|do|does|should|is|are|will|understanding|"
-    r"everything|tips|mistakes|signs|reasons|steps)\b|"
+    r"everything|tips|mistakes|signs|reasons|steps|"
+    # The same explainer with a gerund for a first word. "Preventing bedsores" was accepted as
+    # Sarkisian Sarkisian & Associates' nursing home practice page: it is a blog post, and it
+    # won the ranking because every other word in its address names the practice.
+    r"preventing|avoiding|recognizing|recognising|protecting|choosing|dealing|coping|"
+    r"filing|proving|spotting|reporting|knowing|staying|keeping|"
+    r"common|top|ways|myths|questions)\b|"
     r"\b(?:glossary|faq|frequently asked|blog|guide to|checklist|explained|"
     # A WordPress category archive and a resources hub both title themselves for the practice
     # and are not a statement that the firm does the work. Three Baltimore and Lakeland
@@ -486,13 +492,33 @@ ARTICLE_TITLE = re.compile(
     r"everything you need)\b", re.I)
 
 
+# Where a sitemap lives when robots.txt does not say. /sitemap.xml is the convention and it is
+# not the only one: Yoast, which runs on a large share of law firm sites, publishes
+# /sitemap_index.xml and serves 404 at /sitemap.xml, and WordPress itself has served
+# /wp-sitemap.xml since 5.5. Asking only the first address and taking the 404 as an answer meant
+# 189 of the 1,388 published firms were read from their home page links alone.
+#
+# This is the belt to crawl_public.fetch_plain's braces. robots.txt names a sitemap for 1,191 of
+# those firms and was never read, so the guess was doing all the work and guessing one address;
+# now the declaration is read first and this list is what remains for the 149 hosts that publish
+# a sitemap and do not mention it. Forty-eight firms have no sitemap at any address, and for
+# those the home page's links are the whole of what the site tells a crawler.
+SITEMAP_FALLBACKS = ("/sitemap.xml", "/sitemap_index.xml", "/sitemap-index.xml",
+                     "/wp-sitemap.xml", "/sitemap1.xml")
+
+
 def sitemap_urls(origin, robots, rp):
-    """URLs from the sitemaps robots.txt declares, plus the conventional location."""
+    """URLs from the sitemaps robots.txt declares, or from the conventional locations."""
     seen, out = set(), []
-    todo = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "") or [origin + "/sitemap.xml"]
-    while todo and len(out) < 4000:
+    declared = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "")
+    guesses = [] if declared else [origin + path for path in SITEMAP_FALLBACKS]
+    todo = declared or list(guesses)
+    # A sitemap index can list a dozen children, and five of those are now guesses that may be
+    # spent before the real one answers. The old cap of 12 would have been reached by a Yoast
+    # site with seven children before it read any of them.
+    while todo and len(out) < 4000 and len(seen) <= 32:
         url = todo.pop(0)
-        if url in seen or len(seen) > 12:
+        if url in seen:
             continue
         seen.add(url)
         if not rp.can_fetch("*", url):
@@ -503,6 +529,9 @@ def sitemap_urls(origin, robots, rp):
             continue
         # A sitemap index points at more sitemaps; both are <loc> lists.
         locs = [unescape(m) for m in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body, re.I)]
+        if locs and url in guesses:
+            # One conventional address answered, so stop asking the host for the other four.
+            todo = [u for u in todo if u not in guesses]
         for loc in locs:
             (todo if loc.lower().endswith(".xml") or "sitemap" in loc.lower() else out).append(loc)
     return out
@@ -703,16 +732,32 @@ def examine(domain, spec, site=None):
         return None, "no page whose address names the practice (%s)" % where
 
     # A site with dozens of matching URLs has a page per borough and per injury type as well as
-    # the practice page. Rank by how much of the final segment is not the practice itself, then
-    # by depth: /workers-compensation beats /workers-comp-glossary beats /bronx/workers-comp.
+    # the practice page. Rank by how much of the address is not the practice itself, then by
+    # depth: /workers-compensation beats /workers-comp-glossary beats /bronx/workers-comp.
+    #
+    # The last segment and the ones above it are counted separately, and that separation is the
+    # whole of this function. Counting every segment together charged a page for the folder it
+    # sits in, so /personal-injury/slip-and-fall/ scored worse than /portage-slip-and-fall-lawyer/
+    # and worse than four other town variants, and with only the first eight candidates tried the
+    # real practice page was never fetched. Sarkisian Sarkisian & Associates publishes
+    # /personal-injury/slip-and-fall/, /personal-injury/nursing-home-accidents/ and
+    # /motor-vehicle-accidents/truck-collisions/, and was recorded as publishing none of the
+    # three. A folder named for the area of law is the strongest sign a page is the practice
+    # page rather than an article about it; it was the one thing being punished.
+    def extras(segment):
+        tokens = [t for t in re.split(r"[-_.]+", segment.lower()) if t]
+        return [t for t in tokens
+                if t not in CORE_WORDS and not spec["slug"].search(t) and not t.isdigit()]
+
     def rank(url):
         parts = [p for p in urllib.parse.urlparse(url).path.strip("/").split("/") if p]
-        # Every segment, not only the last: /bronx/workers-compensation is a borough variant
-        # and its final segment alone looks like the practice page itself.
-        tokens = [t for t in re.split(r"[-_./]+", "/".join(parts).lower()) if t]
-        extra = [t for t in tokens
-                 if t not in CORE_WORDS and not spec["slug"].search(t) and not t.isdigit()]
-        return (len(extra), len(parts), len(url))
+        if not parts:
+            return (99, 99, 0, len(url))
+        # Still every segment, because /bronx/workers-compensation is a borough variant and its
+        # final segment alone looks like the practice page itself. A parent only breaks the tie.
+        tail = len(extras(parts[-1]))
+        above = sum(len(extras(seg)) for seg in parts[:-1])
+        return (tail, above, len(parts), len(url))
 
     candidates.sort(key=rank)
     if len(candidates) > MENU_DENSITY:

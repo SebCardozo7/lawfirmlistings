@@ -232,10 +232,36 @@ def https_origin(domain):
     return ("https://" + other) if (alt == 200 and alt_html) else bare
 
 
+def fetch_plain(url):
+    """GET a URL that is text rather than a document. Returns (status, text).
+
+    fetch() exists to read pages, so it throws away any body that is not HTML or XML. robots.txt
+    is served as text/plain, which meant fetch() handed back 200 and an empty string for every
+    robots.txt on every site this pipeline has ever read. Both callers below treated that empty
+    string as a robots.txt that says nothing: no Sitemap directive was ever seen, and no Disallow
+    was ever honoured, while the docstring at the top of check_practice.py promised it was.
+    """
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA,
+        "Accept": "text/plain,text/*;q=0.9,*/*;q=0.5",
+        "Accept-Encoding": "gzip",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+            raw = r.read()
+            if r.headers.get("Content-Encoding") == "gzip":
+                raw = gzip.decompress(raw)
+            return r.status, raw.decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        return e.code, ""
+    except Exception:
+        return None, ""
+
+
 def robots_body(origin):
     """The raw robots.txt, kept because it carries the Sitemap directives."""
     try:
-        status, body, _ = fetch(origin + "/robots.txt")
+        status, body = fetch_plain(origin + "/robots.txt")
         return body if status == 200 else ""
     except Exception:
         return ""
@@ -245,9 +271,9 @@ def robots_for(origin):
     rp = urllib.robotparser.RobotFileParser()
     rp.set_url(origin + "/robots.txt")
     try:
-        status, body, _ = fetch(origin + "/robots.txt")
+        status, body = fetch_plain(origin + "/robots.txt")
         # A site with no robots.txt allows everything; a 4xx is not a disallow.
-        rp.parse((body or "").splitlines())
+        rp.parse((body or "").splitlines() if status == 200 else [])
     except Exception:
         rp.parse([])
     return rp
