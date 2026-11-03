@@ -18,8 +18,12 @@
 import { EmailMessage } from 'cloudflare:email';
 import { mime, json, present } from './mail';
 import { handlePanel } from './panel';
-import { ackBody, drainFollowUps, queueFollowUp, sendTo } from './outbound';
+import {
+  ackBody, answeredUrl, cancelReminder, drainFollowUps, drainReminders, queueFollowUp,
+  queueReminder, sendTo,
+} from './outbound';
 import { isFreeRequest } from '../src/data/listing';
+import type { Enquiry } from './outbound';
 
 interface Env {
   ASSETS: Fetcher;
@@ -100,6 +104,34 @@ async function submit(request: Request, env: Env): Promise<Response> {
     return json(400, { error: 'That email address does not look right.' });
   }
 
+  const enquiry: Enquiry = {
+    firm: values.firm, contact: values.contact, email: values.email,
+    website: values.website, city: values.city, practice: values.practice,
+    // The form's first question, which was collected, emailed to us and then dropped here. The
+    // follow-up is a quote with a payment link in it, and it was queued for everybody: a firm
+    // writing in to say we had named one of its page titles as an attorney got a price six
+    // hours later. Twenty-one firms had that to tell us.
+    request: values.request,
+  };
+
+  // Queued before the first email goes, so that email can carry the link that cancels it. It is
+  // the only piece of this that runs before the notification, and it cannot be allowed to stop
+  // one: an enquiry that reached us without a reminder is worth more than one that never
+  // arrived at all.
+  const origin = new URL(request.url).origin;
+  try {
+    const r = await queueReminder(env, enquiry, origin);
+    if (r) {
+      enquiry.reminderKey = r.key;
+      enquiry.reminderToken = r.token;
+    } else {
+      console.warn('reminder not queued: no FOLLOWUPS namespace bound');
+    }
+  } catch (err) {
+    console.error('reminder queue failed', err);
+  }
+  const cancel = answeredUrl(enquiry, origin);
+
   const body = [
     `${values.firm} has asked to be listed.`,
     '',
@@ -107,9 +139,13 @@ async function submit(request: Request, env: Env): Promise<Response> {
       .filter(k => values[k])
       .map(k => `${LABELS[k]}: ${values[k]}`),
     '',
-    `Sent from ${new URL(request.url).origin}/list-your-firm/`,
+    `Sent from ${origin}/list-your-firm/`,
     `Received ${new Date().toISOString()}`,
     request.headers.get('cf-connecting-ip') ? `From IP ${request.headers.get('cf-connecting-ip')}` : null,
+    cancel ? '' : null,
+    cancel ? 'They were promised a person within 12 working hours. If nobody has written by' : null,
+    cancel ? 'then you will be reminded once. Say you have answered them and you will not be:' : null,
+    cancel || null,
   ].filter(present).join('\n');
 
   try {
@@ -127,15 +163,6 @@ async function submit(request: Request, env: Env): Promise<Response> {
   // Everything from here is for the firm rather than for us, and none of it may turn a
   // successful submission into a failed one. A form that worked has worked, whatever happens to
   // the autoresponder, so each piece catches its own error and the response is still 200.
-  const enquiry = {
-    firm: values.firm, contact: values.contact, email: values.email,
-    website: values.website, city: values.city, practice: values.practice,
-    // The form's first question, which was collected, emailed to us and then dropped here. The
-    // follow-up is a quote with a payment link in it, and it was queued for everybody: a firm
-    // writing in to say we had named one of its page titles as an attorney got a price six
-    // hours later. Twenty-one firms had that to tell us.
-    request: values.request,
-  };
   // Each of these says what it did, because an automation nobody can watch is one nobody
   // trusts. The firm's name goes in the line and its email address does not: the log answers
   // "did the second email get scheduled, and for when", which needs neither.
@@ -207,6 +234,59 @@ const RETIRED: Record<string, string> = {
   '/guides/best-personal-injury-law-firms-nyc': '/cities/new-york-ny/personal-injury/',
 };
 
+/**
+ * "I have answered them", which cancels the reminder queued when the enquiry arrived.
+ *
+ * The GET shows a button and changes nothing. That is not politeness about HTTP verbs: this
+ * address arrives by email, and a link in an email is followed by things that are not the
+ * recipient. Outlook's Safe Links fetches every URL in a message to scan it, antivirus gateways
+ * do the same, and a GET that deleted the reminder would be cancelled by the scanner before the
+ * person ever saw it. The one thing this feature exists to prevent is a reminder that silently
+ * does not arrive.
+ *
+ * The POST does the work, and says which of the three things happened rather than pretending
+ * they are the same: cancelled, already gone, or the token does not match.
+ */
+async function answered(request: Request, env: Env, url: URL): Promise<Response> {
+  const key = url.searchParams.get('k') ?? '';
+  const token = url.searchParams.get('t') ?? '';
+  const page = (title: string, note: string, form: boolean) => new Response(
+    `<!doctype html><html lang="en"><meta charset="utf-8">`
+    + `<meta name="viewport" content="width=device-width,initial-scale=1">`
+    + `<meta name="robots" content="noindex">`
+    + `<title>${title}</title>`
+    + '<style>body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;'
+    + 'background:#EFEFEA;color:#0A0A0C;margin:0;display:grid;place-items:center;'
+    + 'min-height:100vh;padding:24px}main{background:#fff;border:1px solid #E7E7E2;'
+    + 'border-radius:14px;padding:28px;max-width:46ch}h1{font-size:1.25rem;margin:0 0 10px}'
+    + 'p{margin:0 0 18px;color:#3B3C43}button{font:inherit;font-weight:600;background:#0A0A0C;'
+    + 'color:#fff;border:0;border-radius:999px;padding:10px 20px;cursor:pointer}</style>'
+    + `<main><h1>${title}</h1><p>${note}</p>`
+    + (form ? '<form method="POST"><button type="submit">Yes, I answered them</button></form>' : '')
+    + '</main>',
+    { status: 200, headers: { 'content-type': 'text/html; charset=utf-8' } },
+  );
+
+  if (request.method === 'GET') {
+    if (!key || !token) return page('Nothing to cancel', 'That link is missing part of itself.', false);
+    return page('Mark this enquiry as answered?',
+                'The reminder will not be sent. Nothing else changes.', true);
+  }
+  if (request.method !== 'POST') return json(405, { error: 'GET or POST only.' });
+
+  const result = await cancelReminder(env, key, token);
+  if (result === 'cancelled') {
+    return page('Noted', 'The reminder has been cancelled.', false);
+  }
+  if (result === 'gone') {
+    return page('Already done',
+                'There is no reminder under that link: it was cancelled earlier, or it has '
+                + 'already been sent.', false);
+  }
+  return page('That link did not check out',
+              'The reminder is still queued. Use the link from the email as it was sent.', false);
+}
+
 function retiredRedirect(url: URL): Response | null {
   const path = url.pathname.replace(/\/+$/, '') || '/';
   const to = RETIRED[path];
@@ -231,6 +311,9 @@ export default {
       }
       return submit(request, env);
     }
+    if (url.pathname === '/api/answered') {
+      return answered(request, env, url);
+    }
     // Everything else is a file. The assets binding keeps the 404 page and the trailing-slash
     // handling the site was already configured for.
     return env.ASSETS.fetch(request);
@@ -247,5 +330,9 @@ export default {
   async scheduled(_event: ScheduledController, env: Env, _ctx: ExecutionContext): Promise<void> {
     const { sent, failed } = await drainFollowUps(env);
     if (sent || failed) console.log(`follow-ups sent ${sent}, failed ${failed}`);
+    // Separately, because the two have nothing to do with each other beyond sharing a store and
+    // a clock: one is a quote to a firm and one is a note to us saying the firm is still waiting.
+    const r = await drainReminders(env);
+    if (r.sent || r.failed) console.log(`reminders sent ${r.sent}, failed ${r.failed}`);
   },
 };

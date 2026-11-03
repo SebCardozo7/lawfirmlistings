@@ -39,6 +39,8 @@ export interface OutboundEnv {
   PAYPAL_LINK?: string;
   /** Hours before the second email. Unset is 6. */
   FOLLOWUP_HOURS?: string;
+  /** Hours before the owner is reminded that nobody has answered. Unset is 48. */
+  REMINDER_HOURS?: string;
 }
 
 import { isFreeRequest } from '../src/data/listing';
@@ -52,12 +54,31 @@ export interface Enquiry {
   practice?: string;
   /** What the firm said it came for. Absent on a follow-up queued before this field existed. */
   request?: string;
+  /** The reminder this enquiry queued, so the owner's emails can all carry the same link. */
+  reminderKey?: string;
+  reminderToken?: string;
 }
 
 const hours = (env: OutboundEnv) => {
   const n = Number(env.FOLLOWUP_HOURS);
   return Number.isFinite(n) && n > 0 && n < 24 * 30 ? n : 6;
 };
+
+const reminderHours = (env: OutboundEnv) => {
+  const n = Number(env.REMINDER_HOURS);
+  return Number.isFinite(n) && n > 0 && n < 24 * 30 ? n : 48;
+};
+
+/**
+ * Where the "I have answered them" link points when nothing better is known. The Worker knows
+ * its own origin at submit time and stores it, so this is only the fallback for a record queued
+ * without one.
+ *
+ * The apex, not www: index.ts 301s www to the apex, and this address is posted to rather than
+ * read. A browser is not required to repeat a POST to the address a redirect names, and some
+ * turn it into a GET, which here is the method that deliberately does nothing.
+ */
+export const SITE = 'https://lawfirmlistings.com';
 
 /** The sender's own name, so a reply does not go to a no-reply nobody reads. */
 /**
@@ -260,6 +281,112 @@ export async function sendTo(env: OutboundEnv, to: string, subject: string, text
   await env.EMAIL.send(new EmailMessage(sender, to, raw));
 }
 
+/**
+ * The reminder, which is the only thing here addressed to us rather than to a firm.
+ *
+ * The acknowledgement promises the firm that a person will read its message and reply within 12
+ * working hours. Nothing watched whether that happened. One firm wrote on 28 October, got the
+ * acknowledgement, got the quote six hours later, and waited six days: both automatic messages
+ * worked perfectly and the one a person owed it never went.
+ *
+ * A Worker cannot read a mailbox, so it cannot know whether the reply was sent. What it can do
+ * is ask. This fires once, hours later, to us, and every email we get about the enquiry carries
+ * a link that cancels it. Answer the firm, click the link, and the reminder never arrives;
+ * ignore both and it does.
+ *
+ * Queued for every enquiry, including the corrections and appeals that get no quote. Those are
+ * the ones that most need a person, and they are the ones with nothing else scheduled behind
+ * them.
+ */
+export async function queueReminder(
+  env: OutboundEnv, e: Enquiry, origin = SITE,
+): Promise<{ key: string; token: string } | null> {
+  if (!env.FOLLOWUPS) return null;
+  const due = new Date(Date.now() + reminderHours(env) * 60 * 60 * 1000);
+  const key = `reminder:${due.toISOString()}:${crypto.randomUUID().slice(0, 8)}`;
+  const token = crypto.randomUUID().replace(/-/g, '');
+  await env.FOLLOWUPS.put(key, JSON.stringify({
+    ...e, due: due.toISOString(), queuedAt: new Date().toISOString(), token, origin,
+    // The record carries its own key and token, because the reminder is the one email that
+    // builds the cancel link from the stored copy rather than from the caller's. The caller
+    // learns them from the return value below, hours after this record was written, so a
+    // record that did not keep them produced a reminder with no way to stop the next one.
+    reminderKey: key, reminderToken: token,
+  }), { expirationTtl: 90 * 24 * 60 * 60 });
+  return { key, token };
+}
+
+/** The address that cancels a reminder, for the owner's own emails. */
+export function answeredUrl(e: Enquiry, origin = SITE): string | null {
+  if (!e.reminderKey || !e.reminderToken) return null;
+  return `${origin}/api/answered?k=${encodeURIComponent(e.reminderKey)}`
+    + `&t=${encodeURIComponent(e.reminderToken)}`;
+}
+
+/**
+ * Cancels one reminder. Returns what happened, because the page says it back.
+ *
+ * The token is checked as well as the key. The key is in the address of a link sent by email,
+ * and an address in an email is not a secret: it travels through our mail provider, the
+ * recipient's, and whatever scans either of them.
+ */
+export async function cancelReminder(
+  env: OutboundEnv, key: string, token: string,
+): Promise<'cancelled' | 'gone' | 'denied'> {
+  if (!env.FOLLOWUPS || !key.startsWith('reminder:')) return 'denied';
+  const raw = await env.FOLLOWUPS.get(key);
+  if (!raw) return 'gone';
+  try {
+    const rec = JSON.parse(raw) as { token?: string };
+    if (!rec.token || rec.token !== token) return 'denied';
+  } catch {
+    return 'denied';
+  }
+  await env.FOLLOWUPS.delete(key);
+  return 'cancelled';
+}
+
+export function reminderBody(
+  e: Enquiry & { queuedAt?: string }, env: OutboundEnv, origin = SITE,
+): { subject: string; text: string } {
+  const url = answeredUrl(e, origin);
+  // Measured rather than assumed. A send that fails stays queued and is retried, so by the time
+  // one of these actually arrives it may be a good deal older than REMINDER_HOURS, and an email
+  // that opens with a wrong number about its own lateness is not worth reading.
+  const since = e.queuedAt ? Date.parse(e.queuedAt) : NaN;
+  const waited = Number.isFinite(since)
+    ? Math.max(1, Math.round((Date.now() - since) / 3600000))
+    : reminderHours(env);
+  return {
+    subject: `Still unanswered: ${e.firm}`,
+    text: [
+      `${waited} hours ago ${e.firm} wrote in, and nothing says a person has`,
+      'replied yet. The acknowledgement they received promised one within 12 working hours.',
+      '',
+      `  Firm:     ${e.firm}`,
+      `  Contact:  ${e.contact}`,
+      `  Reply to: ${e.email}`,
+      e.website ? `  Website:  ${e.website}` : null,
+      e.city ? `  Market:   ${e.city}` : null,
+      e.request ? `  Asked:    ${e.request}` : null,
+      '',
+      // The distinction the whole feature turns on, said in the email rather than left to be
+      // remembered: one of these had a second automatic message behind it and one had nothing.
+      isFreeRequest(e.request)
+        ? 'No quote was sent and none will be: this is a correction or an appeal, which we do'
+        : 'They have the quote and the payment link already. What is missing is a person.',
+      isFreeRequest(e.request)
+        ? 'not charge for. A person is the only thing that was ever going to answer it.'
+        : null,
+      '',
+      'If you have already written to them, say so and this stops:',
+      url || '  (no cancel link: this reminder was queued before the link existed)',
+      '',
+      'This is the only reminder. Nothing else will chase it.',
+    ].filter(present).join('\n'),
+  };
+}
+
 /** Queued under the minute it is due, so the cron can ask for everything up to now. */
 export async function queueFollowUp(env: OutboundEnv, e: Enquiry): Promise<string | null> {
   if (!env.FOLLOWUPS) return null;
@@ -299,6 +426,13 @@ export function ownerNoticeBody(e: Enquiry, env: OutboundEnv): { subject: string
     'goes out automatically, so the next move is theirs or yours.',
     '',
     `Their enquiry came in ${hours(env)} hours ago.`,
+    '',
+    // The same link the reminder carries. A notice that only reports is a notice you learn to
+    // skim; this one can be acted on from the preview line.
+    ...(answeredUrl(e) ? [
+      `You will be reminded at ${reminderHours(env)} hours unless you say you have answered:`,
+      answeredUrl(e) as string,
+    ] : []),
   ].filter(present).join('\n');
   return { subject: `Quote sent: ${e.firm}`, text };
 }
@@ -316,6 +450,39 @@ async function notifyOwner(env: OutboundEnv, e: Enquiry): Promise<void> {
  * record has to be read to know whether it is time. A send that throws leaves the key in place,
  * so the next run tries again rather than losing the message.
  */
+export async function drainReminders(
+  env: OutboundEnv,
+): Promise<{ sent: number; failed: number }> {
+  if (!env.FOLLOWUPS || !env.SUBMISSIONS_TO) return { sent: 0, failed: 0 };
+  const now = new Date().toISOString();
+  let sent = 0;
+  let failed = 0;
+  const list = await env.FOLLOWUPS.list({ prefix: 'reminder:' });
+  for (const k of list.keys) {
+    const dueAt = k.name.split(':').slice(1, -1).join(':');
+    if (dueAt > now) continue;
+    const raw = await env.FOLLOWUPS.get(k.name);
+    if (!raw) continue;
+    let rec: Enquiry & { origin?: string };
+    try {
+      rec = JSON.parse(raw);
+    } catch {
+      await env.FOLLOWUPS.delete(k.name);
+      continue;
+    }
+    const { subject, text } = reminderBody(rec, env, rec.origin || SITE);
+    try {
+      await sendTo(env, env.SUBMISSIONS_TO, subject, text);
+      await env.FOLLOWUPS.delete(k.name);
+      sent += 1;
+    } catch (err) {
+      console.error('reminder failed', k.name, err);
+      failed += 1;
+    }
+  }
+  return { sent, failed };
+}
+
 export async function drainFollowUps(env: OutboundEnv): Promise<{ sent: number; failed: number }> {
   if (!env.FOLLOWUPS) return { sent: 0, failed: 0 };
   const now = new Date().toISOString();
