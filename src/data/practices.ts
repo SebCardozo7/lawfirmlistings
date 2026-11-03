@@ -69,8 +69,8 @@ export const SHARED_FAQ: { q: string; a: string }[] = [
     q: 'Can law firms pay to rank higher on this page?',
     a: 'No. The order comes from the Certification Score, and the score, the eligibility gates ' +
        'and the tier cannot be bought or edited, not even by a firm that manages its own ' +
-       'profile. Claiming a profile is free and lets a firm keep its offices, fees and practice ' +
-       'areas current. Sponsored placements are always labeled and never appear inside this list.',
+       'profile. Correcting something we published, and appealing a sub-score, is free for any ' +
+       'firm. Sponsored placements are always labeled and never appear inside this list.',
   },
 ];
 

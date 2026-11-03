@@ -415,7 +415,7 @@ function dashboard(d: any, pending: any[]): string {
   ${submittedList(open, i => esc(i.summary ?? i.kind))}
   <h2>What this panel does not change</h2>
   <p class="lede">Your score, your eligibility gates and your tier are measured, not entered. Nothing
-    on these pages moves them, and a claimed profile is measured exactly the way an unclaimed one
+    on these pages moves them, and a firm-managed profile is measured exactly the way any other
     is. <a href="/claim/faq">How this works</a> explains what each section does reach.</p>`;
 }
 

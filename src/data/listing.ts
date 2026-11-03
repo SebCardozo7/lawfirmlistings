@@ -95,28 +95,19 @@ export interface Product {
 }
 
 /**
- * Claiming is free, and that is not a promotion but a published commitment: the methodology FAQ
- * says a firm may claim its profile at no cost and the contact page says it again. It is listed
- * here as a product priced "Free" so the page can set it beside anything paid, which is where the
- * comparison does its work.
+ * One product, and one thing that is not for sale because it is not ours to sell.
+ *
+ * Claiming used to be free and separate: a firm took control of its own page at no charge and
+ * the fee added a link, a logo and the quoted reviews. That is no longer the offer. Running
+ * your own profile is the product, and it costs what the annual listing costs.
+ *
+ * Correcting something we got wrong is not part of it and never will be. A firm that finds a
+ * page title listed as one of its attorneys, which this directory did to twenty-one firms,
+ * should not have to buy anything to have it taken down. We publish these pages unasked and we
+ * publish them from the outside, so the cost of being wrong is ours. That line is in the terms
+ * as well as here.
  */
 export const PRODUCTS: Product[] = [
-  {
-    name: 'Claimed profile',
-    price: 'Free',
-    summary:
-      'For a firm that wants its own profile to be right, and to stay right. There is no ' +
-      'upgrade path attached to this and no expiry.',
-    includes: [
-      'Correct your offices, phone, practice areas, languages and fee terms',
-      'Submit case results with a docket number for verification',
-      'Appeal any sub-factor, reviewed within 30 days',
-      'See every sub-score and the evidence behind it',
-    ],
-    excluded:
-      'Claiming changes nothing about the score, the eligibility gates or the tier. Those are ' +
-      'measured, and a claimed profile is measured exactly the same way an unclaimed one is.',
-  },
   {
     name: 'Annual listing',
     price: '350 USD',
@@ -125,7 +116,9 @@ export const PRODUCTS: Product[] = [
       'For a firm that wants to run its own profile and have its own site linked from it. ' +
       'Renewed once a year, and we write to you before it renews.',
     includes: [
-      'Everything a claimed profile includes',
+      'Your own panel: offices, phone, practice areas, languages and fee terms',
+      'Submit case results with a docket number for verification',
+      'See every sub-score and the evidence behind it',
       'A dofollow link to your site, from your profile and from every card you appear in',
       'Your own logo on your profile',
       'The client reviews you want quoted, reviewed by us before they appear',
@@ -136,6 +129,36 @@ export const PRODUCTS: Product[] = [
       'does not.',
   },
 ];
+
+/**
+ * What a firm never pays for, named here so the pages that say it read it from one place.
+ * Both of these are about our own accuracy rather than about the firm's presentation.
+ */
+export const ALWAYS_FREE = [
+  'Correcting anything we published about your firm that is wrong',
+  'Appealing a sub-score, which is reviewed within 30 days',
+];
+
+/**
+ * The two answers to "what brings you here" that must never be answered with a price.
+ *
+ * The form asks a firm what it wants and the Worker queues a follow-up to everybody who sends
+ * it, so a firm writing in to say we had named a page title as one of its attorneys was getting
+ * a quote and a PayPal link six hours later. The strings are declared once and spread into the
+ * form's own options below, so the list the Worker tests against is the list the firm picked
+ * from and the two cannot drift apart.
+ *
+ * worker/index.ts imports this. src/data/listing.ts has no imports of its own and must keep
+ * none, because that is what makes it readable from inside the Worker bundle as well as from a
+ * page.
+ */
+export const FREE_REQUESTS = [
+  'Correct something on our profile',
+  'Appeal a sub-score',
+];
+
+export const isFreeRequest = (value?: string | null): boolean =>
+  !!value && FREE_REQUESTS.includes(value.trim());
 
 /**
  * The form. Kept as data so the page renders it, the mailto builder serialises it and the
@@ -206,10 +229,9 @@ export const STEPS: Step[] = [
       'of these it is and we will tell you where your firm actually stands.',
     fields: [
       { name: 'request', label: 'What brings you here', type: 'select', required: true,
-        options: ['Claim a profile we already publish',
+        options: ['Run the profile we already publish',
                   'Ask to be considered for the directory',
-                  'Correct something on our profile',
-                  'Appeal a sub-score',
+                  ...FREE_REQUESTS,
                   'Ask about sponsorship'],
       },
       { name: 'attorneys', label: 'Page that names your attorneys', type: 'url', required: false,
@@ -228,26 +250,13 @@ export const STEPS: Step[] = [
 ];
 
 /**
- * What the annual listing adds to a claimed profile, derived rather than retyped.
+ * The price, derived rather than retyped.
  *
- * The free half and the paid half were restated by hand in four places, and every one of them
- * got it backwards: the panel, the corrections and the scorecard were described as the thing
- * money buys, when they come with a claimed profile and the fee adds a link, a logo and the
- * quoted reviews. Prose cannot be type-checked, so anything that needs this split now reads it
- * from here and there is one copy of it.
+ * It was restated by hand in four places once and every one of them got the split backwards,
+ * which is why anything that needs it reads it from here. A sentence of prose cannot be
+ * type-checked, and this has already changed once: claiming stopped being free and the panel
+ * moved from the free half to the priced one.
  */
-export const ANNUAL_ADDS = (PRODUCTS.find(p => p.name === 'Annual listing')?.includes ?? [])
-  .filter(line => !/^Everything a claimed profile/i.test(line));
-
-/** The same, as a sentence: "a followed link, your logo and the reviews you want quoted". */
-export const annualAddsSentence = (): string => {
-  // Each line is written to stand alone in a bullet, so it starts with a capital. Dropped into
-  // the middle of a sentence they read "adds a dofollow link, Your own logo and The client
-  // reviews", so the first letter comes down. None of them begins with a proper noun.
-  const short = ANNUAL_ADDS.map((line) => {
-    const head = line.split(',')[0].trim();
-    return head.charAt(0).toLowerCase() + head.slice(1);
-  });
-  return short.length < 2 ? short.join('')
-    : `${short.slice(0, -1).join(', ')} and ${short[short.length - 1]}`;
-};
+const listing = PRODUCTS.find(p => p.name === 'Annual listing');
+export const LISTING_PRICE = listing?.price ?? '';
+export const LISTING_CADENCE = listing?.cadence ?? '';

@@ -19,6 +19,7 @@ import { EmailMessage } from 'cloudflare:email';
 import { mime, json, present } from './mail';
 import { handlePanel } from './panel';
 import { ackBody, drainFollowUps, queueFollowUp, sendTo } from './outbound';
+import { isFreeRequest } from '../src/data/listing';
 
 interface Env {
   ASSETS: Fetcher;
@@ -129,6 +130,11 @@ async function submit(request: Request, env: Env): Promise<Response> {
   const enquiry = {
     firm: values.firm, contact: values.contact, email: values.email,
     website: values.website, city: values.city, practice: values.practice,
+    // The form's first question, which was collected, emailed to us and then dropped here. The
+    // follow-up is a quote with a payment link in it, and it was queued for everybody: a firm
+    // writing in to say we had named one of its page titles as an attorney got a price six
+    // hours later. Twenty-one firms had that to tell us.
+    request: values.request,
   };
   // Each of these says what it did, because an automation nobody can watch is one nobody
   // trusts. The firm's name goes in the line and its email address does not: the log answers
@@ -143,9 +149,16 @@ async function submit(request: Request, env: Env): Promise<Response> {
     console.error('ack failed', err);
   }
   try {
-    const key = await queueFollowUp(env, enquiry);
-    if (key) console.log(`follow-up for ${values.firm} due ${key.split(':').slice(1, -1).join(':')}`);
-    else console.warn('follow-up not queued: no FOLLOWUPS namespace bound');
+    if (isFreeRequest(values.request)) {
+      // A correction and an appeal are the two things this directory does not charge for, so
+      // the one automated message that names a price is not sent for them. A person answers
+      // these, and the acknowledgement above has already said so.
+      console.log(`follow-up skipped for ${values.firm}: ${values.request}`);
+    } else {
+      const key = await queueFollowUp(env, enquiry);
+      if (key) console.log(`follow-up for ${values.firm} due ${key.split(':').slice(1, -1).join(':')}`);
+      else console.warn('follow-up not queued: no FOLLOWUPS namespace bound');
+    }
   } catch (err) {
     console.error('follow-up queue failed', err);
   }
