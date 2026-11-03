@@ -2,7 +2,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { fitDescription } from '../../lib/seo';
-import { officeLabel } from '../../lib/labels';
+import { locality, officeLabel } from '../../lib/labels';
 import { achievementsFor, marksFor } from '../../lib/achievements';
 import { rosterFor } from '../../lib/roster';
 import Icon from '../../components/Icon.astro';
@@ -468,7 +468,11 @@ const schema = faqPage ? [legalService, faqPage] : legalService;
           <dt>Fee</dt><dd>{d.fee_model}</dd>
           <dt>Consultation</dt><dd>{d.free_consultation ? 'Free' : 'Paid'}</dd>
           <dt>Languages</dt><dd>{d.languages.join(', ')}</dd>
-          {hq && <><dt>Main office</dt><dd>{hq.address.split(',')[0]}, {hq.address.split(',').slice(-1)[0].trim()}</dd></>}
+          {/* locality(), not the last comma-separated part. Google writes its addresses with the
+              country on the end, so the last part is "USA" on 2,638 of the 2,652 offices in the
+              directory and this line read "101 N 12th St UNIT 102, USA" on 1,387 of 1,388
+              profiles. The street and the city is what somebody checking an address wants. */}
+          {hq && <><dt>Main office</dt><dd>{hq.address.split(',')[0]}{locality(hq.address) ? `, ${locality(hq.address)}` : ''}</dd></>}
           <dt>Profile</dt><dd>{d.claimed ? `Managed by the firm since ${d.claimed.claimed_at}` : 'Measured by us, not managed by the firm'}</dd>
         </dl>
         {/* The card has refused to print a total built from too little of the scale since it was
