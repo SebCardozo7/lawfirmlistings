@@ -232,9 +232,12 @@ PRACTICES = {
             r"fianza|antecedentes\s+penales|audiencia", re.I),
     },
     "workers-compensation": {
-        "slug": re.compile(r"work(?:ers?|place)?[-_]?(?:comp\b|compensation|injur)|"
+        # \b before work, because without it "firework" ends in one. Two firms' Fourth of July
+        # posts, "Firework Safety | How To Prevent Firework Injuries" and "Firework Injuries in
+        # San Antonio", were recorded as their workers' compensation practice pages.
+        "slug": re.compile(r"\bwork(?:ers?|place)?[-_]?(?:comp\b|compensation|injur)|"
                            r"injured[-_]?(?:at[-_])?work|on[-_]the[-_]job", re.I),
-        "title": re.compile(r"workers?'?s?\s+comp(?:ensation)?\b|work(?:place)?\s+injur|"
+        "title": re.compile(r"\bworkers?'?s?\s+comp(?:ensation)?\b|\bwork(?:place)?\s+injur|"
                             r"injured\s+(?:at|on\s+the)\s+(?:work|job)", re.I),
         # Present on a page about the practice and absent from one that only mentions it.
         "corroborating": re.compile(
@@ -455,8 +458,8 @@ CORE_WORDS = {
 # statement about what it does; an article is content marketing, and the difference is the whole
 # point of asking.
 NOT_A_PRACTICE_PAGE = re.compile(
-    r"(^|/)(blog|news|articles?|posts?|resources?|library|glossary|dictionary|terms|"
-    r"faqs?|questions?|category|categories|tag|tags|20\d\d)(/|$)|"
+    r"(^|/)(blogs?|news|articles?|posts?|resources?|library|glossary|dictionary|terms|"
+    r"faqs?|questions?|category|categories|tag|tags|videos?|podcasts?|contact|contact[-_]us|intake|20\d\d)(/|$)|"
     r"[-_](?:vs|versus|glossary|faq|guide|checklist)(?:[-_]|$)|"
     # A slug that opens with a question word is the firm answering one, which is the same
     # content-marketing page with a friendlier address: /if-i-was-injured-on-the-job-do-i.
@@ -476,23 +479,92 @@ ARTICLE_TITLE = re.compile(
     # Multi-Vehicle Collisions" is a real page on a real firm's site and is not that firm
     # telling anybody what it does.
     r"^\s*(?:what|how|why|when|can|do|does|should|is|are|will|understanding|"
-    r"everything|tips|mistakes|signs|reasons|steps)\b|"
-    r"\b(?:glossary|faq|frequently asked|blog|guide to|checklist|explained|"
+    r"everything|tips|mistakes|signs|reasons|steps|"
+    # The same explainer with a gerund for a first word. "Preventing bedsores" was accepted as
+    # Sarkisian Sarkisian & Associates' nursing home practice page: it is a blog post, and it
+    # won the ranking because every other word in its address names the practice.
+    r"preventing|avoiding|recognizing|recognising|protecting|choosing|dealing|coping|"
+    r"filing|proving|spotting|reporting|knowing|staying|keeping|"
+    r"dissecting|navigating|examining|exploring|breaking|"
+    r"common|top|ways|myths|questions)\b|"
+    # "guide to" missed "Denied Workers' Comp Claims In Illinois: 2026 Smart Guide" and the
+    # Spanish "una guia integral", and the whole tell of "Truck Accidents: What to do After
+    # Impact" is its second clause.
+    r"\bwhat to do\b|\bmay lead to\b|\bgu[ií]as?\b|"
+    r"\b(?:glossary|faqs?|frequently asked|blog|guides?|checklist|explained|"
     # A WordPress category archive and a resources hub both title themselves for the practice
     # and are not a statement that the firm does the work. Three Baltimore and Lakeland
     # candidates were accepted on "Personal Injury Archives", "Personal Injury Resources" and
     # "Personal Injury Statistics", which are a listing, a reading list and a page of numbers.
-    r"archives?|resources?|statistics|library|"
+    r"archives?|categor(?:y|ies)|resources?|statistics|library|intake form|case intake|"
     r"everything you need)\b", re.I)
 
 
+# Where a sitemap lives when robots.txt does not say. /sitemap.xml is the convention and it is
+# not the only one: Yoast, which runs on a large share of law firm sites, publishes
+# /sitemap_index.xml and serves 404 at /sitemap.xml, and WordPress itself has served
+# /wp-sitemap.xml since 5.5. Asking only the first address and taking the 404 as an answer meant
+# 189 of the 1,388 published firms were read from their home page links alone.
+#
+# This is the belt to crawl_public.fetch_plain's braces. robots.txt names a sitemap for 1,191 of
+# those firms and was never read, so the guess was doing all the work and guessing one address;
+# now the declaration is read first and this list is what remains for the 149 hosts that publish
+# a sitemap and do not mention it. Forty-eight firms have no sitemap at any address, and for
+# those the home page's links are the whole of what the site tells a crawler.
+SITEMAP_FALLBACKS = ("/sitemap.xml", "/sitemap_index.xml", "/sitemap-index.xml",
+                     "/wp-sitemap.xml", "/sitemap1.xml")
+
+
+# A practice page's title is a label. An article's title is a sentence.
+#
+# ARTICLE_TITLE catches the openers one at a time and a sample of forty-five answers still held
+# four pages like "Fatal Workplace Accidents in Chicago: When a Wrongful Death Claim Goes
+# Beyond Comp" and "Nursing Home Neglect: Signs Every Family Should Know". Enumerating those is
+# a losing game, so this asks the shape of the thing instead: a page the firm published to say
+# what it does names the role, or it is short enough to be a name rather than a claim.
+#
+# The suffix after a pipe or a dash is the firm's own name and is not part of the title's shape,
+# so the word count is taken before it. Spanish practice pages are wordier than English ones and
+# frequently name no role at all, which is why their openers are listed: "Reclamos por Muerte
+# por Negligencia en Nueva York" is a practice page and eight words long.
+LABEL_ROLE = re.compile(r"\b(?:lawyer|lawyers|attorney|attorneys|abogad\w+|counsel|"
+                        r"law\s+firm|law\s+offices?|law\s+group|bufete)\b", re.I)
+LABEL_OPENER = re.compile(r"^\s*(?:abogad\w+|reclamos?|accidentes?|demandas?|negligencia|"
+                          r"lesiones|muerte|compensaci[oó]n)\b", re.I)
+
+
+def looks_like_a_label(text):
+    head = re.split(r"\s*[|–—·]\s*|\s+-\s+", text or "")[0].strip()
+    if not head:
+        return False
+    if LABEL_ROLE.search(text) or LABEL_OPENER.match(head):
+        return True
+    # Six words and no sentence punctuation: "Florida Medical Malpractice", "Slip And Fall
+    # Accidents", "Practice Areas". A colon or an exclamation is somebody writing a headline.
+    if re.search(r"[:!]", head):
+        return False
+    # An ampersand is not a word. "Car & Auto Accidents in New York" is the name of a page.
+    words = [w for w in head.split() if re.search(r"[0-9a-z]", w, re.I)]
+    # A question mark usually opens a headline and sometimes is the whole name of the page:
+    # "Injured at Work?" is what one firm calls its workers' compensation page, while "Injured
+    # at Work? How to Get NY Workers Compensation" is an article on another's.
+    if "?" in head and len(words) > 4:
+        return False
+    return len(words) <= 6
+
+
 def sitemap_urls(origin, robots, rp):
-    """URLs from the sitemaps robots.txt declares, plus the conventional location."""
+    """URLs from the sitemaps robots.txt declares, or from the conventional locations."""
     seen, out = set(), []
-    todo = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "") or [origin + "/sitemap.xml"]
-    while todo and len(out) < 4000:
+    declared = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "")
+    guesses = [] if declared else [origin + path for path in SITEMAP_FALLBACKS]
+    todo = declared or list(guesses)
+    # A sitemap index can list a dozen children, and five of those are now guesses that may be
+    # spent before the real one answers. The old cap of 12 would have been reached by a Yoast
+    # site with seven children before it read any of them.
+    while todo and len(out) < 4000 and len(seen) <= 32:
         url = todo.pop(0)
-        if url in seen or len(seen) > 12:
+        if url in seen:
             continue
         seen.add(url)
         if not rp.can_fetch("*", url):
@@ -503,6 +575,9 @@ def sitemap_urls(origin, robots, rp):
             continue
         # A sitemap index points at more sitemaps; both are <loc> lists.
         locs = [unescape(m) for m in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body, re.I)]
+        if locs and url in guesses:
+            # One conventional address answered, so stop asking the host for the other four.
+            todo = [u for u in todo if u not in guesses]
         for loc in locs:
             (todo if loc.lower().endswith(".xml") or "sitemap" in loc.lower() else out).append(loc)
     return out
@@ -612,8 +687,19 @@ def confirm(url, spec, rp):
     # The address is not always the tell. One firm's comparison piece lives at
     # /construction-site-accident-lawyer/workers-comp-personal-injury/, which no path rule would
     # catch, and announces itself in the title: "Workers Comp vs Personal Injury".
-    if ARTICLE_TITLE.search(title) or ARTICLE_TITLE.search(heading):
+    # The <title> is the page's statement of what it is; an <h1> is often a marketing line on a
+    # real practice page. Visionary Law Group's workers' compensation page is titled "Workers
+    # Compensation" and headed "Navigating Workers' Compensation in California with Visionary
+    # Law Group LLP", and letting the heading condemn it threw the page away. So a heading can
+    # confirm a page and only condemn one whose title does not already name the practice
+    # plainly.
+    titled = spec["title"].search(title) and looks_like_a_label(title) \
+        and not ARTICLE_TITLE.search(title)
+    if ARTICLE_TITLE.search(title) or (ARTICLE_TITLE.search(heading) and not titled):
         return None, "the title is an article's, not a practice page's"
+
+    if not titled and not (looks_like_a_label(title) or looks_like_a_label(heading)):
+        return None, "the title reads as a headline rather than as the name of a page"
 
     text = strip_tags(html)
     if not spec["corroborating"].search(text):
@@ -703,16 +789,40 @@ def examine(domain, spec, site=None):
         return None, "no page whose address names the practice (%s)" % where
 
     # A site with dozens of matching URLs has a page per borough and per injury type as well as
-    # the practice page. Rank by how much of the final segment is not the practice itself, then
-    # by depth: /workers-compensation beats /workers-comp-glossary beats /bronx/workers-comp.
+    # the practice page. Rank by how much of the address is not the practice itself, then by
+    # depth: /workers-compensation beats /workers-comp-glossary beats /bronx/workers-comp.
+    #
+    # The last segment and the ones above it are counted separately, and that separation is the
+    # whole of this function. Counting every segment together charged a page for the folder it
+    # sits in, so /personal-injury/slip-and-fall/ scored worse than /portage-slip-and-fall-lawyer/
+    # and worse than four other town variants, and with only the first eight candidates tried the
+    # real practice page was never fetched. Sarkisian Sarkisian & Associates publishes
+    # /personal-injury/slip-and-fall/, /personal-injury/nursing-home-accidents/ and
+    # /motor-vehicle-accidents/truck-collisions/, and was recorded as publishing none of the
+    # three. A folder named for the area of law is the strongest sign a page is the practice
+    # page rather than an article about it; it was the one thing being punished.
+    # The practice is cut out of the segment before anything is counted, rather than each word
+    # being offered to the slug pattern on its own. Those patterns are phrases: "workers" does
+    # not match the workers' compensation slug and neither does "compensation", so
+    # /workers-compensation-lawyer/ was charged two extra words and lost to its own child
+    # /workers-compensation-lawyer/videos/, which was charged one. Every multi-word practice had
+    # the same hole, and slip and fall had it twice.
+    def extras(segment):
+        rest = spec["slug"].sub(" ", segment.lower())
+        # Cutting the phrase out leaves the plural behind: the motorcycle slug ends at
+        # "accident", so "motorcycle-accidents" keeps an "s". One letter is not a word.
+        return [t for t in re.split(r"[-_.\s]+", rest)
+                if len(t) > 1 and t not in CORE_WORDS and not t.isdigit()]
+
     def rank(url):
         parts = [p for p in urllib.parse.urlparse(url).path.strip("/").split("/") if p]
-        # Every segment, not only the last: /bronx/workers-compensation is a borough variant
-        # and its final segment alone looks like the practice page itself.
-        tokens = [t for t in re.split(r"[-_./]+", "/".join(parts).lower()) if t]
-        extra = [t for t in tokens
-                 if t not in CORE_WORDS and not spec["slug"].search(t) and not t.isdigit()]
-        return (len(extra), len(parts), len(url))
+        if not parts:
+            return (99, 99, 0, len(url))
+        # Still every segment, because /bronx/workers-compensation is a borough variant and its
+        # final segment alone looks like the practice page itself. A parent only breaks the tie.
+        tail = len(extras(parts[-1]))
+        above = sum(len(extras(seg)) for seg in parts[:-1])
+        return (tail, above, len(parts), len(url))
 
     candidates.sort(key=rank)
     if len(candidates) > MENU_DENSITY:
