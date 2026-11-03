@@ -200,7 +200,7 @@ jobs:
 
       - name: Build, and check what the build says
         run: |
-          npm ci
+          npm ci --omit=dev
           npm run build
           node scripts/audit_seo.mjs
           python scripts/audit_published.py | tee /tmp/audit.log
