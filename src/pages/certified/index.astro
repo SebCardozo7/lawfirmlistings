@@ -1,0 +1,105 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import FirmCard from '../../components/FirmCard.astro';
+import RankedRows from '../../components/RankedRows.astro';
+import ListYourFirmCta from '../../components/ListYourFirmCta.astro';
+
+/**
+ * Every certified firm, which the home page used to be.
+ *
+ * The home page handed its three column grid all 216 of them, so the front of the site was
+ * seventy-two rows of law firms under a heading saying "certified this month". The grid is nine
+ * now and this page is where the rest went.
+ *
+ * Cards for the first nine and rows for the other two hundred, which is the same division the
+ * city pages make and for the same reason: a card is a recommendation and two hundred cards is
+ * a scroll.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status === 'certified' && !!f.data.score);
+
+const ranked = [...firms].sort((a, b) =>
+  (b.data.score!.total - a.data.score!.total) || a.data.name.localeCompare(b.data.name));
+
+const TIERS = ['Elite', 'Distinguished', 'Certified'];
+const groups = TIERS.map(tier => ({
+  tier,
+  firms: ranked.filter(f => f.data.score!.tier === tier),
+})).filter(g => g.firms.length);
+
+const cities = new Set(ranked.map(f => f.data.market.city_slug)).size;
+const states = new Set(ranked.map(f => f.data.market.state)).size;
+const highest = ranked[0]?.data.score?.total ?? 0;
+const logoVariants = ['', 'l2', 'l3'];
+
+// "Updated" is the newest measurement behind these scores, not the day the page was built.
+const computed = ranked.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+const updated = computed.length
+  ? new Date(computed.sort().at(-1)!).toLocaleDateString('en-US',
+      { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+---
+<Base title="Every LFL Certified law firm, 2026"
+      description="Every US law firm that holds the 2026 LFL certification, ranked by score. Measured from public records, and no firm can buy a point."
+      nav="cities">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs"><li><a href="/">Home</a></li><li aria-current="page">Certified firms</li></ol>
+      <span class="eyebrow">The 2026 list</span>
+      <h1>Every firm that holds the certification</h1>
+      <p class="lede">{ranked.length} firms across {cities} cities have cleared every eligibility
+        gate and scored high enough to be certified. The order is the score, the score is
+        computed from public records, and nothing on this page was bought.</p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{ranked.length}</b><span>Certified firms</span></div>
+      <div class="fact"><b class="num">{cities}</b><span>Cities</span></div>
+      <div class="fact"><b class="num">{states}</b><span>States</span></div>
+      <div class="fact"><b class="num">{highest}</b><span>Highest score</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">The top of the list</span>
+        <h2 style="margin-top:12px">The nine highest-scoring certified firms</h2>
+        <p>Across every city and practice area in the directory. A firm appears here on what it
+          publishes and what the public record says about it, which is why the order changes
+          when a firm changes.</p>
+      </div>
+      <a class="link" href="/methodology/">How the score is measured</a>
+    </div>
+    <div class="firm-list">
+      {ranked.slice(0, 9).map((firm, i) => (
+        <FirmCard firm={firm} rank={i + 1} logoVariant={logoVariants[i % logoVariants.length]} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="results-head">
+      <h2>All {ranked.length}, by tier</h2>
+      <span class="num">{updated ? `Ranked by the Certification Score, updated ${updated}` : 'Ranked by the Certification Score'}</span>
+    </div>
+    {groups.map(g => (
+      <div class="rank-group">
+        <h4><span>{g.tier}</span><span class="num">{g.firms.length} {g.firms.length === 1 ? 'firm' : 'firms'}</span></h4>
+        <RankedRows firms={g.firms} showCity={true} />
+      </div>
+    ))}
+    <p class="muted" style="font-size:.9rem;margin-top:22px">
+      Certification is not the top of the scale. <a class="link" href="/badge/">Every firm here
+      has a badge it can display</a>, and the tier on it changes when the score does.
+    </p>
+  </div>
+</section>
+<ListYourFirmCta />
+</Base>
