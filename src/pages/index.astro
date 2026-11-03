@@ -177,7 +177,9 @@ const searchIndex = {
     <div class="hero-preview" aria-hidden="true">
       {lead && (
         <div class="glass">
-          <div class="firm"><div class="avatar">{lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {officeLabel(leadHq?.label, leadHq?.address, lead.data.name)}, {lead.data.market.state}</span></div></div>
+          <div class="firm"><div class={lead.data.logo ? 'avatar has-logo' : 'avatar'}>{lead.data.logo
+            ? <img src={lead.data.logo.file} alt="" width="44" height="44" loading="eager" decoding="async" />
+            : lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {officeLabel(leadHq?.label, leadHq?.address, lead.data.name)}, {lead.data.market.state}</span></div></div>
           {leadGoogle && (
             <div class="stars">{'★'.repeat(Math.round(leadGoogle.rating))} <small>{leadGoogle.rating.toFixed(1)} · {leadGoogle.count_label} reviews{leadSelfReported ? ', as reported by the firm' : ''}</small></div>
           )}
@@ -306,17 +308,28 @@ const searchIndex = {
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <div><span class="eyebrow">Certified this month</span><h2 style="margin-top:12px">Firms that just earned the 2026 certification</h2><p>New certifications are published on the first business day of each month, after licensure, discipline and results checks are complete.</p></div>
-      <a class="link" href="/practice-areas/personal-injury/">View all rankings</a>
+      <div><span class="eyebrow">Certified</span><h2 style="margin-top:12px">The highest-scoring certified firms</h2><p>{certified.length} firms hold the 2026 certification. These are the nine that score highest, across every city and practice area in the directory.</p></div>
+      <a class="link" href="/certified/">See all {certified.length} certified firms</a>
     </div>
     <div class="feat-grid">
-      {certified.map((f, i) => {
+      {/* Nine. This grid was handed the whole certified list, so the front page of the site was
+          seventy-two rows of law firms under a heading promising the ones certified this month.
+          The rest of them live at /certified/. */}
+      {certified.slice(0, 9).map((f, i) => {
         const pr = f.data.practices.find(x => x.primary) ?? f.data.practices[0];
         const g = f.data.reviews.google;
         const self = g ? /as reported by the firm/i.test(g.source) : false;
         return (
           <article class="feat">
-            <div class="top"><div class={logoVariants[i % logoVariants.length] ? `firm-logo ${logoVariants[i % logoVariants.length]}` : 'firm-logo'}>{f.data.initials}</div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
+            <div class="top">{/* The firm's own mark where we have one, which on this row is all six of
+                them. The home page was still drawing initials while the same firm's card in
+                every ranking showed its logo: 1,310 of the 1,388 published firms have one.
+                alt is empty on purpose, because the name is the next thing read. */}
+              <div class={f.data.logo ? 'firm-logo has-logo' : (logoVariants[i % logoVariants.length] ? `firm-logo ${logoVariants[i % logoVariants.length]}` : 'firm-logo')}>
+                {f.data.logo
+                  ? <img src={f.data.logo.file} alt="" width="68" height="68" loading="lazy" decoding="async" />
+                  : f.data.initials}
+              </div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
             <div><h3><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></h3><span class="where">{pr?.name} · {f.data.market.city}, {f.data.market.state}</span></div>
             <p>{f.data.about[0] ?? f.data.tagline}</p>
             <div class="foot">
