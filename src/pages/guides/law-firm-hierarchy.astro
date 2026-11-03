@@ -1,0 +1,465 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+import { classify } from '../../lib/roster';
+
+/**
+ * What a law firm's own team page says about who works there, counted across the directory.
+ *
+ * Every page ranking for "law firm hierarchy" draws the same ladder: equity partner, non-equity
+ * partner, senior associate, associate, of counsel, paralegal. Ten of them, two written about
+ * the United Kingdom, all of them career advice for people who want a job at a large commercial
+ * firm. Not one has looked at a law firm's roster. We hold 1,008 of them.
+ *
+ * The fields, and the script behind each, because two fields that sound alike have put a false
+ * sentence on a live page here before:
+ *
+ *   attorneys[].role         The title the firm printed beside the name, in the firm's own
+ *                            wording. scripts/crawl_attorneys.py, either lifted from the bio
+ *                            page or read from the roster listing by `role_beside`.
+ *   attorneys[].role_source  Where that title came from, and the ONLY way to tell a real title
+ *                            from the crawler's old default. An earlier crawl wrote
+ *                            role: "Attorney" whenever the firm printed nothing, so the role
+ *                            string alone cannot be trusted: the literal value
+ *                            "not stated by the firm" is what records that the firm printed
+ *                            none. Every count below tests the source, never the role alone.
+ *                            See scripts/repair_roles.py, which exists because a profile once
+ *                            asserted twenty-seven attorneys at a firm that named ten.
+ *   attorneys[].bar_number   OUR match against a state attorney register, not something the
+ *                            firm publishes. It is not evidence about the firm's page and it is
+ *                            never counted here as a title.
+ *
+ * The classification is imported from src/lib/roster.ts rather than rebuilt, so this page and
+ * every firm profile can never disagree about who a firm presents as a lawyer. scripts/score.py
+ * holds the same split in roster_roles.py, and A2 and A6 are scored through it.
+ *
+ * The reach limit, stated on the page and worth repeating here. A title our reader does not
+ * recognise reads as no title, so "no title" is partly a measurement of us. ROSTER_ROLE in
+ * crawl_attorneys.py says so itself: "deliberately short: a word not on this list is not a role
+ * we will assert." That is why the central figure is reported twice, once across every firm
+ * with a roster and once inside the 487 firms whose pages demonstrably did yield a title, where
+ * the crawler's reach is no longer the explanation for the silence beside the next name.
+ *
+ * Nothing on this page says that an untitled person is not a lawyer. The record cannot support
+ * it and roster.ts does not claim it either: that person is "named by the firm without a role".
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+type Firm = typeof firms[number];
+type Person = Firm['data']['attorneys'][number];
+
+const num = (n: number) => n.toLocaleString('en-US');
+const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
+const median = (xs: number[]) => {
+  if (!xs.length) return null;
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
+// The literal the crawler writes where the firm printed no role. Checked against the source and
+// never against the role string, for the reason in the header.
+const NOT_STATED = 'not stated by the firm';
+const titled = (p: Person) => Boolean(p.role && p.role_source !== NOT_STATED);
+
+const withRoster = firms.filter(f => f.data.attorneys.length > 0);
+const noRoster = firms.filter(f => f.data.attorneys.length === 0);
+const people = withRoster.flatMap(f => f.data.attorneys);
+const titledPeople = people.filter(titled);
+const untitledPeople = people.filter(p => !titled(p));
+
+// The control cohort: firms whose pages yielded at least one title, so a missing title beside
+// the next name on the same site is the firm's silence rather than our reader's reach.
+const printing = withRoster.filter(f => f.data.attorneys.some(titled));
+const silent = withRoster.filter(f => !f.data.attorneys.some(titled));
+const printingPeople = printing.flatMap(f => f.data.attorneys);
+const printingTitled = printingPeople.filter(titled);
+const printingUntitled = printingPeople.filter(p => !titled(p));
+
+// Who the firm presents as a lawyer, through the same function the profiles use.
+const classed = (role: 'attorney' | 'colleague' | 'staff') =>
+  people.filter(p => classify(p) === role).length;
+const asAttorney = classed('attorney');
+const asColleague = classed('colleague');
+const asStaff = classed('staff');
+const namesNobodyAsAttorney = withRoster.filter(
+  f => !f.data.attorneys.some(p => classify(p) === 'attorney')).length;
+
+// The ranks, as words a firm prints. Written out rather than derived, because the point of the
+// list is to test the ladder the explainers draw against what firms publish, so the rungs have
+// to be named in advance. Each is counted as firms printing it at least once, out of the firms
+// that print any title at all, which is the denominator a firm printing nothing cannot flatter.
+const RANKS: { label: string; re: RegExp; note?: string }[] = [
+  { label: 'Attorney, and nothing more', re: /^attorneys?$/i, note: 'no rank attached' },
+  { label: 'Partner', re: /\bpartner\b/i },
+  { label: 'Founder or founding', re: /\bfound(er|ing)\b/i },
+  { label: 'Associate', re: /\bassociate\b/i },
+  { label: 'Of counsel', re: /\bof counsel\b/i },
+  { label: 'Paralegal', re: /\bparalegal\b/i, note: 'named as not a lawyer' },
+  { label: 'Shareholder', re: /\bshareholder\b/i },
+];
+const firmsPrinting = (re: RegExp) =>
+  printing.filter(f => f.data.attorneys.some(p => titled(p) && re.test(p.role!))).length;
+const rankRows = RANKS.map(r => ({
+  label: r.label,
+  note: r.note ? `${r.note} · ${firmsPrinting(r.re)} firms` : `${firmsPrinting(r.re)} firms`,
+  value: pct(firmsPrinting(r.re), printing.length),
+  emphasis: r.re.source === '^attorneys?$',
+}));
+
+// The ladder itself: a firm showing a rung above and a rung below. Shareholder counts as the
+// partner rung because it is what a professional corporation calls one.
+const SENIOR = /\bpartner\b|\bshareholder\b/i;
+const JUNIOR = /\bassociate\b/i;
+const showsLadder = printing.filter(f =>
+  f.data.attorneys.some(p => titled(p) && SENIOR.test(p.role!)) &&
+  f.data.attorneys.some(p => titled(p) && JUNIOR.test(p.role!)));
+
+// How much of a firm's own roster carries a title. A distribution, because the mean hides the
+// shape: the tall band is zero and that is the argument.
+// Each label is one line and none of them carries a note. `.chart-col` is bottom-aligned, so a
+// label that wraps to two lines while its neighbours wrap to one lifts that column's value out
+// of the row at phone width. The zero band had a note reading "no rank published" and did
+// exactly that at 390px; the legend already says which band is which, so the note was redundant
+// as well as broken. Caught in the rendered chart, not in the build.
+const SHARE_BANDS = [
+  { label: 'None of them', lo: 0, hi: 0 },
+  { label: 'Under half', lo: 0.0001, hi: 0.4999 },
+  { label: 'Half or more', lo: 0.5, hi: 0.9999 },
+  { label: 'Every one', lo: 1, hi: 1 },
+];
+const shareColumns = SHARE_BANDS.map(b => ({
+  label: b.label,
+  emphasis: b.hi === 0,
+  value: withRoster.filter(f => {
+    const s = f.data.attorneys.filter(titled).length / f.data.attorneys.length;
+    return s >= b.lo && s <= b.hi;
+  }).length,
+}));
+
+// By market, as a share, because the markets hold 13 to 188 firms and a bar drawn from the raw
+// count would make the largest one look like the worst. Eight largest by firms with a roster,
+// chosen by size rather than by a cutoff so a twentieth market opening cannot turn this into a
+// table. Each label links its city hub.
+const byMarket = new Map<string, { city: string; slug: string; n: number; t: number }>();
+for (const f of withRoster) {
+  const k = f.data.market.city_slug;
+  const row = byMarket.get(k) ?? { city: f.data.market.city, slug: k, n: 0, t: 0 };
+  row.n += 1;
+  if (f.data.attorneys.some(titled)) row.t += 1;
+  byMarket.set(k, row);
+}
+const marketRows = [...byMarket.values()]
+  .sort((a, b) => b.n - a.n || a.slug.localeCompare(b.slug))
+  .slice(0, 8)
+  .sort((a, b) => b.t / b.n - a.t / a.n || a.slug.localeCompare(b.slug))
+  .map(m => ({
+    label: m.city,
+    href: `/cities/${m.slug}/`,
+    value: pct(m.t, m.n),
+    note: `${m.t} of ${m.n}`,
+  }));
+const leadMarket = marketRows[0];
+const lastMarket = marketRows[marketRows.length - 1];
+
+// Does the habit predict anything. Our own scale against Google's rating, which is the only
+// measure on this page that comes from clients rather than from a firm's own page.
+const scoreOf = (xs: Firm[]) => median(xs.map(f => f.data.score?.total).filter((n): n is number => n != null));
+const ratingOf = (xs: Firm[]) => mean(xs.map(f => f.data.reviews.google?.rating).filter((n): n is number => n != null));
+const trafficOf = (xs: Firm[]) => median(xs.map(f => f.data.digital.ahrefs?.org_traffic).filter((n): n is number => n != null));
+const reviewsOf = (xs: Firm[]) => median(xs.map(f => f.data.digital.places?.review_count_total).filter((n): n is number => n != null));
+
+const pScore = scoreOf(printing) ?? 0;
+const sScore = scoreOf(silent) ?? 0;
+const nScore = scoreOf(noRoster) ?? 0;
+const pRating = ratingOf(printing) ?? 0;
+const sRating = ratingOf(silent) ?? 0;
+const nRating = ratingOf(noRoster) ?? 0;
+const ratingGap = Math.abs(pRating - sRating);
+
+const signalRows = [
+  { label: 'Certification score, firms printing a rank', value: pScore, display: `${pScore} of 100`, emphasis: true },
+  { label: 'Certification score, firms printing none', value: sScore, display: `${sScore} of 100`, emphasis: true },
+  { label: 'Google rating, firms printing a rank', value: (pRating / 5) * 100, display: `${pRating.toFixed(2)} of 5` },
+  { label: 'Google rating, firms printing none', value: (sRating / 5) * 100, display: `${sRating.toFixed(2)} of 5` },
+];
+
+// The control that matters most: a firm with thirty people has more chances to print a title
+// than a firm with two, and bigger firms rate differently. Hold the headcount still.
+const SIZE_BANDS = [
+  { label: '1 to 2 people', lo: 1, hi: 2 },
+  { label: '3 to 5', lo: 3, hi: 5 },
+  { label: '6 to 10', lo: 6, hi: 10 },
+  { label: '11 or more', lo: 11, hi: Infinity },
+];
+const sizeRows = SIZE_BANDS.map(b => {
+  const inBand = (xs: Firm[]) =>
+    xs.filter(f => f.data.attorneys.length >= b.lo && f.data.attorneys.length <= b.hi);
+  const p = inBand(printing);
+  const s = inBand(silent);
+  return {
+    label: b.label,
+    pn: p.length, sn: s.length,
+    pr: ratingOf(p), sr: ratingOf(s),
+    ps: scoreOf(p), ss: scoreOf(s),
+  };
+});
+const bandsHoldingRating = sizeRows.filter(r => r.pr != null && r.sr != null && Math.abs(r.pr! - r.sr!) < 0.1).length;
+
+// And the market control, since a market is a different mix of firms as well as a different city.
+const marketPairs = [...byMarket.keys()]
+  .map(slug => {
+    const here = withRoster.filter(f => f.data.market.city_slug === slug);
+    const p = here.filter(f => f.data.attorneys.some(titled));
+    const s = here.filter(f => !f.data.attorneys.some(titled));
+    return { slug, p, s, ps: scoreOf(p), ss: scoreOf(s) };
+  })
+  .filter(m => m.p.length >= 8 && m.s.length >= 8);
+const marketsHigher = marketPairs.filter(m => (m.ps ?? 0) > (m.ss ?? 0)).length;
+
+// What our own scale does with a roster, and how little of the directory it reaches.
+const subOf = (f: Firm, code: string) => f.data.score?.pillars.A.subs.find(s => s.code === code);
+const sourceCount = (code: string, source: string) =>
+  firms.filter(f => subOf(f, code)?.source === source).length;
+const a2Scored = sourceCount('A2', 'registry');
+const a6Scored = sourceCount('A6', 'registry');
+const a2NoRegister = sourceCount('A2', 'no queryable source');
+const a2NoRoster = sourceCount('A2', 'no roster published');
+const a6NoRoster = sourceCount('A6', 'no roster published');
+// Declared weights, read from the firms rather than from the script, so this page cannot assert
+// a maximum the engine does not actually award. The largest maximum any firm was assessed on.
+const maxOf = (code: string) => Math.max(0, ...firms.map(f => subOf(f, code)?.max ?? 0));
+const a2Max = maxOf('A2');
+const a6Max = maxOf('A6');
+const rosterPoints = a2Max + a6Max;
+const openRegisterStates = [...new Set(
+  firms.filter(f => subOf(f, 'A2')?.source === 'registry' || subOf(f, 'A6')?.source === 'registry')
+    .map(f => f.data.market.state))].sort();
+const allStates = [...new Set(firms.map(f => f.data.market.state))];
+
+// Our own fault, computed rather than described: a title the firm did print that our own reader
+// cannot act on, so the person falls through to "named without a role" anyway. No regex is
+// copied here; the test is the behaviour of classify() itself, which is the thing at fault.
+const unreadableTitles = people.filter(p => titled(p) && !p.bar_number && classify(p) === 'colleague');
+const unreadableFirms = withRoster.filter(
+  f => f.data.attorneys.some(p => titled(p) && !p.bar_number && classify(p) === 'colleague')).length;
+// One word in that pile is a real title in the wrong language rather than a parsing artefact.
+const SPANISH_FOR_LAWYER = /^abogad[oa]s?$/i;
+const spanishTitles = unreadableTitles.filter(p => SPANISH_FOR_LAWYER.test(p.role!)).length;
+
+// Exemplars, picked by computation and tie-broken on the slug so the page re-picks its own
+// illustration as the data moves. The link targets are derived from the firms chosen, not typed.
+const biggest = (xs: Firm[]) =>
+  [...xs].sort((a, b) => b.data.attorneys.length - a.data.attorneys.length
+    || a.data.slug.localeCompare(b.data.slug))[0];
+const biggestSilent = biggest(silent);
+const biggestLadder = biggest(showsLadder);
+// One link per market, deduplicated on the path, because a sentence that can name two markets
+// has to be able to link two.
+const exemplarMarkets = [...new Map(
+  [biggestSilent, biggestLadder].filter(Boolean)
+    .map(f => [f.data.market.city_slug, { slug: f.data.market.city_slug, city: f.data.market.city }]),
+).values()];
+
+const title = `Law Firm Hierarchy: ${num(silent.length)} of ${num(withRoster.length)} Firms Publish No Rank at All`;
+const description = 'Every guide to law firm hierarchy draws the same ladder. We read the team page of every firm in this directory and counted who actually publishes one.';
+
+// The figures are a snapshot, which is what lets a computed count sit in the title. The roster
+// read itself carries no date on any record, so this names the source and says so rather than
+// borrowing a date from a different measurement. See the limits section.
+const snapshot = [...firms].map(f => f.data.score?.computed_at).filter(Boolean).sort().at(-1) ?? '';
+---
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`every published firm's own roster pages; the roster read carries no date, scored ${snapshot}`}
+      image="/og/titles.png"
+      imageAlt="A grid of staff cards, each with a name, and the rank under most of them left as an empty dashed outline">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Law firm hierarchy</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Study · What a firm's own team page says</span>
+    <h1>{title}</h1>
+    <p class="lede">Every page explaining law firm hierarchy draws the same ladder, and every one of them draws it from the inside of a large commercial firm. We read the team pages of the {num(withRoster.length)} firms in this directory that publish one, and counted the {num(people.length)} people they name. <b>{num(untitledPeople.length)}</b> of those names arrive with no job title beside them, and <b>{num(silent.length)}</b> firms print no title beside anybody.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>8 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="titles" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#page">What a team page says</a></li>
+      <li><a href="#ladder">The ladder, and who publishes one</a></li>
+      <li><a href="#predict">Whether a rank predicts anything</a></li>
+      <li><a href="#score">What our own score does with it</a></li>
+      <li><a href="#limits">What this does not measure</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read from the team pages of ${num(withRoster.length)} law firms in ${allStates.length} states, naming ${num(people.length)} people between them.`}
+      items={[
+        `<b>${num(silent.length)} of ${num(withRoster.length)}</b> firms that publish a roster print no job title beside any of the people on it.`,
+        `Only <b>${num(showsLadder.length)}</b> firms publish both a partner and an associate, which is the two-rung ladder every guide to law firm hierarchy is built on.`,
+        `Among the <b>${num(printing.length)}</b> firms whose pages did give us a title, <b>${num(printingUntitled.length)} of ${num(printingPeople.length)}</b> named people still arrive without one, so the silence is not only our reading.`,
+        `Firms that print ranks carry a median certification score of <b>${pScore}</b> against <b>${sScore}</b>, while their clients rate them <b>${ratingGap.toFixed(2)} of a star</b> apart.`,
+        `<b>${rosterPoints} of the 100 points</b> in our own scale are read off a roster, and in ${allStates.length - openRegisterStates.length} of the ${allStates.length} states we cover neither sub-factor can be scored for anybody.`,
+      ]}
+    />
+    <StatRow
+      stats={[
+        { value: num(silent.length), label: 'firms name their people and rank none of them', note: `out of ${num(withRoster.length)} publishing a roster`, emphasis: true },
+        { value: num(untitledPeople.length), label: 'named people carry no job title we could read', note: `out of ${num(people.length)}` },
+        { value: num(showsLadder.length), label: 'firms publish both a partner and an associate', note: `out of ${num(withRoster.length)} with a roster` },
+        { value: num(noRoster.length), label: 'firms publish no roster at all', note: `out of ${num(firms.length)} in the directory` },
+      ]}
+      source={`Read from each firm's own attorney and team pages, across ${num(firms.length)} published firms.`}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Search for law firm hierarchy and you get a ladder. Equity partner, non-equity partner, counsel, senior associate, associate, paralegal, with a chart. It is accurate about the firms it describes, which are large commercial firms, and the pages describing it are written for people who want a job at one.</p>
+    <p>Nobody on that search result has looked at a law firm's website. <b>The question a client actually has is narrower and nobody answers it: when I open this firm's team page, will it tell me who these people are?</b></p>
+    <p>So we counted. For every firm in the directory we read the pages where it names its own people, and recorded two things about each name: the title the firm printed beside it, in the firm's own wording, and where on the site that title came from. {num(withRoster.length)} of the {num(firms.length)} published firms name somebody. {num(noRoster.length)} name nobody at all.</p>
+    <p>Those two fields are separate on purpose, and the second one is load bearing. An earlier version of our crawler wrote the word "Attorney" into the role whenever a firm printed nothing, which meant the record asserted a credential the firm had never claimed. The field recording that the firm had said nothing is the only thing that tells the two apart, so every count on this page tests it rather than the title string.</p>
+    <p>One name goes in one of three places, and the split is the same one each firm profile publishes.</p>
+    <StackBar
+      heading={`Who a law firm's team page says its people are, across ${num(people.length)} named people`}
+      unit="the people named"
+      segments={[
+        { label: 'Named with a lawyer’s title, or matched to a state register', value: asAttorney },
+        { label: 'Named with no title we could read', value: asColleague },
+        { label: 'Named in a role that is not a lawyer’s', value: asStaff },
+      ]}
+      caption={`Part to whole of one population. The middle band is not a claim that those ${num(asColleague)} people are not lawyers: it is the firm naming somebody and printing nothing beside the name, which is a fact about the page rather than about the person.`}
+    />
+    <p>{num(asAttorney)} of the {num(people.length)} names carry either a lawyer's title or a registration we matched in a state register. {num(asStaff)} carry a title that is not a lawyer's: paralegal, case manager, intake, legal assistant. <b>The largest group is the middle one, and it is larger than the other two together.</b></p>
+    <p>That matters more than it sounds. {num(namesNobodyAsAttorney)} of the {num(withRoster.length)} firms with a roster name people and give us nothing that identifies any of them as a lawyer, which means the page a client would use to check who is handling the case does not do that job.</p>
+
+    <h2 id="page">What a team page says</h2>
+    <p>Split by firm rather than by person, the shape is sharper. The question is what share of its own people a firm bothers to rank.</p>
+    <ColumnChart
+      heading={`How many of its named people a firm prints a title beside, across ${num(withRoster.length)} firms`}
+      columns={shareColumns}
+      emphasisLabel="Firms that rank nobody"
+      quietLabel="Firms that rank somebody"
+      caption={`Each firm's titled names as a share of all the people it names. The tall band is zero, and the ${num(shareColumns[3].value)} firms at the far end are the ones where every single name carries a title.`}
+    />
+    <p><b>{num(silent.length)} firms print no rank at all and {num(shareColumns[3].value)} print one beside every name.</b> Between them sit {num(shareColumns[1].value + shareColumns[2].value)} firms that rank some of their people and not others.</p>
+    <p>Here is the problem with reading that straight. A title our reader does not recognise reads to us as no title, and the pattern list it uses is short by design. So part of that first bar is our crawler rather than the firm.</p>
+    <p><b>The control is to throw away every firm we never got a title from.</b> {num(printing.length)} firms gave us at least one, which proves our reader could see titles on those sites. Inside that group, {num(printingTitled.length)} of the {num(printingPeople.length)} named people carry one and <b>{num(printingUntitled.length)} do not</b>. Those {num(printingUntitled.length)} names sit on pages where the firm demonstrably knew how to print a title and did not print one beside them.</p>
+    <p>The habit also moves by market.</p>
+    <BarChart
+      heading="Firms printing a title beside at least one name, by market"
+      max={100}
+      rows={marketRows}
+      caption={`The bar is the share and the figure beside each name is the count, because these markets hold very different numbers of firms. The eight largest by firms publishing a roster.`}
+    />
+    {leadMarket && lastMarket && leadMarket.slug !== lastMarket.slug && (
+      <p><a href={leadMarket.href}>{leadMarket.label}</a> leads at {leadMarket.note}, and <a href={lastMarket.href}>{lastMarket.label}</a> is last at {lastMarket.note}. These are firms competing for the same clients in the same cities, so the spread is not a local rule about what a website must say.</p>
+    )}
+
+    <h2 id="ladder">The ladder, and who publishes one</h2>
+    <p>Now the ladder itself. Of the {num(printing.length)} firms that print any title at all, here is how many print each rung at least once.</p>
+    <BarChart
+      heading={`Ranks printed on a firm's own team page, out of the ${num(printing.length)} firms that print any`}
+      max={100}
+      rows={rankRows}
+      caption={`The bar is the share of those ${num(printing.length)} firms and the figure beside each label is the count. A firm printing nothing at all is out of this denominator, so these are the best case. The highlighted row is the bare word "Attorney" with no rank attached to it.`}
+    />
+    <p>The most common thing a law firm prints beside a name is the bare word "Attorney", which tells a reader that the person is a lawyer and nothing about where they sit. <b>The ladder that every explainer draws is on {num(showsLadder.length)} websites in this directory.</b> That is {num(showsLadder.length)} of the {num(printing.length)} firms that print any title, and {num(showsLadder.length)} of the {num(withRoster.length)} that publish a roster at all.</p>
+    <p>Of counsel appears on {firmsPrinting(/\bof counsel\b/i)} of these sites, beside {num(titledPeople.filter(p => /\bof counsel\b/i.test(p.role!)).length)} people. Shareholder, which is what a professional corporation calls a partner, appears on {firmsPrinting(/\bshareholder\b/i)}.</p>
+    <p>Two firms show the two shapes as clearly as anything on this page, and both were picked by the size of their roster rather than by hand.</p>
+    {biggestSilent && (
+      <p><a href={`/firms/${biggestSilent.data.slug}/`}>{biggestSilent.data.name}</a> names {num(biggestSilent.data.attorneys.length)} people and prints a job title beside none of them. Every one of those names is somebody the firm chose to publish, and a reader has no way to tell the founding partner from the intake coordinator.</p>
+    )}
+    {biggestLadder && (
+      <p><a href={`/firms/${biggestLadder.data.slug}/`}>{biggestLadder.data.name}</a> names {num(biggestLadder.data.attorneys.length)} and prints a title beside {num(biggestLadder.data.attorneys.filter(titled).length)} of them, partners and associates among them. It is the same kind of page, the same size of firm, and it answers the question.</p>
+    )}
+    {exemplarMarkets.length > 0 && (
+      <p>Those firms sit in {exemplarMarkets.map((m, i) => (<>{i > 0 ? (i === exemplarMarkets.length - 1 ? ' and ' : ', ') : ''}<a href={`/cities/${m.slug}/`}>{m.city}</a></>))}, and the ranked lists for those markets are built from the same records.</p>
+    )}
+
+    <h2 id="predict">Whether a rank predicts anything</h2>
+    <p>A page that publishes ranks looks like a more careful page. The question is whether it goes with anything a client would notice, and there is one measure here that does not come from the firm's own website: the rating its clients left on Google.</p>
+    <BarChart
+      heading="The two groups on our scale and on Google's"
+      max={100}
+      rows={signalRows}
+      caption="Each measure drawn as a share of its own maximum so the two sit on one scale, with the real units printed on each bar. The score is ours and the rating is Google's. The highlighted pair is the one that moves."
+    />
+    <p>Median certification score runs {pScore} against {sScore}. Mean Google rating runs {pRating.toFixed(2)} against {sRating.toFixed(2)}, a difference of {ratingGap.toFixed(2)} of a star across {num(printing.length)} and {num(silent.length)} firms. <b>Our scale cares a great deal and the clients do not appear to care at all.</b></p>
+    <p>Before trusting that, hold the headcount still. A firm naming thirty people has more chances to print a title than a firm naming two, and large firms are not small firms in any other respect either.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>People named</th><th>Prints a rank</th><th>Google rating</th><th>Prints none</th><th>Google rating</th></tr></thead>
+        <tbody>
+          {sizeRows.map(r => (
+            <tr>
+              <td>{r.label}</td>
+              <td>{num(r.pn)} firms</td>
+              <td>{r.pr != null ? r.pr.toFixed(2) : 'n/a'}</td>
+              <td>{num(r.sn)} firms</td>
+              <td>{r.sr != null ? r.sr.toFixed(2) : 'n/a'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p>The two ratings stay within a tenth of a star in {bandsHoldingRating} of the {sizeRows.length} headcount bands, and they are closest among the largest firms. <b>The falsification survives: printing a rank beside a name does not go with a better rated firm.</b></p>
+    <p>The same test by market goes the other way for our own score, which is the honest half of it. In the {marketPairs.length} markets holding at least eight firms on each side, the firms printing ranks carry the higher median score in {marketsHigher}. So the score gap is real and it is not a trick of which cities the two groups sit in.</p>
+    <p>What else moves with it is reach. Median monthly organic search traffic runs {num(Math.round(trafficOf(printing) ?? 0))} visits against {num(Math.round(trafficOf(silent) ?? 0))}, and median Google review count {num(Math.round(reviewsOf(printing) ?? 0))} against {num(Math.round(reviewsOf(silent) ?? 0))}. That is the same finding we reached from the other direction when we <a href="/guides/what-search-traffic-says-about-a-law-firm/">sorted the whole directory by search visibility</a>: a firm that publishes more of everything is a firm with a marketing operation, and visibility brings more reviews rather than better ones.</p>
+    <p>The firms with no roster at all make the point hardest. Their median certification score is {nScore}, the lowest of the three groups by a distance, and their mean Google rating is {nRating.toFixed(2)}, <b>the highest of the three</b>. A firm can name nobody on its website and still be the firm its clients rate best.</p>
+
+    <h2 id="score">What our own score does with it</h2>
+    <p>Two of our sub-factors read a roster. A2 is experience, worth {a2Max} points, computed as the mean years since admission across the people a firm presents as lawyers. A6 is roster verifiability, worth {a6Max}, the share of that roster we matched to a state attorney register. Together that is <b>{rosterPoints} of the hundred</b>, and the full method is on <a href="/methodology/">the methodology page</a>.</p>
+    <p>Neither can be scored without a register to read, and a register is the state's to publish. A2 is scored for {num(a2Scored)} of the {num(firms.length)} firms here and A6 for {num(a6Scored)}. {num(a2NoRegister)} firms sit in a state that publishes no attorney register we may query, so those {rosterPoints} points leave the scale entirely rather than being charged to the firm. <b>In {allStates.length - openRegisterStates.length} of the {allStates.length} states this directory covers, neither sub-factor can be read for anybody</b>, which we have written up state by state in <a href="/guides/what-you-can-check-about-a-lawyer-by-state/">what you can and cannot check about a lawyer</a>.</p>
+    <p>The other branch is the firm's. {num(a2NoRoster)} firms have no roster for A2 to average and {num(a6NoRoster)} have none for A6 to verify. Those points leave the scale too, because a firm must not lose points to the reach of our own crawl. What a firm is actually asked for is a published roster, and that is gate G5 rather than a sub-factor.</p>
+    <p><b>Now the part that is ours to answer for.</b> Our reader is not as good as this page has implied. {num(unreadableTitles.length)} of the {num(titledPeople.length)} titles we did read are ones our own classifier cannot act on, so those people fall through to "named without a role" exactly as if the firm had printed nothing. They sit across {num(unreadableFirms)} firms.</p>
+    <p>Some of that pile is our own name splitter leaving a suffix behind where a person is a third or a fourth of their name, and some of it is a practice area lifted off a heading. {spanishTitles > 0 && (<>Some of it is a real title in the wrong language: {spanishTitles} of those people are titled with the Spanish word for lawyer, which our list of lawyer's titles does not contain, on a directory where <a href="/guides/what-law-firms-publish-in-spanish/">we have counted how many of these firms publish in Spanish</a>. </>)}None of it is the firm's fault, and all of it is counted above as the firm's silence.</p>
+    <p>The asymmetry worth naming is that our scale pays a firm nothing for printing a rank. A6 pays for the share of a roster we can match to a register and for bar numbers published on bios; neither reads the word "Partner". Yet the two groups sit {pScore - sScore} median points apart, which means the gap is coming from everything else a thorough firm publishes rather than from the ranks themselves. We found the same shape when we counted <a href="/guides/what-law-firm-websites-publish/">which pages a law firm website carries</a>.</p>
+
+    <h2 id="limits">What this does not measure</h2>
+    <p>Four limits, in the order they would bite.</p>
+    <p><b>An absence here is partly our reading.</b> The pattern list our crawler uses to recognise a title beside a name is deliberately short, because a word not on it is a word we will not assert is somebody's job. That is the right trade for a record and the wrong one for a denominator, which is why the central figure is reported twice and the control cohort of {num(printing.length)} firms carries the claim.</p>
+    <p><b>Nothing here says anybody is not a lawyer.</b> {num(asColleague)} people are named by their firm without a title we could read. That is all the record says, it is all their profiles say, and it is all this page says. A person who is not matched to a register is not a person the register rejected.</p>
+    <p><b>The roster read carries no date.</b> Every other measurement family in this directory records when it ran, and this one does not: no field on an attorney record says when the team page was last fetched. So this page prints no measurement date rather than borrowing one from a different reading, and a page a firm rewrote last week is a page we may not have.</p>
+    <p><b>This is a directory of consumer firms, not of the firms the ladder describes.</b> {num(firms.filter(f => f.data.practices.some(p => p.primary && p.slug === 'personal-injury')).length)} of the {num(firms.length)} firms here lead with personal injury. The explainers that rank for this question describe large commercial practices, and the honest reading of everything above is that the two are different worlds rather than that one of them is doing it wrong. If you are hiring a lawyer for an injury, a deportation or a divorce, the ladder in those articles is not the firm you are about to meet.</p>
+    <p>Every firm can see its own roster, its own sub-scores and the evidence behind each one on its profile, and a firm that publishes a roster we never found can <a href="/list-your-firm/">tell us where it is</a>. The ranked lists these figures sit behind are at <a href="/practice-areas/personal-injury/">the personal injury hub</a> and the city pages under it.</p>
+    <p class="muted" style="font-size:.86rem">Titles and names are read from each firm's own attorney, team and bio pages. Bar numbers and admission years come from the New York and California attorney registers. Review counts and ratings come from Google Business Profile listings verified to the firm. Search traffic comes from Ahrefs. A firm whose page we could not read keeps the sub-factor pending rather than scoring zero.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm counted above has a profile showing the people it names, which of them we matched to a register, and what it publishes.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-you-can-check-about-a-lawyer-by-state/">What you can check, by state</a></li>
+        <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

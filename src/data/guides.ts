@@ -25,7 +25,7 @@ export interface Guide {
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-    | 'defense' | 'menu';
+    | 'defense' | 'menu' | 'titles';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -173,6 +173,21 @@ export const GUIDES: Guide[] = [
     thumb: '',
     icon: 'doc',
     meta: 'The notice of claim comes first',
+  },
+  {
+    slug: 'law-firm-hierarchy',
+    cover: 'titles',
+    kicker: 'Study',
+    title: 'Most Law Firms Name Their People and Rank None of Them',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every explainer about law firm hierarchy draws the same ladder, from the inside of a ' +
+      'large commercial firm. We read the team page of every firm in this directory instead ' +
+      'and counted who publishes a rank beside a name. Most publish none, the partner and ' +
+      'associate ladder is nearly absent, and their clients rate them no differently.',
+    thumb: 't2',
+    icon: 'users',
+    meta: 'The ladder is in the articles, not on the sites',
   },
   {
     slug: 'types-of-personal-injury-case-firms-advertise',
