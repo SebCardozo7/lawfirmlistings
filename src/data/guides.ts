@@ -25,7 +25,7 @@ export interface Guide {
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-    | 'defense' | 'menu' | 'titles';
+    | 'defense' | 'menu' | 'titles' | 'breadth';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -173,6 +173,21 @@ export const GUIDES: Guide[] = [
     thumb: '',
     icon: 'doc',
     meta: 'The notice of claim comes first',
+  },
+  {
+    slug: 'does-a-medical-malpractice-page-mean-anything',
+    cover: 'breadth',
+    kicker: 'Study',
+    title: 'Injury Firms Advertising Medical Malpractice Are Broader, Not Better',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every guide to hiring one of these lawyers gives the same advice, which is to find a ' +
+      'firm that handles the case type. We tested whether that signal carries anything. Firms ' +
+      'publishing the rarer pages do score higher, until you compare them only against firms ' +
+      'publishing as many pages as they do, and then the gap is gone.',
+    thumb: 't3',
+    icon: 'layers',
+    meta: 'The rarer page is a page count, not a specialty',
   },
   {
     slug: 'law-firm-hierarchy',

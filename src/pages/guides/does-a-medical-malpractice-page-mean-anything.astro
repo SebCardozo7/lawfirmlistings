@@ -1,0 +1,310 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+
+/**
+ * Whether the practice page every hiring guide tells a client to look for carries anything.
+ *
+ * The breadth study published before this one counted how many kinds of injury case a firm holds
+ * itself out for. This is the other cut the sweep left behind: not how many areas, but which.
+ * Medical malpractice and nursing home abuse are the two injury areas fewest firms publish a page
+ * about, and they are the two with a different defendant, a different insurer and a longer tail.
+ * Every page ranking for "how to choose a medical malpractice lawyer" tells the reader to find a
+ * firm that handles the case type. Nobody has checked whether that signal separates firms.
+ *
+ * It does, until it is controlled, and then it does not. That is the piece.
+ *
+ * The control is the whole argument, so it is stated rather than implied: everything a firm
+ * publishes correlates with everything else a firm publishes, so "firms with the rarer page score
+ * higher" is a sentence about page count wearing a costume. The test that can kill it is to hold
+ * breadth constant and compare a firm only against firms publishing as many areas as it does. In
+ * four of the five bands with enough firms on each side, the advantage is gone or reversed.
+ *
+ * The fields, and what each one is not:
+ *
+ *   practices[].slug        scripts/check_practice.py, applied by apply_practice.py. The row
+ *                           exists only where the firm publishes its OWN page about that area,
+ *                           with the practice in the page's title or first heading. A footer link
+ *                           does not qualify and neither does a blog post. So a firm that takes
+ *                           medical malpractice work without publishing a page about it is
+ *                           counted here as not publishing one, which is the honest reading of
+ *                           what we measured and is said on the page.
+ *   practices[].primary     the area the firm leads with, which is what puts it in a cohort.
+ *                           False on every row the sub-practice sweeps added. The cohort here is
+ *                           the firm's own primary practice, never an area it happens to list:
+ *                           counting mentions counts the wrong thing, which publishedGuides in
+ *                           src/data/guides.ts already learned the hard way.
+ *   score.total             OUR scale, and it does not pay for practice pages. score.py reads
+ *                           practices[] only to pick a cohort (line 399) and never scores their
+ *                           number, which is what makes the raw gap worth explaining rather than
+ *                           dismissing: the scale is not paying for the pages directly.
+ *
+ * The falsification is the house one and it held again: what a firm publishes moves with
+ * everything, and the rating its clients gave it does not move at all.
+ *
+ * Nothing on this page says a firm without the page cannot take the case. The record cannot
+ * support that and the page says so where the limits are set out.
+ */
+const all = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const num = (n: number) => n.toLocaleString('en-US');
+const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
+const median = (xs: number[]) => {
+  if (!xs.length) return null;
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+/** Deduplicates and formats, because join(' and ') has put a false sentence on a live page here. */
+const list = (xs: string[]) => {
+  const u = [...new Set(xs)];
+  return u.length < 2 ? (u[0] ?? '') : `${u.slice(0, -1).join(', ')} and ${u[u.length - 1]}`;
+};
+
+// The eight injury areas the directory reads a page for. personal-injury itself is the cohort
+// rather than an area, so it is not one of them.
+const AREA_NAMES: Record<string, string> = {
+  'car-accidents': 'Car accidents',
+  'motorcycle-accidents': 'Motorcycle accidents',
+  'slip-and-fall': 'Slip and fall',
+  'truck-accidents': 'Truck accidents',
+  'wrongful-death': 'Wrongful death',
+  'medical-malpractice': 'Medical malpractice',
+  'nursing-home-abuse': 'Nursing home abuse',
+  'workers-compensation': "Workers' compensation",
+};
+const AREAS = Object.keys(AREA_NAMES);
+const RARE = ['medical-malpractice', 'nursing-home-abuse'];
+
+const firms = all.filter(f =>
+  (f.data.practices ?? []).some((p: any) => p.slug === 'personal-injury' && p.primary));
+
+const areasOf = new Map<string, Set<string>>();
+for (const f of firms) {
+  const slugs = new Set((f.data.practices ?? []).map((p: any) => p.slug));
+  areasOf.set(f.data.slug, new Set(AREAS.filter(a => slugs.has(a))));
+}
+const areas = (f: typeof firms[number]) => areasOf.get(f.data.slug)!;
+
+const countFor = (a: string) => firms.filter(f => areas(f).has(a)).length;
+const ranked = [...AREAS].sort((a, b) => countFor(b) - countFor(a));
+const rareNames = RARE.map(a => AREA_NAMES[a].toLowerCase());
+// Which of the rare pair is rarest, computed rather than assumed, since the two move.
+const rarestFirst = [...RARE].sort((a, b) => countFor(a) - countFor(b));
+
+// The pair is chosen for the kind of claim, not for being the two smallest counts, and a draft
+// of this page said otherwise in a chart caption while the chart underneath it showed workers'
+// compensation sitting between them. Anything rarer than the more common of the pair is named on
+// the page instead, computed, so the sentence cannot go stale the way the false one did.
+const rareCeiling = Math.max(...RARE.map(countFor));
+const rarerStill = ranked.filter(a => !RARE.includes(a) && countFor(a) < rareCeiling);
+// Areas at least three quarters of the cohort publishes, which is the group the rare pair is not.
+const nearUniversal = ranked.filter(a => countFor(a) / firms.length >= 0.75);
+
+const withRare = firms.filter(f => RARE.some(a => areas(f).has(a)));
+const without = firms.filter(f => !RARE.some(a => areas(f).has(a)));
+
+const traffic = (f: any) => f.data.digital?.ahrefs?.org_traffic ?? null;
+const rating = (f: any) => f.data.reviews?.google?.rating ?? null;
+const reviews = (f: any) => {
+  const n = Number(String(f.data.reviews?.google?.count_label ?? '').replace(/,/g, ''));
+  return Number.isFinite(n) ? n : null;
+};
+const total = (f: any) => f.data.score?.total ?? null;
+const got = <T,>(xs: any[], get: (f: any) => T | null) =>
+  xs.map(get).filter((v): v is T => v !== null && v !== undefined) as number[];
+
+const medScoreRare = median(got(withRare, total))!;
+const medScoreNot = median(got(without, total))!;
+// Rounded, because an even-sized set puts a half visit on the page and a median of 894.5 monthly
+// visits reads as a precision the figure does not have.
+const medTrafficRare = Math.round(median(got(withRare, traffic))!);
+const medTrafficNot = Math.round(median(got(without, traffic))!);
+const medAttRare = median(withRare.map(f => (f.data.attorneys ?? []).length))!;
+const medAttNot = median(without.map(f => (f.data.attorneys ?? []).length))!;
+const medAreasRare = median(withRare.map(f => areas(f).size))!;
+const medAreasNot = median(without.map(f => areas(f).size))!;
+const ratingRare = mean(got(withRare, rating))!;
+const ratingNot = mean(got(without, rating))!;
+const ratingGap = Math.abs(ratingRare - ratingNot);
+
+// The control. Inside firms publishing exactly k of the eight areas, does carrying a rare one
+// still predict a score? Bands with fewer than eight firms on a side are not shown, because a
+// median of six firms is an anecdote with a decimal point.
+const MIN_BAND = 8;
+const bands = [...new Set(firms.map(f => areas(f).size))].sort((a, b) => a - b)
+  .map(k => {
+    const inBand = firms.filter(f => areas(f).size === k);
+    const r = inBand.filter(f => RARE.some(a => areas(f).has(a)));
+    const n = inBand.filter(f => !RARE.some(a => areas(f).has(a)));
+    return {
+      k,
+      rare: r.length, not: n.length,
+      scoreRare: median(got(r, total)),
+      scoreNot: median(got(n, total)),
+      ratingRare: mean(got(r, rating)),
+      ratingNot: mean(got(n, rating)),
+    };
+  })
+  .filter(b => b.rare >= MIN_BAND && b.not >= MIN_BAND
+    && b.scoreRare !== null && b.scoreNot !== null);
+
+const bandsNoGain = bands.filter(b => (b.scoreRare as number) <= (b.scoreNot as number));
+const bandsGain = bands.filter(b => (b.scoreRare as number) > (b.scoreNot as number));
+const widestBand = [...bands].sort((a, b) =>
+  ((b.scoreNot as number) - (b.scoreRare as number)) - ((a.scoreNot as number) - (a.scoreRare as number))
+  || a.k - b.k)[0];
+
+const states = [...new Set(firms.map(f => f.data.market.state))];
+const snapshot = firms[0]?.data.score?.computed_at ?? '';
+
+const areaRows = ranked.map(a => ({
+  label: AREA_NAMES[a],
+  value: countFor(a),
+  display: `${num(countFor(a))} of ${num(firms.length)}`,
+  note: `${pct(countFor(a), firms.length)}% of the cohort`,
+  emphasis: RARE.includes(a),
+}));
+
+// Ten rows, the pairs adjacent, so the eye reads a band rather than a group. Each label is one
+// line: the 2026-11-02 entry in the backlog is about a note that wrapped and lifted a column.
+const WORDS = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'];
+const bandRows = bands.flatMap(b => [
+  {
+    label: `${WORDS[b.k]} areas, with a rarer page`,
+    value: b.scoreRare as number,
+    display: String(b.scoreRare),
+    note: `${num(b.rare)} firms`,
+    emphasis: true,
+  },
+  {
+    label: `${WORDS[b.k]} areas, with neither`,
+    value: b.scoreNot as number,
+    display: String(b.scoreNot),
+    note: `${num(b.not)} firms`,
+  },
+]);
+
+const title = 'Injury Firms Advertising Medical Malpractice Are Broader, Not Better';
+const description = 'Every hiring guide says to find a firm that handles your case type. We measured whether that signal separates injury firms, comparing like with like.';
+---
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`the practice pages every firm in this directory publishes on its own site, scored ${snapshot}`}
+      image="/og/breadth.png"
+      imageAlt="Two bars far apart on the left, and five pairs of bars standing level on the right">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Choosing by practice area</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Study · What a practice page predicts</span>
+    <h1>{title}</h1>
+    <p class="lede">Every guide to hiring a medical malpractice lawyer gives the same first instruction, which is to find a firm that handles medical malpractice. We read the practice pages of the {num(firms.length)} injury firms in this directory and tested the instruction. <b>{num(withRare.length)}</b> of them publish a page about {rareNames[0]} or {rareNames[1]}, and those firms do carry a higher score. Compare them only against firms publishing as many areas as they do and the advantage disappears in {bandsNoGain.length} of the {bands.length} bands we can measure.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>7 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="breadth" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#which">Which pages are the rare ones</a></li>
+      <li><a href="#raw">The gap, before controlling for anything</a></li>
+      <li><a href="#control">The same gap, like for like</a></li>
+      <li><a href="#clients">What the clients said</a></li>
+      <li><a href="#limits">What this does not measure</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read from the practice pages of ${num(firms.length)} firms whose own primary practice is personal injury, across ${states.length} states.`}
+      items={[
+        `<b>${num(countFor(rarestFirst[0]))} of ${num(firms.length)}</b> injury firms publish a page about ${AREA_NAMES[rarestFirst[0]].toLowerCase()}, against <b>${num(countFor(ranked[0]))}</b> publishing one about ${AREA_NAMES[ranked[0]].toLowerCase()}.`,
+        `Firms publishing a rarer page carry a median score of <b>${medScoreRare}</b> against <b>${medScoreNot}</b>, and median organic traffic of <b>${num(medTrafficRare)}</b> against <b>${num(medTrafficNot)}</b>.`,
+        `They also publish a median of <b>${medAreasRare}</b> of the ${AREAS.length} areas against <b>${medAreasNot}</b>, which is the explanation the rest of this page tests.`,
+        `Hold that constant and the advantage is gone: in <b>${bandsNoGain.length} of the ${bands.length}</b> bands with enough firms on each side, the firms carrying a rarer page score the same or lower.`,
+        `Their clients rate them <b>${ratingGap.toFixed(2)} of a star</b> apart, which is the fifth time a study here has found a client rating that does not move with anything a firm publishes.`,
+      ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${num(withRare.length)} of ${num(firms.length)}`, label: `injury firms publish a page about one of the ${WORDS[RARE.length].toLowerCase()} rarer areas`, note: 'read from the firm’s own site', emphasis: true },
+        { value: `${medScoreRare} v ${medScoreNot}`, label: 'median score, with a rarer page against without', note: 'before controlling for anything' },
+        { value: `${bandsNoGain.length} of ${bands.length}`, label: 'bands where the advantage is gone once breadth is held constant', note: `bands of ${MIN_BAND} firms or more on each side` },
+        { value: ratingGap.toFixed(2), label: 'of a star between the two groups', note: 'mean Google rating' },
+      ]}
+      source={`Computed from ${num(firms.length)} published injury firms at build time.`}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice, and nothing here says a firm without a page cannot take the case.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Search for how to choose a medical malpractice lawyer and the first instruction on every result is the same one: find a firm that handles medical malpractice, not a general injury firm. It is sensible advice. It is also completely untested, because the people giving it are law firms, and the only way to test it is to hold a large number of firms at once.</p>
+    <p>We hold {num(firms.length)}. Every firm in this directory whose own primary practice is personal injury, in {states.length} states. For each one we read its site and recorded which kinds of injury case it publishes its own page about, with the page we read it from. A row exists only where the practice is in the page's title or first heading, so a link in a footer does not count and neither does a blog post.</p>
+    <p><b>That is the signal a client is told to look for, and it is the only form of it anybody outside a firm can check.</b> A client cannot see the firm's case list. They can see whether the firm publishes a page about their kind of case. So that is what we tested.</p>
+
+    <h2 id="which">Which pages are the rare ones</h2>
+    <p>The {AREAS.length} areas do not divide evenly. {list(nearUniversal.map(a => AREA_NAMES[a].toLowerCase()))} are published by at least three quarters of this cohort each. The two we are testing are not.</p>
+    <BarChart
+      heading={`Injury firms publishing their own page about each area, out of ${num(firms.length)}`}
+      rows={areaRows}
+      caption={`The highlighted rows are the two this page is about. They are not simply the two smallest counts, and the chart says so: ${list(rarerStill.map(a => AREA_NAMES[a].toLowerCase()))} sits below one of them.`}
+    />
+    <p><b>The pair was chosen for the kind of claim it is, not for being the two smallest numbers on that chart.</b> A medical malpractice case and a nursing home case are brought against a hospital, a physician group or a care home operator, defended by an insurer that litigates rather than settles, and they run for years. That is the thing a client is told to look for a specialist in. {list(rarerStill.map(a => AREA_NAMES[a]))} is rarer than {AREA_NAMES[rarestFirst[1]].toLowerCase()} and is left out of the pair on purpose: it is an administrative benefits claim with no defendant to sue, so it tests nothing about litigating against a hospital.</p>
+    <p>{AREA_NAMES[rarestFirst[0]]} is the rarest of the {AREAS.length} at {num(countFor(rarestFirst[0]))} firms. Against that, {num(countFor(ranked[0]))} firms publish a page about {AREA_NAMES[ranked[0]].toLowerCase()}. So a client following the standard advice is using a filter that removes most of the market, which is exactly why it feels like a useful filter.</p>
+
+    <h2 id="raw">The gap, before controlling for anything</h2>
+    <p>Split the cohort on whether a firm publishes either of the two rarer pages and the two groups look nothing alike. The {num(withRare.length)} firms that do carry a median certification score of {medScoreRare}. The {num(without.length)} that do not carry {medScoreNot}. Median organic search traffic runs {num(medTrafficRare)} against {num(medTrafficNot)}, and the median roster is {medAttRare} named attorneys against {medAttNot}.</p>
+    <p>Read quickly, that is the advice vindicated. The firms advertising the harder case really are the stronger firms on every measure we hold.</p>
+    <p><b>There is one more number in that paragraph and it undoes the rest.</b> The firms publishing a rarer page publish a median of {medAreasRare} of the {AREAS.length} areas. The firms publishing neither publish {medAreasNot}. They are not firms that chose a difficult specialism. They are firms with more pages, and one of the pages they have is this one.</p>
+    <p>It is worth being precise about what that does and does not implicate. Our own scale does not award a single point for the number of practice pages a firm publishes: the scoring engine reads the practice list only to decide which cohort a firm is compared within. The gap is not our arithmetic paying for pages. It is that publishing more pages travels with being a larger firm, and the things a larger firm has, which are attorneys, reviews, links and search traffic, are scored.</p>
+
+    <h2 id="control">The same gap, like for like</h2>
+    <p>So the test is to stop comparing a broad firm with a narrow one. Inside each group of firms publishing the same number of areas, compare the ones carrying a rarer page against the ones carrying neither. If the advice is right, the rarer page should still predict something. If the page was only ever a proxy for size, the difference should collapse.</p>
+    <BarChart
+      heading="Median certification score inside each breadth band"
+      rows={bandRows}
+      caption={`Only bands holding at least ${MIN_BAND} firms on each side are shown, because a median of six firms is an anecdote with a decimal point. Each pair compares firms publishing the same number of areas.`}
+    />
+    <p>It collapses. In {bandsNoGain.length} of the {bands.length} bands, the firms carrying a rarer page score the same as or lower than the firms carrying neither. The widest difference in the table runs against the advice rather than for it: among firms publishing {WORDS[widestBand.k].toLowerCase()} areas, the ones that include a rarer page sit at {widestBand.scoreRare} and the ones that do not sit at {widestBand.scoreNot}.</p>
+    {bandsGain.length > 0 && (
+      <p>{bandsGain.length === 1 ? 'One band runs the other way' : `${WORDS[bandsGain.length]} bands run the other way`}, and printing it is more honest than averaging it away: {list(bandsGain.map(b => `${WORDS[b.k].toLowerCase()} areas, ${b.scoreRare} against ${b.scoreNot}`))}. Set against the {bandsNoGain.length} bands going the other direction, there is no pattern here to build advice on.</p>
+    )}
+    <p><b>The page is not a signal about the firm. It is a signal about how many pages the firm has.</b> A client using it as a filter is filtering for size, which they could have done faster by looking at the roster.</p>
+
+    <h2 id="clients">What the clients said</h2>
+    <p>Every study on this site runs the same check before publishing, because the one measure we hold that nobody at a law firm writes is the rating its clients left. If a real difference in competence sat under the practice pages, that is where it would have somewhere to show.</p>
+    <BarChart
+      heading="Mean Google rating, and median score, for the two groups"
+      max={100}
+      rows={[
+        { label: 'Our score, publishes a rarer page', value: medScoreRare, display: String(medScoreRare), note: 'median, out of 100', emphasis: true },
+        { label: 'Our score, publishes neither', value: medScoreNot, display: String(medScoreNot), note: 'median, out of 100' },
+        { label: 'Client rating, publishes a rarer page', value: ratingRare * 20, display: ratingRare.toFixed(2), note: 'mean Google rating, out of five' },
+        { label: 'Client rating, publishes neither', value: ratingNot * 20, display: ratingNot.toFixed(2), note: 'mean Google rating, out of five' },
+      ]}
+      caption="The ratings are drawn on the same scale as the score so the two pairs can be compared by eye. The top pair is what firms publish about themselves. The bottom pair is what their clients said."
+    />
+    <p>The two groups sit {ratingGap.toFixed(2)} of a star apart, and the group with fewer pages is not the lower one. This is the fifth time a study here has set a measure of what firms publish beside a measure of what clients said and found the second one flat. It is the most reliable finding this directory has, and it is a caution about our own scale as much as about anybody's advice.</p>
+
+    <h2 id="limits">What this does not measure</h2>
+    <p>Three limits, and the first is the one that could change the answer.</p>
+    <p><b>A page is not a case.</b> We measured what a firm publishes, because that is what a client can see and it is all an outsider can read. A firm that has tried twenty medical malpractice cases and never built a page about them is counted here as publishing none. Nothing in our records can separate that firm from one that does not take the work, and if those firms are common then the thing we tested is the advertisement rather than the practice. The honest version of this page's finding is therefore narrow: <b>the published page does not predict the firm</b>, which is precisely the claim the hiring guides make and the only form of it a reader can act on.</p>
+    <p><b>Our reach is part of the count.</b> A page our crawler did not reach is a page we did not record. The sweep reads a firm's own site and requires the practice in the page's title or first heading, which is deliberately strict, and the cost of that strictness is that a real page written loosely is missed.</p>
+    <p><b>The score is ours.</b> It is a measure of what a firm publishes and how it is found, built from the gates and pillars set out in <a href="/methodology/">our methodology</a>. It is not a measure of the outcome of a case, and no directory can give you one. The companion study on <a href="/guides/types-of-personal-injury-case-firms-advertise/">how many areas a firm advertises</a> counts the breadth this page controls for, and <a href="/guides/how-to-choose-a-criminal-defense-lawyer/">the criminal defense piece</a> runs the same test on case results instead of practice pages.</p>
+  </div>
+</div>
+</article>
+</Base>

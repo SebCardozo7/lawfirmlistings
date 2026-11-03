@@ -97,13 +97,35 @@ const dir = mkdtempSync(join(tmpdir(), 'lfl-og-'));
 const src = join(dir, 'card.html');
 writeFileSync(src, card);
 
-// Both layouts, because the bundled browser moved from chrome-linux/ to chrome-linux64/ between
-// Playwright builds and this script failed with "no chromium" on an image that had one installed.
-// The plain /opt/pw-browsers/chromium launcher is the last resort the environment documents.
-const chrome = globSync('/opt/pw-browsers/chromium-*/chrome-linux{,64}/chrome')[0]
-  ?? ['/opt/pw-browsers/chromium', '/usr/bin/google-chrome'].find(p => existsSync(p));
+// Where a Chromium might be, in the order we would rather have one.
+//
+// This used to look only under /opt/pw-browsers/, which is the CI image, so the script could not
+// be run on the machine a guide is actually written on and the share card had to wait for a
+// pipeline. Both layouts of the bundled browser are still tried first, because it moved from
+// chrome-linux/ to chrome-linux64/ between Playwright builds and this failed with "no chromium"
+// on an image that had one installed.
+//
+// Any Chromium renders this identically: the card is one inline SVG on a flat background with no
+// web fonts and no system UI in the frame, so an installed Chrome produces the same pixels as the
+// bundled one. The fallbacks are ordered Chromium first and a real browser second only because a
+// pinned build drifts less than whatever the machine updated to last week.
+const LOCAL = process.env.LOCALAPPDATA ?? '';
+const candidates = [
+  ...globSync('/opt/pw-browsers/chromium-*/chrome-linux{,64}/chrome'),
+  ...(LOCAL ? globSync(`${LOCAL.replace(/\\/g, '/')}/ms-playwright/chromium-*/chrome-win/chrome.exe`) : []),
+  ...globSync(`${process.env.HOME ?? ''}/.cache/ms-playwright/chromium-*/chrome-linux{,64}/chrome`),
+  '/opt/pw-browsers/chromium',
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  'C:/Program Files/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+];
+const chrome = candidates.find(p => p && existsSync(p));
 if (!chrome) {
-  console.error('no chromium under /opt/pw-browsers/');
+  console.error('no chromium found. Looked in:');
+  for (const c of candidates) console.error(`   ${c}`);
   process.exit(2);
 }
 const shot = join(dir, 'shot.png');
