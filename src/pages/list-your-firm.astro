@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { SITE, mailto } from '../data/site';
-import { REQUIREMENTS, PRODUCTS, STEPS } from '../data/listing';
+import { ALWAYS_FREE, REQUIREMENTS, PRODUCTS, STEPS } from '../data/listing';
 
 /**
  * The front door for a firm, and the page most likely to be read by somebody deciding whether
@@ -30,8 +30,8 @@ import { REQUIREMENTS, PRODUCTS, STEPS } from '../data/listing';
 
 const title = 'List your firm on Law Firm Listings';
 const description =
-  'What a firm has to meet to be listed, what a claimed profile and an annual listing ' +
-  'include, and how to reach us. No payment moves a score.';
+  'What a firm has to meet to be listed, what the annual listing includes, what stays free ' +
+  'for ever, and how to reach us. No payment moves a score.';
 
 const priced = PRODUCTS.filter(p => p.price);
 const subject = 'List your firm';
@@ -46,13 +46,13 @@ const subject = 'List your firm';
       <h1>What we check, and what it costs.</h1>
       <p class="lede">
         Firms appear here because we found them and read their public record, not because they
-        bought a place. What a firm can do is claim its profile, keep it accurate, and fix the
-        things that are holding its score down. Those three are free. The page below says what
-        each one involves, and what the optional annual listing adds.
+        bought a place. Correcting what we got wrong, and appealing any sub-score, is free and
+        always will be: we publish these pages unasked, so the cost of being wrong is ours.
+        Running the page yourself is the annual listing. The page below says what each involves.
       </p>
     </div>
     <div class="hero-facts">
-      <div class="fact"><b class="num">Free</b><span>To claim a profile</span></div>
+      <div class="fact"><b class="num">Free</b><span>To correct or appeal</span></div>
       <div class="fact"><b class="num">0</b><span>Points any payment can buy</span></div>
       <div class="fact"><b class="num">30</b><span>Days to review an appeal</span></div>
     </div>
@@ -104,6 +104,23 @@ const subject = 'List your firm';
           {p.excluded && <p class="excluded">{p.excluded}</p>}
         </div>
       ))}
+      {/* The free half, given the same card as the paid one rather than a sentence underneath
+          it. There is one product on this page now, and a lone card reads as a price list with
+          nothing beside it to compare. More to the point, the thing a firm most needs to know
+          is the thing we are not charging for. */}
+      <div class="product">
+        <b>Corrections and appeals</b>
+        <div class="price">Free<small>for ever</small></div>
+        <p>
+          For a firm that wants a page about it to be right. We publish these pages unasked and
+          we read them from the outside, so the cost of being wrong is ours rather than yours.
+        </p>
+        <ul>{ALWAYS_FREE.map(i => <li><Icon name="check" />{i}</li>)}</ul>
+        <p class="excluded">
+          No account and no purchase. One email, from an address at your firm's own domain, and
+          a correction that holds up is applied to the profile and to everything built from it.
+        </p>
+      </div>
     </div>
     <div class="narrow prose" style="margin-top:36px">
       <p>
@@ -142,14 +159,20 @@ const subject = 'List your firm';
         only you can see. <b>The panel is where a guess of ours becomes a fact of yours.</b>
       </p>
       <p>
-        <b>Claiming it is free</b>, and most of what follows comes with a claimed profile: the
-        corrections, the case results, every sub-score and the evidence under it. The annual
-        listing adds three things on top, and they are named where they appear below.
+        <b>The panel is the annual listing</b>, and everything below is part of it: the details,
+        the case results, every sub-score and the evidence under it, your logo, your link and
+        your quoted reviews.
       </p>
       <p>
-        What neither one buys is the score. It, the eligibility gates and the tier are measured
-        the same way whether you pay or not, and a claimed profile is read by the same crawler
-        as an unclaimed one.
+        <b>Telling us we got something wrong is free</b>, and always will be, whether or not you
+        ever buy anything. You do not need the panel for it. <a href="/contact/">One email</a>
+        is enough, and a correction that holds up is applied to the profile and to everything
+        built from it. We publish these pages unasked, so the cost of being wrong is ours.
+      </p>
+      <p>
+        What the listing does not buy is the score. It, the eligibility gates and the tier are
+        measured the same way whether you pay or not, and a firm-managed profile is read by the
+        same crawler as any other.
       </p>
     </div>
 
@@ -191,7 +214,7 @@ const subject = 'List your firm';
         <figcaption>
           <b>Results that can be checked.</b> A figure on your own site is counted and never
           confirmed. Send one with its docket or index number and we look it up, and your profile
-          says verified instead of claimed.
+          says verified instead of self-reported.
         </figcaption>
       </figure>
 
@@ -201,7 +224,6 @@ const subject = 'List your firm';
         <figcaption>
           <b>Your mark, not your initials.</b> We read your logo off your own site where we can
           find one. Where we cannot, or where you rebrand, you replace it here.
-          <em>Part of the annual listing.</em>
         </figcaption>
       </figure>
     </div>
@@ -209,8 +231,8 @@ const subject = 'List your firm';
     <div class="narrow prose" style="margin-top:36px">
       <p>
         A person reads every change before it goes live, usually the same day. That is slower
-        than a form that publishes itself, and it is the reason a reader can trust what a claimed
-        profile says.
+        than a form that publishes itself, and it is the reason a reader can trust what a
+        firm-managed profile says.
       </p>
     </div>
   </div>

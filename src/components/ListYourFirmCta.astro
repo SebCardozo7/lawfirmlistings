@@ -1,5 +1,5 @@
 ---
-import { annualAddsSentence } from '../data/listing';
+import { LISTING_CADENCE, LISTING_PRICE } from '../data/listing';
 
 /**
  * The invitation to a firm reading a page about its own market.
@@ -39,8 +39,9 @@ const heading = practice && place ? `Do you handle ${practice} in ${place}?`
           We list firms whether they ask us to or not, and everything on a profile is read from
           the outside: the firm's own site, its Google listings, its state's attorney register.
           That means we get things wrong, and the person who can see it is the firm.
-          <b> Claiming your profile is free</b>, and so is every correction. The annual listing
-          adds {annualAddsSentence()}. Neither moves a single point of the score.
+          <b> Telling us is free and always will be</b>, because the cost of being wrong about
+          a firm is ours rather than theirs. Running your own profile is the annual listing, at
+          {LISTING_PRICE} {LISTING_CADENCE}, and it moves no point of the score either way.
         </p>
       </div>
       <div class="cta-actions">

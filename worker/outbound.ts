@@ -41,6 +41,8 @@ export interface OutboundEnv {
   FOLLOWUP_HOURS?: string;
 }
 
+import { isFreeRequest } from '../src/data/listing';
+
 export interface Enquiry {
   firm: string;
   contact: string;
@@ -48,6 +50,8 @@ export interface Enquiry {
   website?: string;
   city?: string;
   practice?: string;
+  /** What the firm said it came for. Absent on a follow-up queued before this field existed. */
+  request?: string;
 }
 
 const hours = (env: OutboundEnv) => {
@@ -330,6 +334,14 @@ export async function drainFollowUps(env: OutboundEnv): Promise<{ sent: number; 
       await env.FOLLOWUPS.delete(k.name);
       continue;
     }
+    // Checked again on the way out, not only on the way in. submit() stopped queueing these,
+    // and a queue is a place where yesterday's decisions wait: anything already sitting here
+    // when that shipped was written by the old rule.
+    if (isFreeRequest(e.request)) {
+      await env.FOLLOWUPS.delete(k.name);
+      console.log(`follow-up dropped for ${e.firm}: ${e.request}`);
+      continue;
+    }
     const { subject, text } = pitchBody(e, env);
     try {
       await sendTo(env, e.email, subject, text, true);
@@ -437,12 +449,13 @@ export function listedNoticeBody(f: Listed, env: OutboundEnv): { subject: string
       '  your own site names. If your attorneys are listed somewhere we did not find, point us',
       '  at the page.',
       '',
-      'What a claimed profile gives you, at no charge:',
+      'What the annual listing gives you:',
       '',
-      // Taken from PRODUCTS in src/data/listing.ts, which is the authority on what is free and
-      // what is not. An earlier draft of this message put the whole panel behind the fee, which
-      // was both wrong and the worse way round: the free half is the half that makes the
-      // directory accurate, and charging for it would be charging a firm to correct us.
+      // Taken from PRODUCTS and ALWAYS_FREE in src/data/listing.ts, which is the authority on
+      // what is free and what is not. The split moved once: running your own profile used to
+      // be free and is now the product. What stays free is the half about our accuracy rather
+      // than about your presentation, because charging for that would be charging a firm to
+      // correct us.
       '  **You edit your own details.** Your phone number, up to four office addresses, the',
       '  languages your firm works in, how you charge, whether the first consultation is free,',
       '  and your availability: a 24/7 intake line, hospital visits, home visits.',
@@ -450,9 +463,7 @@ export function listedNoticeBody(f: Listed, env: OutboundEnv): { subject: string
       '  **You file case results with their docket or index number**, which is the only kind',
       '  this directory marks verified, and we look each one up.',
       '',
-      '  **You see every sub-score with the evidence under it**, and you can appeal any of them.',
-      '',
-      'The annual listing adds three things to that:',
+      '  **You see every sub-score with the evidence under it.**',
       '',
       '  **A followed link to your site**, from your profile and from every card your firm',
       '  appears in across the directory.',
@@ -461,18 +472,18 @@ export function listedNoticeBody(f: Listed, env: OutboundEnv): { subject: string
       '',
       '  **The client reviews you want quoted**, read by us before they appear.',
       '',
-      'Neither one moves the score. The points, the gates and the tier are measured the same way',
-      'for a firm that pays and a firm that does not, and no part of them is for sale.',
+      'It moves no part of the score. The points, the gates and the tier are measured the same',
+      'way for a firm that pays and a firm that does not, and no part of them is for sale.',
       '',
       'Every change is read by a person before it goes live, usually the same day.',
       '',
-      // Claiming is the free thing, so the ask is to claim; the figure only matters to a firm
-      // that wants the three paid additions, and it is offered rather than pushed.
-      'Claiming costs nothing and takes one message. We reply the same day with your sign-in,',
-      'with where your firm stands against each of the five eligibility checks, and with the',
-      'annual figure if you want the link, the logo and the reviews as well.',
+      // Two separate asks, in the order that costs the firm least. A correction is free and is
+      // the thing we actually need; the listing is offered rather than pushed.
+      'Correcting us takes one reply and costs nothing. If you would rather run the page',
+      'yourself, write back and we will send the annual figure and your sign-in the same day,',
+      'along with where your firm stands against each of the five eligibility checks.',
       '',
-      'Claim your profile:',
+      'What the listing covers:',
       'https://lawfirmlistings.com/list-your-firm/#form',
       '',
       'Kind regards,',
