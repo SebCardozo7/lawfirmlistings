@@ -21,7 +21,7 @@ interface Props {
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
       | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-      | 'defense' | 'menu' | 'titles';
+      | 'defense' | 'menu' | 'titles' | 'breadth';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -930,6 +930,42 @@ const lens = { col: 4, row: 3, span: 5 };
           stroke-dasharray={k === 0 ? undefined : '10 9'}
           opacity={k === 0 ? 1 : .6} />
       ))}
+    </g>
+  </svg>
+)}
+
+{name === 'breadth' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* The finding in one shape: a gap on the left that is not there on the right.
+
+        Left panel, the two groups as the raw comparison finds them: firms that publish the
+        rarer page stand well above the firms that do not. Right panel, the same two groups
+        compared only against firms publishing as many areas as they do, where the pairs come
+        level and two of them tip the other way. The dashed rule runs at the height the right
+        panel settles on, so the eye can carry the left bar across and see it fall.
+
+        The proportions are the measured shape rounded to whole pixels: this is a cover rather
+        than a chart, and the article beside it carries the counts. */}
+    <g transform="translate(96,54)">
+      {[{ h: 248, fill: VIOLET, x: 0 }, { h: 136, fill: 'rgba(255,255,255,.22)', x: 92 }].map(g => (
+        <rect x={g.x} y={296 - g.h} width="58" height={g.h} rx="14" fill={g.fill} />
+      ))}
+      <rect x="-24" y="-18" width="220" height="356" rx="20" fill="none"
+        stroke="rgba(255,255,255,.16)" stroke-width="1.6" />
+    </g>
+
+    {/* The five matched bands. Each pair is drawn at the height the measurement puts it, and
+        the pair order is kept so the two that tip the other way read as themselves rather than
+        as noise smoothed out. */}
+    <g transform="translate(400,54)">
+      {[[150, 162], [176, 168], [196, 200], [202, 222], [224, 226]].map((pair, i) => (
+        <g transform={`translate(${i * 152},0)`}>
+          <rect x="0" y={296 - pair[0]} width="52" height={pair[0]} rx="13" fill={VIOLET} opacity=".88" />
+          <rect x="62" y={296 - pair[1]} width="52" height={pair[1]} rx="13" fill="rgba(255,255,255,.22)" />
+        </g>
+      ))}
+      <line x1="-28" y1="104" x2="752" y2="104" stroke={BLUE} stroke-width="2"
+        stroke-dasharray="8 7" opacity=".6" />
     </g>
   </svg>
 )}
