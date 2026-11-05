@@ -223,9 +223,13 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       '',
       'What the year includes:',
       '',
-      existing ? null : '  **A dofollow link to your site**, from your profile and from every card your firm',
-      existing ? null : '  appears in across the directory.',
-      existing ? null : '',
+      // True for both readers under the rule of 2026-11-05, and worth stating first to each:
+      // an unpaid profile carries rel="nofollow" whether or not it is already published, so
+      // this is a benefit rather than something either firm already has.
+      '  **A dofollow link to your site**, from your profile and from every card your firm',
+      '  appears in across the directory. Until then your profile links to you with',
+      '  rel="nofollow", which is how every unpaid profile in the directory links out.',
+      '',
       '  **Your own panel**, where you maintain your offices, phone, practice areas, languages,',
       '  fee terms and logo, submit the client reviews you want quoted, and file case results',
       '  with a docket number. We review every submission before it is published.',
@@ -236,12 +240,6 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       'measured from public records and are identical for a firm that pays and a firm that does',
       'not.',
       '',
-      // The honest version of the benefit that was cut above. A firm at Verified or above
-      // already has the followed link, and saying so costs us nothing we were entitled to.
-      existing ? 'Your outbound link is not part of this either. A firm that clears every eligibility' : null,
-      existing ? 'gate has a followed link already, at no cost, and keeps it whether or not it ever pays' : null,
-      existing ? 'us. Your own profile states which of the two applies to you.' : null,
-      existing ? '' : null,
       existing ? null : 'What your firm has to meet:',
       existing ? null : '',
       existing ? null : '1. **A site that names its lawyers**, served over HTTPS, with a working telephone number.',

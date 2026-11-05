@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { paysForListing } from '../../../lib/outbound';
 
 /**
  * What the firm panel is allowed to show a firm about itself, emitted at build time.
@@ -82,24 +83,22 @@ export const GET: APIRoute = ({ props }) => {
     // Whether the outbound link on this profile is followed, and why. A firm asks about this more
     // than about anything else, so the panel answers it with the rule rather than with a yes.
     outbound_link: (() => {
-      const earned = ['Verified', 'Certified', 'Distinguished', 'Elite']
-        .includes(d.score?.tier ?? '');
-      const paid = Boolean(d.subscription?.until
-        && d.subscription.until >= new Date().toISOString().slice(0, 10));
+      // One way to get it since 2026-11-05, so the panel has one sentence instead of three. The
+      // branch that told a firm it had earned the link by clearing the gates was removed rather
+      // than reworded: it is no longer true of anybody, and a panel that tells a firm it earned
+      // something we have taken away is worse than one that says plainly what the rule is.
+      const paid = paysForListing(d);
       return {
-        followed: earned || paid,
-        // Two ways to get it and the panel should say which one applies, because a firm that
-        // earned it should not be told it bought it and a firm that bought it should not be told
-        // it earned it. The sentence used to end "it is not for sale", which stopped being true
-        // on 2026-10-08.
-        rule: earned
-          ? 'You have a followed link because you clear every eligibility gate, which is what '
-            + 'reaching Verified means. That half is measured and it cannot be bought.'
-          : paid
-            ? 'You have a followed link as part of your annual listing. It is the one thing on '
-              + 'this profile that payment reaches: it buys no points, no gate and no tier.'
-            : 'A followed link comes with clearing every eligibility gate, which is what reaching '
-              + 'Verified means, or with an annual listing. Nothing buys a point either way.',
+        followed: paid,
+        rule: paid
+          ? 'You have a followed link as part of your listing. It is the one thing on this '
+            + 'profile that payment reaches: it buys no point, no gate, no tier and no position '
+            + 'in any ranking.'
+          : 'Your outbound link carries rel="nofollow". A followed link comes with a paid '
+            + 'listing and with nothing else, and it is the only thing a listing changes here: '
+            + 'it buys no point, no gate, no tier and no position in any ranking. Your score and '
+            + 'everything on this page are measured the same way either way, and correcting '
+            + 'anything we have wrong about you is free whether or not you ever pay us.',
       };
     })(),
   };

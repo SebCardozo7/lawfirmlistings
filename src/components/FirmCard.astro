@@ -11,6 +11,7 @@
 // - Both buttons resolve to real URLs (no href="#").
 import type { CollectionEntry } from 'astro:content';
 import Icon from './Icon.astro';
+import { firmLinkRel } from '../lib/outbound';
 
 interface Props {
   firm: CollectionEntry<'firms'>;
@@ -35,24 +36,12 @@ const stars = g ? '★'.repeat(Math.round(g.rating)) + '☆'.repeat(5 - Math.rou
 // count_label is a label, not a number ("400+"), and its provenance ships with it.
 const selfReported = g ? /as reported by the firm/i.test(g.source) : false;
 
-// The link attribute is editorial, not commercial: a firm that clears every eligibility gate
-// earns a followed link. Running your own profile does not change it and neither does paying for
-// anything — selling followed links is a link scheme, and the penalty would land on this site
-// rather than on the firm.
-// Counting to six was wrong from the moment G4 was retired: there are five gates, so this was
-// never true and every firm in the directory got a nofollow link, including the ones that clear
-// everything. Ask the engine instead of counting. score.tier reaches "Verified" exactly when all
-// of a firm's gates were checked and held, and the tiers above it are that plus a score.
-const EARNED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
-const gatesPassed = EARNED.includes(s?.tier ?? '');
-// The second way to earn it, and the one place money changes an answer on this site. A current
-// paid annual listing carries a followed link, which is Sebastián's decision of 2026-10-08 taken
-// after being told that a link given for payment is a link scheme and that the penalty lands here
-// rather than on the firm. It touches nothing else: not the score, not a gate, not the tier, not
-// the order of this card in any list. See the fuller note on the profile template.
-const subscribed = Boolean(d.subscription?.until
-  && d.subscription.until >= new Date().toISOString().slice(0, 10));
-const linkRel = gatesPassed || subscribed ? 'noopener' : 'nofollow noopener';
+// A followed link comes with a paid listing and with nothing else, which is Sebastián's rule of
+// 2026-11-05. It touches nothing else on this card: not the score, not a gate, not the tier, not
+// the position of this firm in any list. The rule lives in src/lib/outbound.ts because it used to
+// live here and on the profile template at once, and two copies of a rule are a rule that can
+// disagree with itself about the same firm on two pages.
+const linkRel = firmLinkRel(d);
 
 const officeLabel = `${d.offices.length} office${d.offices.length === 1 ? '' : 's'}`;
 // An empty attorneys array means we have not verified any names yet, not that the firm has no
