@@ -190,8 +190,18 @@ try {
   {
     const { env } = makeEnv();
     const priced = reminderBody({ ...ENQ, request: 'Ask about sponsorship' }, env);
-    ok('a priced enquiry is told the quote already went',
-       priced.text.includes('They have the quote and the payment link already'));
+    // The sentence moved on 2026-11-05 when the reminder stopped asking whether a person had
+    // replied and started asking whether the firm had paid. What it has to keep saying is that
+    // the priced enquiry already has everything it needs to pay, because that is what makes the
+    // reminder about the sale rather than about a reply nobody owes any more.
+    ok('a priced enquiry is told it already has the price and the link',
+       priced.text.includes('They have the price, the terms and the payment link'));
+    ok('and that nothing else goes out automatically',
+       priced.text.includes('automatically after this'));
+    ok('the reminder is about payment, not about a reply',
+       priced.subject.startsWith('Not paid yet:')
+       && priced.text.includes('nothing')
+       && !priced.text.includes('promised one within 12 working hours'));
     const free = reminderBody({ ...ENQ, request: 'Correct something on our profile' }, env);
     ok('A CORRECTION IS NOT TOLD IT HAS A QUOTE',
        free.text.includes('No quote was sent and none will be')

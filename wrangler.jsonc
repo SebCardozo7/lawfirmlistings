@@ -43,13 +43,17 @@
     // Set 2026-10-08. The follow-up prints it; it is never typed into the template, so changing
     // it here changes every email from the next deploy.
     "LISTING_PRICE_USD": "350",
-    "FOLLOWUP_HOURS": "6",
-    // Hours before we are reminded that a firm is still waiting for a person. The firm was
-    // promised one within 12 working hours, so this is two days rather than two weeks: late
-    // enough that a same-day reply has already happened, early enough that the promise is only
-    // just broken. One reminder per enquiry, and every email about that enquiry carries a link
-    // that cancels it.
-    "REMINDER_HOURS": "48"
+    // One hour, from 2026-11-05. It was six, chosen when a lead was rare enough that a person
+    // would reach it first anyway. The aim now is that a firm enquiring has the price, the
+    // terms and the payment link while it is still on the page it enquired from, so the only
+    // thing standing between an enquiry and a payment is the firm deciding.
+    "FOLLOWUP_HOURS": "1",
+    // Twenty-four hours from the enquiry, so about twenty-three after the follow-up above.
+    // The question it asks changed with it on 2026-11-05: it used to ask whether a person had
+    // replied, and it now asks whether the firm has paid, because the follow-up answers the
+    // enquiry on its own and what is left to chase is the sale. One reminder per enquiry, and
+    // the link in it says so when the answer is yes.
+    "REMINDER_HOURS": "24"
   },
   "send_email": [
     { "name": "EMAIL" }

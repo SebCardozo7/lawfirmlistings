@@ -43,7 +43,7 @@ export interface OutboundEnv {
   REMINDER_HOURS?: string;
 }
 
-import { isFreeRequest, isExistingProfile } from '../src/data/listing';
+import { isFreeRequest } from '../src/data/listing';
 
 export interface Enquiry {
   firm: string;
@@ -184,13 +184,13 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
 export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text: string } {
   const price = (env.LISTING_PRICE_USD || '').trim();
   const link = payLink(env);
-  // A firm already in the directory asked for a different thing and must not be read the
-  // stranger's letter. Four of its claims are false to that reader: the five requirements have
-  // been measured, we have already read the site, the profile is already live, and the followed
-  // link at the top of the list is something a firm at Verified or above already has for
-  // nothing. The branch is taken off the request the firm itself chose, so it needs no lookup
-  // and cannot be wrong about a firm the Worker cannot see.
-  const existing = isExistingProfile(e.request);
+  // One letter, whether or not the firm is already in the directory.
+  //
+  // It branched for a day, on the request the firm picked, and Sebastián removed the branch:
+  // two letters is two things to keep true, and every sentence that needed the branch turned
+  // out to be a sentence worth cutting. What is left never asserts whether this firm is
+  // published yet, which is the only fact the two readers do not share, and says instead what
+  // a listing does and what it does not reach.
   return {
     // What a firm gets, before what it pays, with its own name in front of both. The old one
     // was "what a listing needs, and what it includes", which describes the email rather than
@@ -203,15 +203,11 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
     text: [
       greeting(e),
       '',
-      // The firm's name is not interpolated into this branch. It is in the greeting and in the
-      // subject already, and a Google Business title runs to sixty characters, which put a
-      // 134-character line in the middle of the paragraph on the firm that prompted this.
-      existing
-        ? 'Thank you. You asked to run the profile we already publish for your firm, so this sets'
-        : `Thank you for your enquiry about ${e.firm}. Everything required to make a decision is`,
-      existing
-        ? 'out what that changes and, as importantly, what it does not.'
-        : 'set out below.',
+      // The firm's name is not interpolated here. It is in the greeting and in the subject
+      // already, and a Google Business title runs to sixty characters, which put a
+      // 134-character line through the middle of this paragraph on the firm that prompted it.
+      'Thank you for your enquiry. Everything you need in order to decide is below, and so is',
+      'what a listing does not change.',
       '',
       // The price is the first thing a reader looks for, so it is the first thing they get, in
       // the one block built to be looked at rather than read. Where no figure is configured the
@@ -227,8 +223,8 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       // an unpaid profile carries rel="nofollow" whether or not it is already published, so
       // this is a benefit rather than something either firm already has.
       '  **A dofollow link to your site**, from your profile and from every card your firm',
-      '  appears in across the directory. Until then your profile links to you with',
-      '  rel="nofollow", which is how every unpaid profile in the directory links out.',
+      '  appears in across the directory. Without a listing a profile links out with',
+      '  rel="nofollow", which is how every unpaid profile in this directory links.',
       '',
       '  **Your own panel**, where you maintain your offices, phone, practice areas, languages,',
       '  fee terms and logo, submit the client reviews you want quoted, and file case results',
@@ -236,39 +232,30 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       '',
       '  **Every sub-score, the evidence behind it, and the right to appeal any of it.**',
       '',
-      'The fee does not include points, a gate, a tier, or a position in any ranking. Those are',
-      'measured from public records and are identical for a firm that pays and a firm that does',
-      'not.',
+      'What it does not include, and what no amount of money reaches here: a point, a gate, a',
+      'tier, or a position in any ranking. Those are measured from public sources and come out',
+      'the same for a firm that pays and a firm that does not. Correcting anything we have',
+      'wrong about your firm is free and always will be, whether or not you ever pay us.',
       '',
-      existing ? null : 'What your firm has to meet:',
-      existing ? null : '',
-      existing ? null : '1. **A site that names its lawyers**, served over HTTPS, with a working telephone number.',
-      existing ? null : '2. **A current licence** for every attorney named on it.',
-      existing ? null : '3. **No outstanding public discipline** against anyone named on it.',
-      existing ? null : '4. **A registered entity and a physical office.**',
-      existing ? null : '5. **A year in practice and ten client reviews.**',
-      existing ? null : '',
-      existing ? null : 'All five are read from public sources, so there is nothing to send us, and only the first',
-      existing ? null : 'is within your control. Each one is published in full, with every sub-factor and every',
-      existing ? null : 'weight, at https://lawfirmlistings.com/methodology/#gates',
-      existing ? null : '',
-      existing ? 'Your profile is live and already measured, so there is no application here and nothing' : null,
-      existing ? 'to qualify for. Every gate and every weight behind what it says is published at' : null,
-      existing ? 'https://lawfirmlistings.com/methodology/#gates, and if any of it is wrong about your' : null,
-      existing ? 'firm, telling us costs nothing and always will.' : null,
-      existing ? '' : null,
+      // The old letter listed the five gates to a stranger and told a published firm it had
+      // met them already. Saying how the measurement works, without saying where this firm sits
+      // inside it, is true for either reader and is the half somebody wants before paying.
+      'How a firm is measured here, paying or not:',
+      '',
+      '  We read the website the firm publishes, its verified Google listings, and the state',
+      '  register where the state publishes one we may query. Five eligibility gates and five',
+      '  scoring pillars, with every sub-factor and every weight published in full at',
+      '  https://lawfirmlistings.com/methodology/',
+      '',
+      '  Nothing is sent to us and nothing is filled in. A firm is listed whether it asks to be',
+      '  or not, and it is read from the outside either way.',
+      '',
       'What happens next:',
       '',
-      existing
-        ? '1. We reply with where your firm stands today and what is currently holding it back,'
-        : `1. We read your site and report where ${e.firm} stands against the five, within 12`,
-      existing
-        ? '   within 12 working hours of your enquiry.'
-        : '   working hours of your enquiry.',
+      '1. We reply with where your firm stands today and what is holding it back, within 12',
+      '   working hours of your enquiry.',
       '2. You settle the year, and we issue the receipt.',
-      existing
-        ? '3. We provide your sign-in the same day, and the profile becomes yours to maintain.'
-        : '3. We provide your sign-in the same day, and your profile goes live with your link.',
+      '3. We send your sign-in the same day, and the profile becomes yours to maintain.',
       '',
       // A label on its own line and the URL under it. In the text part that reads the way
       // anybody writes a link in an email; in the HTML part emailhtml.ts turns exactly that
@@ -387,10 +374,22 @@ export function reminderBody(
     ? Math.max(1, Math.round((Date.now() - since) / 3600000))
     : reminderHours(env);
   return {
-    subject: `Still unanswered: ${e.firm}`,
+    subject: `Not paid yet: ${e.firm}`,
     text: [
-      `${waited} hours ago ${e.firm} wrote in, and nothing says a person has`,
-      'replied yet. The acknowledgement they received promised one within 12 working hours.',
+      // What this asks changed on 2026-11-05 along with the hours. It used to ask whether a
+      // person had replied, which was the right question while the follow-up took six hours to
+      // arrive. The follow-up now lands within the hour and answers the enquiry by itself, so
+      // the only thing left to chase is the sale. A reminder that asks the wrong question is a
+      // reminder that gets dismissed.
+      // Conditional, because a correction or an appeal never had a quote and telling its sender
+      // that it has had the payment link for a day would be false. The check that caught this
+      // is the one that has guarded the same distinction since the reminder was written.
+      isFreeRequest(e.request)
+        ? `${waited} hours ago this firm wrote in, and nothing here says a person has replied.`
+        : `${waited} hours ago this firm enquired. It had the price and everything it needs to`,
+      isFreeRequest(e.request)
+        ? 'It asked for something we do not charge for, so no second message went after it.'
+        : 'pay within the hour, and nothing here says it has paid.',
       '',
       `  Firm:     ${e.firm}`,
       `  Contact:  ${e.contact}`,
@@ -403,12 +402,12 @@ export function reminderBody(
       // remembered: one of these had a second automatic message behind it and one had nothing.
       isFreeRequest(e.request)
         ? 'No quote was sent and none will be: this is a correction or an appeal, which we do'
-        : 'They have the quote and the payment link already. What is missing is a person.',
+        : 'They have the price, the terms and the payment link. Nothing else reaches them',
       isFreeRequest(e.request)
         ? 'not charge for. A person is the only thing that was ever going to answer it.'
-        : null,
+        : 'automatically after this, so anything further is yours to send.',
       '',
-      'If you have already written to them, say so and this stops:',
+      'If they have paid, or you have dealt with it, say so and this stops:',
       url || '  (no cancel link: this reminder was queued before the link existed)',
       '',
       'This is the only reminder. Nothing else will chase it.',
