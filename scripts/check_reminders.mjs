@@ -167,11 +167,19 @@ try {
     const d = await drainReminders(env);
     ok('one sent', d.sent === 1 && d.failed === 0);
     ok('and deleted, because this one fires once', store.size === 0);
-    ok('addressed to us, not to the firm', sent[0].to === 'owner@example.com');
+    // Who it reaches is the whole of this change. A priced enquiry is chased at the firm, so
+    // the one address this must never be is the owner's.
+    ok('addressed to the firm, not to us', sent[0].to === 'person@example.com');
     const raw = String(sent[0].raw);
     ok('counts the real wait rather than the setting', /\b50 hours ago\b/.test(raw),
        raw.match(/\b\d+ hours ago\b/)?.[0] ?? 'no hours line at all');
-    ok('carries the cancel link', raw.includes('/api/answered?k='));
+    // The cancel link is the owner's and belongs in the owner's own notice. Putting it in a
+    // message to the firm would hand a stranger the switch that stops our own chasing.
+    ok('and carries no cancel link, which is ours and not theirs',
+       !raw.includes('/api/answered?k='));
+    ok('it says the firm stays published either way',
+       raw.includes('stays published whether or not you pay'));
+    ok('and that nothing else follows', raw.includes('Nothing further is sent either way'));
     ok('a second drain sends nothing', (await drainReminders(env)).sent === 0 && sent.length === 1);
   }
 
@@ -190,16 +198,41 @@ try {
   {
     const { env } = makeEnv();
     const priced = reminderBody({ ...ENQ, request: 'Ask about sponsorship' }, env);
-    ok('a priced enquiry is told the quote already went',
-       priced.text.includes('They have the quote and the payment link already'));
+    // The second message is the firm's now. It has to read as a letter to them rather than as
+    // a note about them, which is the difference a wrong pronoun would give away.
+    ok('a priced enquiry is addressed to the firm', priced.to === 'firm');
+    ok('and written to them, not about them',
+       priced.text.includes('your profile') || priced.text.includes('Your profile'));
+    ok('it leads with what does not change',
+       priced.text.includes('stays published whether or not you pay'));
+    ok('and names the thing that does',
+       priced.text.includes('rel="nofollow"'));
+    // With no PAYPAL_LINK configured the message must leave the line out rather than print a
+    // broken one, which is the same rule the follow-up follows about the price.
+    ok('it prints no payment line when none is configured',
+       !priced.text.includes('Secure your listing'));
+    const withLink = reminderBody({ ...ENQ, request: 'Ask about sponsorship' },
+                                  makeEnv({ PAYPAL_LINK: 'https://paypal.me/x' }).env);
+    ok('and carries one when there is a link',
+       withLink.text.includes('Secure your listing') && withLink.text.includes('paypal.me/x'));
+    ok('and closes without asking for a reply',
+       priced.text.includes('If the answer is no, you need not reply'));
+
+    // The exception, and the one that matters most. Somebody asking us to fix what we got
+    // wrong is never chased for money: that message stays with the owner, where it was.
     const free = reminderBody({ ...ENQ, request: 'Correct something on our profile' }, env);
-    ok('A CORRECTION IS NOT TOLD IT HAS A QUOTE',
-       free.text.includes('No quote was sent and none will be')
-       && !free.text.includes('payment link'));
-    ok('both say it is the only one', priced.text.includes('This is the only reminder')
+    ok('A CORRECTION IS NOT CHASED AT ALL', free.to === 'owner');
+    ok('and is not told it has a quote',
+       free.text.includes('something we do not charge for')
+       && !free.text.includes('payment link')
+       && !free.text.includes('paypal'));
+    ok('the owner keeps the cancel link on that one',
+       free.text.includes('say so and this stops'));
+    ok('both say it is the only one', priced.text.includes('Nothing further is sent either way')
        && free.text.includes('This is the only reminder'));
     ok('with no link it says so rather than printing a broken one',
-       reminderBody(ENQ, env).text.includes('no cancel link'));
+       reminderBody({ ...ENQ, request: 'Correct something on our profile' }, env)
+         .text.includes('no cancel link'));
   }
 
   console.log('/api/answered');
