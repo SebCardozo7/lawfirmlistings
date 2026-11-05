@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { fitDescription } from '../../lib/seo';
 import { locality, officeLabel } from '../../lib/labels';
+import { firmLinkRel } from '../../lib/outbound';
 import { achievementsFor, marksFor } from '../../lib/achievements';
 import { rosterFor } from '../../lib/roster';
 import Icon from '../../components/Icon.astro';
@@ -119,21 +120,23 @@ const rankingHref = rankingPractice
   : null;
 // Whether an outbound link is followed, and this is the one place money changes an answer.
 //
-// Two ways to earn it, and they are different kinds of thing. Clearing every eligibility gate
-// earns it, which is what reaching Verified means, and that half is editorial: it is measured and
-// it cannot be bought. A current paid annual listing also earns it, which is commercial, and
-// Sebastian's decision on 2026-10-08 after being told the risk: a link given in exchange for
-// payment is a link scheme under Google's policy and the penalty lands on this site rather than
-// on the firm that paid. He has taken that risk knowingly and it is his to take.
+// Sebastián's rule of 2026-11-05, taken after being shown that 7,869 followed links were leaving
+// this site and that 7,776 of them went to firms who had never paid: a followed link comes with
+// a paid listing and with nothing else. It replaces the rule that stood until that day, under
+// which clearing every eligibility gate earned one, and the earlier decision of 2026-10-08 that
+// a paid listing earned one too. Both halves are now one half.
+//
+// The risk is the same one he was told about then and has taken knowingly again: a link given in
+// exchange for payment is a link scheme under Google's policy, and the penalty lands on this site
+// rather than on the firm that paid. Removing the editorial half makes the remaining half the
+// whole, which is a larger version of the same risk rather than a different one.
 //
 // What it does not touch, and the copy on this site still says so truthfully: the score, the
 // gates, the tier, and the order of any ranking. Money buys a link attribute and the panel at
-// /claim/. It buys no points.
-const subscribed = Boolean(d.subscription?.until && d.subscription.until >= new Date()
-  .toISOString().slice(0, 10));
-const gatesPassed = ['Verified', 'Certified', 'Distinguished', 'Elite']
-  .includes(d.score?.tier ?? '');
-const linkRel = gatesPassed || subscribed ? 'noopener' : 'nofollow noopener';
+// /claim/. It buys no points. Every sentence that used to say the link was earned at no cost was
+// rewritten in the same commit, because a promise we no longer keep is worse than one we never
+// made. The rule itself is in src/lib/outbound.ts, where the card template reads it too.
+const linkRel = firmLinkRel(d);
 const roster = rosterFor(d);
 // Two letters from a name, first and last, for the avatar tile.
 const initialsOf = (name: string) => {

@@ -6,6 +6,7 @@ import BarChart from '../../components/BarChart.astro';
 import ColumnChart from '../../components/ColumnChart.astro';
 import Takeaways from '../../components/Takeaways.astro';
 import screens from '../../data/research/site-screens.json';
+import { firmLinkRel } from '../../lib/outbound';
 
 /**
  * A study, not a reference article: every figure is our own measurement of the firms in this
@@ -33,7 +34,7 @@ type Row = {
   city: string; state: string;
   performance: number; cwv: boolean; note: string;
   signals: number; has: Record<string, boolean>;
-  gatesPassed: boolean;
+  linkRel: string;
 };
 
 // The eight publishing signals, each one a thing the site either does or does not do. Named here
@@ -62,10 +63,10 @@ const measured: Row[] = firms
       note: f.data.digital.psi!.note ?? '',
       signals: Object.values(has).filter(Boolean).length,
       has,
-      // The same rule the profiles use: clearing every eligibility gate earns a followed link.
-      // Nothing about appearing on this page changes it.
-      gatesPassed: ['Verified', 'Certified', 'Distinguished', 'Elite']
-        .includes(f.data.score?.tier ?? ''),
+      // The same rule the profiles use, read from the same place. This page had its own copy
+      // of it, which is how fourteen firms kept a followed link here after the rule changed
+      // everywhere else: a measured list that links out is still a list that links out.
+      linkRel: firmLinkRel(f.data),
     };
   })
   .sort((a, b) => b.performance - a.performance
@@ -186,7 +187,7 @@ const description = `We ran Google's own speed test on ${measured.length} law fi
               <p class="site-rank">#{r.rank}</p>
               <h3><a href={`/firms/${r.slug}/`}>{r.name}</a></h3>
               <p class="site-meta">
-                <a href={r.website} rel={r.gatesPassed ? 'noopener' : 'nofollow noopener'}
+                <a href={r.website} rel={r.linkRel}
                   target="_blank">{r.domain} ↗</a>
                 <span> · {r.city}, {r.state}</span>
               </p>
