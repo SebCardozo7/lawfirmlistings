@@ -48,12 +48,17 @@
     // terms and the payment link while it is still on the page it enquired from, so the only
     // thing standing between an enquiry and a payment is the firm deciding.
     "FOLLOWUP_HOURS": "1",
-    // Twenty-four hours from the enquiry, so about twenty-three after the follow-up above.
-    // The question it asks changed with it on 2026-11-05: it used to ask whether a person had
-    // replied, and it now asks whether the firm has paid, because the follow-up answers the
-    // enquiry on its own and what is left to chase is the sale. One reminder per enquiry, and
-    // the link in it says so when the answer is yes.
-    "REMINDER_HOURS": "24"
+    // Forty-eight hours from the enquiry, so a working day sits between the two messages.
+    // Twenty-four was the first figure and it reads as pressure when the first email landed
+    // an hour after the enquiry: a firm deciding on a year of anything has not finished in a
+    // day. This is the second and last message either way.
+    // Who it goes to changed with it: it used to tell the owner a lead was still unanswered,
+    // and it now goes to the firm. PayPal tells the owner when somebody pays, so a reminder
+    // aimed at him is one he does not need. A correction or an appeal is the exception and
+    // still reaches him, because nobody should be sold anything for asking us to fix what we
+    // got wrong. One message per enquiry either way, and the owner's own notice carries the
+    // link that stops it.
+    "REMINDER_HOURS": "48"
   },
   "send_email": [
     { "name": "EMAIL" }

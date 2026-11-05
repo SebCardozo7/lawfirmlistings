@@ -199,7 +199,12 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
     // link, your own panel, and 350 USD a year", as an advertisement and filed the message in
     // Promotions, which is where a subject line built like a banner belongs. This one says what
     // the message is about, which is also what somebody answering an enquiry would write.
-    subject: `Your enquiry about listing ${e.firm}`,
+    // "Your enquiry about listing <firm>" was accurate and said nothing, and a Google Business
+    // title pushed it past 90 characters so the end was cut off in every client. This names
+    // what is in the message, including the half most subject lines would leave out, and it is
+    // still not a banner: no figure, no offer, no exclamation, nothing a classifier reads as an
+    // advertisement. The firm's own name is in the greeting a line later.
+    subject: 'What a listing changes for your firm, and what it does not',
     text: [
       greeting(e),
       '',
@@ -362,9 +367,23 @@ export async function cancelReminder(
   return 'cancelled';
 }
 
+/**
+ * The second and last message, and who it goes to depends on what was asked.
+ *
+ * It used to go to the owner in every case, saying a lead was unanswered. Sebastián changed
+ * that on 2026-11-05: PayPal tells him when a firm pays, so a reminder aimed at him is a
+ * reminder he does not need, and the message worth sending is the one that reaches the firm.
+ *
+ * A correction or an appeal is the exception and it matters. That sender was never quoted and
+ * never will be, so chasing it would be selling to somebody who asked us to fix something we
+ * got wrong, which is the one thing this directory promises is free. Those still go to the
+ * owner, because a correction nobody answered is a person's job and always was.
+ */
 export function reminderBody(
   e: Enquiry & { queuedAt?: string }, env: OutboundEnv, origin = SITE,
-): { subject: string; text: string } {
+): { to: 'firm' | 'owner'; subject: string; text: string } {
+  const price = (env.LISTING_PRICE_USD || '').trim();
+  const link = payLink(env);
   const url = answeredUrl(e, origin);
   // Measured rather than assumed. A send that fails stays queued and is retried, so by the time
   // one of these actually arrives it may be a good deal older than REMINDER_HOURS, and an email
@@ -373,48 +392,76 @@ export function reminderBody(
   const waited = Number.isFinite(since)
     ? Math.max(1, Math.round((Date.now() - since) / 3600000))
     : reminderHours(env);
+
+  if (isFreeRequest(e.request)) {
+    return {
+      to: 'owner',
+      subject: `Still unanswered: ${e.firm}`,
+      text: [
+        `${waited} hours ago this firm wrote in, and nothing here says a person has replied.`,
+        'It asked for something we do not charge for, so no second message went after it and',
+        'none will. A person is the only thing that was ever going to answer it.',
+        '',
+        `  Firm:     ${e.firm}`,
+        `  Contact:  ${e.contact}`,
+        `  Reply to: ${e.email}`,
+        e.website ? `  Website:  ${e.website}` : null,
+        e.city ? `  Market:   ${e.city}` : null,
+        e.request ? `  Asked:    ${e.request}` : null,
+        '',
+        'If you have already written to them, say so and this stops:',
+        url || '  (no cancel link: this reminder was queued before the link existed)',
+        '',
+        'This is the only reminder. Nothing else will chase it.',
+      ].filter(present).join('\n'),
+    };
+  }
+
   return {
-    subject: `Not paid yet: ${e.firm}`,
+    to: 'firm',
+    // Specific and true, and it is the sentence the firm has the strongest reason to open.
+    // Not a banner: no figure, no offer, no exclamation. The thing it names is a fact about
+    // their own page that they can check in ten seconds.
+    subject: 'Your profile stays up. Your link is what changes.',
     text: [
-      // What this asks changed on 2026-11-05 along with the hours. It used to ask whether a
-      // person had replied, which was the right question while the follow-up took six hours to
-      // arrive. The follow-up now lands within the hour and answers the enquiry by itself, so
-      // the only thing left to chase is the sale. A reminder that asks the wrong question is a
-      // reminder that gets dismissed.
-      // Conditional, because a correction or an appeal never had a quote and telling its sender
-      // that it has had the payment link for a day would be false. The check that caught this
-      // is the one that has guarded the same distinction since the reminder was written.
-      isFreeRequest(e.request)
-        ? `${waited} hours ago this firm wrote in, and nothing here says a person has replied.`
-        : `${waited} hours ago this firm enquired. It had the price and everything it needs to`,
-      isFreeRequest(e.request)
-        ? 'It asked for something we do not charge for, so no second message went after it.'
-        : 'pay within the hour, and nothing here says it has paid.',
+      greeting(e),
       '',
-      `  Firm:     ${e.firm}`,
-      `  Contact:  ${e.contact}`,
-      `  Reply to: ${e.email}`,
-      e.website ? `  Website:  ${e.website}` : null,
-      e.city ? `  Market:   ${e.city}` : null,
-      e.request ? `  Asked:    ${e.request}` : null,
+      `You asked about a listing ${waited} hours ago and we sent the terms. Nothing has`,
+      'happened since, which is a fine answer, and this is the only time we will ask.',
       '',
-      // The distinction the whole feature turns on, said in the email rather than left to be
-      // remembered: one of these had a second automatic message behind it and one had nothing.
-      isFreeRequest(e.request)
-        ? 'No quote was sent and none will be: this is a correction or an appeal, which we do'
-        : 'They have the price, the terms and the payment link. Nothing else reaches them',
-      isFreeRequest(e.request)
-        ? 'not charge for. A person is the only thing that was ever going to answer it.'
-        : 'automatically after this, so anything further is yours to send.',
+      'The part worth repeating, because it is the part firms misread:',
       '',
-      'If they have paid, or you have dealt with it, say so and this stops:',
-      url || '  (no cancel link: this reminder was queued before the link existed)',
+      '  **Your profile stays published whether or not you pay.** We publish it without',
+      '  asking and we measure it from the outside, and that does not change.',
       '',
-      'This is the only reminder. Nothing else will chase it.',
+      '  **Your outbound link is what changes.** Without a listing your profile links to',
+      '  your site with rel="nofollow", which passes nothing. With one it is followed, from',
+      '  your profile and from every card your firm appears in across the directory.',
+      '',
+      '  **And the panel**, where you maintain your offices, phone, practice areas, fee',
+      '  terms and logo, file case results with a docket number, and see every sub-score',
+      '  with the evidence under it.',
+      '',
+      price
+        ? `It is ${price} USD a year, and it moves no point of your score in either direction.`
+        : 'It moves no point of your score in either direction.',
+      'The score, the gates, the tier and your position in every ranking are measured from',
+      'public sources and come out the same whether you pay us or never speak to us again.',
+      '',
+      'If anything we publish about your firm is wrong, tell us and we will fix it. That is',
+      'free, it has always been free, and it does not depend on this.',
+      '',
+      link ? 'Secure your listing:' : null,
+      link || null,
+      '',
+      'If the answer is no, you need not reply. Nothing further is sent either way.',
+      '',
+      'Kind regards,',
+      'Sebastián Cardozo',
+      'Law Firm Listings',
     ].filter(present).join('\n'),
   };
 }
-
 /** Queued under the minute it is due, so the cron can ask for everything up to now. */
 export async function queueFollowUp(env: OutboundEnv, e: Enquiry): Promise<string | null> {
   if (!env.FOLLOWUPS) return null;
@@ -458,7 +505,13 @@ export function ownerNoticeBody(e: Enquiry, env: OutboundEnv): { subject: string
     // The same link the reminder carries. A notice that only reports is a notice you learn to
     // skim; this one can be acted on from the preview line.
     ...(answeredUrl(e) ? [
-      `You will be reminded at ${reminderHours(env)} hours unless you say you have answered:`,
+      // The link stops a message to the firm now, not a message to you, so the line has to say
+      // whose inbox is at stake. Clicking it after they have paid is the difference between a
+      // new customer and a new customer being asked whether they are still interested.
+      isFreeRequest(e.request)
+        ? `You will be reminded at ${reminderHours(env)} hours unless you say you have answered:`
+        : `At ${reminderHours(env)} hours we send them one more email, asking once whether they`
+          + ' still want it. If they have paid, or you would rather we did not, stop it here:',
       answeredUrl(e) as string,
     ] : []),
   ].filter(present).join('\n');
@@ -498,9 +551,19 @@ export async function drainReminders(
       await env.FOLLOWUPS.delete(k.name);
       continue;
     }
-    const { subject, text } = reminderBody(rec, env, rec.origin || SITE);
+    const { to, subject, text } = reminderBody(rec, env, rec.origin || SITE);
+    // Where it goes is the message's own answer, not this loop's. A priced enquiry is chased at
+    // the firm; a correction or an appeal is raised with the owner, because nobody should be
+    // sold anything for asking us to fix what we got wrong. `restrained` for the firm, the same
+    // as the follow-up, because that is an unsolicited commercial message and the owner's own
+    // mail is not.
+    const address = to === 'firm' ? rec.email : env.SUBMISSIONS_TO;
+    if (!address) {
+      await env.FOLLOWUPS.delete(k.name);
+      continue;
+    }
     try {
-      await sendTo(env, env.SUBMISSIONS_TO, subject, text);
+      await sendTo(env, address, subject, text, to === 'firm');
       await env.FOLLOWUPS.delete(k.name);
       sent += 1;
     } catch (err) {
