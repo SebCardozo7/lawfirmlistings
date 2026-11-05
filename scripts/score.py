@@ -1039,7 +1039,17 @@ def compute(firm):
                               key=lambda x: -x["max"])[:3]
                 for x in pend:
                     path.append(f"{x['code']} {x['label']}: not yet measured ({x['max']} pts)")
-            weakest = sorted([s for s in out if s["source"] != "pending" and s["pts"] < s["max"]],
+            # The same rule the comment above states, applied to the other way a point can be
+            # out of reach. "pending" is a measurement we owe and it is named as one; a
+            # sub-factor in NO_SOURCE_IN_MARKET is a point the firm cannot earn at any effort,
+            # because its state publishes no register we may query. Printing it as "+10
+            # available" on a firm's own scorecard sends it chasing a number nobody in
+            # Massachusetts or Maryland can have, and because A2 and A6 are the two largest
+            # sub-factors on the scale they took the top two of three slots and pushed the one
+            # real step off the end of the list.
+            weakest = sorted([s for s in out if s["source"] != "pending" and s["pts"] < s["max"]
+                              and not any(w in (s["source"] or "").lower()
+                                          for w in NO_SOURCE_IN_MARKET)],
                              key=lambda s: s["max"] - s["pts"], reverse=True)[:3 - len(path)]
             for s in weakest: path.append(f"{s['code']} {s['label']}: +{round(s['max']-s['pts'],1)} available")
             nxt = {"name": name, "needed": need, "gap": max(0, need - total),
