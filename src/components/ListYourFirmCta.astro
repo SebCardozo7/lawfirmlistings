@@ -40,8 +40,11 @@ const heading = practice && place ? `Do you handle ${practice} in ${place}?`
           the outside: the firm's own site, its Google listings, its state's attorney register.
           That means we get things wrong, and the person who can see it is the firm.
           <b> Telling us is free and always will be</b>, because the cost of being wrong about
-          a firm is ours rather than theirs. Running your own profile is the annual listing, at
-          {LISTING_PRICE} {LISTING_CADENCE}, and it moves no point of the score either way.
+          a firm is ours rather than theirs. Running your own profile is the annual listing,
+          {/* The space before the price has to be inside the expression. A text node that ends
+              in a newline has its trailing whitespace trimmed, so "at" and the figure were
+              rendering welded together as "at350 USD" on every page carrying this block. */}
+          {` at ${LISTING_PRICE} ${LISTING_CADENCE}`}, and it moves no point of the score either way.
         </p>
       </div>
       <div class="cta-actions">
