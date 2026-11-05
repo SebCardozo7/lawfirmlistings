@@ -43,7 +43,7 @@ export interface OutboundEnv {
   REMINDER_HOURS?: string;
 }
 
-import { isFreeRequest } from '../src/data/listing';
+import { isFreeRequest, isExistingProfile } from '../src/data/listing';
 
 export interface Enquiry {
   firm: string;
@@ -184,6 +184,13 @@ export function ackBody(e: Enquiry): { subject: string; text: string } {
 export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text: string } {
   const price = (env.LISTING_PRICE_USD || '').trim();
   const link = payLink(env);
+  // A firm already in the directory asked for a different thing and must not be read the
+  // stranger's letter. Four of its claims are false to that reader: the five requirements have
+  // been measured, we have already read the site, the profile is already live, and the followed
+  // link at the top of the list is something a firm at Verified or above already has for
+  // nothing. The branch is taken off the request the firm itself chose, so it needs no lookup
+  // and cannot be wrong about a firm the Worker cannot see.
+  const existing = isExistingProfile(e.request);
   return {
     // What a firm gets, before what it pays, with its own name in front of both. The old one
     // was "what a listing needs, and what it includes", which describes the email rather than
@@ -196,8 +203,15 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
     text: [
       greeting(e),
       '',
-      `Thank you for your enquiry about ${e.firm}. Everything required to make a decision is`,
-      'set out below.',
+      // The firm's name is not interpolated into this branch. It is in the greeting and in the
+      // subject already, and a Google Business title runs to sixty characters, which put a
+      // 134-character line in the middle of the paragraph on the firm that prompted this.
+      existing
+        ? 'Thank you. You asked to run the profile we already publish for your firm, so this sets'
+        : `Thank you for your enquiry about ${e.firm}. Everything required to make a decision is`,
+      existing
+        ? 'out what that changes and, as importantly, what it does not.'
+        : 'set out below.',
       '',
       // The price is the first thing a reader looks for, so it is the first thing they get, in
       // the one block built to be looked at rather than read. Where no figure is configured the
@@ -209,9 +223,9 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       '',
       'What the year includes:',
       '',
-      '  **A dofollow link to your site**, from your profile and from every card your firm',
-      '  appears in across the directory.',
-      '',
+      existing ? null : '  **A dofollow link to your site**, from your profile and from every card your firm',
+      existing ? null : '  appears in across the directory.',
+      existing ? null : '',
       '  **Your own panel**, where you maintain your offices, phone, practice areas, languages,',
       '  fee terms and logo, submit the client reviews you want quoted, and file case results',
       '  with a docket number. We review every submission before it is published.',
@@ -222,24 +236,41 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
       'measured from public records and are identical for a firm that pays and a firm that does',
       'not.',
       '',
-      'What your firm has to meet:',
-      '',
-      '1. **A site that names its lawyers**, served over HTTPS, with a working telephone number.',
-      '2. **A current licence** for every attorney named on it.',
-      '3. **No outstanding public discipline** against anyone named on it.',
-      '4. **A registered entity and a physical office.**',
-      '5. **A year in practice and ten client reviews.**',
-      '',
-      'All five are read from public sources, so there is nothing to send us, and only the first',
-      'is within your control. Each one is published in full, with every sub-factor and every',
-      'weight, at https://lawfirmlistings.com/methodology/#gates',
-      '',
+      // The honest version of the benefit that was cut above. A firm at Verified or above
+      // already has the followed link, and saying so costs us nothing we were entitled to.
+      existing ? 'Your outbound link is not part of this either. A firm that clears every eligibility' : null,
+      existing ? 'gate has a followed link already, at no cost, and keeps it whether or not it ever pays' : null,
+      existing ? 'us. Your own profile states which of the two applies to you.' : null,
+      existing ? '' : null,
+      existing ? null : 'What your firm has to meet:',
+      existing ? null : '',
+      existing ? null : '1. **A site that names its lawyers**, served over HTTPS, with a working telephone number.',
+      existing ? null : '2. **A current licence** for every attorney named on it.',
+      existing ? null : '3. **No outstanding public discipline** against anyone named on it.',
+      existing ? null : '4. **A registered entity and a physical office.**',
+      existing ? null : '5. **A year in practice and ten client reviews.**',
+      existing ? null : '',
+      existing ? null : 'All five are read from public sources, so there is nothing to send us, and only the first',
+      existing ? null : 'is within your control. Each one is published in full, with every sub-factor and every',
+      existing ? null : 'weight, at https://lawfirmlistings.com/methodology/#gates',
+      existing ? null : '',
+      existing ? 'Your profile is live and already measured, so there is no application here and nothing' : null,
+      existing ? 'to qualify for. Every gate and every weight behind what it says is published at' : null,
+      existing ? 'https://lawfirmlistings.com/methodology/#gates, and if any of it is wrong about your' : null,
+      existing ? 'firm, telling us costs nothing and always will.' : null,
+      existing ? '' : null,
       'What happens next:',
       '',
-      `1. We read your site and report where ${e.firm} stands against the five, within 12`,
-      '   working hours of your enquiry.',
+      existing
+        ? '1. We reply with where your firm stands today and what is currently holding it back,'
+        : `1. We read your site and report where ${e.firm} stands against the five, within 12`,
+      existing
+        ? '   within 12 working hours of your enquiry.'
+        : '   working hours of your enquiry.',
       '2. You settle the year, and we issue the receipt.',
-      '3. We provide your sign-in the same day, and your profile goes live with your link.',
+      existing
+        ? '3. We provide your sign-in the same day, and the profile becomes yours to maintain.'
+        : '3. We provide your sign-in the same day, and your profile goes live with your link.',
       '',
       // A label on its own line and the URL under it. In the text part that reads the way
       // anybody writes a link in an email; in the HTML part emailhtml.ts turns exactly that
