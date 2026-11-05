@@ -161,6 +161,23 @@ export const isFreeRequest = (value?: string | null): boolean =>
   !!value && FREE_REQUESTS.includes(value.trim());
 
 /**
+ * The first option on the form, and the one a firm reaches by clicking the call to action on
+ * its own profile, so it is the ordinary path rather than an edge case.
+ *
+ * It needs naming because the follow-up email was written for a stranger and reads wrong to the
+ * firm that picks it. A firm already in the directory is told what it has to meet, that we will
+ * read its site and report where it stands, and that its profile will go live, when all three
+ * already happened. The worst line is the first benefit: a followed link, which a firm at
+ * Verified or above already has, for nothing, because clearing the gates earns it. Selling a
+ * firm the thing it already owns is the fastest way to be read as a directory that does not
+ * know who it is writing to.
+ */
+export const EXISTING_PROFILE_REQUEST = 'Run the profile we already publish';
+
+export const isExistingProfile = (value?: string | null): boolean =>
+  !!value && value.trim() === EXISTING_PROFILE_REQUEST;
+
+/**
  * The form. Kept as data so the page renders it, the mailto builder serialises it and the
  * validator checks it from one definition, rather than three lists that drift apart.
  */
@@ -229,7 +246,7 @@ export const STEPS: Step[] = [
       'of these it is and we will tell you where your firm actually stands.',
     fields: [
       { name: 'request', label: 'What brings you here', type: 'select', required: true,
-        options: ['Run the profile we already publish',
+        options: [EXISTING_PROFILE_REQUEST,
                   'Ask to be considered for the directory',
                   ...FREE_REQUESTS,
                   'Ask about sponsorship'],
