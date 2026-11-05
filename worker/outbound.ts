@@ -199,12 +199,15 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
     // link, your own panel, and 350 USD a year", as an advertisement and filed the message in
     // Promotions, which is where a subject line built like a banner belongs. This one says what
     // the message is about, which is also what somebody answering an enquiry would write.
-    // "Your enquiry about listing <firm>" was accurate and said nothing, and a Google Business
-    // title pushed it past 90 characters so the end was cut off in every client. This names
-    // what is in the message, including the half most subject lines would leave out, and it is
-    // still not a banner: no figure, no offer, no exclamation, nothing a classifier reads as an
-    // advertisement. The firm's own name is in the greeting a line later.
-    subject: 'What a listing changes for your firm, and what it does not',
+    // Plain on purpose, and Sebastián's call after reading the alternative. A subject that
+    // states the message's argument reads as an opening move; this one reads as the reply to
+    // something the firm sent, which is what it is. It also keeps the shape of the
+    // acknowledgement that went out an hour earlier, so the two sit together in a thread view.
+    //
+    // What changed from the version this replaces is only the firm's name: interpolating it
+    // pushed the line past 90 characters on a Google Business title and the end was cut off in
+    // every client. The name is in the greeting a line later.
+    subject: 'Your enquiry about listing your firm',
     text: [
       greeting(e),
       '',
