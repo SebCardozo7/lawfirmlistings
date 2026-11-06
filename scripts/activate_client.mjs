@@ -117,14 +117,75 @@ if (!confirmedBy && !identity) {
   console.error('si la identidad se establecio de otra forma, --identity "como fue" lo deja asentado.');
   process.exit(2);
 }
+/**
+ * Three ways an address can prove it belongs to the firm, not one.
+ *
+ * The rule used to be "the address is on a domain this profile carries", and it was too narrow
+ * in a way two real enquiries showed within a day of each other. Greg Baumgartner wrote from
+ * texastriallawyers.com about baumgartnerlawyers.com. Maida Law Firm wrote from
+ * maidalawfirm.net about maidalawfirm.com. Neither is an impostor and both were refused.
+ *
+ * So the question is not whether the address sits on the one domain we happen to publish. It is
+ * whether the domain it sits on is demonstrably the firm's, and there are two more ways to show
+ * that which a machine can check:
+ *
+ *   it redirects    texastriallawyers.com answers 301 to baumgartnerlawyers.com. A firm that
+ *                   can point one domain at another controls both.
+ *   they publish    maidalawfirm.com prints contact@maidalawfirm.net on its own contact page.
+ *                   An address a firm publishes as its own is its own.
+ *
+ * What is deliberately not added is a fourth way that reads "somebody said so". That is what
+ * --identity is for, it is recorded on the account, and a human took it. The point of this
+ * check was never to make activation hard. It is that an account here can change what a public
+ * directory says about a law firm, and the file should say how we knew who was asking.
+ */
+async function headHost(url) {
+  try {
+    const r = await fetch(url, { method: 'HEAD', redirect: 'manual' });
+    const to = r.headers.get('location');
+    return to ? new URL(to, url).hostname.toLowerCase().replace(/^www\./, '') : null;
+  } catch { return null; }
+}
+
+async function provenOwn(host) {
+  for (const scheme of ['https://', 'http://']) {
+    const landed = await headHost(`${scheme}${host}/`);
+    if (landed && firmDomains.some(d => landed === d || landed.endsWith(`.${d}`))) {
+      return `${host} redirige a ${landed}`;
+    }
+  }
+  for (const d of firmDomains) {
+    for (const path of ['/', '/contact/', '/contact-us/']) {
+      try {
+        const r = await fetch(`https://${d}${path}`, {
+          headers: { 'User-Agent': 'lawfirmlistings-activation' },
+        });
+        if (!r.ok) continue;
+        if ((await r.text()).toLowerCase().includes(confirmedBy)) {
+          return `${d}${path} publica ${confirmedBy}`;
+        }
+      } catch { /* a page that does not answer proves nothing either way */ }
+    }
+  }
+  return null;
+}
+
+let identityNote = identity;
 if (confirmedBy) {
   const host = confirmedBy.split('@')[1] || '';
   const onFirmDomain = firmDomains.some(d => host === d || host.endsWith(`.${d}`) || d.endsWith(`.${host}`));
   if (!onFirmDomain && !identity) {
-    console.error(`${confirmedBy} no esta en el dominio de ${firm.name}.`);
-    console.error(`el perfil publica ${firmDomains.join(', ')}.`);
-    console.error('pedile que escriba desde ahi, o explica con --identity "como fue" si ya lo verificaste de otra forma.');
-    process.exit(2);
+    const proof = await provenOwn(host);
+    if (proof) {
+      identityNote = `verificado: ${proof}`;
+      console.log(`  ${confirmedBy} no esta en ${firmDomains.join(', ')}, y ${proof}.`);
+    } else {
+      console.error(`${confirmedBy} no esta en el dominio de ${firm.name}.`);
+      console.error(`el perfil publica ${firmDomains.join(', ')}.`);
+      console.error(`${host} no redirige a ninguno de esos, y ninguno publica esa direccion.`);
+      console.error('pedile que escriba desde ahi, o explica con --identity "como fue" si ya lo verificaste de otra forma.');
+      process.exit(2);
+    }
   }
 }
 
@@ -150,11 +211,16 @@ console.log(`  Vigente a    ${untilISO}  (${months} meses)`);
 console.log(`  Enlace       ${onList
   ? 'ya seguido: el dominio esta en paid-listings.ts. La suscripcion lo respalda en el perfil'
   : 'pasa de nofollow a seguido con esta suscripcion, en el proximo deploy'}`);
-console.log(`  Identidad    ${confirmedBy || '(sin direccion)'}${identity ? ` · ${identity}` : ''}`);
+console.log(`  Identidad    ${confirmedBy || '(sin direccion)'}${identityNote ? ` · ${identityNote}` : ''}`);
 console.log('');
 
 if (dryRun) {
   console.log('  nada escrito (--dry-run).');
+  // process.exit, and it has to be an exit: everything below this line writes. A first attempt
+  // at silencing the libuv assertion that Node on Windows throws when it exits with fetch's
+  // sockets still open replaced this with process.exitCode, which let a dry run fall straight
+  // through into writing the subscription. The noisy exit is the correct one, and the assertion
+  // is printed after the output rather than instead of it.
   process.exit(0);
 }
 
