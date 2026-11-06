@@ -12,6 +12,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Icon from './Icon.astro';
 import { firmLinkRel } from '../lib/outbound';
+import { asShown } from '../lib/stated';
 
 interface Props {
   firm: CollectionEntry<'firms'>;
@@ -20,7 +21,9 @@ interface Props {
   logoVariant?: string;
 }
 const { firm, rank, rankLabel, logoVariant } = Astro.props;
-const d = firm.data;
+// asShown, not firm.data. See src/lib/stated.ts: the panel corrects what a page says and
+// never what the score was computed from.
+const d = asShown(firm.data as any);
 const s = d.score;
 
 const isCertified = d.status === 'certified' && !!s;

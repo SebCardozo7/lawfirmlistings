@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { fitDescription } from '../../lib/seo';
 import { locality, officeLabel } from '../../lib/labels';
 import { firmLinkRel } from '../../lib/outbound';
+import { asShown } from '../../lib/stated';
 import { achievementsFor, marksFor } from '../../lib/achievements';
 import { rosterFor } from '../../lib/roster';
 import Icon from '../../components/Icon.astro';
@@ -27,7 +28,9 @@ export async function getStaticPaths() {
   return firms.map(f => ({ params: { slug: f.data.slug }, props: { firm: f } }));
 }
 const { firm } = Astro.props;
-const d = firm.data; const s = d.score;
+// asShown, not firm.data: a correction a firm made through the panel is displayed here and
+// is deliberately not what the scorer read. See src/lib/stated.ts.
+const d = asShown(firm.data as any); const s = d.score;
 const cohort = await getEntry('cohorts', d.cohort_id);
 
 /*

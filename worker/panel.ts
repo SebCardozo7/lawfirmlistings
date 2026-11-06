@@ -416,7 +416,12 @@ function dashboard(d: any, pending: any[]): string {
   <h2>What this panel does not change</h2>
   <p class="lede">Your score, your eligibility gates and your tier are measured, not entered. Nothing
     on these pages moves them, and a firm-managed profile is measured exactly the way any other
-    is. <a href="/claim/faq">How this works</a> explains what each section does reach.</p>`;
+    is. <a href="/claim/faq">How this works</a> explains what each section does reach.</p>
+  <p class="lede">Four of the details you can correct here are also read by the score: your
+    languages, your availability, your fee model and whether the consultation is free. Correcting
+    one changes what this profile says, and it does not move the number, because the number is
+    read from your own website. <b>Publishing it on your site is what moves the score, and that
+    costs you nothing.</b> We re-read every site monthly.</p>`;
 }
 
 function profileForm(d: any, flash?: string, bad = false): string {
