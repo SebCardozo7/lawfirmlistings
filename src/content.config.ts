@@ -236,6 +236,25 @@ const firms = defineCollection({
       since: z.string(),
       until: z.string(),
     }).optional(),
+    // What a firm told us about itself through the panel, kept beside the measured values
+    // rather than on top of them.
+    //
+    // Each of these four is read by score.py: languages and availability feed E3, availability
+    // also feeds E4, free_consultation and fee_model feed E1. A panel is something a firm pays
+    // for, and this site promises in five places that a listing moves no point of a score, so a
+    // panel submission that overwrote the measured field would have made that promise false the
+    // first time anybody used it, with the sub-factor still labelled "observed".
+    //
+    // The profile displays these, because the firm is the authority on itself. The scorer never
+    // reads them, because the score is a measurement of what a firm publishes where anybody can
+    // check it. Publishing it on their own site is what moves the number, and that is free.
+    firm_stated: z.object({
+      languages: z.array(z.string()).optional(),
+      fee_model: z.string().optional(),
+      free_consultation: z.boolean().optional(),
+      availability: z.array(z.string()).optional(),
+      stated_at: z.string().optional(),
+    }).optional(),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     similar: z.array(z.object({ name: z.string(), slug: z.string().nullable(), rating: z.string() })).default([]),
   }),

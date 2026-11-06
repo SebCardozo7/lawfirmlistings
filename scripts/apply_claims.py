@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import datetime as dt
 import glob
 import io
 import json
@@ -50,6 +51,23 @@ EXT = {"image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/svg
 # What a panel submission is allowed to write. Anything outside this cannot be reached from the
 # panel and must not be reachable from here either, whatever a stored record happens to contain.
 PROFILE_FIELDS = {"phone", "languages", "fee_model", "free_consultation", "availability", "offices"}
+
+# Of those six, these four are read by score.py and the other two are not, which was checked
+# field by field rather than assumed: languages and availability feed E3, availability also feeds
+# E4, free_consultation and fee_model feed E1. Together that is about thirteen points of pillar E
+# reachable by typing into a form.
+#
+# A panel is something a firm pays for, and this site promises in five places that a listing
+# moves no point of a score. Writing these straight into the profile would have made that false
+# the first time anybody used the panel, and the sub-factor would have carried source "observed",
+# which asserts we saw it on the firm's own site.
+#
+# So a firm's own version of these is kept beside the measured one rather than on top of it. The
+# profile displays what the firm says, because the firm is the authority on itself. score.py goes
+# on reading what crawl_public.py found, because the score is a measurement of what a firm
+# publishes where anybody can check it. Putting it on their own site is what moves the number,
+# and that costs nothing, which is the sentence the panel now prints.
+SCORED_FIELDS = {"languages", "fee_model", "free_consultation", "availability"}
 
 
 def wrangler(args: list[str], local: bool) -> str:
@@ -115,6 +133,15 @@ def apply_profile(firm: dict, item: dict) -> list[str]:
                     if before != office.get("address"):
                         firm["offices"][i]["address"] = office.get("address")
                         done.append(f"office {i + 1}: {before} -> {office.get('address')}")
+            continue
+        if field in SCORED_FIELDS:
+            stated = firm.setdefault("firm_stated", {})
+            before = stated.get(field)
+            stated[field] = change.get("to")
+            stated["stated_at"] = dt.date.today().isoformat()
+            done.append(f"firm_stated.{field}: {json.dumps(before, ensure_ascii=False)} -> "
+                        f"{json.dumps(change.get('to'), ensure_ascii=False)}"
+                        f"  (se muestra; no puntua)")
             continue
         before = firm.get(field)
         firm[field] = change.get("to")
