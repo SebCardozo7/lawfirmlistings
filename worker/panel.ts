@@ -896,7 +896,11 @@ export async function handlePanel(request: Request, env: PanelEnv): Promise<Resp
     // The same work and the same answer either way: a login that returns faster for a firm with
     // no account tells somebody which firms have one.
     const ok = await verifyPassword(String(form.get('password') ?? ''), acc?.hash
-      ?? 'pbkdf2$210000$AAAAAAAAAAAAAAAAAAAAAA$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+      // The count here has to be one the runtime accepts, or an unknown firm throws a 500 where
+      // a known one with a wrong password returns 401, which is both a crash and the user
+      // enumeration this dummy exists to prevent. It said 210000 and Workers caps PBKDF2 at
+      // 100000. See the note over ITERATIONS in worker/auth.ts.
+      ?? 'pbkdf2$100000$AAAAAAAAAAAAAAAAAAAAAA$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     if (!acc || !ok) return loginPage('That firm ID and password do not match.', 401);
     const token = await sign(env.PANEL_SECRET, { slug }, SESSION_SECONDS);
     return new Response(null, { status: 302,
