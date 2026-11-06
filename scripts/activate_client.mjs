@@ -128,17 +128,28 @@ if (confirmedBy) {
   }
 }
 
-const EARNED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
-const earnsItAnyway = EARNED.includes(firm.score?.tier ?? '');
+// El tier dejo de otorgar enlace seguido el 2026-11-05. Esta linea seguia diciendo "ya seguido
+// por tier Verified", que ahora es falso para todos y para nadie mas peligroso que para quien
+// lee esta salida antes de activar: le dice que el enlace ya estaba bien cuando es justo lo que
+// esta por entregar. La regla vive en src/data/paid-listings.ts y se lee de ahi, no se repite.
+const paidList = readFileSync(join('src', 'data', 'paid-listings.ts'), 'utf8');
+const listBlock = paidList.match(/PAID_LISTING_DOMAINS[^=]*=\s*\[([^\]]*)\]/);
+const onList = (listBlock?.[1] ?? '')
+  .split('\n')
+  .map(l => l.replace(/\/\/.*$/, ''))
+  .join('\n')
+  .match(/'([^']+)'/g)
+  ?.some(q => q.slice(1, -1).toLowerCase()
+    === String(firm.domain ?? '').toLowerCase().replace(/^www\./, '')) ?? false;
 
 console.log('');
 console.log(`  Firma        ${firm.name}`);
 console.log(`  Perfil       /firms/${slug}/`);
 console.log(`  Pago visto   ${paid}`);
 console.log(`  Vigente a    ${untilISO}  (${months} meses)`);
-console.log(`  Enlace       ${earnsItAnyway
-  ? `ya seguido por tier ${firm.score.tier}; la suscripcion lo sostiene si el tier baja`
-  : 'pasa de nofollow a seguido con esta suscripcion'}`);
+console.log(`  Enlace       ${onList
+  ? 'ya seguido: el dominio esta en paid-listings.ts. La suscripcion lo respalda en el perfil'
+  : 'pasa de nofollow a seguido con esta suscripcion, en el proximo deploy'}`);
 console.log(`  Identidad    ${confirmedBy || '(sin direccion)'}${identity ? ` · ${identity}` : ''}`);
 console.log('');
 
