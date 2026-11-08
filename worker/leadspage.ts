@@ -117,7 +117,8 @@ export async function handleLeads(request: Request, env: LeadsEnv, url: URL): Pr
       + `<td>${esc(l.city ?? '')}<small>${esc(l.practice ?? '')}</small></td>`
       + `<td>${esc(l.request ?? '')}</td>`
       + `<td><span class="tag ${l.status}">${esc(LABEL[l.status] ?? l.status)}</span>`
-      + `${l.closed_as ? `<small>${esc(l.closed_as)}</small>` : ''}</td>`
+      + `${l.closed_as ? `<small>${esc(l.closed_as)}</small>` : ''}`
+      + `${l.note ? `<small>${esc(l.note)}</small>` : ''}</td>`
       + `<td>${esc(l.arrived_at.slice(0, 10))}<small>${age === 0 ? 'today' : `${age} day${age === 1 ? '' : 's'} ago`}</small></td>`
       + '</tr>';
   }).join('');
