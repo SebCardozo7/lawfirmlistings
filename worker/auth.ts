@@ -71,7 +71,7 @@ function unb64url(s: string): Uint8Array {
  * `a === b` on a secret returns as soon as two bytes differ, and the time it took says how much
  * of the guess was right. This is only ever a few dozen bytes, so there is no reason to be clever.
  */
-function sameBytes(a: Uint8Array, b: Uint8Array): boolean {
+export function sameBytes(a: Uint8Array, b: Uint8Array): boolean {
   if (a.length !== b.length) return false;
   let diff = 0;
   for (let i = 0; i < a.length; i += 1) diff |= a[i] ^ b[i];
