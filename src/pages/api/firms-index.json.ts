@@ -49,6 +49,16 @@ interface Entry {
   g?: [string, number];
   /** the single sub-factor with the most points available: [code, label, available] */
   o?: [string, string, number];
+  /**
+   * The firm's own logo, which scripts/fetch_logos.py downloaded and public/logos/ serves.
+   *
+   * Usually just the extension, because every one of the 1,334 files we hold is named after
+   * the domain that is this entry's own key, so repeating the domain here would add 30KB to
+   * a file a Worker fetches. A file that ever breaks that convention carries its whole path
+   * instead, told apart by the slash, so the shorthand cannot quietly point at the wrong
+   * picture.
+   */
+  l?: string;
 }
 
 export const GET: APIRoute = async () => {
@@ -94,6 +104,14 @@ export const GET: APIRoute = async () => {
       }
     }
 
+    // The logo, as an extension where the convention holds and as a path where it does not.
+    const file = String(f.logo?.file ?? '');
+    const dot = file.lastIndexOf('.');
+    const ext = dot > 0 ? file.slice(dot + 1) : '';
+    const logo = !file ? undefined
+      : file === `/logos/${domain}.${ext}` ? ext
+      : file;
+
     const next = f.score?.next_tier;
     out[domain] = {
       s: String(f.slug ?? ''),
@@ -104,6 +122,7 @@ export const GET: APIRoute = async () => {
       w: weakest,
       ...(next?.name && typeof next.gap === 'number' ? { g: [next.name, next.gap] as [string, number] } : {}),
       ...(best ? { o: best } : {}),
+      ...(logo ? { l: logo } : {}),
     };
   }
 
