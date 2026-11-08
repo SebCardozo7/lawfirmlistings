@@ -20,7 +20,7 @@
  * that rate the whole list takes a month, and a month of warming is what the domain needs
  * anyway.
  */
-import { firmByDomain, type FirmEntry } from './dossier';
+import { firmByDomain, logoFor, type FirmEntry } from './dossier';
 import { newLeadId, recordLead } from './ledger';
 import { pagesFor } from './pages';
 import {
@@ -30,9 +30,14 @@ import {
 import { sendTo } from './outbound';
 import { verificationLetter } from './verifyletter';
 import { columns, rows, stacked } from './charts';
+import {
+  BUILD_HOUR, SEND_FROM, SEND_TO, approveBatch, batchState, capFor, dayOf, getBatch,
+  type Batch, type BatchState,
+} from './batch';
+
 import { composer, isPreview, previewHtml, readCompose, type ComposeState } from './composer';
 import {
-  ROUTE, ago, esc, fig, hidden, link, shell, since, today, type Nav,
+  ROUTE, ago, avatar, esc, fig, hidden, link, shell, since, today, visit, type Nav,
 } from './deskui';
 
 export interface ProspectPageEnv {
@@ -40,14 +45,24 @@ export interface ProspectPageEnv {
   ASSETS?: Fetcher;
   EMAIL?: { send(message: any): Promise<unknown> };
   SUBMISSIONS_FROM?: string;
+  SUBMISSIONS_TO?: string;
   REPLY_TO?: string;
   POSTAL_ADDRESS?: string;
 }
 
 /**
- * Letters a day. Not a setting, because a number somebody can raise in a hurry is a number
- * that gets raised in a hurry, and the cost of being wrong here is the sending domain.
+ * Letters a day, which is not a fixed number and not a setting.
+ *
+ * It ramps with how many have ever gone out, because a domain that has sent a few dozen
+ * emails in its life and then sends 25 a day gets filed as spam, and this one also carries
+ * the replies to real leads and the panel sign-ins. worker/batch.ts owns the steps, and the
+ * manual send on these pages obeys the same one the cron does: two different daily limits in
+ * one system is one limit and one bug.
  */
+export const dailyCap = (all: Prospect[]): number =>
+  capFor(all.filter(p => p.sent_at).length);
+
+/** The ceiling the ramp reaches, which is what the pages call "of N". */
 export const CAP = 25;
 
 const LABEL: Record<ProspectStatus, string> = {
@@ -68,7 +83,8 @@ function figures(all: Prospect[]): string {
   const answered = t.replied;
   const reach = t.sent + t.replied;
   const rate = reach ? Math.round((answered / reach) * 100) : 0;
-  const room = Math.max(0, CAP - sentToday(all));
+  const cap = dailyCap(all);
+  const room = Math.max(0, cap - sentToday(all));
 
   return [
     fig(String(t.total), 'firms with an address'),
@@ -76,7 +92,7 @@ function figures(all: Prospect[]): string {
     fig(String(t.sent + t.replied), 'letters sent'),
     fig(String(answered), 'replied', answered ? 'lit' : undefined),
     fig(reach ? `${rate}%` : 'n/a', `answered of ${reach} reached`),
-    fig(String(room), `left to send today, of ${CAP}`, room === 0 ? 'hot' : undefined),
+    fig(String(room), `left to send today, of ${cap}`, room === 0 ? 'hot' : undefined),
   ].join('');
 }
 
@@ -152,7 +168,7 @@ function charts(all: Prospect[]): string {
   }
   const pace = columns({
     title: 'Letters sent a day',
-    note: `the cap is ${CAP}`,
+    note: `the cap today is ${dailyCap(all)}, and it ramps to ${CAP}`,
     data: days,
     unit: 'days',
   });
@@ -198,6 +214,142 @@ function postalWarning(env: ProspectPageEnv): string {
     + 'letter below starts working.</div>';
 }
 
+/**
+ * When the next letters go out, in one sentence, at the top of the view.
+ *
+ * "When do the emails get sent" has six different true answers depending on where the day is,
+ * and a page that says nothing leaves a person guessing at which one applies. Each state here
+ * says the time as well as the fact, because the whole point of handing the sending to a cron
+ * is that a person stops having to watch it.
+ */
+function batchBanner(state: BatchState, token: string): string {
+  const at = `${SEND_FROM}:00 and ${SEND_TO}:00 UTC`;
+  const open = (b: Batch, label: string) =>
+    ` <a href="${esc(link(ROUTE.batch, token, { on: b.on }))}">${esc(label)}</a>`;
+
+  switch (state.kind) {
+    case 'none':
+      return '<div class="flag"><b>No batch is waiting.</b> One is proposed for '
+        + `${esc(state.on)} at ${BUILD_HOUR}:00 UTC today and emailed to you. Nothing is sent `
+        + 'until you approve it.</div>';
+    case 'waiting':
+      return `<div class="flag"><b>${state.batch.slugs.length} letters are waiting on you</b> `
+        + `for ${esc(state.batch.on)}. Nothing goes out until you approve them, and a batch `
+        + 'nobody approves is simply dropped.'
+        + open(state.batch, 'Read the list and approve') + '</div>';
+    case 'declined':
+      return `<div class="flag"><b>Nothing approved for ${esc(state.batch.on)}.</b> `
+        + 'No letters go out that day. A fresh list is proposed the following afternoon.'
+        + open(state.batch, 'Change that') + '</div>';
+    case 'approved':
+      return `<div class="said"><b>${state.left} approved for ${esc(state.batch.on)}</b>, `
+        + `going out between ${at}, a couple every quarter of an hour.`
+        + open(state.batch, 'See the list') + '</div>';
+    case 'sending':
+      return `<div class="said"><b>Sending now.</b> ${state.left} of `
+        + `${state.batch.approved?.length ?? 0} still to go today, finishing by ${SEND_TO}:00 `
+        + 'UTC.' + open(state.batch, 'See the list') + '</div>';
+    case 'done':
+      return `<div class="said"><b>${state.batch.sent.length} sent on `
+        + `${esc(state.batch.on)}.</b> The next list is proposed at ${BUILD_HOUR}:00 UTC and `
+        + 'emailed to you.' + open(state.batch, 'See it') + '</div>';
+    default:
+      return '';
+  }
+}
+
+/**
+ * The page the link in that email opens.
+ *
+ * It opens. It does not send, and it does not approve: mail scanners follow links in incoming
+ * messages to see where they go, so a GET that approved a day's sending would be a GET that a
+ * spam filter performs on the owner's behalf. Approving is a POST from the form below, which
+ * is the same rule worker/unsubscribe.ts follows for the opposite reason.
+ *
+ * Every row is ticked when it arrives, because the list has already passed every rule we have
+ * and the person is here to catch the thing a rule cannot: that this address belongs to the
+ * firm's web developer rather than to the firm.
+ */
+export async function batchPage(
+  env: ProspectPageEnv, token: string, on: string, openLeads: number, said?: string,
+): Promise<Response> {
+  const all = await listProspects(env);
+  // With no day on the URL, the batch that matters: today's if there is one, otherwise
+  // tomorrow's. The link in the email always names a day, so this is the case where somebody
+  // has bookmarked the page, and sending them to a 404 for today when five letters are
+  // waiting for tomorrow is the wrong answer to the right question.
+  const current = await batchState(env);
+  const batch = await getBatch(env,
+    on || ('batch' in current ? current.batch.on : dayOf(new Date())));
+  if (!batch) {
+    return shell('No batch', nav(token, all, openLeads),
+      `<a class="back" href="${esc(link(ROUTE.prospects, token))}">&larr; Prospecting</a>`
+      + '<h1>No batch for that day</h1>'
+      + '<p class="lede">A batch is built at '
+      + `${BUILD_HOUR}:00 UTC for the following day, and only when somebody is waiting and a `
+      + 'postal address is configured.</p>', 404);
+  }
+
+  const rows: Prospect[] = [];
+  for (const slug of batch.slugs) {
+    const p = await getProspect(env, slug);
+    if (p) rows.push(p);
+  }
+  const firms = await Promise.all(rows.map(p => firmByDomain(env, p.domain)));
+  const decided = batch.approved;
+  const ticked = (slug: string) => (decided ? decided.includes(slug) : true);
+  const gone = (slug: string) => batch.sent.includes(slug);
+
+  const table = '<div class="sheet"><div class="scroll"><table><thead><tr>'
+    + '<th>Send</th><th>Firm</th><th>Score</th><th>On our pages</th><th>Address</th>'
+    + '<th></th></tr></thead><tbody>'
+    + rows.map((p, i) => {
+      const out = gone(p.slug);
+      return '<tr>'
+        + `<td><input type="checkbox" name="slug" value="${esc(p.slug)}"`
+        + `${ticked(p.slug) && !out ? ' checked' : ''}${out ? ' disabled' : ''} `
+        + `aria-label="Send to ${esc(p.name)}"></td>`
+        + '<td><div class="who">' + avatar(p.name, logoFor(firms[i], p.domain)) + '<div>'
+        + `<a class="name" href="${esc(link(ROUTE.prospect(p.slug), token))}">`
+        + `${esc(p.name)}</a><span class="sub">${esc(p.domain)}</span>`
+        + `<span class="sub">${visit(p.domain)}</span></div></div></td>`
+        + `<td>${firms[i] ? `<span class="num">${firms[i]!.sc}</span> `
+          + `<span class="pill">${esc(firms[i]!.t)}</span>`
+          : '<span class="warnish">not in the index</span>'}</td>`
+        + `<td class="num">${p.pages}</td>`
+        + `<td>${esc(p.email)}</td>`
+        + `<td>${out ? '<span class="pill sent">Sent</span>'
+          : `<a href="${esc(link(ROUTE.prospect(p.slug), token))}">Read the letter</a>`}</td>`
+        + '</tr>';
+    }).join('')
+    + '</tbody></table></div></div>';
+
+  const form = `<form method="post" action="${esc(ROUTE.batch)}">`
+    + hidden(token, { on: batch.on, action: 'approve' })
+    + table
+    + '<div class="row" style="margin-top:12px">'
+    + `<button class="send" name="go" value="1">Approve the ticked for ${esc(batch.on)}</button>`
+    + '<button name="none" value="1">Send none that day</button>'
+    + '</div></form>';
+
+  const state = decided
+    ? `<p class="lede">${decided.length} of ${batch.slugs.length} approved on `
+      + `${esc(String(batch.approved_at).slice(0, 16).replace('T', ' '))}. `
+      + `${batch.sent.length} sent so far. You can still change it until they go out.</p>`
+    : '<p class="lede">Nothing is approved yet, so nothing will be sent. Untick anybody who '
+      + 'should not hear from us: an address that belongs to a web developer or a service '
+      + 'rather than to the firm is what this page exists to catch.</p>';
+
+  return shell(`Batch for ${batch.on}`, nav(token, all, openLeads),
+    `<a class="back" href="${esc(link(ROUTE.prospects, token))}">&larr; Prospecting</a>`
+    + `<div class="mast"><h1>${batch.slugs.length} letters for ${esc(batch.on)}</h1>`
+    + `<span class="note">going out between ${SEND_FROM}:00 and ${SEND_TO}:00 UTC</span></div>`
+    + state
+    + (said ? `<div class="said">${esc(said)}</div>` : '')
+    + postalWarning(env)
+    + form);
+}
+
 export async function prospectsPage(
   env: ProspectPageEnv, token: string, openLeads: number, said?: string,
 ): Promise<Response> {
@@ -212,7 +364,7 @@ export async function prospectsPage(
       + 'write to.</div>');
   }
 
-  const room = Math.max(0, CAP - sentToday(all));
+  const room = Math.max(0, dailyCap(all) - sentToday(all));
   const { ready, blocked } = await nextBatch(env, Math.max(room, 1));
   const queue = ready.slice(0, room);
 
@@ -221,8 +373,11 @@ export async function prospectsPage(
   const queueRows = queue.map((p, i) => {
     const f = firms[i];
     return '<tr>'
-      + `<td><a class="name" href="${esc(link(ROUTE.prospect(p.slug), token))}">`
-      + `${esc(p.name)}</a><span class="sub">${esc(p.domain)}</span></td>`
+      + '<td><div class="who">' + avatar(p.name, logoFor(f, p.domain)) + '<div>'
+      + `<a class="name" href="${esc(link(ROUTE.prospect(p.slug), token))}">`
+      + `${esc(p.name)}</a><span class="sub">${esc(p.domain)}</span>`
+      + `<span class="sub">${visit(p.domain)}</span>`
+      + '</div></div></td>'
       + `<td>${f ? `<span class="num">${f.sc}</span> <span class="pill">${esc(f.t)}</span>`
         : '<span class="warnish">not in the index</span>'}</td>`
       + `<td class="num">${p.pages}</td>`
@@ -237,7 +392,7 @@ export async function prospectsPage(
       + '<th>Firm</th><th>Score</th><th>On our pages</th><th>State</th><th>Address</th>'
       + '<th></th></tr></thead><tbody>' + queueRows + '</tbody></table></div></div>'
     : `<div class="empty">${room === 0
-      ? `Today's ${CAP} are sent. The queue refills at midnight UTC.`
+      ? `Today's ${dailyCap(all)} are sent. The queue refills at midnight UTC.`
       : 'Nobody is waiting. Every firm on the list has been written to, replied, '
         + 'unsubscribed or is a client.'}</div>`;
 
@@ -246,13 +401,18 @@ export async function prospectsPage(
     .sort((a, b) => String(b.sent_at).localeCompare(String(a.sent_at)))
     .slice(0, 12);
 
+  // The index is already loaded and cached by the queue above, so these are free lookups.
+  const recentFirms = await Promise.all(recent.map(r => firmByDomain(env, r.domain)));
+
   const recentTable = recent.length
     ? '<h2>Written to, most recent first</h2><div class="sheet"><div class="scroll">'
       + '<table><thead><tr><th>Firm</th><th>Sent</th><th>Status</th><th>What happened</th>'
-      + '</tr></thead><tbody>' + recent.map(p =>
+      + '</tr></thead><tbody>' + recent.map((p, i) =>
         '<tr>'
-        + `<td><a class="name" href="${esc(link(ROUTE.prospect(p.slug), token))}">`
-        + `${esc(p.name)}</a><span class="sub">${esc(p.email)}</span></td>`
+        + '<td><div class="who">' + avatar(p.name, logoFor(recentFirms[i], p.domain)) + '<div>'
+        + `<a class="name" href="${esc(link(ROUTE.prospect(p.slug), token))}">`
+        + `${esc(p.name)}</a><span class="sub">${esc(p.email)}</span>`
+        + '</div></div></td>'
         + `<td>${esc(String(p.sent_at).slice(0, 10))}`
         + `<span class="sub">${esc(ago(since(p.sent_at)))}</span></td>`
         + `<td><span class="pill ${esc(p.status)}">${esc(LABEL[p.status] ?? p.status)}</span></td>`
@@ -277,6 +437,7 @@ export async function prospectsPage(
     + 'a firm that answers hears about that from a person, in the reply.</p>'
     + (said ? `<div class="said">${esc(said)}</div>` : '')
     + postalWarning(env)
+    + batchBanner(await batchState(env), token)
     + `<div class="figures">${figures(all)}</div>`
     + charts(all)
     + `<h2>Next ${queue.length === 1 ? 'one' : queue.length} to write to, most-listed first</h2>`
@@ -315,7 +476,8 @@ export async function prospectPage(
   const [firm, pages] = await Promise.all([firmByDomain(env, p.domain), pagesFor(env, p.slug)]);
   const built = verificationLetter(p, pages, firm, env);
   const why = await canSend(env, p);
-  const room = Math.max(0, CAP - sentToday(all));
+  const cap = dailyCap(all);
+  const room = Math.max(0, cap - sentToday(all));
 
   let body: string;
   if (built.blocked) {
@@ -327,7 +489,7 @@ export async function prospectPage(
       + `<iframe title="The letter" sandbox srcdoc="${esc(previewHtml(built.letter!.text, state))}">`
       + '</iframe></div>';
   } else if (room === 0) {
-    body = `<div class="blocked"><b>Today's ${CAP} are sent.</b> The cap exists so the domain `
+    body = `<div class="blocked"><b>Today's ${cap} are sent.</b> The cap exists so the domain `
       + 'that carries our replies and sign-ins keeps being delivered. This one goes out '
       + 'tomorrow.</div>';
   } else {
@@ -344,8 +506,23 @@ export async function prospectPage(
     });
   }
 
+  // Which batch this firm is in, if any, so the row answers "when does this one go out"
+  // rather than leaving a person to work it out from the banner on the other page.
+  const sending = await batchState(env);
+  const inBatch = 'batch' in sending && sending.batch.slugs.includes(p.slug)
+    ? sending.batch : null;
+  const when = !inBatch ? null
+    : inBatch.sent.includes(p.slug) ? 'already sent in that batch'
+    : !inBatch.approved ? `proposed for ${inBatch.on}, waiting on you`
+    : inBatch.approved.includes(p.slug)
+      ? `approved for ${inBatch.on}, between ${SEND_FROM}:00 and ${SEND_TO}:00 UTC`
+      : `left out of the batch for ${inBatch.on}`;
+
   const facts = [
     ['Status', `<span class="pill ${esc(p.status)}">${esc(LABEL[p.status] ?? p.status)}</span>`],
+    when ? ['Goes out', `${esc(when)}`
+      + ` &middot; <a href="${esc(link(ROUTE.batch, token, { on: inBatch!.on }))}">the batch</a>`]
+      : null,
     ['Address', esc(p.email)],
     ['Domain', esc(p.domain)],
     ['State', esc(String(p.state ?? '').toUpperCase())],
@@ -365,7 +542,10 @@ export async function prospectPage(
 
   return shell(p.name, nav(token, all, openLeads),
     `<a class="back" href="${esc(link(ROUTE.prospects, token))}">&larr; Prospecting</a>`
-    + `<div class="mast"><h1>${esc(p.name)}</h1>`
+    + '<div class="mast">'
+    + avatar(p.name, logoFor(firm, p.domain), 30)
+    + `<h1>${esc(p.name)}</h1>`
+    + visit(p.domain)
     + `<span class="note">${esc(p.domain)}</span></div>`
     + '<p class="lede">Never written to from our side unless the history below says otherwise.</p>'
     + (said ? `<div class="said">${esc(said)}</div>` : '')
@@ -383,14 +563,15 @@ export async function prospectPage(
     + '</div></div></div>');
 }
 
-const backTo = (path: string, token: string, said: string): Response =>
-  new Response(null, {
+const backTo = (
+  path: string, token: string, said: string, extra: Record<string, string> = {},
+): Response => {
+  const q = new URLSearchParams({ t: token, ...extra, said });
+  return new Response(null, {
     status: 303,
-    headers: {
-      location: `${path}?t=${encodeURIComponent(token)}&said=${encodeURIComponent(said)}`,
-      'cache-control': 'no-store',
-    },
+    headers: { location: `${path}?${q.toString()}`, 'cache-control': 'no-store' },
   });
+};
 
 /**
  * Everything the prospecting view can do, and the order of the checks is the point.
@@ -402,6 +583,24 @@ const backTo = (path: string, token: string, said: string): Response =>
 export async function prospectAct(
   env: ProspectPageEnv, form: FormData, token: string, openLeads: number,
 ): Promise<Response> {
+  // Approving a batch is about a day rather than about a firm, so it is answered before the
+  // row lookup below, which would 404 on a form that carries no slug.
+  if (String(form.get('action') ?? '') === 'approve') {
+    const on = String(form.get('on') ?? '');
+    // "Send none" is a decision and is recorded as one, rather than being the same thing as
+    // never having opened the page. The difference matters to the banner and to anybody
+    // wondering tomorrow why nothing went out.
+    const slugs = form.get('none') ? [] : form.getAll('slug').map(String);
+    const batch = await approveBatch(env, on, slugs);
+    if (!batch) return backTo(ROUTE.prospects, token, 'No batch for that day.');
+    return backTo(ROUTE.batch, token,
+      slugs.length
+        ? `${batch.approved?.length ?? 0} approved for ${on}. They go out between `
+          + `${SEND_FROM}:00 and ${SEND_TO}:00 UTC that day.`
+        : `Nothing will be sent on ${on}.`,
+      { on });
+  }
+
   const slug = String(form.get('slug') ?? '');
   const p = await getProspect(env, slug);
   if (!p) {
@@ -477,8 +676,9 @@ export async function prospectAct(
     const why = await canSend(env, p);
     if (why) return backTo(where, token, `Nothing sent: ${why}.`);
     const all = await listProspects(env);
-    if (sentToday(all) >= CAP) {
-      return backTo(where, token, `Nothing sent: today's ${CAP} are already out.`);
+    if (sentToday(all) >= dailyCap(all)) {
+      return backTo(where, token,
+        `Nothing sent: today's ${dailyCap(all)} are already out.`);
     }
 
     try {

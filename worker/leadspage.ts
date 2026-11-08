@@ -36,7 +36,7 @@
  * lacks.
  */
 import { sameBytes } from './auth';
-import { dossierFor, type Dossier } from './dossier';
+import { dossierFor, logoFor, type Dossier } from './dossier';
 import {
   addNote, getLead, listLeads, recordSend, setFollowUp, setStatus,
   type Lead, type LeadStatus, type LeadEvent, RESOLVED, STATUSES,
@@ -47,13 +47,15 @@ import { render, TEMPLATES, templateById, priceOf } from './templates';
 import { columns, rows, stacked, tooFew } from './charts';
 import { composer, isPreview, previewHtml, readCompose, type ComposeState } from './composer';
 import {
-  CAP, prospectAct, prospectPage, prospectsPage, type ProspectPageEnv,
+  CAP, batchPage, prospectAct, prospectPage, prospectsPage, type ProspectPageEnv,
 } from './prospectpage';
 import {
-  ROUTE, ago, esc, fig, hidden, link, shell, since, today, NOT_FOUND, type Nav,
+  ROUTE, ago, avatar, esc, fig, hidden, link, shell, since, today, visit,
+  NOT_FOUND, type Nav,
 } from './deskui';
 
 export interface LeadsEnv extends ProspectPageEnv {
+  SUBMISSIONS_TO?: string;
   FOLLOWUPS?: KVNamespace;
   PANEL?: KVNamespace;
   ASSETS?: Fetcher;
@@ -340,8 +342,7 @@ function leadPanel(opts: {
   const facts: [string, string][] = [
     ['Contact', esc(lead.contact)],
     ['Email', `<a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>`],
-    ['Website', lead.website
-      ? `<a href="${esc(lead.website)}" target="_blank" rel="noopener">${esc(lead.website)}</a>`
+    ['Website', lead.website ? visit(lead.website, lead.website.replace(/^https?:\/\//, ''))
       : 'not given'],
     ['Market', `${esc(lead.city ?? 'not given')}`
       + `${lead.practice ? ` &middot; ${esc(lead.practice)}` : ''}`],
@@ -447,10 +448,15 @@ async function listPage(
     const here = link(ROUTE.leads, token,
       isOpen ? {} : { open: l.id, view: state.view, brand: state.restrained ? '0' : '1' });
     const row = `<tr class="lead${isOpen ? ' open' : ''}">`
-      + `<td><a class="caret" href="${esc(here)}" `
-      + `title="${isOpen ? 'Close' : 'Open here'}">${isOpen ? '&#9662;' : '&#9656;'}</a> `
+      + '<td><div class="who">'
+      + `<a class="caret" href="${esc(here)}" style="padding-top:4px" `
+      + `title="${isOpen ? 'Close' : 'Open here'}">${isOpen ? '&#9662;' : '&#9656;'}</a>`
+      + avatar(l.firm, logoFor(dossiers[i].firm, dossiers[i].domain))
+      + '<div>'
       + `<a class="name" href="${esc(link(ROUTE.lead(l.id), token))}">${esc(l.firm)}</a>`
-      + `<span class="sub" style="margin-left:17px">${esc(l.contact)}</span></td>`
+      + `<span class="sub">${esc(l.contact)}</span>`
+      + `${l.website ? `<span class="sub">${visit(l.website)}</span>` : ''}`
+      + '</div></div></td>'
       + `<td>${dossierCell(dossiers[i])}</td>`
       + `<td>${esc(l.email)}${l.city ? `<span class="sub">${esc(l.city)}</span>` : ''}</td>`
       + `<td>${esc(l.request ?? '')}</td>`
@@ -519,8 +525,11 @@ async function leadPage(
 
   return shell(lead.firm, nav,
     `<a class="back" href="${esc(link(ROUTE.leads, token))}">&larr; All leads</a>`
-    + `<div class="mast"><h1>${esc(lead.firm)}</h1>`
+    + '<div class="mast">'
+    + avatar(lead.firm, logoFor(d.firm, d.domain), 30)
+    + `<h1>${esc(lead.firm)}</h1>`
     + `<span class="pill ${esc(lead.status)}">${esc(LABEL[lead.status])}</span>`
+    + visit(lead.website)
     + `<span class="note">${price ? `list price ${price} USD` : 'no price configured'}</span>`
     + '</div>'
     + '<p class="lede">This lead has a page of its own so it can be opened, linked and left '
@@ -636,6 +645,7 @@ function routeOf(pathname: string): { view: string; arg: string } | null {
   if (path === '/api/leads') return { view: 'overview', arg: '' };
   if (path === '/api/leads/list') return { view: 'leads', arg: '' };
   if (path === '/api/leads/prospects') return { view: 'prospects', arg: '' };
+  if (path === '/api/leads/batch') return { view: 'batch', arg: '' };
   const lead = /^\/api\/leads\/lead\/([A-Za-z0-9_-]{1,64})$/.exec(path);
   if (lead) return { view: 'lead', arg: lead[1] };
   const pro = /^\/api\/leads\/prospect\/([A-Za-z0-9_.-]{1,160})$/.exec(path);
@@ -665,7 +675,7 @@ export async function handleLeads(request: Request, env: LeadsEnv, url: URL): Pr
     if (!(await allowed(env, token))) return shell('Not found', null, NOT_FOUND, 404);
 
     const leads = await listLeads(env, 400);
-    if (route.view === 'prospect' || route.view === 'prospects') {
+    if (route.view === 'prospect' || route.view === 'prospects' || route.view === 'batch') {
       return prospectAct(env, form, token, openLeadsIn(leads));
     }
     return leadAct(env, form, token, route.view === 'lead' ? 'lead' : 'list');
@@ -704,6 +714,8 @@ export async function handleLeads(request: Request, env: LeadsEnv, url: URL): Pr
     case 'prospects': return prospectsPage(env, token, await openCount(), said);
     case 'prospect':
       return prospectPage(env, token, route.arg, await openCount(), readCompose(q), said);
+    case 'batch':
+      return batchPage(env, token, q.get('on') ?? '', await openCount(), said);
     default: return shell('Not found', null, NOT_FOUND, 404);
   }
 }

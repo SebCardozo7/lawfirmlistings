@@ -36,6 +36,7 @@ export const ROUTE = {
   lead: (id: string) => `/api/leads/lead/${encodeURIComponent(id)}`,
   prospects: '/api/leads/prospects',
   prospect: (slug: string) => `/api/leads/prospect/${encodeURIComponent(slug)}`,
+  batch: '/api/leads/batch',
 };
 
 /** A link inside the desk, with the token carried along because every page needs it. */
@@ -166,6 +167,19 @@ const BASE =
   + '.warnish{color:var(--warn)}'
   + '.caret{display:inline-block;width:11px;color:var(--muted);text-decoration:none}'
 
+  // The mark, and the initials that stand in for it.
+  + '.ava{display:inline-block;vertical-align:middle;object-fit:contain;background:#fff;'
+  + 'border:1px solid var(--line);flex:none}'
+  + '.ava.mono{display:inline-flex;align-items:center;justify-content:center;font-weight:600;'
+  + 'letter-spacing:.02em;border-color:transparent}'
+  + '.who{display:flex;gap:9px;align-items:flex-start;min-width:0}'
+  + '.who>div{min-width:0}'
+  // noreferrer as well as noopener: following it must not tell the firm's own server which
+  // page of ours the person came from, and that page is a private desk behind a token.
+  + '.visit{font-size:12px;white-space:nowrap;text-decoration:none;border:1px solid var(--line);'
+  + 'border-radius:7px;padding:2px 8px;display:inline-block;background:var(--panel)}'
+  + '.visit:hover{background:var(--raise)}'
+
   // Pills.
   + '.pill{display:inline-block;font:500 11.5px/1.5 var(--ui);padding:1px 9px;border-radius:99px;'
   + 'border:1px solid var(--line);white-space:nowrap;background:var(--raise)}'
@@ -284,6 +298,47 @@ export const hidden = (token: string, extra: Record<string, string> = {}): strin
   `<input type="hidden" name="t" value="${esc(token)}">`
   + Object.entries(extra).map(([k, v]) =>
     `<input type="hidden" name="${esc(k)}" value="${esc(v)}">`).join('');
+
+/**
+ * The firm's mark, or its initials.
+ *
+ * A list of twelve law firms in twelve identical rows is a list with no way in for the eye,
+ * and the logo is the fastest way to know you are looking at the right one. The picture is
+ * our own copy, served from /logos/ by scripts/fetch_logos.py, so nothing here reaches a
+ * third-party favicon service: a private desk that asked Google for a favicon would be a
+ * private desk telling Google which law firms we are working on today.
+ *
+ * Where there is no logo the initials are not a failure state. They are drawn from the name
+ * on a tile whose colour comes from the name too, so the same firm is the same colour every
+ * time and two rows apart are two different colours.
+ */
+export function avatar(name: string, logo?: string, size = 26): string {
+  const box = `width:${size}px;height:${size}px;border-radius:${Math.round(size / 3.5)}px`;
+  if (logo) {
+    return `<img class="ava" src="${esc(logo)}" alt="" width="${size}" height="${size}" `
+      + `loading="lazy" style="${box}">`;
+  }
+  const initials = String(name ?? '')
+    .replace(/[^A-Za-z0-9 ]+/g, ' ')
+    .trim().split(/\s+/).filter(w => !/^(the|and|law|llp|llc|pc|pa|group|firm)$/i.test(w))
+    .slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
+  let hash = 0;
+  for (const ch of String(name ?? '')) hash = (hash * 31 + ch.charCodeAt(0)) % 360;
+  return `<span class="ava mono" style="${box};background:hsl(${hash} 42% 90%);`
+    + `color:hsl(${hash} 48% 28%);font-size:${Math.round(size * 0.4)}px">${esc(initials)}</span>`;
+}
+
+/**
+ * A link to the firm's own site, which is the thing a person reaches for before writing to a
+ * stranger: is this really them, are they still trading, does the page match what we publish.
+ */
+export function visit(website?: string, label = 'Their site'): string {
+  const raw = String(website ?? '').trim();
+  if (!raw) return '';
+  const href = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  return `<a class="visit" href="${esc(href)}" target="_blank" rel="noopener noreferrer">`
+    + `${esc(label)} &#8599;</a>`;
+}
 
 /** One figure tile. */
 export const fig = (value: string, label: string, tone?: 'lit' | 'hot'): string =>
