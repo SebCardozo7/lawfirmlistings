@@ -40,9 +40,16 @@
     // the short paypal.me form because the plain-text half of the email prints the URL, and
     // payLink() in worker/outbound.ts appends the amount to it from LISTING_PRICE_USD.
     "PAYPAL_LINK": "https://paypal.me/lawfirmlistings",
-    // Set 2026-10-08. The follow-up prints it; it is never typed into the template, so changing
-    // it here changes every email from the next deploy.
-    "LISTING_PRICE_USD": "350",
+    // 500 from 2026-11-08, up from 350. The follow-up prints it, the chase prints it and
+    // payLink() puts it on the end of the PayPal URL, so one variable moves all three from the
+    // next deploy and none of them is ever typed into a template.
+    //
+    // It has a twin: `price` on the Annual listing in src/data/listing.ts, which is what every
+    // page prints. They have to move together. Between the 6th and the 8th they did not, after
+    // a Houston firm was quoted 500 while the ranking page it had asked about still said 350,
+    // and a price a reader can check in one click is a price that has to be the same
+    // everywhere.
+    "LISTING_PRICE_USD": "500",
     // One hour, from 2026-11-05. It was six, chosen when a lead was rare enough that a person
     // would reach it first anyway. The aim now is that a firm enquiring has the price, the
     // terms and the payment link while it is still on the page it enquired from, so the only
