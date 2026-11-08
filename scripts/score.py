@@ -80,6 +80,27 @@ PILLAR_MAX = {"A": 25, "B": 15, "C": 20, "D": 25, "E": 15}
 # for the firms we could not match, and ten of them lose Certified over it.
 OPEN_REGISTER_STATES = {"NY", "CA"}
 
+# What each of those registers is called, named the way the script that reads it names it.
+#
+# A2 used to write New York's name into its evidence no matter whose profile it was, so 144
+# Californian firms published "NYS Attorney Registration database" as the source of their
+# attorneys' admission years. The years were right: check_ca_register.py reads them from the
+# State Bar, and A6 one factor below said "California register" on the same page. Only the
+# sentence citing them was wrong, which is the worst kind of wrong on a site whose whole
+# argument is that every number comes with the source behind it. A California lawyer could
+# disprove that line by reading it.
+#
+# Keyed by the same codes as OPEN_REGISTER_STATES, and the two sets are asserted equal below,
+# because a register we are permitted to query and cannot name is one we should not be citing.
+REGISTER_NAMES = {
+    "NY": "NYS Attorney Registration database",
+    "CA": "the State Bar of California's licensee search",
+}
+assert OPEN_REGISTER_STATES == set(REGISTER_NAMES), (
+    "every open register needs a name for the evidence line: %s"
+    % (OPEN_REGISTER_STATES ^ set(REGISTER_NAMES))
+)
+
 # The eligibility gates, all five checkable by machine from a public source. G4, "no
 # consumer-protection actions", was removed at v2.0: it asked for a negative across every
 # enforcement body in the country and no search can establish it. The reasoning, and the two
@@ -292,10 +313,16 @@ def compute(firm):
         # could not be earned by anybody and the top band was reached by 64% of the firms that
         # have the data, which is not much of a top. A roster averaging 25 years is 28% of them.
         pts = 10 if avg >= 25 else 9 if avg >= 15 else 7 if avg >= 10 else 5 if avg >= 5 else 2
+        # The register that actually produced these years, not whichever one was typed here
+        # first. The fallback is generic rather than wrong: a state could join
+        # OPEN_REGISTER_STATES before anybody adds its name, and "the state attorney register"
+        # is true everywhere, while New York's name is true in one place.
+        register = REGISTER_NAMES.get(firm.get("market", {}).get("state"),
+                                      "the state attorney register")
         out.append(sub("A2", pts, "registry",
                        f"Mean {avg:.1f} years since admission across {len(years)} of {len(attys)} "
                        f"named attorneys (longest {max(years)}, shortest {min(years)}) · "
-                       f"NYS Attorney Registration database"))
+                       f"{register}"))
     elif firm.get("market", {}).get("state") not in OPEN_REGISTER_STATES:
         # A2 is the year an attorney was admitted, and that year lives in a state attorney
         # register. A6 was given this exact treatment and A2 was missed, which left ten points

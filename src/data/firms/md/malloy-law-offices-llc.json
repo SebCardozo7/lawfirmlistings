@@ -614,8 +614,8 @@
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 2,
-            "max": 5,
+            "pts": 2.0,
+            "max": 5.0,
             "source": "observed",
             "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
           },
@@ -630,7 +630,7 @@
           {
             "code": "D3",
             "label": "Local presence",
-            "pts": 1,
+            "pts": 1.0,
             "max": 1,
             "source": "places",
             "evidence": "7 operational Google Business Profile listings · 10 or more photos, which is where the API stops counting · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
@@ -691,7 +691,7 @@
     },
     "raw": 32.5,
     "assessed": 68,
-    "coverage": 1,
+    "coverage": 1.0,
     "floor_abc_pct": 0.474,
     "gates_unavailable": [
       "G1",
