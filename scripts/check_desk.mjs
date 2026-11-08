@@ -110,10 +110,23 @@ function kv() {
       put: async (k, v) => { store.set(k, v); },
       get: async k => (store.has(k) ? store.get(k) : null),
       delete: async k => { store.delete(k); },
-      list: async ({ prefix, limit }) => ({
-        keys: [...store.keys()].filter(k => k.startsWith(prefix)).sort()
-          .slice(0, limit ?? 1000).map(name => ({ name })),
-      }),
+      // Pages, and refuses an oversized limit, because that is what the real one does. A stub
+      // that quietly returns everything is a stub that passes the guard and ships the outage.
+      list: async ({ prefix, limit, cursor }) => {
+        if (limit !== undefined && (!Number.isInteger(limit) || limit < 1 || limit >= 1000)) {
+          throw new Error(`KV GET failed: 400 Invalid key_count_limit of ${limit}.`
+            + ' Please specify integer less than 1000.');
+        }
+        const all = [...store.keys()].filter(k => k.startsWith(prefix)).sort();
+        const from = cursor ? Number(cursor) : 0;
+        const page = all.slice(from, from + (limit ?? 999));
+        const done = from + page.length >= all.length;
+        return {
+          keys: page.map(name => ({ name })),
+          list_complete: done,
+          ...(done ? {} : { cursor: String(from + page.length) }),
+        };
+      },
     },
   };
 }
@@ -603,6 +616,24 @@ const many = (n, status = 'new') => Array.from({ length: n }, (_, i) => ({
   email: `contact@firm${i}.example`, pages: 20 - i, status,
   ...(status === 'sent' ? { sent_at: '2026-11-01T10:00:00.000Z' } : {}),
 }));
+
+head('the store is read to the end, because KV answers in pages');
+{
+  const t = await desk({ prospects: many(1200) });
+
+  // The stub now refuses what production refuses. It used to ignore the limit and hand back
+  // everything, so listProspects asked a real namespace for 2,000 rows through fifteen
+  // passing guards, got a 400, and every page of the desk answered "Worker threw exception".
+  let refused = false;
+  try { await t.env.FOLLOWUPS.list({ prefix: 'prospect:', limit: 2000 }); }
+  catch { refused = true; }
+  ok('KV REFUSES AN OVERSIZED LIMIT RATHER THAN CLAMPING IT', refused);
+
+  const all = await listProspects(t.env);
+  ok('EVERY ROW COMES BACK, NOT THE FIRST PAGE', all.length === 1200, String(all.length));
+  ok('and they are all distinct', new Set(all.map(p => p.slug)).size === 1200);
+  ok('a caller may still cap it', (await listProspects(t.env, 7)).length === 7);
+}
 
 head('the daily number ramps with what has gone out, not with the calendar');
 {

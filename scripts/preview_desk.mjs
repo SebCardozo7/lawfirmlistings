@@ -74,10 +74,23 @@ const KV = {
   put: async (k, v) => { store.set(k, v); },
   get: async k => (store.has(k) ? store.get(k) : null),
   delete: async k => { store.delete(k); },
-  list: async ({ prefix, limit }) => ({
-    keys: [...store.keys()].filter(k => k.startsWith(prefix)).sort()
-      .slice(0, limit ?? 2000).map(name => ({ name })),
-  }),
+  // Pages and refuses an oversized limit, the same as the real namespace and as the guard's
+  // stub. A preview that is kinder than production is a preview that lies.
+  list: async ({ prefix, limit, cursor }) => {
+    if (limit !== undefined && (!Number.isInteger(limit) || limit < 1 || limit >= 1000)) {
+      throw new Error(`KV GET failed: 400 Invalid key_count_limit of ${limit}.`
+        + ' Please specify integer less than 1000.');
+    }
+    const all = [...store.keys()].filter(k => k.startsWith(prefix)).sort();
+    const from = cursor ? Number(cursor) : 0;
+    const page = all.slice(from, from + (limit ?? 999));
+    const done = from + page.length >= all.length;
+    return {
+      keys: page.map(name => ({ name })),
+      list_complete: done,
+      ...(done ? {} : { cursor: String(from + page.length) }),
+    };
+  },
 };
 const panel = new Map([['access:leads', JSON.stringify({ token: TOKEN, created_at: 'today' })]]);
 const PANEL = { ...KV, get: async k => panel.get(k) ?? null, put: async (k, v) => panel.set(k, v) };
