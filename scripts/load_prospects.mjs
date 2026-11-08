@@ -91,7 +91,15 @@ let skipped = 0;
 let clients = 0;
 let unlisted = 0;
 
-console.log('');
+/**
+ * Everything to write, worked out before anything is written.
+ *
+ * The first version wrote each row with its own `kv key put`, which is its own wrangler
+ * process: 569 of them took half an hour, and the crawl will find more addresses every time
+ * it runs, so that cost comes back. `kv bulk put` takes a file of key/value pairs and does
+ * the lot in one call, which is the same half hour in about four seconds.
+ */
+const writes = [];
 for (const r of rows) {
   if (have.has(r.slug)) { skipped += 1; continue; }
   const on = pages.firms[r.slug];
@@ -112,17 +120,30 @@ for (const r of rows) {
   };
 
   added += 1;
-  if (dryRun) continue;
+  writes.push({ key: `prospect:${r.slug}`, value: JSON.stringify(prospect) });
+}
 
-  const tmp = path.join(ROOT, '.crawl', `prospect-${r.slug}.json`);
+console.log('');
+
+/**
+ * In chunks, and the file goes in .crawl/ rather than the system temp directory.
+ *
+ * .crawl/ is gitignored and already holds the addresses these rows carry, so a chunk file
+ * that somehow survives a crash is beside the data it came from and out of the repository,
+ * which is public. It is deleted in a finally either way.
+ */
+const CHUNK = 1000;
+for (let i = 0; !dryRun && i < writes.length; i += CHUNK) {
+  const slice = writes.slice(i, i + CHUNK);
+  const tmp = path.join(ROOT, '.crawl', `prospects-bulk-${i}.json`);
   mkdirSync(path.dirname(tmp), { recursive: true });
-  writeFileSync(tmp, JSON.stringify(prospect), 'utf8');
+  writeFileSync(tmp, JSON.stringify(slice), 'utf8');
   try {
-    wrangler(['key', 'put', `prospect:${r.slug}`, '--path', tmp]);
+    wrangler(['bulk', 'put', tmp]);
+    console.log(`  ${Math.min(i + CHUNK, writes.length)} of ${writes.length} written...`);
   } finally {
     rmSync(tmp, { force: true });
   }
-  if (added % 25 === 0) console.log(`  ${added} written...`);
 }
 
 const writable = added - clients;
