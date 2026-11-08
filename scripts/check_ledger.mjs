@@ -130,6 +130,30 @@ console.log('advancing');
 }
 
 console.log('');
+console.log('a stray row under the prefix cannot take the page down');
+{
+  const { ns } = kv();
+  const panel = kv();
+  const env = { FOLLOWUPS: ns, PANEL: panel.ns };
+  await recordLead(env, ENQ, newLeadId());
+  // Exactly what happened in production: a hand-written probe left under the lead: prefix. It
+  // is valid JSON, so parsing it succeeds, and then the page formats arrived_at on it and the
+  // whole thing answers 500.
+  await ns.put('lead:probe', JSON.stringify({ probe: true }));
+  await ns.put('lead:halfway', JSON.stringify({ id: 'x', status: 'arrived' }));
+  await ns.put('lead:garbage', 'not json at all');
+
+  const rows = await listLeads(env);
+  ok('the real row survives', rows.length === 1 && rows[0].firm === ENQ.firm, `${rows.length} rows`);
+
+  await panel.ns.put('access:leads', JSON.stringify({ token: 'c'.repeat(48) }));
+  const at = new URL(`https://lawfirmlistings.com/api/leads?t=${'c'.repeat(48)}`);
+  const res = await handleLeads(new Request(at), env, at);
+  ok('AND THE PAGE STILL ANSWERS 200', res.status === 200, String(res.status));
+  ok('counting only the rows that are leads', (await res.text()).includes('>1<'));
+}
+
+console.log('');
 console.log('with no namespace bound, nothing throws');
 {
   const env = {};

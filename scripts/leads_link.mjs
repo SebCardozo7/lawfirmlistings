@@ -53,7 +53,9 @@ function read() {
 }
 
 if (flag('revoke')) {
-  wrangler(['key', 'delete', KEY, '--force']);
+  // No --force: kv key delete no lo acepta y la invocacion sale por el help sin borrar nada,
+  // que es como se descubrio, intentando limpiar una clave de prueba que seguia ahi.
+  wrangler(['key', 'delete', KEY]);
   console.log('\n  revocado. El link anterior ya no abre nada.\n');
   process.exit(0);
 }

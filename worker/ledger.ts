@@ -43,6 +43,15 @@ export interface Lead extends Enquiry {
   closed_at?: string;
   /** What the owner said when he closed it, as the link he clicked reported it. */
   closed_as?: string;
+  /**
+   * Where the row came from, when it did not come from the form.
+   *
+   * The six enquiries that arrived before this ledger existed were reconstructed from the
+   * notification emails, which is the only record of them there was. Their status is what the
+   * sequence would have done and their outcome is not knowable: nobody was clicking a link
+   * that did not exist. A row that says so is worth more than a row that looks measured.
+   */
+  note?: string;
   origin?: string;
 }
 
@@ -121,7 +130,15 @@ export async function listLeads(env: LeadEnv, limit = 200): Promise<Lead[]> {
     const raw = await env.FOLLOWUPS.get(k.name);
     if (!raw) continue;
     try {
-      out.push(JSON.parse(raw));
+      const row = JSON.parse(raw);
+      // Shape-checked, not just parsed. A key under this prefix that is valid JSON and not a
+      // lead reaches the page and the page formats arrived_at, so one stray row took the whole
+      // thing down with a 500. That row was a probe somebody wrote by hand, which is exactly
+      // the kind of thing that ends up in a namespace a person can edit.
+      if (row && typeof row.id === 'string' && typeof row.status === 'string'
+          && typeof row.arrived_at === 'string' && typeof row.firm === 'string') {
+        out.push(row as Lead);
+      }
     } catch {
       // A row we cannot parse is a row we do not show, and not a page that fails to load.
     }
