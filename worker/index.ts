@@ -26,6 +26,7 @@ import { isFreeRequest } from '../src/data/listing';
 import type { Enquiry } from './outbound';
 import { advanceLead, newLeadId, recordLead } from './ledger';
 import { handleLeads } from './leadspage';
+import { handleUnsubscribe } from './unsubscribe';
 
 interface Env {
   ASSETS: Fetcher;
@@ -345,11 +346,16 @@ export default {
     // Nothing outside may ask for it, and the desk does not go through this router to read
     // it: env.ASSETS.fetch reaches the asset store directly, so worker/dossier.ts still gets
     // the file while the open web gets a 404.
-    if (url.pathname === '/api/firms-index.json') {
+    if (url.pathname === '/api/firms-index.json' || url.pathname === '/api/firm-pages.json') {
       return new Response('Not found', {
         status: 404,
         headers: { 'content-type': 'text/plain; charset=utf-8', 'x-robots-tag': 'noindex' },
       });
+    }
+    // The opt-out from every outbound letter. Not behind anything, cached by nobody, and the
+    // first route a reader of those letters is entitled to reach. See worker/unsubscribe.ts.
+    if (url.pathname === '/api/unsubscribe') {
+      return handleUnsubscribe(request, env, url);
     }
     if (url.pathname === '/api/answered') {
       return answered(request, env, url);
