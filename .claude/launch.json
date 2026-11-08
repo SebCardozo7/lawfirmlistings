@@ -15,6 +15,21 @@
       ],
       "port": 4322,
       "autoPort": false
+    },
+    {
+      "name": "worker",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "wrangler",
+        "dev",
+        "--local",
+        "--port",
+        "8788",
+        "--ip",
+        "127.0.0.1"
+      ],
+      "port": 8788,
+      "autoPort": false
     }
   ]
 }

@@ -338,6 +338,19 @@ export default {
     if (url.pathname === '/api/leads') {
       return handleLeads(request, env, url);
     }
+    // The firms index is a build artefact for the lead desk, not a page. It is one file
+    // carrying every published firm's score and weakest pillar, and while each of those
+    // numbers is already on a public profile, handing over the whole directory in a single
+    // download is a different thing from publishing 1,388 pages that each hand over one.
+    // Nothing outside may ask for it, and the desk does not go through this router to read
+    // it: env.ASSETS.fetch reaches the asset store directly, so worker/dossier.ts still gets
+    // the file while the open web gets a 404.
+    if (url.pathname === '/api/firms-index.json') {
+      return new Response('Not found', {
+        status: 404,
+        headers: { 'content-type': 'text/plain; charset=utf-8', 'x-robots-tag': 'noindex' },
+      });
+    }
     if (url.pathname === '/api/answered') {
       return answered(request, env, url);
     }
