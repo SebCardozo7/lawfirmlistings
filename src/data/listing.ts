@@ -110,7 +110,15 @@ export interface Product {
 export const PRODUCTS: Product[] = [
   {
     name: 'Annual listing',
-    price: '350 USD',
+    // 500 from 2026-11-08, up from 350, which is Sebastián's call. The figure lives here and in
+    // LISTING_PRICE_USD in wrangler.jsonc, and both have to move together: this one prints on
+    // every page and that one prints in the two emails and goes on the end of the PayPal link,
+    // so a firm can read one figure on a ranking page and be quoted another in its inbox.
+    // That is exactly what happened between the 6th and today, after a Houston firm was quoted
+    // 500 while /cities/houston-tx/truck-accidents/, the page it had asked about, still said
+    // 350. A price a reader can check in one click is a price that has to be the same
+    // everywhere.
+    price: '500 USD',
     cadence: 'a year',
     summary:
       'For a firm that wants to run its own profile and have its own site linked from it. ' +

@@ -44,6 +44,29 @@ for (const g of new Set(dupes)) {
   problems.push(`${g} is described twice on /list-your-firm/.`);
 }
 
+/*
+ * The price is written in two files and a firm can see both.
+ *
+ * `price` on the Annual listing prints on every page: /list-your-firm/, every profile, every
+ * city ranking. LISTING_PRICE_USD in wrangler.jsonc prints in the follow-up and the chase, and
+ * payLink() puts it on the end of the PayPal URL, so it is also the figure PayPal opens showing.
+ *
+ * They drifted between 2026-11-06 and 2026-11-08: a Houston firm was quoted 500 by email while
+ * the ranking page it had asked about still said 350. Nobody noticed from inside, because each
+ * file was correct on its own. A price a reader can check in one click has to be one number.
+ */
+const worker = readFileSync('wrangler.jsonc', 'utf8');
+const pagePrice = page.match(/name: 'Annual listing',[\s\S]{0,900}?price: '(\d[\d,]*)\s*USD'/)?.[1];
+const mailPrice = worker.match(/"LISTING_PRICE_USD":\s*"(\d[\d,]*)"/)?.[1];
+const clean = v => (v ?? '').replace(/,/g, '');
+
+if (!pagePrice) problems.push("could not read the Annual listing price from src/data/listing.ts.");
+if (!mailPrice) problems.push('could not read LISTING_PRICE_USD from wrangler.jsonc.');
+if (pagePrice && mailPrice && clean(pagePrice) !== clean(mailPrice)) {
+  problems.push(`the pages say ${pagePrice} USD a year and the emails say ${mailPrice}. `
+    + 'A firm quoted one figure can open a ranking page and read the other.');
+}
+
 if (problems.length) {
   console.error('Listing rules do not match the engine:\n');
   for (const p of problems) console.error('  ' + p);
@@ -52,3 +75,4 @@ if (problems.length) {
 }
 
 console.log(`${pageGates.length} listing rule(s) match the engine's gates: ${engineGates.join(', ')}`);
+console.log(`the pages and the emails both say ${pagePrice} USD a year.`);
