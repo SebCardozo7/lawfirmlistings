@@ -55,7 +55,8 @@ await build({
     contents: `export { handleLeads } from './worker/leadspage.ts';
                export { recordLead, newLeadId, setStatus, addNote, recordSend, setFollowUp }
                  from './worker/ledger.ts';
-               export { putProspect } from './worker/prospects.ts';`,
+               export { putProspect } from './worker/prospects.ts';
+               export { buildBatch, tomorrow, BUILD_HOUR } from './worker/batch.ts';`,
     resolveDir: ROOT,
     loader: 'ts',
   },
@@ -65,6 +66,7 @@ await build({
 
 const {
   handleLeads, recordLead, newLeadId, setStatus, addNote, recordSend, setFollowUp, putProspect,
+  buildBatch, tomorrow, BUILD_HOUR,
 } = await import(pathToFileURL(bundle).href);
 
 const store = new Map();
@@ -97,15 +99,30 @@ const NAMES = [
 
 const slugOf = n => n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+// Seven of the ten get a mark and three do not, so both states are on screen: the firm's own
+// logo and the initials that stand in for it. The marks are generated below and served by
+// this script, so no real firm's logo is attached to an invented name.
 const INDEX = {
   generated_at: 'today',
   states: ['ca', 'ny', 'tx', 'il'],
   count: NAMES.length,
-  firms: Object.fromEntries(NAMES.map(([n, domain, st, sc, t, w, g]) => [domain, {
+  firms: Object.fromEntries(NAMES.map(([n, domain, st, sc, t, w, g], i) => [domain, {
     s: slugOf(n), n, st, sc, t, w, ...(g ? { g } : {}),
     o: ['A2', 'Experience', 5],
+    ...(i % 10 < 7 ? { l: 'svg' } : {}),
   }])),
 };
+
+/** An invented mark for an invented firm, drawn here rather than taken from anybody. */
+function markFor(domain) {
+  let h = 0;
+  for (const ch of domain) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  const initials = domain.slice(0, 2).toUpperCase();
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">`
+    + `<rect width="64" height="64" rx="12" fill="hsl(${h} 58% 46%)"/>`
+    + `<text x="32" y="43" text-anchor="middle" font-family="Helvetica,Arial" `
+    + `font-size="30" font-weight="700" fill="#fff">${initials}</text></svg>`;
+}
 
 const PATHS = [
   '/cities/los-angeles-ca/car-accidents/', '/cities/los-angeles-ca/personal-injury/',
@@ -211,10 +228,24 @@ for (const [n, domain, st] of NAMES) {
   });
 }
 
+// A batch proposed and not yet approved, so the banner, the approval page and the "goes out"
+// line on a firm all have something to show. The clock is forced past the build hour because
+// this script may be run at any time of day.
+const forced = new Date();
+forced.setUTCHours(Math.max(forced.getUTCHours(), BUILD_HOUR), 5, 0, 0);
+const proposed = await buildBatch(env, tomorrow(forced));
+if (proposed) console.log(`  (a batch of ${proposed.slugs.length} is waiting for approval)`);
+
 /* -------------------------------------------------------------------- the server */
 
 const server = createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
+  // The marks, which on the real site are files in public/logos/ that Cloudflare serves.
+  if (url.pathname.startsWith('/logos/')) {
+    const domain = url.pathname.slice('/logos/'.length).replace(/\.svg$/, '');
+    res.writeHead(200, { 'content-type': 'image/svg+xml' });
+    return res.end(markFor(domain));
+  }
   if (url.pathname === '/') {
     res.writeHead(302, { location: `/api/leads?t=${TOKEN}` });
     return res.end();

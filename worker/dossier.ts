@@ -24,6 +24,12 @@ export interface FirmEntry {
   w: [string, number, number];
   g?: [string, number];
   o?: [string, string, number];
+  /**
+   * The firm's own logo: usually the extension of the file in public/logos/, whose stem is the
+   * domain this entry is keyed by, and occasionally a whole path where that is not true. See
+   * src/pages/api/firms-index.json.ts, which writes it, and logoFor() below, which reads it.
+   */
+  l?: string;
 }
 
 interface Index {
@@ -40,6 +46,14 @@ export interface Dossier {
   url?: string;
   /** The state read off the lead's own "city, state" field, when it could be read. */
   state?: string;
+  /**
+   * The key the firm was found under, which is its domain.
+   *
+   * Carried back because the index is keyed by it and the entry does not repeat it, and the
+   * logo file is named after it. Without this the desk can say everything about a firm except
+   * where its picture is.
+   */
+  domain?: string;
   /** False when we publish nothing in that state, which is a different answer from "no match". */
   covered: boolean;
   /** True when the index itself could not be read, so absence proves nothing. */
@@ -133,6 +147,23 @@ export function domainOf(website?: string): string | undefined {
  * already carries the domain the index is keyed by, and guessing at a firm we have the key for
  * would be a second answer to a question with one.
  */
+/**
+ * Where a firm's logo is served from, or nothing.
+ *
+ * The file was downloaded by scripts/fetch_logos.py and is served by us: never hot-linked, so
+ * the firm's server does not pay for our traffic and is not handed the address of everybody
+ * who reads about them. The desk is a private page, which makes that matter more rather than
+ * less: a row of favicons fetched from twelve law firms' own servers is a row of twelve
+ * servers that now know somebody is looking at them.
+ */
+export function logoFor(firm: FirmEntry | undefined, domain?: string): string | undefined {
+  const l = firm?.l;
+  if (!l) return undefined;
+  if (l.includes('/')) return l;
+  const key = String(domain ?? '').trim().toLowerCase();
+  return key ? `/logos/${key}.${l}` : undefined;
+}
+
 export async function firmByDomain(
   env: DossierEnv, domain?: string,
 ): Promise<FirmEntry | undefined> {
@@ -154,12 +185,14 @@ export async function dossierFor(
   // marketing site, and it happens in both directions. Neither field alone finds everybody.
   const candidates = [domainOf(lead.website), domainOf(lead.email?.split('@')[1])];
   let firm: FirmEntry | undefined;
+  let domain: string | undefined;
   for (const d of candidates) {
-    if (d && index.firms[d]) { firm = index.firms[d]; break; }
+    if (d && index.firms[d]) { firm = index.firms[d]; domain = d; break; }
   }
 
   return {
     firm,
+    domain,
     url: firm ? `${SITE}/firms/${firm.s}/` : undefined,
     state,
     // Unknown states count as covered: the point of this flag is to stop us quoting a price

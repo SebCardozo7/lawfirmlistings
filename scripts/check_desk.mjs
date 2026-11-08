@@ -84,7 +84,10 @@ await build({
                export { resetIndex } from './worker/dossier.ts';
                export { resetPages } from './worker/pages.ts';
                export { htmlFromText } from './worker/emailhtml.ts';
-               export { columns, rows, stacked } from './worker/charts.ts';`,
+               export { columns, rows, stacked } from './worker/charts.ts';
+               export { BUILD_HOUR, SEND_FROM, SEND_TO, PER_RUN, capFor, proposeBatch,
+                        drainBatch, getBatch, approveBatch, buildBatch, tomorrow, dayOf }
+                 from './worker/batch.ts';`,
     resolveDir: ROOT,
     loader: 'ts',
   },
@@ -95,6 +98,8 @@ await build({
 const {
   handleLeads, CAP, recordLead, newLeadId, getLead, putProspect, getProspect, listProspects,
   isOptedOut, resetIndex, resetPages, htmlFromText, columns, rows, stacked,
+  BUILD_HOUR, SEND_FROM, SEND_TO, PER_RUN, capFor, proposeBatch, drainBatch, getBatch,
+  approveBatch, buildBatch, tomorrow, dayOf,
 } = await import(pathToFileURL(bundle).href);
 
 function kv() {
@@ -134,6 +139,17 @@ const INDEX = {
   },
 };
 
+// Ten more, generated, for the batch checks: a batch needs more than a cap's worth of firms
+// and each of them needs a profile and a page, or the letter has nothing to ask about and is
+// refused before it is sent. All on .example, which cannot resolve.
+for (let i = 0; i < 10; i += 1) {
+  INDEX.firms[`firm${i}.example`] = {
+    s: `firm-${i}`, n: `Firm ${i}`, st: 'ca', sc: 50 + i, t: 'Verified',
+    w: ['A', 5, 25], g: ['Certified', 4], o: ['A2', 'Experience', 5], l: 'png',
+  };
+}
+INDEX.count = Object.keys(INDEX.firms).length;
+
 /** Which of our pages carry each of them, as the firmPages() build integration writes it. */
 const PAGES = {
   generated_at: '2026-11-08',
@@ -146,6 +162,7 @@ const PAGES = {
     'harborline-law': [0, 1, 4, 5],
     'quiet-river-legal': [2],
     'tallgrass-trial': [3, 5],
+    ...Object.fromEntries(Array.from({ length: 10 }, (_, i) => [`firm-${i}`, [0, 1, 5]])),
   },
 };
 
@@ -165,6 +182,8 @@ function mailbox() {
 
 const TOKEN = 'a'.repeat(48);
 const POSTAL = '000 Example Street, Suite 0, Example City, EX 00000';
+/** Stands in for the SUBMISSIONS_TO secret: where the batch notice goes. */
+const OWNER = 'desk@example.com';
 
 const ENQ = {
   firm: 'A Firm, P.C.', contact: 'A Person', email: 'person@example.com',
@@ -187,7 +206,8 @@ async function desk({ leads = [ENQ], prospects = [], postal = POSTAL } = {}) {
   const box = mailbox();
   const env = {
     FOLLOWUPS: followups.ns, PANEL: panel.ns, ASSETS: assets(), EMAIL: box.EMAIL,
-    SUBMISSIONS_FROM: 'hello@lawfirmlistings.com', LISTING_PRICE_USD: '500',
+    SUBMISSIONS_FROM: 'hello@lawfirmlistings.com', SUBMISSIONS_TO: OWNER,
+    LISTING_PRICE_USD: '500',
     PAYPAL_LINK: 'https://paypal.me/lawfirmlistings',
     ...(postal ? { POSTAL_ADDRESS: postal } : {}),
   };
@@ -465,6 +485,8 @@ head('the queue opens with the firms that have most riding on it');
 
 head('the cap is re-checked at the send, not only at the draw');
 {
+  // Filled past the ceiling, so the ramp's answer for the day is whatever capFor says at the
+  // top step and the page has to print that number rather than a constant.
   const already = [];
   for (let i = 0; i < CAP; i += 1) {
     already.push({
@@ -474,14 +496,20 @@ head('the cap is re-checked at the send, not only at the draw');
   }
   const t = await desk({ prospects: [...already, PROSPECT] });
   const page = await t.text(`/prospect/harborline-law?t=${TOKEN}`);
-  ok('the page says the day is done', page.includes(`Today's ${CAP} are sent`));
+  const cap = capFor(CAP);
+  ok('the page says the day is done', page.includes(`Today's ${cap} are sent`),
+    `expected the ramp's ${cap}`);
+  ok('and names what the ramp allows rather than the ceiling', cap !== CAP && cap === 10,
+    String(cap));
   ok('and offers no send button', !page.includes('class="send"'));
 
   const res = await t.post('/prospect/harborline-law',
     { slug: 'harborline-law', action: 'send', subject: 'Hello', body: 'The letter.' });
   ok('THE CAP HOLDS AGAINST A POST ANYWAY', t.box.sent.length === 0, String(t.box.sent.length));
-  ok('and it says so', decodeURIComponent(res.headers.get('location') || '')
-    .includes('already out'));
+  ok('and it says so',
+    (new URL(res.headers.get('location'), 'https://lawfirmlistings.com')
+      .searchParams.get('said') || '').includes('already out'),
+    res.headers.get('location'));
   ok('the row is untouched', (await getProspect(t.env, 'harborline-law')).status === 'new');
 }
 
@@ -561,6 +589,196 @@ head('with no prospects loaded, the view says so rather than breaking');
   ok('the overview still draws', (await t.get(`?t=${TOKEN}`)).status === 200);
   ok('and refuses the prospecting chart rather than drawing an empty one',
     (await t.text(`?t=${TOKEN}`)).includes('This chart starts drawing at'));
+}
+
+/* --------------------------------------------------------------- the daily batch */
+
+/** A clock we control, because every rule in worker/batch.ts is about what time it is. */
+const at = (day, hour) => new Date(Date.UTC(2026, 10, day, hour, 5, 0));
+
+/** Firms with an address, so a batch has more than a cap's worth to choose from. */
+const many = (n, status = 'new') => Array.from({ length: n }, (_, i) => ({
+  ...PROSPECT,
+  slug: `firm-${i}`, name: `Firm ${i}`, domain: `firm${i}.example`,
+  email: `contact@firm${i}.example`, pages: 20 - i, status,
+  ...(status === 'sent' ? { sent_at: '2026-11-01T10:00:00.000Z' } : {}),
+}));
+
+head('the daily number ramps with what has gone out, not with the calendar');
+{
+  ok('the first ten go five a day', capFor(0) === 5 && capFor(9) === 5);
+  ok('then ten', capFor(10) === 10 && capFor(39) === 10);
+  ok('then fifteen', capFor(40) === 15 && capFor(99) === 15);
+  ok('and twenty-five from a hundred', capFor(100) === 25 && capFor(600) === 25);
+  ok('THE RAMP CANNOT BE SKIPPED BY WAITING', capFor(0) === 5,
+    'it is keyed to history, so a pause does not advance it');
+}
+
+head('a batch is proposed in the afternoon and emailed once');
+{
+  const t = await desk({ prospects: many(10) });
+
+  const early = await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR - 1));
+  ok('NOTHING IS BUILT BEFORE ITS HOUR', early.built === 0 && !early.notified);
+  ok('and nothing is in the store', (await getBatch(t.env, tomorrow(at(8, 9)))) === null);
+
+  const made = await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  ok('it builds at the hour', made.built === 5, String(made.built));
+  ok('five, because nothing has gone out yet', made.built === capFor(0));
+  ok('THE OWNER IS EMAILED', t.box.sent.length === 1, String(t.box.sent.length));
+  ok('at the address the secret names', t.box.sent[0]?.to === OWNER, t.box.sent[0]?.to);
+
+  const note = htmlPartOf(t.box.sent[0]?.raw);
+  ok('the email names the firms', note.includes('Firm 0') && note.includes('Firm 4'));
+  ok('and carries a link to the list', note.includes('/api/leads/batch'));
+  ok('with the day on it', note.includes(tomorrow(at(8, 17))));
+
+  const again = await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR + 1));
+  ok('A SECOND RUN BUILDS NOTHING', again.built === 0);
+  ok('AND EMAILS NOTHING', t.box.sent.length === 1, String(t.box.sent.length));
+
+  const batch = await getBatch(t.env, tomorrow(at(8, 17)));
+  ok('most-listed first', batch.slugs[0] === 'firm-0' && batch.slugs[4] === 'firm-4');
+}
+
+head('silence is a no');
+{
+  const t = await desk({ prospects: many(10) });
+  await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  t.box.sent.length = 0;
+
+  const out = await drainBatch(t.env, at(9, SEND_FROM + 1));
+  ok('NOTHING SENDS WITHOUT AN APPROVAL', out.sent === 0 && t.box.sent.length === 0);
+  const rows = await listProspects(t.env);
+  ok('and no row says it was written to', rows.every(p => !p.sent_at));
+}
+
+head('approved, and only the ticked ones');
+{
+  const t = await desk({ prospects: many(10) });
+  await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  t.box.sent.length = 0;
+  const on = tomorrow(at(8, 17));
+
+  // Two of the five, plus one that was never proposed. A list of addresses to mail is not
+  // something a request body gets to add to.
+  await approveBatch(t.env, on, ['firm-0', 'firm-2', 'firm-9']);
+  const batch = await getBatch(t.env, on);
+  ok('A SLUG THAT WAS NOT PROPOSED IS DROPPED', !batch.approved.includes('firm-9'),
+    batch.approved.join(','));
+  ok('and the two real ones are kept', batch.approved.length === 2);
+
+  const before = await drainBatch(t.env, at(9, SEND_FROM - 1));
+  ok('NOTHING GOES OUT BEFORE THE WINDOW', before.sent === 0 && t.box.sent.length === 0);
+
+  const run = await drainBatch(t.env, at(9, SEND_FROM));
+  ok('a run sends at most PER_RUN', run.sent <= PER_RUN, String(run.sent));
+
+  let guard = 0;
+  while ((await drainBatch(t.env, at(9, SEND_FROM))).sent && guard++ < 10) { /* drain it */ }
+  ok('THE APPROVED TWO WENT OUT', t.box.sent.length === 2, String(t.box.sent.length));
+  ok('to the two that were ticked',
+    t.box.sent.map(m => m.to).sort().join(',')
+      === 'contact@firm0.example,contact@firm2.example',
+    t.box.sent.map(m => m.to).join(','));
+  ok('and the rows say so',
+    (await getProspect(t.env, 'firm-0')).status === 'sent'
+    && (await getProspect(t.env, 'firm-1')).status === 'new');
+
+  const after = await drainBatch(t.env, at(9, SEND_FROM + 1));
+  ok('A SECOND DRAIN SENDS NOTHING', after.sent === 0 && t.box.sent.length === 2);
+
+  const late = await drainBatch(t.env, at(9, SEND_TO));
+  ok('and the window closes', late.sent === 0);
+}
+
+head('the approval is a permission, not a cached verdict');
+{
+  const t = await desk({ prospects: many(10) });
+  await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  t.box.sent.length = 0;
+  const on = tomorrow(at(8, 17));
+  await approveBatch(t.env, on, ['firm-0', 'firm-1']);
+
+  // Overnight, between the approval and the sending.
+  await t.post('/prospect/firm-0', { slug: 'firm-0', action: 'optout' });
+
+  let guard = 0;
+  while ((await drainBatch(t.env, at(9, SEND_FROM))).sent && guard++ < 10) { /* drain it */ }
+  ok('AN OPT-OUT AFTER THE APPROVAL STILL BLOCKS IT',
+    !t.box.sent.some(m => m.to === 'contact@firm0.example'),
+    t.box.sent.map(m => m.to).join(','));
+  ok('and the other one still went', t.box.sent.some(m => m.to === 'contact@firm1.example'));
+}
+
+head('send none is a decision and is recorded as one');
+{
+  const t = await desk({ prospects: many(10) });
+  await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  t.box.sent.length = 0;
+  const on = tomorrow(at(8, 17));
+
+  const res = await t.post('/batch', { action: 'approve', on, none: '1' });
+  ok('it answers a redirect', res.status === 303, String(res.status));
+  const batch = await getBatch(t.env, on);
+  ok('the batch records an empty approval',
+    Array.isArray(batch.approved) && batch.approved.length === 0);
+  ok('which is not the same as never having looked', typeof batch.approved_at === 'string');
+
+  const out = await drainBatch(t.env, at(9, SEND_FROM + 1));
+  ok('AND NOTHING IS SENT', out.sent === 0 && t.box.sent.length === 0);
+}
+
+head('the approval page opens without doing anything');
+{
+  const t = await desk({ prospects: many(10) });
+  await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  t.box.sent.length = 0;
+  const on = tomorrow(at(8, 17));
+
+  const page = await t.text(`/batch?t=${TOKEN}&on=${on}`);
+  ok('it lists the proposed firms', page.includes('Firm 0') && page.includes('Firm 4'));
+  ok('every row arrives ticked', (page.match(/ checked/g) || []).length === 5,
+    String((page.match(/ checked/g) || []).length));
+  ok('and says when they would go out', page.includes(`${SEND_FROM}:00`));
+  ok('A GET APPROVES NOTHING', (await getBatch(t.env, on)).approved === undefined);
+  ok('AND A GET SENDS NOTHING', t.box.sent.length === 0);
+  ok('it is shut without the token',
+    (await t.get(`/batch?t=${'b'.repeat(48)}&on=${on}`)).status === 404);
+  ok('a day with no batch is 404',
+    (await t.get(`/batch?t=${TOKEN}&on=2020-01-01`)).status === 404);
+}
+
+head('no postal address, no batch at all');
+{
+  const t = await desk({ prospects: many(10), postal: null });
+  const made = await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  ok('NOTHING IS EVEN PROPOSED', made.built === 0 && !made.notified);
+  ok('and the owner is not emailed about it', t.box.sent.length === 0);
+  ok('because a letter that cannot carry one is a letter that does not exist',
+    (await getBatch(t.env, tomorrow(at(8, 17)))) === null);
+}
+
+head('the desk says when the next letters go out');
+{
+  const t = await desk({ prospects: many(10) });
+  const before = await t.text(`/prospects?t=${TOKEN}`);
+  ok('with no batch it says when one is proposed', before.includes(`${BUILD_HOUR}:00 UTC`));
+
+  await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
+  const waiting = await t.text(`/prospects?t=${TOKEN}`);
+  ok('once proposed it says they are waiting on a person', waiting.includes('waiting on you'));
+  ok('and links to the list', waiting.includes('/api/leads/batch?'));
+
+  await approveBatch(t.env, tomorrow(at(8, 17)), ['firm-0']);
+  const approved = await t.text(`/prospects?t=${TOKEN}`);
+  ok('once approved it says the hours',
+    approved.includes(`${SEND_FROM}:00`) && approved.includes(`${SEND_TO}:00`));
+
+  const one = await t.text(`/prospect/firm-0?t=${TOKEN}`);
+  ok('AND THE FIRM ITSELF SAYS WHEN ITS LETTER GOES', one.includes('Goes out'));
+  const other = await t.text(`/prospect/firm-1?t=${TOKEN}`);
+  ok('while one left out says that instead', other.includes('left out of the batch'));
 }
 
 console.log(failed

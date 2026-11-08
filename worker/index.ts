@@ -27,6 +27,7 @@ import type { Enquiry } from './outbound';
 import { advanceLead, newLeadId, recordLead } from './ledger';
 import { handleLeads } from './leadspage';
 import { handleUnsubscribe } from './unsubscribe';
+import { drainBatch, leadsToken, proposeBatch } from './batch';
 
 interface Env {
   ASSETS: Fetcher;
@@ -46,6 +47,12 @@ interface Env {
   LISTING_PRICE_USD?: string;
   PAYPAL_LINK?: string;
   FOLLOWUP_HOURS?: string;
+  /**
+   * The physical address CAN-SPAM requires in every commercial email, as a secret rather than
+   * a var for the same reason SUBMISSIONS_TO is one. Without it worker/verifyletter.ts returns
+   * an error instead of a letter and no prospecting mail can be built at all.
+   */
+  POSTAL_ADDRESS?: string;
 }
 
 /** What the form may send, and the longest each field may be. Anything else is dropped. */
@@ -380,5 +387,21 @@ export default {
     // a clock: one is a quote to a firm and one is a note to us saying the firm is still waiting.
     const r = await drainReminders(env);
     if (r.sent || r.failed) console.log(`reminders sent ${r.sent}, failed ${r.failed}`);
+
+    // The prospecting batch, which is the only thing on this clock that writes to a firm that
+    // never wrote to us. It proposes in the afternoon, emails the list, and sends the next day
+    // only what a person ticked: see worker/batch.ts. Wrapped, because a prospecting run that
+    // throws must not stop the follow-ups and reminders above from draining tomorrow.
+    try {
+      const b = await proposeBatch(env, await leadsToken(env));
+      if (b.built) console.log(`batch proposed: ${b.built} letters`);
+      if (b.notified) console.log('batch notice sent');
+      const d = await drainBatch(env);
+      if (d.sent || d.failed || d.skipped) {
+        console.log(`batch sent ${d.sent}, failed ${d.failed}, skipped ${d.skipped}`);
+      }
+    } catch (err) {
+      console.error('batch run failed', err);
+    }
   },
 };
