@@ -125,6 +125,23 @@ export function domainOf(website?: string): string | undefined {
   return host.includes('.') ? host : undefined;
 }
 
+/**
+ * One firm, straight off the index by its domain.
+ *
+ * dossierFor() exists because a lead gives us a website and an address and we have to work out
+ * who that is. A prospect does not need any of that: it came out of the directory, so it
+ * already carries the domain the index is keyed by, and guessing at a firm we have the key for
+ * would be a second answer to a question with one.
+ */
+export async function firmByDomain(
+  env: DossierEnv, domain?: string,
+): Promise<FirmEntry | undefined> {
+  const index = await loadIndex(env);
+  const key = domainOf(domain) ?? String(domain ?? '').trim().toLowerCase();
+  if (!index || !key) return undefined;
+  return index.firms[key];
+}
+
 export async function dossierFor(
   env: DossierEnv, lead: { website?: string; city?: string; email?: string },
 ): Promise<Dossier> {

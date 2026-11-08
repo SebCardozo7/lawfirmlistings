@@ -39,11 +39,20 @@ const FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** Turns a bare URL in already-escaped text into a link. */
+/**
+ * Turns a bare URL in already-escaped text into a link.
+ *
+ * It breaks mid-word when it has to. A URL is one unbroken token, so a long one is wider than
+ * the 560px card and every client that cannot widen the card gives the reader a sideways
+ * scrollbar instead: the prospecting letter lists four of our own page addresses, and on a
+ * phone they ran off the side of the message. Breaking a URL across two lines is ugly and
+ * reading half of one is worse.
+ */
 function autolink(escaped: string): string {
   return escaped.replace(/https?:\/\/[^\s<>()]+[^\s<>().,;:]/g, (url) => {
     const href = url.replace(/&amp;/g, '&');
-    return `<a href="${href}" style="color:${LINK};text-decoration:underline">${url}</a>`;
+    return `<a href="${href}" style="color:${LINK};text-decoration:underline;`
+      + `word-break:break-word">${url}</a>`;
   });
 }
 

@@ -336,7 +336,7 @@ export default {
     // The owner's own view of the ledger, behind a signed token rather than behind the firm
     // panel: /claim/ accounts belong to law firms, and no firm should be one URL away from a
     // list of other firms' enquiries. See worker/leadspage.ts.
-    if (url.pathname === '/api/leads') {
+    if (url.pathname === '/api/leads' || url.pathname.startsWith('/api/leads/')) {
       return handleLeads(request, env, url);
     }
     // The firms index is a build artefact for the lead desk, not a page. It is one file
