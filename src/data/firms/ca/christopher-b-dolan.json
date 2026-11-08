@@ -351,10 +351,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 52,
+    "total": 51,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-11-08",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -367,7 +367,7 @@
             "pts": 9,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 21.0 years since admission across 2 of 5 named attorneys (longest 26, shortest 16) · NYS Attorney Registration database"
+            "evidence": "Mean 21.0 years since admission across 2 of 5 named attorneys (longest 26, shortest 16) · the State Bar of California's licensee search"
           },
           {
             "code": "A6",
@@ -418,7 +418,7 @@
         ]
       },
       "C": {
-        "score": 17,
+        "score": 16,
         "max": 20,
         "subs": [
           {
@@ -440,10 +440,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 5,
+            "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "9 of 15 sampled reviews are from the last 12 months (newest 2026-07-01) · a sample of five per business listing, not every review"
+            "evidence": "8 of 15 sampled reviews are from the last 12 months (newest 2026-07-01) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -524,11 +524,11 @@
         ]
       }
     },
-    "floor_abc": 30,
+    "floor_abc": 29,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 13,
+      "gap": 14,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -537,10 +537,10 @@
         "B2 Specificity: +5 available"
       ]
     },
-    "raw": 45.0,
+    "raw": 44.0,
     "assessed": 87,
     "coverage": 1.0,
-    "floor_abc_pct": 0.526,
+    "floor_abc_pct": 0.509,
     "gates_unavailable": [
       "G3"
     ],
