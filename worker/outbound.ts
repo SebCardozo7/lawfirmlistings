@@ -44,6 +44,7 @@ export interface OutboundEnv {
 }
 
 import { isFreeRequest } from '../src/data/listing';
+import { advanceLead } from './ledger';
 
 export interface Enquiry {
   firm: string;
@@ -57,6 +58,12 @@ export interface Enquiry {
   /** The reminder this enquiry queued, so the owner's emails can all carry the same link. */
   reminderKey?: string;
   reminderToken?: string;
+  /**
+   * The ledger row this enquiry opened, carried on both queued records so the cron that sends
+   * each message hours later can move the row on. See worker/ledger.ts. Absent on anything
+   * queued before the ledger existed, which is why every use of it is guarded.
+   */
+  leadId?: string;
 }
 
 const hours = (env: OutboundEnv) => {
@@ -357,17 +364,32 @@ export function answeredUrl(e: Enquiry, origin = SITE): string | null {
 export async function cancelReminder(
   env: OutboundEnv, key: string, token: string,
 ): Promise<'cancelled' | 'gone' | 'denied'> {
-  if (!env.FOLLOWUPS || !key.startsWith('reminder:')) return 'denied';
+  return (await cancelReminderAnd(env, key, token)).result;
+}
+
+/**
+ * The same thing, returning the lead it belonged to as well.
+ *
+ * Clicking the link in the owner's notice means the firm paid or he dealt with it, which is
+ * also the moment the ledger row closes. The id has to come from the record being cancelled,
+ * because the record is deleted a line later and the caller has only a key and a token.
+ */
+export async function cancelReminderAnd(
+  env: OutboundEnv, key: string, token: string,
+): Promise<{ result: 'cancelled' | 'gone' | 'denied'; leadId?: string }> {
+  if (!env.FOLLOWUPS || !key.startsWith('reminder:')) return { result: 'denied' };
   const raw = await env.FOLLOWUPS.get(key);
-  if (!raw) return 'gone';
+  if (!raw) return { result: 'gone' };
+  let leadId: string | undefined;
   try {
-    const rec = JSON.parse(raw) as { token?: string };
-    if (!rec.token || rec.token !== token) return 'denied';
+    const rec = JSON.parse(raw) as { token?: string; leadId?: string };
+    if (!rec.token || rec.token !== token) return { result: 'denied' };
+    leadId = rec.leadId;
   } catch {
-    return 'denied';
+    return { result: 'denied' };
   }
   await env.FOLLOWUPS.delete(key);
-  return 'cancelled';
+  return { result: 'cancelled', leadId };
 }
 
 /**
@@ -567,6 +589,7 @@ export async function drainReminders(
     }
     try {
       await sendTo(env, address, subject, text, to === 'firm');
+      if (rec.leadId) await advanceLead(env, rec.leadId, 'chased').catch(() => {});
       await env.FOLLOWUPS.delete(k.name);
       sent += 1;
     } catch (err) {
@@ -606,6 +629,10 @@ export async function drainFollowUps(env: OutboundEnv): Promise<{ sent: number; 
     const { subject, text } = pitchBody(e, env);
     try {
       await sendTo(env, e.email, subject, text, true);
+      // The row moves on only once the message is actually away. A send that throws leaves
+      // the key in place to be retried, and a lead marked quoted by a send that failed is a
+      // lead nobody would ever look at again.
+      if (e.leadId) await advanceLead(env, e.leadId, 'quoted').catch(() => {});
       await env.FOLLOWUPS.delete(k.name);
       sent += 1;
       // The quote went out hours after the enquiry did, with nobody watching. Say so, so the

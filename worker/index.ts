@@ -19,11 +19,13 @@ import { EmailMessage } from 'cloudflare:email';
 import { mime, json, present } from './mail';
 import { handlePanel } from './panel';
 import {
-  ackBody, answeredUrl, cancelReminder, drainFollowUps, drainReminders, queueFollowUp,
+  ackBody, answeredUrl, cancelReminderAnd, drainFollowUps, drainReminders, queueFollowUp,
   queueReminder, sendTo,
 } from './outbound';
 import { isFreeRequest } from '../src/data/listing';
 import type { Enquiry } from './outbound';
+import { advanceLead, newLeadId, recordLead } from './ledger';
+import { handleLeads } from './leadspage';
 
 interface Env {
   ASSETS: Fetcher;
@@ -112,7 +114,20 @@ async function submit(request: Request, env: Env): Promise<Response> {
     // writing in to say we had named one of its page titles as an attorney got a price six
     // hours later. Twenty-one firms had that to tell us.
     request: values.request,
+    // Minted here and carried onto both queued records, so the cron that sends each message
+    // hours from now can find the ledger row this enquiry opens below.
+    leadId: newLeadId(),
   };
+
+  // The ledger, written before anything is queued or sent. Wrapped like the reminder below and
+  // for the same reason: a lead that reached us without a row is worth more than one that never
+  // arrived because the ledger was down. Until this existed an enquiry left no durable trace at
+  // all, so nobody could say how many there had been.
+  try {
+    await recordLead(env, enquiry, enquiry.leadId!, new URL(request.url).origin);
+  } catch (err) {
+    console.error('ledger write failed', err);
+  }
 
   // Queued before the first email goes, so that email can carry the link that cancels it. It is
   // the only piece of this that runs before the notification, and it cannot be allowed to stop
@@ -274,9 +289,15 @@ async function answered(request: Request, env: Env, url: URL): Promise<Response>
   }
   if (request.method !== 'POST') return json(405, { error: 'GET or POST only.' });
 
-  const result = await cancelReminder(env, key, token);
+  const { result, leadId } = await cancelReminderAnd(env, key, token);
   if (result === 'cancelled') {
-    return page('Noted', 'The reminder has been cancelled.', false);
+    // The same click closes the ledger row. This link is only in the owner's own notice, and
+    // he clicks it when a firm has paid or he has dealt with it, so it is the one signal the
+    // system gets about an outcome. Swallowed on failure: the reminder is already cancelled
+    // and refusing to say so because a bookkeeping write failed helps nobody.
+    if (leadId) await advanceLead(env, leadId, 'closed', 'paid or handled, from the owner link')
+      .catch(() => {});
+    return page('Noted', 'The reminder has been cancelled and the lead is closed.', false);
   }
   if (result === 'gone') {
     return page('Already done',
@@ -310,6 +331,12 @@ export default {
         return json(405, { error: 'POST only.' });
       }
       return submit(request, env);
+    }
+    // The owner's own view of the ledger, behind a signed token rather than behind the firm
+    // panel: /claim/ accounts belong to law firms, and no firm should be one URL away from a
+    // list of other firms' enquiries. See worker/leadspage.ts.
+    if (url.pathname === '/api/leads') {
+      return handleLeads(request, env, url);
     }
     if (url.pathname === '/api/answered') {
       return answered(request, env, url);
