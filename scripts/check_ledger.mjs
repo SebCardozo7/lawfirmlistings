@@ -521,7 +521,8 @@ head('sending, with the token');
   });
   ok('it answers a redirect, not a page', res.status === 303, String(res.status));
   ok('SO A REFRESH CANNOT SEND IT TWICE',
-     (res.headers.get('location') || '').includes(`id=${id}`));
+     (res.headers.get('location') || '').includes(`open=${id}`),
+     res.headers.get('location'));
   ok('one message went out', t.box.sent.length === 1, `${t.box.sent.length}`);
   ok('to the firm that asked', t.box.sent[0]?.to === ENQ.email, t.box.sent[0]?.to);
 
@@ -590,11 +591,25 @@ head('the desk actions, end to end');
   await t.post({ id, action: 'followup', date: '2027-01-15' });
   ok('a follow-up date posts through', (await getLead(t.env, id)).follow_up_at === '2027-01-15');
 
-  const page = await (await t.get(`?t=${TOKEN}&id=${id}`)).text();
-  ok('the detail page shows the history', page.includes('invoice sent'));
+  const page = await (await t.get(`/lead/${id}?t=${TOKEN}`)).text();
+  ok('the lead has a page of its own', page.includes('invoice sent'));
   ok('and the money', page.includes('500'));
-  ok('a detail page for an unknown id is 404',
-     (await t.get(`?t=${TOKEN}&id=nope1234`)).status === 404);
+  ok('an unknown id is 404 there', (await t.get(`/lead/nope1234?t=${TOKEN}`)).status === 404);
+
+  // The desk was one page with ?id= on it until the sidebar existed, and that address is in
+  // sent email and in somebody's bookmarks. It has to keep arriving somewhere.
+  const old = await t.get(`?t=${TOKEN}&id=${id}`);
+  ok('THE OLD ?id= LINK STILL LANDS ON THE LEAD', old.status === 302, String(old.status));
+  ok('and lands on its own page',
+     (old.headers.get('location') || '').includes(`/api/leads/lead/${id}`),
+     old.headers.get('location'));
+
+  // The row unfolds in the list as well, and the two must show the same thing: a control that
+  // exists on one and not the other is how a desk grows two ways of doing the same job.
+  const unfolded = await (await t.get(`/list?t=${TOKEN}&open=${id}`)).text();
+  ok('the list unfolds the same lead in place', unfolded.includes('invoice sent'));
+  ok('and both offer the same letters',
+     TEMPLATES.every(x => unfolded.includes(`value="${x.id}"`) && page.includes(`value="${x.id}"`)));
 }
 
 head('the numbers on the front page');
