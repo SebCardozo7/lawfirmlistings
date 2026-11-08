@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, writeFileSync, mkdirSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 // The sitemap is generated from the routes on every build, so a new firm, city or practice area
 // appears in it as soon as its page exists. Nothing to maintain by hand.
@@ -110,6 +112,85 @@ function withLastmod(item) {
   return lastmod ? { ...item, lastmod } : item;
 }
 
+/**
+ * Which of our pages carry each firm, read off the built HTML.
+ *
+ * The outbound desk opens with a true sentence a firm can check in ten seconds: your firm is on
+ * thirteen pages of this directory, here they are, is any of it wrong. That sentence needs the
+ * list, and the list has to be the real one. Deriving it from the data instead, by asking which
+ * city and practice a firm belongs to, means writing a second copy of the rule each page already
+ * applies, and the day a page changes what it lists the letter starts naming pages the firm is
+ * not on. So this reads the finished HTML and records the links it actually contains.
+ *
+ * It runs on astro:build:done, which means an ordinary `npm run build` produces it and no deploy
+ * can forget a separate step.
+ *
+ * Stored as a table of paths plus indexes into it rather than a path per firm per row: the same
+ * fifteen hundred paths repeat across 1,388 firms, and spelling each one out turns 150 KB into
+ * about 700 KB for nothing.
+ *
+ * Like the firms index beside it, worker/index.ts answers 404 for this path. It is for the desk,
+ * not for the web.
+ */
+function firmPages() {
+  const LINK = /\/firms\/([a-z0-9-]+)\//g;
+  return {
+    name: 'lfl-firm-pages',
+    hooks: {
+      'astro:build:done': ({ dir, logger }) => {
+        const root = fileURLToPath(dir);
+        const paths = [];
+        const index = new Map();
+        const firms = new Map();
+
+        const idFor = (p) => {
+          if (!index.has(p)) {
+            index.set(p, paths.length);
+            paths.push(p);
+          }
+          return index.get(p);
+        };
+
+        const walk = (folder) => {
+          for (const entry of readdirSync(folder, { withFileTypes: true })) {
+            const full = path.join(folder, entry.name);
+            if (entry.isDirectory()) {
+              if (entry.name === '_astro' || entry.name === 'api') continue;
+              walk(full);
+            } else if (entry.name.endsWith('.html')) {
+              const url = '/' + path.relative(root, full).split(path.sep).join('/')
+                .replace(/index\.html$/, '').replace(/\.html$/, '/');
+              // A profile linking to itself is not a page that lists the firm.
+              const own = url.startsWith('/firms/') ? url.split('/')[2] : null;
+              const html = readFileSync(full, 'utf8');
+              const here = new Set();
+              for (const [, slug] of html.matchAll(LINK)) {
+                if (slug !== own) here.add(slug);
+              }
+              if (!here.size) continue;
+              const id = idFor(url);
+              for (const slug of here) {
+                if (!firms.has(slug)) firms.set(slug, []);
+                firms.get(slug).push(id);
+              }
+            }
+          }
+        };
+
+        walk(root);
+        const out = {
+          generated_at: new Date().toISOString().slice(0, 10),
+          paths,
+          firms: Object.fromEntries([...firms].map(([k, v]) => [k, v.sort((a, b) => a - b)])),
+        };
+        mkdirSync(path.join(root, 'api'), { recursive: true });
+        writeFileSync(path.join(root, 'api', 'firm-pages.json'), JSON.stringify(out), 'utf8');
+        logger.info(`firm-pages.json: ${firms.size} firms across ${paths.length} pages`);
+      },
+    },
+  };
+}
+
 export default defineConfig({
   site: 'https://lawfirmlistings.com',
   trailingSlash: 'always',
@@ -118,5 +199,8 @@ export default defineConfig({
   // browser renders public/sitemap.xsl instead of raw XML. A crawler ignores it entirely,
   // which is the point: the file a crawler reads is unchanged, and the file a person opens
   // before a launch is legible.
-  integrations: [sitemap({ filter: isIndexable, serialize: withLastmod, xslURL: '/sitemap.xsl' })],
+  integrations: [
+    sitemap({ filter: isIndexable, serialize: withLastmod, xslURL: '/sitemap.xsl' }),
+    firmPages(),
+  ],
 });

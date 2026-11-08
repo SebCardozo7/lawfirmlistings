@@ -333,6 +333,10 @@ head('the index is for the desk, not for the web');
     new Request('https://lawfirmlistings.com/api/firms-index.json'),
     { ASSETS: assets() }, { waitUntil() {} });
   ok('ASKING FOR IT DIRECTLY IS A 404', res.status === 404, String(res.status));
+  const pagesRes = await handle.fetch(
+    new Request('https://lawfirmlistings.com/api/firm-pages.json'),
+    { ASSETS: assets() }, { waitUntil() {} });
+  ok('and so is the page index beside it', pagesRes.status === 404, String(pagesRes.status));
   resetIndex();
   const d = await dossierFor({ ASSETS: assets() }, { website: 'https://harborline.example/' });
   ok('and the desk still reads it', d.firm?.s === 'harborline-law');
