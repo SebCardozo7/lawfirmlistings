@@ -24,7 +24,10 @@ import { mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync }
 import { dirname, join } from 'node:path';
 import { webcrypto as crypto } from 'node:crypto';
 
-const ITERATIONS = 210_000;
+// Has to match worker/auth.ts, and the number is the runtime's ceiling rather than a choice:
+// Workers refuses any PBKDF2 above 100,000 and threw on every login until this was lowered.
+// See the note over ITERATIONS in worker/auth.ts.
+const ITERATIONS = 100_000;
 const READABLE = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
 
 const b64url = bytes => Buffer.from(bytes).toString('base64')
@@ -99,9 +102,24 @@ const record = JSON.stringify({
 
 console.log(`  firma     ${firm.name}`);
 console.log(`  mercado   ${firm.market.city}, ${firm.market.state}`);
+// El tier dejo de otorgar enlace seguido el 2026-11-05. Esta linea decia "follow, ya ganado"
+// para cualquier firma Verified, que ahora es falso para todas, y "se gana al llegar a
+// Verified", que ya no se gana nunca. Es el decimo lugar con la regla vieja y el segundo en
+// scripts/. La regla vive en src/data/paid-listings.ts y se lee de ahi, no se repite.
+const paidDomains = new Set(
+  (readFileSync(join(ROOT, 'src', 'data', 'paid-listings.ts'), 'utf8')
+    .match(/PAID_LISTING_DOMAINS[^=]*=\s*\[([^\]]*)\]/)?.[1] ?? '')
+    .split('\n')
+    .map(l => l.replace(/\/\/.*$/, ''))
+    .join('\n')
+    .match(/'([^']+)'/g)
+    ?.map(q => q.slice(1, -1).toLowerCase()) ?? [],
+);
+const linkIsFollowed = paidDomains.has(String(firm.domain ?? '').toLowerCase().replace(/^www\./, ''))
+  || Boolean(firm.subscription?.until
+    && firm.subscription.until >= new Date().toISOString().slice(0, 10));
 console.log(`  tier      ${firm.score?.tier ?? 'sin puntaje'}  (enlace `
-  + `${['Verified', 'Certified', 'Distinguished', 'Elite'].includes(firm.score?.tier ?? '')
-      ? 'follow, ya ganado' : 'nofollow, se gana al llegar a Verified'})`);
+  + `${linkIsFollowed ? 'follow, por listado pago' : 'nofollow, se gana con un listado pago'})`);
 console.log('');
 console.log('  Credencial, se muestra una sola vez:');
 console.log(`    Firm ID   ${firm.slug}`);

@@ -20,8 +20,29 @@
  *   have accounts.
  */
 
-/** PBKDF2-SHA256. 210,000 is OWASP's 2023 floor for this hash and it costs about 80ms here. */
-const ITERATIONS = 210_000;
+/**
+ * PBKDF2-SHA256, at the highest count this runtime will accept.
+ *
+ * It was 210,000, which is OWASP's 2023 floor for this hash and the right number to want. The
+ * Workers runtime refuses it:
+ *
+ *     NotSupportedError: Pbkdf2 failed: iteration counts above 100000 are not supported
+ *     (requested 210000).
+ *
+ * So every login threw, which is a 500 and not a 401, and it threw for an unknown firm as
+ * readily as for a known one because the dummy hash the handler compares against carried the
+ * same count. The panel had never been able to let anybody in, and nothing said so because no
+ * account had ever been issued to try it with. Found on the day the first one was.
+ *
+ * 100,000 is below the floor we would choose and it is the ceiling we are given. It is worth
+ * knowing rather than hiding: these are credentials for editing a directory entry, not for
+ * money, each one is issued by hand to one firm, and the hash never leaves KV. If that stops
+ * being the shape of this, the answer is a different KDF rather than a bigger number here,
+ * because this number cannot get bigger.
+ */
+export const ITERATIONS = 100_000;
+/** The hard ceiling the Workers runtime enforces on PBKDF2. Above this every login throws. */
+export const MAX_ITERATIONS = 100_000;
 const KEY_BITS = 256;
 
 /** Eight hours. Long enough to finish a correction, short enough to matter if a laptop is lost. */
