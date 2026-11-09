@@ -306,7 +306,56 @@ authority of the counts either side of it while being uncheckable by any reader.
 data belongs in this file and in the pull request, never in the prose**, which is a rule the
 section has followed by habit and had never written down.
 
+## Three traps this run walked into, added 2026-11-09
+
+All three were caught before the pull request. Two would have put a false sentence on the page and
+the third would have put a stale count in prose on a page whose whole subject is counts.
+
+**A `pending` row carries the sub-factor's published maximum, and counting maxima counted it.**
+This run's topic is A5, where `score.py` passes `max_override=3` unless the firm discloses cover,
+so the published six-point scale is reachable by exactly the firms that disclose. The draft
+counted `max === 6` across every scored firm and got **seven**, and the takeaway read that seven
+firms "are scored on the full six points". One of those seven discloses cover. The other six have
+no `accountability` record at all and went through `score.py`'s `assessed()` branch, which calls
+`sub()` with no override and therefore inherits the published max of six while scoring zero from
+`pending`. So the page said six firms were graded on six points when they were graded on nothing.
+**Filter on `source !== 'pending'` before counting anything about a sub-factor's scale**, and more
+generally: a `max` is not evidence that a scale was applied.
+
+**A hardcoded count copied out of a script's comment.** The draft said the list of bar associations
+"began as a New York and Maryland list, and five states were opened before their own bar
+associations were added to it". Five is what `check_a5.py`'s own comment says, and it was true the
+day that comment was written. **Six** of the thirteen states here now have no association of their
+own on the list. Taking a count out of a comment is the same bug as typing one, with the added
+problem that it looks sourced. The published version computes the set of states whose own body is
+absent and prints its size.
+
+**An assertion about firms, sitting in the advice section where nothing else is computed.** A
+bullet read "A firm that carries it will say so immediately", which is contradicted by the
+measurement two screens above it: one firm in 1,382 says so, and in Oregon, where every firm in
+private practice is covered, not one of twenty says so. The page spent six sections establishing
+that firms with cover do not mention it and then told the reader that firms with cover mention it.
+**The advice section inherits the authority of the measurement and is the part nobody re-reads
+against it.** The published bullet says instead that no register exists to check the answer
+against, so the answer is the firm's own word either way.
+
 ## Generated pages, so a topic is not aimed at one of them
+
+**Re-counted on 2026-11-09, and the city x practice rankings moved after a run of saying they did
+not.** The build produces **1,635 pages from 1,388 published firms in 19 markets and 13 states**,
+with **29 guides** in the manifest and every guide page carrying an entry. The real move is the
+ranking inventory: **174 city x practice rankings against 152 on 2026-11-02**, so twenty-two
+combinations crossed their threshold in a week while the firm total stayed identical at 1,388 and
+the 19 city hubs and 13 practice hubs did not change. Tiers did not move either: **216 certified,
+406 listed, 766 verified, 24 not eligible**, the same four figures as 2026-11-02. Nothing in this
+run's topic is aimed at any of those pages: `/practice-areas/medical-malpractice/` is about suing a
+doctor and this guide is about a firm's own professional liability cover, which no generated page
+mentions at all. **Re-count the rankings every run anyway.** The 2026-11-02 entry concluded from
+one flat week that the denominators had stopped moving, and twenty-two pages appeared in the next
+one.
+
+The 2026-11-02 text follows.
+
 
 **Re-counted on 2026-11-02, and almost nothing moved, which is the first time in ten runs.**
 The build produces **1,610 pages from 1,388 published firms in 19 markets and 13 states**, with
@@ -422,6 +471,7 @@ Every city and practice combination in that list is off limits as a guide topic.
 
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-11-09 | `/guides/do-lawyers-have-malpractice-insurance/` | **`do lawyers have malpractice insurance` (40/mo US, KD 4, CPC $4.00, TP 2,100)** with `do attorneys have malpractice insurance` (30/mo, KD 1) and `is malpractice insurance required for lawyers` (20/mo, KD 0, TP 2,000) beside it: **90/mo exact match**, thin, inside the parent topic `legal malpractice insurance` at 2,000 TP. Taken on the SERP rather than on the volume. All ten results are written **for the lawyer buying the policy**, by an insurer, a broker or a bar association, and not one measures a real firm. Checked and **not** targeted: `legal malpractice insurance` (800/mo, KD 11) and `attorney malpractice insurance` (600/mo, KD 9) are the broker cluster and we do not sell policies to lawyers; the `can i sue my lawyer` family (100/mo and below) is legal advice, which is the thing this section has no advantage at. No generated page mentions professional liability cover. | The field was `accountability`, written by `check_a5.py`, **read by no guide in twenty-nine** and sitting under three scripts nobody had opened. Findings in order: **1 of 1,382** firms publishes that it carries professional liability cover, still **1 of 739** on the firms where three pages or more were read, and **0 of 20** in Portland, the one market here where cover is compulsory. **560 of 1,382** have a bar or trial lawyers' association named on a page, **821** have neither. The method half is the better half: the association check is a **bare name match** with a 120-character evidence window and no membership test at all, so **712 of 1,358** stored snippets contain no form of the word member, **146** credit a body tied to another state, and for **10 firms** that out-of-state body is the only thing credited. Two named causes, both in the pattern list itself: ITLA abbreviates the Illinois and the Indiana trial lawyers associations and only Indiana's is listed, and MATA is both a Massachusetts association and a surname. **49% against 31%** on whether a state's own bar body is on our list at all. |
 | 2026-11-03 | `/guides/does-a-medical-malpractice-page-mean-anything/` | **"how to choose a medical malpractice lawyer" (450/mo US, CPC $3.00, KD unreported, commercial + informational)**, with `how to choose a good medical malpractice lawyer` (30/mo) beside it, so **480/mo in the exact-match cluster**. This is the per-practice fork the 2026-10-05 criminal defense entry predicted and said was "worth a run each": that cluster listed `medical malpractice 450` and this is it. Checked and **not** targeted: `how to choose a personal injury lawyer` (200/mo, **KD 0**, CPC $12.00, TP 200, parent `how to select a personal injury attorney`) is the broader sibling and is worth its own run rather than being folded in; `personal injury vs medical malpractice` (50/mo, KD 0) is a definitional query; `lawyer specialization` (50/mo, KD 37, parent `types of law`) is a different topic wearing the same words; `do lawyers specialize` is dead at 10/mo. | Item 2 off the ranked list, carried since 2026-10-19 and unwritten through two runs. **Recount first, and it mattered:** the backlog figures were medical malpractice 410 of 901 and nursing home abuse 341, and against 1,388 published firms they are now **524 and 441 of a 1,113-firm injury cohort**, so every sentence built on the old pair would have been wrong. The finding: the raw split looks like the hiring advice vindicated, **median score 57 against 47, organic traffic 895 against 176, roster 5 against 2**, and then the control kills it. Hold breadth constant and in **4 of the 5 bands** with 8+ firms a side the firms carrying a rarer page score **the same or lower**; the widest gap in the table runs against the advice (five areas, **49 against 54**). The explanation is in the same paragraph: the rare-page firms publish a median of **7 of the 8 areas against 4**. Worth recording that `score.py` reads `practices[]` only to pick a cohort (line 399) and **never scores their number**, so the raw gap is not our own arithmetic paying for pages, it is breadth standing in for firm size. Falsification, fifth consecutive hold: mean Google rating **4.85 against 4.89**, and the group with fewer pages is the higher one. **A false caption caught only by reading the rendered page:** a draft said the highlighted pair were "the areas fewest firms publish" while the chart under it showed **workers' compensation at 455 sitting below medical malpractice at 524**. The published page names it and says why the pair is chosen by kind of claim instead, workers' comp being an administrative benefits claim with no defendant to sue. Three further hardcoded counts ("five of them", "the eight areas" twice) were derived. `make_og.mjs` only looked for Chromium under `/opt/pw-browsers/`, so the share card could not be rendered on the machine a guide is written on; it now searches the Playwright cache, Chrome and Edge on Windows, macOS and Linux. |
 | 2026-11-02 | `/guides/law-firm-hierarchy/` | **"law firm hierarchy" (400/mo US, 900 global, KD 1, CPC $0.50, traffic potential 350, informational, parent topic `law firm titles`)**, with `law firm titles` (70/mo, **KD 0**, CPC $2.50, parent `law firm hierarchy`, so the two are one topic), `law firm structure` (150/mo, **KD 0**, parent `law firm hierarchy`) and `associate vs partner law firm` (60/mo, **KD 0**) beside it. Roughly **680/mo at KD 0 to 1**. `law firm positions` (200/mo, KD 0) was **rejected**: its parent topic is `law office jobs near me` and the intent is a job seeker. The **`of counsel` cluster is much bigger and was deliberately not targeted**: `of counsel meaning` 1,800/mo (KD 5) and `what does of counsel mean` 1,600/mo (KD 3) share one parent topic, 3,400/mo in all, and the intent is a definition we would be restating from the ABA. It gets a measured section on the page and a backlog entry of its own. The SERP for the target is **US News (DR 91), Indeed UK (DR 92), BCG Search (a legal recruiter), a NALP handout PDF, Clio, Qanooni, attorneyatwork, remotescouts, achieveprofessionals and YouTube**: every result is career advice drawing the same idealised large-firm ladder, **two of the ten are about the United Kingdom**, and not one has opened a law firm's team page. Traffic on the page is thin (332, 205, 123, 66) | Not from the ranked list, ninth run running, and the survey found it in `attorneys[].role` and `role_source`, which **no entry in this file had ever named** although `prune_nonpeople.py`, `repair_roles.py` and `roster_roles.py` all exist to service them. **1,008 of 1,388 firms publish a roster and 380 publish none.** Of the **10,023** people they name, **6,243 carry no job title we could read** and **521 firms print one beside nobody**. Crawl-reach control, which is the whole epistemic load of the piece: restrict to the **487 firms whose pages did yield a title** and **2,611 of 6,391** named people still arrive without one, so the silence is not only our reader. The hierarchy finding: **only 51 of 1,008 firms publish both a partner and an associate**, and the most common thing printed beside a name is the bare word "Attorney" (188 firms, 1,002 people). Falsification, and it held twice: mean Google rating **4.85 against 4.82**, and the two stay within a tenth of a star in **all four headcount bands**, while median score runs 57 against 51 and median organic traffic 806 against 365. The firms publishing **no roster at all rate highest of the three groups at 4.88** on a median score of 40. Market control: in the 12 markets with 8+ firms on each side the printing cohort holds the higher median score in **10**, so the score gap is not a city effect. Self-critical half, three parts: **A2 (10 pts) and A6 (9 pts) both read a roster, 19 of the hundred**, and A2 is scored on **305 of 1,388** firms and A6 on **328**, because **908 firms sit in the 11 of 13 states publishing no queryable register**; **329 of the 3,780 titles we did read are ones our own classifier cannot act on** (across 157 firms), including 10 people titled `Abogado`, which our lawyer-role list does not contain; and the scale **pays nothing at all for printing a rank** yet the groups sit 6 median points apart. No date in the byline: the roster read carries none, which is open item 0b one field over. |
 | 2026-10-19 | `/guides/types-of-personal-injury-case-firms-advertise/` | **"types of personal injury cases" (600/mo US, 800 global, KD 0, CPC $4.50, traffic potential 150, informational, parent topic `personal injury case`)**, with `law firm practice areas` (100/mo, KD 17, TP 150, parent `practice areas`) and `lawyer practice areas` (30/mo, **KD 0**) beside it. The specialization cluster was checked first and is **dead**: `do lawyers specialize` 10/mo, `what is a practice area in law` 0/mo, and every `specialized lawyer` term above 40/mo is local intent for a named practice. `general practice attorney` (800/mo, KD 0) and `general practice lawyer` (700/mo, KD 0) are real volume and were **rejected**: both carry local intent, and a study of injury sub-practices is not what somebody typing them wants. The SERP for the target is **ten law firm blog posts and one legal-software vendor, DR 12 to 41, every one of them a list** whose counts contradict each other: 4, 6, 7, 35. Nobody on that page has counted a firm | Not from the ranked list, eighth run running. The topic came from the data moving: #133 and #137 took practice rows from ~1,450 to 5,919, and `practices[].source_url` is now on **5,914 of 5,919** rows, meaning the firm's own page with the practice in its title or first heading. Denominator is the **901 of 1,113 injury firms carrying at least one sub-practice row**, because absence is our sweep rather than their silence (see the trap above). **217 publish a page on all seven, 46 publish exactly one, the median publishes five.** The concentration is the sharper half: only **84 of 127 possible lists occur at all, and 3 of them cover 474 of 901 firms**. What a long list predicts: median 7 attorneys against 1, 1,295 monthly organic visits against 110, 331 reviews against 162, median score 58 against 41. Controls, all three held: inside every band of attorney count the score gap survives (39 v 50, 38.5 v 54, 51 v 60), and in the 11 markets with 8+ firms on each side the long lists carry the higher median in 11. Falsification, and it held: mean Google rating **4.88 against 4.85**, 0.03 of a star, and the long lists carry the higher mean in **0 of 3** bands of review volume. Self-critical half: the score awards **no points at all** for the length of the list, yet the groups are 17 median points apart, and of the 10.9 raw-point pillar gap **pillar C, what clients said, is 0.45, or 4%**. Second fault, ours alone: CASE_TYPES in `crawl_results.py` has **no motorcycle and no nursing home entry**, so 782 firms publishing a page on one of those can never have a result recorded as that kind. |
@@ -443,6 +493,63 @@ Every city and practice combination in that list is off limits as a guide topic.
 | gated | `/guides/best-personal-injury-law-firms-nyc/` | ranking | Publishes at 8 certified firms in New York. Currently 3. |
 
 ## Next, ranked
+
+**Read this first, 2026-11-09. Tenth run running, and the survey beat the ranking for the tenth
+time.** The topic came out of `accountability`, a field on **1,382 of 1,388** published firms,
+written by `check_a5.py`, read by `score.py` through sub-factor A5, and **never read by a single
+one of the twenty-eight guides before this one**. The 2026-11-02 lesson was to re-read fields that
+have scripts named after them. This run adds the next one: **re-read the fields that no guide has
+ever opened.** `grep -l "f.data.<field>" src/pages/guides/*.astro` is a ten-second query and it
+produced this run's topic on the first try.
+
+**Fill rates across 1,388 published firms, counted 2026-11-09.** Only what changed:
+
+- **`accountability` is now spent.** 1,382 of 1,388, and this run reports both halves of it. What
+  is left in the field is not another study, it is the two engine defects below.
+- **Nothing else moved.** `reviews.google`, `digital.places`, `results_published`, `score`,
+  `offices`, `languages`, `digital.schema_detected` and `digital.ahrefs` all **1,388**;
+  `attorneys` non-empty **1,008**; `availability` non-empty **752**; `digital.psi` **1,294**;
+  `operating` **1,366**. Gates G1 **287**, G2 **603**. Status: 216 certified, 406 listed, 766
+  verified, 24 not eligible. All identical to 2026-11-02, which has now held for two runs, so the
+  **1,610 to 1,635 page move is the 174 rankings and this guide, not new firms**.
+- **`accountability.bar_associations` at 560 was the thing nobody had looked at, and now somebody
+  has.** The 2026-11-02 entry flagged the 113 to 560 move as a fivefold jump worth recounting
+  before building on. Recounted: 560 firms, 1,358 rows, 40 bodies. The recount is not the finding.
+  **Reading the script that fills it is the finding**, and it should have been the first step in
+  every run that has touched a measured field: the check is a name match with no membership test,
+  so the number is real and does not mean what the methodology page says it means.
+- Still dead and not to be proposed without a recount: `founded_year`, `claimed`, `results[]`
+  non-empty, `subscription` at **0**; `digital.ahrefs.ai_citations` **13, unchanged across eight
+  runs**.
+
+**What this run leaves on the table, ranked:**
+
+1. **The `of counsel` cluster is still the largest single prize this section has found, and it is
+   now carried for a second run.** `of counsel meaning` 1,800/mo at KD 5 and `what does of counsel
+   mean` 1,600/mo at KD 3, **3,400/mo at KD 3 to 5** under one parent. The blocker is unchanged
+   and is an editorial decision rather than a data one: the intent is definitional, the definition
+   belongs to the ABA and the state rules, and a page restating it is the thing this section
+   exists not to write. The measured angle already exists in `/guides/law-firm-hierarchy/` (the
+   title appears on **75 of 487** firms that print any title, beside **187 people**, almost none
+   of them the large commercial firms the definition describes). Two risks nobody has weighed:
+   whether a measured answer can win a definitional SERP at all, and whether a second page about
+   titles would cannibalise the hierarchy guide. **This needs a person to decide, not another run
+   to re-rank it.**
+2. **The single-market visibility re-run, unblocked since 2026-11-02 and now pending five runs.**
+   `digital.ahrefs` is on all 1,388, so the 2026-09-30 quartiles can finally be cut inside one
+   market instead of across nineteen, where a New York firm's 4,000 visits sit beside a Lakeland
+   firm's. Needs no new data and no new decision. **This is the one to take next if nothing in the
+   fill-rate survey beats it, and it has lost to the survey four times running.**
+3. **`availability` is a claim nobody has tested, on 752 of 1,388 records.** Carried since
+   2026-10-19 and still untouched. Recount against 1,388 before quoting any figure in this file.
+   The obvious question is whether a firm advertising round-the-clock availability answers
+   differently from one that does not, and nothing in the records can answer the second half of
+   that, so scope it carefully before writing.
+4. **`accountability.bar_associations` as a second study is dead**, and this run killed it rather
+   than leaving it ranked. Any cut of which bodies firms belong to is a cut of our own pattern
+   list and of a name match that cannot see membership. Until `check_a5.py` requires a membership
+   claim, the field supports the method piece published this run and nothing else.
+
 
 **Read this first, 2026-11-02. Ninth run running, and the survey beat the ranking again.** The
 topic came out of `attorneys[].role` and `attorneys[].role_source`, two fields that have existed
@@ -962,6 +1069,66 @@ The entries below were re-checked against the collection on 2026-09-21.
   `24/7 intake line` is on 401 of 786 and `Hospital & home visits` on 80, and the other three
   values are on 1 record each. The problem is that we measure the *claim* and never test it, so
   the honest piece is one paragraph long. Checked 2026-09-28.
+
+## Keyword research, 2026-11-09
+
+Four Ahrefs calls, one of them free. Units at the time of the run: **636,121 of 800,000 used,
+resetting 2026-11-19**, so 163,879 left with ten days to go and no reason to be careful beyond the
+six-call rule. Spend this run: 378 + 1,287 + 306 = **1,971 units**.
+
+**The cluster, `keywords-explorer-overview`, US:**
+
+| Keyword | Vol | KD | CPC | TP | Parent |
+| --- | --- | --- | --- | --- | --- |
+| `legal malpractice insurance` | 800 | 11 | $11.00 | 2,000 | itself |
+| `attorney malpractice insurance` | 600 | 9 | $5.00 | 1,900 | `legal malpractice insurance` |
+| `lawyers professional liability insurance` | 600 | 2 | $10.00 | 800 | `lawyers professional liability insurance application` |
+| `lawyer malpractice insurance` | 350 | 6 | $8.00 | 1,900 | `legal malpractice insurance` |
+| `do lawyers have malpractice insurance` | 40 | 4 | $4.00 | 2,100 | `legal malpractice insurance` |
+| `do attorneys have malpractice insurance` | 30 | 1 | $4.00 | 30 | `business insurance lawyer` |
+| `is malpractice insurance required for lawyers` | 20 | 0 | $4.00 | 2,000 | `legal malpractice insurance` |
+| `bar association membership` | 10 | n/a | $1.10 | n/a | none |
+
+Returned nothing at all, so below Ahrefs' floor: `does my lawyer have malpractice insurance`,
+`what to do if your lawyer makes a mistake`, `how to check if a lawyer is a member of the bar
+association`. **The consumer phrasing of this question barely exists as a keyword**, and that is
+the finding, not a reason to skip the topic.
+
+**The shape of the demand, `keywords-explorer-matching-terms`.** The volume in this subject splits
+cleanly in two and neither half is ours by default. One half is **lawyers buying policies**:
+`how much is lawyer malpractice insurance` 200/mo, `lawyer malpractice insurance cost` 150/mo,
+`cost of lawyer malpractice insurance` 100/mo, plus state variants (`lawyer malpractice insurance
+california` 150/mo, `texas lawyer malpractice insurance` 50/mo). The other half is **clients suing
+their own lawyer**: `how much can i sue my lawyer for negligence` 150/mo, `can i sue my lawyer for
+bad representation` 100/mo, `can i sue my lawyer for negligence` 100/mo, and a long tail of
+`can i sue my lawyer for <specific failure>` at 40 to 80 each. **We should chase neither.** The
+first is a quote-and-buy intent we have no product for, and the second is legal advice, which is
+the category this section was set up not to write.
+
+**The SERP, `serp-overview` on `do lawyers have malpractice insurance`, and this is why the topic
+was taken.** Ten results and **not one is addressed to the person asking**:
+
+1. americanbar.org, DR 90, an FAQ titled "for the New or Suddenly Solo Attorney"
+2. a People Also Ask block, three of whose four questions are about what a lawyer pays
+3. three Reddit and JustAnswer discussions, including one asking literally "What benefit is there
+   to a client for an attorney to have malpractice insurance"
+4. ohiobar.org, DR 74, "Do I need malpractice insurance?"
+5. attorneysinsurancemutual.com, alpsinsurance.com, biberk.com, leavitt.com: four insurers
+6. embroker.com, DR 75, "Legal Malpractice Insurance Requirements by State", with sitelinks to
+   per-state sections
+
+**So the question is asked by clients and answered to lawyers.** Every page on the SERP tells a
+lawyer whether they need a policy. Nothing tells a client what they will find if they go looking,
+which is what measuring 1,382 firm websites can say and an insurer cannot. KD 0 to 4 across the
+exact-match terms, DR 12 and DR 46 sitting at positions 5 and 7, so the SERP is winnable on a page
+nobody else can write.
+
+**Not verifiable from this environment, and it should be checked by a person before publication.**
+`www.americanbar.org`, `www.osbplf.org` and `www.osbar.org` all fail to resolve here
+(`getaddrinfo ENOTFOUND`), which is the same network policy that has blocked seven of the eight
+competitors. The ABA URL the guide cites is taken from the live SERP data above, where it sits at
+position 1, so it exists. The Oregon mandate is stated in the guide without a link and rests on
+search results rather than on a fetch of the Professional Liability Fund's own page.
 
 ## Keyword research, 2026-11-02
 
@@ -1563,8 +1730,52 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: martindale.com**, seventh in the rotation. superlawyers.com was re-read on
-2026-11-02 and the set is on its second pass.
+**Next run: thelawfirmlist.us**, eighth in the rotation and the last of the second pass, after
+which the set returns to nolo.com. martindale.com was re-read on 2026-11-09. Note that the
+2026-11-03 run shipped a guide without advancing this rotation or adding a keyword section, so
+martindale.com was due for two runs rather than one. **Advance the rotation even on a run that
+takes a topic off the ranked list rather than out of the competitor pass.**
+
+### martindale.com, read 2026-11-09 (second pass)
+
+`www.martindale.com` does not resolve from this environment, same as the 2026-09-25 pass and same
+as six of the other seven, so this was read through search results and the pages the company and
+its customers publish about itself. Nothing below is quoted as a figure and nothing from it went
+onto the published page.
+
+**What the first pass established and still holds.** The inventory is a page per attorney carrying
+a peer rating, and the rating is the product: three tiers, **AV Preeminent**, Distinguished and
+Notable, from an anonymous poll of non-affiliated attorneys, with a separate Client Champion award
+from client reviews since 2017. Eligibility is three years in practice plus a minimum number of
+responses, and Martindale does not publish that minimum. The company puts AV Preeminent at roughly
+the top tenth of attorneys. Ratings for a disbarred or suspended lawyer come down once a state bar
+tells them.
+
+**What this pass adds, and it landed directly on this run's subject.**
+
+- **Their credential and ours end up in the same block on a firm's own website, and that block is
+  what our check reads.** Firms republish the peer rating on their bios under a heading like
+  "Honors & Awards", and this run's reading of the stored evidence found `American College of
+  Trial Lawyers, Fellow` and `AV Preeminent Peer Review Rating, Martindale-Hubbell` **adjacent in
+  the same snippet**, both credited to the same firm by a matcher that only knows how to exclude
+  the badges on `NOT_AN_ASSOCIATION`. Martindale is not on that list and arguably should not be,
+  since the rating is not bought. The point is narrower and worse: **a firm's credentials block is
+  an undifferentiated run of text, and anything reading it by name match cannot tell a membership
+  from a fellowship from a purchased ranking from a peer poll.** That is the defect this run's
+  guide publishes about itself.
+- **Tenth sourced case for item 4, and it is the cleanest of the ten.** The rated party supplies
+  nothing to the peer rating and the poll decides it, which is the opposite of the Super Lawyers
+  and Avvo pattern. So "what a participation score measures" now has a control inside the same
+  dataset: a rating the subject cannot write, published beside ratings the subject does write, on
+  the same profile. Item 4 has been "worth writing" for eight runs. **Somebody should write it or
+  close it**, and with a control available it is now worth more than it was.
+- **No public API, confirmed again.** Same posture as the state registers: published to humans,
+  published in the one shape that stops anybody counting it.
+
+**What we should not chase:** the ratings explainer. "What does AV Preeminent mean" is a definition
+of their own product, they will own it forever, and the honest answer is a paragraph. Also not the
+per-attorney profile, for the fifth time across this set: a page asserting a named individual's
+standing is the thing this directory will not publish without having checked it.
 
 ### superlawyers.com, read 2026-11-02 (second pass)
 
@@ -2269,6 +2480,37 @@ rescores 217 firms, which is not a guide run's call:
   live on profiles.
 
 ## Open items for a person
+
+- **A5's association half scores a mention, not a membership, and it is worth three points to 560
+  firms.** Raised 2026-11-09 and now live on the public page. `check_a5.py` searches each page for
+  a body's name, keeps a 120-character window as evidence, and rejects only the bought-badge
+  forums. Nothing requires the firm to claim membership. Of the 1,358 stored snippets, **712
+  contain no form of the word member**, **146 credit a body tied to a state the firm does not
+  practise in**, and for **10 firms that out-of-state body is the only thing credited**, so their
+  three points rest entirely on it. Two causes are in the pattern list itself: `\bITLA\b` matches
+  the Illinois Trial Lawyers Association while the list only holds Indiana's, and `\bMATA\b`
+  matches a surname as readily as the Massachusetts association. The cheap fix is a membership
+  test on the window, in the same shape as `FIRST_PERSON` on the insurance half, which the script
+  already demonstrates. Rescoring moves tiers, so it is not a guide run's call, and the guide
+  published this run says it out loud.
+
+- **The one firm that disclosed its cover is graded on a harder scale than the 560 that disclosed
+  nothing, and scores worse for it.** Raised 2026-11-09. `sub()` passes `max_override=3` unless
+  cover is disclosed, which is the right call for everybody who did not disclose. The firm that
+  did is graded out of 6 and earns 3, while a firm with a body named on a bio page is graded out
+  of 3 and earns 3. In a total that is a share of what was assessed, **answering the question is
+  worth less than not being asked it**. Nobody designed that; it falls out of combining a
+  conditional denominator with a two-part sub-factor. It currently affects one record, which is
+  why it is an open item and not an emergency, and it affects every record the moment the
+  membership test above is fixed and firms start disclosing.
+
+- **`check_a5.py`'s association list holds no body of their own for six of the thirteen states
+  here.** Raised 2026-11-09. California, Arizona, Nevada, Georgia, Pennsylvania and Illinois have
+  no state bar or state trial lawyers association on `ASSOCIATIONS`, and the share of firms
+  matching anything is **49% in the seven states that do have one against 31% in the six that do
+  not**. The script's own comment says five states were opened before their bodies were added; it
+  is six now. This is the same class as the 2026-10-02 reach problem and it is cheap to fix: six
+  names and six regexes, read off the firms' own pages the way the Florida and Texas entries were.
 
 - **A guide may be competing with our own practice hub, and it was published a week ago.**
   Raised 2026-10-12. `/practice-areas/criminal-defense/` carries the H2 **"How to choose a criminal
