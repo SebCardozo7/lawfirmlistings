@@ -32,6 +32,7 @@
  * desk calls and it moves anywhere, because a person correcting a mistake is the one case where
  * going backwards is the right answer. Both write an event, so the history says which it was.
  */
+import { getMany } from './kvread';
 import type { Enquiry } from './outbound';
 
 export type LeadStatus = 'arrived' | 'quoted' | 'chased' | 'closed' | 'won' | 'lost';
@@ -260,8 +261,9 @@ export async function listLeads(env: LeadEnv, limit = 200): Promise<Lead[]> {
   if (!env.FOLLOWUPS) return [];
   const list = await env.FOLLOWUPS.list({ prefix: 'lead:', limit });
   const out: Lead[] = [];
-  for (const k of list.keys) {
-    const raw = await env.FOLLOWUPS.get(k.name);
+  // Read together, not one after the other. Four hundred leads read sequentially is four
+  // hundred round trips before the page starts, which the desk paid alongside the prospects.
+  for (const raw of await getMany(env.FOLLOWUPS, list.keys.map(k => k.name))) {
     if (!raw) continue;
     try {
       const row = JSON.parse(raw);
