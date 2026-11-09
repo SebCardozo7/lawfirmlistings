@@ -11,13 +11,16 @@
  *
  * So the rhythm is: the cron proposes, a person disposes, and the cron sends.
  *
- *   17:00 UTC   a batch for tomorrow is built and emailed to SUBMISSIONS_TO, with a link
+ *   17:00 UTC   a batch for the next working day is built and emailed to SUBMISSIONS_TO
  *   any time    the owner opens the link, unticks anybody wrong, and approves
  *   13:00 UTC   the approved letters start going out, a couple every quarter of an hour
  *   17:00 UTC   the window closes, whatever is left is simply not sent
  *
- * SILENCE IS A NO. A batch nobody approved sends nothing and is not carried forward; tomorrow
- * a fresh one is built from whoever is still waiting. The failure mode of forgetting is that
+ * Monday to Friday, both ends. Nothing is proposed for a Saturday and nothing goes out on
+ * one, so a Friday afternoon proposes Monday and the weekend runs find it already made.
+ *
+ * SILENCE IS A NO. A batch nobody approved sends nothing and is not carried forward; the next
+ * working day a fresh one is built from whoever is still waiting. The failure mode of forgetting is that
  * nothing happens, which is the only acceptable failure mode for mail to strangers.
  *
  * The link in that email opens a page. It does not send. Mail scanners follow links in
@@ -77,8 +80,29 @@ export const SEND_TO = 17;
 export const PER_RUN = 2;
 
 export const dayOf = (d: Date): string => d.toISOString().slice(0, 10);
-export const tomorrow = (now = new Date()): string =>
-  dayOf(new Date(now.getTime() + 86400000));
+
+/** Saturday and Sunday are not business days in any of the clocks this touches. */
+export const isWorkday = (d: Date): boolean => {
+  const day = d.getUTCDay();
+  return day !== 0 && day !== 6;
+};
+
+/**
+ * The day the next batch is for: tomorrow, unless tomorrow is a weekend.
+ *
+ * A batch is only ever built for a day it could go out on. Built for a Saturday it would sit
+ * approved and unsent until it expired, and the person who approved it would be left thinking
+ * five letters went out when none did.
+ *
+ * So a Friday evening proposes Monday. The Saturday and Sunday runs then find Monday's batch
+ * already built and already notified, and say nothing, which is what stops the same list being
+ * emailed three times over a weekend.
+ */
+export const nextWorkday = (now = new Date()): string => {
+  const d = new Date(now.getTime() + 86400000);
+  while (!isWorkday(d)) d.setUTCDate(d.getUTCDate() + 1);
+  return dayOf(d);
+};
 
 /**
  * How many letters a day, given how many have ever gone out.
@@ -184,8 +208,8 @@ export function batchNotice(
     `${n} ${n === 1 ? 'letter is' : 'letters are'} proposed for ${batch.on}.`,
     '',
     'Nothing goes out until you approve it. Open the list, untick anybody who should not',
-    'hear from us, and approve the rest. If you do nothing, nothing is sent and tomorrow',
-    'builds a fresh list.',
+    'hear from us, and approve the rest. If you do nothing, nothing is sent and the next',
+    'working day builds a fresh list.',
     '',
     'Approve the list:',
     `${SITE}/api/leads/batch?t=${encodeURIComponent(token)}&on=${encodeURIComponent(batch.on)}`,
@@ -215,11 +239,24 @@ export function batchNotice(
  * email. A build that cannot be emailed is left un-notified rather than discarded, so the
  * next run tries again.
  */
+/**
+ * `force` is the button on the desk, for the hours the cron is not looking.
+ *
+ * It changes two things and nothing else. The hour no longer has to be the build hour, and
+ * the batch is for today rather than the next working day, when today is still a working day
+ * with window left in it, because a batch proposed by hand is a batch somebody wants to act
+ * on now and not tomorrow.
+ *
+ * Everything that matters is untouched: no postal address still means no batch, a day that
+ * already has one is not rebuilt, a list already emailed is not emailed again, and nothing
+ * reaches a firm until somebody ticks the boxes. The button proposes. It does not send.
+ */
 export async function proposeBatch(
-  env: BatchEnv, token: string, now = new Date(),
+  env: BatchEnv, token: string, now = new Date(), force = false,
 ): Promise<{ built: number; notified: boolean }> {
-  if (now.getUTCHours() < BUILD_HOUR) return { built: 0, notified: false };
-  const on = tomorrow(now);
+  if (!force && now.getUTCHours() < BUILD_HOUR) return { built: 0, notified: false };
+  const today = isWorkday(now) && now.getUTCHours() < SEND_TO;
+  const on = force && today ? dayOf(now) : nextWorkday(now);
   const made = await buildBatch(env, on);
   const batch = made ?? await getBatch(env, on);
   if (!batch || batch.notified_at) return { built: made ? made.slugs.length : 0, notified: false };
@@ -290,6 +327,11 @@ export async function drainBatch(
   if (!env.FOLLOWUPS || !env.EMAIL) return out;
   if (!(env.POSTAL_ADDRESS ?? '').trim()) return out;
 
+  // Belt as well as braces. No batch is ever built for a weekend, so this should never be
+  // the thing that stops a send, and that is exactly why it is here: the day a batch reaches
+  // a Saturday by some route nobody thought of, the letters still do not go out.
+  if (!isWorkday(now)) return out;
+
   const hour = now.getUTCHours();
   if (hour < SEND_FROM || hour >= SEND_TO) return out;
 
@@ -339,7 +381,7 @@ export async function batchState(env: BatchEnv, now = new Date()): Promise<Batch
   const today = dayOf(now);
   // Today's batch first: a batch that is sending is the thing a person wants to know about,
   // and tomorrow's is only interesting once today's is finished with.
-  for (const on of [today, tomorrow(now)]) {
+  for (const on of [today, nextWorkday(now)]) {
     const batch = await getBatch(env, on);
     if (!batch) continue;
     if (!batch.approved) return { kind: 'waiting', batch };
@@ -351,5 +393,5 @@ export async function batchState(env: BatchEnv, now = new Date()): Promise<Batch
       ? { kind: 'sending', batch, left }
       : { kind: 'approved', batch, left };
   }
-  return { kind: 'none', on: tomorrow(now) };
+  return { kind: 'none', on: nextWorkday(now) };
 }

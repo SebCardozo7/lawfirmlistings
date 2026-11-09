@@ -56,7 +56,7 @@ await build({
                export { recordLead, newLeadId, setStatus, addNote, recordSend, setFollowUp }
                  from './worker/ledger.ts';
                export { putProspect } from './worker/prospects.ts';
-               export { buildBatch, tomorrow, BUILD_HOUR } from './worker/batch.ts';`,
+               export { buildBatch, nextWorkday, BUILD_HOUR } from './worker/batch.ts';`,
     resolveDir: ROOT,
     loader: 'ts',
   },
@@ -66,7 +66,7 @@ await build({
 
 const {
   handleLeads, recordLead, newLeadId, setStatus, addNote, recordSend, setFollowUp, putProspect,
-  buildBatch, tomorrow, BUILD_HOUR,
+  buildBatch, nextWorkday, BUILD_HOUR,
 } = await import(pathToFileURL(bundle).href);
 
 const store = new Map();
@@ -246,7 +246,7 @@ for (const [n, domain, st] of NAMES) {
 // this script may be run at any time of day.
 const forced = new Date();
 forced.setUTCHours(Math.max(forced.getUTCHours(), BUILD_HOUR), 5, 0, 0);
-const proposed = await buildBatch(env, tomorrow(forced));
+const proposed = await buildBatch(env, nextWorkday(forced));
 if (proposed) console.log(`  (a batch of ${proposed.slugs.length} is waiting for approval)`);
 
 /* -------------------------------------------------------------------- the server */
