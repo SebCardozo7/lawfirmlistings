@@ -553,10 +553,31 @@ def looks_like_a_label(text):
     return len(words) <= 6
 
 
+def absolute_to(origin, url):
+    """A URL from somebody else's file, resolved against their origin, or None.
+
+    The sitemap standard says robots.txt must give an absolute URL and a fair number of sites
+    give "/sitemap.xml" anyway. Taken as written it reaches urlopen as a path with no scheme,
+    which raises ValueError rather than returning an error status, so it is not caught by any
+    of the handling around a bad response: it takes the whole run down. One firm in New Orleans
+    stopped that market at 44 of 144 and one in Detroit at 206 of 217, in both cases after the
+    crawl had already been paid for.
+
+    Anything that does not resolve to http or https is dropped rather than tried. A sitemap
+    declared as ftp:// or javascript: is not a sitemap.
+    """
+    try:
+        resolved = urllib.parse.urljoin(origin + "/", unescape(str(url)).strip())
+    except ValueError:
+        return None
+    return resolved if resolved.lower().startswith(("http://", "https://")) else None
+
+
 def sitemap_urls(origin, robots, rp):
     """URLs from the sitemaps robots.txt declares, or from the conventional locations."""
     seen, out = set(), []
-    declared = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "")
+    declared = [u for u in (absolute_to(origin, m) for m
+                            in re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "")) if u]
     guesses = [] if declared else [origin + path for path in SITEMAP_FALLBACKS]
     todo = declared or list(guesses)
     # A sitemap index can list a dozen children, and five of those are now guesses that may be
@@ -574,7 +595,10 @@ def sitemap_urls(origin, robots, rp):
         if status != 200 or not body:
             continue
         # A sitemap index points at more sitemaps; both are <loc> lists.
-        locs = [unescape(m) for m in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body, re.I)]
+        # Resolved too. A sitemap index is as free to list a relative child as robots.txt is to
+        # declare a relative sitemap, and the failure is identical.
+        locs = [u for u in (absolute_to(origin, m) for m
+                            in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body, re.I)) if u]
         if locs and url in guesses:
             # One conventional address answered, so stop asking the host for the other four.
             todo = [u for u in todo if u not in guesses]
@@ -997,12 +1021,29 @@ def main() -> int:
 
         # One visit, then every unanswered practice against it. This is the whole saving: the
         # sitemap of a firm with 6,000 URLs is fetched once instead of once per practice.
-        visit = site_urls(domain)
-        answers = {}
-        for name, spec in todo:
-            found, why = probe(domain, spec, name, args.budget, visit)
-            answers[name] = (found, why)
-            (holds if found else misses).append((name, domain))
+        #
+        # Wrapped, because one firm's site must not end a market. Everything inside here is a
+        # conversation with somebody else's server, and the failures are theirs: a malformed
+        # URL in their robots.txt, a header that decodes to nothing, a redirect loop. Each of
+        # those is a fact about one domain and the run carries on past it, the same way a
+        # non-200 already does. Before this, a relative sitemap in New Orleans stopped that
+        # market at 44 of 144 with no record of the 100 it never reached.
+        try:
+            visit = site_urls(domain)
+            answers = {}
+            for name, spec in todo:
+                found, why = probe(domain, spec, name, args.budget, visit)
+                answers[name] = (found, why)
+                (holds if found else misses).append((name, domain))
+        except Exception as err:  # noqa: BLE001  (any failure here belongs to one domain)
+            print("%3d/%d %-34s %-34s %s"
+                  % (i, len(domains), domain[:34], label,
+                     "skipped, %s" % type(err).__name__))
+            # Counted as a miss for every practice still pending on it, so the totals at the
+            # end still add up to the number of domains examined rather than quietly losing one.
+            for name, _ in todo:
+                misses.append((name, domain))
+            continue
         shown = ", ".join("%s%s" % (n, "" if f else " no") for n, (f, _) in answers.items())
         print("%3d/%d %-34s %-34s %s"
               % (i, len(domains), domain[:34], label, shown[:60]))
