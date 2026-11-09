@@ -86,7 +86,7 @@ await build({
                export { htmlFromText } from './worker/emailhtml.ts';
                export { columns, rows, stacked } from './worker/charts.ts';
                export { BUILD_HOUR, SEND_FROM, SEND_TO, PER_RUN, capFor, proposeBatch,
-                        drainBatch, getBatch, approveBatch, buildBatch, tomorrow, dayOf }
+                        drainBatch, getBatch, approveBatch, buildBatch, nextWorkday, dayOf }
                  from './worker/batch.ts';`,
     resolveDir: ROOT,
     loader: 'ts',
@@ -100,7 +100,7 @@ const {
   listProspects,
   isOptedOut, resetIndex, resetPages, htmlFromText, columns, rows, stacked,
   BUILD_HOUR, SEND_FROM, SEND_TO, PER_RUN, capFor, proposeBatch, drainBatch, getBatch,
-  approveBatch, buildBatch, tomorrow, dayOf,
+  approveBatch, buildBatch, nextWorkday, dayOf,
 } = await import(pathToFileURL(bundle).href);
 
 function kv() {
@@ -646,13 +646,49 @@ head('the daily number ramps with what has gone out, not with the calendar');
     'it is keyed to history, so a pause does not advance it');
 }
 
+head('Monday to Friday, at both ends');
+{
+  // November 2026: the 6th is a Friday, the 7th a Saturday, the 8th a Sunday, the 9th a
+  // Monday. Written out because every assertion below is really about which day that is.
+  ok('a Friday proposes Monday', nextWorkday(at(6, BUILD_HOUR)) === '2026-11-09');
+  ok('a Saturday proposes Monday too', nextWorkday(at(7, BUILD_HOUR)) === '2026-11-09');
+  ok('and a Monday still proposes Tuesday', nextWorkday(at(9, BUILD_HOUR)) === '2026-11-10');
+
+  const t = await desk({ prospects: many(10) });
+  const friday = await proposeBatch(t.env, TOKEN, at(6, BUILD_HOUR));
+  ok('NOTHING IS EVER BUILT FOR A SATURDAY', friday.built === 5 && friday.notified);
+  ok('the batch is for the Monday', (await getBatch(t.env, '2026-11-09')) !== null);
+  ok('and no Saturday batch exists', (await getBatch(t.env, '2026-11-07')) === null);
+
+  const saturday = await proposeBatch(t.env, TOKEN, at(7, BUILD_HOUR));
+  ok('THE WEEKEND RUNS DO NOT EMAIL THE SAME LIST AGAIN',
+    !saturday.notified && t.box.sent.length === 1, String(t.box.sent.length));
+
+  await approveBatch(t.env, '2026-11-09', ['firm-0']);
+  t.box.sent.length = 0;
+  const onSaturday = await drainBatch(t.env, at(7, SEND_FROM));
+  ok('AND NOTHING GOES OUT ON A SATURDAY', onSaturday.sent === 0 && t.box.sent.length === 0);
+  const onMonday = await drainBatch(t.env, at(9, SEND_FROM));
+  ok('while the Monday sends as usual', onMonday.sent === 1, String(onMonday.sent));
+
+  // A batch forced onto a Saturday, which nothing in the ordinary run of things can produce.
+  // Without this the weekend guard in drainBatch is unreachable and therefore untested: break
+  // it and every check still passes, which is the same as not having written it.
+  await buildBatch(t.env, '2026-11-07');
+  await approveBatch(t.env, '2026-11-07', ['firm-1']);
+  t.box.sent.length = 0;
+  const forced = await drainBatch(t.env, at(7, SEND_FROM));
+  ok('AND A BATCH THAT SOMEHOW LANDS ON A SATURDAY STILL DOES NOT SEND',
+    forced.sent === 0 && t.box.sent.length === 0, String(t.box.sent.length));
+}
+
 head('a batch is proposed in the afternoon and emailed once');
 {
   const t = await desk({ prospects: many(10) });
 
   const early = await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR - 1));
   ok('NOTHING IS BUILT BEFORE ITS HOUR', early.built === 0 && !early.notified);
-  ok('and nothing is in the store', (await getBatch(t.env, tomorrow(at(8, 9)))) === null);
+  ok('and nothing is in the store', (await getBatch(t.env, nextWorkday(at(8, 9)))) === null);
 
   const made = await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
   ok('it builds at the hour', made.built === 5, String(made.built));
@@ -663,13 +699,13 @@ head('a batch is proposed in the afternoon and emailed once');
   const note = htmlPartOf(t.box.sent[0]?.raw);
   ok('the email names the firms', note.includes('Firm 0') && note.includes('Firm 4'));
   ok('and carries a link to the list', note.includes('/api/leads/batch'));
-  ok('with the day on it', note.includes(tomorrow(at(8, 17))));
+  ok('with the day on it', note.includes(nextWorkday(at(8, 17))));
 
   const again = await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR + 1));
   ok('A SECOND RUN BUILDS NOTHING', again.built === 0);
   ok('AND EMAILS NOTHING', t.box.sent.length === 1, String(t.box.sent.length));
 
-  const batch = await getBatch(t.env, tomorrow(at(8, 17)));
+  const batch = await getBatch(t.env, nextWorkday(at(8, 17)));
   ok('most-listed first', batch.slugs[0] === 'firm-0' && batch.slugs[4] === 'firm-4');
 }
 
@@ -690,7 +726,7 @@ head('approved, and only the ticked ones');
   const t = await desk({ prospects: many(10) });
   await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
   t.box.sent.length = 0;
-  const on = tomorrow(at(8, 17));
+  const on = nextWorkday(at(8, 17));
 
   // Two of the five, plus one that was never proposed. A list of addresses to mail is not
   // something a request body gets to add to.
@@ -729,7 +765,7 @@ head('the approval is a permission, not a cached verdict');
   const t = await desk({ prospects: many(10) });
   await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
   t.box.sent.length = 0;
-  const on = tomorrow(at(8, 17));
+  const on = nextWorkday(at(8, 17));
   await approveBatch(t.env, on, ['firm-0', 'firm-1']);
 
   // Overnight, between the approval and the sending.
@@ -748,7 +784,7 @@ head('send none is a decision and is recorded as one');
   const t = await desk({ prospects: many(10) });
   await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
   t.box.sent.length = 0;
-  const on = tomorrow(at(8, 17));
+  const on = nextWorkday(at(8, 17));
 
   const res = await t.post('/batch', { action: 'approve', on, none: '1' });
   ok('it answers a redirect', res.status === 303, String(res.status));
@@ -766,7 +802,7 @@ head('the approval page opens without doing anything');
   const t = await desk({ prospects: many(10) });
   await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
   t.box.sent.length = 0;
-  const on = tomorrow(at(8, 17));
+  const on = nextWorkday(at(8, 17));
 
   const page = await t.text(`/batch?t=${TOKEN}&on=${on}`);
   ok('it lists the proposed firms', page.includes('Firm 0') && page.includes('Firm 4'));
@@ -788,7 +824,7 @@ head('no postal address, no batch at all');
   ok('NOTHING IS EVEN PROPOSED', made.built === 0 && !made.notified);
   ok('and the owner is not emailed about it', t.box.sent.length === 0);
   ok('because a letter that cannot carry one is a letter that does not exist',
-    (await getBatch(t.env, tomorrow(at(8, 17)))) === null);
+    (await getBatch(t.env, nextWorkday(at(8, 17)))) === null);
 }
 
 head('the desk says when the next letters go out');
@@ -809,7 +845,7 @@ head('the desk says when the next letters go out');
   ok('once proposed it says they are waiting on a person', waiting.includes('waiting on you'));
   ok('and links to the list', waiting.includes('/api/leads/batch?'));
 
-  await approveBatch(t.env, tomorrow(at(8, 17)), ['firm-0']);
+  await approveBatch(t.env, nextWorkday(at(8, 17)), ['firm-0']);
   const approved = await page(at(8, 18));
   ok('once approved it says the hours',
     approved.includes(`${SEND_FROM}:00`) && approved.includes(`${SEND_TO}:00`));
