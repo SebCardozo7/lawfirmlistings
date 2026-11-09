@@ -82,7 +82,15 @@ export function composer(opts: {
 }): string {
   const { state } = opts;
   const screen = state.view === 'html'
-    ? '<div class="screen"><iframe title="The email as it will arrive" sandbox '
+    // allow-same-origin, and nothing else. A bare `sandbox` gives the frame an opaque origin,
+    // and the browser then does not even request the logo: the preview showed a broken image
+    // for a letter whose logo was fine in the recipient's inbox, which is the worst kind of
+    // wrong, because it makes you doubt the thing that works.
+    //
+    // What the sandbox is for is scripts, and allow-scripts is still absent, so none run. The
+    // dangerous pairing is allow-same-origin together with allow-scripts, because then the
+    // frame can reach up and take its own sandbox off. check_desk asserts it never appears.
+    ? '<div class="screen"><iframe title="The email as it will arrive" sandbox="allow-same-origin" '
       + `srcdoc="${esc(previewHtml(opts.text, state))}"></iframe></div>`
     : `<div class="screen"><pre class="plain">${esc(opts.text)}</pre></div>`;
 

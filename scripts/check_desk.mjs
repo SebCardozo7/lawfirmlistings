@@ -352,6 +352,28 @@ head('the preview is the email, not a picture of one');
 
   ok('it is sandboxed, so the email cannot run anything', page.includes('<iframe title=')
     && /<iframe[^>]*\ssandbox/.test(page));
+
+  // How it is sandboxed, and not only that it is. A bare `sandbox` gives the frame an opaque
+  // origin and the browser then never even requests the logo: confirmed in a real browser
+  // against production, where there was no network request for the mark at all. The letter
+  // arrived in the inbox intact and looked broken on the desk, which is the worst way round,
+  // because it makes you doubt the thing that works.
+  const frames = page.match(/<iframe[^>]*>/g) || [];
+  ok('NO PREVIEW CARRIES A BARE SANDBOX',
+    frames.length > 0 && frames.every(f => !/\ssandbox(?=[\s>])/.test(f)),
+    frames.join(' | ').slice(0, 140));
+  ok('it allows the same origin, which is what lets the mark load',
+    frames.every(f => f.includes('sandbox="allow-same-origin"')));
+
+  // The pairing that would make the sandbox decorative: with both, the frame can take its own
+  // sandbox off. Scripts are the only thing it is actually here to stop.
+  ok('AND NO PREVIEW EVER ALLOWS SCRIPTS',
+    frames.every(f => !f.includes('allow-scripts')), frames.join(' | ').slice(0, 140));
+
+  const branded = srcdocOf(await t.text(`/lead/${id}?t=${TOKEN}&tpl=terms&brand=1`));
+  ok('the branded preview carries the mark',
+    String(branded).includes('apple-touch-icon'),
+    String(branded).includes('<img') ? 'an image, but not the mark' : 'no image at all');
 }
 
 head('an edit in the box is an edit in the preview');
