@@ -32,6 +32,8 @@
  * the panel credentials.
  */
 
+import { readUnder } from './kvread';
+
 export type ProspectStatus =
   | 'new'          // we hold an address and have not written
   | 'queued'       // picked for today's batch
@@ -75,40 +77,6 @@ const KEY = (slug: string) => `prospect:${slug}`;
  */
 const OPTOUT = (email: string) => `optout:${email.trim().toLowerCase()}`;
 
-/**
- * How many keys one KV list call may ask for.
- *
- * 999 and not 1,000 because the two sources disagree: Cloudflare's documentation says 1,000
- * is the maximum, and the 400 a real namespace answers with says "Please specify integer less
- * than 1000". One of them is wrong, and the way to find out which is to put it in production
- * and watch the desk return "Worker threw exception", which is how we got here.
- */
-const PAGE = 999;
-
-/**
- * Every key under a prefix, followed to the end.
- *
- * Two different silent failures live in this one call. Ask for more than KV allows and it
- * does not clamp, it refuses the whole request with a 400, which surfaces as an unhandled
- * exception and a 1101 page. Ask for an allowed number and it answers that many and stops,
- * with `list_complete: false` as the only sign that the rest exists.
- *
- * A Map standing in for KV in a test does neither. It ignores the limit and returns
- * everything, so `listProspects` asked for 2,000 rows through fifteen passing guards and took
- * the desk down the first time a real namespace answered it.
- */
-async function keysUnder(ns: KVNamespace, prefix: string): Promise<string[]> {
-  const names: string[] = [];
-  let cursor: string | undefined;
-  for (;;) {
-    const page = await ns.list({ prefix, limit: PAGE, cursor });
-    for (const k of page.keys) names.push(k.name);
-    if (page.list_complete) return names;
-    cursor = (page as { cursor?: string }).cursor;
-    if (!cursor) return names;
-  }
-}
-
 /** Lowercased and trimmed, because every comparison here depends on it. */
 export const normalise = (email: string): string => String(email ?? '').trim().toLowerCase();
 
@@ -131,9 +99,7 @@ export async function optOut(
   await env.FOLLOWUPS.put(OPTOUT(at), JSON.stringify({ at, how, on: new Date().toISOString() }));
   // And the prospect row, where there is one, so the desk shows it rather than only the guard
   // knowing. Found by scan because the row is keyed by slug and this is an address.
-  for (const name of await keysUnder(env.FOLLOWUPS, 'prospect:')) {
-    const raw = await env.FOLLOWUPS.get(name);
-    if (!raw) continue;
+  for (const { name, raw } of await readUnder(env.FOLLOWUPS, 'prospect:')) {
     try {
       const p = JSON.parse(raw) as Prospect;
       if (normalise(p.email) === at) {
@@ -187,10 +153,8 @@ export async function putProspect(env: ProspectEnv, p: Prospect): Promise<void> 
 export async function listProspects(env: ProspectEnv, limit = Infinity): Promise<Prospect[]> {
   if (!env.FOLLOWUPS) return [];
   const out: Prospect[] = [];
-  for (const name of await keysUnder(env.FOLLOWUPS, 'prospect:')) {
+  for (const { raw } of await readUnder(env.FOLLOWUPS, 'prospect:')) {
     if (out.length >= limit) break;
-    const raw = await env.FOLLOWUPS.get(name);
-    if (!raw) continue;
     try {
       const p = JSON.parse(raw);
       if (p && typeof p.slug === 'string' && typeof p.email === 'string'

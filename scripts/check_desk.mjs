@@ -77,7 +77,7 @@ const bundle = path.join(dir, 'bundle.mjs');
 await build({
   stdin: {
     contents: `export { handleLeads } from './worker/leadspage.ts';
-               export { CAP } from './worker/prospectpage.ts';
+               export { CAP, prospectsPage } from './worker/prospectpage.ts';
                export { recordLead, newLeadId, getLead, listLeads } from './worker/ledger.ts';
                export { putProspect, getProspect, listProspects, isOptedOut }
                  from './worker/prospects.ts';
@@ -96,7 +96,8 @@ await build({
 });
 
 const {
-  handleLeads, CAP, recordLead, newLeadId, getLead, putProspect, getProspect, listProspects,
+  handleLeads, CAP, prospectsPage, recordLead, newLeadId, getLead, putProspect, getProspect,
+  listProspects,
   isOptedOut, resetIndex, resetPages, htmlFromText, columns, rows, stacked,
   BUILD_HOUR, SEND_FROM, SEND_TO, PER_RUN, capFor, proposeBatch, drainBatch, getBatch,
   approveBatch, buildBatch, tomorrow, dayOf,
@@ -793,18 +794,29 @@ head('no postal address, no batch at all');
 head('the desk says when the next letters go out');
 {
   const t = await desk({ prospects: many(10) });
-  const before = await t.text(`/prospects?t=${TOKEN}`);
+
+  // Read at a clock we choose, not at whatever time the suite is run. The banner says a
+  // different thing inside the sending window than outside it, and read through the router
+  // this block asserted the approved wording and got the sending wording the first afternoon
+  // anybody ran it. A guard that depends on the hour is a guard that cries wolf after lunch.
+  const page = (now) => prospectsPage(t.env, TOKEN, 0, undefined, now).then(r => r.text());
+
+  const before = await page(at(8, 9));
   ok('with no batch it says when one is proposed', before.includes(`${BUILD_HOUR}:00 UTC`));
 
   await proposeBatch(t.env, TOKEN, at(8, BUILD_HOUR));
-  const waiting = await t.text(`/prospects?t=${TOKEN}`);
+  const waiting = await page(at(8, 18));
   ok('once proposed it says they are waiting on a person', waiting.includes('waiting on you'));
   ok('and links to the list', waiting.includes('/api/leads/batch?'));
 
   await approveBatch(t.env, tomorrow(at(8, 17)), ['firm-0']);
-  const approved = await t.text(`/prospects?t=${TOKEN}`);
+  const approved = await page(at(8, 18));
   ok('once approved it says the hours',
     approved.includes(`${SEND_FROM}:00`) && approved.includes(`${SEND_TO}:00`));
+
+  const during = await page(at(9, SEND_FROM));
+  ok('AND INSIDE THE WINDOW IT SAYS IT IS SENDING', during.includes('Sending now'),
+    during.includes('approved for') ? 'still showing the approved wording' : '');
 
   const one = await t.text(`/prospect/firm-0?t=${TOKEN}`);
   ok('AND THE FIRM ITSELF SAYS WHEN ITS LETTER GOES', one.includes('Goes out'));

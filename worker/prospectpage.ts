@@ -350,8 +350,15 @@ export async function batchPage(
     + form);
 }
 
+/**
+ * `now` is a parameter and not `new Date()` inside because the banner says different things
+ * at different hours, and a test that reads it with whatever time it happens to be run at is
+ * a test that passes in the morning and fails after lunch. This one did: it asserted the
+ * wording for an approved batch and got the wording for one that is already going out.
+ */
 export async function prospectsPage(
   env: ProspectPageEnv, token: string, openLeads: number, said?: string,
+  now = new Date(),
 ): Promise<Response> {
   const all = await listProspects(env);
   if (!all.length) {
@@ -437,7 +444,7 @@ export async function prospectsPage(
     + 'a firm that answers hears about that from a person, in the reply.</p>'
     + (said ? `<div class="said">${esc(said)}</div>` : '')
     + postalWarning(env)
-    + batchBanner(await batchState(env), token)
+    + batchBanner(await batchState(env, now), token)
     + `<div class="figures">${figures(all)}</div>`
     + charts(all)
     + `<h2>Next ${queue.length === 1 ? 'one' : queue.length} to write to, most-listed first</h2>`
