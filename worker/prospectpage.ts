@@ -32,7 +32,7 @@ import { verificationLetter } from './verifyletter';
 import { columns, rows, stacked } from './charts';
 import {
   BUILD_HOUR, SEND_FROM, SEND_TO, approveBatch, batchState, capFor, dayOf, getBatch,
-  type Batch, type BatchState,
+  leadsToken, proposeBatch, type Batch, type BatchState,
 } from './batch';
 
 import { composer, isPreview, previewHtml, readCompose, type ComposeState } from './composer';
@@ -231,7 +231,14 @@ function batchBanner(state: BatchState, token: string): string {
     case 'none':
       return '<div class="flag"><b>No batch is waiting.</b> One is proposed for '
         + `${esc(state.on)} at ${BUILD_HOUR}:00 UTC today and emailed to you. Nothing is sent `
-        + 'until you approve it.</div>';
+        + 'until you approve it.'
+        // A POST and not a link. The same reason the approval is a POST: mail scanners and
+        // link previewers follow every URL they are shown, and a GET that builds a batch is
+        // a batch built by a robot that was reading the owner's inbox.
+        + `<form method="post" action="${esc(ROUTE.prospects)}" style="margin-top:10px">`
+        + hidden(token, { action: 'propose' })
+        + '<button class="send" name="go" value="1">Propose one now</button>'
+        + '</form></div>';
     case 'waiting':
       return `<div class="flag"><b>${state.batch.slugs.length} letters are waiting on you</b> `
         + `for ${esc(state.batch.on)}. Nothing goes out until you approve them, and a batch `
@@ -590,6 +597,21 @@ const backTo = (
 export async function prospectAct(
   env: ProspectPageEnv, form: FormData, token: string, openLeads: number,
 ): Promise<Response> {
+  // Proposing is about a day too, and carries no slug either. It builds the list and emails
+  // it, which is the same thing the cron does at 17:00 UTC and nothing more: no letter
+  // reaches a firm until somebody comes back and ticks the boxes.
+  if (String(form.get('action') ?? '') === 'propose') {
+    const made = await proposeBatch(env, await leadsToken(env), new Date(), true);
+    if (!made.built && !made.notified) {
+      return backTo(ROUTE.prospects, token,
+        'Nothing proposed. Either a batch for that day already exists, or there is nobody '
+        + 'left to write to, or no postal address is configured.');
+    }
+    return backTo(ROUTE.prospects, token, made.notified
+      ? `${made.built} proposed and emailed to you. Nothing goes out until you approve it.`
+      : `${made.built} proposed, but the email did not go out. Open the list from here.`);
+  }
+
   // Approving a batch is about a day rather than about a firm, so it is answered before the
   // row lookup below, which would 404 on a form that carries no slug.
   if (String(form.get('action') ?? '') === 'approve') {

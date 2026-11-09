@@ -239,11 +239,24 @@ export function batchNotice(
  * email. A build that cannot be emailed is left un-notified rather than discarded, so the
  * next run tries again.
  */
+/**
+ * `force` is the button on the desk, for the hours the cron is not looking.
+ *
+ * It changes two things and nothing else. The hour no longer has to be the build hour, and
+ * the batch is for today rather than the next working day, when today is still a working day
+ * with window left in it, because a batch proposed by hand is a batch somebody wants to act
+ * on now and not tomorrow.
+ *
+ * Everything that matters is untouched: no postal address still means no batch, a day that
+ * already has one is not rebuilt, a list already emailed is not emailed again, and nothing
+ * reaches a firm until somebody ticks the boxes. The button proposes. It does not send.
+ */
 export async function proposeBatch(
-  env: BatchEnv, token: string, now = new Date(),
+  env: BatchEnv, token: string, now = new Date(), force = false,
 ): Promise<{ built: number; notified: boolean }> {
-  if (now.getUTCHours() < BUILD_HOUR) return { built: 0, notified: false };
-  const on = nextWorkday(now);
+  if (!force && now.getUTCHours() < BUILD_HOUR) return { built: 0, notified: false };
+  const today = isWorkday(now) && now.getUTCHours() < SEND_TO;
+  const on = force && today ? dayOf(now) : nextWorkday(now);
   const made = await buildBatch(env, on);
   const batch = made ?? await getBatch(env, on);
   if (!batch || batch.notified_at) return { built: made ? made.slugs.length : 0, notified: false };

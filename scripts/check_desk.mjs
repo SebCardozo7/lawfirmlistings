@@ -682,6 +682,40 @@ head('Monday to Friday, at both ends');
     forced.sent === 0 && t.box.sent.length === 0, String(t.box.sent.length));
 }
 
+head('the button proposes, and proposing is not sending');
+{
+  const t = await desk({ prospects: many(10) });
+  const morning = at(9, 11);                       // Monday, before the build hour
+
+  const page = await prospectsPage(t.env, TOKEN, 0, undefined, morning).then(r => r.text());
+  ok('the desk offers it when nothing is waiting', page.includes('Propose one now'));
+  ok('AND OFFERS IT AS A POST, NOT A LINK',
+    /<form method="post"[^>]*>(?:(?!<\/form>)[\s\S])*Propose one now/.test(page));
+  ok('A GET PROPOSES NOTHING', (await getBatch(t.env, dayOf(morning))) === null);
+
+  const res = await t.post('/prospects', { action: 'propose' });
+  ok('it answers a redirect', res.status === 303, String(res.status));
+
+  // Which day depends on the hour it is actually pressed, so the assertion is that a batch
+  // somebody can act on exists, not which of the two days it landed on.
+  const built = (await getBatch(t.env, dayOf(new Date())))
+    ?? (await getBatch(t.env, nextWorkday(new Date())));
+  ok('IT BUILDS A BATCH THERE AND THEN', built !== null);
+  ok('capped at the ramp, not at everyone', built?.slugs.length === capFor(0),
+    String(built?.slugs.length));
+  ok('THE OWNER IS EMAILED AND NOBODY ELSE',
+    t.box.sent.length === 1 && t.box.sent[0]?.to === OWNER,
+    t.box.sent.map(m => m.to).join(','));
+
+  // The whole point. A proposal is a list, not an outbox.
+  const rows = await listProspects(t.env);
+  ok('NOT ONE FIRM WAS WRITTEN TO', rows.every(p => !p.sent_at));
+
+  await t.post('/prospects', { action: 'propose' });
+  ok('PRESSING IT TWICE DOES NOT EMAIL THE LIST TWICE',
+    t.box.sent.length === 1, String(t.box.sent.length));
+}
+
 head('a batch is proposed in the afternoon and emailed once');
 {
   const t = await desk({ prospects: many(10) });
