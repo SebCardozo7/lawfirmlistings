@@ -175,6 +175,22 @@ export const GUIDES: Guide[] = [
     meta: 'The notice of claim comes first',
   },
   {
+    slug: 'do-lawyers-have-malpractice-insurance',
+    cover: 'shield',
+    kicker: 'Method',
+    title: 'Almost No Law Firm Publishes Whether It Carries Malpractice Insurance',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Three points of the score are for disclosing professional liability cover, and every page ' +
+      'answering this question is written for the lawyer buying the policy. We read the about ' +
+      'page and the bios of every firm in this directory instead. Almost none publishes a ' +
+      'disclosure, what they publish instead is bar memberships, and our own check reads a ' +
+      'mention of one as a membership in it.',
+    thumb: '',
+    icon: 'shield',
+    meta: 'The sentence no firm writes, and the points nobody earns',
+  },
+  {
     slug: 'does-a-medical-malpractice-page-mean-anything',
     cover: 'breadth',
     kicker: 'Study',

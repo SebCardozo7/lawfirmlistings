@@ -1,0 +1,301 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+
+// A5 is the sub-factor no guide had ever read, and three scripts in scripts/ exist to fill it.
+// `accountability` is written by scripts/check_a5.py off the firm's own about and attorney pages,
+// and it carries two findings that look alike and are not: whether the firm says, in a sentence
+// where the firm is the subject, that it carries professional liability cover, and whether any
+// bar or trial lawyers' association from a fixed list appears anywhere on a page we read.
+//
+// The second one is a NAME MATCH, not a claim of membership. check_a5.py takes a 120-character
+// window around the name and rejects only the bought-badge forums; nothing requires the firm to
+// say it belongs to the thing. So the two halves of this piece are a disclosure and a mention,
+// and conflating them would be the same mistake as reading attorneys[].bar_number as something
+// the firm publishes. See docs/guides-backlog.md.
+//
+// Every figure below is computed from the collection at build time. Nothing is typed into prose.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+// Only the firms whose pages we actually read. A firm with no record here owes us nothing and is
+// not evidence of silence, so it is out of every denominator on this page.
+const read = firms.filter(f => f.data.accountability);
+const assocRows = (f: typeof read[number]) => f.data.accountability!.bar_associations ?? [];
+
+const cover = read.filter(f => f.data.accountability!.malpractice_insurance === true);
+const named = read.filter(f => assocRows(f).length > 0);
+const silent = read.filter(f =>
+  f.data.accountability!.malpractice_insurance !== true && assocRows(f).length === 0);
+
+const pagesRead = read.reduce((n, f) => n + (f.data.accountability!.pages_read ?? 0), 0);
+const states = new Set(read.map(f => f.data.market.state));
+const rowTotal = read.reduce((n, f) => n + assocRows(f).length, 0);
+const bodies = new Set(read.flatMap(f => assocRows(f).map(a => a.name)));
+
+// The reach control. If the answer on cover were an artefact of a thin crawl it would move as the
+// crawl deepens, so the same count is taken again on the firms where we read three pages or more.
+const deepRead = read.filter(f => (f.data.accountability!.pages_read ?? 0) >= 3);
+const deepCover = deepRead.filter(f => f.data.accountability!.malpractice_insurance === true);
+
+// The falsification. Oregon is the one state in this directory where cover is not optional, so if
+// publishing it tracked having it, Oregon is where the sentence would be. Derived, not typed: the
+// state code is the filter and the firm count comes off the records.
+const oregon = read.filter(f => f.data.market.state === 'OR');
+const oregonCover = oregon.filter(f => f.data.accountability!.malpractice_insurance === true);
+const oregonNamed = oregon.filter(f => assocRows(f).length > 0);
+
+// How much of the state-by-state spread is our own matching rather than the firms. check_a5.py
+// began as a New York and Maryland list and five states were opened before their own bar bodies
+// were added to it, so a firm in Phoenix or Las Vegas that names its state bar is read as naming
+// nothing. These are the states whose own bar body appears in ASSOCIATIONS at all.
+const ON_THE_LIST = new Set(['NY', 'MD', 'MA', 'FL', 'OR', 'TX', 'IN']);
+const share = (xs: typeof read) =>
+  xs.length ? Math.round(100 * xs.filter(f => assocRows(f).length > 0).length / xs.length) : 0;
+const listed = read.filter(f => ON_THE_LIST.has(f.data.market.state));
+const unlisted = read.filter(f => !ON_THE_LIST.has(f.data.market.state));
+// Counted, not typed. check_a5.py's own comment says "five states have been opened since", which
+// was true when it was written and is a hardcoded count now that a sixth is open.
+const unlistedStates = new Set(unlisted.map(f => f.data.market.state));
+
+// A mention is not a membership, counted two ways. First, the word: the snippet check_a5.py kept
+// as its evidence, with no membership word anywhere in it. The window is 120 characters, so the
+// word can fall outside it and a plain list of associations carries no verb at all. This is a
+// count of what the stored evidence says, not a count of firms that are not members.
+const MEMBER = /member|membership|belongs to|affiliat/i;
+const quietRows = read.reduce(
+  (n, f) => n + assocRows(f).filter(a => !MEMBER.test(a.quote ?? '')).length, 0);
+const quietFirms = named.filter(f => assocRows(f).every(a => !MEMBER.test(a.quote ?? '')));
+
+// Second, the geography, which is the harder test and needs no pattern of ours. A body tied to
+// one state, credited to a firm practising in another, is either a genuine multi-state practice or
+// a matcher error, and the firms where it is the ONLY thing credited are the ones whose three
+// points rest on it entirely.
+const BODY_STATE: Record<string, string> = {
+  'New York State Trial Lawyers Association': 'NY', 'New York State Bar Association': 'NY',
+  'New York City Bar Association': 'NY', 'Brooklyn Bar Association': 'NY',
+  'Bronx County Bar Association': 'NY', 'Queens County Bar Association': 'NY',
+  'Nassau County Bar Association': 'NY', 'Suffolk County Bar Association': 'NY',
+  'Westchester County Bar Association': 'NY', 'Maryland State Bar Association': 'MD',
+  'Maryland Association for Justice': 'MD', 'Bar Association of Baltimore City': 'MD',
+  'New Jersey State Bar Association': 'NJ', 'The Florida Bar': 'FL',
+  'Florida Justice Association': 'FL', 'Collier County Bar Association': 'FL',
+  'Polk County Trial Lawyers Association': 'FL', 'Polk County Bar Association': 'FL',
+  'Massachusetts Bar Association': 'MA', 'Massachusetts Academy of Trial Attorneys': 'MA',
+  'Boston Bar Association': 'MA', 'Oregon State Bar': 'OR',
+  'Oregon Trial Lawyers Association': 'OR', 'State Bar of Texas': 'TX',
+  'Texas Trial Lawyers Association': 'TX', 'Dallas Bar Association': 'TX',
+  'Dallas Trial Lawyers Association': 'TX', 'Tarrant County Bar Association': 'TX',
+  'Indiana State Bar Association': 'IN', 'Indiana Trial Lawyers Association': 'IN',
+  'Lake County Bar Association': 'IN',
+};
+const elsewhere = (f: typeof read[number], a: { name: string }) => {
+  const s = BODY_STATE[a.name];
+  return Boolean(s) && s !== f.data.market.state;
+};
+const awayRows = read.reduce((n, f) => n + assocRows(f).filter(a => elsewhere(f, a)).length, 0);
+const awayFirms = named.filter(f => assocRows(f).some(a => elsewhere(f, a)));
+// Tie-broken on the slug, so the examples do not change between builds.
+const awayOnly = named
+  .filter(f => assocRows(f).every(a => elsewhere(f, a)))
+  .sort((a, b) => a.data.slug.localeCompare(b.data.slug));
+
+// The distribution. Labels are one line each at phone width, notes included, because a label that
+// wraps while its neighbours do not lifts that column's value out of the row.
+const BANDS = [
+  { label: 'None', lo: 0, hi: 0 },
+  { label: '1', lo: 1, hi: 1 },
+  { label: '2', lo: 2, hi: 2 },
+  { label: '3 to 4', lo: 3, hi: 4 },
+  { label: '5+', lo: 5, hi: Infinity },
+];
+const columns = BANDS.map(b => ({
+  label: b.label,
+  value: read.filter(f => assocRows(f).length >= b.lo && assocRows(f).length <= b.hi).length,
+}));
+
+// The bodies themselves, most-named first, tie-broken on the name.
+const tally = new Map<string, number>();
+for (const f of read) for (const a of assocRows(f)) tally.set(a.name, (tally.get(a.name) ?? 0) + 1);
+const topBodies = [...tally.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 8)
+  .map(([name, n]) => ({ label: name, value: n }));
+
+// What the engine does with all this. A5 is published as six points and almost nobody is scored
+// out of six: where no cover is disclosed the insurance half leaves the denominator, which is the
+// right call and also means the published scale overstates what is reachable.
+//
+// The pending rows have to come out first, and the draft of this page did not take them out. A
+// firm with no reading at all goes through score.py's assessed() branch, which carries the
+// sub-factor's published max of six because no override is passed, so counting `max === 6` across
+// every scored firm returned seven: the one firm that discloses cover, plus six firms the check
+// has never run on. The page said seven firms are "graded on the full six points" when six of
+// them are graded on nothing. Same family as every other trap in the backlog: a real field, a
+// correct arithmetic, and a sentence about something else entirely.
+const a5 = (f: typeof read[number]) => f.data.score?.pillars.A.subs.find(s => s.code === 'A5');
+const ran = firms.filter(f => a5(f) && a5(f)!.source !== 'pending');
+const pending = firms.filter(f => a5(f) && a5(f)!.source === 'pending');
+const outOfSix = ran.filter(f => a5(f)!.max === 6);
+const capped = ran.filter(f => a5(f)!.max < 6);
+const cappedMax = capped.length ? a5(capped[0])!.max : 0;
+const zero = ran.filter(f => a5(f)!.pts === 0);
+const half = ran.filter(f => a5(f)!.pts === cappedMax);
+
+const example = cover[0] ?? null;
+const exampleA5 = example ? a5(example) : null;
+
+const title = 'Almost No Law Firm Publishes Whether It Carries Malpractice Insurance';
+const description = 'We looked for a disclosure of professional liability cover on every firm '
+  + 'website in this directory. Almost none publishes one. What they publish instead.';
+
+const snapshot = [...read]
+  .map(f => f.data.accountability!.checked_at)
+  .filter(Boolean)
+  .sort()
+  .at(-1) ?? '';
+---
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`Law firm websites read for accountability disclosures, latest reading ${snapshot}`}
+      image="/og/shield.png"
+      imageAlt="A wall of filled and unfilled credential badges beside one shield outline that never fills">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Malpractice insurance</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Pillar A</span>
+    <h1>{title}</h1>
+    <p class="lede">Three points in the certification score are for disclosing professional liability cover. We read {read.length.toLocaleString('en-US')} firm websites looking for that sentence and found it on {cover.length === 1 ? 'one' : cover.length}. This is what the rest publish instead, what our own check reads it as, and why those are not the same thing.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="shield" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#cover">The sentence nobody writes</a></li>
+      <li><a href="#instead">What they publish instead</a></li>
+      <li><a href="#mention">A mention is not a membership</a></li>
+      <li><a href="#score">What our own score does with it</a></li>
+      <li><a href="#ask">What to ask instead</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Read across ${read.length.toLocaleString('en-US')} law firm websites in ${states.size} states, ${pagesRead.toLocaleString('en-US')} pages in all.`}
+      items={[
+        `Of the <b>${read.length.toLocaleString('en-US')}</b> firm websites we read, <b>${cover.length}</b> carries a sentence saying the firm itself holds professional liability cover.`,
+        `<b>${named.length} of ${read.length.toLocaleString('en-US')}</b> firms have a bar or trial lawyers' association named somewhere on the pages we read, and <b>${silent.length}</b> have neither that nor a word about insurance.`,
+        `Oregon is the one state here where cover is compulsory for every lawyer in private practice, and <b>${oregonCover.length} of its ${oregon.length}</b> firms say so on their own site.`,
+        `Our check credits a name on a page rather than a claim of membership: in <b>${quietFirms.length} of the ${named.length}</b> firms it credits, no snippet it stored contains the word member.`,
+        `The score publishes this sub-factor as six points and grades <b>${outOfSix.length} of the ${ran.length.toLocaleString('en-US')}</b> firms it ran on out of six, because the insurance half has nobody to award it to.`,
+      ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${cover.length} of ${read.length.toLocaleString('en-US')}`, label: 'publish that the firm carries cover', note: 'read off the firm’s own pages', emphasis: true },
+        { value: String(named.length), label: 'have an association named on a page', note: `${rowTotal.toLocaleString('en-US')} rows across ${bodies.size} bodies` },
+        { value: String(silent.length), label: 'publish neither', note: 'no cover, no association, nothing to check' },
+        { value: pagesRead.toLocaleString('en-US'), label: 'pages read to find out', note: `about and attorney pages at ${read.length.toLocaleString('en-US')} firms` },
+      ]}
+      source={`Read from the firms' own websites, latest reading ${snapshot}.`}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own reading of these firms' websites at build time, so it changes when the data does. This page is about what firms publish, not about whether they are insured, and the two are not the same thing. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Somebody searching this question is usually asking one of two things: whether lawyers are required to carry malpractice insurance, and whether their own lawyer has it. The first has an answer and it is short. In almost every state cover is voluntary. Some states make a lawyer who goes without it say so, to the bar on an annual filing or to the client directly, and some ask for nothing. <a href="https://www.americanbar.org/groups/lawyers_professional_liability/resources/faqs_on_malpractice_insurance_for_the_new_or_suddenly_solo_attorney/" rel="noopener">The American Bar Association keeps the reference version of that answer</a>, written for the lawyer buying the policy rather than the client wondering about it.</p>
+    <p>The second question is the one nobody has measured, so we did. For each firm in this directory we read its about page and the attorney bios it links, and looked for two things.</p>
+    <p><b>A disclosure of cover.</b> The firm has to be the subject of the sentence. On a personal injury website the word insurance is everywhere and it almost always belongs to the other side: the adjuster, the carrier, the denied claim. So a disclosure counts only where a first-person subject sits next to a carrying verb and an insurance phrase inside a short window. "We maintain professional liability insurance" counts. "The hospital's malpractice insurer denied the claim" does not.</p>
+    <p><b>A named bar or trial lawyers' association.</b> A fixed list of real professional bodies, with the paid "Top 100" and "Million Dollar" forums a firm can join by invoice deliberately excluded, because those are the badges the eligibility gates exist to screen out.</p>
+    <p>That gave us {pagesRead.toLocaleString('en-US')} pages across {read.length.toLocaleString('en-US')} firms in {states.size} states. The {firms.length - read.length} firms in the directory with no reading of their own are out of every count below, because a page we never opened is not evidence of silence.</p>
+
+    <h2 id="cover">The sentence nobody writes</h2>
+    <p>{cover.length === 1 ? 'One firm' : `${cover.length} firms`} out of {read.length.toLocaleString('en-US')}.</p>
+    <p>That is the whole finding, and the interesting part is how hard it is to make it go away. The obvious objection is that we did not read enough pages, so here is the same count on the firms where we read three pages or more: {deepCover.length} of {deepRead.length.toLocaleString('en-US')}. Reading deeper finds more of almost everything else a firm publishes. It does not find this.</p>
+    <p>The other objection is that firms do not publish it because most of them do not have it. That one is testable, and it is why Oregon is in this piece. Oregon is the only state in the country that requires every lawyer in private practice to be covered, through the Oregon State Bar's Professional Liability Fund, which means the answer for an Oregon firm is yes before anybody asks. If publishing the fact tracked having the fact, Portland is where the sentence would be. We read {oregon.length} Portland firms and {oregonCover.length === 0 ? 'not one of them says it' : `${oregonCover.length} say it`}.</p>
+    <p>The likeliest explanation is the dull one, and it is the same reason nobody advertises that their office has a fire exit. A thing every competitor also has differentiates nothing, so no marketing department writes it on the website. That explanation is consistent with the Oregon result rather than proved by it: with {oregon.length} firms in one city this is a check that could have broken the finding and did not, not a result that stands on its own.</p>
+    <p><a href="/guides/what-law-firm-websites-publish/">We have counted what these sites do publish</a>, and the pattern there is the same one: a blog is the first page a firm reaches for and anything about money is the last.</p>
+
+    <h2 id="instead">What they publish instead</h2>
+    <p>{named.length} of the {read.length.toLocaleString('en-US')} firms have at least one bar or trial lawyers' association named on a page we read, {rowTotal.toLocaleString('en-US')} such rows in all, across {bodies.size} different bodies. {silent.length} firms have neither an association nor a word about insurance, which is to say that the pages a client would read to check anything carry nothing to check.</p>
+    <ColumnChart
+      heading={`How many professional bodies a firm's own pages name, across ${read.length.toLocaleString('en-US')} firms`}
+      columns={columns}
+      caption="Counted from the firm's about page and the attorney bios it links. A body appears once per firm however many times it is named."
+    />
+    <BarChart
+      heading={`The bodies named most often, out of ${read.length.toLocaleString('en-US')} firms`}
+      rows={topBodies}
+      caption="One count per firm, however many times a body is named. Membership of the national bodies is open to any lawyer who pays the dues, and in Florida, Texas and Oregon membership of the state bar is not optional at all: a lawyer cannot practise there without it."
+    />
+    <p>Read down that list and a pattern shows up that the three points were not designed for. The bodies named most are the ones easiest to join, and some of them are not joined at all: a firm in Florida, Texas or Oregon that names its own state bar has named its licence, because membership of the integrated bar in those states is a condition of practising. {(() => {
+      const mandatory = new Set(['The Florida Bar', 'State Bar of Texas', 'Oregon State Bar']);
+      const only = named.filter(f => assocRows(f).every(a => mandatory.has(a.name)));
+      return `For ${only.length} firms that is the only thing on the list.`;
+    })()}</p>
+
+    <h2 id="mention">A mention is not a membership</h2>
+    <p>Here is where this stops being a study of firms and starts being a study of our own check, which is the more useful half.</p>
+    <p>The association half of this sub-factor is a name match. It looks for a body's name anywhere in the text of a page we read, keeps a 120-character window around it as evidence, and rejects only the bought-badge forums. <b>Nothing in it requires the firm to say it belongs to the thing.</b> So a firm that writes "member of the New York State Trial Lawyers Association" and a firm whose page happens to contain those words for some other reason earn the same three points, and the record cannot tell them apart.</p>
+    <p>Two counts of how far that goes, and neither is a count of firms that are not members.</p>
+    <p>The first is the word. Of the {rowTotal.toLocaleString('en-US')} snippets the check stored as its own evidence, {quietRows.toLocaleString('en-US')} contain no form of the word member, membership or affiliated; in {quietFirms.length} of the {named.length} credited firms, not one stored snippet does. Some of those are plainly membership lists written without the verb, because a bio that prints four association names under a heading does not need one, and the window is short enough to cut the word off. It is still the case that the check never looked for it.</p>
+    <p>The second needs no pattern of ours. {awayRows} of the snippets credit a body tied to one state to a firm practising in another, across {awayFirms.length} firms. Plenty of those are real: a firm with offices in four states belongs to bodies in four states. For {awayOnly.length} firms it is the only thing credited, so the three points rest on it entirely. {awayOnly.slice(0, 2).map((f, i) => (
+      <>{i > 0 ? ', and ' : ''}<a href={`/firms/${f.data.slug}/`}>{f.data.name}</a> in {f.data.market.city} is credited with {assocRows(f)[0].name}</>
+    ))}.</p>
+    <p>Two things in the list of bodies produce most of that, and both are visible in the patterns themselves rather than in any firm's conduct. ITLA abbreviates the Illinois Trial Lawyers Association and the Indiana one, and only Indiana's is on our list, so an Illinois firm naming its own trial bar is credited to the wrong state. MATA abbreviates a Massachusetts association and is also a surname, so a page that names a lawyer can earn a firm a membership two thousand miles away. A reader can check either one: the snippet the check kept is printed on the firm's profile, beside the sub-score it paid for.</p>
+    <p>None of that means those firms are not members of anything. It means the evidence we stored does not establish that they are, and the score spent three points on it anyway. The honest reading of the association half is that it measures whether a firm's site mentions the professional world it works in, which is a real signal about how much a firm publishes and a weak one about accountability.</p>
+    <p>One more thing in it is ours rather than theirs. The list of bodies began as a New York and Maryland list, and {unlistedStates.size} of the {states.size} states in this directory still have no bar association of their own on it. Across the {listed.length.toLocaleString('en-US')} firms in states whose own bar body is on the list, {share(listed)}% have an association named. Across the {unlisted.length.toLocaleString('en-US')} firms in states whose own bar body is not, {share(unlisted)}%. A reader looking at a state-by-state table of this would be looking partly at the reach of our own matching, which is why there is no such table on this page.</p>
+
+    <h2 id="score">What our own score does with it</h2>
+    <p><a href="/methodology/">The methodology</a> publishes this sub-factor as six points: three for cover disclosed, three for a named association. The check has run on {ran.length.toLocaleString('en-US')} firms, and {outOfSix.length === 1 ? 'one of them is' : `${outOfSix.length} of them are`} graded out of six. Everybody else is graded on the association half alone, because the engine takes the insurance half out of the denominator wherever no cover is disclosed rather than charging a firm points for a silence the whole market keeps.</p>
+    <p>That is the right call. Scoring an absence that is universal separates nobody, moves no ranking, and quietly makes the published thresholds stricter than the page says they are, since a score out of a hundred where three points cannot be reached is really a score out of ninety-seven. It also means <b>the number on the methodology page describes a scale that one firm in this directory can reach.</b></p>
+    {example && exampleA5 && (
+      <p>And the firm that reached it did worse out of it. <a href={`/firms/${example.data.slug}/`}>{example.data.name}</a> in {example.data.market.city} is the one record here carrying a disclosure of cover, which earns it {exampleA5.pts} of {exampleA5.max} on this sub-factor. A firm that published nothing about insurance and has a body named on a bio page is graded out of {cappedMax} and takes all {cappedMax}. In a score that is a share of what was assessed, answering the harder question is worth less than not being asked it. That is a defect in our own arithmetic rather than in anybody's website, and it is now written down where a reader can see it.</p>
+    )}
+    <p>The rest of the shape is plain enough. {zero.length.toLocaleString('en-US')} of the firms this check ran on score nothing here and {half.length.toLocaleString('en-US')} score {cappedMax}. There is no middle, because there is nothing in between a name and no name. A further {pending.length} firms have no reading at all, and the sub-factor stays out of their denominator rather than scoring them zero for the reach of our own crawl.</p>
+    <p>Two of our guides are about the same problem from the other end. <a href="/guides/what-you-can-check-about-a-lawyer-by-state/">What you can actually check about a lawyer</a> is the register half: public and legible are different things, and almost no state publishes a lawyer register anybody can read as data. <a href="/guides/how-to-choose-a-criminal-defense-lawyer/">What a criminal defense firm publishes about its results</a> is pillar B's version: most publish no outcome at all, our score marks them down for it, and their clients rate them the same.</p>
+
+    <h2 id="ask">What to ask instead</h2>
+    <p>The practical answer to the question in the title is that a firm's website will not tell you, and that the silence says very little about the firm. Publishing the sentence is not evidence of a better firm, and the {silent.length} firms publishing neither thing are not uninsured. They are firms whose marketing never had a reason to mention it.</p>
+    <p>So ask. Three questions, in the order they are worth asking:</p>
+    <ul>
+      <li><b>Do you carry professional liability insurance, and with what limits?</b> No state publishes a register you could check this against, so the answer is the firm's own word either way. Asking for it in writing costs nothing, and a firm that is covered has no reason to be slow about saying so.</li>
+      <li><b>Does my state make you tell me?</b> Several states require a lawyer without cover to say so, to the client or on an annual filing. Your state bar's website is the place that answer is authoritative.</li>
+      <li><b>Which bodies does the firm actually belong to?</b> Not which appear on the site. The question is cheap to ask and the answer is checkable with the body itself, which is more than the name on the page is.</li>
+    </ul>
+    <p>You can see every sub-score and the evidence behind it on any <a href="/practice-areas/personal-injury/">firm profile in the directory</a>, including this one, and including the snippet the check kept. Chicago firms are ranked at <a href="/cities/chicago-il/personal-injury/">personal injury lawyers in Chicago</a>. A firm that thinks a measurement here is wrong can <a href="/list-your-firm/">tell us where to look</a>, and the fastest way to move this particular sub-score is to write one true sentence on an about page.</p>
+    <p class="muted" style="font-size:.86rem">Limits, in order of how much they matter. The disclosure check is deliberately conservative and requires the firm to be the subject of the sentence, so a firm stating its cover in some other construction is missed. The association check is a name match and credits a mention, as above. Both read only the about page and the attorney bios a firm links, so a disclosure inside an engagement letter or a terms page is not counted. The list of bodies is ours and holds no association of their own for {unlistedStates.size} of the {states.size} states here. Latest reading {snapshot}.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm above has a profile showing its offices, fees, client reviews and the evidence behind each sub-score.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>How scoring works</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-law-firm-websites-publish/">What law firm websites publish</a></li>
+        <li><a href="/guides/what-you-can-check-about-a-lawyer-by-state/">What you can check by state</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
