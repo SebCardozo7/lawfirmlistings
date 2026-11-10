@@ -42,7 +42,7 @@ import {
   type Lead, type LeadStatus, type LeadEvent, RESOLVED, STATUSES,
 } from './ledger';
 import { listProspects, tally } from './prospects';
-import { sendTo } from './outbound';
+import { cancelReminderForLead, sendTo } from './outbound';
 import { render, TEMPLATES, templateById, priceOf } from './templates';
 import { columns, rows, stacked, tooFew } from './charts';
 import { composer, isPreview, previewHtml, readCompose, type ComposeState } from './composer';
@@ -630,10 +630,14 @@ async function leadAct(
       return home('Send failed. Nothing went out and nothing was recorded.');
     }
     await recordSend(env, id, `sent "${subject}"${tpl ? ` (${tpl})` : ''}`, 'owner');
+    // Writing to the firm is answering it, which is the whole question the reminder asks.
+    // It used to be cancelled only by the link in the owner's own email, so answering here
+    // left it armed and it went off the next day about work already done.
+    const stood = await cancelReminderForLead(env as any, id).catch(() => 0);
     // Quoted rather than chased: the desk writing for the first time is the quote going out,
     // and a lead that was already chased stays chased because setStatus is not called here.
     if (lead.status === 'arrived') await setStatus(env, id, 'quoted');
-    return home(`Sent to ${lead.email}.`);
+    return home(`Sent to ${lead.email}.${stood ? ' The reminder is stood down.' : ''}`);
   }
 
   return home('Nothing to do.');

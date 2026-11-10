@@ -77,13 +77,14 @@ const bundle = path.join(dir, 'bundle.mjs');
 await build({
   stdin: {
     contents: `export { handleLeads } from './worker/leadspage.ts';
-               export { CAP, prospectsPage } from './worker/prospectpage.ts';
+               export { CAP, prospectsPage, prospectPage } from './worker/prospectpage.ts';
                export { recordLead, newLeadId, getLead, listLeads } from './worker/ledger.ts';
                export { putProspect, getProspect, listProspects, isOptedOut }
                  from './worker/prospects.ts';
                export { resetIndex } from './worker/dossier.ts';
                export { resetPages } from './worker/pages.ts';
                export { htmlFromText } from './worker/emailhtml.ts';
+               export { queueReminder, cancelReminderForLead } from './worker/outbound.ts';
                export { columns, rows, stacked } from './worker/charts.ts';
                export { BUILD_HOUR, SEND_FROM, SEND_TO, PER_RUN, capFor, proposeBatch,
                         drainBatch, getBatch, approveBatch, buildBatch, nextWorkday, dayOf }
@@ -96,9 +97,11 @@ await build({
 });
 
 const {
-  handleLeads, CAP, prospectsPage, recordLead, newLeadId, getLead, putProspect, getProspect,
+  handleLeads, CAP, prospectsPage, prospectPage, recordLead, newLeadId, getLead, putProspect,
+  getProspect,
   listProspects,
   isOptedOut, resetIndex, resetPages, htmlFromText, columns, rows, stacked,
+  queueReminder, cancelReminderForLead,
   BUILD_HOUR, SEND_FROM, SEND_TO, PER_RUN, capFor, proposeBatch, drainBatch, getBatch,
   approveBatch, buildBatch, nextWorkday, dayOf,
 } = await import(pathToFileURL(bundle).href);
@@ -463,6 +466,41 @@ head('sober by default, and the toggle is not a toggle on the preview only');
     { id: uid, action: 'send', tpl: 'terms', subject: 'Terms', body: 'The letter.' });
   ok('and a default send is sober',
     !htmlPartOf(u.box.sent[0]?.raw).includes('apple-touch-icon'));
+}
+
+head('answering from the desk stands the reminder down');
+{
+  // The reminder is the only thing behind the promise that a person reads every free
+  // correction. It used to be cancelled only by the link in the owner's own email, so a lead
+  // answered from the desk kept its reminder and went off the next day about finished work.
+  const t = await desk();
+  const id = t.ids[0];
+  const lead = await getLead(t.env, id);
+  await queueReminder(t.env, { ...lead, leadId: id }, 'https://lawfirmlistings.com');
+
+  const armed = await t.env.FOLLOWUPS.list({ prefix: 'reminder:', limit: 100 });
+  ok('a reminder is armed when the enquiry arrives', armed.keys.length === 1);
+
+  await t.post(`/lead/${id}`,
+    { id, action: 'send', tpl: 'terms', subject: 'Terms', body: 'The letter.' });
+  const after = await t.env.FOLLOWUPS.list({ prefix: 'reminder:', limit: 100 });
+  ok('WRITING TO THE FIRM CANCELS IT', after.keys.length === 0,
+    `${after.keys.length} still armed`);
+
+  // Somebody else's reminder is not ours to delete. The key says nothing about the lead, so
+  // the only thing standing between the two is the id inside the record.
+  const u = await desk({ leads: [ENQ, { ...ENQ, email: 'other@example.com' }] });
+  const [mine, theirs] = u.ids;
+  for (const who of u.ids) {
+    await queueReminder(u.env, { ...(await getLead(u.env, who)), leadId: who },
+      'https://lawfirmlistings.com');
+  }
+  await u.post(`/lead/${mine}`,
+    { id: mine, action: 'send', tpl: 'terms', subject: 'Terms', body: 'The letter.' });
+  const left = await u.env.FOLLOWUPS.list({ prefix: 'reminder:', limit: 100 });
+  ok('AND ONLY THE ONE ANSWERED', left.keys.length === 1, `${left.keys.length} left`);
+  const raw = await u.env.FOLLOWUPS.get(left.keys[0].name);
+  ok('the one left belongs to the other lead', JSON.parse(raw).leadId === theirs);
 }
 
 /* ----------------------------------------------------------------- the charts */
@@ -910,9 +948,17 @@ head('the desk says when the next letters go out');
   ok('AND INSIDE THE WINDOW IT SAYS IT IS SENDING', during.includes('Sending now'),
     during.includes('approved for') ? 'still showing the approved wording' : '');
 
-  const one = await t.text(`/prospect/firm-0?t=${TOKEN}`);
+  // Through the function and not the router, with the same clock the batch was built on.
+  // Read at the wall clock these two passed on the day they were written and failed the next
+  // morning: the batch they set up was yesterday's by then, so the page they read had no batch
+  // at all and said nothing about either firm.
+  const firmPage = (slug, now) => prospectPage(
+    t.env, TOKEN, slug, 0, { view: 'html', restrained: true }, undefined, undefined, now,
+  ).then(r => r.text());
+
+  const one = await firmPage('firm-0', at(8, 18));
   ok('AND THE FIRM ITSELF SAYS WHEN ITS LETTER GOES', one.includes('Goes out'));
-  const other = await t.text(`/prospect/firm-1?t=${TOKEN}`);
+  const other = await firmPage('firm-1', at(8, 18));
   ok('while one left out says that instead', other.includes('left out of the batch'));
 }
 

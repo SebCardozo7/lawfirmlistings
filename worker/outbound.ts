@@ -23,6 +23,7 @@
  *   not sold, so the follow-up states the requirements and what the fee does buy, which is the
  *   panel and a followed link, and says plainly that the score is not part of it.
  */
+import { getMany, keysUnder } from './kvread';
 import { mime, present } from './mail';
 
 export interface OutboundEnv {
@@ -390,6 +391,43 @@ export async function cancelReminderAnd(
   }
   await env.FOLLOWUPS.delete(key);
   return { result: 'cancelled', leadId };
+}
+
+/**
+ * Cancels whatever reminder is armed for a lead, by the lead rather than by the key.
+ *
+ * Until now the only thing that could cancel one was the link in the owner's own email, which
+ * carries the key and the token. Answering from the desk is the other way a lead gets answered,
+ * and the desk has neither: the key is a timestamp and eight random characters that have
+ * nothing to do with the lead id. So a correction answered from the desk left the reminder
+ * armed, and the next day it said nobody had answered.
+ *
+ * That is worse than a wasted email. The reminder is the only thing standing behind the promise
+ * that a person reads every free correction, and an alarm that goes off after the work is done
+ * is an alarm you learn to ignore.
+ *
+ * No token is checked here, because there is no untrusted caller: the key came from the store
+ * and the lead id came from an authenticated desk session, not from a link in somebody's inbox.
+ */
+export async function cancelReminderForLead(
+  env: OutboundEnv, leadId: string,
+): Promise<number> {
+  if (!env.FOLLOWUPS || !leadId) return 0;
+  const names = await keysUnder(env.FOLLOWUPS, 'reminder:');
+  const raws = await getMany(env.FOLLOWUPS, names);
+  let gone = 0;
+  for (let i = 0; i < names.length; i += 1) {
+    const raw = raws[i];
+    if (!raw) continue;
+    try {
+      if ((JSON.parse(raw) as { leadId?: string }).leadId !== leadId) continue;
+    } catch {
+      continue;
+    }
+    await env.FOLLOWUPS.delete(names[i]);
+    gone += 1;
+  }
+  return gone;
 }
 
 /**
