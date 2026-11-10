@@ -553,10 +553,31 @@ def looks_like_a_label(text):
     return len(words) <= 6
 
 
+def absolute_to(origin, url):
+    """A URL from somebody else's file, resolved against their origin, or None.
+
+    The sitemap standard says robots.txt must give an absolute URL and a fair number of sites
+    give "/sitemap.xml" anyway. Taken as written it reaches urlopen as a path with no scheme,
+    which raises ValueError rather than returning an error status, so it is not caught by any
+    of the handling around a bad response: it takes the whole run down. One firm in New Orleans
+    stopped that market at 44 of 144 and one in Detroit at 206 of 217, in both cases after the
+    crawl had already been paid for.
+
+    Anything that does not resolve to http or https is dropped rather than tried. A sitemap
+    declared as ftp:// or javascript: is not a sitemap.
+    """
+    try:
+        resolved = urllib.parse.urljoin(origin + "/", unescape(str(url)).strip())
+    except ValueError:
+        return None
+    return resolved if resolved.lower().startswith(("http://", "https://")) else None
+
+
 def sitemap_urls(origin, robots, rp):
     """URLs from the sitemaps robots.txt declares, or from the conventional locations."""
     seen, out = set(), []
-    declared = re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "")
+    declared = [u for u in (absolute_to(origin, m) for m
+                            in re.findall(r"(?im)^\s*sitemap:\s*(\S+)", robots or "")) if u]
     guesses = [] if declared else [origin + path for path in SITEMAP_FALLBACKS]
     todo = declared or list(guesses)
     # A sitemap index can list a dozen children, and five of those are now guesses that may be
@@ -574,7 +595,10 @@ def sitemap_urls(origin, robots, rp):
         if status != 200 or not body:
             continue
         # A sitemap index points at more sitemaps; both are <loc> lists.
-        locs = [unescape(m) for m in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body, re.I)]
+        # Resolved too. A sitemap index is as free to list a relative child as robots.txt is to
+        # declare a relative sitemap, and the failure is identical.
+        locs = [u for u in (absolute_to(origin, m) for m
+                            in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body, re.I)) if u]
         if locs and url in guesses:
             # One conventional address answered, so stop asking the host for the other four.
             todo = [u for u in todo if u not in guesses]
@@ -869,6 +893,22 @@ def examine_combined(domain, spec, practice_name, site=None):
     return None, last
 
 
+def unreadable(why):
+    """True when a probe failed to read the site rather than reading it and finding nothing.
+
+    The prefix is written by probe() and read in two places: the write-out, which leaves these
+    out of the record so a later run asks again, and the run's own report. They used to test for
+    it separately, and only the write-out tested at all, so the record was right and every
+    number printed on top of it was wrong by the same firms.
+
+    Either half, not just the first. The two probes' reasons are joined with "; ", so a
+    practice-page probe that answered and a practice-areas probe that could not be read produce
+    a string beginning with the answer.
+    """
+    return bool(why) and any(part.strip().startswith("unreadable:")
+                             for part in str(why).split(";"))
+
+
 def read_record(path):
     if path.exists():
         try:
@@ -971,7 +1011,14 @@ def main() -> int:
     specs = [(p, PRACTICES[p]) for p in wanted]
     staging = ROOT / args.staging
     staging.mkdir(parents=True, exist_ok=True)
-    holds, misses = [], []
+    # Three outcomes, not two. A site that refused to answer is not a firm that publishes
+    # nothing, and the record has known that since the Buffalo family-law run: an unreadable
+    # probe is left out of the evidence so a later run asks again. The report did not know it.
+    # It printed "no" next to those domains and counted them in the denominator, so in Detroit
+    # the two best-known injury firms in the market, both of them behind bot protection that
+    # answers 403 to everything we send, arrived as evidence that the market is thinner than it
+    # is. The number a market is opened on has to say which firms it could not read.
+    holds, misses, unread = [], [], []
 
     for i, domain in enumerate(domains, 1):
         path = staging / (domain + ".json")
@@ -997,13 +1044,35 @@ def main() -> int:
 
         # One visit, then every unanswered practice against it. This is the whole saving: the
         # sitemap of a firm with 6,000 URLs is fetched once instead of once per practice.
-        visit = site_urls(domain)
-        answers = {}
-        for name, spec in todo:
-            found, why = probe(domain, spec, name, args.budget, visit)
-            answers[name] = (found, why)
-            (holds if found else misses).append((name, domain))
-        shown = ", ".join("%s%s" % (n, "" if f else " no") for n, (f, _) in answers.items())
+        #
+        # Wrapped, because one firm's site must not end a market. Everything inside here is a
+        # conversation with somebody else's server, and the failures are theirs: a malformed
+        # URL in their robots.txt, a header that decodes to nothing, a redirect loop. Each of
+        # those is a fact about one domain and the run carries on past it, the same way a
+        # non-200 already does. Before this, a relative sitemap in New Orleans stopped that
+        # market at 44 of 144 with no record of the 100 it never reached.
+        try:
+            visit = site_urls(domain)
+            answers = {}
+            for name, spec in todo:
+                found, why = probe(domain, spec, name, args.budget, visit)
+                answers[name] = (found, why)
+                bucket = holds if found else unread if unreadable(why) else misses
+                bucket.append((name, domain))
+        except Exception as err:  # noqa: BLE001  (any failure here belongs to one domain)
+            print("%3d/%d %-34s %-34s %s"
+                  % (i, len(domains), domain[:34], label,
+                     "skipped, %s" % type(err).__name__))
+            # Unreadable for every practice still pending on it, which is what a domain that
+            # threw on its way through is: a site we did not finish reading. Counting it as a
+            # miss kept the totals adding up to the number of domains examined and made them
+            # add up to the wrong thing.
+            for name, _ in todo:
+                unread.append((name, domain))
+            continue
+        shown = ", ".join(
+            "%s%s" % (n, "" if f else " unreadable" if unreadable(w) else " no")
+            for n, (f, w) in answers.items())
         print("%3d/%d %-34s %-34s %s"
               % (i, len(domains), domain[:34], label, shown[:60]))
 
@@ -1017,8 +1086,7 @@ def main() -> int:
             # Either half, not just the first. The two probes' reasons are joined with "; ", so a
             # practice-page probe that answered and a practice-areas probe that could not be read
             # produce a string beginning with the answer, and startswith() waved it through.
-            if not found and why and any(part.strip().startswith("unreadable:")
-                                         for part in why.split(";")):
+            if not found and unreadable(why):
                 continue
             store[name] = found or {"held": False, "why": why, "checked_at": TODAY}
             wrote = True
@@ -1027,10 +1095,19 @@ def main() -> int:
                 json.dumps(rec, ensure_ascii=False, indent=2) + "\n")
 
     print()
+    blocked = sorted({d for _, d in unread})
     for name, _ in specs:
         n = sum(1 for p, _ in holds if p == name)
+        u = sum(1 for p, _ in unread if p == name)
         print("%d of %d publish a %s practice page, or name it among their practice areas"
-              % (n, len(domains), name))
+              % (n, len(domains) - u, name))
+    if blocked:
+        print()
+        print("%d of %d sites answered nothing we could read, so they are out of the "
+              "denominator above rather than counted as publishing nothing:"
+              % (len(blocked), len(domains)))
+        for d in blocked:
+            print("   %s" % d)
     return 0
 
 
