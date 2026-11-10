@@ -500,7 +500,11 @@ export async function prospectPage(
     // Still rendered, so the desk can read what was sent. Just not sendable.
     body = `<div class="blocked"><b>Not sendable:</b> ${esc(why)}.</div>`
       + '<div class="screen" style="margin-top:12px">'
-      + `<iframe title="The letter" sandbox srcdoc="${esc(previewHtml(built.letter!.text, state))}">`
+      // allow-same-origin and no allow-scripts, for the reason set out in composer.ts: a bare
+      // sandbox stops the browser requesting the logo, so the letter looks broken here and
+      // arrives intact.
+      + '<iframe title="The letter" sandbox="allow-same-origin" '
+      + `srcdoc="${esc(previewHtml(built.letter!.text, state))}">`
       + '</iframe></div>';
   } else if (room === 0) {
     body = `<div class="blocked"><b>Today's ${cap} are sent.</b> The cap exists so the domain `
