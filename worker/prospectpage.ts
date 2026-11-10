@@ -479,6 +479,7 @@ function outcomeForms(token: string, p: Prospect): string {
 export async function prospectPage(
   env: ProspectPageEnv, token: string, slug: string, openLeads: number,
   state: ComposeState, said?: string, draft?: { subject: string; text: string },
+  now = new Date(),
 ): Promise<Response> {
   const all = await listProspects(env);
   const p = await getProspect(env, slug);
@@ -526,7 +527,11 @@ export async function prospectPage(
 
   // Which batch this firm is in, if any, so the row answers "when does this one go out"
   // rather than leaving a person to work it out from the banner on the other page.
-  const sending = await batchState(env);
+  // The clock is a parameter here for the same reason it is one on the list page. "Goes out"
+  // is read off the batch for the day this is asked about, so a guard that set up a batch for
+  // one day and read the page on another found no batch at all and failed on a Tuesday what
+  // passed on a Monday.
+  const sending = await batchState(env, now);
   const inBatch = 'batch' in sending && sending.batch.slugs.includes(p.slug)
     ? sending.batch : null;
   const when = !inBatch ? null
