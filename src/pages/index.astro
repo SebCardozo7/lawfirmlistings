@@ -3,370 +3,676 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import CoverArt from '../components/CoverArt.astro';
-import { officeLabel } from '../lib/labels';
-import { PRACTICE_SLUGS } from '../data/practices';
+import { PRACTICE_SLUGS, hasPractice } from '../data/practices';
 import { publishedGuides } from '../data/guides';
+import { BADGE_YEAR } from '../lib/badge';
 
-// The hero preview and the "certified this month" grid both render real firms.
-// They used to be hand-written mock-ups naming firms that do not exist.
+/**
+ * The home page, rebuilt 2026-11-11.
+ *
+ * What it was: a hero claiming we check "verified client outcomes", a grid of situations, a
+ * list of cities, nine certified firms, three guides and a For-firms box that never named the
+ * product. Sixty-one internal links out of 1,635 published URLs, which made the page that
+ * receives every external link the worst connected one on the site. Search Console says the
+ * city-by-practice lists carry thousands of impressions at position 57 to 79 and no clicks,
+ * and the only clicks the site has ever had are brand queries landing on firm profiles. The
+ * thing that moves page six to page one is authority, and the cheapest authority we own is the
+ * link equity this page was sitting on.
+ *
+ * Every number below is counted from the collection at build time. That is deliberate and it
+ * is the whole point: the old page stated figures a person had typed, and two of them were
+ * invented. A number that is computed cannot go stale and cannot be wrong in one place and
+ * right in another.
+ *
+ * The claim that is gone. "Verified client outcomes" was true of none of the 1,388 published
+ * firms: the `results` array is empty on every one of them. What we actually measure is what a
+ * firm publishes about its own results, which is `results_published`, and 782 of 1,388 publish
+ * nothing readable at all. On a site whose entire argument is that it only publishes what it
+ * can check, that sentence was the most expensive one we had.
+ */
 const published = await getCollection('firms', f =>
   f.data.status !== 'sample' && f.data.status !== 'not_eligible');
 
+const scored = published.filter(f => f.data.score);
 const certified = published
   .filter(f => f.data.status === 'certified' && f.data.score)
-  .sort((a, b) => (b.data.score!.total) - (a.data.score!.total));
+  .sort((a, b) => b.data.score!.total - a.data.score!.total);
 
-// The guides section was hand-written: it advertised a ranking that is still gated, invented
-// a firm count and a read time, and two of its three cards linked to "#". It now reads the
-// manifest, so publishing a guide puts it on the home page and nothing here can describe an
-// article that does not exist.
-const homeGuides = publishedGuides(published).slice(0, 3);
-// Sixteen state chips and an "All 50 states" link sat in the hero of a site that publishes
-// one city, three clicks from a /cities/ page saying "one city so far". That is not a dead
-// link, it is a claim of national coverage. The list comes from the collection now.
-const states = [...new Set(published.map(f => f.data.market.state_name))].sort();
+/** The highest-scoring firm in the directory, which carries the hero and the worked example. */
+const top = [...scored].sort((a, b) => b.data.score!.total - a.data.score!.total)[0] ?? null;
+const topPractice = top?.data.practices.find(p => p.primary) ?? top?.data.practices[0];
+const topOffice = top?.data.offices.find(o => o.is_hq) ?? top?.data.offices[0];
+const topGoogle = top?.data.reviews.google;
+/** The town, not the street: "New Hyde Park" rather than "2001 Marcus Ave W295". */
+const townOf = (address?: string) => {
+  const parts = String(address ?? '').split(',').map(s => s.trim());
+  return parts.length >= 3 ? parts[parts.length - 3] : '';
+};
 
-const lead = certified[0] ?? published[0] ?? null;
-const leadPrimary = lead?.data.practices.find(pr => pr.primary) ?? lead?.data.practices[0];
-const leadHq = lead?.data.offices.find(o => o.is_hq) ?? lead?.data.offices[0];
-const leadGoogle = lead?.data.reviews.google;
-const leadSelfReported = leadGoogle ? /as reported by the firm/i.test(leadGoogle.source) : false;
-// Only results backed by a docket or document count; nothing else may imply an outcome.
-const leadVerifiedResults = lead ? lead.data.results.filter(r => r.verified).length : 0;
-
-const cityCounts = [...new Set(published.map(f => f.data.market.city_slug))].map(slug => {
-  const inCity = published.filter(f => f.data.market.city_slug === slug);
-  return { label: `${inCity[0].data.market.city}, ${inCity[0].data.market.state}`, count: inCity.length };
-}).sort((a, b) => b.count - a.count);
-
-const practiceCount = new Set(published.flatMap(f => f.data.practices.map(pr => pr.slug))).size;
-
-// The situations grid is navigation copy — people know what happened to them, not which kind of
-// lawyer they need — so the eight entries stay. Their firm counts were invented, and the seven
-// practice areas we have not started have no page to link to. Each tile now shows a count only
-// when there are firms behind it, and links only where a page exists.
-const PAGES = new Set(PRACTICE_SLUGS);
-const SITUATIONS = [
-  { slug: 'personal-injury', icon: 'car', name: 'Personal Injury', title: 'I was hurt in an accident', desc: 'Car and truck crashes, slip & fall, medical mistakes, wrongful death' },
-  { slug: 'workers-compensation', icon: 'briefcase', name: "Workers' Compensation", title: 'I was hurt at work', desc: 'Workplace and construction injuries, repetitive strain, benefits denied or stopped' },
-  { slug: 'family-law', icon: 'heart', name: 'Family Law', title: "I'm getting divorced or need custody help", desc: 'Divorce, child custody and support, prenups, domestic violence orders' },
-  { slug: 'criminal-defense', icon: 'gavel', name: 'Criminal Defense', title: "I've been arrested or charged", desc: 'DUI, drug and assault charges, white-collar and federal investigations' },
-  { slug: 'immigration', icon: 'globe', name: 'Immigration', title: 'I need a visa, green card or citizenship', desc: 'Family and work visas, asylum, naturalization, removal defense' },
-  { slug: 'employment', icon: 'users', name: 'Employment', title: 'I was fired, harassed or underpaid', desc: 'Wrongful termination, discrimination, unpaid wages, severance review' },
-  { slug: 'estate-planning', icon: 'pen', name: 'Estate Planning', title: "I want to protect my family's future", desc: 'Wills, trusts, probate, powers of attorney, elder care planning' },
-  { slug: 'business-law', icon: 'briefcase', name: 'Business Law', title: "I'm starting or running a business", desc: 'Formation, contracts, partnerships, disputes, mergers' },
-  { slug: 'real-estate', icon: 'home', name: 'Real Estate', title: "I'm buying, selling or renting property", desc: 'Closings, landlord–tenant disputes, evictions, zoning, title issues' },
-].map(s => ({
-  ...s,
-  count: published.filter(f => f.data.practices.some(pr => pr.slug === s.slug)).length,
-  href: PAGES.has(s.slug) ? `/practice-areas/${s.slug}/` : null,
-}));
-
-// The hero used to state "4,800+ certified firms" and "12,400+ verified client reviews". Both
-// were invented. These are the real aggregates, summed across published firms.
 const digits = (s: string) => Number(String(s).replace(/[^\d]/g, '') || 0);
-const freeConsultShare = published.length
-  ? Math.round((100 * published.filter(f => f.data.free_consultation).length) / published.length)
-  : null;
 
+// The record, counted rather than asserted.
+const attorneyCount = published.reduce((n, f) => n + f.data.attorneys.length, 0);
+const faqCount = published.reduce((n, f) => n + f.data.faq.length, 0);
 const withReviews = published.filter(f => f.data.reviews.google);
 const reviewTotal = withReviews.reduce((n, f) => n + digits(f.data.reviews.google!.count_label), 0);
 const ratingAvg = reviewTotal
   ? Math.round((withReviews.reduce((s, f) =>
-      s + f.data.reviews.google!.rating * digits(f.data.reviews.google!.count_label), 0) / reviewTotal) * 100) / 100
+      s + f.data.reviews.google!.rating * digits(f.data.reviews.google!.count_label), 0)
+      / reviewTotal) * 100) / 100
   : null;
 
-const computedDates = published.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
-const lastUpdated = computedDates.length
-  ? new Date(computedDates.sort().at(-1)!).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
+// Every city × practice combination that has a page, which is the unit this site ranks in.
+const combos = new Map<string, { city: string; practice: string; label: string; n: number }>();
+for (const f of published) {
+  for (const pr of f.data.practices) {
+    if (!hasPractice(pr.slug)) continue;
+    const key = `${f.data.market.city_slug}/${pr.slug}`;
+    const row = combos.get(key);
+    if (row) row.n += 1;
+    else combos.set(key, {
+      city: f.data.market.city_slug, practice: pr.slug,
+      label: `${pr.name} · ${f.data.market.city}, ${f.data.market.state}`, n: 1,
+    });
+  }
+}
+const listCount = combos.size;
+const topLists = [...combos.values()].sort((a, b) => b.n - a.n).slice(0, 10);
+
+/** The ranked list shown open: the one with the most firms behind it. */
+const lead = topLists[0];
+const leadFirms = lead
+  ? published
+      .filter(f => f.data.market.city_slug === lead.city
+        && f.data.practices.some(pr => pr.slug === lead.practice))
+      .sort((a, b) => (b.data.score?.total ?? -1) - (a.data.score?.total ?? -1))
+  : [];
+const leadName = lead ? published.find(f => f.data.market.city_slug === lead.city)!.data.market : null;
+const leadPracticeName = lead
+  ? published.find(f => f.data.practices.some(p => p.slug === lead.practice))!
+      .data.practices.find(p => p.slug === lead.practice)!.name
+  : '';
+
+const cityRows = [...new Map(published.map(f => [f.data.market.city_slug, f.data.market])).values()]
+  .map(m => ({ ...m, n: published.filter(f => f.data.market.city_slug === m.city_slug).length }))
+  .sort((a, b) => b.n - a.n);
+
+/**
+ * States, each pointing at its own largest city.
+ *
+ * Every state chip used to carry href="/cities/", so thirteen links on the most linked page of
+ * the site went to one destination and told a crawler nothing about any state. There is no
+ * /states/ route yet, so the chip goes to the biggest city we publish in that state, which is
+ * at least a page about somewhere in it.
+ */
+const stateRows = [...new Map(published.map(f => [f.data.market.state, f.data.market])).values()]
+  .map(m => {
+    const inState = cityRows.filter(c => c.state === m.state);
+    return {
+      name: m.state_name, abbr: m.state, href: `/cities/${inState[0].city_slug}/`,
+      n: inState.reduce((s, c) => s + c.n, 0),
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+/**
+ * Where each city sits on the map, as x,y in the 760×420 viewBox.
+ *
+ * Hand-placed from latitude and longitude on an equirectangular projection of the lower 48,
+ * because adding two fields to every market record to draw one picture is a worse trade than a
+ * lookup table that lives beside the picture. A city with no entry simply gets no dot, which is
+ * why the legend counts the dots rather than the cities.
+ */
+const CITY_XY: Record<string, [number, number]> = {
+  'new-york-ny': [668, 139], 'miami-fl': [587, 391], 'los-angeles-ca': [88, 251],
+  'san-diego-ca': [103, 273], 'chicago-il': [490, 120], 'phoenix-az': [169, 261],
+  'las-vegas-nv': [129, 215], 'atlanta-ga': [532, 256], 'houston-tx': [388, 323],
+  'philadelphia-pa': [653, 152], 'san-antonio-tx': [347, 329], 'buffalo-ny': [604, 102],
+  'baltimore-md': [634, 163], 'boston-ma': [707, 112], 'naples-fl': [566, 384],
+  'portland-or': [30, 58], 'dallas-tx': [369, 273], 'lakeland-fl': [564, 352],
+  'northwest-indiana': [493, 131],
+};
+const mapped = cityRows.filter(c => CITY_XY[c.city_slug])
+  .map(c => ({ ...c, xy: CITY_XY[c.city_slug], r: 4 + Math.sqrt(c.n) / 2.2 }));
+
+/**
+ * Markets measured and not yet published. They are on the map because they are true: the
+ * cohorts are written and the practice pass is done. They come off it the day they open.
+ */
+const OPENING: { label: string; xy: [number, number]; n: number }[] = [
+  { label: 'Orlando', xy: [572, 344], n: 95 },
+  { label: 'New Orleans', xy: [458, 320], n: 94 },
+  { label: 'Detroit', xy: [549, 112], n: 115 },
+];
+const openingTotal = OPENING.reduce((s, m) => s + m.n, 0);
+
+// The three findings. Counted here so the article and the home page cannot disagree.
+const withInsurance = published.filter(f => f.data.accountability?.malpractice_insurance).length;
+const noResults = published.filter(f => !(f.data.results_published?.count ?? 0)).length;
+const noAttorneys = published.filter(f => f.data.attorneys.length === 0).length;
+const noAttorneyPct = Math.round((1000 * noAttorneys) / published.length) / 10;
+
+// Firms that have earned a tier they can show on their own site.
+const EARNED = new Set(['Verified', 'Certified', 'Distinguished', 'Elite']);
+const earned = scored.filter(f => EARNED.has(f.data.score!.tier));
+const eliteCount = scored.filter(f => f.data.score!.tier === 'Elite').length;
+
+/** The logo wall: real marks, highest scoring first, at most three to a city. */
+const logoSeen = new Map<string, number>();
+const logoFirms: typeof published = [];
+for (const f of [...scored].sort((a, b) => b.data.score!.total - a.data.score!.total)) {
+  if (!f.data.logo) continue;
+  const city = f.data.market.city_slug;
+  if ((logoSeen.get(city) ?? 0) >= 3) continue;
+  logoSeen.set(city, (logoSeen.get(city) ?? 0) + 1);
+  logoFirms.push(f);
+  if (logoFirms.length >= 24) break;
+}
+const withLogo = published.filter(f => f.data.logo).length;
+const logoRowA = logoFirms.slice(0, 12);
+const logoRowB = logoFirms.slice(12, 24);
+
+const homeGuides = publishedGuides(published).slice(0, 3);
+const guideCount = publishedGuides(published).length;
+
+const lastUpdated = (() => {
+  const dates = published.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+  return dates.length
+    ? new Date(dates.sort().at(-1)!).toLocaleDateString('en-US',
+        { month: 'long', year: 'numeric', timeZone: 'UTC' })
+    : null;
+})();
+
+const freeConsultShare = published.length
+  ? Math.round((100 * published.filter(f => f.data.free_consultation).length) / published.length)
   : null;
-const logoVariants = ['', 'l2', 'l3'];
-// The hero search routes in the browser against the pages that exist. Built from the
-// collection, so a new city or practice area is searchable as soon as it has a page.
-const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
+
+// The situations grid. Each tile counts real firms and links only where a page exists.
+const PAGES = new Set(PRACTICE_SLUGS);
+const SITUATIONS = [
+  { slug: 'personal-injury', icon: 'car', title: 'I was hurt in an accident', desc: 'Car and truck crashes, slip and fall, medical mistakes, wrongful death' },
+  { slug: 'workers-compensation', icon: 'briefcase', title: 'I was hurt at work', desc: 'Workplace and construction injuries, benefits denied or stopped' },
+  { slug: 'medical-malpractice', icon: 'heart', title: 'A doctor or hospital got it wrong', desc: 'Misdiagnosis, surgical error, birth injury, nursing home neglect' },
+  { slug: 'criminal-defense', icon: 'gavel', title: 'I have been arrested or charged', desc: 'DUI, drug and assault charges, white collar and federal investigations' },
+  { slug: 'family-law', icon: 'users', title: 'I am getting divorced or need custody help', desc: 'Divorce, child custody and support, prenups, protection orders' },
+  { slug: 'immigration', icon: 'globe', title: 'I need a visa, green card or citizenship', desc: 'Family and work visas, asylum, naturalization, removal defense' },
+].map(s => {
+  const n = published.filter(f => f.data.practices.some(pr => pr.slug === s.slug)).length;
+  const cities = new Set(published.filter(f => f.data.practices.some(pr => pr.slug === s.slug))
+    .map(f => f.data.market.city_slug)).size;
+  return { ...s, n, cities, href: PAGES.has(s.slug) ? `/practice-areas/${s.slug}/` : null };
+});
+
+const popular = SITUATIONS.filter(s => s.href).slice(0, 4);
+
 const searchIndex = {
   practices: [...new Map(published.flatMap(f => f.data.practices)
-    .filter(pr => PRACTICE_PAGES.has(pr.slug))
+    .filter(pr => PAGES.has(pr.slug))
     .map(pr => [pr.slug, pr.name])).entries()]
     .map(([slug, name]) => ({ slug, name, href: `/practice-areas/${slug}/` })),
-  cities: [...new Map(published.map(f =>
-    [f.data.market.city_slug, { city: f.data.market.city, state: f.data.market.state }])).entries()]
-    .map(([slug, m]) => ({ slug, name: `${m.city}, ${m.state}`, city: m.city, state: m.state,
-                           href: `/cities/${slug}/` })),
+  cities: cityRows.map(m => ({ slug: m.city_slug, name: `${m.city}, ${m.state}`,
+                               city: m.city, state: m.state, href: `/cities/${m.city_slug}/` })),
 };
 
+const pillars: { key: string; name: string; max: number; blurb: string }[] = [
+  { key: 'A', name: 'Professional Standing', max: 25, blurb: "Licensure, discipline, years in practice, and whether the firm's roster can be verified against the bar." },
+  { key: 'B', name: 'Published Outcomes', max: 15, blurb: 'What the firm publishes about its results, how specific it is, and whether the disclaimer sits beside it.' },
+  { key: 'C', name: 'Client Experience', max: 20, blurb: 'Review volume, rating quality, how recent the reviews are, and the share of them that are complaints.' },
+  { key: 'D', name: 'Digital Presence', max: 25, blurb: "Core Web Vitals, search authority as a percentile of the firm's own city, local presence, structured data." },
+  { key: 'E', name: 'Access', max: 15, blurb: 'Free consultation and fee transparency, languages, accessibility, and when a human can be reached.' },
+];
+const topPillars = top ? pillars.map(p => ({
+  ...p, got: top.data.score!.pillars?.[p.key]?.score ?? 0,
+})) : [];
+const weakest = [...topPillars].sort((a, b) => (a.got / a.max) - (b.got / b.max))[0];
+const firstSub = top?.data.score?.pillars?.A?.subs?.[0];
+
+// No figure in here. check_meta refuses one, and it is right to: a count baked into the snippet
+// Google caches is a number that goes wrong somewhere we cannot see it.
+const desc = 'Compare US law firms on public records: licensure, discipline, client reviews and '
+  + 'what each firm publishes about its fees. No firm can pay to rank.';
 ---
-{/* The description is the snippet Google shows, so it says what the directory holds today.
-    It read "top-rated law firms in 100 U.S. cities and every practice area" — one city, one
-    practice area. */}
-<Base title="Law Firm Listings: Law Firms Verified, Not Advertised" description="Find and compare US law firms on verified evidence: licensure, disciplinary history, client reviews, case results and fee terms. No firm can pay to rank." nav="home">
+<Base title="Law Firm Listings: Law Firms Verified, Not Advertised" description={desc} nav="home">
+
 <!-- HERO -->
-<section class="hero">
-  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><span class="glow"></span><span class="noise"></span></div>
-  <div class="container">
-    {ratingAvg && <div class="trust-pill"><span class="avs"><i></i><i></i><i></i><i></i></span><span class="stars">{'★'.repeat(Math.round(ratingAvg))}</span><span><b>{ratingAvg.toFixed(2)}</b> · {reviewTotal.toLocaleString('en-US')} client reviews from Google Business Profiles</span></div>}
-    <h1>The law firm directory built on <span class="grad-text">verification</span>, not advertising.</h1>
-    <p class="lede">Every firm here is checked for active licensure, clean disciplinary records and verified client outcomes, and no firm can pay to rank. {published.length} {published.length === 1 ? 'firm' : 'firms'} published so far across {cityCounts.length} U.S. {cityCounts.length === 1 ? 'city' : 'cities'}.</p>
-    <form class="search-panel" id="firm-search" action="/practice-areas/personal-injury/" method="get">
-      <div class="search-field">
-        <Icon name="search" />
-        <div style="flex:1"><label for="q">Legal matter</label><input id="q" type="text" placeholder="Car accident, divorce, DUI…"></div>
-      </div>
-      <div class="search-field">
-        <Icon name="pin" />
-        <div style="flex:1"><label for="loc">City or state</label><input id="loc" type="text" placeholder="New York, NY"></div>
-      </div>
-      <button class="btn btn--primary" type="submit">Search firms</button>
-      <p class="search-note" hidden id="search-note"></p>
-    </form>
-    <script is:inline define:vars={{ searchIndex }}>
-  // Client-side only: no request leaves the browser until the visitor is sent to a page that
-  // already exists. A matter or city we do not cover yet says so instead of pretending.
-  (function () {
-    var form = document.getElementById('firm-search');
-    if (!form) return;
-    var note = document.getElementById('search-note');
-    var norm = function (s) { return (s || '').toLowerCase().replace(/[^a-z\s]/g, ' ').trim(); };
-
-    // Everyday words for a matter, mapped to the practice slug they belong to. Only slugs that
-    // have a page are in searchIndex, so an unmatched term is genuinely uncovered.
-    var MATTER_HINTS = {
-      'personal-injury': ['injury', 'injured', 'hurt', 'accident', 'crash', 'car', 'truck',
-        'motorcycle', 'pedestrian', 'slip', 'fall', 'construction', 'malpractice', 'negligence',
-        'wrongful death', 'work', 'workers', 'compensation', 'premises', 'dog bite']
-    };
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var matter = norm(document.getElementById('q').value);
-      var where = norm(document.getElementById('loc').value);
-
-      var city = searchIndex.cities.find(function (c) {
-        var n = norm(c.name), just = norm(c.city);
-        return where && (n.indexOf(where) > -1 || where.indexOf(just) > -1 ||
-                         just.indexOf(where) > -1 || norm(c.state) === where);
-      });
-
-      var practice = searchIndex.practices.find(function (p) {
-        if (matter && norm(p.name).indexOf(matter) > -1) return true;
-        var hints = MATTER_HINTS[p.slug] || [];
-        return matter && hints.some(function (h) { return matter.indexOf(h) > -1; });
-      });
-
-      if (practice) { window.location.href = practice.href; return; }
-      // A matter was typed and matched nothing: say so rather than routing to the city anyway.
-      // Sending someone looking for a divorce lawyer to a personal-injury page, silently, is
-      // the kind of helpfulness that misleads.
-      if (city && !matter) { window.location.href = city.href; return; }
-
-      if (note) {
-        var have = searchIndex.practices.map(function (p) { return p.name; }).join(', ');
-        var places = searchIndex.cities.map(function (c) { return c.name; }).join(', ');
-        note.textContent = (matter || where)
-          ? 'We do not cover that yet. So far the directory holds ' + have + ' in ' + places + '.'
-          : 'Tell us what happened, or pick one of the popular searches below.';
-        note.hidden = false;
-      }
-    });
-  })();
-</script>
-    <div class="hero-popular"><span>Popular:</span><a href="/cities/new-york-ny/personal-injury/">Personal injury</a><a href="/cities/new-york-ny/workers-compensation/">Workers' compensation</a>{['Divorce', 'Criminal defense', 'Immigration', 'Estate planning'].map(p => (
-        <span class="soon">{p}</span>
-      ))}</div>
-
-    <div class="hero-preview" aria-hidden="true">
-      {lead && (
-        <div class="glass">
-          <div class="firm"><div class={lead.data.logo ? 'avatar has-logo' : 'avatar'}>{lead.data.logo
-            ? <img src={lead.data.logo.file} alt="" width="44" height="44" loading="eager" decoding="async" />
-            : lead.data.initials}</div><div><b>{lead.data.name}</b><span>{leadPrimary?.name} · {officeLabel(leadHq?.label, leadHq?.address, lead.data.name)}, {lead.data.market.state}</span></div></div>
-          {leadGoogle && (
-            <div class="stars">{'★'.repeat(Math.round(leadGoogle.rating))} <small>{leadGoogle.rating.toFixed(1)} · {leadGoogle.count_label} reviews{leadSelfReported ? ', as reported by the firm' : ''}</small></div>
-          )}
-          {lead.data.status === 'certified' && (
-            <span class="badge badge--certified"><Icon name="shield" /> LFL Certified 2026</span>
-          )}
-          <div class="img"><Icon name="skyline" /></div>
-          <div class="row"><span>Offices <b>{lead.data.offices.length}</b></span><span>Free consult <b>{lead.data.free_consultation ? 'Yes' : 'No'}</b></span><span>Fee <b>{lead.data.fee_model}</b></span></div>
+<section class="hm-hero">
+  <div class="hm-aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="hm-grid-lines" aria-hidden="true"></div>
+  <div class="container hm-hero-grid">
+    <div>
+      {ratingAvg && (
+        <div class="hm-pill">
+          <span class="hm-stars" aria-hidden="true">
+            <Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" />
+          </span>
+          <span><b>{reviewTotal.toLocaleString('en-US')}</b> client reviews read &middot; <b>{ratingAvg.toFixed(2)}</b> average</span>
         </div>
       )}
-      {lead?.data.score && (
-        <div class="glass">
-          <div class="k">Certification score</div><div class="v num">{lead.data.score.total}<span style="font-size:1rem;color:var(--on-night-soft)">/100</span></div>
-          <div class="sub">Licensure · Discipline · Results · Reviews</div>
-          <div class="bar"><i style={`width:${lead.data.score.total}%`}></i></div>
-          <div class="row"><span>Bar status <b>{lead.data.gates.G1?.pass ? 'Active' : 'Pending'}</b></span><span>Discipline <b>{lead.data.gates.G2?.pass ? 'None' : 'Pending'}</b></span></div>
-          <div class="row" style="border:0;padding:0;margin-top:8px"><span>Verified results <b>{leadVerifiedResults > 0 ? leadVerifiedResults : 'Pending'}</b></span><span>A+B+C <b>{lead.data.score.floor_abc}/65</b></span></div>
+
+      <h1>The law firm directory built on <span class="grad-text">verification</span>, not advertising.</h1>
+
+      <p class="hm-lede"><b>No firm can buy a place here.</b> Not the top spot, not a point, not a
+        badge. All <b>{published.length.toLocaleString('en-US')}</b> of them are read from their
+        own public record, scored out of 100 in the open, and measured again every month.</p>
+
+      <form class="hm-search" id="firm-search" action="/practice-areas/personal-injury/" method="get">
+        <div class="hm-field">
+          <label for="q">Legal matter</label>
+          <input id="q" type="text" placeholder="Car accident, divorce…" autocomplete="off">
         </div>
-      )}
-      <div class="glass">
-        <div class="k">Certified firms</div><div class="v num">{certified.length}</div>
-        <div class="sub">across {cityCounts.length} {cityCounts.length === 1 ? 'city' : 'U.S. cities'} · {practiceCount} practice areas</div>
-        {cityCounts.slice(0, 2).map(c => (
-          <div class="row"><span>{c.label} <b class="num">{c.count}</b></span></div>
-        ))}
-        <div class="row" style="border:0;padding:0;margin-top:8px"><span>Updated <b>{lastUpdated ?? 'not yet'}</b></span><span class="badge badge--live">● Live</span></div>
+        <div class="hm-field hm-field--split">
+          <label for="loc">City or state</label>
+          <input id="loc" type="text" placeholder="New York, NY" autocomplete="off">
+        </div>
+        <button class="btn btn--primary" type="submit"><Icon name="search" /> Search</button>
+        <p class="hm-note" hidden id="search-note"></p>
+      </form>
+
+      <div class="hm-popular">
+        <span>Popular:</span>
+        {popular.map(s => <a class="chip" href={s.href!}>{s.slug.replace(/-/g, ' ').replace(/^\w/, c => c.toUpperCase())}</a>)}
+        <a class="chip chip--more" href="/practice-areas/">All {searchIndex.practices.length} practice areas</a>
       </div>
     </div>
+
+    {top && (
+      <div class="hm-art">
+        <div class="hm-orbit" aria-hidden="true"></div>
+        <div class="hm-orbit hm-orbit--in" aria-hidden="true"></div>
+
+        <div class="hm-chip hm-chip--l"><span class="hm-tick"><Icon name="check" /></span>Licence active</div>
+        <div class="hm-chip hm-chip--r"><span class="hm-live" aria-hidden="true"></span>Re-measured monthly</div>
+
+        <article class="hm-card hm-float">
+          <header>
+            {top.data.logo
+              ? <img class="hm-fav" src={top.data.logo.file} alt="" width="40" height="40" loading="lazy" />
+              : <span class="hm-fav hm-fav--txt">{top.data.initials}</span>}
+            <div>
+              <b>{top.data.name}</b>
+              <span>{topPractice?.name} &middot; {top.data.market.city}, {top.data.market.state}</span>
+            </div>
+            <span class="hm-badge"><Icon name="shield" /> {top.data.score!.tier}</span>
+          </header>
+
+          <div class="hm-gauge">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="var(--tint)" stroke-width="10" />
+              <circle class="v" cx="60" cy="60" r="50" fill="none" stroke="#6D5BF0" stroke-width="10"
+                      stroke-linecap="round" stroke-dasharray="314"
+                      style={`stroke-dashoffset:${314 - (314 * top.data.score!.total) / 100}`} />
+            </svg>
+            <div><strong>{top.data.score!.total}</strong><span>of 100</span></div>
+          </div>
+
+          <ul class="hm-pillars">
+            {topPillars.map((p, i) => (
+              <li>
+                <span><b>{p.key} &middot; {p.name.split(' ')[0]}</b><em>{p.got}/{p.max}</em></span>
+                <span class="hm-bar"><i style={`width:${(100 * p.got) / p.max}%;animation-delay:${i * 0.1}s`}></i></span>
+              </li>
+            ))}
+          </ul>
+        </article>
+        <p class="hm-caption">Every sub-score links the evidence it came from.</p>
+      </div>
+    )}
+  </div>
+
+  <!-- THE WALL OF MARKS -->
+  <div class="hm-wall">
+    <div class="container hm-wall-head">
+      <p><b>{withLogo.toLocaleString('en-US')}</b> of the {published.length.toLocaleString('en-US')} published firms carry their own mark here. Not one of them paid to be on this page.</p>
+    </div>
+    <div class="hm-fade" aria-hidden="true"></div>
+    <div class="hm-track">
+      {[...logoRowA, ...logoRowA].map(f => (
+        <span class="hm-logo"><img src={f.data.logo!.file} alt="" loading="lazy" /></span>
+      ))}
+    </div>
+    <div class="hm-track hm-track--rev">
+      {[...logoRowB, ...logoRowB].map(f => (
+        <span class="hm-logo"><img src={f.data.logo!.file} alt="" loading="lazy" /></span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- THE RECORD -->
+<section class="hm-record">
+  <div class="hm-aurora hm-aurora--low" aria-hidden="true"><i class="b1"></i><i class="b2"></i></div>
+  <div class="container">
+    <h2>The record behind the rankings</h2>
+    <div class="hm-stats">
+      <div><strong>{published.length.toLocaleString('en-US')}</strong><span class="hm-bar"><i style="width:100%;background:#8B5CF6"></i></span><span>firms measured in full, not sampled</span></div>
+      <div><strong>{attorneyCount.toLocaleString('en-US')}</strong><span class="hm-bar"><i style="width:86%;background:#7C7BF0;animation-delay:.1s"></i></span><span>attorneys named one by one</span></div>
+      <div><strong>{reviewTotal.toLocaleString('en-US')}</strong><span class="hm-bar"><i style="width:94%;background:#5B9BF8;animation-delay:.2s"></i></span><span>client reviews read</span></div>
+      <div><strong>{listCount}</strong><span class="hm-bar"><i style="width:62%;background:#3FBFD4;animation-delay:.3s"></i></span><span>ranked lists, city by practice</span></div>
+      <div><strong>{faqCount.toLocaleString('en-US')}</strong><span class="hm-bar"><i style="width:74%;background:#35C8B0;animation-delay:.4s"></i></span><span>questions answered on profiles</span></div>
+      <div><strong>{certified.length}</strong><span class="hm-bar"><i style="width:46%;background:#5EEAD4;animation-delay:.5s"></i></span><span>firms certified for {new Date().getUTCFullYear()}</span></div>
+    </div>
+    <p class="hm-record-foot">Every number on this row is counted from the published profiles, and
+      every one of them is a link away from being checked. <a href="/methodology/">See how a firm is scored</a>.</p>
   </div>
 </section>
 
 <!-- SITUATIONS -->
-<section class="section" style="border-top:0;padding-top:72px">
-  <div class="container">
-    <div class="section-head">
-      <div><span class="eyebrow">Start with your situation</span><h2 style="margin-top:12px">Tell us what happened. We'll show you who's certified to handle it.</h2><p>Most people don't know which kind of lawyer they need. They know what is going on in their life. Start there.</p></div>
-      
-    </div>
-    <div class="sit-grid">
-      {SITUATIONS.map(s => {
-        const inner = (
-          <>
-            <span class="ico"><Icon name={s.icon} /></span>
-            <div><b>{s.title}</b><span>{s.desc}</span></div>
-            <em>{s.name}{s.count > 0 ? <> · <span class="num">{s.count}</span> {s.count === 1 ? 'firm' : 'firms'}</> : ''}</em>
-          </>
-        );
-        return s.href
-          ? <a class="sit" href={s.href}>{inner}</a>
-          : <div class="sit is-soon">{inner}</div>;
-      })}
-    </div>
-  </div>
-</section>
-
-<!-- CITIES & STATES -->
-<section class="section section--paper">
-  <div class="container">
-    <div class="section-head">
-      <div><span class="eyebrow">Certified firms near you</span><h2 style="margin-top:12px">Ranked city by city, not nationally.</h2><p>Licensure is checked against each state's bar, and rankings are built city by city, so a top firm in Houston is ranked against Houston and not against Boston.</p></div>
-      
-    </div>
-    <div class="city-grid">
-      {cityCounts.map((c, i) => (
-        <a class={`city c${(i % 8) + 1}`} href={`/cities/${published.find(f => `${f.data.market.city}, ${f.data.market.state}` === c.label)!.data.market.city_slug}/`}>
-          <Icon name="sky_sm" /><div class="t"><b>{c.label}</b><span class="num">{c.count} {c.count === 1 ? 'firm' : 'firms'}</span></div>
-        </a>
-      ))}
-    </div>
-    <div class="states">
-        <span class="lbl">Where we publish</span>
-        <div class="chips">
-          {states.map(st => <a class="chip" href="/cities/">{st}</a>)}
-          <span class="chip soon">Other states as the evidence is collected</span>
-        </div>
-      </div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-{/* Counts come from the data. This bar read "100 U.S. cities" while the directory held 18,
-    which is the same claim the page description was corrected for and this line kept. */}
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>{cityCounts.length} U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
-    <span>Licensure verified</span><span>No pay-to-rank</span><span>Verified client outcomes</span><span>{cityCounts.length} U.S. cities</span><span>Free consultations</span><span>Updated monthly</span><span>Independent editorial methodology</span>
-  </div>
-</div>
-
-<!-- WHAT CERTIFIED MEANS -->
-<section class="section section--night cert-section">
-  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i></div>
-  <div class="container" style="position:relative">
-    <div class="cert-grid">
-      <div>
-        <span class="eyebrow">What "certified" means</span>
-        <h2 style="margin-top:14px">Most directories sell placement. We verify firms, and publish exactly how.</h2>
-        <p class="lede" style="color:var(--on-night-soft);margin-top:18px">A firm earns the <b style="color:#fff">LFL Certified</b> badge by clearing every eligibility gate its state lets anyone check and then scoring 70 or higher on measured evidence. It can't be bought, it's re-measured when the market is, and a public disciplinary action removes it.</p>
-        <div class="criteria" style="margin-top:28px">
-          <div class="criterion"><Icon name="shield" /><div><b>1 · Licensure &amp; discipline</b><span>Every named attorney matched to the state register and checked for an adverse status. Where a state publishes neither, we say so on the profile instead of scoring it.</span></div></div>
-          <div class="criterion"><Icon name="scale" /><div><b>2 · Published outcomes</b><span>Case results counted from the firm's own pages. The amounts are the firm's and we say on every profile that we have not confirmed them.</span></div></div>
-          <div class="criterion"><Icon name="star" /><div><b>3 · Client experience</b><span>Google review volume and rating, weighted against the firm's own market rather than against five stars, so a high average at low volume earns less.</span></div></div>
-          <div class="criterion"><Icon name="users" /><div><b>4 · Reach &amp; transparency</b><span>Domain authority, verified locations, fee terms, free consultations and the languages the firm publishes in, each read from a public source.</span></div></div>
-        </div>
-        <a class="btn btn--white" href="/methodology/" style="margin-top:28px">Read the full methodology</a>
-      </div>
-      <div class="compare-wrap">
-        <table class="compare">
-          <thead><tr><th>What you get</th><th class="us">Law Firm Listings</th><th>Paid directories</th><th>Search &amp; reviews</th></tr></thead>
-          <tbody>
-            <tr><td>Bar licensure checked for every attorney</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
-            <tr><td>Disciplinary history screened</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
-            <tr><td>Case results counted, and labelled unconfirmed</td><td class="us"><Icon name="check" /></td><td>Self-reported</td><td>No</td></tr>
-            <tr><td>Firms can pay to rank higher</td><td class="us">Never</td><td>Yes</td><td>Ads</td></tr>
-            <tr><td>Ranked against local competitors</td><td class="us"><Icon name="check" /></td><td>Partial</td><td>No</td></tr>
-            <tr><td>Fee model &amp; free-consult shown up front</td><td class="us"><Icon name="check" /></td><td>Sometimes</td><td>No</td></tr>
-            <tr><td>Every score traced to its source</td><td class="us"><Icon name="check" /></td><td>No</td><td>No</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURED FIRMS -->
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <div><span class="eyebrow">Certified</span><h2 style="margin-top:12px">The highest-scoring certified firms</h2><p>{certified.length} firms hold the 2026 certification. These are the nine that score highest, across every city and practice area in the directory.</p></div>
-      <a class="link" href="/certified/">See all {certified.length} certified firms</a>
+      <div>
+        <span class="eyebrow">Start with your situation</span>
+        <h2>Tell us what happened. We will show you who is measured to handle it.</h2>
+        <p>Most people do not know which kind of lawyer they need. They know what is going on in their life. Start there.</p>
+      </div>
     </div>
-    <div class="feat-grid">
-      {/* Nine. This grid was handed the whole certified list, so the front page of the site was
-          seventy-two rows of law firms under a heading promising the ones certified this month.
-          The rest of them live at /certified/. */}
-      {certified.slice(0, 9).map((f, i) => {
-        const pr = f.data.practices.find(x => x.primary) ?? f.data.practices[0];
-        const g = f.data.reviews.google;
-        const self = g ? /as reported by the firm/i.test(g.source) : false;
+    <div class="hm-sits">
+      {SITUATIONS.map(s => {
+        const Tag = s.href ? 'a' : 'div';
         return (
-          <article class="feat">
-            <div class="top">{/* The firm's own mark where we have one, which on this row is all six of
-                them. The home page was still drawing initials while the same firm's card in
-                every ranking showed its logo: 1,310 of the 1,388 published firms have one.
-                alt is empty on purpose, because the name is the next thing read. */}
-              <div class={f.data.logo ? 'firm-logo has-logo' : (logoVariants[i % logoVariants.length] ? `firm-logo ${logoVariants[i % logoVariants.length]}` : 'firm-logo')}>
-                {f.data.logo
-                  ? <img src={f.data.logo.file} alt="" width="68" height="68" loading="lazy" decoding="async" />
-                  : f.data.initials}
-              </div><span class="badge badge--certified"><Icon name="shield" /> Certified 2026</span></div>
-            <div><h3><a href={`/firms/${f.data.slug}/`}>{f.data.name}</a></h3><span class="where">{pr?.name} · {f.data.market.city}, {f.data.market.state}</span></div>
-            <p>{f.data.about[0] ?? f.data.tagline}</p>
-            <div class="foot">
-              {g
-                ? <><span class="stars">{'★'.repeat(Math.round(g.rating))} <b>{g.rating.toFixed(1)}</b></span><span class="muted num">{g.count_label} reviews{self ? ', as reported by the firm' : ''}</span></>
-                : <span class="muted num">Reviews pending verification</span>}
-            </div>
-          </article>
+          <Tag class="hm-sit" href={s.href ?? undefined}>
+            <span class="hm-ico"><Icon name={s.icon} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+            {s.n > 0 && <span class="hm-count"><b>{s.n.toLocaleString('en-US')}</b> firms &middot; {s.cities} {s.cities === 1 ? 'city' : 'cities'}</span>}
+          </Tag>
         );
       })}
     </div>
-    {certified.length === 0 && (
-      <div class="callout"><b>No certifications published yet.</b> The first cohort is in verification; certified firms appear here on the first business day of the month.</div>
+  </div>
+</section>
+
+<!-- RANKED LISTS -->
+{lead && (
+<section class="section section--paper" id="lists">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Ranked lists</span>
+        <h2>{listCount} ranked lists, one per city and practice</h2>
+        <p>A firm is ranked against the firms a client would actually choose between. Houston against Houston, never against Boston.</p>
+      </div>
+      <a class="link" href="/cities/">Browse every city</a>
+    </div>
+
+    <div class="hm-lists">
+      <div class="hm-list-card">
+        <div class="hm-list-head">
+          <div>
+            <span class="eyebrow">Ranked by the Certification Score</span>
+            <h3>{leadPracticeName} lawyers in {leadName!.city}</h3>
+          </div>
+          {lastUpdated && <span class="chip"><span class="hm-live" aria-hidden="true"></span>Updated {lastUpdated}</span>}
+        </div>
+        <ol class="hm-rank">
+          {leadFirms.slice(0, 3).map((f, i) => (
+            <li class={i === 0 ? 'is-first' : undefined}>
+              <span class="hm-pos">{String(i + 1).padStart(2, '0')}</span>
+              {f.data.logo
+                ? <img class="hm-fav" src={f.data.logo.file} alt="" width="40" height="40" loading="lazy" />
+                : <span class="hm-fav hm-fav--txt">{f.data.initials}</span>}
+              <span class="hm-who">
+                <a href={`/firms/${f.data.slug}/`}>{f.data.name}</a>
+                {f.data.status === 'certified' && <span class="hm-badge"><Icon name="shield" /> Certified</span>}
+                <em>{townOf(f.data.offices[0]?.address)}{f.data.reviews.google
+                  ? ` · ${f.data.reviews.google.count_label} reviews · ${f.data.reviews.google.rating.toFixed(1)}`
+                  : ''}</em>
+              </span>
+              <span class="hm-sc">
+                <strong>{f.data.score?.total ?? '—'}</strong><span>/100</span>
+                <span class="hm-bar"><i style={`width:${f.data.score?.total ?? 0}%;animation-delay:${i * 0.1}s`}></i></span>
+              </span>
+            </li>
+          ))}
+          <li class="is-rest">
+            <span class="hm-pos">04</span>
+            <span class="hm-fav hm-fav--txt">+{leadFirms.length - 3}</span>
+            <span class="hm-who"><b>And {leadFirms.length - 3} more firms in this list</b>
+              <em>Every one with its score, its sub-scores and the evidence behind them</em></span>
+            <a class="link" href={`/cities/${lead.city}/${lead.practice}/`}>Open list</a>
+          </li>
+        </ol>
+      </div>
+
+      <div>
+        <span class="eyebrow">Deepest lists in the directory</span>
+        <ul class="hm-list-links">
+          {topLists.map(l => (
+            <li><a href={`/cities/${l.city}/${l.practice}/`}>
+              <span>{l.label}</span><em>{l.n}</em>
+            </a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+)}
+
+<!-- CITIES, WITH THE MAP -->
+<section class="section" id="cities">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Certified firms near you</span>
+        <h2>Ranked city by city, not nationally.</h2>
+        <p>Licensure is checked against each state's bar, and rankings are built city by city, so a top firm in Houston is ranked against Houston.</p>
+      </div>
+      <a class="link" href="/cities/">All {cityRows.length} cities</a>
+    </div>
+
+    <div class="hm-map">
+      <div class="hm-map-head">
+        <b>{cityRows.length} cities measured{OPENING.length ? `, ${OPENING.length} more opening` : ''}</b>
+        <div class="hm-legend">
+          <span><i class="d1"></i>Published, sized by firms</span>
+          {OPENING.length > 0 && <span><i class="d2"></i>Measured, opening next</span>}
+        </div>
+      </div>
+      <svg viewBox="0 0 760 420" role="img"
+           aria-label={`Map of the United States showing the ${mapped.length} cities published and ${OPENING.length} being opened`}>
+        <polygon class="hm-usa" points="4,10 26,0 393,0 431,37 498,67 537,54 549,118 603,96 708,67 760,71 720,123 668,139 654,171 638,203 648,230 590,272 571,314 587,390 557,354 524,319 485,316 458,331 396,331 362,388 315,329 288,331 242,289 103,277 59,244 33,188 8,144 11,84" />
+        <g class="hm-dots">
+          {mapped.map(c => (<>
+            <circle cx={c.xy[0]} cy={c.xy[1]} r={c.r * 2.2} opacity=".2" />
+            <circle cx={c.xy[0]} cy={c.xy[1]} r={c.r} />
+          </>))}
+        </g>
+        <g class="hm-open">
+          {OPENING.map((m, i) => (<>
+            <circle class={`hm-ping p${i}`} cx={m.xy[0]} cy={m.xy[1]} r="5" />
+            <circle class="hm-open-dot" cx={m.xy[0]} cy={m.xy[1]} r="5.5" />
+          </>))}
+        </g>
+        <g class="hm-labels">
+          {mapped.slice(0, 6).map(c => (
+            <text x={c.xy[0] + 14} y={c.xy[1] + 4}>{c.city} {c.n}</text>
+          ))}
+          {OPENING.map(m => <text x={m.xy[0] + 14} y={m.xy[1] + 4}>{m.label} {m.n}</text>)}
+        </g>
+      </svg>
+      {OPENING.length > 0 && (
+        <p class="hm-map-foot">The three in green are already measured: {openingTotal} firms read
+          across Orlando, New Orleans and Detroit. What is left is opening them.</p>
+      )}
+    </div>
+
+    <div class="hm-cities">
+      {cityRows.slice(0, 8).map(c => (
+        <a class="hm-city" href={`/cities/${c.city_slug}/`}>
+          <span class="hm-crest" aria-hidden="true"></span>
+          <span><b>{c.city}</b><em>{c.state_name}</em></span>
+          <span class="hm-n">{c.n}</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="hm-states">
+      {stateRows.map(s => (
+        <a class="chip" href={s.href}><span class="hm-crest hm-crest--sm" aria-hidden="true"></span>{s.name} <em>{s.n}</em></a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- THE SCORE -->
+<section class="section section--paper" id="score">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">The Certification Score</span>
+        <h2>100 points, and every one of them is a public record</h2>
+        <p>Five pillars, each measured from something anyone can check. The average across the
+          directory is {Math.round((10 * scored.reduce((s, f) => s + f.data.score!.total, 0)) / scored.length) / 10}.
+          Certification starts at 70.</p>
+      </div>
+      <a class="link" href="/methodology/">Read the full methodology</a>
+    </div>
+
+    <div class="hm-pillar-grid">
+      {pillars.map((p, i) => (
+        <a class="hm-pillar" href="/methodology/">
+          <span class="hm-ico"><Icon name="shield" /></span>
+          <strong>{p.max}</strong><span class="hm-of">points</span>
+          <span class="hm-bar"><i style={`width:${(p.max / 25) * 100}%;animation-delay:${i * 0.1}s`}></i></span>
+          <h3>{p.key}. {p.name}</h3>
+          <p>{p.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    {top && firstSub && (
+    <div class="hm-worked">
+      <div class="hm-worked-head">
+        <h3>How a {top.data.score!.total} is built</h3>
+        <span>{top.data.name}, the highest-scoring firm in the directory</span>
+      </div>
+      <div class="hm-steps">
+        <div><span class="eyebrow">1 &middot; The evidence</span><p>{firstSub.evidence}</p></div>
+        <div><span class="eyebrow">2 &middot; The sub-score</span><p>{firstSub.code} {firstSub.label}.</p><strong>{firstSub.pts}<em> of {firstSub.max}</em></strong></div>
+        <div><span class="eyebrow">3 &middot; The pillar</span><p>It joins the rest of Professional Standing.</p><strong>{top.data.score!.pillars!.A.score}<em> of {top.data.score!.pillars!.A.max}</em></strong></div>
+        <div><span class="eyebrow">4 &middot; The total</span><p>Five pillars, every gate passed, one number.</p><strong>{top.data.score!.total}<em> of 100 &middot; {top.data.score!.tier}</em></strong></div>
+      </div>
+      <div class="hm-worked-bars">
+        {topPillars.map((p, i) => (
+          <div class={p.key === weakest?.key ? 'is-weak' : undefined}>
+            <span><b>{p.key}</b><em>{p.got}/{p.max}</em></span>
+            <span class="hm-bar"><i style={`width:${(100 * p.got) / p.max}%;animation-delay:${i * 0.1}s`}></i></span>
+          </div>
+        ))}
+      </div>
+      {weakest && (
+        <p class="hm-worked-foot">The highest-scoring firm in the directory loses
+          {' '}{weakest.max - weakest.got} of its {weakest.max} {weakest.name} points, and its own
+          profile says so in its first line. A score that only flatters is not a score.</p>
+      )}
+    </div>
     )}
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section section--paper">
+<!-- WHAT CERTIFIED MEANS -->
+<section class="section section--night">
+  <div class="container hm-cert">
+    <div>
+      <span class="eyebrow">What "certified" means</span>
+      <h2>Most directories sell placement. We measure firms, and publish exactly how.</h2>
+      <p>Every sub-score on every profile shows the evidence it came from and the date it was
+        read. A firm that disagrees can appeal, free, answered within 30 days. Correcting
+        anything we published that is wrong is free and always will be.</p>
+      <div class="hm-cta-row">
+        <a class="btn btn--white" href="/methodology/">Read the methodology</a>
+        <a class="btn btn--ghost-night" href="/guides/">See the research</a>
+      </div>
+    </div>
+    <ul class="hm-rules">
+      <li><b>Gates before points.</b> A firm with an open disciplinary action cannot be certified at any score.</li>
+      <li><b>Evidence before claims.</b> If we could not read it, we do not publish it. Sites we could not read are named, not counted as empty.</li>
+      <li><b>Local before national.</b> Search authority is a percentile of the firm's own city, so a Lakeland firm is not measured against Manhattan.</li>
+      <li><b>Nothing here is for sale.</b> No points, no gate, no tier, no position in any ranked list.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- BUILT TO BE QUOTED -->
+<section class="section" id="ai">
+  <div class="container hm-ai">
+    <div>
+      <span class="eyebrow">Built to be quoted</span>
+      <h2>When an assistant answers "who should I call?", it needs a source it can check.</h2>
+      <p>More and more people ask an assistant before they ask Google. An assistant will not
+        repeat a directory it cannot check, and it has no way to check one that sells its top
+        spot. So every page here is written to be read by a machine as easily as by a person.</p>
+      <ul class="hm-ai-list">
+        <li><b>Structured data on every profile.</b> LegalService and FAQPage markup on all {published.length.toLocaleString('en-US')}, so the facts arrive already labelled.</li>
+        <li><b>Evidence and a date on every claim.</b> Each sub-score names the source it came from and the day it was read.</li>
+        <li><b>{faqCount.toLocaleString('en-US')} questions answered in public.</b> Real questions with real answers, which is the shape an assistant reaches for first.</li>
+        <li><b>No paid placement, anywhere.</b> The one thing a machine cannot verify about a directory that sells one.</li>
+      </ul>
+    </div>
+    {top && (
+    <aside class="hm-quote hm-float">
+      <header><span class="hm-ico"><Icon name="shield" /></span><b>An assistant answering a client</b></header>
+      <p>"For {topPractice?.name.toLowerCase()} in {top.data.market.city}, <b>{top.data.name}</b>
+        scores {top.data.score!.total} out of 100 on Law Firm Listings, a directory that scores
+        firms on public records and takes no payment for placement."</p>
+      <footer>
+        <span class="eyebrow">Sources it can cite</span>
+        <span class="chip">Profile &middot; score and evidence</span>
+        <span class="chip">Ranked list &middot; {leadPracticeName}, {leadName?.city}</span>
+        <span class="chip">Methodology</span>
+      </footer>
+    </aside>
+    )}
+  </div>
+</section>
+
+<!-- WHAT WE FOUND -->
+<section class="section section--paper" id="findings">
   <div class="container">
     <div class="section-head">
-      <div><span class="eyebrow">How it works</span><h2 style="margin-top:12px">From "what do I do now?" to a booked consultation</h2><p>No account, no forms sold to lead brokers. You choose who to contact, and the firm hears from you directly.</p></div>
+      <div>
+        <span class="eyebrow">What we found</span>
+        <h2>Three things nobody had counted until we did.</h2>
+        <p>Not a survey of the firms that answered. The whole directory, read page by page, which
+          is the only way these numbers exist at all.</p>
+      </div>
+      <a class="link" href="/guides/">Read the studies</a>
     </div>
-    <div class="steps">
-      <div class="step"><h3>Describe your situation</h3><p>Pick what's happening and your city. Or just search. "Rear-ended on the BQE" works as well as "car accident lawyer".</p></div>
-      <div class="step"><h3>Compare certified firms</h3><p>Ratings, fee model, verified results, languages and consultation availability, side by side and in plain English.</p></div>
-      <div class="step"><h3>Talk to the firm, free</h3><p>Request a consultation directly.{freeConsultShare !== null && <> {freeConsultShare}% of the firms published here offer the first call free.</>} None of them pays us a referral fee.</p></div>
+    <div class="hm-finds">
+      <a class="hm-find" href="/guides/do-lawyers-have-malpractice-insurance/">
+        <span class="hm-viz hm-viz--dots" aria-hidden="true"><i></i></span>
+        <strong>{withInsurance}</strong><span class="hm-of">of {published.length.toLocaleString('en-US')} firms</span>
+        <h3>publishes whether it carries malpractice insurance</h3>
+        <p>The cover a client would most want to know about is the one thing almost nobody says out loud.</p>
+      </a>
+      <a class="hm-find" href="/guides/types-of-personal-injury-case-firms-advertise/">
+        <span class="hm-viz hm-viz--bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <strong>{noResults.toLocaleString('en-US')}</strong><span class="hm-of">of {published.length.toLocaleString('en-US')} firms</span>
+        <h3>publish no case result anyone can read</h3>
+        <p>More than half the directory advertises experience and shows none of it.</p>
+      </a>
+      <a class="hm-find" href="/guides/law-firm-hierarchy/">
+        <span class="hm-viz hm-viz--ring" aria-hidden="true" style={`--pct:${noAttorneyPct}%`}><i></i></span>
+        <strong>{noAttorneys}</strong><span class="hm-of">of {published.length.toLocaleString('en-US')} firms</span>
+        <h3>name not a single attorney on their own site</h3>
+        <p>More than a quarter of a directory of law firms, in a business where the person is the product.</p>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- GUIDES -->
-<section class="section">
+<!-- RESEARCH -->
+<section class="section" id="research">
   <div class="container">
     <div class="section-head">
-      <div><span class="eyebrow">What we measured</span><h2 style="margin-top:12px">The analysis behind the score, published</h2><p>Every figure in these pieces is computed from the same data the profiles use, so a correction reaches the article and the ranking at once. No paywall and no sponsorship.</p></div>
-      <a class="link" href="/guides/">All guides</a>
+      <div>
+        <span class="eyebrow">What we measured</span>
+        <h2>{guideCount} studies, computed from the same data the profiles use</h2>
+        <p>A correction reaches the article and the ranking at once. No paywall, no sponsorship,
+          and the sample is the whole directory rather than the firms that answered a survey.</p>
+      </div>
+      <a class="link" href="/guides/">All {guideCount} studies</a>
     </div>
     {homeGuides.length > 0 ? (
       <div class="guide-grid">
@@ -390,38 +696,378 @@ const searchIndex = {
   </div>
 </section>
 
+<!-- THE BADGE -->
+{top && (
+<section class="section section--night" id="badge">
+  <div class="container hm-badge-sec">
+    <div class="hm-badge-art">
+      {/* The dark-surface file, because this section is a night band. The year is in the name:
+          from January the 2027 badges appear beside the 2026 ones rather than replacing them. */}
+      <img class="hm-float" src={`/badge/${top.data.slug}/tier-${BADGE_YEAR}.svg`} width="200" height="200"
+           alt={`The ${top.data.score!.tier} badge earned by ${top.data.name}`} loading="lazy" />
+    </div>
+    <div>
+      <span class="eyebrow">The badge</span>
+      <h2>The only award that can be taken back.</h2>
+      <p>A firm puts the badge on its own site and it stays live, served from here and rebuilt on
+        every deploy. If the firm loses its tier, the badge on its own site changes. That is the
+        opposite of how this industry works, where the award is a JPEG the firm keeps for ever.</p>
+      <div class="hm-badge-kinds">
+        <div><b>The tier badge</b><span>One per firm per year. Names no practice area, because the score is for the firm.</span></div>
+        <div><b>The ranking badge</b><span>One per ranking the firm is in. Position is measured per city and per practice, so it can say so.</span></div>
+      </div>
+      <p class="hm-badge-n"><b>{earned.length.toLocaleString('en-US')}</b> firms have earned a tier
+        they can show{eliteCount > 0 ? <>, and <b>{eliteCount}</b> {eliteCount === 1 ? 'is' : 'are'} Elite</> : null}.</p>
+      <div class="hm-cta-row">
+        <a class="btn btn--white" href="/badge/">Get your badge</a>
+        <a class="btn btn--ghost-night" href="/methodology/">How tiers are earned</a>
+      </div>
+    </div>
+  </div>
+</section>
+)}
+
+<!-- FOR FIRMS -->
+<section class="section" id="firms">
+  <div class="container">
+    <div class="cta-firm">
+      <div>
+        <span class="eyebrow">For law firms</span>
+        <h2>Your firm is already here. Being measured, ranked and certified costs nothing.</h2>
+        <p class="lede">{published.length.toLocaleString('en-US')} firms are published and not one
+          of them paid to be. Claim yours to see every sub-score and the evidence behind it,
+          correct anything we got wrong, or appeal a number you think is unfair.</p>
+        <div class="actions">
+          <a class="btn btn--ink" href="/list-your-firm/">Claim your profile</a>
+          <a class="btn btn--ghost" href="/methodology/">See the criteria</a>
+        </div>
+      </div>
+      <ul>
+        <li><Icon name="check" /><span>A full profile with its score and every sub-score</span></li>
+        <li><Icon name="check" /><span>A place in every ranked list it qualifies for</span></li>
+        <li><Icon name="check" /><span>The certification badge, if the firm earns it</span></li>
+        <li><Icon name="check" /><span>Correcting anything we got wrong, forever</span></li>
+        <li><Icon name="check" /><span>Appealing a sub-score, answered in 30 days</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="section section--paper">
   <div class="container faq-split">
-    <div><span class="eyebrow">Questions people ask first</span><h2 style="margin-top:14px">Before you hire anyone</h2><p style="margin-top:14px;max-width:38ch">Short answers to the questions we hear most. Every guide is reviewed by a licensed attorney in the relevant state.</p><a class="link" href="/guides/" style="margin-top:20px">Browse all guides</a></div>
+    <div>
+      <span class="eyebrow">Questions people ask first</span>
+      <h2 style="margin-top:14px">Before you hire anyone</h2>
+      <p style="margin-top:14px;max-width:38ch">Short answers to the questions we hear most. Every
+        guide is reviewed by a licensed attorney in the relevant state.</p>
+      <a class="link" href="/guides/" style="margin-top:20px">Browse all {guideCount} studies</a>
+    </div>
     <div class="faq">
-      <details open><summary>How much does a lawyer cost?</summary><div>It depends on the matter. Personal injury firms almost always work on contingency (typically 33⅓%, nothing up front). Divorce, criminal defense and business work are usually hourly ($250–$1,200) or flat-fee. Every profile shows the fee model before you call.</div></details>
-      <details><summary>Is a "certified" firm better than a highly rated one?</summary><div>Ratings tell you how clients felt. Certification tells you the attorneys are licensed, undisciplined and have results we could verify. The best firms have both, and our rankings weight them together.</div></details>
-      <details><summary>Do law firms pay to be listed here?</summary><div>No. Firms appear here because we found them and read their public record, and being listed costs nothing. The Certification Score, the eligibility gates and the tier cannot be bought or edited by anyone, including a firm that manages its own profile, so nothing a firm can buy moves its position in any ranked list. A firm that wants to manage its own profile can take an optional annual listing, and sponsored placements are always labeled and never appear inside a ranked list.</div></details>
+      <details open><summary>How much does a lawyer cost?</summary><div>It depends on the matter. Injury firms almost always work on contingency, typically a third, nothing up front. Divorce, criminal defense and business work are usually hourly or flat fee. Every profile shows the fee model before you call.</div></details>
+      <details><summary>Do law firms pay to be listed here?</summary><div>No. Firms appear because we found them and read their public record, and being listed costs nothing. The Certification Score, the eligibility gates and the tier cannot be bought or edited by anyone. A firm that wants to manage its own profile can take an optional annual listing, and sponsored placements are always labeled and never appear inside a ranked list.</div></details>
+      <details><summary>Is a certified firm better than a highly rated one?</summary><div>Ratings tell you how clients felt. Certification tells you the attorneys are licensed and undisciplined, and that what the firm publishes about itself holds up. The best firms have both, and the rankings weight them together.</div></details>
       <details><summary>What happens when I request a consultation?</summary><div>Your message goes straight to the firm. We do not sell it to other lawyers and we take no referral fee.{freeConsultShare !== null && <> {freeConsultShare}% of the firms published here offer the first consultation free.</>} How quickly a firm replies is up to the firm; we do not measure it yet, so we do not promise it.</div></details>
       <details><summary>What if a firm loses its certification?</summary><div>If a public disciplinary action appears or verified reviews fall below our threshold, the badge is removed within 30 days and the firm drops out of ranked lists until it re-qualifies.</div></details>
     </div>
   </div>
 </section>
 
-<!-- FOR FIRMS -->
-<section class="section">
-  <div class="container">
-    <div class="cta-firm">
-      <div>
-        <span class="eyebrow">For law firms</span>
-        <h2 style="margin-top:14px">Is your firm eligible for certification?</h2>
-        <p class="lede" style="margin-top:14px">Certification is free and earned, never purchased. Claim your profile to submit verified results, respond to reviews and appear in city and practice-area rankings.</p>
-        <div class="actions"><a class="btn btn--ink" href="/contact/">Ask us to claim your profile</a><a class="btn btn--ghost" href="/methodology/">See certification criteria</a></div>
-      </div>
-      <ul>
-        <li><Icon name="check" /><span>Free, permanent profile with verified badge</span></li>
-        <li><Icon name="check" /><span>Featured in monthly "Recently certified" rankings</span></li>
-        <li><Icon name="check" /><span>Structured data for Google &amp; AI search visibility</span></li>
-        <li><Icon name="check" /><span>Direct consultation requests, with no referral fees</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
+<script define:vars={{ searchIndex }}>
+  // The hero search routes in the browser against the pages that exist, and says so when it
+  // cannot. Unchanged in behaviour from the page this replaced.
+  const form = document.getElementById('firm-search');
+  const note = document.getElementById('search-note');
+  if (form) {
+    form.addEventListener('submit', e => {
+      const q = (document.getElementById('q')?.value ?? '').trim().toLowerCase();
+      const loc = (document.getElementById('loc')?.value ?? '').trim().toLowerCase();
+      const city = searchIndex.cities.find(c =>
+        loc && (c.name.toLowerCase().includes(loc) || loc.includes(c.city.toLowerCase())));
+      const practice = searchIndex.practices.find(p =>
+        q && (p.name.toLowerCase().includes(q) || q.includes(p.name.toLowerCase())));
+      if (city && practice) { e.preventDefault(); location.href = `/cities/${city.slug}/${practice.slug}/`; return; }
+      if (city) { e.preventDefault(); location.href = city.href; return; }
+      if (practice) { e.preventDefault(); location.href = practice.href; return; }
+      if ((q || loc) && note) {
+        e.preventDefault();
+        note.hidden = false;
+        note.textContent = 'We do not publish that combination yet. Browse the cities we do.';
+      }
+    });
+  }
+</script>
 
+<style>
+/* ---------------------------------------------------------------- the hero */
+.hm-hero{position:relative;overflow:hidden;background:var(--ground)}
+.hm-hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:60px;align-items:center;padding-block:72px 84px}
+.hm-aurora{position:absolute;inset:-180px -14% auto -14%;height:720px;pointer-events:none;filter:blur(18px);opacity:.55}
+.hm-aurora i{position:absolute;display:block;border-radius:50%}
+.hm-aurora .b1{left:8%;top:6%;width:42%;height:70%;background:radial-gradient(circle,rgba(139,92,246,.75),transparent 66%);animation:hm-drift 26s ease-in-out infinite}
+.hm-aurora .b2{left:38%;top:-6%;width:40%;height:74%;background:radial-gradient(circle,rgba(59,130,246,.68),transparent 66%);animation:hm-drift 32s ease-in-out -8s infinite}
+.hm-aurora .b3{left:66%;top:12%;width:38%;height:66%;background:radial-gradient(circle,rgba(94,234,212,.62),transparent 66%);animation:hm-drift 38s ease-in-out -16s infinite}
+.hm-grid-lines{position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(70% 60% at 50% 20%,#000,transparent 72%);mask-image:radial-gradient(70% 60% at 50% 20%,#000,transparent 72%)}
+@keyframes hm-drift{0%,100%{transform:translate3d(0,0,0) scale(1)}33%{transform:translate3d(5%,-6%,0) scale(1.08)}66%{transform:translate3d(-4%,5%,0) scale(.95)}}
+
+.hm-pill{display:inline-flex;align-items:center;gap:11px;background:var(--paper);border:1px solid var(--line);border-radius:var(--pill);padding:9px 20px 9px 13px;box-shadow:var(--shadow-sm);font-size:.92rem;white-space:nowrap}
+.hm-pill b{color:var(--ink)}
+.hm-stars{display:inline-flex;color:#D97706}
+.hm-stars :global(svg){width:16px;height:16px}
+.hm-hero h1{font-size:clamp(2.3rem,4.2vw,3.4rem);line-height:1.04;margin:24px 0 0}
+.hm-lede{font-size:1.17rem;line-height:1.55;margin-top:22px;max-width:54ch;color:var(--ink-soft)}
+.hm-lede b{color:var(--ink)}
+
+.hm-search{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:14px;margin-top:32px;box-shadow:var(--shadow)}
+.hm-field{flex:1 1 185px;padding:4px 8px 4px 14px;min-width:0}
+.hm-field--split{flex-basis:150px;border-left:1px solid var(--line)}
+.hm-field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hm-field input{width:100%;border:0;outline:0;font:inherit;font-size:1rem;color:var(--ink);background:transparent;padding-top:4px}
+.hm-search .btn{flex:0 0 auto;min-height:46px}
+.hm-note{flex:1 1 100%;margin:4px 0 0;padding-left:14px;font-size:.88rem;color:var(--warn)}
+
+.hm-popular{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:22px}
+.hm-popular>span{font-size:.9rem;font-weight:600;color:var(--muted)}
+.hm-popular .chip{min-height:36px;font-size:.88rem;padding:0 14px}
+.chip--more{border-style:dashed}
+
+/* the floating scorecard */
+.hm-art{position:relative;padding:56px 16px 12px;max-width:440px;margin-inline:auto;width:100%}
+.hm-orbit{position:absolute;left:50%;top:50%;width:132%;aspect-ratio:1;margin:-66% 0 0 -66%;border-radius:50%;border:1px dashed var(--line-2);opacity:.45;animation:hm-orbit 40s linear infinite}
+.hm-orbit--in{width:108%;margin:-54% 0 0 -54%;border-style:solid;border-color:var(--line);animation-duration:58s;animation-direction:reverse}
+@keyframes hm-orbit{to{transform:rotate(360deg)}}
+.hm-float{animation:hm-float 9s ease-in-out infinite}
+@keyframes hm-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-15px) rotate(-.7deg)}}
+.hm-card{position:relative;z-index:2;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--shadow)}
+.hm-card header{display:flex;align-items:center;gap:13px}
+.hm-card header div{min-width:0}
+.hm-card header b{display:block;color:var(--ink);font-size:1.03rem;line-height:1.2}
+.hm-card header div span{font-size:.85rem;color:var(--muted)}
+.hm-fav{width:48px;height:48px;border-radius:14px;background:var(--paper);border:1px solid var(--line);object-fit:contain;padding:4px;flex:0 0 auto}
+.hm-fav--txt{display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;color:var(--muted);background:var(--tint);padding:0}
+.hm-badge{display:inline-flex;align-items:center;gap:5px;margin-left:auto;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:var(--pill);border:1px solid var(--line-2);background:var(--tint);color:var(--ink);flex:0 0 auto}
+.hm-badge :global(svg){width:12px;height:12px}
+.hm-gauge{position:relative;width:170px;height:170px;margin:26px auto 0}
+.hm-gauge svg{width:170px;height:170px;transform:rotate(-90deg)}
+.hm-gauge .v{animation:hm-dash 1.8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes hm-dash{from{stroke-dashoffset:314}}
+.hm-gauge div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hm-gauge strong{font-size:2.9rem;font-weight:700;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.hm-gauge span{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-top:4px}
+.hm-pillars{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:11px}
+.hm-pillars>li>span:first-child{display:flex;justify-content:space-between;font-size:.8rem}
+.hm-pillars b{color:var(--muted);font-weight:700}
+.hm-pillars em{font-style:normal;color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.hm-bar{display:block;height:6px;border-radius:var(--pill);background:var(--tint);margin-top:5px;overflow:hidden}
+.hm-bar i{display:block;height:100%;border-radius:var(--pill);background:var(--aurora);transform-origin:left center;animation:hm-grow 1.1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes hm-grow{from{transform:scaleX(0)}}
+.hm-caption{position:relative;z-index:2;text-align:center;font-size:.78rem;color:var(--muted);margin-top:16px}
+.hm-chip{position:absolute;z-index:3;top:4px;display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 13px;font-size:.78rem;font-weight:600;color:var(--ink);white-space:nowrap;box-shadow:var(--shadow)}
+.hm-chip--l{left:0;animation:hm-bob 5.4s ease-in-out -1.4s infinite}
+.hm-chip--r{right:0;animation:hm-bob 6.2s ease-in-out -2.8s infinite}
+@keyframes hm-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hm-tick{width:22px;height:22px;border-radius:7px;background:#E6F6EE;color:#116B48;display:inline-flex;align-items:center;justify-content:center}
+.hm-tick :global(svg){width:12px;height:12px}
+.hm-live{width:7px;height:7px;border-radius:var(--pill);background:var(--success);display:block;animation:hm-pulse 2.4s ease-in-out infinite}
+@keyframes hm-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+
+/* ------------------------------------------------------------ wall of marks */
+.hm-wall{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);overflow:hidden;padding-block:30px 34px}
+.hm-wall-head{position:relative;z-index:3;margin-bottom:22px}
+.hm-wall-head p{font-size:.95rem;color:var(--muted)}
+.hm-wall-head b{color:var(--ink)}
+.hm-fade{position:absolute;inset:86px 0 0 0;z-index:2;pointer-events:none;background:linear-gradient(90deg,var(--paper),transparent 8%,transparent 92%,var(--paper))}
+.hm-track{display:flex;gap:14px;width:max-content;animation:hm-slide 62s linear infinite}
+.hm-track--rev{margin-top:14px;animation-duration:74s;animation-direction:reverse}
+@keyframes hm-slide{to{transform:translateX(-50%)}}
+.hm-logo{display:flex;align-items:center;justify-content:center;width:158px;height:76px;border-radius:16px;background:#fff;border:1px solid var(--line);flex:0 0 auto;padding:12px}
+.hm-logo img{max-width:112px;max-height:44px;width:auto;height:auto;object-fit:contain}
+
+/* --------------------------------------------------------------- the record */
+.hm-record{position:relative;overflow:hidden;background:var(--ink);color:var(--on-night-soft);padding-block:66px}
+.hm-record h2{color:#fff;font-size:1.6rem;margin-bottom:34px}
+.hm-aurora--low{inset:auto -10% -60% -10%;height:340px;filter:blur(60px);opacity:.5}
+.hm-record .container{position:relative}
+.hm-stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:26px}
+.hm-stats strong{display:block;font-size:2.6rem;font-weight:700;color:#fff;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.hm-stats .hm-bar{height:4px;background:rgba(255,255,255,.14);margin:10px 0}
+.hm-stats div>span:last-child{font-size:.9rem;color:var(--on-night-soft)}
+.hm-record-foot{font-size:.96rem;margin-top:30px;max-width:84ch;color:var(--on-night-soft)}
+.hm-record-foot a{color:#B9D4FF;font-weight:600}
+
+/* ------------------------------------------------------------- situations */
+.hm-sits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hm-sit{display:block;padding:28px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);color:inherit;text-decoration:none!important;transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,border-color .22s}
+a.hm-sit:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-2)}
+.hm-ico{width:44px;height:44px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;background:var(--tint);color:var(--ink)}
+.hm-ico :global(svg){width:22px;height:22px}
+.hm-sit h3{font-size:1.3rem;margin-top:18px}
+.hm-sit p{color:var(--muted);margin-top:10px;font-size:.97rem}
+.hm-count{display:block;margin-top:18px;color:var(--muted);font-size:.92rem}
+.hm-count b{color:var(--ink);font-size:1.05rem}
+
+/* ----------------------------------------------------------- ranked lists */
+.hm-lists{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:start}
+.hm-list-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:30px 32px 26px}
+.hm-list-head{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.hm-list-head h3{font-size:1.45rem;margin-top:8px}
+.hm-list-head .chip{min-height:34px;font-size:.84rem;gap:7px;pointer-events:none}
+.hm-rank{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.hm-rank li{display:flex;gap:16px;align-items:center;padding:16px;border-radius:18px;border:1px solid var(--line)}
+.hm-rank li.is-first{background:var(--tint);border-color:var(--line-2)}
+.hm-rank li.is-rest{opacity:.8}
+.hm-pos{font-size:1.5rem;font-weight:700;color:var(--muted);width:34px;text-align:center;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.is-first .hm-pos{color:var(--link)}
+.hm-who{flex:1 1 auto;min-width:0}
+.hm-who a,.hm-who b{color:var(--ink);font-size:1.05rem;font-weight:600}
+.hm-who em{display:block;font-style:normal;font-size:.9rem;color:var(--muted);margin-top:3px}
+.hm-who .hm-badge{margin-left:8px}
+.hm-sc{flex:0 0 132px;text-align:right}
+.hm-sc strong{font-size:1.6rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.hm-sc>span{font-size:.85rem;color:var(--muted)}
+.hm-sc .hm-bar{margin-top:7px}
+.hm-list-links{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.hm-list-links a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);color:var(--ink);font-weight:600;text-decoration:none!important;transition:border-color .18s,transform .18s}
+.hm-list-links a:hover{border-color:var(--ink);transform:translateY(-2px)}
+.hm-list-links em{font-style:normal;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+
+/* ---------------------------------------------------------------- the map */
+.hm-map{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:28px 28px 22px;margin-bottom:22px}
+.hm-map-head{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.hm-map-head b{color:var(--ink)}
+.hm-legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.84rem;color:var(--muted)}
+.hm-legend span{display:inline-flex;align-items:center;gap:7px}
+.hm-legend i{width:10px;height:10px;border-radius:50%;display:block}
+.hm-legend .d1{background:var(--link)}
+.hm-legend .d2{border:2px solid var(--a3)}
+.hm-map svg{width:100%;height:auto;max-height:430px;margin-top:14px}
+.hm-usa{fill:var(--tint);stroke:var(--line-2);stroke-width:1.5;stroke-linejoin:round}
+.hm-dots circle{fill:var(--link)}
+.hm-open-dot{fill:var(--a3)}
+.hm-ping{fill:none;stroke:var(--a3);stroke-width:2;animation:hm-ping 3s ease-out infinite}
+.hm-ping.p1{animation-delay:1s}.hm-ping.p2{animation-delay:2s}
+@keyframes hm-ping{0%{r:5;opacity:.65}100%{r:20;opacity:0}}
+.hm-labels text{fill:var(--ink);font-size:12.5px;font-weight:700}
+.hm-map-foot{font-size:.86rem;color:var(--muted);margin-top:6px}
+
+.hm-cities{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.hm-city{display:flex;align-items:center;gap:13px;padding:17px 19px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);color:inherit;text-decoration:none!important;transition:transform .2s,border-color .2s,box-shadow .2s}
+.hm-city:hover{transform:translateY(-3px);border-color:var(--line-2);box-shadow:var(--shadow-sm)}
+.hm-city>span:nth-child(2){flex:1 1 auto;min-width:0}
+.hm-city b{display:block;color:var(--ink);line-height:1.2}
+.hm-city em{font-style:normal;font-size:.85rem;color:var(--muted)}
+.hm-n{color:var(--muted);font-variant-numeric:tabular-nums}
+.hm-crest{width:32px;height:36px;flex:0 0 auto;background:var(--aurora);clip-path:polygon(50% 0,100% 16%,100% 58%,50% 100%,0 58%,0 16%)}
+.hm-crest--sm{width:15px;height:17px;margin-right:7px}
+.hm-states{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
+.hm-states .chip em{font-style:normal;color:var(--muted);margin-left:6px;font-variant-numeric:tabular-nums}
+
+/* -------------------------------------------------------------- the score */
+.hm-pillar-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.hm-pillar{display:block;padding:26px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);color:inherit;text-decoration:none!important;transition:transform .22s,box-shadow .22s,border-color .22s}
+.hm-pillar:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-2)}
+.hm-pillar strong{display:inline-block;font-size:2.4rem;font-weight:700;color:var(--ink);letter-spacing:-.045em;margin-top:18px}
+.hm-of{font-size:.85rem;color:var(--muted);margin-left:6px}
+.hm-pillar .hm-bar{height:7px;margin:12px 0 16px}
+.hm-pillar h3{font-size:1.1rem}
+.hm-pillar p{color:var(--muted);font-size:.93rem;margin-top:9px}
+
+.hm-worked{margin-top:20px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:34px 36px}
+.hm-worked-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hm-worked-head h3{font-size:1.7rem}
+.hm-worked-head span{color:var(--muted);font-size:.95rem}
+.hm-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;margin-top:30px}
+.hm-steps>div{position:relative}
+.hm-steps>div::after{content:"";position:absolute;top:10px;right:-21px;width:18px;height:2px;background:var(--line-2)}
+.hm-steps>div:last-child::after{display:none}
+.hm-steps p{font-size:.95rem;color:var(--ink-soft);margin-top:9px}
+.hm-steps strong{display:block;font-size:1.5rem;font-weight:700;color:var(--ink);margin-top:10px;font-variant-numeric:tabular-nums}
+.hm-steps em{font-style:normal;font-size:.9rem;font-weight:500;color:var(--muted)}
+.hm-worked-bars{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:34px;padding-top:28px;border-top:1px solid var(--line)}
+.hm-worked-bars span:first-child{display:flex;justify-content:space-between;font-size:.85rem}
+.hm-worked-bars b{color:var(--ink)}
+.hm-worked-bars em{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
+.hm-worked-bars .hm-bar{height:7px;margin-top:7px}
+.is-weak em{color:var(--warn);font-weight:700}
+.is-weak .hm-bar i{background:var(--warn)}
+.hm-worked-foot{font-size:.97rem;margin-top:20px;color:var(--ink-soft)}
+
+/* ------------------------------------------------- certified, AI, findings */
+.hm-cert{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:64px;align-items:center}
+.hm-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn--ghost-night{border-color:rgba(255,255,255,.28);color:var(--on-night)}
+.hm-rules{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.hm-rules li{background:rgba(255,255,255,.05);border:1px solid var(--night-line);border-radius:18px;padding:20px 22px}
+.hm-rules b{color:#fff}
+
+.hm-ai{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center}
+.hm-ai-list{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.hm-ai-list li{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);padding:20px;font-size:.92rem;color:var(--muted)}
+.hm-ai-list b{display:block;color:var(--ink);margin-bottom:6px;font-size:.98rem}
+.hm-quote{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow)}
+.hm-quote header{display:flex;align-items:center;gap:10px}
+.hm-quote header .hm-ico{width:32px;height:32px;border-radius:10px}
+.hm-quote header b{color:var(--ink)}
+.hm-quote>p{font-size:1.02rem;line-height:1.55;margin-top:18px;color:var(--ink-soft)}
+.hm-quote footer{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.hm-quote footer .eyebrow{width:100%}
+.hm-quote footer .chip{min-height:32px;font-size:.82rem;pointer-events:none}
+
+.hm-finds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.hm-find{display:block;padding:30px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);color:inherit;text-decoration:none!important;transition:transform .22s,box-shadow .22s,border-color .22s}
+.hm-find:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-2)}
+.hm-find strong{display:inline-block;font-size:2.7rem;font-weight:700;color:var(--ink);letter-spacing:-.045em;margin-top:22px;font-variant-numeric:tabular-nums}
+.hm-find h3{font-size:1.18rem;margin-top:10px}
+.hm-find p{color:var(--muted);font-size:.95rem;margin-top:10px}
+.hm-viz{display:block;height:120px;border-radius:14px;background:var(--tint)}
+.hm-viz--dots{position:relative;background-image:radial-gradient(var(--line-2) 2.2px,transparent 2.2px);background-size:15px 15px;background-position:7px 7px}
+.hm-viz--dots i{position:absolute;left:52px;top:52px;width:16px;height:16px;border-radius:50%;background:var(--link);box-shadow:0 0 0 5px var(--tint)}
+.hm-viz--bars{display:flex;align-items:flex-end;gap:7px;padding:16px}
+.hm-viz--bars i{flex:1;background:var(--line-2);border-radius:6px}
+.hm-viz--bars i:nth-child(1){height:100%;background:var(--link);opacity:.9}
+.hm-viz--bars i:nth-child(2){height:86%;background:var(--link);opacity:.55}
+.hm-viz--bars i:nth-child(3){height:38%}
+.hm-viz--bars i:nth-child(4){height:26%}
+.hm-viz--bars i:nth-child(5){height:18%}
+.hm-viz--ring{display:flex;align-items:center;justify-content:center}
+.hm-viz--ring i{width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--link) 0 var(--pct),var(--line-2) var(--pct) 100%);display:flex;align-items:center;justify-content:center}
+.hm-viz--ring i::after{content:"";width:58px;height:58px;border-radius:50%;background:var(--paper)}
+
+/* -------------------------------------------------------------- the badge */
+.hm-badge-sec{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:center}
+.hm-badge-art{display:flex;justify-content:center}
+.hm-badge-art img{width:min(230px,70%);height:auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+.hm-badge-kinds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+.hm-badge-kinds div{background:rgba(255,255,255,.05);border:1px solid var(--night-line);border-radius:18px;padding:20px}
+.hm-badge-kinds b{display:block;color:#fff;margin-bottom:6px}
+.hm-badge-kinds span{font-size:.93rem}
+.hm-badge-n{margin-top:26px}
+.hm-badge-n b{color:#fff;font-size:1.3rem;font-weight:700}
+
+/* ------------------------------------------------------------- responsive */
+@media (max-width:1120px){
+  .hm-hero-grid{grid-template-columns:minmax(0,1fr)}
+  .hm-art{display:none}
+  .hm-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .hm-pillar-grid,.hm-worked-bars{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hm-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+  .hm-steps>div::after{display:none}
+  .hm-lists,.hm-cert,.hm-ai,.hm-badge-sec{grid-template-columns:minmax(0,1fr);gap:34px}
+  .hm-sits,.hm-finds{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hm-cities{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:720px){
+  .hm-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hm-sits,.hm-finds,.hm-pillar-grid,.hm-worked-bars,.hm-ai-list,.hm-badge-kinds{grid-template-columns:minmax(0,1fr)}
+  .hm-steps{grid-template-columns:minmax(0,1fr)}
+  .hm-cities{grid-template-columns:minmax(0,1fr)}
+  .hm-rank li{flex-wrap:wrap}
+  .hm-sc{flex-basis:100%;text-align:left}
+  .hm-worked{padding:24px}
+  .hm-list-card{padding:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hm-aurora i,.hm-bar i,.hm-track,.hm-float,.hm-chip,.hm-orbit,.hm-gauge .v,.hm-ping,.hm-live{animation:none}
+}
+</style>
 </Base>
