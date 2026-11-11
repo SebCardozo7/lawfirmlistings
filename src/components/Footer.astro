@@ -1,90 +1,184 @@
 ---
 import { getCollection } from 'astro:content';
-import Icon from './Icon.astro';
-import { PRACTICE_SLUGS } from '../data/practices';
+import { PRACTICE_SLUGS, hasPractice } from '../data/practices';
 
-// The footer listed six cities and "All 100 cities" on every page of the site; five of the six
-// had no page and the hundred do not exist. It now lists the cities that actually have firms.
+/**
+ * The footer, which is the cheapest interlinking the site owns.
+ *
+ * It listed five columns: practice areas, cities, three resources, four company links, and
+ * seven unlinked "soon" labels that went nowhere on every page of the site. The home page
+ * reached 61 of 1,635 published URLs and this was most of the reason: the 174 ranked lists,
+ * the one place Search Console shows thousands of impressions at position 57 to 79, were
+ * reachable only by going to a city page first and looking for them.
+ *
+ * So the lists are here now, deepest first, and so are the states. Everything is counted from
+ * the collection, which is the rule the rest of the site already follows: a footer that names a
+ * page by hand is a footer that will one day name a page that does not exist. The "soon" labels
+ * are gone. A label that has read "soon" for a year is not a roadmap, it is a dead link that
+ * cannot even be clicked.
+ */
 const published = await getCollection('firms', f =>
   f.data.status !== 'sample' && f.data.status !== 'not_eligible');
-const cities = [...new Map(published.map(f =>
-  [f.data.market.city_slug, `${f.data.market.city}, ${f.data.market.state}`])).entries()]
-  .sort((a, b) => a[1].localeCompare(b[1]));
 
-// Only practice areas that have both a page and a firm behind them. The footer used to list
-// five more that went to href="#", on every page of the site.
+const cityRows = [...new Map(published.map(f => [f.data.market.city_slug, f.data.market])).values()]
+  .map(m => ({ ...m, n: published.filter(f => f.data.market.city_slug === m.city_slug).length }))
+  .sort((a, b) => b.n - a.n);
+
 const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
 const practices = [...new Map(published.flatMap(f => f.data.practices)
   .filter(pr => PRACTICE_PAGES.has(pr.slug))
-  .map(pr => [pr.slug, pr.name])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+  .map(pr => [pr.slug, pr.name])).entries()]
+  .map(([slug, name]) => ({ slug, name, n: published.filter(f =>
+    f.data.practices.some(pr => pr.slug === slug)).length }))
+  .sort((a, b) => b.n - a.n);
 
-// Destinations the directory intends to cover. They stay visible as a roadmap and render
-// unlinked until the page exists, rather than as an href="#" a reader can click into nothing.
-const PLANNED_PRACTICES = ['Family & Divorce', 'Criminal Defense', 'Immigration',
-                           'Estate Planning', 'Business & Corporate'];
-const PLANNED_RESOURCES = ['Cost of a lawyer', 'How to hire a law firm'];
-// About, Contact, Privacy and Terms now exist. What is left planned is the two that need
-// content rather than a page: a For-firms explainer and a published editorial standards note.
-const COMPANY_LINKS: [string, string][] = [
+// Every city × practice that has a page, deepest first. These are the pages people search for.
+const combos = new Map<string, { city: string; practice: string; label: string; n: number }>();
+for (const f of published) {
+  for (const pr of f.data.practices) {
+    if (!hasPractice(pr.slug)) continue;
+    const key = `${f.data.market.city_slug}/${pr.slug}`;
+    const row = combos.get(key);
+    if (row) row.n += 1;
+    else combos.set(key, {
+      city: f.data.market.city_slug, practice: pr.slug,
+      label: `${pr.name} · ${f.data.market.city}`, n: 1,
+    });
+  }
+}
+const lists = [...combos.values()].sort((a, b) => b.n - a.n);
+
+/**
+ * States point at their largest city, because there is no /states/ route yet. The chips on the
+ * home page did the same thing badly: thirteen links to /cities/, which tells a crawler nothing
+ * about any state. One link per state to a real page in it is worth thirteen to the same index.
+ */
+const states = [...new Map(published.map(f => [f.data.market.state, f.data.market])).values()]
+  .map(m => {
+    const inState = cityRows.filter(c => c.state === m.state);
+    return { name: m.state_name, href: `/cities/${inState[0].city_slug}/`,
+             n: inState.reduce((s, c) => s + c.n, 0) };
+  })
+  .sort((a, b) => b.n - a.n);
+
+/** The phrases these lists actually answer, built from the lists rather than typed. */
+const searches = lists.slice(0, 12).map(l => {
+  const m = published.find(f => f.data.market.city_slug === l.city)!.data.market;
+  const name = published.find(f => f.data.practices.some(p => p.slug === l.practice))!
+    .data.practices.find(p => p.slug === l.practice)!.name;
+  return { label: `${name} lawyer ${m.city}`, href: `/cities/${l.city}/${l.practice}/` };
+});
+
+const COMPANY: [string, string][] = [
   ['/about/', 'About us'],
   ['/contact/', 'Contact'],
   ['/privacy/', 'Privacy policy'],
   ['/terms/', 'Terms of use'],
 ];
-const PLANNED_COMPANY = ['For law firms', 'Editorial standards'];
+const FOR_FIRMS: [string, string][] = [
+  ['/list-your-firm/', 'List your firm and pricing'],
+  ['/badge/', 'The badge, and how to embed it'],
+  ['/methodology/', 'Certification criteria'],
+  ['/contact/', 'Correct something we published'],
+  ['/contact/', 'Appeal a sub-score'],
+];
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="/">
-          {/* The pale lockup, because the footer is the one dark surface on most pages. The
-              tagline that used to sit under the wordmark is gone: it is the sentence in the
-              paragraph below, and saying it twice in one corner read as filler. */}
           <img class="brand-lockup" src="/brand/logo-light.png" width="640" height="116"
                alt="Law Firm Listings" loading="lazy" />
         </a>
-        <p>An independent directory of vetted law firms across the United States. We verify licensure, disciplinary history and client outcomes so you can research with confidence.</p>
+        <p>An independent directory of vetted law firms across the United States. We read what
+          each firm publishes about itself and score it against public records. No firm can pay
+          to rank.</p>
       </div>
+
+      <div>
+        <h4>Cities</h4>
+        <ul>
+          {cityRows.map(c => (
+            <li><a href={`/cities/${c.city_slug}/`}>{c.city}, {c.state}</a></li>
+          ))}
+          <li><a class="more" href="/cities/">All {cityRows.length} cities</a></li>
+        </ul>
+      </div>
+
       <div>
         <h4>Practice areas</h4>
         <ul>
-          {practices.map(([slug, name]) => (
-            <li><a href={`/practice-areas/${slug}/`}>{name}</a></li>
+          {practices.map(p => (
+            <li><a href={`/practice-areas/${p.slug}/`}>{p.name}</a></li>
           ))}
-          {PLANNED_PRACTICES.map(name => <li><span class="soon">{name}</span></li>)}
-          <li><a href="/practice-areas/">All practice areas</a></li>
+          <li><a class="more" href="/practice-areas/">All {practices.length} practice areas</a></li>
         </ul>
       </div>
+
       <div>
-        <h4>{cities.length === 1 ? 'City' : 'Cities'}</h4>
+        <h4>Ranked lists</h4>
         <ul>
-          {cities.map(([slug, label]) => (
-            <li><a href={`/cities/${slug}/`}>{label}</a></li>
+          {lists.slice(0, 14).map(l => (
+            <li><a href={`/cities/${l.city}/${l.practice}/`}>{l.label}</a></li>
           ))}
-          <li><a href="/cities/">All cities</a></li>
+          <li><a class="more" href="/cities/">All {lists.length} ranked lists</a></li>
         </ul>
       </div>
+
       <div>
-        <h4>Resources</h4>
+        <h4>States</h4>
         <ul>
-          <li><a href="/guides/">Guides &amp; rankings</a></li>
+          {states.map(s => <li><a href={s.href}>{s.name}</a></li>)}
+          <li><a class="more" href="/cities/">All {states.length} states</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>For law firms</h4>
+        <ul>
+          {FOR_FIRMS.map(([href, name]) => <li><a href={href}>{name}</a></li>)}
+        </ul>
+        <h4 class="h4-second">Company</h4>
+        <ul>
+          <li><a href="/guides/">Guides &amp; research</a></li>
           <li><a href="/methodology/">Our methodology</a></li>
-          <li><a href="/list-your-firm/">List your firm</a></li>
-          {PLANNED_RESOURCES.map(name => <li><span class="soon">{name}</span></li>)}
-        </ul>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <ul>
-          {COMPANY_LINKS.map(([href, name]) => <li><a href={href}>{name}</a></li>)}
-          {PLANNED_COMPANY.map(name => <li><span class="soon">{name}</span></li>)}
+          {COMPANY.map(([href, name]) => <li><a href={href}>{name}</a></li>)}
         </ul>
       </div>
     </div>
+
+    <div class="footer-searches">
+      <h4>Popular searches</h4>
+      <div>
+        {searches.map(s => <a href={s.href}>{s.label}</a>)}
+      </div>
+    </div>
+
     <div class="footer-bottom">
-      <p>LawFirmListings.com is not a law firm and does not provide legal advice. Rankings are editorial opinions based on our published methodology and do not constitute an endorsement or guarantee of results. Attorney advertising where applicable.</p>
+      <p>LawFirmListings.com is not a law firm and does not provide legal advice. Rankings are
+        editorial opinions based on our published methodology and do not constitute an
+        endorsement or guarantee of results. Attorney advertising where applicable.</p>
       <span>© {new Date().getFullYear()} Law Firm Listings. All rights reserved.</span>
     </div>
   </div>
 </footer>
+
+<style>
+  /* Six columns rather than five, and the brand no longer eats a column and a half of them. */
+  .site-footer :global(.footer-grid){grid-template-columns:1.5fr repeat(5,minmax(0,1fr));gap:34px}
+  .h4-second{margin-top:26px}
+  .more{font-weight:600;color:#fff!important}
+  .footer-searches{border-top:1px solid var(--night-line);margin-top:48px;padding-top:30px}
+  .footer-searches h4{color:#fff;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;font-weight:600}
+  .footer-searches div{display:flex;gap:7px;flex-wrap:wrap}
+  .footer-searches a{font-size:.88rem;padding:7px 13px;border-radius:var(--pill);border:1px solid var(--night-line)}
+  .footer-searches a:hover{border-color:rgba(255,255,255,.4)}
+  @media (max-width:1100px){
+    .site-footer :global(.footer-grid){grid-template-columns:repeat(3,minmax(0,1fr))}
+    .site-footer :global(.footer-brand){grid-column:1/-1}
+  }
+  @media (max-width:680px){
+    .site-footer :global(.footer-grid){grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+</style>
