@@ -1,5 +1,7 @@
 ---
+import { getCollection } from 'astro:content';
 import Icon from './Icon.astro';
+import { PRACTICE_SLUGS, hasPractice } from '../data/practices';
 interface Props { nav?: string }
 const { nav = 'home' } = Astro.props;
 
@@ -8,6 +10,26 @@ const { nav = 'home' } = Astro.props;
  * four sections and the phone showed none of them, because the hamburger was a button with no
  * menu behind it and never had one. Every section of this site was unreachable on a phone
  * except through the one CTA.
+ *
+ * Two things were added on 2026-11-11, and both are about the same problem the footer had.
+ *
+ * The strip above the pill. A reader arriving on a firm profile from a search had no way of
+ * knowing whether this directory reads one firm or a thousand, and the only numbers on the site
+ * were on a home page most visitors never see. They are counted here, on every page, including
+ * the date of the last full re-measurement, which is the one fact no competitor can print.
+ *
+ * The Browse panel. The bar held four links. It now opens onto the cities, the practices and
+ * the ranked lists, which is the shape of the directory rather than the shape of its menu, and
+ * it is where the 174 city-by-practice pages become reachable in one click from anywhere.
+ *
+ * It is a <details>, not a scripted dropdown, so it opens with no JavaScript and answers the
+ * keyboard for free. The script below only closes it on an outside click, which is a courtesy
+ * and not a requirement.
+ *
+ * Both are hidden below 820px, where the phone menu takes over and 36px of chrome is a tax
+ * rather than a signal. The strip's height is why --header-h is 127px and not 91: four sticky
+ * things on this site offset themselves against it, and a header that grows without saying so
+ * puts a filter bar seven pixels under a scorecard. That has happened here before.
  */
 const LINKS: { href: string; label: string; icon: string; key: string }[] = [
   { href: '/practice-areas/', label: 'Practice Areas', icon: 'scale', key: 'practice' },
@@ -15,8 +37,66 @@ const LINKS: { href: string; label: string; icon: string; key: string }[] = [
   { href: '/methodology/', label: 'Methodology', icon: 'shield', key: 'method' },
   { href: '/guides/', label: 'Guides', icon: 'doc', key: 'guides' },
 ];
+
+const published = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+const certifiedCount = published.filter(f => f.data.status === 'certified').length;
+
+const cityRows = [...new Map(published.map(f => [f.data.market.city_slug, f.data.market])).values()]
+  .map(m => ({ ...m, n: published.filter(f => f.data.market.city_slug === m.city_slug).length }))
+  .sort((a, b) => b.n - a.n);
+
+const PRACTICE_PAGES = new Set(PRACTICE_SLUGS);
+const practices = [...new Map(published.flatMap(f => f.data.practices)
+  .filter(pr => PRACTICE_PAGES.has(pr.slug))
+  .map(pr => [pr.slug, pr.name])).entries()]
+  .map(([slug, name]) => ({ slug, name, n: published.filter(f =>
+    f.data.practices.some(pr => pr.slug === slug)).length }))
+  .sort((a, b) => b.n - a.n);
+
+const combos = new Map<string, { city: string; practice: string; label: string; n: number }>();
+for (const f of published) {
+  for (const pr of f.data.practices) {
+    if (!hasPractice(pr.slug)) continue;
+    const key = `${f.data.market.city_slug}/${pr.slug}`;
+    const row = combos.get(key);
+    if (row) row.n += 1;
+    else combos.set(key, {
+      city: f.data.market.city_slug, practice: pr.slug,
+      label: `${pr.name} · ${f.data.market.city}`, n: 1,
+    });
+  }
+}
+const lists = [...combos.values()].sort((a, b) => b.n - a.n);
+
+const lastUpdated = (() => {
+  const dates = published.map(f => f.data.score?.computed_at).filter(Boolean) as string[];
+  return dates.length
+    ? new Date(dates.sort().at(-1)!).toLocaleDateString('en-US',
+        { month: 'short', year: 'numeric', timeZone: 'UTC' })
+    : null;
+})();
 ---
 <header class="site-header">
+
+  <div class="site-topbar">
+    <div class="container">
+      <span class="tb-fact tb-first">
+        <i class="tb-live" aria-hidden="true"></i>
+        Re-measured monthly{lastUpdated ? <>, last run <b>{lastUpdated}</b></> : null}
+      </span>
+      <span class="tb-fact"><b>{published.length.toLocaleString('en-US')}</b> firms read in full</span>
+      <span class="tb-fact"><b>{certifiedCount}</b> certified</span>
+      <span class="tb-fact"><b>{lists.length}</b> ranked lists</span>
+      <nav class="tb-links" aria-label="Secondary">
+        <a href="/list-your-firm/">For law firms</a>
+        <a href="/guides/">Research</a>
+        <a href="/badge/">The badge</a>
+      </nav>
+    </div>
+  </div>
+
   <div class="container">
     <nav class="navpill" aria-label="Main">
       <a class="brand" href="/" aria-label="Law Firm Listings, home">
@@ -29,6 +109,54 @@ const LINKS: { href: string; label: string; icon: string; key: string }[] = [
              alt="" aria-hidden="true" />
       </a>
       <ul class="nav-links">
+        <li class="nav-browse">
+          <details class="mega" id="mega">
+            <summary><Icon name="columns" /><span>Browse</span>
+              <svg class="mega-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="mega-panel">
+              <div>
+                <h3>By city</h3>
+                <ul>
+                  {cityRows.slice(0, 6).map(c => (
+                    <li><a href={`/cities/${c.city_slug}/`}>{c.city}, {c.state} <em>{c.n}</em></a></li>
+                  ))}
+                  <li><a class="mega-more" href="/cities/">All {cityRows.length} cities</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3>By practice</h3>
+                <ul>
+                  {practices.slice(0, 6).map(p => (
+                    <li><a href={`/practice-areas/${p.slug}/`}>{p.name} <em>{p.n}</em></a></li>
+                  ))}
+                  <li><a class="mega-more" href="/practice-areas/">All {practices.length} practice areas</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3>Ranked lists</h3>
+                <ul>
+                  {lists.slice(0, 6).map(l => (
+                    <li><a href={`/cities/${l.city}/${l.practice}/`}>{l.label} <em>{l.n}</em></a></li>
+                  ))}
+                  <li><a class="mega-more" href="/cities/">All {lists.length} ranked lists</a></li>
+                </ul>
+              </div>
+              <div class="mega-card">
+                <h3>Certification</h3>
+                <div class="mega-card-top">
+                  <span class="mega-ico"><Icon name="shield" /></span>
+                  <b>What certification<br />means</b>
+                </div>
+                <p>Five pillars, 100 points, every one of them a public record.
+                  {' '}{certifiedCount} firms hold it today.</p>
+                <a class="btn btn--ghost btn--sm" href="/methodology/">Read the methodology</a>
+              </div>
+            </div>
+          </details>
+        </li>
         {LINKS.map(l => (
           <li><a href={l.href} aria-current={nav === l.key ? 'page' : undefined}><Icon name={l.icon} /><span>{l.label}</span></a></li>
         ))}
@@ -53,6 +181,7 @@ const LINKS: { href: string; label: string; icon: string; key: string }[] = [
         {LINKS.map(l => (
           <li><a href={l.href} aria-current={nav === l.key ? 'page' : undefined}><Icon name={l.icon} /><span>{l.label}</span></a></li>
         ))}
+        <li><a href="/badge/"><Icon name="star" /><span>The badge</span></a></li>
       </ul>
       <a class="btn btn--ghost" href="/list-your-firm/"
          aria-current={nav==='list'?'page':undefined}>List your firm</a>
@@ -66,6 +195,7 @@ const LINKS: { href: string; label: string; icon: string; key: string }[] = [
   const toggle = document.getElementById('nav-toggle');
   const menu = document.getElementById('nav-menu');
   const header = document.querySelector('.site-header');
+  const mega = document.getElementById('mega') as HTMLDetailsElement | null;
 
   if (toggle && menu && header) {
     const setOpen = (open: boolean) => {
@@ -98,6 +228,24 @@ const LINKS: { href: string; label: string; icon: string; key: string }[] = [
     // A phone rotated to landscape crosses the breakpoint with the menu still marked open.
     window.matchMedia('(min-width: 821px)').addEventListener('change', e => {
       if (e.matches) setOpen(false);
+    });
+  }
+
+  // The Browse panel needs none of this to open. All the script does is close it again, which
+  // a <details> on its own will not do: click a city, come back, and it would still be hanging
+  // open over the page you returned to.
+  if (mega) {
+    document.addEventListener('click', e => {
+      if (mega.open && !mega.contains(e.target as Node)) mega.open = false;
+    });
+    mega.addEventListener('click', e => {
+      if ((e.target as HTMLElement).closest('.mega-panel a')) mega.open = false;
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && mega.open) {
+        mega.open = false;
+        mega.querySelector('summary')?.focus();
+      }
     });
   }
 </script>
