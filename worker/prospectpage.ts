@@ -720,7 +720,9 @@ export async function prospectAct(
     }
 
     try {
-      await sendTo(env as any, p.email, subject, body, state.restrained);
+      // Commercial, like the batch: a prospect is by definition a firm that never wrote to us,
+      // whether the letter leaves from here or from the cron.
+      await sendTo(env as any, p.email, subject, body, state.restrained, true);
     } catch (err) {
       console.error('prospect send failed', slug, err);
       return backTo(where, token, 'Send failed. Nothing went out and nothing was recorded.');

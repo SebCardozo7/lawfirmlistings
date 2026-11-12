@@ -25,6 +25,7 @@
  */
 import { getMany, keysUnder } from './kvread';
 import { mime, present } from './mail';
+import { optOutUrl } from './verifyletter';
 
 export interface OutboundEnv {
   EMAIL: { send(message: any): Promise<unknown> };
@@ -297,7 +298,7 @@ export function pitchBody(e: Enquiry, env: OutboundEnv): { subject: string; text
  * one function.
  */
 export async function sendTo(env: OutboundEnv, to: string, subject: string, text: string,
-                             restrained = false) {
+                             restrained = false, commercial = false) {
   const sender = from(env);
   // Reply-To used to be spliced into the finished message with a string replace on the
   // MIME-Version line. That worked only as long as mime() emitted exactly that line in exactly
@@ -305,6 +306,9 @@ export async function sendTo(env: OutboundEnv, to: string, subject: string, text
   // parameter now.
   const raw = mime(sender, to, subject, text, {
     replyTo: env.REPLY_TO,
+    // Only on a letter to a firm that did not write to us. See MessageOptions in mail.ts for
+    // why putting it on the other kind would make things worse rather than better.
+    listUnsubscribe: commercial ? optOutUrl(to) : undefined,
     footer: 'Law Firm Listings measures what US law firms publish about themselves and'
       + ' scores it against public records.',
     restrained,

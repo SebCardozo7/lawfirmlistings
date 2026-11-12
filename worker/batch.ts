@@ -304,7 +304,10 @@ async function sendOne(env: BatchEnv, p: Prospect): Promise<boolean> {
     console.warn('batch skipped', p.slug, blocked);
     return false;
   }
-  await sendTo(env as any, p.email, letter.subject, letter.text, true);
+  // The sixth argument is what marks this commercial: it is a letter to a firm that never
+  // wrote to us, so it carries the unsubscribe headers. The replies to firms that did write
+  // do not, deliberately. See MessageOptions in worker/mail.ts.
+  await sendTo(env as any, p.email, letter.subject, letter.text, true, true);
   await putProspect(env, {
     ...p, status: 'sent', sent_at: new Date().toISOString(),
     note: 'asked whether our pages are right, from the approved batch',
