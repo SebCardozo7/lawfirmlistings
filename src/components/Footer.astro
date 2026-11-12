@@ -87,9 +87,10 @@ const FOR_FIRMS: [string, string][] = [
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
+        {/* The same gradient square the header and the favicon use, so the three agree. */}
         <a class="brand" href="/">
-          <img class="brand-lockup" src="/brand/logo-light.png" width="640" height="116"
-               alt="Law Firm Listings" loading="lazy" />
+          <span class="brand-tile" aria-hidden="true"></span>
+          <span class="brand-word">Law Firm Listings</span>
         </a>
         <p>An independent directory of vetted law firms across the United States. We read what
           each firm publishes about itself and score it against public records. No firm can pay
@@ -167,6 +168,7 @@ const FOR_FIRMS: [string, string][] = [
 <style>
   /* Six columns rather than five, and the brand no longer eats a column and a half of them. */
   .site-footer :global(.footer-grid){grid-template-columns:1.5fr repeat(5,minmax(0,1fr));gap:34px}
+  .site-footer :global(.brand-word){color:#fff}
   .h4-second{margin-top:26px}
   .more{font-weight:600;color:#fff!important}
   .footer-searches{border-top:1px solid var(--night-line);margin-top:48px;padding-top:30px}

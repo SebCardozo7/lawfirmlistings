@@ -22,7 +22,7 @@
   /* Measured, not guessed: 36px strip + 16px + 64px pill + 16px. The 91 this replaced was
      itself five short of the 96 the pill block already measured, which is how a filter bar
      ends up slightly under what it is supposed to clear. */
-  --header-h:132px;
+  --header-h:105px;
   --ink:#0A0A0C;           /* headings, primary buttons */
   --ink-soft:#3B3C43;      /* body */
   --muted:#6F7079;         /* meta */
@@ -42,6 +42,8 @@
   --a3:#5EEAD4;            /* aurora mint */
   --aurora:linear-gradient(90deg,var(--a1),var(--a2) 55%,var(--a3));
   --link:#4F46E5;
+  --brand:#5B4BE0;         /* the call to action, and only that */
+  --brand-ink:#4A3BC4;
   --success:#15A36B;
   --r:20px;--r-sm:12px;--pill:999px;
   --shadow-sm:0 1px 2px rgba(10,10,12,.05),0 2px 8px rgba(10,10,12,.04);
@@ -100,8 +102,10 @@ button,input,select{font:inherit;color:inherit}
 [hidden]{display:none!important}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:var(--pill);font-weight:600;font-size:.98rem;border:1px solid transparent;cursor:pointer;transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;text-decoration:none!important;white-space:nowrap;letter-spacing:-.01em}
 .btn:active{transform:translateY(1px)}
-.btn--primary,.btn--ink{background:var(--ink);color:#fff;box-shadow:0 10px 24px -10px rgba(10,10,12,.6)}
-.btn--primary:hover,.btn--ink:hover{background:#26272E}
+.btn--primary{background:var(--brand);color:#fff;box-shadow:0 12px 28px -12px rgba(91,75,224,.75)}
+.btn--primary:hover{background:var(--brand-ink);color:#fff}
+.btn--ink{background:var(--ink);color:#fff;box-shadow:0 10px 24px -10px rgba(10,10,12,.6)}
+.btn--ink:hover{background:#26272E}
 .btn--ghost{background:var(--paper);color:var(--ink);border-color:var(--line-2)}
 .btn--ghost:hover{border-color:var(--ink)}
 .btn--white{background:#fff;color:var(--ink)}
@@ -133,26 +137,39 @@ button,input,select{font:inherit;color:inherit}
 .on-night .chip{background:rgba(255,255,255,.06);border-color:var(--night-line);color:var(--on-night)}
 .on-night .chip:hover{border-color:rgba(255,255,255,.4)}
 
-/* ---------- Header: floating pill nav ---------- */
-.site-header{position:sticky;top:0;z-index:50;padding:16px 0;pointer-events:none}
-.site-header .container{display:flex;justify-content:center}
-.navpill{position:relative;pointer-events:auto;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.4) blur(14px);border:1px solid rgba(10,10,12,.08);border-radius:var(--pill);padding:8px 8px 8px 16px;box-shadow:0 12px 40px -16px rgba(10,10,12,.35),0 1px 2px rgba(10,10,12,.05);max-width:100%}
-.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:700;font-size:1rem;letter-spacing:-.02em;text-decoration:none!important;padding:6px 20px 6px 0;border-right:1px solid var(--line);margin-right:6px}
-/* Sized by height, never by width: the lockup and the mark have different aspect ratios and
-   only their optical height has to agree with the nav links beside them. */
-.brand-lockup{height:28px;width:auto;display:block}
-.brand-mark-img{display:none;height:30px;width:auto}
+/* ---------- Header: one solid bar, full width ---------- */
+/* It was a floating capsule with a shadow, which is the visual language of a SaaS product and
+   not of a register that reads 1,388 firms against thirteen state bars. A bar that spans the
+   window and sits on a hairline says the second thing. */
+.site-header{position:sticky;top:0;z-index:50}
+.site-bar{position:relative;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+.site-bar>.container{display:flex;align-items:center;gap:18px;min-height:68px}
+
+/* The mark is the site's own gradient square, the same one public/favicon.svg is. Drawn in
+   CSS, so it paints with the first frame instead of flashing empty on every navigation, which
+   is what the PNG lockup it replaces did. */
+.brand{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none!important;padding:0;border:0;margin:0;flex:none}
+.brand-tile{width:30px;height:30px;border-radius:9px;background:var(--aurora);display:block;flex:none;box-shadow:0 8px 18px -10px rgba(99,102,241,.9)}
+.brand-word{font-weight:700;font-size:1.03rem;letter-spacing:-.025em;white-space:nowrap}
 .brand small{display:none}
-.nav-links{display:flex;gap:4px;list-style:none}
-.nav-links a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:500;font-size:.95rem;padding:11px 16px;border-radius:var(--pill);text-decoration:none!important;transition:background .15s}
+
+.nav-links{display:flex;gap:2px;list-style:none;margin-inline:auto}
+.nav-links a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:500;font-size:.95rem;padding:11px 15px;border-radius:var(--pill);text-decoration:none!important;transition:background .15s}
 .nav-links a:hover{background:var(--tint)}
 .nav-links a[aria-current]{background:var(--tint);position:relative}
 .nav-links a[aria-current]::after{content:"";position:absolute;left:50%;bottom:4px;transform:translateX(-50%);width:18px;height:2px;border-radius:1px;background:var(--aurora)}
 .nav-links svg{width:15px;height:15px;color:var(--muted)}
-.nav-actions{display:flex;gap:8px;align-items:center;margin-left:8px;padding-left:12px;border-left:1px solid var(--line)}
+.nav-actions{display:flex;gap:8px;align-items:center;flex:none}
 .nav-toggle{display:none}
-@media (max-width:1060px){.nav-links a span{display:none}.nav-links a{padding:10px 12px}}
-@media (max-width:820px){.nav-links,.nav-actions .btn--ghost{display:none}.nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:44px;height:44px;align-items:center;justify-content:center;color:var(--ink);flex:none}.site-header{padding:0}.site-header .container{width:100%;display:block}.navpill{width:100%;justify-content:space-between;border-radius:0;border-width:0 0 1px 0;box-shadow:none;background:rgba(255,255,255,.94);padding:12px 16px;gap:10px}.brand{border-right:0;padding:0;margin-right:0}.brand-lockup{height:26px}.brand-mark-img{display:none}.nav-actions{margin-left:0;padding-left:0;border-left:0;gap:8px}.nav-actions .btn--primary{padding:12px 18px;font-size:.95rem}}
+@media (max-width:1140px){.nav-links a span{display:none}.nav-links a{padding:10px 12px}}
+@media (max-width:820px){
+  .nav-links,.nav-actions .btn--ghost{display:none}
+  .nav-toggle{display:inline-flex;background:none;border:1px solid var(--line-2);border-radius:50%;width:44px;height:44px;align-items:center;justify-content:center;color:var(--ink);flex:none}
+  .site-bar>.container{min-height:62px;gap:10px}
+  .nav-actions{margin-left:auto}
+  .nav-actions .btn--primary{padding:11px 16px;font-size:.93rem}
+  .brand-word{font-size:.98rem}
+}
 
 /* ---------- Header: the authority strip ---------- */
 /* Counted on every page, because the numbers used to live only on a home page most visitors
@@ -1125,7 +1142,8 @@ button,input,select{font:inherit;color:inherit}
 /* The sticky offsets read this, and it was a desktop constant. The phone header is 79px, so
    the filter bar and the profile's own tab strip were parking twelve pixels below where the
    header ends, which on a scorecard reads as a seam. */
-@media (max-width:820px){ :root{--header-h:75px} }
+/* 62px bar + 1px hairline, with the strip gone. Measured, like the 105 above it. */
+@media (max-width:820px){ :root{--header-h:63px} }
 
 @media (max-width:640px){
   .section{padding:56px 0}
