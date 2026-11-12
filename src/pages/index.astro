@@ -232,7 +232,18 @@ const firstSub = top?.data.score?.pillars?.A?.subs?.[0];
 const desc = 'Compare US law firms on public records: licensure, discipline, client reviews and '
   + 'what each firm publishes about its fees. No firm can pay to rank.';
 ---
-<Base title="Law Firm Listings: Law Firms Verified, Not Advertised" description={desc} nav="home">
+{/**
+ * The title led with the brand and carried no term anybody searches: "Law Firm Listings: Law
+ * Firms Verified, Not Advertised". At 53 characters it also crossed Base's threshold, so the
+ * brand suffix was suppressed and the brand was simply the first two words instead.
+ *
+ * It leads with the category now. The volume is small and worth saying out loud: "law firm
+ * directory" is 90 searches a month, "attorney directory" 400, "lawyer directory" 300. This is
+ * not a traffic play. It is what the page says it is to a reader scanning a result and to a
+ * model deciding what kind of site this is, and the brand still closes the line, where the
+ * domain above it already repeats it.
+ */}
+<Base title="Law Firm Directory: Verified, Not Advertised" description={desc} nav="home">
 
 <!-- HERO -->
 <section class="hm-hero">
