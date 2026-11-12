@@ -32,6 +32,26 @@ export interface MessageOptions {
   footer?: string;
   /** Renders the plain, letter-like page instead of the branded one. See emailhtml.ts. */
   restrained?: boolean;
+  /**
+   * The opt-out URL, on the commercial letters only.
+   *
+   * Every one of those already carried the link in its footer, which is what US law asks for.
+   * This is the other half, and it is the half the filters read: a mail client that is given
+   * these headers draws its own unsubscribe button beside the sender's name, so the reader who
+   * wants out presses that instead of pressing the one next to it, which reports the message as
+   * spam and teaches the filter about the whole domain. Fifty-two letters had gone out without
+   * it by 12 November 2026.
+   *
+   * List-Unsubscribe-Post is RFC 8058, and it means what it says: the mail provider POSTs to
+   * the URL on the reader's behalf and nobody has to open a page. That works here only because
+   * worker/unsubscribe.ts already acts on POST and refuses to act on GET, a rule it adopted
+   * for its own reason, which is that scanners prefetch links. The two fit exactly.
+   *
+   * Never set on a reply to a firm that wrote to us first. An unsubscribe header on an answer
+   * to somebody's own question is a category error, and mail providers treat a transactional
+   * message carrying one as a marketing message.
+   */
+  listUnsubscribe?: string;
 }
 
 /**
@@ -113,6 +133,15 @@ export function mime(
     `Date: ${new Date().toUTCString()}`,
   ];
   if (opts.replyTo) head.push(`Reply-To: <${header(opts.replyTo)}>`);
+  if (opts.listUnsubscribe) {
+    // Two routes, because a mail client that cannot do one does the other, and the mailto costs
+    // nothing: the address is read by a person who can honour a REMOVE by hand.
+    head.push(
+      `List-Unsubscribe: <${opts.listUnsubscribe}>, `
+      + `<mailto:${header(from)}?subject=REMOVE>`,
+      'List-Unsubscribe-Post: List-Unsubscribe=One-Click',
+    );
+  }
   head.push('MIME-Version: 1.0');
 
   if (opts.html === false) {

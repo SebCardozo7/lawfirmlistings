@@ -289,6 +289,7 @@ const bundle = path.join(out, 'bundle.mjs');
 await build({
   stdin: {
     contents: `export { listedNoticeBody } from './worker/outbound.ts';
+               export { optOutUrl } from './worker/verifyletter.ts';
                export { mime } from './worker/mail.ts';`,
     resolveDir: ROOT,
     loader: 'ts',
@@ -296,7 +297,7 @@ await build({
   bundle: true, format: 'esm', platform: 'neutral',
   outfile: bundle, external: ['cloudflare:email'], logLevel: 'warning',
 });
-const { listedNoticeBody } = await import(pathToFileURL(bundle).href);
+const { listedNoticeBody, optOutUrl } = await import(pathToFileURL(bundle).href);
 
 const env = { SUBMISSIONS_FROM: 'hello@lawfirmlistings.com', REPLY_TO: 'hello@lawfirmlistings.com' };
 const rendered = batch.map(c => ({ c, msg: listedNoticeBody(c, env) }));
@@ -328,9 +329,16 @@ for (const { c, msg } of rendered) {
   try {
     // Text only. The HTML half is the Worker's to build; this path exists to put a handful of
     // real messages in real inboxes, and a plain letter is the half that always renders.
+    // The unsubscribe headers, which this path has to add by hand because it does not go
+    // through mime(). The letter has always carried the link in its footer; these are what a
+    // mail provider reads, and they are why the reader who wants out presses the client's own
+    // unsubscribe button rather than the spam button beside it. See worker/mail.ts.
     execFileSync(process.execPath, [wrangler, 'email', 'sending', 'send',
       '--from', env.SUBMISSIONS_FROM, '--from-name', 'Law Firm Listings',
       '--reply-to', env.REPLY_TO, '--to', c.email,
+      '--header', `List-Unsubscribe:<${optOutUrl(c.email)}>, `
+        + `<mailto:${env.SUBMISSIONS_FROM}?subject=REMOVE>`,
+      '--header', 'List-Unsubscribe-Post:List-Unsubscribe=One-Click',
       '--subject', msg.subject, '--text', readFileSync(body, 'utf8')],
       { encoding: 'utf8', stdio: 'pipe' });
     // Written down the moment it leaves, one firm at a time. A log written after the loop is a
