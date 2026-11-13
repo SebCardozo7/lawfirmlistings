@@ -51,11 +51,19 @@ const TILE_TINTS = ['', 'l2', 'l3'];
             ? <img src={d.logo.file} alt="" width="24" height="24" loading="lazy" decoding="async" />
             : d.initials}
         </span>
+        {/* The tier chip is written twice and shown once. On a phone it belongs on the second
+            line, beside the offices and the attorneys, because beside the name it took the room
+            that pushed thirty of a hundred and forty names onto a line of their own. CSS cannot
+            move a node from one parent to another, and the alternative, giving the chip a column
+            of its own, would have lined the chips up away from the names on the desktop layout
+            nobody asked to change. Only one of the two is ever rendered, so a screen reader and
+            a reader hear the tier once. */}
         <span class="rr-name">
           <a href={`/firms/${d.slug}/`}>{d.name}</a>
-          {chip && <span class={`rr-chip rr-chip--${chip}`}>{s!.tier}</span>}
+          {chip && <span class={`rr-chip rr-chip--${chip} rr-chip--beside`}>{s!.tier}</span>}
         </span>
         <span class="rr-meta">
+          {chip && <span class={`rr-chip rr-chip--${chip} rr-chip--under`}>{s!.tier}</span>}
           {showCity && <>{d.market.city}, {d.market.state} · </>}
           {d.offices.length} {d.offices.length === 1 ? 'office' : 'offices'}
           {d.attorneys.length > 0 && <> · {d.attorneys.length} {d.attorneys.length === 1 ? 'attorney' : 'attorneys'}</>}
