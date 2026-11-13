@@ -39,6 +39,7 @@ import re
 import sys
 import time
 from html import unescape
+from urllib.parse import unquote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -61,6 +62,10 @@ PROVIDERS = {"gmail.com", "outlook.com", "hotmail.com", "yahoo.com", "aol.com",
              "icloud.com", "me.com", "msn.com", "comcast.net", "att.net", "proton.me"}
 MAILTO = re.compile(r'href=["\']mailto:([^"\'?]+)', re.I)
 
+# A literal backslash escape in the source, as written inside a JavaScript string rather
+# than as the character it stands for. See harvest().
+ESCAPE = re.compile(r"\\[nrt]")
+
 # Addresses that are real and are not a way to reach the firm, plus the ones that are not
 # addresses at all. The image extensions matter more than they look: a filename like
 # hero@2x.png matches any email pattern ever written, and a list built without this is a third
@@ -74,10 +79,42 @@ JUNK = re.compile(
     re.I,
 )
 
-# What an intake address tends to be called, best first. A firm that publishes both
-# info@ and a partner's personal address wants to be reached at the first one.
-PREFERRED = ["info", "contact", "intake", "hello", "inquiries", "enquiries",
-             "office", "mail", "newclients", "help", "admin", "reception"]
+# Who should receive the one letter this directory sends, in the order we would rather
+# reach them.
+#
+# The old order ran info, contact, intake, hello, inquiries, office, mail, newclients,
+# help, admin, reception, and its comment said why: "a firm that publishes both info@ and
+# a partner's personal address wants to be reached at the first one". That is true of the
+# message a firm is expecting. It is the wrong way round for the one we send.
+#
+# Our letter tells a firm that a page about it exists and asks whether it is right.
+# info@, intake@, newclients@ and reception@ are the admissions desk, read by somebody
+# whose job is to qualify accident victims and book consultations. Our letter is not a
+# case, so it is nobody's. Of the thirty firms in the approved batches, 24 were addressed
+# this way, 16 of them at info@, and none of the 52 letters sent by 13 November 2026 was
+# answered.
+#
+# So a human comes first. Then the mailbox read by whoever owns how the firm looks, which
+# is what the letter is about. Then the general office. The admissions desk last, because
+# it is better than nothing and nothing is the alternative.
+#
+# A local part that matches none of these lists is treated as a person: bmorelli,
+# j.dagostino, credmond, staver. Some of those are the named partner rather than an
+# individual, which is the same thing for our purposes. Both are a human rather than a
+# queue. 43 of the 372 firms we had addressed at a role mailbox published one of these on
+# the same page and we passed over it.
+BRAND = ["marketing", "communications", "comms", "pr", "press", "media"]
+GENERAL = ["info", "contact", "hello", "office", "mail", "inquiries", "enquiries", "admin",
+           # Found by counting: a local part that turns up at several unrelated firms is a
+           # job title, not a name. attorney@, team@, legal@ and legalassistant@ were being
+           # read as people because they match no list, which is what "person" means here.
+           "attorney", "attorneys", "lawyer", "lawyers", "legal", "legalassistant",
+           "team", "staff", "firm", "general", "frontoffice", "paralegal"]
+INTAKE = ["intake", "newclients", "newclient", "casereview", "clientservices", "clients",
+          "leads", "lead", "reception", "help", "support", "frontdesk", "schedule",
+          "appointments", "consult", "consultation"]
+# Kept because for_firm() and the tests still name it: every role word, in one list.
+PREFERRED = GENERAL + INTAKE
 
 
 def firms(state=None):
@@ -112,10 +149,19 @@ def harvest(html, domain):
     """
     found = []
     for m in MAILTO.findall(html or ""):
-        found.append((unescape(m).strip(), "mailto"))
+        # unquote before unescape: a mailto: href is URL-encoded, and two firms published
+        # href="mailto:%20info@..." which was harvested as a mailbox called "%20info" and
+        # would have been written to. A bounce we would never have seen, because nothing
+        # here can see a bounce.
+        found.append((unescape(unquote(m)).strip(), "mailto"))
     # Also the ones written as text, which is most of them, and the ones obfuscated with
     # entities, which unescape() turns back into an address.
-    for m in ADDRESS.findall(unescape(html or "")):
+    #
+    # ESCAPE first, because an address inside a JavaScript string arrives as "\ninfo@..."
+    # and ADDRESS cannot start on the backslash but can start on the n. Two firms were
+    # recorded as "ninfo@" that way. Turning the escape into a space fixes the class
+    # rather than those two.
+    for m in ADDRESS.findall(ESCAPE.sub(" ", unescape(html or ""))):
         found.append((m.strip(), "text"))
     out, seen = [], set()
     for a, via in found:
@@ -125,6 +171,25 @@ def harvest(html, domain):
         seen.add(a)
         out.append((a, via))
     return out
+
+
+def rank(address):
+    """
+    Lower is better: 0 a human, 1 the brand mailbox, 2 the general office, 3 admissions.
+
+    The trailing digits come off first, because info2@ and info01@ are info@ wearing a hat,
+    and the startswith test is kept from the old code so that info.ny@ and contact-us@ are
+    still read as the general office rather than mistaken for somebody's name. It is only
+    ever used to make an address worse, never better: a person is whatever matched nothing.
+    """
+    local = address.split("@")[0].lower().rstrip("0123456789")
+    for score, words in ((1, BRAND), (2, GENERAL), (3, INTAKE)):
+        if local in words:
+            return score
+    for score, words in ((1, BRAND), (2, GENERAL), (3, INTAKE)):
+        if any(local.startswith(w) for w in words):
+            return score
+    return 0
 
 
 def best(addresses, domain):
@@ -143,6 +208,10 @@ def best(addresses, domain):
     Gmail, and a stylesheet really does carry the font designer's Gmail inside its licence
     comment; the link is what tells them apart. The rejects stay in `others`, so the choice
     is reviewable rather than silent.
+
+    Among the ones the firm does own, rank() decides, and ties go to whichever the page
+    printed first. See the lists above for why a human beats the admissions desk here and
+    would not in a directory that was taking enquiries rather than sending them.
     """
     if not addresses:
         return None
@@ -152,15 +221,7 @@ def best(addresses, domain):
             or (a.split("@")[-1] in PROVIDERS and via == "mailto")]
     if not pool:
         return None
-    for want in PREFERRED:
-        for a in pool:
-            if a.split("@")[0] == want:
-                return a
-    for want in PREFERRED:
-        for a in pool:
-            if a.split("@")[0].startswith(want):
-                return a
-    return pool[0]
+    return min(pool, key=lambda a: (rank(a), pool.index(a)))
 
 
 def for_firm(firm):
@@ -228,13 +289,90 @@ def for_firm(firm):
     return row
 
 
+def selftest():
+    """
+    Who the one unsolicited letter is addressed to, asserted rather than assumed.
+
+    This runs without a network and without the crawl, because the thing it guards is a
+    judgement rather than a fetch: that a human beats the admissions desk. Getting it
+    backwards is invisible until a batch has gone out and nobody has answered, which is
+    how it was found in the first place.
+    """
+    cases = [
+        ("bmorelli@f.com", 0), ("j.dagostino@f.com", 0), ("staver@f.com", 0),
+        ("akryder@f.com", 0), ("tjsaye@f.com", 0),
+        ("marketing@f.com", 1), ("pr@f.com", 1), ("communications@f.com", 1),
+        ("info@f.com", 2), ("contact@f.com", 2), ("office@f.com", 2),
+        # info@ wearing a hat, and the suffixes the old startswith test already caught.
+        ("info2@f.com", 2), ("info.ny@f.com", 2), ("contact-us@f.com", 2),
+        ("intake@f.com", 3), ("newclients@f.com", 3), ("casereview@f.com", 3),
+        ("clientservices@f.com", 3), ("reception@f.com", 3),
+        # Job titles that match no name list and were read as people until they were
+        # counted: four firms published attorney@, four team@, three legal@.
+        ("attorney@f.com", 2), ("team@f.com", 2), ("legal@f.com", 2),
+        ("legalassistant@f.com", 2), ("media@f.com", 1),
+    ]
+    bad = 0
+    for address, want in cases:
+        got = rank(address)
+        if got != want:
+            bad += 1
+            print(f"  FAIL {address:24} rank {got}, expected {want}")
+        else:
+            print(f"  ok   {address:24} rank {got}")
+
+    # And the choice itself, which is the only thing any caller uses.
+    picks = [
+        ([("info@f.com", "text"), ("bmorelli@f.com", "text"), ("intake@f.com", "text")],
+         "bmorelli@f.com"),
+        ([("intake@f.com", "text"), ("info@f.com", "text")], "info@f.com"),
+        ([("info@f.com", "text"), ("marketing@f.com", "text")], "marketing@f.com"),
+        # Two humans and no rule to separate them: the page's own order decides, so the
+        # result is stable rather than whichever way the set happened to iterate.
+        ([("zed@f.com", "text"), ("amy@f.com", "text")], "zed@f.com"),
+        # Somebody else's address is still refused, which is the older and stricter rule.
+        ([("dev@agency.example", "text")], None),
+    ]
+    for pool, want in picks:
+        got = best(pool, "f.com")
+        if got != want:
+            bad += 1
+            print(f"  FAIL best({[a for a, _ in pool]}) = {got}, expected {want}")
+        else:
+            print(f"  ok   best picks {got}")
+
+    # And the two ways an address arrived with something glued to the front of it. Both
+    # were found in the live crawl, both produce a mailbox that does not exist, and a
+    # letter to one bounces somewhere we cannot see.
+    harvests = [
+        ('<a href="mailto:%20info@f.com">write</a>', "info@f.com", "a URL-encoded space"),
+        (r'var e = "\ninfo@f.com";', "info@f.com", "a backslash-n in a script"),
+        ('<a href="mailto:info@f.com">write</a>', "info@f.com", "the ordinary case"),
+    ]
+    for html, want, why in harvests:
+        got = [a for a, _ in harvest(html, "f.com")]
+        if want not in got:
+            bad += 1
+            print(f"  FAIL {why}: harvested {got}, expected {want}")
+        else:
+            print(f"  ok   {why} yields {want}")
+
+    print("\nEvery check passed." if not bad else f"\n{bad} check(s) failed.")
+    return 1 if bad else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0, help="stop after N firms")
     ap.add_argument("--state", help="one state, e.g. ny")
     ap.add_argument("--shard", help="i/n, to run n of these at once")
+    ap.add_argument("--selftest", action="store_true",
+                    help="check who a letter would be addressed to, with no network")
     ap.add_argument("--out", default=OUT)
     args = ap.parse_args()
+
+    if args.selftest:
+        sys.exit(selftest())
 
     rows = firms(args.state)
     if args.shard:
