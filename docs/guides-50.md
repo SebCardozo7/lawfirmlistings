@@ -320,7 +320,7 @@ client's Basecamp project when the piece places a client. Pieces that place a cl
 | written 2026-10-09 | 27 Massachusetts (PR #118) | Brooks Law Firm |
 | written 2026-10-12 | 29 Indiana (PR #125) | Sarkisian |
 | written 2026-10-14 | 16 Statute of limitations hub (PR #127) | Lopez & Humphries, Fielding, Greenstein & Pittari, Paulson Coletti, Brooks, Malloy, Sarkisian |
-| 2026-10-16 | 41 Back and neck injury settlements | verified injury firms by state |
+| written 2026-11-13 | 41 Back and neck injury settlements (PR #200) | Greenstein & Pittari, Fielding, Paulson Coletti |
 | 2026-10-19 | 2 AT&T data breach settlement | none |
 | 2026-10-21 | 30 Green card renewal | none |
 | 2026-10-23 | 17 California | none |
