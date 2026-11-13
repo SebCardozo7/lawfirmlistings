@@ -574,6 +574,9 @@ button,input,select{font:inherit;color:inherit}
 .rr-name a:hover{color:var(--link)}
 .rr-chip{display:inline-block;margin-left:9px;font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--line-2);color:var(--muted);white-space:nowrap;vertical-align:1px}
 .rr-chip--certified,.rr-chip--tier{background:var(--tint);border-color:transparent;color:var(--ink)}
+/* Beside the name on a wide screen, under it on a narrow one. The component writes both and
+   each width shows one; see the comment there for why it is not a single element moved. */
+.rr-chip--under{display:none}
 .rr-meta{color:var(--muted);font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rr-score{text-align:right;white-space:nowrap;color:var(--ink)}
 .rr-score i{color:var(--muted);font-style:normal;font-size:.78rem}
@@ -599,6 +602,11 @@ button,input,select{font:inherit;color:inherit}
   .rr-name{grid-column:3;grid-row:1}
   .rr-score{grid-column:4;grid-row:1}
   .rr-meta{grid-column:3 / -1;grid-row:2;white-space:normal}
+  /* The chip moves down to the meta line, which gives the name the whole width of its column
+     back. Measured on Los Angeles at 375px: the list is 11,771px this way against 12,792px with
+     the chip beside the name, and 11,989px as it stood before the marks existed. */
+  .rr-chip--beside{display:none}
+  .rr-chip--under{display:inline-block;margin-left:0;margin-right:8px}
 }
 /* The badge a firm can take away, on its own profile. The code block is the product here, so it
    is the thing that gets the room: a firm that cannot copy it will not display it. */
