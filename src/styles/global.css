@@ -374,13 +374,13 @@ button,input,select{font:inherit;color:inherit}
 
 /* A logo tile is paper with a hairline, not the dark monogram tile. These icons are made for a
    phone home screen, so they bring their own background and only need somewhere to sit. */
-.firm-logo.has-logo,.profile-logo.has-logo{background:var(--paper);border:1px solid var(--line);padding:0;overflow:hidden}
+.firm-logo.has-logo,.profile-logo.has-logo,.rr-logo.has-logo{background:var(--paper);border:1px solid var(--line);padding:0;overflow:hidden}
 /* The 44px tile in the hero's glass card, which draws the same firm as the cards below it
    and was the last place still showing initials over a logo we hold. */
 .glass .avatar.has-logo{padding:0;overflow:hidden;border:1px solid var(--line)}
 .glass .avatar.has-logo img{display:block;width:100%;height:100%;object-fit:contain}
 .firm-logo img,.profile-logo img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
-.firm-logo.l2{background:#1F2937}.firm-logo.l3{background:#3B3C43}.firm-logo.l4{background:linear-gradient(160deg,#8B5CF6,#3B82F6)}.firm-logo.l5{background:linear-gradient(160deg,#3B82F6,#5EEAD4);color:var(--ink)}.firm-logo.l6{background:#6F7079}
+.firm-logo.l2,.rr-logo.l2{background:#1F2937}.firm-logo.l3,.rr-logo.l3{background:#3B3C43}.firm-logo.l4{background:linear-gradient(160deg,#8B5CF6,#3B82F6)}.firm-logo.l5{background:linear-gradient(160deg,#3B82F6,#5EEAD4);color:var(--ink)}.firm-logo.l6{background:#6F7079}
 .firm-body{min-width:0}
 .firm-title{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .firm-title h3{font-size:1.35rem}
@@ -555,10 +555,21 @@ button,input,select{font:inherit;color:inherit}
 .full-rank .results-head{margin-bottom:16px}
 .full-rank h3{font-size:1.3rem}
 .rank-rows{list-style:none;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);overflow:hidden}
-.rank-rows li{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(0,auto) 72px;gap:16px;align-items:baseline;padding:12px 18px;border-top:1px solid var(--line);font-size:.95rem}
+.rank-rows li{display:grid;grid-template-columns:34px 24px minmax(0,1fr) minmax(0,auto) 72px;gap:16px;align-items:baseline;padding:12px 18px;border-top:1px solid var(--line);font-size:.95rem}
 .rank-rows li:first-child{border-top:0}
 .rank-rows li:nth-child(even){background:var(--ground)}
 .rr-rank{color:var(--muted);font-size:.84rem;text-align:right}
+/* The firm's own mark at the head of the row, from the same place the cards and the home page's
+   logo wall take theirs: public/logos/, copied by scripts/fetch_logos.py from the icon the firm's
+   own site declares. Nothing is fetched from a third party, so no reader's browser reports which
+   firms these pages are about. The tile is 24px because the row's name line is 24.39px tall: a
+   26px tile became the tallest thing in the row and added a pixel and a half to every one of
+   them, so a list of 188 firms grew by a row's worth of height to gain nothing. */
+.rr-logo{width:24px;height:24px;border-radius:7px;align-self:center;display:grid;place-items:center;
+  background:var(--ink);color:#fff;font-weight:700;font-size:.6rem;letter-spacing:-.01em}
+/* contain rather than the cards' cover: one mark in eight is wider than it is tall, and the
+   cropped middle of a wordmark says less at this size than the whole of it drawn small. */
+.rr-logo img{width:100%;height:100%;object-fit:contain;border-radius:inherit;display:block;padding:2px;box-sizing:border-box}
 .rr-name a{color:var(--ink);font-weight:500}
 .rr-name a:hover{color:var(--link)}
 .rr-chip{display:inline-block;margin-left:9px;font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--line-2);color:var(--muted);white-space:nowrap;vertical-align:1px}
@@ -574,14 +585,20 @@ button,input,select{font:inherit;color:inherit}
 .rank-group h4 a{color:var(--ink)}
 .rank-group h4 span{color:var(--muted);font-size:.82rem;font-weight:400;white-space:nowrap}
 @media (max-width:720px){
-  .rank-rows li{grid-template-columns:26px minmax(0,1fr) auto;gap:4px 10px;padding:12px 14px}
+  .rank-rows li{grid-template-columns:26px 22px minmax(0,1fr) auto;gap:4px 9px;padding:12px 14px}
   /* The meta line takes a row of its own here, and auto-placement then put the score in the
      next free cell, which is column one of row three: the number read as if it belonged to the
      rank rather than to the firm. Both are placed explicitly instead. */
   .rr-rank{grid-column:1;grid-row:1}
-  .rr-name{grid-column:2;grid-row:1}
-  .rr-score{grid-column:3;grid-row:1}
-  .rr-meta{grid-column:2 / -1;grid-row:2;white-space:normal}
+  /* A long name takes two lines here, and a tile centred on both of them floats between the
+     name and its tier chip. Aligned to the top instead, it sits on the first line with the rank
+     number, which is where the firm's name starts. The 1px keeps the 22px tile optically on the
+     24.39px line without being tall enough to stretch the row. */
+  .rr-logo{grid-column:2;grid-row:1;width:22px;height:22px;border-radius:6px;font-size:.55rem;
+    align-self:start;margin-top:1px}
+  .rr-name{grid-column:3;grid-row:1}
+  .rr-score{grid-column:4;grid-row:1}
+  .rr-meta{grid-column:3 / -1;grid-row:2;white-space:normal}
 }
 /* The badge a firm can take away, on its own profile. The code block is the product here, so it
    is the thing that gets the room: a firm that cannot copy it will not display it. */

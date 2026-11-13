@@ -11,6 +11,13 @@
  *
  * The order is the caller's. This component never re-sorts, so a row's position always means
  * what the heading above it says it means.
+ *
+ * Each row opens with the firm's own mark. The cards above already carried one and the home page
+ * builds a wall of them, from the same place: scripts/fetch_logos.py copies the icon a firm's own
+ * site declares into public/logos/ and writes the path into `logo.file`, so nothing here calls out
+ * to a third party and no reader's browser tells anyone which firms these pages are about. 1,310
+ * of the 1,388 published firms have one. The other 78 get the initials tile, which is the same
+ * fallback the profile and the cards use and is a design rather than a hole.
  */
 import type { CollectionEntry } from 'astro:content';
 
@@ -25,6 +32,9 @@ const { firms, showCity = false } = Astro.props;
 const TIER_CHIP: Record<string, string> = {
   Elite: 'tier', Distinguished: 'tier', Certified: 'certified', Verified: 'verified',
 };
+// The same three monogram tints the ranked cards cycle through, so a list of initials beside a
+// list of marks still looks like one page rather than a column of identical dark squares.
+const TILE_TINTS = ['', 'l2', 'l3'];
 ---
 <ol class="rank-rows">
   {firms.map((f, i) => {
@@ -34,6 +44,13 @@ const TIER_CHIP: Record<string, string> = {
     return (
       <li>
         <span class="rr-rank num">{i + 1}</span>
+        {/* alt is empty on purpose: the firm's name is the next thing in the reading order, so
+            announcing the mark would say the same firm twice. */}
+        <span class={`rr-logo ${d.logo ? 'has-logo' : TILE_TINTS[i % TILE_TINTS.length]}`.trim()}>
+          {d.logo
+            ? <img src={d.logo.file} alt="" width="24" height="24" loading="lazy" decoding="async" />
+            : d.initials}
+        </span>
         <span class="rr-name">
           <a href={`/firms/${d.slug}/`}>{d.name}</a>
           {chip && <span class={`rr-chip rr-chip--${chip}`}>{s!.tier}</span>}
