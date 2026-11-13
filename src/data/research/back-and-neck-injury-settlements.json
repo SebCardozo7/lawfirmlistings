@@ -1,0 +1,120 @@
+{
+  "slug": "average-settlement-for-back-and-neck-injury",
+  "measured_at": "2026-11-13",
+  "keyword": {
+    "term": "average settlement for car accident back and neck injury",
+    "volume": 7200,
+    "kd": 0,
+    "read": "2026-10-04"
+  },
+  "irc": {
+    "who": "Insurance Research Council",
+    "what": "Auto Injury Insurance Claims: A Study of Increasing Claim Severity",
+    "published": "2026-07-30",
+    "url": "https://insurance-research.org/sites/default/files/2026-07/Auto%20Injury%20Study%20Summary%20Page.pdf",
+    "release_url": "https://insurance-research.org/sites/default/files/2026-07/PR%20IRC%20Auto_Injury_Study.pdf",
+    "insurers": 9,
+    "market_share": 43,
+    "claims_millions": 7.4,
+    "period": "mid-2017 to mid-2022",
+    "bi_average": [
+      { "year": 2017, "value": 14000, "qualifier": "about", "quote": "from approximately $14,000 in 2017" },
+      { "year": 2022, "value": 20000, "qualifier": "more than", "quote": "to more than $20,000 in 2022" }
+    ],
+    "bi_growth_annualized": 7.8,
+    "inflation_multiple": "more than double the rate of medical care inflation",
+    "leverage": {
+      "average": 2.0,
+      "start": { "when": "early 2018", "value": 1.8 },
+      "end": { "when": "mid-2022", "value": 2.3 },
+      "quote": "BI claimants received $2.00 in total settlement for every dollar of medical bills paid, not accounting for any legal fees."
+    },
+    "attorney": {
+      "all_2017": 40,
+      "all_2022": 50,
+      "all_2022_qualifier": "nearly",
+      "bi_2022": 57,
+      "bi_gain_points": 11,
+      "litigation_2017": 10,
+      "litigation_2022": 18
+    },
+    "net": {
+      "represented": 1.4,
+      "unrepresented": 1.8,
+      "fee_share": "one-third",
+      "quote": "After accounting for medical costs and legal fees (estimated at one-third of settlement), BI claimants with attorneys received $1.40 in claim payment for every dollar of medical expense, compared with $1.80 for claimants without attorneys."
+    },
+    "wait_days_represented": 440,
+    "funding": "The IRC is a nonprofit research body supported by property and casualty insurers, and affiliated with The Institutes. It says it does not lobby."
+  },
+  "sprains": {
+    "who": "Insurance Research Council",
+    "what": "a study of bodily injury claims in California, Illinois, Texas and Washington, claims closed in 2002",
+    "reported_by": "Insurance Journal",
+    "reported_on": "2005-07-11",
+    "url": "https://www.insurancejournal.com/news/national/2005/07/11/57099.htm",
+    "share_in_ten": 7,
+    "no_disability_share": "three-quarters",
+    "quote": "In each of the four states, neck or back sprains were the most serious injury for at least seven in ten BI claimants and at least three-quarters suffered no disability from the accident.",
+    "note": "Read in the trade press report of the study, not in the IRC's own document, which is not published free."
+  },
+  "whiplash_cost": {
+    "who": "National Highway Traffic Safety Administration",
+    "what": "Final rule on head restraints, FMVSS No. 202a, 69 Fed. Reg. 74848",
+    "published": "2004-12-14",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2004-12-14/pdf/04-26641.pdf",
+    "rear_impact_per_year": 272464,
+    "all_per_year": 805581,
+    "data_years": "1988 to 1996",
+    "average_cost": 9994,
+    "economic": 6843,
+    "quality_of_life": 3151,
+    "dollars": "2002 dollars",
+    "quote": "For rear impact crashes, the average cost of whiplash injuries in 2002 dollars is $9,994 (which includes $6,843 in economic costs and $3,151 in quality of life impacts, but not property damage)"
+  },
+  "recovery": {
+    "who": "Carroll and colleagues for the Bone and Joint Decade 2000-2010 Task Force on Neck Pain",
+    "what": "Spine 2008;33(4 Suppl):S83-S92",
+    "url": "https://iwh.on.ca/node/1948",
+    "share_at_one_year": 50,
+    "quote": "The evidence suggests that approximately 50% of those with WAD will report neck pain symptoms 1 year after their injuries."
+  },
+  "states": [
+    { "state": "Arizona", "code": "AZ", "bi_person": 25000, "bi_accident": 50000, "statute": "A.R.S. § 28-4009(A)(2)", "url": "https://www.azleg.gov/ars/28/04009.htm", "pip": null, "threshold": null, "via": null },
+    { "state": "California", "code": "CA", "bi_person": 30000, "bi_accident": 60000, "statute": "Cal. Veh. Code § 16056(a)(2)", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=VEH&sectionNum=16056", "pip": null, "threshold": null, "change": "Raised from 15/30 for policies issued or renewed on or after January 1, 2025, and set to rise again in 2035.", "via": null },
+    { "state": "Florida", "code": "FL", "bi_person": 0, "bi_accident": 0, "statute": "Fla. Stat. §§ 324.022, 627.733", "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0627/Sections/0627.733.html", "pip": { "amount": 10000, "statute": "Fla. Stat. § 627.736(1)", "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0627/Sections/0627.736.html", "waivable": false }, "threshold": { "rule": "a permanent injury, significant and permanent scarring or loss of an important bodily function, or death", "statute": "Fla. Stat. § 627.737(2)", "url": "http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0627/Sections/0627.737.html" }, "note": "Florida requires PIP and property damage cover. Bodily injury liability is not compulsory for most drivers; the 10/20 figures in § 324.021(7) are proof of financial responsibility.", "via": null },
+    { "state": "Georgia", "code": "GA", "bi_person": 25000, "bi_accident": 50000, "statute": "O.C.G.A. § 33-7-11(a)(1)(A)", "url": "https://codes.findlaw.com/ga/title-33-insurance/ga-code-sect-33-7-11.html", "pip": null, "threshold": null, "via": "FindLaw, current as of March 28, 2024" },
+    { "state": "Illinois", "code": "IL", "bi_person": 25000, "bi_accident": 50000, "statute": "625 ILCS 5/7-203", "url": "https://codes.findlaw.com/il/chapter-625-vehicles/il-st-sect-625-5-7-203.html", "pip": null, "threshold": null, "via": "FindLaw, checked against an archived ilga.gov copy of May 2025" },
+    { "state": "Indiana", "code": "IN", "bi_person": 25000, "bi_accident": 50000, "statute": "Ind. Code § 9-25-4-5", "url": "https://codes.findlaw.com/in/title-9-motor-vehicles/in-code-sect-9-25-4-5.html", "pip": null, "threshold": null, "via": "FindLaw, current as of January 1, 2026" },
+    { "state": "Maryland", "code": "MD", "bi_person": 30000, "bi_accident": 60000, "statute": "Md. Transp. § 17-103(b)(1)", "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gtr&section=17-103&enactments=false", "pip": { "amount": 2500, "statute": "Md. Ins. § 19-505", "url": "https://mgaleg.maryland.gov/mgawebsite/Laws/StatuteText?article=gin&section=19-505&enactments=false", "waivable": true }, "threshold": null, "via": null },
+    { "state": "Massachusetts", "code": "MA", "bi_person": 25000, "bi_accident": 50000, "statute": "Mass. Gen. Laws ch. 90, § 34A", "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section34A", "pip": { "amount": 8000, "statute": "Mass. Gen. Laws ch. 90, § 34A", "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section34A", "waivable": false }, "threshold": { "rule": "more than $2,000 in reasonable medical expenses, or a death, a fracture, a lost body member, permanent and serious disfigurement, or loss of sight or hearing", "statute": "Mass. Gen. Laws ch. 231, § 6D", "url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleII/Chapter231/Section6D" }, "change": "Raised from 20/40 for policies issued or renewed on or after July 1, 2025, by Acts 2024, c. 275.", "via": "An archived copy of malegislature.gov from September 2026" },
+    { "state": "Nevada", "code": "NV", "bi_person": 25000, "bi_accident": 50000, "statute": "NRS 485.185", "url": "https://www.leg.state.nv.us/nrs/nrs-485.html", "pip": null, "threshold": null, "via": "An archived copy of leg.state.nv.us from July 2026" },
+    { "state": "New York", "code": "NY", "bi_person": 25000, "bi_accident": 50000, "statute": "N.Y. Veh. & Traf. Law § 311(4)(a)", "url": "https://www.nysenate.gov/legislation/laws/VAT/311", "pip": { "amount": 50000, "statute": "N.Y. Ins. Law §§ 5102(a), 5103", "url": "https://www.nysenate.gov/legislation/laws/ISC/5102", "waivable": false }, "threshold": { "rule": "a serious injury, which includes a fracture, a permanent or significant limitation of use, or 90 of the first 180 days unable to do usual activities", "statute": "N.Y. Ins. Law §§ 5102(d), 5104(a)", "url": "https://www.nysenate.gov/legislation/laws/ISC/5102" }, "via": null },
+    { "state": "Oregon", "code": "OR", "bi_person": 25000, "bi_accident": 50000, "statute": "ORS 806.070(2)", "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors806.html", "pip": { "amount": 15000, "statute": "ORS 742.520, 742.524(1)(a)", "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors742.html", "waivable": false }, "threshold": null, "via": "The 2025 edition, from an archived copy of September 2026" },
+    { "state": "Pennsylvania", "code": "PA", "bi_person": 15000, "bi_accident": 30000, "statute": "75 Pa.C.S. § 1702", "url": "https://www.palegis.us/statutes/consolidated/view-statute?iFrame=true&txtType=HTM&ttl=75&div=00.&chpt=017.&sctn=002.&subsctn=000", "pip": { "amount": 5000, "statute": "75 Pa.C.S. § 1711(a)", "url": "https://www.palegis.us/statutes/consolidated/view-statute?iFrame=true&txtType=HTM&ttl=75&div=00.&chpt=017.&sctn=011.&subsctn=000", "waivable": false }, "threshold": { "rule": "a serious injury, for a driver who chose limited tort: death, serious impairment of a body function or permanent serious disfigurement", "statute": "75 Pa.C.S. § 1705(d)", "url": "https://www.palegis.us/statutes/consolidated/view-statute?iFrame=true&txtType=HTM&ttl=75&div=00.&chpt=017.&sctn=005.&subsctn=000" }, "via": null },
+    { "state": "Texas", "code": "TX", "bi_person": 30000, "bi_accident": 60000, "statute": "Tex. Transp. Code § 601.072(a-1)", "url": "https://tcss.legis.texas.gov/resources/TN/htm/TN.601.htm", "pip": { "amount": 2500, "statute": "Tex. Ins. Code §§ 1952.152-.153", "url": "https://tcss.legis.texas.gov/resources/IN/htm/IN.1952.htm", "waivable": true }, "threshold": null, "via": null }
+  ],
+  "reading": [
+    {
+      "firm": "greenstein-pittari-llp",
+      "state": "NY",
+      "url": "https://www.nyclawfirm.com/nyc-car-accident-average-settlement-for-neck-back-injuries/",
+      "title": "NYC Car Accident: Average Settlement for Neck & Back Injuries",
+      "why": "The same question asked for New York City, where the serious injury threshold decides whether pain and suffering is on the table at all. Its account of the $50,000 no-fault benefit, the 90/180 rule and the three-year deadline matches the statutes. Its value ranges are the firm's own estimates, labelled as such."
+    },
+    {
+      "firm": "fielding-law",
+      "state": "TX",
+      "url": "https://www.fieldinglaw.com/practice-areas/car-accidents/what-is-the-average-settlement-for-whiplash/",
+      "title": "What is the average settlement for whiplash?",
+      "why": "Whiplash in Texas, with the state's comparative fault rule worked through an example: a driver more than half to blame recovers nothing, which matches Texas law. The range it gives is the firm's own ballpark."
+    },
+    {
+      "firm": "paulson-coletti-trial-attorneys-pc",
+      "state": "OR",
+      "url": "https://www.paulsoncoletti.com/auto-accidents/back-injuries/",
+      "title": "Was Your Back Injured in a Car Accident?",
+      "why": "The back injuries that move a claim out of the soft tissue band, herniated discs, fractured vertebrae and lumbar damage that stops physical work, explained by an Oregon trial firm."
+    }
+  ]
+}

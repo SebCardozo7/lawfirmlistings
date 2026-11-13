@@ -1,0 +1,329 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import data from '../../data/research/back-and-neck-injury-settlements.json';
+
+/**
+ * Item 41 in docs/guides-50.md (family D, settlement values). A reference article, not a study.
+ *
+ * Nobody publishes a measured average settlement for back and neck injuries alone, and the pages
+ * that rank for the phrase fill the gap with ranges nobody measured. So this page answers with the
+ * closest figures that were measured, and says which is which: the Insurance Research Council's
+ * 2026 study of 7.4 million claims for the average bodily injury payment and the ratio of
+ * settlement to medical bills, its four-state study for how much of that claim pool is neck and
+ * back sprains, NHTSA for what a whiplash injury costs, and each state's own code for the
+ * insurance minimum that caps most of these claims in practice.
+ *
+ * House rule for family D: no range comes from a firm's own results page. The firm pages under
+ * "Further reading" were read and checked against the statutes; where they give a range, the page
+ * says it is the firm's own.
+ *
+ * Nothing here is a hand-typed figure. Every number is read from the research file or computed
+ * from it, and the firms in the state section are computed from the directory at build time.
+ */
+const irc = data.irc;
+const usd = (v: number) => '$' + Math.round(v).toLocaleString('en-US');
+const n = (v: number) => v.toLocaleString('en-US');
+const ratio = (v: number) => '$' + v.toFixed(2);
+const list = (xs: string[]) => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const fmtDate = (d: string) => new Date(d).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const read = fmtDate(data.measured_at);
+const ircDate = fmtDate(irc.published);
+
+const [start, end] = irc.bi_average;
+const growth = Math.round(((end.value - start.value) / start.value) * 100);
+const lev = irc.leverage;
+const net = irc.net;
+const netGap = Math.round(((net.unrepresented - net.represented) / net.unrepresented) * 100);
+const sp = data.sprains;
+const wh = data.whiplash_cost;
+const rec = data.recovery;
+
+// The states, ranked by the bodily injury minimum per person. Florida's is zero because it does
+// not make the cover compulsory, which is the finding for that state rather than a gap in the row.
+const states = [...data.states].sort((a, b) => b.bi_person - a.bi_person || a.state.localeCompare(b.state));
+const highest = states[0].bi_person;
+const lowestPositive = Math.min(...states.filter(s => s.bi_person > 0).map(s => s.bi_person));
+const noBi = states.filter(s => s.bi_person === 0);
+const atLowest = states.filter(s => s.bi_person === lowestPositive);
+const withPip = states.filter(s => s.pip);
+const withThreshold = states.filter(s => s.threshold);
+const changed = states.filter(s => (s as any).change);
+
+// A worked example, with its one assumption stated where the reader can see it and change it:
+// a claim with this much in medical bills, priced at the study's average ratio, against each
+// state's minimum. It is arithmetic on published figures, not a valuation of anybody's claim.
+const BILLS = 10000;
+const priced = BILLS * lev.average;
+const capped = states.filter(s => s.bi_person > 0 && s.bi_person < priced);
+const fits = states.filter(s => s.bi_person >= priced);
+
+// Our own data, and only in the state section: the highest-scoring verified injury firm in each
+// state this directory covers, computed rather than chosen, and the client pages read for this
+// topic.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const GATED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
+const primary = (f: typeof firms[number]) => f.data.practices.find(p => p.primary) ?? f.data.practices[0];
+const topInjury = (code: string) => firms
+  .filter(f => f.data.market.state === code && primary(f)?.slug === 'personal-injury' && GATED.includes(f.data.score?.tier ?? ''))
+  .sort((a, b) => (b.data.score?.total ?? 0) - (a.data.score?.total ?? 0) || a.data.name.localeCompare(b.data.name))[0];
+const relFor = (f: typeof firms[number] | undefined) =>
+  f && GATED.includes(f.data.score?.tier ?? '') ? 'noopener' : 'nofollow noopener';
+const reading = data.reading.map(r => {
+  const f = firms.find(x => x.data.slug === r.firm);
+  if (!f) throw new Error(`reading: no firm "${r.firm}"`);
+  return { ...r, f, rel: relFor(f) };
+});
+const byState = [...data.states].sort((a, b) => a.state.localeCompare(b.state)).map(s => ({
+  ...s,
+  top: topInjury(s.code),
+  reading: reading.filter(r => r.state === s.code),
+}));
+
+const title = 'Average Settlement for Back and Neck Injury After a Car Accident';
+const description = `Insurers paid an average injury claim of ${end.qualifier} ${usd(end.value)} in ${end.year}, most of them neck and back sprains. What moves that number, and what caps it.`;
+const lede = `Nobody publishes a measured average for back and neck injuries alone. The closest figure that was measured comes from the insurers' own research body: across ${irc.claims_millions} million claims, the average bodily injury payment after a crash rose from ${start.qualifier} <b>${usd(start.value)}</b> in ${start.year} to <b>${end.qualifier} ${usd(end.value)}</b> in ${end.year}. Neck and back sprains are the most serious injury in at least <b>${sp.share_in_ten} of every 10</b> of those claims, so that average is, more than anything, a back and neck number. Here is what it is made of, what moves it, and the limit that caps most of these claims in practice.`;
+
+const faq = [
+  {
+    q: 'What is the average settlement for a back and neck injury after a car accident?',
+    a: `No public dataset isolates back and neck injuries. The best measured proxy is the average bodily injury liability payment, which the ${irc.who} put at ${end.qualifier} ${usd(end.value)} in ${end.year}, from ${irc.claims_millions} million claims. Neck and back sprains are the most serious injury in at least ${sp.share_in_ten} in 10 bodily injury claims, so that figure is mostly made of them. A claim with surgery or a fracture sits well above it; a sprain that clears in weeks sits below it.`,
+  },
+  {
+    q: 'How are back and neck injury settlements calculated?',
+    a: `Mostly from the medical bills. In the ${irc.who}'s study, bodily injury claimants received ${ratio(lev.average)} in total for every dollar of medical bills paid, before legal fees, and the ratio climbed from ${ratio(lev.start.value)} in ${lev.start.when} to ${ratio(lev.end.value)} by ${lev.end.when}. Fault, the at-fault driver's policy limit, and in some states a threshold for pain and suffering then move or cap that figure.`,
+  },
+  {
+    q: 'Does a lawyer get a bigger settlement for whiplash?',
+    a: `The comparison is not clean, because people hire lawyers for the harder claims. Measured per dollar of medical bills after fees, the ${irc.who} found represented bodily injury claimants netted ${ratio(net.represented)} against ${ratio(net.unrepresented)} for those without one, and waited a median of nearly ${irc.wait_days_represented} days. The study is funded by insurers, which is worth weighing.`,
+  },
+  {
+    q: 'What is the most an insurance company will pay for a back injury?',
+    a: `Usually the at-fault driver's bodily injury limit, unless the claimant's own underinsured motorist cover adds to it or the driver has assets worth pursuing. The legal minimum per person runs from ${usd(lowestPositive)} in ${list(atLowest.map(s => s.state))} to ${usd(highest)} in the highest states covered here, and ${list(noBi.map(s => s.state))} ${noBi.length === 1 ? 'does' : 'do'} not require the cover at all.`,
+  },
+  {
+    q: 'How long do back and neck injury claims take to settle?',
+    a: `A claim with no lawyer and a short course of treatment can close within months. In the ${irc.who}'s data, represented bodily injury claims took a median of nearly ${irc.wait_days_represented} days to close, more than twice as long as unrepresented ones. Nobody should settle before treatment ends, since the medical bills are what the claim is priced from.`,
+  },
+];
+
+const url = new URL(`/guides/${data.slug}/`, Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: data.measured_at,
+    dateModified: data.measured_at,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Law Firm Listings Editorial Team' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+<Base title={title} description={description} nav="guides" schema={schema}
+  figuresFrom={`${irc.who}, ${irc.what}, ${ircDate}`} image="/og/settlement.png"
+  imageAlt="A spine beside three columns: a dollar of medical bills, a settlement twice its height, and what is left after fees">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Back and neck injury settlements</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Settlements</span>
+    <h1>{title}</h1>
+    <p class="lede" set:html={lede} />
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Published research, no legal advice</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>9 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="settlement" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#average" class="is-active">The average, and why it is a back and neck number</a></li>
+      <li><a href="#bills">Priced from the medical bills</a></li>
+      <li><a href="#severity">Sprain, disc, surgery</a></li>
+      <li><a href="#limits">The limit that caps the claim</a></li>
+      <li><a href="#thresholds">States that gate pain and suffering</a></li>
+      <li><a href="#lawyer">With a lawyer and without</a></li>
+      <li><a href="#states">By state, and who to read</a></li>
+      <li><a href="#faq">Questions people ask</a></li>
+      <li><a href="#method">Where these figures come from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`From the ${irc.who}'s study of ${irc.claims_millions} million auto injury claims closed ${irc.period}, published ${ircDate}, and the codes of ${states.length} states read ${read}.`}
+      items={[
+        `The average bodily injury claim paid after a crash was <b>${end.qualifier} ${usd(end.value)}</b> in ${end.year}, up ${growth}% from ${start.qualifier} ${usd(start.value)} in ${start.year}.`,
+        `Neck and back sprains are the most serious injury in at least <b>${sp.share_in_ten} of every 10</b> of those claims.`,
+        `Claimants received <b>${ratio(lev.average)} for every $1 of medical bills</b>, before fees. The ratio rose from ${ratio(lev.start.value)} to ${ratio(lev.end.value)} over the study.`,
+        `The legal minimum the at-fault driver must carry runs from ${usd(lowestPositive)} to ${usd(highest)} per person in the states covered here, and ${list(noBi.map(s => s.state))} require${noBi.length === 1 ? 's' : ''} none.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every dollar figure here was measured by somebody else and carries their name. The {irc.who} is funded by insurers; we say so where it matters. No range on this page comes from a law firm's own results, and none of it is a valuation of anybody's claim. That depends on records only a lawyer who has seen them can weigh.</div>
+
+    <h2 id="average">The average injury claim paid {end.qualifier} {usd(end.value)}, and most of it is back and neck</h2>
+    <p>Search for this question and the answers are ranges: ten thousand to fifty, fifty to two hundred. None of them says who measured them, because nobody did. No insurer, court system or government body publishes an average settlement for back and neck injuries on their own.</p>
+    <p>What does exist is the average payment on every <b>bodily injury liability claim</b>, which is the claim an injured person makes against the at-fault driver's insurer. The {irc.who} measured it for <i>{irc.what}</i>, from data sent in by {irc.insurers} insurers writing about {irc.market_share}% of the US private auto market, covering more than {irc.claims_millions} million claims closed with payment from {irc.period}.</p>
+    <BarChart
+      heading="Average bodily injury claim payment, US"
+      rows={irc.bi_average.map((p, i) => ({
+        label: String(p.year),
+        value: p.value,
+        display: `${p.qualifier} ${usd(p.value)}`,
+        emphasis: i === irc.bi_average.length - 1,
+      }))}
+      caption={`${irc.who}, ${irc.what}, ${ircDate}. Growth of ${irc.bi_growth_annualized}% a year, which the study puts at ${irc.inflation_multiple}.`}
+    />
+    <p>That is an average over every kind of injury, so the next question is what those claims are. The {sp.who}'s study of claims in California, Illinois, Texas and Washington found that <b>neck or back sprains were the most serious injury for at least {sp.share_in_ten} in 10</b> bodily injury claimants in every one of the four states, and that at least {sp.no_disability_share} of them reported no disability from the crash.</p>
+    <p>So the average is not a figure that back and neck claims sit somewhere inside. They are most of it. A sprain that clears up sits below it, and the rarer claims with fractures, surgery or lasting damage are what pull it up.</p>
+
+    <h2 id="bills">Every $1 of medical bills became {ratio(lev.average)} of settlement</h2>
+    <p>Insurers price these claims from the treatment. The bills are the part of the claim a document proves, and the rest of the settlement, pain and suffering, lost enjoyment, is built on top of them.</p>
+    <p>The {irc.who} measured how big that top layer is. On average, bodily injury claimants received <b>{ratio(lev.average)} in total for every dollar of medical bills paid</b>, before any legal fee came out. And the multiplier is growing:</p>
+    <BarChart
+      heading="Total settlement per $1 of medical bills, bodily injury claims"
+      rows={[
+        { label: lev.start.when, value: lev.start.value, display: ratio(lev.start.value) },
+        { label: 'Average over the study', value: lev.average, display: ratio(lev.average) },
+        { label: lev.end.when, value: lev.end.value, display: ratio(lev.end.value), emphasis: true },
+      ]}
+      caption={`${irc.who}, ${irc.what}. Total settlement excludes legal fees. The study calls the ratio leverage.`}
+    />
+    <p>That is the mechanism behind the {growth}% rise in the average. Medical bills got bigger, and each dollar of them bought more general damages than it used to.</p>
+    <p>It also gives a reader a rough way to place their own claim: what the treatment cost, times something near two. It is a national average across millions of claims, not a formula an adjuster applies. Lost wages are added on top, fault takes some off, and the limits in the next sections can stop the arithmetic dead.</p>
+
+    <h2 id="severity">Sprain, herniated disc, surgery: what moves a claim up</h2>
+    <p>Back and neck injuries are not one injury, and the claim value tracks what the treatment had to be. In rough order of what they cost:</p>
+    <ul>
+      <li><b>Sprain and strain, including whiplash.</b> Soft tissue damage, treated with rest, physical therapy or chiropractic care over weeks. This is the bulk of the claims above. NHTSA put the average cost of a rear impact whiplash injury at <b>{usd(wh.average_cost)}</b> in {wh.dollars}, {usd(wh.economic)} of it economic and {usd(wh.quality_of_life)} in quality of life, from crash data of {wh.data_years}. Old and in old dollars, but measured.</li>
+      <li><b>Pain that does not go away.</b> A review by {rec.who} found that <b>about {rec.share_at_one_year}%</b> of people with whiplash still report neck pain a year later. A claim settled in the third week cannot account for that, which is the strongest argument for finishing treatment first.</li>
+      <li><b>Herniated or bulging disc.</b> Usually confirmed by MRI, often treated with injections, and argued over: insurers routinely say the disc was degenerating before the crash. Imaging and the treating doctor's opinion carry these claims.</li>
+      <li><b>Fracture or surgery.</b> A fractured vertebra or a fusion moves the claim out of the soft tissue band entirely, and in the threshold states below a fracture is one of the injuries that opens the door to pain and suffering on its own.</li>
+    </ul>
+    <p>Two more things move any of these: <b>fault</b>, since every state reduces or bars recovery for a driver who shares the blame, and <b>lost income</b>, which is added to the claim at its actual value.</p>
+
+    <h2 id="limits">The at-fault driver's policy limit is the ceiling most claims hit</h2>
+    <p>An insurer pays up to the limit of the policy, and a great many drivers carry the legal minimum. Above the limit, the money has to come from the driver personally, which is rarely there, or from the injured person's own underinsured motorist cover, if they bought any.</p>
+    <p>Here is what each state this directory covers makes a driver carry, read from its own code:</p>
+    <div class="table-wrap">
+      <table class="limits">
+        <thead><tr><th>State</th><th class="num">Per person</th><th class="num">Per crash</th><th>Own medical cover (PIP)</th></tr></thead>
+        <tbody>
+          {states.map(s => (
+            <tr>
+              <th scope="row">{s.state}</th>
+              <td class="num"><a href={s.url} rel="noopener" target="_blank">{s.bi_person ? usd(s.bi_person) : 'Not required'}</a></td>
+              <td class="num">{s.bi_accident ? usd(s.bi_accident) : 'Not required'}</td>
+              <td>{s.pip ? <><a href={s.pip.url} rel="noopener" target="_blank">{usd(s.pip.amount)}</a>{s.pip.waivable ? ', can be declined' : ''}</> : 'Not required'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Bodily injury liability minimums and personal injury protection, from each state's code, read {read}. Each figure links to the section it comes from. The method section names the states read from a copy.</p>
+    <BarChart
+      heading={`What ${usd(BILLS)} of medical bills prices to, against each state's minimum`}
+      rows={states.map(s => ({
+        label: s.state,
+        value: s.bi_person,
+        display: s.bi_person ? usd(s.bi_person) : 'no minimum',
+        note: s.bi_person === 0 ? 'Bodily injury cover not compulsory' : s.bi_person < priced ? `Below ${usd(priced)}` : undefined,
+        emphasis: s.bi_person < priced,
+      }))}
+      caption={`Minimum bodily injury cover per person. Highlighted states set a minimum below ${usd(priced)}, which is ${usd(BILLS)} of medical bills at the ${irc.who}'s average of ${ratio(lev.average)} per dollar. The ${usd(BILLS)} is an illustration, not a typical claim.`}
+    />
+    <p>The arithmetic is plain. A claim with {usd(BILLS)} in medical bills, priced at the national ratio, comes to about <b>{usd(priced)}</b>. In {list(capped.map(s => s.state))}, a driver carrying the minimum is insured for less than that. In {list(fits.map(s => s.state))}, the minimum covers it.</p>
+    {noBi.length > 0 && <p><b>{list(noBi.map(s => s.state))}</b> {noBi.length === 1 ? 'is' : 'are'} the outlier: {noBi.map(s => (s as any).note).join(' ')} An injured person there starts with their own PIP, and may find the driver who hit them has no injury cover at all.</p>}
+    {changed.length > 0 && <p>{changed.length === 1 ? 'One state' : changed.length === 2 ? 'Two states' : `${changed.length} states`} raised {changed.length === 1 ? 'its minimum' : 'their minimums'} recently, and the old figures still show up on pages that have not caught up: {changed.map((s, i) => <>{i > 0 && ' '}{s.state}: {(s as any).change}</>)}</p>}
+    <p>The practical point for anyone with a back or neck claim: ask early what the other driver carries, and check your own policy for underinsured motorist cover. It is often the difference between a settlement and the limit.</p>
+
+    <h2 id="thresholds">In {withThreshold.length} states, pain and suffering has to be earned first</h2>
+    <p>{withPip.length} of the {states.length} states make drivers carry their own medical cover, personal injury protection, which pays the first bills whoever was at fault. Some of them go further and close the door on pain and suffering for minor injuries. That matters more for back and neck claims than for any other kind, because most of them are minor on paper.</p>
+    <ul>
+      {withThreshold.map(s => (
+        <li><b>{s.state}:</b> a claim for pain and suffering needs {s.threshold!.rule}, under <a href={s.threshold!.url} rel="noopener" target="_blank">{s.threshold!.statute}</a>.</li>
+      ))}
+    </ul>
+    <p>A sprain that heals in six weeks usually meets none of these, so in those states the claim is often the PIP benefit and little else. A herniated disc with lasting limitation is exactly what the thresholds are argued about, and the medical records decide it.</p>
+
+    <h2 id="lawyer">With a lawyer, claimants kept {ratio(net.represented)} per $1 of bills and waited twice as long</h2>
+    <p>The share of claimants who hire a lawyer is climbing. Across all coverages it went from {irc.attorney.all_2017}% in 2017 to {irc.attorney.all_2022_qualifier} {irc.attorney.all_2022}% in 2022, and for bodily injury claims it reached <b>{irc.attorney.bi_2022}%</b>. Litigation went from {irc.attorney.litigation_2017}% to {irc.attorney.litigation_2022}% of claimants.</p>
+    <p>The {irc.who} then measured what a claimant keeps per dollar of medical bills, after the bills and a legal fee of {net.fee_share}:</p>
+    <BarChart
+      heading="Net to the claimant per $1 of medical bills, bodily injury claims"
+      rows={[
+        { label: 'Without a lawyer', value: net.unrepresented, display: ratio(net.unrepresented), emphasis: true },
+        { label: 'With a lawyer', value: net.represented, display: ratio(net.represented) },
+      ]}
+      caption={`${irc.who}, ${irc.what}. Legal fees estimated at ${net.fee_share} of the settlement.`}
+    />
+    <p>Read that carefully, because it is easy to read as "a lawyer costs you money", and it does not say that. It is a ratio per dollar of bills, not a total. The two groups are not the same claims: a disputed fault question, a large injury or an insurer that will not move are the reasons people hire lawyers, so the ratio says little about what any one claimant would have received the other way. It also comes from a research body supported by insurers, who have an interest in fewer claimants hiring lawyers.</p>
+    <p>The figure that holds up either way is the wait: represented claims took a median of <b>nearly {irc.wait_days_represented} days</b> to close, more than twice as long. For a sprain with modest bills and clear fault, that is a real cost. For a disc injury, a disputed threshold or a policy limit that is too small, it is usually the price of getting paid at all.</p>
+
+    <h2 id="states">Back and neck injury claims by state, and who to read</h2>
+    <p>Each state below has its minimum and its threshold from the code, the highest-scoring verified injury firm in this directory, and where we found one, a firm's own page on the same question that we read and checked against the statute. The top firm is computed from the directory, not chosen, and <a href="/methodology/">the method is published</a>. For the deadline to file, see the <a href="/guides/statute-of-limitations-by-state/">statute of limitations in every state</a>.</p>
+    {byState.map(s => (
+      <>
+        <h3>{s.state}</h3>
+        <p>
+          Minimum bodily injury cover: <b>{s.bi_person ? `${usd(s.bi_person)} per person` : 'not required'}</b>.
+          {s.pip && <> Own medical cover: {usd(s.pip.amount)}{s.pip.waivable ? ', which can be declined' : ''}.</>}
+          {s.threshold && <> Pain and suffering needs {s.threshold.rule}.</>}
+          {s.top && <> Highest-scoring verified injury firm: <a href={`/firms/${s.top.data.slug}/`}>{s.top.data.name}</a> in {s.top.data.market.city}, at <b>{s.top.data.score?.total}</b>.</>}
+        </p>
+        {s.reading.length > 0 && (
+          <ul class="reading">
+            {s.reading.map(r => (
+              <li><span class="fr">Further reading:</span> <a href={r.url} rel={r.rel} target="_blank">{r.title}</a>, from <a href={`/firms/${r.f.data.slug}/`}>{r.f.data.name}</a> in {r.f.data.market.city}. {r.why}</li>
+            ))}
+          </ul>
+        )}
+      </>
+    ))}
+
+    <h2 id="faq">Questions people ask about back and neck injury settlements</h2>
+    {faq.map(f => (
+      <>
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </>
+    ))}
+
+    <h2 id="method">Where these figures come from</h2>
+    <p>The average payment, the ratio of settlement to medical bills, the attorney rates and the waiting times are from the <a href={irc.url} rel="noopener" target="_blank">{irc.who}</a>, {irc.what}, published {ircDate}, read in the study's summary and <a href={irc.release_url} rel="noopener" target="_blank">its press release</a>. The full report is not published free. {irc.funding} The two averages are rounded by the study itself, which is why they read "about" and "more than".</p>
+    <p>The share of claims that are neck and back sprains is from an earlier {sp.who} study, {sp.what}, as <a href={sp.url} rel="noopener" target="_blank">reported by {sp.reported_by}</a> on {fmtDate(sp.reported_on)}. {sp.note} It is the most recent public figure we could read; newer editions exist behind a paywall, and a figure we could not read is not on this page.</p>
+    <p>The whiplash cost is from the <a href={wh.url} rel="noopener" target="_blank">{wh.who}, {wh.what}</a>, published {fmtDate(wh.published)}. The recovery figure is from {rec.who}, {rec.what}, read in <a href={rec.url} rel="noopener" target="_blank">the Institute for Work &amp; Health's summary</a>.</p>
+    <p>Every insurance minimum was read from the state's code on {read}, from the legislature's own site where it would serve the page. For {list(states.filter(s => s.via).map(s => s.state))} the text came from a copy instead: {states.filter(s => s.via).map((s, i) => <>{i > 0 && '; '}{s.state}, {s.via}</>)}. Those are the first we recheck.</p>
+    <p>Firm scores are computed from this directory each time the page is built. The firm pages under further reading were read on {read}; where they give a settlement range, it is the firm's own estimate and is not used anywhere on this page. Nothing here is legal advice, and no lawyer-client relationship comes from reading it.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  .prose p.note { font-size: .86rem; color: var(--muted); line-height: 1.6; margin: -12px 0 24px; padding-left: 2px; }
+  .prose .table-wrap { margin: 22px 0; overflow-x: auto; }
+  .prose table.limits { font-size: .9rem; }
+  .prose table.limits th[scope="row"] { text-align: left; white-space: nowrap; font-weight: 600; }
+  .prose .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .prose ul.reading li { margin-bottom: 10px; }
+  .prose ul.reading .fr { font-weight: 600; color: var(--ink); }
+</style>

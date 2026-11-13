@@ -21,7 +21,7 @@ interface Props {
   name: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
       | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-      | 'defense' | 'menu' | 'titles' | 'breadth';
+      | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -966,6 +966,35 @@ const lens = { col: 4, row: 3, span: 5 };
       ))}
       <line x1="-28" y1="104" x2="752" y2="104" stroke={BLUE} stroke-width="2"
         stroke-dasharray="8 7" opacity=".6" />
+    </g>
+  </svg>
+)}
+
+{name === 'settlement' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* What a back and neck claim is priced from, in one shape. On the left, a spine: seven
+        vertebrae, the two in the neck and low back drawn in violet because those are the
+        sprains most claims are about. On the right, three columns on one baseline: a dollar of
+        medical bills, the settlement it turns into, and what is left to the claimant once a
+        third goes in legal fees and the bills are paid. The ratios are the measured shape,
+        rounded: a cover rather than a chart, and the article carries the figures. */}
+    <g transform="translate(170,46)">
+      {[0, 1, 2, 3, 4, 5, 6].map(i => (
+        <rect x={-(46 + (i % 3) * 4) / 2} y={i * 50} width={46 + (i % 3) * 4} height="36" rx="12"
+          fill={i === 1 || i === 5 ? VIOLET : 'rgba(255,255,255,.22)'}
+          opacity={i === 1 || i === 5 ? '.9' : '1'} />
+      ))}
+      <line x1="0" y1="-10" x2="0" y2="350" stroke="rgba(255,255,255,.14)" stroke-width="2" />
+    </g>
+    <g transform="translate(420,46)">
+      <line x1="-30" y1="340" x2="700" y2="340" stroke="rgba(255,255,255,.28)" stroke-width="2" />
+      <rect x="0" y="200" width="140" height="140" rx="16" fill="rgba(255,255,255,.55)" />
+      <rect x="250" y="60" width="140" height="280" rx="16" fill={VIOLET} opacity=".85" />
+      <rect x="250" y="200" width="140" height="140" rx="16" fill="none" stroke="rgba(255,255,255,.55)"
+        stroke-width="2" stroke-dasharray="8 7" />
+      <rect x="500" y="200" width="140" height="140" rx="16" fill={MINT} opacity=".9" />
+      <rect x="500" y="60" width="140" height="140" rx="16" fill="none" stroke={BLUE}
+        stroke-width="2.5" stroke-dasharray="9 7" />
     </g>
   </svg>
 )}
