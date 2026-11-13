@@ -30,6 +30,11 @@ export interface FirmEntry {
    * src/pages/api/firms-index.json.ts, which writes it, and logoFor() below, which reads it.
    */
   l?: string;
+  /**
+   * The unclaimed points in pillar E, as [label, scored, max]. See the same field in
+   * src/pages/api/firms-index.json.ts, which writes it and says why it is not `o`.
+   */
+  fr?: [string, number, number][];
 }
 
 interface Index {

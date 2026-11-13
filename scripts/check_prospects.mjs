@@ -75,6 +75,14 @@ const POSTAL = 'Example Studio, 1 Example Street, Montevideo 11300, Uruguay';
 const FIRM = {
   s: 'harborline-law', n: 'Harborline Law', st: 'ca', sc: 71, t: 'Certified',
   w: ['A', 10, 25], g: ['Distinguished', 7], o: ['A2', 'Experience', 5],
+  // 8.5 unclaimed of the 15 in pillar E, which is close to the real average of 10.4 across
+  // the 1,388 published firms. The half point is deliberate: E3 scores 1.5 of 4 on a firm
+  // that publishes one language beyond English, and the letter must not round it.
+  fr: [
+    ['Free consult & fee transparency', 3, 6],
+    ['Languages & accessibility', 1.5, 4],
+    ['Availability', 2, 5],
+  ],
 };
 const PAGES = [
   'https://lawfirmlistings.com/cities/los-angeles-ca/',
@@ -153,13 +161,36 @@ head('the letter');
   ok('and says so out loud', /nothing to sign up for/i.test(letter.text));
 
   ok('it carries the real page count', letter.text.includes('5 pages'));
-  ok('and the subject does too', letter.subject.includes('5 pages'));
   ok('it shows four of them', PAGES.slice(0, 4).every(u => letter.text.includes(u)));
   ok('and says how many it left out', letter.text.includes('1 more'));
   ok('it carries the score', letter.text.includes('71 out of 100'));
-  ok('and the weakest pillar', letter.text.includes('pillar A, at 10 of 25'));
-  ok('it asks the question', letter.text.includes('Is any of it wrong?'));
+  ok('it asks the question', /is any of it wrong\?/i.test(letter.text));
   ok('it promises a free correction', /costs nothing/i.test(letter.text));
+
+  /*
+   * The free points, which are the reason this letter was rewritten on 2026-11-13.
+   *
+   * It used to ask one thing, "is any of it wrong?", and the honest answer for most firms is
+   * no, which is answered by saying nothing. Fifty-two letters got nothing back. So the letter
+   * now leads with the one true thing that is worth the reader's time rather than ours: the
+   * points in pillar E they have not claimed, every one of which is read off their own site.
+   *
+   * The arithmetic is asserted because it is the whole claim. 3 of 6, 1.5 of 4 and 2 of 5
+   * leaves 8.5, and a letter that printed 8 or 9 would be telling a firm a number its own
+   * profile page contradicts, in a letter whose entire purpose is to invite it to go and check.
+   */
+  ok('IT NAMES THE FREE POINTS', letter.text.includes('8.5 cost nothing'),
+     letter.text.match(/, [\d.]+ cost nothing/)?.[0]);
+  ok('and the subject carries the figure too', letter.subject.includes('8.5'), letter.subject);
+  ok('and the score, because that is the fact about them',
+     letter.subject.includes('scores 71'), letter.subject);
+  ok('it lists each one with its own numbers',
+     FIRM.fr.every(([label, pts, max]) => letter.text.includes(`${label}: ${pts} of ${max}`)));
+  ok('it says they need nothing from us', /need nothing from us/i.test(letter.text));
+  ok('and that nobody has to tell us', /do not have to tell\s+us/i.test(letter.text));
+  // The old subject was a fact about us, not about them, and it is what went out 52 times.
+  ok('the subject no longer leads on the page count', !letter.subject.includes('5 pages'),
+     letter.subject);
 
   ok('THE OPT-OUT LINK IS IN IT', letter.text.includes(optOutUrl(p.email)));
   ok('and the postal address', letter.text.includes(POSTAL));
@@ -168,6 +199,25 @@ head('the letter');
      !/^Hello,\n\nI am /.test(letter.text) && !/I run the directory/.test(letter.text));
   const longest = Math.max(...letter.text.split('\n').map(l => l.length));
   ok('it wraps under 95 columns', longest <= 95, `${longest}`);
+}
+
+/*
+ * No firm in the directory has all fifteen points in pillar E today: all 1,388 of them have
+ * something unclaimed, and that is exactly why this branch needs a test. It is the branch
+ * nothing exercises, so it is the branch that rots, and the day a firm does claim the lot it
+ * must get a letter rather than a sentence about 'undefined of the points you are missing'.
+ */
+head('a firm with nothing free left still gets a letter');
+{
+  const { fr, ...full } = FIRM;
+  const { letter } = verificationLetter(make(), PAGES, full, { POSTAL_ADDRESS: POSTAL });
+  ok('IT STILL BUILDS', Boolean(letter));
+  ok('and names no free points', !/cost nothing and need nothing/.test(letter.text));
+  ok('it falls back to the weakest pillar', letter.text.includes('A, at 10 of 25'));
+  ok('the subject drops the figure', letter.subject === 'Harborline Law scores 71 on our '
+     + 'directory', letter.subject);
+  ok('and it still asks the question', /is any of it wrong\?/i.test(letter.text));
+  ok('no stray undefined or NaN', !/undefined|NaN/.test(letter.text + letter.subject));
 }
 
 head('a letter that cannot be lawful is not written');
