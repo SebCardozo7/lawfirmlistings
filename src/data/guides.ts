@@ -25,7 +25,7 @@ export interface Guide {
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-    | 'defense' | 'menu' | 'titles' | 'breadth';
+    | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -67,6 +67,21 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  // Family D in docs/guides-50.md: settlement values. Reference pieces built on published
+  // research; the page computes its figures from src/data/research, so nothing here may carry one.
+  {
+    slug: 'average-settlement-for-back-and-neck-injury',
+    cover: 'settlement',
+    kicker: 'Reference',
+    title: 'Average Settlement for Back and Neck Injury After a Car Accident',
+    summary:
+      'Nobody measures back and neck settlements on their own, so this starts from the figure ' +
+      'insurers do measure: the average injury claim, most of which are neck and back sprains. ' +
+      'How the medical bills price the claim, and the state minimum that caps it.',
+    thumb: 't1',
+    icon: 'doc',
+    meta: 'Priced from the bills, capped by the policy',
+  },
   // The state statute pages from docs/guides-50.md, family B. Reference pieces: the periods
   // live in src/data/research/statute-of-limitations-<code>.json and the pages compute their
   // headlines from it, so nothing here may carry a figure.
