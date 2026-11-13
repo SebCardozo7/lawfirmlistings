@@ -82,7 +82,11 @@ const lede = notes.lede
       </ol>
       <span class="eyebrow">City guide</span>
       <h1>Law Firms in {place}</h1>
-      <p class="lede">{lede}</p>
+      {/* set:html, as the sections below already are. Four of these ledes bold the deadline that
+          ends most claims, and interpolation printed the tags: Los Angeles opened with "the
+          other deadline: <b>six months</b> to present a claim". The source is src/data/cities.ts,
+          which is ours and holds no input from anybody else. */}
+      <p class="lede" set:html={lede} />
       {notes.areas && notes.areas.length > 0 && (
         <div class="chips" style="margin-top:24px">
           {/* Named, not linked: there are no neighbourhood pages yet, and a chip that goes
