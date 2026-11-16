@@ -115,6 +115,53 @@ export async function optOut(
   return true;
 }
 
+// The local parts a form prints as an example. One of these was published as if it were a
+// firm's own address and was chosen for that firm, so the queue held it.
+const PLACEHOLDER = new Set([
+  'youremail', 'your-email', 'yourname', 'your-name', 'email', 'e-mail', 'name',
+  'firstname', 'lastname', 'example', 'someone', 'user', 'username', 'test', 'sample',
+  'emailaddress', 'myemail',
+]);
+
+/**
+ * Why a letter addressed here could never arrive, or null when it could.
+ *
+ * `includes('@')` was the whole test until 16 November 2026, and five firms waiting in the
+ * queue held an address that passed it and could not receive mail: a space left inside a
+ * mailto: href, a stray @ left in a template, the text of a JSON escape glued to the front.
+ * A sixth held youremail@, a form's example address published as though it were the firm's,
+ * which would have sent an unsolicited letter about a law firm to whoever owns that account.
+ *
+ * The crawler now refuses these where it finds them. This refuses them where they are sent,
+ * which is the only place that can be sure of it: KV holds rows written by earlier passes,
+ * and the pass that put youremail@ into the queue was run by hand and is not in this
+ * repository. A gate that only guards the front door does not guard a room with two.
+ *
+ * It refuses and never repairs. Working out what a damaged address was meant to say is how
+ * a letter reaches somebody who was never asked. Note what it cannot see: ninfo@firm.com is
+ * a perfectly well-formed address at a mailbox that does not exist, and nothing here can
+ * tell that from a real one. That is the crawler's job, and bounces would be ours if we
+ * could see them.
+ */
+export function undeliverable(email: string): string | null {
+  const a = String(email ?? '').trim().toLowerCase();
+  if (!a) return 'no address';
+  if (/\s/.test(a)) return 'a space inside the address';
+  const parts = a.split('@');
+  if (parts.length !== 2) return parts.length > 2 ? 'more than one @' : 'no @';
+  const [local, domain] = parts;
+  if (!local || !domain) return 'half an address';
+  if (local.startsWith('.') || local.endsWith('.') || local.includes('..')) {
+    return 'a stray dot in the mailbox';
+  }
+  if (PLACEHOLDER.has(local)) return "a form's example address, not the firm's";
+  if (!/^[a-z0-9][a-z0-9._%+-]*$/.test(local)) return 'the mailbox is not a mailbox';
+  const labels = domain.split('.');
+  if (labels.length < 2 || !labels.every(l => /^[a-z0-9-]+$/.test(l))) return 'no domain';
+  if (!/^[a-z]{2,24}$/.test(labels[labels.length - 1])) return 'no top-level domain';
+  return null;
+}
+
 /**
  * The single gate every outbound message to a prospect passes.
  *
@@ -123,7 +170,8 @@ export async function optOut(
  * that somebody unsubscribed since.
  */
 export async function canSend(env: ProspectEnv, p: Prospect): Promise<string | null> {
-  if (!p.email || !p.email.includes('@')) return 'no address';
+  const bad = undeliverable(p.email);
+  if (bad) return bad;
   if (p.status === 'unsubscribed') return 'they asked to be left alone';
   if (p.status === 'client') return 'they are already a client';
   if (p.status === 'bounced') return 'the address bounced';

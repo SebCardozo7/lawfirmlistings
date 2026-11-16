@@ -44,6 +44,16 @@ def domain_of(address):
 GLUED = re.compile(
     r"^[a-z0-9%]{1,3}(info|contact|intake|hello|office|mail|admin|team|legal)$")
 
+# The text of a JSON escape, left at the front of a local part because a backslash cannot
+# start an address and the letter after it can. The crawler stopped producing these on
+# 16 November 2026; the rows already on disk still carry them.
+#
+# Stripped whatever follows it, rather than only in front of a word we recognise. The first
+# version of this repair only stripped it from in front of info@ and its siblings, which
+# left one firm with u003emediarequests@ still stored and, because nothing matched it, still
+# read as a person's name and still preferred over that firm's real info@ address.
+ESCAPED = re.compile(r"^u[0-9a-f]{4}")
+
 
 def repair(addresses):
     """
@@ -59,8 +69,16 @@ def repair(addresses):
     for a in addresses:
         if not a:
             continue
-        a = unquote(a).strip().lower()
-        if "@" not in a or GLUED.match(a.split("@")[0]):
+        # clean() is the crawler's own gate, so a row repaired here and a row crawled
+        # tomorrow are judged by one rule rather than two that drift apart. It handles the
+        # space and the stray @; GLUED handles what is syntactically a perfectly good
+        # address and is still nobody's mailbox.
+        a = ce.clean(unquote(a))
+        if not a:
+            continue
+        local, at, dom = a.partition("@")
+        a = ESCAPED.sub("", local) + at + dom
+        if not local or ce.JUNK.search(a) or GLUED.match(a.split("@")[0]):
             continue
         if a not in seen:
             seen.add(a)
@@ -68,10 +86,49 @@ def repair(addresses):
     return out
 
 
+def selftest():
+    """
+    The repair rule, on the six strings that were actually stored as a firm's address.
+
+    Every one of them was chosen, so a letter to any was already written or about to be.
+    They are kept as cases rather than fixed by hand because this file runs over 1,388 rows
+    and got one of them wrong on the first pass: stripping the JSON escape only in front of
+    a word it recognised left u003emediarequests@ intact and preferred over a real info@.
+    """
+    cases = [
+        (["%20info@f.com"], ["info@f.com"], "a URL-encoded space"),
+        (["contact@ f.com"], ["contact@f.com"], "a space inside the href"),
+        (["@info@f.com"], ["info@f.com"], "a stray @ from a template"),
+        (["u003einfo@f.com"], ["info@f.com"], "an escape in front of a known word"),
+        (["u003emediarequests@f.com"], ["mediarequests@f.com"],
+         "an escape in front of anything else"),
+        (["ninfo@f.com"], [], "a swallowed backslash-n, which is nobody's mailbox"),
+        (["youremail@gmail.com"], [], "a form's example address"),
+        (["here 4 u @ f.com"], [], "an address spaced out against scrapers"),
+        (["info@f.com", "info@f.com"], ["info@f.com"], "the same address twice"),
+        (["info@f.com"], ["info@f.com"], "an address that was always fine"),
+    ]
+    bad = 0
+    for given, want, why in cases:
+        got = repair(given)
+        if got != want:
+            bad += 1
+            print(f"  FAIL {why}: {got}, expected {want}")
+        else:
+            print(f"  ok   {why}")
+    print("\nEvery check passed." if not bad else f"\n{bad} check(s) failed.")
+    return 1 if bad else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true", help="rewrite the file")
+    ap.add_argument("--selftest", action="store_true",
+                    help="check the repair rule, with no files and no network")
     args = ap.parse_args()
+
+    if args.selftest:
+        sys.exit(selftest())
 
     if not EMAILS.exists():
         sys.exit(f"{EMAILS} is not here. Run scripts/crawl_emails.py first.")

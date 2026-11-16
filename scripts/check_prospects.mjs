@@ -50,7 +50,7 @@ await build({
   bundle: true, format: 'esm', platform: 'neutral', outfile: bundle, logLevel: 'warning',
 });
 const {
-  canSend, optOut, isOptedOut, getProspect, putProspect, listProspects, nextBatch, tally,
+  canSend, undeliverable, optOut, isOptedOut, getProspect, putProspect, listProspects, nextBatch, tally,
   verificationLetter, optOutUrl, handleUnsubscribe, pagesFor, resetPages,
 } = await import(pathToFileURL(bundle).href);
 
@@ -115,6 +115,36 @@ head('an opt-out beats everything');
      (await canSend(env, make({ email: 'other@elsewhere.example' }))) === null);
   ok('an empty address is refused', (await canSend(env, make({ email: '' }))) !== null);
   ok('and so is one with no @', (await canSend(env, make({ email: 'nope' }))) !== null);
+}
+
+head('an address that could never arrive, which includes("@") let through for months');
+{
+  const { ns } = kv();
+  const env = { FOLLOWUPS: ns };
+  // Every string here was sitting in the live queue on 16 November 2026, chosen as a firm's
+  // address and waiting to be written to. The first four cannot receive mail at all. The
+  // fifth is the one that matters: a form's example address, which would have sent an
+  // unsolicited letter about a law firm to a stranger who never heard of us.
+  const queued = [
+    ['contact@ firm.example', 'a space left inside a mailto: href'],
+    ['@info@firm.example', 'a stray @ left in a template'],
+    ['%20info@firm.example', 'a URL-encoded space, never decoded'],
+    ['info@firm', 'a domain with no top-level domain'],
+    ['youremail@gmail.com', "A FORM'S EXAMPLE ADDRESS, NOT A FIRM'S"],
+  ];
+  for (const [email, why] of queued) {
+    ok(`refused: ${why}`, (await canSend(env, make({ email }))) !== null, email);
+  }
+  // And the ordinary ones still go, because a gate that refuses everything guards nothing.
+  for (const email of ['info@firm.example', 'j.o-brien+intake@sub.firm.co.uk',
+                       'contact@firm-name.law', 'a1@b2.io']) {
+    ok(`still sent: ${email}`, (await canSend(env, make({ email }))) === null,
+       String(await canSend(env, make({ email }))));
+  }
+  // Refused, never repaired: nothing here may invent the address it thinks was meant.
+  ok('AND NOTHING IS REPAIRED INTO AN ADDRESS',
+     undeliverable('contact@ firm.example') !== null
+     && undeliverable('@info@firm.example') !== null);
 }
 
 head('the opt-out also marks the row, when there is one');
