@@ -1,0 +1,144 @@
+{
+  "slug": "att-data-breach-settlement",
+  "measured_at": "2026-11-16",
+  "case": {
+    "name": "In re AT&T Inc. Customer Data Security Breach Litigation",
+    "court": "US District Court for the Northern District of Texas, Dallas Division",
+    "mdl": "MDL No. 3:24-md-03114",
+    "civil_action": "3:24-cv-00757",
+    "judge_original": "Ada E. Brown",
+    "judge_final": "Sidney A. Fitzwater",
+    "administrator": "Kroll Settlement Administration LLC",
+    "fraud_vendor": "Covalynt (ClaimScore, LLC)",
+    "special_master": "Royal Furgeson, a retired US District Judge",
+    "site": "https://telecomdatasettlement.com/",
+    "faq": "https://telecomdatasettlement.com/faq",
+    "documents": "https://telecomdatasettlement.com/documents",
+    "order_url": "https://telecomdatasettlement.com/files/Memorandum%20Opinion%20and%20Order.pdf",
+    "agreement_url": "https://telecomdatasettlement.com/files/AT&T%20Data%20Incident%20Settlement%20-%20Settlement%20Agreement.pdf",
+    "docket_url": "https://www.courtlistener.com/docket/68394437/in-re-att-inc-customer-data-security-breach-litigation/",
+    "final_approval": "2026-10-02",
+    "order_ecf": 534,
+    "order_pages": 73,
+    "admin_update": {
+      "date": "2026-10-30",
+      "text": "Payments have not been issued yet. Payments cannot be made until the Settlement becomes \"effective.\" That happens only after the time to appeal has ended and any post-judgment motions or appeals are resolved. Payments are not expected to be issued in 2026."
+    }
+  },
+  "incidents": [
+    {
+      "key": "att1",
+      "label": "AT&T 1",
+      "announced": "2024-03-30",
+      "dark_web_by": "2021-08-20",
+      "compromised_year": 2019,
+      "data": "some combination of names, addresses, telephone numbers, email addresses, dates of birth, account passcodes, billing account numbers and Social Security numbers",
+      "defendants": "AT&T Inc., AT&T Mobility LLC, AT&T Corporation and DirecTV, LLC"
+    },
+    {
+      "key": "att2",
+      "label": "AT&T 2",
+      "announced": "2024-07-12",
+      "loss_from": "2024-04-14",
+      "data": "telephone numbers of current and former customers, the telephone numbers they interacted with, counts of those interactions, aggregate call durations for a day or month and, for a small subset, cell site identification numbers",
+      "not_included": "text content, customer names, Social Security numbers, dates of birth or other personal or financial information",
+      "defendants": "AT&T Mobility LLC, AT&T Services, Inc. and Cricket Wireless LLC"
+    }
+  ],
+  "funds": {
+    "total": 177000000,
+    "att1": 149000000,
+    "att2": 28000000,
+    "non_reversionary": true,
+    "att1_documented_loss_pool": 25000000
+  },
+  "benefits": {
+    "att1_documented_cap": 5000,
+    "att2_documented_cap": 2500,
+    "tier1_multiple": 5,
+    "check_days": 180,
+    "payment_methods": ["Venmo", "direct deposit", "paper check"],
+    "estimates_source": "Kroll Omnibus Declaration (ECF No. 517) paragraph 40, as quoted in the final approval order",
+    "estimates": [
+      { "tier": "Tier 1", "who": "AT&T 1 members whose Social Security number was exposed", "low": 39, "high": 40 },
+      { "tier": "Tier 2", "who": "AT&T 1 members whose Social Security number was not exposed", "low": 7.5, "high": 8.1, "order_label": "AT&T 2 - Tier 2" },
+      { "tier": "Tier 3", "who": "AT&T 2 account owners", "low": 6.5, "high": 7.1 }
+    ],
+    "not_covered": ["medical bills", "emotional distress", "estimated lost wages", "estimated lost time", "credit score reductions", "services you performed yourself", "losses already reimbursed"]
+  },
+  "class": {
+    "records_total": 99763302,
+    "att1_only": 57002042,
+    "att2_only": 36478626,
+    "overlap": 6282634,
+    "email_attempted": 86916176,
+    "email_undeliverable": 17393394,
+    "postcards": 17906765,
+    "postcards_returned": 517080,
+    "likely_reached": 86912467,
+    "reminder_emails": 61172725
+  },
+  "claims": {
+    "mail": 754263,
+    "online": 4163810,
+    "total": 4918073,
+    "rate_pct": 4.8,
+    "rejected": 1099732,
+    "fraud": 804381,
+    "tier1_allowed": 1654046,
+    "tier2_allowed": 687859,
+    "tier3_allowed": 1582248,
+    "deficient_deadline": "2026-09-08",
+    "cure_days": 22
+  },
+  "costs": {
+    "fees_att1": 49666666,
+    "fees_att2": 9333333,
+    "fee_share": "one-third",
+    "expenses_att1": 828612.64,
+    "expenses_att2": 231438.36,
+    "service_award_each": 1500,
+    "service_awards_total": 54000,
+    "admin_estimate_original": 5453185,
+    "admin_estimate_now": 22161587.09,
+    "admin_approved": 18856175.48,
+    "lodestar_att1": 12841203,
+    "lodestar_att2": 2505245,
+    "multiplier_att1": 3.86,
+    "multiplier_att2": 3.73
+  },
+  "timing": {
+    "appeal_days": 30,
+    "appeal_rule": "Federal Rule of Appellate Procedure 4(a)(1)(A)",
+    "appeal_rule_url": "https://www.law.cornell.edu/rules/frap/rule_4",
+    "effective_days_after_appeal_time": 10,
+    "effective_days_after_appeal_ruling": 30,
+    "distribute_within_days": 60,
+    "fees_within_days": 15
+  },
+  "timeline": [
+    { "date": "2021-08-20", "what": "The AT&T 1 data set is on the dark web by this date, according to the complaint." },
+    { "date": "2024-03-30", "what": "AT&T announces the first incident (AT&T 1)." },
+    { "date": "2024-06-05", "what": "The Judicial Panel on Multidistrict Litigation sends the AT&T 1 suits to Dallas as MDL No. 3114." },
+    { "date": "2024-07-12", "what": "AT&T announces the second incident, the call records taken from its Snowflake workspace (AT&T 2)." },
+    { "date": "2024-10-04", "what": "The Snowflake suits, AT&T 2 among them, are sent to Judge Brian Morris in Montana." },
+    { "date": "2025-03-17", "what": "Three days of mediation begin. Both cases reach agreements in principle." },
+    { "date": "2025-05-30", "what": "One settlement agreement for both incidents is signed and filed in Dallas." },
+    { "date": "2025-06-20", "what": "Judge Ada E. Brown grants preliminary approval." },
+    { "date": "2025-08-04", "what": "Kroll starts sending email notice." },
+    { "date": "2025-11-17", "what": "Last day to opt out or object." },
+    { "date": "2025-12-18", "what": "Claim deadline." },
+    { "date": "2026-01-15", "what": "Final approval hearing in Dallas." },
+    { "date": "2026-08-17", "what": "The case is reassigned to Senior Judge Sidney A. Fitzwater after Judge Brown recuses." },
+    { "date": "2026-09-08", "what": "Last day to answer a notice of deficient claim." },
+    { "date": "2026-10-02", "what": "Final approval granted, with fees, costs and service awards." },
+    { "date": "2026-10-30", "what": "The administrator posts that payments are not expected in 2026." }
+  ],
+  "keyword": {
+    "head": "at&t data breach settlement",
+    "volume": 77000,
+    "kd": 3,
+    "read": "2026-10-04",
+    "source": "Ahrefs Keywords Explorer, US"
+  }
+}

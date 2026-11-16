@@ -1,0 +1,322 @@
+---
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import data from '../../data/research/att-data-breach-settlement.json';
+
+/**
+ * Item 2 in docs/guides-50.md (family A, class action settlements). A reference article: the
+ * full account of one case, then how the money moves and when.
+ *
+ * Every figure is read from src/data/research/att-data-breach-settlement.json, which was taken
+ * from three primary sources on the date it carries: the settlement website Kroll runs for the
+ * court, the settlement agreement filed on May 30, 2025, and the 73-page memorandum opinion and
+ * order granting final approval on October 2, 2026 (ECF No. 534). Nothing comes from a news
+ * summary of either.
+ *
+ * The payment date is the one thing nobody has published, so the page computes the earliest date
+ * the agreement allows if no appeal was filed, shows the arithmetic, and sets it beside what the
+ * administrator itself says. Both are dated. The case carries a claims history and a payout
+ * date, so it is re-read on the monthly refresh.
+ *
+ * No client firm is placed here: none of the eight does class action work, and the plan says so.
+ */
+const c = data.case;
+const f = data.funds;
+const b = data.benefits;
+const k = data.class;
+const cl = data.claims;
+const co = data.costs;
+const tm = data.timing;
+const [i1, i2] = data.incidents;
+
+const DAY = 86400000;
+const usd = (v: number) => '$' + Math.round(v).toLocaleString('en-US');
+const usd2 = (v: number) => '$' + v.toFixed(2);
+const mill = (v: number, d = 0) => '$' + (v / 1e6).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d }) + ' million';
+const n = (v: number) => v.toLocaleString('en-US');
+const mn = (v: number) => (v / 1e6).toFixed(1) + ' million';
+const pct = (a: number, z: number) => Math.round((a / z) * 100);
+const list = (xs: string[]) => xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const d = (s: string) => new Date(s + 'T00:00:00Z');
+const fmt = (x: Date | string) => (typeof x === 'string' ? d(x) : x).toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const plus = (x: Date, days: number) => new Date(x.getTime() + days * DAY);
+// A deadline that lands on a weekend runs to the Monday, which is how the federal rules count it.
+const rollWeekend = (x: Date) => x.getUTCDay() === 6 ? plus(x, 2) : x.getUTCDay() === 0 ? plus(x, 1) : x;
+
+const read = fmt(data.measured_at);
+const approved = c.final_approval;
+const approvedDate = d(approved);
+const appealEnds = rollWeekend(plus(approvedDate, tm.appeal_days));
+const effective = plus(appealEnds, tm.effective_days_after_appeal_time);
+const payBy = plus(effective, tm.distribute_within_days);
+const update = c.admin_update;
+
+// Who is in the classes. The overlap is counted in both, which is how the order counts it too.
+const att1People = k.att1_only + k.overlap;
+const att2People = k.att2_only + k.overlap;
+const reachedPct = pct(k.likely_reached, k.records_total);
+
+// Where the $177 million goes. Administration is Kroll's current estimate, which the court has
+// not yet approved in full; the page says so beside the figure.
+const fees = co.fees_att1 + co.fees_att2;
+const expenses = co.expenses_att1 + co.expenses_att2;
+const admin = co.admin_estimate_now;
+const left = f.total - fees - expenses - co.service_awards_total - admin;
+const adminGrowth = Math.round(co.admin_estimate_now / co.admin_estimate_original * 10) / 10;
+
+const [t1, t2, t3] = b.estimates;
+const fraudPct = pct(cl.fraud, cl.total);
+const allowed = cl.tier1_allowed + cl.tier2_allowed + cl.tier3_allowed;
+
+const title = 'AT&T Data Breach Settlement: Who Qualifies, How Much, When It Pays';
+const description = `The court approved the ${mill(f.total)} AT&T settlement on ${fmt(approved)}. Who is in it, what each tier is expected to pay, and why nobody is paid yet.`;
+const lede = `AT&T agreed to pay <b>${mill(f.total)}</b> to settle the lawsuits over two data breaches announced in 2024, and the court gave its final approval on <b>${fmt(approved)}</b>. Claims closed on ${fmt('2025-12-18')}. Nobody has been paid yet. The administrator's own estimate puts the cash payment at <b>${usd(t1.low)} to ${usd(t1.high)}</b> for someone whose Social Security number was exposed and under ${usd(Math.ceil(t2.high))} for most others. Here is how the case got here, who is in it, and the earliest the money can move.`;
+
+const faq = [
+  {
+    q: 'When will the AT&T data breach settlement pay out?',
+    a: `Not before the settlement becomes effective. Under the agreement that is ${tm.effective_days_after_appeal_time} days after the time to appeal the ${fmt(approved)} approval runs out, and Kroll then has ${tm.distribute_within_days} days to pay. If nobody appealed, that puts the effective date at ${fmt(effective)} and the last day to pay at ${fmt(payBy)}. If anybody appealed, everything waits for the appeal. On ${fmt(update.date)} the administrator wrote that payments are not expected to be issued in 2026.`,
+  },
+  {
+    q: 'How much will I get from the AT&T settlement?',
+    a: `It depends on your tier. Kroll estimated the cash payments at ${usd(t1.low)} to ${usd(t1.high)} for Tier 1 (AT&T 1 members whose Social Security number was exposed), ${usd2(t2.low)} to ${usd2(t2.high)} for Tier 2 (the other AT&T 1 members) and ${usd2(t3.low)} to ${usd2(t3.high)} for Tier 3 (AT&T 2 account owners). People who claimed documented losses instead can receive up to ${usd(b.att1_documented_cap)} under AT&T 1 and ${usd(b.att2_documented_cap)} under AT&T 2. The estimates are not final; they move with the administration bill and the number of valid claims.`,
+  },
+  {
+    q: 'Who qualifies for the AT&T data breach settlement?',
+    a: `Two groups. Anyone in the United States whose data was in the set AT&T announced on ${fmt(i1.announced)} (the AT&T 1 class), and AT&T account owners and line users whose call records were in the Snowflake download announced on ${fmt(i2.announced)} (the AT&T 2 class). People in both are overlap members and can claim from both funds. Being in a class was not enough on its own: only people who filed a valid claim by ${fmt('2025-12-18')} will be paid.`,
+  },
+  {
+    q: 'Can I still file a claim in the AT&T settlement?',
+    a: `No. The claim deadline was ${fmt('2025-12-18')}, and the settlement website says claims can no longer be submitted. Claims filed after the deadline were rejected as late. If you filed one, you do not need to do anything else unless Kroll sent you a notice asking for more information.`,
+  },
+  {
+    q: 'Is the AT&T settlement email legitimate?',
+    a: `The real notices came from attsettlement@e.emailksa.com, the address of Kroll Settlement Administration, and the only authorized website is telecomdatasettlement.com. Kroll never asks for a fee to release a payment. If a message asks you to pay, or sends you anywhere else, treat it as a scam and check it against the official site.`,
+  },
+  {
+    q: 'Why is the AT&T settlement taking so long?',
+    a: `Three reasons, all in the court record. Kroll had ${n(cl.total)} claims to review and ${n(cl.fraud)} of them were rejected as fraud, which needed a notice-and-cure process for the people flagged. The judge who held the fairness hearing recused in August 2026 and the case moved to a new judge, who ruled on ${fmt(approved)}. And no payment can go out until the time for appeals has run and any appeal is resolved.`,
+  },
+];
+
+const url = new URL(`/guides/${data.slug}/`, Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: data.measured_at,
+    dateModified: data.measured_at,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Law Firm Listings Editorial Team' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(q => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.a } })),
+  },
+];
+---
+<Base title={title} description={description} nav="guides" schema={schema}
+  figuresFrom={`${c.name}, ${c.mdl}, final approval order of ${fmt(approved)} and the settlement website, read ${read}`}
+  image="/og/breach.png"
+  imageAlt="Two server cabinets with a stream of records leaking out, flowing into a fund split into three unequal shares">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">AT&amp;T data breach settlement</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Class actions</span>
+    <h1>{title}</h1>
+    <p class="lede" set:html={lede} />
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Published research, no legal advice</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>10 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="breach" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#status" class="is-active">Where the case stands</a></li>
+      <li><a href="#what-happened">Two breaches, one settlement</a></li>
+      <li><a href="#who">Who qualifies</a></li>
+      <li><a href="#how-much">How much each tier gets</a></li>
+      <li><a href="#money">Where the $177 million goes</a></li>
+      <li><a href="#claims">The claims, and the fraud</a></li>
+      <li><a href="#when">When it pays</a></li>
+      <li><a href="#notices">Deficient and denied claims</a></li>
+      <li><a href="#objections">What objectors argued</a></li>
+      <li><a href="#faq">Questions people ask</a></li>
+      <li><a href="#method">Where these figures come from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`From the final approval order of ${fmt(approved)}, the settlement agreement and the official settlement website, read ${read}.`}
+      items={[
+        `The settlement is <b>${mill(f.total)}</b>: ${mill(f.att1)} for the March 2024 breach and ${mill(f.att2)} for the Snowflake call records.`,
+        `Kroll's estimate of the cash payment: <b>${usd(t1.low)} to ${usd(t1.high)}</b> if your Social Security number was exposed, ${usd2(t2.low)} to ${usd2(t2.high)} if it was not, ${usd2(t3.low)} to ${usd2(t3.high)} for Snowflake account owners.`,
+        `${n(cl.total)} claims came in, a ${cl.rate_pct}% claims rate. <b>${n(cl.fraud)}</b> were rejected as fraud.`,
+        `If nobody appealed, the agreement's earliest pay-by date is <b>${fmt(payBy)}</b>. The administrator says no payments are expected in 2026.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page comes from the court's order, the settlement agreement or the website the court authorized, and each is cited where it is used. The payment estimates are Kroll's, made before every claim was final, so they can move. Nothing here is legal advice about your own claim.</div>
+
+    <h2 id="status">Where the AT&amp;T settlement stands on {read}</h2>
+    <p>The settlement has final approval. Senior Judge {c.judge_final} signed the memorandum opinion and order on <b>{fmt(approved)}</b>, approving the agreement, the attorneys' fees and the service awards, with one change to what happens to money left over at the end.</p>
+    <p>No payments have gone out. The administrator's update of {fmt(update.date)} says so in plain terms: payments wait until the settlement is "effective", which happens only after the time to appeal has ended and any appeals are resolved, and they are <b>not expected to be issued in 2026</b>.</p>
+    <p>Claims are closed. The deadline was {fmt('2025-12-18')}. If you filed and have not heard anything, you do not need to do anything. If you got an email about a deficient or denied claim, the section on <a href="#notices">notices</a> below covers what it means.</p>
+
+    <h2 id="what-happened">Two breaches, two courts, one settlement</h2>
+    <p>This case is two data incidents that were litigated separately and settled together.</p>
+    <p><b>The first, which the settlement calls AT&amp;T 1,</b> started years before anyone was told. According to the complaint, AT&amp;T's systems were compromised by an outside actor sometime in {i1.compromised_year}, and a data set with AT&amp;T customer fields was on the dark web on or before {fmt(i1.dark_web_by)}. AT&amp;T announced it on <b>{fmt(i1.announced)}</b>, almost three years later. The data included {i1.data}.</p>
+    <p>Suits were filed in state and federal courts across the country. On June 5, 2024 the Judicial Panel on Multidistrict Litigation sent them to Dallas, to Judge {c.judge_original} of the Northern District of Texas, as one proceeding.</p>
+    <p><b>The second, AT&amp;T 2,</b> was announced on <b>{fmt(i2.announced)}</b>. Someone had downloaded data from an AT&amp;T workspace on a cloud platform run by Snowflake, Inc. This time it was call log data: {i2.data}. The court's order is specific that it did not include {i2.not_included}.</p>
+    <p>Suits over the Snowflake downloads named Snowflake and many of its customers, so the AT&amp;T 2 cases went into a separate multidistrict proceeding before Judge Brian Morris in Montana.</p>
+    <p>In March 2025 the parties in both cases spent three days with a mediator, Robert A. Meyer, and reached separate agreements in principle. They then wrote one settlement agreement covering both, signed on May 30, 2025, and brought AT&amp;T 2 to Dallas so a single judge could approve it. AT&amp;T settled without admitting liability or wrongdoing.</p>
+
+    <ol class="case-timeline" aria-label="The case, from breach to approval">
+      {data.timeline.map(t => (
+        <li class={t.date === approved ? 'key' : ''}><time datetime={t.date}>{fmt(t.date)}</time><span>{t.what}</span></li>
+      ))}
+    </ol>
+    <p class="note">From the final approval order, the settlement agreement and the settlement website.</p>
+
+    <h2 id="who">Who qualifies: two classes and an overlap</h2>
+    <p>The settlement has two classes, one per breach, and people in both are called overlap members.</p>
+    <ul>
+      <li><b>The AT&amp;T 1 class</b> is every living person in the United States whose data was in the set announced on {fmt(i1.announced)}. It is not limited to current customers.</li>
+      <li><b>The AT&amp;T 2 class</b> is AT&amp;T account owners and line or end users whose records were in the Snowflake download.</li>
+    </ul>
+    <p>For sending notice, Kroll worked from <b>{n(k.records_total)}</b> class member records: {n(k.att1_only)} in AT&amp;T 1 only, {n(k.att2_only)} in AT&amp;T 2 only and {n(k.overlap)} in both. Counting the overlap in each, that is about {mn(att1People)} records in the first class and {mn(att2People)} in the second.</p>
+    <BarChart
+      heading="Class member records used for notice"
+      rows={[
+        { label: 'AT&T 1 only', value: k.att1_only, display: n(k.att1_only), emphasis: true },
+        { label: 'AT&T 2 only', value: k.att2_only, display: n(k.att2_only) },
+        { label: 'In both classes', value: k.overlap, display: n(k.overlap) },
+      ]}
+      caption={`Kroll Omnibus Declaration, as quoted in the final approval order of ${fmt(approved)}. A record is not always one person.`}
+    />
+    <p>Kroll emailed {n(k.email_attempted)} records and mailed {n(k.postcards)} postcards where email failed or was missing. The order counts {n(k.likely_reached)} records, or {reachedPct}%, as likely to have received direct notice.</p>
+    <p>The part that matters now: being in a class was never enough. Only people who filed a valid claim by the deadline will be paid. Everyone else in the class who did not opt out is bound by the release and gets nothing.</p>
+
+    <h2 id="how-much">How much each tier gets: about {usd(t1.low)} at the top</h2>
+    <p>Each claimant chose one of two kinds of payment for each class they were in.</p>
+    <p><b>Documented losses.</b> Up to <b>{usd(b.att1_documented_cap)}</b> under AT&amp;T 1, for losses from 2019 on, and up to <b>{usd(b.att2_documented_cap)}</b> under AT&amp;T 2, for losses from {fmt(i2.loss_from)} on. The losses had to be "fairly traceable" to the breach and proved with documents somebody else prepared, such as receipts or bank statements. Covered: unreimbursed costs of identity theft or fraud, the incidental costs of dealing with it, and credit monitoring bought afterwards. Not covered: {list(b.not_covered)}. Under AT&amp;T 1, documented loss payments together cannot pass {mill(f.att1_documented_loss_pool)}; above that, every one is cut pro rata.</p>
+    <p><b>A cash payment by tier.</b> Everyone else gets a share of what is left in their fund once documented losses, fees and costs are paid. The share depends on the tier, and a Tier 1 payment is fixed at <b>{b.tier1_multiple} times</b> a Tier 2 payment.</p>
+    <BarChart
+      heading="Kroll's estimate of the cash payment per claim, by tier"
+      rows={b.estimates.map((e, i) => ({
+        label: e.tier,
+        value: e.high,
+        display: e.low >= 10 ? `${usd(e.low)} to ${usd(e.high)}` : `${usd2(e.low)} to ${usd2(e.high)}`,
+        note: e.who,
+        emphasis: i === 0,
+      }))}
+      caption={`${b.estimates_source}. The upper end of each range is drawn. Estimates were made before every claim was final.`}
+    />
+    <p>Those are small numbers for what was exposed, and the court heard that argument at length. They are small because the classes are huge: {mill(f.att1)} across tens of millions of people is a few dollars each before anyone takes a cut. Tier 1 is larger because the agreement treats an exposed Social Security number as the more serious exposure and sets that payment at five times Tier 2.</p>
+    <p>The estimates are Kroll's, made from the claims as they stood. The order quotes them as contingent on certain variables, and the settlement website names what moves them: the administration costs, the fees and awards, and the number of valid claims. One more detail: the order labels the middle line "AT&amp;T 2 - Tier 2", but Tier 2 belongs to AT&amp;T 1 under the agreement, and the five-to-one ratio between the first two ranges confirms it.</p>
+    <p>Payment comes by Venmo or direct deposit for anyone who chose an electronic method on the claim form, and by paper check for everyone else. A check has to be cashed within <b>{b.check_days} days</b>.</p>
+
+    <h2 id="money">Where the {mill(f.total)} goes</h2>
+    <p>Both funds are non-reversionary: nothing goes back to AT&amp;T. Before claimants are paid, the fund pays the lawyers, their expenses, the class representatives and the administrator.</p>
+    <BarChart
+      heading={`The ${mill(f.total)} settlement, by where it goes`}
+      rows={[
+        { label: 'Left for claimants', value: left, display: mill(left, 1), note: 'Documented losses and tier payments', emphasis: true },
+        { label: "Attorneys' fees", value: fees, display: mill(fees, 1), note: `${co.fee_share} of each fund` },
+        { label: 'Settlement administration', value: admin, display: mill(admin, 1), note: `Kroll's estimate; ${mill(co.admin_approved, 1)} approved so far` },
+        { label: "Lawyers' expenses", value: expenses, display: mill(expenses, 2) },
+        { label: 'Service awards', value: co.service_awards_total, display: usd(co.service_awards_total), note: `${usd(co.service_award_each)} each to the class representatives` },
+      ]}
+      caption={`Final approval order of ${fmt(approved)}. "Left for claimants" is computed: the total less the approved fees, expenses and awards and Kroll's current administration estimate.`}
+    />
+    <p><b>The fees.</b> Class counsel asked for one-third of each fund, {usd(co.fees_att1)} from AT&amp;T 1 and {usd(co.fees_att2)} from AT&amp;T 2, and the court granted it in full. Objectors fought it. The judge checked it against the hours the lawyers reported, {usd(co.lodestar_att1)} and {usd(co.lodestar_att2)} of billable time, which makes the fee {co.multiplier_att1} and {co.multiplier_att2} times their hourly value, inside the range courts accept.</p>
+    <p><b>The administration bill</b> is the number that moved. Kroll first estimated {usd(co.admin_estimate_original)} to run the settlement. The estimate is now {usd(admin)}, about {adminGrowth} times as much, and it may still grow. The court approved {usd(co.admin_approved)} for work done so far and held back on the rest. It said why that matters: these costs come out of the fund, not from AT&amp;T, so every dollar spent on administration is a dollar less for the class.</p>
+
+    <h2 id="claims">{n(cl.total)} claims, and {n(cl.fraud)} of them fraud</h2>
+    <p>Kroll received {n(cl.online)} claims online and {n(cl.mail)} by mail, <b>{n(cl.total)}</b> in all. Against the size of the classes that is a {cl.rate_pct}% claims rate, which Kroll told the court is higher than most settlements it has run.</p>
+    <p>The fraud is the unusual part. A separate firm, {c.fraud_vendor}, screened the online claims and flagged about {n(cl.fraud)} as fraudulent, roughly <b>{fraudPct}%</b> of everything received. The court spent pages on it, because a real claimant flagged by mistake would lose their payment, and approved the screening together with a notice-and-cure process overseen by the special master, {c.special_master}.</p>
+    <BarChart
+      heading="What happened to the claims, as reported to the court"
+      rows={[
+        { label: 'Allowed, Tier 1', value: cl.tier1_allowed, display: n(cl.tier1_allowed), emphasis: true },
+        { label: 'Allowed, Tier 3', value: cl.tier3_allowed, display: n(cl.tier3_allowed) },
+        { label: 'Allowed, Tier 2', value: cl.tier2_allowed, display: n(cl.tier2_allowed) },
+        { label: 'Rejected as fraud', value: cl.fraud, display: n(cl.fraud) },
+        { label: 'Rejected for other reasons', value: cl.rejected - cl.fraud, display: n(cl.rejected - cl.fraud), note: 'Late, duplicate, released, withdrawn or an ineligible business' },
+      ]}
+      caption={`Kroll Omnibus Declaration (ECF No. 517), as quoted in the final approval order. An overlap member can hold an allowed claim in two tiers, so the rows do not add up to ${n(cl.total)}.`}
+    />
+    <p>That leaves {n(allowed)} allowed tier claims across the two funds, plus the documented loss claims, whose final count depends on the cures.</p>
+
+    <h2 id="when">When the AT&amp;T settlement pays: the earliest date is {fmt(payBy)}</h2>
+    <p>Nobody has announced a payment date. What the agreement does fix is the rule, and the rule can be worked through:</p>
+    <ol class="steps">
+      <li><b>Final approval:</b> {fmt(approved)}.</li>
+      <li><b>Time to appeal:</b> {tm.appeal_days} days under <a href={tm.appeal_rule_url} rel="noopener" target="_blank">{tm.appeal_rule}</a>, counted to the next business day, which takes it to <b>{fmt(appealEnds)}</b>.</li>
+      <li><b>Effective date:</b> {tm.effective_days_after_appeal_time} days after the time for appeal runs, if no appeal was filed: <b>{fmt(effective)}</b>. With an appeal, it is {tm.effective_days_after_appeal_ruling} days after the last appellate ruling affirming the approval, or after a dismissal that leaves no further appeal.</li>
+      <li><b>Payment:</b> Kroll must distribute no later than {tm.distribute_within_days} days after the effective date: <b>{fmt(payBy)}</b> at the earliest.</li>
+    </ol>
+    <p>That is the best case, and the administrator does not expect it to be the actual case: its update of {fmt(update.date)} says payments are not expected in 2026, which fits a January 2027 deadline or a later one. The court's public docket, as mirrored on CourtListener on {read}, did not show a notice of appeal, but that mirror is incomplete, so it does not prove there was none. If an appeal was filed, payment waits for the Fifth Circuit to rule.</p>
+    <p>The order does not leave timing open-ended. It tells Kroll to pay on the agreement's timeline, and it put the state of claims administration on the agenda of a status conference on October 30, 2026. AT&amp;T's money comes in on a clock too: the rest of the fund is due within 15 days of the effective date.</p>
+
+    <h2 id="notices">Deficient and denied claims: what the notices mean</h2>
+    <p>Kroll sent two kinds of notice to claimants whose claims had a problem.</p>
+    <ul>
+      <li><b>A notice of deficient claim</b> asked for more: proof of class membership, or more documents for a documented loss. The deadline to answer was <b>{fmt(cl.deficient_deadline)}</b>.</li>
+      <li><b>A notice of denial</b> can be cured if the reason was that Kroll could not confirm class membership. The response form has to be mailed and postmarked within <b>{cl.cure_days} days</b> of the date on the notice, one claim per envelope. Kroll does not accept it by email or through the contact form.</li>
+    </ul>
+    <p>Claims flagged as fraud get their own notice by email, with a validation form. That process was designed with the special master so that a real claimant flagged by mistake has a way back.</p>
+    <p>Real notices come from <b>attsettlement@e.emailksa.com</b>, and the only authorized website is <a href={c.site} rel="noopener" target="_blank">telecomdatasettlement.com</a>. A message that asks for a fee, or for card details, to release a payment is not from the administrator.</p>
+
+    <h2 id="objections">What objectors argued, and the one thing the judge changed</h2>
+    <p>The motion for approval was unopposed between the parties, but class members objected, some through lawyers and some on their own. The order works through each objection.</p>
+    <ul>
+      <li><b>Too little money.</b> Objectors compared it with the T-Mobile data breach settlement: $350 million, a $25,000 cap on documented losses, credit monitoring and a security spending commitment. The court declined to treat a headline comparison as the test and set it beside other data breach settlements it found the AT&amp;T deal in line with.</li>
+      <li><b>A burdensome claims process.</b> Wet ink signatures, the documentation standard, the opt-out rules. Overruled; the court pointed to the {cl.rate_pct}% claims rate.</li>
+      <li><b>The fee.</b> Overruled, after the cross-check above.</li>
+      <li><b>The leftover money.</b> Sustained. The agreement named the Texas Bar Foundation to receive any money left after distribution. The judge found its link to data breach victims indirect, ordered the parties to propose other recipients alongside it, any of them tied to data privacy, cybersecurity, consumer protection or access to justice, and said any residue must first be considered for a second payment to claimants before it goes to anyone else.</li>
+    </ul>
+    <p>So money left at the end goes back to the people who claimed, where that is practical, and only then to an organization the court approves.</p>
+
+    <h2 id="faq">Questions people ask about the AT&amp;T settlement</h2>
+    {faq.map(q => (
+      <>
+        <h3>{q.q}</h3>
+        <p>{q.a}</p>
+      </>
+    ))}
+
+    <h2 id="method">Where these figures come from</h2>
+    <p>The settlement amounts, the class counts, the claims, the fraud review, the fees, costs and awards, the administration bill and Kroll's payment estimates are from the <a href={c.order_url} rel="noopener" target="_blank">memorandum opinion and order</a> granting final approval, ECF No. {c.order_ecf}, {c.order_pages} pages, signed by Senior Judge {c.judge_final} on {fmt(approved)} in {c.name}, {c.mdl}, {c.court}. Where the order quotes a declaration, the page names it.</p>
+    <p>The payment rule, the effective date definition, the payment methods, the {mill(f.att1_documented_loss_pool)} pool for AT&amp;T 1 documented losses and the time to cash a check are from the <a href={c.agreement_url} rel="noopener" target="_blank">settlement agreement</a> filed on May 30, 2025. The class definitions, the deadlines, the notice process and the administrator's {fmt(update.date)} update are from the <a href={c.site} rel="noopener" target="_blank">settlement website</a> and <a href={c.faq} rel="noopener" target="_blank">its FAQ</a>, read on {read}. The docket was checked on <a href={c.docket_url} rel="noopener" target="_blank">CourtListener</a> the same day.</p>
+    <p>Two figures are computed here rather than quoted: the amount left for claimants, which uses Kroll's current administration estimate and will change if that does, and the earliest pay-by date, which applies the agreement's rule and assumes no appeal. Both say so where they appear. This page is re-read on the monthly refresh until the money is paid. Nothing on it is legal advice, and no lawyer-client relationship comes from reading it.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  .prose p.note { font-size: .86rem; color: var(--muted); line-height: 1.6; margin: -8px 0 24px; padding-left: 2px; }
+  .prose ol.case-timeline { list-style: none; padding: 0; margin: 26px 0 18px; border-left: 2px solid var(--line-2); }
+  .prose ol.case-timeline li { position: relative; padding: 0 0 14px 22px; margin: 0; }
+  .prose ol.case-timeline li::before { content: ''; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); }
+  .prose ol.case-timeline li.key::before { background: var(--brand); border-color: var(--brand); }
+  .prose ol.case-timeline time { display: block; font-size: .8rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .prose ol.case-timeline li.key time { color: var(--ink); }
+  .prose ol.case-timeline span { display: block; line-height: 1.5; }
+  .prose ol.steps li { margin-bottom: 8px; }
+</style>
