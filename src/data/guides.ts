@@ -25,7 +25,7 @@ export interface Guide {
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-    | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement';
+    | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement' | 'breach';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -67,6 +67,22 @@ export function publishedGuides(
 }
 
 export const GUIDES: Guide[] = [
+  // Family A in docs/guides-50.md: class action settlements, each the full account of one case.
+  // Reference pieces built on the court record; the page computes its figures from
+  // src/data/research, so nothing here may carry one.
+  {
+    slug: 'att-data-breach-settlement',
+    cover: 'breach',
+    kicker: 'Reference',
+    title: 'AT&T Data Breach Settlement: Who Qualifies, How Much, When It Pays',
+    summary:
+      'Two breaches, two courts and one settlement, now approved. Who is in each class, what ' +
+      'each tier is expected to pay, where the money goes first, and the earliest date the ' +
+      'agreement lets it reach claimants.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'Approved, and the rule for when it pays',
+  },
   // Family D in docs/guides-50.md: settlement values. Reference pieces built on published
   // research; the page computes its figures from src/data/research, so nothing here may carry one.
   {
