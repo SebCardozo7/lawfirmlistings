@@ -339,138 +339,78 @@ that firms with cover do not mention it and then told the reader that firms with
 against it.** The published bullet says instead that no register exists to check the answer
 against, so the answer is the firm's own word either way.
 
+## Four traps this run walked into, added 2026-11-16
+
+All four were caught before the pull request. Two would have put a false sentence on the page, one
+would have put an uncomputed one in the opening paragraph, and the fourth very nearly killed the
+topic after the research was done.
+
+**The Written table claims a guide that has never existed, and it is this run's topic.** The row
+dated 2026-09-14 records `/guides/what-a-law-firm-score-cannot-compare/` as published, calls it
+"the denominator piece" and lists `how are lawyer ratings calculated` and `what does a lawyer
+rating mean` as its targets, which are this run's keywords exactly. There is no such file,
+no manifest entry, and `git log --all` has never seen that path. The same is true of four more
+rows: `what-a-business-register-proves-about-a-law-firm`, `what-law-firms-publish-about-
+malpractice-insurance`, `what-it-takes-to-check-a-law-firm` and `what-a-case-results-page-proves`
+have **zero commits each**. The research in those rows is real and clearly became published guides
+under other slugs, but the slugs in this table are not those slugs. The 2026-10-05 entry said the
+Written table understates what is published; it also **overstates** it, and a run that had taken
+that row at face value would have dropped a good topic as already done. **Check a slug against
+`src/data/guides.ts` and `git log` before believing this table in either direction.** The dead
+placeholder in the Core Web Vitals aside, an unlinked `<li>What a score cannot compare</li>`, has
+been waiting for that page since September and now points at the one this run shipped.
+
+**A quarter of the scale is not the unreachable part of it.** A draft sentence read that "a
+quarter of the published scale describes a measurement nobody here is making", reasoning from
+pillar D being 25 of 100. Pillar D is 25 points, of which **15 are applied** to the average firm,
+so the unreachable part is **10 points, a tenth**, not a quarter. The figure was arithmetically
+adjacent to a real one and recomputed itself on every build in the wrong units, which is the
+2026-10-05 family exactly. The published sentence prints `pillarD.published - pillarD.meanApplied`
+and names no fraction.
+
+**An uncomputed claim in the opening paragraph, where it inherits the most authority.** The lede
+section said the denominator "moves a score further than anything a firm does". Nothing on the
+page measures what a firm's own actions move, and nothing in the records could: there is no
+before-and-after. It sat two sentences above four computed figures. The published version states
+the computed range of the denominator instead, 19 points to 90.
+
+**Two different quantities behind one sub-factor's absence, again.** `A2` and `A6` both leave the
+scale for 1,060 firms, and the source word says why: **908** carry `no queryable source`, which is
+the state, and the rest carry `no roster published`, which is the firm's own site. A draft
+sentence that said 1,060 firms sit in states with no register would have been false for 152 of
+them, every one in New York or California. Same shape as `bar_numbers_on_bios`, and the engine
+already writes the two down as different sentences. The page keeps them apart in its own prose.
+
 ## Generated pages, so a topic is not aimed at one of them
 
-**Re-counted on 2026-11-09, and the city x practice rankings moved after a run of saying they did
-not.** The build produces **1,635 pages from 1,388 published firms in 19 markets and 13 states**,
-with **29 guides** in the manifest and every guide page carrying an entry. The real move is the
-ranking inventory: **174 city x practice rankings against 152 on 2026-11-02**, so twenty-two
-combinations crossed their threshold in a week while the firm total stayed identical at 1,388 and
-the 19 city hubs and 13 practice hubs did not change. Tiers did not move either: **216 certified,
-406 listed, 766 verified, 24 not eligible**, the same four figures as 2026-11-02. Nothing in this
-run's topic is aimed at any of those pages: `/practice-areas/medical-malpractice/` is about suing a
-doctor and this guide is about a firm's own professional liability cover, which no generated page
-mentions at all. **Re-count the rankings every run anyway.** The 2026-11-02 entry concluded from
-one flat week that the denominators had stopped moving, and twenty-two pages appeared in the next
-one.
+**Re-counted on 2026-11-16, and nothing in the directory moved.** The build produces **1,637 pages
+from 1,388 published firms in 19 markets and 13 states**, with **30 guides** in the manifest after
+this run. The ranking inventory is **174 city x practice rankings**, identical to 2026-11-09, and
+so are the 19 city hubs, the 13 practice hubs and the tier counts: **216 certified, 406 listed,
+766 verified, 24 not eligible**. Two flat weeks in a row, and the 2026-11-02 entry drew exactly
+that conclusion and was wrong a week later, so **re-count anyway**.
 
-The 2026-11-02 text follows.
-
-
-**Re-counted on 2026-11-02, and almost nothing moved, which is the first time in ten runs.**
-The build produces **1,610 pages from 1,388 published firms in 19 markets and 13 states**, with
-**27 published guides** plus the gated ranking. No new market, no new practice, no new city x
-practice combination: the **152 city x practice rankings and 13 practice hubs are unchanged**
-from 2026-10-19, and the firm total is identical at 1,388. The one real move is in tiers:
-**certified went 173 to 216** while listed fell 412 to 406 and verified 803 to 766, which is the
-California register work landing on G1 (284 to **287**) and G2 (600 to **603**) and on the
-A2/A6 pair. State counts are unchanged: CA 245, NY 235, FL 222, TX 156, IL 103, AZ 100, NV 84,
-GA 80, PA 71, MD 31, MA 28, OR 20, IN 13. Primary practice is unchanged: personal injury 1,113,
-immigration 115, criminal defense 81, family law 42, real estate 20, workers' compensation 17.
-
-**So the rule that a denominator moves under every run did not hold this run, and that is worth
-one line rather than a paragraph: check anyway, it cost ten minutes.** Every city and practice
-combination listed under 2026-10-19 remains off limits as a guide topic, and the
-`how to choose a <practice> lawyer` family remains owned by the generated hubs.
-
-The 2026-10-19 text follows.
-
-**Re-counted on 2026-10-19, and this is the largest move this section has ever recorded.**
-`main` took the sub-practice sweeps (#133 and #137), which asked every published injury firm
-whether it publishes its own page on car accidents, slip and fall, truck accidents, wrongful
-death and medical malpractice, and then asked all 1,412 records about motorcycle accidents and
-nursing home abuse. Practice rows went from about 1,450 to **5,919**. The build now produces
-**1,609 pages from 1,388 published firms in 19 markets and 13 states**, with 26 published guides
-plus the gated ranking.
-
-**The number that changes what a guide may be about is the city x practice count: 152, against 23
-on 2026-10-05.** Every one of those is off limits as a guide topic, and the set now covers seven
-injury sub-practices in nearly every market rather than `personal-injury` plus a handful of
-oddities. Practice hubs went from 6 to **13**: the six that existed plus `car-accidents`,
-`motorcycle-accidents`, `truck-accidents`, `slip-and-fall`, `wrongful-death`,
-`medical-malpractice` and `nursing-home-abuse`. **Read the rendered hub before claiming a query
-is unowned**, as the 2026-10-12 entry says: each new hub carries "How to choose a <practice>
-lawyer" in its H2 and the same phrase in its meta description, so the whole `how to choose a
-<injury sub-practice> lawyer` family is now owned by generated pages.
-
-By status, 2026-10-19: **173 certified**, 412 listed, 803 verified, and 24 records `not_eligible`
-which nothing published may count. Certified went 57 to 173 over three runs. Firm counts by
-state: **CA 245**, NY 235, FL 222, TX 156, IL 103, AZ 100, NV 84, GA 80, PA 71, MD 31, MA 28,
-OR 20, IN 13. Primary practice: personal injury 1,113, immigration 115, criminal defense 81,
-family law 42, real estate 20, workers' compensation 17. `transaction` (20) and `domestic` (42)
-are unchanged, so pillar B still has the same three branches.
-
-The 2026-10-16 text follows.
-
-**Moved again on 2026-10-16, while this run's pull request was still open, and that is the
-useful part of the entry.** `main` took Los Angeles and five sub-practices (#128) and the Indiana
-statute page (#125), the base was merged into the open branch, and the build now produces
-**1,488 pages from 1,388 published firms in 19 markets and 13 states**, with 25 published guides
-plus the gated ranking. Primary practice is now personal injury 1,113, immigration 115, criminal
-defense 81, family law 42, real estate 20, workers' compensation 17: the five sub-practices did
-not become new primary practices, and `transaction` (20) and `domestic` (42) are unchanged, so
-the pillar B branches are the same three.
-
-**Every figure in the open guide recomputed correctly and one sentence around them did not**, for
-the fourth time this file has recorded that pattern. See the trap added below. **A guide whose
-pull request sits open across a data change has to be reread at the new n before it merges**, not
-only before it is opened. The title went from "340 of 532" to "374 of 599" on its own, which is
-the design working; what did not work was a sentence naming the markets two example firms sit in.
-
-Re-counted against the build on **2026-10-12**. The build produces **1,330 pages, from 1,248
-published firms in 18 markets and 13 states**, with 24 published guides plus the gated ranking.
-**Nothing moved between 2026-10-05 and today except the guide count**: no new market, no new
-practice, and the firm total went 1,252 to 1,248 as four records changed status. That is the first
-run in seven where the denominators held still, so the section below is the 2026-10-05 text with
-this run's counts substituted, and the only material change in the data is item 0h closing.
-Firm counts by state and practice, counted 2026-10-12: NY 235, FL 222, TX 156, CA 105, IL 103,
-AZ 100, NV 84, GA 80, PA 71, MD 31, MA 28, OR 20, IN 13; primary practice personal injury 973,
-immigration 115, criminal defense 81, family law 42, real estate 20, workers' compensation 17;
-by status 817 verified, 376 listed, 55 certified, and 22 records that nothing published may count.
-The 2026-10-05 text follows.
-
-Re-counted against the build on **2026-10-05**. The build produced **1,334 pages, from 1,252
-published firms in 18 markets and 13 states**, with 23 published guides plus the gated ranking.
-**No new market opened since 2026-10-02, and a whole practice did:** criminal defense, 85 firms,
-all of them in New York. That is the second practice in a row to arrive between runs, after
-immigration on 2026-10-02, and it is the sixth consecutive run to find the denominators moved
-underneath it. Check this section against a build before scoping anything at all.
-
-- `/`, `/cities/`, `/practice-areas/`, `/guides/`
-- Eighteen city hubs, unchanged from 2026-10-02: `atlanta-ga`, `baltimore-md`, `boston-ma`,
-  `buffalo-ny`, `chicago-il`, `dallas-tx`, `houston-tx`, `lakeland-fl`, `las-vegas-nv`,
-  `miami-fl`, `naples-fl`, `new-york-ny`, `northwest-indiana`, `philadelphia-pa`, `phoenix-az`,
-  `portland-or`, `san-antonio-tx`, `san-diego-ca`
-- City x practice rankings, 23 of them: `personal-injury` in every city hub except `naples-fl`,
-  `immigration` in `miami-fl`, `workers-compensation` in `baltimore-md` and `new-york-ny`,
-  `real-estate` in `naples-fl`, `family-law` in `new-york-ny` and `buffalo-ny`, and **new this
-  run, `criminal-defense` in `new-york-ny`**
-- Six practice hubs: `/practice-areas/personal-injury/`, `/practice-areas/immigration/`,
-  **`/practice-areas/criminal-defense/`**, `/practice-areas/real-estate/`,
-  `/practice-areas/workers-compensation/`, `/practice-areas/family-law/`
-- 1,252 firm profiles, and the static pages (`/methodology/`, `/about/`, `/list-your-firm/`,
-  `/contact/`, `/privacy/`, `/terms/`)
-
-Firm counts by state: FL 222, **NY 239**, TX 156, CA 105, IL 103, AZ 100, NV 84, GA 80, PA 71,
-MD 31, MA 28, OR 20, IN 13. **Primary practice: personal injury 973, immigration 115, criminal
-defense 85, family law 42, real estate 20, workers' compensation 17.** By status: 840 verified,
-355 listed, 57 certified, and 18 records `not_eligible` which nothing published may count. New
-York is now the largest state and `new-york-ny` holds four practices: criminal defense 85,
-personal injury 77, family law 18, workers' compensation 12.
-
-**Criminal defense is the thing to notice, and it is the same class of arrival as immigration.**
-It is the second practice here whose work produces no settlement for pillar B to read, it came in
-at 85 firms at once, and every one of them is in New York, which for once is useful: the injury
-cohort sits in the same city, so a practice comparison can be run with the market, the local
-search results and the state's advertising rules all held still. The guide published this run does
-exactly that. See item 0g below, which predicted this and is now half written.
-
-Every city and practice combination in that list is off limits as a guide topic.
+Nothing in this run's topic is aimed at any of those pages. The guide targets how a rating is
+calculated and what its scale cannot reach. The city x practice rankings target `best <practice>
+lawyers in <city>`, the practice hubs target `<practice> lawyers` and, on several of them, `how to
+choose a <practice> firm`, and **`/methodology/` is the page to check hardest here**, since it is
+the other page on this site about the score. It is titled "LFL Certified Methodology: How the
+Certification Score Works" and its description sells the scheme: gates, pillars, tiers,
+re-verification. It answers "how does the LFL score work" for somebody who already knows what LFL
+is. The guide answers "how is a law firm rating calculated, and how much of its own scale does it
+actually apply", for somebody who has never heard of us, and it reports a finding against our own
+rubric that a methodology page would never carry. They link to each other rather than compete.
 
 ## Written
 
+**Read the warning in the traps section above before trusting a row here.** Five of the older rows
+name slugs that have never existed in this repository, and the table also omits guides that are
+published. It is notes on what each run learned, not an index. `src/data/guides.ts` and
+`ls src/pages/guides/` are the index.
+
 | Run | Guide | Targets | Notes |
 | --- | --- | --- | --- |
+| 2026-11-16 | `/guides/how-law-firm-ratings-are-calculated/` | **"how are lawyer ratings calculated" and its siblings** (`lawyer rating scale`, `attorney rating systems`, `are lawyer rating sites accurate`, `what does a lawyer rating mean`). **No Ahrefs volumes this run: the subscription hit its unit limit on the first call** (expected 430 units, 23 left), so every figure in this row is from the SERP rather than from Keywords Explorer, and the cluster should be re-costed after the 19th. The targets are the ones the phantom 2026-09-14 row already recorded for this exact topic, which is weak corroboration but it is independent of this run. The SERP is **Justia's own explainer, Avvo and Martindale methodology pages, and legal-marketing blogs restating them**: every result explains how one company's number is built and **not one measures how much of its own scale that company manages to apply**. A second search for independent accuracy studies returned opinion pieces, a Florida Bar advertising-panel item and vendor criticism, and no rigorous study at all. That absence is the whole opening. Deliberately **not** targeted: `avvo rating` and `av preeminent meaning`, which are definitions of other companies' products and theirs forever. | Not from the ranked list, eleventh run running, and found the same way: `score.coverage`, `score.assessable` and `score.comparable` are on **1,388 of 1,388** firms and `grep -l` found them in **zero** of the thirty guides. The headline: **not one firm in the directory is graded on all 100 published points**, the commonest denominator is **68** on **1,014** firms, and the range runs **19 to 90**. Where the scale goes, as means per firm summing to 100: **71.9 scored, 14.5 with no source in the market, 13.0 off the scale for every firm, 0.7 we simply have not read**. Per pillar, and this is the sharp half: **B, C and E are applied at their published size to every firm**, while **pillar D is published as 25 points and graded out of 15.0 on average, on 1,388 of 1,388 firms**, and pillar A is short on 1,381. The consequence, in raw points so the units match: a Certified mark rests on **61.4 points** of measured evidence in California and New York and **47.2** in the other 11 states, both clearing the same published threshold on denominators of 86.9 and 68.0. Gates: **1,211 of 1,388** firms sit where at least one gate has no queryable source, **412** carry one that ran and could not resolve, **131** have neither. The one figure that flatters us: coverage means **99.1%** and only **64** firms have a point we have left unread, which is why the Core Web Vitals guide's claim that unread points move a score further than a state line **has been corrected on that page** (0.7 against 14.5). The page publishes its own check: recomputing `assessable` from the sub-factor rows reproduces the stored figure on **all 1,388** records. |
 | 2026-11-09 | `/guides/do-lawyers-have-malpractice-insurance/` | **`do lawyers have malpractice insurance` (40/mo US, KD 4, CPC $4.00, TP 2,100)** with `do attorneys have malpractice insurance` (30/mo, KD 1) and `is malpractice insurance required for lawyers` (20/mo, KD 0, TP 2,000) beside it: **90/mo exact match**, thin, inside the parent topic `legal malpractice insurance` at 2,000 TP. Taken on the SERP rather than on the volume. All ten results are written **for the lawyer buying the policy**, by an insurer, a broker or a bar association, and not one measures a real firm. Checked and **not** targeted: `legal malpractice insurance` (800/mo, KD 11) and `attorney malpractice insurance` (600/mo, KD 9) are the broker cluster and we do not sell policies to lawyers; the `can i sue my lawyer` family (100/mo and below) is legal advice, which is the thing this section has no advantage at. No generated page mentions professional liability cover. | The field was `accountability`, written by `check_a5.py`, **read by no guide in twenty-nine** and sitting under three scripts nobody had opened. Findings in order: **1 of 1,382** firms publishes that it carries professional liability cover, still **1 of 739** on the firms where three pages or more were read, and **0 of 20** in Portland, the one market here where cover is compulsory. **560 of 1,382** have a bar or trial lawyers' association named on a page, **821** have neither. The method half is the better half: the association check is a **bare name match** with a 120-character evidence window and no membership test at all, so **712 of 1,358** stored snippets contain no form of the word member, **146** credit a body tied to another state, and for **10 firms** that out-of-state body is the only thing credited. Two named causes, both in the pattern list itself: ITLA abbreviates the Illinois and the Indiana trial lawyers associations and only Indiana's is listed, and MATA is both a Massachusetts association and a surname. **49% against 31%** on whether a state's own bar body is on our list at all. |
 | 2026-11-03 | `/guides/does-a-medical-malpractice-page-mean-anything/` | **"how to choose a medical malpractice lawyer" (450/mo US, CPC $3.00, KD unreported, commercial + informational)**, with `how to choose a good medical malpractice lawyer` (30/mo) beside it, so **480/mo in the exact-match cluster**. This is the per-practice fork the 2026-10-05 criminal defense entry predicted and said was "worth a run each": that cluster listed `medical malpractice 450` and this is it. Checked and **not** targeted: `how to choose a personal injury lawyer` (200/mo, **KD 0**, CPC $12.00, TP 200, parent `how to select a personal injury attorney`) is the broader sibling and is worth its own run rather than being folded in; `personal injury vs medical malpractice` (50/mo, KD 0) is a definitional query; `lawyer specialization` (50/mo, KD 37, parent `types of law`) is a different topic wearing the same words; `do lawyers specialize` is dead at 10/mo. | Item 2 off the ranked list, carried since 2026-10-19 and unwritten through two runs. **Recount first, and it mattered:** the backlog figures were medical malpractice 410 of 901 and nursing home abuse 341, and against 1,388 published firms they are now **524 and 441 of a 1,113-firm injury cohort**, so every sentence built on the old pair would have been wrong. The finding: the raw split looks like the hiring advice vindicated, **median score 57 against 47, organic traffic 895 against 176, roster 5 against 2**, and then the control kills it. Hold breadth constant and in **4 of the 5 bands** with 8+ firms a side the firms carrying a rarer page score **the same or lower**; the widest gap in the table runs against the advice (five areas, **49 against 54**). The explanation is in the same paragraph: the rare-page firms publish a median of **7 of the 8 areas against 4**. Worth recording that `score.py` reads `practices[]` only to pick a cohort (line 399) and **never scores their number**, so the raw gap is not our own arithmetic paying for pages, it is breadth standing in for firm size. Falsification, fifth consecutive hold: mean Google rating **4.85 against 4.89**, and the group with fewer pages is the higher one. **A false caption caught only by reading the rendered page:** a draft said the highlighted pair were "the areas fewest firms publish" while the chart under it showed **workers' compensation at 455 sitting below medical malpractice at 524**. The published page names it and says why the pair is chosen by kind of claim instead, workers' comp being an administrative benefits claim with no defendant to sue. Three further hardcoded counts ("five of them", "the eight areas" twice) were derived. `make_og.mjs` only looked for Chromium under `/opt/pw-browsers/`, so the share card could not be rendered on the machine a guide is written on; it now searches the Playwright cache, Chrome and Edge on Windows, macOS and Linux. |
 | 2026-11-02 | `/guides/law-firm-hierarchy/` | **"law firm hierarchy" (400/mo US, 900 global, KD 1, CPC $0.50, traffic potential 350, informational, parent topic `law firm titles`)**, with `law firm titles` (70/mo, **KD 0**, CPC $2.50, parent `law firm hierarchy`, so the two are one topic), `law firm structure` (150/mo, **KD 0**, parent `law firm hierarchy`) and `associate vs partner law firm` (60/mo, **KD 0**) beside it. Roughly **680/mo at KD 0 to 1**. `law firm positions` (200/mo, KD 0) was **rejected**: its parent topic is `law office jobs near me` and the intent is a job seeker. The **`of counsel` cluster is much bigger and was deliberately not targeted**: `of counsel meaning` 1,800/mo (KD 5) and `what does of counsel mean` 1,600/mo (KD 3) share one parent topic, 3,400/mo in all, and the intent is a definition we would be restating from the ABA. It gets a measured section on the page and a backlog entry of its own. The SERP for the target is **US News (DR 91), Indeed UK (DR 92), BCG Search (a legal recruiter), a NALP handout PDF, Clio, Qanooni, attorneyatwork, remotescouts, achieveprofessionals and YouTube**: every result is career advice drawing the same idealised large-firm ladder, **two of the ten are about the United Kingdom**, and not one has opened a law firm's team page. Traffic on the page is thin (332, 205, 123, 66) | Not from the ranked list, ninth run running, and the survey found it in `attorneys[].role` and `role_source`, which **no entry in this file had ever named** although `prune_nonpeople.py`, `repair_roles.py` and `roster_roles.py` all exist to service them. **1,008 of 1,388 firms publish a roster and 380 publish none.** Of the **10,023** people they name, **6,243 carry no job title we could read** and **521 firms print one beside nobody**. Crawl-reach control, which is the whole epistemic load of the piece: restrict to the **487 firms whose pages did yield a title** and **2,611 of 6,391** named people still arrive without one, so the silence is not only our reader. The hierarchy finding: **only 51 of 1,008 firms publish both a partner and an associate**, and the most common thing printed beside a name is the bare word "Attorney" (188 firms, 1,002 people). Falsification, and it held twice: mean Google rating **4.85 against 4.82**, and the two stay within a tenth of a star in **all four headcount bands**, while median score runs 57 against 51 and median organic traffic 806 against 365. The firms publishing **no roster at all rate highest of the three groups at 4.88** on a median score of 40. Market control: in the 12 markets with 8+ firms on each side the printing cohort holds the higher median score in **10**, so the score gap is not a city effect. Self-critical half, three parts: **A2 (10 pts) and A6 (9 pts) both read a roster, 19 of the hundred**, and A2 is scored on **305 of 1,388** firms and A6 on **328**, because **908 firms sit in the 11 of 13 states publishing no queryable register**; **329 of the 3,780 titles we did read are ones our own classifier cannot act on** (across 157 firms), including 10 people titled `Abogado`, which our lawyer-role list does not contain; and the scale **pays nothing at all for printing a rank** yet the groups sit 6 median points apart. No date in the byline: the roster read carries none, which is open item 0b one field over. |
@@ -493,6 +433,67 @@ Every city and practice combination in that list is off limits as a guide topic.
 | gated | `/guides/best-personal-injury-law-firms-nyc/` | ranking | Publishes at 8 certified firms in New York. Currently 3. |
 
 ## Next, ranked
+
+**Read this first, 2026-11-16. Eleventh run running, and the survey beat the ranking for the
+eleventh time.** The topic came out of `score.coverage`, `score.assessable` and
+`score.comparable`: three fields on **1,388 of 1,388** published firms, written by `score.py`,
+printed on every profile, and **named in none of the thirty guides**. The 2026-11-09 rule was to
+re-read the fields no guide has ever opened, and the ten-second query it recommends
+(`grep -l "score.coverage" src/pages/guides/*.astro`) returned nothing, which was the answer.
+**The rule keeps working. Run it first, before reading this list.**
+
+What this run adds to it: **the fields a guide has never opened include the ones the score itself
+is made of.** Eleven runs spent measuring what firms publish, and the directory's own denominator
+had never been counted. Look at the engine's outputs, not only at its inputs.
+
+**Fill rates across 1,388 published firms, counted 2026-11-16. Nothing moved, for the third run
+running.** `reviews.google`, `digital.places`, `results_published`, `score`, `offices`,
+`languages`, `digital.schema_detected` and `digital.ahrefs` all **1,388**; `accountability`
+**1,382**; `operating` **1,366**; `logo` **1,310**; `digital.psi` **1,294**; `practices` with more
+than one row **1,080**; `attorneys` non-empty **1,008**; `availability` non-empty **752**;
+`entity` **253**; `fee_statement` **177**; `screens` **57**; `domestic` **42**; `transaction`
+**20**; `site_blocked` **3**; `subscription` **1**; `firm_stated` **0**. Status: 216 certified,
+406 listed, 766 verified, 24 not eligible. Gates G1 **287**, G2 **603**. Three identical weeks is
+not a reason to stop counting, it is a reason to spend the saved time on the engine's outputs,
+which is where this run's topic came from.
+
+**New, and counted here for the first time:** `score.gates_unavailable` non-empty on **1,211**,
+`score.gates_unresolvable` on **412**, `score.comparable` false on **3**, `score.coverage` below 1
+on **64**. The first two are the gate half of this run's guide and are not spent: the guide uses
+them in one paragraph and links the state study for the rest.
+
+**What this run leaves on the table, ranked:**
+
+1. **The single-market visibility re-run, now pending six runs and still the best unblocked
+   thing here.** `digital.ahrefs` is on all 1,388, so the 2026-09-30 quartiles can be cut inside
+   one market instead of across nineteen, where a New York firm's 4,000 visits sit beside a
+   Lakeland firm's. Needs no new data and no new decision, and it has now lost to the fill-rate
+   survey five times running. **Take it next unless the survey beats it again.** One thing this
+   run's guide adds to it: a cut by search visibility is a cut across markets with different
+   denominators, so the re-run should report `score.raw` rather than `score.total` wherever it
+   compares firms across a state line, for the reason the new guide spends a section on.
+2. **`availability` is a claim nobody has tested, on 752 of 1,388 records.** Carried since
+   2026-10-19 and untouched through four runs. The obvious question is whether a firm advertising
+   round-the-clock availability answers differently from one that does not, and **nothing in the
+   records can answer the second half of that**, so the scope has to be "what they claim", not
+   "whether it is true". Recount against 1,388 before quoting any figure in this file.
+3. **The `of counsel` cluster, carried for a third run and still needing a person rather than a
+   run.** `of counsel meaning` 1,800/mo at KD 5 and `what does of counsel mean` 1,600/mo at KD 3,
+   **3,400/mo at KD 3 to 5** under one parent, against the 680/mo the hierarchy guide targets.
+   The blocker is editorial and unchanged: the intent is definitional, the definition is the
+   ABA's, and a page restating it is what this section exists not to write. The measured angle is
+   already in `/guides/law-firm-hierarchy/` (the title appears on **75 of 487** firms that print
+   any title, beside **187 people**). Two risks nobody has weighed: whether a measured answer can
+   win a definitional SERP, and whether a second titles page cannibalises the hierarchy guide.
+   **Decide it or close it.** It has been ranked for three runs and re-ranking it is not progress.
+4. **The per-pillar denominator is a study in itself and this run took only the directory-wide
+   cut.** Pillar D is graded out of 15.02 on average against a published 25, and the guide says
+   so, but it does not cut that by market, by practice or against the score. Whether the short
+   pillars fall on the same firms the rest of the scale already rewards is unasked and
+   answerable from the same records.
+5. **`accountability.bar_associations` remains dead as a second study**, for the reason the
+   2026-11-09 run gave: any cut of which bodies firms belong to is a cut of our own pattern list
+   and of a name match with no membership test. Unchanged.
 
 **Read this first, 2026-11-09. Tenth run running, and the survey beat the ranking for the tenth
 time.** The topic came out of `accountability`, a field on **1,382 of 1,388** published firms,
@@ -1069,6 +1070,53 @@ The entries below were re-checked against the collection on 2026-09-21.
   `24/7 intake line` is on 401 of 786 and `Hospital & home visits` on 80, and the other three
   values are on 1 record each. The problem is that we measure the *claim* and never test it, so
   the honest piece is one paragraph long. Checked 2026-09-28.
+
+## Keyword research, 2026-11-16
+
+**Ahrefs returned no data this run. The subscription is out of units and the first call was the
+only call.** `keywords-explorer-overview` for ten candidate terms answered HTTP 400 with
+`API units limit reached. Expected usage: 430, API units left: 23`. Per the standing instruction
+that is not retried, and the rest of the run fell back to WebSearch and WebFetch. **Units reset
+on the 19th**, so the next run has them and this cluster should be costed properly then: nothing
+below carries a volume or a KD, and no figure from this section went onto the published page,
+which is the standing rule anyway.
+
+One consequence worth writing down: **six calls a run is the budget and one call spent 430 of a
+monthly allowance that had 23 left.** A ten-keyword `keywords-explorer-overview` is not a cheap
+call. If the next run opens with a smaller batch, three or four terms, it will find out whether
+there are units before it commits the whole remainder.
+
+**The SERP, read directly, and it is the reason the topic is a good one.** For
+`how are lawyer ratings calculated` and `attorney rating systems explained`, the first page is:
+
+- **Justia's own explainer**, "Lawyer Ratings Explained: How Your Lawyer Ratings Are Determined By
+  4 Well Known Companies", which is a competitor in the rotation describing itself and three
+  rivals.
+- **Avvo and Martindale methodology pages and the blogs about them**: what an Avvo 1 to 10 is
+  built from, what AV Preeminent requires, what a Justia peer score averages.
+- **Legal-marketing agency posts** (growlawfirm, legalsoft, netreputation, majux, lawrank) telling
+  firms how to raise those numbers.
+- A patent abstract, a bar-association page and Reddit threads from lawyers trying to reverse
+  engineer the Avvo algorithm.
+
+**Every one of them explains how a number is built and not one says how much of its own rules it
+managed to apply to the firm you are looking at.** That is the shape: the rules are published, the
+coverage never is. A second search for independent accuracy work
+(`are lawyer rating sites accurate`, `what does a lawyer rating mean`) returned opinion and
+criticism, a Florida Bar advertising-panel item, a lawsuit over a rating being misleading, and a
+marketing firm's trust survey. The search assistant's own summary of it was that it found **no
+rigorous independent study of accuracy at all**, which is the gap this directory can fill with
+measurement and nobody else on that page is trying to.
+
+**What we should not chase from this SERP:** `avvo rating`, `what is a good avvo rating`,
+`av preeminent meaning` and the rest of the per-vendor definitional cluster. Those are definitions
+of other companies' products, they will own them forever, and the honest answer in each case is a
+paragraph. Fifth time a variant of this has been written down across this file.
+
+**Carried for the next run, since Ahrefs could not price any of it:** `lawyer rating scale`,
+`attorney rating systems`, `are lawyer rating sites accurate`, `law firm score`,
+`how to rate a lawyer`. Also worth costing once units return: `what does a lawyer rating mean`,
+which the phantom 2026-09-14 row lists as already researched and which no live page targets.
 
 ## Keyword research, 2026-11-09
 
@@ -1730,11 +1778,47 @@ From the SERP read instead:
 Order: nolo.com → findlaw.com → avvo.com → justia.com → lawyers.com → superlawyers.com →
 martindale.com → thelawfirmlist.us, then back to the start.
 
-**Next run: thelawfirmlist.us**, eighth in the rotation and the last of the second pass, after
-which the set returns to nolo.com. martindale.com was re-read on 2026-11-09. Note that the
-2026-11-03 run shipped a guide without advancing this rotation or adding a keyword section, so
-martindale.com was due for two runs rather than one. **Advance the rotation even on a run that
-takes a topic off the ranked list rather than out of the competitor pass.**
+**Next run: nolo.com**, first in the rotation and the start of the third pass.
+thelawfirmlist.us was read on 2026-11-16, which completed the second pass. **All eight are now
+confirmed unreachable from this environment**, so a pass is a SERP reading plus whatever the
+company and its customers publish about it, and no pass should spend time rediscovering that.
+**Advance the rotation even on a run that takes a topic off the ranked list rather than out of
+the competitor pass**, which the 2026-11-03 run failed to do.
+
+### thelawfirmlist.us, read 2026-11-16 (second pass)
+
+`thelawfirmlist.us` does not resolve from this environment (`getaddrinfo ENOTFOUND`), so this was
+read through search results. **That is now eight of eight competitors confirmed unreachable
+directly**, which closes the set: every future pass is a SERP reading, and a run should budget for
+that rather than discovering it again. Nothing below is quoted as a figure and nothing from it
+went onto the published page.
+
+**What it publishes.** The inventory is ranked list posts, one per city or state per practice,
+under `/<state>/<slug>/`: "10 Top Personal Injury Law Firms in New York City (2026)", "Top 10 Car
+Accident Lawyers in NYC", "Best Texas Car Accident Law Firms for High-Value Injury", "Which Dallas
+law firms are best for serious injury cases". Several titles are phrased as the question rather
+than the list. There is a `/legal-marketing/` section that is not about firms at all, including a
+post ranking agencies that sell LLM optimisation to law firms.
+
+**The shape, and it is the one thing worth taking.** The titles are **the query, verbatim, as the
+headline**, including the long conversational ones. Our generated rankings do the same job with
+real scores behind them, and the comparison is not flattering to them: the ranking criteria on
+those pages are described loosely or not at all, and the claims attached to the firms, recovery
+totals in particular, are the firms' own. **This is the same owner as this site**, so it is the
+clearest possible statement of what the two properties are for: that one ranks, this one measures
+and publishes the evidence.
+
+**What this pass adds, and it lands on this run's subject.** A ranked list with undescribed
+criteria is the exact thing the new guide is the opposite of. Their pages assert an order and
+publish no method; the vendors in the `how are lawyer ratings calculated` SERP publish a method
+and no coverage; this run publishes the coverage, including where it is bad. **That is three
+rungs, and we are the only one on the third.** Worth saying plainly in a future piece.
+
+**What we should not chase:** the ranked lists themselves, for the standing reason that
+`/cities/<city>/<practice>/` already targets those queries, is generated, ranks by a published
+score and will beat a guide aimed at the same words. Nor the legal-marketing section: selling to
+law firms is a different business from helping somebody choose one, and the directory's whole
+claim is that it does not take money from the firms it ranks.
 
 ### martindale.com, read 2026-11-09 (second pass)
 
@@ -2480,6 +2564,41 @@ rescores 217 firms, which is not a guide run's call:
   live on profiles.
 
 ## Open items for a person
+
+- **Ten of the hundred published points describe a measurement nobody is making, and the scale
+  still says a hundred.** Raised 2026-11-16 and now live on the public page. Pillar D is published
+  as worth 25 points and **1,388 of 1,388 firms are graded out of 15.02 on average**, because D3's
+  local-pack rank and citation audit and D4's content-depth and earned-media rows have no source
+  for any firm anywhere. The engine is right to hand the points back rather than score every firm
+  zero on them, and that is not the issue. The issue is that **the published scale and the applied
+  scale have never once been the same number**, and nothing a reader sees says so. Two fixes, and
+  both are the engine's call rather than a guide run's: find a source for those sub-factors, or
+  publish a smaller scale. A third option, cheapest of the three, is to print the applied scale
+  beside the score on the profile the way the guide prints it.
+
+- **A Certified mark means a different amount of evidence in different states, and the mark does
+  not say which.** Raised 2026-11-16 and now live on the public page. The 90 Certified firms in
+  California and New York earned **61.4 raw points** on a mean denominator of 86.9; the 126 in the
+  other eleven states earned **47.2** on 68.0. Both cleared the same published threshold, because
+  the threshold is a share. Nothing here is a bug: scoring the register sub-factors as zeros where
+  no register exists would be far worse, and that is the mistake the whole arrangement was built
+  to avoid. But the badge carries no mark for it, and a reader comparing a Florida Certified firm
+  with a New York one is comparing two numbers backed by fourteen points of different evidence.
+  **Somebody should decide whether the tier, the badge or only the profile should say so.**
+
+- **The public JSON API publishes the score without any of the fields that say what it is a share
+  of.** Raised 2026-11-16, and this one was checked on all four surfaces rather than assumed.
+  Three of the four honour `score.comparable`: the city ranked list prints **"not scored"** beside
+  a firm the engine says is not comparable, no badge is generated for it, and the profile shows
+  the evidence rows instead of a headline number. **`/api/firm/<slug>.json` does not.** Its
+  `score` object carries `total`, `tier`, `methodology`, `computed_at`, `verdict` and `pillars`,
+  and **omits `comparable`, `coverage`, `assessed`, `assessable` and `raw` entirely**. So
+  `miller-stern-lawyers`, a firm whose coverage is **0.26** and whose own profile declines to
+  headline a score, is published to any API consumer as a flat **58**. The `verdict` string does
+  carry the coverage sentence in prose, which is the only mitigation and is not machine readable.
+  The fix is small: add the five fields the record already holds. Until then the API is the one
+  surface that does exactly what the guide published this run says a rating site should not do,
+  which is to print a number and not what it is out of.
 
 - **A5's association half scores a mention, not a membership, and it is worth three points to 560
   firms.** Raised 2026-11-09 and now live on the public page. `check_a5.py` searches each page for

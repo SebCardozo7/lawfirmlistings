@@ -1,0 +1,382 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import StackBar from '../../components/StackBar.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+
+// A method piece about the denominator, which is the part of a rating nobody publishes.
+//
+// Every figure here comes out of the `score` block each profile already carries: the pillar
+// maxima, the sub-factor rows with their own `max` and `source`, and the stored `assessed`,
+// `assessable` and `coverage`. Nothing is typed into the prose and nothing is read from a field
+// that measures something adjacent. Two warnings from docs/guides-backlog.md apply directly:
+//
+//   - A sub-factor's `max` is the scale that was applied to THIS firm, not the scale the
+//     methodology publishes. scripts/score.py shrinks it through `max_override` wherever part
+//     of a sub-factor cannot be reached. The published figure lives in score.py's SUBS table,
+//     which is not in the collection, so no per-sub-factor published maximum appears on this
+//     page. The pillar maxima ARE in the collection, as score.pillars[x].max, and that is the
+//     level everything below is computed at.
+//   - "no queryable source" and "no roster published" are different facts wearing the same
+//     consequence. The first is about the state, the second is about the firm's own site.
+//     They are counted apart wherever a sentence depends on which one it is.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const scored = firms.filter(f => f.data.score);
+
+// The engine's own vocabulary, copied from scripts/score.py rather than inferred from the data,
+// so a word added there shows up here as an unrecognised source instead of being silently
+// counted as a measurement. NOT_A_FINDING is everything the engine refuses to read as a zero.
+// NO_SOURCE_IN_MARKET is the subset that is nobody's to fix: it leaves the scale entirely.
+const NOT_A_FINDING = ['pending', 'partial', 'no queryable source', 'unavailable',
+  'screening only', 'incomplete', 'not yet', 'no roster published'];
+const NO_SOURCE = ['no queryable source', 'unavailable', 'no roster published'];
+const hits = (source: string, words: string[]) =>
+  words.some(w => source.toLowerCase().includes(w));
+
+type Sub = { code: string; max: number; pts: number; source: string };
+const PILLARS = ['A', 'B', 'C', 'D', 'E'] as const;
+type Letter = typeof PILLARS[number];
+// Labels only. The point values beside them on this page are all read from the records; these
+// are the names the methodology page prints for each pillar, and a name is not a figure.
+const PILLAR_NAME: Record<Letter, string> = {
+  A: 'Professional Standing',
+  B: 'Published Outcomes',
+  C: 'Client Experience',
+  D: 'Digital Presence & Authority',
+  E: 'Access & Responsiveness',
+};
+
+const subsOf = (f: typeof scored[number]): Sub[] =>
+  PILLARS.flatMap(p => f.data.score!.pillars[p].subs as Sub[]);
+
+type Row = {
+  slug: string; name: string; state: string; stateName: string; citySlug: string;
+  status: string; total: number; raw: number;
+  /** The published scale, summed from the pillar maxima the record itself carries. */
+  published: number;
+  /** The scale actually applied to this firm, summed from its own sub-factor rows. */
+  applied: number;
+  /** Of that, the part with no source anybody can query here. */
+  absent: number;
+  assessable: number; assessed: number; coverage: number;
+  unavailableGates: number; unresolvableGates: number;
+  register: boolean;
+};
+
+const rows: Row[] = scored.map(f => {
+  const s = f.data.score!;
+  const subs = subsOf(f);
+  const published = PILLARS.reduce((a, p) => a + s.pillars[p].max, 0);
+  const applied = subs.reduce((a, x) => a + x.max, 0);
+  const absent = subs.filter(x => hits(x.source, NO_SOURCE)).reduce((a, x) => a + x.max, 0);
+  return {
+    slug: f.data.slug, name: f.data.name,
+    state: f.data.market.state, stateName: f.data.market.state_name,
+    citySlug: f.data.market.city_slug, status: f.data.status,
+    total: s.total, raw: s.raw ?? 0,
+    published, applied, absent,
+    assessable: s.assessable ?? 0, assessed: s.assessed ?? 0, coverage: s.coverage ?? 0,
+    unavailableGates: (s.gates_unavailable ?? []).length,
+    unresolvableGates: (s.gates_unresolvable ?? []).length,
+    // A state whose attorney register the engine actually read for somebody. Derived from the
+    // source word on the rows rather than from a list of state codes, so a state that opens
+    // moves this page without anybody editing it.
+    register: subs.some(x => x.source === 'registry'),
+  };
+});
+
+const n = rows.length;
+const fmt = (x: number) => x.toLocaleString('en-US');
+const mean = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+const one = (x: number) => x.toFixed(1);
+
+// The published scale, summed from the pillar maxima rather than typed in. Taking the largest
+// of the distinct values means a record that somehow disagreed could not quietly shrink the
+// scale every other sentence on this page is a share of.
+const scale = Math.max(...rows.map(r => r.published));
+
+// The page's own check, published rather than kept in a comment. Recomputing the denominator
+// from the sub-factor rows has to reproduce the figure score.py stored, or something in this
+// page's reading of the vocabulary is wrong and every number under it is suspect.
+const agree = rows.filter(r => r.assessable === r.applied - r.absent).length;
+
+const onFullScale = rows.filter(r => r.assessed === scale).length;
+const denominators = rows.map(r => r.assessed);
+const widest = Math.max(...denominators);
+const narrowest = Math.min(...denominators);
+const tally = denominators.reduce<Record<number, number>>((o, v) => {
+  o[v] = (o[v] ?? 0) + 1; return o;
+}, {});
+const [commonest, commonestFirms] = Object.entries(tally)
+  .sort((a, b) => b[1] - a[1] || Number(a[0]) - Number(b[0]))[0];
+
+// The four parts of the published scale, averaged across every firm. They sum to the scale by
+// construction, which is the only reason a stacked bar is the honest shape for them.
+const meanAssessed = mean(rows.map(r => r.assessed));
+const meanAbsent = mean(rows.map(r => r.absent));
+const meanHandedBack = mean(rows.map(r => r.published - r.applied));
+const meanUnread = mean(rows.map(r => r.assessable - r.assessed));
+
+// Per pillar: what the methodology allocates, and what is left of it once the rows are read.
+const pillarRows = PILLARS.map(p => {
+  const published = scored[0].data.score!.pillars[p].max;
+  const applied = scored.map(f => (f.data.score!.pillars[p].subs as Sub[])
+    .reduce((a, x) => a + x.max, 0));
+  const assessedPts = scored.map(f => (f.data.score!.pillars[p].subs as Sub[])
+    .filter(x => !hits(x.source, NOT_A_FINDING)).reduce((a, x) => a + x.max, 0));
+  return {
+    letter: p, name: PILLAR_NAME[p], published,
+    meanApplied: mean(applied), meanAssessed: mean(assessedPts),
+    below: applied.filter(v => v < published).length,
+    widestApplied: Math.max(...applied),
+  };
+});
+const short = pillarRows.filter(p => p.below > 0).sort((a, b) => a.letter.localeCompare(b.letter));
+const whole = pillarRows.filter(p => p.below === 0).sort((a, b) => a.letter.localeCompare(b.letter));
+const pillarD = pillarRows.find(p => p.letter === 'D')!;
+const pillarA = pillarRows.find(p => p.letter === 'A')!;
+// Pillar A's assessed scale, per firm, because the headline about the register is about A.
+const aAssessed = scored.map(f => (f.data.score!.pillars.A.subs as Sub[])
+  .filter(x => !hits(x.source, NOT_A_FINDING)).reduce((a, x) => a + x.max, 0));
+const aGutted = aAssessed.filter(v => v <= pillarA.published / 4).length;
+
+// Which states answer, and which do not. Both lists are derived and deduplicated: a hand-written
+// pair of state names is a sentence that goes wrong the week a market opens.
+const registerStates = [...new Set(rows.filter(r => r.register).map(r => r.stateName))].sort();
+const closedStates = [...new Set(rows.filter(r => !registerStates.includes(r.stateName))
+  .map(r => r.stateName))].sort();
+const list = (xs: string[]) =>
+  xs.length <= 1 ? (xs[0] ?? '') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`;
+const inRegisterStates = rows.filter(r => registerStates.includes(r.stateName));
+
+// The same mark, in the two kinds of state. Raw points, both sides, which is the one comparison
+// on this page where the units have to be checked out loud: `raw` is earned points and `total`
+// is a percentage of a denominator that differs, so the percentages are not comparable and the
+// points are.
+const certified = rows.filter(r => r.status === 'certified');
+const certOpen = certified.filter(r => registerStates.includes(r.stateName));
+const certClosed = certified.filter(r => !registerStates.includes(r.stateName));
+const certOpenRaw = mean(certOpen.map(r => r.raw));
+const certClosedRaw = mean(certClosed.map(r => r.raw));
+
+// One exemplar from each group: the highest-scoring certified firm, tie-broken on the slug so
+// the page draws the same illustration on every build.
+const best = (xs: Row[]) =>
+  [...xs].sort((a, b) => b.total - a.total || a.slug.localeCompare(b.slug))[0];
+const openExample = best(certOpen);
+const closedExample = best(certClosed);
+// Derived alongside the firm, never beside it. A link whose target is hardcoded while its text
+// is computed is the failure recorded in docs/guides-backlog.md on 2026-10-16.
+const cityOf = (r: Row | undefined) => (r ? `/cities/${r.citySlug}/` : '/cities/');
+
+// Coverage: the part of the shortfall that is ours, which is the part a reader is entitled to
+// hold against us rather than against a state.
+const fullyRead = rows.filter(r => r.coverage >= 1).length;
+const partlyRead = n - fullyRead;
+const meanCoverage = mean(rows.map(r => r.coverage));
+const incomparable = scored.filter(f => f.data.score!.comparable === false).length;
+
+// Gates, counted here only as a second instance of the same shape. The study of which state
+// answers which gate is its own guide and this page links to it rather than repeating it.
+const gatesUnavailable = rows.filter(r => r.unavailableGates > 0).length;
+const gatesUnresolvable = rows.filter(r => r.unresolvableGates > 0).length;
+const gatesClean = rows.filter(r => r.unavailableGates === 0 && r.unresolvableGates === 0).length;
+
+const states = new Set(rows.map(r => r.state)).size;
+const markets = new Set(rows.map(r => r.citySlug)).size;
+
+// Fixed bands, chosen once and not derived, the same way the Core Web Vitals guide uses Google's
+// own reporting bands. Deriving them from this month's modes would redraw the chart every time a
+// market opened. Labels are one line each at 390px and carry no note, which is the failure
+// recorded in docs/guides-backlog.md on 2026-11-02.
+const BANDS = [
+  { label: 'Under 50', lo: 0, hi: 50 },
+  { label: '50 to 69', lo: 50, hi: 70 },
+  { label: '70 to 89', lo: 70, hi: 90 },
+  { label: '90 or more', lo: 90, hi: Infinity },
+];
+const bandColumns = BANDS.map(b => ({
+  label: b.label,
+  value: rows.filter(r => r.assessed >= b.lo && r.assessed < b.hi).length,
+}));
+
+const snapshot = [...scored].map(f => f.data.score!.computed_at).filter(Boolean).sort().at(-1) ?? '';
+
+// Says the finding, and carries the phrase somebody types when they want to know what one of
+// these numbers is made of. No count in it: the scale is stable, the counts under it are not.
+const title = 'How Law Firm Ratings Are Calculated, and What the Scale Cannot Reach';
+const description = 'Our 0-100 certification score is a share of what could be measured, '
+  + 'not of a hundred. We counted how much of the scale exists for every firm we publish.';
+---
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`Score records for every published firm in the directory, read ${snapshot}`}
+      image="/og/ladder.png"
+      imageAlt="Two measuring rules of different length, each filled to the same fraction of itself">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">How a rating is calculated</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Method · Every practice</span>
+    <h1>{title}</h1>
+    <p class="lede">Every firm in this directory carries a score out of {scale}. That number is not a share of {scale}. It is a share of what we were able to measure for that firm, and of the {fmt(n)} firms published here in {states} states, {onFullScale === 0 ? 'not one' : fmt(onFullScale)} is graded on all {scale} points. This is where the rest of the scale goes, and whose doing it is.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      <span class="sep" aria-hidden="true"></span>
+      <span>7 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="ladder" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#share" class="is-active">What the score is a share of</a></li>
+      <li><a href="#where">Where the points go</a></li>
+      <li><a href="#rubric">The part that reaches nobody</a></li>
+      <li><a href="#register">The part that depends on the state</a></li>
+      <li><a href="#mark">What it does to a Certified mark</a></li>
+      <li><a href="#ours">What we have not read</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`Every published firm in the directory: ${fmt(n)} firms, ${markets} markets, ${states} states, read ${snapshot}.`}
+      items={[
+        `<b>${onFullScale} of ${fmt(n)}</b> firms are graded on all ${scale} points. The commonest denominator in the directory is <b>${commonest} points</b>, carried by <b>${fmt(commonestFirms)}</b> firms.`,
+        `Pillar ${pillarD.letter}, ${pillarD.name}, is published as worth <b>${pillarD.published} points</b> and is graded out of <b>${one(pillarD.meanApplied)} on average</b>, because parts of it have no source for any firm anywhere.`,
+        `A Certified mark rests on <b>${one(certOpenRaw)} points</b> of measured evidence in ${list(registerStates)}, and on <b>${one(certClosedRaw)} points</b> in the other ${closedStates.length} states, where no attorney register answers us.`,
+        `<b>${fmt(gatesUnavailable)} of ${fmt(n)}</b> firms sit in a market where at least one of the eligibility gates has no source anybody can query.`,
+        `Of the scale that does exist, we have read <b>${(meanCoverage * 100).toFixed(1)}%</b>: only <b>${partlyRead}</b> firms have a point left unmeasured by us.`,
+      ]}
+    />
+    <StatRow
+      stats={[
+        { value: String(onFullScale), label: `firms graded on all ${scale} points`, note: `out of ${fmt(n)} published`, emphasis: true },
+        { value: String(commonest), label: 'points in the commonest denominator', note: `carried by ${fmt(commonestFirms)} firms` },
+        { value: `${one(certOpenRaw)} vs ${one(certClosedRaw)}`, label: 'points behind the same Certified mark', note: 'where a register answers, and where none does' },
+        { value: `${(meanCoverage * 100).toFixed(1)}%`, label: 'of the available scale we have read', note: `${partlyRead} firms have a point still unmeasured` },
+      ]}
+      source={`Computed from the score record on every published profile, ${snapshot}.`}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own score records at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="share">What the score is a share of</h2>
+    <p>Most directories publish a rating and the rules behind it. Almost none publish how much of those rules they were able to apply to the firm you are looking at. That second number is the subject here. In our own data it ranges from {narrowest} points to {widest} across firms that all carry a score out of {scale}.</p>
+    <p>The certification score works in three steps. Each sub-factor is worth a fixed number of points. A sub-factor the engine could not answer is taken out of the denominator instead of being scored as a zero, because a firm must not lose points for the reach of our own crawl or for a record its state does not publish. The total is then the points earned divided by the points that were genuinely in play, printed as a percentage.</p>
+    <p>So the published scale is {scale} points, and the denominator is whatever is left of it. Across {fmt(n)} firms the denominator runs from {narrowest} points to {widest}. It reaches {scale} for {onFullScale === 0 ? 'none of them' : `${onFullScale} of them`}.</p>
+    <ColumnChart
+      heading={`How many of the ${scale} published points each firm was actually graded on`}
+      columns={bandColumns}
+      caption={`${fmt(n)} published firms. The band a firm falls in is its denominator, not its score: a firm in the lowest band is not a bad firm, it is a firm about which less could be established. The widest denominator in the directory is ${widest}.`}
+    />
+    <p>Recomputing that denominator here from each firm's own sub-factor rows reproduces the figure the scoring engine stored on {agree === n ? `all ${fmt(n)}` : `${fmt(agree)} of ${fmt(n)}`} records, which is the check that lets the rest of this page stand on the same arithmetic the profiles do.</p>
+
+    <h2 id="where">Where the points go</h2>
+    <p>A point leaves the scale in one of three ways, and they are not the same kind of fact. The methodology can decline to grade part of a sub-factor because no public source carries it for anybody. A state can publish no register, so a check that exists cannot be run on any firm there. Or we can simply not have done the work yet. Only the last of those is ours to fix, and it is the smallest of the three.</p>
+    <StackBar
+      heading={`The ${scale} published points, averaged across all ${fmt(n)} firms`}
+      segments={[
+        { label: 'Scored: in the denominator the firm is graded on', value: Number(one(meanAssessed)) },
+        { label: 'No source in this market, so the check cannot be run here', value: Number(one(meanAbsent)) },
+        { label: 'Off the scale for every firm, because nothing public carries it', value: Number(one(meanHandedBack)) },
+        { label: 'Measured by nobody yet, which is work we owe', value: Number(one(meanUnread)) },
+      ]}
+      unit="the published scale"
+      caption={`Mean points per firm. The four parts sum to ${scale} by construction. The third is a judgement we made about our own rubric and the second is a fact about a state, so a reader who wants to hold somebody responsible for a short denominator should split them.`}
+    />
+    <p>The shortfall is not spread evenly across the rubric. {whole.length > 0 && <>{list(whole.map(p => `Pillar ${p.letter}`))} {whole.length === 1 ? 'is' : 'are'} applied at {whole.length === 1 ? 'its' : 'their'} published size to every firm in the directory. </>}The whole of it sits in {list(short.map(p => `pillar ${p.letter}`))}.</p>
+    <BarChart
+      heading={`Points of each pillar actually in a firm's denominator, on average`}
+      max={Math.max(...pillarRows.map(p => p.published))}
+      rows={pillarRows.map(p => ({
+        label: `${p.letter} · ${p.name}`,
+        value: Number(one(p.meanAssessed)),
+        display: `${one(p.meanAssessed)} of ${p.published}`,
+        note: p.below > 0
+          ? `${fmt(p.below)} of ${fmt(n)} firms are graded on a shorter scale than the published ${p.published}`
+          : `the full ${p.published} is on the scale for every firm`,
+        emphasis: p.below > 0,
+      }))}
+      caption={`The pillar maxima are the ones each profile carries in its own score record. A highlighted row is a pillar that is shorter than its published size for at least one firm.`}
+    />
+
+    <h2 id="rubric">The part that reaches nobody</h2>
+    <p>Pillar {pillarD.letter}, {pillarD.name}, is published as worth {pillarD.published} points. Not one firm in this directory is graded on more than {pillarD.widestApplied} of them, and the average is {one(pillarD.meanApplied)}. That gap is not a state's doing and it is not a firm's. It is ours.</p>
+    <p>The pillar asks for things that turned out to have no public source: a firm's rank in the local pack, the consistency of its name and address across citations, an audit of content depth, earned media. Those are real questions and the engine hands their points back rather than scoring every firm zero on them, which would publish our own reach as the firms' result. The honest reading is that {one(pillarD.published - pillarD.meanApplied)} points of the published scale describe a measurement nobody here is making, and have done since the rubric was written.</p>
+    <p>The same thing happens on a smaller scale in pillar {pillarA.letter}, where the half of accountability that asks whether a firm discloses professional liability cover is handed back for almost every firm. <a href="/guides/do-lawyers-have-malpractice-insurance/">We measured that one separately</a>, and what it found is why the points leave: the disclosure is so nearly universal in its absence that scoring it would separate nobody.</p>
+    <p>We are not going to pretend this is a feature. A scale whose published size has never applied to a single firm is a scale that overstates what it reads, and the number a reader sees carries no mark saying so. The fix is either a source for those sub-factors or a smaller published scale, and both are decisions for the engine rather than for a guide.</p>
+
+    <h2 id="register">The part that depends on the state</h2>
+    <p>The larger hole is pillar {pillarA.letter}, {pillarA.name}, and it opens and closes at a state line. Two of its sub-factors read a state attorney register: how long a firm's lawyers have been admitted, and how much of its published roster resolves to a real registration. Both need a register that something other than a person with a form can query.</p>
+    <p>Of the {states} states in this directory, {registerStates.length === 1 ? 'one publishes' : `${registerStates.length} publish`} such a register: {list(registerStates)}. The other {closedStates.length} do not, and in those states both sub-factors leave the scale for every firm. {fmt(aGutted)} of {fmt(n)} firms are graded on a quarter or less of what pillar {pillarA.letter} is published as being worth.</p>
+    <p>There is a second way the same points leave, and conflating it with the first would be a mistake. Where a firm's own site names no attorney, there is no roster to verify and the sub-factors leave the scale too, in a state that answers perfectly well. The engine writes those two cases down as different sentences on the profile, and so should anyone reading across them: one says nothing can be checked here, the other says this firm published nothing to check. <a href="/guides/what-you-can-check-about-a-lawyer-by-state/">The state half of that question has its own study</a>, which counts which register answers which check and what a reader can do about it.</p>
+    <p>{fmt(inRegisterStates.length)} of the firms here sit in a state whose register we read. That is the minority, and every figure in the next section follows from it.</p>
+
+    <h2 id="mark">What it does to a Certified mark</h2>
+    <p>A tier threshold is a percentage, so a shorter scale is neither easier nor harder to clear on its face. What a shorter scale changes is the amount of evidence the same mark rests on, and that difference is large enough to say plainly.</p>
+    <BarChart
+      heading="Points of measured evidence behind the same Certified mark"
+      max={scale}
+      rows={[
+        {
+          label: `Certified in ${list(registerStates)}`,
+          value: Number(one(certOpenRaw)),
+          display: `${one(certOpenRaw)} points`,
+          note: `${fmt(certOpen.length)} firms, graded on ${one(mean(certOpen.map(r => r.assessed)))} points on average`,
+        },
+        {
+          label: `Certified in the other ${closedStates.length} states`,
+          value: Number(one(certClosedRaw)),
+          display: `${one(certClosedRaw)} points`,
+          note: `${fmt(certClosed.length)} firms, graded on ${one(mean(certClosed.map(r => r.assessed)))} points on average`,
+          emphasis: true,
+        },
+      ]}
+      caption={`Earned points, not percentages. The percentages are not comparable between these two groups, which is the entire point: both groups clear the same published threshold, and the bars are what each one cleared it with.`}
+    />
+    <p>{fmt(certified.length)} firms in the directory are Certified. The {fmt(certOpen.length)} of them in {list(registerStates)} earned {one(certOpenRaw)} points on average. The {fmt(certClosed.length)} in the other {closedStates.length} states earned {one(certClosedRaw)}. Both groups cleared the same published bar, on denominators averaging {one(mean(certOpen.map(r => r.assessed)))} points and {one(mean(certClosed.map(r => r.assessed)))}.</p>
+    {openExample && closedExample && (
+      <p>The highest-scoring Certified firm in a state whose register answers is <a href={`/firms/${openExample.slug}/`}>{openExample.name}</a>, in <a href={cityOf(openExample)}>{openExample.stateName}</a>, which scored {openExample.total} on a denominator of {openExample.assessed}. The highest-scoring Certified firm in a state whose register does not is <a href={`/firms/${closedExample.slug}/`}>{closedExample.name}</a>, in <a href={cityOf(closedExample)}>{closedExample.stateName}</a>, which scored {closedExample.total} on a denominator of {closedExample.assessed}. Neither number is wrong and neither firm did anything to earn a different scale. The first was simply asked more questions.</p>
+    )}
+    <p>The eligibility gates have the same shape. {fmt(gatesUnavailable)} of {fmt(n)} firms sit where at least one gate has no queryable source, and {fmt(gatesUnresolvable)} carry a gate that was run against a real source which could not answer for that particular firm. {fmt(gatesClean)} firms have neither. A profile that says every gate passed is therefore saying something different in different states, which is why the verdict line on each profile names the gates that could not be answered instead of counting them as passes.</p>
+
+    <h2 id="ours">What we have not read</h2>
+    <p>The third way a point leaves the scale is the one we are accountable for, and it is worth separating from the other two because it is the only one a reader can fairly hold against us.</p>
+    <p>{fmt(fullyRead)} of {fmt(n)} firms have a coverage figure of 1, which is to say every point available in their market was actually read. {partlyRead} firms have at least one point still unmeasured, and the mean across the directory is {(meanCoverage * 100).toFixed(1)}% of what is available. {incomparable === 0 ? 'No firm' : `${incomparable} firms`} fall below the threshold at which the engine stops presenting the total as comparable with another firm's, and {incomparable === 1 ? 'that profile shows' : 'those profiles show'} the evidence instead of the number.</p>
+    <p>That is the one figure on this page that flatters us, and it is also the one that moves fastest. An earlier version of our Core Web Vitals study said the points we had not read moved a score further than any state line did. <a href="/guides/core-web-vitals-new-york-injury-firms/">That page</a> has been corrected: on the mean figures above, what we have not read is worth {one(meanUnread)} points per firm, and what a state does not publish is worth {one(meanAbsent)}.</p>
+
+    <h2>What this does not tell you</h2>
+    <p>Three limits, stated rather than implied.</p>
+    <p>The first is that none of this says a firm in a state with no register is worse or better than one in a state with a register. It says we know less about it. A directory that quietly treated those as the same thing would be publishing its own reach as a finding about businesses, and that is the error this whole arrangement exists to avoid.</p>
+    <p>The second is that the per-sub-factor published maxima are not in the data a reader can check. The pillar maxima are, and every figure above is computed at that level for exactly that reason. The scoring table on <a href="/methodology/">the methodology page</a> carries the sub-factor values, and nothing on this page is derived from it.</p>
+    <p>The third is that a denominator is not a quality signal in either direction, and we would rather it were shorter and honest than full and invented. If your firm is in this directory and a sub-factor reads as unmeasured where you publish the evidence, the profile links the source we used for every row. <a href="/list-your-firm/">Telling us where to look</a> is free and moves the measurement, which is the only thing on this page that a firm can change.</p>
+    <p class="muted" style="font-size:.86rem">Figures computed from the score record on every published profile in the directory, excluding sample and ineligible records. Pillar weightings, sub-factor scales and the source word on each row are read from the records themselves.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm above has a profile showing each sub-factor, the scale it was graded on and the evidence behind it.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>How scoring works</h4>
+      <ul>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+        <li><a href="/guides/what-you-can-check-about-a-lawyer-by-state/">What you can check, by state</a></li>
+        <li><a href="/guides/do-lawyers-have-malpractice-insurance/">What accountability measures</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>
