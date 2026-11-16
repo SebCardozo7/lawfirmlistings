@@ -36,6 +36,7 @@ import sys
 import html as html_entities
 import unicodedata
 
+from lib_claims import availability_of, fee_model_of, free_consultation_of, languages_of
 from lib_describe import describe
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -586,47 +587,16 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
     places = rec.get("places", {})
     agg = places.get("aggregate", {})
 
-    languages = ["English"]
-    if "se_habla_espanol" in claims or rec.get("spanish_signals"):
-        # The site is written in English, so the field names the language in English. A
-        # profile that read "English and Español" mixed the two in one sentence.
-        languages.append("Spanish")
+    # These four moved to scripts/lib_claims.py on 16 November 2026, unchanged. They were
+    # only ever derived here, and here runs once, when a market opens: the monthly
+    # re-measurement runs promote_measurements.py, whose FIELD_PATHS carried none of them. So
+    # pillar E was frozen on all 1,388 published profiles at whatever the firm said the day
+    # its market opened. Both scripts call the same function now.
+    languages = languages_of(rec)
+    availability = availability_of(rec)
 
-    availability = []
-    if "available_24_7" in claims:
-        availability.append("24/7 intake line")
-    if "hospital_visits" in claims:
-        availability.append("Hospital & home visits")
-
-    # A fee model is only stated if the firm states it. No defaulting to contingency.
-    #
-    # And contingency is not the only thing a firm can state. A transactional practice charges a
-    # flat fee or an hourly rate, so reading only the contingency claim reported "Not stated"
-    # for all twenty firms in the first real estate market, five of which say plainly that their
-    # engagements are priced as flat fees. scripts/check_transaction.py found those words; this
-    # just believes them.
-    tx = rec.get("transaction") or {}
-    # And the same again for a domestic relations practice, with a stronger reason. Rule
-    # 1.5(d)(5)(i) forbids a contingent fee in a matrimonial matter outright, so reading only the
-    # contingency claim reported "Not stated" for all forty-two family law firms in the directory,
-    # including the four that publish a price. The New York City and Buffalo passes each patched
-    # this by hand in a scratchpad script; it belongs here, so the next family market does not
-    # need one. scripts/check_domestic.py found the words.
-    dm = rec.get("domestic") or {}
-    if "contingency" in claims:
-        fee_model = "Contingency"
-    elif tx.get("flat_fee"):
-        fee_model = "Flat fee"
-    elif dm.get("hourly"):
-        fee_model = "Hourly rate published"
-    elif dm.get("retainer_figure"):
-        fee_model = "Retainer figure published"
-    elif dm.get("flat_fee"):
-        fee_model = "Flat fee published"
-    elif dm.get("fee_terms"):
-        fee_model = "Billing terms published, no figure"
-    else:
-        fee_model = "Not stated"
+    # See scripts/lib_claims.py, which holds the whole rule and why each branch exists.
+    fee_model = fee_model_of(rec)
     built_offices = build_offices(rec)
 
     reviews = {"quotes": []}
@@ -706,7 +676,7 @@ def build(rec, cohort_lookup, market, cohort_id, practice):
         # different pillar B. promote_measurements.py copies this onto a published profile; a
         # new draft was going out without it and getting it on the next promote.
         **({"domestic": rec["domestic"]} if rec.get("domestic") else {}),
-        "free_consultation": "free_consultation" in claims,
+        "free_consultation": free_consultation_of(rec),
         "availability": availability,
         # Assembled from the fields above rather than left for a person to write. See
         # lib_describe: it states nothing no column carries, and attributes to the firm

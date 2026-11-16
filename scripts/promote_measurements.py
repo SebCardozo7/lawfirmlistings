@@ -40,6 +40,7 @@ for stream in (sys.stdout, sys.stderr):
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from crawl_attorneys import looks_like_a_person  # noqa: E402
+from lib_claims import pillar_e  # noqa: E402
 # The vocabulary lives in build_profiles because that is where it was written and this repo
 # already carries one rule in three copies. Importing it is the alternative to a fourth.
 from build_profiles import NOT_A_NAME_match  # noqa: E402
@@ -335,6 +336,31 @@ def promote(rec: dict, firm: dict) -> list[str]:
         changed.append(f"schema_detected {digital.get('schema_detected')} -> {detected}")
     digital["schema_detected"] = detected
 
+    # Pillar E: what the firm publishes about its fees, its languages and when it answers.
+    #
+    # These were derived in build_profiles.py and nowhere else, and build_profiles runs once,
+    # when a market opens. So the fifteen points of pillar E were frozen on all 1,388
+    # published profiles at whatever the firm said that day, and no amount of re-crawling
+    # moved them. A firm that put its contingency percentage up the next morning scored the
+    # same for ever.
+    #
+    # Which the prospecting letter started promising the opposite of on 13 November 2026:
+    # "Publish what is missing and the next monthly read picks it up." Pillar E is the only
+    # part of the score that letter names, because it is the only part a firm can move by
+    # itself in a week.
+    #
+    # Guarded on `claims`, not on truthiness. A crawl that read the firm's pages and found no
+    # claims at all writes {}, and that is a real measurement saying the firm publishes none
+    # of this. A record with no claims key is a crawl that never got in, and deriving from it
+    # would publish "Not stated" and no Spanish about a firm we failed to read, taking points
+    # off it for our own failure. The same distinction trust_pages above had to learn.
+    if rec.get("claims") is not None:
+        for key, value in pillar_e(rec).items():
+            if firm.get(key) != value:
+                changed.append(f"{key:15} {json.dumps(firm.get(key))[:40]} -> "
+                               f"{json.dumps(value)[:40]}")
+                firm[key] = value
+
     return changed
 
 
@@ -354,6 +380,11 @@ FIELD_PATHS = {
     "digital.psi": ("digital", "psi"),
     "trust_pages": ("digital", "trust_pages"),
     "schema_detected": ("digital", "schema_detected"),
+    # Pillar E, so --only can hold these back like any other measured field.
+    "languages": ("languages",),
+    "fee_model": ("fee_model",),
+    "free_consultation": ("free_consultation",),
+    "availability": ("availability",),
 }
 
 

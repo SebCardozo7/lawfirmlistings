@@ -160,6 +160,20 @@ jobs:
           fi
           echo "ALL=$(python scripts/published_domains.py --joined)" >> "$GITHUB_ENV"
 
+      # Before promoting anything, check that promoting still moves pillar E.
+      #
+      # It did not, from the day the first market opened until 16 November 2026. The four
+      # fields behind those fifteen points were derived in build_profiles.py, which runs once,
+      # and this job runs promote_measurements.py, which carried none of them. Every monthly
+      # run was green and pillar E never moved on any of the 1,388 profiles.
+      #
+      # Nothing errored, which is why it ran for weeks: a number that never changes looks
+      # exactly like a firm that never changed. So it is asserted rather than watched, and it
+      # runs here, before the promotion, because a run that cannot keep the promise should
+      # stop rather than write a month of measurements that quietly leave it out.
+      - name: The promise the letter makes
+        run: python scripts/check_pillar_e.py
+
       # Only the fields a machine measured, in the shape build_profiles writes them. Prose, FAQs
       # and pull quotes on a published profile are left exactly as they are.
       - name: Promote the measurements
