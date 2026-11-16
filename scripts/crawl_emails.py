@@ -64,7 +64,12 @@ MAILTO = re.compile(r'href=["\']mailto:([^"\'?]+)', re.I)
 
 # A literal backslash escape in the source, as written inside a JavaScript string rather
 # than as the character it stands for. See harvest().
-ESCAPE = re.compile(r"\\[nrt]")
+#
+# The \uXXXX form is here because of one firm: a page that carried its markup inside a JSON
+# blob wrote the angle bracket before its address as >, and since a backslash cannot
+# start an address and the u can, the mailbox was recorded as u003einfo@ and a letter to it
+# would have bounced. Any \u escape is a character that was never part of the address.
+ESCAPE = re.compile(r"\\(?:u[0-9a-fA-F]{4}|[nrtbfv])")
 
 # Addresses that are real and are not a way to reach the firm, plus the ones that are not
 # addresses at all. The image extensions matter more than they look: a filename like
@@ -72,7 +77,7 @@ ESCAPE = re.compile(r"\\[nrt]")
 # junk by volume.
 JUNK = re.compile(
     r"(^(no-?reply|do-?not-?reply|postmaster|abuse|webmaster|hostmaster|sentry|wordpress|"
-    r"example|your-?name|email|name|user)@)"
+    r"example|your-?name|your-?email|email|name|user)@)"
     r"|(@(example|test|localhost|domain|yourdomain|sentry|wixpress|squarespace)\.)"
     r"|(\.(png|jpe?g|gif|webp|svg|css|js|woff2?|ico)$)"
     r"|(^[a-f0-9]{16,}@)",
@@ -138,6 +143,38 @@ def firms(state=None):
     return out
 
 
+def clean(raw):
+    """
+    One harvested string, turned into an address or refused. None means refused.
+
+    The text pass finds its candidates with ADDRESS and so cannot produce anything that is
+    not shaped like an address. The mailto pass takes whatever sits between `mailto:` and
+    the first quote and, until this existed, trusted it because it came from an href. Every
+    unusable recipient in the directory arrived that way: `contact@ f.com`, from a space
+    inside the href, and `@info@f.com`, from a stray character left in a template. Both were
+    chosen as the firm's address and a letter to either bounces somewhere we cannot see,
+    because nothing here can see a bounce.
+
+    A candidate is repaired only where the repair is certain, and refused otherwise. A space
+    beside the @ is certain: no address has one. A character glued in front of a second @ is
+    certain for the same reason. A space anywhere else is not repaired at all, because a
+    firm that spaced its address out did it to keep scrapers off, and honouring that is of a
+    piece with obeying robots.txt. Anything that still does not match ADDRESS whole is
+    refused rather than guessed at: a guess here is an unsolicited letter to a stranger.
+    """
+    if not raw:
+        return None
+    a = raw.strip().strip(".,;:<>\"'").lower()
+    while " @" in a or "@ " in a:
+        a = a.replace(" @", "@").replace("@ ", "@")
+    if any(c.isspace() for c in a):
+        return None
+    if a.count("@") > 1:
+        head, _, tail = a.rpartition("@")
+        a = head.rpartition("@")[2] + "@" + tail
+    return a if ADDRESS.fullmatch(a) else None
+
+
 def harvest(html, domain):
     """
     Every plausible address on one page as (address, how it was written).
@@ -165,8 +202,8 @@ def harvest(html, domain):
         found.append((m.strip(), "text"))
     out, seen = [], set()
     for a, via in found:
-        a = a.lower().strip(".,;:")
-        if JUNK.search(a) or a in seen:
+        a = clean(a)
+        if not a or JUNK.search(a) or a in seen:
             continue
         seen.add(a)
         out.append((a, via))
@@ -216,7 +253,14 @@ def best(addresses, domain):
     if not addresses:
         return None
     bare = domain.lower().replace("www.", "")
-    pool = [a for a, via in addresses
+    # clean() runs here as well as in harvest(), because best() is also handed addresses
+    # that were stored before the gate existed: crawl_bios.py --merge offers it everything
+    # in a firm's `others`, and an unusable string there matches no role word, is therefore
+    # read as somebody's name, and wins. The gate belongs at the point of choice, not only
+    # at the point of discovery.
+    usable = [(c, via) for c, via in ((clean(a), via) for a, via in addresses)
+              if c and not JUNK.search(c)]
+    pool = [a for a, via in usable
             if a.split("@")[-1].replace("www.", "").endswith(bare)
             or (a.split("@")[-1] in PROVIDERS and via == "mailto")]
     if not pool:
@@ -332,6 +376,16 @@ def selftest():
         ([("zed@f.com", "text"), ("amy@f.com", "text")], "zed@f.com"),
         # Somebody else's address is still refused, which is the older and stricter rule.
         ([("dev@agency.example", "text")], None),
+        # And an unusable one stored before the gate existed. It matches no role word, so
+        # it reads as somebody's name and beats the firm's real address unless best() runs
+        # the same gate harvest() does. This is the path crawl_bios.py --merge takes.
+        ([("%20info@f.com", "mailto"), ("info@f.com", "mailto")], "info@f.com"),
+        ([("youremail@gmail.com", "mailto"), ("intake@f.com", "mailto")], "intake@f.com"),
+        # And when the artefact is all there is, the answer is no address rather than a
+        # repaired one. best() does not URL-decode, on purpose: decoding is what the mailto
+        # pass does before it ever gets here, and a firm with nothing usable stored is a
+        # firm the bio crawl and the paid lookup both know how to go and find.
+        ([("%20info@f.com", "mailto")], None),
     ]
     for pool, want in picks:
         got = best(pool, "f.com")
@@ -348,6 +402,14 @@ def selftest():
         ('<a href="mailto:%20info@f.com">write</a>', "info@f.com", "a URL-encoded space"),
         (r'var e = "\ninfo@f.com";', "info@f.com", "a backslash-n in a script"),
         ('<a href="mailto:info@f.com">write</a>', "info@f.com", "the ordinary case"),
+        # The three that were still being chosen as a firm's address on 16 November 2026,
+        # all of them through the mailto: pass, which trusted the href because it was an
+        # href. Each is a real string taken off a published profile's site.
+        ('<a href="mailto:contact@ f.com">write</a>', "contact@f.com",
+         "a space inside the href"),
+        ('<a href="mailto:@info@f.com">write</a>', "info@f.com",
+         "a stray @ left in a template"),
+        (r'<p>>info@f.com</p>', "info@f.com", "markup escaped inside JSON"),
     ]
     for html, want, why in harvests:
         got = [a for a, _ in harvest(html, "f.com")]
@@ -356,6 +418,24 @@ def selftest():
             print(f"  FAIL {why}: harvested {got}, expected {want}")
         else:
             print(f"  ok   {why} yields {want}")
+
+    # And what must never be harvested. The first is the one that matters: a form's example
+    # address, published as if it were the firm's, was chosen for one firm and would have
+    # sent an unsolicited letter about a law firm to whoever owns that Gmail account. The
+    # second is an address a firm spaced out on purpose, and putting it back together would
+    # be working around the one defence a small site has.
+    refusals = [
+        ('<a href="mailto:youremail@gmail.com">write</a>', "a form's example address"),
+        ('<p>here 4 u @ f.com</p>', "an address spaced out against scrapers"),
+        ('<a href="mailto:not an address at all">write</a>', "not an address"),
+    ]
+    for html, why in refusals:
+        got = [a for a, _ in harvest(html, "f.com")]
+        if got:
+            bad += 1
+            print(f"  FAIL {why}: harvested {got}, expected nothing")
+        else:
+            print(f"  ok   {why} is refused")
 
     print("\nEvery check passed." if not bad else f"\n{bad} check(s) failed.")
     return 1 if bad else 0
