@@ -321,7 +321,7 @@ client's Basecamp project when the piece places a client. Pieces that place a cl
 | written 2026-10-12 | 29 Indiana (PR #125) | Sarkisian |
 | written 2026-10-14 | 16 Statute of limitations hub (PR #127) | Lopez & Humphries, Fielding, Greenstein & Pittari, Paulson Coletti, Brooks, Malloy, Sarkisian |
 | written 2026-11-13 | 41 Back and neck injury settlements (PR #200) | Greenstein & Pittari, Fielding, Paulson Coletti |
-| 2026-10-19 | 2 AT&T data breach settlement | none |
+| written 2026-11-16 | 2 AT&T data breach settlement (PR #205) | none |
 | 2026-10-21 | 30 Green card renewal | none |
 | 2026-10-23 | 17 California | none |
 | 2026-10-26 | 31 Green card lottery 2027 | none |
