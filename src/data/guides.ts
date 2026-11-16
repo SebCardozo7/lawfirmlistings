@@ -190,6 +190,22 @@ export const GUIDES: Guide[] = [
     meta: 'The notice of claim comes first',
   },
   {
+    slug: 'how-law-firm-ratings-are-calculated',
+    cover: 'ladder',
+    kicker: 'Method',
+    title: 'How Law Firm Ratings Are Calculated, and What the Scale Cannot Reach',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every rating site publishes the rules behind its number and none of them publishes how ' +
+      'much of those rules it managed to apply to the firm you are reading about. We measured ' +
+      'that for our own score, across every firm in the directory: how much of the scale a '
+      + 'state leaves standing, how much our own rubric hands back, and how much of the rest '
+      + 'we have actually read.',
+    thumb: '',
+    icon: 'scale',
+    meta: 'The denominator nobody publishes',
+  },
+  {
     slug: 'do-lawyers-have-malpractice-insurance',
     cover: 'shield',
     kicker: 'Method',
