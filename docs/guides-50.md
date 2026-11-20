@@ -322,7 +322,7 @@ client's Basecamp project when the piece places a client. Pieces that place a cl
 | written 2026-10-14 | 16 Statute of limitations hub (PR #127) | Lopez & Humphries, Fielding, Greenstein & Pittari, Paulson Coletti, Brooks, Malloy, Sarkisian |
 | written 2026-11-13 | 41 Back and neck injury settlements (PR #200) | Greenstein & Pittari, Fielding, Paulson Coletti |
 | written 2026-11-16 | 2 AT&T data breach settlement (PR #205) | none |
-| 2026-10-21 | 30 Green card renewal | none |
+| written 2026-11-20 | 30 Green card renewal (PR #209) | Brooks Law Firm (further reading, its immigration practice) |
 | 2026-10-23 | 17 California | none |
 | 2026-10-26 | 31 Green card lottery 2027 | none |
 | 2026-10-28 | 21 Georgia | none |
