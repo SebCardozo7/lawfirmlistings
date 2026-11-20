@@ -1,0 +1,291 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import data from '../../data/research/green-card-renewal.json';
+
+/**
+ * Item 30 in docs/guides-50.md (family C, immigration). A reference article on renewing a green
+ * card with Form I-90: who files it, who must not, what it costs, the receipt notice that keeps
+ * the expired card usable, and the steps in order.
+ *
+ * Every figure is read from src/data/research/green-card-renewal.json, which was taken on the
+ * date it carries from USCIS itself (the I-90 page, the Replace Your Green Card page, the G-1055
+ * fee schedule and the alert that set the 36-month extension) and from the regulation, 8 CFR
+ * 264.5. Nothing comes from a news summary or a law firm's own figures.
+ *
+ * USCIS processing times sit behind a bot check that cannot be read by a script, so the page
+ * gives no processing-time figure: it says where to look, and why the receipt notice matters
+ * more than the wait.
+ *
+ * Client placement: the plan put immigration outside every client's work, which stopped being
+ * true when PR #163 found Brooks Law Firm's immigration practice. Brooks appears only under
+ * "Further reading", on two of its own pages that were read and checked against USCIS, and the
+ * link is followed because the firm's tier is, which is the profile rule.
+ */
+const s = data.sources;
+const t = data.timing;
+const fl = data.filing;
+const fee = Object.fromEntries(data.fees.map(f => [f.key, f]));
+const gen = fee.general;
+
+const usd = (v: number) => '$' + Math.round(v).toLocaleString('en-US');
+const fmt = (x: string) => new Date(x + 'T00:00:00Z').toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const read = fmt(data.measured_at);
+const year = data.measured_at.slice(0, 4);
+const saving = gen.paper - gen.online;
+const freeCases = data.fees.filter(f => f.paper === 0);
+
+// A worked example of the extension, so the reader can see the arithmetic: a card that expired
+// on the day this page was read, renewed on time, is evidence of status for this long.
+const addMonths = (iso: string, m: number) => {
+  const d = new Date(iso + 'T00:00:00Z');
+  d.setUTCMonth(d.getUTCMonth() + m);
+  return d.toISOString().slice(0, 10);
+};
+const exampleExpiry = data.measured_at;
+const exampleCovered = addMonths(exampleExpiry, t.extension_months);
+const earliestFiling = addMonths(exampleExpiry, -t.file_within_months);
+
+// Directory data, used in one place: how many published firms list immigration work, and the
+// client pages read for this topic. The rel on a firm's link follows its tier, as on its profile.
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+const immigration = firms.filter(f => f.data.practices.some(p => p.slug === 'immigration'));
+const GATED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
+const relFor = (f: typeof firms[number]) =>
+  GATED.includes(f.data.score?.tier ?? '') ? 'noopener' : 'nofollow noopener';
+const reading = data.reading.map(r => {
+  const f = firms.find(x => x.data.slug === r.firm);
+  if (!f) throw new Error(`reading: no firm "${r.firm}"`);
+  return { ...r, f, rel: relFor(f) };
+});
+
+const title = `Green Card Renewal ${year}: How to Renew With Form I-90, Step by Step`;
+const description = `Renewing a green card means filing Form I-90 within ${t.file_within_months} months of expiry. The ${usd(gen.online)} online fee, the ${t.extension_months}-month receipt notice, and who must not file it.`;
+const lede = `A green card is renewed with <b>Form I-90</b>, filed online or by mail no earlier than <b>${t.file_within_months} months</b> before the date printed on the card. The fee is <b>${usd(gen.online)}</b> online and ${usd(gen.paper)} on paper. Once USCIS accepts the form, its receipt notice keeps your expired card valid as proof of status for <b>${t.extension_months} months</b> past that date. The one thing to check first is whether your card is a two-year card, because then I-90 is the wrong form.`;
+
+const faq = [
+  {
+    q: 'How much does it cost to renew a green card?',
+    a: `${usd(gen.online)} if you file Form I-90 online and ${usd(gen.paper)} if you file on paper, according to the USCIS fee schedule read on ${read}. There is no separate biometrics fee on the schedule. Some filings cost nothing: a card that was issued but came back to USCIS as undeliverable, a card printed with wrong information because of a DHS error, and a card replaced at 14 when it would otherwise run past your 16th birthday. Fees are not refunded if the application is denied.`,
+  },
+  {
+    q: 'How early can I renew my green card?',
+    a: `When it will expire within the next ${t.file_within_months} months. That is the trigger in the regulation, 8 CFR 264.5(b)(2), and on the USCIS replacement page. A card that has already expired can be renewed at any time; there is no late fee.`,
+  },
+  {
+    q: 'Can I still work and travel while my renewal is pending?',
+    a: `Yes. The I-90 receipt notice, shown together with the expired card, is evidence of permanent resident status for ${t.extension_months} months from the expiration date on the card, and USCIS prints on it that you remain authorized to work and travel. The ${t.extension_months}-month period started on ${fmt(t.extension_effective)}; before that the notice gave ${t.extension_previous_months} months.`,
+  },
+  {
+    q: 'Do I lose my permanent resident status if my green card expires?',
+    a: `The card is evidence of status, and the regulation treats it as something to replace, not as the status itself: an expiring card is one of the reasons you are required to file for a new one. The practical risk of an expired card is proving your status to an employer, an airline or a border officer, which is what the receipt notice solves. Two-year conditional cards are different: if the conditions are not removed in time, the status itself is at risk.`,
+  },
+  {
+    q: 'I have a two-year green card. Do I file Form I-90?',
+    a: `Not to renew it. A conditional resident whose card is expiring files Form I-751 (through marriage) or Form I-829 (through investment) to remove the conditions, within the ${t.conditional_window_days}-day period before the card expires. USCIS says on the I-90 page not to submit it for that. A conditional resident uses I-90 only to replace a card that was lost, stolen, damaged, wrong or never received, and only if it is not expiring within ${t.conditional_replace_not_expiring_within_days} days.`,
+  },
+  {
+    q: 'How long does green card renewal take?',
+    a: `USCIS publishes the current range on its processing times page, by form and office, and it changes month to month. While you wait, the receipt notice is your proof of status for ${t.extension_months} months past the card's expiry, which is why filing early in the ${t.file_within_months}-month window matters more than the exact wait.`,
+  },
+  {
+    q: 'Can I renew my green card from outside the United States?',
+    a: `USCIS says that if your card will expire within six months while you are abroad, but you will return within a year of leaving and before it expires, you should file Form I-90 as soon as you are back. Biometrics, when USCIS asks for them, are taken at an Application Support Center in the United States.`,
+  },
+];
+
+const url = new URL(`/guides/${data.slug}/`, Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: data.measured_at,
+    dateModified: data.measured_at,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Law Firm Listings Editorial Team' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to renew a green card with Form I-90',
+    estimatedCost: { '@type': 'MonetaryAmount', currency: 'USD', value: gen.online },
+    step: [
+      { '@type': 'HowToStep', name: 'Check which form you need', text: 'A card without conditions is renewed with Form I-90. A two-year conditional card is not: it needs Form I-751 or I-829.' },
+      { '@type': 'HowToStep', name: 'File in the window', text: `File when the card expires within ${t.file_within_months} months, or any time after it has expired.` },
+      { '@type': 'HowToStep', name: 'File online or by mail', text: `Online through a USCIS account (${usd(gen.online)}) or on paper (${usd(gen.paper)}).` },
+      { '@type': 'HowToStep', name: 'Keep the receipt notice', text: `The receipt notice and the expired card together prove status for ${t.extension_months} months past the expiry date.` },
+      { '@type': 'HowToStep', name: 'Attend biometrics', text: 'Go to the Application Support Center appointment USCIS mails you, if it asks for one.' },
+      { '@type': 'HowToStep', name: 'Receive the new card', text: 'If the application is approved, USCIS mails the new card.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(q => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.a } })),
+  },
+];
+---
+<Base title={title} description={description} nav="guides" schema={schema}
+  figuresFrom={`USCIS Form I-90 page, Replace Your Green Card page and G-1055 fee schedule, and 8 CFR 264.5, read ${read}`}
+  image="/og/renewal.png"
+  imageAlt="A permanent resident card with its expiry date struck through, clipped to a receipt notice whose timeline runs on past it">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Green card renewal</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Immigration</span>
+    <h1>{title}</h1>
+    <p class="lede" set:html={lede} />
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Published research, no legal advice</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>8 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="renewal" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#which-form" class="is-active">Is I-90 your form?</a></li>
+      <li><a href="#when">When to file</a></li>
+      <li><a href="#cost">What it costs</a></li>
+      <li><a href="#steps">How to renew, step by step</a></li>
+      <li><a href="#receipt">The 36-month receipt notice</a></li>
+      <li><a href="#waiting">While you wait</a></li>
+      <li><a href="#problems">Denials and mistakes</a></li>
+      <li><a href="#faq">Questions people ask</a></li>
+      <li><a href="#lawyer">When a lawyer helps</a></li>
+      <li><a href="#method">Where these figures come from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`From USCIS's own pages and fee schedule and from 8 CFR 264.5, read ${read}.`}
+      items={[
+        `File <b>Form I-90</b> when your card expires within <b>${t.file_within_months} months</b>, or at any point after it has expired.`,
+        `The fee is <b>${usd(gen.online)}</b> online and ${usd(gen.paper)} on paper. Filing online saves ${usd(saving)}.`,
+        `The receipt notice plus the expired card prove your status for <b>${t.extension_months} months</b> past the card's expiry date.`,
+        `A two-year conditional card is <b>not</b> renewed with I-90. It needs Form I-751 or I-829, in the ${t.conditional_window_days} days before it expires.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> Every rule and fee here is from USCIS or the federal regulation, each linked where it is used and dated to the day it was read. USCIS changes its fees and forms, so check the fee schedule on the day you file. Nothing here is legal advice about your own case.</div>
+
+    <h2 id="which-form">Is Form I-90 your form? Check the card first</h2>
+    <p>Renewing a green card is not a separate application. It is one of the reasons on <a href={s.i90.url} rel="noopener" target="_blank">Form I-90, Application to Replace Permanent Resident Card</a>, the same form you would use for a lost card or a name change. What decides whether it is your form is the kind of card you hold.</p>
+    <ul>
+      <li><b>A permanent resident card with no conditions</b>, the kind most people mean when they say green card: renew it with Form I-90.</li>
+      <li><b>A conditional card valid for {t.conditional_card_years} years</b>, issued through a recent marriage or an investment: do not file I-90 to renew it. USCIS <a href={s.conditional.url} rel="noopener" target="_blank">says</a> you remove the conditions instead, with Form I-751 (marriage) or Form I-829 (investment), filed in the {t.conditional_window_days}-day period before the card expires. The I-90 page itself says not to submit I-90 for that.</li>
+    </ul>
+    <p>If you are not sure, look at the dates on the front: a card whose expiry is two years after its "resident since" date is a conditional card.</p>
+    <p>Renewal is not the only reason the regulation, <a href={s.regulation.url} rel="noopener" target="_blank">{s.regulation.cite}</a>, makes a permanent resident file. You are required to apply for a new card when:</p>
+    <ul>
+      {data.must_file.map(m => <li>{m}.</li>)}
+    </ul>
+
+    <h2 id="when">When to file: the {t.file_within_months}-month window</h2>
+    <p>You can file to renew once the card <b>will expire within the next {t.file_within_months} months</b>. That is the trigger written into {s.regulation.cite}(b)(2) and repeated on the USCIS <a href={s.replace.url} rel="noopener" target="_blank">replacement page</a>. An application filed before that point is not a renewal the rules recognise yet.</p>
+    <p>There is no back end to the window. A card that expired last month or five years ago is renewed the same way, at the same fee. The cost of waiting is not a penalty from USCIS but the months of carrying a card that an employer, an airline or a border officer may question, with no receipt notice to show beside it.</p>
+    <div class="example">
+      <p><b>Worked example.</b> A card that expires on <b>{fmt(exampleExpiry)}</b> can be renewed from <b>{fmt(earliestFiling)}</b>. Once the I-90 is accepted, the receipt notice covers that card until <b>{fmt(exampleCovered)}</b>, {t.extension_months} months after the date on its face.</p>
+    </div>
+
+    <h2 id="cost">What green card renewal costs: {usd(gen.online)} online</h2>
+    <p>The <a href={s.fees.url} rel="noopener" target="_blank">USCIS fee schedule</a>, last updated {fmt(s.fees.updated)} and read on {read}, lists the I-90 fee by filing category:</p>
+    <BarChart
+      heading="Form I-90 filing fee, by category"
+      rows={data.fees.map((f, i) => ({
+        label: f.category,
+        value: f.paper,
+        display: f.paper === 0 ? 'No fee' : `${usd(f.online)} online, ${usd(f.paper)} paper`,
+        emphasis: i === 0,
+      }))}
+      caption={`USCIS Form G-1055, Fee Schedule, I-90 row, read ${read}. The paper fee is drawn.`}
+    />
+    <p>Three things the schedule makes clear:</p>
+    <ul>
+      <li><b>Filing online is cheaper.</b> {usd(gen.online)} against {usd(gen.paper)}, a {usd(saving)} difference for the same form.</li>
+      <li><b>There is no separate biometrics fee</b> on the I-90 row. What you see is what you pay.</li>
+      <li><b>{freeCases.length} situations cost nothing</b>: a card returned to USCIS as undeliverable, a card with wrong information because of a DHS error, and a card replaced at 14 when it would otherwise run past your 16th birthday.</li>
+    </ul>
+    <p>A fee waiver exists, on {data.fee_notes.waiver_form}, for people who meet its income or hardship rules. USCIS notes that for most forms a waiver cannot be requested online, so a waiver request means filing on paper. On paper, you pay with {data.fee_notes.paper_payment}. And one rule to know before you send money: "{data.fee_notes.refund}"</p>
+
+    <h2 id="steps">How to renew your green card, step by step</h2>
+    <ol class="howto">
+      <li><b>Confirm it is an I-90 case.</b> A card without conditions, expiring within {t.file_within_months} months or already expired. A two-year card goes to I-751 or I-829 instead.</li>
+      <li><b>Choose online or paper.</b> Online needs a free <a href={s.account.url} rel="noopener" target="_blank">USCIS online account</a>, and lets you pay, see when USCIS receives the form, get updates and message USCIS. On paper, you mail the signed form with the fee payment to the address on the <a href={s.i90.url} rel="noopener" target="_blank">I-90 page</a>; on {read} that was {fl.paper_usps} for the Postal Service and {fl.paper_courier} for courier delivery. USCIS rejects any unsigned form.</li>
+      <li><b>Keep your current card at hand.</b> It is what you are replacing, and the regulation says the prior card must be surrendered to USCIS when a new one is issued for an expiring card. Follow the form instructions on the I-90 page for what to send with the application.</li>
+      <li><b>Keep the receipt notice.</b> USCIS mails a Form I-797 receipt notice once it accepts the application. This is the document that extends your card; see <a href="#receipt">below</a>.</li>
+      <li><b>Go to biometrics if asked.</b> If USCIS needs your fingerprints, photo and signature, it mails a separate appointment notice for an Application Support Center. The receipt notice says plainly that it is not that appointment notice.</li>
+      <li><b>Track the case.</b> USCIS asks you to wait {t.status_wait_hours} hours after filing before checking <a href={s.case_status.url} rel="noopener" target="_blank">case status</a> with the receipt number.</li>
+      <li><b>Receive the new card.</b> If USCIS approves the application, it mails the new card to the address it has on file, so a move while the case is pending has to be reported through your USCIS account.</li>
+    </ol>
+
+    <h2 id="receipt">The receipt notice that keeps your card valid for {t.extension_months} months</h2>
+    <p>This is the part of renewal people most often miss. Since <b>{fmt(t.extension_effective)}</b>, USCIS has printed a {t.extension_months}-month extension on the receipt notice for a renewal. Before that date the extension was {t.extension_previous_months} months; USCIS lengthened it, in its <a href={s.extension_alert.url} rel="noopener" target="_blank">announcement</a>, to help applicants facing longer processing times.</p>
+    <p>The notice carries this text, quoted from the USCIS replacement page:</p>
+    <blockquote>{data.receipt_text}</blockquote>
+    <p>Two practical points. The extension runs from the <b>expiration date on the card</b>, not from the day you filed, so a card renewed two years after it expired has less of the {t.extension_months} months left. And it works only as a pair: the notice with the expired card. For a job, an employer can accept the two together for Form I-9; USCIS gives a line for employer questions, {fl.i9_line}.</p>
+    <p>If you no longer have the card at all, the notice has nothing to be paired with. USCIS says it may issue an <b>ADIT stamp</b>, temporary evidence of status, after you file; you ask for a field office appointment through the USCIS Contact Center at {fl.contact_center}.</p>
+
+    <h2 id="waiting">While you wait: work, travel and processing times</h2>
+    <p>With the receipt notice and the expired card, USCIS states that you remain authorized to work and travel. The notice is evidence only together with the card, so carry both, and the passport you travel on.</p>
+    <p>How long the renewal itself takes changes month to month, and USCIS publishes the current range by form and office on its <a href={s.processing_times.url} rel="noopener" target="_blank">processing times page</a>. This guide prints no figure for it: that page could not be read by our checks on {read}, and a wait time copied from elsewhere goes stale faster than anything else on this topic. The {t.extension_months}-month notice is the reason the exact wait matters less than it did.</p>
+
+    <h2 id="problems">Denials, mistakes and what to do about them</h2>
+    <ul>
+      <li><b>The wrong form for a two-year card.</b> The most expensive mistake, because the I-751 or I-829 deadline keeps running. If your card is conditional, the I-90 fee does not buy you anything toward removing conditions.</li>
+      <li><b>Filing too early.</b> More than {t.file_within_months} months before expiry is outside the rule for a renewal.</li>
+      <li><b>An unsigned form.</b> Rejected, per the I-90 page.</li>
+      <li><b>A missed biometrics appointment.</b> If USCIS asked for biometrics, the case waits on them, so contact USCIS before the date rather than letting it pass.</li>
+      <li><b>A denial.</b> USCIS sends a letter with the reasons. There is no appeal from an I-90 denial, which the regulation states in {s.regulation.cite}(f); what you can file is a motion to reopen, with new facts and evidence, or a motion to reconsider, showing the law or policy was applied wrongly, to the office that decided.</li>
+    </ul>
+    <p>Renewal can mean giving biometrics again. If you have had an arrest, a conviction or long periods abroad since your card was issued, that is the moment to speak to an immigration lawyer before filing.</p>
+
+    <h2 id="faq">Questions people ask about green card renewal</h2>
+    {faq.map(q => (
+      <>
+        <h3>{q.q}</h3>
+        <p>{q.a}</p>
+      </>
+    ))}
+
+    <h2 id="lawyer">When a lawyer helps, and where to find one</h2>
+    <p>Most renewals are a form and a fee, and USCIS designs I-90 to be filed by the person whose card it is. A lawyer earns the fee in the cases above: a conditional card, a criminal record, time spent outside the country, or a denial. {immigration.length} firms in this directory list immigration work, and they are on the <a href="/practice-areas/immigration/">immigration practice page</a>, ranked by the same published score as every other firm.</p>
+    {reading.length > 0 && (
+      <>
+        <h3>Further reading from firms in this directory</h3>
+        <p>Each of these was read on {read} and checked against the USCIS pages cited here.</p>
+        <ul>
+          {reading.map(r => (
+            <li><a href={r.url} rel={r.rel} target="_blank">{r.title}</a>, from <a href={`/firms/${r.f.data.slug}/`}>{r.f.data.name}</a> in {r.f.data.market.city}. {r.checked}</li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    <h2 id="method">Where these figures come from</h2>
+    <p>The fee table is the Form I-90 row of the <a href={s.fees.url} rel="noopener" target="_blank">USCIS fee schedule, G-1055</a>, last updated {fmt(s.fees.updated)}. The filing reasons, the {t.file_within_months}-month window, the receipt notice text, the ADIT stamp, the status check and the motions after a denial are from the USCIS <a href={s.replace.url} rel="noopener" target="_blank">Replace Your Green Card</a> page, updated {fmt(s.replace.updated)}, and the <a href={s.i90.url} rel="noopener" target="_blank">Form I-90</a> page, updated {fmt(s.i90.updated)}, which also gives the mailing addresses. The date the extension went to {t.extension_months} months is from the USCIS <a href={s.extension_alert.url} rel="noopener" target="_blank">alert</a> of {fmt(s.extension_alert.released)}. The conditional card rules are from the USCIS <a href={s.conditional.url} rel="noopener" target="_blank">Conditional Permanent Residence</a> page.</p>
+    <p>The rules on who must file, surrendering the old card, conditional residents and the absence of an appeal are from <a href={s.regulation.url} rel="noopener" target="_blank">{s.regulation.cite}</a>, last amended at {s.regulation.last_amended}, read through <a href={s.regulation.via} rel="noopener" target="_blank">Cornell's Legal Information Institute</a> because the eCFR server refused automated reads. All were read on {read}. The worked example dates are computed. The count of immigration firms is computed from this directory each time the page is built. Nothing here is legal advice, and no lawyer-client relationship comes from reading it.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  .prose ol.howto li { margin-bottom: 10px; }
+  .prose .example { border: 1px solid var(--line-2); border-radius: 12px; padding: 14px 18px; margin: 22px 0; background: var(--paper); }
+  .prose .example p { margin: 0; }
+  .prose blockquote { border-left: 3px solid var(--brand); margin: 18px 0; padding: 4px 0 4px 16px; color: var(--ink); font-style: italic; }
+</style>

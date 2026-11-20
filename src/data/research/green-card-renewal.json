@@ -1,0 +1,73 @@
+{
+  "slug": "green-card-renewal",
+  "measured_at": "2026-11-20",
+  "keyword": { "term": "green card renewal", "volume": 25000, "kd": 7, "read": "2026-10-04", "source": "Ahrefs Keywords Explorer, US" },
+  "sources": {
+    "i90": { "url": "https://www.uscis.gov/i-90", "title": "I-90, Application to Replace Permanent Resident Card", "updated": "2026-10-07", "edition": "01/20/25" },
+    "replace": { "url": "https://www.uscis.gov/green-card/after-we-grant-your-green-card/replace-your-green-card", "title": "Replace Your Green Card", "updated": "2025-09-12" },
+    "fees": { "url": "https://www.uscis.gov/g-1055", "title": "G-1055, Fee Schedule", "updated": "2026-11-19" },
+    "extension_alert": { "url": "https://www.uscis.gov/newsroom/alerts/uscis-extends-green-card-validity-extension-to-36-months-for-green-card-renewals", "title": "USCIS Extends Green Card Validity Extension to 36 Months for Green Card Renewals", "released": "2024-09-18" },
+    "conditional": { "url": "https://www.uscis.gov/green-card/after-we-grant-your-green-card/conditional-permanent-residence", "title": "Conditional Permanent Residence", "updated": "2025-04-24" },
+    "regulation": { "url": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-264/section-264.5", "via": "https://www.law.cornell.edu/cfr/text/8/264.5", "cite": "8 CFR 264.5", "last_amended": "91 FR 39332, June 29, 2026" },
+    "case_status": { "url": "https://egov.uscis.gov/casestatus/landing.do" },
+    "processing_times": { "url": "https://egov.uscis.gov/processing-times/" },
+    "account": { "url": "https://my.uscis.gov/" }
+  },
+  "fees": [
+    { "category": "Renewal or replacement, general filing", "paper": 465, "online": 415, "key": "general" },
+    { "category": "Turned 14, and the card expires before you turn 16", "paper": 465, "online": 415, "key": "14_before_16" },
+    { "category": "Turned 14, and the card expires after you turn 16", "paper": 0, "online": 0, "key": "14_after_16" },
+    { "category": "Card issued but never received, returned to USCIS as undeliverable", "paper": 0, "online": 0, "key": "never_received" },
+    { "category": "Card printed with wrong information because of a DHS error", "paper": 0, "online": 0, "key": "dhs_error" }
+  ],
+  "fee_notes": {
+    "waiver_form": "Form I-912, Request for Fee Waiver",
+    "waiver_online": "For most forms, you cannot request a fee waiver when filing online.",
+    "refund": "Filing and biometric service fees are final and nonrefundable.",
+    "paper_payment": "Form G-1450 (credit card) or Form G-1650 (ACH bank withdrawal)"
+  },
+  "timing": {
+    "file_within_months": 6,
+    "extension_months": 36,
+    "extension_effective": "2024-09-10",
+    "extension_previous_months": 24,
+    "status_wait_hours": 72,
+    "conditional_card_years": 2,
+    "conditional_window_days": 90,
+    "conditional_replace_not_expiring_within_days": 90
+  },
+  "filing": {
+    "paper_usps": "P.O. Box 21262, Phoenix, AZ 85036-1262",
+    "paper_courier": "2108 E. Elliot Rd., Tempe, AZ 85284-1806",
+    "contact_center": "800-375-5283",
+    "i9_line": "888-897-7781"
+  },
+  "must_file": [
+    "Your card has expired or will expire within the next six months",
+    "Your card was lost, stolen, mutilated or destroyed",
+    "You got the card before you turned 14 and have now turned 14, unless the card expires before your 16th birthday",
+    "You have legally changed your name or other biographic information",
+    "Your card has wrong information on it",
+    "You never received the card USCIS issued",
+    "You were a commuter and now live in the United States, or the other way round",
+    "Your status was automatically converted to permanent resident status",
+    "You still hold an old card (Form AR-3, AR-103 or I-151), which is no longer valid"
+  ],
+  "receipt_text": "This notice, together with your Form I-551, Permanent Resident Card (also known as the Green Card), provides evidence of your lawful permanent resident status for 36 months from the expiration date on your Permanent Resident Card. You remain authorized to work and travel.",
+  "reading": [
+    {
+      "firm": "brooks-law-firm",
+      "url": "https://brookslawfirm.com/blog/green-card-renewal-cost-timeline-and-how-to-apply/",
+      "title": "Green Card Renewal: Cost, Timeline, and How To Apply",
+      "posted": "2026-10-09",
+      "checked": "Its fees ($415 online, $465 on paper), the six-month filing window, the 36-month receipt extension and the rule that two-year cards go to Form I-751 all match USCIS as read on this page's date. Its processing-time estimates are the firm's own and are not used here."
+    },
+    {
+      "firm": "brooks-law-firm",
+      "url": "https://brookslawfirm.com/blog/how-to-remove-the-conditions-on-my-green-card/",
+      "title": "How to Remove the Conditions on My Green Card",
+      "posted": "2026-10-07",
+      "checked": "The 90-day filing window before a two-year card expires matches the USCIS conditional residence page. Its I-751 fees and wait times are the firm's own figures and are not used here."
+    }
+  ]
+}
