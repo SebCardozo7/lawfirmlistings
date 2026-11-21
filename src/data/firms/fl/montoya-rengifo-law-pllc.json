@@ -139,13 +139,13 @@
       "pass": false,
       "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
       "source": "no roster published",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G3": {
       "pass": true,
-      "evidence": "GARCIA, MONTOYA, & RENGIFO LAW, PLLC is an active FLAL on the Florida register, document L21000487498, filed 2021-11-12, with 1 Google-verified location",
+      "evidence": "MONTOYA & RENGIFO LAW, PLLC is an active FLAL on the Florida register, document L21000487498, filed 2021-11-12, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": false,
@@ -157,7 +157,7 @@
       "pass": true,
       "evidence": "231 public client reviews and 5 years since the entity was filed in 2021",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -239,7 +239,7 @@
     "total": 38,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -320,7 +320,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 231 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 231 reviews → Bayesian 4.88 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -435,12 +435,12 @@
     "comparable": true
   },
   "entity": {
-    "legal_name": "GARCIA, MONTOYA, & RENGIFO LAW, PLLC",
+    "legal_name": "MONTOYA & RENGIFO LAW, PLLC",
     "entity_type": "FLAL",
     "dos_id": "L21000487498",
     "formed": "2021-11-12",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "logo": {
     "file": "/logos/montoyarengifolaw.com.svg",

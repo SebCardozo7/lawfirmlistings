@@ -1,0 +1,450 @@
+{
+  "slug": "911-biker-law",
+  "name": "911 Biker Law",
+  "initials": "9B",
+  "website": "https://www.911bikerlaw.com/",
+  "domain": "911bikerlaw.com",
+  "phone": "(407) 645-2195",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://www.911bikerlaw.com/single-motorcycle-accidents/",
+      "checked_at": "2026-11-09"
+    }
+  ],
+  "market": {
+    "city_slug": "orlando-fl",
+    "city": "Orlando",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "911 Biker Law",
+      "address": "230 N Westmonte Dr STE 1000, Altamonte Springs, FL 32714, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=17218064309972483869&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English"
+  ],
+  "fee_model": "Contingency",
+  "free_consultation": true,
+  "availability": [],
+  "about": [
+    "911 Biker Law is a personal injury firm with a single office in Altamonte Springs.",
+    "The firm states that it works on a contingency fee, with nothing to pay unless the case is won; the first consultation is free."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 5.0,
+      "count_label": "33",
+      "source": "Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count",
+      "fetched_at": "2026-11-16"
+    },
+    "sample": [
+      {
+        "published_at": "2026-11-01T14:17:39.878932632Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-11-02T14:57:25.292307064Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-11-01T14:08:57.897148170Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-11-01T14:26:55.937060568Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-11-01T17:14:58.456826073Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "disclaimer": true
+    },
+    "schema_detected": false,
+    "psi": {
+      "value": {
+        "performance": 46,
+        "cwv_pass": false
+      },
+      "source": "PageSpeed Insights API (mobile, lab only)",
+      "measured_at": "2026-11-16",
+      "note": "LCP 17.9 s / CLS 0.000 / TBT 411 ms"
+    },
+    "_ahrefs_partial_from_cohort": {
+      "domain": "911bikerlaw.com",
+      "name": "911 Biker Law",
+      "review_count_at_discovery": 42
+    },
+    "places": {
+      "listing_count": 1,
+      "review_count_total": 33,
+      "rating_weighted": 5.0,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 5,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-11-16"
+    },
+    "ahrefs": {
+      "dr": 10.0,
+      "ahrefs_rank": 18929333,
+      "refdomains": 609,
+      "refdomains_dofollow": 103,
+      "backlinks": 1628,
+      "org_keywords": 79,
+      "org_traffic": 189,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-11-21"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-11-16"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
+      "source": "no roster published",
+      "checked_at": "2026-11-21"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-11-21"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-11-21"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "33 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2009-11-17, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-11-21"
+    }
+  },
+  "cohort_id": "fl-orlando-personal-injury",
+  "faq": [],
+  "fee_statement": "We accept all accident cases on a contingent fee basis, which means you pay no fees or costs unless we recover money for you.",
+  "logo": {
+    "file": "/logos/911bikerlaw.com.png",
+    "source_url": "https://www.911bikerlaw.com/content/themes/911bikerlaw/_/img/logo/florida-bar-logo.png",
+    "width": 131,
+    "height": 132,
+    "bytes": 9302,
+    "source": "The logo in the header of the firm's own site, copied here rather than hot-linked",
+    "fetched_at": "2026-11-17"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 1,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-11-16"
+  },
+  "results_published": {
+    "count": 31,
+    "counted_from": "stated amounts",
+    "amounts": [
+      3900000,
+      2750000,
+      2100000,
+      1000000,
+      435000,
+      300000,
+      250000,
+      240000,
+      230000,
+      225000,
+      220000,
+      200000,
+      187500,
+      167500,
+      167000,
+      163000,
+      161000,
+      152000,
+      125000,
+      120000,
+      110000,
+      105000,
+      90000,
+      76000,
+      58000,
+      50000,
+      44000,
+      38260,
+      35000,
+      25000,
+      10000
+    ],
+    "largest": 3900000,
+    "aggregate_claims": [
+      2500000,
+      325000,
+      100000,
+      89000,
+      80000
+    ],
+    "case_types": [
+      "construction",
+      "motor vehicle",
+      "truck"
+    ],
+    "disclaimer": false,
+    "venues": [
+      "Orange County"
+    ],
+    "text_length": 27704,
+    "readable": true,
+    "url": "https://www.911bikerlaw.com/case-results/",
+    "checked_at": "2026-11-16"
+  },
+  "score": {
+    "total": 53,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-11-21",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 11,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 6,
+            "max": 6,
+            "source": "firm",
+            "evidence": "31 results published on the firm's own site, counted from stated amounts"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 5,
+            "max": 5,
+            "source": "firm",
+            "evidence": "3 case types named; 1 court or county reference"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 16,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 2,
+            "max": 5,
+            "source": "observed",
+            "evidence": "33 Google reviews · Google Business Profile via Places API. 1 listing, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 5.0 over 33 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 5,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 5 sampled reviews are from the last 12 months (newest 2026-11-02) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 4,
+            "max": 4,
+            "source": "places",
+            "evidence": "0 of 5 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 4,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 1.5,
+            "max": 5.0,
+            "source": "observed",
+            "evidence": "CWV fail · no fee statement · no privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 2,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 10.0 → 45th pct of 92-firm cohort (median 12) 1/3 · 609 referring domains, 0th pct 0/2 · 79 organic keywords / 189 visits·mo, 58th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.5,
+            "max": 1,
+            "source": "places",
+            "evidence": "1 operational Google Business Profile listing · 5 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 0,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "no JSON-LD detected 0/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 5,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 5,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · “We accept all accident cases on a contingent fee basis, which means you pay no fees or costs unless we recover money for you.” · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 0.0,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 0,
+            "max": 5,
+            "source": "observed",
+            "evidence": "no availability published"
+          }
+        ]
+      }
+    },
+    "floor_abc": 27,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 65,
+      "gap": 12,
+      "floor_met": true,
+      "coverage_met": true,
+      "path": [
+        "D2 Search authority: +6 available",
+        "E4 Availability: +5 available",
+        "B3 Results disclosure: +4 available"
+      ]
+    },
+    "raw": 36.0,
+    "assessed": 68,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.711,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 68,
+    "comparable": true
+  },
+  "operating": {
+    "registered": "2009-11-17",
+    "years": 17.0,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-11-21"
+  }
+}

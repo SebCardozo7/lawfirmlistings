@@ -141,17 +141,17 @@
       "checked_at": "2026-09-30"
     },
     "G2": {
-      "pass": false,
-      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
-      "source": "no roster published",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
+      "checked_at": "2026-11-21",
+      "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": false,
       "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
       "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -258,8 +258,8 @@
   "score": {
     "total": 32,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-11-05",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -340,7 +340,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.4 over 239 reviews → Bayesian 4.53 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.4 over 239 reviews → Bayesian 4.53 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -447,8 +447,7 @@
     "coverage": 1.0,
     "floor_abc_pct": 0.395,
     "gates_unavailable": [
-      "G1",
-      "G2"
+      "G1"
     ],
     "gates_unresolvable": [
       "G3"

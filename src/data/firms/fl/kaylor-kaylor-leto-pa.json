@@ -187,13 +187,13 @@
       "pass": false,
       "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
       "source": "no roster published",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G3": {
       "pass": true,
       "evidence": "KAYLOR, KAYLOR & LETO, P.A. is an active DOMP on the Florida register, document P94000094243, filed 1994-12-30, with 2 Google-verified locations",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": false,
@@ -205,7 +205,7 @@
       "pass": true,
       "evidence": "57 public client reviews and 32 years since the entity was filed in 1994",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-personal-injury",
@@ -284,7 +284,7 @@
     "total": 25,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -365,7 +365,7 @@
             "pts": 3,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.17 over 57 reviews → Bayesian 4.59 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.17 over 57 reviews → Bayesian 4.59 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -485,7 +485,7 @@
     "dos_id": "P94000094243",
     "formed": "1994-12-30",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "logo": {
     "file": "/logos/kkllaw.com.png",

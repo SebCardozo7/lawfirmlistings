@@ -356,7 +356,7 @@
       "pass": true,
       "evidence": "BOATMAN RICCI, P.A. is an active DOMP on the Florida register, document P06000145575, filed 2006-11-20, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -368,7 +368,7 @@
       "pass": true,
       "evidence": "1 Google-verified location and 20 years since the entity was filed in 2006. This practice is transactional, so the gate asks for a verified listing and the year in operation rather than ten reviews, and its 79 reviews are scored in pillar C instead",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-naples-real-estate",
@@ -466,7 +466,7 @@
     "total": 44,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -547,7 +547,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 79 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 79 reviews → Bayesian 4.82 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -667,6 +667,6 @@
     "dos_id": "P06000145575",
     "formed": "2006-11-20",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   }
 }

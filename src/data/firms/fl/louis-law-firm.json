@@ -1,0 +1,419 @@
+{
+  "slug": "louis-law-firm",
+  "name": "Louis Law Firm",
+  "initials": "LO",
+  "website": "https://louisfirm.com/",
+  "domain": "louisfirm.com",
+  "phone": "(407) 603-6044",
+  "status": "listed",
+  "practices": [
+    {
+      "slug": "personal-injury",
+      "name": "Personal Injury",
+      "primary": true,
+      "source_url": "https://louisfirm.com/llf-practice-area/car-accidents/",
+      "checked_at": "2026-11-09"
+    }
+  ],
+  "market": {
+    "city_slug": "orlando-fl",
+    "city": "Orlando",
+    "state": "FL",
+    "state_name": "Florida"
+  },
+  "offices": [
+    {
+      "label": "The Louis Law Firm",
+      "address": "5401 S Kirkman Rd Suite 310, Orlando, FL 32819, USA",
+      "by_appointment": false,
+      "is_hq": true,
+      "source_url": "https://maps.google.com/?cid=13107718179868236364&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    },
+    {
+      "label": "The Louis Law Firm",
+      "address": "1500 E Gateway Blvd Ste. 220, Boynton Beach, FL 33426, USA",
+      "by_appointment": false,
+      "is_hq": false,
+      "source_url": "https://maps.google.com/?cid=8209414902046643829&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA"
+    }
+  ],
+  "attorneys": [],
+  "languages": [
+    "English",
+    "Spanish"
+  ],
+  "fee_model": "Not stated",
+  "free_consultation": true,
+  "availability": [
+    "24/7 intake line"
+  ],
+  "about": [
+    "Louis Law Firm is a personal injury firm with offices in Orlando and Boynton Beach.",
+    "The firm states that the first consultation is free; its intake line is open around the clock. It publishes material in English and Spanish. It does not state a fee model on its public pages, so none is recorded here."
+  ],
+  "reviews": {
+    "quotes": [],
+    "google": {
+      "rating": 4.71,
+      "count_label": "231",
+      "source": "Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count",
+      "fetched_at": "2026-11-16"
+    },
+    "sample": [
+      {
+        "published_at": "2026-07-31T15:17:22.088681371Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-07-28T17:54:19.634019769Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-09-11T14:35:58.996088524Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2026-08-27T16:44:24.766669035Z",
+        "rating": 1
+      },
+      {
+        "published_at": "2026-08-19T14:39:56.489815676Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-08-14T21:43:28.176032Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-08-17T16:13:57.951620Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-08-17T17:52:47.264617Z",
+        "rating": 5
+      },
+      {
+        "published_at": "2023-08-15T16:24:37.694083Z",
+        "rating": 5
+      }
+    ]
+  },
+  "results": [],
+  "digital": {
+    "trust_pages": {
+      "blog": true,
+      "disclaimer": true,
+      "privacy_policy": true
+    },
+    "schema_detected": true,
+    "_ahrefs_partial_from_cohort": {
+      "domain": "louisfirm.com",
+      "name": "The Louis Law Firm",
+      "review_count_at_discovery": 225
+    },
+    "places": {
+      "listing_count": 2,
+      "review_count_total": 231,
+      "rating_weighted": 4.71,
+      "completeness": {
+        "categories": 5,
+        "hours_published": true,
+        "photos": 6,
+        "google_wrote_a_summary": false,
+        "unobtainable": [
+          "the owner's own description",
+          "services list",
+          "questions and answers",
+          "recent posts"
+        ],
+        "note": "Categories, opening hours and photo count come from the Places API. The owner's own description, the services list, the Q&A and recent posts are owner-side fields the API does not expose at any price, so they are not scored either way. The API does expose Google's editorial summary, which is a different thing: Google writes those about notable places and has written one for no firm in this directory."
+      },
+      "source": "Google Places API (New) places:searchText",
+      "measured_at": "2026-11-16"
+    },
+    "ahrefs": {
+      "dr": 1.7,
+      "ahrefs_rank": 51697732,
+      "refdomains": 880,
+      "refdomains_dofollow": 361,
+      "backlinks": 1102,
+      "org_keywords": 7,
+      "org_traffic": 93,
+      "paid_keywords": 0,
+      "source": "Ahrefs Site Explorer, batch endpoint, subdomains mode, organic figures for the United States",
+      "measured_at": "2026-11-21"
+    }
+  },
+  "gates": {
+    "G1": {
+      "pass": false,
+      "evidence": "Florida does not publish an attorney register we can query, so licensure is not verified here. The state's own attorney search is the place to check it.",
+      "source": "no queryable source",
+      "checked_at": "2026-11-16"
+    },
+    "G2": {
+      "pass": false,
+      "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
+      "source": "no roster published",
+      "checked_at": "2026-11-21"
+    },
+    "G3": {
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-11-21"
+    },
+    "G5": {
+      "pass": false,
+      "evidence": "Site has served over HTTPS, a working phone number published, no attorney is named on the site we could read. The gate also asks for no misleading claims, which is an editorial read we have not recorded.",
+      "source": "Public crawl, partial",
+      "checked_at": "2026-11-21"
+    },
+    "G6": {
+      "pass": true,
+      "evidence": "231 public client reviews across 2 Google listings, above the 10 minimum, and the firm's domain has been registered since 2013-06-13, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-11-21"
+    }
+  },
+  "cohort_id": "fl-orlando-personal-injury",
+  "faq": [],
+  "logo": {
+    "file": "/logos/louisfirm.com.png",
+    "source_url": "https://louisfirm.com/wp-content/uploads/2025/12/cropped-Site-Icon-LLF-192x192.png",
+    "width": 192,
+    "height": 192,
+    "bytes": 1189,
+    "source": "The icon the firm's own site declares, copied here rather than hot-linked",
+    "fetched_at": "2026-11-17"
+  },
+  "accountability": {
+    "malpractice_insurance": false,
+    "insurance_evidence": null,
+    "bar_associations": [],
+    "pts": 0,
+    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 2,
+    "bios_published": 0,
+    "source": "observed",
+    "checked_at": "2026-11-16"
+  },
+  "results_published": {
+    "readable": true,
+    "count": 0,
+    "amounts": [],
+    "case_types": [],
+    "disclaimer": false,
+    "venues": [],
+    "why": "the site publishes no case-results page",
+    "checked_at": "2026-11-16"
+  },
+  "score": {
+    "total": 35,
+    "tier": "Listed",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-11-21",
+    "methodology": "v2.0",
+    "pillars": {
+      "A": {
+        "score": 0,
+        "max": 25,
+        "subs": [
+          {
+            "code": "A2",
+            "label": "Experience",
+            "pts": 0,
+            "max": 10,
+            "source": "no queryable source",
+            "evidence": "Florida publishes no attorney register we can query, so years since admission cannot be established here for any firm and this is not scored."
+          },
+          {
+            "code": "A6",
+            "label": "Roster verifiability",
+            "pts": 0,
+            "max": 9,
+            "source": "no roster published",
+            "evidence": "Our crawl found no roster on this firm's site, so there is nothing here to verify against a register. Publishing one, or telling us where it is, is what gate G5 asks for."
+          },
+          {
+            "code": "A5",
+            "label": "Accountability",
+            "pts": 0,
+            "max": 3,
+            "source": "observed",
+            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+          }
+        ]
+      },
+      "B": {
+        "score": 0,
+        "max": 15,
+        "subs": [
+          {
+            "code": "B1",
+            "label": "Results published",
+            "pts": 0,
+            "max": 6,
+            "source": "firm",
+            "evidence": "The firm publishes no case results we could read"
+          },
+          {
+            "code": "B2",
+            "label": "Specificity",
+            "pts": 0,
+            "max": 5,
+            "source": "firm",
+            "evidence": "0 case types named; no court or county named, so no result can be looked up"
+          },
+          {
+            "code": "B3",
+            "label": "Results disclosure",
+            "pts": 0,
+            "max": 4,
+            "source": "firm",
+            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+          }
+        ]
+      },
+      "C": {
+        "score": 14,
+        "max": 20,
+        "subs": [
+          {
+            "code": "C1",
+            "label": "Authentic volume",
+            "pts": 4,
+            "max": 5,
+            "source": "observed",
+            "evidence": "231 Google reviews · Google Business Profile via Places API. 2 listings, counts summed and rating weighted by count"
+          },
+          {
+            "code": "C2",
+            "label": "Rating quality",
+            "pts": 4,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Google rating 4.71 over 231 reviews → Bayesian 4.75 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
+          },
+          {
+            "code": "C3",
+            "label": "Review recency",
+            "pts": 4,
+            "max": 5,
+            "source": "places",
+            "evidence": "5 of 9 sampled reviews are from the last 12 months (newest 2026-09-11) · a sample of five per business listing, not every review"
+          },
+          {
+            "code": "C5",
+            "label": "Complaint share",
+            "pts": 2,
+            "max": 4,
+            "source": "places",
+            "evidence": "1 of 9 sampled reviews rate 1 or 2 stars · a sample, so this is the shape of the complaints rather than a count of them"
+          }
+        ]
+      },
+      "D": {
+        "score": 5,
+        "max": 25,
+        "subs": [
+          {
+            "code": "D1",
+            "label": "Website trust & experience",
+            "pts": 2.0,
+            "max": 5.0,
+            "source": "observed",
+            "evidence": "CWV pending · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
+          },
+          {
+            "code": "D2",
+            "label": "Search authority",
+            "pts": 1,
+            "max": 8,
+            "source": "ahrefs",
+            "evidence": "DR 1.7 → 13th pct of 92-firm cohort (median 12) 0/3 · 880 referring domains, 11th pct 0/2 · 7 organic keywords / 93 visits·mo, 33th pct 1/2 · brand demand 0/1 (pending)"
+          },
+          {
+            "code": "D3",
+            "label": "Local presence",
+            "pts": 0.6,
+            "max": 1,
+            "source": "places",
+            "evidence": "2 operational Google Business Profile listings · 6 photos · 5 categories, hours published, which almost every listing here has and so separates nobody · the services list, Q&A and recent posts are owner-side fields the Places API does not expose, and NAP consistency across citations and local-pack rank have no source here, so the rest of this sub-factor leaves the scale rather than being scored as unearned"
+          },
+          {
+            "code": "D4",
+            "label": "Content, E-E-A-T & schema",
+            "pts": 1,
+            "max": 1,
+            "source": "ahrefs",
+            "evidence": "JSON-LD detected 1/1 · not assessed on any firm yet, so content depth and earned media and AI citations leave the scale (4 pts)"
+          }
+        ]
+      },
+      "E": {
+        "score": 5,
+        "max": 15,
+        "subs": [
+          {
+            "code": "E1",
+            "label": "Free consult & fee transparency",
+            "pts": 1,
+            "max": 6,
+            "source": "observed",
+            "evidence": "Free consultation · fee model not published · the fee percentage itself is not published"
+          },
+          {
+            "code": "E3",
+            "label": "Languages & accessibility",
+            "pts": 1.5,
+            "max": 4,
+            "source": "observed",
+            "evidence": "English, Spanish"
+          },
+          {
+            "code": "E4",
+            "label": "Availability",
+            "pts": 2.5,
+            "max": 5,
+            "source": "observed",
+            "evidence": "24/7 intake line"
+          }
+        ]
+      }
+    },
+    "floor_abc": 14,
+    "next_tier": {
+      "name": "Certified",
+      "needed": 65,
+      "gap": 30,
+      "floor_met": false,
+      "coverage_met": true,
+      "path": [
+        "D2 Search authority: +7 available",
+        "B1 Results published: +6 available",
+        "B2 Specificity: +5 available"
+      ]
+    },
+    "raw": 23.6,
+    "assessed": 68,
+    "coverage": 1.0,
+    "floor_abc_pct": 0.368,
+    "gates_unavailable": [
+      "G1",
+      "G2"
+    ],
+    "gates_unresolvable": [
+      "G3"
+    ],
+    "assessable": 68,
+    "comparable": true
+  },
+  "operating": {
+    "registered": "2013-06-13",
+    "years": 13.4,
+    "source": "Domain registration date over RDAP, which is a lower bound on how long the firm has been operating rather than its founding date",
+    "checked_at": "2026-11-21"
+  }
+}

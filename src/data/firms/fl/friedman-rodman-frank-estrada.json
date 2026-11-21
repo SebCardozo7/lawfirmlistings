@@ -337,7 +337,7 @@
       "pass": true,
       "evidence": "FRIEDMAN, RODMAN & FRANK, P.A. is an active DOMP on the Florida register, document M55205, filed 1987-07-08, with 4 Google-verified locations",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -349,7 +349,7 @@
       "pass": true,
       "evidence": "240 public client reviews and 39 years since the entity was filed in 1987",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-personal-injury",
@@ -464,13 +464,13 @@
     "dos_id": "M55205",
     "formed": "1987-07-08",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "score": {
     "total": 57,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G1) and does not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-11-08",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -551,7 +551,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 240 reviews → Bayesian 4.74 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 240 reviews → Bayesian 4.74 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

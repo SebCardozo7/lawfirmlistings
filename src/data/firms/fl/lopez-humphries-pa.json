@@ -292,9 +292,9 @@
     },
     "G3": {
       "pass": true,
-      "evidence": "LOPEZ & HUMPHRIES, P.A. is an active DOMP on the Florida register, document P09000048369, filed 2009-06-03, with 4 Google-verified locations",
+      "evidence": "LOPEZ & HUMPHRIES, P.A. is an active DOMP on the Florida register, document P09000048369, filed 2009-06-03, with 3 Google-verified locations",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -304,9 +304,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "542 public client reviews and 17 years since the entity was filed in 2009",
+      "evidence": "525 public client reviews and 17 years since the entity was filed in 2009",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-personal-injury",
@@ -378,7 +378,7 @@
     "total": 51,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -459,7 +459,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.81 over 525 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.81 over 525 reviews → Bayesian 4.81 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -586,7 +586,7 @@
     "dos_id": "P09000048369",
     "formed": "2009-06-03",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "accountability": {
     "malpractice_insurance": false,

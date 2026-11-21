@@ -219,13 +219,13 @@
       "pass": false,
       "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
       "source": "no roster published",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G3": {
       "pass": true,
       "evidence": "LAW OFFICES OF ROBERT SHELDON, LLC is an active FLAL on the Florida register, document L11000114099, filed 2011-10-05, with 4 Google-verified locations",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": false,
@@ -237,7 +237,7 @@
       "pass": true,
       "evidence": "1,812 public client reviews and 15 years since the entity was filed in 2011",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -330,7 +330,7 @@
     "total": 36,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -411,7 +411,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.71 over 1,812 reviews → Bayesian 4.72 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.71 over 1,812 reviews → Bayesian 4.72 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -531,7 +531,7 @@
     "dos_id": "L11000114099",
     "formed": "2011-10-05",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "logo": {
     "file": "/logos/vidaenamerica.com.png",

@@ -128,13 +128,14 @@
       "pass": false,
       "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
       "source": "no roster published",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G3": {
-      "pass": true,
-      "evidence": "ABOGADOS DE CONFIANZA SR LLC is an active FLAL on the Florida register, document L24000397487, filed 2024-09-11, with 1 Google-verified location",
-      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "pass": false,
+      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
+      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": false,
@@ -199,19 +200,11 @@
     "why": "the site publishes no case-results page",
     "checked_at": "2026-09-23"
   },
-  "entity": {
-    "legal_name": "ABOGADOS DE CONFIANZA SR LLC",
-    "entity_type": "FLAL",
-    "dos_id": "L24000397487",
-    "formed": "2024-09-11",
-    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
-  },
   "score": {
     "total": 38,
     "tier": "Listed",
-    "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-11-05",
+    "verdict": "1 eligibility gate(s) still to be checked. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -292,7 +285,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 433 reviews → Bayesian 4.97 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 433 reviews → Bayesian 4.97 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -402,7 +395,9 @@
       "G1",
       "G2"
     ],
-    "gates_unresolvable": [],
+    "gates_unresolvable": [
+      "G3"
+    ],
     "assessable": 68,
     "comparable": true
   },

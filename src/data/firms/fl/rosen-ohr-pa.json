@@ -234,7 +234,7 @@
       "pass": true,
       "evidence": "ROSEN & OHR, P.A. is an active DOMP on the Florida register, document P97000071780, filed 1997-08-19, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -246,7 +246,7 @@
       "pass": true,
       "evidence": "337 public client reviews and 29 years since the entity was filed in 1997",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-personal-injury",
@@ -312,13 +312,13 @@
     "dos_id": "P97000071780",
     "formed": "1997-08-19",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "score": {
     "total": 57,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G1) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -399,7 +399,7 @@
             "pts": 6,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 5.0 over 337 reviews → Bayesian 4.96 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 5.0 over 337 reviews → Bayesian 4.96 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",

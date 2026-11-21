@@ -46,6 +46,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import contextlib
 import difflib
 import io
 import json
@@ -215,6 +216,41 @@ def firm_cities(firm: dict) -> set[str]:
     return out
 
 
+@contextlib.contextmanager
+def open_snapshot(path: Path):
+    """The snapshot's member files, as (name, opener) pairs, from the zip or from beside it.
+
+    Florida now ships cordata.zip with compression method 9, Deflate64. Python's zipfile
+    refuses it, and so do GNU tar and bsdtar: libarchive says "Unsupported ZIP compression
+    method (9: deflation-64-bit)" in as many words. The Windows shell reads it, and reads it
+    fast, so the members are extracted once into cordata/ beside the archive and this prefers
+    them when they are there.
+
+    Extracted, not converted. The archive stays the record of what the state published, the
+    directory is 17 GB of working copy, and .crawl is gitignored so neither is in the build.
+    A member is streamed either way: nothing here holds 1.8 GB in memory.
+
+        tar -xf cordata.zip                     refuses it
+        powershell "(New-Object -ComObject Shell.Application).NameSpace('...cordata.zip')
+                    .Items() | ..."             reads it, about 40 seconds a member
+    """
+    folder = path.parent / path.stem
+    loose = sorted(folder.glob("*.txt")) if folder.is_dir() else []
+    if loose:
+        print("reading %d extracted member file(s) from %s" % (len(loose), folder))
+        yield [(p.name, (lambda p=p: io.open(p, "rb"))) for p in loose]
+        return
+    with zipfile.ZipFile(path) as zf:
+        names = [m for m in zf.namelist() if not m.endswith("/")]
+        print("snapshot holds %d member file(s): %s" % (len(names), ", ".join(names[:4])))
+        try:
+            yield [(n, (lambda n=n: zf.open(n))) for n in names]
+        except NotImplementedError:
+            raise SystemExit(
+                "This snapshot uses a compression method Python cannot read (Deflate64).\n"
+                "Extract it once with the Windows shell, into %s, and run this again." % folder)
+
+
 def scan(path: Path, wanted: dict[str, set[str]]) -> dict[str, list[dict]]:
     """One pass over the snapshot, collecting the rows that could belong to any firm we asked about.
 
@@ -229,11 +265,9 @@ def scan(path: Path, wanted: dict[str, set[str]]) -> dict[str, list[dict]]:
             index.setdefault(tok, set()).add(slug)
     hits: dict[str, list[dict]] = {slug: [] for slug in wanted}
     rows = kept = 0
-    with zipfile.ZipFile(path) as zf:
-        members = [m for m in zf.namelist() if not m.endswith("/")]
-        print("snapshot holds %d member file(s): %s" % (len(members), ", ".join(members[:4])))
-        for member in members:
-            with zf.open(member) as raw:
+    with open_snapshot(path) as members:
+        for member, opener in members:
+            with opener() as raw:
                 for data in io.TextIOWrapper(raw, encoding="latin-1", newline=""):
                     line = data.rstrip("\r\n")
                     if len(line) < RECORD_LEN - 40:

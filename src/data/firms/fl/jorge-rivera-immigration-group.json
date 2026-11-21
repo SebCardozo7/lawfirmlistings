@@ -138,13 +138,13 @@
       "pass": false,
       "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
       "source": "no roster published",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G3": {
       "pass": true,
       "evidence": "JORGE RIVERA LLC is an active FLAL on the Florida register, document L21000475174, filed 2021-11-02, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": false,
@@ -156,7 +156,7 @@
       "pass": true,
       "evidence": "5,348 public client reviews and 5 years since the entity was filed in 2021",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -314,7 +314,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.8 over 5,348 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.8 over 5,348 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -434,7 +434,7 @@
     "dos_id": "L21000475174",
     "formed": "2021-11-02",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "logo": {
     "file": "/logos/jorgerivera.org.svg",

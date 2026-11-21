@@ -193,11 +193,10 @@
       "evidence": "1 of the firm's attorneys share a surname with a disciplined attorney, and for Gary L. Green 1 of 5 decision(s) naming this surname have no searchable text, so they can be neither tied to nor ruled out against this attorney. The decisions that cannot be read are scans without searchable text, so this is a limit of the published record. Nothing here says the firm's attorney is that person."
     },
     "G3": {
-      "pass": false,
-      "evidence": "No matching active entity in the Florida corporate register. Florida does not require a sole proprietorship or a general partnership to register, so this is a check we could not complete from this source rather than evidence against the firm",
-      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations, partial",
-      "unresolvable": "Florida does not require every law firm to register, so this register cannot answer for one that is not obliged to appear in it",
-      "checked_at": "2026-09-30"
+      "pass": true,
+      "evidence": "SAM J. SAAD III, PA is an active DOMP on the Florida register, document P08000104950, filed 2008-12-01, with 1 Google-verified location",
+      "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -207,9 +206,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "130 public client reviews across 1 Google listing, above the 10 minimum, and the firm's domain has been registered since 2009-06-04, so it has been operating for more than a year",
-      "source": "Google Places API and the domain's registration date over RDAP",
-      "checked_at": "2026-09-15"
+      "evidence": "1 Google-verified location and 18 years since the entity was filed in 2008. This practice is transactional, so the gate asks for a verified listing and the year in operation rather than ten reviews, and its 130 reviews are scored in pillar C instead",
+      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-naples-real-estate",
@@ -314,8 +313,8 @@
   "score": {
     "total": 60,
     "tier": "Verified",
-    "verdict": "2 of 5 eligibility gates passed. 3 could not be answered from the available records (G1, G2, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
-    "computed_at": "2026-11-05",
+    "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (3/25).",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -396,7 +395,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 130 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 130 reviews → Bayesian 4.87 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -506,10 +505,16 @@
       "G1",
       "G2"
     ],
-    "gates_unresolvable": [
-      "G3"
-    ],
+    "gates_unresolvable": [],
     "assessable": 68,
     "comparable": true
+  },
+  "entity": {
+    "legal_name": "SAM J. SAAD III, PA",
+    "entity_type": "DOMP",
+    "dos_id": "P08000104950",
+    "formed": "2008-12-01",
+    "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
+    "checked_at": "2026-11-21"
   }
 }

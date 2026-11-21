@@ -583,7 +583,7 @@
       "pass": true,
       "evidence": "ARCE IMMIGRATION LAW, P.A. is an active DOMP on the Florida register, document P11000019298, filed 2011-02-23, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -595,7 +595,7 @@
       "pass": true,
       "evidence": "577 public client reviews and 16 years since the entity was filed in 2011",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -698,7 +698,7 @@
     "total": 47,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -779,7 +779,7 @@
             "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.9 over 577 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.9 over 577 reviews → Bayesian 4.89 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -899,7 +899,7 @@
     "dos_id": "P11000019298",
     "formed": "2011-02-23",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "logo": {
     "file": "/logos/arceglobal.com.png",

@@ -191,13 +191,13 @@
       "pass": false,
       "evidence": "This firm names no attorney on the pages we could read, so there is nobody to look up. The register itself exists: Florida publishes its attorney discipline as court decisions and we read them for the other firms in this market.",
       "source": "no roster published",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G3": {
       "pass": true,
-      "evidence": "CATHOLIC PSYCHIATRIC SERVICES, LLC is an active FLAL on the Florida register, document L08000086764, filed 2008-09-11, with 3 Google-verified locations",
+      "evidence": "CATHOLIC MULTI SERVICES LLC is an active FLAL on the Florida register, document L26000444398, filed 2026-08-24, with 3 Google-verified locations",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": false,
@@ -207,9 +207,9 @@
     },
     "G6": {
       "pass": true,
-      "evidence": "494 public client reviews and 18 years since the entity was filed in 2008",
-      "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "evidence": "494 public client reviews across 3 Google listings, above the 10 minimum, and the firm's domain has been registered since 2000-05-17, so it has been operating for more than a year",
+      "source": "Google Places API and the domain's registration date over RDAP",
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -284,7 +284,7 @@
     "total": 28,
     "tier": "Listed",
     "verdict": "1 eligibility gate(s) still to be checked. 2 could not be answered from the available records (G1, G2) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -365,7 +365,7 @@
             "pts": 2,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.17 over 494 reviews → Bayesian 4.28 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.17 over 494 reviews → Bayesian 4.28 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -480,12 +480,12 @@
     "comparable": true
   },
   "entity": {
-    "legal_name": "CATHOLIC PSYCHIATRIC SERVICES, LLC",
+    "legal_name": "CATHOLIC MULTI SERVICES LLC",
     "entity_type": "FLAL",
-    "dos_id": "L08000086764",
-    "formed": "2008-09-11",
+    "dos_id": "L26000444398",
+    "formed": "2026-08-24",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "logo": {
     "file": "/logos/cclsmiami.org.png",

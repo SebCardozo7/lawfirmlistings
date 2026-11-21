@@ -153,14 +153,14 @@
     "G2": {
       "pass": true,
       "source": "Published decisions of the Supreme Court of Florida on the discipline of Florida Bar members, indexed by CourtListener (Free Law Project)",
-      "checked_at": "2026-09-30",
+      "checked_at": "2026-11-21",
       "evidence": "No attorney this firm names appears as the respondent in any of the 1237 published discipline decisions of the Supreme Court of Florida on the discipline of Florida Bar members, 1946 to 2026. Published decisions record what has been decided, so this covers a disbarment or suspension on the record and not whether a registration is current today."
     },
     "G3": {
       "pass": true,
       "evidence": "LAW OFFICE OF BEN EZRA ERAN P.A is an active DOMP on the Florida register, document P16000049660, filed 2016-06-06, with 1 Google-verified location",
       "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     },
     "G5": {
       "pass": true,
@@ -172,7 +172,7 @@
       "pass": true,
       "evidence": "454 public client reviews and 10 years since the entity was filed in 2016",
       "source": "Google Places API and Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-      "checked_at": "2026-09-30"
+      "checked_at": "2026-11-21"
     }
   },
   "cohort_id": "fl-miami-immigration",
@@ -270,7 +270,7 @@
     "total": 54,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G1) and does not count against the firm. Certification needs more of the scale measured than we have managed here, pillar B in particular. Strongest pillar: C; most headroom in pillar B (0/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -351,7 +351,7 @@
             "pts": 4,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.7 over 454 reviews → Bayesian 4.72 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.7 over 454 reviews → Bayesian 4.72 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -470,7 +470,7 @@
     "dos_id": "P16000049660",
     "formed": "2016-06-06",
     "source": "Corporate Data File, quarterly full snapshot, published by the Florida Department of State Division of Corporations",
-    "checked_at": "2026-09-30"
+    "checked_at": "2026-11-21"
   },
   "logo": {
     "file": "/logos/cislawoffice.com.png",
