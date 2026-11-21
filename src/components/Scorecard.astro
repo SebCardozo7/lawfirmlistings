@@ -12,8 +12,21 @@ const tagLabel = (src: string) => ({ registry: 'Registry', observed: 'Observed',
 // not a finding about the firm and score.py keeps it out of the scale. It was rendering
 // as the bare word "partial" next to a zero, which reads like a verdict.
 const isMeasured = (src: string) => ['registry','observed','ahrefs','places','psi','court'].includes(src);
-const nextMonth = new Date(); nextMonth.setMonth(nextMonth.getMonth() + 1, 1);
-const nextCheck = nextMonth.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+// The 20th, because that is when the re-measurement actually runs: see the cron in
+// .github/workflows/remeasure.yml, which is on the 20th so it starts the day after the Ahrefs
+// units reset. This line said the first of next month, and said it on all 1,481 profiles. A
+// firm wrote in on 17 November planning its corrections around "the scheduled December 1
+// re-check", which is a date this page invented and on which nothing runs. The real next read
+// was three days away.
+//
+// Build-time, like the rest of this page. The site rebuilds on every push to main, so the date
+// does not go stale for long, and it is a schedule rather than a promise about one profile.
+const nextCheck = (() => {
+  const now = new Date();
+  const next = new Date(now.getFullYear(), now.getMonth(), 20);
+  if (next <= now) next.setMonth(next.getMonth() + 1);
+  return next.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+})();
 const verified = new Date(s.computed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 // An allowlist, not a denylist. This was `tier !== 'Listed' && tier !== 'Not eligible'`, so
 // when the engine gained a third non-certified state the badge kept rendering: a firm whose own

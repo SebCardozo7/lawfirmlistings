@@ -417,7 +417,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-20"
+      "checked_at": "2026-11-21"
     },
     "G6": {
       "pass": true,
@@ -558,10 +558,10 @@
     "checked_at": "2026-09-30"
   },
   "score": {
-    "total": 67,
+    "total": 70,
     "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (10/25).",
-    "computed_at": "2026-11-08",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -580,9 +580,9 @@
             "code": "A6",
             "label": "Roster verifiability",
             "pts": 4.5,
-            "max": 9,
+            "max": 6,
             "source": "registry",
-            "evidence": "6 of 7 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "6 of 7 named attorneys matched to the California register; whether the bios carry bar numbers has not been read here, so those 3 points leave the scale rather than counting against the firm"
           },
           {
             "code": "A5",
@@ -650,7 +650,7 @@
             "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "20 of 35 sampled reviews are from the last 12 months (newest 2026-08-03) · a sample of five per business listing, not every review"
+            "evidence": "19 of 35 sampled reviews are from the last 12 months (newest 2026-08-03) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -735,24 +735,24 @@
     "next_tier": {
       "name": "Distinguished",
       "needed": 78,
-      "gap": 11,
+      "gap": 8,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +4.5 available",
         "B3 Results disclosure: +4 available",
-        "D1 Website trust & experience: +3.5 available"
+        "D1 Website trust & experience: +3.5 available",
+        "A2 Experience: +3 available"
       ]
     },
     "raw": 58.5,
-    "assessed": 87,
+    "assessed": 84,
     "coverage": 1.0,
-    "floor_abc_pct": 0.702,
+    "floor_abc_pct": 0.741,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 87,
+    "assessable": 84,
     "comparable": true
   }
 }

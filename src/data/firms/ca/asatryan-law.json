@@ -5,7 +5,7 @@
   "website": "https://asatryanlaw.com/",
   "domain": "asatryanlaw.com",
   "phone": "(818) 208-0000",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -181,7 +181,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 2 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-12"
+      "checked_at": "2026-11-21"
     },
     "G6": {
       "pass": true,
@@ -289,10 +289,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 64,
-    "tier": "Verified",
+    "total": 66,
+    "tier": "Certified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: B; most headroom in pillar E (4/15).",
-    "computed_at": "2026-11-08",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -311,9 +311,9 @@
             "code": "A6",
             "label": "Roster verifiability",
             "pts": 6,
-            "max": 9,
+            "max": 6,
             "source": "registry",
-            "evidence": "2 of 2 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "2 of 2 named attorneys matched to the California register; whether the bios carry bar numbers has not been read here, so those 3 points leave the scale rather than counting against the firm"
           },
           {
             "code": "A5",
@@ -464,9 +464,9 @@
     },
     "floor_abc": 43,
     "next_tier": {
-      "name": "Certified",
-      "needed": 65,
-      "gap": 1,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 12,
       "floor_met": true,
       "coverage_met": true,
       "path": [
@@ -476,14 +476,14 @@
       ]
     },
     "raw": 55.5,
-    "assessed": 87,
+    "assessed": 84,
     "coverage": 1.0,
-    "floor_abc_pct": 0.754,
+    "floor_abc_pct": 0.796,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 87,
+    "assessable": 84,
     "comparable": true
   }
 }
