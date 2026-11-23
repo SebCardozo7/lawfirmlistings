@@ -1,0 +1,397 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import ColumnChart from '../../components/ColumnChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import StatRow from '../../components/StatRow.astro';
+
+/**
+ * Does firm size matter? Measured, rather than argued.
+ *
+ * Every figure here is computed from the firms collection at build time. Two fields carry the
+ * study and they are both fields no guide had opened before this one:
+ *
+ *   offices[]   one row per verified Google Business Profile listing, written by
+ *               build_profiles.py:build_offices(). It is NOT what a firm's own site claims
+ *               about its locations, and the prose says so. score.py never reads it.
+ *   attorneys[] the people a firm names on a page our crawler could read.
+ *
+ * The decomposition below reproduces score.py's own spread(): a sub-factor counts toward a band
+ * only when it was really scored, so a check that could not run in a firm's state never lands in
+ * anybody's denominator. Comparing raw pillar percentages instead would have compared our own
+ * register coverage across bands, since pillars[].max is the published max and not the assessed
+ * one, and multi-office firms span more states than single-office ones.
+ *
+ * One sentence deliberately not written here: that firms with more offices draw more complaints.
+ * C5 is computed from a sample of five reviews per listing, so a one-office firm is judged on
+ * five and a twelve-office firm on sixty, and the step function pays full marks only at a share
+ * of exactly zero. The page reports the scoring gap and the far smaller gap in the underlying
+ * share, and says which one is about the firms.
+ */
+const firms = await getCollection('firms', f =>
+  f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+type Firm = (typeof firms)[number];
+const scored = firms.filter(f => f.data.score);
+
+const fmt = (n: number) => n.toLocaleString('en-US');
+const pc = (n: number) => `${Math.round(n)}%`;
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : 0;
+};
+
+// ---- the two size measures ----
+const officeCount = (f: Firm) => f.data.offices.length;
+const officeRows = firms.reduce((n, f) => n + officeCount(f), 0);
+const multiOffice = firms.filter(f => officeCount(f) > 1);
+const biggest = [...firms].sort((a, b) => officeCount(b) - officeCount(a))[0];
+const attorneysNamed = firms.reduce((n, f) => n + f.data.attorneys.length, 0);
+
+// The state each office address sits in, read off the end of the address Places returned. An
+// address that does not end in a state and a ZIP is skipped rather than guessed at.
+const stateOf = (address: string) => address.match(/,\s*([A-Z]{2})\s+\d{5}/)?.[1] ?? null;
+const statesOf = (f: Firm) =>
+  new Set(f.data.offices.map(o => stateOf(o.address)).filter((s): s is string => !!s));
+const crossState = firms.filter(f => statesOf(f).size > 1);
+const biggestStates = statesOf(biggest).size;
+const officeStates = new Set(firms.flatMap(f => [...statesOf(f)]));
+const marketStates = new Set(firms.map(f => f.data.market.state));
+const markets = new Set(firms.map(f => f.data.market.city_slug));
+
+// ---- bands ----
+const BANDS = [
+  { key: '1', label: 'One office', lo: 1, hi: 1 },
+  { key: '2', label: 'Two', lo: 2, hi: 2 },
+  { key: '3-4', label: 'Three or four', lo: 3, hi: 4 },
+  { key: '5-9', label: 'Five to nine', lo: 5, hi: 9 },
+  { key: '10+', label: 'Ten or more', lo: 10, hi: Infinity },
+];
+const inBand = (f: Firm, b: typeof BANDS[number]) =>
+  officeCount(f) >= b.lo && officeCount(f) <= b.hi;
+const banded = BANDS.map(b => ({ ...b, firms: scored.filter(f => inBand(f, b)) }));
+const solo = banded[0];
+const large = banded[banded.length - 1];
+
+const medianScore = (fs: Firm[]) => median(fs.map(f => f.data.score!.total));
+const soloMedian = medianScore(solo.firms);
+const largeMedian = medianScore(large.firms);
+// The overlap, which is the whole caveat on the trend above it: how many one-office firms match
+// or beat the score a typical firm in the largest band carries.
+const soloBeatingLarge = solo.firms.filter(f => f.data.score!.total >= largeMedian).length;
+
+// ---- score.py's own assessed denominator, reproduced ----
+// A source word from this list means the check did not run, or could not, so the sub-factor
+// never enters a numerator or a denominator. Copied from NOT_A_FINDING in scripts/score.py.
+const NOT_A_FINDING = ['pending', 'partial', 'no queryable source', 'unavailable',
+  'screening only', 'incomplete', 'not yet', 'no roster published'];
+const wasScored = (s: { source: string }) =>
+  !NOT_A_FINDING.some(w => (s.source || '').toLowerCase().includes(w));
+const subs = (f: Firm) =>
+  (['A', 'B', 'C', 'D', 'E'] as const).flatMap(k => f.data.score!.pillars[k].subs);
+const sub = (f: Firm, code: string) => subs(f).find(s => s.code === code);
+
+/** Pooled earned-over-assessable across a group, for one sub-factor or one pillar's worth. */
+const pooled = (fs: Firm[], pick: (f: Firm) => { pts: number; max: number; source: string }[]) => {
+  let earned = 0, assessable = 0, n = 0;
+  for (const f of fs) {
+    for (const s of pick(f)) {
+      if (!wasScored(s)) continue;
+      earned += s.pts; assessable += s.max; n++;
+    }
+  }
+  return { pct: assessable ? (100 * earned) / assessable : null, n };
+};
+const pooledSub = (fs: Firm[], code: string) =>
+  pooled(fs, f => { const s = sub(f, code); return s ? [s] : []; });
+
+// Five or more offices against exactly one: the two ends of the range, with enough firms at each
+// end for a pooled share to mean something. The bands above carry the trend; this carries the
+// decomposition, which is what the piece is actually about.
+const fewest = solo.firms;
+const most = scored.filter(f => officeCount(f) >= 5);
+
+// Every sub-factor the engine actually wrote, taken from the records rather than from a list
+// typed here, so a change to the rubric shows up in this study instead of silently missing from
+// it. The descriptor is the only editorial part: it says in plain words whether the check counts
+// a quantity or judges one, which is the distinction the whole section turns on. A code with no
+// descriptor falls back to the engine's own label.
+const WHAT: Record<string, string> = {
+  C1: 'counts the reviews', D2: 'counts links and organic traffic',
+  E4: 'counts published hours and contact channels', D3: 'counts listings and their photos',
+  B3: 'counts how results are disclosed', B1: 'counts outcomes published on the site',
+  B2: 'counts how specific those outcomes are', A5: 'counts memberships and insurance evidence',
+  E1: 'counts what the fee page states', E3: 'counts languages and accessibility',
+  D1: 'counts trust pages and page speed', D4: 'counts structured data and authorship',
+  C3: 'rates how fresh the reviews are', C2: 'rates the stars against the market',
+  A2: 'verifies experience against a state register',
+  A6: 'verifies the roster against a state register',
+  C5: 'rates the one and two star share',
+};
+const allCodes = [...new Set(scored.flatMap(f => subs(f).map(s => s.code)))].sort();
+const labelOf = (code: string) =>
+  scored.flatMap(f => subs(f)).find(s => s.code === code)?.label ?? code;
+const movement = allCodes.map(code => {
+  const a = pooledSub(fewest, code);
+  const b = pooledSub(most, code);
+  return { code, label: labelOf(code), what: WHAT[code] ?? labelOf(code).toLowerCase(),
+           soloPct: a.pct ?? 0, soloN: a.n, bigPct: b.pct ?? 0, bigN: b.n,
+           delta: (b.pct ?? 0) - (a.pct ?? 0) };
+});
+const byDelta = [...movement].sort((a, b) => b.delta - a.delta);
+const risers = byDelta.filter(m => m.delta >= 10);
+const fallers = byDelta.filter(m => m.delta < 0);
+// The falling checks are the claim of this section, so the page states how many firms each of
+// them was actually scored on: two of them run only where a state register answers us, and at
+// the large end that is a couple of dozen firms rather than a hundred.
+const thinnest = [...fallers].sort((a, b) => a.bigN - b.bigN)[0];
+const topRiser = byDelta[0];
+const spellOut = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+  'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen',
+  'eighteen', 'nineteen', 'twenty'];
+const words = (n: number) => spellOut[n] ?? fmt(n);
+const Words = (n: number) => { const w = words(n); return w[0].toUpperCase() + w.slice(1); };
+/** "a, b and c", deduplicated, so a list never reads as a hardcoded pair. */
+const list = (xs: string[]) => {
+  const u = [...new Set(xs)];
+  return u.length <= 1 ? (u[0] ?? '') : `${u.slice(0, -1).join(', ')} and ${u[u.length - 1]}`;
+};
+const c1 = movement.find(m => m.code === 'C1')!;
+const c2 = movement.find(m => m.code === 'C2')!;
+const c3 = movement.find(m => m.code === 'C3')!;
+const c5 = movement.find(m => m.code === 'C5')!;
+
+// ---- the C5 sampling check ----
+// Places returns five reviews per listing, so the sample a firm is judged on grows with its
+// office count. Full marks on C5 need a one-and-two-star share of exactly zero, which is a very
+// different ask at five reviews than at sixty.
+const sampleOf = (f: Firm) => f.data.reviews.sample ?? [];
+const lowOf = (f: Firm) => sampleOf(f).filter(r => (r.rating ?? 5) <= 2).length;
+const sampled = (fs: Firm[]) => fs.filter(f => sampleOf(f).length > 0);
+const sampleStats = (fs: Firm[]) => {
+  const g = sampled(fs);
+  const seen = g.reduce((n, f) => n + sampleOf(f).length, 0);
+  const low = g.reduce((n, f) => n + lowOf(f), 0);
+  const clean = g.filter(f => lowOf(f) === 0).length;
+  return { firms: g.length, medianSample: median(g.map(f => sampleOf(f).length)),
+           lowShare: seen ? (100 * low) / seen : 0, cleanShare: g.length ? (100 * clean) / g.length : 0 };
+};
+const soloSample = sampleStats(fewest);
+const bigSample = sampleStats(most);
+
+// Review volume itself, which is the quantity C1 reads and the clearest case of a number that
+// grows because a firm has more addresses rather than because more people wrote about it.
+const reviewTotal = (f: Firm) => f.data.digital.places?.review_count_total ?? null;
+const medianReviews = (fs: Firm[]) =>
+  median(fs.map(reviewTotal).filter((n): n is number => n != null));
+const soloReviews = medianReviews(fewest);
+const bigReviews = medianReviews(most);
+
+// ---- roster size, the other way of reading "size" ----
+const ROSTER = [
+  { label: 'Names nobody', lo: 0, hi: 0 },
+  { label: 'One or two', lo: 1, hi: 2 },
+  { label: 'Three to five', lo: 3, hi: 5 },
+  { label: 'Six to fifteen', lo: 6, hi: 15 },
+  { label: 'Sixteen or more', lo: 16, hi: Infinity },
+];
+const rosterBands = ROSTER.map(b => {
+  const fs = scored.filter(f => f.data.attorneys.length >= b.lo && f.data.attorneys.length <= b.hi);
+  return { ...b, n: fs.length, median: medianScore(fs) };
+}).filter(b => b.n > 0);
+
+// ---- charts ----
+const bandColumns = banded.map(b => ({
+  label: b.label,
+  note: `${fmt(b.firms.length)} firms`,
+  value: b.firms.length,
+  emphasis: b.key === '1',
+}));
+const scoreRows = banded.map(b => ({
+  label: b.label,
+  value: medianScore(b.firms),
+  note: `${fmt(b.firms.length)} firms`,
+  emphasis: b.key === '10+',
+}));
+const reviewRows = [
+  { code: 'C1', note: 'counts how many reviews there are' },
+  { code: 'C2', note: 'rates the stars, shrunk toward the market' },
+  { code: 'C5', note: 'rates the one and two star share' },
+].flatMap(r => {
+  const m = movement.find(x => x.code === r.code)!;
+  return [
+    { label: `${m.label}, one office`, value: Math.round(m.soloPct), display: pc(m.soloPct), note: r.note },
+    { label: `${m.label}, five or more`, value: Math.round(m.bigPct), display: pc(m.bigPct), emphasis: true },
+  ];
+});
+const moveRows = byDelta.map(m => ({
+  label: m.label,
+  value: Math.round(m.bigPct),
+  display: `${pc(m.soloPct)} to ${pc(m.bigPct)}`,
+  note: m.what,
+  emphasis: m.delta >= 10,
+}));
+
+// ---- dates ----
+const snapshot = [...firms].map(f => f.data.score?.computed_at).filter(Boolean).sort().at(-1) ?? '';
+const placesRead = [...firms].map(f => f.data.digital.places?.measured_at).filter(Boolean).sort().at(-1) ?? '';
+const updated = snapshot
+  ? new Date(snapshot).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+
+// Says the finding, not the subject, and carries no figure: the trend holds while every number
+// under it moves. "Arithmetic" is the claim the decomposition below actually supports, which is
+// narrower than saying a big firm is no better.
+const title = 'Bigger Law Firms Score Higher Here, and Part of the Gap Is Arithmetic';
+const description = 'We measured every firm in this directory by office count and roster size '
+  + 'against its score. Bigger firms score higher. Part of it is how we count.';
+---
+<Base title={title} description={description} nav="guides"
+      figuresFrom={`Every published firm in this directory, scored ${snapshot}`}
+      image="/og/scale.png"
+      imageAlt="Five bands of law firm office count, with clusters of map pins growing steeply and the score bars above them barely growing at all">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Does law firm size matter</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Data · Method</span>
+    <h1>{title}</h1>
+    <p class="lede">Every firm page on this site carries a score out of 100, and every firm also publishes a number of offices. We put the two beside each other across all {fmt(firms.length)} published firms. Firms with more offices do score higher: {soloMedian} at the median with one office, {largeMedian} with ten or more. Then we took the score apart to see which of its checks were responsible, and the answer is not flattering to the score.</p>
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Measured data, no legal content</div></div>
+      {updated && <><span class="sep" aria-hidden="true"></span><span>Measured {updated}</span></>}
+      <span class="sep" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="scale" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#what" class="is-active">What we measured</a></li>
+      <li><a href="#trend">Bigger firms do score higher</a></li>
+      <li><a href="#which">Which checks move</a></li>
+      <li><a href="#reviews">Three checks, one set of reviews</a></li>
+      <li><a href="#roster">Counting size the other way</a></li>
+      <li><a href="#use">What to do with this</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`${fmt(firms.length)} published firms across ${markets.size} markets, ${fmt(officeRows)} office addresses, scored ${updated ?? snapshot}.`}
+      items={[
+        `<b>${fmt(multiOffice.length)} of ${fmt(firms.length)}</b> firms publish more than one office, and the largest network here runs <b>${biggest.data.offices.length} addresses</b> in ${biggestStates} states.`,
+        `Median score rises from <b>${soloMedian}</b> for a one-office firm to <b>${largeMedian}</b> for a firm with ten or more, so size does track the score.`,
+        `It tracks it loosely: <b>${fmt(soloBeatingLarge)} one-office firms</b> already match or beat that ten-office median, which is ${pc((100 * soloBeatingLarge) / solo.firms.length)} of them.`,
+        `The checks that count things rise hardest. ${topRiser.label} (${topRiser.what}) goes from <b>${pc(topRiser.soloPct)} to ${pc(topRiser.bigPct)}</b> between the smallest and largest firms.`,
+        `Not one of the <b>${words(fallers.length)} checks that score worse</b> with size counts anything: every one of them rates evidence or confirms it against an outside source.`,
+      ]}
+    />
+    <StatRow
+      stats={[
+        { value: `${soloMedian} to ${largeMedian}`, label: 'median score, one office to ten or more', note: 'out of 100', emphasis: true },
+        { value: fmt(multiOffice.length), label: 'firms publish more than one office', note: `of ${fmt(firms.length)} published firms` },
+        { value: `${pc(c1.soloPct)} to ${pc(c1.bigPct)}`, label: 'review volume sub-factor', note: 'the check that counts reviews' },
+        { value: `${pc(c2.soloPct)} to ${pc(c2.bigPct)}`, label: 'rating quality sub-factor', note: 'the check that rates the same reviews' },
+      ]}
+      source={`Pooled across ${fmt(scored.length)} scored firms, computed ${snapshot}.`}
+    />
+    <div class="callout"><b>How to read this.</b> Every figure on this page is computed from our own measurements at build time, so it changes when the data does. Nothing here is legal information or advice.</div>
+
+    <h2 id="what">What we measured</h2>
+    <p>Firm size has an answer on the internet already, and it is always the same answer: it depends. The pages that rank for the question are almost all written by law firms, and a big firm concludes that big firms have the resources while a small firm concludes that small firms give you attention. Neither side counts anything.</p>
+    <p>We can count. This directory holds {fmt(firms.length)} published firms across {markets.size} markets in {marketStates.size} states, each carrying a score out of 100 built from evidence we gathered ourselves. So the question becomes a measurement: as firms get bigger, what happens to that score, and which parts of it move?</p>
+    <p><b>Size here means office count, and the number is not the firm's claim.</b> A firm's own site can say whatever it likes about its locations. What we count is verified Google Business Profile listings, one row per listing, which is a location Google has confirmed is operational. Across the directory that comes to {fmt(officeRows)} addresses. {fmt(multiOffice.length)} firms publish more than one, {fmt(crossState.length)} of them cross a state line, and those addresses land in {officeStates.size} states, which is more than the {marketStates.size} this directory has opened a market in.</p>
+    <p>The largest network belongs to <a href={`/firms/${biggest.data.slug}/`}>{biggest.data.name}</a>, with {biggest.data.offices.length} addresses across {biggestStates} states. We list it in {biggest.data.market.city}, because a firm belongs to one market here, and that is already a hint about what an office count does and does not tell you.</p>
+    <ColumnChart
+      heading={`How many offices the ${fmt(scored.length)} scored firms publish`}
+      columns={bandColumns}
+      emphasisLabel="Single-office firms"
+      quietLabel="Everyone else"
+      caption={`One row per verified Google Business Profile listing. Most firms in this directory are one-office firms: ${fmt(solo.firms.length)} of ${fmt(scored.length)}.`}
+    />
+
+    <h2 id="trend">Bigger firms do score higher</h2>
+    <p>The trend is real and it is not subtle. A one-office firm carries a median score of {soloMedian}. A firm with ten or more offices carries {largeMedian}. Every band in between sits in order.</p>
+    <BarChart
+      heading="Median certification score by office count"
+      max={100}
+      rows={scoreRows}
+      caption={`Out of 100. The score is a share of what we could assess for each firm rather than of a flat hundred, which is why a short measurement does not drag a firm down: we have written separately about what that denominator does.`}
+    />
+    <p><b>Now the part that matters more than the trend.</b> These are band medians, and the bands overlap heavily. {fmt(soloBeatingLarge)} of the {fmt(solo.firms.length)} one-office firms here already score at or above {largeMedian}, the median of the largest band. That is {pc((100 * soloBeatingLarge) / solo.firms.length)} of them. The best-scoring single-office firm in the directory, <a href={`/firms/${[...solo.firms].sort((a, b) => b.data.score!.total - a.data.score!.total)[0].data.slug}/`}>{[...solo.firms].sort((a, b) => b.data.score!.total - a.data.score!.total)[0].data.name}</a>, outscores every firm in the ten-or-more band.</p>
+    <p>So office count predicts a band and tells you very little about the firm in front of you. If you are comparing two specific firms, the number of pins on their map is close to useless. That is worth saying plainly, because it is the opposite of how a firm with a long locations page presents itself.</p>
+
+    <h2 id="which">Which checks move</h2>
+    <p>The score is built from {words(allCodes.length)} sub-factors in five pillars, each one a separate measurement with its own evidence. If size lifts the total, it has to be lifting some of those and not others. We pooled all {words(allCodes.length)} across the one-office firms and across the firms with five or more, counting a sub-factor only where it was really scored, so a check that cannot run in a firm's state never lands in anybody's denominator.</p>
+    <BarChart
+      heading="Sub-factor scores, one-office firms against firms with five or more offices"
+      max={100}
+      rows={moveRows}
+      caption={`Each bar is the five-or-more figure; the value beside it reads one-office first. Pooled across ${fmt(fewest.length)} one-office firms and ${fmt(most.length)} firms with five or more. A highlighted row moved by ten points or more.`}
+    />
+    <p>The pattern is clean enough to state in one sentence. <b>The checks that count things rise. The checks that judge things do not.</b></p>
+    <p>{Words(risers.length)} of the {words(allCodes.length)} sub-factors gain ten points or more, and they are the accumulating ones. The three largest moves are {risers.slice(0, 3).map(m => `${m.label.toLowerCase()}, which ${m.what}`).join('; ')}. Every one of those is a quantity a firm adds to by opening another address, whether or not anything about its lawyering changed.</p>
+    <p><b>{Words(fallers.length)} sub-factors move the other way, and this is the part worth sitting with: not one of them is a counting check.</b> They are {list(fallers.map(m => m.label.toLowerCase()))}. Each one reads evidence the firm already has and asks how good it is, or tries to confirm it against an outside source. On those, the firms with five or more offices do no better than the firms with one, and on several they do slightly worse.</p>
+    <p>Two of those {words(fallers.length)} rest on thin ground and the page should say so rather than let the chart imply otherwise. Experience and roster verifiability are scored only where a state register answers us, so at the large end they rest on as few as {thinnest.bigN} firms rather than {most.length}. The other three are measured on effectively every firm in both groups.</p>
+
+    <h2 id="reviews">Three checks, one set of reviews</h2>
+    <p>The clearest case sits inside a single pillar. Three sub-factors read the same Google reviews, and they disagree about size completely.</p>
+    <BarChart
+      heading="Three checks on the same reviews, by office count"
+      max={100}
+      rows={reviewRows}
+      caption={`Pooled across ${fmt(fewest.length)} one-office firms and ${fmt(most.length)} firms with five or more. Same reviews, three questions, three answers.`}
+    />
+    <p><b>{c1.label} goes from {pc(c1.soloPct)} to {pc(c1.bigPct)}.</b> This is arithmetic rather than reputation. A Google review attaches to a business listing, not to a firm, and we sum a firm's reviews across its listings. The median one-office firm here has {fmt(soloReviews)} reviews; the median firm with five or more offices has {fmt(bigReviews)}. Open five offices and you collect reviews at five addresses at once. We <a href="/guides/google-reviews-new-york-injury-firms/">measured that effect inside one market first</a>, and it holds across the directory.</p>
+    <p><b>{c2.label} goes from {pc(c2.soloPct)} to {pc(c2.bigPct)}, and {c3.label.toLowerCase()} from {pc(c3.soloPct)} to {pc(c3.bigPct)}.</b> Both are flat, and both read the same reviews the volume check just rewarded. The stars do not improve when a firm opens offices. Only the count does.</p>
+    <p><b>{c5.label} goes from {pc(c5.soloPct)} down to {pc(c5.bigPct)}</b>, and this one needs a caveat we would rather put in bold than in a footnote, because the obvious reading of it is wrong.</p>
+    <p>Complaint share is scored from a sample. Google returns five reviews per listing, so a one-office firm is judged on about {soloSample.medianSample} reviews and a firm with five or more on about {bigSample.medianSample}. Full marks require a one-and-two-star share of exactly zero, which is a much easier bar to clear at {soloSample.medianSample} reviews than at {bigSample.medianSample}. And that is what the data shows: {pc(soloSample.cleanShare)} of one-office firms show no complaint at all in their sample, against {pc(bigSample.cleanShare)} of the larger firms, while the underlying share of one and two star reviews moves far less, from {soloSample.lowShare.toFixed(1)}% to {bigSample.lowShare.toFixed(1)}%.</p>
+    <p>So the honest statement is narrow. Larger networks do show a somewhat higher share of unhappy reviews, roughly {(bigSample.lowShare / soloSample.lowShare).toFixed(1)} times the smaller firms' rate rather than the collapse the sub-factor score implies. Most of the scoring gap is our step function meeting a bigger sample. <b>That is a defect in our check, not a finding about the firms</b>, and it is on the list to fix. We have written before about <a href="/guides/are-google-reviews-reliable/">what that five-per-listing sample can and cannot support</a>.</p>
+
+    <h2 id="roster">Counting size the other way</h2>
+    <p>Offices are one way to read size and headcount is the other, so we cut it again by how many attorneys a firm names on a page we could read. Across the directory that is {fmt(attorneysNamed)} named people.</p>
+    <BarChart
+      heading="Median score by the number of attorneys a firm names"
+      max={100}
+      rows={rosterBands.map(b => ({ label: b.label, value: b.median, note: `${fmt(b.n)} firms`, emphasis: b.lo === 0 }))}
+      caption="Out of 100. Naming nobody is the highlighted row, and it is the single clearest thing a firm here can fix."
+    />
+    <p>The same shape appears, and the bottom row is the interesting one. {fmt(rosterBands[0].n)} firms name no attorney at all on a page our crawler could read, and they carry the lowest median score in the directory. That is not a size effect. A roster is the input most other checks need: without names there is nothing to match against a state register, nothing to check an admission date on, nothing to tie a credential to. <a href="/guides/how-law-firm-ratings-are-calculated/">A firm that publishes nothing checkable is not scored badly so much as scored thinly</a>, and the two look similar from outside.</p>
+
+    <h2 id="use">What to do with this</h2>
+    <p>If you are choosing a lawyer, the useful version of all this is short.</p>
+    <p><b>An office near you is a listing, not a promise.</b> It means Google confirmed a location operates there. It does not tell you that your case will be worked there, or by whom. {fmt(crossState.length)} firms in this directory run offices in more than one state, and the firm advertising locally in your city may do most of its work elsewhere.</p>
+    <p><b>A large review count is partly an address count.</b> Before reading two thousand reviews as two thousand opinions about one office, check how many offices they are spread across. Every firm profile here lists them.</p>
+    <p><b>Compare the things that do not scale.</b> Whether a firm names its lawyers, what it publishes about fees, whether it says how its results were reached. Those moved little or not at all with size in this measurement, which means they are telling you about the firm rather than about its footprint. The <a href="/methodology/">methodology page</a> lists every sub-factor and what evidence it takes, and each firm's profile shows its own sub-scores with the source behind each one.</p>
+    <p>And the standing caveat on everything above: this is a measurement of {fmt(firms.length)} firms we have published, not of the profession. Our coverage is concentrated in personal injury and in {markets.size} metropolitan markets, so a reader in another practice area should treat the shape as a hypothesis rather than a result. You can see the underlying rankings for <a href="/practice-areas/personal-injury/">personal injury firms</a>, or for a single market such as <a href="/cities/new-york-ny/personal-injury/">New York</a> and <a href="/cities/philadelphia-pa/personal-injury/">Philadelphia</a>, where the office counts behind these bands are visible on each profile.</p>
+    <p class="muted" style="font-size:.86rem">Office counts come from verified Google Business Profile listings read through the Places API, most recently {placesRead}. Scores were computed {snapshot}. A firm that would like its record corrected can <a href="/list-your-firm/">tell us what we got wrong</a>, which costs nothing and moves no point of any score.</p>
+  </div>
+
+  <aside class="article-aside">
+    <div class="panel panel--ink">
+      <h4>See the directory</h4>
+      <p>Every firm above has a profile showing its offices, fees, client reviews and measured digital presence.</p>
+      <a class="btn btn--white" href="/practice-areas/personal-injury/">Personal injury firms</a>
+    </div>
+    <div class="panel">
+      <h4>Related measurements</h4>
+      <ul>
+        <li><a href="/guides/google-reviews-new-york-injury-firms/">Office count and review count in one market</a></li>
+        <li><a href="/guides/how-law-firm-ratings-are-calculated/">What a score cannot compare</a></li>
+        <li><a href="/guides/are-google-reviews-reliable/">What the review sample supports</a></li>
+        <li><a href="/guides/what-search-traffic-says-about-a-law-firm/">What search traffic says</a></li>
+        <li><a href="/methodology/">LFL Certified Methodology</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+</article>
+</Base>

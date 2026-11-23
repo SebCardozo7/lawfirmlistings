@@ -179,6 +179,7 @@ const snapshot = [...firms]
       caption={`The listing count under each name is the point: a review attaches to a listing rather than to a firm, so each bar is the sum of however many addresses that firm runs. The ratings behind these bars sit ${ratingSpread} of a star apart, and the table above carries every firm rather than the twelve here.`}
     />
     <p><b>Most of that gap is offices, not popularity.</b> A Google review attaches to a business listing, not to a firm, so a practice with {byCount[0].data.digital.places!.listing_count} listings accumulates reviews at {byCount[0].data.digital.places!.listing_count} addresses at once.</p>
+    <p>We have since run that comparison across every firm in the directory rather than this one market, and <a href="/guides/does-law-firm-size-matter/">the same effect shows up in the score itself</a>: the sub-factors that count a firm's reviews, links and listings rise steeply with office count, while the ones that rate the same evidence do not move.</p>
     {multi.length > 0 && single.length > 0 && (
       <p>Across this set, the {multi.length} firms with more than one listing average {fmt(avgCount(multi))} reviews. The {single.length} with a single listing average {fmt(avgCount(single))}.</p>
     )}

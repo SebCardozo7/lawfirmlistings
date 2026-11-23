@@ -25,7 +25,7 @@ export interface Guide {
   cover?: 'results' | 'reviews' | 'speed' | 'fees' | 'statutes' | 'ranking' | 'ladder' | 'roster'
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
-    | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement' | 'breach';
+    | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement' | 'breach' | 'scale';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -204,6 +204,21 @@ export const GUIDES: Guide[] = [
     thumb: '',
     icon: 'doc',
     meta: 'The notice of claim comes first',
+  },
+  {
+    slug: 'does-law-firm-size-matter',
+    cover: 'scale',
+    kicker: 'Data',
+    title: 'Bigger Law Firms Score Higher Here, and Part of the Gap Is Arithmetic',
+    // Nothing in this file is computed, so nothing here may carry a figure. The page counts.
+    summary:
+      'Every firm here publishes an office count and carries a score out of 100, so we put the '
+      + 'two beside each other across the whole directory. Firms with more offices do score '
+      + 'higher. Taking the score apart shows why: the checks that count things rise sharply '
+      + 'with size, and the checks that rate the same evidence barely move at all.',
+    thumb: 't3',
+    icon: 'scale',
+    meta: 'What an office count does and does not buy',
   },
   {
     slug: 'how-law-firm-ratings-are-calculated',
