@@ -132,7 +132,14 @@ const ratingOf = (xs: typeof firms) =>
   mean(xs.map(f => f.data.digital.places?.rating_weighted).filter((n): n is number => n != null));
 // Rounded, because a median across an even-sized set lands on a half review, and there is no
 // such thing as half a review.
-const reviewsOf = (xs: typeof firms) => Math.round(median(xs.map(f => f.data.digital.places!.review_count_total)));
+//
+// A firm with no Google listing is left out rather than counted as zero, the same way the rating
+// above leaves it out. Counting it as zero would say a firm has no reviews, when what we have is
+// no listing to read them from. This page asserted every firm had one until Orlando opened with
+// two that do not, and the assertion was a `!` that type-checked and then crashed the build.
+const reviewsOf = (xs: typeof firms) =>
+  Math.round(median(xs.map(f => f.data.digital.places?.review_count_total)
+    .filter((n): n is number => n != null)));
 const scoreYes = scoreOf(groupYes);
 const scoreNo = scoreOf(groupNo);
 const ratingYes = ratingOf(groupYes);
@@ -166,8 +173,10 @@ const stmtBottom = bottom.firms.filter(f => f.data.fee_statement).length;
 // The named examples, picked by the largest review count so the choice is deterministic and the
 // firm is one a reader can go and look at. Both sentences below are about what a website
 // publishes and nothing else.
+// A firm with no Google listing cannot be the one with the most reviews, and the sentences below
+// quote its review count, so it is filtered out here rather than sorted with a missing number.
 const byReviews = (xs: typeof firms) =>
-  [...xs].sort((a, b) =>
+  xs.filter(f => f.data.digital.places).sort((a, b) =>
     b.data.digital.places!.review_count_total - a.data.digital.places!.review_count_total ||
     a.data.slug.localeCompare(b.data.slug));
 const bottomPublisher = byReviews(bottom.firms.filter(f => f.data.free_consultation))[0] ?? null;

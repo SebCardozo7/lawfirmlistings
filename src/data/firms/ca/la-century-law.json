@@ -5,7 +5,7 @@
   "website": "https://lacenturylaw.com/",
   "domain": "lacenturylaw.com",
   "phone": "(213) 205-0657",
-  "status": "verified",
+  "status": "certified",
   "practices": [
     {
       "slug": "personal-injury",
@@ -82,77 +82,86 @@
   "attorneys": [
     {
       "name": "Ryan J. Daneshrad",
-      "source_url": "https://lacenturylaw.com/lacenturylaw.com/attorney/ryan-j-daneshrad-esq/",
+      "source_url": "https://lacenturylaw.com/attorney/ryan-j-daneshrad-esq/",
       "bar_number": "309643",
       "role_source": "not stated by the firm",
       "name_source": "the heading of the firm's own page",
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/309643",
-      "admitted_year": 2016
+      "admitted_year": 2016,
+      "bar_state": "NY"
     },
     {
       "name": "Shantel Yaghoobian",
-      "source_url": "https://lacenturylaw.com/lacenturylaw.com/attorney/shantel-yaghoobian-esq/",
+      "source_url": "https://lacenturylaw.com/attorney/shantel-yaghoobian-esq/",
       "bar_number": "331205",
       "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/331205",
-      "admitted_year": 2020
+      "admitted_year": 2020,
+      "bar_state": "NY"
     },
     {
       "name": "Eric Boim",
-      "source_url": "https://lacenturylaw.com/lacenturylaw.com/attorney/eric-boim-esq/",
+      "source_url": "https://lacenturylaw.com/attorney/eric-boim-esq/",
       "bar_number": "334203",
       "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/334203",
-      "admitted_year": 2021
+      "admitted_year": 2021,
+      "bar_state": "NY"
     },
     {
       "name": "Michelle Dor",
-      "source_url": "https://lacenturylaw.com/lacenturylaw.com/attorney/michelle-dor-esq/",
+      "source_url": "https://lacenturylaw.com/attorney/michelle-dor-esq/",
       "bar_number": "362092",
-      "role": "Associate Attorney",
-      "role_source": "firm bio page",
+      "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/362092",
-      "admitted_year": 2025
+      "admitted_year": 2025,
+      "bar_state": "NY"
     },
     {
       "name": "Taryn Jacobson",
-      "source_url": "https://lacenturylaw.com/lacenturylaw.com/attorney/taryn-jacobson-esq/",
+      "source_url": "https://lacenturylaw.com/attorney/taryn-jacobson-esq/",
       "bar_number": "339808",
-      "role": "Senior Associate Attorney",
-      "role_source": "firm bio page",
+      "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/339808",
-      "admitted_year": 2021
+      "admitted_year": 2021,
+      "bar_state": "NY"
     },
     {
       "name": "Rea Bilandzic",
-      "source_url": "https://lacenturylaw.com/lacenturylaw.com/attorney/rea-bilandzic-esq/",
+      "source_url": "https://lacenturylaw.com/attorney/rea-bilandzic-esq/",
       "bar_number": "360586",
-      "role": "Associate Attorney",
-      "role_source": "firm bio page",
+      "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/360586",
-      "admitted_year": 2025
+      "admitted_year": 2025,
+      "bar_state": "NY"
     },
     {
       "name": "Robert Safar",
-      "source_url": "https://lacenturylaw.com/lacenturylaw.com/attorney/robert-safar-esq/",
+      "source_url": "https://lacenturylaw.com/attorney/robert-safar-esq/",
       "bar_number": "360150",
-      "role": "Associate Attorney",
-      "role_source": "firm bio page",
+      "role_source": "not stated by the firm",
       "name_source": "bio heading",
       "registry_status": "Active",
       "registry_url": "https://apps.calbar.ca.gov/attorney/Licensee/Detail/360150",
-      "admitted_year": 2025
+      "admitted_year": 2025,
+      "bar_state": "NY"
+    },
+    {
+      "name": "Andy Khacheryan",
+      "role_source": "not stated by the firm",
+      "bar_state": "NY",
+      "source_url": "https://lacenturylaw.com/attorney/andy-khacheryan-esq/"
     }
   ],
   "languages": [
@@ -242,10 +251,12 @@
   "results": [],
   "digital": {
     "trust_pages": {
-      "attorney_bios": true,
+      "bar_numbers_on_bios": true,
       "blog": true,
+      "privacy_policy": true,
       "disclaimer": true,
-      "privacy_policy": true
+      "attorney_bios": true,
+      "fee_statement": true
     },
     "schema_detected": true,
     "psi": {
@@ -316,9 +327,9 @@
     },
     "G5": {
       "pass": true,
-      "evidence": "Site has served over HTTPS, a working phone number published, 7 named attorneys published.",
+      "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-12"
+      "checked_at": "2026-11-21"
     },
     "G6": {
       "pass": true,
@@ -348,31 +359,43 @@
   "accountability": {
     "malpractice_insurance": false,
     "insurance_evidence": null,
-    "bar_associations": [],
-    "pts": 0,
-    "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
-    "pages_read": 2,
+    "bar_associations": [
+      {
+        "name": "State Bar of Texas",
+        "source_url": "https://lacenturylaw.com/attorney/ryan-j-daneshrad-esq/",
+        "quote": "Pre Law & Business Admissions State of California State of Texas State Bar numbers State Bar of California No. 309643 State Bar of Tex"
+      }
+    ],
+    "pts": 3,
+    "evidence": "member of State Bar of Texas · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them",
+    "pages_read": 3,
     "bios_published": 0,
     "source": "observed",
-    "checked_at": "2026-10-12"
+    "checked_at": "2026-11-18"
   },
   "results_published": {
-    "count": 16,
+    "count": 22,
     "counted_from": "stated amounts",
     "amounts": [
       18500000,
       3000000,
       2600000,
       1500000,
+      1300000,
+      1250000,
       1200000,
       1000000,
       995000,
+      985000,
       950000,
+      875000,
       825000,
+      750000,
       650000,
       500000,
       306000,
       250000,
+      225000,
       175000,
       150000,
       100000
@@ -380,27 +403,29 @@
     "largest": 18500000,
     "aggregate_claims": [],
     "case_types": [
+      "motor vehicle",
+      "truck",
       "premises",
       "wrongful death",
       "pedestrian",
       "assault"
     ],
-    "disclaimer": false,
+    "disclaimer": true,
     "venues": [],
-    "text_length": 3798,
+    "text_length": 5498,
     "readable": true,
     "url": "https://lacenturylaw.com/results/",
-    "checked_at": "2026-10-12"
+    "checked_at": "2026-11-18"
   },
   "score": {
-    "total": 59,
-    "tier": "Verified",
-    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (7/25).",
-    "computed_at": "2026-11-08",
+    "total": 70,
+    "tier": "Certified",
+    "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (9/25).",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
-        "score": 8,
+        "score": 12,
         "max": 25,
         "subs": [
           {
@@ -409,28 +434,28 @@
             "pts": 2,
             "max": 10,
             "source": "registry",
-            "evidence": "Mean 4.1 years since admission across 7 of 7 named attorneys (longest 10, shortest 1) · the State Bar of California's licensee search"
+            "evidence": "Mean 4.1 years since admission across 7 of 8 named attorneys (longest 10, shortest 1) · the State Bar of California's licensee search"
           },
           {
             "code": "A6",
             "label": "Roster verifiability",
-            "pts": 6,
+            "pts": 7.5,
             "max": 9,
             "source": "registry",
-            "evidence": "7 of 7 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "7 of 8 named attorneys matched to the California register; bar numbers published on the bios"
           },
           {
             "code": "A5",
             "label": "Accountability",
-            "pts": 0,
+            "pts": 3,
             "max": 3,
             "source": "observed",
-            "evidence": "no bar or trial lawyers' association named on the pages we read · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
+            "evidence": "member of State Bar of Texas · no professional liability cover disclosed, which is not scored here: plaintiff firms in this market do not publish it, and an absence shared by every firm separates none of them"
           }
         ]
       },
       "B": {
-        "score": 8,
+        "score": 12,
         "max": 15,
         "subs": [
           {
@@ -439,7 +464,7 @@
             "pts": 4.5,
             "max": 6,
             "source": "firm",
-            "evidence": "16 results published on the firm's own site, counted from stated amounts"
+            "evidence": "22 results published on the firm's own site, counted from stated amounts"
           },
           {
             "code": "B2",
@@ -447,15 +472,15 @@
             "pts": 3,
             "max": 5,
             "source": "firm",
-            "evidence": "4 case types named; no court or county named, so no result can be looked up"
+            "evidence": "6 case types named; no court or county named, so no result can be looked up"
           },
           {
             "code": "B3",
             "label": "Results disclosure",
-            "pts": 0,
+            "pts": 4,
             "max": 4,
             "source": "firm",
-            "evidence": "No prior-results disclaimer on the results page. A past result is not a prediction of another one, and the disclaimer is the sentence that says so"
+            "evidence": "Prior-results disclaimer present beside the published results"
           }
         ]
       },
@@ -498,16 +523,16 @@
         ]
       },
       "D": {
-        "score": 7,
+        "score": 9,
         "max": 25,
         "subs": [
           {
             "code": "D1",
             "label": "Website trust & experience",
-            "pts": 2.0,
-            "max": 5.0,
+            "pts": 4.0,
+            "max": 6.0,
             "source": "observed",
-            "evidence": "CWV fail · no fee statement · privacy policy · disclaimer · fresh content · scored out of 5 of the 7: nothing has measured accessibility or bar numbers on bios here yet, so it is not counted against this firm"
+            "evidence": "CWV fail · bar numbers on bios · fee statement · privacy policy · disclaimer · fresh content · scored out of 6 of the 7: nothing has measured accessibility here yet, so it is not counted against this firm"
           },
           {
             "code": "D2",
@@ -566,28 +591,48 @@
         ]
       }
     },
-    "floor_abc": 36,
+    "floor_abc": 44,
     "next_tier": {
-      "name": "Certified",
-      "needed": 65,
-      "gap": 6,
+      "name": "Distinguished",
+      "needed": 78,
+      "gap": 8,
       "floor_met": true,
       "coverage_met": true,
       "path": [
         "A2 Experience: +8 available",
         "D2 Search authority: +5 available",
-        "B3 Results disclosure: +4 available"
+        "E3 Languages & accessibility: +2.5 available"
       ]
     },
-    "raw": 51.5,
-    "assessed": 87,
+    "raw": 62.0,
+    "assessed": 88,
     "coverage": 1.0,
-    "floor_abc_pct": 0.623,
+    "floor_abc_pct": 0.772,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 87,
+    "assessable": 88,
     "comparable": true
+  },
+  "transaction": {
+    "readable": true,
+    "pages_read": 7,
+    "price": {
+      "figure": "$50",
+      "quote": "Dog bites cost Californians $50 million in medical costs annually.",
+      "source_url": "https://lacenturylaw.com/dog-bite-injuries/"
+    },
+    "flat_fee": null,
+    "fee_terms": {
+      "quote": "Financial losses These are the measurable costs of the death.",
+      "source_url": "https://lacenturylaw.com/tarzana-wrongful-death-attorney/"
+    },
+    "escrow": null,
+    "escrow_location_named": false,
+    "stages": [],
+    "stage_evidence": {},
+    "source": "The firm's own fee, closing and practice pages",
+    "checked_at": "2026-11-18"
   }
 }

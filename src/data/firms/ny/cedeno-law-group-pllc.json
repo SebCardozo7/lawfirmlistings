@@ -184,7 +184,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-12"
+      "checked_at": "2026-11-21"
     },
     "G6": {
       "pass": true,
@@ -319,10 +319,10 @@
     "checked_at": "2026-09-21"
   },
   "score": {
-    "total": 43,
+    "total": 45,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar B (2/15).",
-    "computed_at": "2026-10-24",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -341,9 +341,9 @@
             "code": "A6",
             "label": "Roster verifiability",
             "pts": 3,
-            "max": 9,
+            "max": 6,
             "source": "registry",
-            "evidence": "2 of 3 named attorneys matched to the New York register; no bar number published on any bio"
+            "evidence": "2 of 3 named attorneys matched to the New York register; whether the bios carry bar numbers has not been read here, so those 3 points leave the scale rather than counting against the firm"
           },
           {
             "code": "A5",
@@ -496,24 +496,24 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 22,
+      "gap": 20,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +6 available",
         "B1 Fee terms published: +6 available",
-        "D2 Search authority: +6 available"
+        "D2 Search authority: +6 available",
+        "E1 Free consult & fee transparency: +6 available"
       ]
     },
     "raw": 37.5,
-    "assessed": 87,
+    "assessed": 84,
     "coverage": 1.0,
-    "floor_abc_pct": 0.526,
+    "floor_abc_pct": 0.556,
     "gates_unavailable": [],
     "gates_unresolvable": [
       "G3"
     ],
-    "assessable": 87,
+    "assessable": 84,
     "comparable": true
   },
   "results_published": {
