@@ -130,6 +130,19 @@ export const GUIDES: Guide[] = [
     meta: 'Every state, four deadlines, one table',
   },
   {
+    slug: 'california-statute-of-limitations',
+    cover: 'deadline',
+    kicker: 'Reference',
+    title: 'California Statute of Limitations: Every Deadline by Claim',
+    summary:
+      'California gives most injury claims two years, and a claim against a city, a county or the ' +
+      'state a written claim in six months before any lawsuit. Malpractice can close in one year. ' +
+      'Every California deadline, read from the Code of Civil Procedure and the Government Code.',
+    thumb: 't1',
+    icon: 'doc',
+    meta: 'Six months for a claim against the government',
+  },
+  {
     slug: 'indiana-statute-of-limitations',
     cover: 'deadline',
     kicker: 'Reference',

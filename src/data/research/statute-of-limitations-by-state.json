@@ -155,6 +155,12 @@
     {
       "state": "California",
       "code": "CA",
+      "from": {
+        "personal_injury": "Personal injury",
+        "wrongful_death": "Wrongful death",
+        "medical_malpractice": "Medical malpractice",
+        "property_damage": "Damage to personal property"
+      },
       "via": "leginfo.legislature.ca.gov (California Code of Civil Procedure)",
       "copy": false,
       "personal_injury": {

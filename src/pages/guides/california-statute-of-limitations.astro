@@ -1,0 +1,48 @@
+---
+import StatuteGuide from '../../components/StatuteGuide.astro';
+import data from '../../data/research/statute-of-limitations-ca.json';
+
+/**
+ * California deadlines, a state statute page from docs/guides-50.md (family B, item 17).
+ *
+ * Title and description figures are read from the research file and declared through
+ * figuresFrom, so a corrected period rewrites the headline instead of leaving it stale.
+ */
+const head = data.headline;
+const claim = data.rows.find(r => r.statute === 'Gov. Code § 911.2(a)')!;
+const late = data.rows.find(r => r.statute === 'Gov. Code § 911.4')!;
+const afterReject = data.rows.find(r => r.statute === 'Gov. Code § 945.6(a)(1)')!;
+const noNotice = data.rows.find(r => r.statute === 'Gov. Code § 945.6(a)(2)')!;
+const car = data.rows.find(r => r.statute === 'CCP § 338(c)(1)')!;
+const med = data.rows.find(r => r.statute === 'CCP § 340.5')!;
+const notice = data.exceptions.find(e => e.statute === 'CCP § 364(d)')!;
+const children = data.exceptions.find(e => e.statute === 'CCP § 352')!;
+const months = (r: { period: string }) => r.period.replace(' to file a claim', '');
+const year = data.measured_at.slice(0, 4);
+const title = `California Statute of Limitations ${year}: Every Deadline by Claim`;
+const description = `Most California injury claims have ${head.years} years. A claim against a city, county or the state needs a written claim in ${months(claim)}, and malpractice can end sooner.`;
+const lede = `California gives most injury claims <b>${head.years} years</b>. The deadline that ends more cases than any other is far shorter: <b>${months(claim)}</b> to file a written claim with a city, county, transit district or state agency before anyone can sue it. Medical malpractice can close in one year. Here is every California deadline by type of claim, read from the Code of Civil Procedure and the Government Code.`;
+---
+<StatuteGuide data={data} title={title} description={description} lede={lede}
+  crumb="California statute of limitations">
+  <Fragment slot="toc">
+    <li><a href="#six-months">The six-month claim</a></li>
+    <li><a href="#malpractice">Malpractice, and the 90-day notice</a></li>
+    <li><a href="#crash">One crash, three clocks</a></li>
+  </Fragment>
+
+  <h2 id="six-months">In California, the government gets a claim before it gets a lawsuit</h2>
+  <p>Before anyone can sue a public entity in California for an injury or a death, they have to present a written claim to it, and <a href={claim.url} rel="noopener" target="_blank">{claim.statute}</a> gives them <b>{months(claim)}</b> from the injury to do it. That covers a city bus, a county hospital, a school district, a police car and a pothole on a state highway.</p>
+  <p>What happens next sets the lawsuit deadline. If the entity rejects the claim in writing, the lawsuit is due within <b>{afterReject.period}</b>, under {afterReject.statute}. If it never sends that notice, the lawsuit has <b>{noNotice.period}</b> from the injury, under {noNotice.statute}.</p>
+  <p>Missing the six months is not always the end. <a href={late.url} rel="noopener" target="_blank">{late.statute}</a> lets a person ask permission to file late, within a reasonable time and never more than a year after the injury, with the reason for the delay. It is a request the entity can refuse. And the pause that protects injured children elsewhere does not apply here: {children.statute}(b) excludes claims against public entities, so a child hit by a school bus is on the same six months as an adult.</p>
+
+  <h2 id="malpractice">Medical malpractice: one year, and a notice that moves the date</h2>
+  <p>Malpractice runs on <a href={med.url} rel="noopener" target="_blank">{med.statute}</a>, not on the two-year rule. The claim has to be filed three years from the injury or one year from when the patient discovered it or should have, whichever comes first. In practice the one year is usually the deadline that matters, because most people notice something wrong long before three years have passed.</p>
+  <p>The lawsuit also needs notice first. A health care provider has to receive at least 90 days' written notice of the claim, and when that notice goes out inside the last 90 days of the deadline, {notice.statute} moves the deadline to 90 days after the notice was served. That rule exists so the notice requirement cannot eat the end of the filing period, and it is one of the reasons malpractice dates in California are worked out by a lawyer, not read off a table.</p>
+
+  <h2 id="crash">One California crash can run on three clocks</h2>
+  <p>A collision with a city vehicle shows how far apart the deadlines in one event can be.</p>
+  <p><b>{months(claim)} for the claim to the city.</b> Under {claim.statute}, damage to personal property is on this clock too, so the car and the injuries both need the written claim inside six months.</p>
+  <p><b>{head.years} years for the people hurt.</b> Against a private driver, the injury claims run on {head.statute}.</p>
+  <p><b>{car.period} for the car.</b> Against a private driver, damage to the car runs on <a href={car.url} rel="noopener" target="_blank">{car.statute}</a>, a year longer than the injury claim. That gap is why a settled property damage claim tells a person nothing about whether the injury claim is still open.</p>
+</StatuteGuide>
