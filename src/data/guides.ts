@@ -83,6 +83,21 @@ export const GUIDES: Guide[] = [
     icon: 'doc',
     meta: 'Approved, and the rule for when it pays',
   },
+  // Family C in docs/guides-50.md: immigration. Reference pieces read from USCIS and the
+  // regulation; the page computes its figures from src/data/research, so nothing here may carry one.
+  {
+    slug: 'green-card-renewal',
+    cover: 'renewal',
+    kicker: 'Reference',
+    title: 'Green Card Renewal: How to Renew With Form I-90, Step by Step',
+    summary:
+      'Who renews with Form I-90 and who must not, the window to file in, what USCIS charges ' +
+      'online and on paper, and the receipt notice that keeps an expired card usable while the ' +
+      'new one is made.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'The form, the fee and the receipt notice',
+  },
   // Family D in docs/guides-50.md: settlement values. Reference pieces built on published
   // research; the page computes its figures from src/data/research, so nothing here may carry one.
   {
