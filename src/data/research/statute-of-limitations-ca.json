@@ -1,0 +1,255 @@
+{
+  "state": "California",
+  "code": "CA",
+  "slug": "california-statute-of-limitations",
+  "measured_at": "2026-11-23",
+  "source": {
+    "who": "The California Legislature",
+    "what": "California Code of Civil Procedure, Part 2, Title 2",
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displayexpandedbranch.xhtml?tocCode=CCP&division=&title=2.&part=2.&chapter=&article=",
+    "via": "california.public.law, which reproduces the Legislature's text section by section and showed each one as verified on November 16, 2026"
+  },
+  "headline": {
+    "years": 2,
+    "claim": "a personal injury claim",
+    "statute": "Cal. Code Civ. Proc. § 335.1",
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=335.1"
+  },
+  "rows": [
+    {
+      "claim": "Personal injury",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "CCP § 335.1",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=335.1",
+      "clock": "From the injury, or later if the person could not reasonably have discovered it. California courts read a discovery rule into the section.",
+      "note": "The same section covers assault and battery."
+    },
+    {
+      "claim": "Wrongful death",
+      "group": "injury",
+      "period": "2 years",
+      "years": 2,
+      "statute": "CCP § 335.1",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=335.1",
+      "clock": "From the death.",
+      "note": "When the death was caused by medical negligence, the malpractice section governs instead."
+    },
+    {
+      "claim": "Medical malpractice",
+      "group": "injury",
+      "period": "1 year from discovery, 3 at the outside",
+      "years": 1,
+      "statute": "CCP § 340.5",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340.5",
+      "clock": "Three years from the injury or one year from when it was discovered or should have been, whichever comes first.",
+      "note": "The three years stretch only for fraud, intentional concealment or a foreign body left inside the patient. A 90-day notice served near the end extends the deadline by 90 days."
+    },
+    {
+      "claim": "Libel, slander and false imprisonment",
+      "group": "injury",
+      "period": "1 year",
+      "years": 1,
+      "statute": "CCP § 340(c)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340",
+      "clock": "From the day the claim accrues, which for defamation is generally the publication.",
+      "note": "The shortest private filing period in the table."
+    },
+    {
+      "claim": "Childhood sexual assault",
+      "group": "injury",
+      "period": "No time limit, for assaults from 2024",
+      "years": null,
+      "statute": "CCP § 340.1",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340.1",
+      "clock": "There is no deadline for an assault that happened on or after January 1, 2024.",
+      "note": "An assault on or before December 31, 2023 stays on the statute as it read that day. No government claim is needed first."
+    },
+    {
+      "claim": "Damage to real property",
+      "group": "property",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CCP § 338(b)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338",
+      "clock": "From the trespass or the damage.",
+      "note": ""
+    },
+    {
+      "claim": "Damage to personal property",
+      "group": "property",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CCP § 338(c)(1)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338",
+      "clock": "From the taking, detaining or damage.",
+      "note": "This is the clock for the car in a crash, a year longer than the clock for the people in it."
+    },
+    {
+      "claim": "Written contract",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "CCP § 337(a)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=337",
+      "clock": "From the breach.",
+      "note": ""
+    },
+    {
+      "claim": "Oral contract",
+      "group": "contract",
+      "period": "2 years",
+      "years": 2,
+      "statute": "CCP § 339(1)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=339",
+      "clock": "From the breach.",
+      "note": "Half the period of a written one, which is the reason to put an agreement on paper."
+    },
+    {
+      "claim": "Fraud or mistake",
+      "group": "contract",
+      "period": "3 years",
+      "years": 3,
+      "statute": "CCP § 338(d)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=338",
+      "clock": "From the discovery of the facts that make up the fraud or mistake, which the statute says in so many words.",
+      "note": ""
+    },
+    {
+      "claim": "Sale of goods and warranties",
+      "group": "contract",
+      "period": "4 years",
+      "years": 4,
+      "statute": "Com. Code § 2725(1)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=COM&sectionNum=2725",
+      "clock": "From the breach.",
+      "note": "The contract can shorten this to one year but never lengthen it."
+    },
+    {
+      "claim": "Legal malpractice",
+      "group": "contract",
+      "period": "1 year from discovery, 4 at the outside",
+      "years": 1,
+      "statute": "CCP § 340.6(a)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340.6",
+      "clock": "One year from when the client discovered the wrongful act or should have, or four years from the act, whichever comes first.",
+      "note": "The four years pause while the lawyer keeps representing the client on the same matter."
+    },
+    {
+      "claim": "Claim to a public entity for injury or death",
+      "group": "government",
+      "period": "6 months to file a claim",
+      "years": 0.5,
+      "statute": "Gov. Code § 911.2(a)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=911.2",
+      "clock": "Within six months of the injury, presented to the city, county, district or state agency itself.",
+      "note": "This is a written claim, not a lawsuit, and the lawsuit cannot be filed until it has been made. The pause for children does not apply to it."
+    },
+    {
+      "claim": "Claim to a public entity for other losses",
+      "group": "government",
+      "period": "1 year to file a claim",
+      "years": 1,
+      "statute": "Gov. Code § 911.2(a)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=911.2",
+      "clock": "Within one year of the loss.",
+      "note": "Damage to personal property and crops is on the six-month clock, not this one."
+    },
+    {
+      "claim": "Asking to file a late claim",
+      "group": "government",
+      "period": "1 year at the outside",
+      "years": 1,
+      "statute": "Gov. Code § 911.4",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=911.4",
+      "clock": "Within a reasonable time, and never more than one year after the injury, with the reason for the delay.",
+      "note": "Permission is asked for, not given as of right."
+    },
+    {
+      "claim": "Lawsuit after the claim is rejected",
+      "group": "government",
+      "period": "6 months from the rejection",
+      "years": 0.5,
+      "statute": "Gov. Code § 945.6(a)(1)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=945.6",
+      "clock": "From the day the written notice of rejection is delivered or mailed.",
+      "note": ""
+    },
+    {
+      "claim": "Lawsuit when no rejection notice was sent",
+      "group": "government",
+      "period": "2 years",
+      "years": 2,
+      "statute": "Gov. Code § 945.6(a)(2)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=945.6",
+      "clock": "From the injury.",
+      "note": ""
+    },
+    {
+      "claim": "Any claim not otherwise provided for",
+      "group": "other",
+      "period": "4 years",
+      "years": 4,
+      "statute": "CCP § 343",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=343",
+      "clock": "From the day the claim accrues.",
+      "note": "The catch-all at the end of the chapter."
+    }
+  ],
+  "exceptions": [
+    {
+      "name": "Children, except against the government",
+      "statute": "CCP § 352",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=352",
+      "text": "The time a person is under 18 does not count, so an injured child's two years usually start at 18. Subdivision (b) takes that away for any claim against a public entity or public employee, where the six-month claim runs from the injury whatever the age of the person hurt."
+    },
+    {
+      "name": "Medical malpractice on a young child",
+      "statute": "CCP § 340.5",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=340.5",
+      "text": "Malpractice does not take the ordinary pause for minors. The section has its own rule: a child injured before age six has three years, or until the eighth birthday, whichever is longer."
+    },
+    {
+      "name": "Lacking the capacity to make decisions",
+      "statute": "CCP § 352(a)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=352",
+      "text": "If the person lacked the legal capacity to make decisions when the claim arose, that time is not counted. The same exclusion for claims against the government applies."
+    },
+    {
+      "name": "The discovery rule, which the courts read into the statute",
+      "statute": "Jolly v. Eli Lilly & Co., 44 Cal. 3d 1103 (1988)",
+      "url": "",
+      "text": "California starts the clock when the person suspects, or should suspect, that someone's wrongdoing caused the injury. It does not wait for the person to know the legal theory or the name of the defendant, so a suspicion with no follow-up still runs the clock."
+    },
+    {
+      "name": "The 90-day notice in a malpractice case",
+      "statute": "CCP § 364(d)",
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=364",
+      "text": "A claim against a health care provider needs at least 90 days' written notice before the lawsuit. When that notice is served within the last 90 days of the deadline, the deadline moves 90 days from the day it was served."
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the statute of limitations for personal injury in California?",
+      "a": "Two years, under Code of Civil Procedure section 335.1. For a crash or a fall the clock almost always starts the day it happened. Against a city, county or state agency, a written claim is due within six months first."
+    },
+    {
+      "q": "How long do you have to file a wrongful death lawsuit in California?",
+      "a": "Two years from the death, under section 335.1. If the death came from medical negligence, the malpractice rule in section 340.5 applies, and against a public entity the six-month claim comes first."
+    },
+    {
+      "q": "What is the deadline for medical malpractice in California?",
+      "a": "One year from when the injury was discovered or should have been, and never more than three years from the injury, whichever comes first, under section 340.5. A 90-day notice served near the deadline extends it by 90 days."
+    },
+    {
+      "q": "How long do you have to sue a city or the state in California?",
+      "a": "A written claim for injury or death has to reach the public entity within six months, under Government Code section 911.2. If it is rejected in writing, the lawsuit is due six months after the notice. If no notice comes, two years from the injury."
+    },
+    {
+      "q": "Does the statute of limitations stop for a minor in California?",
+      "a": "Usually, yes: section 352 does not count the time before 18. It does not apply to claims against the government, and medical malpractice has its own rule for children under six: three years or until the eighth birthday, whichever is longer."
+    }
+  ],
+  "reading": []
+}
