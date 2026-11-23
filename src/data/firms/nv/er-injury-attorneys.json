@@ -213,7 +213,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 4 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-11-21"
+      "checked_at": "2026-11-23"
     },
     "G6": {
       "pass": true,
@@ -312,10 +312,10 @@
     "checked_at": "2026-09-26"
   },
   "score": {
-    "total": 35,
+    "total": 36,
     "tier": "Verified",
     "verdict": "3 of 5 eligibility gates passed. 2 could not be answered from the available records (G1, G3) and do not count against the firm. Strongest pillar: C; most headroom in pillar A (0/25).",
-    "computed_at": "2026-11-05",
+    "computed_at": "2026-11-23",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -379,7 +379,7 @@
         ]
       },
       "C": {
-        "score": 10,
+        "score": 11,
         "max": 20,
         "subs": [
           {
@@ -393,10 +393,10 @@
           {
             "code": "C2",
             "label": "Rating quality",
-            "pts": 4,
+            "pts": 5,
             "max": 6,
             "source": "observed",
-            "evidence": "Google rating 4.6 over 14 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1410 scored firms) · single platform, Google only"
+            "evidence": "Google rating 4.6 over 14 reviews → Bayesian 4.80 (prior 4.83 weighted as 100 reviews, from 1501 scored firms) · single platform, Google only"
           },
           {
             "code": "C3",
@@ -485,11 +485,11 @@
         ]
       }
     },
-    "floor_abc": 10,
+    "floor_abc": 11,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 30,
+      "gap": 29,
       "floor_met": false,
       "coverage_met": true,
       "path": [
@@ -498,10 +498,10 @@
         "B3 Results disclosure: +4 available"
       ]
     },
-    "raw": 23.5,
+    "raw": 24.5,
     "assessed": 68,
     "coverage": 1.0,
-    "floor_abc_pct": 0.263,
+    "floor_abc_pct": 0.289,
     "gates_unavailable": [
       "G1",
       "G3"
