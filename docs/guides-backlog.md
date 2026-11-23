@@ -442,6 +442,15 @@ This run opened its pull request and GitHub immediately reported `mergeable_stat
 refresh of ~1,400 firm records. **Expect this. `remeasure.yml` runs on the 20th**, so a run in the
 back half of the month is likely to be cut from a stale base.
 
+**The Cloudflare branch preview is not reachable from here, so do not plan to verify against it.**
+`cloudflare-workers-and-pages[bot]` comments a "Deployment successful" table with a commit preview
+URL and a branch preview URL on every guide pull request. Both are on `*.workers.dev`, and that
+host does not resolve from this environment: curl gets a 403 from the egress proxy and WebFetch
+gets `getaddrinfo ENOTFOUND`, the same wall the eight competitors sit behind. The bot's own green
+tick plus the local checks are the evidence a run actually has. **Verify the page in `dist/` with
+a real browser before pushing**, which is what the takeaways screenshot step is for, because after
+pushing there is no second look.
+
 Two things to do, in order:
 
 1. **Merge the base in and then re-read every figure.** The refresh moved this guide's numbers:
