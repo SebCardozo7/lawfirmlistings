@@ -361,7 +361,6 @@ def compute(firm):
     # real difference rather than a gap in our data.
     named = len(attys)
     verified = [a for a in attys if a.get("bar_number")]
-    with_number = [a for a in attys if a.get("bar_number") and a.get("registry_basis")]
     # A6 is a share of a register, so it needs a register. Where the state publishes none we may
     # query, every attorney is unmatched by definition, and the profile said "0 of 7 named
     # attorneys matched to the Maryland register" and scored the firm 1 out of 9 for it. Maryland
@@ -377,14 +376,38 @@ def compute(firm):
         pts = 6 if share >= 0.95 else 4.5 if share >= 0.8 else 3 if share >= 0.5 else 1
         # Three more for publishing the numbers itself, which is a text change any firm can
         # make and which is the single cheapest thing on this scale.
-        on_bios = sum(1 for a in attys if (a.get("bar_number") and
-                                           "firm" in (a.get("registry_basis") or "").lower()))
+        #
+        # Asked of trust_pages, where the crawl records what the bios say, and which D1 already
+        # scores from. It used to ask registry_basis, a field only check_ny_registry writes, so
+        # outside New York the three points could not be reached however many numbers a firm
+        # published. 161 profiles carried a roster with bar numbers on it and the sentence "no
+        # bar number published on any bio" in the same line, which contradicts itself and is
+        # wrong about the firm. One of them wrote in to say so.
+        #
+        # Absent, it leaves the scale rather than reading as a no, the same treatment D1 gives
+        # the same key and A5 gives professional liability cover: a firm whose bios nobody has
+        # read has not been found wanting, it has not been measured.
+        # Two ways of knowing, and either is the firm publishing the number. trust_pages is the
+        # crawl reading the bios. registry_basis is check_ny_registry saying it matched the
+        # register using the number the firm itself printed, which is the same fact arrived at
+        # from the other side. Replacing the second with the first took the points off 147 New
+        # York firms to give them to 14 Californian ones, which is a different error, not a fix.
+        tp6 = (firm.get("digital") or {}).get("trust_pages") or {}
+        from_registry = any(a.get("bar_number") and
+                            "firm" in str(a.get("registry_basis") or "").lower() for a in attys)
+        read_bios = "bar_numbers_on_bios" in tp6 or from_registry
+        on_bios = bool(tp6.get("bar_numbers_on_bios")) or from_registry
         pts += 3 if on_bios else 0
+        if read_bios:
+            tail = ("; bar numbers published on the bios" if on_bios else
+                    "; no bar number published on any bio")
+        else:
+            tail = ("; whether the bios carry bar numbers has not been read here, so those 3 "
+                    "points leave the scale rather than counting against the firm")
         out.append(sub("A6", pts, "registry",
                        f"{len(verified)} of {named} named attorneys matched to the "
-                       f"{firm.get('market', {}).get('state_name', 'state')} register"
-                       + ("; bar numbers published on the bios" if on_bios else
-                          "; no bar number published on any bio")))
+                       f"{firm.get('market', {}).get('state_name', 'state')} register" + tail,
+                       max_override=None if read_bios else SUBS["A6"][2] - 3))
     else:
         # "pending" is a claim about us: it says we owe this measurement and have not made it.
         # Where there is no roster there is no share to compute, so the factor leaves the scale.

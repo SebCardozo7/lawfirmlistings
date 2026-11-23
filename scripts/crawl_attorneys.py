@@ -405,8 +405,23 @@ ROLE_WORDS = {
 TITLE_RESIDUE = re.compile(r"\b(" + "|".join(sorted(ROLE_WORDS)) + r")\b", re.I)
 
 # New York registration numbers are seven digits; the label varies by firm.
+#
+# The jurisdiction is allowed to sit between the two halves, because that is how most of the
+# country writes it: "State Bar of California No. 309643", "State Bar of Texas No. 24087..."
+# The first version required the two halves to touch, so it read a New York bio and missed a
+# Californian one. A firm wrote in on 17 November saying its bios now carry the numbers, and
+# they did, in that form, on every bio we had just read.
+#
+# This is not cosmetic. score.py gives D1 a point for bar_numbers_on_bios and, where the key
+# is present and false, prints "no bar numbers on bios" on the firm's public page. A pattern
+# that cannot see the common form makes that sentence a statement about our regex.
+#
+# The gap is words only, up to three of them, with no digits or punctuation in it. A loose
+# `.{0,40}` would reach across "Attorney at Law, 1880 Century Park East, Suite No. 1101" and
+# file a street address as a registration.
 BAR_NUMBER = re.compile(
-    r"(?:bar|attorney|registration)\s*(?:no\.?|number|#|id)\s*:?\s*(\d{6,8})", re.I)
+    r"(?:bar|attorney|registration)\b(?:\s+of)?(?:\s+[A-Za-z]+){0,3}\s*"
+    r"(?:no\.?|number|#|id|sbn)\s*:?\s*(\d{5,8})", re.I)
 
 
 # Prefixes that carry a capital inside them. A blanket title-case turns McDonald into Mcdonald

@@ -221,7 +221,7 @@
       "pass": true,
       "evidence": "Site has served over HTTPS, a working phone number published, 3 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-12"
+      "checked_at": "2026-11-21"
     },
     "G6": {
       "pass": true,
@@ -280,10 +280,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 44,
+    "total": 45,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar D (3/25).",
-    "computed_at": "2026-11-08",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -302,9 +302,9 @@
             "code": "A6",
             "label": "Roster verifiability",
             "pts": 3,
-            "max": 9,
+            "max": 6,
             "source": "registry",
-            "evidence": "2 of 3 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "2 of 3 named attorneys matched to the California register; whether the bios carry bar numbers has not been read here, so those 3 points leave the scale rather than counting against the firm"
           },
           {
             "code": "A5",
@@ -347,7 +347,7 @@
         ]
       },
       "C": {
-        "score": 16,
+        "score": 15,
         "max": 20,
         "subs": [
           {
@@ -369,10 +369,10 @@
           {
             "code": "C3",
             "label": "Review recency",
-            "pts": 5,
+            "pts": 4,
             "max": 5,
             "source": "places",
-            "evidence": "3 of 5 sampled reviews are from the last 12 months (newest 2026-01-02) · a sample of five per business listing, not every review"
+            "evidence": "2 of 5 sampled reviews are from the last 12 months (newest 2026-01-02) · a sample of five per business listing, not every review"
           },
           {
             "code": "C5",
@@ -453,28 +453,28 @@
         ]
       }
     },
-    "floor_abc": 32,
+    "floor_abc": 31,
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 21,
+      "gap": 20,
       "floor_met": false,
       "coverage_met": true,
       "path": [
         "D2 Search authority: +7 available",
-        "A6 Roster verifiability: +6 available",
-        "E1 Free consult & fee transparency: +5 available"
+        "E1 Free consult & fee transparency: +5 available",
+        "B2 Specificity: +4 available"
       ]
     },
-    "raw": 38.6,
-    "assessed": 87,
+    "raw": 37.6,
+    "assessed": 84,
     "coverage": 1.0,
-    "floor_abc_pct": 0.561,
+    "floor_abc_pct": 0.574,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 87,
+    "assessable": 84,
     "comparable": true
   }
 }

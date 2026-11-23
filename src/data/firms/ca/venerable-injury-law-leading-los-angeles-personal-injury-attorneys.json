@@ -248,9 +248,9 @@
     },
     "G5": {
       "pass": true,
-      "evidence": "Site has served over HTTPS, a working phone number published, 9 named attorneys published.",
+      "evidence": "Site has served over HTTPS, a working phone number published, 8 named attorneys published.",
       "source": "Public crawl of the firm's own site",
-      "checked_at": "2026-10-12"
+      "checked_at": "2026-11-21"
     },
     "G6": {
       "pass": true,
@@ -313,10 +313,10 @@
     "checked_at": "2026-10-12"
   },
   "score": {
-    "total": 51,
+    "total": 53,
     "tier": "Verified",
     "verdict": "4 of 5 eligibility gates passed. 1 could not be answered from the available records (G3) and does not count against the firm. Strongest pillar: C; most headroom in pillar E (5/15).",
-    "computed_at": "2026-11-08",
+    "computed_at": "2026-11-21",
     "methodology": "v2.0",
     "pillars": {
       "A": {
@@ -335,9 +335,9 @@
             "code": "A6",
             "label": "Roster verifiability",
             "pts": 1,
-            "max": 9,
+            "max": 6,
             "source": "registry",
-            "evidence": "3 of 8 named attorneys matched to the California register; no bar number published on any bio"
+            "evidence": "3 of 8 named attorneys matched to the California register; whether the bios carry bar numbers has not been read here, so those 3 points leave the scale rather than counting against the firm"
           },
           {
             "code": "A5",
@@ -490,24 +490,24 @@
     "next_tier": {
       "name": "Certified",
       "needed": 65,
-      "gap": 14,
+      "gap": 12,
       "floor_met": false,
       "coverage_met": true,
       "path": [
-        "A6 Roster verifiability: +8 available",
+        "A6 Roster verifiability: +5 available",
         "E1 Free consult & fee transparency: +5 available",
         "B3 Results disclosure: +4 available"
       ]
     },
     "raw": 44.5,
-    "assessed": 87,
+    "assessed": 84,
     "coverage": 1.0,
-    "floor_abc_pct": 0.535,
+    "floor_abc_pct": 0.565,
     "gates_unavailable": [
       "G3"
     ],
     "gates_unresolvable": [],
-    "assessable": 87,
+    "assessable": 84,
     "comparable": true
   }
 }
