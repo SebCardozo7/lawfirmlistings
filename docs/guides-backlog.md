@@ -435,6 +435,31 @@ sentences starting with a lowercase spelled number, a list joined without an "an
 twelve addresses" (a hardcoded count in words, the 2026-09-14 rule), and a lede rounding
 61.5 - 46 to "16 points" two lines above printing 46 and 61.5.
 
+## The merge hazard every guide run will hit, added 2026-11-23
+
+This run opened its pull request and GitHub immediately reported `mergeable_state: dirty`, because
+`main` had moved underneath it: the green-card-renewal guide plus the monthly `remeasure.yml`
+refresh of ~1,400 firm records. **Expect this. `remeasure.yml` runs on the 20th**, so a run in the
+back half of the month is likely to be cut from a stale base.
+
+Two things to do, in order:
+
+1. **Merge the base in and then re-read every figure.** The refresh moved this guide's numbers:
+   median score at one office 46 to 47, the one-office firms matching the ten-office median 160 to
+   167, and the firm the page names as the best single-office firm changed from Gorayeb to El Dabe
+   Ritter. **Every one of those updated itself**, which is the whole argument for computing rather
+   than typing, but the **pull request body does not recompute** and has to be restated by hand.
+   `main` had also rewritten A6 to read `trust_pages.bar_numbers_on_bios` and given it a variable
+   max of 6 or 9; the decomposition absorbed that only because it sums each row's own `max`
+   instead of assuming `PILLAR_MAX`.
+
+2. **Check `src/data/guides.ts` by hand after the merge, even when git reports no conflict there.**
+   `CoverArt.astro` conflicted honestly, because both runs appended a scene to the same union line
+   and git noticed. `guides.ts` has the *same* union line, git auto-merged it **cleanly and
+   silently dropped the other run's `'renewal'`**, leaving a manifest entry with `cover: 'renewal'`
+   and no such member in the type. A clean merge is not a correct merge on a line that every guide
+   run appends to. Read the union, confirm every cover name in the file is in it.
+
 ## Generated pages, so a topic is not aimed at one of them
 
 **Re-counted on 2026-11-16, and nothing in the directory moved.** The build produces **1,637 pages
