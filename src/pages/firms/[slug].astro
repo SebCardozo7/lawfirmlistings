@@ -495,6 +495,17 @@ const schema = faqPage ? [legalService, faqPage] : legalService;
         <h4>Compare with similar firms</h4>
         <p>See how {d.name} stacks up against other {rankingPractice!.name.toLowerCase()} firms in {d.market.city}.</p>
         <a class="btn btn--white" href={rankingHref}>View {d.market.city} ranking</a>
+        {/*
+          The side-by-side, which is the question people actually type: "<firm> alternatives".
+          This link is also the only thing on the site pointing at that page, and the SEO audit
+          said so in those words for all 1,476 of them. An orphan page is one Google has no
+          reason to crawl and no reason to rank, which would have made the whole page type
+          worthless and invisible at the same time.
+        */}
+        <p class="panel-also">
+          Or read the <a href={`/firms/${d.slug}/alternatives/`}>side-by-side with the firms
+          ranked around it</a>, compared on what each one publishes.
+        </p>
       </div>
       )}
       {cohort && (

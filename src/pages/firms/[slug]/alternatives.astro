@@ -1,0 +1,287 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import FirmCard from '../../../components/FirmCard.astro';
+import ListYourFirmCta from '../../../components/ListYourFirmCta.astro';
+import { rankFirms, ordinal } from '../../../lib/ranking';
+import { fitDescription } from '../../../lib/seo';
+import { asShown } from '../../../lib/stated';
+
+/**
+ * "<Firm> alternatives", which people search and we had no page for.
+ *
+ * Google already puts this site in the top ten for twenty of these, several at position one,
+ * and every one of them sent nobody: the query landed on the firm's own profile, or on a city
+ * page, and neither answers the question. A reader typing it has decided to look past one firm
+ * and wants to know who else there is. That is the one question a measured directory is better
+ * placed to answer than anybody, and we were not answering it.
+ *
+ * What it is not. It is not a page about the firm being worse. The honest answer for a firm
+ * ranked second of 240 is that there is almost nobody above it, and the page says that in those
+ * words rather than manufacturing a list. The comparison runs in both directions, and the
+ * section that says where the searched firm is ahead is not a courtesy: a comparison that only
+ * ever flatters the alternatives is an advertisement for them.
+ *
+ * Nobody pays to appear here and no money moves the order. The order is the city-by-practice
+ * ranking this site already computes, from src/lib/ranking.ts, so a firm's position on this page
+ * and its position on the ranked city page are the same number by construction.
+ */
+export async function getStaticPaths() {
+  const firms = await getCollection('firms', f =>
+    f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+  // Two firms genuinely share a name in this directory, in different cities: Davis Law Firm and
+  // The Doan Law Firm. Without the city their two pages carry the same <title>, which the SEO
+  // audit reports as a problem rather than a note, and rightly: a reader choosing between search
+  // results cannot tell which city each one is about. The city is added only where it is needed,
+  // because every title it lengthens is a title that stops fitting.
+  const seen = new Map<string, number>();
+  for (const f of firms) seen.set(f.data.name, (seen.get(f.data.name) ?? 0) + 1);
+
+  return firms.map(firm => {
+    // The unit of comparison is city and practice, as the methodology says, and the practice is
+    // the firm's primary one: comparing a firm's slip-and-fall work against a city's whole
+    // personal-injury field would rank it against people it is not competing with.
+    const practice = firm.data.practices.find(p => p.primary) ?? firm.data.practices[0];
+    const field = practice
+      ? firms.filter(f =>
+          f.data.market.city_slug === firm.data.market.city_slug &&
+          f.data.practices.some(p => p.slug === practice.slug))
+      : [firm];
+    return {
+      params: { slug: firm.data.slug },
+      props: {
+        firm, field, practiceName: practice?.name ?? null,
+        ambiguous: (seen.get(firm.data.name) ?? 1) > 1,
+      },
+    };
+  });
+}
+
+interface Props {
+  firm: CollectionEntry<'firms'>;
+  field: CollectionEntry<'firms'>[];
+  practiceName: string | null;
+  ambiguous: boolean;
+}
+const { firm, field, practiceName, ambiguous } = Astro.props;
+
+const d = asShown(firm.data as any);
+const market = firm.data.market;
+
+const ranked = rankFirms(field);
+const place = ranked.findIndex(f => f.data.slug === firm.data.slug) + 1;
+
+// Whoever the measurement puts above this firm, nearest first, so the top of the list is the
+// firm a reader is most likely to be choosing between rather than the strongest in the city.
+const above = ranked.slice(0, Math.max(place - 1, 0)).reverse().slice(0, 5);
+// And, where there is nobody above or almost nobody, the nearest below. A reader comparing the
+// first-ranked firm still wants somebody to compare it with.
+const below = ranked.slice(place).slice(0, Math.max(0, 5 - above.length));
+const shown = [...above, ...below];
+
+/** One row of the comparison, read off what each firm publishes rather than off the score. */
+const facts = (f: CollectionEntry<'firms'>) => {
+  const s = asShown(f.data as any);
+  const g = s.reviews?.google;
+  return {
+    slug: s.slug,
+    name: s.name,
+    total: s.score?.total ?? null,
+    tier: s.score?.tier ?? null,
+    attorneys: (s.attorneys ?? []).length,
+    results: (s.results ?? []).length,
+    reviews: g ? `${g.rating} over ${g.count_label}` : null,
+    free: s.free_consultation === true,
+    fee: s.fee_model && s.fee_model !== 'Not stated' ? s.fee_model : null,
+    languages: (s.languages ?? []).filter((l: string) => l !== 'English'),
+    availability: (s.availability ?? []).length,
+  };
+};
+
+const mine = facts(firm);
+const theirs = shown.map(facts);
+
+// Where this firm is ahead of every firm on this page. Computed, not written: each one is a
+// field a reader can check on the firm's own site in a minute.
+const aheadOn: string[] = [];
+if (theirs.length) {
+  if (mine.results > 0 && theirs.every(t => t.results < mine.results)) {
+    aheadOn.push(`publishes more case results than any of them (${mine.results})`);
+  }
+  if (mine.attorneys > 0 && theirs.every(t => t.attorneys < mine.attorneys)) {
+    aheadOn.push(`names more attorneys on its own site (${mine.attorneys})`);
+  }
+  if (mine.fee && theirs.every(t => !t.fee)) {
+    aheadOn.push('is the only one here that publishes how it charges');
+  }
+  if (mine.languages.length && theirs.every(t => !t.languages.length)) {
+    aheadOn.push(`is the only one here publishing in ${mine.languages.join(' and ')}`);
+  }
+  if (mine.availability > 0 && theirs.every(t => t.availability === 0)) {
+    aheadOn.push('is the only one here that publishes when it is reachable');
+  }
+}
+
+const first = place === 1;
+const scopeLine = practiceName
+  ? `${ranked.length} ${practiceName.toLowerCase()} firms in ${market.city}`
+  : `${ranked.length} firms in ${market.city}`;
+
+const title = ambiguous
+  ? `Alternatives to ${d.name} in ${market.city}`
+  : `Alternatives to ${d.name}`;
+const description = fitDescription(
+  `We measure ${scopeLine}.`,
+  first
+    ? `${d.name} ranks first among them.`
+    : `${d.name} ranks ${ordinal(place)}.`,
+  'Compared on what each firm publishes: attorneys named, results, fees, languages.',
+);
+---
+
+<Base title={title} description={description} nav="home">
+  <section class="wrap narrow">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> ·
+      <a href={`/cities/${market.city_slug}/`}>{market.city}</a> ·
+      <a href={`/firms/${d.slug}/`}>{d.name}</a> ·
+      <span>Alternatives</span>
+    </nav>
+
+    <h1>Alternatives to {d.name}</h1>
+
+    <p class="lede">
+      We measure {scopeLine}, and we rank them on what each one publishes about itself rather
+      than on who pays us. Nobody pays to appear on this page.
+      {` ${d.name} ranks ${first ? 'first' : ordinal(place)} of them${d.score ? `, with ${d.score.total} out of 100` : ''}.`}
+      {above.length === 0
+        ? ' Nothing we measure in this city ranks above it, so what follows is who comes next.'
+        : above.length < shown.length
+          ? ' There are few firms above it, so the nearest below are here too, and each heading says which is which.'
+          : ''}
+    </p>
+
+    {shown.length === 0 && (
+      <p class="lede">
+        It is the only firm we have measured in this city for this practice, so there is nothing
+        here to compare it against yet. The <a href={`/cities/${market.city_slug}/`}>city page</a>
+        lists everything we do measure there.
+      </p>
+    )}
+
+    {shown.length > 0 && (
+      <>
+        {above.length > 0 && (
+          <>
+            <h2>Ranked above {d.name}</h2>
+            <div class="firm-grid">
+              {above.map(f => (
+                <FirmCard
+                  firm={f}
+                  rank={ranked.findIndex(r => r.data.slug === f.data.slug) + 1}
+                  rankLabel={practiceName ? `${practiceName}, ${market.city}` : market.city}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        {below.length > 0 && (
+          <>
+            <h2>Ranked just below {d.name}</h2>
+            <div class="firm-grid">
+              {below.map(f => (
+                <FirmCard
+                  firm={f}
+                  rank={ranked.findIndex(r => r.data.slug === f.data.slug) + 1}
+                  rankLabel={practiceName ? `${practiceName}, ${market.city}` : market.city}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        <h2>What each one publishes</h2>
+        <p>
+          Every column is a thing a reader can check on the firm's own website in a minute. An
+          empty cell means we read the site and found nothing, not that we did not look.
+        </p>
+        <div class="table-scroll">
+          <table class="compare">
+            <thead>
+              <tr>
+                <th scope="col">Firm</th>
+                <th scope="col">Score</th>
+                <th scope="col">Attorneys named</th>
+                <th scope="col">Case results</th>
+                <th scope="col">Google reviews</th>
+                <th scope="col">Free consult</th>
+                <th scope="col">Fee published</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="is-subject">
+                <th scope="row"><a href={`/firms/${mine.slug}/`}>{mine.name}</a></th>
+                <td>{mine.total ?? '—'}</td>
+                <td>{mine.attorneys || '—'}</td>
+                <td>{mine.results || '—'}</td>
+                <td>{mine.reviews ?? '—'}</td>
+                <td>{mine.free ? 'Yes' : '—'}</td>
+                <td>{mine.fee ?? '—'}</td>
+              </tr>
+              {theirs.map(t => (
+                <tr>
+                  <th scope="row"><a href={`/firms/${t.slug}/`}>{t.name}</a></th>
+                  <td>{t.total ?? '—'}</td>
+                  <td>{t.attorneys || '—'}</td>
+                  <td>{t.results || '—'}</td>
+                  <td>{t.reviews ?? '—'}</td>
+                  <td>{t.free ? 'Yes' : '—'}</td>
+                  <td>{t.fee ?? '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {aheadOn.length > 0 && (
+          <>
+            <h2>Where {d.name} is ahead of all of them</h2>
+            <p>
+              The ranking is one number over a hundred points and it hides this, so it is worth
+              saying plainly. Against every firm on this page, {d.name}:
+            </p>
+            <ul>
+              {aheadOn.map(line => <li>{line}</li>)}
+            </ul>
+          </>
+        )}
+
+        <h2>How this page is built</h2>
+        <p>
+          The order is the same city-by-practice ranking as the
+          <a href={`/cities/${market.city_slug}/`}> {market.city} page</a>, computed from the
+          <a href="/methodology/"> certification score</a>. No firm can buy a place on it, move
+          another firm down, or have this page taken down, and a firm that tells us something
+          here is wrong gets it corrected for free whether or not it is a customer.
+        </p>
+      </>
+    )}
+
+    <ListYourFirmCta />
+  </section>
+</Base>
+
+<style>
+  .crumbs { font-size: .85rem; margin-bottom: 1rem; }
+  .table-scroll { overflow-x: auto; margin: 1rem 0 2rem; }
+  table.compare { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  table.compare th, table.compare td { padding: .55rem .7rem; text-align: left; border-bottom: 1px solid var(--rule, #e7e7e2); white-space: nowrap; }
+  table.compare thead th { font-weight: 600; font-size: .8rem; letter-spacing: .03em; text-transform: uppercase; }
+  table.compare tbody th { font-weight: 600; white-space: normal; min-width: 14rem; }
+  table.compare tr.is-subject { background: var(--tint, #f6f6f3); }
+  .firm-grid { display: grid; gap: 1rem; margin: 1rem 0 2rem; }
+  @media (min-width: 48rem) { .firm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
