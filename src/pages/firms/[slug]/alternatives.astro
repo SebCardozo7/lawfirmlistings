@@ -142,136 +142,153 @@ const description = fitDescription(
 ---
 
 <Base title={title} description={description} nav="home">
-  <section class="wrap narrow">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="/">Home</a> ·
-      <a href={`/cities/${market.city_slug}/`}>{market.city}</a> ·
-      <a href={`/firms/${d.slug}/`}>{d.name}</a> ·
-      <span>Alternatives</span>
-    </nav>
-
-    <h1>Alternatives to {d.name}</h1>
-
-    <p class="lede">
-      We measure {scopeLine}, and we rank them on what each one publishes about itself rather
-      than on who pays us. Nobody pays to appear on this page.
-      {` ${d.name} ranks ${first ? 'first' : ordinal(place)} of them${d.score ? `, with ${d.score.total} out of 100` : ''}.`}
-      {above.length === 0
-        ? ' Nothing we measure in this city ranks above it, so what follows is who comes next.'
-        : above.length < shown.length
-          ? ' There are few firms above it, so the nearest below are here too, and each heading says which is which.'
-          : ''}
-    </p>
-
-    {shown.length === 0 && (
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs">
+        <li><a href="/">Home</a></li>
+        <li><a href={`/cities/${market.city_slug}/`}>{market.city}, {market.state}</a></li>
+        <li><a href={`/firms/${d.slug}/`}>{d.name}</a></li>
+        <li aria-current="page">Alternatives</li>
+      </ol>
+      <span class="eyebrow">{practiceName ? `${practiceName} · ${market.city}` : market.city}</span>
+      <h1>Alternatives to {d.name}</h1>
       <p class="lede">
-        It is the only firm we have measured in this city for this practice, so there is nothing
-        here to compare it against yet. The <a href={`/cities/${market.city_slug}/`}>city page</a>
-        lists everything we do measure there.
+        We measure {scopeLine}, and we rank them on what each one publishes about itself rather
+        than on who pays us. Nobody pays to appear on this page.
+        {` ${d.name} ranks ${first ? 'first' : ordinal(place)} of them${d.score ? `, with ${d.score.total} out of 100` : ''}.`}
+        {above.length === 0
+          ? ' Nothing we measure in this city ranks above it, so what follows is who comes next.'
+          : above.length < shown.length
+            ? ' There are few firms above it, so the nearest below are here too, and each heading says which is which.'
+            : ''}
       </p>
-    )}
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{first ? '1st' : ordinal(place)}</b><span>Of {ranked.length} measured</span></div>
+      {d.score && <div class="fact"><b class="num">{d.score.total}</b><span>Certification score</span></div>}
+      <div class="fact"><b class="num">{mine.attorneys || '0'}</b><span>Attorneys named</span></div>
+      <div class="fact"><b class="num">{mine.results || '0'}</b><span>Case results</span></div>
+    </div>
+  </div>
+</section>
 
-    {shown.length > 0 && (
-      <>
-        {above.length > 0 && (
-          <>
+<section class="section--tight">
+  <div class="container layout">
+    <div>
+      {shown.length === 0 && (
+        <p class="lede">
+          It is the only firm we have measured in this city for this practice, so there is nothing
+          here to compare it against yet. The <a href={`/cities/${market.city_slug}/`}>city page</a>
+          {' '}lists everything we do measure there.
+        </p>
+      )}
+
+      {above.length > 0 && (
+        <>
+          <div class="results-head">
             <h2>Ranked above {d.name}</h2>
-            <div class="firm-grid">
-              {above.map(f => (
-                <FirmCard
-                  firm={f}
-                  rank={ranked.findIndex(r => r.data.slug === f.data.slug) + 1}
-                  rankLabel={practiceName ? `${practiceName}, ${market.city}` : market.city}
-                />
-              ))}
-            </div>
-          </>
-        )}
+            <span class="num">{above.length === 1 ? 'The only firm above it' : `The ${above.length} nearest above it`}</span>
+          </div>
+          <div class="firm-list">
+            {above.map(f => (
+              <FirmCard firm={f} rank={ranked.findIndex(r => r.data.slug === f.data.slug) + 1} />
+            ))}
+          </div>
+        </>
+      )}
 
-        {below.length > 0 && (
-          <>
+      {below.length > 0 && (
+        <>
+          <div class="results-head">
             <h2>Ranked just below {d.name}</h2>
-            <div class="firm-grid">
-              {below.map(f => (
-                <FirmCard
-                  firm={f}
-                  rank={ranked.findIndex(r => r.data.slug === f.data.slug) + 1}
-                  rankLabel={practiceName ? `${practiceName}, ${market.city}` : market.city}
-                />
-              ))}
-            </div>
-          </>
-        )}
+            <span class="num">{below.length === 1 ? 'The next one down' : `The ${below.length} nearest below it`}</span>
+          </div>
+          <div class="firm-list">
+            {below.map(f => (
+              <FirmCard firm={f} rank={ranked.findIndex(r => r.data.slug === f.data.slug) + 1} />
+            ))}
+          </div>
+        </>
+      )}
 
-        <h2>What each one publishes</h2>
-        <p>
-          Every column is a thing a reader can check on the firm's own website in a minute. An
-          empty cell means we read the site and found nothing, not that we did not look.
-        </p>
-        <div class="table-scroll">
-          <table class="compare">
-            <thead>
-              <tr>
-                <th scope="col">Firm</th>
-                <th scope="col">Score</th>
-                <th scope="col">Attorneys named</th>
-                <th scope="col">Case results</th>
-                <th scope="col">Google reviews</th>
-                <th scope="col">Free consult</th>
-                <th scope="col">Fee published</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="is-subject">
-                <th scope="row"><a href={`/firms/${mine.slug}/`}>{mine.name}</a></th>
-                <td>{mine.total ?? '—'}</td>
-                <td>{mine.attorneys || '—'}</td>
-                <td>{mine.results || '—'}</td>
-                <td>{mine.reviews ?? '—'}</td>
-                <td>{mine.free ? 'Yes' : '—'}</td>
-                <td>{mine.fee ?? '—'}</td>
-              </tr>
-              {theirs.map(t => (
+      {shown.length > 0 && (
+        <>
+          <div class="results-head">
+            <h2>What each one publishes</h2>
+            <span class="num">Every column is a thing you can check on the firm's own site in a minute</span>
+          </div>
+          <p>An empty cell means we read the site and found nothing, not that we did not look.</p>
+          <div class="table-scroll">
+            <table class="compare">
+              <thead>
                 <tr>
-                  <th scope="row"><a href={`/firms/${t.slug}/`}>{t.name}</a></th>
-                  <td>{t.total ?? '—'}</td>
-                  <td>{t.attorneys || '—'}</td>
-                  <td>{t.results || '—'}</td>
-                  <td>{t.reviews ?? '—'}</td>
-                  <td>{t.free ? 'Yes' : '—'}</td>
-                  <td>{t.fee ?? '—'}</td>
+                  <th scope="col">Firm</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Attorneys named</th>
+                  <th scope="col">Case results</th>
+                  <th scope="col">Google reviews</th>
+                  <th scope="col">Free consult</th>
+                  <th scope="col">Fee published</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                <tr class="is-subject">
+                  <th scope="row"><a href={`/firms/${mine.slug}/`}>{mine.name}</a></th>
+                  <td>{mine.total ?? '--'}</td>
+                  <td>{mine.attorneys || '--'}</td>
+                  <td>{mine.results || '--'}</td>
+                  <td>{mine.reviews ?? '--'}</td>
+                  <td>{mine.free ? 'Yes' : '--'}</td>
+                  <td>{mine.fee ?? '--'}</td>
+                </tr>
+                {theirs.map(t => (
+                  <tr>
+                    <th scope="row"><a href={`/firms/${t.slug}/`}>{t.name}</a></th>
+                    <td>{t.total ?? '--'}</td>
+                    <td>{t.attorneys || '--'}</td>
+                    <td>{t.results || '--'}</td>
+                    <td>{t.reviews ?? '--'}</td>
+                    <td>{t.free ? 'Yes' : '--'}</td>
+                    <td>{t.fee ?? '--'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
 
-        {aheadOn.length > 0 && (
-          <>
+      {aheadOn.length > 0 && (
+        <>
+          <div class="results-head">
             <h2>Where {d.name} is ahead of all of them</h2>
-            <p>
-              The ranking is one number over a hundred points and it hides this, so it is worth
-              saying plainly. Against every firm on this page, {d.name}:
-            </p>
-            <ul>
-              {aheadOn.map(line => <li>{line}</li>)}
-            </ul>
-          </>
-        )}
+            <span class="num">The ranking is one number and it hides this</span>
+          </div>
+          <p>Against every firm on this page, {d.name}:</p>
+          <ul>
+            {aheadOn.map(line => <li>{line}</li>)}
+          </ul>
+        </>
+      )}
 
-        <h2>How this page is built</h2>
-        <p>
-          The order is the same city-by-practice ranking as the
-          <a href={`/cities/${market.city_slug}/`}> {market.city} page</a>, computed from the
-          <a href="/methodology/"> certification score</a>. No firm can buy a place on it, move
-          another firm down, or have this page taken down, and a firm that tells us something
-          here is wrong gets it corrected for free whether or not it is a customer.
-        </p>
-      </>
-    )}
-
-    <ListYourFirmCta />
-  </section>
+      {shown.length > 0 && (
+        <>
+          <h2>How this page is built</h2>
+          <p>
+            The order is the same city-by-practice ranking as the
+            <a href={`/cities/${market.city_slug}/`}> {market.city} page</a>, computed from the
+            <a href="/methodology/"> certification score</a>. No firm can buy a place on it, move
+            another firm down, or have this page taken down, and a firm that tells us something
+            here is wrong gets it corrected for free whether or not it is a customer.
+          </p>
+        </>
+      )}
+    </div>
+  </div>
+</section>
+<ListYourFirmCta />
 </Base>
 
 <style>

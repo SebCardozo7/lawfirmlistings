@@ -89,75 +89,93 @@ const description = fitDescription(
 );
 ---
 
-<Base title={title} description={description} nav="home">
-  <section class="wrap narrow">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="/">Home</a> ·
-      {marketCount === 1 && <><a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city}, {homeMarket.state}</a> · </>}
-      <span>{where}</span>
-    </nav>
-
-    <h1>{title}</h1>
-
-    <p class="lede">
-      {firms.length} of the law firms we measure have an office in {where}, confirmed on the
-      firm's own Google Business Profile rather than taken from a directory listing.
-      {' '}{marketCount === 1
-        ? <>They are all measured in our <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city} market</a>, whose full ranking is the wider list this page is part of.</>
-        : <>They are measured in {marketCount} of our markets, most of them in <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city}</a>. {where} is not a market of ours, so this page is the firms with an office there rather than a ranking of the place.</>}
-    </p>
-
-    <h2>Ranked among our {homeMarket.city} market</h2>
-    <p>
-      Ranked on the <a href="/methodology/">certification score</a>, which is comparable inside
-      one market because part of it is measured against the market's own field. Nobody pays to
-      appear here and no firm can move another one down.
-    </p>
-
-    <div class="firm-grid">
-      {ranked.slice(0, 4).map((f, i) => (
-        <FirmCard firm={f} rank={i + 1} rankLabel={`${homeMarket.city} market`} />
-      ))}
+<Base title={title} description={description} nav="cities">
+<section class="page-hero on-night">
+  <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <div class="container">
+    <div>
+      <ol class="crumbs">
+        <li><a href="/">Home</a></li>
+        <li><a href="/cities/">Cities</a></li>
+        {marketCount === 1 && (
+          <li><a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city}, {homeMarket.state}</a></li>
+        )}
+        <li aria-current="page">{where}</li>
+      </ol>
+      <span class="eyebrow">{practiceWord ? `${topPractice} · ${where}` : where}</span>
+      <h1>{title}</h1>
+      <p class="lede">
+        {firms.length} of the law firms we measure have an office in {where}, confirmed on the
+        firm's own Google Business Profile rather than taken from a directory listing.
+        {' '}{marketCount === 1
+          ? <>They are all measured in our <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city} market</a>, whose full ranking is the wider list this page is part of.</>
+          : <>They are measured in {marketCount} of our markets, most of them in <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city}</a>. {where} is not a market of ours, so this page is the firms with an office there rather than a ranking of the place.</>}
+      </p>
     </div>
+    <div class="hero-facts">
+      <div class="fact"><b class="num">{firms.length}</b><span>Firms with an office here</span></div>
+      <div class="fact"><b class="num">{ranked.length}</b><span>In the {homeMarket.city} market</span></div>
+      {elsewhere.length > 0 && <div class="fact"><b class="num">{elsewhere.length}</b><span>From other markets</span></div>}
+      <div class="fact"><b class="num">{marketCount}</b><span>{marketCount === 1 ? 'Market' : 'Markets'}</span></div>
+    </div>
+  </div>
+</section>
 
-    {/* The whole list, numbered from one, the same way the city page does it: the cards above
-        are a top four rather than a separate set, and a reader scanning the rows should find
-        them in the first four places rather than wonder where they went. */}
-    {ranked.length > 4 && <RankedRows firms={ranked} />}
+<section class="section--tight">
+  <div class="container layout">
+    <div>
+      <div class="results-head">
+        <h2>Ranked among our {homeMarket.city} market</h2>
+        <span class="num">All {ranked.length}, by the Certification Score</span>
+      </div>
+      <p>
+        The <a href="/methodology/">certification score</a> is comparable inside one market
+        because part of it is measured against that market's own field. Nobody pays to appear
+        here and no firm can move another one down.
+      </p>
 
-    {elsewhere.length > 0 && (
-      <>
-        <h2>Also here, from other markets</h2>
-        <p>
-          {elsewhere.length === 1 ? 'One firm has' : `${elsewhere.length} firms have`} an office
-          in {where} but {elsewhere.length === 1 ? 'belongs' : 'belong'} to a market we measure
-          separately. They are listed rather than ranked, on purpose: the score is computed partly
-          against a firm's own market, so placing them in the list above would compare two numbers
-          that were not measured against the same field.
-        </p>
-        <ul class="plain">
-          {elsewhere.map(f => (
-            <li>
-              <a href={`/firms/${f.data.slug}/`}>{f.data.name}</a>
-              {' · '}{f.data.market.city}, {f.data.market.state} market
-              {f.data.score ? ` · ${f.data.score.total}/100` : ''}
-            </li>
-          ))}
-        </ul>
-      </>
-    )}
+      <div class="firm-list">
+        {ranked.map((f, i) => (
+          <FirmCard firm={f} rank={i + 1} />
+        ))}
+      </div>
 
-    <h2>What a verified office means here</h2>
-    <p>
-      It means the address is on a Google Business Profile that Google has confirmed, which is a
-      stronger claim than a street address typed on a contact page and a weaker one than a
-      registered place of business. It does not mean the firm's attorneys sit there every day, and
-      a firm that tells us an office on this page is closed gets it removed for free, whether or
-      not it is a customer.
-    </p>
+      {elsewhere.length > 0 && (
+        <>
+          <div class="results-head">
+            <h2>Also here, from other markets</h2>
+            <span class="num">Listed, not ranked, and the paragraph says why</span>
+          </div>
+          <p>
+            {elsewhere.length === 1 ? 'One firm has' : `${elsewhere.length} firms have`} an office
+            in {where} but {elsewhere.length === 1 ? 'belongs' : 'belong'} to a market we measure
+            separately. Placing them in the list above would compare two numbers that were not
+            measured against the same field.
+          </p>
+          <ul class="plain">
+            {elsewhere.map(f => (
+              <li>
+                <a href={`/firms/${f.data.slug}/`}>{f.data.name}</a>
+                {' · '}{f.data.market.city}, {f.data.market.state} market
+                {f.data.score ? ` · ${f.data.score.total}/100` : ''}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
-    <ListYourFirmCta />
-  </section>
+      <h2>What a verified office means here</h2>
+      <p>
+        It means the address is on a Google Business Profile that Google has confirmed, which is
+        a stronger claim than a street address typed on a contact page and a weaker one than a
+        registered place of business. It does not mean the firm's attorneys sit there every day,
+        and a firm that tells us an office on this page is closed gets it removed for free,
+        whether or not it is a customer.
+      </p>
+    </div>
+  </div>
+</section>
+<ListYourFirmCta place={where} />
 </Base>
 
 <style>
