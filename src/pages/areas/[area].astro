@@ -1,0 +1,169 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import FirmCard from '../../components/FirmCard.astro';
+import RankedRows from '../../components/RankedRows.astro';
+import ListYourFirmCta from '../../components/ListYourFirmCta.astro';
+import { rankFirms } from '../../lib/ranking';
+import { areasFrom } from '../../lib/areas';
+import { fitDescription } from '../../lib/seo';
+
+/**
+ * The town an office is actually in, which is not always the market it belongs to.
+ *
+ * Search Console: "truck accident attorneys beverly hills ca" at position 7.7, "semi truck
+ * accident attorneys santa monica ca" at 7.4, "rideshare accident lawyer belvidere" at 3.5,
+ * "top personal injury lawyers in harlem nyc" at 3.5. All of them landed on a page headed
+ * "Los Angeles" or "New York, NY", and all of them sent nobody. Somebody searching for a lawyer
+ * in Scottsdale does not want a Phoenix list, even though Scottsdale is in the Phoenix market.
+ *
+ * Where the geography comes from. Not from a neighbourhood field, because there is none and
+ * inventing one would be writing geography we never measured. It is parsed out of
+ * `offices[].address`, which comes from the firm's verified Google Business Profile, so every
+ * town on this site is a town where a firm really has an office that Google has confirmed.
+ *
+ * Why the page groups by market instead of ranking everybody together. The certification score
+ * is comparable inside a cohort and not across cohorts: D2 is a percentile computed against the
+ * firm's own city-and-practice field, so a 70 in Atlanta and a 70 in Los Angeles are not the
+ * same measurement. 45 of the 78 eligible towns hold offices from firms in more than one market
+ * (San Francisco has five), and ranking those together would publish a comparison the
+ * methodology does not support. So the firms of the town's own market are ranked, and firms
+ * that come from elsewhere are listed under a heading that says they come from elsewhere.
+ *
+ * Five firms is the floor. Below that it is not a list, it is a page about one or two firms that
+ * their own profiles already cover.
+ */
+export async function getStaticPaths() {
+  const firms = await getCollection('firms', f =>
+    f.data.status !== 'sample' && f.data.status !== 'not_eligible');
+
+  // areasFrom is shared with /cities/<city>/, which links to these pages. One definition, so a
+  // link never points at a page that was not built and a page is never left with no link.
+  return [...areasFrom(firms).values()]
+    .map(a => ({ params: { area: a.slug }, props: { town: a.town, st: a.st, firms: a.firms } }));
+}
+
+interface Props { town: string; st: string; firms: CollectionEntry<'firms'>[] }
+const { town, st, firms } = Astro.props;
+
+// The market most of these firms belong to. Its firms can be ranked against each other because
+// that is the cohort the score was computed in.
+const byMarket = new Map<string, CollectionEntry<'firms'>[]>();
+for (const f of firms) {
+  const k = f.data.market.city_slug;
+  byMarket.set(k, [...(byMarket.get(k) ?? []), f]);
+}
+const [homeSlug, homeFirms] = [...byMarket.entries()]
+  .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))[0];
+const homeMarket = homeFirms[0].data.market;
+const ranked = rankFirms(homeFirms);
+const elsewhere = firms.filter(f => f.data.market.city_slug !== homeSlug);
+const marketCount = byMarket.size;
+
+// Never say the town is inside a market. The first build picked whichever market held most of
+// the firms and wrote "<town> sits inside the <city> market", which is true of Scottsdale and
+// Phoenix and is nonsense for San Francisco, whose six firms happen to be Californian ones
+// measured in our San Diego cohort. Nothing we measure knows which metro a town belongs to, so
+// the page says which markets these firms are measured in and stops there.
+
+// The practice most of them lead with, used in the heading only where it is a real majority.
+// A heading that says "personal injury" over a page that is half immigration is a worse page
+// than one that says "law firms".
+const leads = new Map<string, number>();
+for (const f of firms) {
+  const p = f.data.practices.find(x => x.primary) ?? f.data.practices[0];
+  if (p) leads.set(p.name, (leads.get(p.name) ?? 0) + 1);
+}
+const [topPractice, topCount] = [...leads.entries()].sort((a, b) => b[1] - a[1])[0] ?? ['', 0];
+const practiceWord = topCount / firms.length >= 0.6 ? topPractice.toLowerCase() : null;
+
+const where = `${town}, ${st}`;
+const title = practiceWord
+  ? `${topPractice} law firms in ${where}`
+  : `Law firms with an office in ${where}`;
+const description = fitDescription(
+  `${firms.length} law firms we measure have a verified office in ${where}.`,
+  `Ranked on the LFL Certification Score within the ${homeMarket.city} market.`,
+  'Every office is confirmed on the firm\'s own Google Business Profile.',
+);
+---
+
+<Base title={title} description={description} nav="home">
+  <section class="wrap narrow">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> ·
+      {marketCount === 1 && <><a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city}, {homeMarket.state}</a> · </>}
+      <span>{where}</span>
+    </nav>
+
+    <h1>{title}</h1>
+
+    <p class="lede">
+      {firms.length} of the law firms we measure have an office in {where}, confirmed on the
+      firm's own Google Business Profile rather than taken from a directory listing.
+      {' '}{marketCount === 1
+        ? <>They are all measured in our <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city} market</a>, whose full ranking is the wider list this page is part of.</>
+        : <>They are measured in {marketCount} of our markets, most of them in <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city}</a>. {where} is not a market of ours, so this page is the firms with an office there rather than a ranking of the place.</>}
+    </p>
+
+    <h2>Ranked among our {homeMarket.city} market</h2>
+    <p>
+      Ranked on the <a href="/methodology/">certification score</a>, which is comparable inside
+      one market because part of it is measured against the market's own field. Nobody pays to
+      appear here and no firm can move another one down.
+    </p>
+
+    <div class="firm-grid">
+      {ranked.slice(0, 4).map((f, i) => (
+        <FirmCard firm={f} rank={i + 1} rankLabel={`${homeMarket.city} market`} />
+      ))}
+    </div>
+
+    {/* The whole list, numbered from one, the same way the city page does it: the cards above
+        are a top four rather than a separate set, and a reader scanning the rows should find
+        them in the first four places rather than wonder where they went. */}
+    {ranked.length > 4 && <RankedRows firms={ranked} />}
+
+    {elsewhere.length > 0 && (
+      <>
+        <h2>Also here, from other markets</h2>
+        <p>
+          {elsewhere.length === 1 ? 'One firm has' : `${elsewhere.length} firms have`} an office
+          in {where} but {elsewhere.length === 1 ? 'belongs' : 'belong'} to a market we measure
+          separately. They are listed rather than ranked, on purpose: the score is computed partly
+          against a firm's own market, so placing them in the list above would compare two numbers
+          that were not measured against the same field.
+        </p>
+        <ul class="plain">
+          {elsewhere.map(f => (
+            <li>
+              <a href={`/firms/${f.data.slug}/`}>{f.data.name}</a>
+              {' · '}{f.data.market.city}, {f.data.market.state} market
+              {f.data.score ? ` · ${f.data.score.total}/100` : ''}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    <h2>What a verified office means here</h2>
+    <p>
+      It means the address is on a Google Business Profile that Google has confirmed, which is a
+      stronger claim than a street address typed on a contact page and a weaker one than a
+      registered place of business. It does not mean the firm's attorneys sit there every day, and
+      a firm that tells us an office on this page is closed gets it removed for free, whether or
+      not it is a customer.
+    </p>
+
+    <ListYourFirmCta />
+  </section>
+</Base>
+
+<style>
+  .crumbs { font-size: .85rem; margin-bottom: 1rem; }
+  .firm-grid { display: grid; gap: 1rem; margin: 1rem 0 2rem; }
+  @media (min-width: 48rem) { .firm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  ul.plain { list-style: none; padding: 0; margin: 1rem 0 2rem; }
+  ul.plain li { padding: .5rem 0; border-bottom: 1px solid var(--rule, #e7e7e2); font-size: .95rem; }
+</style>

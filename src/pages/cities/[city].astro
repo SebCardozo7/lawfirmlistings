@@ -5,6 +5,7 @@ import ListYourFirmCta from '../../components/ListYourFirmCta.astro';
 import Icon from '../../components/Icon.astro';
 import FirmCard from '../../components/FirmCard.astro';
 import RankedRows from '../../components/RankedRows.astro';
+import { areasFrom, areasOfMarket } from '../../lib/areas';
 import { CITY_NOTES } from '../../data/cities';
 import { PRACTICES, PRACTICE_SLUGS } from '../../data/practices';
 
@@ -25,15 +26,28 @@ export async function getStaticPaths() {
   const firms = await getCollection('firms', f =>
     f.data.status !== 'sample' && f.data.status !== 'not_eligible');
 
+  // The towns inside this market that have a page of their own. Computed from the whole
+  // collection, not from this city's firms, because areasFrom has to know every market's name to
+  // tell a town from a market, and because a town page can hold firms from more than one market.
+  //
+  // This is also the only thing linking to those pages. The SEO audit called all 78 of them
+  // orphans when they shipped without it, and an orphan is a page the crawler has no reason to
+  // visit and no reason to rank.
+  const areas = areasFrom(firms);
+
   const cities = [...new Map(firms.map(f => [f.data.market.city_slug, f.data.market])).entries()];
   return cities.map(([slug, market]) => ({
     params: { city: slug },
-    props: { market, firms: firms.filter(f => f.data.market.city_slug === slug) },
+    props: {
+      market,
+      firms: firms.filter(f => f.data.market.city_slug === slug),
+      towns: areasOfMarket(areas, slug),
+    },
   }));
 }
 
 const { city } = Astro.params;
-const { market, firms } = Astro.props;
+const { market, firms, towns } = Astro.props;
 const notes = CITY_NOTES[city] ?? {};
 
 // Ranked by the score. See [city]/[practice].astro: sorting only the certified firms by score
@@ -89,8 +103,11 @@ const lede = notes.lede
       <p class="lede" set:html={lede} />
       {notes.areas && notes.areas.length > 0 && (
         <div class="chips" style="margin-top:24px">
-          {/* Named, not linked: there are no neighbourhood pages yet, and a chip that goes
-              nowhere is worse than a chip that plainly does not. */}
+          {/* Named, not linked. These are editorial neighbourhood names from src/data/cities.ts
+              and they are not the towns under "Towns in the ... area" further down: those are parsed
+              from firms' own verified office addresses, and a neighbourhood inside a city, Harlem
+              or the Upper West Side, never appears in one. A chip that goes nowhere is still
+              better than a chip that goes to a page about somewhere else. */}
           {notes.areas.map(a => <span class="chip soon">{a}</span>)}
         </div>
       )}
@@ -147,6 +164,17 @@ const lede = notes.lede
             <span class="num">All {ranked.length}, ranked by the Certification Score</span>
           </div>
           <RankedRows firms={ranked} />
+        </div>
+      )}
+      {towns.length > 0 && (
+        <div class="ranked-links">
+          <h3>Towns in the {market.city} area</h3>
+          <span class="num">Where these firms actually have an office, from their own verified Google listing</span>
+          <ul>
+            {towns.map(a => (
+              <li><a href={`/areas/${a.slug}/`}>{a.town}, {a.st}</a><span class="num">{a.firms.length} {a.firms.length === 1 ? 'firm' : 'firms'}</span></li>
+            ))}
+          </ul>
         </div>
       )}
       {practices.length > 0 && (
