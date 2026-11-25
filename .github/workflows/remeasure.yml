@@ -36,17 +36,28 @@ jobs:
   # not negotiable, so the only way to shorten a four-hour run is to give each shard a different
   # set of firms. Per-host spacing is unchanged.
   #
-  # Six shards rather than four, and a step more to run in each. The directory went from 116
-  # firms to 217 in a week, and a shard now also reads the transaction pages for the practices
-  # that have no outcomes. Four shards of fifty-four firms would have come close enough to the
-  # six-hour job ceiling to lose a whole month's measurement to a timeout.
+  # Eighteen shards. It was six, chosen when the directory held 217 firms, and the directory now
+  # holds 1,505. That arithmetic is the whole reason this workflow has never once finished:
+  # September failed, October and November were cancelled, and both cancellations were this job's
+  # own timeout. On 20 November every shard ran the full five hours and was killed, and shard 1
+  # had reached step three of eight.
+  #
+  # The sizing, so the next person can redo it rather than guess. Per-host spacing is 1.5 seconds
+  # and is not negotiable, it is the politeness we score other firms on, so the only lever is how
+  # many firms a shard owns. Opening Orlando measured 95 firms through these same steps in about
+  # 208 minutes, which is 2.2 minutes a firm. 1,505 firms is therefore about 55 hours of work:
+  # over six shards that is nine hours each, against a five-hour timeout and a six-hour ceiling
+  # GitHub will not raise. Eighteen shards is 84 firms each, a little over three hours, which
+  # leaves room for the slow sites rather than assuming the average.
+  #
+  # Re-divide this whenever a market opens. The number to keep under is about 120 firms a shard.
   measure:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 330
     strategy:
       fail-fast: false
       matrix:
-        shard: [1, 2, 3, 4, 5, 6]
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     steps:
       - uses: actions/checkout@v4
 
@@ -57,8 +68,8 @@ jobs:
       - name: Which firms this shard owns
         id: firms
         run: |
-          echo "domains=$(python scripts/published_domains.py --shard ${{ matrix.shard }} --of 6 --joined)" >> "$GITHUB_OUTPUT"
-          python scripts/published_domains.py --shard ${{ matrix.shard }} --of 6
+          echo "domains=$(python scripts/published_domains.py --shard ${{ matrix.shard }} --of 18 --joined)" >> "$GITHUB_OUTPUT"
+          python scripts/published_domains.py --shard ${{ matrix.shard }} --of 18
 
       # Read from the firms' own sites. Each step is separate and none of them fails the job: a
       # site that is down this month is a site that is down, and the rest of the measurement is
