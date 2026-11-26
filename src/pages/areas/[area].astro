@@ -124,25 +124,24 @@ const description = fitDescription(
 <section class="section--tight">
   <div class="container layout">
     <div>
-      <div class="results-head">
-        <h2>The {ranked.length} with an office in {where}</h2>
-        <span class="num">Ranked against each other, by the Certification Score</span>
-      </div>
       {/*
-        The heading and the badge both say "in <town>", and that is the point rather than style.
-        It read "Ranked among our New York market" over a card badged #1, which says Cellino Law
-        is first in New York. It is not: Raphaelson & Levine scores 79 to its 78 and is not in
-        Brooklyn. Cellino is first of the 45 firms that have an office here, which is a true and
-        useful thing to say and a different one. A firm can print this badge on its own site, so
-        the number has to mean what the badge says it means.
+        The prose goes above the results-head, not between it and the cards. .results-head
+        carries the 28px that lets the rank badge hang 11px over the first card's top edge, and
+        a paragraph dropped in there has a smaller margin of its own: the badge landed on the
+        last line of text and covered the word "down".
       */}
-      <p>
+      <p class="area-note">
         These are ranked against each other and not against the whole market. All of them are
         measured in our <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city} market</a>,
         so the comparison holds: the <a href="/methodology/">certification score</a> is comparable
         inside one market because part of it is measured against that market's own field. Nobody
         pays to appear here and no firm can move another one down.
       </p>
+
+      <div class="results-head">
+        <h2>The {ranked.length} with an office in {where}</h2>
+        <span class="num">Ranked against each other, by the Certification Score</span>
+      </div>
 
       <div class="firm-list">
         {ranked.map((f, i) => (
@@ -151,37 +150,40 @@ const description = fitDescription(
       </div>
 
       {elsewhere.length > 0 && (
-        <>
-          <div class="results-head">
-            <h2>Also here, from other markets</h2>
-            <span class="num">Listed, not ranked, and the paragraph says why</span>
-          </div>
-          <p>
+        <div class="area-block">
+          <p class="area-note">
             {elsewhere.length === 1 ? 'One firm has' : `${elsewhere.length} firms have`} an office
             in {where} but {elsewhere.length === 1 ? 'belongs' : 'belong'} to a market we measure
             separately. Placing them in the list above would compare two numbers that were not
             measured against the same field.
           </p>
+          <div class="results-head">
+            <h2>Also here, from other markets</h2>
+            <span class="num">Listed, not ranked</span>
+          </div>
           <ul class="plain">
             {elsewhere.map(f => (
               <li>
                 <a href={`/firms/${f.data.slug}/`}>{f.data.name}</a>
-                {' · '}{f.data.market.city}, {f.data.market.state} market
-                {f.data.score ? ` · ${f.data.score.total}/100` : ''}
+                <span class="num">{f.data.market.city}, {f.data.market.state}{f.data.score ? ` · ${f.data.score.total}/100` : ''}</span>
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
 
-      <h2>What a verified office means here</h2>
-      <p>
-        It means the address is on a Google Business Profile that Google has confirmed, which is
-        a stronger claim than a street address typed on a contact page and a weaker one than a
-        registered place of business. It does not mean the firm's attorneys sit there every day,
-        and a firm that tells us an office on this page is closed gets it removed for free,
-        whether or not it is a customer.
-      </p>
+      <div class="area-block">
+        <div class="results-head">
+          <h2>What a verified office means here</h2>
+        </div>
+        <p class="area-note">
+          It means the address is on a Google Business Profile that Google has confirmed, which is
+          a stronger claim than a street address typed on a contact page and a weaker one than a
+          registered place of business. It does not mean the firm's attorneys sit there every day,
+          and a firm that tells us an office on this page is closed gets it removed for free,
+          whether or not it is a customer.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -189,9 +191,14 @@ const description = fitDescription(
 </Base>
 
 <style>
-  .crumbs { font-size: .85rem; margin-bottom: 1rem; }
-  .firm-grid { display: grid; gap: 1rem; margin: 1rem 0 2rem; }
-  @media (min-width: 48rem) { .firm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  ul.plain { list-style: none; padding: 0; margin: 1rem 0 2rem; }
-  ul.plain li { padding: .5rem 0; border-bottom: 1px solid var(--rule, #e7e7e2); font-size: .95rem; }
+  /* Nothing here restyles a class global.css already owns. The first version redefined .crumbs
+     with a worse rule and carried a .firm-grid that no longer exists, and its border colour
+     referred to --rule, which is not a variable on this site, so it silently fell back to a
+     hardcoded grey. */
+  .area-note { max-width: 62ch; margin: 0 0 28px; color: var(--muted); }
+  .area-block { margin-top: 56px; }
+  ul.plain { list-style: none; padding: 0; margin: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+  ul.plain li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; padding: 12px 18px; border-top: 1px solid var(--line); font-size: .95rem; }
+  ul.plain li:first-child { border-top: 0; }
+  ul.plain li:nth-child(even) { background: var(--ground); }
 </style>
