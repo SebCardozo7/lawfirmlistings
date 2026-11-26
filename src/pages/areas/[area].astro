@@ -125,18 +125,28 @@ const description = fitDescription(
   <div class="container layout">
     <div>
       <div class="results-head">
-        <h2>Ranked among our {homeMarket.city} market</h2>
-        <span class="num">All {ranked.length}, by the Certification Score</span>
+        <h2>The {ranked.length} with an office in {where}</h2>
+        <span class="num">Ranked against each other, by the Certification Score</span>
       </div>
+      {/*
+        The heading and the badge both say "in <town>", and that is the point rather than style.
+        It read "Ranked among our New York market" over a card badged #1, which says Cellino Law
+        is first in New York. It is not: Raphaelson & Levine scores 79 to its 78 and is not in
+        Brooklyn. Cellino is first of the 45 firms that have an office here, which is a true and
+        useful thing to say and a different one. A firm can print this badge on its own site, so
+        the number has to mean what the badge says it means.
+      */}
       <p>
-        The <a href="/methodology/">certification score</a> is comparable inside one market
-        because part of it is measured against that market's own field. Nobody pays to appear
-        here and no firm can move another one down.
+        These are ranked against each other and not against the whole market. All of them are
+        measured in our <a href={`/cities/${homeMarket.city_slug}/`}>{homeMarket.city} market</a>,
+        so the comparison holds: the <a href="/methodology/">certification score</a> is comparable
+        inside one market because part of it is measured against that market's own field. Nobody
+        pays to appear here and no firm can move another one down.
       </p>
 
       <div class="firm-list">
         {ranked.map((f, i) => (
-          <FirmCard firm={f} rank={i + 1} />
+          <FirmCard firm={f} rank={i + 1} rankLabel={`#${i + 1} in ${town}`} />
         ))}
       </div>
 
