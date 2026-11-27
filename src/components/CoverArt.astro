@@ -22,7 +22,7 @@ interface Props {
       | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
       | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
       | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement' | 'breach' | 'renewal'
-      | 'scale';
+      | 'scale' | 'lottery';
   /** 'slice' fills the frame and crops; 'meet' fits the whole scene inside it. */
   fit?: 'slice' | 'meet';
 }
@@ -996,6 +996,33 @@ const lens = { col: 4, row: 3, span: 5 };
       <rect x="500" y="200" width="140" height="140" rx="16" fill={MINT} opacity=".9" />
       <rect x="500" y="60" width="140" height="140" rx="16" fill="none" stroke={BLUE}
         stroke-width="2.5" stroke-dasharray="9 7" />
+    </g>
+  </svg>
+)}
+
+{name === 'lottery' && (
+  <svg class="cover-art" viewBox="0 0 1200 440" preserveAspectRatio={par}>
+    {/* The green card lottery with no lottery to enter. On the left, a field of entry tickets in
+        faint white, a handful lit mint for the few drawn from millions. On the right, a calendar
+        page whose top row is a month and whose registration dates are one dashed violet box with
+        nothing in it: the entry period that has not been published. A cover rather than a chart;
+        the article carries the figures. */}
+    <g transform="translate(140,70)">
+      {Array.from({ length: 60 }, (_, i) => (
+        <rect x={(i % 10) * 54} y={Math.floor(i / 10) * 50} width="40" height="30" rx="6"
+          fill={[7, 23, 38, 51].includes(i) ? MINT : 'rgba(255,255,255,.16)'}
+          opacity={[7, 23, 38, 51].includes(i) ? '.92' : '1'} />
+      ))}
+    </g>
+    <g transform="translate(760,50)">
+      <rect x="0" y="0" width="320" height="320" rx="20" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.3)" stroke-width="2" />
+      <rect x="0" y="0" width="320" height="64" rx="20" fill={BLUE} opacity=".7" />
+      <rect x="70" y="-18" width="16" height="40" rx="6" fill="rgba(255,255,255,.5)" />
+      <rect x="234" y="-18" width="16" height="40" rx="6" fill="rgba(255,255,255,.5)" />
+      {Array.from({ length: 15 }, (_, i) => (
+        <rect x={24 + (i % 5) * 56} y={88 + Math.floor(i / 5) * 46} width="40" height="30" rx="6" fill="rgba(255,255,255,.18)" />
+      ))}
+      <rect x="24" y="232" width="272" height="64" rx="12" fill="none" stroke={VIOLET} stroke-width="3" stroke-dasharray="10 8" />
     </g>
   </svg>
 )}

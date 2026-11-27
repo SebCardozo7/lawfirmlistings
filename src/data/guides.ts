@@ -26,7 +26,7 @@ export interface Guide {
     | 'shield' | 'register' | 'headcount' | 'offices' | 'screens' | 'rates'
     | 'divorce' | 'language' | 'sample' | 'pages' | 'signal' | 'consult' | 'deadline'
     | 'defense' | 'menu' | 'titles' | 'breadth' | 'settlement' | 'breach' | 'renewal'
-    | 'scale';
+    | 'scale' | 'lottery';
   /** One line for the compact cards on the home page, where there is no room for the summary. */
   meta?: string;
   gate?: GuideGate;
@@ -86,6 +86,19 @@ export const GUIDES: Guide[] = [
   },
   // Family C in docs/guides-50.md: immigration. Reference pieces read from USCIS and the
   // regulation; the page computes its figures from src/data/research, so nothing here may carry one.
+  {
+    slug: 'green-card-lottery',
+    cover: 'lottery',
+    kicker: 'Reference',
+    title: 'Green Card Lottery: Dates, Eligibility and How to Apply',
+    summary:
+      'Where the Diversity Visa lottery stands while registration stays shut, who can enter, ' +
+      "the new entry fee and passport rule, the odds from the Department of State's own table, " +
+      'and how to enter without being scammed.',
+    thumb: 't2',
+    icon: 'doc',
+    meta: 'Shut for now, and the rules for when it opens',
+  },
   {
     slug: 'green-card-renewal',
     cover: 'renewal',

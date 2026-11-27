@@ -1,0 +1,65 @@
+{
+  "slug": "green-card-lottery",
+  "measured_at": "2026-11-27",
+  "program": "DV-2027",
+  "keyword": { "term": "green card lottery 2027", "volume": 8200, "kd": 0, "head": "green card lottery", "head_volume": 19000, "read": "2026-10-04", "source": "Ahrefs Keywords Explorer, US" },
+  "sources": {
+    "instructions_2026": { "url": "https://www.federalregister.gov/documents/2024/10/01/2024-22482/diversity-visa-instructions-for-dv-2026", "cite": "89 FR 79997", "published": "2024-10-01", "title": "Diversity Visa Instructions for DV-2026" },
+    "instructions_2026_correction": { "url": "https://www.federalregister.gov/documents/2024/10/31/2024-25240/diversity-visa-instructions-for-dv-2026-correction", "cite": "89 FR 86904", "published": "2024-10-31" },
+    "fee_rule": { "url": "https://www.federalregister.gov/documents/2025/09/16/2025-17851/schedule-of-fees-for-consular-services-department-of-state-and-overseas-embassies-and", "cite": "90 FR 44524", "published": "2025-09-16", "effective": "2025-09-16" },
+    "passport_rule": { "url": "https://www.federalregister.gov/documents/2026/03/11/2026-04737/visas-enhancing-vetting-and-combatting-fraud-in-the-diversity-immigrant-visa-program", "cite": "91 FR 11891", "published": "2026-03-11", "effective": "2026-04-10", "proposed": "90 FR 37437, August 5, 2025" },
+    "fr_search": { "url": "https://www.federalregister.gov/documents/search?conditions%5Bterm%5D=%22DV-2027%22", "note": "Federal Register API searched for \"DV-2027\" and \"DV-2028\" on the read date: the only Department of State document naming either is the passport rule. No DV-2027 or DV-2028 instructions have been published." },
+    "entry_site": { "url": "https://dvprogram.state.gov/" },
+    "dos_program": { "url": "https://travel.state.gov/content/travel/en/us-visas/immigrate/diversity-visa-program-entry.html", "note": "Behind a bot check that refused our reads on the read date." },
+    "ninth_circuit_report": { "url": "https://news.bloomberglaw.com/litigation/diversity-immigrant-visa-lottery-can-remain-paused-as-us-appeals", "publisher": "Bloomberg Law", "published": "2026-10-30", "kind": "news report" },
+    "pause_tracker": { "url": "https://immpolicytracking.org/policies/dhs-pauses-diversity-immigrant-visa-program/", "publisher": "Immigration Policy Tracking Project", "kind": "policy tracker" }
+  },
+  "visas_available": 55000,
+  "country_cap_percent": 7,
+  "regions": 6,
+  "fees": { "registration": 1, "application": 330 },
+  "registration_rule_min_days": 30,
+  "last_published_entry_period": { "program": "DV-2026", "opened": "2024-10-02", "closed": "2024-11-07", "status_check_from": "2025-05-04", "status_check_until": "2026-09-30" },
+  "education": {
+    "school": "at least a high school education or its equivalent, defined as successful completion of a 12-year course of formal elementary and secondary education",
+    "work": "two years of work experience within the past five years in an occupation that requires at least two years of training or experience to perform",
+    "work_database": "O*Net Online"
+  },
+  "ineligible_last_published": {
+    "program": "DV-2026",
+    "countries": ["Bangladesh", "Brazil", "Canada", "China (mainland and Hong Kong born)", "Colombia", "Cuba", "Dominican Republic", "El Salvador", "Haiti", "Honduras", "India", "Jamaica", "Mexico", "Nigeria", "Pakistan", "Philippines", "South Korea", "Venezuela", "Vietnam"],
+    "threshold": 50000,
+    "years": 5,
+    "eligible_note": "Natives of Macau SAR and Taiwan are eligible."
+  },
+  "passport_exemptions": [
+    "You are stateless",
+    "You are a national of a Communist-controlled country and cannot obtain a passport from its government",
+    "You are, or expect to be, the beneficiary of an individual waiver approved by the Secretaries of Homeland Security and State"
+  ],
+  "participation": [
+    { "year": 2016, "entrants": 11391146, "selectees": 91563, "issued": 46718, "passport_rule": false },
+    { "year": 2017, "entrants": 12437190, "selectees": 83910, "issued": 49976, "passport_rule": false },
+    { "year": 2018, "entrants": 14692258, "selectees": 89540, "issued": 49713, "passport_rule": false },
+    { "year": 2019, "entrants": 14352013, "selectees": 87610, "issued": 45889, "passport_rule": false },
+    { "year": 2020, "entrants": 14722798, "selectees": 83884, "issued": 19125, "passport_rule": false, "note": "COVID-19" },
+    { "year": 2021, "entrants": 6741128, "selectees": 87642, "issued": 18912, "passport_rule": true, "note": "COVID-19" },
+    { "year": 2022, "entrants": 7336302, "selectees": 112103, "issued": 55882, "passport_rule": true },
+    { "year": 2023, "entrants": 9570291, "selectees": 93843, "issued": 55993, "passport_rule": true },
+    { "year": 2024, "entrants": 23823436, "selectees": 78767, "issued": 54554, "passport_rule": false },
+    { "year": 2025, "entrants": 19927656, "selectees": 81179, "issued": 47045, "passport_rule": false, "note": "preliminary" }
+  ],
+  "fraud_dv2025": 2500000,
+  "expected_entrants_dv2027": 10000000,
+  "timeline": [
+    { "date": "2024-11-07", "event": "DV-2026 registration closes, the last entry period the Department has run.", "source": "instructions_2026_correction" },
+    { "date": "2025-08-05", "event": "The Department proposes requiring a valid passport scan with every entry.", "source": "passport_rule" },
+    { "date": "2025-09-16", "event": "A $1 registration fee takes effect, separate from the $330 application fee paid by selectees.", "source": "fee_rule" },
+    { "date": "2025-12-23", "event": "The Department pauses issuance of all diversity visas, after the December shootings at Brown University and of an MIT professor.", "source": "pause_tracker" },
+    { "date": "2026-03-11", "event": "The passport rule is final, effective April 10, 2026, and the Department says it will apply it from DV-2027.", "source": "passport_rule" },
+    { "date": "2026-08-28", "event": "A federal court in California (Medani v. Trump) enjoins the issuance pause for the rest of the DV-2026 year.", "source": "pause_tracker" },
+    { "date": "2026-10-14", "event": "A federal judge in San Diego orders DV-2027 registration dates announced by October 29 and registration opened by November 1 (Red Eagle Law L.C. v. Rubio).", "source": "ninth_circuit_report" },
+    { "date": "2026-10-29", "event": "The Ninth Circuit stays that order while the government appeals (No. 26-6943). Registration stays shut.", "source": "ninth_circuit_report" }
+  ],
+  "reading": []
+}

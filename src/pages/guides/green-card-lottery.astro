@@ -1,0 +1,313 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GuideCover from '../../components/GuideCover.astro';
+import BarChart from '../../components/BarChart.astro';
+import Takeaways from '../../components/Takeaways.astro';
+import data from '../../data/research/green-card-lottery.json';
+
+/**
+ * Item 31 in docs/guides-50.md (family C, immigration). A reference article on the Diversity Visa
+ * program, the "green card lottery", for the program year people are searching for.
+ *
+ * The honest answer to "green card lottery 2027" on the date this was read is that registration
+ * has not opened, so the page leads with where the program stands and why, then gives the rules
+ * that will apply when it does open: who qualifies, what it costs, the new passport requirement,
+ * the odds, and how to enter without being robbed.
+ *
+ * Every rule and figure is read from src/data/research/green-card-lottery.json, taken on the date
+ * it carries from the Federal Register: the DV-2026 instructions (the last the Department has
+ * published), the September 2025 fee rule and the March 2026 passport rule, whose Table 1 is the
+ * participation data charted here. travel.state.gov and dvprogram.state.gov sit behind a bot check
+ * that refused our reads, so nothing is taken from them. The court events in the timeline come
+ * from a news report and a policy tracker, not from the dockets, and the page says so where it
+ * uses them.
+ *
+ * Client placement: none. Brooks Law Firm has the only immigration practice among the clients,
+ * and its sitemap carries no page on the Diversity Visa, so there is nothing to put under
+ * "Further reading". The list is computed from data.reading and renders nothing while it is empty.
+ */
+const s = data.sources;
+const f = data.fees;
+const last = data.last_published_entry_period;
+const inel = data.ineligible_last_published;
+
+const usd = (v: number) => '$' + Math.round(v).toLocaleString('en-US');
+const num = (v: number) => Math.round(v).toLocaleString('en-US');
+const fmt = (x: string) => new Date(x + 'T00:00:00Z').toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const read = fmt(data.measured_at);
+const year = data.program.replace('DV-', '');
+const lastYear = last.program.replace('DV-', '');
+
+// The odds, computed from the Department's own table: entrants per selectee, and the share of
+// selectees who ended with a visa. A selectee is a chance to apply, not a visa.
+const rows = data.participation.map(p => ({
+  ...p,
+  odds: Math.round(p.entrants / p.selectees),
+  issuedShare: Math.round((p.issued / p.selectees) * 100),
+}));
+const latest = rows[rows.length - 1];
+const passportYears = rows.filter(r => r.passport_rule && r.note !== 'COVID-19');
+const openYears = rows.filter(r => !r.passport_rule && r.note !== 'COVID-19');
+const projectedOdds = Math.round(data.expected_entrants_dv2027 / latest.selectees);
+const avg = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
+const passportOdds = Math.round(avg(passportYears.map(r => r.odds)));
+const openOdds = Math.round(avg(openYears.map(r => r.odds)));
+const maxEntrants = rows.reduce((a, b) => (b.entrants > a.entrants ? b : a));
+const expectedMillions = data.expected_entrants_dv2027 / 1_000_000;
+const fraudMillions = (data.fraud_dv2025 / 1_000_000).toLocaleString('en-US');
+
+// Months since the last registration window closed, as of the read date.
+const monthsSince = (a: string, b: string) => {
+  const x = new Date(a + 'T00:00:00Z'), y = new Date(b + 'T00:00:00Z');
+  return (y.getUTCFullYear() - x.getUTCFullYear()) * 12 + (y.getUTCMonth() - x.getUTCMonth());
+};
+const gapMonths = monthsSince(last.closed, data.measured_at);
+const openDays = Math.round((Date.parse(last.closed) - Date.parse(last.opened)) / 86_400_000);
+
+const firms = await getCollection('firms', x =>
+  x.data.status !== 'sample' && x.data.status !== 'not_eligible');
+const immigration = firms.filter(x => x.data.practices.some(p => p.slug === 'immigration'));
+const GATED = ['Verified', 'Certified', 'Distinguished', 'Elite'];
+const relFor = (x: typeof firms[number]) =>
+  GATED.includes(x.data.score?.tier ?? '') ? 'noopener' : 'nofollow noopener';
+const reading = (data.reading as { firm: string; url: string; title: string; checked: string }[]).map(r => {
+  const x = firms.find(y => y.data.slug === r.firm);
+  if (!x) throw new Error(`reading: no firm "${r.firm}"`);
+  return { ...r, f: x, rel: relFor(x) };
+});
+
+const title = `Green Card Lottery ${year}: Dates, Eligibility and How to Apply`;
+const description = `${data.program} registration has not opened. Where the green card lottery stands, who qualifies, the ${usd(f.registration)} entry fee, the new passport rule and the real odds.`;
+const lede = `As of ${read}, <b>registration for the ${year} green card lottery (${data.program}) has not opened</b>, and no dates have been published. A federal judge ordered it opened by November 1; an appeals court put that order on hold. When it does open, entry will cost <b>${usd(f.registration)}</b>, every entrant will need a <b>valid passport</b>, and the last published rules still apply: a native of an eligible country, with a high school education or two years of qualifying work.`;
+
+const faq = [
+  {
+    q: `When does the ${year} green card lottery open?`,
+    a: `No date has been published as of ${read}. The Department of State announces each entry period in the Federal Register, and no ${data.program} instructions have appeared there. The last registration, for ${last.program}, ran from ${fmt(last.opened)} to ${fmt(last.closed)}. A court order to open ${data.program} registration by November 1, 2026 was stayed by the Ninth Circuit on October 29, 2026, so the timing now depends on the Department or the appeal.`,
+  },
+  {
+    q: 'How much does it cost to enter the green card lottery?',
+    a: `${usd(f.registration)} to register, a fee that took effect on ${fmt(s.fee_rule.effective)}. Before that, entry was free. If you are selected and go on to apply, the Diversity Visa application fee is ${usd(f.application)} per person. Anyone charging more than that to "enter you" is selling a service you do not need.`,
+  },
+  {
+    q: 'Do I need a passport to enter?',
+    a: `Yes, from ${data.program} on. A rule effective ${fmt(s.passport_rule.effective)} requires every entrant to give the details of a valid, unexpired passport and upload a scan of its biographic and signature page, unless an exemption applies: being stateless, being a national of a Communist-controlled country unable to get a passport from it, or holding an individual waiver.`,
+  },
+  {
+    q: 'Which countries cannot enter the green card lottery?',
+    a: `Natives of countries that sent more than ${num(inel.threshold)} immigrants to the United States in the previous ${inel.years} years. The last published list, for ${inel.program}, has ${inel.countries.length}: ${inel.countries.join(', ')}. The list for ${data.program} has not been published. You may still qualify through your spouse's country of birth or, in some cases, a parent's.`,
+  },
+  {
+    q: 'What are the chances of winning the green card lottery?',
+    a: `For ${latest.year}, ${num(latest.entrants)} entrants and ${num(latest.selectees)} selectees, about 1 in ${num(latest.odds)}, from the Department's own table. Being selected is not a visa: about ${num(data.visas_available)} visas exist each year for more selectees than that, and only ${latest.issuedShare}% of ${latest.year}'s selectees had been issued one in the preliminary count.`,
+  },
+  {
+    q: 'How do I know if I won?',
+    a: `Only through Entrant Status Check on dvprogram.state.gov, with the confirmation number you got when you entered. The Department does not mail letters or send emails saying you were selected. Any email that says you won is not from the U.S. government.`,
+  },
+  {
+    q: 'Can my spouse and I both enter?',
+    a: `Yes. Each eligible person may submit one entry, and spouses may each enter, listing the other. More than one entry for the same person disqualifies all of them. If you are married, you must list your spouse, even if you are separated, unless the spouse is already a U.S. citizen or permanent resident.`,
+  },
+];
+
+const url = new URL(`/guides/${data.slug}/`, Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: data.measured_at,
+    dateModified: data.measured_at,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Law Firm Listings Editorial Team' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to enter the green card lottery',
+    estimatedCost: { '@type': 'MonetaryAmount', currency: 'USD', value: f.registration },
+    step: [
+      { '@type': 'HowToStep', name: 'Check you qualify', text: 'Confirm your country of eligibility and that you have a high school education or two years of qualifying work.' },
+      { '@type': 'HowToStep', name: 'Get your passport ready', text: 'Have a valid, unexpired passport and a scan of its biographic and signature page.' },
+      { '@type': 'HowToStep', name: 'Take new photos', text: 'Take a recent photo of yourself, your spouse and each child, taken within the last six months.' },
+      { '@type': 'HowToStep', name: 'Enter on the official site', text: `Enter once, during the published period, at dvprogram.state.gov, and pay the ${usd(f.registration)} fee.` },
+      { '@type': 'HowToStep', name: 'Keep the confirmation number', text: 'Print or save the confirmation page. Without the number you cannot check your result.' },
+      { '@type': 'HowToStep', name: 'Check your status yourself', text: 'Use Entrant Status Check on dvprogram.state.gov when the Department says results are available.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(q => ({ '@type': 'Question', name: q.q, acceptedAnswer: { '@type': 'Answer', text: q.a } })),
+  },
+];
+---
+<Base title={title} description={description} nav="guides" schema={schema}
+  figuresFrom={`Federal Register: ${last.program} instructions, the September 2025 fee rule and the March 2026 passport rule, read ${read}`}
+  image="/og/lottery.png"
+  imageAlt="A field of entry tickets with a handful lit, beside a calendar whose registration dates are an empty dashed box">
+<article>
+<header class="article-head">
+  <div class="narrow">
+    <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/guides/">Guides</a></li><li aria-current="page">Green card lottery</li></ol>
+    <span class="eyebrow" style="margin-top:18px">Reference · Immigration</span>
+    <h1>{title}</h1>
+    <p class="lede" set:html={lede} />
+    <div class="byline">
+      <div class="who"><span class="av" aria-hidden="true"></span><div><b>By the Law Firm Listings Editorial Team</b>Published research, no legal advice</div></div>
+      <span class="sep" aria-hidden="true"></span><span>Read {read}</span>
+      <span class="sep" aria-hidden="true"></span><span>9 min read</span>
+    </div>
+  </div>
+</header>
+
+<GuideCover name="lottery" />
+
+<div class="container article-grid">
+  <nav class="toc" aria-label="On this page">
+    <h4>On this page</h4>
+    <ol>
+      <li><a href="#status" class="is-active">Where {data.program} stands</a></li>
+      <li><a href="#what">What the lottery is</a></li>
+      <li><a href="#eligibility">Who can enter</a></li>
+      <li><a href="#countries">Countries that cannot</a></li>
+      <li><a href="#cost">The fee and the passport rule</a></li>
+      <li><a href="#odds">The odds</a></li>
+      <li><a href="#apply">How to apply</a></li>
+      <li><a href="#selected">If you are selected</a></li>
+      <li><a href="#scams">Scams</a></li>
+      <li><a href="#faq">Questions people ask</a></li>
+      <li><a href="#lawyer">When a lawyer helps</a></li>
+      <li><a href="#method">Where these figures come from</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+    <Takeaways
+      scope={`From the Federal Register and the Department of State's own data, read ${read}.`}
+      items={[
+        `<b>${data.program} registration has not opened.</b> It has been ${gapMonths} months since the last entry period closed on ${fmt(last.closed)}.`,
+        `Entering now costs <b>${usd(f.registration)}</b>, and from ${data.program} you need a <b>valid passport</b> scanned into the form.`,
+        `You qualify through your country of birth (or your spouse's) and <b>a high school education or two years of qualifying work</b>.`,
+        `In ${latest.year} the odds were about <b>1 in ${num(latest.odds)}</b>, and being selected is not a visa.`,
+      ]}
+    />
+    <div class="callout"><b>How to read this.</b> The rules here come from the Federal Register, each linked and dated. The court events come from news reporting, and are marked as such. The program is in litigation and can change in a week, so check <a href={s.entry_site.url} rel="noopener" target="_blank">dvprogram.state.gov</a> itself before acting. Nothing here is legal advice about your own case.</div>
+
+    <h2 id="status">Where the {year} green card lottery stands</h2>
+    <p>The Diversity Visa program normally opens for entries every October, for about a month, and draws winners for a visa year that starts the following October. That rhythm broke after {last.program}. The regulation, 22 CFR 42.33(b)(3), says the Department "will establish a period of not less than {data.registration_rule_min_days} days during each fiscal year" for entries and announce it in the Federal Register. A search of the Federal Register on {read} finds no {data.program} instructions and no {data.program.replace(year, String(Number(year) + 1))} instructions. The only Department of State document naming {data.program} is the passport rule, which says the new requirement will start with it.</p>
+    <p>What happened in between, in order:</p>
+    <ol class="timeline">
+      {data.timeline.map(t => (
+        <li><b>{fmt(t.date)}.</b> {t.event}</li>
+      ))}
+    </ol>
+    <p>The first, second, third and fifth entries are from the Federal Register. The issuance pause and the California order are from the <a href={s.pause_tracker.url} rel="noopener" target="_blank">{s.pause_tracker.publisher}</a>, and the San Diego order and the stay are as reported by <a href={s.ninth_circuit_report.url} rel="noopener" target="_blank">{s.ninth_circuit_report.publisher}</a> on {fmt(s.ninth_circuit_report.published)}. We have not read the dockets themselves. The appeals court did not decide whether leaving the lottery shut is lawful; it found the law firm that sued unlikely to win, because it is not the kind of party the statute protects. The appeal goes on.</p>
+    <p>So for anyone searching for {data.program} dates: there are none yet, and any site that says registration is open should be checked against dvprogram.state.gov before you give it a passport scan.</p>
+
+    <h2 id="what">What the green card lottery is</h2>
+    <p>The lottery is the Diversity Immigrant Visa program, created by section 203(c) of the Immigration and Nationality Act to admit immigrants from countries with historically low rates of immigration to the United States. Up to <b>{num(data.visas_available)}</b> diversity visas are available each fiscal year, split across {data.regions} geographic regions, and no single country may receive more than {data.country_cap_percent}% of them. Winners are chosen by a randomized computer drawing among qualified entries. A winner, called a selectee, earns the right to apply for a green card, not the card itself.</p>
+
+    <h2 id="eligibility">Who can enter: two requirements</h2>
+    <p>The {last.program} instructions, the last published, set two requirements, and say you should not enter unless you meet both.</p>
+    <ul>
+      <li><b>Country.</b> You must be a native of an eligible country. If you are not, there are two other ways in: you can claim your <b>spouse's</b> country of birth, if you are both named on the entry, both issued visas and enter the United States together; or a <b>parent's</b> country of birth, if neither parent was born in or legally resident in your country of birth when you were born.</li>
+      <li><b>Education or work.</b> Either {data.education.school}; or {data.education.work}. The Department checks qualifying work against the U.S. Department of Labor's {data.education.work_database} database.</li>
+    </ul>
+    <p>The entry form asks for your education, but a consular officer decides whether you qualify at the visa interview, after you have been selected, which is how people who do not meet the education test end up selected and then refused.</p>
+
+    <h2 id="countries">Countries whose natives cannot enter</h2>
+    <p>A country drops out when more than {num(inel.threshold)} of its natives immigrated to the United States in the previous {inel.years} years. The list is set each year in the instructions, and the {data.program} list has not been published. For {inel.program}, the last published, natives of these {inel.countries.length} countries could not enter:</p>
+    <ul class="cols">
+      {inel.countries.map(c => <li>{c}</li>)}
+    </ul>
+    <p>{inel.eligible_note} If your country is on the list, check the spouse and parent routes above before ruling yourself out.</p>
+
+    <h2 id="cost">The {usd(f.registration)} fee and the new passport rule</h2>
+    <p>Entry used to be free. A <a href={s.fee_rule.url} rel="noopener" target="_blank">fee rule</a> effective {fmt(s.fee_rule.effective)} added a <b>{usd(f.registration)} registration fee</b>, collected when you enter, to cover the cost of running the drawing. The <b>{usd(f.application)} application fee</b> is separate and is paid only by selectees who go on to apply.</p>
+    <p>The bigger change is the <a href={s.passport_rule.url} rel="noopener" target="_blank">passport rule</a>, final on {fmt(s.passport_rule.published)} and effective {fmt(s.passport_rule.effective)}. Every entrant must give the details of a <b>valid, unexpired passport</b> and upload a scan of its biographic and signature page. The Department's stated reason is fraud: it says it found {fraudMillions} million fraudulent entries in DV-2025, many filed by third parties who then held the confirmation number for ransom. The only exemptions:</p>
+    <ul>
+      {data.passport_exemptions.map(e => <li>{e}.</li>)}
+    </ul>
+    <p>Financial hardship is not an exemption; the rule says so. If you plan to enter and have no passport, apply for one now, because the entry period, when it opens, has historically lasted about {openDays} days.</p>
+
+    <h2 id="odds">The odds, from the Department's own table</h2>
+    <p>The passport rule prints the program's participation for ten years. Dividing entrants by selectees gives the odds of being drawn:</p>
+    <BarChart
+      heading="Entrants per selectee, by program year"
+      rows={rows.map(r => ({
+        label: `DV-${r.year}`,
+        value: r.odds,
+        display: `1 in ${num(r.odds)}`,
+        note: `${num(r.entrants)} entrants, ${num(r.selectees)} selected${r.passport_rule ? ', passport number required' : ''}${r.note ? ` (${r.note === 'preliminary' ? 'visas preliminary' : r.note})` : ''}`,
+        emphasis: r.year === latest.year,
+      }))}
+      caption={`Department of State, Table 1 of the passport rule, ${s.passport_rule.cite}. Odds computed as entrants divided by selectees.`}
+    />
+    <p>Two things stand out. In the years a passport number was required, {passportYears.map(r => r.year).join(' and ')} (leaving out pandemic-hit 2021), entries fell and the odds averaged about 1 in {num(passportOdds)}; in the open years around them they averaged about 1 in {num(openOdds)}. The peak was {num(maxEntrants.entrants)} entrants for DV-{maxEntrants.year}. The Department expects about {expectedMillions} million entrants for {data.program} with the passport scan and the fee, half or less of the entries in either of the last two years. If the Department drew as many selectees as for DV-{latest.year}, that would be about 1 in {num(projectedOdds)}, an estimate built on its own forecast and not a published figure.</p>
+    <p>And selection is not the finish line. The Department selects more people than it has visas, because many selectees never apply or do not qualify. In {latest.year}, {num(latest.issued)} visas were issued to {num(latest.selectees)} selectees in the preliminary count, {latest.issuedShare}%.</p>
+
+    <h2 id="apply">How to apply for the green card lottery, step by step</h2>
+    <p>This is the process as the last published instructions describe it, with the {data.program} changes added. Do not start until the Department announces the entry period.</p>
+    <ol class="howto">
+      <li><b>Confirm both requirements.</b> Your country (or your spouse's or parent's), and the education or work test. Entering when you do not qualify costs you only {usd(f.registration)}, but a selection you cannot use costs you the year.</li>
+      <li><b>Have your passport ready.</b> Valid and unexpired, with a clear scan of the biographic and signature page.</li>
+      <li><b>Take new photos</b> of yourself, your spouse and every unmarried child under 21, taken within the last six months to U.S. visa photo standards. Reusing a photo from a prior year's entry makes you ineligible.</li>
+      <li><b>Enter once, on the official site.</b> Only at <a href={s.entry_site.url} rel="noopener" target="_blank">dvprogram.state.gov</a>, during the published period. No paper entries and no late entries. More than one entry for the same person disqualifies all of them.</li>
+      <li><b>List your family.</b> Your spouse, even if separated, unless they are already a U.S. citizen or permanent resident, and all your eligible children, even those who will not immigrate with you. Leaving one off can make the whole entry ineligible.</li>
+      <li><b>Keep the confirmation number.</b> Print or save the confirmation page. The Department will not replace the number, and without it you cannot see your result.</li>
+    </ol>
+
+    <h2 id="selected">If you are selected</h2>
+    <p>Results appear only in <b>Entrant Status Check</b> on dvprogram.state.gov. For {last.program} it opened on {fmt(last.status_check_from)}, about six months after entries closed, and stayed available through {fmt(last.status_check_until)}. The Department does not mail letters or send emails telling you that you won.</p>
+    <p>A selectee then files the DS-260 online immigrant visa application, pays the {usd(f.application)} fee, and waits for an interview. Every visa in a program year must be issued by <b>September 30</b> of that fiscal year, or until the visas run out, whichever comes first; after that date the selection is worthless, and family members cannot follow to join. People already in the United States can apply to adjust status through USCIS within the same deadline.</p>
+    <p>That deadline is why the {last.program} pause mattered so much: issuance stopped in December 2025 and, according to the {s.pause_tracker.publisher}, resumed only after an order of August 28, 2026, a month before the year's visas expired.</p>
+
+    <h2 id="scams">Green card lottery scams</h2>
+    <p>The instructions spend pages on fraud, and the passport rule exists because of it. The rules that protect you:</p>
+    <ul>
+      <li><b>The fee is {usd(f.registration)}</b>, paid on the official site. A website charging tens or hundreds of dollars to "submit" or "improve" your entry is not the government.</li>
+      <li><b>No one is notified by email.</b> An email saying you won and asking for money is fraud.</li>
+      <li><b>Keep your own confirmation number.</b> The Department warns of people who enter on someone's behalf and then hold the number back until they are paid.</li>
+      <li><b>Government sites end in .gov.</b> The entry site is dvprogram.state.gov and no other address.</li>
+    </ul>
+
+    <h2 id="faq">Questions people ask about the green card lottery</h2>
+    {faq.map(q => (
+      <>
+        <h3>{q.q}</h3>
+        <p>{q.a}</p>
+      </>
+    ))}
+
+    <h2 id="lawyer">When a lawyer helps, and where to find one</h2>
+    <p>Entering the lottery needs no lawyer, and the Department built it to be done alone. A lawyer earns the fee after selection, when the questions get harder: whether your work history meets the {data.education.work_database} test, how to adjust status from inside the country, what to do about a past arrest or overstay, or a case running into the September 30 deadline. {immigration.length} firms in this directory list immigration work, ranked on the <a href="/practice-areas/immigration/">immigration practice page</a> by the same published score as every other firm.</p>
+    {reading.length > 0 && (
+      <>
+        <h3>Further reading from firms in this directory</h3>
+        <p>Each of these was read on {read} and checked against the sources cited here.</p>
+        <ul>
+          {reading.map(r => (
+            <li><a href={r.url} rel={r.rel} target="_blank">{r.title}</a>, from <a href={`/firms/${r.f.data.slug}/`}>{r.f.data.name}</a> in {r.f.data.market.city}. {r.checked}</li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    <h2 id="method">Where these figures come from</h2>
+    <p>The eligibility rules, the ineligible countries, the entry rules, Entrant Status Check and the September 30 deadline are from the <a href={s.instructions_2026.url} rel="noopener" target="_blank">{s.instructions_2026.title}</a>, {s.instructions_2026.cite}, published {fmt(s.instructions_2026.published)}, with the entry dates from its <a href={s.instructions_2026_correction.url} rel="noopener" target="_blank">correction</a>, {s.instructions_2026_correction.cite}. The fees are from the <a href={s.fee_rule.url} rel="noopener" target="_blank">consular fee rule</a>, {s.fee_rule.cite}. The passport requirement, its exemptions, the fraud count, the {data.program} estimate and the ten years of participation data are from the <a href={s.passport_rule.url} rel="noopener" target="_blank">passport rule</a>, {s.passport_rule.cite}; its visa counts include adjustments of status through USCIS, and the {latest.year} figure is preliminary. The odds and the share of selectees issued a visa are computed from that table each time the page is built.</p>
+    <p>The absence of {data.program} instructions is from a search of the Federal Register on {read}. The Department's own program pages, <a href={s.dos_program.url} rel="noopener" target="_blank">travel.state.gov</a> and dvprogram.state.gov, refused our reads that day behind a bot check, so nothing here is quoted from them. The court events are from {s.ninth_circuit_report.publisher} and the {s.pause_tracker.publisher}, as marked above. Nothing here is legal advice, and no lawyer-client relationship comes from reading it.</p>
+  </div>
+</div>
+</article>
+</Base>
+
+<style>
+  .prose ol.howto li, .prose ol.timeline li { margin-bottom: 10px; }
+  .prose ul.cols { columns: 2; column-gap: 32px; }
+  @media (max-width: 560px) { .prose ul.cols { columns: 1; } }
+</style>
