@@ -36,6 +36,21 @@ const ok = (name, pass, detail) => {
 };
 const head = n => console.log(`\n${n}`);
 
+/** cloudflare:email, stubbed rather than external: worker/batch.ts reaches it through
+    worker/outbound.ts, and esbuild cannot resolve a Workers runtime module on its own. */
+const stubEmail = {
+  name: 'stub-cloudflare-email',
+  setup(b) {
+    b.onResolve({ filter: /^cloudflare:email$/ },
+      () => ({ path: 'cloudflare:email', namespace: 'stub' }));
+    b.onLoad({ filter: /.*/, namespace: 'stub' }, () => ({
+      contents: 'export class EmailMessage {'
+        + ' constructor(from, to, raw) { this.from = from; this.to = to; this.raw = raw; } }',
+      loader: 'js',
+    }));
+  },
+};
+
 const dir = mkdtempSync(path.join(tmpdir(), 'lfl-prospects-'));
 const bundle = path.join(dir, 'bundle.mjs');
 await build({
@@ -43,15 +58,18 @@ await build({
     contents: `export * from './worker/prospects.ts';
                export { verificationLetter, optOutUrl } from './worker/verifyletter.ts';
                export { handleUnsubscribe } from './worker/unsubscribe.ts';
-               export { pagesFor, resetPages } from './worker/pages.ts';`,
+               export { pagesFor, resetPages } from './worker/pages.ts';
+               export { buildBatch, drainBatch, outreachPaused } from './worker/batch.ts';`,
     resolveDir: ROOT,
     loader: 'ts',
   },
   bundle: true, format: 'esm', platform: 'neutral', outfile: bundle, logLevel: 'warning',
+  plugins: [stubEmail],
 });
 const {
   canSend, undeliverable, optOut, isOptedOut, getProspect, putProspect, listProspects, nextBatch, tally,
   verificationLetter, optOutUrl, handleUnsubscribe, pagesFor, resetPages,
+  buildBatch, drainBatch, outreachPaused,
 } = await import(pathToFileURL(bundle).href);
 
 function kv() {
@@ -145,6 +163,38 @@ head('an address that could never arrive, which includes("@") let through for mo
   ok('AND NOTHING IS REPAIRED INTO AN ADDRESS',
      undeliverable('contact@ firm.example') !== null
      && undeliverable('@info@firm.example') !== null);
+}
+
+head('the pause flag stops the programme, not one day of it');
+{
+  // On 25 November the outbound programme was called off and the only thing done about it was
+  // emptying that day's approved list. The cron builds a fresh list every working day, so a new
+  // one was proposed on the 26th and again on the 27th. The flag exists so that "paused" means
+  // paused, and this exists so nobody has to find that out from the inbox again.
+  const { ns } = kv();
+  const env = {
+    FOLLOWUPS: ns, EMAIL: { send: async () => {} },
+    SUBMISSIONS_TO: 'desk@firm.example', POSTAL_ADDRESS: 'Somewhere',
+  };
+  await putProspect(env, make({ slug: 'a-firm', email: 'info@a-firm.example', pages: 9 }));
+
+  ok('with no flag, a batch is built', (await buildBatch(env, '2026-11-27')) !== null);
+
+  await ns.put('outreach:paused', 'called off on 25 November');
+  ok('PAUSED, NOTHING IS BUILT', (await buildBatch(env, '2026-11-30')) === null);
+
+  // And the half that matters more: a batch approved before the pause must not go out after it.
+  await ns.put('batch:2026-11-27', JSON.stringify({
+    on: '2026-11-27', slugs: ['a-firm'], approved: ['a-firm'], sent: [],
+    built_at: '2026-11-26T17:00:00.000Z', approved_at: '2026-11-26T18:00:00.000Z',
+  }));
+  const drained = await drainBatch(env, new Date('2026-11-27T14:00:00Z'));
+  ok('AND AN APPROVED BATCH DOES NOT SEND', drained.sent === 0, JSON.stringify(drained));
+
+  await ns.delete('outreach:paused');
+  ok('lifting it builds again', (await buildBatch(env, '2026-12-01')) !== null);
+  ok('and the flag reads back as a note, not a boolean',
+     (await outreachPaused(env)) === null);
 }
 
 head('the opt-out also marks the row, when there is one');

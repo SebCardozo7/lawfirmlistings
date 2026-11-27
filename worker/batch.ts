@@ -167,8 +167,34 @@ const sentEver = (all: Prospect[]): number =>
  * out at all, or there is no namespace. None of them is an error and none of them is worth an
  * email saying so every afternoon.
  */
+/**
+ * The off switch for everything that writes to a firm that never wrote to us.
+ *
+ * It lives in KV rather than in wrangler.jsonc because it has to be flippable in a second,
+ * from either side, without a deploy. On 25 November the whole outbound programme was paused
+ * and the only thing done about it was emptying that day's approved list, which stopped that
+ * day and nothing else: the cron builds a fresh list every working day, so a new one was
+ * proposed on the 26th and again on the 27th, and Sebastián went on getting the approval
+ * email for a programme he had already called off. A one-day edit is not a pause.
+ *
+ * Any value at all means paused. The value is a note to whoever finds it later.
+ *
+ *   npx wrangler kv key put outreach:paused "why, and who" --binding FOLLOWUPS --remote
+ *   npx wrangler kv key delete outreach:paused --binding FOLLOWUPS --remote
+ */
+export async function outreachPaused(env: BatchEnv): Promise<string | null> {
+  if (!env.FOLLOWUPS) return null;
+  try {
+    return await env.FOLLOWUPS.get('outreach:paused');
+  } catch {
+    // A store we cannot read is not permission to start writing to strangers.
+    return 'the pause flag could not be read';
+  }
+}
+
 export async function buildBatch(env: BatchEnv, on: string): Promise<Batch | null> {
   if (!env.FOLLOWUPS) return null;
+  if (await outreachPaused(env)) return null;
   if (!(env.POSTAL_ADDRESS ?? '').trim()) return null;
   if (await getBatch(env, on)) return null;
 
@@ -328,6 +354,10 @@ export async function drainBatch(
 ): Promise<{ sent: number; failed: number; skipped: number }> {
   const out = { sent: 0, failed: 0, skipped: 0 };
   if (!env.FOLLOWUPS || !env.EMAIL) return out;
+  // Checked here as well as in buildBatch, which is the same belt-and-braces reasoning as the
+  // weekday test below: this one stops a batch that was already built and approved before the
+  // pause, which buildBatch by then has no say over.
+  if (await outreachPaused(env)) return out;
   if (!(env.POSTAL_ADDRESS ?? '').trim()) return out;
 
   // Belt as well as braces. No batch is ever built for a weekend, so this should never be
