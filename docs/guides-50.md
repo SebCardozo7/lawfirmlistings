@@ -324,7 +324,7 @@ client's Basecamp project when the piece places a client. Pieces that place a cl
 | written 2026-11-16 | 2 AT&T data breach settlement (PR #205) | none |
 | written 2026-11-20 | 30 Green card renewal (PR #209) | Brooks Law Firm (further reading, its immigration practice) |
 | written 2026-11-23 | 17 California (PR #212) | none |
-| 2026-10-26 | 31 Green card lottery 2027 | none |
+| written 2026-11-27 | 31 Green card lottery 2027 (PR #218) | none (Brooks has no Diversity Visa page) |
 | 2026-10-28 | 21 Georgia | none |
 | 2026-10-30 | 3 Facebook privacy settlement | none |
 | 2026-11-02 | 4 Cash App settlement | none |
